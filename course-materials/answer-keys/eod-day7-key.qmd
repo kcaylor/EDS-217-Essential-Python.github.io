@@ -45,26 +45,162 @@ http://uszipcodelist.com/zip_code_database.csv
 
 First, import pandas, matplotlib, and seaborn and load the three datasets. 
 
+```{python}
+#| echo: true
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Define data urls
+url_20203 = 'https://prism.oregonstate.edu/projects/phm_data/phzm_us_zipcode_2023.csv'
+url_2012 = 'https://prism.oregonstate.edu/projects/public/phm/2012/phm_us_zipcode_2012.csv'
+url_zips = 'http://uszipcodelist.com/zip_code_database.csv'
+
+# Load the data
+df_2023 = pd.read_csv(url_20203)
+df_2012 = pd.read_csv(url_2012)
+df_zipcodes = pd.read_csv(url_zips)
+```
+
 Next, display the first few rows and print out the dataset info to get an idea of the contents of each dataset. 
+
+```{python}
+#| echo: true
+# Display the first few rows:
+print(df_2023.head())
+print(df_2012.head())
+print(df_zipcodes.head())
+```
+
+```{python}
+#| echo: true
+# Display the dataframe info:
+print(df_2023.info())
+print(df_2012.info())
+print(df_zipcodes.info())
+```
 
 You may have noticed that the zipcodes were read in as integers rather than strings, and therefore might not be 5 digits long. Ensure the `zipcode` or `zip` column in all datasets is a 5-character string, filling in any zeros that were dropped.
 
+```{python}
+# Ensure 5-character string zipcodes
+df_2023['zipcode'] = df_2023['zipcode'].astype(str).str.zfill(5)
+df_2012['zipcode'] = df_2012['zipcode'].astype(str).str.zfill(5)
+df_zipcodes['zip'] = df_zipcodes['zip'].astype(str).str.zfill(5)
+```
+
 Combine the 2012 and 2023 data together by adding a `year` column and then stacking them together. 
+
+```{python}
+# Add the year column
+df_2023['year'] = 2023
+df_2012['year'] = 2012
+
+# Bind the datasets together
+df = pd.concat([df_2023, df_2012], axis=0)
+```
 
 In the combined plant hardiness dataframe, create two new columns, `trange_min` and `trange_max`, containing the min and max temperatures of the `trange` column. Remove the original `trange` column.
 
 Hint: use `str.split()` to split the `trange` strings where they have spaces and retrieve the first and last components (min and max, respectively)
+
+```{python}
+# Split the trange string and get the first (min) and last (max) pieces of it
+df['trange_min'] = df['trange'].str.split().str.get(0).astype(int)
+df['trange_max'] = df['trange'].str.split().str.get(-1).astype(int)
+           
+df = df.drop('trange', axis='columns')
+```
 
 ## Tasks
 
 ### 2. Exploration and visualization
 
 On average, how much has the minimum temperature in a zip code changed from 2012 to 2023?
+```{python}
+# Get the mean of the minimum temperatures 
+mean_2023 = df[df['year'] == 2023]['trange_min'].mean()
+mean_2012 = df[df['year'] == 2012]['trange_min'].mean()
+
+# Print the difference between the two means
+print(mean_2023 - mean_2012)
+```
 
 Merge together the combined plant hardiness dataset and the zipcode dataset by zipcode. This will give us more informtaion in the plant hardiness dataset, such as the latitude and longitude for each zipcode. 
+```{python}
+df = pd.merge(df, df_zipcodes, left_on='zipcode', right_on='zip')
+df.head()
+```
 
 Create two scatter plot where the x axis is the longitude, the y axis is the latitude, the color is based on the minimum temperature in 2012 for one and 2023 for the other. Only look at longitude < -60. 
 
+```{python}
+# Filter the data for longitude less than -60
+df_filtered = df[df['longitude'] < -60]
+
+# Create scatter plot for 2012
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df_filtered[df_filtered['year'] == 2012], 
+                x='longitude', y='latitude', hue='trange_min', palette='coolwarm', s=10)
+plt.title('Minimum Temperature in 2012 by Latitude and Longitude')
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+plt.legend(title='Min Temp (2012)')
+plt.show()
+
+# Create scatter plot for 2023
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df_filtered[df_filtered['year'] == 2023], 
+                x='longitude', y='latitude', hue='trange_min', palette='coolwarm', s=10)
+plt.title('Minimum Temperature in 2023 by Latitude and Longitude')
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+plt.legend(title='Min Temp (2023)')
+plt.show()
+```
+
 Now create a single scatter plot where you look at the difference between the minimum temperature in 2012 and 2023. Only look at longitude < -60. Color any zipcodes where you do not have information from both years in grey. 
 
+```{python}
+# Get the difference in minimum temperature between 2023 and 2012
+df_diff = df_filtered.pivot_table(index=['zipcode', 'latitude', 'longitude'], 
+                                  columns='year', values='trange_min').reset_index()
+df_diff['temp_diff'] = df_diff[2023] - df_diff[2012]
+
+# Create a scatter plot showing the difference
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df_diff, x='longitude', y='latitude', hue='temp_diff', 
+                palette='coolwarm', s=10, edgecolor='gray', legend='full')
+plt.title('Temperature Difference (2023 - 2012) by Latitude and Longitude')
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+plt.legend(title='Temp Difference')
+plt.show()
+```
+
 Create a bar plot showing the top 10 states where the average minimum temperature increased the most. Label your axes appropriately.
+
+```{python}
+# Filter the data for only 2012 and 2023
+df_2012_filtered = df_filtered[df_filtered['year'] == 2012]
+df_2023_filtered = df_filtered[df_filtered['year'] == 2023]
+
+# Group by state and calculate the mean minimum temperature for 2012 and 2023
+mean_temp_2012 = df_2012_filtered.groupby('state')['trange_min'].mean()
+mean_temp_2023 = df_2023_filtered.groupby('state')['trange_min'].mean()
+
+# Calculate the difference between 2023 and 2012 for each state
+temp_diff_by_state = mean_temp_2023 - mean_temp_2012
+
+# Sort the states by the highest temperature increase and get the top 10
+top_10_states = temp_diff_by_state.sort_values(ascending=False).head(10)
+
+# Plot the top 10 states
+plt.figure(figsize=(10, 6))
+sns.barplot(x=top_10_states.values, y=top_10_states.index, palette='viridis')
+plt.title('Top 10 States with Highest Increase in Minimum Temperature (2012-2023)')
+plt.xlabel('Average Temp Increase (°F)')
+plt.ylabel('State')
+plt.show()
+```
+

@@ -48,7 +48,7 @@ import pandas as pd
 ### Task 1.2: Load the dataset into a dataframe named `df` from the provided URL into a pandas DataFrame. 
 
 :::{.callout-tip}
-I've already taken a look at this data set and noticed there was a column with sample date called `Date`. We can use the `parse_date` option of the `read_csv()` function to convert values in the `Dates` column of the csv into datetime objects in pandas while reading the file. 
+I've already taken a look at this data set and noticed there was a column with sample date called `Date`. We can use the `parse_date` option of the `read_csv()` function to convert values in the `Date` column of the csv into datetime objects in pandas while reading the file. 
 :::
 
 ```{python}

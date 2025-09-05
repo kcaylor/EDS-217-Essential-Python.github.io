@@ -4107,5 +4107,12 @@
     "title": "Interactive Session 6A",
     "section": "Resources",
     "text": "Resources\n\nPandas Groupby Documentation\nPandas Pivot Table Documentation\n\nDon’t forget to check out our EDS 217 Cheatsheet on Grouping and Aggregating for quick reference!\n\nEnd interactive session 6A"
+  },
+  {
+    "objectID": "course-materials/interactive-sessions/4a_dataframes.html#basic-cleaning",
+    "href": "course-materials/interactive-sessions/4a_dataframes.html#basic-cleaning",
+    "title": "Interactive Session",
+    "section": "3. Basic Cleaning",
+    "text": "3. Basic Cleaning\nRemove rows with missing data in subcountry using dropna() and the subset argument.\n\n\nCode\ncities_df = cities_df.dropna(subset=['subcountry'])"
   }
 ]

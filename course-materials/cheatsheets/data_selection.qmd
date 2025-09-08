@@ -199,6 +199,16 @@ high_gpa = df.where(df['gpa'] > 3.5)
 2. Use `&` for AND, `|` for OR in multiple conditions:
    ```python
    df[(df['age'] > 21) & (df['gpa'] > 3.5) | (df['major'] == 'Computer Science')]
+
+   # Because the & operator takes precendence over the | operator, 
+   # the above expression evaluates the same as:
+   df[((df['age'] > 21) & (df['gpa'] > 3.5)) | 
+      (df['major'] == 'Computer Science')]
+
+   # To group the second two conditions, use parentheses:
+   df[(df['age'] > 21) & 
+      ((df['gpa'] > 3.5) | (df['major'] == 'Computer Science'))]
+
    ```
 
 3. Reset index after filtering if needed:

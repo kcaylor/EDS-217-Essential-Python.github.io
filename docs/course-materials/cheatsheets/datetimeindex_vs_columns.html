@@ -431,8 +431,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#index-to-column" id="toc-index-to-column" class="nav-link" data-scroll-target="#index-to-column">Index to Column</a></li>
   </ul></li>
   <li><a href="#quick-decision-guide" id="toc-quick-decision-guide" class="nav-link" data-scroll-target="#quick-decision-guide">Quick Decision Guide</a></li>
-  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -456,7 +454,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="6cc1b722" class="cell" data-execution_count="1">
+<div id="b082360e" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -502,7 +500,7 @@ dtype: object</code></pre>
 <h2 class="anchored" data-anchor-id="datetime-column-approach">DateTime Column Approach</h2>
 <section id="creating-dataframes-with-datetime-columns" class="level3">
 <h3 class="anchored" data-anchor-id="creating-dataframes-with-datetime-columns">Creating DataFrames with DateTime Columns</h3>
-<div id="d3667169" class="cell" data-execution_count="2">
+<div id="96fe7041" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep date as a regular column</span></span>
@@ -532,7 +530,7 @@ Index type: &lt;class 'pandas.core.indexes.range.RangeIndex'&gt;</code></pre>
 <li><strong>Flexibility</strong>: Can easily convert to different formats or extract components</li>
 <li><strong>MultiIndex friendly</strong>: Works well with hierarchical indexing</li>
 </ol>
-<div id="26d644ab" class="cell" data-execution_count="3">
+<div id="7bc6792d" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Multiple date columns</span></span>
@@ -564,7 +562,7 @@ Index type: &lt;class 'pandas.core.indexes.range.RangeIndex'&gt;</code></pre>
 <li><strong>No automatic time series methods</strong>: Can’t use built-in time series resampling directly</li>
 <li><strong>Extra syntax</strong>: Need to use <code>.dt</code> accessor for date operations</li>
 </ol>
-<div id="cfc411ee" class="cell" data-execution_count="4">
+<div id="38556a96" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># More verbose filtering</span></span>
@@ -596,7 +594,7 @@ date
 <h2 class="anchored" data-anchor-id="datetimeindex-approach">DatetimeIndex Approach</h2>
 <section id="creating-dataframes-with-datetimeindex" class="level3">
 <h3 class="anchored" data-anchor-id="creating-dataframes-with-datetimeindex">Creating DataFrames with DatetimeIndex</h3>
-<div id="52ac4ad4" class="cell" data-execution_count="5">
+<div id="6a82be58" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set date as index</span></span>
@@ -627,7 +625,7 @@ Index type: &lt;class 'pandas.core.indexes.datetimes.DatetimeIndex'&gt;</code></
 <li><strong>Performance</strong>: Faster time-based operations on large datasets</li>
 <li><strong>Alignment</strong>: Automatic alignment on dates during operations</li>
 </ol>
-<div id="da7f6f96" class="cell" data-execution_count="6">
+<div id="32476cff" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Intuitive date slicing</span></span>
@@ -676,7 +674,7 @@ df_indexed['temperature'].plot()  # Automatic time axis!</code></pre>
 <li><strong>Merging complexity</strong>: More complex to merge DataFrames with datetime indices</li>
 <li><strong>Reset needed</strong>: Sometimes need to reset_index() for certain operations</li>
 </ol>
-<div id="e9308087" class="cell" data-execution_count="7">
+<div id="f6c5b0e2" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GroupBy changes the index</span></span>
@@ -707,54 +705,57 @@ After reset_index: ['date', 'temperature', 'precipitation', 'site']</code></pre>
 <h2 class="anchored" data-anchor-id="when-to-use-each-approach">When to Use Each Approach</h2>
 <section id="use-datetimeindex-when" class="level3">
 <h3 class="anchored" data-anchor-id="use-datetimeindex-when">Use DatetimeIndex When:</h3>
-<div id="76e5de4b" class="cell" data-execution_count="8">
+<ul>
+<li>✅ Time series analysis is primary focus</li>
+<li>✅ Need frequent resampling/aggregation</li>
+<li>✅ Creating time series plots</li>
+<li>✅ Working with single time series</li>
+</ul>
+<div id="ada2cc01" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Time series analysis is primary focus</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Need frequent resampling/aggregation</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Creating time series plots</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Working with single time series</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Environmental monitoring time series</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>monitoring_data <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'temperature'</span>: np.random.normal(<span class="dv">20</span>, <span class="dv">3</span>, <span class="dv">100</span>),</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'humidity'</span>: np.random.normal(<span class="dv">60</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>}, index<span class="op">=</span>pd.date_range(<span class="st">'2023-01-01'</span>, periods<span class="op">=</span><span class="dv">100</span>, freq<span class="op">=</span><span class="st">'H'</span>))</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Perfect for DatetimeIndex - time series monitoring:"</span>)</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Easy resampling: </span><span class="sc">{</span><span class="bu">len</span>(monitoring_data.resample(<span class="st">'D'</span>).mean())<span class="sc">}</span><span class="ss"> daily averages"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Environmental monitoring time series</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>monitoring_data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'temperature'</span>: np.random.normal(<span class="dv">20</span>, <span class="dv">3</span>, <span class="dv">100</span>),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'humidity'</span>: np.random.normal(<span class="dv">60</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>}, index<span class="op">=</span>pd.date_range(<span class="st">'2023-01-01'</span>, periods<span class="op">=</span><span class="dv">100</span>, freq<span class="op">=</span><span class="st">'H'</span>))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Perfect for DatetimeIndex - time series monitoring:"</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Easy resampling: </span><span class="sc">{</span><span class="bu">len</span>(monitoring_data.resample(<span class="st">'D'</span>).mean())<span class="sc">}</span><span class="ss"> daily averages"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Perfect for DatetimeIndex - time series monitoring:
 Easy resampling: 5 daily averages</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/bs/x9tn9jz91cv6hb3q6p4djbmw0000gn/T/ipykernel_84922/4214301773.py:10: FutureWarning: 'H' is deprecated and will be removed in a future version, please use 'h' instead.
+<pre><code>/var/folders/bs/x9tn9jz91cv6hb3q6p4djbmw0000gn/T/ipykernel_87363/3599448582.py:5: FutureWarning: 'H' is deprecated and will be removed in a future version, please use 'h' instead.
   }, index=pd.date_range('2023-01-01', periods=100, freq='H'))</code></pre>
 </div>
 </div>
 </section>
 <section id="use-datetime-column-when" class="level3">
 <h3 class="anchored" data-anchor-id="use-datetime-column-when">Use DateTime Column When:</h3>
-<div id="96be6749" class="cell" data-execution_count="9">
+<ul>
+<li>✅ Multiple date/time columns needed</li>
+<li>✅ Frequent merging with other DataFrames<br>
+</li>
+<li>✅ Complex grouping operations</li>
+<li>✅ Date is one of many attributes</li>
+</ul>
+<div id="a11d5caa" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Multiple date/time columns needed</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Frequent merging with other DataFrames  </span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Complex grouping operations</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Date is one of many attributes</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Event data with multiple dates</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>event_data <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'event_start'</span>: pd.date_range(<span class="st">'2023-01-01'</span>, periods<span class="op">=</span><span class="dv">10</span>, freq<span class="op">=</span><span class="st">'3D'</span>),</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'event_end'</span>: pd.date_range(<span class="st">'2023-01-02'</span>, periods<span class="op">=</span><span class="dv">10</span>, freq<span class="op">=</span><span class="st">'3D'</span>),</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'location'</span>: [<span class="st">'Site_'</span> <span class="op">+</span> <span class="bu">str</span>(i<span class="op">%</span><span class="dv">3</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)],</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'measurement'</span>: np.random.normal(<span class="dv">15</span>, <span class="dv">2</span>, <span class="dv">10</span>)</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Perfect for datetime columns - event data:"</span>)</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(event_data.head(<span class="dv">3</span>))</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Can easily work with both start and end dates!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Event data with multiple dates</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>event_data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'event_start'</span>: pd.date_range(<span class="st">'2023-01-01'</span>, periods<span class="op">=</span><span class="dv">10</span>, freq<span class="op">=</span><span class="st">'3D'</span>),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'event_end'</span>: pd.date_range(<span class="st">'2023-01-02'</span>, periods<span class="op">=</span><span class="dv">10</span>, freq<span class="op">=</span><span class="st">'3D'</span>),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'location'</span>: [<span class="st">'Site_'</span> <span class="op">+</span> <span class="bu">str</span>(i<span class="op">%</span><span class="dv">3</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)],</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'measurement'</span>: np.random.normal(<span class="dv">15</span>, <span class="dv">2</span>, <span class="dv">10</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Perfect for datetime columns - event data:"</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(event_data.head(<span class="dv">3</span>))</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Can easily work with both start and end dates!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Perfect for datetime columns - event data:
@@ -772,7 +773,7 @@ Can easily work with both start and end dates!</code></pre>
 <h2 class="anchored" data-anchor-id="converting-between-approaches">Converting Between Approaches</h2>
 <section id="column-to-index" class="level3">
 <h3 class="anchored" data-anchor-id="column-to-index">Column to Index</h3>
-<div id="634b1974" class="cell" data-execution_count="10">
+<div id="783f810d" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert datetime column to index</span></span>
@@ -798,7 +799,7 @@ date
 </section>
 <section id="index-to-column" class="level3">
 <h3 class="anchored" data-anchor-id="index-to-column">Index to Column</h3>
-<div id="8858a67a" class="cell" data-execution_count="11">
+<div id="e1195912" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert DatetimeIndex back to column</span></span>
@@ -880,49 +881,6 @@ Both index and column: ['temperature', 'precipitation', 'site', 'date_column']</
 </tr>
 </tbody>
 </table>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<div id="6b2f7359" class="cell" data-execution_count="12">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Always ensure proper datetime parsing</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>sample_csv_data <span class="op">=</span> <span class="st">"""date,value</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="st">2023-01-01,10.5</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="st">2023-01-02,11.2</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="st">2023-01-03,9.8"""</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Save and read with proper parsing</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'sample_time_data.csv'</span>, <span class="st">'w'</span>) <span class="im">as</span> f:</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    f.write(sample_csv_data)</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Good: Parse dates during reading</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>df_good <span class="op">=</span> pd.read_csv(<span class="st">'sample_time_data.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'date'</span>])</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✅ Properly parsed dates:"</span>)</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_good.dtypes)</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Choose approach based on your primary use case</span></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Convert between approaches as needed</span></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Use descriptive variable names (date_column vs df_indexed)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>✅ Properly parsed dates:
-date     datetime64[ns]
-value           float64
-dtype: object</code></pre>
-</div>
-</div>
-</section>
-<section id="summary" class="level2">
-<h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<ul>
-<li><strong>DatetimeIndex</strong>: Best for dedicated time series analysis with frequent temporal operations</li>
-<li><strong>DateTime Column</strong>: Best for mixed analytical tasks, multiple dates, or complex data structures</li>
-<li><strong>Both approaches are valid</strong> - choose based on your primary use case</li>
-<li><strong>Easy to convert</strong> between approaches when needs change</li>
-<li><strong>Consider your workflow</strong>: resampling/plotting → DatetimeIndex; merging/grouping → DateTime Column</li>
-</ul>
-<p>The key is understanding your data analysis patterns and choosing the approach that makes your code more intuitive and efficient [[memory:8558460]].</p>
 
 
 </section>

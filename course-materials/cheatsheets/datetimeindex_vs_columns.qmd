@@ -181,13 +181,14 @@ print(f"\nAfter reset_index: {list(df_reset.columns)}")
 
 ### Use DatetimeIndex When:
 
+
+- ✅ Time series analysis is primary focus
+- ✅ Need frequent resampling/aggregation
+- ✅ Creating time series plots
+- ✅ Working with single time series
+
 ```{python}
 #| echo: true
-
-# ✅ Time series analysis is primary focus
-# ✅ Need frequent resampling/aggregation
-# ✅ Creating time series plots
-# ✅ Working with single time series
 
 # Example: Environmental monitoring time series
 monitoring_data = pd.DataFrame({
@@ -201,13 +202,14 @@ print(f"Easy resampling: {len(monitoring_data.resample('D').mean())} daily avera
 
 ### Use DateTime Column When:
 
+
+- ✅ Multiple date/time columns needed
+- ✅ Frequent merging with other DataFrames  
+- ✅ Complex grouping operations
+- ✅ Date is one of many attributes
+
 ```{python}
 #| echo: true
-
-# ✅ Multiple date/time columns needed
-# ✅ Frequent merging with other DataFrames  
-# ✅ Complex grouping operations
-# ✅ Date is one of many attributes
 
 # Example: Event data with multiple dates
 event_data = pd.DataFrame({
@@ -271,38 +273,4 @@ print(f"\nBoth index and column: {list(df_both.columns)}")
 | Event data (start/end times) | **DateTime Column** | Multiple temporal dimensions |
 | Sensor/monitoring data | **DatetimeIndex** | Optimized for time series |
 
-## Best Practices
-
-```{python}
-#| echo: true
-
-# ✅ Always ensure proper datetime parsing
-sample_csv_data = """date,value
-2023-01-01,10.5
-2023-01-02,11.2
-2023-01-03,9.8"""
-
-# Save and read with proper parsing
-with open('sample_time_data.csv', 'w') as f:
-    f.write(sample_csv_data)
-
-# Good: Parse dates during reading
-df_good = pd.read_csv('sample_time_data.csv', parse_dates=['date'])
-print("✅ Properly parsed dates:")
-print(df_good.dtypes)
-
-# ✅ Choose approach based on your primary use case
-# ✅ Convert between approaches as needed
-# ✅ Use descriptive variable names (date_column vs df_indexed)
-```
-
-## Summary
-
-- **DatetimeIndex**: Best for dedicated time series analysis with frequent temporal operations
-- **DateTime Column**: Best for mixed analytical tasks, multiple dates, or complex data structures
-- **Both approaches are valid** - choose based on your primary use case
-- **Easy to convert** between approaches when needs change
-- **Consider your workflow**: resampling/plotting → DatetimeIndex; merging/grouping → DateTime Column
-
-The key is understanding your data analysis patterns and choosing the approach that makes your code more intuitive and efficient [[memory:8558460]].
 

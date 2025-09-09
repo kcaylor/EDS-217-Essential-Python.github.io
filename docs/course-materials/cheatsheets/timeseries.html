@@ -412,58 +412,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#reading-csv-with-date-parsing" id="toc-reading-csv-with-date-parsing" class="nav-link" data-scroll-target="#reading-csv-with-date-parsing">Reading CSV with Date Parsing</a></li>
   <li><a href="#converting-strings-to-datetime" id="toc-converting-strings-to-datetime" class="nav-link" data-scroll-target="#converting-strings-to-datetime">Converting Strings to Datetime</a></li>
-  <li><a href="#handling-different-date-formats" id="toc-handling-different-date-formats" class="nav-link" data-scroll-target="#handling-different-date-formats">Handling Different Date Formats</a></li>
   </ul></li>
-  <li><a href="#working-with-datetime-index" id="toc-working-with-datetime-index" class="nav-link" data-scroll-target="#working-with-datetime-index">Working with DateTime Index</a>
-  <ul class="collapse">
   <li><a href="#setting-datetime-index" id="toc-setting-datetime-index" class="nav-link" data-scroll-target="#setting-datetime-index">Setting DateTime Index</a></li>
-  <li><a href="#creating-date-ranges" id="toc-creating-date-ranges" class="nav-link" data-scroll-target="#creating-date-ranges">Creating Date Ranges</a></li>
-  </ul></li>
   <li><a href="#extracting-date-components" id="toc-extracting-date-components" class="nav-link" data-scroll-target="#extracting-date-components">Extracting Date Components</a>
   <ul class="collapse">
-  <li><a href="#using-the-.dt-accessor" id="toc-using-the-.dt-accessor" class="nav-link" data-scroll-target="#using-the-.dt-accessor">Using the .dt Accessor</a></li>
-  <li><a href="#creating-custom-date-groupings" id="toc-creating-custom-date-groupings" class="nav-link" data-scroll-target="#creating-custom-date-groupings">Creating Custom Date Groupings</a></li>
-  <li><a href="#creating-n-year-groupings" id="toc-creating-n-year-groupings" class="nav-link" data-scroll-target="#creating-n-year-groupings">Creating N-Year Groupings</a></li>
+  <li><a href="#creating-seasonal-groupings" id="toc-creating-seasonal-groupings" class="nav-link" data-scroll-target="#creating-seasonal-groupings">Creating Seasonal Groupings</a></li>
   </ul></li>
   <li><a href="#time-series-resampling" id="toc-time-series-resampling" class="nav-link" data-scroll-target="#time-series-resampling">Time Series Resampling</a>
   <ul class="collapse">
   <li><a href="#basic-resampling" id="toc-basic-resampling" class="nav-link" data-scroll-target="#basic-resampling">Basic Resampling</a></li>
-  <li><a href="#different-aggregation-functions" id="toc-different-aggregation-functions" class="nav-link" data-scroll-target="#different-aggregation-functions">Different Aggregation Functions</a></li>
-  <li><a href="#common-resampling-frequencies" id="toc-common-resampling-frequencies" class="nav-link" data-scroll-target="#common-resampling-frequencies">Common Resampling Frequencies</a></li>
+  <li><a href="#common-frequency-codes" id="toc-common-frequency-codes" class="nav-link" data-scroll-target="#common-frequency-codes">Common Frequency Codes</a></li>
   </ul></li>
-  <li><a href="#time-based-calculations" id="toc-time-based-calculations" class="nav-link" data-scroll-target="#time-based-calculations">Time-Based Calculations</a>
+  <li><a href="#time-series-calculations" id="toc-time-series-calculations" class="nav-link" data-scroll-target="#time-series-calculations">Time Series Calculations</a>
   <ul class="collapse">
   <li><a href="#year-over-year-changes" id="toc-year-over-year-changes" class="nav-link" data-scroll-target="#year-over-year-changes">Year-over-Year Changes</a></li>
   <li><a href="#rolling-averages" id="toc-rolling-averages" class="nav-link" data-scroll-target="#rolling-averages">Rolling Averages</a></li>
-  <li><a href="#seasonal-analysis" id="toc-seasonal-analysis" class="nav-link" data-scroll-target="#seasonal-analysis">Seasonal Analysis</a></li>
   </ul></li>
-  <li><a href="#time-series-filtering-and-selection" id="toc-time-series-filtering-and-selection" class="nav-link" data-scroll-target="#time-series-filtering-and-selection">Time Series Filtering and Selection</a>
+  <li><a href="#time-series-filtering" id="toc-time-series-filtering" class="nav-link" data-scroll-target="#time-series-filtering">Time Series Filtering</a>
   <ul class="collapse">
   <li><a href="#selecting-date-ranges" id="toc-selecting-date-ranges" class="nav-link" data-scroll-target="#selecting-date-ranges">Selecting Date Ranges</a></li>
   <li><a href="#filtering-by-date-components" id="toc-filtering-by-date-components" class="nav-link" data-scroll-target="#filtering-by-date-components">Filtering by Date Components</a></li>
   </ul></li>
-  <li><a href="#merging-time-series-data" id="toc-merging-time-series-data" class="nav-link" data-scroll-target="#merging-time-series-data">Merging Time Series Data</a>
-  <ul class="collapse">
-  <li><a href="#joining-on-datetime-index" id="toc-joining-on-datetime-index" class="nav-link" data-scroll-target="#joining-on-datetime-index">Joining on DateTime Index</a></li>
-  </ul></li>
-  <li><a href="#time-series-visualization" id="toc-time-series-visualization" class="nav-link" data-scroll-target="#time-series-visualization">Time Series Visualization</a>
-  <ul class="collapse">
-  <li><a href="#basic-time-series-plots" id="toc-basic-time-series-plots" class="nav-link" data-scroll-target="#basic-time-series-plots">Basic Time Series Plots</a></li>
-  <li><a href="#multiple-series-plot" id="toc-multiple-series-plot" class="nav-link" data-scroll-target="#multiple-series-plot">Multiple Series Plot</a></li>
-  </ul></li>
-  <li><a href="#common-patterns-and-use-cases" id="toc-common-patterns-and-use-cases" class="nav-link" data-scroll-target="#common-patterns-and-use-cases">Common Patterns and Use Cases</a>
-  <ul class="collapse">
-  <li><a href="#climate-data-analysis" id="toc-climate-data-analysis" class="nav-link" data-scroll-target="#climate-data-analysis">Climate Data Analysis</a></li>
-  <li><a href="#anomaly-detection" id="toc-anomaly-detection" class="nav-link" data-scroll-target="#anomaly-detection">Anomaly Detection</a></li>
-  </ul></li>
-  <li><a href="#tips-and-best-practices" id="toc-tips-and-best-practices" class="nav-link" data-scroll-target="#tips-and-best-practices">Tips and Best Practices</a>
-  <ul class="collapse">
-  <li><a href="#working-with-time-zones" id="toc-working-with-time-zones" class="nav-link" data-scroll-target="#working-with-time-zones">Working with Time Zones</a></li>
-  <li><a href="#handling-missing-time-series-data" id="toc-handling-missing-time-series-data" class="nav-link" data-scroll-target="#handling-missing-time-series-data">Handling Missing Time Series Data</a></li>
-  </ul></li>
+  <li><a href="#merging-time-series-data" id="toc-merging-time-series-data" class="nav-link" data-scroll-target="#merging-time-series-data">Merging Time Series Data</a></li>
+  <li><a href="#basic-time-series-visualization" id="toc-basic-time-series-visualization" class="nav-link" data-scroll-target="#basic-time-series-visualization">Basic Time Series Visualization</a></li>
   <li><a href="#key-reminders" id="toc-key-reminders" class="nav-link" data-scroll-target="#key-reminders">Key Reminders</a></li>
-  <li><a href="#common-frequency-codes-reference" id="toc-common-frequency-codes-reference" class="nav-link" data-scroll-target="#common-frequency-codes-reference">Common Frequency Codes Reference</a></li>
-  <li><a href="#further-learning" id="toc-further-learning" class="nav-link" data-scroll-target="#further-learning">Further Learning</a></li>
   </ul>
 </nav>
     </div>
@@ -476,12 +448,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>This cheatsheet provides a quick reference for working with dates, times, and time series data in pandas. Time series analysis is crucial in environmental data science for analyzing trends, seasonal patterns, and temporal relationships in climate, environmental monitoring, and other time-dependent datasets.</p>
+<p>This cheatsheet covers essential datetime and time series operations in pandas needed for environmental data analysis.</p>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>Always start by importing the necessary libraries:</p>
-<div id="4d1ba9a1" class="cell" data-execution_count="1">
+<div id="28269d20" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -491,9 +462,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set random seed for reproducible examples</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create some sample time series data</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2020-01-01'</span>, <span class="st">'2023-12-31'</span>, freq<span class="op">=</span><span class="st">'ME'</span>)  <span class="co"># Monthly end dates</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>temperature <span class="op">=</span> np.random.normal(<span class="dv">15</span>, <span class="dv">10</span>, <span class="bu">len</span>(dates)) <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> np.sin(np.arange(<span class="bu">len</span>(dates)) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">12</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sample time series data</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2020-01-01'</span>, <span class="st">'2023-12-31'</span>, freq<span class="op">=</span><span class="st">'ME'</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>temperature <span class="op">=</span> np.random.normal(<span class="dv">15</span>, <span class="dv">5</span>, <span class="bu">len</span>(dates)) <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> np.sin(np.arange(<span class="bu">len</span>(dates)) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">12</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>sample_df <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'date'</span>: dates,</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'temperature'</span>: temperature,</span>
@@ -506,38 +477,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="loading-time-series-data">Loading Time Series Data</h2>
 <section id="reading-csv-with-date-parsing" class="level3">
 <h3 class="anchored" data-anchor-id="reading-csv-with-date-parsing">Reading CSV with Date Parsing</h3>
-<div id="59e10674" class="cell" data-execution_count="2">
+<div id="a63bc36b" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse dates while reading CSV (most efficient)</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse dates while reading CSV (most efficient method)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># df = pd.read_csv('data.csv', parse_dates=['Date'])</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># For demonstration, let's save and reload our sample data</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># For demonstration, save and reload sample data</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sample_df.to_csv(<span class="st">'temp_data.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'temp_data.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'date'</span>])</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"First few rows:"</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Date column dtype: </span><span class="sc">{</span>df[<span class="st">'date'</span>]<span class="sc">.</span>dtype<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Data shape: </span><span class="sc">{</span>df<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Date column dtype: </span><span class="sc">{</span>df[<span class="st">'date'</span>]<span class="sc">.</span>dtype<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Data shape: </span><span class="sc">{</span>df<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>First few rows:
-        date  temperature         co2
-0 2020-01-31    19.967142  400.271809
-1 2020-02-29    18.617357  399.490289
-2 2020-03-31    30.137139  399.752331
-3 2020-04-30    40.230299  399.659790
-4 2020-05-31    21.318720  399.421329
-
-Date column dtype: datetime64[ns]
+<pre><code>Date column dtype: datetime64[ns]
 Data shape: (48, 3)</code></pre>
 </div>
 </div>
 </section>
 <section id="converting-strings-to-datetime" class="level3">
 <h3 class="anchored" data-anchor-id="converting-strings-to-datetime">Converting Strings to Datetime</h3>
-<div id="6ade336a" class="cell" data-execution_count="3">
+<div id="a2225ebe" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert year-only data to datetime (common in environmental datasets)</span></span>
@@ -546,9 +507,8 @@ Data shape: (48, 3)</code></pre>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'annual_temp'</span>: [<span class="fl">14.5</span>, <span class="fl">15.2</span>, <span class="fl">14.8</span>, <span class="fl">15.6</span>]</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert year to datetime</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>year_data[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(year_data[<span class="st">'year'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">'%Y'</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(year_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>year_data[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(year_data[<span class="st">'year'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">'%Y'</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(year_data.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>   year  annual_temp       date
@@ -559,149 +519,74 @@ Data shape: (48, 3)</code></pre>
 </div>
 </div>
 </section>
-<section id="handling-different-date-formats" class="level3">
-<h3 class="anchored" data-anchor-id="handling-different-date-formats">Handling Different Date Formats</h3>
-<div id="a415908c" class="cell" data-execution_count="4">
+</section>
+<section id="setting-datetime-index" class="level2">
+<h2 class="anchored" data-anchor-id="setting-datetime-index">Setting DateTime Index</h2>
+<div id="d315b5ad" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Common date format conversions</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>date_examples <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'date_str'</span>: [<span class="st">'2023-01-15'</span>, <span class="st">'15/01/2023'</span>, <span class="st">'01-15-23'</span>, <span class="st">'2023-Jan-15'</span>]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Different parsing approaches</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 1: ISO format (automatic parsing)</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>iso_date <span class="op">=</span> pd.to_datetime(<span class="st">'2023-01-15'</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 2: European format (day/month/year)</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>euro_date <span class="op">=</span> pd.to_datetime(<span class="st">'15/01/2023'</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'</span><span class="sc">%d</span><span class="st">/%m/%Y'</span>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 3: US short format </span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>us_date <span class="op">=</span> pd.to_datetime(<span class="st">'01-15-23'</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'%m-</span><span class="sc">%d</span><span class="st">-%y'</span>)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 4: Text month format</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>text_date <span class="op">=</span> pd.to_datetime(<span class="st">'2023-Jan-15'</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'%Y-%b-</span><span class="sc">%d</span><span class="st">'</span>)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"ISO format: </span><span class="sc">{</span>iso_date<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"European format: </span><span class="sc">{</span>euro_date<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"US format: </span><span class="sc">{</span>us_date<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Text month: </span><span class="sc">{</span>text_date<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set date column as index for time series operations</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_indexed <span class="op">=</span> df.set_index(<span class="st">'date'</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Index is datetime: </span><span class="sc">{</span>pd<span class="sc">.</span>api<span class="sc">.</span>types<span class="sc">.</span>is_datetime64_any_dtype(df_indexed.index)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_indexed.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>ISO format: 2023-01-15 00:00:00
-European format: 2023-01-15 00:00:00
-US format: 2023-01-15 00:00:00
-Text month: 2023-01-15 00:00:00</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="working-with-datetime-index" class="level2">
-<h2 class="anchored" data-anchor-id="working-with-datetime-index">Working with DateTime Index</h2>
-<section id="setting-datetime-index" class="level3">
-<h3 class="anchored" data-anchor-id="setting-datetime-index">Setting DateTime Index</h3>
-<div id="ab7a2d09" class="cell" data-execution_count="5">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set date column as index for time series operations (method chaining)</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df_indexed <span class="op">=</span> (df</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>              .set_index(<span class="st">'date'</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>              .copy())  <span class="co"># Explicit copy to avoid SettingWithCopyWarning</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_indexed.head())</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Index is datetime: </span><span class="sc">{</span>pd<span class="sc">.</span>api<span class="sc">.</span>types<span class="sc">.</span>is_datetime64_any_dtype(df_indexed.index)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Index name: </span><span class="sc">{</span>df_indexed<span class="sc">.</span>index<span class="sc">.</span>name<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>            temperature         co2
+<pre><code>Index is datetime: True
+            temperature         co2
 date                               
-2020-01-31    19.967142  400.271809
-2020-02-29    18.617357  399.490289
-2020-03-31    30.137139  399.752331
-2020-04-30    40.230299  399.659790
-2020-05-31    21.318720  399.421329
-Index is datetime: True
-Index name: date</code></pre>
+2020-01-31    17.483571  400.271809
+2020-02-29    19.308678  399.490289
+2020-03-31    26.898697  399.752331
+2020-04-30    32.615149  399.659790
+2020-05-31    22.489487  399.421329</code></pre>
 </div>
 </div>
-</section>
-<section id="creating-date-ranges" class="level3">
-<h3 class="anchored" data-anchor-id="creating-date-ranges">Creating Date Ranges</h3>
-<div id="d27b96ed" class="cell" data-execution_count="6">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create various date ranges</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>daily_range <span class="op">=</span> pd.date_range(<span class="st">'2023-01-01'</span>, <span class="st">'2023-01-10'</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>monthly_range <span class="op">=</span> pd.date_range(<span class="st">'2023-01-01'</span>, periods<span class="op">=</span><span class="dv">12</span>, freq<span class="op">=</span><span class="st">'ME'</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>yearly_range <span class="op">=</span> pd.date_range(<span class="st">'2020-01-01'</span>, <span class="st">'2025-01-01'</span>, freq<span class="op">=</span><span class="st">'YE'</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Daily: </span><span class="sc">{</span>daily_range[:<span class="dv">5</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Monthly: </span><span class="sc">{</span>monthly_range[:<span class="dv">3</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Yearly: </span><span class="sc">{</span>yearly_range<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Daily: DatetimeIndex(['2023-01-01', '2023-01-02', '2023-01-03', '2023-01-04',
-               '2023-01-05'],
-              dtype='datetime64[ns]', freq='D')
-Monthly: DatetimeIndex(['2023-01-31', '2023-02-28', '2023-03-31'], dtype='datetime64[ns]', freq='ME')
-Yearly: DatetimeIndex(['2020-12-31', '2021-12-31', '2022-12-31', '2023-12-31',
-               '2024-12-31'],
-              dtype='datetime64[ns]', freq='YE-DEC')</code></pre>
-</div>
-</div>
-</section>
 </section>
 <section id="extracting-date-components" class="level2">
 <h2 class="anchored" data-anchor-id="extracting-date-components">Extracting Date Components</h2>
-<section id="using-the-.dt-accessor" class="level3">
-<h3 class="anchored" data-anchor-id="using-the-.dt-accessor">Using the .dt Accessor</h3>
-<div id="802254eb" class="cell" data-execution_count="7">
+<div id="dde80121" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract various date components</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'year'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].dt.year</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'month'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].dt.month</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'day_of_week'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].dt.day_name()</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'quarter'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].dt.quarter</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create decade grouping (useful for long-term climate analysis)</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'decade'</span>] <span class="op">=</span> (df[<span class="st">'date'</span>].dt.year <span class="op">//</span> <span class="dv">10</span>) <span class="op">*</span> <span class="dv">10</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">'date'</span>, <span class="st">'year'</span>, <span class="st">'month'</span>, <span class="st">'day_of_week'</span>, <span class="st">'decade'</span>]].head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract date components using .dt accessor</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'year'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].dt.year</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'month'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].dt.month</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'quarter'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].dt.quarter</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create decade grouping (useful for climate analysis)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'decade'</span>] <span class="op">=</span> (df[<span class="st">'date'</span>].dt.year <span class="op">//</span> <span class="dv">10</span>) <span class="op">*</span> <span class="dv">10</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">'date'</span>, <span class="st">'year'</span>, <span class="st">'month'</span>, <span class="st">'decade'</span>]].head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>        date  year  month day_of_week  decade
-0 2020-01-31  2020      1      Friday    2020
-1 2020-02-29  2020      2    Saturday    2020
-2 2020-03-31  2020      3     Tuesday    2020
-3 2020-04-30  2020      4    Thursday    2020
-4 2020-05-31  2020      5      Sunday    2020</code></pre>
+<pre><code>        date  year  month  decade
+0 2020-01-31  2020      1    2020
+1 2020-02-29  2020      2    2020
+2 2020-03-31  2020      3    2020
+3 2020-04-30  2020      4    2020
+4 2020-05-31  2020      5    2020</code></pre>
 </div>
 </div>
-</section>
-<section id="creating-custom-date-groupings" class="level3">
-<h3 class="anchored" data-anchor-id="creating-custom-date-groupings">Creating Custom Date Groupings</h3>
-<div id="4c7b1c58" class="cell" data-execution_count="8">
+<section id="creating-seasonal-groupings" class="level3">
+<h3 class="anchored" data-anchor-id="creating-seasonal-groupings">Creating Seasonal Groupings</h3>
+<div id="ea79a523" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define seasonal groupings as constants (more maintainable)</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>SEASON_MAP <span class="op">=</span> {</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">12</span>: <span class="st">'Winter'</span>, <span class="dv">1</span>: <span class="st">'Winter'</span>, <span class="dv">2</span>: <span class="st">'Winter'</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>: <span class="st">'Spring'</span>, <span class="dv">4</span>: <span class="st">'Spring'</span>, <span class="dv">5</span>: <span class="st">'Spring'</span>, </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>: <span class="st">'Summer'</span>, <span class="dv">7</span>: <span class="st">'Summer'</span>, <span class="dv">8</span>: <span class="st">'Summer'</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">9</span>: <span class="st">'Fall'</span>, <span class="dv">10</span>: <span class="st">'Fall'</span>, <span class="dv">11</span>: <span class="st">'Fall'</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_season(date):</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Assign season based on month (Northern Hemisphere)."""</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> SEASON_MAP[date.month]</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply season function to create new column</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'season'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].<span class="bu">apply</span>(get_season)</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># For indexed DataFrame, apply to index values</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>df_indexed[<span class="st">'season'</span>] <span class="op">=</span> df_indexed.index.to_series().<span class="bu">apply</span>(get_season)</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">'date'</span>, <span class="st">'season'</span>]].head(<span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define seasonal groupings as constants</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>SEASON_MAP <span class="op">=</span> {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">12</span>: <span class="st">'Winter'</span>, <span class="dv">1</span>: <span class="st">'Winter'</span>, <span class="dv">2</span>: <span class="st">'Winter'</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>: <span class="st">'Spring'</span>, <span class="dv">4</span>: <span class="st">'Spring'</span>, <span class="dv">5</span>: <span class="st">'Spring'</span>, </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>: <span class="st">'Summer'</span>, <span class="dv">7</span>: <span class="st">'Summer'</span>, <span class="dv">8</span>: <span class="st">'Summer'</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">9</span>: <span class="st">'Fall'</span>, <span class="dv">10</span>: <span class="st">'Fall'</span>, <span class="dv">11</span>: <span class="st">'Fall'</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_season(date):</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Assign season based on month (Northern Hemisphere)."""</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> SEASON_MAP[date.month]</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply season function</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'season'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].<span class="bu">apply</span>(get_season)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">'date'</span>, <span class="st">'season'</span>]].head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>        date  season
@@ -709,42 +594,7 @@ Yearly: DatetimeIndex(['2020-12-31', '2021-12-31', '2022-12-31', '2023-12-31',
 1 2020-02-29  Winter
 2 2020-03-31  Spring
 3 2020-04-30  Spring
-4 2020-05-31  Spring
-5 2020-06-30  Summer
-6 2020-07-31  Summer
-7 2020-08-31  Summer</code></pre>
-</div>
-</div>
-</section>
-<section id="creating-n-year-groupings" class="level3">
-<h3 class="anchored" data-anchor-id="creating-n-year-groupings">Creating N-Year Groupings</h3>
-<div id="6b191705" class="cell" data-execution_count="9">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group years into 5-year periods (useful for climate normals)</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'five_year_period'</span>] <span class="op">=</span> (df[<span class="st">'date'</span>].dt.year <span class="op">//</span> N) <span class="op">*</span> N</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># More flexible binning with pd.cut</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'custom_period'</span>] <span class="op">=</span> pd.cut(df[<span class="st">'date'</span>].dt.year, </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                            bins<span class="op">=</span>[<span class="dv">2019</span>, <span class="dv">2021</span>, <span class="dv">2022</span>, <span class="dv">2024</span>], </span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                            labels<span class="op">=</span>[<span class="st">'2020-2021'</span>, <span class="st">'2022'</span>, <span class="st">'2023-2024'</span>],</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                            include_lowest<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">'date'</span>, <span class="st">'five_year_period'</span>, <span class="st">'custom_period'</span>]].head(<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>        date  five_year_period custom_period
-0 2020-01-31              2020     2020-2021
-1 2020-02-29              2020     2020-2021
-2 2020-03-31              2020     2020-2021
-3 2020-04-30              2020     2020-2021
-4 2020-05-31              2020     2020-2021
-5 2020-06-30              2020     2020-2021
-6 2020-07-31              2020     2020-2021
-7 2020-08-31              2020     2020-2021
-8 2020-09-30              2020     2020-2021
-9 2020-10-31              2020     2020-2021</code></pre>
+4 2020-05-31  Spring</code></pre>
 </div>
 </div>
 </section>
@@ -753,35 +603,35 @@ Yearly: DatetimeIndex(['2020-12-31', '2021-12-31', '2022-12-31', '2023-12-31',
 <h2 class="anchored" data-anchor-id="time-series-resampling">Time Series Resampling</h2>
 <section id="basic-resampling" class="level3">
 <h3 class="anchored" data-anchor-id="basic-resampling">Basic Resampling</h3>
-<div id="09f46f27" class="cell" data-execution_count="10">
+<div id="737d5033" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Resample monthly data to annual averages - only numeric columns</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>annual_avg <span class="op">=</span> df_indexed.resample(<span class="st">'YE'</span>).mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Annual averages:"</span>)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(annual_avg.head())</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Resample to quarterly data - only numeric columns</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>quarterly_data <span class="op">=</span> df_indexed.resample(<span class="st">'QE'</span>).mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Quarterly averages:"</span>)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(quarterly_data.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Resample monthly data to annual averages</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>annual_avg <span class="op">=</span> df_indexed.resample(<span class="st">'YE'</span>).mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Annual averages:"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(annual_avg.head())</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Resample to quarterly data</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>quarterly_data <span class="op">=</span> df_indexed.resample(<span class="st">'QE'</span>).mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Quarterly averages:"</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(quarterly_data.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Annual averages:
             temperature         co2
 date                               
-2020-12-31    17.959553  400.298642
-2021-12-31     9.087681  401.834578
-2022-12-31    13.066647  403.788055
-2023-12-31    11.674224  404.590108
+2020-12-31    16.479777  400.298642
+2021-12-31    12.043841  401.834578
+2022-12-31    14.033324  403.788055
+2023-12-31    13.337112  404.590108
 Quarterly averages:
             temperature         co2
 date                               
-2020-03-31    22.907213  399.838143
-2020-06-30    26.402550  399.636095
-2020-09-30    16.703826  400.713224
-2020-12-31     5.824624  401.007104
-2021-03-31     8.232632  401.201634</code></pre>
+2020-03-31    21.230315  399.838143
+2020-06-30    24.644651  399.636095
+2020-09-30    13.575204  400.713224
+2020-12-31     6.468936  401.007104
+2021-03-31    13.893025  401.201634</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -790,449 +640,16 @@ date
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Handling Mixed Data Types in Resampling
+Handling Mixed Data Types
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When your DataFrame contains both numeric and non-numeric columns (like strings), use <code>numeric_only=True</code> with aggregation functions like <code>.mean()</code>, <code>.sum()</code>, etc. This prevents errors when pandas tries to calculate statistics on text columns.</p>
-<p>Alternatively, you can select only the columns you want before resampling:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only numeric columns before resampling</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>numeric_cols <span class="op">=</span> [<span class="st">'temperature'</span>, <span class="st">'co2'</span>]</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>annual_avg <span class="op">=</span> df_indexed[numeric_cols].resample(<span class="st">'YE'</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>When your DataFrame contains both numeric and non-numeric columns, use <code>numeric_only=True</code> with aggregation functions to prevent errors.</p>
 </div>
 </div>
 </section>
-<section id="different-aggregation-functions" class="level3">
-<h3 class="anchored" data-anchor-id="different-aggregation-functions">Different Aggregation Functions</h3>
-<div id="06e41184" class="cell" data-execution_count="11">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple aggregation functions - specify columns to avoid string columns</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>annual_stats <span class="op">=</span> df_indexed.resample(<span class="st">'YE'</span>).agg({</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'temperature'</span>: [<span class="st">'mean'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>, <span class="st">'std'</span>],</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'co2'</span>: <span class="st">'mean'</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(annual_stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>           temperature                                         co2
-                  mean       min        max        std        mean
-date                                                              
-2020-12-31   17.959553  1.645002  40.230299  11.951324  400.298642
-2021-12-31    9.087681 -4.247482  23.142473   9.610991  401.834578
-2022-12-31   13.066647 -5.577109  28.756980  10.647341  403.788055
-2023-12-31   11.674224 -8.445474  31.044920  12.320898  404.590108</code></pre>
-</div>
-</div>
-</section>
-<section id="common-resampling-frequencies" class="level3">
-<h3 class="anchored" data-anchor-id="common-resampling-frequencies">Common Resampling Frequencies</h3>
-<div id="413bc716" class="cell" data-execution_count="12">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demonstrate common frequency codes</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>freq_examples <span class="op">=</span> {</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D'</span>: <span class="st">'Daily'</span>,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'W'</span>: <span class="st">'Weekly'</span>, </span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ME'</span>: <span class="st">'Month End'</span>,</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MS'</span>: <span class="st">'Month Start'</span>,</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'QE'</span>: <span class="st">'Quarter End'</span>,</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'YE'</span>: <span class="st">'Year End'</span>,</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'A'</span>: <span class="st">'Annual'</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Common frequency codes:"</span>)</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, description <span class="kw">in</span> freq_examples.items():</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>code<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>description<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Common frequency codes:
-  D: Daily
-  W: Weekly
-  ME: Month End
-  MS: Month Start
-  QE: Quarter End
-  YE: Year End
-  A: Annual</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="time-based-calculations" class="level2">
-<h2 class="anchored" data-anchor-id="time-based-calculations">Time-Based Calculations</h2>
-<section id="year-over-year-changes" class="level3">
-<h3 class="anchored" data-anchor-id="year-over-year-changes">Year-over-Year Changes</h3>
-<div id="81bae271" class="cell" data-execution_count="13">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate year-over-year changes</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>annual_data <span class="op">=</span> df_indexed.resample(<span class="st">'YE'</span>).mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>annual_data[<span class="st">'temp_yoy_change'</span>] <span class="op">=</span> annual_data[<span class="st">'temperature'</span>].diff()</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>annual_data[<span class="st">'co2_yoy_change'</span>] <span class="op">=</span> annual_data[<span class="st">'co2'</span>].diff()</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Year-over-year changes:"</span>)</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(annual_data[[<span class="st">'temperature'</span>, <span class="st">'temp_yoy_change'</span>, <span class="st">'co2'</span>, <span class="st">'co2_yoy_change'</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Year-over-year changes:
-            temperature  temp_yoy_change         co2  co2_yoy_change
-date                                                                
-2020-12-31    17.959553              NaN  400.298642             NaN
-2021-12-31     9.087681        -8.871872  401.834578        1.535936
-2022-12-31    13.066647         3.978966  403.788055        1.953477
-2023-12-31    11.674224        -1.392423  404.590108        0.802053</code></pre>
-</div>
-</div>
-</section>
-<section id="rolling-averages" class="level3">
-<h3 class="anchored" data-anchor-id="rolling-averages">Rolling Averages</h3>
-<div id="926facfc" class="cell" data-execution_count="14">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 12-month rolling average</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df_indexed[<span class="st">'temp_12m_rolling'</span>] <span class="op">=</span> df_indexed[<span class="st">'temperature'</span>].rolling(window<span class="op">=</span><span class="dv">12</span>).mean()</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original vs 12-month rolling average:"</span>)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_indexed[[<span class="st">'temperature'</span>, <span class="st">'temp_12m_rolling'</span>]].head(<span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Original vs 12-month rolling average:
-            temperature  temp_12m_rolling
-date                                     
-2020-01-31    19.967142               NaN
-2020-02-29    18.617357               NaN
-2020-03-31    30.137139               NaN
-2020-04-30    40.230299               NaN
-2020-05-31    21.318720               NaN
-2020-06-30    17.658630               NaN
-2020-07-31    30.792128               NaN
-2020-08-31    17.674347               NaN
-2020-09-30     1.645002               NaN
-2020-10-31    10.425600               NaN
-2020-11-30     1.705569               NaN
-2020-12-31     5.342702         17.959553
-2021-01-31    17.419623         17.747260
-2021-02-28     0.867198         16.268080
-2021-03-31     6.411076         14.290908</code></pre>
-</div>
-</div>
-</section>
-<section id="seasonal-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="seasonal-analysis">Seasonal Analysis</h3>
-<div id="20ee424a" class="cell" data-execution_count="15">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by season and calculate statistics</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>seasonal_stats <span class="op">=</span> df.groupby(<span class="st">'season'</span>).agg({</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'temperature'</span>: [<span class="st">'mean'</span>, <span class="st">'std'</span>],</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'co2'</span>: <span class="st">'mean'</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Seasonal statistics:"</span>)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(seasonal_stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Seasonal statistics:
-       temperature            co2
-              mean    std    mean
-season                           
-Fall          4.23   8.30  403.01
-Spring       21.50  10.09  402.10
-Summer       15.68  10.03  402.76
-Winter       10.37   9.82  402.64</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="time-series-filtering-and-selection" class="level2">
-<h2 class="anchored" data-anchor-id="time-series-filtering-and-selection">Time Series Filtering and Selection</h2>
-<section id="selecting-date-ranges" class="level3">
-<h3 class="anchored" data-anchor-id="selecting-date-ranges">Selecting Date Ranges</h3>
-<div id="5e21a8ff" class="cell" data-execution_count="16">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, ensure we have a proper DatetimeIndex</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"DataFrame index type: </span><span class="sc">{</span><span class="bu">type</span>(df_indexed.index)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Date range: </span><span class="sc">{</span>df_indexed<span class="sc">.</span>index<span class="sc">.</span><span class="bu">min</span>()<span class="sc">}</span><span class="ss"> to </span><span class="sc">{</span>df_indexed<span class="sc">.</span>index<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Select data from specific year using boolean indexing</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>data_2022 <span class="op">=</span> df_indexed[df_indexed.index.year <span class="op">==</span> <span class="dv">2022</span>]</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Data from 2022: </span><span class="sc">{</span><span class="bu">len</span>(data_2022)<span class="sc">}</span><span class="ss"> records"</span>)</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Select data from specific date range using loc</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>recent_data <span class="op">=</span> df_indexed.loc[<span class="st">'2023-01-01'</span>:<span class="st">'2023-06-30'</span>]</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"First half 2023: </span><span class="sc">{</span><span class="bu">len</span>(recent_data)<span class="sc">}</span><span class="ss"> records"</span>)</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter using datetime conditions on original DataFrame</span></span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>modern_data <span class="op">=</span> df[df[<span class="st">'date'</span>] <span class="op">&gt;=</span> pd.to_datetime(<span class="st">'2022-01-01'</span>)]</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Modern data (2022+): </span><span class="sc">{</span><span class="bu">len</span>(modern_data)<span class="sc">}</span><span class="ss"> records"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>DataFrame index type: &lt;class 'pandas.core.indexes.datetimes.DatetimeIndex'&gt;
-Date range: 2020-01-31 00:00:00 to 2023-12-31 00:00:00
-Data from 2022: 12 records
-First half 2023: 6 records
-Modern data (2022+): 24 records</code></pre>
-</div>
-</div>
-</section>
-<section id="filtering-by-date-components" class="level3">
-<h3 class="anchored" data-anchor-id="filtering-by-date-components">Filtering by Date Components</h3>
-<div id="c272a31b" class="cell" data-execution_count="17">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter by month (e.g., all January data)</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>january_data <span class="op">=</span> df[df[<span class="st">'date'</span>].dt.month <span class="op">==</span> <span class="dv">1</span>]</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter by season</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>winter_data <span class="op">=</span> df[df[<span class="st">'season'</span>] <span class="op">==</span> <span class="st">'Winter'</span>]</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter by decade</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>recent_decade <span class="op">=</span> df[df[<span class="st">'decade'</span>] <span class="op">==</span> <span class="dv">2020</span>]</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"January records: </span><span class="sc">{</span><span class="bu">len</span>(january_data)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Winter records: </span><span class="sc">{</span><span class="bu">len</span>(winter_data)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"2020s decade: </span><span class="sc">{</span><span class="bu">len</span>(recent_decade)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>January records: 4
-Winter records: 12
-2020s decade: 48</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="merging-time-series-data" class="level2">
-<h2 class="anchored" data-anchor-id="merging-time-series-data">Merging Time Series Data</h2>
-<section id="joining-on-datetime-index" class="level3">
-<h3 class="anchored" data-anchor-id="joining-on-datetime-index">Joining on DateTime Index</h3>
-<div id="8fe2f1ce" class="cell" data-execution_count="18">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create second dataset with different frequency</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>daily_dates <span class="op">=</span> pd.date_range(<span class="st">'2022-01-01'</span>, <span class="st">'2022-12-31'</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)  <span class="co"># Different seed for variety in examples</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>daily_data <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'precipitation'</span>: np.random.exponential(<span class="dv">2</span>, <span class="bu">len</span>(daily_dates))</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>}, index<span class="op">=</span>daily_dates)</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Resample to monthly to match our original data frequency</span></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>monthly_precip <span class="op">=</span> daily_data.resample(<span class="st">'ME'</span>).<span class="bu">sum</span>()</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge with existing data</span></span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>merged_data <span class="op">=</span> pd.merge(df_indexed, monthly_precip, </span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>                      left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>, how<span class="op">=</span><span class="st">'inner'</span>)</span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Merged time series data:"</span>)</span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged_data.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Merged time series data:
-            temperature         co2  season  temp_12m_rolling  precipitation
-2022-01-31     9.556173  403.644014  Winter          8.432394      51.491886
-2022-02-28    21.109226  404.526336  Winter         10.119230      56.312308
-2022-03-31    12.150318  403.316464  Spring         10.597500      51.965009
-2022-04-30    28.756980  403.827415  Spring         11.379154      61.195394
-2022-05-31    17.653867  403.970938  Spring         11.722648      69.480568</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="time-series-visualization" class="level2">
-<h2 class="anchored" data-anchor-id="time-series-visualization">Time Series Visualization</h2>
-<section id="basic-time-series-plots" class="level3">
-<h3 class="anchored" data-anchor-id="basic-time-series-plots">Basic Time Series Plots</h3>
-<div id="56e6271c" class="cell" data-execution_count="19">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple time series plot using object-oriented interface</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>ax.plot(df_indexed.index, df_indexed[<span class="st">'temperature'</span>])</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Temperature Time Series'</span>)</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Temperature (°C)'</span>)</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'x'</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="timeseries_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="multiple-series-plot" class="level3">
-<h3 class="anchored" data-anchor-id="multiple-series-plot">Multiple Series Plot</h3>
-<div id="7fa6b869" class="cell" data-execution_count="20">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot multiple time series with dual y-axis</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Temperature on left y-axis</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'Temperature (°C)'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>ax1.plot(df_indexed.index, df_indexed[<span class="st">'temperature'</span>], color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Temperature'</span>)</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co"># CO2 on right y-axis</span></span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'CO2 (ppm)'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>ax2.plot(df_indexed.index, df_indexed[<span class="st">'co2'</span>], color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'CO2'</span>)</span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">'Temperature and CO2 Over Time'</span>)</span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>fig.autofmt_xdate()  <span class="co"># Better way to format x-axis dates</span></span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="timeseries_files/figure-html/cell-21-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="common-patterns-and-use-cases" class="level2">
-<h2 class="anchored" data-anchor-id="common-patterns-and-use-cases">Common Patterns and Use Cases</h2>
-<section id="climate-data-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="climate-data-analysis">Climate Data Analysis</h3>
-<div id="e37ce4de" class="cell" data-execution_count="21">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Typical climate analysis workflow - calculate average temperature by year and season</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>climate_analysis <span class="op">=</span> df.groupby([<span class="st">'year'</span>, <span class="st">'season'</span>])[<span class="st">'temperature'</span>].mean()</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Annual seasonal temperature averages:"</span>)</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(climate_analysis.<span class="bu">round</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Annual seasonal temperature averages:
-year  season
-2020  Fall       4.59
-      Spring    30.56
-      Summer    22.04
-      Winter    14.64
-2021  Fall      10.25
-      Spring    13.11
-      Summer     8.31
-      Winter     4.68
-2022  Fall       5.06
-      Spring    19.52
-      Summer    18.20
-      Winter     9.49
-2023  Fall      -2.97
-      Spring    22.80
-      Summer    14.18
-      Winter    12.69
-Name: temperature, dtype: float64</code></pre>
-</div>
-</div>
-</section>
-<section id="anomaly-detection" class="level3">
-<h3 class="anchored" data-anchor-id="anomaly-detection">Anomaly Detection</h3>
-<div id="606f33d9" class="cell" data-execution_count="22">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate temperature anomalies from long-term mean</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>long_term_mean <span class="op">=</span> df_indexed[<span class="st">'temperature'</span>].mean()</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>df_indexed[<span class="st">'temperature_anomaly'</span>] <span class="op">=</span> df_indexed[<span class="st">'temperature'</span>] <span class="op">-</span> long_term_mean</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Find extreme anomalies (&gt;2 standard deviations)</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>std_temp <span class="op">=</span> df_indexed[<span class="st">'temperature'</span>].std()</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>extreme_hot <span class="op">=</span> df_indexed[df_indexed[<span class="st">'temperature_anomaly'</span>] <span class="op">&gt;</span> <span class="dv">2</span> <span class="op">*</span> std_temp]</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>extreme_cold <span class="op">=</span> df_indexed[df_indexed[<span class="st">'temperature_anomaly'</span>] <span class="op">&lt;</span> <span class="op">-</span><span class="dv">2</span> <span class="op">*</span> std_temp]</span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Long-term mean temperature: </span><span class="sc">{</span>long_term_mean<span class="sc">:.2f}</span><span class="ss">°C"</span>)</span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Extreme hot events: </span><span class="sc">{</span><span class="bu">len</span>(extreme_hot)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Extreme cold events: </span><span class="sc">{</span><span class="bu">len</span>(extreme_cold)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Long-term mean temperature: 12.95°C
-Extreme hot events: 1
-Extreme cold events: 0</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="tips-and-best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="tips-and-best-practices">Tips and Best Practices</h2>
-<section id="working-with-time-zones" class="level3">
-<h3 class="anchored" data-anchor-id="working-with-time-zones">Working with Time Zones</h3>
-<div id="7a9c4478" class="cell" data-execution_count="23">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to specific timezone (important for environmental monitoring)</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>df_utc <span class="op">=</span> df.copy()</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>df_utc[<span class="st">'date_utc'</span>] <span class="op">=</span> pd.to_datetime(df_utc[<span class="st">'date'</span>]).dt.tz_localize(<span class="st">'UTC'</span>)</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>df_utc[<span class="st">'date_pacific'</span>] <span class="op">=</span> df_utc[<span class="st">'date_utc'</span>].dt.tz_convert(<span class="st">'America/Los_Angeles'</span>)</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time zone conversions:"</span>)</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_utc[[<span class="st">'date'</span>, <span class="st">'date_utc'</span>, <span class="st">'date_pacific'</span>]].head(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Time zone conversions:
-        date                  date_utc              date_pacific
-0 2020-01-31 2020-01-31 00:00:00+00:00 2020-01-30 16:00:00-08:00
-1 2020-02-29 2020-02-29 00:00:00+00:00 2020-02-28 16:00:00-08:00
-2 2020-03-31 2020-03-31 00:00:00+00:00 2020-03-30 17:00:00-07:00</code></pre>
-</div>
-</div>
-</section>
-<section id="handling-missing-time-series-data" class="level3">
-<h3 class="anchored" data-anchor-id="handling-missing-time-series-data">Handling Missing Time Series Data</h3>
-<div id="115a9fe5" class="cell" data-execution_count="24">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create gaps in time series</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>df_gaps <span class="op">=</span> df_indexed.copy()</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>df_gaps.loc[<span class="st">'2022-03'</span>:<span class="st">'2022-05'</span>] <span class="op">=</span> np.nan</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Different strategies for handling gaps</span></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>df_gaps[<span class="st">'temp_forward_fill'</span>] <span class="op">=</span> df_gaps[<span class="st">'temperature'</span>].ffill()</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>df_gaps[<span class="st">'temp_interpolate'</span>] <span class="op">=</span> df_gaps[<span class="st">'temperature'</span>].interpolate()</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For more complex filling, calculate overall mean as a simple example</span></span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>overall_mean <span class="op">=</span> df_gaps[<span class="st">'temperature'</span>].mean()</span>
-<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>df_gaps[<span class="st">'temp_mean_fill'</span>] <span class="op">=</span> df_gaps[<span class="st">'temperature'</span>].fillna(overall_mean)</span>
-<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Handling missing data:"</span>)</span>
-<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_gaps.loc[<span class="st">'2022-02'</span>:<span class="st">'2022-06'</span>, </span>
-<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>               [<span class="st">'temperature'</span>, <span class="st">'temp_forward_fill'</span>, <span class="st">'temp_interpolate'</span>, <span class="st">'temp_mean_fill'</span>]].head(<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Handling missing data:
-            temperature  temp_forward_fill  temp_interpolate  temp_mean_fill
-date                                                                        
-2022-02-28    21.109226          21.109226         21.109226       21.109226
-2022-03-31          NaN          21.109226         20.102685       12.508802
-2022-04-30          NaN          21.109226         19.096144       12.508802
-2022-05-31          NaN          21.109226         18.089603       12.508802
-2022-06-30    17.083063          17.083063         17.083063       17.083063</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="key-reminders" class="level2">
-<h2 class="anchored" data-anchor-id="key-reminders">Key Reminders</h2>
-<ol type="1">
-<li><strong>Always parse dates when loading data</strong> using <code>parse_dates</code> parameter</li>
-<li><strong>Set datetime as index</strong> for time series operations with <code>set_index()</code></li>
-<li><strong>Use <code>.dt</code> accessor</strong> to extract date components from datetime columns</li>
-<li><strong>Resample carefully</strong> - choose appropriate frequencies and aggregation functions</li>
-<li><strong>Handle time zones</strong> explicitly when working with global datasets</li>
-<li><strong>Fill missing values</strong> thoughtfully - consider seasonal patterns in environmental data</li>
-</ol>
-</section>
-<section id="common-frequency-codes-reference" class="level2">
-<h2 class="anchored" data-anchor-id="common-frequency-codes-reference">Common Frequency Codes Reference</h2>
+<section id="common-frequency-codes" class="level3">
+<h3 class="anchored" data-anchor-id="common-frequency-codes">Common Frequency Codes</h3>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1248,19 +665,9 @@ date
 <td>2023-01-01, 2023-01-02, …</td>
 </tr>
 <tr class="even">
-<td>W</td>
-<td>Weekly</td>
-<td>Every Sunday by default</td>
-</tr>
-<tr class="odd">
 <td>ME</td>
 <td>Month End</td>
 <td>2023-01-31, 2023-02-28, …</td>
-</tr>
-<tr class="even">
-<td>MS</td>
-<td>Month Start</td>
-<td>2023-01-01, 2023-02-01, …</td>
 </tr>
 <tr class="odd">
 <td>QE</td>
@@ -1272,28 +679,189 @@ date
 <td>Year End</td>
 <td>2023-12-31, 2024-12-31, …</td>
 </tr>
-<tr class="odd">
-<td>H</td>
-<td>Hourly</td>
-<td>Every hour</td>
-</tr>
-<tr class="even">
-<td>T or min</td>
-<td>Minutely</td>
-<td>Every minute</td>
-</tr>
 </tbody>
 </table>
 </section>
-<section id="further-learning" class="level2">
-<h2 class="anchored" data-anchor-id="further-learning">Further Learning</h2>
-<p>For more advanced time series operations:</p>
+</section>
+<section id="time-series-calculations" class="level2">
+<h2 class="anchored" data-anchor-id="time-series-calculations">Time Series Calculations</h2>
+<section id="year-over-year-changes" class="level3">
+<h3 class="anchored" data-anchor-id="year-over-year-changes">Year-over-Year Changes</h3>
+<div id="0a60bc04" class="cell" data-execution_count="8">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate year-over-year changes</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>annual_data <span class="op">=</span> df_indexed.resample(<span class="st">'YE'</span>).mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>annual_data[<span class="st">'temp_change'</span>] <span class="op">=</span> annual_data[<span class="st">'temperature'</span>].diff()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>annual_data[<span class="st">'co2_change'</span>] <span class="op">=</span> annual_data[<span class="st">'co2'</span>].diff()</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Year-over-year changes:"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(annual_data[[<span class="st">'temperature'</span>, <span class="st">'temp_change'</span>, <span class="st">'co2'</span>, <span class="st">'co2_change'</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Year-over-year changes:
+            temperature  temp_change         co2  co2_change
+date                                                        
+2020-12-31    16.479777          NaN  400.298642         NaN
+2021-12-31    12.043841    -4.435936  401.834578    1.535936
+2022-12-31    14.033324     1.989483  403.788055    1.953477
+2023-12-31    13.337112    -0.696212  404.590108    0.802053</code></pre>
+</div>
+</div>
+</section>
+<section id="rolling-averages" class="level3">
+<h3 class="anchored" data-anchor-id="rolling-averages">Rolling Averages</h3>
+<div id="ce224fd8" class="cell" data-execution_count="9">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 12-month rolling average</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df_indexed[<span class="st">'temp_rolling'</span>] <span class="op">=</span> df_indexed[<span class="st">'temperature'</span>].rolling(window<span class="op">=</span><span class="dv">12</span>).mean()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original vs rolling average:"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_indexed[[<span class="st">'temperature'</span>, <span class="st">'temp_rolling'</span>]].head(<span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Original vs rolling average:
+            temperature  temp_rolling
+date                                 
+2020-01-31    17.483571           NaN
+2020-02-29    19.308678           NaN
+2020-03-31    26.898697           NaN
+2020-04-30    32.615149           NaN
+2020-05-31    22.489487           NaN
+2020-06-30    18.829315           NaN
+2020-07-31    22.896064           NaN
+2020-08-31    13.837174           NaN
+2020-09-30     3.992374           NaN
+2020-10-31     7.712800           NaN
+2020-11-30     4.022657           NaN
+2020-12-31     7.671351     16.479777
+2021-01-31    16.209811     16.373630
+2021-02-28    10.433599     15.634040
+2021-03-31    15.035665     14.645454</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="time-series-filtering" class="level2">
+<h2 class="anchored" data-anchor-id="time-series-filtering">Time Series Filtering</h2>
+<section id="selecting-date-ranges" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-date-ranges">Selecting Date Ranges</h3>
+<div id="95c2a85d" class="cell" data-execution_count="10">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select data from specific year</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>data_2022 <span class="op">=</span> df_indexed[df_indexed.index.year <span class="op">==</span> <span class="dv">2022</span>]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Data from 2022: </span><span class="sc">{</span><span class="bu">len</span>(data_2022)<span class="sc">}</span><span class="ss"> records"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Select data from date range</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>recent_data <span class="op">=</span> df_indexed.loc[<span class="st">'2023-01-01'</span>:<span class="st">'2023-06-30'</span>]</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"First half 2023: </span><span class="sc">{</span><span class="bu">len</span>(recent_data)<span class="sc">}</span><span class="ss"> records"</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter using datetime conditions</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>modern_data <span class="op">=</span> df[df[<span class="st">'date'</span>] <span class="op">&gt;=</span> pd.to_datetime(<span class="st">'2022-01-01'</span>)]</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Modern data (2022+): </span><span class="sc">{</span><span class="bu">len</span>(modern_data)<span class="sc">}</span><span class="ss"> records"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data from 2022: 12 records
+First half 2023: 6 records
+Modern data (2022+): 24 records</code></pre>
+</div>
+</div>
+</section>
+<section id="filtering-by-date-components" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-by-date-components">Filtering by Date Components</h3>
+<div id="3438fefb" class="cell" data-execution_count="11">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter by month (e.g., all January data)</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>january_data <span class="op">=</span> df[df[<span class="st">'date'</span>].dt.month <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter by season</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>winter_data <span class="op">=</span> df[df[<span class="st">'season'</span>] <span class="op">==</span> <span class="st">'Winter'</span>]</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter by decade</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>recent_decade <span class="op">=</span> df[df[<span class="st">'decade'</span>] <span class="op">==</span> <span class="dv">2020</span>]</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"January records: </span><span class="sc">{</span><span class="bu">len</span>(january_data)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Winter records: </span><span class="sc">{</span><span class="bu">len</span>(winter_data)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"2020s decade: </span><span class="sc">{</span><span class="bu">len</span>(recent_decade)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>January records: 4
+Winter records: 12
+2020s decade: 48</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="merging-time-series-data" class="level2">
+<h2 class="anchored" data-anchor-id="merging-time-series-data">Merging Time Series Data</h2>
+<div id="ca325a26" class="cell" data-execution_count="12">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create second dataset with different frequency</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>daily_dates <span class="op">=</span> pd.date_range(<span class="st">'2022-01-01'</span>, <span class="st">'2022-12-31'</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>daily_data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'precipitation'</span>: np.random.exponential(<span class="dv">2</span>, <span class="bu">len</span>(daily_dates))</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>}, index<span class="op">=</span>daily_dates)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Resample to monthly to match original data frequency</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>monthly_precip <span class="op">=</span> daily_data.resample(<span class="st">'ME'</span>).<span class="bu">sum</span>()</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge with existing data</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>merged_data <span class="op">=</span> pd.merge(df_indexed, monthly_precip, </span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>                      left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>, how<span class="op">=</span><span class="st">'inner'</span>)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Merged time series data:"</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged_data.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Merged time series data:
+            temperature         co2  temp_rolling  precipitation
+2022-01-31    12.278086  403.644014     11.716197      51.491886
+2022-02-28    20.554613  404.526336     12.559615      56.312308
+2022-03-31    17.905286  403.316464     12.798750      51.965009
+2022-04-30    26.878490  403.827415     13.189577      61.195394
+2022-05-31    20.657061  403.970938     13.361324      69.480568</code></pre>
+</div>
+</div>
+</section>
+<section id="basic-time-series-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="basic-time-series-visualization">Basic Time Series Visualization</h2>
+<div id="866a09dc" class="cell" data-execution_count="13">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple time series plot</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>ax.plot(df_indexed.index, df_indexed[<span class="st">'temperature'</span>])</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Temperature Time Series'</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Temperature (°C)'</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'x'</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="timeseries_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="key-reminders" class="level2">
+<h2 class="anchored" data-anchor-id="key-reminders">Key Reminders</h2>
 <ol type="1">
-<li><a href="https://pandas.pydata.org/docs/user_guide/timeseries.html">Pandas Time Series Documentation</a></li>
-<li><a href="https://www.machinelearningplus.com/time-series/time-series-analysis-python/">Time Series Analysis with Python</a></li>
-<li><a href="https://climatedataguide.ucar.edu/">Environmental Data Analysis Examples</a></li>
+<li><strong>Always parse dates when loading data</strong> using <code>parse_dates</code> parameter</li>
+<li><strong>Set datetime as index</strong> for time series operations with <code>set_index()</code></li>
+<li><strong>Use <code>.dt</code> accessor</strong> to extract date components from datetime columns</li>
+<li><strong>Use <code>numeric_only=True</code></strong> when resampling mixed data types</li>
+<li><strong>Use consistent frequency codes</strong> for resampling operations</li>
 </ol>
-<p>Remember: Environmental time series data often has seasonal patterns, trends, and irregular observations. Always visualize your data first and consider the physical processes that generate the patterns you observe!</p>
 
 
 </section>

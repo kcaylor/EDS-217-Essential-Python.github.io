@@ -433,7 +433,7 @@
 </section>
 <section id="mcar-example-assigning-nan-randomly" class="slide level2">
 <h2>MCAR Example (Assigning nan randomly)</h2>
-<div id="91ec09b6" class="cell" data-execution_count="1">
+<div id="c11e6f84" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a></a></span>
@@ -460,7 +460,7 @@ dtype: int64</code></pre>
 </section>
 <section id="mar-example-assigning-nan-randomly-filtered-on-column-value" class="slide level2">
 <h2>MAR Example (Assigning nan randomly, filtered on column value)</h2>
-<div id="1e0e2540" class="cell" data-execution_count="2">
+<div id="8526d41b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Create sample data with MAR</span></span>
 <span id="cb3-2"><a></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb3-3"><a></a>df <span class="op">=</span> pd.DataFrame({</span>
@@ -508,7 +508,7 @@ dtype: int64</code></pre>
 </section>
 <section id="drop-example" class="slide level2">
 <h2>Drop Example</h2>
-<div id="cff93208" class="cell" data-execution_count="3">
+<div id="e81a50fd" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># Dropping missing data</span></span>
 <span id="cb5-2"><a></a>df_dropped <span class="op">=</span> df.dropna()</span>
 <span id="cb5-3"><a></a><span class="bu">print</span>(<span class="ss">f"Original shape: </span><span class="sc">{</span>df<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">, After dropping: </span><span class="sc">{</span>df_dropped<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -538,7 +538,7 @@ dtype: int64</code></pre>
 </section>
 <section id="imputation-example" class="slide level2">
 <h2>Imputation Example</h2>
-<div id="7201a6c5" class="cell" data-execution_count="4">
+<div id="14af1d78" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># Simple mean imputation</span></span>
 <span id="cb7-2"><a></a>df_imputed <span class="op">=</span> df.fillna(df.mean())</span>
 <span id="cb7-3"><a></a><span class="bu">print</span>(<span class="ss">f"Original missing: </span><span class="sc">{</span>df[<span class="st">'Income'</span>]<span class="sc">.</span>isnull()<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">, After imputation: </span><span class="sc">{</span>df_imputed[<span class="st">'Income'</span>]<span class="sc">.</span>isnull()<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -592,7 +592,6 @@ dtype: int64</code></pre>
 </section>
 <section id="questions" class="slide level2">
 <h2>Questions?</h2>
-<p>Thank you for your attention!</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

@@ -1264,7 +1264,7 @@
     "href": "course-materials/lectures/05_Drop_or_Impute.html#questions",
     "title": "EDS 217 - Lecture",
     "section": "Questions?",
-    "text": "Questions?\nThank you for your attention!"
+    "text": "Questions?"
   },
   {
     "objectID": "course-materials/coding-colabs/2c_lists_dictionaries_sets.html",
@@ -1747,7 +1747,7 @@
     "href": "course-materials/cheatsheets/timeseries.html",
     "title": "EDS 217 Cheatsheet",
     "section": "",
-    "text": "To be added"
+    "text": "This cheatsheet provides a quick reference for working with dates, times, and time series data in pandas. Time series analysis is crucial in environmental data science for analyzing trends, seasonal patterns, and temporal relationships in climate, environmental monitoring, and other time-dependent datasets."
   },
   {
     "objectID": "course-materials/cheatsheets/print.html",
@@ -2202,7 +2202,7 @@
     "href": "course-materials/cheatsheets/data_merging.html",
     "title": "EDS 217 Cheatsheet",
     "section": "",
-    "text": "To be added"
+    "text": "Data merging and joining are fundamental operations in data science that allow you to combine information from multiple datasets. This cheatsheet covers the essential techniques you’ll need to merge DataFrames effectively using pandas.\nKey Concepts:\n\nMerge/Join: Combine two DataFrames based on common columns or indices\nConcatenate: Stack DataFrames vertically (rows) or horizontally (columns)\nKeys: The columns or indices used to match records between DataFrames\nJoin Types: Different ways to handle records that don’t have matches"
   },
   {
     "objectID": "course-materials/cheatsheets/lists.html",
@@ -4114,5 +4114,201 @@
     "title": "Interactive Session",
     "section": "3. Basic Cleaning",
     "text": "3. Basic Cleaning\nRemove rows with missing data in subcountry using dropna() and the subset argument.\n\n\nCode\ncities_df = cities_df.dropna(subset=['subcountry'])"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#introduction",
+    "href": "course-materials/cheatsheets/timeseries.html#introduction",
+    "title": "EDS 217 Cheatsheet",
+    "section": "",
+    "text": "This cheatsheet provides a quick reference for working with dates, times, and time series data in pandas. Time series analysis is crucial in environmental data science for analyzing trends, seasonal patterns, and temporal relationships in climate, environmental monitoring, and other time-dependent datasets."
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#setup",
+    "href": "course-materials/cheatsheets/timeseries.html#setup",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Setup",
+    "text": "Setup\nAlways start by importing the necessary libraries:\n\n\nCode\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Set random seed for reproducible examples\nnp.random.seed(42)\n\n# Create some sample time series data\ndates = pd.date_range('2020-01-01', '2023-12-31', freq='ME')  # Monthly end dates\ntemperature = np.random.normal(15, 10, len(dates)) + 10 * np.sin(np.arange(len(dates)) * 2 * np.pi / 12)\nsample_df = pd.DataFrame({\n    'date': dates,\n    'temperature': temperature,\n    'co2': 400 + np.cumsum(np.random.normal(0.1, 0.5, len(dates)))\n})"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#loading-time-series-data",
+    "href": "course-materials/cheatsheets/timeseries.html#loading-time-series-data",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Loading Time Series Data",
+    "text": "Loading Time Series Data\n\nReading CSV with Date Parsing\n\n\nCode\n# Parse dates while reading CSV (most efficient)\n# df = pd.read_csv('data.csv', parse_dates=['Date'])\n\n# For demonstration, let's save and reload our sample data\nsample_df.to_csv('temp_data.csv', index=False)\ndf = pd.read_csv('temp_data.csv', parse_dates=['date'])\n\nprint(\"First few rows:\")\nprint(df.head())\nprint(f\"\\nDate column dtype: {df['date'].dtype}\")\nprint(f\"Data shape: {df.shape}\")\n\n\nFirst few rows:\n        date  temperature         co2\n0 2020-01-31    19.967142  400.271809\n1 2020-02-29    18.617357  399.490289\n2 2020-03-31    30.137139  399.752331\n3 2020-04-30    40.230299  399.659790\n4 2020-05-31    21.318720  399.421329\n\nDate column dtype: datetime64[ns]\nData shape: (48, 3)\n\n\n\n\nConverting Strings to Datetime\n\n\nCode\n# Convert year-only data to datetime (common in environmental datasets)\nyear_data = pd.DataFrame({\n    'year': [2020, 2021, 2022, 2023],\n    'annual_temp': [14.5, 15.2, 14.8, 15.6]\n})\n\n# Convert year to datetime\nyear_data['date'] = pd.to_datetime(year_data['year'], format='%Y')\nprint(year_data)\n\n\n   year  annual_temp       date\n0  2020         14.5 2020-01-01\n1  2021         15.2 2021-01-01\n2  2022         14.8 2022-01-01\n3  2023         15.6 2023-01-01\n\n\n\n\nHandling Different Date Formats\n\n\nCode\n# Common date format conversions\ndate_examples = pd.DataFrame({\n    'date_str': ['2023-01-15', '15/01/2023', '01-15-23', '2023-Jan-15']\n})\n\n# Different parsing approaches\n# Example 1: ISO format (automatic parsing)\niso_date = pd.to_datetime('2023-01-15')\n\n# Example 2: European format (day/month/year)\neuro_date = pd.to_datetime('15/01/2023', format='%d/%m/%Y')\n\n# Example 3: US short format \nus_date = pd.to_datetime('01-15-23', format='%m-%d-%y')\n\n# Example 4: Text month format\ntext_date = pd.to_datetime('2023-Jan-15', format='%Y-%b-%d')\n\nprint(f\"ISO format: {iso_date}\")\nprint(f\"European format: {euro_date}\")\nprint(f\"US format: {us_date}\")\nprint(f\"Text month: {text_date}\")\n\n\nISO format: 2023-01-15 00:00:00\nEuropean format: 2023-01-15 00:00:00\nUS format: 2023-01-15 00:00:00\nText month: 2023-01-15 00:00:00"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#working-with-datetime-index",
+    "href": "course-materials/cheatsheets/timeseries.html#working-with-datetime-index",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Working with DateTime Index",
+    "text": "Working with DateTime Index\n\nSetting DateTime Index\n\n\nCode\n# Set date column as index for time series operations (method chaining)\ndf_indexed = (df\n              .set_index('date')\n              .copy())  # Explicit copy to avoid SettingWithCopyWarning\n\nprint(df_indexed.head())\nprint(f\"Index is datetime: {pd.api.types.is_datetime64_any_dtype(df_indexed.index)}\")\nprint(f\"Index name: {df_indexed.index.name}\")\n\n\n            temperature         co2\ndate                               \n2020-01-31    19.967142  400.271809\n2020-02-29    18.617357  399.490289\n2020-03-31    30.137139  399.752331\n2020-04-30    40.230299  399.659790\n2020-05-31    21.318720  399.421329\nIndex is datetime: True\nIndex name: date\n\n\n\n\nCreating Date Ranges\n\n\nCode\n# Create various date ranges\ndaily_range = pd.date_range('2023-01-01', '2023-01-10', freq='D')\nmonthly_range = pd.date_range('2023-01-01', periods=12, freq='ME')\nyearly_range = pd.date_range('2020-01-01', '2025-01-01', freq='YE')\n\nprint(f\"Daily: {daily_range[:5]}\")\nprint(f\"Monthly: {monthly_range[:3]}\")\nprint(f\"Yearly: {yearly_range}\")\n\n\nDaily: DatetimeIndex(['2023-01-01', '2023-01-02', '2023-01-03', '2023-01-04',\n               '2023-01-05'],\n              dtype='datetime64[ns]', freq='D')\nMonthly: DatetimeIndex(['2023-01-31', '2023-02-28', '2023-03-31'], dtype='datetime64[ns]', freq='ME')\nYearly: DatetimeIndex(['2020-12-31', '2021-12-31', '2022-12-31', '2023-12-31',\n               '2024-12-31'],\n              dtype='datetime64[ns]', freq='YE-DEC')"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#extracting-date-components",
+    "href": "course-materials/cheatsheets/timeseries.html#extracting-date-components",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Extracting Date Components",
+    "text": "Extracting Date Components\n\nUsing the .dt Accessor\n\n\nCode\n# Extract various date components\ndf['year'] = df['date'].dt.year\ndf['month'] = df['date'].dt.month\ndf['day_of_week'] = df['date'].dt.day_name()\ndf['quarter'] = df['date'].dt.quarter\n\n# Create decade grouping (useful for long-term climate analysis)\ndf['decade'] = (df['date'].dt.year // 10) * 10\n\nprint(df[['date', 'year', 'month', 'day_of_week', 'decade']].head())\n\n\n        date  year  month day_of_week  decade\n0 2020-01-31  2020      1      Friday    2020\n1 2020-02-29  2020      2    Saturday    2020\n2 2020-03-31  2020      3     Tuesday    2020\n3 2020-04-30  2020      4    Thursday    2020\n4 2020-05-31  2020      5      Sunday    2020\n\n\n\n\nCreating Custom Date Groupings\n\n\nCode\n# Define seasonal groupings as constants (more maintainable)\nSEASON_MAP = {\n    12: 'Winter', 1: 'Winter', 2: 'Winter',\n    3: 'Spring', 4: 'Spring', 5: 'Spring', \n    6: 'Summer', 7: 'Summer', 8: 'Summer',\n    9: 'Fall', 10: 'Fall', 11: 'Fall'\n}\n\ndef get_season(date):\n    \"\"\"Assign season based on month (Northern Hemisphere).\"\"\"\n    return SEASON_MAP[date.month]\n\n# Apply season function to create new column\ndf['season'] = df['date'].apply(get_season)\n# For indexed DataFrame, apply to index values\ndf_indexed['season'] = df_indexed.index.to_series().apply(get_season)\n\nprint(df[['date', 'season']].head(8))\n\n\n        date  season\n0 2020-01-31  Winter\n1 2020-02-29  Winter\n2 2020-03-31  Spring\n3 2020-04-30  Spring\n4 2020-05-31  Spring\n5 2020-06-30  Summer\n6 2020-07-31  Summer\n7 2020-08-31  Summer\n\n\n\n\nCreating N-Year Groupings\n\n\nCode\n# Group years into 5-year periods (useful for climate normals)\nN = 5\ndf['five_year_period'] = (df['date'].dt.year // N) * N\n\n# More flexible binning with pd.cut\ndf['custom_period'] = pd.cut(df['date'].dt.year, \n                            bins=[2019, 2021, 2022, 2024], \n                            labels=['2020-2021', '2022', '2023-2024'],\n                            include_lowest=True)\n\nprint(df[['date', 'five_year_period', 'custom_period']].head(10))\n\n\n        date  five_year_period custom_period\n0 2020-01-31              2020     2020-2021\n1 2020-02-29              2020     2020-2021\n2 2020-03-31              2020     2020-2021\n3 2020-04-30              2020     2020-2021\n4 2020-05-31              2020     2020-2021\n5 2020-06-30              2020     2020-2021\n6 2020-07-31              2020     2020-2021\n7 2020-08-31              2020     2020-2021\n8 2020-09-30              2020     2020-2021\n9 2020-10-31              2020     2020-2021"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#time-series-resampling",
+    "href": "course-materials/cheatsheets/timeseries.html#time-series-resampling",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Time Series Resampling",
+    "text": "Time Series Resampling\n\nBasic Resampling\n\n\nCode\n# Resample monthly data to annual averages - only numeric columns\nannual_avg = df_indexed.resample('YE').mean(numeric_only=True)\nprint(\"Annual averages:\")\nprint(annual_avg.head())\n\n# Resample to quarterly data - only numeric columns\nquarterly_data = df_indexed.resample('QE').mean(numeric_only=True)\nprint(\"Quarterly averages:\")\nprint(quarterly_data.head())\n\n\nAnnual averages:\n            temperature         co2\ndate                               \n2020-12-31    17.959553  400.298642\n2021-12-31     9.087681  401.834578\n2022-12-31    13.066647  403.788055\n2023-12-31    11.674224  404.590108\nQuarterly averages:\n            temperature         co2\ndate                               \n2020-03-31    22.907213  399.838143\n2020-06-30    26.402550  399.636095\n2020-09-30    16.703826  400.713224\n2020-12-31     5.824624  401.007104\n2021-03-31     8.232632  401.201634\n\n\n\n\n\n\n\n\nHandling Mixed Data Types in Resampling\n\n\n\nWhen your DataFrame contains both numeric and non-numeric columns (like strings), use numeric_only=True with aggregation functions like .mean(), .sum(), etc. This prevents errors when pandas tries to calculate statistics on text columns.\nAlternatively, you can select only the columns you want before resampling:\n# Select only numeric columns before resampling\nnumeric_cols = ['temperature', 'co2']\nannual_avg = df_indexed[numeric_cols].resample('YE').mean()\n\n\n\n\nDifferent Aggregation Functions\n\n\nCode\n# Multiple aggregation functions - specify columns to avoid string columns\nannual_stats = df_indexed.resample('YE').agg({\n    'temperature': ['mean', 'min', 'max', 'std'],\n    'co2': 'mean'\n})\nprint(annual_stats)\n\n\n           temperature                                         co2\n                  mean       min        max        std        mean\ndate                                                              \n2020-12-31   17.959553  1.645002  40.230299  11.951324  400.298642\n2021-12-31    9.087681 -4.247482  23.142473   9.610991  401.834578\n2022-12-31   13.066647 -5.577109  28.756980  10.647341  403.788055\n2023-12-31   11.674224 -8.445474  31.044920  12.320898  404.590108\n\n\n\n\nCommon Resampling Frequencies\n\n\nCode\n# Demonstrate common frequency codes\nfreq_examples = {\n    'D': 'Daily',\n    'W': 'Weekly', \n    'ME': 'Month End',\n    'MS': 'Month Start',\n    'QE': 'Quarter End',\n    'YE': 'Year End',\n    'A': 'Annual'\n}\n\nprint(\"Common frequency codes:\")\nfor code, description in freq_examples.items():\n    print(f\"  {code}: {description}\")\n\n\nCommon frequency codes:\n  D: Daily\n  W: Weekly\n  ME: Month End\n  MS: Month Start\n  QE: Quarter End\n  YE: Year End\n  A: Annual"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#time-based-calculations",
+    "href": "course-materials/cheatsheets/timeseries.html#time-based-calculations",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Time-Based Calculations",
+    "text": "Time-Based Calculations\n\nYear-over-Year Changes\n\n\nCode\n# Calculate year-over-year changes\nannual_data = df_indexed.resample('YE').mean(numeric_only=True)\nannual_data['temp_yoy_change'] = annual_data['temperature'].diff()\nannual_data['co2_yoy_change'] = annual_data['co2'].diff()\n\nprint(\"Year-over-year changes:\")\nprint(annual_data[['temperature', 'temp_yoy_change', 'co2', 'co2_yoy_change']])\n\n\nYear-over-year changes:\n            temperature  temp_yoy_change         co2  co2_yoy_change\ndate                                                                \n2020-12-31    17.959553              NaN  400.298642             NaN\n2021-12-31     9.087681        -8.871872  401.834578        1.535936\n2022-12-31    13.066647         3.978966  403.788055        1.953477\n2023-12-31    11.674224        -1.392423  404.590108        0.802053\n\n\n\n\nRolling Averages\n\n\nCode\n# Calculate 12-month rolling average\ndf_indexed['temp_12m_rolling'] = df_indexed['temperature'].rolling(window=12).mean()\n\nprint(\"Original vs 12-month rolling average:\")\nprint(df_indexed[['temperature', 'temp_12m_rolling']].head(15))\n\n\nOriginal vs 12-month rolling average:\n            temperature  temp_12m_rolling\ndate                                     \n2020-01-31    19.967142               NaN\n2020-02-29    18.617357               NaN\n2020-03-31    30.137139               NaN\n2020-04-30    40.230299               NaN\n2020-05-31    21.318720               NaN\n2020-06-30    17.658630               NaN\n2020-07-31    30.792128               NaN\n2020-08-31    17.674347               NaN\n2020-09-30     1.645002               NaN\n2020-10-31    10.425600               NaN\n2020-11-30     1.705569               NaN\n2020-12-31     5.342702         17.959553\n2021-01-31    17.419623         17.747260\n2021-02-28     0.867198         16.268080\n2021-03-31     6.411076         14.290908\n\n\n\n\nSeasonal Analysis\n\n\nCode\n# Group by season and calculate statistics\nseasonal_stats = df.groupby('season').agg({\n    'temperature': ['mean', 'std'],\n    'co2': 'mean'\n}).round(2)\n\nprint(\"Seasonal statistics:\")\nprint(seasonal_stats)\n\n\nSeasonal statistics:\n       temperature            co2\n              mean    std    mean\nseason                           \nFall          4.23   8.30  403.01\nSpring       21.50  10.09  402.10\nSummer       15.68  10.03  402.76\nWinter       10.37   9.82  402.64"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#time-series-filtering-and-selection",
+    "href": "course-materials/cheatsheets/timeseries.html#time-series-filtering-and-selection",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Time Series Filtering and Selection",
+    "text": "Time Series Filtering and Selection\n\nSelecting Date Ranges\n\n\nCode\n# First, ensure we have a proper DatetimeIndex\nprint(f\"DataFrame index type: {type(df_indexed.index)}\")\nprint(f\"Date range: {df_indexed.index.min()} to {df_indexed.index.max()}\")\n\n# Select data from specific year using boolean indexing\ndata_2022 = df_indexed[df_indexed.index.year == 2022]\nprint(f\"Data from 2022: {len(data_2022)} records\")\n\n# Select data from specific date range using loc\nrecent_data = df_indexed.loc['2023-01-01':'2023-06-30']\nprint(f\"First half 2023: {len(recent_data)} records\")\n\n# Filter using datetime conditions on original DataFrame\nmodern_data = df[df['date'] &gt;= pd.to_datetime('2022-01-01')]\nprint(f\"Modern data (2022+): {len(modern_data)} records\")\n\n\nDataFrame index type: &lt;class 'pandas.core.indexes.datetimes.DatetimeIndex'&gt;\nDate range: 2020-01-31 00:00:00 to 2023-12-31 00:00:00\nData from 2022: 12 records\nFirst half 2023: 6 records\nModern data (2022+): 24 records\n\n\n\n\nFiltering by Date Components\n\n\nCode\n# Filter by month (e.g., all January data)\njanuary_data = df[df['date'].dt.month == 1]\n\n# Filter by season\nwinter_data = df[df['season'] == 'Winter']\n\n# Filter by decade\nrecent_decade = df[df['decade'] == 2020]\n\nprint(f\"January records: {len(january_data)}\")\nprint(f\"Winter records: {len(winter_data)}\")\nprint(f\"2020s decade: {len(recent_decade)}\")\n\n\nJanuary records: 4\nWinter records: 12\n2020s decade: 48"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#merging-time-series-data",
+    "href": "course-materials/cheatsheets/timeseries.html#merging-time-series-data",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Merging Time Series Data",
+    "text": "Merging Time Series Data\n\nJoining on DateTime Index\n\n\nCode\n# Create second dataset with different frequency\ndaily_dates = pd.date_range('2022-01-01', '2022-12-31', freq='D')\nnp.random.seed(123)  # Different seed for variety in examples\ndaily_data = pd.DataFrame({\n    'precipitation': np.random.exponential(2, len(daily_dates))\n}, index=daily_dates)\n\n# Resample to monthly to match our original data frequency\nmonthly_precip = daily_data.resample('ME').sum()\n\n# Merge with existing data\nmerged_data = pd.merge(df_indexed, monthly_precip, \n                      left_index=True, right_index=True, how='inner')\n\nprint(\"Merged time series data:\")\nprint(merged_data.head())\n\n\nMerged time series data:\n            temperature         co2  season  temp_12m_rolling  precipitation\n2022-01-31     9.556173  403.644014  Winter          8.432394      51.491886\n2022-02-28    21.109226  404.526336  Winter         10.119230      56.312308\n2022-03-31    12.150318  403.316464  Spring         10.597500      51.965009\n2022-04-30    28.756980  403.827415  Spring         11.379154      61.195394\n2022-05-31    17.653867  403.970938  Spring         11.722648      69.480568"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#time-series-visualization",
+    "href": "course-materials/cheatsheets/timeseries.html#time-series-visualization",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Time Series Visualization",
+    "text": "Time Series Visualization\n\nBasic Time Series Plots\n\n\nCode\n# Simple time series plot using object-oriented interface\nfig, ax = plt.subplots(figsize=(12, 6))\nax.plot(df_indexed.index, df_indexed['temperature'])\nax.set_title('Temperature Time Series')\nax.set_xlabel('Date')\nax.set_ylabel('Temperature (°C)')\nax.tick_params(axis='x', rotation=45)\nax.grid(True, alpha=0.3)\nfig.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nMultiple Series Plot\n\n\nCode\n# Plot multiple time series with dual y-axis\nfig, ax1 = plt.subplots(figsize=(12, 6))\n\n# Temperature on left y-axis\nax1.set_xlabel('Date')\nax1.set_ylabel('Temperature (°C)', color='red')\nax1.plot(df_indexed.index, df_indexed['temperature'], color='red', label='Temperature')\nax1.tick_params(axis='y', labelcolor='red')\n\n# CO2 on right y-axis\nax2 = ax1.twinx()\nax2.set_ylabel('CO2 (ppm)', color='blue')\nax2.plot(df_indexed.index, df_indexed['co2'], color='blue', label='CO2')\nax2.tick_params(axis='y', labelcolor='blue')\n\nfig.suptitle('Temperature and CO2 Over Time')\nfig.autofmt_xdate()  # Better way to format x-axis dates\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#common-patterns-and-use-cases",
+    "href": "course-materials/cheatsheets/timeseries.html#common-patterns-and-use-cases",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Common Patterns and Use Cases",
+    "text": "Common Patterns and Use Cases\n\nClimate Data Analysis\n\n\nCode\n# Typical climate analysis workflow - calculate average temperature by year and season\nclimate_analysis = df.groupby(['year', 'season'])['temperature'].mean()\n\nprint(\"Annual seasonal temperature averages:\")\nprint(climate_analysis.round(2))\n\n\nAnnual seasonal temperature averages:\nyear  season\n2020  Fall       4.59\n      Spring    30.56\n      Summer    22.04\n      Winter    14.64\n2021  Fall      10.25\n      Spring    13.11\n      Summer     8.31\n      Winter     4.68\n2022  Fall       5.06\n      Spring    19.52\n      Summer    18.20\n      Winter     9.49\n2023  Fall      -2.97\n      Spring    22.80\n      Summer    14.18\n      Winter    12.69\nName: temperature, dtype: float64\n\n\n\n\nAnomaly Detection\n\n\nCode\n# Calculate temperature anomalies from long-term mean\nlong_term_mean = df_indexed['temperature'].mean()\ndf_indexed['temperature_anomaly'] = df_indexed['temperature'] - long_term_mean\n\n# Find extreme anomalies (&gt;2 standard deviations)\nstd_temp = df_indexed['temperature'].std()\nextreme_hot = df_indexed[df_indexed['temperature_anomaly'] &gt; 2 * std_temp]\nextreme_cold = df_indexed[df_indexed['temperature_anomaly'] &lt; -2 * std_temp]\n\nprint(f\"Long-term mean temperature: {long_term_mean:.2f}°C\")\nprint(f\"Extreme hot events: {len(extreme_hot)}\")\nprint(f\"Extreme cold events: {len(extreme_cold)}\")\n\n\nLong-term mean temperature: 12.95°C\nExtreme hot events: 1\nExtreme cold events: 0"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#tips-and-best-practices",
+    "href": "course-materials/cheatsheets/timeseries.html#tips-and-best-practices",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Tips and Best Practices",
+    "text": "Tips and Best Practices\n\nWorking with Time Zones\n\n\nCode\n# Convert to specific timezone (important for environmental monitoring)\ndf_utc = df.copy()\ndf_utc['date_utc'] = pd.to_datetime(df_utc['date']).dt.tz_localize('UTC')\ndf_utc['date_pacific'] = df_utc['date_utc'].dt.tz_convert('America/Los_Angeles')\n\nprint(\"Time zone conversions:\")\nprint(df_utc[['date', 'date_utc', 'date_pacific']].head(3))\n\n\nTime zone conversions:\n        date                  date_utc              date_pacific\n0 2020-01-31 2020-01-31 00:00:00+00:00 2020-01-30 16:00:00-08:00\n1 2020-02-29 2020-02-29 00:00:00+00:00 2020-02-28 16:00:00-08:00\n2 2020-03-31 2020-03-31 00:00:00+00:00 2020-03-30 17:00:00-07:00\n\n\n\n\nHandling Missing Time Series Data\n\n\nCode\n# Create gaps in time series\ndf_gaps = df_indexed.copy()\ndf_gaps.loc['2022-03':'2022-05'] = np.nan\n\n# Different strategies for handling gaps\ndf_gaps['temp_forward_fill'] = df_gaps['temperature'].ffill()\ndf_gaps['temp_interpolate'] = df_gaps['temperature'].interpolate()\n\n# For more complex filling, calculate overall mean as a simple example\noverall_mean = df_gaps['temperature'].mean()\ndf_gaps['temp_mean_fill'] = df_gaps['temperature'].fillna(overall_mean)\n\nprint(\"Handling missing data:\")\nprint(df_gaps.loc['2022-02':'2022-06', \n               ['temperature', 'temp_forward_fill', 'temp_interpolate', 'temp_mean_fill']].head(10))\n\n\nHandling missing data:\n            temperature  temp_forward_fill  temp_interpolate  temp_mean_fill\ndate                                                                        \n2022-02-28    21.109226          21.109226         21.109226       21.109226\n2022-03-31          NaN          21.109226         20.102685       12.508802\n2022-04-30          NaN          21.109226         19.096144       12.508802\n2022-05-31          NaN          21.109226         18.089603       12.508802\n2022-06-30    17.083063          17.083063         17.083063       17.083063"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#key-reminders",
+    "href": "course-materials/cheatsheets/timeseries.html#key-reminders",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Key Reminders",
+    "text": "Key Reminders\n\nAlways parse dates when loading data using parse_dates parameter\nSet datetime as index for time series operations with set_index()\nUse .dt accessor to extract date components from datetime columns\nResample carefully - choose appropriate frequencies and aggregation functions\nHandle time zones explicitly when working with global datasets\nFill missing values thoughtfully - consider seasonal patterns in environmental data"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#common-frequency-codes-reference",
+    "href": "course-materials/cheatsheets/timeseries.html#common-frequency-codes-reference",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Common Frequency Codes Reference",
+    "text": "Common Frequency Codes Reference\n\n\n\nCode\nDescription\nExample\n\n\n\n\nD\nDaily\n2023-01-01, 2023-01-02, …\n\n\nW\nWeekly\nEvery Sunday by default\n\n\nME\nMonth End\n2023-01-31, 2023-02-28, …\n\n\nMS\nMonth Start\n2023-01-01, 2023-02-01, …\n\n\nQE\nQuarter End\n2023-03-31, 2023-06-30, …\n\n\nYE\nYear End\n2023-12-31, 2024-12-31, …\n\n\nH\nHourly\nEvery hour\n\n\nT or min\nMinutely\nEvery minute"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/timeseries.html#further-learning",
+    "href": "course-materials/cheatsheets/timeseries.html#further-learning",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Further Learning",
+    "text": "Further Learning\nFor more advanced time series operations:\n\nPandas Time Series Documentation\nTime Series Analysis with Python\nEnvironmental Data Analysis Examples\n\nRemember: Environmental time series data often has seasonal patterns, trends, and irregular observations. Always visualize your data first and consider the physical processes that generate the patterns you observe!"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#introduction",
+    "href": "course-materials/cheatsheets/data_merging.html#introduction",
+    "title": "EDS 217 Cheatsheet",
+    "section": "",
+    "text": "Data merging and joining are fundamental operations in data science that allow you to combine information from multiple datasets. This cheatsheet covers the essential techniques you’ll need to merge DataFrames effectively using pandas.\nKey Concepts:\n\nMerge/Join: Combine two DataFrames based on common columns or indices\nConcatenate: Stack DataFrames vertically (rows) or horizontally (columns)\nKeys: The columns or indices used to match records between DataFrames\nJoin Types: Different ways to handle records that don’t have matches"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#setup",
+    "href": "course-materials/cheatsheets/data_merging.html#setup",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Setup",
+    "text": "Setup\nLet’s start by importing pandas and creating sample datasets to work with:\n\n\nCode\nimport pandas as pd\n\n# Create sample DataFrames for examples\nstudents = pd.DataFrame({\n    'student_id': [1, 2, 3, 4, 5],\n    'name': ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve'],\n    'major': ['Biology', 'Chemistry', 'Physics', 'Biology', 'Chemistry']\n})\n\ngrades = pd.DataFrame({\n    'student_id': [1, 2, 3, 6, 7],\n    'course': ['Bio101', 'Chem201', 'Phys301', 'Math101', 'Stat201'],\n    'grade': ['A', 'B+', 'A-', 'B', 'A']\n})\n\nprint(\"Students DataFrame:\")\nprint(students)\nprint(\"\\nGrades DataFrame:\")\nprint(grades)\n\n\nStudents DataFrame:\n   student_id     name      major\n0           1    Alice    Biology\n1           2      Bob  Chemistry\n2           3  Charlie    Physics\n3           4    Diana    Biology\n4           5      Eve  Chemistry\n\nGrades DataFrame:\n   student_id   course grade\n0           1   Bio101     A\n1           2  Chem201    B+\n2           3  Phys301    A-\n3           6  Math101     B\n4           7  Stat201     A"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#types-of-joins",
+    "href": "course-materials/cheatsheets/data_merging.html#types-of-joins",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Types of Joins",
+    "text": "Types of Joins\nUnderstanding different join types is crucial for merging data correctly:\n\nInner Join (Default)\nReturns only rows that have matching keys in both DataFrames.\n\n\nCode\n# Inner join - only students with grades\ninner_result = pd.merge(students, grades, on='student_id')\nprint(\"Inner Join Result:\")\nprint(inner_result)\n\n\nInner Join Result:\n   student_id     name      major   course grade\n0           1    Alice    Biology   Bio101     A\n1           2      Bob  Chemistry  Chem201    B+\n2           3  Charlie    Physics  Phys301    A-\n\n\n\n\nLeft Join\nReturns all rows from the left DataFrame and matched rows from the right DataFrame.\n\n\nCode\n# Left join - all students, with grades where available\nleft_result = pd.merge(students, grades, on='student_id', how='left')\nprint(\"Left Join Result:\")\nprint(left_result)\n\n\nLeft Join Result:\n   student_id     name      major   course grade\n0           1    Alice    Biology   Bio101     A\n1           2      Bob  Chemistry  Chem201    B+\n2           3  Charlie    Physics  Phys301    A-\n3           4    Diana    Biology      NaN   NaN\n4           5      Eve  Chemistry      NaN   NaN\n\n\n\n\nRight Join\nReturns all rows from the right DataFrame and matched rows from the left DataFrame.\n\n\nCode\n# Right join - all grades, with student info where available\nright_result = pd.merge(students, grades, on='student_id', how='right')\nprint(\"Right Join Result:\")\nprint(right_result)\n\n\nRight Join Result:\n   student_id     name      major   course grade\n0           1    Alice    Biology   Bio101     A\n1           2      Bob  Chemistry  Chem201    B+\n2           3  Charlie    Physics  Phys301    A-\n3           6      NaN        NaN  Math101     B\n4           7      NaN        NaN  Stat201     A\n\n\n\n\nOuter Join\nReturns all rows from both DataFrames, filling missing values with NaN.\n\n\nCode\n# Outer join - all students and all grades\nouter_result = pd.merge(students, grades, on='student_id', how='outer')\nprint(\"Outer Join Result:\")\nprint(outer_result)\n\n\nOuter Join Result:\n   student_id     name      major   course grade\n0           1    Alice    Biology   Bio101     A\n1           2      Bob  Chemistry  Chem201    B+\n2           3  Charlie    Physics  Phys301    A-\n3           4    Diana    Biology      NaN   NaN\n4           5      Eve  Chemistry      NaN   NaN\n5           6      NaN        NaN  Math101     B\n6           7      NaN        NaN  Stat201     A"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#merging-with-different-column-names",
+    "href": "course-materials/cheatsheets/data_merging.html#merging-with-different-column-names",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Merging with Different Column Names",
+    "text": "Merging with Different Column Names\nWhen the key columns have different names in each DataFrame:\n\n\nCode\n# Create DataFrame with different column name\npopulation_data = pd.DataFrame({\n    'country_name': ['USA', 'Canada', 'Mexico', 'UK'],\n    'population': [331000000, 38000000, 128000000, 67000000]\n})\n\neurovision_data = pd.DataFrame({\n    'to_country': ['USA', 'Canada', 'France', 'UK'],  \n    'points': [250, 180, 300, 220]\n})\n\n# Merge with different column names\nmerged = pd.merge(eurovision_data, population_data, \n                  left_on='to_country', right_on='country_name')\nprint(\"Merged with different column names:\")\nprint(merged)\n\n\nMerged with different column names:\n  to_country  points country_name  population\n0        USA     250          USA   331000000\n1     Canada     180       Canada    38000000\n2         UK     220           UK    67000000"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#merging-on-index",
+    "href": "course-materials/cheatsheets/data_merging.html#merging-on-index",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Merging on Index",
+    "text": "Merging on Index\nSometimes you want to merge based on the row numbers (index) instead of column values:\n\n\nCode\n# Create DataFrames with matching row numbers\ntemp_data = pd.DataFrame({\n    'location': ['Site A', 'Site B', 'Site C'],\n    'temperature': [15.2, 18.5, 22.1]\n})\n\nco2_data = pd.DataFrame({\n    'location': ['Site A', 'Site B', 'Site C'], \n    'co2': [415, 418, 420]\n})\n\n# For this simple case, we can merge on the 'location' column\nclimate_data = pd.merge(temp_data, co2_data, on='location')\nprint(\"Merged on location:\")\nprint(climate_data)\n\n\nMerged on location:\n  location  temperature  co2\n0   Site A         15.2  415\n1   Site B         18.5  418\n2   Site C         22.1  420"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#concatenating-dataframes",
+    "href": "course-materials/cheatsheets/data_merging.html#concatenating-dataframes",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Concatenating DataFrames",
+    "text": "Concatenating DataFrames\nUse pd.concat() to stack DataFrames vertically or horizontally:\n\nVertical Concatenation (Stacking Rows)\n\n\nCode\n# Create additional data for different years\ndf_2023 = pd.DataFrame({\n    'zipcode': ['90210', '10001', '60601'],\n    'temp_min': [-5, -10, -15],\n    'year': [2023, 2023, 2023]\n})\n\ndf_2012 = pd.DataFrame({\n    'zipcode': ['90210', '10001', '60601'], \n    'temp_min': [-8, -12, -18],\n    'year': [2012, 2012, 2012]\n})\n\n# Concatenate vertically (stack rows on top of each other)\ncombined_years = pd.concat([df_2023, df_2012])\nprint(\"Vertically concatenated:\")\nprint(combined_years)\n\n\nVertically concatenated:\n  zipcode  temp_min  year\n0   90210        -5  2023\n1   10001       -10  2023\n2   60601       -15  2023\n0   90210        -8  2012\n1   10001       -12  2012\n2   60601       -18  2012\n\n\n\n\nHorizontal Concatenation (Adding Columns)\n\n\nCode\n# Create separate DataFrames with same index\ndf_left = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})\ndf_right = pd.DataFrame({'C': [7, 8, 9], 'D': [10, 11, 12]})\n\n# Concatenate horizontally (add columns)\ncombined_cols = pd.concat([df_left, df_right], axis=1)\nprint(\"Horizontally concatenated:\")\nprint(combined_cols)\n\n\nHorizontally concatenated:\n   A  B  C   D\n0  1  4  7  10\n1  2  5  8  11\n2  3  6  9  12"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#real-world-examples",
+    "href": "course-materials/cheatsheets/data_merging.html#real-world-examples",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Real-World Examples",
+    "text": "Real-World Examples\n\nExample 1: Eurovision Analysis (from eod-day6)\n\n\nCode\n# Simulate the Eurovision data merging scenario\neurovision_df = pd.DataFrame({\n    'to_country': ['Sweden', 'Norway', 'Finland', 'Denmark'],\n    'points_final': [280, 245, 190, 165],\n    'year': [2023, 2023, 2023, 2023]\n})\n\npopulation_df = pd.DataFrame({\n    'country_name': ['Sweden', 'Norway', 'Finland', 'Iceland'],\n    'population': [10415000, 5380000, 5530000, 370000]\n})\n\n# Merge Eurovision data with population data  \nmerged_df = pd.merge(eurovision_df, population_df, \n                     left_on='to_country', right_on='country_name')\nprint(\"Eurovision-Population merge:\")\nprint(merged_df)\n\n\nEurovision-Population merge:\n  to_country  points_final  year country_name  population\n0     Sweden           280  2023       Sweden    10415000\n1     Norway           245  2023       Norway     5380000\n2    Finland           190  2023      Finland     5530000\n\n\n\n\nExample 2: Climate Data Analysis (from 6b_advanced_data_manipulation)\n\n\nCode\n# Create simple temperature and CO2 data\ntemp_df = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'temperature': [0.8, 1.2, 0.9, 1.1]\n})\n\nco2_df = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'], \n    'co2_level': [420, 422, 419, 421]\n})\n\n# Merge on the month column\ncombined_df = pd.merge(temp_df, co2_df, on='month')\nprint(\"Climate data merge:\")\nprint(combined_df)\n\n\nClimate data merge:\n  month  temperature  co2_level\n0   Jan          0.8        420\n1   Feb          1.2        422\n2   Mar          0.9        419\n3   Apr          1.1        421"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#handling-common-issues",
+    "href": "course-materials/cheatsheets/data_merging.html#handling-common-issues",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Handling Common Issues",
+    "text": "Handling Common Issues\n\nMissing Values After Merge\n\n\nCode\n# Create DataFrames with some non-matching records\ndf1 = pd.DataFrame({'key': ['A', 'B', 'C'], 'val1': [1, 2, 3]})\ndf2 = pd.DataFrame({'key': ['A', 'C', 'D'], 'val2': [10, 30, 40]})\n\n# Outer join creates NaN values\nresult = pd.merge(df1, df2, on='key', how='outer')\nprint(\"Result with NaN values:\")\nprint(result)\n\n# Handle missing values - fill all NaN with 0\nresult_filled = result.fillna(0)\nprint(\"\\nAfter filling NaN with 0:\")\nprint(result_filled)\n\n# Alternative: Drop rows with any NaN values\nresult_clean = result.dropna()\nprint(\"\\nAfter dropping rows with NaN:\")\nprint(result_clean)\n\n\nResult with NaN values:\n  key  val1  val2\n0   A   1.0  10.0\n1   B   2.0   NaN\n2   C   3.0  30.0\n3   D   NaN  40.0\n\nAfter filling NaN with 0:\n  key  val1  val2\n0   A   1.0  10.0\n1   B   2.0   0.0\n2   C   3.0  30.0\n3   D   0.0  40.0\n\nAfter dropping rows with NaN:\n  key  val1  val2\n0   A   1.0  10.0\n2   C   3.0  30.0\n\n\n\n\nDuplicate Column Names\n\n\nCode\n# DataFrames with overlapping column names  \ndf1 = pd.DataFrame({'key': ['A', 'B'], 'value': [1, 2], 'extra': ['x', 'y']})\ndf2 = pd.DataFrame({'key': ['A', 'B'], 'value': [10, 20], 'other': ['p', 'q']})\n\n# Pandas automatically adds suffixes\nresult = pd.merge(df1, df2, on='key')\nprint(\"Result with automatic suffixes:\")\nprint(result)\n\n# Custom suffixes\nresult_custom = pd.merge(df1, df2, on='key', suffixes=('_left', '_right'))\nprint(\"\\nResult with custom suffixes:\")\nprint(result_custom)\n\n\nResult with automatic suffixes:\n  key  value_x extra  value_y other\n0   A        1     x       10     p\n1   B        2     y       20     q\n\nResult with custom suffixes:\n  key  value_left extra  value_right other\n0   A           1     x           10     p\n1   B           2     y           20     q"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#tips-and-best-practices",
+    "href": "course-materials/cheatsheets/data_merging.html#tips-and-best-practices",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Tips and Best Practices",
+    "text": "Tips and Best Practices\n\n1. Always Inspect Your Data First\n# Check the merge keys before merging\nprint(\"Unique keys in df1:\", df1['key'].unique())\nprint(\"Unique keys in df2:\", df2['key'].unique())\n\n# Check for duplicates and null values\nprint(\"Duplicates in df1:\", df1['key'].duplicated().any())\nprint(\"Null values in df1:\", df1['key'].isnull().any())\nprint(\"Null values in df2:\", df2['key'].isnull().any())\n\n# Check data types to ensure compatibility\nprint(\"df1 key dtype:\", df1['key'].dtype)\nprint(\"df2 key dtype:\", df2['key'].dtype)\n\n\n2. Validate Your Merge Results\n# Check the shape before and after merge\nprint(f\"Before: df1 has {df1.shape[0]} rows, df2 has {df2.shape[0]} rows\")\nprint(f\"After: merged has {merged.shape[0]} rows\")\n\n# Check for unexpected NaN values\nprint(\"NaN count after merge:\")\nprint(merged.isnull().sum())\n\n# Check if merge worked as expected\nprint(\"First few rows of result:\")\nprint(merged.head())\n\n\n3. Start Simple, Then Explore\n# For beginners: Start with basic merges and check your results\n# Once comfortable, you can explore more advanced options\n\n# Basic merge (most common)\nresult = pd.merge(df1, df2, on='key')\n\n# Specify the type of join if needed\nresult = pd.merge(df1, df2, on='key', how='left')\n\n# Always look at your results to make sure they make sense!\nprint(result.head())"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#quick-reference",
+    "href": "course-materials/cheatsheets/data_merging.html#quick-reference",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Quick Reference",
+    "text": "Quick Reference\n\n\n\n\n\n\n\n\nOperation\nSyntax\nUse Case\n\n\n\n\nInner join\npd.merge(df1, df2, on='key')\nOnly matching records\n\n\nLeft join\npd.merge(df1, df2, on='key', how='left')\nAll records from left DF\n\n\nRight join\npd.merge(df1, df2, on='key', how='right')\nAll records from right DF\n\n\nOuter join\npd.merge(df1, df2, on='key', how='outer')\nAll records from both DFs\n\n\nDifferent keys\npd.merge(df1, df2, left_on='key1', right_on='key2')\nKey columns have different names\n\n\nConcatenate rows\npd.concat([df1, df2])\nStack DataFrames vertically\n\n\nConcatenate columns\npd.concat([df1, df2], axis=1)\nAdd columns side by side"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#common-patterns-in-environmental-data-science",
+    "href": "course-materials/cheatsheets/data_merging.html#common-patterns-in-environmental-data-science",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Common Patterns in Environmental Data Science",
+    "text": "Common Patterns in Environmental Data Science\n\nTime Series Joining: Merge climate data from different sources by date\nSpatial Joining: Combine location-based data (zip codes, coordinates)\n\nCategorical Joining: Link datasets using country names, species codes, etc.\nMulti-year Analysis: Concatenate data from different years for trend analysis\nSensor Data Integration: Combine readings from multiple environmental sensors"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#adding-new-columns-after-merge",
+    "href": "course-materials/cheatsheets/data_merging.html#adding-new-columns-after-merge",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Adding New Columns After Merge",
+    "text": "Adding New Columns After Merge\n# Add calculated columns after merging\nmerged = pd.merge(eurovision_df, population_df, \n                  left_on='to_country', right_on='country_name')\n\n# Calculate new columns using simple operations\nmerged['points_per_capita'] = merged['points_final'] / merged['population'] * 1000000\n\n# Create categories using simple if-else logic\ndef categorize_year(year):\n    if year &gt;= 2020:\n        return '2020s'\n    else:\n        return '2010s'\n\nmerged['year_category'] = merged['year'].apply(categorize_year)"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#common-troubleshooting",
+    "href": "course-materials/cheatsheets/data_merging.html#common-troubleshooting",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Common Troubleshooting",
+    "text": "Common Troubleshooting\n# If your merge doesn't work as expected, try these steps:\n\n# 1. Check what's in your key columns\nprint(\"Keys in df1:\", df1['key'].unique())\nprint(\"Keys in df2:\", df2['key'].unique())\n\n# 2. Make sure there are no missing values in your key columns\nprint(\"Missing values in df1 key:\", df1['key'].isnull().sum())\nprint(\"Missing values in df2 key:\", df2['key'].isnull().sum())\n\n# 3. If you get fewer rows than expected, try an outer join to see all data\nresult_all = pd.merge(df1, df2, on='key', how='outer')\nprint(\"All possible combinations:\")\nprint(result_all)\nRemember: Always examine your data before and after merging to ensure the operation worked as expected. When in doubt, start with a small sample of your data to test your merge logic!"
   }
 ]

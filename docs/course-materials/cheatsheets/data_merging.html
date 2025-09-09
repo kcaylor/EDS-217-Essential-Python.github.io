@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -349,14 +383,14 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
+    <div class="quarto-title column-page-left">
       <h1 class="title">EDS 217 Cheatsheet</h1>
             <p class="subtitle lead">Merging and Joining Data</p>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       
     
@@ -367,18 +401,623 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#types-of-joins" id="toc-types-of-joins" class="nav-link" data-scroll-target="#types-of-joins">Types of Joins</a>
+  <ul class="collapse">
+  <li><a href="#inner-join-default" id="toc-inner-join-default" class="nav-link" data-scroll-target="#inner-join-default">Inner Join (Default)</a></li>
+  <li><a href="#left-join" id="toc-left-join" class="nav-link" data-scroll-target="#left-join">Left Join</a></li>
+  <li><a href="#right-join" id="toc-right-join" class="nav-link" data-scroll-target="#right-join">Right Join</a></li>
+  <li><a href="#outer-join" id="toc-outer-join" class="nav-link" data-scroll-target="#outer-join">Outer Join</a></li>
+  </ul></li>
+  <li><a href="#merging-with-different-column-names" id="toc-merging-with-different-column-names" class="nav-link" data-scroll-target="#merging-with-different-column-names">Merging with Different Column Names</a></li>
+  <li><a href="#merging-on-index" id="toc-merging-on-index" class="nav-link" data-scroll-target="#merging-on-index">Merging on Index</a></li>
+  <li><a href="#concatenating-dataframes" id="toc-concatenating-dataframes" class="nav-link" data-scroll-target="#concatenating-dataframes">Concatenating DataFrames</a>
+  <ul class="collapse">
+  <li><a href="#vertical-concatenation-stacking-rows" id="toc-vertical-concatenation-stacking-rows" class="nav-link" data-scroll-target="#vertical-concatenation-stacking-rows">Vertical Concatenation (Stacking Rows)</a></li>
+  <li><a href="#horizontal-concatenation-adding-columns" id="toc-horizontal-concatenation-adding-columns" class="nav-link" data-scroll-target="#horizontal-concatenation-adding-columns">Horizontal Concatenation (Adding Columns)</a></li>
+  </ul></li>
+  <li><a href="#real-world-examples" id="toc-real-world-examples" class="nav-link" data-scroll-target="#real-world-examples">Real-World Examples</a>
+  <ul class="collapse">
+  <li><a href="#example-1-eurovision-analysis-from-eod-day6" id="toc-example-1-eurovision-analysis-from-eod-day6" class="nav-link" data-scroll-target="#example-1-eurovision-analysis-from-eod-day6">Example 1: Eurovision Analysis (from eod-day6)</a></li>
+  <li><a href="#example-2-climate-data-analysis-from-6b_advanced_data_manipulation" id="toc-example-2-climate-data-analysis-from-6b_advanced_data_manipulation" class="nav-link" data-scroll-target="#example-2-climate-data-analysis-from-6b_advanced_data_manipulation">Example 2: Climate Data Analysis (from 6b_advanced_data_manipulation)</a></li>
+  </ul></li>
+  <li><a href="#handling-common-issues" id="toc-handling-common-issues" class="nav-link" data-scroll-target="#handling-common-issues">Handling Common Issues</a>
+  <ul class="collapse">
+  <li><a href="#missing-values-after-merge" id="toc-missing-values-after-merge" class="nav-link" data-scroll-target="#missing-values-after-merge">Missing Values After Merge</a></li>
+  <li><a href="#duplicate-column-names" id="toc-duplicate-column-names" class="nav-link" data-scroll-target="#duplicate-column-names">Duplicate Column Names</a></li>
+  </ul></li>
+  <li><a href="#tips-and-best-practices" id="toc-tips-and-best-practices" class="nav-link" data-scroll-target="#tips-and-best-practices">Tips and Best Practices</a>
+  <ul class="collapse">
+  <li><a href="#always-inspect-your-data-first" id="toc-always-inspect-your-data-first" class="nav-link" data-scroll-target="#always-inspect-your-data-first">1. Always Inspect Your Data First</a></li>
+  <li><a href="#validate-your-merge-results" id="toc-validate-your-merge-results" class="nav-link" data-scroll-target="#validate-your-merge-results">2. Validate Your Merge Results</a></li>
+  <li><a href="#start-simple-then-explore" id="toc-start-simple-then-explore" class="nav-link" data-scroll-target="#start-simple-then-explore">3. Start Simple, Then Explore</a></li>
+  </ul></li>
+  <li><a href="#quick-reference" id="toc-quick-reference" class="nav-link" data-scroll-target="#quick-reference">Quick Reference</a></li>
+  <li><a href="#adding-new-columns-after-merge" id="toc-adding-new-columns-after-merge" class="nav-link" data-scroll-target="#adding-new-columns-after-merge">Adding New Columns After Merge</a></li>
+  <li><a href="#common-patterns-in-environmental-data-science" id="toc-common-patterns-in-environmental-data-science" class="nav-link" data-scroll-target="#common-patterns-in-environmental-data-science">Common Patterns in Environmental Data Science</a></li>
+  <li><a href="#common-troubleshooting" id="toc-common-troubleshooting" class="nav-link" data-scroll-target="#common-troubleshooting">Common Troubleshooting</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
-<section id="to-be-added" class="level4">
-<h4 class="anchored" data-anchor-id="to-be-added">To be added</h4>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Data merging and joining are fundamental operations in data science that allow you to combine information from multiple datasets. This cheatsheet covers the essential techniques you’ll need to merge DataFrames effectively using pandas.</p>
+<p><strong>Key Concepts</strong>:</p>
+<ul>
+<li><strong>Merge/Join</strong>: Combine two DataFrames based on common columns or indices</li>
+<li><strong>Concatenate</strong>: Stack DataFrames vertically (rows) or horizontally (columns)</li>
+<li><strong>Keys</strong>: The columns or indices used to match records between DataFrames</li>
+<li><strong>Join Types</strong>: Different ways to handle records that don’t have matches</li>
+</ul>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Let’s start by importing pandas and creating sample datasets to work with:</p>
+<div id="76670298" class="cell" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sample DataFrames for examples</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>students <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'student_id'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>],</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>, <span class="st">'Diana'</span>, <span class="st">'Eve'</span>],</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'major'</span>: [<span class="st">'Biology'</span>, <span class="st">'Chemistry'</span>, <span class="st">'Physics'</span>, <span class="st">'Biology'</span>, <span class="st">'Chemistry'</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>grades <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'student_id'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">7</span>],</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'course'</span>: [<span class="st">'Bio101'</span>, <span class="st">'Chem201'</span>, <span class="st">'Phys301'</span>, <span class="st">'Math101'</span>, <span class="st">'Stat201'</span>],</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'grade'</span>: [<span class="st">'A'</span>, <span class="st">'B+'</span>, <span class="st">'A-'</span>, <span class="st">'B'</span>, <span class="st">'A'</span>]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Students DataFrame:"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(students)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Grades DataFrame:"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grades)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Students DataFrame:
+   student_id     name      major
+0           1    Alice    Biology
+1           2      Bob  Chemistry
+2           3  Charlie    Physics
+3           4    Diana    Biology
+4           5      Eve  Chemistry
+
+Grades DataFrame:
+   student_id   course grade
+0           1   Bio101     A
+1           2  Chem201    B+
+2           3  Phys301    A-
+3           6  Math101     B
+4           7  Stat201     A</code></pre>
+</div>
+</div>
+</section>
+<section id="types-of-joins" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-joins">Types of Joins</h2>
+<p>Understanding different join types is crucial for merging data correctly:</p>
+<section id="inner-join-default" class="level3">
+<h3 class="anchored" data-anchor-id="inner-join-default">Inner Join (Default)</h3>
+<p>Returns only rows that have matching keys in both DataFrames.</p>
+<div id="ec3c586f" class="cell" data-execution_count="2">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inner join - only students with grades</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>inner_result <span class="op">=</span> pd.merge(students, grades, on<span class="op">=</span><span class="st">'student_id'</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Inner Join Result:"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inner_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Inner Join Result:
+   student_id     name      major   course grade
+0           1    Alice    Biology   Bio101     A
+1           2      Bob  Chemistry  Chem201    B+
+2           3  Charlie    Physics  Phys301    A-</code></pre>
+</div>
+</div>
+</section>
+<section id="left-join" class="level3">
+<h3 class="anchored" data-anchor-id="left-join">Left Join</h3>
+<p>Returns all rows from the left DataFrame and matched rows from the right DataFrame.</p>
+<div id="5e35a67a" class="cell" data-execution_count="3">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Left join - all students, with grades where available</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>left_result <span class="op">=</span> pd.merge(students, grades, on<span class="op">=</span><span class="st">'student_id'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Left Join Result:"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(left_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Left Join Result:
+   student_id     name      major   course grade
+0           1    Alice    Biology   Bio101     A
+1           2      Bob  Chemistry  Chem201    B+
+2           3  Charlie    Physics  Phys301    A-
+3           4    Diana    Biology      NaN   NaN
+4           5      Eve  Chemistry      NaN   NaN</code></pre>
+</div>
+</div>
+</section>
+<section id="right-join" class="level3">
+<h3 class="anchored" data-anchor-id="right-join">Right Join</h3>
+<p>Returns all rows from the right DataFrame and matched rows from the left DataFrame.</p>
+<div id="6784c4f9" class="cell" data-execution_count="4">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Right join - all grades, with student info where available</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>right_result <span class="op">=</span> pd.merge(students, grades, on<span class="op">=</span><span class="st">'student_id'</span>, how<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Right Join Result:"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(right_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Right Join Result:
+   student_id     name      major   course grade
+0           1    Alice    Biology   Bio101     A
+1           2      Bob  Chemistry  Chem201    B+
+2           3  Charlie    Physics  Phys301    A-
+3           6      NaN        NaN  Math101     B
+4           7      NaN        NaN  Stat201     A</code></pre>
+</div>
+</div>
+</section>
+<section id="outer-join" class="level3">
+<h3 class="anchored" data-anchor-id="outer-join">Outer Join</h3>
+<p>Returns all rows from both DataFrames, filling missing values with NaN.</p>
+<div id="4d3ea07d" class="cell" data-execution_count="5">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Outer join - all students and all grades</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>outer_result <span class="op">=</span> pd.merge(students, grades, on<span class="op">=</span><span class="st">'student_id'</span>, how<span class="op">=</span><span class="st">'outer'</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Outer Join Result:"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(outer_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Outer Join Result:
+   student_id     name      major   course grade
+0           1    Alice    Biology   Bio101     A
+1           2      Bob  Chemistry  Chem201    B+
+2           3  Charlie    Physics  Phys301    A-
+3           4    Diana    Biology      NaN   NaN
+4           5      Eve  Chemistry      NaN   NaN
+5           6      NaN        NaN  Math101     B
+6           7      NaN        NaN  Stat201     A</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="merging-with-different-column-names" class="level2">
+<h2 class="anchored" data-anchor-id="merging-with-different-column-names">Merging with Different Column Names</h2>
+<p>When the key columns have different names in each DataFrame:</p>
+<div id="4d26a113" class="cell" data-execution_count="6">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame with different column name</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>population_data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'country_name'</span>: [<span class="st">'USA'</span>, <span class="st">'Canada'</span>, <span class="st">'Mexico'</span>, <span class="st">'UK'</span>],</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'population'</span>: [<span class="dv">331000000</span>, <span class="dv">38000000</span>, <span class="dv">128000000</span>, <span class="dv">67000000</span>]</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>eurovision_data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'to_country'</span>: [<span class="st">'USA'</span>, <span class="st">'Canada'</span>, <span class="st">'France'</span>, <span class="st">'UK'</span>],  </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'points'</span>: [<span class="dv">250</span>, <span class="dv">180</span>, <span class="dv">300</span>, <span class="dv">220</span>]</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge with different column names</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> pd.merge(eurovision_data, population_data, </span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>                  left_on<span class="op">=</span><span class="st">'to_country'</span>, right_on<span class="op">=</span><span class="st">'country_name'</span>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Merged with different column names:"</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Merged with different column names:
+  to_country  points country_name  population
+0        USA     250          USA   331000000
+1     Canada     180       Canada    38000000
+2         UK     220           UK    67000000</code></pre>
+</div>
+</div>
+</section>
+<section id="merging-on-index" class="level2">
+<h2 class="anchored" data-anchor-id="merging-on-index">Merging on Index</h2>
+<p>Sometimes you want to merge based on the row numbers (index) instead of column values:</p>
+<div id="ddd670c6" class="cell" data-execution_count="7">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrames with matching row numbers</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>temp_data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'location'</span>: [<span class="st">'Site A'</span>, <span class="st">'Site B'</span>, <span class="st">'Site C'</span>],</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'temperature'</span>: [<span class="fl">15.2</span>, <span class="fl">18.5</span>, <span class="fl">22.1</span>]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>co2_data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'location'</span>: [<span class="st">'Site A'</span>, <span class="st">'Site B'</span>, <span class="st">'Site C'</span>], </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'co2'</span>: [<span class="dv">415</span>, <span class="dv">418</span>, <span class="dv">420</span>]</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co"># For this simple case, we can merge on the 'location' column</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>climate_data <span class="op">=</span> pd.merge(temp_data, co2_data, on<span class="op">=</span><span class="st">'location'</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Merged on location:"</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(climate_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Merged on location:
+  location  temperature  co2
+0   Site A         15.2  415
+1   Site B         18.5  418
+2   Site C         22.1  420</code></pre>
+</div>
+</div>
+</section>
+<section id="concatenating-dataframes" class="level2">
+<h2 class="anchored" data-anchor-id="concatenating-dataframes">Concatenating DataFrames</h2>
+<p>Use <code>pd.concat()</code> to stack DataFrames vertically or horizontally:</p>
+<section id="vertical-concatenation-stacking-rows" class="level3">
+<h3 class="anchored" data-anchor-id="vertical-concatenation-stacking-rows">Vertical Concatenation (Stacking Rows)</h3>
+<div id="f6661fe8" class="cell" data-execution_count="8">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create additional data for different years</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df_2023 <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'zipcode'</span>: [<span class="st">'90210'</span>, <span class="st">'10001'</span>, <span class="st">'60601'</span>],</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'temp_min'</span>: [<span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">10</span>, <span class="op">-</span><span class="dv">15</span>],</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'year'</span>: [<span class="dv">2023</span>, <span class="dv">2023</span>, <span class="dv">2023</span>]</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>df_2012 <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'zipcode'</span>: [<span class="st">'90210'</span>, <span class="st">'10001'</span>, <span class="st">'60601'</span>], </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'temp_min'</span>: [<span class="op">-</span><span class="dv">8</span>, <span class="op">-</span><span class="dv">12</span>, <span class="op">-</span><span class="dv">18</span>],</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'year'</span>: [<span class="dv">2012</span>, <span class="dv">2012</span>, <span class="dv">2012</span>]</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate vertically (stack rows on top of each other)</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>combined_years <span class="op">=</span> pd.concat([df_2023, df_2012])</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Vertically concatenated:"</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(combined_years)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Vertically concatenated:
+  zipcode  temp_min  year
+0   90210        -5  2023
+1   10001       -10  2023
+2   60601       -15  2023
+0   90210        -8  2012
+1   10001       -12  2012
+2   60601       -18  2012</code></pre>
+</div>
+</div>
+</section>
+<section id="horizontal-concatenation-adding-columns" class="level3">
+<h3 class="anchored" data-anchor-id="horizontal-concatenation-adding-columns">Horizontal Concatenation (Adding Columns)</h3>
+<div id="2eb36163" class="cell" data-execution_count="9">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create separate DataFrames with same index</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df_left <span class="op">=</span> pd.DataFrame({<span class="st">'A'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], <span class="st">'B'</span>: [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]})</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>df_right <span class="op">=</span> pd.DataFrame({<span class="st">'C'</span>: [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>], <span class="st">'D'</span>: [<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>]})</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate horizontally (add columns)</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>combined_cols <span class="op">=</span> pd.concat([df_left, df_right], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Horizontally concatenated:"</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(combined_cols)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Horizontally concatenated:
+   A  B  C   D
+0  1  4  7  10
+1  2  5  8  11
+2  3  6  9  12</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="real-world-examples" class="level2">
+<h2 class="anchored" data-anchor-id="real-world-examples">Real-World Examples</h2>
+<section id="example-1-eurovision-analysis-from-eod-day6" class="level3">
+<h3 class="anchored" data-anchor-id="example-1-eurovision-analysis-from-eod-day6">Example 1: Eurovision Analysis (from eod-day6)</h3>
+<div id="21618716" class="cell" data-execution_count="10">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate the Eurovision data merging scenario</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>eurovision_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'to_country'</span>: [<span class="st">'Sweden'</span>, <span class="st">'Norway'</span>, <span class="st">'Finland'</span>, <span class="st">'Denmark'</span>],</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'points_final'</span>: [<span class="dv">280</span>, <span class="dv">245</span>, <span class="dv">190</span>, <span class="dv">165</span>],</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'year'</span>: [<span class="dv">2023</span>, <span class="dv">2023</span>, <span class="dv">2023</span>, <span class="dv">2023</span>]</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>population_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'country_name'</span>: [<span class="st">'Sweden'</span>, <span class="st">'Norway'</span>, <span class="st">'Finland'</span>, <span class="st">'Iceland'</span>],</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'population'</span>: [<span class="dv">10415000</span>, <span class="dv">5380000</span>, <span class="dv">5530000</span>, <span class="dv">370000</span>]</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge Eurovision data with population data  </span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> pd.merge(eurovision_df, population_df, </span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>                     left_on<span class="op">=</span><span class="st">'to_country'</span>, right_on<span class="op">=</span><span class="st">'country_name'</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Eurovision-Population merge:"</span>)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Eurovision-Population merge:
+  to_country  points_final  year country_name  population
+0     Sweden           280  2023       Sweden    10415000
+1     Norway           245  2023       Norway     5380000
+2    Finland           190  2023      Finland     5530000</code></pre>
+</div>
+</div>
+</section>
+<section id="example-2-climate-data-analysis-from-6b_advanced_data_manipulation" class="level3">
+<h3 class="anchored" data-anchor-id="example-2-climate-data-analysis-from-6b_advanced_data_manipulation">Example 2: Climate Data Analysis (from 6b_advanced_data_manipulation)</h3>
+<div id="1008fca9" class="cell" data-execution_count="11">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create simple temperature and CO2 data</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>temp_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'month'</span>: [<span class="st">'Jan'</span>, <span class="st">'Feb'</span>, <span class="st">'Mar'</span>, <span class="st">'Apr'</span>],</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'temperature'</span>: [<span class="fl">0.8</span>, <span class="fl">1.2</span>, <span class="fl">0.9</span>, <span class="fl">1.1</span>]</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>co2_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'month'</span>: [<span class="st">'Jan'</span>, <span class="st">'Feb'</span>, <span class="st">'Mar'</span>, <span class="st">'Apr'</span>], </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'co2_level'</span>: [<span class="dv">420</span>, <span class="dv">422</span>, <span class="dv">419</span>, <span class="dv">421</span>]</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge on the month column</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> pd.merge(temp_df, co2_df, on<span class="op">=</span><span class="st">'month'</span>)</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Climate data merge:"</span>)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(combined_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Climate data merge:
+  month  temperature  co2_level
+0   Jan          0.8        420
+1   Feb          1.2        422
+2   Mar          0.9        419
+3   Apr          1.1        421</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="handling-common-issues" class="level2">
+<h2 class="anchored" data-anchor-id="handling-common-issues">Handling Common Issues</h2>
+<section id="missing-values-after-merge" class="level3">
+<h3 class="anchored" data-anchor-id="missing-values-after-merge">Missing Values After Merge</h3>
+<div id="0e0f2968" class="cell" data-execution_count="12">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrames with some non-matching records</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame({<span class="st">'key'</span>: [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>], <span class="st">'val1'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]})</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.DataFrame({<span class="st">'key'</span>: [<span class="st">'A'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>], <span class="st">'val2'</span>: [<span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">40</span>]})</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Outer join creates NaN values</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> pd.merge(df1, df2, on<span class="op">=</span><span class="st">'key'</span>, how<span class="op">=</span><span class="st">'outer'</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Result with NaN values:"</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Handle missing values - fill all NaN with 0</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>result_filled <span class="op">=</span> result.fillna(<span class="dv">0</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">After filling NaN with 0:"</span>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result_filled)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative: Drop rows with any NaN values</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>result_clean <span class="op">=</span> result.dropna()</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">After dropping rows with NaN:"</span>)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Result with NaN values:
+  key  val1  val2
+0   A   1.0  10.0
+1   B   2.0   NaN
+2   C   3.0  30.0
+3   D   NaN  40.0
+
+After filling NaN with 0:
+  key  val1  val2
+0   A   1.0  10.0
+1   B   2.0   0.0
+2   C   3.0  30.0
+3   D   0.0  40.0
+
+After dropping rows with NaN:
+  key  val1  val2
+0   A   1.0  10.0
+2   C   3.0  30.0</code></pre>
+</div>
+</div>
+</section>
+<section id="duplicate-column-names" class="level3">
+<h3 class="anchored" data-anchor-id="duplicate-column-names">Duplicate Column Names</h3>
+<div id="bd60b77a" class="cell" data-execution_count="13">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DataFrames with overlapping column names  </span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame({<span class="st">'key'</span>: [<span class="st">'A'</span>, <span class="st">'B'</span>], <span class="st">'value'</span>: [<span class="dv">1</span>, <span class="dv">2</span>], <span class="st">'extra'</span>: [<span class="st">'x'</span>, <span class="st">'y'</span>]})</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.DataFrame({<span class="st">'key'</span>: [<span class="st">'A'</span>, <span class="st">'B'</span>], <span class="st">'value'</span>: [<span class="dv">10</span>, <span class="dv">20</span>], <span class="st">'other'</span>: [<span class="st">'p'</span>, <span class="st">'q'</span>]})</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Pandas automatically adds suffixes</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> pd.merge(df1, df2, on<span class="op">=</span><span class="st">'key'</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Result with automatic suffixes:"</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Custom suffixes</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>result_custom <span class="op">=</span> pd.merge(df1, df2, on<span class="op">=</span><span class="st">'key'</span>, suffixes<span class="op">=</span>(<span class="st">'_left'</span>, <span class="st">'_right'</span>))</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Result with custom suffixes:"</span>)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result_custom)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Result with automatic suffixes:
+  key  value_x extra  value_y other
+0   A        1     x       10     p
+1   B        2     y       20     q
+
+Result with custom suffixes:
+  key  value_left extra  value_right other
+0   A           1     x           10     p
+1   B           2     y           20     q</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="tips-and-best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="tips-and-best-practices">Tips and Best Practices</h2>
+<section id="always-inspect-your-data-first" class="level3">
+<h3 class="anchored" data-anchor-id="always-inspect-your-data-first">1. Always Inspect Your Data First</h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the merge keys before merging</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Unique keys in df1:"</span>, df1[<span class="st">'key'</span>].unique())</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Unique keys in df2:"</span>, df2[<span class="st">'key'</span>].unique())</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for duplicates and null values</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Duplicates in df1:"</span>, df1[<span class="st">'key'</span>].duplicated().<span class="bu">any</span>())</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Null values in df1:"</span>, df1[<span class="st">'key'</span>].isnull().<span class="bu">any</span>())</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Null values in df2:"</span>, df2[<span class="st">'key'</span>].isnull().<span class="bu">any</span>())</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check data types to ensure compatibility</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"df1 key dtype:"</span>, df1[<span class="st">'key'</span>].dtype)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"df2 key dtype:"</span>, df2[<span class="st">'key'</span>].dtype)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="validate-your-merge-results" class="level3">
+<h3 class="anchored" data-anchor-id="validate-your-merge-results">2. Validate Your Merge Results</h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the shape before and after merge</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Before: df1 has </span><span class="sc">{</span>df1<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> rows, df2 has </span><span class="sc">{</span>df2<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> rows"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After: merged has </span><span class="sc">{</span>merged<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> rows"</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for unexpected NaN values</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"NaN count after merge:"</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged.isnull().<span class="bu">sum</span>())</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if merge worked as expected</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"First few rows of result:"</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="start-simple-then-explore" class="level3">
+<h3 class="anchored" data-anchor-id="start-simple-then-explore">3. Start Simple, Then Explore</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For beginners: Start with basic merges and check your results</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Once comfortable, you can explore more advanced options</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic merge (most common)</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> pd.merge(df1, df2, on<span class="op">=</span><span class="st">'key'</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the type of join if needed</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> pd.merge(df1, df2, on<span class="op">=</span><span class="st">'key'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Always look at your results to make sure they make sense!</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="quick-reference" class="level2">
+<h2 class="anchored" data-anchor-id="quick-reference">Quick Reference</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 30%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Operation</th>
+<th>Syntax</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Inner join</td>
+<td><code>pd.merge(df1, df2, on='key')</code></td>
+<td>Only matching records</td>
+</tr>
+<tr class="even">
+<td>Left join</td>
+<td><code>pd.merge(df1, df2, on='key', how='left')</code></td>
+<td>All records from left DF</td>
+</tr>
+<tr class="odd">
+<td>Right join</td>
+<td><code>pd.merge(df1, df2, on='key', how='right')</code></td>
+<td>All records from right DF</td>
+</tr>
+<tr class="even">
+<td>Outer join</td>
+<td><code>pd.merge(df1, df2, on='key', how='outer')</code></td>
+<td>All records from both DFs</td>
+</tr>
+<tr class="odd">
+<td>Different keys</td>
+<td><code>pd.merge(df1, df2, left_on='key1', right_on='key2')</code></td>
+<td>Key columns have different names</td>
+</tr>
+<tr class="even">
+<td>Concatenate rows</td>
+<td><code>pd.concat([df1, df2])</code></td>
+<td>Stack DataFrames vertically</td>
+</tr>
+<tr class="odd">
+<td>Concatenate columns</td>
+<td><code>pd.concat([df1, df2], axis=1)</code></td>
+<td>Add columns side by side</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="adding-new-columns-after-merge" class="level2">
+<h2 class="anchored" data-anchor-id="adding-new-columns-after-merge">Adding New Columns After Merge</h2>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add calculated columns after merging</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> pd.merge(eurovision_df, population_df, </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                  left_on<span class="op">=</span><span class="st">'to_country'</span>, right_on<span class="op">=</span><span class="st">'country_name'</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate new columns using simple operations</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>merged[<span class="st">'points_per_capita'</span>] <span class="op">=</span> merged[<span class="st">'points_final'</span>] <span class="op">/</span> merged[<span class="st">'population'</span>] <span class="op">*</span> <span class="dv">1000000</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create categories using simple if-else logic</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> categorize_year(year):</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> year <span class="op">&gt;=</span> <span class="dv">2020</span>:</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'2020s'</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'2010s'</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>merged[<span class="st">'year_category'</span>] <span class="op">=</span> merged[<span class="st">'year'</span>].<span class="bu">apply</span>(categorize_year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="common-patterns-in-environmental-data-science" class="level2">
+<h2 class="anchored" data-anchor-id="common-patterns-in-environmental-data-science">Common Patterns in Environmental Data Science</h2>
+<ol type="1">
+<li><strong>Time Series Joining</strong>: Merge climate data from different sources by date</li>
+<li><strong>Spatial Joining</strong>: Combine location-based data (zip codes, coordinates)<br>
+</li>
+<li><strong>Categorical Joining</strong>: Link datasets using country names, species codes, etc.</li>
+<li><strong>Multi-year Analysis</strong>: Concatenate data from different years for trend analysis</li>
+<li><strong>Sensor Data Integration</strong>: Combine readings from multiple environmental sensors</li>
+</ol>
+</section>
+<section id="common-troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="common-troubleshooting">Common Troubleshooting</h2>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If your merge doesn't work as expected, try these steps:</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Check what's in your key columns</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Keys in df1:"</span>, df1[<span class="st">'key'</span>].unique())</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Keys in df2:"</span>, df2[<span class="st">'key'</span>].unique())</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Make sure there are no missing values in your key columns</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Missing values in df1 key:"</span>, df1[<span class="st">'key'</span>].isnull().<span class="bu">sum</span>())</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Missing values in df2 key:"</span>, df2[<span class="st">'key'</span>].isnull().<span class="bu">sum</span>())</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. If you get fewer rows than expected, try an outer join to see all data</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>result_all <span class="op">=</span> pd.merge(df1, df2, on<span class="op">=</span><span class="st">'key'</span>, how<span class="op">=</span><span class="st">'outer'</span>)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"All possible combinations:"</span>)</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result_all)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Remember: Always examine your data before and after merging to ensure the operation worked as expected. When in doubt, start with a small sample of your data to test your merge logic!</p>
 
 
 </section>

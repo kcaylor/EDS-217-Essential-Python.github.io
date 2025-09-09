@@ -513,7 +513,7 @@ Let’s begin our interactive session!
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Let’s start by importing the necessary libraries and creating a sample dataset:</p>
-<div id="7b5230fc" class="cell" data-execution_count="1">
+<div id="65d78f5d" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -548,7 +548,7 @@ Let’s begin our interactive session!
 <p>Sorting is crucial in data analysis for identifying extremes, patterns, and organizing your data for subsequent analyses.</p>
 <section id="basic-sorting" class="level3">
 <h3 class="anchored" data-anchor-id="basic-sorting">Basic Sorting</h3>
-<div id="162e3f49" class="cell" data-execution_count="2">
+<div id="63cd0e18" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by species count</span></span>
@@ -567,7 +567,7 @@ Let’s begin our interactive session!
 </section>
 <section id="multi-column-sorting" class="level3">
 <h3 class="anchored" data-anchor-id="multi-column-sorting">Multi-column Sorting</h3>
-<div id="201047ad" class="cell" data-execution_count="3">
+<div id="f86c3266" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by site and then by species count</span></span>
@@ -590,7 +590,7 @@ Let’s begin our interactive session!
 <p>Grouping allows us to analyze data at different ecological levels, from individual species to entire ecosystems.</p>
 <section id="basic-groupby" class="level3">
 <h3 class="anchored" data-anchor-id="basic-groupby">Basic Groupby</h3>
-<div id="067858be" class="cell" data-execution_count="4">
+<div id="66a46d39" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sum of species counts by site</span></span>
@@ -608,7 +608,7 @@ Name: count, dtype: int64</code></pre>
 </section>
 <section id="multiple-aggregations" class="level3">
 <h3 class="anchored" data-anchor-id="multiple-aggregations">Multiple Aggregations</h3>
-<div id="1ea1abf2" class="cell" data-execution_count="5">
+<div id="69803c8e" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple stats by site</span></span>
@@ -633,7 +633,7 @@ Wetland     248  8.000000  19       4   14.528127</code></pre>
 <section id="joining-data" class="level2">
 <h2 class="anchored" data-anchor-id="joining-data">3. Joining Data</h2>
 <p>Joining data allows us to combine information from datasets.</p>
-<div id="d0cdcda9" class="cell" data-execution_count="6">
+<div id="dfc9bc64" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a second DataFrame with site characteristics</span></span>
@@ -668,7 +668,7 @@ Wetland     248  8.000000  19       4   14.528127</code></pre>
 <section id="working-with-dates" class="level2">
 <h2 class="anchored" data-anchor-id="working-with-dates">4. Working with Dates</h2>
 <p>Date manipulation is crucial for analyzing seasonal patterns, long-term trends, and time-sensitive events.</p>
-<div id="ac2fc780" class="cell" data-execution_count="7">
+<div id="1caa51e0" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set date as index</span></span>
@@ -676,7 +676,7 @@ Wetland     248  8.000000  19       4   14.528127</code></pre>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Resample to monthly data</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>monthly_counts <span class="op">=</span> df.resample(<span class="st">'M'</span>)[<span class="st">'count'</span>].<span class="bu">sum</span>()</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>monthly_counts <span class="op">=</span> df.resample(<span class="st">'ME'</span>)[<span class="st">'count'</span>].<span class="bu">sum</span>()</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(monthly_counts.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -694,28 +694,24 @@ date
 2023-04-30     91
 Freq: ME, Name: count, dtype: int64</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/bs/x9tn9jz91cv6hb3q6p4djbmw0000gn/T/ipykernel_522/881548494.py:6: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
-  monthly_counts = df.resample('M')['count'].sum()</code></pre>
-</div>
 </div>
 <section id="understanding-inplacetrue" class="level3">
 <h3 class="anchored" data-anchor-id="understanding-inplacetrue">Understanding <code>inplace=True</code></h3>
 <p>The <code>inplace=True</code> parameter modifies the original DataFrame directly:</p>
-<div id="10b9068d" class="cell" data-execution_count="8">
+<div id="fc3bc78b" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Without inplace=True (creates a new DataFrame)</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df_new <span class="op">=</span> df.reset_index()</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">New DataFrame with reset index:"</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_new.head())</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Original DataFrame (unchanged):"</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># With inplace=True (modifies the original DataFrame)</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>df.reset_index(inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Original DataFrame after reset_index(inplace=True):"</span>)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Without inplace=True (creates a new DataFrame)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df_new <span class="op">=</span> df.reset_index()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">New DataFrame with reset index:"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_new.head())</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Original DataFrame (unchanged):"</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># With inplace=True (modifies the original DataFrame)</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>df.reset_index(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Original DataFrame after reset_index(inplace=True):"</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -750,17 +746,17 @@ Original DataFrame after reset_index(inplace=True):
 </section>
 <section id="date-filtering-and-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="date-filtering-and-analysis">Date Filtering and Analysis</h3>
-<div id="e624e76d" class="cell" data-execution_count="9">
+<div id="d1323176" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter by date range (e.g., spring season)</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>spring_data <span class="op">=</span> df[(df[<span class="st">'date'</span>] <span class="op">&gt;=</span> <span class="st">'2023-03-01'</span>) <span class="op">&amp;</span> (df[<span class="st">'date'</span>] <span class="op">&lt;</span> <span class="st">'2023-06-01'</span>)]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(spring_data.head())</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract date components</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'month'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].dt.month</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'day_of_year'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].dt.dayofyear</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter by date range (e.g., spring season)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>spring_data <span class="op">=</span> df[(df[<span class="st">'date'</span>] <span class="op">&gt;=</span> <span class="st">'2023-03-01'</span>) <span class="op">&amp;</span> (df[<span class="st">'date'</span>] <span class="op">&lt;</span> <span class="st">'2023-06-01'</span>)]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(spring_data.head())</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract date components</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'month'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].dt.month</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'day_of_year'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].dt.dayofyear</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>         date       site species  count  temperature
@@ -783,29 +779,29 @@ Original DataFrame after reset_index(inplace=True):
 <section id="using-df.apply-to-transform-data" class="level2">
 <h2 class="anchored" data-anchor-id="using-df.apply-to-transform-data">5. Using df.apply() to transform data</h2>
 <p>The <code>apply()</code> function allows you to apply custom calculations to your data.</p>
-<div id="e09ad672" class="cell" data-execution_count="10">
+<div id="4ab9618c" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply a function to categorize temperature</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> categorize_temperature(value):</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> value <span class="op">&lt;</span> <span class="dv">10</span>:</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Cold'</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> value <span class="op">&lt;</span> <span class="dv">20</span>:</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Moderate'</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Warm'</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'temp_category'</span>] <span class="op">=</span> df[<span class="st">'temperature'</span>].<span class="bu">apply</span>(categorize_temperature)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply a function to calculate biodiversity index</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simpson_diversity(row):</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> row[<span class="st">'count'</span>]</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> df.loc[df[<span class="st">'site'</span>] <span class="op">==</span> row[<span class="st">'site'</span>], <span class="st">'count'</span>].<span class="bu">sum</span>()</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> (n <span class="op">*</span> (n <span class="op">-</span> <span class="dv">1</span>)) <span class="op">/</span> (N <span class="op">*</span> (N <span class="op">-</span> <span class="dv">1</span>))</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'simpson_index'</span>] <span class="op">=</span> df.<span class="bu">apply</span>(simpson_diversity, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply a function to categorize temperature</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> categorize_temperature(value):</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> value <span class="op">&lt;</span> <span class="dv">10</span>:</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Cold'</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> value <span class="op">&lt;</span> <span class="dv">20</span>:</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Moderate'</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Warm'</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'temp_category'</span>] <span class="op">=</span> df[<span class="st">'temperature'</span>].<span class="bu">apply</span>(categorize_temperature)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply a function to calculate biodiversity index</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simpson_diversity(row):</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> row[<span class="st">'count'</span>]</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> df.loc[df[<span class="st">'site'</span>] <span class="op">==</span> row[<span class="st">'site'</span>], <span class="st">'count'</span>].<span class="bu">sum</span>()</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> (n <span class="op">*</span> (n <span class="op">-</span> <span class="dv">1</span>)) <span class="op">/</span> (N <span class="op">*</span> (N <span class="op">-</span> <span class="dv">1</span>))</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'simpson_index'</span>] <span class="op">=</span> df.<span class="bu">apply</span>(simpson_diversity, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>        date     site species  count  temperature  month  day_of_year  \
@@ -855,18 +851,18 @@ Original DataFrame after reset_index(inplace=True):
 <div class="example">
 <p>✏️ Try it. Add the cell below to your notebook and run it.</p>
 </div>
-<div id="0ab84946" class="cell" data-execution_count="11">
+<div id="660c7610" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a sample DataFrame</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'date'</span>: [<span class="st">'2023-01-01'</span>, <span class="st">'2023-01-01'</span>, <span class="st">'2023-01-02'</span>, <span class="st">'2023-01-02'</span>],</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'city'</span>: [<span class="st">'New York'</span>, <span class="st">'Los Angeles'</span>, <span class="st">'New York'</span>, <span class="st">'Los Angeles'</span>],</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'temperature'</span>: [<span class="dv">32</span>, <span class="dv">68</span>, <span class="dv">28</span>, <span class="dv">72</span>]</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original DataFrame:"</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a sample DataFrame</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'date'</span>: [<span class="st">'2023-01-01'</span>, <span class="st">'2023-01-01'</span>, <span class="st">'2023-01-02'</span>, <span class="st">'2023-01-02'</span>],</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'city'</span>: [<span class="st">'New York'</span>, <span class="st">'Los Angeles'</span>, <span class="st">'New York'</span>, <span class="st">'Los Angeles'</span>],</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'temperature'</span>: [<span class="dv">32</span>, <span class="dv">68</span>, <span class="dv">28</span>, <span class="dv">72</span>]</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original DataFrame:"</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Original DataFrame:
@@ -882,12 +878,12 @@ Original DataFrame after reset_index(inplace=True):
 <div class="example">
 <p>✏️ Try it. Add the cell below to your notebook and run it.</p>
 </div>
-<div id="a7061f35" class="cell" data-execution_count="12">
+<div id="106df387" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pivot <span class="op">=</span> pd.pivot(df, values<span class="op">=</span><span class="st">'temperature'</span>, index<span class="op">=</span><span class="st">'date'</span>, columns<span class="op">=</span><span class="st">'city'</span>)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Pivot:"</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pivot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pivot <span class="op">=</span> pd.pivot(df, values<span class="op">=</span><span class="st">'temperature'</span>, index<span class="op">=</span><span class="st">'date'</span>, columns<span class="op">=</span><span class="st">'city'</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Pivot:"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pivot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -904,13 +900,13 @@ date
 <div class="example">
 <p>✏️ Try it. Add the cell below to your notebook and run it.</p>
 </div>
-<div id="e59d7915" class="cell" data-execution_count="13">
+<div id="b35c6694" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a pivot table</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>pivot_table <span class="op">=</span> df.pivot_table(values<span class="op">=</span><span class="st">'temperature'</span>, index<span class="op">=</span><span class="st">'date'</span>, columns<span class="op">=</span><span class="st">'city'</span>, aggfunc<span class="op">=</span><span class="st">'mean'</span>)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Pivot Table:"</span>)</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pivot_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a pivot table</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>pivot_table <span class="op">=</span> df.pivot_table(values<span class="op">=</span><span class="st">'temperature'</span>, index<span class="op">=</span><span class="st">'date'</span>, columns<span class="op">=</span><span class="st">'city'</span>, aggfunc<span class="op">=</span><span class="st">'mean'</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Pivot Table:"</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pivot_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -950,12 +946,12 @@ Note
 <div class="example">
 <p>✏️ Try it. Add the cell below to your notebook and run it.</p>
 </div>
-<div id="dbe418b4" class="cell" data-execution_count="14">
+<div id="7e04aa6d" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a pivot table</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pivot <span class="op">=</span> df.pivot_table(values<span class="op">=</span><span class="st">'temperature'</span>, index<span class="op">=</span><span class="st">'city'</span>, columns<span class="op">=</span><span class="st">'date'</span>, aggfunc<span class="op">=</span><span class="st">'mean'</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pivot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a pivot table</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>pivot <span class="op">=</span> df.pivot_table(values<span class="op">=</span><span class="st">'temperature'</span>, index<span class="op">=</span><span class="st">'city'</span>, columns<span class="op">=</span><span class="st">'date'</span>, aggfunc<span class="op">=</span><span class="st">'mean'</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pivot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>date         2023-01-01  2023-01-02
@@ -968,10 +964,10 @@ New York           32.0        28.0</code></pre>
 <div class="example">
 <p>✏️ Try it. Add the cell below to your notebook and then provide your code.</p>
 </div>
-<div id="b19ea98d" class="cell" data-execution_count="15">
+<div id="6d761ff2" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>

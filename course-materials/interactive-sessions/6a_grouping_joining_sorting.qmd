@@ -183,7 +183,7 @@ df.set_index('date', inplace=True)
 print(df.head())
 
 # Resample to monthly data
-monthly_counts = df.resample('M')['count'].sum()
+monthly_counts = df.resample('ME')['count'].sum()
 print(monthly_counts.head())
 ```
 

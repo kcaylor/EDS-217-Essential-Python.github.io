@@ -518,7 +518,7 @@ Caution
 <section id="setting-up" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up">Setting Up</h2>
 <p>Let’s start by importing the pandas library and loading our dataset.</p>
-<div id="22ef07dc" class="cell" data-execution_count="1">
+<div id="2bc03c92" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -528,7 +528,7 @@ Caution
 </section>
 <section id="basic-data-importing" class="level2">
 <h2 class="anchored" data-anchor-id="basic-data-importing">1. Basic <em>Data Importing</em></h2>
-<div id="95383111" class="cell" data-execution_count="2">
+<div id="d303d9e1" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/datasets/world-cities/master/data/world-cities.csv"</span></span>
@@ -541,7 +541,7 @@ Caution
 <section id="viewing-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="viewing-the-data">Viewing the Data</h3>
 <p>Let’s take a look at the first few rows of our DataFrame:</p>
-<div id="f09f606d" class="cell" data-execution_count="3">
+<div id="0c11647b" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities_df.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -556,7 +556,7 @@ Caution
 </div>
 </div>
 <p>To see the last few rows, we can use:</p>
-<div id="a1a78f90" class="cell" data-execution_count="4">
+<div id="52ff0ca9" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities_df.tail())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -581,7 +581,7 @@ Caution
 <section id="dataframe-properties" class="level3">
 <h3 class="anchored" data-anchor-id="dataframe-properties">DataFrame Properties</h3>
 <p>Now, let’s explore some basic properties of our DataFrame:</p>
-<div id="3b81ed5d" class="cell" data-execution_count="5">
+<div id="708e149d" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of rows and columns</span></span>
@@ -624,7 +624,7 @@ max    1.351271e+07</code></pre>
 <section id="checking-for-missing-values" class="level3">
 <h3 class="anchored" data-anchor-id="checking-for-missing-values">Checking for Missing Values</h3>
 <p>It’s important to identify any missing data in your DataFrame:</p>
-<div id="0e72cec5" class="cell" data-execution_count="6">
+<div id="43892efc" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities_df.isnull().<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -642,7 +642,7 @@ dtype: int64</code></pre>
 <section id="basic-cleaning" class="level2">
 <h2 class="anchored" data-anchor-id="basic-cleaning">3. Basic <em>Cleaning</em></h2>
 <p>Remove rows with missing data in subcountry using <code>dropna()</code> and the <code>subset</code> argument.</p>
-<div id="d25cf7bf" class="cell" data-execution_count="7">
+<div id="b35b0a8d" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cities_df <span class="op">=</span> cities_df.dropna(subset<span class="op">=</span>[<span class="st">'subcountry'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -654,7 +654,7 @@ dtype: int64</code></pre>
 <section id="selecting-columns" class="level3">
 <h3 class="anchored" data-anchor-id="selecting-columns">Selecting Columns</h3>
 <p>To select specific columns:</p>
-<div id="375a4208" class="cell" data-execution_count="8">
+<div id="be76fbe8" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select a single column</span></span>
@@ -682,7 +682,7 @@ Name: name, dtype: object
 <section id="filtering-rows" class="level3">
 <h3 class="anchored" data-anchor-id="filtering-rows">Filtering Rows</h3>
 <p>We can filter rows based on conditions:</p>
-<div id="9380c8db" class="cell" data-execution_count="9">
+<div id="6e7183a8" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cities in the United States</span></span>
@@ -712,7 +712,7 @@ Name: name, dtype: object
 <section id="combining-conditions" class="level3">
 <h3 class="anchored" data-anchor-id="combining-conditions">Combining Conditions</h3>
 <p>We can use logical operators to combine multiple conditions:</p>
-<div id="d6ea08cb" class="cell" data-execution_count="10">
+<div id="3ea7bf86" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cities in Canada that start with the letter 'T'</span></span>
@@ -746,7 +746,7 @@ Name: name, dtype: object
 <section id="basic-sorting-and-ranking" class="level2">
 <h2 class="anchored" data-anchor-id="basic-sorting-and-ranking">5. Basic <em>Sorting and Ranking</em></h2>
 <p>To sort the DataFrame based on one or more columns:</p>
-<div id="6c334694" class="cell" data-execution_count="11">
+<div id="665affcf" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort cities alphabetically</span></span>
@@ -778,7 +778,7 @@ Name: name, dtype: object
 <section id="creating-new-columns" class="level4">
 <h4 class="anchored" data-anchor-id="creating-new-columns">Creating New Columns</h4>
 <p>We can create new columns based on existing data:</p>
-<div id="baeca448" class="cell" data-execution_count="12">
+<div id="0b1fb5ab" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a column for city name length</span></span>
@@ -805,20 +805,65 @@ Name: name, dtype: object
 </div>
 </div>
 </section>
+<section id="adding-series-as-columns-index-alignment" class="level4">
+<h4 class="anchored" data-anchor-id="adding-series-as-columns-index-alignment">Adding Series as Columns: Index Alignment</h4>
+<p>When adding a Series as a new column, pandas aligns data by index:</p>
+<div id="0b8e9f4a" class="cell" data-execution_count="13">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This works - Series index matches DataFrame index</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sample_series <span class="op">=</span> pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], index<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>])</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>small_df <span class="op">=</span> pd.DataFrame({<span class="st">'A'</span>: [<span class="st">'x'</span>, <span class="st">'y'</span>, <span class="st">'z'</span>]})</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>small_df[<span class="st">'B'</span>] <span class="op">=</span> sample_series</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Aligned correctly:"</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(small_df)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates unexpected results - misaligned indices</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>misaligned_series <span class="op">=</span> pd.Series([<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>], index<span class="op">=</span>[<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>])</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>small_df[<span class="st">'C'</span>] <span class="op">=</span> misaligned_series  <span class="co"># Results in NaN values!</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Misaligned indices:"</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(small_df)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Solution: Use .reindex() or ensure matching indices</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>small_df[<span class="st">'D'</span>] <span class="op">=</span> misaligned_series.reindex(small_df.index, fill_value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Corrected alignment:"</span>)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(small_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Aligned correctly:
+   A  B
+0  x  1
+1  y  2
+2  z  3
+
+Misaligned indices:
+   A  B   C
+0  x  1 NaN
+1  y  2 NaN
+2  z  3 NaN
+
+Corrected alignment:
+   A  B   C  D
+0  x  1 NaN  0
+1  y  2 NaN  0
+2  z  3 NaN  0</code></pre>
+</div>
+</div>
+</section>
 </section>
 <section id="basic-grouping-and-aggregation" class="level2">
 <h2 class="anchored" data-anchor-id="basic-grouping-and-aggregation">7-8: Basic <em>Grouping</em> and <em>Aggregation</em></h2>
 <p>Grouping allows us to perform operations on subsets of the data:</p>
-<div id="32f42ac6" class="cell" data-execution_count="13">
+<div id="dce7c835" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of cities by country</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>cities_per_country <span class="op">=</span> cities_df.groupby(<span class="st">'country'</span>)[<span class="st">'name'</span>].count().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities_per_country.head())</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of subcountries (e.g., states, provinces) by country</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>subcountries_per_country <span class="op">=</span> cities_df.groupby(<span class="st">'country'</span>)[<span class="st">'subcountry'</span>].nunique().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(subcountries_per_country.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of cities by country</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>cities_per_country <span class="op">=</span> cities_df.groupby(<span class="st">'country'</span>)[<span class="st">'name'</span>].count().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities_per_country.head())</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of subcountries (e.g., states, provinces) by country</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>subcountries_per_country <span class="op">=</span> cities_df.groupby(<span class="st">'country'</span>)[<span class="st">'subcountry'</span>].nunique().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(subcountries_per_country.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>country

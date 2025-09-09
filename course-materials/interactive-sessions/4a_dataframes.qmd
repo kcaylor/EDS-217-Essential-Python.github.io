@@ -235,6 +235,32 @@ long_named_cities = cities_df.nlargest(5, 'name_length')
 print(long_named_cities[['name', 'country', 'name_length']])
 ```
 
+#### Adding Series as Columns: Index Alignment
+
+When adding a Series as a new column, pandas aligns data by index:
+
+```{python}
+#| echo: true
+
+# This works - Series index matches DataFrame index
+sample_series = pd.Series([1, 2, 3], index=[0, 1, 2])
+small_df = pd.DataFrame({'A': ['x', 'y', 'z']})
+small_df['B'] = sample_series
+print("Aligned correctly:")
+print(small_df)
+
+# This creates unexpected results - misaligned indices
+misaligned_series = pd.Series([10, 20, 30], index=['a', 'b', 'c'])
+small_df['C'] = misaligned_series  # Results in NaN values!
+print("\nMisaligned indices:")
+print(small_df)
+
+# Solution: Use .reindex() or ensure matching indices
+small_df['D'] = misaligned_series.reindex(small_df.index, fill_value=0)
+print("\nCorrected alignment:")
+print(small_df)
+```
+
 ## 7-8: Basic _Grouping_ and _Aggregation_
 
 Grouping allows us to perform operations on subsets of the data:

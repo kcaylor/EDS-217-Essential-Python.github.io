@@ -401,5 +401,3 @@ result_all = pd.merge(df1, df2, on='key', how='outer')
 print("All possible combinations:")
 print(result_all)
 ```
-
-Remember: Always examine your data before and after merging to ensure the operation worked as expected. When in doubt, start with a small sample of your data to test your merge logic!

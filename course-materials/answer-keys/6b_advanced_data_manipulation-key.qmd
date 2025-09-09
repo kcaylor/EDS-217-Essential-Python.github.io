@@ -1,0 +1,234 @@
+---
+title: "Day 6: 🙌 Coding Colab Answer Key"
+subtitle: "Analyzing Global Temperature Anomalies and CO2 Concentrations"
+search: false
+---
+
+## Quick Reference
+
+Here's a quick reference for the data manipulation techniques we'll be using:
+
+```python
+# Setting index
+df.set_index('column', inplace=True)
+
+# Merging dataframes
+pd.merge(df1, df2, left_index=True, right_index=True, how='outer')
+
+# Resampling time series
+df.resample('YE').mean()  # Annual averages
+
+# Creating new columns
+df['new_column'] = df['column'].apply(function)
+
+# Grouping and aggregation
+df.groupby('column').mean()
+```
+
+Here are our course cheatsheets:
+
+- [Pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+- [Matplotlib](../cheatsheets/matplotlib.qmd)
+- [Seaborn](../cheatsheets/seaborn.qmd)
+
+Feel free to refer to these cheatsheets throughout the exercise if you need a quick reminder about syntax or functionality.
+
+## Exercise Overview
+
+In this coding colab, you'll analyze global temperature anomalies and CO2 concentration data. You'll practice data manipulation, joining datasets, time series analysis, and visualization techniques.
+
+## Setup
+
+Let's start by importing necessary libraries and loading our datasets:
+
+```{python}
+#| echo: true
+
+import pandas as pd
+
+# Load the temperature anomaly dataset
+temp_url = "https://bit.ly/monthly_temp"
+temp_df = pd.read_csv(temp_url, parse_dates=['Date'])
+
+# Load the CO2 concentration dataset
+co2_url = "https://bit.ly/monthly_CO2"
+co2_df = pd.read_csv(co2_url, parse_dates=['Date'])
+
+print("Temperature data:")
+print(temp_df.head())
+print("\nCO2 data:")
+print(co2_df.head())
+```
+
+## Task 1: Data Preparation
+
+### 1. Set the 'Date' column as the index for both dataframes
+
+```{python}
+#| echo: true
+#| include: true
+
+temp_df.set_index('Date', inplace=True)
+co2_df.set_index('Date', inplace=True)
+
+print("Set Date as index for both dataframes")
+```
+
+### 2. Check for missing values
+
+```{python}
+#| echo: true
+#| include: true
+
+print("Missing values in temperature data:", temp_df.isnull().sum().sum())
+print("Missing values in CO2 data:", co2_df.isnull().sum().sum())
+```
+
+## Task 2: Joining Datasets
+
+### 1. Merge the temperature and CO2 datasets
+
+```{python}
+#| echo: true
+#| include: true
+
+combined_df = pd.merge(temp_df, co2_df, left_index=True, right_index=True, how='inner')
+print("Merged datasets")
+```
+
+### 2. Handle missing values from the merge
+
+```{python}
+#| echo: true
+#| include: true
+
+combined_df.fillna(method='ffill', inplace=True)
+print("Filled missing values")
+```
+
+### 3. Create plots showing temperature anomalies and CO2 concentrations
+
+```{python}
+#| echo: true
+#| include: true
+
+# Temperature anomaly plot
+combined_df['MonthlyAnomaly'].plot(
+    figsize=(12, 4), color='red', 
+    title='Monthly Global Temperature Anomalies',
+    ylabel='Temperature Anomaly (°C)')
+
+# CO2 concentration plot  
+combined_df['CO2Concentration'].plot(
+    figsize=(12, 4), color='blue',
+    title='Monthly CO2 Concentration',
+    ylabel='CO2 Concentration (ppm)')
+```
+
+## Task 3: Time Series Analysis
+
+### 1. Resample data to annual averages
+
+```{python}
+#| echo: true
+#| include: true
+
+annual_data = combined_df.resample('YE').mean()
+print(annual_data.head())
+```
+
+### 2. Calculate year-over-year changes
+
+```{python}
+#| echo: true
+#| include: true
+
+annual_data['Temp_YoY_Change'] = annual_data['MonthlyAnomaly'].diff()
+annual_data['CO2_YoY_Change'] = annual_data['CO2Concentration'].diff()
+
+print(annual_data[['Temp_YoY_Change', 'CO2_YoY_Change']].head(10))
+```
+
+### 3. Create scatter plot of temperature vs CO2
+
+```{python}
+#| echo: true
+#| include: true
+
+annual_data.plot(
+    kind='scatter', 
+    x='CO2Concentration', 
+    y='MonthlyAnomaly', 
+    figsize=(10, 6), 
+    title='Annual Temperature Anomaly vs CO2 Concentration'
+)
+```
+
+## Task 4: Seasonal Analysis
+
+### 1. Create function to extract season
+
+```{python}
+#| echo: true
+#| include: true
+
+def get_season(date):
+    month = date.month
+    if month in [12, 1, 2]:
+        return 'Winter'
+    elif month in [3, 4, 5]:
+        return 'Spring'
+    elif month in [6, 7, 8]:
+        return 'Summer'
+    else:
+        return 'Fall'
+```
+
+### 2. Add Season column to dataframe
+
+```{python}
+#| echo: true
+#| include: true
+
+combined_df['Season'] = pd.Series(combined_df.index, index=combined_df.index).apply(get_season)
+
+# combined_df['Season'] = combined_df.index.map(get_season)
+
+print("Added Season column")
+print(combined_df.head())
+```
+
+### 3. Calculate seasonal averages
+
+```{python}
+#| echo: true
+#| include: true
+
+seasonal_avg = combined_df.groupby('Season').mean()
+print("Seasonal Averages:")
+print(seasonal_avg)
+```
+
+### 4. Create box plot of temperature anomalies by season
+
+```{python}
+#| echo: true
+#| include: true
+
+combined_df.boxplot(
+    column='MonthlyAnomaly',
+    by='Season', 
+    figsize=(10, 6)
+)
+```
+
+## Conclusion and Discussion
+
+With your partner, briefly discuss:
+
+1. What relationship did you observe between CO2 concentrations and temperature anomalies?
+2. Are there any seasonal patterns in the temperature anomalies?
+3. How has the rate of change in both CO2 and temperature evolved over time?
+4. What additional analyses would you perform to better understand these climate indicators?
+
+Great job completing this analysis! You've successfully practiced joining time series data, performing temporal resampling, calculating trends, and analyzing seasonal patterns in environmental data.

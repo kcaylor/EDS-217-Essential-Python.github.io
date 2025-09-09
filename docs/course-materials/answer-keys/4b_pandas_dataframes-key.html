@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Day 6: 🙌 Coding Colab</title>
+<title>Day 4: 🙌 Coding Colab Answer Key</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -384,8 +384,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Day 6: 🙌 Coding Colab</h1>
-            <p class="subtitle lead">Analyzing Global Temperature Anomalies and CO2 Concentrations</p>
+      <h1 class="title">Day 4: 🙌 Coding Colab Answer Key</h1>
+            <p class="subtitle lead">Exploring, Cleaning, and Analyzing National Parks Visitor Data with Pandas</p>
                       </div>
   </div>
     
@@ -406,13 +406,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#quick-reference" id="toc-quick-reference" class="nav-link active" data-scroll-target="#quick-reference">Quick Reference</a></li>
+  <li><a href="#exercise-overview" id="toc-exercise-overview" class="nav-link" data-scroll-target="#exercise-overview">Exercise Overview</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#task-1-data-preparation" id="toc-task-1-data-preparation" class="nav-link" data-scroll-target="#task-1-data-preparation">Task 1: Data Preparation</a></li>
-  <li><a href="#task-2-joining-datasets" id="toc-task-2-joining-datasets" class="nav-link" data-scroll-target="#task-2-joining-datasets">Task 2: Joining Datasets</a></li>
-  <li><a href="#task-3-time-series-analysis" id="toc-task-3-time-series-analysis" class="nav-link" data-scroll-target="#task-3-time-series-analysis">Task 3: Time Series Analysis</a></li>
-  <li><a href="#task-4-seasonal-analysis" id="toc-task-4-seasonal-analysis" class="nav-link" data-scroll-target="#task-4-seasonal-analysis">Task 4: Seasonal Analysis</a></li>
+  <li><a href="#task-1-data-exploration-and-cleaning" id="toc-task-1-data-exploration-and-cleaning" class="nav-link" data-scroll-target="#task-1-data-exploration-and-cleaning">Task 1: Data Exploration and Cleaning</a>
+  <ul class="collapse">
+  <li><a href="#how-many-rows-and-columns-does-the-dataframe-have" id="toc-how-many-rows-and-columns-does-the-dataframe-have" class="nav-link" data-scroll-target="#how-many-rows-and-columns-does-the-dataframe-have">1. How many rows and columns does the DataFrame have?</a></li>
+  <li><a href="#what-are-the-column-names" id="toc-what-are-the-column-names" class="nav-link" data-scroll-target="#what-are-the-column-names">2. What are the column names?</a></li>
+  <li><a href="#what-data-types-are-used-in-each-column" id="toc-what-data-types-are-used-in-each-column" class="nav-link" data-scroll-target="#what-data-types-are-used-in-each-column">3. What data types are used in each column?</a></li>
+  <li><a href="#are-there-any-missing-values-in-the-dataframe" id="toc-are-there-any-missing-values-in-the-dataframe" class="nav-link" data-scroll-target="#are-there-any-missing-values-in-the-dataframe">4. Are there any missing values in the DataFrame?</a></li>
+  <li><a href="#remove-the-rows-where-year-is-total" id="toc-remove-the-rows-where-year-is-total" class="nav-link" data-scroll-target="#remove-the-rows-where-year-is-total">5. Remove the rows where <code>year</code> is <code>Total</code></a></li>
+  <li><a href="#convert-the-year-column-to-numeric-type" id="toc-convert-the-year-column-to-numeric-type" class="nav-link" data-scroll-target="#convert-the-year-column-to-numeric-type">6. Convert the <code>year</code> column to numeric type</a></li>
+  </ul></li>
+  <li><a href="#task-2-basic-filtering-and-analysis" id="toc-task-2-basic-filtering-and-analysis" class="nav-link" data-scroll-target="#task-2-basic-filtering-and-analysis">Task 2: Basic Filtering and Analysis</a>
+  <ul class="collapse">
+  <li><a href="#create-a-new-dataframe-for-years-2000-2015-and-only-national-parks" id="toc-create-a-new-dataframe-for-years-2000-2015-and-only-national-parks" class="nav-link" data-scroll-target="#create-a-new-dataframe-for-years-2000-2015-and-only-national-parks">1. Create a new DataFrame for years 2000-2015 and only National Parks</a></li>
+  <li><a href="#find-the-total-number-of-visitors-across-all-national-parks-for-each-year" id="toc-find-the-total-number-of-visitors-across-all-national-parks-for-each-year" class="nav-link" data-scroll-target="#find-the-total-number-of-visitors-across-all-national-parks-for-each-year">2. Find the total number of visitors across all National Parks for each year</a></li>
+  <li><a href="#calculate-the-average-yearly-visitors-for-each-national-park" id="toc-calculate-the-average-yearly-visitors-for-each-national-park" class="nav-link" data-scroll-target="#calculate-the-average-yearly-visitors-for-each-national-park">3. Calculate the average yearly visitors for each National Park</a></li>
+  <li><a href="#identify-the-top-5-most-visited-national-parks" id="toc-identify-the-top-5-most-visited-national-parks" class="nav-link" data-scroll-target="#identify-the-top-5-most-visited-national-parks">4. Identify the top 5 most visited National Parks</a></li>
+  </ul></li>
+  <li><a href="#task-3-thinking-in-dataframes" id="toc-task-3-thinking-in-dataframes" class="nav-link" data-scroll-target="#task-3-thinking-in-dataframes">Task 3: Thinking in DataFrames</a></li>
+  <li><a href="#conclusion-and-discussion" id="toc-conclusion-and-discussion" class="nav-link" data-scroll-target="#conclusion-and-discussion">Conclusion and Discussion</a></li>
   </ul>
 </nav>
     </div>
@@ -423,91 +437,243 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In this coding colab, you’ll analyze global temperature anomalies and CO2 concentration data. You’ll practice data manipulation, joining datasets, time series analysis, and visualization techniques.</p>
+<section id="quick-reference" class="level2">
+<h2 class="anchored" data-anchor-id="quick-reference">Quick Reference</h2>
+<p>Here’s a quick reference for the pandas DataFrame operations we’ll be using:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic DataFrame operations</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df.shape           <span class="co"># Get number of rows and columns</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df.columns         <span class="co"># Get column names</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df.dtypes          <span class="co"># Get data types</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()  <span class="co"># Count missing values</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">==</span> value]  <span class="co"># Filter by condition</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df[(condition1) <span class="op">&amp;</span> (condition2)]  <span class="co"># Multiple conditions</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Grouping and aggregation</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'column'</span>)[<span class="st">'value'</span>].<span class="bu">sum</span>()   <span class="co"># Group and sum</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'column'</span>)[<span class="st">'value'</span>].mean()  <span class="co"># Group and average</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here are our course cheatsheets:</p>
+<ul>
+<li><a href="../../course-materials/cheatsheets/pandas_dataframes.html">Pandas DataFrames</a></li>
+<li><a href="../cheatsheets/Pandas_Cheat_Sheet.pdf">Pandas PDF Cheat Sheet</a></li>
+<li><a href="../../course-materials/cheatsheets/workflow_methods.html">DataFrame Workflows</a></li>
+</ul>
+<p>Feel free to refer to these cheatsheets throughout the exercise if you need a quick reminder about syntax or functionality.</p>
 </section>
-<section id="learning-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
-<p>By the end of this colab, you will be able to:</p>
-<ol type="1">
-<li>Load and preprocess time series data</li>
-<li>Join datasets based on datetime indices</li>
-<li>Perform basic time series analysis and resampling</li>
-<li>Apply data manipulation techniques to extract insights from environmental datasets</li>
-</ol>
+<section id="exercise-overview" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-overview">Exercise Overview</h2>
+<p>In this collaborative coding exercise, you’ll work with a partner to practice importing, cleaning, exploring, and analyzing DataFrames using pandas. You’ll be working with a dataset containing yearly visitor information about national parks in the United States.</p>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>Let’s start by importing necessary libraries and loading our datasets:</p>
-<div id="d70d1f3d" class="cell" data-execution_count="1">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the temperature anomaly dataset</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>temp_url <span class="op">=</span> <span class="st">"https://bit.ly/monthly_temp"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>temp_df <span class="op">=</span> pd.read_csv(temp_url, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>])</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the CO2 concentration dataset</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>co2_url <span class="op">=</span> <span class="st">"https://bit.ly/monthly_CO2"</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>co2_df <span class="op">=</span> pd.read_csv(co2_url, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>])</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Temperature data:"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temp_df.head())</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">CO2 data:"</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(co2_df.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<p>First, let’s import the necessary libraries and load our dataset.</p>
+<div id="83ba0d95" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-09-17/national_parks.csv"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>parks_df <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-1-data-exploration-and-cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="task-1-data-exploration-and-cleaning">Task 1: Data Exploration and Cleaning</h2>
+<p>With your partner, explore the DataFrame and perform some initial cleaning.</p>
+<section id="how-many-rows-and-columns-does-the-dataframe-have" class="level3">
+<h3 class="anchored" data-anchor-id="how-many-rows-and-columns-does-the-dataframe-have">1. How many rows and columns does the DataFrame have?</h3>
+<div id="8deb3774" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(parks_df.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Temperature data:
-        Date  MonthlyAnomaly
-0 1880-01-01           -0.20
-1 1880-02-01           -0.25
-2 1880-03-01           -0.09
-3 1880-04-01           -0.16
-4 1880-05-01           -0.09
-
-CO2 data:
-        Date  CO2Concentration
-0 1958-04-01            317.45
-1 1958-05-01            317.51
-2 1958-06-01            317.27
-3 1958-07-01            315.87
-4 1958-08-01            314.93</code></pre>
+<pre><code>(21560, 12)</code></pre>
 </div>
 </div>
 </section>
-<section id="task-1-data-preparation" class="level2">
-<h2 class="anchored" data-anchor-id="task-1-data-preparation">Task 1: Data Preparation</h2>
-<ol type="1">
-<li>Set the ‘Date’ column as the index for both dataframes.</li>
-<li>Ensure that there are no missing values in either dataset.</li>
-</ol>
+<section id="what-are-the-column-names" class="level3">
+<h3 class="anchored" data-anchor-id="what-are-the-column-names">2. What are the column names?</h3>
+<div id="b9a9b2fc" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(parks_df.columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Index(['year', 'gnis_id', 'geometry', 'metadata', 'number_of_records',
+       'parkname', 'region', 'state', 'unit_code', 'unit_name', 'unit_type',
+       'visitors'],
+      dtype='object')</code></pre>
+</div>
+</div>
 </section>
-<section id="task-2-joining-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="task-2-joining-datasets">Task 2: Joining Datasets</h2>
-<ol type="1">
-<li>Merge the temperature and CO2 datasets based on their date index.</li>
-<li>Handle any missing values that may have been introduced by the merge.</li>
-<li>Create some plots showing temperature anomalies and CO2 concentrations over time using pandas built-in plotting functions.</li>
-</ol>
+<section id="what-data-types-are-used-in-each-column" class="level3">
+<h3 class="anchored" data-anchor-id="what-data-types-are-used-in-each-column">3. What data types are used in each column?</h3>
+<div id="dfc80291" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(parks_df.dtypes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>year                  object
+gnis_id               object
+geometry              object
+metadata              object
+number_of_records      int64
+parkname              object
+region                object
+state                 object
+unit_code             object
+unit_name             object
+unit_type             object
+visitors             float64
+dtype: object</code></pre>
+</div>
+</div>
 </section>
-<section id="task-3-time-series-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="task-3-time-series-analysis">Task 3: Time Series Analysis</h2>
-<ol type="1">
-<li>Resample the data to annual averages.</li>
-<li>Calculate the year-over-year change in temperature anomalies and CO2 concentrations.</li>
-<li>Create a scatter plot of annual temperature anomalies vs CO2 concentrations using pandas plotting.</li>
-</ol>
+<section id="are-there-any-missing-values-in-the-dataframe" class="level3">
+<h3 class="anchored" data-anchor-id="are-there-any-missing-values-in-the-dataframe">4. Are there any missing values in the DataFrame?</h3>
+<div id="0b2de4a6" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(parks_df.isnull().<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>year                    0
+gnis_id                 0
+geometry                0
+metadata             2712
+number_of_records       0
+parkname             2218
+region                  0
+state                   0
+unit_code               0
+unit_name               0
+unit_type               0
+visitors                4
+dtype: int64</code></pre>
+</div>
+</div>
 </section>
-<section id="task-4-seasonal-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="task-4-seasonal-analysis">Task 4: Seasonal Analysis</h2>
+<section id="remove-the-rows-where-year-is-total" class="level3">
+<h3 class="anchored" data-anchor-id="remove-the-rows-where-year-is-total">5. Remove the rows where <code>year</code> is <code>Total</code></h3>
+<div id="81735af4" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove 'Total' rows</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>parks_df <span class="op">=</span> parks_df[parks_df[<span class="st">'year'</span>] <span class="op">!=</span> <span class="st">'Total'</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Removed rows where year is 'Total'"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Removed rows where year is 'Total'</code></pre>
+</div>
+</div>
+</section>
+<section id="convert-the-year-column-to-numeric-type" class="level3">
+<h3 class="anchored" data-anchor-id="convert-the-year-column-to-numeric-type">6. Convert the <code>year</code> column to numeric type</h3>
+<div id="d5d7650a" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to numeric</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>parks_df[<span class="st">'year'</span>] <span class="op">=</span> pd.to_numeric(parks_df[<span class="st">'year'</span>])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Converted year column to numeric"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Converted year column to numeric</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="task-2-basic-filtering-and-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="task-2-basic-filtering-and-analysis">Task 2: Basic Filtering and Analysis</h2>
+<p>Now, let’s practice some basic filtering and analysis operations:</p>
+<section id="create-a-new-dataframe-for-years-2000-2015-and-only-national-parks" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-new-dataframe-for-years-2000-2015-and-only-national-parks">1. Create a new DataFrame for years 2000-2015 and only National Parks</h3>
+<div id="b489da15" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for years 2000-2015 and National Parks only</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>parks_2000_2015 <span class="op">=</span> parks_df[</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    (parks_df[<span class="st">'year'</span>] <span class="op">&gt;=</span> <span class="dv">2000</span>) <span class="op">&amp;</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    (parks_df[<span class="st">'year'</span>] <span class="op">&lt;=</span> <span class="dv">2015</span>) <span class="op">&amp;</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    (parks_df[<span class="st">'unit_type'</span>] <span class="op">==</span> <span class="st">'National Park'</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Created filtered DataFrame for years 2000-2015 with National Parks only"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Created filtered DataFrame for years 2000-2015 with National Parks only</code></pre>
+</div>
+</div>
+</section>
+<section id="find-the-total-number-of-visitors-across-all-national-parks-for-each-year" class="level3">
+<h3 class="anchored" data-anchor-id="find-the-total-number-of-visitors-across-all-national-parks-for-each-year">2. Find the total number of visitors across all National Parks for each year</h3>
+<div id="aeca7448" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>yearly_totals <span class="op">=</span> parks_2000_2015.groupby(<span class="st">'year'</span>)[<span class="st">'visitors'</span>].<span class="bu">sum</span>()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(yearly_totals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>year
+2000    67481265.0
+2001    65281408.0
+2002    65886517.0
+2003    64890428.0
+2004    64869460.0
+2005    64675197.0
+2006    61431710.0
+2007    63396381.0
+2008    62246208.0
+2009    63946873.0
+2010    65769682.0
+2011    63839238.0
+2012    65919193.0
+2013    64486815.0
+2014    69847696.0
+2015    76258329.0
+Name: visitors, dtype: float64</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-the-average-yearly-visitors-for-each-national-park" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-the-average-yearly-visitors-for-each-national-park">3. Calculate the average yearly visitors for each National Park</h3>
+<div id="1bbf5b26" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>avg_yearly_visitors <span class="op">=</span> parks_2000_2015.groupby(<span class="st">'parkname'</span>)[<span class="st">'visitors'</span>].mean()</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(avg_yearly_visitors.head(<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>parkname
+Arches                          9.433541e+05
+Badlands                        9.171606e+05
+Biscayne                        5.086311e+05
+Black Canyon of the Gunnison    1.804268e+05
+Bryce Canyon                    1.161639e+06
+Canyonlands                     4.358917e+05
+Capitol Reef                    6.241222e+05
+Carlsbad Caverns                4.217702e+05
+Channel Islands                 3.900332e+05
+Congaree                        1.119453e+05
+Name: visitors, dtype: float64</code></pre>
+</div>
+</div>
+</section>
+<section id="identify-the-top-5-most-visited-national-parks" class="level3">
+<h3 class="anchored" data-anchor-id="identify-the-top-5-most-visited-national-parks">4. Identify the top 5 most visited National Parks</h3>
+<div id="02e920ab" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>top_5_parks <span class="op">=</span> parks_2000_2015.groupby(<span class="st">'parkname'</span>)[<span class="st">'visitors'</span>].<span class="bu">sum</span>().nlargest(<span class="dv">5</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top_5_parks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>parkname
+Grand Canyon      70836419.0
+Yosemite          57440533.0
+Yellowstone       50958648.0
+Olympic           50201663.0
+Rocky Mountain    49124036.0
+Name: visitors, dtype: float64</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="task-3-thinking-in-dataframes" class="level2">
+<h2 class="anchored" data-anchor-id="task-3-thinking-in-dataframes">Task 3: Thinking in DataFrames</h2>
+<p>Let’s create a simple visualization:</p>
+<div id="71d2bc8f" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple plot of yearly visitor totals</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>yearly_totals.plot(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="4b_pandas_dataframes-key_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-and-discussion">Conclusion and Discussion</h2>
+<p>With your partner, briefly discuss:</p>
 <ol type="1">
-<li>Create a function to extract the season from a given date (hint: use the <code>date.month</code> attribute and if-elif-else to assign the season in your function).</li>
-<li>Use the function to create a new column called <code>Season</code></li>
-<li>Calculate the average temperature anomaly and CO2 concentration for each season.</li>
-<li>Create a box plot using the pandas <code>boxplot</code> method showing the distribution of temperature anomalies for each season.</li>
+<li>Which pandas operations did you find most useful for this analysis?</li>
+<li>What other questions could you explore with this dataset?</li>
+<li>How would you handle the data differently if you wanted to analyze seasonal patterns?</li>
 </ol>
+<p>Great job working through these exercises! You’ve practiced importing data, cleaning a dataset, exploring DataFrames, and performing various filtering and analysis operations using pandas. These skills are fundamental to data analysis in Python and will be valuable as you continue to work with more complex datasets.</p>
 
 
 </section>

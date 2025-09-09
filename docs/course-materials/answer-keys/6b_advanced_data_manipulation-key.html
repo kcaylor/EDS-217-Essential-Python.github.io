@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Day 6: 🙌 Coding Colab</title>
+<title>Day 6: 🙌 Coding Colab Answer Key</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -384,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Day 6: 🙌 Coding Colab</h1>
+      <h1 class="title">Day 6: 🙌 Coding Colab Answer Key</h1>
             <p class="subtitle lead">Analyzing Global Temperature Anomalies and CO2 Concentrations</p>
                       </div>
   </div>
@@ -406,13 +406,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#quick-reference" id="toc-quick-reference" class="nav-link active" data-scroll-target="#quick-reference">Quick Reference</a></li>
+  <li><a href="#exercise-overview" id="toc-exercise-overview" class="nav-link" data-scroll-target="#exercise-overview">Exercise Overview</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#task-1-data-preparation" id="toc-task-1-data-preparation" class="nav-link" data-scroll-target="#task-1-data-preparation">Task 1: Data Preparation</a></li>
-  <li><a href="#task-2-joining-datasets" id="toc-task-2-joining-datasets" class="nav-link" data-scroll-target="#task-2-joining-datasets">Task 2: Joining Datasets</a></li>
-  <li><a href="#task-3-time-series-analysis" id="toc-task-3-time-series-analysis" class="nav-link" data-scroll-target="#task-3-time-series-analysis">Task 3: Time Series Analysis</a></li>
-  <li><a href="#task-4-seasonal-analysis" id="toc-task-4-seasonal-analysis" class="nav-link" data-scroll-target="#task-4-seasonal-analysis">Task 4: Seasonal Analysis</a></li>
+  <li><a href="#task-1-data-preparation" id="toc-task-1-data-preparation" class="nav-link" data-scroll-target="#task-1-data-preparation">Task 1: Data Preparation</a>
+  <ul class="collapse">
+  <li><a href="#set-the-date-column-as-the-index-for-both-dataframes" id="toc-set-the-date-column-as-the-index-for-both-dataframes" class="nav-link" data-scroll-target="#set-the-date-column-as-the-index-for-both-dataframes">1. Set the ‘Date’ column as the index for both dataframes</a></li>
+  <li><a href="#check-for-missing-values" id="toc-check-for-missing-values" class="nav-link" data-scroll-target="#check-for-missing-values">2. Check for missing values</a></li>
+  </ul></li>
+  <li><a href="#task-2-joining-datasets" id="toc-task-2-joining-datasets" class="nav-link" data-scroll-target="#task-2-joining-datasets">Task 2: Joining Datasets</a>
+  <ul class="collapse">
+  <li><a href="#merge-the-temperature-and-co2-datasets" id="toc-merge-the-temperature-and-co2-datasets" class="nav-link" data-scroll-target="#merge-the-temperature-and-co2-datasets">1. Merge the temperature and CO2 datasets</a></li>
+  <li><a href="#handle-missing-values-from-the-merge" id="toc-handle-missing-values-from-the-merge" class="nav-link" data-scroll-target="#handle-missing-values-from-the-merge">2. Handle missing values from the merge</a></li>
+  <li><a href="#create-plots-showing-temperature-anomalies-and-co2-concentrations" id="toc-create-plots-showing-temperature-anomalies-and-co2-concentrations" class="nav-link" data-scroll-target="#create-plots-showing-temperature-anomalies-and-co2-concentrations">3. Create plots showing temperature anomalies and CO2 concentrations</a></li>
+  </ul></li>
+  <li><a href="#task-3-time-series-analysis" id="toc-task-3-time-series-analysis" class="nav-link" data-scroll-target="#task-3-time-series-analysis">Task 3: Time Series Analysis</a>
+  <ul class="collapse">
+  <li><a href="#resample-data-to-annual-averages" id="toc-resample-data-to-annual-averages" class="nav-link" data-scroll-target="#resample-data-to-annual-averages">1. Resample data to annual averages</a></li>
+  <li><a href="#calculate-year-over-year-changes" id="toc-calculate-year-over-year-changes" class="nav-link" data-scroll-target="#calculate-year-over-year-changes">2. Calculate year-over-year changes</a></li>
+  <li><a href="#create-scatter-plot-of-temperature-vs-co2" id="toc-create-scatter-plot-of-temperature-vs-co2" class="nav-link" data-scroll-target="#create-scatter-plot-of-temperature-vs-co2">3. Create scatter plot of temperature vs CO2</a></li>
+  </ul></li>
+  <li><a href="#task-4-seasonal-analysis" id="toc-task-4-seasonal-analysis" class="nav-link" data-scroll-target="#task-4-seasonal-analysis">Task 4: Seasonal Analysis</a>
+  <ul class="collapse">
+  <li><a href="#create-function-to-extract-season" id="toc-create-function-to-extract-season" class="nav-link" data-scroll-target="#create-function-to-extract-season">1. Create function to extract season</a></li>
+  <li><a href="#add-season-column-to-dataframe" id="toc-add-season-column-to-dataframe" class="nav-link" data-scroll-target="#add-season-column-to-dataframe">2. Add Season column to dataframe</a></li>
+  <li><a href="#calculate-seasonal-averages" id="toc-calculate-seasonal-averages" class="nav-link" data-scroll-target="#calculate-seasonal-averages">3. Calculate seasonal averages</a></li>
+  <li><a href="#create-box-plot-of-temperature-anomalies-by-season" id="toc-create-box-plot-of-temperature-anomalies-by-season" class="nav-link" data-scroll-target="#create-box-plot-of-temperature-anomalies-by-season">4. Create box plot of temperature anomalies by season</a></li>
+  </ul></li>
+  <li><a href="#conclusion-and-discussion" id="toc-conclusion-and-discussion" class="nav-link" data-scroll-target="#conclusion-and-discussion">Conclusion and Discussion</a></li>
   </ul>
 </nav>
     </div>
@@ -423,41 +444,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In this coding colab, you’ll analyze global temperature anomalies and CO2 concentration data. You’ll practice data manipulation, joining datasets, time series analysis, and visualization techniques.</p>
+<section id="quick-reference" class="level2">
+<h2 class="anchored" data-anchor-id="quick-reference">Quick Reference</h2>
+<p>Here’s a quick reference for the data manipulation techniques we’ll be using:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting index</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df.set_index(<span class="st">'column'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Merging dataframes</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pd.merge(df1, df2, left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>, how<span class="op">=</span><span class="st">'outer'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Resampling time series</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df.resample(<span class="st">'YE'</span>).mean()  <span class="co"># Annual averages</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating new columns</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new_column'</span>] <span class="op">=</span> df[<span class="st">'column'</span>].<span class="bu">apply</span>(function)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Grouping and aggregation</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'column'</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here are our course cheatsheets:</p>
+<ul>
+<li><a href="../../course-materials/cheatsheets/pandas_dataframes.html">Pandas DataFrames</a></li>
+<li><a href="../../course-materials/cheatsheets/matplotlib.html">Matplotlib</a></li>
+<li><a href="../../course-materials/cheatsheets/seaborn.html">Seaborn</a></li>
+</ul>
+<p>Feel free to refer to these cheatsheets throughout the exercise if you need a quick reminder about syntax or functionality.</p>
 </section>
-<section id="learning-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
-<p>By the end of this colab, you will be able to:</p>
-<ol type="1">
-<li>Load and preprocess time series data</li>
-<li>Join datasets based on datetime indices</li>
-<li>Perform basic time series analysis and resampling</li>
-<li>Apply data manipulation techniques to extract insights from environmental datasets</li>
-</ol>
+<section id="exercise-overview" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-overview">Exercise Overview</h2>
+<p>In this coding colab, you’ll analyze global temperature anomalies and CO2 concentration data. You’ll practice data manipulation, joining datasets, time series analysis, and visualization techniques.</p>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Let’s start by importing necessary libraries and loading our datasets:</p>
-<div id="d70d1f3d" class="cell" data-execution_count="1">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the temperature anomaly dataset</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>temp_url <span class="op">=</span> <span class="st">"https://bit.ly/monthly_temp"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>temp_df <span class="op">=</span> pd.read_csv(temp_url, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>])</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the CO2 concentration dataset</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>co2_url <span class="op">=</span> <span class="st">"https://bit.ly/monthly_CO2"</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>co2_df <span class="op">=</span> pd.read_csv(co2_url, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>])</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Temperature data:"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temp_df.head())</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">CO2 data:"</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(co2_df.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div id="fe96fa17" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the temperature anomaly dataset</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>temp_url <span class="op">=</span> <span class="st">"https://bit.ly/monthly_temp"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>temp_df <span class="op">=</span> pd.read_csv(temp_url, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>])</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the CO2 concentration dataset</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>co2_url <span class="op">=</span> <span class="st">"https://bit.ly/monthly_CO2"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>co2_df <span class="op">=</span> pd.read_csv(co2_url, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>])</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Temperature data:"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temp_df.head())</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">CO2 data:"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(co2_df.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Temperature data:
         Date  MonthlyAnomaly
@@ -479,35 +512,224 @@ CO2 data:
 </section>
 <section id="task-1-data-preparation" class="level2">
 <h2 class="anchored" data-anchor-id="task-1-data-preparation">Task 1: Data Preparation</h2>
-<ol type="1">
-<li>Set the ‘Date’ column as the index for both dataframes.</li>
-<li>Ensure that there are no missing values in either dataset.</li>
-</ol>
+<section id="set-the-date-column-as-the-index-for-both-dataframes" class="level3">
+<h3 class="anchored" data-anchor-id="set-the-date-column-as-the-index-for-both-dataframes">1. Set the ‘Date’ column as the index for both dataframes</h3>
+<div id="55858067" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>temp_df.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>co2_df.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Set Date as index for both dataframes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Set Date as index for both dataframes</code></pre>
+</div>
+</div>
+</section>
+<section id="check-for-missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="check-for-missing-values">2. Check for missing values</h3>
+<div id="0002936d" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Missing values in temperature data:"</span>, temp_df.isnull().<span class="bu">sum</span>().<span class="bu">sum</span>())</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Missing values in CO2 data:"</span>, co2_df.isnull().<span class="bu">sum</span>().<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Missing values in temperature data: 0
+Missing values in CO2 data: 0</code></pre>
+</div>
+</div>
+</section>
 </section>
 <section id="task-2-joining-datasets" class="level2">
 <h2 class="anchored" data-anchor-id="task-2-joining-datasets">Task 2: Joining Datasets</h2>
-<ol type="1">
-<li>Merge the temperature and CO2 datasets based on their date index.</li>
-<li>Handle any missing values that may have been introduced by the merge.</li>
-<li>Create some plots showing temperature anomalies and CO2 concentrations over time using pandas built-in plotting functions.</li>
-</ol>
+<section id="merge-the-temperature-and-co2-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="merge-the-temperature-and-co2-datasets">1. Merge the temperature and CO2 datasets</h3>
+<div id="94802d83" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> pd.merge(temp_df, co2_df, left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>, how<span class="op">=</span><span class="st">'inner'</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Merged datasets"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Merged datasets</code></pre>
+</div>
+</div>
+</section>
+<section id="handle-missing-values-from-the-merge" class="level3">
+<h3 class="anchored" data-anchor-id="handle-missing-values-from-the-merge">2. Handle missing values from the merge</h3>
+<div id="18fafbb5" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>combined_df.fillna(method<span class="op">=</span><span class="st">'ffill'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Filled missing values"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Filled missing values</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/bs/x9tn9jz91cv6hb3q6p4djbmw0000gn/T/ipykernel_84328/136284067.py:1: FutureWarning: DataFrame.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  combined_df.fillna(method='ffill', inplace=True)</code></pre>
+</div>
+</div>
+</section>
+<section id="create-plots-showing-temperature-anomalies-and-co2-concentrations" class="level3">
+<h3 class="anchored" data-anchor-id="create-plots-showing-temperature-anomalies-and-co2-concentrations">3. Create plots showing temperature anomalies and CO2 concentrations</h3>
+<div id="1172dee1" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Temperature anomaly plot</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>combined_df[<span class="st">'MonthlyAnomaly'</span>].plot(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">4</span>), color<span class="op">=</span><span class="st">'red'</span>, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Monthly Global Temperature Anomalies'</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">'Temperature Anomaly (°C)'</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># CO2 concentration plot  </span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>combined_df[<span class="st">'CO2Concentration'</span>].plot(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">4</span>), color<span class="op">=</span><span class="st">'blue'</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Monthly CO2 Concentration'</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">'CO2 Concentration (ppm)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="6b_advanced_data_manipulation-key_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="task-3-time-series-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="task-3-time-series-analysis">Task 3: Time Series Analysis</h2>
-<ol type="1">
-<li>Resample the data to annual averages.</li>
-<li>Calculate the year-over-year change in temperature anomalies and CO2 concentrations.</li>
-<li>Create a scatter plot of annual temperature anomalies vs CO2 concentrations using pandas plotting.</li>
-</ol>
+<section id="resample-data-to-annual-averages" class="level3">
+<h3 class="anchored" data-anchor-id="resample-data-to-annual-averages">1. Resample data to annual averages</h3>
+<div id="b72464b8" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>annual_data <span class="op">=</span> combined_df.resample(<span class="st">'YE'</span>).mean()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(annual_data.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            MonthlyAnomaly  CO2Concentration
+Date                                        
+1958-12-31        0.004444        315.184444
+1959-12-31        0.030833        315.981667
+1960-12-31       -0.025000        316.908333
+1961-12-31        0.057500        317.643333
+1962-12-31        0.030833        318.453333</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-year-over-year-changes" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-year-over-year-changes">2. Calculate year-over-year changes</h3>
+<div id="23081c15" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>annual_data[<span class="st">'Temp_YoY_Change'</span>] <span class="op">=</span> annual_data[<span class="st">'MonthlyAnomaly'</span>].diff()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>annual_data[<span class="st">'CO2_YoY_Change'</span>] <span class="op">=</span> annual_data[<span class="st">'CO2Concentration'</span>].diff()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(annual_data[[<span class="st">'Temp_YoY_Change'</span>, <span class="st">'CO2_YoY_Change'</span>]].head(<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Temp_YoY_Change  CO2_YoY_Change
+Date                                       
+1958-12-31              NaN             NaN
+1959-12-31         0.026389        0.797222
+1960-12-31        -0.055833        0.926667
+1961-12-31         0.082500        0.735000
+1962-12-31        -0.026667        0.810000
+1963-12-31         0.023333        0.539167
+1964-12-31        -0.253333        0.627500
+1965-12-31         0.092500        0.416667
+1966-12-31         0.049167        1.330833
+1967-12-31         0.033333        0.811667</code></pre>
+</div>
+</div>
+</section>
+<section id="create-scatter-plot-of-temperature-vs-co2" class="level3">
+<h3 class="anchored" data-anchor-id="create-scatter-plot-of-temperature-vs-co2">3. Create scatter plot of temperature vs CO2</h3>
+<div id="1ec52052" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>annual_data.plot(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">'scatter'</span>, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'CO2Concentration'</span>, </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'MonthlyAnomaly'</span>, </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>), </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Annual Temperature Anomaly vs CO2 Concentration'</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="6b_advanced_data_manipulation-key_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="task-4-seasonal-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="task-4-seasonal-analysis">Task 4: Seasonal Analysis</h2>
+<section id="create-function-to-extract-season" class="level3">
+<h3 class="anchored" data-anchor-id="create-function-to-extract-season">1. Create function to extract season</h3>
+<div id="c32c9cca" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_season(date):</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    month <span class="op">=</span> date.month</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> month <span class="kw">in</span> [<span class="dv">12</span>, <span class="dv">1</span>, <span class="dv">2</span>]:</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Winter'</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> month <span class="kw">in</span> [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]:</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Spring'</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> month <span class="kw">in</span> [<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]:</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Summer'</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Fall'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="add-season-column-to-dataframe" class="level3">
+<h3 class="anchored" data-anchor-id="add-season-column-to-dataframe">2. Add Season column to dataframe</h3>
+<div id="092f2111" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>combined_df[<span class="st">'Season'</span>] <span class="op">=</span> pd.Series(combined_df.index, index<span class="op">=</span>combined_df.index).<span class="bu">apply</span>(get_season)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># combined_df['Season'] = combined_df.index.map(get_season)</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Added Season column"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(combined_df.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Added Season column
+            MonthlyAnomaly  CO2Concentration  Season
+Date                                                
+1958-04-01            0.01            317.45  Spring
+1958-05-01            0.06            317.51  Spring
+1958-06-01           -0.08            317.27  Summer
+1958-07-01            0.05            315.87  Summer
+1958-08-01           -0.05            314.93  Summer</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-seasonal-averages" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-seasonal-averages">3. Calculate seasonal averages</h3>
+<div id="2c4d97e3" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>seasonal_avg <span class="op">=</span> combined_df.groupby(<span class="st">'Season'</span>).mean()</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Seasonal Averages:"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(seasonal_avg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Seasonal Averages:
+        MonthlyAnomaly  CO2Concentration
+Season                                  
+Fall          0.361414        356.246970
+Spring        0.398000        361.802900
+Summer        0.355250        359.830200
+Winter        0.389747        359.467576</code></pre>
+</div>
+</div>
+</section>
+<section id="create-box-plot-of-temperature-anomalies-by-season" class="level3">
+<h3 class="anchored" data-anchor-id="create-box-plot-of-temperature-anomalies-by-season">4. Create box plot of temperature anomalies by season</h3>
+<div id="74c796cf" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>combined_df.boxplot(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    column<span class="op">=</span><span class="st">'MonthlyAnomaly'</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    by<span class="op">=</span><span class="st">'Season'</span>, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="6b_advanced_data_manipulation-key_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-and-discussion">Conclusion and Discussion</h2>
+<p>With your partner, briefly discuss:</p>
 <ol type="1">
-<li>Create a function to extract the season from a given date (hint: use the <code>date.month</code> attribute and if-elif-else to assign the season in your function).</li>
-<li>Use the function to create a new column called <code>Season</code></li>
-<li>Calculate the average temperature anomaly and CO2 concentration for each season.</li>
-<li>Create a box plot using the pandas <code>boxplot</code> method showing the distribution of temperature anomalies for each season.</li>
+<li>What relationship did you observe between CO2 concentrations and temperature anomalies?</li>
+<li>Are there any seasonal patterns in the temperature anomalies?</li>
+<li>How has the rate of change in both CO2 and temperature evolved over time?</li>
+<li>What additional analyses would you perform to better understand these climate indicators?</li>
 </ol>
+<p>Great job completing this analysis! You’ve successfully practiced joining time series data, performing temporal resampling, calculating trends, and analyzing seasonal patterns in environmental data.</p>
 
 
 </section>

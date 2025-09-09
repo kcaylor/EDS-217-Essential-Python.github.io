@@ -30,8 +30,6 @@ Let's start by importing necessary libraries and loading our datasets:
 #| echo: true
 
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 # Load the temperature anomaly dataset
 temp_url = "https://bit.ly/monthly_temp"
@@ -60,8 +58,8 @@ print(co2_df.head())
 temp_df.set_index('Date', inplace=True)
 co2_df.set_index('Date', inplace=True)
 
-print("Missing values in temperature data:", temp_df.isnull().sum())
-print("Missing values in CO2 data:", co2_df.isnull().sum())
+print("Missing values in temperature data:", temp_df.isnull().sum().sum())
+print("Missing values in CO2 data:", co2_df.isnull().sum().sum())
 
 ```
 
@@ -76,30 +74,27 @@ print("Missing values in CO2 data:", co2_df.isnull().sum())
 #| include: false
 
 # Solution
-combined_df = pd.merge(temp_df, co2_df, left_index=True, right_index=True, how='outer')
+combined_df = pd.merge(temp_df, co2_df, left_index=True, right_index=True, how='inner')
 combined_df.fillna(method='ffill', inplace=True)
 
-fig, ax1 = plt.subplots(figsize=(12, 6))
+# Temperature anomaly plot
+combined_df['MonthlyAnomaly'].plot(
+    figsize=(12, 4), color='red', 
+    title='Monthly Global Temperature Anomalies',
+    ylabel='Temperature Anomaly (°C)')
 
-ax1.set_xlabel('Year')
-ax1.set_ylabel('Temperature Anomaly (°C)', color='tab:red')
-ax1.plot(combined_df.index, combined_df['MonthlyAnomaly'], color='tab:red')
-ax1.tick_params(axis='y', labelcolor='tab:red')
-
-ax2 = ax1.twinx()
-ax2.set_ylabel('CO2 Concentration (ppm)', color='tab:blue')
-ax2.plot(combined_df.index, combined_df['CO2Concentration'], color='tab:blue')
-ax2.tick_params(axis='y', labelcolor='tab:blue')
-
-plt.title('Monthly Global Temperature Anomalies and CO2 Concentration')
-plt.show()
+# CO2 concentration plot  
+combined_df['CO2Concentration'].plot(
+    figsize=(12, 4), color='blue',
+    title='Monthly CO2 Concentration',
+    ylabel='CO2 Concentration (ppm)')
 ```
 
 ## Task 3: Time Series Analysis
 
 1. Resample the data to annual averages.
 2. Calculate the year-over-year change in temperature anomalies and CO2 concentrations.
-3. Create a scatter plot (use the [`plt.scatter()`](../cheatsheets/matplotlib.qmd) function) of annual temperature anomalies vs CO2 concentrations.
+3. Create a scatter plot of annual temperature anomalies vs CO2 concentrations using pandas plotting.
 
 ```{python}
 #| echo: false
@@ -111,12 +106,13 @@ annual_data = combined_df.resample('YE').mean()
 annual_data['Temp_YoY_Change'] = annual_data['MonthlyAnomaly'].diff()
 annual_data['CO2_YoY_Change'] = annual_data['CO2Concentration'].diff()
 
-plt.figure(figsize=(10, 6))
-plt.scatter(annual_data['CO2Concentration'], annual_data['MonthlyAnomaly'])
-plt.xlabel('CO2 Concentration (ppm)')
-plt.ylabel('Temperature Anomaly (°C)')
-plt.title('Annual Temperature Anomaly vs CO2 Concentration')
-plt.show()
+annual_data.plot(
+    kind='scatter', 
+    x='CO2Concentration', 
+    y='MonthlyAnomaly', 
+    figsize=(10, 6), 
+    title='Annual Temperature Anomaly vs CO2 Concentration'
+)
 ```
 
 ## Task 4: Seasonal Analysis
@@ -124,7 +120,7 @@ plt.show()
 1. Create a function to extract the season from a given date (hint: use the `date.month` attribute and if-elif-else to assign the season in your function).
 2. Use the function to create a new column called `Season`
 3. Calculate the average temperature anomaly and CO2 concentration for each season.
-4. Create a box plot (use [`sns.boxplot`](../cheatsheets/seaborn.qmd)) showing the distribution of temperature anomalies for each season.
+4. Create a box plot using the pandas `boxplot` method showing the distribution of temperature anomalies for each season.
 
 
 ```{python}
@@ -143,16 +139,18 @@ def get_season(date):
     else:
         return 'Fall'
 
-combined_df['Season'] = combined_df.index.map(get_season)
+combined_df['Season'] = pd.Series(combined_df.index, index=combined_df.index).apply(get_season)
+
+# combined_df['Season'] = combined_df.index.map(get_season)
 
 seasonal_avg = combined_df.groupby('Season').mean()
 print("Seasonal Averages:")
 print(seasonal_avg)
 
-plt.figure(figsize=(10, 6))
-sns.boxplot(x='Season', y='MonthlyAnomaly', data=combined_df)
-plt.title('Distribution of Temperature Anomalies by Season')
-plt.ylabel('Temperature Anomaly (°C)')
-plt.show()
+combined_df.boxplot(
+    column='MonthlyAnomaly',
+    by='Season', 
+    figsize=(10, 6)
+)
 ```
 

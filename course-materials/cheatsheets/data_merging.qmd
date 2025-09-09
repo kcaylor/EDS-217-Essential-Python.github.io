@@ -125,28 +125,33 @@ print("Merged with different column names:")
 print(merged)
 ```
 
-## Merging on Index
+## Joining on Index
 
-Sometimes you want to merge based on the row numbers (index) instead of column values:
+When you want to combine DataFrames based on their index (row labels), use the `.join()` method - it's much simpler than merging:
 
 ```{python}
 #| echo: true
 
-# Create DataFrames with matching row numbers
-temp_data = pd.DataFrame({
-    'location': ['Site A', 'Site B', 'Site C'],
-    'temperature': [15.2, 18.5, 22.1]
-})
+# Create DataFrames with datetime indices (common in time series data)
+dates = pd.date_range('2023-01-01', periods=4, freq='D')
 
-co2_data = pd.DataFrame({
-    'location': ['Site A', 'Site B', 'Site C'], 
-    'co2': [415, 418, 420]
-})
+temperature_df = pd.DataFrame({
+    'temp_celsius': [2.5, 3.1, 4.2, 2.8]
+}, index=dates)
 
-# For this simple case, we can merge on the 'location' column
-climate_data = pd.merge(temp_data, co2_data, on='location')
-print("Merged on location:")
-print(climate_data)
+precipitation_df = pd.DataFrame({
+    'precip_mm': [0.0, 12.5, 8.2, 0.0]
+}, index=dates)
+
+print("Temperature data:")
+print(temperature_df)
+print("\nPrecipitation data:")
+print(precipitation_df)
+
+# Join DataFrames on their index - simple!
+weather_data = temperature_df.join(precipitation_df)
+print("\nJoined weather data:")
+print(weather_data)
 ```
 
 ## Concatenating DataFrames

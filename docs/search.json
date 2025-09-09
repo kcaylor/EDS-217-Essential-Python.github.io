@@ -4338,5 +4338,12 @@
     "title": "EDS 217 Cheatsheet",
     "section": "Basic Time Series Visualization",
     "text": "Basic Time Series Visualization\n\n\nCode\n# Simple time series plot\nfig, ax = plt.subplots(figsize=(10, 5))\nax.plot(df_indexed.index, df_indexed['temperature'])\nax.set_title('Temperature Time Series')\nax.set_xlabel('Date')\nax.set_ylabel('Temperature (°C)')\nax.tick_params(axis='x', rotation=45)\nax.grid(True, alpha=0.3)\nfig.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "course-materials/cheatsheets/data_merging.html#joining-on-index",
+    "href": "course-materials/cheatsheets/data_merging.html#joining-on-index",
+    "title": "EDS 217 Cheatsheet",
+    "section": "Joining on Index",
+    "text": "Joining on Index\nWhen you want to combine DataFrames based on their index (row labels), use the .join() method - it’s much simpler than merging:\n\n\nCode\n# Create DataFrames with datetime indices (common in time series data)\ndates = pd.date_range('2023-01-01', periods=4, freq='D')\n\ntemperature_df = pd.DataFrame({\n    'temp_celsius': [2.5, 3.1, 4.2, 2.8]\n}, index=dates)\n\nprecipitation_df = pd.DataFrame({\n    'precip_mm': [0.0, 12.5, 8.2, 0.0]\n}, index=dates)\n\nprint(\"Temperature data:\")\nprint(temperature_df)\nprint(\"\\nPrecipitation data:\")\nprint(precipitation_df)\n\n# Join DataFrames on their index - simple!\nweather_data = temperature_df.join(precipitation_df)\nprint(\"\\nJoined weather data:\")\nprint(weather_data)\n\n\nTemperature data:\n            temp_celsius\n2023-01-01           2.5\n2023-01-02           3.1\n2023-01-03           4.2\n2023-01-04           2.8\n\nPrecipitation data:\n            precip_mm\n2023-01-01        0.0\n2023-01-02       12.5\n2023-01-03        8.2\n2023-01-04        0.0\n\nJoined weather data:\n            temp_celsius  precip_mm\n2023-01-01           2.5        0.0\n2023-01-02           3.1       12.5\n2023-01-03           4.2        8.2\n2023-01-04           2.8        0.0"
   }
 ]

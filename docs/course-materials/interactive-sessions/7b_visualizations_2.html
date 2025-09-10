@@ -529,27 +529,26 @@ Let’s begin our interactive session!
 <p>This session provides a deeper introduction to the <a href="https://seaborn.pydata.org"><span class="codeb">Seaborn</span></a> visualization library.</p>
 <p><span class="code">Seaborn</span> helps you explore and understand your data. Its plotting functions operate on dataframes and arrays containing whole datasets and internally perform the necessary semantic mapping and statistical aggregation to produce informative plots. Its dataset-oriented, declarative API lets you focus on what the different elements of your plots mean, rather than on the details of how to draw them.</p>
 <p>Here’s an example of seaborne’s capabilities.</p>
-<div id="51c15184" class="cell" data-execution_count="1">
+<div id="f66d41db" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import seaborn</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the default theme</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>sns.set_theme()</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load an example dataset</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>tips <span class="op">=</span> sns.load_dataset(<span class="st">"tips"</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a visualization</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>sns.relplot(</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>tips,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"total_bill"</span>, y<span class="op">=</span><span class="st">"tip"</span>, col<span class="op">=</span><span class="st">"time"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"sex"</span>, style<span class="op">=</span><span class="st">"smoker"</span>, size<span class="op">=</span><span class="st">"size"</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>tips.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import seaborn</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the default theme</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load an example dataset</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>tips <span class="op">=</span> sns.load_dataset(<span class="st">"tips"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a visualization</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>sns.relplot(</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>tips,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"total_bill"</span>, y<span class="op">=</span><span class="st">"tip"</span>, col<span class="op">=</span><span class="st">"time"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"sex"</span>, style<span class="op">=</span><span class="st">"smoker"</span>, size<span class="op">=</span><span class="st">"size"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>tips.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div>
@@ -639,7 +638,7 @@ Let’s begin our interactive session!
 <section id="seaborn-relplot" class="level3">
 <h3 class="anchored" data-anchor-id="seaborn-relplot">Seaborn <code>relplot()</code></h3>
 <p>The function <code>relplot()</code> is named that way because it is designed to visualize many different statistical relationships. While scatter plots are often effective, relationships where one variable represents a measure of time are better represented by a line. The relplot() function has a convenient <code>kind</code> parameter that lets you easily switch to this alternate representation:</p>
-<div id="16bb9815" class="cell" data-execution_count="2">
+<div id="b98aaf48" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dots <span class="op">=</span> sns.load_dataset(<span class="st">"dots"</span>)</span>
@@ -671,7 +670,7 @@ First, as always, let’s import our important packages:
 <div class="example">
 <p>✏️ Try it. Add the cell below to your notebook and run it.</p>
 </div>
-<div id="cef5e4b5" class="cell" data-execution_count="3">
+<div id="efb494e2" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
@@ -688,7 +687,7 @@ First, as always, let’s import our important packages:
 <div class="example">
 <p>✏️ Try it. Add the cell below to your notebook and run it.</p>
 </div>
-<div id="0e0ef29b" class="cell" data-execution_count="4">
+<div id="fa04d772" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a 1D array with 300 points between -5 and 5</span></span>
@@ -710,7 +709,7 @@ First, as always, let’s import our important packages:
 <div class="example">
 <p>✏️ Try it. Add the cell below to your notebook and run it.</p>
 </div>
-<div id="89461858" class="cell" data-execution_count="5">
+<div id="c1a4c3ad" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot sine wave</span></span>
@@ -730,7 +729,7 @@ First, as always, let’s import our important packages:
 <div class="example">
 <p>✏️ Try it. Add the cell below to your notebook and run it.</p>
 </div>
-<div id="ab2e5917" class="cell" data-execution_count="6">
+<div id="eca887aa" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>df,x<span class="op">=</span><span class="st">'x'</span>,y<span class="op">=</span><span class="st">'ysin'</span>)</span>
@@ -757,7 +756,7 @@ First, as always, let’s import our important packages:
 ✏️ Try it. Add the cell below to your notebook, then write code to generate a plot.
 </div>
 
-::: {#221f89d4 .cell execution_count=7}
+::: {#46109d72 .cell execution_count=7}
 ``` {.python .cell-code}
 flights = sns.load_dataset("flights")
 
@@ -775,7 +774,7 @@ flights = sns.load_dataset("flights")
 <div class="example">
 <p>✏️ Try it. Add the cell below to your notebook and run it.</p>
 </div>
-<div id="02c37c22" class="cell" data-execution_count="8">
+<div id="fe2c7a89" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
@@ -817,7 +816,7 @@ DATE
 <div class="example">
 <p>✏️ Apply it. Translate the cell below into seaborn using the <code>sns.lineplot</code> command.</p>
 </div>
-<div id="c9df6850" class="cell" data-execution_count="9">
+<div id="4fb39b0a" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Initialize empty figure</span></span>
@@ -829,7 +828,7 @@ DATE
 </details>
 </div>
 <p>You should end up with something that looks like this:</p>
-<div id="e3a064c8" class="cell" data-execution_count="10">
+<div id="e314330b" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>Text(0, 0.5, 'Incoming SW radiation (W m$^{-2}$)')</code></pre>
 </div>
@@ -849,7 +848,7 @@ DATE
 <div class="example">
 <p>✏️ Try it. Add the cell below to your notebook and run it.</p>
 </div>
-<div id="9b6f2b37" class="cell" data-execution_count="11">
+<div id="608ca025" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 1: Without explicitly setting figsize</span></span>
@@ -885,7 +884,7 @@ DATE
 <section id="technique-2-rotate-x-axis-labels" class="level3">
 <h3 class="anchored" data-anchor-id="technique-2-rotate-x-axis-labels">Technique 2: Rotate X-axis Labels</h3>
 <p>Another simple approach is to rotate the x-axis labels:</p>
-<div id="319e3bb6" class="cell" data-execution_count="12">
+<div id="f70b7c53" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
@@ -906,7 +905,7 @@ DATE
 <section id="technique-3-use-fewer-x-axis-labels" class="level3">
 <h3 class="anchored" data-anchor-id="technique-3-use-fewer-x-axis-labels">Technique 3: Use Fewer X-axis Labels</h3>
 <p>If your dataset spans a long time period, you might want to show fewer labels:</p>
-<div id="2b9ac26f" class="cell" data-execution_count="13">
+<div id="c6188651" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
@@ -931,7 +930,7 @@ DATE
 <section id="technique-4-use-a-time-based-moving-average" class="level3">
 <h3 class="anchored" data-anchor-id="technique-4-use-a-time-based-moving-average">Technique 4: Use a Time-based Moving Average</h3>
 <p>If you have too many data points, you might want to resample your data. Here we create a new column from the dataframe index (which contains our dates). We then resample the dataframe to get hourly averages of the data and plot these instead of the raw data, which is collected every minute</p>
-<div id="f58100a0" class="cell" data-execution_count="14">
+<div id="a34e08fb" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure DATE is a datetime column</span></span>
@@ -1003,7 +1002,7 @@ Note
 <section id="practice" class="level2">
 <h2 class="anchored" data-anchor-id="practice">📚 <b> Practice </b></h2>
 <p>Plot temperature and relative humidity (ideally using subplots) over the month of October 2019 at the BSRN station. Be sure to format the timestamps and include axis labels, a title, and a legend, if necessary.</p>
-<div id="0d58b2f0" class="cell" data-execution_count="15">
+<div id="4cf31980" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your code here!</span></span>
@@ -1014,7 +1013,7 @@ Note
 </details>
 </div>
 <p>Here’s one way your plots may turn out:</p>
-<div id="d91a3c54" class="cell" data-execution_count="16">
+<div id="80479174" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">

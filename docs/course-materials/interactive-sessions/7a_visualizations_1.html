@@ -543,7 +543,7 @@ Caution
 </section>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>There are extensive options for plotting in Python – some favorites include statistical visualizations in <a href="https://seaborn.pydata.org"><code>Seaborn</code></a> and interactive plots for web applications in <a href="https://docs.bokeh.org/en/latest/index.html"><code>Bokeh</code></a>. The original and fundamental library for visualizations in Python, however, is <a href="https://matplotlib.org"><span class="codeb">matplotlib`</span></a>.</p>
+<p>There are extensive options for plotting in Python – some favorites include statistical visualizations in <a href="https://seaborn.pydata.org"><code>Seaborn</code></a>, interactive plots for notebooks/web applications in <a href="https://plotly.com/python/"><code>Plotly</code></a>, and even grammar-of-graphics approaches similar to <code>ggplot</code>, such as <a href="https://plotnine.org">Plotnine</a>. The original and fundamental library for visualizations in Python, however, is <a href="https://matplotlib.org"><span class="codeb">matplotlib`</span></a>.</p>
 <p><code>Matplotlib</code> was the first plotting library developed for Python and remains the most widely used library for data visualization in the Python community. Designed to resemble graphics in MATLAB, <code>matplotlib</code> is reminiscent of MATLAB in both appearance and functionality. As a result, it is not the easiest library to work with, and deviates from the object-oriented syntax we are familiar with in Python.</p>
 <p>This session will serve as an introduction to plotting in Python using <code>matplotlib</code>. The nature of <code>matplotlib</code> – and figure-making in general –&nbsp;is such that the easiest way to learn is by following examples. As such, this session is structured a bit differently than the others, so be sure to look carefully at the coded examples. Finally, the <em>best</em> way to learn advanced functions and find help with <code>matplotlib</code> is by exploring the examples in the <a href="https://matplotlib.org/gallery/index.html">gallery</a>.</p>
 <section id="instructions" class="level3">
@@ -580,7 +580,7 @@ Note
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="d612d024" class="cell" data-execution_count="1">
+<div id="36664ffc" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
@@ -609,7 +609,7 @@ Note
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="50aff120" class="cell" data-execution_count="2">
+<div id="09071ecc" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a 1D array with 300 points between -5 and 5</span></span>
@@ -624,7 +624,7 @@ Note
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="69f2d744" class="cell" data-execution_count="3">
+<div id="75f55524" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot sine wave</span></span>
@@ -644,7 +644,7 @@ Note
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="51263f05" class="cell" data-execution_count="4">
+<div id="a0e6a847" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot sine wave</span></span>
@@ -675,7 +675,7 @@ Note
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="0aa8621f" class="cell" data-execution_count="5">
+<div id="a17c9ae8" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate new x and y with fewer points for legibility</span></span>
@@ -711,7 +711,7 @@ Note
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="c0544079" class="cell" data-execution_count="6">
+<div id="805c827b" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specifying color with a string:</span></span>
@@ -798,7 +798,7 @@ Using alpha for transparency
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="17daa62a" class="cell" data-execution_count="7">
+<div id="f3fa2d23" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specifying color with an RGB tuple:</span></span>
@@ -816,7 +816,7 @@ Using alpha for transparency
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="58175957" class="cell" data-execution_count="8">
+<div id="276950a0" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specifying greyscale with a intensity value [0-1]:</span></span>
@@ -837,7 +837,7 @@ Using alpha for transparency
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="da5fafcb" class="cell" data-execution_count="9">
+<div id="67a524a2" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specifying color with a hex code:</span></span>
@@ -890,7 +890,7 @@ Using alpha for transparency
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="104ca902" class="cell" data-execution_count="10">
+<div id="484338ed" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>
@@ -964,7 +964,7 @@ Using alpha for transparency
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="5ecf9b55" class="cell" data-execution_count="11">
+<div id="7f005907" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>
@@ -988,7 +988,7 @@ Using alpha for transparency
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="00c12b4b" class="cell" data-execution_count="12">
+<div id="3c249ae6" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>
@@ -1015,7 +1015,7 @@ Using alpha for transparency
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="3cb96625" class="cell" data-execution_count="13">
+<div id="524c60d9" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a dashed red line</span></span>
@@ -1033,7 +1033,7 @@ Using alpha for transparency
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="34c3b613" class="cell" data-execution_count="14">
+<div id="290dab80" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>
@@ -1080,7 +1080,7 @@ Note
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="3169757b" class="cell" data-execution_count="15">
+<div id="af0c6af0" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>
@@ -1124,7 +1124,7 @@ Important
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="1be3cfec" class="cell" data-execution_count="16">
+<div id="f2328c7b" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>
@@ -1140,11 +1140,11 @@ Important
 <span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>plt.yticks([<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="fl">0.5</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="16">
-<pre><code>([&lt;matplotlib.axis.YTick at 0x1b2936210&gt;,
-  &lt;matplotlib.axis.YTick at 0x1b29767d0&gt;,
-  &lt;matplotlib.axis.YTick at 0x1b292c250&gt;,
-  &lt;matplotlib.axis.YTick at 0x1b291fe50&gt;,
-  &lt;matplotlib.axis.YTick at 0x1b27b41d0&gt;],
+<pre><code>([&lt;matplotlib.axis.YTick at 0x1aae361d0&gt;,
+  &lt;matplotlib.axis.YTick at 0x1aae54690&gt;,
+  &lt;matplotlib.axis.YTick at 0x1aae67610&gt;,
+  &lt;matplotlib.axis.YTick at 0x1aae68c90&gt;,
+  &lt;matplotlib.axis.YTick at 0x1aae55f90&gt;],
  [Text(0, -1.0, '−1.0'),
   Text(0, -0.5, '−0.5'),
   Text(0, 0.0, '0.0'),
@@ -1163,7 +1163,7 @@ Important
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="77e61a9b" class="cell" data-execution_count="17">
+<div id="598bcd79" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>
@@ -1197,7 +1197,7 @@ Important
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="bfaaa41e" class="cell" data-execution_count="18">
+<div id="9ef4c1a5" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>
@@ -1234,7 +1234,7 @@ Important
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="f1cf5ac0" class="cell" data-execution_count="19">
+<div id="acf85a12" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>
@@ -1275,7 +1275,7 @@ Important
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="5dcb34e1" class="cell" data-execution_count="20">
+<div id="ba92752b" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>
@@ -1332,7 +1332,7 @@ Note
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="3be69873" class="cell" data-execution_count="21">
+<div id="b961a333" class="cell" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>
@@ -1383,7 +1383,7 @@ Note
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="e3df05dc" class="cell" data-execution_count="22">
+<div id="94316309" class="cell" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>
@@ -1406,7 +1406,7 @@ Note
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="8fdd836f" class="cell" data-execution_count="23">
+<div id="cd183e48" class="cell" data-execution_count="23">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>
@@ -1485,7 +1485,7 @@ Note
 <div class="example">
 <p>✏️ <strong>Try it.</strong> Add the cell below to your notebook and run it.</p>
 </div>
-<div id="0dfb3577" class="cell" data-execution_count="24">
+<div id="36298a0c" class="cell" data-execution_count="24">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty figure</span></span>

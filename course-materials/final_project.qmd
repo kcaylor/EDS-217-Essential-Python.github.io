@@ -25,14 +25,14 @@ In this final class activity, you will work in small groups (2-3) to develop a e
 
 ## What to do
 
-To conduct this exercise, you should find a suitable dataset; it doesn't need to be environmental data per se - be creative in your search! You should also focus on making a number of exploratory and analysis visualizations using seaborn. You should avoid planning any analysis that absolutely require mapping and focus on using only pandas, numpy, matplotlib, and seaborn libraries.
+To conduct this exercise, you should find a suitable dataset; it doesn't need to be environmental data per se - be creative in your search! You should also focus on making a number of exploratory and analysis visualizations using seaborn. You should avoid planning any analysis that absolutely require mapping and focus on using only `pandas`, `numpy`, `matplotlib`, and `seaborn` libraries.
 
 Your final product will be a self-contained notebook that is well-documented with markdown and code comments that you will walk through as a presentation to the rest of the class on the final day. 
 
 Your notebook should include each of the nine steps, even if you don't need to do much in each of them. 
 
 :::{.callout-note}
-You can include visualizations as part of your data exploration (step 2), or anywhere else it is helpful.
+You can include additional visualizations as part of your data exploration (step 2), or anywhere else it is helpful.
 :::
 
 Additional figures and graphics are also welcome - you are encouraged to make your notebooks as engaging and visually interesting as possible. 
@@ -68,9 +68,6 @@ Once you've found a .csv file that you want to use, you should:
 3. Open the sharing dialog and copy the sharing link to your clipboard.
 4. Use the code below to download your file (you will need to add this code to the top of your notebook in the `Import Data` section)
 
-:::{.callout-warning}
-For this code to work on the workbench server, you will need to **switch your kernel from 3.11.0 to 3.7.13**. You can switch kernels by clicking on the kernel name in the upper right of your notebook.
-:::
 ```{python}
 import pandas as pd
 import requests

@@ -419,14 +419,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#line-plot-with-weather-emojis" id="toc-line-plot-with-weather-emojis" class="nav-link" data-scroll-target="#line-plot-with-weather-emojis">Line Plot with Weather Emojis</a></li>
   </ul></li>
   <li><a href="#testing-individual-emojis" id="toc-testing-individual-emojis" class="nav-link" data-scroll-target="#testing-individual-emojis">Testing Individual Emojis</a></li>
-  <li><a href="#popular-emoji-categories" id="toc-popular-emoji-categories" class="nav-link" data-scroll-target="#popular-emoji-categories">Popular Emoji Categories</a>
-  <ul class="collapse">
-  <li><a href="#emotions-people" id="toc-emotions-people" class="nav-link" data-scroll-target="#emotions-people">Emotions &amp; People</a></li>
-  <li><a href="#weather-nature" id="toc-weather-nature" class="nav-link" data-scroll-target="#weather-nature">Weather &amp; Nature</a></li>
-  <li><a href="#technology-objects" id="toc-technology-objects" class="nav-link" data-scroll-target="#technology-objects">Technology &amp; Objects</a></li>
-  <li><a href="#food-drinks" id="toc-food-drinks" class="nav-link" data-scroll-target="#food-drinks">Food &amp; Drinks</a></li>
-  <li><a href="#activities-sports" id="toc-activities-sports" class="nav-link" data-scroll-target="#activities-sports">Activities &amp; Sports</a></li>
-  </ul></li>
   <li><a href="#tips-troubleshooting" id="toc-tips-troubleshooting" class="nav-link" data-scroll-target="#tips-troubleshooting">Tips &amp; Troubleshooting</a>
   <ul class="collapse">
   <li><a href="#layout-adjustments" id="toc-layout-adjustments" class="nav-link" data-scroll-target="#layout-adjustments">Layout Adjustments</a></li>
@@ -460,7 +452,7 @@ Tip
 <section id="required-libraries" class="level2">
 <h2 class="anchored" data-anchor-id="required-libraries">Required Libraries</h2>
 <p>Make sure all of these lines are at the top of your notebook:</p>
-<div id="29211c81" class="cell" data-execution_count="1">
+<div id="dbce1db0" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -477,17 +469,17 @@ Tip
 <p>Add these functions as new cells before you do any work with emojis.</p>
 <section id="getting-emoji-images" class="level3">
 <h3 class="anchored" data-anchor-id="getting-emoji-images">Getting Emoji Images</h3>
-<div id="f4172184" class="cell" data-execution_count="2">
+<div id="662588a3" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_emoji_image(emoji, transparent_bg<span class="op">=</span><span class="va">True</span>):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Download an emoji image from online sources and return as numpy array.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">    - emoji: str - A single emoji character (e.g., "😀", "🔥", "👍")</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">    - transparent_bg: bool - If True, makes background transparent</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">    - numpy array with shape (72, 72, 4) for RGBA or (72, 72, 3) for RGB</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
@@ -496,64 +488,65 @@ Tip
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    codepoints <span class="op">=</span> []</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> char <span class="kw">in</span> emoji:</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        codepoints.append(<span class="bu">hex</span>(<span class="bu">ord</span>(char))[<span class="dv">2</span>:].lower())</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Join with underscores for multi-character emojis</span></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    codepoint <span class="op">=</span> <span class="st">"_"</span>.join(codepoints)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Try multiple emoji sources</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    urls <span class="op">=</span> [</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/</span><span class="sc">{</span>codepoint<span class="sc">}</span><span class="ss">.png"</span>,</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"https://github.com/googlefonts/noto-emoji/raw/main/png/72/emoji_u</span><span class="sc">{</span>codepoint<span class="sc">}</span><span class="ss">.png"</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If multi-character, also try just the first character (base emoji)</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(codepoints) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        base_codepoint <span class="op">=</span> codepoints[<span class="dv">0</span>]</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        urls.extend([</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/</span><span class="sc">{</span>base_codepoint<span class="sc">}</span><span class="ss">.png"</span>,</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"https://github.com/googlefonts/noto-emoji/raw/main/png/72/emoji_u</span><span class="sc">{</span>base_codepoint<span class="sc">}</span><span class="ss">.png"</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        ])</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> url <span class="kw">in</span> urls:</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>            response <span class="op">=</span> requests.get(url, timeout<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> response.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>                img <span class="op">=</span> Image.<span class="bu">open</span>(io.BytesIO(response.content))</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Keep transparency if it exists and requested</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> transparent_bg <span class="kw">and</span> img.mode <span class="kw">in</span> (<span class="st">'RGBA'</span>, <span class="st">'LA'</span>):</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">return</span> np.array(img)  <span class="co"># Keep alpha channel</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> transparent_bg:</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Convert to RGBA and make white pixels transparent</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>                    img <span class="op">=</span> img.convert(<span class="st">'RGBA'</span>)</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>                    data <span class="op">=</span> np.array(img)</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Make white/light pixels transparent</span></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>                    light_threshold <span class="op">=</span> <span class="dv">240</span></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>                    mask <span class="op">=</span> (data[:,:,<span class="dv">0</span>] <span class="op">&gt;</span> light_threshold) <span class="op">&amp;</span> <span class="op">\</span></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>                           (data[:,:,<span class="dv">1</span>] <span class="op">&gt;</span> light_threshold) <span class="op">&amp;</span> <span class="op">\</span></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>                           (data[:,:,<span class="dv">2</span>] <span class="op">&gt;</span> light_threshold)</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>                    data[mask, <span class="dv">3</span>] <span class="op">=</span> <span class="dv">0</span>  <span class="co"># Set alpha to 0 (transparent)</span></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">return</span> data</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># No transparency requested</span></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">return</span> np.array(img.convert(<span class="st">'RGB'</span>))</span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span>:</span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fallback: create a colored square</span></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> transparent_bg:</span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> Image.new(<span class="st">'RGBA'</span>, (<span class="dv">72</span>, <span class="dv">72</span>), color<span class="op">=</span>(<span class="dv">200</span>, <span class="dv">200</span>, <span class="dv">200</span>, <span class="dv">255</span>))</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> Image.new(<span class="st">'RGB'</span>, (<span class="dv">72</span>, <span class="dv">72</span>), color<span class="op">=</span>(<span class="dv">200</span>, <span class="dv">200</span>, <span class="dv">200</span>))</span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(img)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Look for google emojis first; twitter emojis are 🤮</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    urls <span class="op">=</span> [</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"https://github.com/googlefonts/noto-emoji/raw/main/png/72/emoji_u</span><span class="sc">{</span>codepoint<span class="sc">}</span><span class="ss">.png"</span>,</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/</span><span class="sc">{</span>codepoint<span class="sc">}</span><span class="ss">.png"</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If multi-character, also try just the first character (base emoji)</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(codepoints) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        base_codepoint <span class="op">=</span> codepoints[<span class="dv">0</span>]</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        urls.extend([</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"https://github.com/googlefonts/noto-emoji/raw/main/png/72/emoji_u</span><span class="sc">{</span>base_codepoint<span class="sc">}</span><span class="ss">.png"</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/</span><span class="sc">{</span>base_codepoint<span class="sc">}</span><span class="ss">.png"</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> url <span class="kw">in</span> urls:</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>            response <span class="op">=</span> requests.get(url, timeout<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> response.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>                img <span class="op">=</span> Image.<span class="bu">open</span>(io.BytesIO(response.content))</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Keep transparency if it exists and requested</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> transparent_bg <span class="kw">and</span> img.mode <span class="kw">in</span> (<span class="st">'RGBA'</span>, <span class="st">'LA'</span>):</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">return</span> np.array(img)  <span class="co"># Keep alpha channel</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> transparent_bg:</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Convert to RGBA and make white pixels transparent</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>                    img <span class="op">=</span> img.convert(<span class="st">'RGBA'</span>)</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>                    data <span class="op">=</span> np.array(img)</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Make white/light pixels transparent</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>                    light_threshold <span class="op">=</span> <span class="dv">240</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>                    mask <span class="op">=</span> (data[:, :, <span class="dv">0</span>] <span class="op">&gt;</span> light_threshold) <span class="op">&amp;</span> <span class="op">\</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>                           (data[:, :, <span class="dv">1</span>] <span class="op">&gt;</span> light_threshold) <span class="op">&amp;</span> <span class="op">\</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>                           (data[:, :, <span class="dv">2</span>] <span class="op">&gt;</span> light_threshold)</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>                    data[mask, <span class="dv">3</span>] <span class="op">=</span> <span class="dv">0</span>  <span class="co"># Set alpha to 0 (transparent)</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">return</span> data</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># No transparency requested</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">return</span> np.array(img.convert(<span class="st">'RGB'</span>))</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span>:</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fallback: create a colored square</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> transparent_bg:</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> Image.new(<span class="st">'RGBA'</span>, (<span class="dv">72</span>, <span class="dv">72</span>), color<span class="op">=</span>(<span class="dv">200</span>, <span class="dv">200</span>, <span class="dv">200</span>, <span class="dv">255</span>))</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> Image.new(<span class="st">'RGB'</span>, (<span class="dv">72</span>, <span class="dv">72</span>), color<span class="op">=</span>(<span class="dv">200</span>, <span class="dv">200</span>, <span class="dv">200</span>))</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(img)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 <section id="preview-single-emoji" class="level3">
 <h3 class="anchored" data-anchor-id="preview-single-emoji">Preview Single Emoji</h3>
-<div id="534d738d" class="cell" data-execution_count="3">
+<div id="a0efa407" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_emoji_image(emoji):</span>
@@ -581,7 +574,7 @@ Tip
 </section>
 <section id="replace-axis-labels-with-emojis" class="level3">
 <h3 class="anchored" data-anchor-id="replace-axis-labels-with-emojis">Replace Axis Labels with Emojis</h3>
-<div id="4bb16c3c" class="cell" data-execution_count="4">
+<div id="eea7c0e3" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> emoji_labels(ax, ticks, emojis, zoom<span class="op">=</span><span class="fl">0.8</span>, y_offset<span class="op">=-</span><span class="dv">18</span>):</span>
@@ -620,7 +613,7 @@ Tip
 <h2 class="anchored" data-anchor-id="basic-usage-examples">Basic Usage Examples</h2>
 <section id="bar-chart-with-emoji-labels" class="level3">
 <h3 class="anchored" data-anchor-id="bar-chart-with-emoji-labels">Bar Chart with Emoji Labels</h3>
-<div id="55c2cb00" class="cell" data-execution_count="5">
+<div id="c063f4af" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample data</span></span>
@@ -650,7 +643,7 @@ Tip
 </section>
 <section id="line-plot-with-weather-emojis" class="level3">
 <h3 class="anchored" data-anchor-id="line-plot-with-weather-emojis">Line Plot with Weather Emojis</h3>
-<div id="9ff5fee3" class="cell" data-execution_count="6">
+<div id="3a4294f5" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Weather data</span></span>
@@ -674,7 +667,7 @@ Tip
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/bs/x9tn9jz91cv6hb3q6p4djbmw0000gn/T/ipykernel_37460/461894929.py:18: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
+<pre><code>/var/folders/bs/x9tn9jz91cv6hb3q6p4djbmw0000gn/T/ipykernel_40308/461894929.py:18: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
   plt.tight_layout()</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -689,22 +682,122 @@ Tip
 </section>
 <section id="testing-individual-emojis" class="level2">
 <h2 class="anchored" data-anchor-id="testing-individual-emojis">Testing Individual Emojis</h2>
-<div id="3f2c5891" class="cell" data-execution_count="7">
+<p>First, let’s test if emoji downloading is working at all:</p>
+<div id="c1fe47ff" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test a few emojis to see how they look</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>test_emojis <span class="op">=</span> [<span class="st">"🐍"</span>, <span class="st">"📊"</span>, <span class="st">"🎉"</span>, <span class="st">"🌟"</span>, <span class="st">"💻"</span>]</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> emoji <span class="kw">in</span> test_emojis:</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    display_emoji_image(emoji)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test simple single-character emojis first</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Testing simple emojis:"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>simple_test <span class="op">=</span> [<span class="st">"🔥"</span>, <span class="st">"🐍"</span>, <span class="st">"📊"</span>, <span class="st">"🎉"</span>, <span class="st">"⭐"</span>]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> emoji <span class="kw">in</span> simple_test:</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Testing </span><span class="sc">{</span>emoji<span class="sc">}</span><span class="ss">:"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    img_array <span class="op">=</span> get_emoji_image(emoji)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  Shape: </span><span class="sc">{</span>img_array<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  Data range: </span><span class="sc">{</span>img_array<span class="sc">.</span><span class="bu">min</span>()<span class="sc">:.1f}</span><span class="ss"> to </span><span class="sc">{</span>img_array<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  Non-zero pixels: </span><span class="sc">{</span>np<span class="sc">.</span>count_nonzero(img_array)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Getting image for: 🐍</code></pre>
+<pre><code>Testing simple emojis:
+
+Testing 🔥:
+  Shape: (72, 72, 4)
+  Data range: 0.0 to 255.0
+  Non-zero pixels: 8792
+
+Testing 🐍:
+  Shape: (72, 72, 4)
+  Data range: 0.0 to 255.0
+  Non-zero pixels: 8668
+
+Testing 📊:
+  Shape: (72, 72, 4)
+  Data range: 0.0 to 255.0
+  Non-zero pixels: 18567
+
+Testing 🎉:
+  Shape: (72, 72, 4)
+  Data range: 0.0 to 255.0
+  Non-zero pixels: 9661
+
+Testing ⭐:
+  Shape: (72, 72, 4)
+  Data range: 0.0 to 255.0
+  Non-zero pixels: 8742</code></pre>
+</div>
+</div>
+<div id="23d9f47e" class="cell" data-execution_count="8">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the weather emojis specifically</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Testing weather emojis:"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>weather_test <span class="op">=</span> [<span class="st">"☀️"</span>, <span class="st">"🌤️"</span>, <span class="st">"🌧️"</span>, <span class="st">"⛅"</span>, <span class="st">"🌞"</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> emoji <span class="kw">in</span> weather_test:</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Testing </span><span class="sc">{</span>emoji<span class="sc">}</span><span class="ss">:"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    img_array <span class="op">=</span> get_emoji_image(emoji)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  Shape: </span><span class="sc">{</span>img_array<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  Data range: </span><span class="sc">{</span>img_array<span class="sc">.</span><span class="bu">min</span>()<span class="sc">:.1f}</span><span class="ss"> to </span><span class="sc">{</span>img_array<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  Non-zero pixels: </span><span class="sc">{</span>np<span class="sc">.</span>count_nonzero(img_array)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Testing weather emojis:
+
+Testing ☀️:
+  Shape: (72, 72, 4)
+  Data range: 0.0 to 255.0
+  Non-zero pixels: 8444
+
+Testing 🌤️:
+  Shape: (72, 72, 4)
+  Data range: 0.0 to 255.0
+  Non-zero pixels: 7824
+
+Testing 🌧️:
+  Shape: (72, 72, 4)
+  Data range: 0.0 to 255.0
+  Non-zero pixels: 8952
+
+Testing ⛅:
+  Shape: (72, 72, 4)
+  Data range: 0.0 to 255.0
+  Non-zero pixels: 8292
+
+Testing 🌞:
+  Shape: (72, 72, 4)
+  Data range: 0.0 to 255.0
+  Non-zero pixels: 12136</code></pre>
+</div>
+</div>
+<div id="f7d74dc3" class="cell" data-execution_count="9">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual test - display individual emojis</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Visual test of individual emojis:"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>test_emojis <span class="op">=</span> [<span class="st">"🔥"</span>, <span class="st">"🐍"</span>, <span class="st">"📊"</span>, <span class="st">"☀️"</span>, <span class="st">"🌧️"</span>]</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> emoji <span class="kw">in</span> test_emojis:</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    display_emoji_image(emoji)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Visual test of individual emojis:
+Getting image for: 🔥</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="emoji_visualizations_files/figure-html/cell-8-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="emoji_visualizations_files/figure-html/cell-10-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Image shape: (72, 72, 4)
+Getting image for: 🐍</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="emoji_visualizations_files/figure-html/cell-10-output-4.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -715,40 +808,29 @@ Getting image for: 📊</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="emoji_visualizations_files/figure-html/cell-8-output-4.png" class="img-fluid figure-img"></p>
+<p><img src="emoji_visualizations_files/figure-html/cell-10-output-6.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Image shape: (72, 72, 4)
-Getting image for: 🎉</code></pre>
+Getting image for: ☀️</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="emoji_visualizations_files/figure-html/cell-8-output-6.png" class="img-fluid figure-img"></p>
+<p><img src="emoji_visualizations_files/figure-html/cell-10-output-8.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Image shape: (72, 72, 4)
-Getting image for: 🌟</code></pre>
+Getting image for: 🌧️</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="emoji_visualizations_files/figure-html/cell-8-output-8.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Image shape: (72, 72, 4)
-Getting image for: 💻</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="emoji_visualizations_files/figure-html/cell-8-output-10.png" class="img-fluid figure-img"></p>
+<p><img src="emoji_visualizations_files/figure-html/cell-10-output-10.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -757,76 +839,22 @@ Getting image for: 💻</code></pre>
 </div>
 </div>
 </section>
-<section id="popular-emoji-categories" class="level2">
-<h2 class="anchored" data-anchor-id="popular-emoji-categories">Popular Emoji Categories</h2>
-<section id="emotions-people" class="level3">
-<h3 class="anchored" data-anchor-id="emotions-people">Emotions &amp; People</h3>
-<div id="4d9c551b" class="cell" data-execution_count="8">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>emotions <span class="op">=</span> [<span class="st">"😀"</span>, <span class="st">"😂"</span>, <span class="st">"😍"</span>, <span class="st">"😢"</span>, <span class="st">"😡"</span>, <span class="st">"🤔"</span>, <span class="st">"😴"</span>, <span class="st">"🤩"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-<section id="weather-nature" class="level3">
-<h3 class="anchored" data-anchor-id="weather-nature">Weather &amp; Nature</h3>
-<div id="b8a53bd0" class="cell" data-execution_count="9">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> [<span class="st">"☀️"</span>, <span class="st">"🌤️"</span>, <span class="st">"⛅"</span>, <span class="st">"🌧️"</span>, <span class="st">"⛈️"</span>, <span class="st">"❄️"</span>, <span class="st">"🌈"</span>, <span class="st">"🔥"</span>]</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>nature <span class="op">=</span> [<span class="st">"🌱"</span>, <span class="st">"🌸"</span>, <span class="st">"🌳"</span>, <span class="st">"🐝"</span>, <span class="st">"🦋"</span>, <span class="st">"🐧"</span>, <span class="st">"🐠"</span>, <span class="st">"🦄"</span>]</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative weather emojis (simpler, single-character)</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>weather_simple <span class="op">=</span> [<span class="st">"☀"</span>, <span class="st">"🌞"</span>, <span class="st">"⛅"</span>, <span class="st">"🌧"</span>, <span class="st">"⛈"</span>, <span class="st">"❄"</span>, <span class="st">"🌈"</span>, <span class="st">"🔥"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-<section id="technology-objects" class="level3">
-<h3 class="anchored" data-anchor-id="technology-objects">Technology &amp; Objects</h3>
-<div id="8a13ded7" class="cell" data-execution_count="10">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tech <span class="op">=</span> [<span class="st">"💻"</span>, <span class="st">"📱"</span>, <span class="st">"🖥️"</span>, <span class="st">"⌚"</span>, <span class="st">"🔌"</span>, <span class="st">"💾"</span>, <span class="st">"📊"</span>, <span class="st">"🔧"</span>]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>transport <span class="op">=</span> [<span class="st">"🚗"</span>, <span class="st">"🚲"</span>, <span class="st">"✈️"</span>, <span class="st">"🚂"</span>, <span class="st">"🚢"</span>, <span class="st">"🚀"</span>, <span class="st">"🛸"</span>, <span class="st">"🏎️"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-<section id="food-drinks" class="level3">
-<h3 class="anchored" data-anchor-id="food-drinks">Food &amp; Drinks</h3>
-<div id="774ea253" class="cell" data-execution_count="11">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>food <span class="op">=</span> [<span class="st">"🍎"</span>, <span class="st">"🍌"</span>, <span class="st">"🍕"</span>, <span class="st">"🍔"</span>, <span class="st">"🌮"</span>, <span class="st">"🍣"</span>, <span class="st">"🍰"</span>, <span class="st">"☕"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-<section id="activities-sports" class="level3">
-<h3 class="anchored" data-anchor-id="activities-sports">Activities &amp; Sports</h3>
-<div id="e658fbe3" class="cell" data-execution_count="12">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sports <span class="op">=</span> [<span class="st">"⚽"</span>, <span class="st">"🏀"</span>, <span class="st">"🎾"</span>, <span class="st">"🏈"</span>, <span class="st">"⚾"</span>, <span class="st">"🏓"</span>, <span class="st">"🎯"</span>, <span class="st">"🏆"</span>]</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>activities <span class="op">=</span> [<span class="st">"🎨"</span>, <span class="st">"🎵"</span>, <span class="st">"📚"</span>, <span class="st">"🎮"</span>, <span class="st">"🎭"</span>, <span class="st">"🎪"</span>, <span class="st">"🎬"</span>, <span class="st">"🎸"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-</section>
 <section id="tips-troubleshooting" class="level2">
 <h2 class="anchored" data-anchor-id="tips-troubleshooting">Tips &amp; Troubleshooting</h2>
 <section id="layout-adjustments" class="level3">
 <h3 class="anchored" data-anchor-id="layout-adjustments">Layout Adjustments</h3>
-<div id="092dcdd5" class="cell" data-execution_count="13">
+<div id="04f7159e" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If emojis are cut off at the bottom:</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(bottom<span class="op">=</span><span class="fl">0.2</span>)  <span class="co"># Add bottom margin</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Or use tight_layout:</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust emoji size if too big/small:</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>emoji_labels(ax, ticks<span class="op">=</span>x, emojis<span class="op">=</span>emojis, zoom<span class="op">=</span><span class="fl">0.6</span>)  <span class="co"># Smaller</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>emoji_labels(ax, ticks<span class="op">=</span>x, emojis<span class="op">=</span>emojis, zoom<span class="op">=</span><span class="fl">1.2</span>)  <span class="co"># Larger</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If emojis are cut off at the bottom:</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(bottom<span class="op">=</span><span class="fl">0.2</span>)  <span class="co"># Add bottom margin</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Or use tight_layout:</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust emoji size if too big/small:</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>emoji_labels(ax, ticks<span class="op">=</span>x, emojis<span class="op">=</span>emojis, zoom<span class="op">=</span><span class="fl">0.6</span>)  <span class="co"># Smaller</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>emoji_labels(ax, ticks<span class="op">=</span>x, emojis<span class="op">=</span>emojis, zoom<span class="op">=</span><span class="fl">1.2</span>)  <span class="co"># Larger</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 672x480 with 0 Axes&gt;</code></pre>
@@ -835,28 +863,28 @@ Getting image for: 💻</code></pre>
 </section>
 <section id="positioning-emojis" class="level3">
 <h3 class="anchored" data-anchor-id="positioning-emojis">Positioning Emojis</h3>
-<div id="772d2da0" class="cell" data-execution_count="14">
+<div id="bbe938c4" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Move emojis further down:</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>emoji_labels(ax, ticks<span class="op">=</span>x, emojis<span class="op">=</span>emojis, y_offset<span class="op">=-</span><span class="dv">25</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Move emojis closer to axis:</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>emoji_labels(ax, ticks<span class="op">=</span>x, emojis<span class="op">=</span>emojis, y_offset<span class="op">=-</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Move emojis further down:</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>emoji_labels(ax, ticks<span class="op">=</span>x, emojis<span class="op">=</span>emojis, y_offset<span class="op">=-</span><span class="dv">25</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Move emojis closer to axis:</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>emoji_labels(ax, ticks<span class="op">=</span>x, emojis<span class="op">=</span>emojis, y_offset<span class="op">=-</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 <section id="error-handling" class="level3">
 <h3 class="anchored" data-anchor-id="error-handling">Error Handling</h3>
-<div id="c8d37fc9" class="cell" data-execution_count="15">
+<div id="1797e2cc" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if emoji downloaded successfully:</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>img_array <span class="op">=</span> get_emoji_image(<span class="st">"🔥"</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>img_array<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Min/Max values: </span><span class="sc">{</span>img_array<span class="sc">.</span><span class="bu">min</span>()<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>img_array<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Gray square = emoji download failed, fallback used</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if emoji downloaded successfully:</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>img_array <span class="op">=</span> get_emoji_image(<span class="st">"🔥"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>img_array<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Min/Max values: </span><span class="sc">{</span>img_array<span class="sc">.</span><span class="bu">min</span>()<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>img_array<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Gray square = emoji download failed, fallback used</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Shape: (72, 72, 4)
@@ -867,44 +895,44 @@ Min/Max values: 0, 255</code></pre>
 </section>
 <section id="complete-example-template" class="level2">
 <h2 class="anchored" data-anchor-id="complete-example-template">Complete Example Template</h2>
-<div id="f5afac54" class="cell" data-execution_count="16">
+<div id="fb48d5e8" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Import libraries (run once)</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.offsetbox <span class="im">as</span> ob</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Copy the three functions above (run once)</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># get_emoji_image(), display_emoji_image(), emoji_labels()</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Create your data</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>categories <span class="op">=</span> [<span class="st">"Category A"</span>, <span class="st">"Category B"</span>, <span class="st">"Category C"</span>, <span class="st">"Category D"</span>]</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="dv">25</span>, <span class="dv">40</span>, <span class="dv">30</span>, <span class="dv">35</span>]</span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>emojis <span class="op">=</span> [<span class="st">"🎯"</span>, <span class="st">"🚀"</span>, <span class="st">"💡"</span>, <span class="st">"🏆"</span>]  <span class="co"># Choose your emojis</span></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="bu">len</span>(categories))</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Create plot</span></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>ax.bar(x, values, color<span class="op">=</span>[<span class="st">'#FF6B6B'</span>, <span class="st">'#4ECDC4'</span>, <span class="st">'#45B7D1'</span>, <span class="st">'#96CEB4'</span>])</span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 5: Add emoji labels</span></span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>emoji_labels(ax, ticks<span class="op">=</span>x, emojis<span class="op">=</span>emojis)</span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 6: Customize plot</span></span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Values"</span>)</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"My Emoji Plot"</span>)</span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>ax.grid(axis<span class="op">=</span><span class="st">'y'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Import libraries (run once)</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.offsetbox <span class="im">as</span> ob</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Copy the three functions above (run once)</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># get_emoji_image(), display_emoji_image(), emoji_labels()</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Create your data</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>categories <span class="op">=</span> [<span class="st">"Category A"</span>, <span class="st">"Category B"</span>, <span class="st">"Category C"</span>, <span class="st">"Category D"</span>]</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="dv">25</span>, <span class="dv">40</span>, <span class="dv">30</span>, <span class="dv">35</span>]</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>emojis <span class="op">=</span> [<span class="st">"🎯"</span>, <span class="st">"🚀"</span>, <span class="st">"💡"</span>, <span class="st">"🏆"</span>]  <span class="co"># Choose your emojis</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="bu">len</span>(categories))</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Create plot</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>ax.bar(x, values, color<span class="op">=</span>[<span class="st">'#FF6B6B'</span>, <span class="st">'#4ECDC4'</span>, <span class="st">'#45B7D1'</span>, <span class="st">'#96CEB4'</span>])</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 5: Add emoji labels</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>emoji_labels(ax, ticks<span class="op">=</span>x, emojis<span class="op">=</span>emojis)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 6: Customize plot</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Values"</span>)</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"My Emoji Plot"</span>)</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>ax.grid(axis<span class="op">=</span><span class="st">'y'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="emoji_visualizations_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="emoji_visualizations_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -932,7 +960,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Emoji Support</strong>: Some complex emojis (multiple Unicode characters) may not work. Stick to single-character emojis for best results.</p>
+<p><strong>Multi-Character Emojis</strong>: Some emojis like “☀️” are actually composed of multiple Unicode characters (base emoji + variation selector). The function now handles these automatically, but if you encounter issues, try the simpler versions like “☀” instead of “☀️”.</p>
 </div>
 </div>
 

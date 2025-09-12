@@ -58,17 +58,18 @@ def get_emoji_image(emoji, transparent_bg=True):
     codepoint = "_".join(codepoints)
     
     # Try multiple emoji sources
+    # Look for google emojis first; twitter emojis are 🤮
     urls = [
-        f"https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/{codepoint}.png",
-        f"https://github.com/googlefonts/noto-emoji/raw/main/png/72/emoji_u{codepoint}.png"
+        f"https://github.com/googlefonts/noto-emoji/raw/main/png/72/emoji_u{codepoint}.png",
+        f"https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/{codepoint}.png"
     ]
     
     # If multi-character, also try just the first character (base emoji)
     if len(codepoints) > 1:
         base_codepoint = codepoints[0]
         urls.extend([
-            f"https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/{base_codepoint}.png",
-            f"https://github.com/googlefonts/noto-emoji/raw/main/png/72/emoji_u{base_codepoint}.png"
+            f"https://github.com/googlefonts/noto-emoji/raw/main/png/72/emoji_u{base_codepoint}.png",
+            f"https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/{base_codepoint}.png"
         ])
     
     for url in urls:
@@ -88,9 +89,9 @@ def get_emoji_image(emoji, transparent_bg=True):
                     # Make white/light pixels transparent
                     # Define what counts as "background" (light colors)
                     light_threshold = 240
-                    mask = (data[:,:,0] > light_threshold) & \
-                           (data[:,:,1] > light_threshold) & \
-                           (data[:,:,2] > light_threshold)
+                    mask = (data[:, :, 0] > light_threshold) & \
+                           (data[:, :, 1] > light_threshold) & \
+                           (data[:, :, 2] > light_threshold)
                     data[mask, 3] = 0  # Set alpha to 0 (transparent)
                     
                     return data

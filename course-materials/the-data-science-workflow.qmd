@@ -1,0 +1,81 @@
+---
+title: "The Data Science Workflow"
+subtitle: "The ten steps, and where you'll learn each one"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+Almost every data analysis you will ever do, in this course and in your career, is some path
+through the same ten steps. Most analyses use a subset of them, and they come in this order. On
+Day 1 you played through a short path, the "Whole Game." Over the following days you will learn
+each step in depth.
+
+```{mermaid}
+flowchart LR
+    A["1. Import 📂"] --> B["2. Explore 🔍"] --> C["3. Clean 🧹"]
+    C --> D["4. Filter 🎯"] --> E["5. Sort 📊"] --> F["6. Transform 🔧"]
+    F --> G["7. Group 👥"] --> H["8. Aggregate 📈"] --> I["9. Join / Reshape 🔗"]
+    I --> J["10. Visualize 📊"]
+```
+
+## The ten steps
+
+1. **Import.** Load your data from a file or URL into a pandas DataFrame, which is a table.
+2. **Explore.** Look at the table's shape, columns, types, and summary statistics so you
+   understand what you actually have.
+3. **Clean.** Fix missing values, wrong data types, and duplicate rows so the data is
+   trustworthy.
+4. **Filter.** Keep only the rows that match a condition you care about.
+5. **Sort.** Reorder the rows by the values in one or more columns.
+6. **Transform.** Build new columns from existing ones, such as calculations, conversions, or
+   categories.
+7. **Group.** Split the rows into buckets that share a common key.
+8. **Aggregate.** Collapse each bucket down to a single summary number, like a mean, sum, or
+   count.
+9. **Join / Reshape.** Combine multiple tables, and pivot or stack the data into the shape your
+   analysis needs. This includes adding a time dimension with dates.
+10. **Visualize.** Turn your numbers into charts that reveal the story.
+
+## Where you'll learn each step
+
+Each step gets its own teaching day. Everything in the course maps back to this table:
+
+| # | Step | What it does | You'll learn it on |
+|---|------|--------------|--------------------|
+| 1 | Import | Load data into a DataFrame | **Day 2: Import + Explore** |
+| 2 | Explore | Get to know the table | **Day 2: Import + Explore** |
+| 3 | Clean | Fix missing values, types, duplicates | **Day 4: Clean + Transform** |
+| 4 | Filter | Keep only the rows you want | **Day 3: Filter + Sort** |
+| 5 | Sort | Order rows by a column | **Day 3: Filter + Sort** |
+| 6 | Transform | Build new columns | **Day 4: Clean + Transform** |
+| 7 | Group | Split rows into buckets by a key | **Day 5: Group + Aggregate** |
+| 8 | Aggregate | Collapse each bucket to a number | **Day 5: Group + Aggregate** |
+| 9 | Join / Reshape | Combine tables; add a time dimension | **Day 6: Join + Reshape + Dates** |
+| 10 | Visualize | Turn numbers into pictures | **Day 7: Visualize** |
+
+Days 8 and 9 put the whole workflow together in your own project.
+
+## The Data Biography
+
+<!-- filled by D2 EOD build -->
+
+*Coming on Day 2.*
+
+## Key Points
+
+- Real analyses are paths through these ten steps, always in this order, though few analyses use
+  every step.
+- Days 2 through 7 each teach one or two steps. Day 1's "Whole Game" gives you the big picture
+  first.
+- When you feel lost later in the course, come back here and ask yourself which step you are on.
+
+## Resources
+
+- [The Whole Game, Part 1](interactive-sessions/1c_whole_game_1.qmd) and
+  [Part 2](interactive-sessions/1d_whole_game_2.qmd) are Day 1's run through the workflow.
+- [Course Cheatsheet: Workflow Methods](cheatsheets/workflow_methods.qmd)
+- [Course Cheatsheet: First Steps](cheatsheets/first_steps.qmd)

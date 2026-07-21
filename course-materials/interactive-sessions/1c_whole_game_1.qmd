@@ -1,0 +1,294 @@
+---
+title: "Interactive Session"
+subtitle: "🎬 The Whole Game, Part 1: Import to Aggregate"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+You are about to run a complete data science workflow. You will start with a raw file on the
+internet and finish with a monthly climate summary, all before you know how any single piece
+works. Today you run through all of it once. Over the next eight days you will learn how each
+part was built.
+
+::: {.callout-important title="Don't panic 🚀"}
+You are not expected to understand every line today. Your job is to copy code, run it, and
+change one thing at a time. Our job is to show you what a workflow looks like. By next Friday
+you will know how all of it works.
+:::
+
+We will use real Arctic weather data from the [Arctic LTER](https://lternet.edu/site/arctic-lter/)
+station at Toolik Lake, Alaska: daily measurements from 1988 onward. This session covers the
+first half of the workflow: Import, Explore, Group, and Aggregate. We skip Clean along the way,
+for a reason you will see. Session 1d finishes the job with Visualize and Export, and gives the
+whole workflow its name.
+
+## Getting Started
+
+Set up your notebook with the usual ritual:
+
+1. **Create a new notebook** (`+` → **Notebook** → **eds217_2026**).
+2. **Rename it** to `Session_1C_Whole_Game_1.ipynb`.
+3. **Add a title cell** (Markdown), updating the date:
+
+```markdown
+# Day 1: Session 1C - The Whole Game, Part 1
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1c_whole_game_1.html)
+
+Date: 08/31/2026
+```
+
+:::{.callout-caution}
+Save often (`Ctrl+S` / `Cmd+S`).
+:::
+
+## How today's steps work
+
+You are going to run code you cannot fully read yet. To make that manageable, every step of
+the workflow follows the same small pattern. We chose this pattern for Day 1 to help you build
+confidence before you build understanding.
+
+Each step has up to three parts:
+
+1. **Run it.** Copy the canonical cell and run it exactly. Everyone gets the same result, so we
+   all begin each step from the same place.
+2. **Change one thing.** Swap a single item from a short menu, then run it again to see what
+   moves. These cells always rebuild their result from `df`, so they leave your data alone. The
+   next canonical cell brings everyone back together.
+3. **Say it in a sentence.** After some steps you will write one f-string that reports a number
+   you just produced. f-strings are the thing you learned to write this morning, so this is
+   where you practice writing for yourself.
+
+The goal on Day 1 is to see the whole workflow and get a feel for each step. Mastering the
+syntax comes later. Running working code shows you where each step lands. Changing one thing
+gives you a safe way to experiment. Writing a sentence keeps you using the one skill you
+already own.
+
+## Step 1: Import 📂
+
+**Import** means loading your tools and then loading your data.
+
+✅ **Canonical cell. Copy and run it exactly:**
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+url = "https://raw.githubusercontent.com/EDS-217-Essential-Python/EDS-217-Essential-Python.github.io/refs/heads/main/data/toolik_weather.csv"
+df = pd.read_csv(url)
+```
+
+The `import ... as ...` lines load Python toolkits under short nicknames. You will see three of
+them all course long: `pd` for pandas (data), `plt` for matplotlib (plots), and `np` for numpy
+(math). `pd.read_csv(url)` reads a CSV straight from the web into a **DataFrame**, a table,
+which we store in `df`.
+
+:::{.callout-note}
+Today `read_csv()` needs only one thing: the `url` of a CSV file. It can do much more, and you
+will learn that on Day 2.
+:::
+
+:::{.callout-tip title="🔁 Change one thing"}
+`read_csv` builds a table, and you can give that table any name you like. Load the same data
+into a new variable, using one name from this menu:
+
+- `climate = pd.read_csv(url)`
+- `toolik = pd.read_csv(url)`
+- `weather = pd.read_csv(url)`
+
+Your original `df` stays exactly as it was. You have simply made a second copy under a new name.
+:::
+
+```{python}
+# 🔁 Example: same data under a new name. Reads url again; leaves df alone.
+climate = pd.read_csv(url)
+```
+
+:::{.callout-tip title="✍️ Say it in a sentence (optional)"}
+Write an f-string that names what you loaded. For example, set `dataset = "Toolik weather"` and
+then print `f"I loaded the {dataset} dataset."`
+:::
+
+## Step 2: Explore 🔍
+
+**Explore** means getting to know the table before you analyze it.
+
+✅ **Canonical cell. Preview the first rows:**
+
+```{python}
+df.head()
+```
+
+:::{.callout-tip title="🔁 Change one thing"}
+Swap `.head()` for one other no-argument view of the same table:
+
+- `df.info()` shows the column names, types, and how many values are present.
+- `df.describe()` shows summary statistics for the number columns.
+
+Each one looks at `df` without changing it.
+:::
+
+```{python}
+# 🔁 Example: a structural overview instead of a row preview. Reads df; leaves it alone.
+df.info()
+```
+
+```{python}
+# 🔁 Example: summary statistics. Reads df; leaves it alone.
+df.describe()
+```
+
+### The health check
+
+Before you trust a dataset, run a quick **health check**. This is a fixed phrase you will reuse
+all course long. It counts the missing values in every column:
+
+```{python}
+df.isnull().sum()
+```
+
+:::{.callout-important}
+Look at `Daily_AirTemp_Mean_C`. It has zero missing values, so the column we are about to
+analyze is complete. A few other columns do have gaps, which is normal. We only need our column
+to be clean.
+:::
+
+:::{.callout-important title="✍️ Say it in a sentence (required)"}
+`df.info()` reported how many rows the dataset has. Read that number, then report it in your own
+f-string. For example:
+
+```python
+n_rows = 11171          # the number info() showed you
+print(f"The Toolik dataset has {n_rows} daily records.")
+```
+
+Now write a second sentence of your own, maybe about how many columns there are.
+:::
+
+## Step 3: Clean 🧹 (skipped today, and here is why)
+
+The next step in a normal workflow is **Clean**: fixing missing values, wrong types, and
+duplicate rows. Our health check already showed that `Daily_AirTemp_Mean_C` has no missing
+values, so there is nothing to clean for today's analysis, and we can go straight on.
+
+:::{.callout-note}
+Enjoy this while it lasts. Most real datasets need real cleaning, and it is often the biggest
+part of a project. You will spend all of Day 4 on it. Today the data came ready to use.
+:::
+
+## Step 4: Group 👥
+
+**Group** means splitting the rows into buckets by some key. Here we bucket every daily record
+by its **Month**, so all the Januaries sit together, all the Februaries, and so on.
+
+✅ **Canonical cell. Copy and run it exactly:**
+
+```{python}
+monthly = df.groupby('Month')
+```
+
+:::{.callout-tip title="🔁 Change one thing"}
+Change only the key you group by. Pick one from this menu:
+
+- `by_year = df.groupby('Year')` buckets records by year, which gives many groups.
+- `by_station = df.groupby('Station')` gives a single bucket here, because every row is the
+  same station.
+
+Both read `df` without changing it, and neither touches your `monthly` grouping.
+:::
+
+```{python}
+# 🔁 Example: group by Year instead of Month. Reads df; leaves df and `monthly` alone.
+by_year = df.groupby('Year')
+```
+
+## Step 5: Aggregate 📈
+
+**Aggregate** means collapsing each bucket down to a single number. Here we take the mean
+temperature within each month. Notice the two-step shape: first group, then pick a column and
+average it.
+
+✅ **Canonical cell. Copy and run it exactly:**
+
+```{python}
+monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
+monthly_means
+```
+
+That gives twelve numbers, one average temperature per month, summarizing thousands of daily
+records into a clear seasonal pattern.
+
+:::{.callout-tip title="🔁 Change one thing"}
+Keep the grouping and change only the column you average. Pick one from this menu:
+
+- `monthly['Daily_Precip_Total_mm'].mean()` gives average daily precipitation.
+- `monthly['Daily_AirTemp_AbsMax_C'].mean()` gives the average daily high temperature.
+
+Store the result under a new name so your `monthly_means` stays put.
+:::
+
+```{python}
+# 🔁 Example: average a different column. Reads `monthly`; leaves monthly_means alone.
+monthly_precip = monthly['Daily_Precip_Total_mm'].mean()
+monthly_precip
+```
+
+:::{.callout-important title="✍️ Say it in a sentence (required)"}
+Look at your `monthly_means`, pick one month's value, read it off, and report it in an f-string.
+For example:
+
+```python
+july_temp = 11.2        # July's value, read from monthly_means
+print(f"At Toolik, the average July temperature is {july_temp} degrees Celsius.")
+```
+
+Now write one more sentence for the month you find most surprising.
+:::
+
+## 🧪 Sandbox (5 minutes)
+
+Now poke at it yourself. Try a different column, a different grouping key, or a deliberate typo.
+Errors are expected today, and they are welcome. A red error message is Python telling you
+something. See what you can make happen.
+
+:::{.callout-caution title="↩️ Canonical restart. Run this to rejoin the group"}
+When the five minutes are up, run this cell to reload the data and rebuild the canonical
+results. Everyone returns to the same state, ready for Part 2:
+
+```{python}
+# Restart: reload df and rebuild the canonical results
+df = pd.read_csv(url)
+monthly = df.groupby('Month')
+monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
+```
+:::
+
+## Key Points
+
+- You ran a real workflow from start to finish: Import, Explore, Group, and Aggregate. You
+  skipped Clean only because the health check proved our column was complete.
+- `pd.read_csv(url)` loads a CSV from the web into a DataFrame. `.head()`, `.info()`, and
+  `.describe()` are your no-argument ways to look at it.
+- `df.isnull().sum()` is the health check for counting missing values.
+- Grouping and then averaging turns thousands of rows into a short summary. You did it in two
+  steps: first `monthly = df.groupby('Month')`, then `monthly['Daily_AirTemp_Mean_C'].mean()`.
+- The change-one-thing cells always re-read `df`, so your data stays put and the group can
+  always reconverge.
+
+## Resources
+
+- [Course Cheatsheet: `read_csv`](../cheatsheets/read_csv.qmd)
+- [Course Cheatsheet: Workflow Methods](../cheatsheets/workflow_methods.qmd)
+- [Course Cheatsheet: Data Grouping](../cheatsheets/data_grouping.qmd)
+- [Course Cheatsheet: Data Aggregation](../cheatsheets/data_aggregation.qmd)
+
+➡️ **Next:** In [The Whole Game, Part 2](1d_whole_game_2.qmd) you will visualize these monthly
+means, save your results, and see the full ten-step workflow named.
+
+::: {.center-text .body-text-xl .teal-text}
+End interactive session 1C
+:::

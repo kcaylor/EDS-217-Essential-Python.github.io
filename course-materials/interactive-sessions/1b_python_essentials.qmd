@@ -1,0 +1,333 @@
+---
+title: "Interactive Session"
+subtitle: "🐍 Python Essentials: Variables, Strings & f-strings"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](images/variable_2.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A cartoon depicting the idea of a variable.* [MidJourney 5](https://www.midjourney.com/jobs/7d8b78b4-61a1-49b2-9187-0bed8b4d8127?index=0)
+:::
+
+Now that you're comfortable moving around JupyterLab, let's meet the handful of Python
+building blocks you'll use in every single notebook this week: **variables**, **strings**,
+the **`print()`** and **`type()`** functions, and the star of today, **f-strings**, for
+building readable output. We're keeping the vocabulary small on purpose so you can use it
+fluently.
+
+## Getting Started
+
+Set up your notebook using the same ritual from this morning:
+
+1. **Create a new notebook:**
+   - Click the `+` button to open a Launcher.
+   - Under **Notebook**, click **eds217_2026**.
+
+2. **Rename your notebook** to: `Session_1B_Python_Essentials.ipynb`
+   (right-click the `Untitled.ipynb` tab → **Rename**).
+
+:::{.callout-tip title="Right-clicking in JupyterLab"}
+If right-clicking shows a system menu instead of the Jupyter menu, try `CTRL-Right Click`
+or `OPTION-Right Click`.
+:::
+
+3. **Add a title cell** (Markdown), updating the date to today:
+
+```markdown
+# Day 1: Session 1B - Python Essentials
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1b_python_essentials.html)
+
+Date: 08/31/2026
+```
+
+4. **Add a code cell** below the title cell to start writing Python.
+
+:::{.callout-caution}
+Save your work frequently with `Ctrl+S` (`Cmd+S` on macOS).
+:::
+
+## Variables and assignment
+
+A **variable** is a name that refers to a value. You create one with the assignment
+operator, `=`. The name goes on the left, the value on the right.
+
+```{python}
+temperature = 21
+site_name = "Santa Barbara"
+```
+
+Nothing prints when you assign a variable. Python just remembers it. Ask for the name
+again and you get the value back:
+
+```{python}
+temperature
+```
+
+Values come in different **types**. The two numeric types you'll see are **integers**
+(whole numbers, `int`) and **floats** (decimal numbers, `float`):
+
+```{python}
+count = 42          # an int
+rainfall = 3.5      # a float
+```
+
+You can do basic arithmetic with numbers, just like a calculator, and store the result in
+a new variable:
+
+```{python}
+high_temp = 24
+low_temp = 12
+temp_range = high_temp - low_temp
+temp_range
+```
+
+We'll cover Python's full set of operators on Day 3. Today, basic `+`, `-`, `*`, and `/`
+are all you need.
+
+:::{.callout-note}
+🐍 Choose variable names that say what the value *is* (`site_name`, not `s`). Python style
+favors lowercase names with underscores. Names can't start with a number, and a few words
+are reserved by Python itself, so your editor will warn you if you hit one.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Create two variables, `morning_temp` and `afternoon_temp`, give them values, and compute
+their difference into a new variable called `daily_swing`. Display `daily_swing`.
+:::
+
+## Strings
+
+A **string** is a piece of text. You write one by wrapping characters in single or double
+quotes, and the two are interchangeable:
+
+```{python}
+greeting = 'hello'
+place = "Bren Hall"
+```
+
+The only practical difference is which quote is easier to include *inside* the text. Use
+double quotes when your text contains an apostrophe:
+
+```{python}
+note = "It's a sunny day."
+```
+
+You can also write a **multi-line string** using triple quotes, which is handy for longer
+blocks of text:
+
+```{python}
+description = """This dataset records
+daily air temperature
+at three stations."""
+```
+
+:::{.callout-note}
+🐍 A string is just data. The quotes tell Python to treat these characters as text. We'll
+learn ways to *transform* text (cleaning, splitting, reformatting) later in the course. For
+now we just need to create strings and print them.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Create a string variable `favorite_place` holding the name of somewhere you like. Then
+create a second string that includes an apostrophe (like `"I'm from Ventura."`) and make
+sure it doesn't cause an error.
+:::
+
+## Knowing your types: `type()`
+
+When you're not sure what kind of value a variable holds, ask Python with the **`type()`**
+function:
+
+```{python}
+type(count)
+```
+
+```{python}
+type(rainfall)
+```
+
+```{python}
+type(site_name)
+```
+
+Those three, `int`, `float`, and `str`, are the types you'll work with today. Knowing a
+value's type tells you what you can do with it.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Predict the type of each of these *before* you run it, then check with `type()`:
+`19`, `19.0`, and `"19"`. Were any surprising?
+:::
+
+## Printing with `print()`
+
+Asking for a variable's value shows it *only* when it's the last line of a cell. To display
+values whenever and wherever you want, use the **`print()`** function:
+
+```{python}
+print("Data loaded.")
+print(site_name)
+```
+
+`print()` can take several values at once, separating them with spaces:
+
+```{python}
+print("Site:", site_name, "-- readings:", count)
+```
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+In a single cell, print two lines: one showing your `favorite_place`, and one showing the
+`daily_swing` you computed earlier. Use a separate `print()` for each.
+:::
+
+## f-strings: readable output (today's main skill)
+
+Stitching text and variables together with commas works, but it gets awkward fast. The
+modern, readable way to build a message from your data is the **f-string** (formatted
+string literal). This is the one construct we want you to be able to *write from scratch* by
+the end of the day, so we'll spend the most time here.
+
+### The recipe
+
+An f-string is a string with the letter **`f`** right before the opening quote. Inside it,
+anything you put in **curly braces `{}`** is replaced by the value of that variable:
+
+```{python}
+name = "Alice"
+print(f"Hello, {name}!")
+```
+
+That's the whole idea: `f"text {variable} more text"`. The `f` turns it into an f-string,
+and each `{variable}` becomes its value.
+
+::: {.callout-important}
+The pattern to memorize is **`f"text {variable}"`**. The `f` must come *before* the quote,
+and the variable name goes *inside* the braces. Forget the `f` and you'll just print the
+braces literally.
+:::
+
+You can drop in as many variables as you like:
+
+```{python}
+site_name = "Goleta"
+count = 42
+print(f"We recorded {count} readings at {site_name}.")
+```
+
+f-strings work anywhere a string does. You can build one and store it in a variable, then
+print it later:
+
+```{python}
+summary = f"Station {site_name} is ready."
+print(summary)
+```
+
+:::{.callout-tip title="R vs Python"}
+Coming from R? An f-string is like `sprintf()` or `glue()`, but the variables sit right
+inside the text where they'll appear, with no separate list of arguments to line up.
+:::
+
+### Practice with f-strings
+
+Let's build up some fluency. Given these variables:
+
+```{python}
+station = "CNSI Roof Top"
+readings = 30
+warmest = 27
+```
+
+Write f-strings that produce sentences:
+
+```{python}
+print(f"The station is {station}.")
+print(f"It logged {readings} readings today.")
+print(f"The warmest reading was {warmest} degrees.")
+```
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Change `warmest` to a new value and re-run the last f-string. The sentence should update
+automatically. Then write a **new** f-string that mentions both `station` and `readings` in
+the same sentence.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+You can also put a **computed value** in a variable and drop it into an f-string. Create
+`coolest = 14`, compute `spread = warmest - coolest`, and print:
+`f"The temperature spread was {spread} degrees."`
+:::
+
+### Putting it together: write your data summary
+
+Here's the kind of thing you'll do constantly: compute a few values, then describe them in
+plain language with f-strings.
+
+Rainfall is a good quantity to summarize because it **accumulates**. Three days of rain add
+up to a three-day total, and dividing by three gives an average daily rate.
+Start from this small rainfall log and compute a couple of values using basic arithmetic:
+
+```{python}
+site = "Santa Barbara"
+day1_rain_mm = 5
+day2_rain_mm = 0
+day3_rain_mm = 7
+
+n_days = 3
+total_rain_mm = day1_rain_mm + day2_rain_mm + day3_rain_mm   # daily rainfall adds up to a total
+average_rain_mm = total_rain_mm / n_days
+```
+
+:::{.callout-important title="✏️ Your turn: write 2 or 3 f-string sentences"}
+Using the variables above (and the values you computed), write **two or three f-string
+`print()` statements** that summarize the rainfall log in complete sentences. For example,
+your output might read something like:
+
+- *"We tracked rainfall across 3 days at Santa Barbara."*
+- *"In total, Santa Barbara received 12 mm of rain."*
+- *"That's an average of 4.0 mm per day."*
+
+Write your own versions in a code cell. Each sentence should pull at least one variable in
+with `{ }`.
+:::
+
+```{python}
+#| echo: false
+#| include: false
+# Example solution (one of many valid phrasings)
+print(f"We tracked rainfall across {n_days} days at {site}.")
+print(f"In total, {site} received {total_rain_mm} mm of rain.")
+print(f"That's an average of {average_rain_mm} mm per day.")
+```
+
+## Key Points
+
+- A **variable** names a value. Create one with `name = value`. Nothing prints on
+  assignment.
+- Today's types are **`int`** (whole numbers), **`float`** (decimals), and **`str`**
+  (text). Check any value with **`type()`**.
+- **Strings** are text wrapped in single or double quotes. Use triple quotes for multi-line
+  text.
+- **`print()`** displays values anywhere in a cell and accepts several at once.
+- **f-strings**, written `f"text {variable}"`, are the readable way to combine text and
+  values, and the one thing you should be able to write on your own after today.
+
+## Resources
+
+- [Course Cheatsheet: First Steps](../cheatsheets/first_steps.qmd) covers Python basics at a
+  glance.
+- [Course Cheatsheet: `print()`](../cheatsheets/print.qmd) covers printing and f-strings.
+- [Python Docs: Formatted string literals](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)
+  is the official f-string reference. The formatting options there are for later. Today we
+  only need `f"text {variable}"`.
+
+::: {.center-text .body-text-xl .teal-text}
+End interactive session 1B
+:::

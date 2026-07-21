@@ -1,0 +1,252 @@
+---
+title: "Interactive Session"
+subtitle: "⚒️ JupyterLab & Jupyter Notebooks"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+![](images/Jupyter.png)
+
+Welcome to your first hands-on session. Over the next hour you'll get comfortable
+with the tools you'll use every day in this course, and throughout MEDS: the
+**JupyterLab** environment and the **Jupyter Notebooks** you'll write your code in.
+
+::: {.center-text .body-text-m}
+Always remember: [**Python is the programming language. JupyterLab is the IDE.**]{.teal-text}
+:::
+
+An *IDE* (integrated development environment) is a workspace that puts your code,
+its output, your notes, and your files together in one place. JupyterLab is the IDE we
+use. Python is the language we write in it.
+
+## Meet JupyterLab
+
+We run JupyterLab on a shared **Posit Workbench** server, so there's nothing to install.
+Everything happens in your browser.
+
+#### Step 1: Log in to Posit Workbench
+
+1. Open a browser and go to [workbench-1.bren.ucsb.edu](https://workbench-1.bren.ucsb.edu).
+2. Enter your login credentials to access the server.
+
+#### Step 2: Launch a JupyterLab session
+
+1. Click **New Session** and select **JupyterLab** from the list of options.
+
+   ![](images/JupyterLab_launch.png)
+
+2. Click **Start Session** (you don't need to change the Session Name or Cluster). Your
+   browser will join the session automatically once the server starts it.
+
+#### Step 3: Get your bearings
+
+When the session launches you'll see the JupyterLab interface. The main pieces are the
+**Menu Bar** (top), the **Sidebar / file browser** (left), and the **Main Work Area**
+(center), where the Launcher opens first.
+
+![](images/interface-jupyterlab.png)
+
+As you work, JupyterLab adds tabs and panes for notebooks, figures, and terminals. You
+can drag them around to arrange your workspace however you like. The
+[JupyterLab User Guide](https://jupyterlab.readthedocs.io/en/latest/user/index.html) has
+much more if you're curious.
+
+::: {.callout-note}
+An IDE like JupyterLab supports **interactive computing**: you run your code a piece at a
+time and see each result immediately. That fast feedback loop is what makes it great for
+exploring data.
+:::
+
+## Two ways to run Python
+
+JupyterLab can run your Python code in two places. It's worth seeing both once so you
+know the difference.
+
+### The IPython console (a REPL)
+
+From the Launcher, you can open a **Console**, which gives you an *IPython* prompt. This is
+a **REPL**, which stands for Read-Eval-Print Loop.
+
+::: {.callout-note}
+A **REPL** **R**eads what you type, **E**valuates it, **P**rints the result, and **L**oops
+back for more. It's an interactive prompt for trying one line at a time.
+:::
+
+Type an expression at the prompt and press Enter, and the REPL evaluates it and shows the
+result right away:
+
+```python
+21 * 2
+```
+
+```
+42
+```
+
+That's the whole read-eval-print idea: you typed an expression, it evaluated it, it printed
+`42`. We're just watching the environment work here. You'll learn Python's syntax properly
+this afternoon, and its full set of operators on Day 3. To leave the console REPL, type
+`exit()`.
+
+### Jupyter Notebooks (what we'll use)
+
+For the rest of this course you'll write your code in **Jupyter Notebooks**. A notebook lets
+you combine **code**, its **output**, and **narrative text** in one document, so your
+analysis and the story of your analysis live together. That's exactly what you want for data
+science, so notebooks are our home base from here on.
+
+## Getting Started
+
+Let's make the notebook you'll use for this session. **We follow this same setup ritual at
+the start of every session**, so it will quickly become second nature.
+
+1. **Create a new notebook:**
+   - Click the `+` button in the top left to open a new Launcher.
+   - Under **Notebook**, click **eds217_2026** to create a new Python notebook using our
+     course environment.
+
+2. **Rename your notebook:**
+   - Right-click on the `Untitled.ipynb` tab (see the note below if right-click gives you
+     trouble).
+   - Select **Rename**.
+   - Name it with the format: `Session_1A_JupyterLab.ipynb`
+
+:::{.callout-tip title="Right-clicking in JupyterLab"}
+Some browser and operating-system combinations won't hand right-clicks to the JupyterLab
+interface and will show a system menu instead. In those cases, `CTRL-Right Click` or
+`OPTION-Right Click` usually brings up the Jupyter menu.
+:::
+
+3. **Add a title cell:**
+   - Click the first cell, and change its type to **Markdown** (dropdown in the toolbar).
+   - Add the following content (update the date to today):
+
+```markdown
+# Day 1: Session 1A - JupyterLab & Jupyter Notebooks
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1a_jupyterlab_notebooks.html)
+
+Date: 08/31/2026
+```
+
+4. **Add a code cell** below the title cell (leave it as a **Code** cell). This is where
+   you'll start writing Python.
+
+:::{.callout-caution}
+Save your work frequently. Click the save icon or press `Ctrl+S` (`Cmd+S` on macOS).
+:::
+
+Throughout the session: take notes in Markdown cells, write and run code in Code cells,
+and ask questions whenever you need to.
+
+## Working with cells
+
+A notebook is a stack of **cells**. Two kinds matter to us:
+
+- **Code cells** for writing and running Python.
+- **Markdown cells** for writing formatted text (notes, headings, links).
+
+### Running a code cell
+
+Click into your empty code cell, type the classic first line of code, and run it with
+`Shift + Enter`:
+
+```{python}
+print("Hello, Jupyter!")
+```
+
+The output appears directly below the cell. `Shift + Enter` runs the cell and moves to the
+next one. `Ctrl + Enter` (`Cmd + Enter`) runs it and stays put.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Change the message inside the quotes to greet yourself by name, then re-run the cell with
+`Shift + Enter`. Did the output update?
+:::
+
+### Writing a Markdown cell
+
+Add a new cell, switch it to **Markdown**, and try some formatting:
+
+```markdown
+## My notes
+
+This is a **Markdown** cell. I can write:
+
+- **Bold** with `**text**`
+- *Italic* with `*text*`
+- [Links](https://jupyterlab.readthedocs.io/)
+```
+
+Run the Markdown cell (`Shift + Enter`) to **render** it into formatted text.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Add one more bullet to your Markdown cell, a link to the course website, then re-render
+it. Try double-clicking the rendered cell to edit it again.
+:::
+
+### Command mode vs. edit mode
+
+A cell is in one of two modes:
+
+- **Edit mode** (blue bar, cursor in the cell): you're typing *inside* the cell. Press
+  `Enter` or click into a cell to enter edit mode.
+- **Command mode** (cell selected, no cursor): keystrokes act on the *cell itself*. Press
+  `Esc` to enter command mode, then, for example, `b` adds a cell **b**elow, `a` adds one
+  **a**bove, and `m` turns the selected cell into **M**arkdown.
+
+## Handy JupyterLab features
+
+A few features that will save you time all week:
+
+- **Tab completion:** start typing a name and press `Tab` to auto-complete it or see
+  suggestions.
+- **Built-in help:** type `help(print)` in a code cell to read a function's documentation,
+  or add a `?` after a name (`print?`) for a quick description.
+- **The Variable Inspector:** shows the names, types, and values of everything you've
+  defined. Open it from the Command Palette (`View > Activate Command Palette`, then type
+  "variable inspector") or with `Ctrl + Shift + I` (`Cmd + Shift + I` on Mac).
+- **Magic commands:** IPython adds special commands prefixed with `%`, like `%history` to
+  see what you've run. You'll meet these as needed.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+In a code cell, type `pri` and press `Tab`. Does JupyterLab offer to complete it to
+`print`? Then run `help(print)` and skim the description.
+:::
+
+## Saving and exporting
+
+- **Save:** the save icon, or `Ctrl + S` / `Cmd + S`. Do this often.
+- **Export:** JupyterLab can export a notebook to other formats (HTML, PDF, and more) via
+  `File > Export Notebook As`. This is handy for sharing a finished analysis.
+
+## Key Points
+
+- **Python is the language. JupyterLab is the IDE** you run it in, hosted on Posit
+  Workbench, so it's all in your browser.
+- JupyterLab can run Python in a **REPL** (a read-eval-print console) or in **notebooks**,
+  and we use notebooks from here on.
+- A notebook combines **code cells**, their **output**, and **Markdown** narrative in one
+  document.
+- Run a cell with `Shift + Enter`. Use `Esc` and `Enter` to switch between **command** and
+  **edit** mode.
+- Start every session with the same ritual: **create, rename, title cell, save often.**
+
+## Resources
+
+- [Course Cheatsheet: JupyterLab Basics](../cheatsheets/JupyterLab.qmd) covers variable
+  inspection, magic commands, and keyboard shortcuts.
+- [Course Cheatsheet: Setting up Python](../cheatsheets/setting_up_python.qmd)
+- [Course Cheatsheet: First Steps](../cheatsheets/first_steps.qmd)
+- [JupyterLab User Guide](https://jupyterlab.readthedocs.io/en/latest/user/index.html) is
+  the official documentation.
+- A [curated gallery of Jupyter Notebooks](https://gist.github.com/kcaylor/79d9b9304764b825e0fe365df17d09fb)
+  showing textbooks, articles, and analyses written as notebooks. Worth a browse to see
+  where this can go.
+
+::: {.center-text .body-text-xl .teal-text}
+End interactive session 1A
+:::

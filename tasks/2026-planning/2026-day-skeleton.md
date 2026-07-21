@@ -1,4 +1,4 @@
-# EDS 217 — 2026 Day Skeleton (Draft 1)
+# EDS 217: 2026 Day Skeleton (Draft 1)
 
 **Created:** July 2026. Companion to `eod-concept-ledger-2025.md` (the construct source of truth).
 **Status:** Design decisions resolved with Kelly on 2026-07-07 (see Decisions section). This is now the working spec for the 2026 build.
@@ -33,14 +33,14 @@ Framework change (**decided**): the 9-step workflow becomes **10 steps** by addi
 
 ## Per-day detail
 
-### Day 1 — The Whole Game
+### Day 1: The Whole Game
 
 Goal: by 4:30pm every student has executed a complete data science workflow and knows the shape of the next eight days. Fundamentals are taught only to the depth the walkthrough needs.
 
 Sessions (sketch):
 - 1a: JupyterLab + notebooks (merge 2025's 1a+1b; compress)
-- 1b: Variables, strings, f-strings, `print`, `type()` — scoped to "enough to read the walkthrough"
-- 1c: The Whole Game, part 1 (Import→Aggregate on Toolik, instructor-led ADAPT: students run given code, then change one thing per step — a column name, a threshold)
+- 1b: Variables, strings, f-strings, `print`, `type()`, scoped to "enough to read the walkthrough"
+- 1c: The Whole Game, part 1 (Import→Aggregate on Toolik, instructor-led ADAPT: students run given code, then change one thing per step: a column name, a threshold)
 - 1d: The Whole Game, part 2 (Visualize + export) + the 10-step framework named explicitly
 - EOD: re-run the workflow with two or three prescribed modifications (different month, different variable). READ→ADAPT depth only.
 
@@ -57,14 +57,14 @@ Scope table:
 
 2025 carry-over: keep the "Coming Attractions" framing that resolved Day 1 in 2025, but upgrade student role from pure READ to ADAPT.
 
-### Day 2 — Import + Explore
+### Day 2: Import + Explore
 
 Sessions (sketch):
 - 2a: `read_csv` properly (url vs path; `index_col=`; what a DataFrame is; Series as a column). Lists arise: `df.columns.tolist()`, a list of column names to select.
-- 2b: Exploration toolkit (`.head/.tail/.shape/.columns/.dtypes/.describe/.info`, `.value_counts()` — taught here explicitly since the ledger flagged it as never clearly taught). Dicts arise: `df.rename(columns={...})` as the motivating case for dict literal + lookup.
+- 2b: Exploration toolkit (`.head/.tail/.shape/.columns/.dtypes/.describe/.info`, `.value_counts()`, taught here explicitly since the ledger flagged it as never clearly taught). Dicts arise: `df.rename(columns={...})` as the motivating case for dict literal + lookup.
 - 2c (colab): explore an unfamiliar dataset in pairs, produce 5 factual claims with evidence.
-- 2d (live coding): lists and dicts as objects in their own right — 20 minutes of pure-Python grammar consolidating what the morning used in context (indexing, `.append`, loop over a list; dict get/set). This is the "grammar minute" scaled up for the two most important collections.
-- EOD: "data biography" — import, explore, and characterize a new dataset; markdown answers with code evidence. Focus-segment WRITE; no filtering/grouping demanded.
+- 2d (live coding): lists and dicts as objects in their own right: 20 minutes of pure-Python grammar consolidating what the morning used in context (indexing, `.append`, loop over a list; dict get/set). This is the "grammar minute" scaled up for the two most important collections.
+- EOD: "data biography" (import, explore, and characterize a new dataset; markdown answers with code evidence). Focus-segment WRITE; no filtering/grouping demanded.
 
 Scope table:
 | Construct | Scope taught | EOD depth |
@@ -77,14 +77,14 @@ Scope table:
 | dict literal + `d[key]`, as `rename` mapping | NOT methods, NOT iteration, NOT nesting | WRITE |
 | `.rename(columns=dict)` | columns direction only | WRITE |
 
-### Day 3 — Filter + Sort
+### Day 3: Filter + Sort
 
 Sessions (sketch):
-- 3a (live coding): booleans, comparisons, `if/elif/else` — taught through data questions ("is this row's value above threshold?"), landing in the boolean-mask idea. Replaces 2025's abstract control-flow session.
+- 3a (live coding): booleans, comparisons, `if/elif/else`, taught through data questions ("is this row's value above threshold?"), landing in the boolean-mask idea. Replaces 2025's abstract control-flow session.
 - 3b: the filter sentence: `df[df['col'] <op> value]`, `&`/`|`/`~` with parentheses, `.isin(list)` (list vocabulary re-used), `.copy()` taught properly here (promoted from 2025's Day 4 callout).
 - 3c: the top-N sentence: `.sort_values()` (one key; `ascending=`) + `.head(n)`; `.idxmax()/.idxmin()` as label-lookup companions.
 - 3d (colab): ranking questions in pairs.
-- EOD: Banana Index (relocated from 2025 Day 5 — its Filter 15% / Sort 20% / Transform 18% profile matches this day nearly perfectly). Trim the function-writing tasks (functions move to Day 4). **Decided:** the set-intersection task is cut; sets drop to a cheatsheet gloss, and the "which foods appear in all three top-10s?" question is answered by visual comparison of the three lists.
+- EOD: Banana Index (relocated from 2025 Day 5: its Filter 15% / Sort 20% / Transform 18% profile matches this day nearly perfectly). Trim the function-writing tasks (functions move to Day 4). **Decided:** the set-intersection task is cut; sets drop to a cheatsheet gloss, and the "which foods appear in all three top-10s?" question is answered by visual comparison of the three lists.
 
 Scope table:
 | Construct | Scope taught | EOD depth |
@@ -98,11 +98,11 @@ Scope table:
 | `.filter(like=)` | 🧭 Field Note (cheese task); sets task cut per decision 5 | ADAPT |
 | `.drop(list, axis='columns')` | 🧭 Field Note in EOD setup | ADAPT |
 
-### Day 4 — Clean + Transform
+### Day 4: Clean + Transform
 
 Sessions (sketch):
 - 4a: missing-data sentence completed (diagnose Day 2 → treat today: `.dropna()`, `.fillna()`, the `~ .isnull()` mask re-using Day 3 grammar); `.astype()`; `.drop_duplicates()`.
-- 4b: derived-column sentence (`df['new'] = expr`), column arithmetic, scalar broadcast; basic `.str` methods (`.strip/.lower/.replace` — scoped; chains deferred to Day 7 Field Note).
+- 4b: derived-column sentence (`df['new'] = expr`), column arithmetic, scalar broadcast; basic `.str` methods (`.strip/.lower/.replace`, scoped; chains deferred to Day 7 Field Note).
 - 4c: functions, properly: `def`/`return`/default args, motivated by "you've now written the same filter-sort-head three times" (fixes the 2025 Day 5 gap where functions were effectively learned inside the EOD); `.apply(func)` on a column as the payoff.
 - 4d (colab): clean a deliberately messy dataset in pairs.
 - EOD: marine microplastics (relocated from 2025 Day 4; now everything it needs is taught: masks Day 3, `~` and `.copy()` Day 3, derived column and `np.log10` today). Its groupby tasks become ADAPT preview cells for Day 5, or get trimmed.
@@ -112,20 +112,20 @@ Scope table:
 |---|---|---|
 | `.dropna()/.fillna(value)` | whole-frame and single-column | WRITE |
 | `.astype(str/int/float)` | single cast, no chains | WRITE |
-| derived-column sentence | arithmetic of columns and scalars; one numpy function (`np.log10`) as "vectorized math comes from numpy" — total intended numpy exposure for the course | WRITE |
+| derived-column sentence | arithmetic of columns and scalars; one numpy function (`np.log10`) as "vectorized math comes from numpy", total intended numpy exposure for the course | WRITE |
 | `.str.strip/.lower/.replace` | single method, no chaining | WRITE |
 | `def f(x): return ...`; default args | 1–2 param functions returning a value | WRITE |
 | `.apply(func)` | named function only, NO lambda | WRITE |
 | `read_csv(parse_dates=['col'])` | 🧭 Field Note (full datetime treatment Day 6) | ADAPT |
 
-### Day 5 — Group + Aggregate
+### Day 5: Group + Aggregate
 
 Sessions (sketch):
-- 5a: split-apply-combine sentence: `groupby(key)['col'].mean()` — taught in BOTH the two-step and one-line forms, explicitly ("these are the same sentence"; fixes the 2025 D4 form gap).
+- 5a: split-apply-combine sentence: `groupby(key)['col'].mean()`, taught in BOTH the two-step and one-line forms, explicitly ("these are the same sentence"; fixes the 2025 D4 form gap).
 - 5b: `.agg()` with a list and with a dict (dict vocabulary deepened on schedule); `.count/.sum/.max/.min`; grouped result → `.sort_values()` → `.head()` (re-using Day 3's top-N sentence on grouped output).
 - 5c (colab): grouped-comparison questions.
 - 5d (live coding): loops over `groupby` ("when a sentence isn't enough"); comprehensions shown as READ-level "you will see this in the wild" with cheatsheet link.
-- EOD (**decided**): OpenAQ air-quality data (already in `data/` — Goleta, Santa Barbara, CNSI station files). Natural grouping questions: by station, by parameter, by hour/day. Join-free by construction. Task design is new work; note the repo's openaq CSVs have ~4,900 uncommitted appended rows from the 2025 class to reconcile first.
+- EOD (**decided**): OpenAQ air-quality data (already in `data/`: Goleta, Santa Barbara, CNSI station files). Natural grouping questions: by station, by parameter, by hour/day. It is join-free by construction. Task design is new work; note the repo's openaq CSVs have ~4,900 uncommitted appended rows from the 2025 class to reconcile first.
 - Multi-key groupby: taught here at ADAPT scope only (show the two-key form and what a MultiIndex looks like; `.reset_index()` as the escape hatch). The 2025 D6 `groupby(...).idxmax()` MultiIndex construct is CUT from EOD WRITE expectations.
 
 Scope table:
@@ -138,12 +138,12 @@ Scope table:
 | loop over groupby | `for name, group in ...` shown | ADAPT |
 | comprehensions | READ/gloss + cheatsheet | READ |
 
-### Day 6 — Join + Reshape + Dates
+### Day 6: Join + Reshape + Dates
 
 The new-content day that fixes the two ❌ never-taught findings (pivot_table, concat). No new fundamentals; Python grammar consolidates.
 
 Sessions (sketch):
-- 6a: join sentence: `pd.merge(a, b, on=)` then `left_on=/right_on=` (mismatched keys taught explicitly — the recurring D6/D7 form), `how='inner'/'left'` with a picture.
+- 6a: join sentence: `pd.merge(a, b, on=)` then `left_on=/right_on=` (mismatched keys taught explicitly: the recurring D6/D7 form), `how='inner'/'left'` with a picture.
 - 6b: reshape: `pd.concat([...])` for stacking; `pivot_table(index=, columns=, values=)` taught with a small worked example (single-level index first, then the multi-column index form Day 7's EOD uses); `.reset_index()` re-used.
 - 6c: dates: `pd.to_datetime(col, format=)`, `.dt.year/.month`, format strings scoped to `%Y %m %d` (the D4-2025 `%I:%M:%S %p` monster becomes a Field Note wherever its dataset is used).
 - 6d (colab): two-table exercise.
@@ -159,16 +159,16 @@ Scope table:
 | `value_counts().reset_index()` + rename | as the "Series to table" move (fixes 2025 D6 gap) | WRITE |
 | MultiIndex `.idxmax()` on groups | 🧭 Field Note or redesigned away | ADAPT |
 
-### Day 7 — Visualize
+### Day 7: Visualize
 
 Sessions (sketch):
-- 7a: matplotlib anatomy (figure/axes, `plt.figure(figsize=)`, labels, titles, `xticks(rotation=)`, `tight_layout`) — 2025's 7a largely survives, now with the D6-2025 sequencing bug fixed because no earlier EOD demands styled matplotlib anymore (D4 EOD keeps only bare `.hist()`, taught as part of Explore's toolkit).
+- 7a: matplotlib anatomy (figure/axes, `plt.figure(figsize=)`, labels, titles, `xticks(rotation=)`, `tight_layout`). 2025's 7a largely survives, now with the D6-2025 sequencing bug fixed because no earlier EOD demands styled matplotlib anymore (D4 EOD keeps only bare `.hist()`, taught as part of Explore's toolkit).
 - 7b: seaborn: `sns.scatterplot/barplot/histplot` with `data=/x=/y=/hue=`; the Series `.values/.index` barplot idiom taught explicitly (2025 flag).
 - 7c (colab): Palmer penguins exploration (2025's 7c survives).
-- 7d (**decided**): project kickoff — form teams, browse dataset sources (final_project.qmd list), draft the analysis question. Decompresses Day 8; students start the project with the full 10-step grammar fresh. Fallback if Day 7 runs hot: convert to buffer/review and push kickoff to Day 8 morning.
-- EOD: USDA hardiness zones (everything it needs is now taught: merge D6, pivot_table D6, concat D6; the `.str.split().str.get().astype()` chain in setup becomes a 🧭 Field Note; seaborn same-day, so per the half-day rule the EOD's seaborn tasks provide the call skeleton and students fill mappings — ADAPT-leaning WRITE).
+- 7d (**decided**): project kickoff. Form teams, browse dataset sources (final_project.qmd list), draft the analysis question. Decompresses Day 8; students start the project with the full 10-step grammar fresh. Fallback if Day 7 runs hot: convert to buffer/review and push kickoff to Day 8 morning.
+- EOD: USDA hardiness zones (everything it needs is now taught: merge D6, pivot_table D6, concat D6; the `.str.split().str.get().astype()` chain in setup becomes a 🧭 Field Note; seaborn same-day, so per the half-day rule the EOD's seaborn tasks provide the call skeleton and students fill mappings: ADAPT-leaning WRITE).
 
-### Days 8–9 — Project
+### Days 8–9: Project
 
 Unchanged from 2025 in structure (pairs, 9→10-step workflow notebook, day 9 afternoon presentations). The 10-step framework gives project rubrics one new line item (join or reshape used where appropriate; keep "even if minimal" allowance).
 
@@ -204,7 +204,7 @@ Unchanged from 2025 in structure (pairs, 9→10-step workflow notebook, day 9 af
 | EOD day 6 (Eurovision) | keep → D6 EOD (redesign decade-winner step) |
 | 7a/7b/7c visualization | keep → 7a/7b/7c |
 | EOD day 7 (hardiness zones) | keep → D7 EOD (Field-Note the str chains) |
-| NEW build required | 6b reshape session (pivot_table/concat) — the only wholly new session; D5 EOD (new or adapted); D2 EOD (data biography) |
+| NEW build required | 6b reshape session (pivot_table/concat), the only wholly new session; D5 EOD (new or adapted); D2 EOD (data biography) |
 
 Net new construction: one session (6b reshape), two EODs (D2, D5), heavy rework of Day 1–3 sessions. Days 4–7 are mostly relocation and trimming.
 
@@ -222,5 +222,5 @@ Net new construction: one session (6b reshape), two EODs (D2, D5), heavy rework 
 
 - **Day 2 is the experiment's crux.** Students touch DataFrames on day 2 with one day of Python. If the "data biography" EOD works, the design works. Mitigation: keep 2d (pure-Python grammar session) robust, and hold 2025's 2a/2b sessions ready as fallback inserts.
 - **Fundamentals debt surfacing late.** A student who never solidifies loops may not notice until Day 5. Mitigation: grammar minutes + the D2/D5 live-coding grammar sessions are the designated debt-collection points; colab pairing surfaces struggling students early.
-- **Instructor context-switching in sessions** (the original worry): bounded by the vocabulary budget — each session teaches its scope-table rows and nothing else; anything a dataset tempts us toward that isn't in the table becomes a Field Note or a cheatsheet link.
+- **Instructor context-switching in sessions** (the original worry): bounded by the vocabulary budget: each session teaches its scope-table rows and nothing else; anything a dataset tempts us toward that isn't in the table becomes a Field Note or a cheatsheet link.
 - **Schedule check:** all of this assumes the 2025 4-sessions+EOD daily rhythm and a 7+2 day calendar. Verify against actual September 2026 dates before allocating sessions to clock times.

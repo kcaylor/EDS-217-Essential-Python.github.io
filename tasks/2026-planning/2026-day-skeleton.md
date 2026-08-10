@@ -73,9 +73,18 @@ Scope table:
 | exploration methods | all no-arg forms | WRITE |
 | `.value_counts()` | bare + `.head(n)` | WRITE |
 | `df['col']` / `df[['a','b']]` | select one / list-of-columns | WRITE |
-| list literal, indexing, `.append`, `len`, `for x in list` | in service of column lists | WRITE |
+| `.isnull().sum()` | as a fixed phrase, the missing-data count (added 2026-08-10) | WRITE |
+| list literal, indexing, `.append`, `len` | in service of column lists | WRITE |
+| `for x in list` | taught in 2d, which is afternoon; half-day rule applies | ADAPT |
 | dict literal + `d[key]`, as `rename` mapping | NOT methods, NOT iteration, NOT nesting | WRITE |
 | `.rename(columns=dict)` | columns direction only | WRITE |
+
+WRITE constructs: 8. At the vocabulary budget cap, not over it.
+
+Note (2026-08-10): `for x in list` was previously bundled into the list row at WRITE. That
+conflicted with the half-day rule, since loops are taught in the afternoon 2d session. Split
+out and demoted to ADAPT. The Day 2 EOD supplies the complete loop in a Field Note and asks
+students only to change the list.
 
 ### Day 3: Filter + Sort
 
@@ -217,6 +226,11 @@ Net new construction: one session (6b reshape), two EODs (D2, D5), heavy rework 
 5. **Sets: cut from D3.** Set-intersection task removed from the Banana Index EOD; sets become a cheatsheet gloss only.
 6. **Day 7 slot 4: project kickoff** (teams, dataset browsing, question drafting). Fallback if the day runs hot: buffer/review, kickoff moves to Day 8 morning.
 7. **Backfill mechanism: "Field Note," hard cap 2 per EOD.** The cap is a design constraint, not a guideline: a third needed Field Note means the day's teaching or the EOD is misdesigned and must change.
+8. **`.isnull().sum()` is WRITE on Day 2** (2026-08-10). Taught as a fixed phrase, not as
+   chaining theory. Takes the eighth and last WRITE slot in the Day 2 vocabulary budget.
+9. **Day 2 EOD keeps one Field Note** (2026-08-10): the optional loop over a column list. The
+   complete pattern is supplied, students change only the list, and the task is optional. This
+   is the half-day rule working as designed, since loops are taught in the afternoon 2d session.
 
 ## Risks
 

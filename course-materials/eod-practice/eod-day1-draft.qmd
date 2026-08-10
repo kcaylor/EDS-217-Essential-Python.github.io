@@ -90,19 +90,19 @@ We imported two powerful libraries! `pandas` is like Excel but supercharged for 
 Now we'll load 15,000+ rows of Arctic weather data in just one line!
 
 Our data is located at: 
-`https://raw.githubusercontent.com/environmental-data-science/eds217-day0-comp/main/data/raw_data/toolik_weather.csv`
+`https://eds-217-essential-python.github.io/data/toolik_weather.csv`
 
 **🎬 Copy and paste this code:**
 
 ```python
-url = 'https://raw.githubusercontent.com/environmental-data-science/eds217-day0-comp/main/data/raw_data/toolik_weather.csv'
+url = 'https://eds-217-essential-python.github.io/data/toolik_weather.csv'
 df = pd.read_csv(url)
 ```
 
 ```{python}
 #| echo: false
 #| include: false
-url = 'https://raw.githubusercontent.com/environmental-data-science/eds217-day0-comp/main/data/raw_data/toolik_weather.csv'
+url = 'https://eds-217-essential-python.github.io/data/toolik_weather.csv'
 df = pd.read_csv(url)
 ```
 

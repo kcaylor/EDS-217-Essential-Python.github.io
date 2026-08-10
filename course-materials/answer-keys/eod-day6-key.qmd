@@ -26,7 +26,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load the dataset
-url = "https://github.com/Spijkervet/eurovision-dataset/releases/download/2020.0/contestants.csv"
+url = "https://eds-217-essential-python.github.io/data/eurovision_contestants.csv"
 eurovision_df = pd.read_csv(url)
 ```
 
@@ -193,7 +193,7 @@ print(decade_winners)
 #| echo: true
 #| include: true
 
-population_url = 'https://bit.ly/euro_pop'
+population_url = 'https://eds-217-essential-python.github.io/data/eurovision_country_populations.csv'
 
 ```
 

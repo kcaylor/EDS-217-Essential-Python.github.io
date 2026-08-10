@@ -1,12 +1,58 @@
-\
+"""
+Canonical URLs for every dataset used in EDS 217.
 
-# GISS Surface Temperature Analysis (GISTEMP v4)
-# https://data.giss.nasa.gov/gistemp/
-giss_global_mean_monthly = 'https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv'
-nh_global_mean_monthly = 'https://data.giss.nasa.gov/gistemp/tabledata_v4/NH.Ts+dSST.csv'
-sh_global_mean_monthly = 'https://data.giss.nasa.gov/gistemp/tabledata_v4/SH.Ts+dSST.csv'
+All course data is served from the course website itself, out of the repo's
+`data/` directory. There are no third-party hosts and no link shorteners, so
+a dead upstream can never take down a session mid-class.
 
-# Toolik Field Station daily weather (ARC LTER), used in the Day 1 Whole Game
-# Source: https://github.com/environmental-data-science/eds217-day0-comp
-# Served from this repo's data/ directory:
-toolik_weather = 'https://raw.githubusercontent.com/EDS-217-Essential-Python/EDS-217-Essential-Python.github.io/refs/heads/main/data/toolik_weather.csv'
+To rebuild `data/` from the original upstream sources, see
+`tools/fetch_data.py`, which also records the provenance of each file.
+"""
+
+BASE = "https://eds-217-essential-python.github.io/data/"
+
+# --- Day 1: The Whole Game -------------------------------------------------
+toolik_weather = BASE + "toolik_weather.csv"
+
+# --- Days 2-3: import, explore, filter, sort -------------------------------
+world_cities = BASE + "world_cities.csv"
+ocean_temperatures = BASE + "ocean_temperatures.csv"
+banana_index = BASE + "banana_index.csv"
+
+# --- Day 4: clean and transform -------------------------------------------
+marine_microplastics = BASE + "marine_microplastics.csv"
+messy = BASE + "messy.csv"
+national_parks = BASE + "national_parks.csv"
+
+# --- Day 5: group and aggregate -------------------------------------------
+openaq_cnsi = BASE + "openaq_CNSI_measurments.csv"
+openaq_goleta = BASE + "openaq_goleta_measurments.csv"
+openaq_santa_barbara = BASE + "openaq_santa_barbara_measurments.csv"
+
+# --- Day 6: join, reshape, dates ------------------------------------------
+eurovision_contestants = BASE + "eurovision_contestants.csv"
+eurovision_country_populations = BASE + "eurovision_country_populations.csv"
+monthly_co2 = BASE + "monthly_co2_concentration.csv"
+monthly_temperature = BASE + "monthly_temperature_data.csv"
+
+# --- Day 7: visualization --------------------------------------------------
+bsrn_gobabeb = BASE + "bsrn_gob_2019-10.csv"
+hardiness_zones_2023 = BASE + "hardiness_zones_2023.csv"
+hardiness_zones_2012 = BASE + "hardiness_zones_2012.csv"
+zip_codes = BASE + "zip_code_database.csv"
+
+# --- read_csv teaching files (small, purpose-built) ------------------------
+basic_data = BASE + "basic_data.csv"
+date_data = BASE + "date_data.csv"
+missing_values = BASE + "missing_values.csv"
+no_header = BASE + "no_header.csv"
+student_data = BASE + "student_data.csv"
+tab_data = BASE + "tab_data.tsv"
+large_dataset = BASE + "large_dataset.csv"
+
+# --- NASA GISTEMP surface temperature (updates monthly upstream) ----------
+# Mirrored here so class materials are reproducible; refresh with
+# `python tools/fetch_data.py --refresh` when a current series is wanted.
+gistemp_global = BASE + "gistemp_global.csv"
+gistemp_nh = BASE + "gistemp_nh.csv"
+gistemp_sh = BASE + "gistemp_sh.csv"

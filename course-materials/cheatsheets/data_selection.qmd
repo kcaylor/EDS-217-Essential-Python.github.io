@@ -67,7 +67,7 @@ First, let's import pandas and load our dataset.
 import pandas as pd
 
 # Load the dataset
-df = pd.read_csv('https://bit.ly/eds217-studentdata')
+df = pd.read_csv('https://eds-217-essential-python.github.io/data/student_data.csv')
 
 # Display the first few rows
 print(df.head())

@@ -1,0 +1,127 @@
+#!/usr/bin/env python3
+"""
+Populate data/ from the upstream sources of record.
+
+Every dataset the course uses lives in data/ and is served to students from
+the course site. This script is how data/ gets rebuilt, and it records where
+each file came from. Run it from the repo root:
+
+    python tools/fetch_data.py            # fetch anything missing
+    python tools/fetch_data.py --refresh  # re-download everything
+    python tools/fetch_data.py --check    # report status, download nothing
+
+Several upstream URLs have moved or died since 2025. The notes on each entry
+record what changed, so the next person does not have to rediscover it.
+"""
+
+import argparse
+import urllib.request
+from pathlib import Path
+
+DATA = Path(__file__).resolve().parent.parent / "data"
+UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"}
+
+# filename -> (url, note)
+SOURCES = {
+    "toolik_weather.csv": (
+        "https://raw.githubusercontent.com/environmental-data-science/eds217-day0-comp/main/data/raw_data/toolik_weather.csv",
+        "Toolik Field Station daily weather (ARC LTER). Day 1 Whole Game."),
+    "banana_index.csv": (
+        "https://github.com/TheEconomist/banana-index-data/releases/download/1.0/bananaindex.csv",
+        "The Economist Banana Index. Day 3 EOD."),
+    "marine_microplastics.csv": (
+        "https://ucsb.box.com/shared/static/dnnu59jsnkymup6o8aaovdywrtxiy3a9.csv",
+        "NOAA marine microplastics. Day 4 EOD. Box link, no stable public mirror."),
+    "eurovision_contestants.csv": (
+        "https://github.com/Spijkervet/eurovision-dataset/releases/download/2020.0/contestants.csv",
+        "Eurovision contestants 1956-2020. Day 6 EOD."),
+    "hardiness_zones_2023.csv": (
+        "https://prism.oregonstate.edu/phzm/data/2023/phzm_us_zipcode_2023.csv",
+        "USDA plant hardiness zones by ZIP, 2023. Day 7 EOD. "
+        "MOVED 2026: was /projects/phm_data/phzm_us_zipcode_2023.csv, now under /phzm/data/2023/."),
+    "hardiness_zones_2012.csv": (
+        "https://prism.oregonstate.edu/phzm/data/2012/phzm_us_zipcode_2012.csv",
+        "USDA plant hardiness zones by ZIP, 2012. Day 7 EOD. "
+        "MOVED AND RENAMED 2026: was /projects/public/phm/2012/phm_us_zipcode_2012.csv "
+        "(phm_), now /phzm/data/2012/phzm_us_zipcode_2012.csv (phzm_)."),
+    "zip_code_database.csv": (
+        "http://uszipcodelist.com/zip_code_database.csv",
+        "ZIP code reference table, joined against hardiness zones. Day 7 EOD. "
+        "Plain http and a commercial host; the in-repo copy is the reliable one."),
+    "world_cities.csv": (
+        "https://raw.githubusercontent.com/datasets/world-cities/master/data/world-cities.csv",
+        "GeoNames world cities. DataFrame examples."),
+    "national_parks.csv": (
+        "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-09-17/national_parks.csv",
+        "TidyTuesday US national park visits. Pandas colab."),
+    "bsrn_gob_2019-10.csv": (
+        "https://raw.githubusercontent.com/kcaylor/eds217_2023/main/data/BSRN_GOB_2019-10.csv",
+        "BSRN Gobabeb radiation, Oct 2019. Seaborn time-series session. "
+        "Was reached via bit.ly/bsrn_data, which pointed at the eds217_2023 repo."),
+    "gistemp_global.csv": (
+        "https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv",
+        "NASA GISTEMP v4 global mean. Updates monthly upstream."),
+    "gistemp_nh.csv": (
+        "https://data.giss.nasa.gov/gistemp/tabledata_v4/NH.Ts+dSST.csv",
+        "NASA GISTEMP v4 northern hemisphere."),
+    "gistemp_sh.csv": (
+        "https://data.giss.nasa.gov/gistemp/tabledata_v4/SH.Ts+dSST.csv",
+        "NASA GISTEMP v4 southern hemisphere."),
+}
+
+# Authored for the course and version-controlled here; no upstream to fetch.
+IN_REPO = {
+    "ocean_temperatures.csv", "openaq_CNSI_measurments.csv",
+    "openaq_goleta_measurments.csv", "openaq_santa_barbara_measurments.csv",
+    "basic_data.csv", "date_data.csv", "missing_values.csv", "no_header.csv",
+    "student_data.csv", "tab_data.tsv", "large_dataset.csv", "messy.csv",
+    "monthly_co2_concentration.csv", "monthly_temperature_data.csv",
+    "eurovision_country_populations.csv",
+}
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--refresh", action="store_true")
+    ap.add_argument("--check", action="store_true")
+    args = ap.parse_args()
+
+    DATA.mkdir(exist_ok=True)
+    missing, ok, failed = [], 0, []
+
+    for name, (url, _note) in sorted(SOURCES.items()):
+        dest = DATA / name
+        if dest.exists() and not args.refresh:
+            print(f"  have  {dest.stat().st_size:>11,}  {name}")
+            ok += 1
+            continue
+        if args.check:
+            print(f"  MISS               {name}")
+            missing.append(name)
+            continue
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=120) as r:
+                payload = r.read()
+            if not payload:
+                raise OSError("empty response")
+            dest.write_bytes(payload)
+            print(f"  got   {len(payload):>11,}  {name}")
+            ok += 1
+        except Exception as exc:
+            print(f"  FAIL               {name}  ({exc.__class__.__name__}: {exc})")
+            failed.append(name)
+
+    absent = sorted(n for n in IN_REPO if not (DATA / n).exists())
+    print(f"\n{ok}/{len(SOURCES)} fetched datasets present, {len(failed)} failed")
+    if absent:
+        print("Version-controlled files missing from data/ (restore from git):")
+        for n in absent:
+            print(f"  {n}")
+    if args.check and missing:
+        print(f"{len(missing)} would be downloaded")
+    return 1 if (failed or absent) else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

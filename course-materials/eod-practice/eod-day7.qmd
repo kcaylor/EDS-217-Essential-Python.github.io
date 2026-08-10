@@ -38,15 +38,15 @@ You will work with three CSV datasets:
 
 First, we'll use the latest (2023) Plant Hardiness Zone report from https://prism.oregonstate.edu/projects/plant_hardiness_zones.php . The data comes in several formats and parts; we'll use the CSV file that provides us with data per US zip code:
 
-https://prism.oregonstate.edu/projects/phm_data/phzm_us_zipcode_2023.csv
+https://eds-217-essential-python.github.io/data/hardiness_zones_2023.csv
 
 Next, we'll download data from the previous survey in 2012, described at https://prism.oregonstate.edu/projects/plant_hardiness_zones_2012.php :
 
-https://prism.oregonstate.edu/projects/public/phm/2012/phm_us_zipcode_2012.csv
+https://eds-217-essential-python.github.io/data/hardiness_zones_2012.csv
 
 Finally, we'll download and work with a CSV file containing US zip codes:
 
-http://uszipcodelist.com/zip_code_database.csv
+https://eds-217-essential-python.github.io/data/zip_code_database.csv
 
 ## Tasks
 
@@ -62,9 +62,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Define data urls
-url_2023 = 'https://prism.oregonstate.edu/projects/phm_data/phzm_us_zipcode_2023.csv'
-url_2012 = 'https://prism.oregonstate.edu/projects/public/phm/2012/phm_us_zipcode_2012.csv'
-url_zips = 'http://uszipcodelist.com/zip_code_database.csv'
+url_2023 = 'https://eds-217-essential-python.github.io/data/hardiness_zones_2023.csv'
+url_2012 = 'https://eds-217-essential-python.github.io/data/hardiness_zones_2012.csv'
+url_zips = 'https://eds-217-essential-python.github.io/data/zip_code_database.csv'
 
 # Load the data
 df_2023 = pd.read_csv(url_2023)

@@ -60,7 +60,7 @@ Follow along and **type each step**. We'll use simple, short commands that are e
 ```{python}
 # | echo: true
 
-url = "https://raw.githubusercontent.com/EDS-217-Essential-Python/EDS-217-Essential-Python.github.io/refs/heads/main/data/ocean_temperatures.csv"
+url = "https://eds-217-essential-python.github.io/data/ocean_temperatures.csv"
 # Import data
 df = pd.read_csv(url)
 print("Data imported")

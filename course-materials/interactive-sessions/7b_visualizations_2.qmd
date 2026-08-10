@@ -223,7 +223,7 @@ Working with real-world data usually complicates things, and plotting is no exce
 ```{python}
 # Import data
 bsrn = pd.read_csv(
-    'https://bit.ly/bsrn_data',
+    'https://eds-217-essential-python.github.io/data/bsrn_gob_2019-10.csv',
     index_col=0,
     parse_dates=True
     )

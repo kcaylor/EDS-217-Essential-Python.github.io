@@ -47,11 +47,11 @@ Let's start by importing necessary libraries and loading our datasets:
 import pandas as pd
 
 # Load the temperature anomaly dataset
-temp_url = "https://bit.ly/monthly_temp"
+temp_url = "https://eds-217-essential-python.github.io/data/monthly_temperature_data.csv"
 temp_df = pd.read_csv(temp_url, parse_dates=['Date'])
 
 # Load the CO2 concentration dataset
-co2_url = "https://bit.ly/monthly_CO2"
+co2_url = "https://eds-217-essential-python.github.io/data/monthly_co2_concentration.csv"
 co2_df = pd.read_csv(co2_url, parse_dates=['Date'])
 
 print("Temperature data:")

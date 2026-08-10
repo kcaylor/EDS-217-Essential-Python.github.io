@@ -54,12 +54,12 @@ To ensure we're all working with the same data, copy and paste the following URL
 ```{python}
 #| echo: true
 # URLs for different CSV files we'll be using
-url_basic = 'https://bit.ly/eds217-basic'
-url_missing = 'https://bit.ly/eds217-missing'
-url_dates = 'https://bit.ly/eds217-dates'
-url_no_header = 'https://bit.ly/eds217-noheader'
-url_tsv = 'https://bit.ly/eds217-tabs'
-url_large = 'https://bit.ly/eds217-large'
+url_basic = 'https://eds-217-essential-python.github.io/data/basic_data.csv'
+url_missing = 'https://eds-217-essential-python.github.io/data/missing_values.csv'
+url_dates = 'https://eds-217-essential-python.github.io/data/date_data.csv'
+url_no_header = 'https://eds-217-essential-python.github.io/data/no_header.csv'
+url_tsv = 'https://eds-217-essential-python.github.io/data/tab_data.tsv'
+url_large = 'https://eds-217-essential-python.github.io/data/zip_code_database.csv'
 ```
 
 ### Step 4: Prepare Markdown Cells for Notes

@@ -29,7 +29,7 @@ Let's begin with the basics. We'll use the 'basic_data.csv' file for this part.
 ```{python}
 #| echo: true
 # URL for the basic data CSV
-url_basic = 'https://bit.ly/eds217-basic'
+url_basic = 'https://eds-217-essential-python.github.io/data/basic_data.csv'
 
 # Read the CSV file
 df_basic = pd.read_csv(url_basic)
@@ -57,7 +57,7 @@ Next, we'll look at how to handle missing data using the 'missing_values.csv' fi
 ```{python}
 #| echo: true
 # URL for the missing values CSV
-url_missing = 'https://bit.ly/eds217-missing'
+url_missing = 'https://eds-217-essential-python.github.io/data/missing_values.csv'
 
 # Read the CSV file, treating 'N/A' and 'Unknown' as NA values
 df_missing = pd.read_csv(url_missing, na_values=['N/A', 'Unknown'])
@@ -91,7 +91,7 @@ Now, let's work with dates using the 'date_data.csv' file.
 ```{python}
 #| echo: true
 # URL for the date data CSV
-url_dates = 'https://bit.ly/eds217-dates'
+url_dates = 'https://eds-217-essential-python.github.io/data/date_data.csv'
 
 # Read the CSV file, parsing the 'Date' column
 df_dates = pd.read_csv(url_dates, parse_dates=['Date'])
@@ -120,7 +120,7 @@ Now, let's look at how to handle files without headers using the 'no_header.csv'
 ```{python}
 #| echo: true
 # URL for the no header CSV
-url_no_header = 'https://bit.ly/eds217-noheader'
+url_no_header = 'https://eds-217-essential-python.github.io/data/no_header.csv'
 
 # Read the CSV file without headers
 df_no_header = pd.read_csv(url_no_header, header=None, names=['A', 'B', 'C', 'D'])
@@ -135,7 +135,7 @@ Sometimes, you'll encounter files that use tabs as separators instead of commas.
 ```{python}
 #| echo: true
 # URL for the TSV data
-url_tsv = 'https://bit.ly/eds217-tabs'
+url_tsv = 'https://eds-217-essential-python.github.io/data/tab_data.tsv'
 
 # Read the TSV file
 df_tsv = pd.read_csv(url_tsv, sep='\t')
@@ -153,7 +153,7 @@ When dealing with very large files, you might want to read only a portion of the
 ```{python}
 #| echo: true
 # URL for the large data file
-url_large = 'https://bit.ly/eds217-large'
+url_large = 'https://eds-217-essential-python.github.io/data/zip_code_database.csv'
 
 # Read only the first 1000 lines of the file
 df_large_subset = pd.read_csv(url_large, nrows=1000)

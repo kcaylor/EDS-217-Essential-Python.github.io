@@ -95,7 +95,7 @@ We imported two powerful libraries! `pandas` is like Excel but supercharged for 
 
     Our data is located at: 
 
-    `https://raw.githubusercontent.com/environmental-data-science/eds217-day0-comp/main/data/raw_data/toolik_weather.csv`
+    `https://eds-217-essential-python.github.io/data/toolik_weather.csv`
 
     - Create a variable called `url` that stores the URL provided above as a string.
     - Use the pandas library's `read_csv()` function from pandas to load the data from the URL into a new DataFrame called `df`. Any pandas function will always be called using the `pd` object and dot notation: `pd.read_csv()`. 
@@ -107,14 +107,14 @@ The `read_csv()` function can do a ton of different things, but today all you ne
 **🎬 Copy and paste this code:**
 
 ```python
-url = 'https://raw.githubusercontent.com/environmental-data-science/eds217-day0-comp/main/data/raw_data/toolik_weather.csv'
+url = 'https://eds-217-essential-python.github.io/data/toolik_weather.csv'
 df = pd.read_csv(url)
 ```
 
 ```{python}
 #| echo: false
 #| include: false
-url = 'https://raw.githubusercontent.com/environmental-data-science/eds217-day0-comp/main/data/raw_data/toolik_weather.csv'
+url = 'https://eds-217-essential-python.github.io/data/toolik_weather.csv'
 df = pd.read_csv(url)
 ```
 

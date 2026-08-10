@@ -23,7 +23,7 @@ First, let's import the necessary libraries and load an example messy dataframe.
 import pandas as pd
 import numpy as np
 
-url = 'https://bit.ly/messy_csv'
+url = 'https://eds-217-essential-python.github.io/data/messy.csv'
 messy_df = pd.read_csv(url)
 ```
 

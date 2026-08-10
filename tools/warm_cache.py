@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """
-Download every dataset the course materials read, into the local cache.
+Pre-flight check on every data URL the course materials use.
 
-Run this while online. Afterwards the same notebooks render with no network.
+Course-site URLs (https://eds-217-essential-python.github.io/data/...) are
+served from the repo's data/ directory by the offline shim, so they are
+*verified*, not downloaded. Anything pointing somewhere else is downloaded
+into the fallback cache so it still works offline.
 
-    python tools/warm_cache.py             # fetch anything not cached
-    python tools/warm_cache.py --refresh   # re-download everything
-    python tools/warm_cache.py --list      # just show what was found
+    python tools/warm_cache.py           # verify + cache anything external
+    python tools/warm_cache.py --list    # show what was found, touch nothing
+    python tools/warm_cache.py --refresh # re-download the external ones
 
-Reports any URL that fails, which doubles as a dead-link check on the
-course materials.
+A non-zero exit means a URL in the materials has no data behind it.
 """
 
 import argparse
@@ -21,29 +23,27 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import eds217_offline_cache as cache  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-SKIP_DIRS = {"docs", "nbs", "extra_files", ".git", "tasks"}
+# tools/ is skipped: fetch_data.py lists upstream sources on purpose, and they
+# are already mirrored into data/. Scanning it would re-download ~28MB.
+SKIP_DIRS = {"docs", "nbs", "extra_files", ".git", "tasks", "tools", "_to_delete"}
 
-# a URL passed straight into a pandas reader
 DIRECT = re.compile(r"""pd\.read_\w+\(\s*['"](https?://[^'"]+)['"]""")
-# a URL bound to a variable that a reader later uses
 ASSIGN = re.compile(r"""^\s*\w*url\w*\s*=\s*['"](https?://[^'"]+)['"]""",
                     re.IGNORECASE | re.MULTILINE)
-# urls collected in a list or dict literal, e.g. data_urls.py
 BARE = re.compile(r"""['"](https?://[^'"]+\.(?:csv|tsv|txt|json|xlsx|xls))['"]""",
                   re.IGNORECASE)
 
-PLACEHOLDER = re.compile(r"your-course-website\.com|example\.(com|org)", re.I)
-
-
-def sources():
-    files = [p for p in ROOT.rglob("*.qmd") if not any(s in p.parts for s in SKIP_DIRS)]
-    files += [p for p in ROOT.rglob("*.py") if not any(s in p.parts for s in SKIP_DIRS)]
-    return files
+# Illustrative URLs, not course data. The final-project page shows students how
+# to load their OWN Google Drive CSV; the link there is an example, and each
+# student substitutes their own. Nothing to mirror.
+ILLUSTRATIVE = re.compile(r"drive\.google\.com|docs\.google\.com", re.IGNORECASE)
 
 
 def collect():
     found = {}
-    for p in sources():
+    files = [p for p in ROOT.rglob("*.qmd") if not any(s in p.parts for s in SKIP_DIRS)]
+    files += [p for p in ROOT.rglob("*.py") if not any(s in p.parts for s in SKIP_DIRS)]
+    for p in files:
         try:
             text = p.read_text(errors="ignore")
         except OSError:
@@ -61,48 +61,60 @@ def main() -> int:
     args = ap.parse_args()
 
     found = collect()
-    live = {u: f for u, f in found.items() if not PLACEHOLDER.search(u)}
-    stub = {u: f for u, f in found.items() if PLACEHOLDER.search(u)}
+    course = {u: f for u, f in found.items() if u.startswith(cache.COURSE_DATA_BASE)}
+    example = {u: f for u, f in found.items()
+               if u not in course and ILLUSTRATIVE.search(u)}
+    other = {u: f for u, f in found.items() if u not in course and u not in example}
 
-    print(f"Found {len(found)} URLs across the course materials "
-          f"({len(live)} real, {len(stub)} placeholder).")
-    print(f"Cache directory: {cache.cache_dir()}\n")
+    print(f"{len(found)} data URLs in the course materials")
+    print(f"  {len(course)} served from the repo's data/ directory")
+    print(f"  {len(other)} external")
+    print(f"  {len(example)} illustrative (student-supplied, nothing to mirror)\n")
 
     if args.list:
-        for u, f in sorted(live.items()):
-            print(f"  {u}\n      used in: {', '.join(sorted(f))}")
-        if stub:
-            print("\nPlaceholders (never resolvable, materials need fixing):")
-            for u, f in sorted(stub.items()):
-                print(f"  {u}\n      used in: {', '.join(sorted(f))}")
+        for label, group in (("course site", course), ("external", other)):
+            if group:
+                print(f"-- {label} --")
+                for u, f in sorted(group.items()):
+                    print(f"  {u}\n      {', '.join(sorted(f))}")
         return 0
 
-    ok = 0
-    failures = []
-    for url in sorted(live):
-        try:
-            path = cache.fetch(url, force=args.refresh)
-            size = path.stat().st_size
-            if size == 0:
-                raise OSError("downloaded 0 bytes")
-            print(f"  ok    {size:>10,}  {url}")
-            ok += 1
-        except Exception as exc:
-            print(f"  FAIL              {url}\n            {exc.__class__.__name__}: {exc}")
-            failures.append((url, sorted(live[url])))
+    problems = []
 
-    print(f"\ncached {ok} datasets, {len(failures)} failed")
+    print("-- course-site URLs (verified against data/, not downloaded) --")
+    for url in sorted(course):
+        name = url[len(cache.COURSE_DATA_BASE):]
+        path = cache.repo_data_dir() / name
+        if path.is_file():
+            print(f"  ok    {path.stat().st_size:>11,}  {name}")
+        else:
+            print(f"  MISSING            {name}")
+            problems.append((url, sorted(course[url]), "no file in data/"))
 
-    if stub:
-        print("\nPlaceholder URLs still in the materials (these fail for students too):")
-        for u, f in sorted(stub.items()):
-            print(f"  {u}  <-  {', '.join(sorted(f))}")
+    if other:
+        print("\n-- external URLs (downloaded to the fallback cache) --")
+        for url in sorted(other):
+            try:
+                p = cache.fetch(url, force=args.refresh)
+                print(f"  ok    {p.stat().st_size:>11,}  {url}")
+            except Exception as exc:
+                print(f"  FAIL               {url}  ({exc.__class__.__name__})")
+                problems.append((url, sorted(other[url]), str(exc)))
 
-    if failures:
-        print("\nFailed downloads, by file:")
-        for u, f in failures:
-            print(f"  {u}\n      {', '.join(f)}")
+    if example:
+        print("\n-- illustrative, skipped --")
+        for u, f in sorted(example.items()):
+            print(f"  {u}\n      {', '.join(sorted(f))}")
+
+    print()
+    if problems:
+        print(f"{len(problems)} URL(s) with no data behind them:")
+        for url, files, why in problems:
+            print(f"  {url}\n      {why}\n      used in: {', '.join(files)}")
+        print("\nIf a course-site file is missing, run: python tools/fetch_data.py")
         return 1
+
+    print("All data URLs resolve. Materials will render with no network.")
     return 0
 
 

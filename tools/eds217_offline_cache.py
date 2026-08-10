@@ -6,8 +6,15 @@ Course materials keep writing plain:
     pd.read_csv('https://example.org/data.csv')
 
 This module wraps pandas.read_csv and pandas.read_excel so that a string
-argument beginning with http:// or https:// is served from a local cache
-directory when a copy exists, and downloaded (then cached) when it does not.
+argument beginning with http:// or https:// resolves locally.
+
+Resolution order:
+
+1. Course-site data URLs (COURSE_DATA_BASE) map straight to the repo's
+   `data/` directory. No download, ever. You render against the same files
+   git tracks, so edits to a dataset show up immediately.
+2. Any other URL is served from a download cache, populated on first use.
+
 Nothing in the course materials changes, and nothing depends on whether you
 currently have a network connection.
 
@@ -35,6 +42,27 @@ __all__ = ["cache_dir", "index", "fetch", "status", "install"]
 _UA = "Mozilla/5.0 (compatible; eds217-cache/1.0)"
 _INDEX_NAME = "index.json"
 _installed = False
+
+# Course data is served from the course site out of the repo's data/ dir.
+COURSE_DATA_BASE = "https://eds-217-essential-python.github.io/data/"
+# tools/ lives beside data/ in the repo
+_REPO_DATA = Path(__file__).resolve().parent.parent / "data"
+
+
+def repo_data_dir() -> Path:
+    """Where the repo's tracked datasets live. Override with EDS217_DATA_DIR."""
+    return Path(os.environ.get("EDS217_DATA_DIR", _REPO_DATA))
+
+
+def _local_for_course_url(url: str):
+    """Map a course-site data URL to the tracked file in data/, if present."""
+    if not url.startswith(COURSE_DATA_BASE):
+        return None
+    name = url[len(COURSE_DATA_BASE):].split("?")[0]
+    if not name or "/" in name or name.startswith("."):
+        return None
+    candidate = repo_data_dir() / name
+    return candidate if candidate.is_file() else None
 
 
 def cache_dir() -> Path:
@@ -114,6 +142,11 @@ def _resolve(url: str) -> object:
     if mode == "off":
         return url
 
+    local = _local_for_course_url(url)
+    if local is not None:
+        _say(f"repo data  {local.name}")
+        return local
+
     dest = _cache_path(url)
 
     if mode == "refresh":
@@ -176,7 +209,10 @@ def install() -> bool:
 
 def status() -> str:
     idx = index()
+    d = repo_data_dir()
+    n = len(list(d.glob("*.csv")) + list(d.glob("*.tsv"))) if d.is_dir() else 0
     return (
-        f"eds217 offline cache: mode={_mode()} "
-        f"dir={cache_dir()} entries={len(idx)}"
+        f"eds217 offline cache: mode={_mode()}\n"
+        f"  repo data : {d} ({n} files, used first for course-site URLs)\n"
+        f"  fallback  : {cache_dir()} ({len(idx)} cached downloads)"
     )

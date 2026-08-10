@@ -1,0 +1,313 @@
+---
+title: "Live Coding Session"
+subtitle: "🎙️ Instructor Notes: Lists & Dictionaries"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+*Instructor run-through for Session 2D. Student-facing page:
+[2d_lists_and_dicts.qmd](2d_lists_and_dicts.qmd). Headings below match the markdown scaffold
+students set up, so everyone stays in the same place.*
+
+**Total: 25 minutes of coding, 20 minutes of buffer and questions.**
+
+:::{.callout-important title="Scope discipline"}
+This session teaches lists and dictionaries as *objects*. It does not teach comprehensions.
+Comprehensions appear on Day 5, at reading level only. If a student asks, the answer is
+"that's a shortcut for exactly this loop, and we'll read some on Friday."
+
+Do not use `lambda` anywhere. It is not in this course.
+:::
+
+## Framing (1 min)
+
+Say something close to this:
+
+> Every time today that you wrote square brackets with column names inside, you wrote a list.
+> Every time you renamed a column, you wrote a dictionary. You already know how to use these.
+> What you don't have yet is a clear picture of what they *are*, and that picture is what
+> makes Day 3 onward feel easy instead of arbitrary.
+
+## 1. Making lists (2 min)
+
+Start with something not about data, so the container is the subject:
+
+```{python}
+sites = ['Toolik', 'Goleta', 'Santa Barbara']
+sites
+```
+
+Points to make:
+
+- square brackets, comma-separated
+- items stay in the order you wrote them
+- a list can hold anything, including mixed types
+
+```{python}
+mixed = ['Toolik', 1988, -8.2, True]
+mixed
+```
+
+Empty list, since they'll need it in a moment:
+
+```{python}
+readings = []
+readings
+```
+
+## 2. Getting things out of a list (3 min)
+
+The zero-indexing conversation. Expect this to be the sticking point.
+
+```{python}
+sites[0]
+```
+
+```{python}
+sites[2]
+```
+
+Draw the positions on the board under the words. Then the classic error, **run it on
+purpose**:
+
+```python
+sites[3]
+```
+
+> `IndexError: list index out of range`
+
+Ask them to say why before you explain. Three items, positions 0, 1, 2.
+
+Counting backwards:
+
+```{python}
+sites[-1]
+```
+
+Slicing, kept deliberately light:
+
+```{python}
+sites[0:2]
+```
+
+Say: the end is exclusive, you'll get this wrong sometimes, everyone does, check with `len`.
+
+```{python}
+len(sites)
+```
+
+## 3. Changing a list (3 min)
+
+```{python}
+readings = []
+readings.append(4.4)
+readings.append(5.1)
+readings.append(3.8)
+readings
+```
+
+Points to make:
+
+- `.append()` adds to the end
+- it changes the list **in place** and returns nothing
+
+Run this to make the point stick, because it's the mirror image of the pandas behavior from
+this morning:
+
+```{python}
+result = readings.append(9.9)
+print(result)
+print(readings)
+```
+
+> `.append()` gave you `None`. The list changed anyway. Compare that with `.rename()` this
+> morning, which gave you a **new** DataFrame and left the original alone. Two opposite
+> conventions, and you have to know which one you're dealing with.
+
+That contrast is the most valuable thirty seconds in this session. Don't rush it.
+
+You can also replace by position:
+
+```{python}
+sites[1] = 'Goleta Station'
+sites
+```
+
+## 4. Looping over a list (3 min)
+
+```{python}
+for site in sites:
+    print(site)
+```
+
+Points to make:
+
+- `site` is a name *you* chose; nothing magic about it
+- the colon, and the indentation, are both required
+- the body runs once per item
+
+Do the indentation error live:
+
+```python
+for site in sites:
+print(site)
+```
+
+> `IndexError`? No: `IndentationError`. Say that Python uses indentation the way other
+> languages use braces.
+
+Something slightly more useful:
+
+```{python}
+for site in sites:
+    print(site, len(site))
+```
+
+## 5. Making dictionaries (3 min)
+
+```{python}
+station_elevations = {
+    'Toolik': 719,
+    'Goleta': 30,
+    'Santa Barbara': 15,
+}
+station_elevations
+```
+
+Points to make:
+
+- curly braces, `key: value` pairs
+- keys are usually strings; values can be anything
+- the trailing comma is legal and makes edits cleaner
+
+Contrast with a list explicitly:
+
+> A list answers "what's in position 2?" A dictionary answers "what's the value for Goleta?"
+> Choose based on which question you'll be asking.
+
+## 6. Getting things out of a dictionary (4 min)
+
+```{python}
+station_elevations['Toolik']
+```
+
+The error, on purpose:
+
+```python
+station_elevations['Bren Hall']
+```
+
+> `KeyError: 'Bren Hall'`
+
+Then the safe version:
+
+```{python}
+station_elevations.get('Bren Hall')
+```
+
+```{python}
+station_elevations.get('Bren Hall', 0)
+```
+
+Adding and updating:
+
+```{python}
+station_elevations['Bren Hall'] = 12
+station_elevations
+```
+
+```{python}
+station_elevations['Goleta'] = 31
+station_elevations
+```
+
+Point to make: same square-bracket syntax adds a new key or overwrites an existing one.
+There's no warning either way.
+
+```{python}
+list(station_elevations.keys())
+```
+
+```{python}
+list(station_elevations.values())
+```
+
+## 7. Looping over a dictionary (3 min)
+
+The default surprises people:
+
+```{python}
+for key in station_elevations:
+    print(key)
+```
+
+> Looping over a dictionary gives you the **keys**, not the values.
+
+Then both at once:
+
+```{python}
+for station, elevation in station_elevations.items():
+    print(station, 'is at', elevation, 'meters')
+```
+
+Two loop variables, because `.items()` hands back a pair each time. Don't go deeper than
+this; they only need to read it fluently.
+
+## 8. Why this mattered today (3 min)
+
+Bring it back to the morning. Write these two cells and let them sit side by side:
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/openaq_goleta_measurments.csv'
+goleta = pd.read_csv(url)
+
+keep = ['location_name', 'parameter', 'value', 'unit']
+goleta[keep].head()
+```
+
+```{python}
+goleta.rename(columns={'datetimeUtc': 'datetime_utc'}).columns.tolist()
+```
+
+Say:
+
+> `keep` is a list, and that's the inner set of brackets in `df[['a', 'b']]`. The thing
+> inside `rename` is a dictionary. You were already writing both of these. Now you know what
+> they are.
+
+Finish with the loop that pays off in tonight's EOD:
+
+```{python}
+for column_name in ['Daily_AirTemp_Mean_C', 'Daily_Precip_Total_mm']:
+    print(column_name)
+```
+
+> There's an optional Field Note in tonight's practice that uses exactly this. You now have
+> everything you need for it.
+
+## Timing checkpoints
+
+| Elapsed | Should be at |
+|---|---|
+| 5 min | end of section 2, indexing done |
+| 12 min | end of section 4, loops over lists working |
+| 20 min | end of section 6, dictionary lookup and `KeyError` seen |
+| 25 min | section 8, tied back to pandas |
+
+If you're behind at 12 minutes, cut slicing (section 2) and `.keys()`/`.values()`
+(section 6). Do not cut section 8; the payoff is the point.
+
+## Common problems
+
+- **Zero-indexing.** Draw positions under the items on the board. Come back to it in section 4.
+- **Indentation.** Trigger the error deliberately rather than warning about it.
+- **`.append()` returning `None`.** Some student will write `readings = readings.append(x)`
+  and lose their list. Show it before it happens.
+- **Curly versus square brackets.** If a student writes `{}` for a list, ask what question
+  they want to ask of it.

@@ -1,5 +1,5 @@
 ---
-title: "Python Data Collections"
+title: "Import & Explore"
 subtitle: "Day 2"
 description: "Tuesday September 1^st^, 2026"
 ---
@@ -12,28 +12,31 @@ description: "Tuesday September 1^st^, 2026"
 *An illustration of collectible toys.* [MidJourney 5](https://www.midjourney.com/jobs/7c249ba1-5cc4-4a9b-92d9-78ca3134f623?index=0)
 :::
 
-<!-- ## Pre-class prep -->
+Yesterday you ran a complete workflow without knowing how any of it worked. Today we slow
+down on the first two steps of that workflow, **Import** and **Explore**, and you learn to
+find out what is actually in a file before you compute anything from it.
 
-<!-- Install the following packages by running the following in your RStudio *Console*: -->
-
-<!-- ```{r} -->
-<!-- #| eval: false -->
-<!-- #| echo: true -->
-<!-- install.packages("ARTofR") # optional, but an awesome package for creating R script section headers -->
-<!-- ``` -->
+Python's two essential containers, **lists** and **dictionaries**, show up today in the
+places you actually need them: a list of columns to select, a dictionary to rename them.
 
 ## Class materials
 
 | {{< fa calendar-day title="A calendar with one day highlighted" >}} Session  | {{< fa laptop-code title="A laptop with on-screen code" >}} Session 1  |  {{< fa laptop-code title="A laptop with on-screen code" >}} Session 2 |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| day 2 / morning   | [🐍 Lists](interactive-sessions/2a_lists.qmd){target="_blank"} | [🐍 Dictionaries](interactive-sessions/2b_dictionaries.qmd) |
-| day 2 / afternoon | [🙌 Working with Lists, Dictionaries, and Sets](coding-colabs/2c_lists_dictionaries_sets.qmd){target="_blank"} | [📝 List and Dictionary Comprehensions](live-coding/2d_list_comprehensions.qmd) |
+| day 2 / morning   | [🐼 Reading Data into pandas](interactive-sessions/2a_reading_data.qmd) | [🔎 Exploring a DataFrame](interactive-sessions/2b_exploring_data.qmd) |
+| day 2 / afternoon | [🙌 Five Claims About a Dataset You've Never Seen](coding-colabs/2c_exploring_unfamiliar_data.qmd) | [📝 Lists & Dictionaries, On Their Own Terms](live-coding/2d_lists_and_dicts.qmd) |
 : {.hover .bordered tbl-colwidths="[20,40,40]"} 
 
 ## End-of-day practice
 
-Complete the following tasks / activities before heading home for the day!
+Today's practice returns to the dataset you ran yesterday, and asks what was actually in it.
 
-- [{{< fa pencil title="A pencil" >}} **Day 2 Practice:** Python Data Structures Practice](eod-practice/eod-day2.qmd)
+- [{{< fa pencil title="A pencil" >}} **Day 2 Practice:** A Data Biography](eod-practice/eod-day2-2026.qmd)
 
 ## Additional Resources
+
+- [{{< fa diagram-project title="A workflow diagram" >}} The Data Science Workflow](the-data-science-workflow.qmd)
+- [{{< fa table title="A table" >}} `read_csv` cheatsheet](cheatsheets/read_csv.qmd)
+- [{{< fa table title="A table" >}} pandas DataFrames cheatsheet](cheatsheets/pandas_dataframes.qmd)
+- [{{< fa table title="A table" >}} lists cheatsheet](cheatsheets/lists.qmd)
+- [{{< fa table title="A table" >}} dictionaries cheatsheet](cheatsheets/dictionaries.qmd)

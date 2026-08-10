@@ -1,0 +1,157 @@
+---
+title: "Coding Colab"
+subtitle: "🙌 Five Claims About a Dataset You've Never Seen"
+execute:
+  echo: false
+  include: false
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](images/collections.jpeg)
+:::
+
+This morning you learned the exploration ritual on a dataset we walked through together.
+Now you'll use it on one nobody has explained to you.
+
+Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
+finish a numbered task. The person not typing reads the output aloud and says what they
+think it means before you move on.
+
+You have 45 minutes.
+
+## The data
+
+US National Park Service visitor records:
+
+```
+https://eds-217-essential-python.github.io/data/national_parks.csv
+```
+
+That's all you're getting. No data dictionary, no column descriptions. Figuring out what's
+in there is the exercise.
+
+## Setup
+
+Create a notebook named `Colab_2C_Unfamiliar_Data.ipynb`, with both partners' names in the
+title cell, then read the file in.
+
+## Your goal
+
+By the end of the session, produce **five factual claims** about this dataset, each written
+in a markdown cell, each immediately preceded by the code cell that proves it.
+
+A claim is factual if a skeptical reader could check it against your output. Compare:
+
+> ❌ "The dataset has a lot of parks in it."
+>
+> ✅ "The dataset contains 4,743 rows describing units of type `National Park`, out of 21,560
+> rows total."
+
+At least one of your five claims must be about a **problem** with the data.
+
+## Working through it
+
+Don't try to write claims immediately. Explore first, then decide what's worth claiming.
+
+1. **Size it up.** How many rows and columns? What are the column names?
+
+2. **Check the types.** Run `.dtypes`. At least one column has a type you would not predict
+   from its name. Find it, and then work out *why* by looking at what's actually in that
+   column. This is the single most important thing in this dataset.
+
+3. **Run the health check.** Which columns have missing values, and how many?
+
+4. **Count the categories.** Use `.value_counts()` on at least three text columns. Which
+   columns are informative? Is any of them close to a constant?
+
+5. **Summarize the numbers.** Run `.describe()`. One of the numeric summaries is distorted.
+   Say which, and connect it to what you found in step 2.
+
+6. **Make a working subset.** Build a list of the columns you'd actually keep, select them
+   into a smaller DataFrame, and rename at least one column with a dictionary.
+
+7. **Write your five claims.** Each one: a code cell, then a markdown cell stating the claim
+   in a full sentence with the specific numbers in it.
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/national_parks.csv'
+parks = pd.read_csv(url)
+parks.shape
+```
+
+```{python}
+parks.columns.tolist()
+```
+
+```{python}
+parks.dtypes
+```
+
+```{python}
+parks['year'].value_counts().head(10)
+```
+
+```{python}
+parks.isnull().sum()
+```
+
+```{python}
+parks['unit_type'].value_counts()
+```
+
+```{python}
+parks['region'].value_counts()
+```
+
+```{python}
+parks['state'].value_counts().head()
+```
+
+```{python}
+parks.describe()
+```
+
+```{python}
+parks['visitors'].describe()
+```
+
+```{python}
+keep = ['year', 'parkname', 'unit_name', 'unit_type', 'region', 'state', 'visitors']
+parks_small = parks[keep]
+parks_small = parks_small.rename(columns={'unit_name': 'park', 'unit_type': 'designation'})
+parks_small.columns.tolist()
+```
+
+```{python}
+parks_small.head()
+```
+
+:::{.callout-tip title="If you get stuck on step 2"}
+Ask the question a different way. If a column of years isn't stored as a number, then
+something in it isn't a year. `.value_counts()` will show you what.
+:::
+
+:::{.callout-note title="If you finish early"}
+Write a sixth claim about something you'd need to know before using this data to answer
+"which national park is the most visited?" You do not need to answer that question. We build
+the tools for it over the next three days. Just say what would have to be true first.
+:::
+
+## Wrap-up
+
+We'll hear two or three pairs read out their problem claim. Be ready to say how you found it,
+not just what it was.
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+- [📖 EDS 217 cheatsheet: lists](../cheatsheets/lists.qmd)
+- [📖 EDS 217 cheatsheet: dictionaries](../cheatsheets/dictionaries.qmd)

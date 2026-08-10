@@ -1,0 +1,111 @@
+---
+title: "Live Coding Session"
+subtitle: "🐍 Lists & Dictionaries, On Their Own Terms"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](images/collections.jpg)
+:::
+
+All day you've used lists and dictionaries in service of something else: a list of column
+names to select, a dictionary to rename columns. That's the right way to meet them, because
+that's how you'll actually use them.
+
+Now we slow down and look at them directly, because these two containers are the backbone of
+Python, and twenty minutes of deliberate practice here will save you a great deal of
+confusion on Days 3 through 7.
+
+## How a live coding session works
+
+We both start from an empty notebook and write everything together, live. There is no code
+on this page to copy, on purpose.
+
+- I write a line, explain it, and run it. You write the same line and run it.
+- When something breaks, we fix it together. Things will break. That's the useful part.
+- If you fall behind, say so. Someone else is behind too, and I would much rather slow down
+  than lose you.
+- Type the code. Do not copy it from a neighbor's screen. The typing is the point.
+
+## Set up your notebook
+
+1. Create a new notebook named `Session_2D_Lists_and_Dicts.ipynb`.
+
+2. Add a title cell:
+
+```markdown
+# Day 2: Session 2D - Lists & Dictionaries
+
+Date: 09/01/2026
+```
+
+3. Add the following **markdown cells** now, in this order, leaving space under each. We'll
+   fill in the code as we go, and having the structure in place means your notes stay
+   organized instead of becoming one long scroll.
+
+```markdown
+## 1. Making lists
+
+## 2. Getting things out of a list
+
+## 3. Changing a list
+
+## 4. Looping over a list
+
+## 5. Making dictionaries
+
+## 6. Getting things out of a dictionary
+
+## 7. Looping over a dictionary
+
+## 8. Why this mattered today
+```
+
+4. Under each heading, add an empty code cell.
+
+That's your scaffold. Now close this page and switch to your notebook.
+
+## What we'll cover
+
+**Lists** (about 10 minutes)
+
+- writing a list, and what can go in one
+- indexing from the front and from the back
+- slicing out a piece
+- `len()`
+- `.append()` to add to the end
+- looping over a list with `for`
+
+**Dictionaries** (about 10 minutes)
+
+- writing a dictionary, keys and values
+- looking up a value by key
+- adding and changing entries
+- `.keys()` and `.values()`
+- looping over a dictionary
+- what happens when you ask for a key that isn't there
+
+**Tying it back** (about 5 minutes)
+
+- the list of column names you used in Session 2A
+- the rename dictionary you used in Session 2B
+- one small loop that checks several columns at once
+
+## What you should be able to do afterwards
+
+- write a list and a dictionary from scratch, without looking anything up
+- get an item out of either one, and say which container you'd choose for a given job
+- read a `for` loop and predict what it prints
+- explain why `df[['a', 'b']]` has two sets of brackets
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: lists](../cheatsheets/lists.qmd)
+- [📖 EDS 217 cheatsheet: dictionaries](../cheatsheets/dictionaries.qmd)
+- [📖 EDS 217 cheatsheet: control flows](../cheatsheets/control_flows.qmd)
+- [Python tutorial: data structures](https://docs.python.org/3/tutorial/datastructures.html){target="_blank"}

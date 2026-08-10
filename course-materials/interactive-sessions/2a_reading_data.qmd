@@ -1,0 +1,287 @@
+---
+title: "Interactive Session"
+subtitle: "🐼 Reading Data into pandas"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](images/panda_intro.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A panda, reading.* [MidJourney 5](https://www.midjourney.com)
+:::
+
+Yesterday you ran `pd.read_csv()` and a DataFrame appeared. Today you slow that line down
+and learn what it actually does, what it gives you back, and how to steer it. Everything
+this week starts with getting data into Python correctly, so this is the most load-bearing
+hour of the course.
+
+By the end of this session you will be able to:
+
+- read a CSV from a URL or a file path into a DataFrame
+- explain the difference between a **DataFrame** and a **Series**
+- choose a column to serve as the **index**
+- get the column names out as a Python **list**, and use a list to select columns
+
+## Getting Started
+
+1. **Create a new notebook:**
+   - Click the `+` button to open a Launcher.
+   - Under **Notebook**, click **eds217_2026**.
+
+2. **Rename your notebook** to: `Session_2A_Reading_Data.ipynb`
+
+3. **Add a title cell** (Markdown), updating the date to today:
+
+```markdown
+# Day 2: Session 2A - Reading Data into pandas
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/2a_reading_data.html)
+
+Date: 09/01/2026
+```
+
+4. **Add a code cell** below the title cell.
+
+:::{.callout-caution}
+Save your work frequently with `Ctrl+S` (`Cmd+S` on macOS).
+:::
+
+## Importing pandas
+
+Every notebook that touches data starts the same way:
+
+```{python}
+import pandas as pd
+```
+
+`import pandas` makes the library available. `as pd` gives it a short nickname so you can
+write `pd.read_csv()` instead of `pandas.read_csv()`. Essentially every pandas user on
+earth writes `pd`, so we will too.
+
+## Our data for today
+
+We'll work with air quality measurements from an OpenAQ monitoring station in Goleta,
+just up the road from Bren.
+
+```{python}
+url = 'https://eds-217-essential-python.github.io/data/openaq_goleta_measurments.csv'
+```
+
+Notice we put the address in a **variable** first. This is a habit worth forming: the URL
+is long, you'll use it more than once, and naming it keeps your `read_csv` line readable.
+
+## `pd.read_csv()`
+
+Here is the whole sentence:
+
+```{python}
+goleta = pd.read_csv(url)
+```
+
+That's it. `pd.read_csv()` takes a location, goes and gets the file, parses the commas, and
+hands you back a **DataFrame**. Let's look at the first few rows:
+
+```{python}
+goleta.head()
+```
+
+:::{.callout-note}
+🐍 `read_csv` is happy with either a web address or a path to a file on disk. These two
+are the same idea:
+
+```python
+df = pd.read_csv('https://example.org/data.csv')   # from the web
+df = pd.read_csv('data/measurements.csv')          # from a folder next to your notebook
+```
+
+This week we mostly read from the web, because then everyone in the room has exactly the
+same file.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+The Santa Barbara station's data is at the same address, but with
+`openaq_santa_barbara_measurments.csv` on the end. Read it into a variable called
+`santa_barbara` and display its first few rows.
+:::
+
+## DataFrames and Series
+
+A **DataFrame** is a table: rows and named columns, like a well-behaved spreadsheet.
+
+Pull a single column out and you get a **Series**, which is one column of values with the
+row labels still attached:
+
+```{python}
+goleta['value']
+```
+
+Check the types to see the difference plainly:
+
+```{python}
+print(type(goleta))
+print(type(goleta['value']))
+```
+
+This distinction matters more than it looks. Many pandas methods return a Series, and
+knowing you're holding one column rather than a table tells you what you can do next.
+
+```{python}
+goleta['value'].head()
+```
+
+:::{.callout-note}
+🐍 Square brackets with **one column name** give you a Series. Square brackets with a
+**list of column names** give you back a DataFrame, even if the list has one item:
+
+```python
+goleta['value']       # Series
+goleta[['value']]     # DataFrame with one column
+```
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Pull out the `parameter` column. Confirm with `type()` that you have a Series, then display
+its first five values.
+:::
+
+## Column names as a list
+
+You often want to know what's in a table before you do anything else. The `.columns`
+attribute tells you:
+
+```{python}
+goleta.columns
+```
+
+That's a pandas object. To get a plain Python **list**, which is easier to read and to work
+with, use `.tolist()`:
+
+```{python}
+column_names = goleta.columns.tolist()
+column_names
+```
+
+A **list** is Python's basic container for an ordered collection of things. You write one
+with square brackets and commas:
+
+```{python}
+parameters_we_care_about = ['o3', 'pm25']
+parameters_we_care_about
+```
+
+You get items out by **position**, counting from zero:
+
+```{python}
+print(column_names[0])
+print(column_names[1])
+```
+
+And `len()` tells you how many items there are:
+
+```{python}
+len(column_names)
+```
+
+:::{.callout-note}
+🐍 Counting from zero trips up everyone at first. The first item is at position `0`, the
+second at `1`, and the last one is at `len(x) - 1`. You can also count backwards: `[-1]` is
+the last item.
+:::
+
+```{python}
+column_names[-1]
+```
+
+## Selecting columns with a list
+
+Here's where the list pays off. Hand `read_csv`'s result a list of column names and you get
+a smaller DataFrame with just those columns:
+
+```{python}
+keep = ['location_name', 'parameter', 'value', 'unit']
+goleta[keep].head()
+```
+
+You'll see this written both ways. The inner brackets are the list, the outer brackets are
+the selection:
+
+```{python}
+goleta[['location_name', 'parameter', 'value', 'unit']].head()
+```
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Build a list called `time_columns` containing `'datetimeUtc'` and `'datetimeLocal'`, then
+use it to display just those two columns from `goleta`.
+:::
+
+## Choosing the index with `index_col=`
+
+Every DataFrame has an **index**: the labels down the left-hand side. By default pandas
+numbers the rows `0, 1, 2, ...`. You saw those numbers in `head()`.
+
+Sometimes a column in the file is a better label than a row number. `index_col=` tells
+`read_csv` to use one:
+
+```{python}
+goleta_by_time = pd.read_csv(url, index_col='datetimeLocal')
+goleta_by_time.head()
+```
+
+The local timestamp is now the row label, and it's no longer one of the columns:
+
+```{python}
+goleta_by_time.columns.tolist()
+```
+
+:::{.callout-note}
+🐍 `index_col=` is our first **keyword argument**: an argument you pass by name rather than
+by position. `read_csv` has dozens of them, and you'll meet a few more this week. The
+pattern is always `name=value`, after the required arguments.
+:::
+
+:::{.callout-caution title="Choosing an index"}
+An index is most useful when its values are meaningful and unique. `location_name` would be
+a poor choice here, since every row has the same station name. A timestamp is a good choice,
+because it identifies the row.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Read the Goleta file again, this time using `datetimeUtc` as the index, into a variable
+called `goleta_utc`. How many columns does it have compared to the original `goleta`?
+:::
+
+## Putting it together
+
+You now have the first sentence of every workflow you'll write:
+
+```python
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/some_file.csv'
+df = pd.read_csv(url)
+df.head()
+```
+
+## Key points
+
+- `import pandas as pd` once, at the top of every notebook.
+- `pd.read_csv(location)` reads a CSV from a URL or a file path and returns a **DataFrame**.
+- `df['col']` gives a **Series** (one column). `df[['a', 'b']]` gives a **DataFrame**.
+- `df.columns.tolist()` gives you the column names as a plain Python **list**.
+- Lists are ordered, written with `[]`, indexed from `0`, and measured with `len()`.
+- `index_col='name'` chooses which column becomes the row labels.
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: `read_csv`](../cheatsheets/read_csv.qmd)
+- [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+- [📖 EDS 217 cheatsheet: pandas Series](../cheatsheets/pandas_series.qmd)
+- [📖 EDS 217 cheatsheet: lists](../cheatsheets/lists.qmd)
+- [pandas documentation: `read_csv`](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html){target="_blank"}

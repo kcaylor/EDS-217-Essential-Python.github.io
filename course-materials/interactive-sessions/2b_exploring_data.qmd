@@ -1,0 +1,295 @@
+---
+title: "Interactive Session"
+subtitle: "🔎 Exploring a DataFrame"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](images/panda_intro2.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A panda, investigating.* [MidJourney 5](https://www.midjourney.com)
+:::
+
+You have a DataFrame. Before you compute anything with it, you need to know what you're
+holding: how big it is, what the columns are, what type each one is, what's missing, and
+what the values look like. That's this session.
+
+This is the step people skip, and skipping it is how you end up confidently reporting an
+average of two different units. We're going to do it properly, and by the end of the hour
+you'll have found two real problems in a real dataset.
+
+By the end of this session you will be able to:
+
+- size up a DataFrame with `.shape`, `.columns`, and `.dtypes`
+- run a health check with `.info()` and `.isnull().sum()`
+- summarize numbers with `.describe()`, and know when not to trust it
+- count categories with `.value_counts()`
+- rename columns using a Python **dictionary**
+
+## Getting Started
+
+1. **Create a new notebook** from the Launcher (**eds217_2026**).
+
+2. **Rename your notebook** to: `Session_2B_Exploring_Data.ipynb`
+
+3. **Add a title cell** (Markdown), updating the date to today:
+
+```markdown
+# Day 2: Session 2B - Exploring a DataFrame
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/2b_exploring_data.html)
+
+Date: 09/01/2026
+```
+
+4. Read in the same Goleta air quality data from the last session:
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/openaq_goleta_measurments.csv'
+goleta = pd.read_csv(url)
+```
+
+## Look at it
+
+Always start by looking. `.head()` shows the first five rows, `.tail()` the last five:
+
+```{python}
+goleta.head()
+```
+
+```{python}
+goleta.tail()
+```
+
+Both take a number if you want more or fewer:
+
+```{python}
+goleta.head(3)
+```
+
+## How big is it?
+
+`.shape` gives you `(rows, columns)`:
+
+```{python}
+goleta.shape
+```
+
+It's a pair of numbers, so you can pull either one out by position, exactly like the lists
+you met in the last session:
+
+```{python}
+print("rows:", goleta.shape[0])
+print("columns:", goleta.shape[1])
+```
+
+## What are the columns, and what type is each?
+
+```{python}
+goleta.columns.tolist()
+```
+
+```{python}
+goleta.dtypes
+```
+
+`object` almost always means text. `float64` and `int64` are numbers. Types matter because
+they decide what you're allowed to do: you can average a `float64`, and you cannot average
+an `object`.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+How many columns in `goleta` hold text? Use `.dtypes` to answer, and say how you counted.
+:::
+
+## The health check: `.info()`
+
+`.info()` is the single most useful line in this session. It combines the shape, the column
+names, the types, and, critically, **how many non-null values each column has**:
+
+```{python}
+goleta.info()
+```
+
+Read the `Non-Null Count` column carefully. Most columns have 1962 non-null values, one for
+every row. Three of them have `0`.
+
+`country_iso`, `isMobile`, and `isMonitor` are **completely empty**. They exist as column
+headers in the file, and there is not one single value in any of them.
+
+:::{.callout-important}
+This is why we explore. Those three columns look perfectly real in `head()`, which shows
+`NaN`, and you might not think twice. `.info()` tells you they are empty from top to bottom.
+:::
+
+You can ask the same question directly. `.isnull()` marks every missing value, and `.sum()`
+counts them per column:
+
+```{python}
+goleta.isnull().sum()
+```
+
+We won't fix this today. Deciding what to *do* about missing data is Day 4's job. Today we
+only need to know it's there.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Read the Santa Barbara file into `santa_barbara` and run `.info()` on it. Does it have the
+same three empty columns?
+:::
+
+## Summarizing numbers with `.describe()`
+
+`.describe()` gives you count, mean, standard deviation, min, max, and quartiles for every
+numeric column:
+
+```{python}
+goleta.describe()
+```
+
+Look at the `value` column. The mean is about 6.4 and the minimum is −4.
+
+Two things should bother you.
+
+**First, a negative concentration.** You cannot have less than zero of a pollutant. That's
+either an instrument artifact or a sentinel value, and it's the kind of thing you flag now
+and decide about later.
+
+**Second, and worse, that mean is meaningless.** Look at what's in the `unit` column:
+
+```{python}
+goleta['unit'].value_counts()
+```
+
+Some rows are in micrograms per cubic metre and some are in parts per million. The mean of
+6.4 was computed by averaging those together. It is a number, it is not a fact.
+
+:::{.callout-caution title="`.describe()` will happily lie to you"}
+`.describe()` averages whatever is in the column. It has no idea that this table stacks
+different pollutants, in different units, in a single `value` column. Data shaped like this,
+with one row per measurement and a column saying which kind, is extremely common in
+environmental data. Getting a real answer out of it means grouping first, which is Day 5.
+:::
+
+## Counting categories with `.value_counts()`
+
+`.describe()` is for numbers. For text columns, the question is usually "what values appear,
+and how often?" That's `.value_counts()`:
+
+```{python}
+goleta['parameter'].value_counts()
+```
+
+Three pollutants: `pm25`, `o3`, and `pm10`. Now the `unit` result above makes sense, since
+ozone is reported in ppm and particulates in µg/m³.
+
+`.value_counts()` is also how you spot a column that carries no information:
+
+```{python}
+goleta['location_name'].value_counts()
+```
+
+Every row says `Goleta`. That column is a constant. It's not wrong, and it will matter later
+when we stack several stations together, but within this file it tells you nothing.
+
+Add `.head(n)` when a column has many distinct values:
+
+```{python}
+goleta['datetimeLocal'].value_counts().head()
+```
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Use `.value_counts()` on the `provider` and `owner_name` columns. Are either of them
+constants, like `location_name`?
+:::
+
+## Renaming columns with a dictionary
+
+`datetimeUtc` and `datetimeLocal` are in camelCase, while everything else uses lowercase
+with underscores. Mixed naming styles cause typos. Let's fix them.
+
+To do that you need Python's other essential container: the **dictionary**.
+
+A **dictionary** stores pairs. Each pair has a **key** and a **value**, written `key: value`,
+and the whole thing goes in curly braces:
+
+```{python}
+new_names = {
+    'datetimeUtc': 'datetime_utc',
+    'datetimeLocal': 'datetime_local',
+}
+new_names
+```
+
+You look up a value by its key, using square brackets:
+
+```{python}
+new_names['datetimeUtc']
+```
+
+Where a list is ordered and you index it by *position*, a dictionary is looked up by *name*.
+That makes it exactly the right shape for "rename this to that":
+
+```{python}
+goleta_renamed = goleta.rename(columns=new_names)
+goleta_renamed.columns.tolist()
+```
+
+You can write the dictionary inline if it's short:
+
+```{python}
+goleta.rename(columns={'value': 'concentration'}).columns.tolist()
+```
+
+:::{.callout-note}
+🐍 `.rename()` returns a **new** DataFrame and leaves the original alone. If you want to
+keep the change, assign it to a name, as we did with `goleta_renamed`. Almost every pandas
+method behaves this way, and forgetting it is the single most common source of "why didn't
+my change stick?"
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Build a dictionary that renames `value` to `concentration` **and** `parameter` to
+`pollutant`, apply it, and confirm with `.columns.tolist()` that both changes took effect.
+:::
+
+## The exploration ritual
+
+Five lines, every time you open a new dataset:
+
+```python
+df.shape          # how big
+df.info()         # types and what's missing
+df.head()         # what does a row look like
+df.describe()     # what do the numbers look like
+df['col'].value_counts()   # what's in the text columns
+```
+
+Run them before you compute anything. You will catch problems in ninety seconds that would
+otherwise surface in your final figure.
+
+## Key points
+
+- `.shape` is `(rows, columns)`. `.columns` and `.dtypes` say what's in the table.
+- `.info()` is the health check. Read the non-null counts; that's where empty columns hide.
+- `.isnull().sum()` counts missing values per column.
+- `.describe()` summarizes numeric columns, and will average across units without complaint.
+  Check what a column actually contains before you trust its mean.
+- `.value_counts()` counts categories, and reveals constants and unexpected values.
+- A **dictionary** maps keys to values, written `{key: value}`, looked up by name.
+- `.rename(columns={...})` returns a new DataFrame. Assign it to keep it.
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+- [📖 EDS 217 cheatsheet: dictionaries](../cheatsheets/dictionaries.qmd)
+- [📖 EDS 217 cheatsheet: data cleaning](../cheatsheets/data_cleaning.qmd)
+- [pandas documentation: `DataFrame.info`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html){target="_blank"}
+- [pandas documentation: `Series.value_counts`](https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html){target="_blank"}

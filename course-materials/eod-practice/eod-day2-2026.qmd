@@ -1,0 +1,247 @@
+---
+title: "Tasks & Activities"
+subtitle: "🔬 A Data Biography: Toolik Field Station"
+execute:
+  echo: false
+  include: false
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](images/kenya_landscape.png)
+:::
+
+Yesterday you ran a complete data science workflow on `toolik_weather.csv`. You imported it,
+summarized it, plotted it, and exported a result. At no point did anyone ask you what was
+actually in that file.
+
+Today you find out.
+
+## What is a data biography?
+
+A **data biography** is a short written account of a dataset: where it came from, what it
+covers, what shape it's in, and what a reader needs to know before trusting anything
+computed from it. Working data scientists write these constantly, usually in the first cells
+of a notebook, because the alternative is discovering a problem after you've built an
+analysis on top of it.
+
+Your deliverable today is a biography of the Toolik weather data, written in your notebook
+as markdown, with code cells showing the evidence for every claim you make.
+
+**This is the important part: every statement in your biography must be backed by a cell that
+produced it.** Not "the data covers about thirty years," but "the data covers 1988 to 2018,"
+with the cell that told you so sitting right above it.
+
+## Setup
+
+1. Create a new notebook named `EOD_Day2_Data_Biography.ipynb`.
+
+2. Add a title cell:
+
+```markdown
+# Day 2 EOD: A Data Biography of Toolik Field Station Weather
+
+Date: 09/01/2026
+```
+
+3. Import pandas and read the data:
+
+```markdown
+The file is at:
+https://eds-217-essential-python.github.io/data/toolik_weather.csv
+```
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/toolik_weather.csv'
+toolik = pd.read_csv(url)
+```
+
+:::{.callout-note title="About this station"}
+Toolik Field Station sits on the North Slope of Alaska, above the Arctic Circle, and is part
+of the Arctic Long Term Ecological Research (LTER) network. It has been collecting daily
+weather since the late 1980s. Keep that context in mind: it should make some of the numbers
+you find look reasonable, and it should make others look suspicious.
+:::
+
+## Part 1: Vital statistics
+
+Answer each of these with code, then write the answer in a markdown cell beneath it.
+
+1. How many rows and how many columns does the dataset have?
+2. What are the column names? Get them as a Python list.
+3. What is the data type of each column?
+4. What years does the record cover? (You can read the earliest and latest year off
+   `.describe()`.)
+
+```{python}
+toolik.shape
+```
+
+```{python}
+toolik.columns.tolist()
+```
+
+```{python}
+toolik.dtypes
+```
+
+```{python}
+toolik.describe()
+```
+
+:::{.callout-tip title="Something to notice"}
+Look closely at the `Date` column's data type. Does it match what you'd expect a date to be?
+Say what pandas has actually stored there. You don't need to fix it, and we'll handle dates
+properly on Day 6.
+:::
+
+## Part 2: The health check
+
+5. Run `.info()`. How many columns have fewer non-null values than there are rows?
+6. Use `.isnull().sum()` to count missing values per column. Which three columns are the
+   emptiest?
+7. One of the flag columns is missing a value in all but a handful of rows. Which one, and
+   how many values does it actually have?
+
+```{python}
+toolik.info()
+```
+
+```{python}
+toolik.isnull().sum()
+```
+
+```{python}
+toolik.isnull().sum().head(20)
+```
+
+:::{.callout-important title="Interpret, don't just report"}
+A column that is 99% empty is not necessarily broken. Think about what a "flag" column is
+for in an environmental dataset, and offer a sentence explaining why it might be mostly
+empty by design. This is the difference between reading a table and understanding a dataset.
+:::
+
+## Part 3: What varies, and what doesn't
+
+8. Use `.value_counts()` on `LTER_Site` and on `Station`. What do you learn? Is either
+   column carrying information?
+9. Use `.value_counts()` on `Flag_Daily_AirTemp_Mean_C`. What values appear, and what do you
+   think they mean?
+10. Use `.value_counts().head()` on the `Year` column. Do all years have the same number of
+    observations? What would explain a year with fewer?
+
+```{python}
+toolik['LTER_Site'].value_counts()
+```
+
+```{python}
+toolik['Station'].value_counts()
+```
+
+```{python}
+toolik['Flag_Daily_AirTemp_Mean_C'].value_counts()
+```
+
+```{python}
+toolik['Year'].value_counts().head()
+```
+
+## Part 4: The numbers
+
+11. What is the mean daily air temperature across the whole record? The minimum? The maximum?
+12. Are those values plausible for a site above the Arctic Circle? Say why or why not.
+13. Pick one other numeric column and report its range. Does anything about it look wrong?
+
+```{python}
+toolik['Daily_AirTemp_Mean_C'].describe()
+```
+
+```{python}
+toolik[['Daily_AirTemp_Mean_C', 'Daily_Precip_Total_mm', 'Daily_windsp_mean_msec']].describe()
+```
+
+:::{.callout-caution title="Remember Session 2B"}
+`.describe()` will average anything you point it at. Before you report a mean, satisfy
+yourself that the column holds one kind of thing, measured one way.
+:::
+
+## Part 5: A tidier table
+
+14. Build a **list** of the five columns you'd keep if you had to hand this dataset to a
+    colleague who only cared about temperature. Use it to make a smaller DataFrame.
+15. Build a **dictionary** that renames at least two of those columns to something shorter
+    and clearer. Apply it with `.rename(columns=...)` and confirm the new names.
+
+```{python}
+temp_columns = ['Year', 'Month', 'Date', 'Daily_AirTemp_Mean_C', 'Daily_AirTemp_AbsMin_C']
+toolik_temps = toolik[temp_columns]
+toolik_temps.head()
+```
+
+```{python}
+shorter = {
+    'Daily_AirTemp_Mean_C': 'temp_mean_c',
+    'Daily_AirTemp_AbsMin_C': 'temp_min_c',
+}
+toolik_temps = toolik_temps.rename(columns=shorter)
+toolik_temps.columns.tolist()
+```
+
+## Part 6: Write the biography
+
+In a single markdown cell, write 200 to 300 words covering:
+
+- **What this dataset is.** Source, station, what is measured, at what frequency.
+- **Coverage.** How many rows, what time span, how many variables.
+- **Condition.** What's missing and where. Which columns you would and would not trust.
+- **Cautions.** Two specific things a person using this data should know before computing
+  anything from it.
+- **Fitness for purpose.** Could you use this to describe how Arctic summer temperatures have
+  changed since 1988? Say yes or no, and say what would need checking first.
+
+Write it for a colleague who has never opened the file. No bullet fragments; complete
+sentences.
+
+:::{.callout-tip title="🧭 Field Note: looping over your column list"}
+If you'd like to check several columns at once rather than one at a time, you can loop over
+a list. We cover loops properly in this afternoon's live-coding session, so here is the whole
+pattern. Adapt the list, don't write the loop from scratch:
+
+```python
+for column_name in ['Daily_AirTemp_Mean_C', 'Daily_Precip_Total_mm']:
+    print(column_name, toolik[column_name].isnull().sum())
+```
+
+This is optional. Everything above can be done one column at a time.
+:::
+
+```{python}
+for column_name in ['Daily_AirTemp_Mean_C', 'Daily_Precip_Total_mm']:
+    print(column_name, toolik[column_name].isnull().sum())
+```
+
+## Wrap-up
+
+Before you close your notebook, check that:
+
+- every factual claim in your biography has a code cell above it that produced the evidence
+- your notebook reads top to bottom as a document, not as a pile of cells
+- you have used at least one list and at least one dictionary
+- you noticed at least one thing about this dataset that would have caused a problem if you
+  hadn't looked
+
+That last one is the whole point of today.
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+- [📖 EDS 217 cheatsheet: lists](../cheatsheets/lists.qmd)
+- [📖 EDS 217 cheatsheet: dictionaries](../cheatsheets/dictionaries.qmd)
+- [Arctic LTER at Toolik Field Station](https://arc-lter.ecosystems.mbl.edu/){target="_blank"}

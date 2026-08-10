@@ -104,8 +104,8 @@ def get_all_buildable_files():
     return all_files
 
 def activate_conda_environment():
-    """Activate the eds217_2025 conda environment."""
-    print("🐍 Activating eds217_2025 environment...")
+    """Activate the eds217_2026 conda environment."""
+    print("🐍 Activating eds217_2026 environment...")
     
     # Get conda base path
     try:
@@ -122,22 +122,22 @@ def activate_conda_environment():
         print(f"❌ Error: Conda script not found at {conda_sh}")
         sys.exit(1)
     
-    # Update PATH to include the eds217_2025 environment
+    # Update PATH to include the eds217_2026 environment
     try:
         result = subprocess.run(["conda", "info", "--envs"], 
                               check=True, capture_output=True, text=True)
         
-        # Find eds217_2025 environment path
+        # Find eds217_2026 environment path
         env_path = None
         for line in result.stdout.split('\n'):
-            if 'eds217_2025' in line:
+            if 'eds217_2026' in line:
                 parts = line.split()
                 if len(parts) >= 2:
                     env_path = parts[-1]  # Last part is the path
                     break
         
         if not env_path:
-            print("❌ Error: eds217_2025 environment not found")
+            print("❌ Error: eds217_2026 environment not found")
             print("Please create the environment first:")
             print("   conda env list")
             sys.exit(1)
@@ -146,10 +146,10 @@ def activate_conda_environment():
         env_bin = os.path.join(env_path, "bin")
         current_path = os.environ.get("PATH", "")
         os.environ["PATH"] = f"{env_bin}:{current_path}"
-        os.environ["CONDA_DEFAULT_ENV"] = "eds217_2025"
+        os.environ["CONDA_DEFAULT_ENV"] = "eds217_2026"
         os.environ["CONDA_PREFIX"] = env_path
         
-        print(f"   ✅ Environment activated: eds217_2025")
+        print(f"   ✅ Environment activated: eds217_2026")
         
     except subprocess.CalledProcessError:
         print("❌ Error: Failed to get conda environment information")

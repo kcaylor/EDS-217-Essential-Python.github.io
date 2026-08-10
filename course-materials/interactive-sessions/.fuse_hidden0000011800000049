@@ -1,0 +1,153 @@
+---
+title: "Interactive Session 1A"
+subtitle: "⚒️ JupyterLab Intro and IPython"
+editor_options: 
+  chunk_output_type: console
+jupyter: eds217_2025
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+![](images/IPython.png)
+
+This is a short exercise to introduce you to the IPython REPL within a JupyterLab session hosted on a Posit Workbench server. This exercise will help you become familiar with the interactive environment we will use throughout the class (and throughout your time in the MEDS program) as well as an introduction to some basic Python operations.
+
+---
+
+### Exercise: Introduction to IPython REPL in JupyterLab
+
+**Objective:** Learn how to use the IPython REPL in JupyterLab for basic Python programming and explore some interactive features.
+
+::: {.callout-note}
+The Read-Eval-Print Loop (REPL) is an interactive programming environment that allows users to execute Python code line-by-line, providing immediate feedback and facilitating rapid testing, debugging, and learning.
+:::
+
+---
+
+#### Step 1: Access JupyterLab
+
+1. **Log in to the Posit Workbench Server**
+   - Open a web browser and go to [workbench-1.bren.ucsb.edu](https://workbench-1.bren.ucsb.edu).
+   - Enter your login credentials to access the server.
+
+2. **Select JupyterLab**
+   - Once logged in, click on the "New Session" button, and select "JupyterLab" from the list of options
+   
+   ![](images/JupyterLab_launch.png)
+
+3. **Start JupyterLab Session** 
+    - Click the "Start Session" button in the lower right of the modal window. You don't need to edit either the Session Name or Cluster.
+
+4. **Wait for the Session to Launch**
+    - Your browser will auto join the session as soon as the server starts it up.
+
+---
+
+#### Step 2: Open the IPython REPL
+
+When the session launches you should see an interface that looks like this:
+
+![](images/JupyterLab_launcher.png)
+
+1. **Start a Terminal**
+   - Select "Terminal" from the list of available options in the Launcher pane. This will open a new terminal tab.
+
+2. **Launch IPython**
+   - In the terminal, type `ipython` and press Enter to start the IPython REPL.
+
+---
+
+#### Step 3: Basic IPython Commands
+
+In the IPython REPL, try the following commands to get familiar with the environment:
+
+1. **Basic Arithmetic Operations**
+   - Calculate the sum of two numbers:
+     ```python
+     3 + 5
+     ```
+   - Multiply two numbers:
+     ```python
+     4 * 7
+     ```
+   - Divide two numbers:
+     ```python
+     10 / 2
+     ```
+
+2. **Variable Assignment**
+   - Assign a value to a variable and use it in a calculation:
+     ```python
+     x = 10
+     y = 5
+     result = x * y
+     result
+     ```
+
+3. **Built-in Functions**
+   - Use a built-in function to find the maximum of a list of numbers:
+     ```python
+     numbers = [3, 9, 1, 6, 2]
+     max(numbers)
+     ```
+
+4. **Interactive Help**
+   - Use the `help()` function to get more information about a built-in function:
+     ```python
+     help(print)
+     ```
+   - Use the `?` to get a quick description of an object or function:
+     ```python
+     len?
+     ```
+
+---
+
+#### Step 4: Explore IPython Features
+
+1. **Tab Completion**
+   - Start typing a command or variable name and press `Tab` to auto-complete or view suggestions:
+     ```python
+     num # Press Tab here
+     ```
+
+2. **Magic Commands**
+   - Use the `%timeit` magic command to time the execution of a statement:
+     ```python
+     %timeit sum(range(1000))
+     ```
+
+3. **History**
+   - View the command history using the `%history` magic command:
+     ```python
+     %history
+     ```
+
+4. **Clear the Console**
+   - Clear the current console session with:
+     ```python
+     %clear
+     ```
+
+---
+
+#### Step 5: Exit the IPython REPL
+
+- To exit the IPython REPL, type `exit()` or press `Ctrl+D`.
+
+---
+
+#### Wrap-Up
+
+Congratulations! You have completed the introduction to the IPython REPL in JupyterLab. You learned how to perform basic operations, use interactive help, explore magic commands, and utilize IPython features.
+
+Feel free to explore more IPython functionalities or ask questions if you need further assistance.
+
+<br>
+
+::: {.center-text .body-text-xl .teal-text}
+End interactive session 1A
+:::

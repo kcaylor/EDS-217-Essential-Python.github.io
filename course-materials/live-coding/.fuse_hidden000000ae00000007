@@ -1,0 +1,256 @@
+---
+title: "Live Coding Session [Instructor Notes]"
+subtitle: "List and Dictionary Comprehensions"
+search: false
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+jupyter: eds217_2025
+---
+
+## Overview
+
+This session introduces list and dictionary comprehensions, providing a comparison to traditional control flow methods. The goal is to help students understand the advantages of using comprehensions in Python and to practice writing their own.
+
+The session is designed to be completed in 45 minutes, including setting up the notebook.
+
+---
+
+## 1. Setting Up Your Notebook (5 minutes)
+
+**Goal**: Start by having students set up their Jupyter notebook with markdown headers. This helps organize the session into distinct sections, making it easier for them to follow along and refer back to their work later.
+
+### Instructions:
+
+1. **Create a new Jupyter notebook** or open an existing one for this session.
+2. **Add markdown cells** with the following headers, using `##` for each header.
+3. **Place code cells between the headers** where you'll write and execute your code.
+
+### Header Texts:
+
+- **First markdown cell:**
+
+  ```markdown
+  ## Review: Traditional Control Flow Approaches
+  ```
+
+- **Second markdown cell:**
+
+  ```markdown
+  ## Introduction to List Comprehensions
+  ```
+
+- **Third markdown cell:**
+
+  ```markdown
+  ## Introduction to Dictionary Comprehensions
+  ```
+
+- **Fourth markdown cell:**
+
+  ```markdown
+  ## Using Conditional Logic in Comprehensions
+  ```
+
+- **Fifth markdown cell:**
+
+  ```markdown
+  ## Summary and Best Practices
+  ```
+
+- **Sixth markdown cell:**
+
+  ```markdown
+  ## Reflections
+  ```
+
+---
+
+## 2. Traditional Control Flow Approaches (8 minutes)
+
+**Goal**: Begin by showing students how they might traditionally create lists and dictionaries using loops. This will set the stage for introducing comprehensions as a more concise alternative.
+
+### Example 1: Creating a List with a `for` Loop
+
+```{python}
+#| echo: true
+# Traditional approach to creating a list of squares
+squares = []
+for i in range(1, 6):
+    squares.append(i ** 2)
+
+print(squares)  # Output: [1, 4, 9, 16, 25]
+```
+
+### Example 2: Creating a Dictionary with a `for` Loop
+
+**Scenario**: Suppose we have two lists—one of Roman numerals and one of corresponding Arabic numbers—and we want to create a dictionary that maps each Roman numeral to its Arabic equivalent.
+
+#### Using `zip`
+
+```{python}
+#| echo: true
+# Lists of Roman numerals and their Arabic equivalents
+roman = ['I', 'II', 'III', 'IV', 'V']
+arabic = [1, 2, 3, 4, 5]
+
+# Traditional approach to creating a dictionary from two lists using zip
+roman_to_arabic = {}
+for r, a in zip(roman, arabic):
+    roman_to_arabic[r] = a
+
+print(roman_to_arabic)  # Output: {'I': 1, 'II': 2, 'III': 3, 'IV': 4, 'V': 5}
+```
+
+#### Without Using `zip`
+
+```{python}
+#| echo: true
+# Traditional approach without zip, using index
+roman_to_arabic = {}
+for i in range(len(roman)):
+    roman_to_arabic[roman[i]] = arabic[i]
+
+print(roman_to_arabic)  # Output: {'I': 1, 'II': 2, 'III': 3, 'IV': 4, 'V': 5}
+```
+
+---
+
+## 3. Introduction to List Comprehensions (7 minutes)
+
+**Goal**: Introduce list comprehensions as a more compact and expressive way to create lists.
+
+### Example 1: List Comprehension for Squares
+
+```{python}
+#| echo: true
+# List comprehension for generating squares
+squares = [i ** 2 for i in range(1, 6)]
+
+print(squares)  # Output: [1, 4, 9, 16, 25]
+```
+
+### Practice List Comprehension
+
+**Instruction**: Ask students to write a list comprehension that generates a list of cubes for numbers from 1 to 5.
+
+**Answer Code:**
+
+```{python}
+#| echo: true
+# Answer: List comprehension for generating cubes
+cubes = [i ** 3 for i in range(1, 6)]
+
+print(cubes)  # Output: [1, 8, 27, 64, 125]
+```
+
+---
+
+## 4. Introduction to Dictionary Comprehensions (7 minutes)
+
+**Goal**: Transition to dictionary comprehensions, using the Roman numeral example to demonstrate how to map keys to values concisely.
+
+### Example 1: Dictionary Comprehension for Roman to Arabic Conversion
+
+#### Using `zip`
+
+```{python}
+#| echo: true
+# Dictionary comprehension for mapping Roman numerals to Arabic numbers using zip
+roman_to_arabic = {r: a for r, a in zip(roman, arabic)}
+
+print(roman_to_arabic)  # Output: {'I': 1, 'II': 2, 'III': 3, 'IV': 4, 'V': 5}
+```
+
+#### Without Using `zip`
+
+```{python}
+#| echo: true
+# Dictionary comprehension without zip, using index
+roman_to_arabic = {roman[i]: arabic[i] for i in range(len(roman))}
+
+print(roman_to_arabic)  # Output: {'I': 1, 'II': 2, 'III': 3, 'IV': 4, 'V': 5}
+```
+
+### Practice Dictionary Comprehension
+
+**Instruction**: Ask students to create a dictionary comprehension that maps the first five letters of the alphabet ('A', 'B', 'C', 'D', 'E') to their corresponding positions in the alphabet (1, 2, 3, 4, 5).
+
+**Answer Code:**
+
+```{python}
+#| echo: true
+# Answer: Dictionary comprehension for mapping letters to positions
+letters = ['A', 'B', 'C', 'D', 'E']
+positions = [1, 2, 3, 4, 5]
+
+# Using zip
+letter_to_position = {l: p for l, p in zip(letters, positions)}
+
+letter_to_position  # Output: {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5}
+
+# Without using zip
+letter_to_position = {letters[i]: positions[i] for i in range(len(letters))}
+
+print(letter_to_position)  # Output: {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5}
+```
+
+---
+
+## 5. Using Conditional Logic in Comprehensions (7 minutes)
+
+**Goal**: Show how to incorporate conditional logic within comprehensions to filter elements.
+
+### Example 1: List Comprehension with a Condition
+
+```{python}
+#| echo: true
+# List comprehension with a condition for even squares
+squares_gt_10 = [i ** 2 for i in range(1, 6) if i > 10]
+
+print(squares_gt_10)  # Output: [16, 25]
+```
+
+### Example 2: Dictionary Comprehension with a Condition
+
+```{python}
+#| echo: true
+# Dictionary comprehension with a condition for selecting even numbers
+no_v_roman_to_arabic = {r: a for r, a in zip(roman, arabic) if 'V' not in r}
+
+print(no_v_roman_to_arabic)  # Output: {'I': 1, 'II': 2, 'III': 3}
+```
+
+### Practice with Conditions
+
+**Instruction**: Ask students to write a list comprehension that generates a list of cubes for odd numbers from 1 to 5.
+
+**Answer Code:**
+
+```{python}
+#| echo: true
+# Answer: List comprehension for generating cubes of odd numbers
+odd_cubes = [i ** 3 for i in range(1, 6) if i % 2 != 0]
+
+print(odd_cubes)  # Output: [1, 27, 125]
+```
+
+---
+
+## 6. Summary and Best Practices (4 minutes)
+
+**Goal**: Summarize the key points of using comprehensions and offer best practices to avoid common pitfalls.
+
+### Best Practices:
+
+- Use comprehensions for simple transformations and filtering.
+- Avoid overly complex nested comprehensions.
+- When logic is complex, consider using traditional loops for clarity.
+
+---
+
+## 7. Conclusion (2 minutes)
+
+**Goal**: Wrap up the session by encouraging students to practice using comprehensions in their own code. Remind them of the exercises they completed and suggest reviewing their work to reinforce learning.
+

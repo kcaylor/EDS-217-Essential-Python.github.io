@@ -1,0 +1,136 @@
+---
+title: EDS 217 Cheatsheet
+subtitle: Python Basics
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+# Python Basics Cheatsheet
+
+## Variables and Data Types
+
+### Declaring Variables
+- Variables are containers for storing data values.
+- Python has no command for declaring a variable: it is created the moment you first assign a value to it.
+
+```{python}
+#| echo: true
+
+x = 5
+name = "Alice"
+```
+
+### Data Types
+- Python has various data types including:
+  - **int** (integer): A whole number, positive or negative, without decimals.
+  - **float** (floating point number): A number, positive or negative, containing one or more decimals.
+  - **str** (string): A sequence of characters in quotes.
+  - **bool** (boolean): Represents `True` or `False`.
+
+```{python}
+#| echo: true
+
+age = 30        # int
+temperature = 20.5  # float
+name = "Bob"    # str
+is_valid = True # bool
+```
+
+## Basic Operations
+
+### Arithmetic Operators
+- Used with numeric values to perform common mathematical operations:
+
+| Operator | Description         |
+|----------|---------------------|
+| `+`      | Addition            |
+| `-`      | Subtraction         |
+| `*`      | Multiplication      |
+| `/`      | Division            |
+| `%`      | Modulus             |
+| `**`     | Exponentiation      |
+| `//`     | Floor division      |
+
+### Example Usage
+```{python}
+#| echo: true
+
+x = 10
+y = 3
+print(x + y)  # 13
+print(x - y)  # 7
+print(x * y)  # 30
+print(x / y)  # 3.3333
+print(x % y)  # 1
+print(x ** y) # 1000
+print(x // y) # 3
+```
+
+### Logical Operators
+- Used to combine conditional statements:
+
+| Operator | Description                      |
+|----------|----------------------------------|
+| `and`    | Returns True if both statements are true |
+| `or`     | Returns True if one of the statements is true |
+| `not`    | Reverse the result, returns False if the result is true |
+
+### Example Usage
+```{python}
+#| echo: true
+
+x = True
+y = False
+print(x and y)  # False
+print(x or y)   # True
+print(not x)    # False
+```
+
+### Strings
+- Strings in Python are surrounded by either single quotation marks, or double quotation marks.
+
+```{python}
+#| echo: true
+
+hello = "Hello"
+world = 'World'
+
+# Modern approach (f-strings) - PREFERRED
+print(f"{hello} {world}")  # Hello World
+
+# Older approach (string concatenation) - you'll see this in code
+print(hello + " " + world)  # Hello World
+```
+
+- Strings can be indexed with the first character having index 0.
+
+```{python}
+#| echo: true
+
+a = "Hello, World!"
+print(a[1])   # e
+```
+
+- Slicing strings:
+
+```{python}
+#| echo: true
+
+b = "Hello, World!"
+print(b[2:5])  # llo
+```
+
+## Printing and Commenting
+
+```{python}
+#| echo: true
+
+# This is a comment
+print("Hello, World!")  # Prints Hello, World!
+```
+
+This cheatsheet covers the very basics to get you started with Python. Experiment with these concepts to understand them better!

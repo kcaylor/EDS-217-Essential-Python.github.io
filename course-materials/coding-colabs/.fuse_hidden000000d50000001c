@@ -1,0 +1,108 @@
+---
+title: "Coding Colab"
+subtitle: "Exploring, Cleaning, and Analyzing National Parks Visitor Data with Pandas"
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=3052&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+:::
+
+## Introduction
+
+In this collaborative coding exercise, you'll work with a partner to practice importing, cleaning, exploring, and analyzing DataFrames using pandas. You'll be working with a dataset containing yearly visitor information about national parks in the United States.
+
+Helpful class CheatSheets:
+
+[Pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+
+[Pandas PDF Cheat Sheet](../cheatsheets/Pandas_Cheat_Sheet.pdf)
+
+[DataFrame Workflows](../cheatsheets/workflow_methods.qmd)
+
+## Setup
+
+First, let's import the necessary libraries and load our dataset.
+
+```{python}
+#| echo: true
+
+import pandas as pd
+import numpy as np
+
+# Load the dataset
+url = "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-09-17/national_parks.csv"
+parks_df = pd.read_csv(url)
+```
+
+## Task 1: Data Exploration and Cleaning
+
+With your partner, explore the DataFrame and perform some initial cleaning. Create cells in your notebook that provide the following information
+
+:::{.callout-tip}
+Use `print()` statements and/or `f-strings` to create your output in a way that makes it easy to understand your results.
+:::
+
+1. How many rows and columns does the DataFrame have?
+2. What are the column names?
+3. What data types are used in each column?
+4. Are there any missing values in the DataFrame?
+5. Remove the rows where `year` is `Total` (these are summary rows we don't need for our analysis).
+6. Convert the `year` column to numeric type.
+
+
+```{python}
+#| echo: false
+#| include: false
+
+
+# Task 1
+print(parks_df.shape)
+print(parks_df.columns)
+print(parks_df.dtypes)
+print(parks_df.isnull().sum())
+
+# Remove 'Total' rows and convert 'year' to numeric
+parks_df = parks_df[parks_df['year'] != 'Total']
+parks_df['year'] = pd.to_numeric(parks_df['year'])
+
+
+```
+
+## Task 2: Basic Filtering and Analysis
+
+Now, let's practice some basic filtering and analysis operations:
+
+1. Create a new DataFrame containing only data for the years 2000-2015 and only data for National Parks (`unit_type` is `National Park`)
+2. Find the total number of visitors across all National Parks for each year from 2000-2015.
+3. Calculate the average yearly visitors for each National Park during the 2000-2015 period.
+4. Identify the top 5 most visited National Parks (based on total visitors) during the 2000-2015 period.
+
+```{python}
+#| echo: false
+#| include: false
+
+
+# Task 2
+parks_2000_2015 = parks_df[(parks_df['year'] >= 2000) & (parks_df['year'] <= 2015)]
+
+yearly_totals = parks_2000_2015.groupby('year')['visitors'].sum()
+
+avg_yearly_visitors = parks_2000_2015.groupby('parkname')['visitors'].mean()
+
+top_5_parks = parks_2000_2015.groupby('parkname')['visitors'].sum().nlargest(5)
+
+```
+
+## Task 3: Thinking in DataFrames
+
+1. In 2016, [a blog post from 538.com](https://fivethirtyeight.com/features/the-national-parks-have-never-been-more-popular/)  explored these data. Take a look at the graphics in the post that use our data and discuss with your partner what steps and functions you think would be necessary to filter, group, and aggregate your dataframe in order to make any of the plots. See if you can make "rough drafts" of any of them using the simple `DataFrame.plot()` function.
+
+## Conclusion
+
+Great job working through these exercises! You've practiced importing data, cleaning a dataset, exploring DataFrames, and performing various filtering and analysis operations using pandas. These skills are fundamental to data analysis in Python and will be valuable as you continue to work with more complex datasets.

@@ -1,0 +1,540 @@
+---
+title: "Interactive Session 6A"
+subtitle: "Grouping, Joining, and Sorting (Part I)"
+editor_options: 
+  chunk_output_type: console
+jupyter: eds217_2025
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 60%; margin: auto;"}
+![](images/grouping_filtering.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A large crowd of pandas dressed in various colors. The pandas are trying to sort themselves based on their clothing color.* [MidJourney 5](https://www.midjourney.com/jobs/a0c058d4-d21b-469c-a71a-9e38e5715ab2?index=0)
+:::
+
+## Getting Started
+
+Before we begin our interactive session, please follow these steps to set up your Jupyter Notebook:
+
+1. Open JupyterLab and create a new notebook:
+   - Click on the `+` button in the top left corner
+   - Select `Python 3.11.0` from the Notebook options
+
+2. Rename your notebook:
+   - Right-click on the `Untitled.ipynb` tab
+   - Select "Rename"
+   - Name your notebook with the format: `Session_XY_Topic.ipynb`
+     (Replace X with the day number and Y with the session number)
+
+3. Add a title cell:
+   - In the first cell of your notebook, change the cell type to "Markdown"
+   - Add the following content (replace the placeholders with the actual information):
+
+```markdown
+# Day 6: Session A - Grouping, Joining, and Sorting
+
+[Link to session webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/6a_grouping_joining_sorting_1_old.html)
+
+Date: 09/09/2025
+
+```
+
+4. Add a code cell:
+   - Below the title cell, add a new cell
+   - Ensure it's set as a "Code" cell
+   - This will be where you start writing your Python code for the session
+
+5. Throughout the session:
+   - Take notes in Markdown cells
+   - Copy or write code in Code cells
+   - Run cells to test your code
+   - Ask questions if you need clarification
+
+:::{.callout-caution}
+Remember to save your work frequently by clicking the save icon or using the keyboard shortcut (Ctrl+S or Cmd+S).
+:::
+
+Let's begin our interactive session!
+<hr>
+
+## Learning Objectives
+
+The goals of this session are to:
+
+1. Be able to use basic sorting methods to organize dataframes
+2. Understand the concept of grouping data in Pandas
+3. Use the `groupby()` function to create groups
+4. Apply aggregate functions to grouped data
+5. Perform multi-level grouping
+6. Reshape data using pivot tables
+
+## First Steps
+
+As always, let's start our notebook by loading our necessary libaries.
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+import pandas as pd
+```
+
+## Basic Sorting in Pandas
+
+Before we dive into grouping and aggregation, let's cover some fundamental sorting operations in Pandas. Sorting your data can provide valuable insights and is often a precursor to more complex data manipulations.
+
+### Sorting by a Single Column
+
+To sort a DataFrame by a single column, we use the `sort_values()` method:
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Create a sample DataFrame
+df = pd.DataFrame({
+    'date': pd.date_range(start='2023-01-01', periods=5),
+    'temperature': [20, 18, 22, 19, 21],
+    'precipitation': [0, 5, 2, 8, 3]
+})
+
+print("Original DataFrame:")
+print(df)
+```
+
+#### Sorting by temperature (default is in ascending order)
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+# Sort by temperature
+df_sorted = df.sort_values('temperature')
+print("\nSorted by temperature (ascending):")
+print(df_sorted)
+```
+
+By default, `sort_values()` sorts in ascending order. To sort in descending order, use the `ascending` parameter:
+
+#### Sorting in descending order
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Sort by temperature in descending order
+df_sorted_desc = df.sort_values('temperature', ascending=False)
+print("Sorted by temperature (descending):")
+print(df_sorted_desc)
+```
+
+### Sorting by Multiple Columns
+
+You can sort by multiple columns by passing a `list` of column names:
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Sort by precipitation (ascending) and then temperature (descending)
+df_multi_sorted = df.sort_values(['precipitation', 'temperature'], ascending=[True, False])
+print("Sorted by precipitation (asc) and temperature (desc):")
+print(df_multi_sorted)
+```
+
+In this example, we first sort by precipitation in ascending order, and then by temperature in descending order for any rows with the same precipitation value.
+
+### Sorting Index
+
+If you want to sort by the index instead of a column, use `sort_index()`:
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Sort by index
+df_index_sorted = df.sort_index(ascending=False)
+print("Sorted by index (descending):")
+print(df_index_sorted)
+```
+
+:::{.callout-caution}
+Remember, by default <b>sorting operations return a new DataFrame</b> and don't modify the original unless you use `inplace=True`.
+:::
+
+
+## Introduction to Grouping
+
+Grouping data is a powerful technique in data analysis that allows us to split a DataFrame into groups based on some criteria, apply a function to each group independently, and combine the results. This is particularly useful when we want to calculate summary statistics for different categories within our data.
+
+Let's start with a simple example using a dataset of environmental measurements across different locations and times.
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+import pandas as pd
+import numpy as np
+
+# Create a sample DataFrame
+data = {
+    'location': ['A', 'B', 'A', 'B', 'A', 'B'],
+    'date': pd.date_range(start='2023-01-01', periods=6),
+    'temperature': [20, 22, 19, 24, 21, 23],
+    'humidity': [50, 48, 52, 45, 49, 47]
+}
+
+df = pd.DataFrame(data)
+print(df)
+```
+
+## Using `groupby()`
+
+The `groupby()` function is the core of grouping operations in Pandas. It allows us to split the data into groups based on one or more columns.
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Group by location
+grouped = df.groupby('location')
+
+# Calculate mean for each group
+print(grouped.mean())
+```
+
+## Aggregating Data
+
+We can apply various aggregation functions to our grouped data. Some common ones include `mean()`, `sum()`, `count()`, `min()`, `max()`, etc.
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Multiple aggregations
+print(grouped.agg(['mean', 'min', 'max']))
+```
+
+Now it's your turn! Try to calculate the standard deviation of temperature and humidity for each location.
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and then provide your code.
+</div>
+
+```{python}
+#| echo: true
+
+# Your code here
+```
+
+```{python}
+#| echo: false
+#| eval: false
+
+# Answer
+print(grouped[['temperature', 'humidity']].std())
+```
+
+## Multi-level Grouping
+
+We can group by multiple columns to create a hierarchical index.
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Add a 'year' column
+df['year'] = df['date'].dt.year
+
+# Group by location and year
+multi_grouped = df.groupby(['location', 'year'])
+
+print(multi_grouped.mean())
+```
+
+
+### Understanding Groupby Objects
+
+After using the `groupby()` function, it's important to understand what kind of object we're working with and how it differs from a regular DataFrame. Let's explore this in more detail.
+
+#### The Groupby Object
+
+When you apply the `groupby()` function to a DataFrame, the result is a `DataFrameGroupBy` object. This object is not a DataFrame itself, but rather a special object that contains information about the groups.
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Create a groupby object
+grouped = df.groupby('location')
+
+# Check the type of the grouped object
+print(type(grouped))
+
+# Try to view the grouped object
+print(grouped)
+```
+
+As you can see, simply printing the groupby object doesn't show us the data. Instead, it gives us information about the groupby operation.
+
+### Accessing Group Data
+
+To actually see the data in each group, we need to iterate over the groups or use aggregation functions.
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Iterate over groups
+for name, group in grouped:
+    print(f"Group: {name}")
+    print(group)
+    print()
+
+# Using an aggregation function
+print(grouped.mean())
+```
+
+### Key Differences from DataFrames
+
+1. **Structure**: A groupby object is not a table-like structure like a DataFrame. It's more like a container of groups.
+
+2. **Direct Access**: You can't access columns or rows of a groupby object directly like you can with a DataFrame.
+
+3. **Lazy Evaluation**: Groupby operations are lazy - they don't actually compute anything until you call an aggregation function or iterate over the groups.
+
+4. **Aggregation Required**: To get meaningful results from a groupby object, you typically need to apply some kind of aggregation function (like `mean()`, `sum()`, `count()`, etc.).
+
+### Converting Groupby Results to DataFrame
+
+After applying an aggregation function to a groupby object, the result is typically a DataFrame:
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Result of aggregation is a DataFrame
+result = grouped.mean()
+print(type(result))
+
+# We can now use DataFrame methods on this result
+print(result.reset_index())
+```
+
+#### Practice
+
+Try grouping the data by both 'location' and 'year', then calculate the maximum temperature for each group. What type of object do you get? How can you reset the index to make it a regular DataFrame?
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and then provide your code.
+</div>
+
+```{python}
+#| echo: true
+
+# Your code here
+```
+
+```{python}
+#| echo: false
+#| eval: false
+
+# Answer
+multi_grouped = df.groupby(['location', 'year'])
+result = multi_grouped['temperature'].max()
+print(type(result))  # This will be a Series with a MultiIndex
+print(result)
+
+# Convert to DataFrame and reset index
+result_df = result.reset_index()
+print(type(result_df))  # This will be a DataFrame
+print(result_df)
+```
+
+#### Key Groupby Points
+
+- A groupby object is not a DataFrame, but a special object containing group information.
+- To view data in a groupby object, you need to iterate over it or apply aggregation functions.
+- Groupby operations are lazy and require aggregation to produce results.
+- The result of aggregating a groupby object is typically a DataFrame or Series, which you can then manipulate further.
+
+## Reshaping DataFrames with Pivot Tables
+
+Pivot tables provide a way to reshape data and calculate aggregations in one step.
+
+### How Pivot Tables Work
+
+1. **Reshaping Data**: Pivot tables reshape data by turning unique values from one column into multiple columns.
+
+2. **Aggregation**: They perform aggregations on a specified value column for each unique group created by the new columns.
+
+3. **Index and Columns**: You specify which column to use as the new index, which to use as new columns, and which to aggregate.
+
+The idea is very similar to the `df.pivot` command:
+![](https://pandas.pydata.org/pandas-docs/stable/_images/reshaping_pivot.png)
+
+The main difference between `df.pivot` and `df.pivot_table` is that `df.pivot_table` includes aggregation.
+
+Let's see an example:
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Create a sample DataFrame
+data = {
+    'date': ['2023-01-01', '2023-01-01', '2023-01-02', '2023-01-02'],
+    'city': ['New York', 'Los Angeles', 'New York', 'Los Angeles'],
+    'temperature': [32, 68, 28, 72]
+}
+df = pd.DataFrame(data)
+print("Original DataFrame:")
+print(df)
+```
+
+#### Using `df.pivot` to rotate the dataframe:
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+pivot = pd.pivot(df, values='temperature', index='date', columns='city')
+print("\nPivot:")
+print(pivot)
+```
+
+#### Using `df.pivot_table` to create a pivot table:
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+# Create a pivot table
+pivot_table = df.pivot_table(values='temperature', index='date', columns='city', aggfunc='mean')
+print("\nPivot Table:")
+print(pivot_table)
+```
+
+In this example:
+- 'date' becomes the index
+- 'city' values become new columns
+- 'temperature' values are aggregated (mean) for each date-city combination
+
+:::{.callout-note}
+In this example, the result of our `pivot` and `pivot_table` commands are essentially the same. Why is that the case? When would we expect different results from these two commands?
+:::
+
+### Key Features of Pivot Tables
+
+1. **Handling Duplicates**: If there are multiple values for a given index-column combination, an aggregation function (like mean, sum, count) must be specified.
+
+2. **Missing Data**: Pivot tables can reveal missing data, often filling these gaps with NaN.
+
+3. **Multi-level Index**: You can create multi-level indexes and columns for more complex reorganizations.
+
+4. **Flexibility**: You can pivot on multiple columns and use multiple value columns.
+
+Pivot tables are especially useful for:
+- Summarizing large datasets
+- Creating cross-tabulations
+- Preparing data for visualization
+- Identifying patterns or trends across categories
+
+Remember, while pivot tables are powerful, they work best with well-structured data and clear categorical variables.
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Create a pivot table
+pivot = df.pivot_table(values='temperature', index='city', columns='date', aggfunc='mean')
+print(pivot)
+```
+
+Try creating a pivot table that shows the maximum humidity for each city and date.
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and then provide your code.
+</div>
+```{python}
+#| echo: true
+
+# Your code here
+```
+
+```{python}
+#| echo: false
+#| eval: false
+
+# Answer
+humidity_pivot = df.pivot_table(values='humidity', index='location', columns='date', aggfunc='max')
+print(humidity_pivot)
+```
+
+## Key Points
+
+- Grouping allows us to split data based on categories and perform operations on each group.
+- The `groupby()` function is the primary tool for grouping in Pandas.
+- We can apply various aggregation functions to grouped data.
+- Multi-level grouping creates a hierarchical index.
+- Pivot tables offer a way to reshape and aggregate data simultaneously.
+
+## Resources
+
+- [Pandas Groupby Documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
+- [Pandas Pivot Table Documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html)
+
+Don't forget to check out our EDS 217 Cheatsheet on [Grouping and Aggregating](../cheatsheets/data_grouping.qmd) for quick reference!
+
+::: {.center-text .body-text-xl .teal-text}
+End interactive session 6A
+:::

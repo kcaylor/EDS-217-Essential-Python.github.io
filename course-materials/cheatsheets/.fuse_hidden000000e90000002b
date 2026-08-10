@@ -1,0 +1,77 @@
+---
+title: "EDS 217 Cheatsheet"
+subtitle: "Pandas DataFrame Methods in Data Science Workflows"
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+## Pandas DataFrame Methods in Data Science Workflows
+
+This table maps commonly used pandas DataFrame methods to the steps in the course-specific data science workflow. Each method is linked to its official pandas documentation for easy reference.
+
+| DataFrame Method ---------------------------- | Import | Exploration | Cleaning | Filtering/ Selection | Transforming | Sorting | Grouping | Aggregating | Visualizing |
+|-------------------------------------|:------:|:-----------:|:--------:|:-------------------:|:------------:|:-------:|:--------:|:-----------:|:-----------:|
+| [`read_csv()`](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html) | ✓ |   |   |   |   |   |   |   |   |
+| [`read_excel()`](https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html) | ✓ |   |   |   |   |   |   |   |   |
+| [`head()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html) |   | ✓ |   |   |   |   |   |   |   |
+| [`tail()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.tail.html) |   | ✓ |   |   |   |   |   |   |   |
+| [`info()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html) |   | ✓ | ✓ |   |   |   |   |   |   |
+| [`describe()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html) |   | ✓ |   |   |   |   |   | ✓ |   |
+| [`dtypes`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.dtypes.html) |   | ✓ | ✓ |   |   |   |   |   |   |
+| [`shape`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.shape.html) |   | ✓ |   |   |   |   |   |   |   |
+| [`columns`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.columns.html) |   | ✓ |   |   |   |   |   |   |   |
+| [`isnull()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.isnull.html) |   | ✓ | ✓ |   |   |   |   |   |   |
+| [`notnull()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.notnull.html) |   | ✓ | ✓ |   |   |   |   |   |   |
+| [`dropna()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.dropna.html) |   |   | ✓ |   | ✓ |   |   |   |   |
+| [`fillna()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.fillna.html) |   |   | ✓ |   | ✓ |   |   |   |   |
+| [`replace()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.replace.html) |   |   | ✓ |   | ✓ |   |   |   |   |
+| [`astype()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.astype.html) |   |   | ✓ |   | ✓ |   |   |   |   |
+| [`rename()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.rename.html) |   |   | ✓ |   | ✓ |   |   |   |   |
+| [`drop()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html) |   |   | ✓ | ✓ | ✓ |   |   |   |   |
+| [`duplicated()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.duplicated.html) |   | ✓ | ✓ |   |   |   |   |   |   |
+| [`drop_duplicates()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop_duplicates.html) |   |   | ✓ |   | ✓ |   |   |   |   |
+| [`value_counts()`](https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html) |   | ✓ |   |   |   |   |   | ✓ |   |
+| [`unique()`](https://pandas.pydata.org/docs/reference/api/pandas.Series.unique.html) |   | ✓ |   |   |   |   |   |   |   |
+| [`nunique()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.nunique.html) |   | ✓ |   |   |   |   |   | ✓ |   |
+| [`sample()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sample.html) |   | ✓ |   | ✓ |   |   |   |   |   |
+| [`corr()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html) |   | ✓ |   |   |   |   |   | ✓ | ✓ |
+| [`cov()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.cov.html) |   | ✓ |   |   |   |   |   | ✓ |   |
+| [`groupby()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html) |   |   |   |   |   |   | ✓ |   |   |
+| [`agg()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.agg.html) |   |   |   |   |   |   | ✓ | ✓ |   |
+| [`apply()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.apply.html) |   |   |   |   | ✓ |   |   |   |   |
+| [`merge()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html) |   |   |   |   | ✓ |   |   |   |   |
+| [`join()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.join.html) |   |   |   |   | ✓ |   |   |   |   |
+| [`concat()`](https://pandas.pydata.org/docs/reference/api/pandas.concat.html) |   |   |   |   | ✓ |   |   |   |   |
+| [`pivot()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pivot.html) |   |   |   |   | ✓ |   |   |   |   |
+| [`melt()`](https://pandas.pydata.org/docs/reference/api/pandas.melt.html) |   |   |   |   | ✓ |   |   |   |   |
+| [`sort_values()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) |   |   |   |   |   | ✓ |   |   |   |
+| [`nlargest()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.nlargest.html) |   |   |   | ✓ |   | ✓ |   |   |   |
+| [`nsmallest()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.nsmallest.html) |   |   |   | ✓ |   | ✓ |   |   |   |
+| [`query()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.query.html) |   |   |   | ✓ |   |   |   |   |   |
+| [`eval()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.eval.html) |   |   |   |   | ✓ |   |   |   |   |
+| [`cut()`](https://pandas.pydata.org/docs/reference/api/pandas.cut.html) |   |   |   |   | ✓ |   |   |   |   |
+| [`qcut()`](https://pandas.pydata.org/docs/reference/api/pandas.qcut.html) |   |   |   |   | ✓ |   |   |   |   |
+| [`get_dummies()`](https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html) |   |   |   |   | ✓ |   |   |   |   |
+| [`iloc[]`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html) |   |   |   | ✓ |   |   |   |   |   |
+| [`loc[]`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html) |   |   |   | ✓ |   |   |   |   |   |
+| [`plot()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.html) |   | ✓ |   |   |   |   |   |   | ✓ |
+
+Note: This table includes some of the most commonly used DataFrame methods, but it's not exhaustive. Some methods may be applicable to multiple steps depending on the specific use case.
+
+## Key Takeaways
+
+1. Import primarily involves reading data from various sources.
+2. Exploration methods help understand the structure and content of the data.
+3. Cleaning methods focus on handling missing data, duplicates, and data type issues.
+4. Filtering/Selection methods allow you to subset your data based on various conditions.
+5. Transforming methods cover a wide range of data manipulation tasks.
+6. Sorting methods help arrange data in a specific order.
+7. Grouping is often a precursor to aggregation operations.
+8. Aggregating methods compute summary statistics on data.
+9. Visualizing methods help create graphical representations of the data.
+
+Remember that the applicability of methods can vary depending on the specific project and dataset. This table serves as a general guide to help you navigate the pandas DataFrame methods in the context of your course's data science workflow. The links to the official documentation provide more detailed information about each method's usage and parameters.

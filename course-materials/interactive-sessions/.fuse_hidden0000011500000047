@@ -1,0 +1,409 @@
+---
+title: "Interactive Session 6A"
+subtitle: "Pandas Data Manipulation and Analysis Techniques"
+jupyter: eds217_2025
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 60%; margin: auto;"}
+![](images/grouping_filtering.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A large crowd of pandas dressed in various colors. The pandas are trying to sort themselves based on their clothing color.* [MidJourney 5](https://www.midjourney.com/jobs/a0c058d4-d21b-469c-a71a-9e38e5715ab2?index=0)
+:::
+
+
+## Getting Started
+
+Before we begin our interactive session, please follow these steps to set up your Jupyter Notebook:
+
+1. Open JupyterLab and create a new notebook:
+   - Click on the `+` button in the top left corner
+   - Select `Python 3.11.0` from the Notebook options
+
+2. Rename your notebook:
+   - Right-click on the `Untitled.ipynb` tab
+   - Select "Rename"
+   - Name your notebook with the format: `Session_XY_Topic.ipynb`
+     (Replace X with the day number and Y with the session number)
+
+3. Add a title cell:
+   - In the first cell of your notebook, change the cell type to "Markdown"
+   - Add the following content (replace the placeholders with the actual information):
+
+```markdown
+# Day 6: Session A - Grouping, Joining, and Sorting
+
+[Link to session webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/6a_grouping_joining_sorting.html)
+
+Date: 09/09/2025
+
+```
+
+4. Add a code cell:
+   - Below the title cell, add a new cell
+   - Ensure it's set as a "Code" cell
+   - This will be where you start writing your Python code for the session
+
+5. Throughout the session:
+   - Take notes in Markdown cells
+   - Copy or write code in Code cells
+   - Run cells to test your code
+   - Ask questions if you need clarification
+
+:::{.callout-caution}
+Remember to save your work frequently by clicking the save icon or using the keyboard shortcut (Ctrl+S or Cmd+S).
+:::
+
+Let's begin our interactive session!
+<hr>
+
+## Introduction
+
+In this session, we'll explore essential data manipulation and analysis techniques in pandas, focusing on some simple examples. We'll cover sorting, grouping, joining, working with dates, and applying custom transformations to data. 
+
+## Setup
+
+Let's start by importing the necessary libraries and creating a sample dataset:
+
+```{python}
+#| echo: true
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Create a sample dataset of species observations
+np.random.seed(42) 
+dates = pd.date_range(start='2023-01-01', periods=100)
+data = {
+    'date': dates,
+    'site': np.random.choice(['Forest', 'Grassland', 'Wetland'], 100),
+    'species': np.random.choice(['Oak', 'Maple', 'Pine', 'Birch'], 100),
+    'count': np.random.randint(1, 20, 100),
+    'temperature': np.random.normal(15, 5, 100)
+}
+df = pd.DataFrame(data)
+print(df.head())
+```
+
+## 1. Sorting Data
+
+Sorting is crucial in data analysis for identifying extremes, patterns, and organizing your data for subsequent analyses.
+
+### Basic Sorting
+
+```{python}
+#| echo: true
+# Sort by species count
+df_sorted = df.sort_values('count', ascending=False)
+print(df_sorted.head())
+```
+
+
+### Multi-column Sorting
+
+```{python}
+#| echo: true
+# Sort by site and then by species count
+df_multi_sorted = df.sort_values(['site', 'count'], ascending=[True, False])
+print(df_multi_sorted.head())
+```
+
+
+## 2. Grouping and Aggregating Data
+
+Grouping allows us to analyze data at different ecological levels, from individual species to entire ecosystems.
+
+### Basic Groupby
+
+```{python}
+#| echo: true
+# Sum of species counts by site
+site_counts = df.groupby('site')['count'].sum()
+print(site_counts)
+```
+
+
+### Multiple Aggregations
+
+```{python}
+#| echo: true
+# Multiple stats by site
+site_stats = df.groupby('site').agg({
+    'count': ['sum', 'mean', 'max'],
+    'species': 'nunique',
+    'temperature': 'mean'
+})
+print(site_stats)
+```
+
+
+## 3. Joining Data
+
+Joining data allows us to combine information from datasets.
+
+```{python}
+#| echo: true
+# Create a second DataFrame with site characteristics
+site_data = pd.DataFrame({
+    'site': ['Forest', 'Grassland', 'Wetland'],
+    'soil_pH': [6.5, 7.2, 6.8],
+    'annual_rainfall': [1200, 800, 1500]
+})
+
+# Perform an inner join
+merged_df = pd.merge(df, site_data, on='site', how='inner')
+print(merged_df.head())
+```
+
+Types of joins and when to use them:
+
+- Inner Join: Use when you want to combine two datasets based on a common key, keeping only the records that have matches in both datasets. This is useful when you're interested in analyzing only the data points that have complete information across both sources.
+- Left Join: Use when you want to keep all records from the left (primary) dataset and match them with records from the right (secondary) dataset where possible. This is helpful when you want to preserve all information from your main dataset while enriching it with additional data where available.
+- Right Join: Similar to a left join, but keeps all records from the right dataset. This is less common but can be useful when you want to ensure all records from a secondary dataset are included, even if they don't have corresponding entries in the primary dataset.
+- Outer Join: Use when you want to combine all unique records from both datasets, regardless of whether they have matches or not. This creates a comprehensive dataset that includes all information from both sources, filling in with null values where there's no match.
+
+Use cases:
+- Combining observation data with site characteristics
+- Merging disparate datasets that share a location or timestamp.
+
+## 4. Working with Dates
+
+Date manipulation is crucial for analyzing seasonal patterns, long-term trends, and time-sensitive events.
+
+```{python}
+#| echo: true
+# Set date as index
+df.set_index('date', inplace=True)
+print(df.head())
+
+# Resample to monthly data
+monthly_counts = df.resample('ME')['count'].sum()
+print(monthly_counts.head())
+```
+
+### Understanding `inplace=True`
+
+The `inplace=True` parameter modifies the original DataFrame directly:
+
+```{python}
+#| echo: true
+
+# Without inplace=True (creates a new DataFrame)
+df_new = df.reset_index()
+print("\nNew DataFrame with reset index:")
+print(df_new.head())
+print("\nOriginal DataFrame (unchanged):")
+print(df.head())
+
+# With inplace=True (modifies the original DataFrame)
+df.reset_index(inplace=True)
+print("\nOriginal DataFrame after reset_index(inplace=True):")
+print(df.head())
+```
+
+When to use `inplace=True`:
+- When preprocessing large datasets to save memory
+- In data cleaning pipelines for time series
+- When you're sure you won't need the original version of the data
+
+When not to use `inplace=True`:
+- When you need to preserve the original dataset for comparison
+- In functions where you want to return a modified copy without altering the input
+- When working with shared datasets that other parts of your analysis might depend on
+
+### Date Filtering and Analysis
+
+```{python}
+#| echo: true
+# Filter by date range (e.g., spring season)
+spring_data = df[(df['date'] >= '2023-03-01') & (df['date'] < '2023-06-01')]
+print(spring_data.head())
+
+# Extract date components
+df['month'] = df['date'].dt.month
+df['day_of_year'] = df['date'].dt.dayofyear
+print(df.head())
+```
+
+When to use date manipulation:
+- Analyzing seasonal patterns
+- Studying time-specific events (e.g., flowering times, migration patterns)
+- Creating time-based features for models
+- Aligning climate data with other observations (resampling)
+
+## 5. Using df.apply() to transform data
+
+The `apply()` function allows you to apply custom calculations to your data.
+
+```{python}
+#| echo: true
+#| 
+# Apply a function to categorize temperature
+def categorize_temperature(value):
+    if value < 10:
+        return 'Cold'
+    elif value < 20:
+        return 'Moderate'
+    else:
+        return 'Warm'
+
+df['temp_category'] = df['temperature'].apply(categorize_temperature)
+print(df.head())
+
+# Apply a function to calculate biodiversity index
+def simpson_diversity(row):
+    n = row['count']
+    N = df.loc[df['site'] == row['site'], 'count'].sum()
+    return 1 - (n * (n - 1)) / (N * (N - 1))
+
+df['simpson_index'] = df.apply(simpson_diversity, axis=1)
+print(df.head())
+```
+
+When to use `apply()`:
+- Calculating complex indices (e.g., biodiversity measures)
+- Applying models to observational data
+- Implementing custom data cleaning rules
+- Performing category-specific calculations
+
+Remember, while `apply()` is versatile, it can be slower than vectorized operations for large datasets. Always consider if there's a vectorized alternative, especially when working with big  datasets.
+
+
+## 6. Reshaping DataFrames with Pivot Tables
+
+Pivot tables provide a way to reshape data and calculate aggregations in one step.
+
+### How Pivot Tables Work
+
+1. **Reshaping Data**: Pivot tables reshape data by turning unique values from one column into multiple columns.
+
+2. **Aggregation**: They perform aggregations on a specified value column for each unique group created by the new columns.
+
+3. **Index and Columns**: You specify which column to use as the new index, which to use as new columns, and which to aggregate.
+
+The idea is very similar to the `df.pivot` command:
+![](https://pandas.pydata.org/pandas-docs/stable/_images/reshaping_pivot.png)
+
+The main difference between `df.pivot` and `df.pivot_table` is that `df.pivot_table` includes aggregation.
+
+Let's see an example:
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Create a sample DataFrame
+data = {
+    'date': ['2023-01-01', '2023-01-01', '2023-01-02', '2023-01-02'],
+    'city': ['New York', 'Los Angeles', 'New York', 'Los Angeles'],
+    'temperature': [32, 68, 28, 72]
+}
+df = pd.DataFrame(data)
+print("Original DataFrame:")
+print(df)
+```
+
+#### Using `df.pivot` to rotate the dataframe:
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+pivot = pd.pivot(df, values='temperature', index='date', columns='city')
+print("\nPivot:")
+print(pivot)
+```
+
+#### Using `df.pivot_table` to create a pivot table:
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+# Create a pivot table
+pivot_table = df.pivot_table(values='temperature', index='date', columns='city', aggfunc='mean')
+print("\nPivot Table:")
+print(pivot_table)
+```
+
+In this example:
+- 'date' becomes the index
+- 'city' values become new columns
+- 'temperature' values are aggregated (mean) for each date-city combination
+
+:::{.callout-note}
+In this example, the result of our `pivot` and `pivot_table` commands are essentially the same. Why is that the case? When would we expect different results from these two commands?
+:::
+
+### Key Features of Pivot Tables
+
+1. **Handling Duplicates**: If there are multiple values for a given index-column combination, an aggregation function (like mean, sum, count) must be specified.
+
+2. **Missing Data**: Pivot tables can reveal missing data, often filling these gaps with NaN.
+
+3. **Multi-level Index**: You can create multi-level indexes and columns for more complex reorganizations.
+
+4. **Flexibility**: You can pivot on multiple columns and use multiple value columns.
+
+Pivot tables are especially useful for:
+- Summarizing large datasets
+- Creating cross-tabulations
+- Preparing data for visualization
+- Identifying patterns or trends across categories
+
+Remember, while pivot tables are powerful, they work best with well-structured data and clear categorical variables.
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+
+# Create a pivot table
+pivot = df.pivot_table(values='temperature', index='city', columns='date', aggfunc='mean')
+print(pivot)
+```
+
+Try creating a pivot table that shows the maximum humidity for each city and date.
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and then provide your code.
+</div>
+```{python}
+#| echo: true
+
+# Your code here
+```
+
+```{python}
+#| echo: false
+#| eval: false
+
+# Answer
+humidity_pivot = df.pivot_table(values='humidity', index='location', columns='date', aggfunc='max')
+print(humidity_pivot)
+```
+
+## Key Points
+
+- Grouping allows us to split data based on categories and perform operations on each group.
+- The `groupby()` function is the primary tool for grouping in Pandas.
+- We can apply various aggregation functions to grouped data.
+- Multi-level grouping creates a hierarchical index.
+- Pivot tables offer a way to reshape and aggregate data simultaneously.
+
+## Conclusion
+
+These techniques form the foundation of data manipulation and analysis in pandas. By understanding when and how to use each method, you can efficiently process and gain insights from datasets. Next you'll applying these concepts to different scenarios to strengthen your skills in environmental data science.

@@ -1,0 +1,91 @@
+---
+title: EDS 217 Cheatsheet
+subtitle: <code>print()</code>
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+
+## Basic Usage of `print()`
+The `print()` function outputs the specified message to the screen. It is often used for debugging to display the values of variables and program status during code execution.
+
+### Printing Simple Messages
+```python
+print("Hello, World!")
+```
+
+### Printing the Value of Variables
+```python
+x = 10
+y = 20
+print(x)
+print(y)
+```
+
+
+
+## Combining Text and Variables
+You can combine text and variables in the `print()` function to make the output more informative. Here are 4 different ways:
+
+::: {type="note"}
+This is a note.
+:::
+
+::: {type="warning"}
+Make sure to check your data types before processing.
+:::
+
+### 1. Using Comma Separation
+```python
+name = "Alice"
+age = 30
+print("Name:", name, "Age:", age)
+```
+
+### 2. Using String Formatting
+
+#### f-string (Formatted String Literal) - Python 3.6+ [PREFERRED]
+```python
+name = "Bob"
+age = 25
+print(f"Name: {name}, Age: {age}")
+```
+
+#### `format()` Method [CAN BE USEFUL IN COMPLICATED PRINT STATEMENTS]
+```python
+name = "Carol"
+age = 22
+print("Name: {}, Age: {}".format(name, age))
+```
+
+#### Old `%` formatting [NOT RECOMMENDED]
+```python
+name = "Dave"
+age = 28
+print("Name: %s, Age: %d" % (name, age))
+```
+
+
+## Debugging with Print
+Use `print()` to display intermediate values in your code to understand how data changes step by step.
+
+### Example: Debugging a Loop
+```python
+for i in range(5):
+    print(f"Current value of i: {i}")
+```
+
+### Example: Checking Function Outputs
+```python
+def add(a, b):
+    result = a + b
+    print(f"Adding {a} + {b} = {result}")
+    return result
+
+add(5, 3)
+```
+

@@ -1,0 +1,135 @@
+---
+title: "EDS 217 Cheatsheet"
+subtitle: "JupyterLab Basics: Variable Inspection, Magic Commands, and Shortcuts"
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+## Variable Inspection in JupyterLab
+
+### Installing the Variable Inspector Extension
+
+Before we can use the Variable Inspector in JupyterLab, we need to install the extension. Follow these steps:
+
+1. Start a new JupyterLab session in your web browser.
+
+2. Click on the "+" button in the top left corner to open the Launcher (it might already be opened).
+
+3. Under "Other", click on "Terminal" to open a new terminal session.
+
+4. In the terminal, type the following command and press Enter:
+
+   ```
+   pip install lckr-jupyterlab-variableinspector
+   ```
+
+5. Wait for the installation to complete. You should see a message indicating successful installation.
+
+6. Once the installation is complete, you need to restart JupyterLab for the changes to take effect. To do this:
+   - Save all your open notebooks and files.
+   - Close all browser tabs with JupyterLab.
+   - Login to `https://workbench-1.bren.ucsb.edu` again.
+   - Restart a JupyterLab session
+
+After restarting JupyterLab, the Variable Inspector extension should be available for use.
+
+### Variable Inspector
+
+Now that you have installed the Variable Inspector extension, here's how to use it:
+
+Open the Variable Inspector:
+- Menu: View > Activate Command Palette, then type "variable inspector"
+- Shortcut: Ctrl + Shift + I (Windows/Linux) or Cmd + Shift + I (Mac)
+- Right-click in an open notebook and select "Open Variable Inspector" (will be at the bottom of the list)
+
+The Variable Inspector shows:
+- Variable names
+- Types
+- Values/shapes
+- Count (for collections)
+
+:::{.callout-warning title="Limits to the Variable Inspector"}
+**The variable inspector is not suitable for use with large dataframes or large arrays**. You should use standard commands like `df.head()`, `df.tail()`, `df.info()`, `df.describe()` to inspect large dataframes.
+:::
+
+
+```{python}
+#| echo: true
+
+# Example variables
+x = 5
+y = "Hello"
+z = [1, 2, 3]
+
+# These will appear in the Variable Inspector
+```
+
+## Essential Magic Commands
+
+Magic commands start with `%` (line magics) or `%%` (cell magics). Note that available magic commands may vary depending on your Jupyter environment and installed extensions.
+
+### Viewing Variables
+
+```{python}
+#| echo: true
+
+# List all variables
+%whos
+
+# List just variable names
+%who
+```
+
+### Running Shell Commands
+
+```{python}
+#| echo: true
+
+# Run a shell command
+!echo "Hello from the shell!"
+
+# Capture output in a variable
+files = !ls
+print(files)
+```
+
+## Useful Keyboard Shortcuts
+
+| Action | Windows/Linux | Mac |
+|--------|---------------|-----|
+| Run cell | Shift + Enter | Shift + Enter |
+| Run cell and insert below | Alt + Enter | Option + Enter |
+| Run cell and select below | Ctrl + Enter | Cmd + Enter |
+| Enter command mode | Esc | Esc |
+| Enter edit mode | Enter | Enter |
+| Save notebook | Ctrl + S | Cmd + S |
+| Insert cell above | A (in command mode) | A (in command mode) |
+| Insert cell below | B (in command mode) | B (in command mode) |
+| Cut cell | X (in command mode) | X (in command mode) |
+| Copy cell | C (in command mode) | C (in command mode) |
+| Paste cell | V (in command mode) | V (in command mode) |
+| Undo cell action | Z (in command mode) | Z (in command mode) |
+| Change to code cell | Y (in command mode) | Y (in command mode) |
+| Change to markdown cell | M (in command mode) | M (in command mode) |
+| Split cell at cursor | Ctrl + Shift + - | Cmd + Shift + - |
+| Merge selected cells | Shift + M (in command mode) | Shift + M (in command mode) |
+| Toggle line numbers | Shift + L (in command mode) | Shift + L (in command mode) |
+| Toggle output | O (in command mode) | O (in command mode) |
+
+## Tips for Beginners
+
+1. Use Tab for code completion
+3. Add `?` after a function name for more detailed help (e.g., `print?`)
+4. Use `dir()` to see available attributes/methods (e.g., `dir(str)`)
+5. Use the `help()` command to get information about functions and objects.
+
+## Resources for Further Learning
+
+- [JupyterLab Documentation](https://jupyterlab.readthedocs.io/)
+- [IPython Documentation (for magic commands)](https://ipython.readthedocs.io/en/stable/interactive/magics.html)
+- [Jupyter Notebook Cheatsheet](https://www.edureka.co/blog/cheatsheets/jupyter-notebook-cheat-sheet)
+- [DataCamp JupyterLab Tutorial](https://www.datacamp.com/tutorial/tutorial-jupyter-notebook)

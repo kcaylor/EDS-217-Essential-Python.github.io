@@ -1,7 +1,7 @@
 ---
 title: EDS 217 Cheatsheet
 subtitle: Setting up <code>python</code>
-jupyter: eds217_2025
+jupyter: eds217_2026
 format: 
     html:
         toc: true
@@ -73,19 +73,19 @@ For better package management, you can create a dedicated conda environment for 
 
 ```
 # Create a new environment specifically for EDS 217
-conda create -n eds217_2025 python=3.11
+conda create -n eds217_2026 python=3.11
 
 # Activate the environment
-conda activate eds217_2025
+conda activate eds217_2026
 
 # Install packages in the dedicated environment
 conda install jupyter jupyterlab numpy pandas matplotlib seaborn scipy scikit-learn
 
 # Register the environment with Jupyter
-python -m ipykernel install --user --name eds217_2025 --display-name "Python 3.11 (EDS 217 2025)"
+python -m ipykernel install --user --name eds217_2026 --display-name "Python 3.11 (EDS 217 2026)"
 ```
 
-When using JupyterLab, you can then select "Python 3.11 (EDS 217 2025)" as your kernel.
+When using JupyterLab, you can then select "Python 3.11 (EDS 217 2026)" as your kernel.
 
 ## Step 3: Verify Installation
 

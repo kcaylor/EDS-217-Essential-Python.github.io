@@ -1,0 +1,101 @@
+---
+title: "Interactive Session 2A"
+subtitle: "⚒️ Getting `help()` in Jupyter Notebooks"
+editor_options: 
+  chunk_output_type: console
+jupyter: eds217_2025
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+**Objective:** Learn how to get help, work with variables, and explore methods available for different Python objects in Jupyter Notebooks.
+
+
+---
+
+## 1. Getting Help in Python
+
+### Using `help()`
+- In a Jupyter Notebook cell, type:
+  ```{python}
+    #| echo: false
+
+  help(len)
+  ```
+- Run the cell to see detailed information about the `len()` function.
+
+### Trying `help()` Yourself
+- Use the `help()` function on other built-in functions like `print` or `sum`.
+
+### Using `?` and `??`
+- Type:
+  ```{python}
+  #| echo: false
+  len?
+  ```
+- Run the cell to see quick documentation.
+- Try:
+  ```{python}
+  #| echo: false
+  len??
+  ```
+- This gives more detailed information, including source code (if available).
+
+---
+
+## 2. Working with Variables
+
+### Creating Variables
+- In a new cell, create a few variables:
+  ```{python}
+  #| echo: false
+  a = 10
+  b = 5.5
+  c = "Hello, world!"
+  ```
+- Use `type()` to check the data type of each variable:
+  ```{python}
+  type(a)
+  type(b)
+  type(c)
+  ```
+
+### Exploring Variables
+- Experiment with creating your own variables and checking their types.
+- Change the values and data types and see what happens.
+
+---
+
+## 3. Exploring Methods Available for Objects
+
+### Using `dir()`
+- Use `dir()` to explore available methods for objects:
+  ```{python}
+  dir(a)
+  dir(b)
+  dir(c)
+  ```
+
+### Using `help()` with Methods
+- Pick a method from the list returned by `dir()` and use `help()` to learn more about it:
+  ```{python}
+  help(c.upper)
+  ```
+
+### Exploring Methods
+- Try calling a method on your variables:
+  ```{python}
+  #| echo: false
+  c.upper()
+  ```
+
+---
+
+```
+
+::: {.center-text .body-text-xl .teal-text}
+End interactive session 2A
+:::

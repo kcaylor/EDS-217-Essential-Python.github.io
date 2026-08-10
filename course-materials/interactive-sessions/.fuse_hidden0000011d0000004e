@@ -1,0 +1,157 @@
+---
+title: "Interactive Session"
+subtitle: "Creating a GitHub Repository for Your EDS 217 Course Work"
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+## Introduction
+
+This session contains detailed instructions for creating a new GitHub repository and pushing your EDS 217 course work to it. It also covers how to clean your Jupyter notebooks before committing them to ensure your repository is clean and professional.
+
+:::{.callout-warning}
+Jupyter notebooks files can be hard to use in github because they contain information about code execution order and output in the file. For this reason, you should clean notebooks before pushing them to a github repo. We will clean them using the `nbstripout` python package
+:::
+
+## Steps to Setting up a GitHub repo for your coursework:
+
+1. Create a new repository on GitHub
+2. Initialize a local Git repository
+3. Clean Jupyter notebooks of output and execution data
+4. Add, commit, and push files to a GitHub repository
+
+## Creating a New GitHub Repository
+
+Let's start by creating a new repository on GitHub:
+
+1. Log in to your GitHub account
+2. Click the '+' icon in the top-right corner and select 'New repository'
+3. Name your repository (e.g., "EDS-217-Course-Work")
+4. Add a description (optional)
+5. Choose to make the repository public or private
+6. Don't initialize the repository with a README, .gitignore, or license
+7. Click 'Create repository'
+
+After creating the repository, you'll see a page with instructions. We'll use these in the next steps.
+
+## Initializing a Local Git Repository
+
+Now, let's set up your local directory as a Git repository:
+
+
+1. Open a terminal on the class `workbench` server
+2. Navigate to your course work directory:
+
+```{python}
+#| echo: true
+#| eval: false
+
+cd path/to/your/EDS-217
+```
+
+3. Initialize the repository:
+
+```{python}
+#| echo: true
+#| eval: false
+
+git init
+```
+
+4. Add your GitHub repository as the remote origin:
+
+```{python}
+#| echo: true
+#| eval: false
+
+git remote add origin https://github.com/your-username/EDS-217-Course-Work.git
+```
+
+Replace `your-username` with your actual GitHub username.
+
+## Cleaning Jupyter Notebooks
+
+Before we commit our notebooks, let's clean them to remove output cells and execution data:
+
+1. Install the `nbstripout` tool if you haven't already:
+
+```{python}
+#| echo: true
+#| eval: false
+
+pip install nbstripout
+```
+
+:::{.callout-warning}
+By default, the server won't add a new python package to the main package repository on `workbench`. For this reason, you will see a warning when running the pip command that looks something like this:
+
+```
+WARNING: The script nbstripout is installed in '/Users/[your user id]/.local/bin' which is not on PATH
+```
+:::
+
+Therefore, we need to access the `nbsripout` command by specifying it's location in your local user folder:
+
+2. Configure `nbstripout` for your repository:
+
+```{python}
+#| echo: true
+#| eval: false
+
+~/.local/bin/nbstripout --install --attributes .gitattributes
+```
+
+This sets up `nbstripout` to automatically clean your notebooks when you commit them.
+
+## Adding, Committing, and Pushing Files
+
+Now we're ready to add our files to the repository:
+
+1. Add all files in the directory:
+
+```{python}
+#| echo: true
+#| eval: false
+
+git add .
+```
+
+2. Commit the files:
+
+```{python}
+#| echo: true
+#| eval: false
+
+git commit -m "Initial commit: Adding EDS 217 course work"
+```
+
+3. Push the files to GitHub:
+
+```{python}
+#| echo: true
+#| eval: false
+
+git push -u origin main
+```
+
+Note: If your default branch is named "master" instead of "main", use `git push -u origin master`.
+
+## Verifying Your Repository
+
+1. Go to your GitHub repository page in your web browser
+2. Refresh the page
+3. You should now see all your course files listed in the repository
+
+## Conclusion
+
+Congratulations! You've successfully created a GitHub repository for your EDS 217 course work, cleaned your Jupyter notebooks, and pushed your files to GitHub. This process helps you maintain a clean, professional repository of your work that you can easily share or refer back to in the future.
+
+## Additional Resources
+
+- [GitHub Docs: Creating a new repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-new-repository)
+- [Git Documentation](https://git-scm.com/doc)
+- [nbstripout Documentation](https://github.com/kynan/nbstripout)

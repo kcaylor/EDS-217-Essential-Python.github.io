@@ -1,0 +1,185 @@
+---
+title: "_What the Python_ (WTP)?: `GroupBy()`, `copy()`, and The Triple Dilemma"
+subtitle: "Exploring Concepts and Tradeoffs in Python and Pandas"
+format: 
+  revealjs:
+    theme: simple
+    transition: slide
+    slide-number: true
+jupyter: eds217_2025
+---
+
+## What is a `GroupBy` Object?
+
+:::{.incremental}
+- Created when you use the `groupby()` function in pandas
+- A plan for splitting data into groups, not the result itself
+- Lazy evaluation: computations occur only when an aggregation method is called
+- Contains:
+  - Reference to the original DataFrame
+  - Columns to group by
+  - Internal dictionary mapping group keys to row indices
+:::
+
+## Structure of a GroupBy Object
+
+:::{.incremental}
+- Internal dictionary structure:
+  ```python
+  {
+    group_key_1: [row_index_1, row_index_3, ...],
+    group_key_2: [row_index_2, row_index_4, ...],
+    ...
+  }
+  ```
+- This structure allows for efficient data access and aggregation
+- Actual data isn't copied or split until necessary
+:::
+
+## GroupBy Example
+
+```{python}
+#| echo: true
+import pandas as pd
+
+df = pd.DataFrame({
+    'Category': ['A', 'B', 'A', 'B', 'A', 'B'],
+    'Value': [1, 2, 3, 4, 5, 6]
+})
+
+grouped = df.groupby('Category')
+# No computation yet!
+
+result = grouped.sum()  # Now we compute
+print(result)
+```
+
+## Why Do We Need `.copy()`?
+
+:::{.incremental}
+- Many pandas operations return views instead of copies
+- Views are memory-efficient but can lead to unexpected modifications
+- `.copy()` creates a new, independent object
+- Use `.copy()` when you want to modify data without affecting the original
+:::
+
+## Views vs. Copies in Pandas
+
+:::{.incremental}
+- Filtering operations usually create views:
+  - `df[df['column'] > value]`
+  - `df.loc[condition]`
+- Some operations create copies by default:
+  - `df.drop(columns=['col'])`
+  - `df.dropna()`
+  - `df.reset_index()`
+- But it's not always clear which operations do what!
+:::
+
+## When to Use .copy()
+
+:::{.incremental}
+- When assigning a slice of a DataFrame to a new variable
+- Before making changes to a DataFrame you want to keep separate
+- In functions where you don't want to modify the input data
+- When chaining operations and you're unsure about view vs. copy behavior
+- To ensure you have an independent copy, regardless of the operation
+:::
+
+## .copy() Example
+
+```{python}
+#| echo: true
+# Filtering creates a view
+df_view = df[df['Category'] == 'A']
+df_view['Value'] += 10  # This modifies the original df!
+
+# Using copy() creates an independent DataFrame
+df_copy = df[df['Category'] == 'A'].copy()
+df_copy['Value'] += 10  # This doesn't affect the original df
+
+print("Original df:")
+print(df)
+print("\nModified copy:")
+print(df_copy)
+```
+
+## The Triple Constraint Dilemma
+
+:::{.incremental}
+- In software design, often you can only optimize two out of three:
+  1. Performance
+  2. Flexibility
+  3. Ease of Use
+- This applies to data science tools like R and Python
+:::
+
+## R vs Python: Trade-offs
+
+:::{.columns}
+:::{.column width="50%"}
+**R**
+
+- ✓✓ Ease of Use
+- ✓ General Flexibility
+- ✗ General Performance
+:::
+
+:::{.column width="50%"}
+**Python**
+
+- ✓✓ Performance
+- ✓ General Flexibility
+- ✗ Ease of Use (for data tasks)
+:::
+:::
+
+## R: Strengths and Limitations
+
+:::{.incremental}
+- Strengths:
+  - Intuitive for statistical operations
+  - Consistent data manipulation with tidyverse
+  - Excellent for quick analyses and visualizations
+- Limitations:
+  - Can be slower for very large datasets
+  - Less efficient memory usage (more frequent copying)
+  - Limited in general-purpose programming tasks
+:::
+
+## Python: Strengths and Limitations
+
+:::{.incremental}
+- Strengths:
+  - Efficient for large-scale data processing
+  - Versatile for various programming tasks
+  - Strong in machine learning and deep learning
+- Limitations:
+  - Less intuitive API for data manipulation (pandas)
+  - Steeper learning curve for data science tasks
+  - Requires more code for some statistical operations
+:::
+
+## Implications for Data Science
+
+:::{.incremental}
+- R excels in statistical computing and quick analyses
+- Python shines in large-scale data processing and diverse applications
+- Choice depends on specific needs:
+  - Project scale
+  - Performance requirements
+  - Team expertise
+  - Integration with other systems
+:::
+
+## Conclusion
+
+- Understanding these concepts helps in:
+  - Choosing the right tool for the job
+  - Writing efficient and correct code
+  - Appreciating the design decisions in data science tools
+- Both R and Python have their places in a data scientist's toolkit
+- Consider using both languages to leverage their respective strengths
+
+## Questions?
+

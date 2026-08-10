@@ -1,0 +1,167 @@
+---
+title: EDS 217 Cheatsheet
+subtitle: <code>numpy</code>
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+# NumPy Cheatsheet for Pandas Users (Beginner-Friendly)
+
+## Importing NumPy
+```python
+import numpy as np
+```
+
+## Creating NumPy Arrays
+
+### From Python Lists
+```python
+arr = np.array([1, 2, 3, 4, 5])
+```
+
+### From Pandas Series or DataFrame
+```python
+# From Series
+s = pd.Series([1, 2, 3, 4, 5])
+arr = s.to_numpy()
+
+# From DataFrame
+df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+arr = df.to_numpy()
+```
+
+## Basic Array Operations
+
+### Element-wise Operations
+```python
+arr1 = np.array([1, 2, 3])
+arr2 = np.array([4, 5, 6])
+
+# Addition
+result = arr1 + arr2
+
+# Multiplication
+result = arr1 * arr2
+
+# Division
+result = arr1 / arr2
+```
+
+### Simple Mathematical Functions
+```python
+# Square root
+sqrt_arr = np.sqrt(arr)
+
+# Exponential
+exp_arr = np.exp(arr)
+
+# Absolute value
+abs_arr = np.abs(arr)
+```
+
+## Statistical Operations
+
+### Basic Statistics
+```python
+# Mean
+mean = np.mean(arr)
+
+# Median
+median = np.median(arr)
+
+# Standard deviation
+std = np.std(arr)
+```
+
+### Min, Max, and Sum
+```python
+# Minimum
+min_val = np.min(arr)
+
+# Maximum
+max_val = np.max(arr)
+
+# Sum
+total = np.sum(arr)
+```
+
+## Array Manipulation
+
+### Reshaping
+```python
+arr = np.array([1, 2, 3, 4, 5, 6])
+reshaped = arr.reshape(2, 3)
+```
+
+### Transposing
+```python
+transposed = arr.T
+```
+
+### Flattening
+```python
+flattened = arr.flatten()
+```
+
+## Random Number Generation
+
+### Random Sampling
+```python
+# Generate 5 random numbers between 0 and 1
+random_uniform = np.random.rand(5)
+
+# Generate 5 random integers between 1 and 10
+random_integers = np.random.randint(1, 11, 5)
+```
+
+### Setting Random Seed
+```python
+np.random.seed(42)  # For reproducibility
+```
+
+## Working with Missing Data
+
+### Handling NaN Values
+```python
+# Check for NaN
+np.isnan(arr)
+
+# Replace NaN with a value
+np.nan_to_num(arr, nan=0.0)
+```
+
+## Useful NumPy Functions for Pandas Users
+
+### unique() and value_counts()
+```python
+# Get unique values
+unique_values = np.unique(arr)
+
+# Get value counts (similar to pandas value_counts())
+values, counts = np.unique(arr, return_counts=True)
+```
+
+### where()
+```python
+# Similar to pandas' where, but returns an array
+result = np.where(condition, x, y)
+```
+
+### concatenate()
+```python
+# Concatenate arrays (similar to pd.concat())
+concatenated = np.concatenate([arr1, arr2, arr3])
+```
+
+## When to Use NumPy with Pandas
+
+1. **Performance**: For large datasets, NumPy operations can be faster than pandas.
+2. **Memory efficiency**: NumPy arrays use less memory than pandas objects.
+3. **Specific mathematical operations**: Some mathematical operations are more straightforward in NumPy.
+4. **Interfacing with other libraries**: Many scientific Python libraries use NumPy arrays.
+
+Remember, while these NumPy operations are useful, many have direct equivalents in pandas that work on Series and DataFrames. Always consider whether you can perform the operation directly in pandas before converting to NumPy arrays.

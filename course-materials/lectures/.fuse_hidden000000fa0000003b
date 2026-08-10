@@ -1,0 +1,172 @@
+---
+title: "EDS 217 - Lecture"
+subtitle: "Missing Data in Pandas: To Drop or to Impute?"
+jupyter: eds217_2025
+format: 
+    revealjs:
+        theme: simple
+        transition: slide
+        slide-number: true
+        chalkboard: true
+---
+
+## Introduction
+
+- Data cleaning is crucial in data analysis
+- Missing data is a common challenge
+- Two main approaches:
+  1. Dropping missing data
+  2. Imputation
+- Understanding the nature of missingness is key
+
+## Types of Missing Data
+
+::: {.incremental}
+1. Missing Completely at Random (MCAR)
+2. Missing at Random (MAR)
+3. Missing Not at Random (MNAR)
+:::
+
+## Missing Completely at Random (MCAR)
+
+- No relationship between missingness and any values
+- Example: Survey responses lost due to a computer glitch
+- Least problematic type of missing data
+- Dropping MCAR data is generally safe but reduces sample size
+
+## MCAR Example (Assigning nan randomly)
+```{python}
+#| echo: true
+
+import pandas as pd
+import numpy as np
+
+# Create sample data with MCAR
+np.random.seed(42)
+df = pd.DataFrame({'A': np.random.rand(100), 'B': np.random.rand(100)})
+df.loc[np.random.choice(df.index, 10, replace=False), 'A'] = np.nan
+print(df.isnull().sum())
+```
+
+## Missing at Random (MAR)
+
+- Missingness is related to other observed variables
+- Example: Older participants more likely to skip income questions
+- More common in real-world datasets
+- Dropping MAR data can introduce bias
+
+## MAR Example (Assigning nan randomly, filtered on column value)
+```{python}
+#| echo: true
+
+# Create sample data with MAR
+np.random.seed(42)
+df = pd.DataFrame({
+    'Age': np.random.randint(18, 80, 100),
+    'Income': np.random.randint(20000, 100000, 100)
+})
+df.loc[df['Age'] > 60, 'Income'] = np.where(
+    np.random.rand(len(df[df['Age'] > 60])) < 0.3, 
+    np.nan, 
+    df.loc[df['Age'] > 60, 'Income']
+)
+print(df[df['Age'] > 60]['Income'].isnull().sum() / len(df[df['Age'] > 60]))
+```
+
+## Missing Not at Random (MNAR)
+
+- Missingness is related to the missing values themselves
+- Example: People with high incomes more likely to skip income questions
+- Most problematic type of missing data
+- Neither dropping nor simple imputation may be appropriate
+
+## Dropping Missing Data
+
+Pros:
+
+::: {.incremental}
+- Simple and quick
+- Maintains the distribution of complete cases
+- Appropriate for MCAR data
+:::
+
+Cons:
+
+::: {.incremental}
+- Reduces sample size
+- Can introduce bias for MAR or MNAR data
+- May lose important information
+:::
+
+## Drop Example
+
+```{python}
+#| echo: true
+
+# Dropping missing data
+df_dropped = df.dropna()
+print(f"Original shape: {df.shape}, After dropping: {df_dropped.shape}")
+```
+
+## Imputation
+
+Pros:
+
+:::{.incremental}
+- Preserves sample size
+- Can reduce bias for MAR data
+- Allows use of all available information
+:::
+
+Cons:
+
+:::{.incremental}
+- Can introduce bias if done incorrectly
+- May underestimate variability
+- Can be computationally intensive for complex methods
+:::
+
+## Imputation Example
+
+```{python}
+#| echo: true
+
+# Simple mean imputation
+df_imputed = df.fillna(df.mean())
+print(f"Original missing: {df['Income'].isnull().sum()}, After imputation: {df_imputed['Income'].isnull().sum()}")
+```
+
+## Imputation Methods
+
+1. Simple imputation:
+   - Mean, median, mode
+   - Last observation carried forward (LOCF)
+
+2. Advanced imputation:
+   - Multiple Imputation
+   - K-Nearest Neighbors (KNN)
+   - Regression imputation
+
+## Best Practices
+
+::: {.incremental}
+1. Understand your data and the missingness mechanism
+2. Visualize patterns of missingness
+3. Consider the impact on your analysis
+4. Use appropriate methods based on the type of missingness
+5. Conduct sensitivity analyses
+6. Document your approach and assumptions
+:::
+
+## Conclusion
+
+- Understanding the nature of missingness is crucial
+- Both dropping and imputation have pros and cons
+- Choose the appropriate method based on:
+  - Type of missingness (MCAR, MAR, MNAR)
+  - Sample size
+  - Analysis goals
+- Always document your approach and conduct sensitivity analyses
+
+## Questions?
+

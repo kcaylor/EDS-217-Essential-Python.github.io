@@ -1,0 +1,129 @@
+---
+title: EDS 217 Cheatsheet
+subtitle: Bar Plots (<code>plt.bar()</code>)
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+        code-tools: true
+---
+
+### Step 1: Import Libraries
+
+First, you need to import the necessary libraries. We'll use `matplotlib.pyplot` for plotting.
+
+```python
+import matplotlib.pyplot as plt
+```
+
+### Step 2: Prepare Your Data
+
+Create lists or arrays for the categories (x-axis) and their corresponding values (y-axis). Here’s a simple example:
+
+```python
+categories = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+values = [-22.89, -20.7, -20.69, -11.76, -0.8, 8.59, 11.22, 7.23, -0.11, -10.54, -18.34, -21.44]
+```
+
+### Step 3: Create the Bar Plot
+
+Use the `bar()` function from `pyplot` to create the bar plot. Pass the categories and values as arguments.
+
+```python
+plt.bar(categories, values)
+```
+
+### Step 4: Add Labels and Title
+
+You can enhance your plot by adding a title and labels for the x-axis and y-axis.
+
+```python
+plt.xlabel('Categories')
+plt.ylabel('Values')
+plt.title('Simple Bar Plot')
+```
+
+### Step 5: Display the Plot
+
+Finally, use `plt.show()` to display the plot.
+
+```python
+plt.show()
+```
+
+### Complete Code Example
+
+Here's the complete code to create a simple bar plot:
+
+```python
+import matplotlib.pyplot as plt
+
+# Data for the plot
+categories = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+values = [-22.89, -20.7, -20.69, -11.76, -0.8, 8.59, 11.22, 7.23, -0.11, -10.54, -18.34, -21.44]
+
+# Create the bar plot
+plt.bar(categories, values)
+
+# Add labels and title
+plt.xlabel('Months')
+plt.ylabel('Average Temperature, deg-C')
+plt.title('Toolik Lake LTER Average Temperatures, 2008-2019')
+
+# Display the plot
+plt.show()
+```
+
+### Customizing the Bar Plot
+
+You can further customize your bar plot with additional options:
+
+- **Color**: Set the color of the bars using the `color` parameter.
+  
+  ```python
+  plt.bar(categories, values, color='skyblue')
+  ```
+
+- **Width**: Adjust the width of the bars using the `width` parameter.
+
+  ```python
+  plt.bar(categories, values, width=0.5)
+  ```
+
+- **Add Grid**: Make the plot easier to read by adding a grid.
+
+  ```python
+  plt.grid(axis='y', linestyle='--', alpha=0.7)
+  ```
+
+- **Horizontal Bar Plot**: Use `barh()` for horizontal bar plots.
+
+  ```python
+  plt.barh(categories, values, color='skyblue')
+  ```
+
+### Example with Customizations
+
+```python
+import matplotlib.pyplot as plt
+
+# Data for the plot
+categories = ['Category A', 'Category B', 'Category C', 'Category D']
+values = [23, 17, 35, 29]
+
+# Create the bar plot with customizations
+plt.bar(categories, values, color='skyblue', width=0.5)
+
+# Add labels and title
+plt.xlabel('Categories')
+plt.ylabel('Values')
+plt.title('Simple Bar Plot')
+
+# Add grid
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Display the plot
+plt.show()
+```

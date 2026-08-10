@@ -1,0 +1,462 @@
+---
+title: "Interactive Session 2A"
+subtitle: "🐍 Getting to know `lists`"
+editor_options: 
+  chunk_output_type: console
+jupyter: eds217_2025
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+![Unsplash list image](images/list.jpg)
+
+Python has four collection data types, the most common of which is the **list**. This session introduces lists and a few of the important list operations. We will also cover **indexing**, a key feature of programming.
+
+
+## Getting Started
+
+Before we begin our interactive session, please follow these steps to set up your Jupyter Notebook:
+
+1. Open JupyterLab and create a new notebook:
+   - Click on the `+` button in the top left corner
+   - Select `Python 3.11.0` from the Notebook options
+
+2. Rename your notebook:
+   - Right-click on the `Untitled.ipynb` tab
+   - Select "Rename"
+   - Name your notebook with the format: `Session_2A_Lists.ipynb`
+     
+3. Add a title cell:
+   - In the first cell of your notebook, change the cell type to "Markdown"
+   - Add the following content (replace the placeholders with the actual information):
+
+```markdown
+# Day 2: Session A - Lists
+
+[Link to session webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/2a_lists.html)
+
+Date: 09/03/2025
+```
+
+4. Add a code cell:
+   - Below the title cell, add a new cell
+   - Ensure it's set as a "Code" cell
+   - This will be where you start writing your Python code for the session
+
+5. Throughout the session:
+   - Take notes in Markdown cells
+   - Copy or write code in Code cells
+   - Run cells to test your code
+   - Ask questions if you need clarification
+
+:::{.callout-caution}
+Remember to save your work frequently by clicking the save icon or using the keyboard shortcut (Ctrl+S or Cmd+S).
+:::
+
+Let's begin our interactive session!
+
+::: {.boxhead1}
+## Session 1.2 Topics
+:::
+
+::: {.boxtext1}
+- 📌 List basics
+  - List notation
+  - `len()`, `min()`, `max()`
+- 📌 Indexing + slicing
+- 📌 List operations
+  - In-place operators
+  - Standard operators
+  - Copies vs. views
+  - Adding lists
+- 📌 Generating sequential lists
+:::
+
+
+## Instructions
+
+:::{.callout-note}
+🐍 &nbsp; &nbsp; This symbol designates an important note about Python structure, syntax, or another quirk.
+:::
+
+<p style="color:#008C96; font-weight: bold"> ✏️ &nbsp; &nbsp; This symbol designates code you should add to your notebook and run.  </p>
+
+
+## Lists
+
+A list is a Python object used to contain multiple values. Lists are ordered and changeable. They are defined as follows:
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Define list variables
+num_list = [4, 23, 654, 2, 0, -12, 4391]
+str_list = ['energy', 'water', 'carbon']
+```
+
+While you can create lists containing mixed data types, this is not usually recommended.
+
+The `len()` command returns the length of the list.
+
+```{python}
+len(str_list)
+```
+
+The `min()` and `max()` commands are used to find the minimum and maximum values in a list. For a list of strings, this corresponds to the alphabetically first and last elements.
+
+```{python}
+min(str_list)
+```
+
+```{python}
+max(str_list)
+```
+
+
+:::{.example}
+✏️ **Try it.** Use the `len()`, `min()`, and `max()` commands to find the length, minimum, and maximum of `num_list`.
+:::
+
+
+### Indexing
+The index is used to reference a value in an iterable object by its position. To access an element in a list by its index, use square brackets `[]`.
+
+:::{.callout-note}
+🐍 Python is **zero-indexed**. This means that the first element in the list is 0, the second is 1, and so on. The last element in a list with $n$ elements is $n - 1$.
+::: 
+
+```python
+num_list = [4, 23, 654, 2, 0, -12, 4391]
+```
+
+```{python}
+num_list[2]
+```
+
+You can also access an element based on its position from the end of the list.
+```python
+num_list = [4, 23, 654, 2, 0, -12, 4391]
+```
+
+```{python}
+num_list[-2]
+```
+
+:::{.example}
+✏️ **Try it.** Find the 2nd element in `str_list` in two different ways. Remember that Python is zero-indexed!
+:::
+
+```{python}
+#| echo: false
+#| include: false
+print(str_list)
+print(str_list[1])
+print(str_list[-2])
+```
+
+### Slicing
+Accessing a range of values in a list is called **slicing**. A slice specifies a start and an endpoint, generating a new list based on the indices. The indices are separated by a `:`.
+
+:::{.callout-note}    
+🐍 The endpoint index in the slice is <i>exclusive</i>. To slice to the end of the list, omit an endpoint.
+:::
+
+```python
+num_list = [4, 23, 654, 2, 0, -12, 4391]
+```
+
+This code returns the 2nd and 3rd elements of the `num_list`
+
+```{python}
+num_list[2:4]
+```
+
+This code would return everything from the 4th element to the end of the list:
+```{python}
+num_list[3:]
+```
+
+::: {.example}
+✏️ **Try it.** Before running each of the following commands in a new cell in your notebook, try to determine what output you expect
+:::
+
+
+```python
+num_list = [4, 23, 654, 2, 0, -12, 4391]
+```
+
+```{python}
+#| eval: false
+num_list[2:6]
+```
+
+```{python}
+#| eval: false
+num_list[0:4]   
+```
+```{python}
+#| eval: false
+num_list[:4]    
+```
+```{python}
+#| eval: false
+num_list[-6:-1] 
+```
+
+Although less common, it is also possible to specify a step size, i.e. `[start:stop:step]`. A step size of 1 would select every element, 2 would select every other element, etc...
+
+```{python}
+num_list[0:4:2]  
+```
+
+```{python}
+num_list[::2]
+```
+A step of -1 returns the list in reverse.
+
+```{python}
+num_list[::-1]
+```
+
+### String indicies
+
+Like lists, strings can also be indexed using the same notation. This can be useful for many applications, such as selecting files in a certain folder for import based on their names or extension.
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+word_str = 'antidisestablishmentarianism'
+```
+
+```{python}
+word_str[14]
+```
+
+```{python}
+word_str[::3]
+```
+
+  
+### List Operations
+Elements can be added to a list using the command `list.append()`.
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+
+```{python}
+colors = ['red', 'blue', 'green', 'black', 'white', 'pink']
+```
+
+
+You can **add** an element to a list in a specific position using the command `list.insert(i, x)` where `i` is the position where the element `x` should be added.
+
+<div class="example">
+✏️ <b> Try it. </b> 
+Add <code>'purple'</code> to the list <code>colors</code> between <code>'green'</code> and <code>'black'</code>.
+</div>
+
+```{python}
+#| echo: false
+#| include: false 
+colors.insert(3, 'purple')
+print(colors)
+```
+
+
+There are multiple ways to **remove** elements from a list. The commands `list.pop()` and `del` remove elements based on indices.
+
+```python
+colors.pop()       # removes the last element
+colors.pop(2)      # removes the third element
+del colors[2]      # removes the third element
+del colors[2:4]    # removes the third and fourth elements
+```
+The command `list.remove()` removes an element based on its value.
+```python
+colors.remove('red')
+print(colors)
+>>> ['blue', 'green', 'black', 'purple', 'white', 'pink']
+```
+
+### Let's reset our color list:
+
+```{python}
+colors = ['red', 'blue', 'green', 'purple', 'black', 'white', 'pink']
+```
+
+
+<div class="example">
+✏️ <b> Try it. </b> 
+Remove <code>pink</code> and <code>purple</code> from <code>colors</code>, using <code>del</code> for one of the strings and <code>list.remove()</code> for the other.
+</div>
+
+```{python}
+#| echo: false
+#| include: false
+colors.remove('pink')
+del colors[3]
+print(colors)
+```
+
+
+### Sorting Lists 
+
+You can **sort** the elements in a list (numerically or alphabetically) in two ways. The first uses the command `list.sort()`.
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+
+```{python}
+rand_list = [5.1 , 3.42 , 3.333 , 100.4 , 0.5 , 26.0 , 7.44 , 5.8 , 39.0]
+rand_list.sort()
+print(rand_list)
+```
+
+Setting `reverse=True` within this command sorts the list in reverse order:
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+rand_list = [5.1 , 3.42 , 3.333 , 100.4 , 0.5 , 26.0 , 7.44 , 5.8 , 39.0]
+rand_list.sort(reverse=True)
+print(rand_list)
+```
+
+So far, all of the list commands we've used have been **in-place operators**. This means that they perform the operation to the variable in place without requiring a new variable to be assigned. By contrast, **standard operators** do not change the original list variable. A new variable must be set in order to retain the operation.
+
+<div class="example">
+✏️ <b> Try it. </b> 
+Verify that <code>rand_list</code> was, in fact, sorted in place by using the <code>min()</code> and <code>max()</code> functions to determine the minmum and maximum values in the list and printing the first and last values in the list.
+</div>
+
+```{python}
+# Step 1: Use f-strings to print the min and max values in rand_list.
+
+# Step 2: Use f-strings to print the first and last values in rand_list.
+```
+
+The other method of sorting a list is to use the `sorted()` command, which does not change the original list. Instead, the sorted list must be assigned to a new variable.
+```{python}
+rand_list = [5.1 , 3.42 , 3.333 , 100.4 , 0.5 , 26.0 , 7.44 , 5.8 , 39.0]
+sorted_list = sorted(rand_list)
+print(rand_list[0])
+print(sorted_list[0])
+```
+
+To avoid changing the original variable when using an in-place operator, it is wise to create a copy. There are multiple ways to create copies of lists, but it is important to know the difference between a true **copy** and a **view**. 
+
+:::{.callout-important}
+The difference between a `copy` and a `view` is a critical topic in Python and something we will come back to later in the class when working with DataFrames. Python only makes a copy of data when it is necessary, so make sure you understand the difference!
+:::
+
+A view of a list can be created as follows:
+```{python}
+str_list = ['energy', 'water', 'carbon']
+str_list_view = str_list
+```
+Any in-place operation performed on `str_list_view` will also be applied to `str_list`. For example, look what happens when you run this code:
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Sorting the str_list_view...
+str_list_view.sort()
+
+# Actually sorts the original str_list!
+print(str_list)
+```
+
+:::{.callout-important}
+**`str_list_view` was just a "view" into to the `str_list` variable, but a copy!**
+:::
+
+To avoid this, create a copy of `str_list` using any of the following methods:
+```{python}
+str_list_copy = str_list.copy()
+# or
+str_list_copy = str_list[:]
+# or
+str_list_copy = list(str_list)
+```
+
+In addition to adding single elements to a list using `list.append()` or `list.insert()`, multiple elements can be added to a list at the same time by adding multiple lists together.
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+rainbow  = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
+shades = ['coral', 'chartreuse', 'cyan', 'navy']
+print( rainbow + shades )
+```
+
+Single lists can be repeated by multiplying by an integer. 
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+str_list2 = str_list * 2
+num_list4 = num_list * 4
+print( str_list2 )
+print( num_list4 )
+```
+
+### Generating sequential lists
+
+Sequential lists are valuable tools, particularly for iteration, which we will explore in later sessions. The `range()` function is used to create an iterable object based on the size of an integer argument.
+
+```python
+range(4)
+>>> range(0, 4)
+```
+
+To construct a sequential list from the `range()` object, use the `list()` function.
+
+```python
+list(range(4))
+>>> [0, 1, 2, 3]
+```
+
+Using multiple integer arguments, the `range()` function can be used to generate sequential lists between two bounds: `range(start, stop [, step])`.
+
+:::{.callout-note}
+🐍   Like indexing, all Python functions using <span style="font-style: italic"> start </span> and <span style="font-style: italic"> stop </span> arguments, the <span style="font-style: italic"> stop </span> value is <span style="font-weight: bold"> exclusive </span>.
+:::
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+range_10 = list(range(1,11))
+odds_10 = list(range(1,11,2))
+print(range_10)
+print(odds_10)
+```
+
+::: {.center-text .body-text-xl .teal-text}
+End interactive session 2A
+:::

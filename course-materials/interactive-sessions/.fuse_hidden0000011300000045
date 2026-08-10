@@ -1,0 +1,229 @@
+---
+title: "Interactive Session 1B"
+description: "⚒️ Introduction to Jupyter Notebooks in JupyterLab"
+editor_options: 
+  chunk_output_type: console
+jupyter: eds217_2025
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+
+![](images/Jupyter.png)
+
+**Now that you've seen the REPL in iPython, from now on in this class you will code in Jupyter Notebooks.** Jupyter is an incredibly awesome and user-friendly *integrated development environment* (IDE). An IDE provides a place for data scientists to see and work with a bunch of different aspects of their work in a nice, organized interface. 
+
+::: {.center-text .body-text-m}
+Always remember: [**Python is the programming language. Jupyter Lab is an IDE.**]{.teal-text}
+:::
+
+## 1. Meet JupyterLab
+
+JupyterLab provides a nice user interface for data science, development, reporting, and collaboration (all of which you'll learn about throughout the MEDS program) in one place. 
+
+### Features of JupyterLab as an IDE
+
+1. **Interactive Computing**: JupyterLab is designed primarily for interactive computing and data analysis. It supports live code execution, data visualization, and interactive widgets, which are key features of modern IDEs.
+
+2. **Multi-language Support**: While originally developed for Python, JupyterLab supports many other programming languages through the use of kernels, making it versatile for various programming tasks.
+
+3. **Rich Text Editing**: It provides a rich text editor for creating and editing Jupyter Notebooks, which can contain both code and narrative text (Markdown), allowing for documentation and code to coexist.
+
+4. **Code Execution**: JupyterLab allows you to execute code cells and see the output immediately, making it suitable for testing and iterating on code quickly.
+
+5. **File Management**: It includes a file manager for browsing and managing project files, similar to the file explorers found in traditional IDEs.
+
+6. **Extensions and Customization**: JupyterLab supports numerous extensions that can enhance its capabilities, such as version control integration, terminal access, and enhanced visualizations.
+
+7. **Integrated Tools**: It has an integrated terminal, variable inspector, and other tools that are typically part of an IDE, providing a comprehensive environment for development.
+
+### Differences from Traditional IDEs
+
+- **Focus on Notebooks**: Unlike many traditional IDEs that focus on scripting and full-scale software development, JupyterLab emphasizes the use of notebooks for exploratory data analysis and research.
+  
+- **Non-linear Workflow**: JupyterLab allows for a non-linear workflow, where users can execute cells out of order and iteratively modify and test code.
+
+
+## JupyterLab Interface
+
+a. [**Primary panes**]{.teal-text} include the *Main Work Area* pane, *Sidebar*, and *Menu Bar*.
+
+![](images/interface-jupyterlab.png)
+
+b. As you work, Jupyer Lab will add additional tabs/panes that contain figures and data inspectors, or even other file types. You can rearrange these panes to organize your workspace however you like.
+    
+You can check out the [JupyterLab User Guide](https://jupyterlab.readthedocs.io/en/latest/user/index.html) for tons of information and helpful tips! 
+        
+
+JupyterLab is a powerful interactive development environment (IDE) that allows you to work with Jupyter Notebooks, text editors, terminals, and other components in a single, integrated environment. It's widely used in data science, scientific computing, and education.
+
+## Getting Started with Jupyter Notebooks in JupyterLab
+
+### Creating a New Notebook
+
+1. **Open JupyterLab**: Once JupyterLab is running, you’ll see the JupyterLab interface with the file browser on the left.
+
+2. **Create a New Notebook**:
+   - Click on the `+` button in the file browser to open a new Launcher tab.
+   - Under the "Notebook" section, click "Python 3" to create a new Python notebook.
+
+3. **Rename the Notebook**:
+   - Click on the notebook title (usually "Untitled") at the top of the notebook interface.
+   - Enter a new name for your notebook and click "Rename".
+
+### Understanding the Notebook Interface
+
+The Jupyter Notebook interface is divided into cells. There are two main types of cells:
+
+- **Code Cells**: For writing and executing Python code.
+- **Markdown Cells**: For writing formatted text using Markdown syntax.
+
+### Writing and Running Code
+
+Let's start by writing some simple Python code in a code cell.
+
+1. **Add a Code Cell**:
+   - Click inside the cell and start typing your Python code.
+
+```python
+
+# Simple Python code
+print("Hello, Jupyter!")
+```
+
+2. **Run the Code Cell**:
+   - Click the "Run" button in the toolbar or press `Shift + Enter` to execute the code.
+   - The output will be displayed directly below the cell.
+
+### Writing Markdown
+
+Markdown cells allow you to write formatted text. You can use Markdown to create headings, lists, links, and more.
+
+1. **Add a Markdown Cell**:
+   - Click on the "+" button in the toolbar to add a new cell.
+   - Change the cell type to "Markdown" from the dropdown menu in the toolbar.
+
+2. **Write Markdown Text**:
+
+```markdown
+# My First Markdown Cell
+
+This is a simple example of a Markdown cell in JupyterLab.
+
+## Features of Markdown
+
+- **Bold Text**: Use `**text**` for **bold**.
+- **Italic Text**: Use `*text*` for *italic*.
+- **Lists**: Create bullet points using `-` or `*`.
+- **Links**: [JupyterLab Documentation](https://jupyterlab.readthedocs.io/)
+
+```
+
+3. **Render the Markdown**:
+   - Click the "Run" button or press `Shift + Enter` to render the Markdown text.
+
+### Combining Code and Markdown
+
+Jupyter Notebooks are powerful because they allow you to combine code and markdown in a single document. This is useful for creating interactive tutorials, reports, and data analyses.
+
+### Rendering Images
+
+Jupyter Notebooks can render images directly in the output cells, which is particularly useful for data visualization.
+
+#### Example: Displaying an Image
+
+```{python}
+
+from IPython.display import Image, display
+
+# Display an image
+img_path = 'https://jupyterlab.readthedocs.io/en/stable/_images/interface-jupyterlab.png'
+display(Image(url=img_path, width=700))
+```
+
+### Interactive Features
+
+Jupyter Notebooks support interactive features, such as widgets, which enhance the interactivity of your notebooks.
+
+#### Example: Using Interactive Widgets
+
+Widgets allow users to interact with your code and visualize results dynamically.
+
+```{python}
+
+import ipywidgets as widgets
+
+# Create a simple slider widget
+slider = widgets.IntSlider(value=50, min=0, max=100, step=1, description='Value:')
+display(slider)
+```
+
+### Saving and Exporting Notebooks
+
+- **Save the Notebook**:
+  - Click the save icon in the toolbar or press `Ctrl + S` (Cmd + S on macOS) to save your work.
+
+- **Export the Notebook**:
+  - JupyterLab allows you to export notebooks to various formats, such as PDF or HTML. Go to `File > Export Notebook As` and choose your desired format.
+
+## Tips for Using JupyterLab
+
+- **Keyboard Shortcuts**: Familiarize yourself with keyboard shortcuts to speed up your workflow. You can view shortcuts by clicking `Help > Keyboard Shortcuts`. You can also refer to our class [Jupyter Keyboard Shortcuts Cheatsheet](../cheatsheets/JupyterLab.qmd)
+
+- **Using the File Browser**: Drag and drop files into the file browser to upload them to your workspace.
+
+- **Using the Variable Inspector**: The variable inspector shows variable names, types, values/shapes, and counts (for collections). Open the Variable Inspector using `Menu: View > Activate Command Palette`, then type "variable inspector." Or use the keyboard shortcut: `Ctrl + Shift + I` (Windows/Linux) or `Cmd + Shift + I` (Mac)
+
+## Conclusion
+
+JupyterLab is a versatile tool that makes it easy to combine code, text, and visualizations in a single document. By mastering the basic functionality of Jupyter Notebooks, you can create powerful and interactive documents that enhance your data analysis and scientific computing tasks.
+
+Feel free to experiment with the code and markdown examples provided in this guide to deepen your understanding of JupyterLab. Happy coding!
+
+## Resources
+
+We will get to know Jupyter Notebooks very well during the rest of this course, but here are even more resources you can use to learn and revisit:
+
+### Jupyter Notebook Gallery
+
+There are many, many examples of textbooks, academic articles, journalism, analyses, and reports written in Jupyter Notebooks. [Here](https://gist.github.com/kcaylor/79d9b9304764b825e0fe365df17d09fb) is a link to a curated gallery containing many such examples. It's worth exploring some of these just to get a sense of the diversity of applications and opportunities available using python and jupyter in data science!
+
+### Tutorials and Shortcourses
+
+#### 1. **Jupyter Notebook Documentation**
+
+- **Website**: [Jupyter Documentation](https://jupyter-notebook.readthedocs.io/en/stable/)
+- **Description**: The official documentation for Jupyter Notebooks provides a comprehensive guide to installing, using, and customizing notebooks. It includes tutorials, tips, and examples to help you get started.
+
+#### 2. **Project Jupyter: Beginner's Guide**
+
+- **Website**: [Project Jupyter](https://jupyter.org/try)
+- **Description**: This page offers an interactive "Try Jupyter" experience, allowing you to run Jupyter Notebooks in the browser without installing anything locally. It is a great way to explore the basics of Jupyter in a hands-on manner.
+
+#### 3. **YouTube Tutorial Series by Corey Schafer**
+
+- **Video Playlist**: [Jupyter Notebooks Tutorial - Corey Schafer](https://www.youtube.com/watch?v=HW29067qVWk&list=PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU)
+- **Description**: This YouTube series provides an in-depth introduction to Jupyter Notebooks. Corey Schafer covers installation, basic usage, and advanced features, making it easy to follow along and practice on your own.
+
+#### 4. **Jupyter Notebooks Beginner Guide - DataCamp**
+
+- **Website**: [DataCamp Jupyter Notebook Tutorial](https://www.datacamp.com/community/tutorials/tutorial-jupyter-notebook)
+- **Description**: This tutorial on DataCamp’s community blog offers a step-by-step guide to using Jupyter Notebooks for data science. It covers the basics and explores more advanced topics such as widgets and extensions.
+
+#### 5. **Real Python: Jupyter Notebook 101**
+
+- **Article**: [Jupyter Notebook 101](https://realpython.com/jupyter-notebook-introduction/)
+- **Description**: This Real Python article introduces Jupyter Notebooks, covering installation, basic usage, and tips for using notebooks effectively. It is an excellent resource for Python developers who are new to Jupyter.
+
+#### 6. **Google Colab**
+
+- **Website**: [Google Colab](https://colab.research.google.com/)
+- **Description**: Google Colab is a free platform that lets you run Jupyter Notebooks in the cloud. You can find many tutorials and example notebooks on their site. For example, [here](https://colab.research.google.com/notebooks/snippets/pandas.ipynb) is a link to a notebook they've created that includes many `pandas` snippets.
+
+
+::: {.center-text .body-text-xl .teal-text}
+End interactive session 1B
+:::

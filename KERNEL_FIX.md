@@ -6,12 +6,12 @@ If you're getting `ModuleNotFoundError` for packages like seaborn, numpy, or pan
 
 ### Step 1: Ensure Environment is Active
 ```bash
-conda activate eds217_2025
+conda activate eds217_2026
 ```
 
 ### Step 2: Reinstall the Kernel
 ```bash
-python -m ipykernel install --user --name eds217_2025 --display-name "Python 3.11 (EDS 217 2025)" --force
+python -m ipykernel install --user --name eds217_2026 --display-name "Python 3.11 (EDS 217 2025)" --force
 ```
 
 ### Step 3: Restart JupyterLab
@@ -44,14 +44,14 @@ print(f"Seaborn version: {sns.__version__}")
 
 - **Wrong kernel selected**: Always check the kernel name in the top-right of your notebook
 - **Old kernel cache**: The `--force` flag in Step 2 overwrites any existing kernel registration
-- **Environment not activated**: Make sure you're in the `eds217_2025` environment when installing the kernel
+- **Environment not activated**: Make sure you're in the `eds217_2026` environment when installing the kernel
 
 ## 🔄 Alternative: Recreate Environment
 
 If issues persist, recreate the environment:
 ```bash
-conda env remove -n eds217_2025
+conda env remove -n eds217_2026
 mamba env create -f environment-fast.yml
-conda activate eds217_2025
-python -m ipykernel install --user --name eds217_2025 --display-name "Python 3.11 (EDS 217 2025)"
+conda activate eds217_2026
+python -m ipykernel install --user --name eds217_2026 --display-name "Python 3.11 (EDS 217 2025)"
 ``` 

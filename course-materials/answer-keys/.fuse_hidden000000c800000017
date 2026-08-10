@@ -1,0 +1,419 @@
+---
+title: "Day 1: Interactive Session 1C Answer Key"
+subtitle: "🐍 Exploring Variable Types and Strings in Python"
+search: false
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: true
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](images/variable_2.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A cartoon depicting the idea of a variable.* [MidJourney 5](https://www.midjourney.com/jobs/7d8b78b4-61a1-49b2-9187-0bed8b4d8127?index=0)
+:::
+
+## Introduction
+
+This answer key provides solutions for Interactive Session 1C, which focuses on understanding variable types, string methods, and the hybrid approach to method chaining. Students practiced both step-by-step and method chaining approaches to build confidence and understanding.
+
+## Variable Types Solutions
+
+### Determining Variable Type
+
+```{python}
+#| echo: true
+#| include: true
+
+# Define some variables
+my_number = 42
+my_text = "Hello, World!"
+my_pi = 3.14159
+my_data = [1, 2, 3, 4, 5]
+
+# Determine the type of each variable
+print(type(my_number))
+print(type(my_text))
+print(type(my_pi))
+print(type(my_data))
+```
+
+### Exploring Methods
+
+```{python}
+#| echo: true
+#| include: true
+
+# List all methods and attributes of a string object
+string_methods = dir(my_text)
+print("All methods and attributes:")
+print(string_methods)
+print()
+
+# Filter out special methods
+user_methods = [method for method in dir(my_text) if not method.startswith('__')]
+print("User-facing methods:")
+print(user_methods)
+```
+
+## String Methods Solutions
+
+### Basic String Methods
+
+```{python}
+#| echo: true
+#| include: true
+
+text = " Hello, World!  "
+
+# Convert to uppercase
+print(text.upper())
+
+# Convert to lowercase
+print(text.lower())
+
+# Replace a substring
+print(text.replace("World", "Python"))
+
+# Remove leading and trailing whitespace
+print(text.strip())
+```
+
+## String Normalization Solutions
+
+### Step-by-Step Solution
+
+```{python}
+#| echo: true
+#| include: true
+
+strings_to_normalize = [
+    "data science",
+    "  MACHINE learning ",
+    "Artificial Intelligence\t",
+    " Natural\nLanguage Processing "
+]
+
+print("Step-by-Step Solution:")
+print("======================")
+
+for string in strings_to_normalize:
+    # Step 1: Remove whitespace
+    cleaned = string.strip()
+    
+    # Step 2: Convert to uppercase
+    upper_case = cleaned.upper()
+    
+    # Step 3: Replace spaces with hyphens
+    normalized = upper_case.replace(" ", "-")
+    
+    print(f"Original: '{string}'")
+    print(f"Step 1 (strip): '{cleaned}'")
+    print(f"Step 2 (upper): '{upper_case}'")
+    print(f"Step 3 (replace): '{normalized}'")
+    print()
+```
+
+### Method Chaining Solution
+
+```{python}
+#| echo: true
+#| include: true
+
+print("Method Chaining Solution:")
+print("=========================")
+
+for string in strings_to_normalize:
+    # Method chaining approach
+    normalized = string.strip().upper().replace(" ", "-")
+    
+    print(f"Original: '{string}'")
+    print(f"Chained result: '{normalized}'")
+    print()
+```
+
+### Advanced String Normalization Examples
+
+```{python}
+#| echo: true
+#| include: true
+
+# Examples of strings to normalize
+examples = [
+    "Hello World",
+    "  Python Programming  ",
+    "STRING NORMALIZATION\n",
+    "  Trim  Spaces  ",
+    "\tTabs and Newlines\n"
+]
+
+print("Step-by-Step Advanced Example:")
+print("===============================")
+
+for original in examples:
+    # Step-by-step approach (clear and easy to follow)
+    cleaned = original.strip()
+    lower_case = cleaned.lower()
+    normalized = lower_case.replace(" ", "_")
+    
+    print(f"Original: '{original}'")
+    print(f"Step 1 (strip): '{cleaned}'")
+    print(f"Step 2 (lower): '{lower_case}'")
+    print(f"Step 3 (replace): '{normalized}'")
+    print()
+
+print("Method Chaining Advanced Example:")
+print("=================================")
+
+for original in examples:
+    # Method chaining approach (more concise)
+    normalized = original.strip().lower().replace(" ", "_")
+    
+    print(f"Original: '{original}'")
+    print(f"Chained result: '{normalized}'")
+    print()
+```
+
+## List Methods Solutions
+
+```{python}
+# | echo: true
+# | include: true
+
+my_numbers = [3, 1, 4, 1, 5, 9]
+print(f"Original list: {my_numbers}")
+
+# Append an item
+my_numbers.append(2)
+print(f"After append(2): {my_numbers}")
+
+# Remove an item (removes first occurrence)
+my_numbers.remove(1)
+print(f"After remove(1): {my_numbers}")
+
+# Sort the list
+my_numbers.sort()
+print(f"After sort(): {my_numbers}")
+```
+
+## String Formatting Solutions
+
+### Comparison of All Methods
+
+```{python}
+#| echo: true
+#| include: true
+
+# Example data - like what you'd use in data science
+name = "Alice"
+age = 25
+score = 87.543
+
+print("=== Different String Formatting Approaches ===")
+print()
+
+# 1. String concatenation (avoid this)
+print("Method 1 - String Concatenation (avoid this):")
+print("Student: " + name + " is " + str(age) + " years old")
+print("Problems: messy, requires str() conversion, hard to read")
+print()
+
+# 2. % formatting (legacy code)
+print("Method 2 - % Formatting (legacy code):")
+print("Student: %s is %d years old with %.1f%% score" % (name, age, score))
+print("You'll see this in older code and some libraries")
+print()
+
+# 3. .format() method (common in existing code)
+print("Method 3 - .format() Method (common in existing code):")
+print("Student: {} is {} years old with {:.1f}% score".format(name, age, score))
+print("Student: {name} is {age} years old with {score:.1f}% score".format(name=name, age=age, score=score))
+print("Better than %, but still verbose")
+print()
+
+# 4. F-strings (MODERN APPROACH - use this!)
+print("Method 4 - F-strings (MODERN - use this!):")
+print(f"Student: {name} is {age} years old with {score:.1f}% score")
+print(f"Temperature reading: {score:.2f}°C")
+print(f"Data points processed: {age * 1000:,}")
+print("✅ Most readable, fastest, and Pythonic!")
+```
+
+### F-string Data Science Examples
+
+```{python}
+#| echo: true
+#| include: true
+
+# Common data science formatting patterns
+temperature = 23.456789
+count = 1234567
+percentage = 0.847
+
+print("=== Data Science F-string Patterns ===")
+print()
+
+# Number formatting
+print(f"Temperature: {temperature:.2f}°C")  # 2 decimal places
+print(f"Data points: {count:,}")           # Thousands separator
+print(f"Success rate: {percentage:.1%}")   # Percentage formatting
+print()
+
+# Dynamic formatting
+precision = 3
+print(f"Precise temperature: {temperature:.{precision}f}°C")
+print()
+
+# Expressions in f-strings
+values = [10, 20, 30, 40, 50]
+print(f"Dataset has {len(values)} values with mean {sum(values)/len(values):.1f}")
+print()
+
+# Multiple variables with formatting
+for i, val in enumerate(values[:3], 1):
+    print(f"Sample {i:2d}: {val:5.1f} (squared: {val**2:6.1f})")
+```
+
+### Practice Exercise Solution
+
+```{python}
+#| echo: true
+#| include: true
+
+# Convert these to f-strings
+city = "Santa Barbara"
+temp_f = 72
+temp_c = (temp_f - 32) * 5/9
+
+# Old style (what students were asked to update):
+print("=== Old Style ===")
+print("Weather in " + city + ":")
+print("Temperature: %d°F (%.1f°C)" % (temp_f, temp_c))
+print()
+
+# F-string solutions:
+print("=== F-string Solutions ===")
+print(f"Weather in {city}:")
+print(f"Temperature: {temp_f}°F ({temp_c:.1f}°C)")
+```
+
+## Key Learning Points
+
+### Method Chaining vs Step-by-Step
+
+**When to use step-by-step approach:**
+- ✅ When learning new methods
+- ✅ When debugging issues
+- ✅ When you need to see intermediate results
+- ✅ When working with complex transformations
+
+**When to use method chaining:**
+- ✅ When you're comfortable with the methods
+- ✅ When writing concise, readable code
+- ✅ When following Python best practices
+- ✅ When intermediate variables aren't needed
+
+### String Formatting Best Practices
+
+1. **Use f-strings** for modern Python code
+2. **Avoid string concatenation** with `+` operator
+3. **Learn to recognize** older formatting styles in existing code
+4. **Format numbers appropriately** for your data context
+
+### R vs Python String Operations
+
+**R approaches:**
+```r
+# R methods
+sprintf("Student: %s scored %.1f%%", name, score)
+paste("Hello", name, "- you scored", score)
+paste0("Temperature: ", temp, "°C")
+str_to_upper(text)
+str_trim(text)
+```
+
+**Python equivalents:**
+```python
+# Modern Python f-strings
+f"Student: {name} scored {score:.1f}%"
+f"Hello {name} - you scored {score}"
+f"Temperature: {temp}°C"
+text.upper()
+text.strip()
+```
+
+## Additional Practice
+
+Try these additional exercises to reinforce your learning:
+
+```{python}
+#| echo: true
+#| include: true
+
+# 1. Create a function that normalizes column names for data science
+def normalize_column_name(column_name):
+    """Convert column names to lowercase, replace spaces with underscores"""
+    return column_name.strip().lower().replace(" ", "_")
+
+# Test the function
+test_columns = [
+    "First Name",
+    "  Last Name  ",
+    "Email Address",
+    "Phone Number"
+]
+
+print("Normalized column names:")
+for col in test_columns:
+    normalized = normalize_column_name(col)
+    print(f"'{col}' -> '{normalized}'")
+```
+
+```{python}
+#| echo: true
+#| include: true
+
+# 2. Data validation using string methods
+def validate_email_format(email):
+    """Simple email validation using string methods"""
+    # Step-by-step approach for clarity
+    cleaned = email.strip().lower()
+    has_at = "@" in cleaned
+    has_dot = "." in cleaned
+    
+    if has_at and has_dot:
+        return f"✅ {email} appears to be a valid email format"
+    else:
+        return f"❌ {email} does not appear to be a valid email format"
+
+# Test the function
+test_emails = [
+    "student@ucsb.edu",
+    "invalid-email",
+    "  Another.Student@GMAIL.COM  "
+]
+
+for email in test_emails:
+    print(validate_email_format(email))
+```
+
+## Conclusion
+
+This session introduced students to:
+
+- **Variable type checking** using `type()` and `dir()`
+- **String manipulation methods** for data cleaning
+- **Method chaining** as a Pythonic approach
+- **Modern string formatting** with f-strings
+- **Hybrid learning approach** that builds confidence progressively
+
+The step-by-step approach helps students understand each operation clearly, while method chaining shows them the elegant, concise Python style they'll encounter in real-world code.
+
+::: {.center-text .body-text-xl .teal-text}
+End Interactive Session 1C Answer Key
+:::

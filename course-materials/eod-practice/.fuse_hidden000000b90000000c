@@ -1,0 +1,193 @@
+---
+title: "Day 3: Tasks & activities"
+subtitle: "Control Flows and Series Analysis"
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](https://cdn.midjourney.com/582b868e-dd7f-45ba-974f-9761288decdb/0_1.jpeg)
+:::
+:::{.gray-text .center-text}
+*A cartoon panda looking over a year's worth of monthly class exams. The panda is doing great; A+!* (Midjourney5)[https://www.midjourney.com/jobs/6b63c3ca-c64d-41b8-a791-7e4b2594c781?index=0]
+:::
+
+## Introduction
+
+In this end-of-day activity, we'll practice the concepts you learned today: **control flows** and **pandas Series analysis**. We'll work with real student test score data to apply if/else statements, loops, and Series operations that you learned in today's sessions.
+
+## Learning Objectives
+
+By completing this exercise, you will practice:
+
+1. **Control Flow Concepts** (from Sessions 3a & 3b):
+   - Using `if`/`elif`/`else` statements for decision making
+   - Using `for` loops to iterate through data
+   - Combining control flows with data analysis
+
+2. **Series Operations** (from Session 3c):
+   - Creating Pandas Series with custom indices
+   - Using Series statistical methods (`.mean()`, `.median()`, `.max()`, `.min()`)
+   - Basic Series indexing and slicing
+   - Applying NumPy statistical functions to Series
+
+## Setup
+
+### Task 0.1: Import the necessary libraries
+
+Import the pandas and numpy libraries that you learned about today.
+
+```{python}
+#| echo: false
+#| include: false
+
+import pandas as pd
+import numpy as np
+```
+
+## Part 1: Creating and Analyzing Test Scores
+
+We'll work with monthly test scores for a student throughout the academic year.
+
+### Task 1.1: Create the Test Scores Series
+
+Create a pandas Series using the following data:
+- **Scores:** `[78, 85, 92, 88, 79, 83, 91, 87, 89, 94]`  
+- **Months:** `['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']`
+
+Create a Series called `scores` where the months are the index and the scores are the values.
+
+```{python}
+#| echo: false
+#| include: false
+
+# Monthly test scores (September through June)
+scores_data = [78, 85, 92, 88, 79, 83, 91, 87, 89, 94]
+months = ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+
+# Create the Series
+scores = pd.Series(scores_data, index=months)
+print("Monthly Test Scores:")
+print(scores)
+```
+
+### Task 1.2: Display the Series
+
+Print your `scores` Series to see the data structure.
+
+### Task 2: Basic Statistical Analysis
+
+Use the Series methods you learned today to calculate and print the following statistics:
+
+1. Average score (using `.mean()`)
+2. Highest score (using `.max()`)  
+3. Lowest score (using `.min()`)
+4. Median score (using `.median()`)
+
+:::{.callout-tip}
+Remember to use f-string formatting to make your output readable! For example: `f"Average score: {average_score:.2f}"`
+:::
+
+```{python}
+#| echo: false
+#| include: false
+
+# Calculate statistics using Series methods
+average_score = scores.mean()
+highest_score = scores.max()
+lowest_score = scores.min()
+median_score = scores.median()
+
+print(f"Average score: {average_score:.2f}")
+print(f"Highest score: {highest_score}")
+print(f"Lowest score: {lowest_score}")
+print(f"Median score: {median_score:.2f}")
+```
+
+## Part 2: Applying Control Flows
+
+### Task 3: Performance Categories
+
+Use `if`/`elif`/`else` statements to categorize the overall performance based on the average score:
+
+- If average ≥ 90: "Excellent"  
+- If average ≥ 80: "Good"
+- If average ≥ 70: "Satisfactory"  
+- Otherwise: "Needs Improvement"
+
+Create a variable called `performance` and print the result with the average score.
+
+For example, if the average score is 95, then you want your code to print:
+
+`Overall performance: Excellent (Average: 95.00)`
+
+```{python}
+#| echo: false
+#| include: false
+
+# Categorize performance based on average score
+if average_score >= 90:
+    performance = "Excellent"
+elif average_score >= 80:
+    performance = "Good"
+elif average_score >= 70:
+    performance = "Satisfactory"
+else:
+    performance = "Needs Improvement"
+
+print(f"Overall performance: {performance} (Average: {average_score:.2f})")
+```
+
+### Task 4: Finding Best and Worst Months
+
+Use Series indexing to find:
+1. The month with the highest score (hint: use `.idxmax()`)
+2. The month with the lowest score (hint: use `.idxmin()`)
+
+Print the results in a clear format.
+
+```{python}
+#| echo: false
+#| include: false
+
+best_month = scores.idxmax()
+worst_month = scores.idxmin()
+best_score = scores.max()
+worst_score = scores.min()
+
+print(f"Best month: {best_month} ({best_score} points)")
+print(f"Worst month: {worst_month} ({worst_score} points)")
+```
+
+## Conclusion
+
+Excellent work! In just four focused tasks, you practiced the key concepts from Day 3:
+
+✅ **Pandas Series Fundamentals**:
+- Created a Series with custom indices
+- Used statistical methods (`.mean()`, `.max()`, `.min()`, `.median()`)
+- Applied Series indexing methods (`.idxmax()`, `.idxmin()`)
+
+✅ **Control Flow Application**:
+- Used `if`/`elif`/`else` statements for data categorization
+- Combined conditional logic with data analysis
+
+These core skills form the foundation for more advanced data analysis!
+
+## Reflection Questions
+
+1. How did using Series methods compare to working with regular Python lists?
+2. What other types of data could you analyze using these same techniques?
+3. Which part of the exercise felt most challenging?
+
+## Optional Extension
+
+**If you finish early:** Create your own Series with 5-7 data points (maybe daily temperatures for a week, or your favorite restaurant ratings) and apply the same analysis techniques you used today.
+
+::: {.center-text .body-text-xl .teal-text}
+End Activity Session (Day 3)
+:::

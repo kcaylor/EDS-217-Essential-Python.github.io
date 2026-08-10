@@ -1,0 +1,740 @@
+---
+title: "Interactive Session 7A"
+subtitle: "Data Visualization with Seaborn & Matplotlib (Part I)"
+editor_options: 
+  chunk_output_type: console
+jupyter: eds217_2025
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    code-fold: show
+---
+
+
+::: {style="width: 60%; margin: auto;"}
+![](images/visualization_1.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A panda is in an art studio painting on a large canvas. The painting is in the impressionistic style. The painting depicts a statistical box plot, similar to what is often found in research articles and data science presentations.* [MidJourney 5](https://www.midjourney.com/jobs/025e9e6c-6f3a-418f-bbb7-8435b81bdb92?index=0)
+:::
+
+## Getting Started
+
+Before we begin our interactive session, please follow these steps to set up your Jupyter Notebook:
+
+1. Open JupyterLab and create a new notebook:
+   - Click on the `+` button in the top left corner
+   - Select `Python 3.11.0` from the Notebook options
+
+2. Rename your notebook:
+   - Right-click on the `Untitled.ipynb` tab
+   - Select "Rename"
+   - Name your notebook with the format: `Session_XY_Topic.ipynb`
+     (Replace X with the day number and Y with the session number)
+
+3. Add a title cell:
+   - In the first cell of your notebook, change the cell type to "Markdown"
+   - Add the following content (replace the placeholders with the actual information):
+
+```markdown
+# Day 7: Session A - Visualizations, Part I
+
+[Link to session webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/7a_visualizations_1.html)
+
+Date: 09/10/2025
+
+```
+
+4. Add a code cell:
+   - Below the title cell, add a new cell
+   - Ensure it's set as a "Code" cell
+   - This will be where you start writing your Python code for the session
+
+5. Throughout the session:
+   - Take notes in Markdown cells
+   - Copy or write code in Code cells
+   - Run cells to test your code
+   - Ask questions if you need clarification
+
+:::{.callout-caution}
+Remember to save your work frequently by clicking the save icon or using the keyboard shortcut (Ctrl+S or Cmd+S).
+:::
+
+## Introduction
+
+There are extensive options for plotting in Python – some favorites include statistical visualizations in [`Seaborn`](https://seaborn.pydata.org), interactive plots for notebooks/web applications in [`Plotly`](https://plotly.com/python/), and even grammar-of-graphics approaches similar to `ggplot`, such as [Plotnine](https://plotnine.org). The original and fundamental library for visualizations in Python, however, is [<span class="codeb">matplotlib`](https://matplotlib.org). 
+
+`Matplotlib` was the first plotting library developed for Python and remains the most widely used library for data visualization in the Python community. Designed to resemble graphics in MATLAB, `matplotlib` is reminiscent of MATLAB in both appearance and functionality. As a result, it is not the easiest library to work with, and deviates from the object-oriented syntax we are familiar with in Python. 
+
+This session will serve as an introduction to plotting in Python using `matplotlib`. The nature of `matplotlib` – and figure-making in general – is such that the easiest way to learn is by following examples. As such, this session is structured a bit differently than the others, so be sure to look carefully at the coded examples. Finally, the *best* way to learn advanced functions and find help with `matplotlib` is by exploring the examples in the [gallery](https://matplotlib.org/gallery/index.html).
+
+
+### Instructions
+
+We will work through this notebook together. To run a cell, click on the cell and press "Shift" + "Enter" or click the "Run" button in the toolbar at the top. 
+
+:::{.callout-note}
+🐍 &nbsp; &nbsp; This symbol designates an important note about Python structure, syntax, or another quirk.
+:::
+
+## Introduction to matplotlib
+
+::: {style="width: 60%; margin: auto;"}
+![matplotlib logo](../images/matplotlib.svg)
+:::
+
+As always, we will begin by importing the required libraries and packages. For plotting, itself, we will use a module of the `matplotlib` library called `pyplot`. The `pyplot` module consists of a collection of functions to display and edit figures. As you advance with Python and with data analysis, you may want to explore additional features of `matplotlib`, but `pyplot` will suit the vast majority of your plotting needs at this stage.
+
+The standard import statement for `matplotlib.pyplot` is:
+
+```python
+import matplotlib.pyplot as plt
+```
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Imports
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+
+### Anatomy of a `matplotlib` plot
+
+The core components of a `matplotlib` plot are the `Figure` and the `Axes`. The `Figure` is the overall window upon which all components are drawn. It serves as the blank container for plots, as well as other things, such as a legend, color bar, etc. You can (and will) create multiple independent figures, and each figure can hold multiple `Axes`. To the figure you will add `Axes`, the area where the data are actually plotted and where associated ticks, labels, etc. live. 
+
+When working with a single plot, we will mostly deal with the `Figure` object and its routines, but we will see the `Axes` become important as we increase the complexity of our plots.
+
+
+::: {style="width: 60%; margin: auto;"}
+![Object heirarchy in matplotlib](../images/mpl_plot.svg)
+:::
+
+### Basic plotting
+
+We will start with the most basic plotting routines: `plt.plot()` and `plt.scatter()`. The first, `plt.plot()`, is used to generate a connected line plot (with optional markers for individual data points). `plt.scatter()`, as the name suggests, is used to generate a scatter plot.
+
+Each time you want to create a new figure, it is wise to first initialize a new instance of the `matplotlib.figure.Figure` class on which to plot our data. While this is not required to display the plot, if you subsequently plot additional data without a new `Figure` instance, all data will be plotted on the same figure. For example, let's generate a few functions, $y_{\sin} = \sin{(x)}$ and $y_{\cos} = \cos{(x)}$:
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+```{python}
+# Generate a 1D array with 300 points between -5 and 5
+x = np.linspace(-5,5,300)
+# Generate sine wave
+ysin = np.sin(x)
+# Generate cosine wave
+ycos = np.cos(x)
+```
+
+We can plot these on the same figure without instancing `plt.figure()` as follows:
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Plot sine wave
+plt.plot(x,ysin)
+# Plot cosine wave
+plt.plot(x,ycos)
+```
+
+To create multiple graphs in separate figure windows, however, you need to create new `Figure` instances as follows:
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Plot sine wave
+fig1 = plt.figure()
+plt.plot(x,ysin)
+
+# Plot cosine wave
+fig2 = plt.figure()
+plt.plot(x,ycos)
+```
+
+This also allows you to access the `Figure` object later by refering to the variable `fig`. Thus, even when you want to plot all data on a single plot, it is best to always start by initializing a new `Figure`.
+
+To generate a scatter plot instead of a line, we can use `plt.scatter()`:
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Generate new x and y with fewer points for legibility
+# np.linspace(lower, upper, n): 
+#     Creates n points between lower and upper, including both bounds.
+
+xscat = np.linspace(-5,5,25)
+yscat = np.sin(xscat)
+
+# Plot sine function as scatter plot
+plt.scatter(xscat,yscat)
+```
+
+You can also create a scatter plot using `plt.plot()` with **keyword arguments**, which allow you to change things like the color, style, and size of the lines and markers. We will explore some of these **keyword arguments** in the next section.
+
+## `plt.plot()` Keyword arguments
+
+In addition to the required `x` and `y` parameters, there are a number of optional keyword arguments that can be passed to the `matplotlib` plotting functions. Here, we will consider a few of the most useful: `color`, `marker`, and `linestyle`.
+
+### Colors
+The first thing you might wish to control is the color of your plot. `Matplotlib` accepts several different color definitions to the `color` keyword argument, which is a feature of most plotting functions. 
+
+First, colors can be passed as strings according to their **HTML/CSS names**. For example:
+
+
+#### Using HTML string names to assign colors
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Specifying color with a string:
+y = ysin
+plt.plot(x, y, 'green')
+```
+
+In total, there are 140 colors allowed in HTML; their names are shown below.
+
+
+::: {style="width: 80%; margin: auto;"}
+![HTML color names](../images/colors.png)
+:::
+
+As you can see in the image above, the basic colors can also be defined by a single-letter shortcut. These are shown in the table below.
+
+| Letter code | Color name |
+|:-----------:|:-----------|
+| `'r'` | [red]{style="color:red;"} |
+| `'g'` | [green]{style="color:green;"} |
+| `'b'` | [blue]{style="color:blue;"} |
+| `'c'` | [cyan]{style="color:cyan;"} |
+| `'m'` | [magenta]{style="color:magenta;"} |
+| `'y'` | [yellow]{style="color:yellow;"} |
+| `'k'` | [black]{style="color:black;"} |
+| `'w'` | [white]{style="color:gray;"} |
+
+
+#### Using RGB(A) tuples to assign colors
+
+Another way of specifying colors is to use an **RGB(A) tuple**, where the brightness of each channel (R, G, or B, which correspond to *red*, *green*, and *blue*) is given as a float between 0 and 1. 
+
+:::{.callout-tip title="Using alpha for transparency"}
+An optional fourth value, A or *alpha*, value can be passed to specify the opacity of the line or marker.
+:::
+
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+```{python}
+# Specifying color with an RGB tuple:
+plt.plot(x, y, color=(0.2,0.7,1.0))
+```
+
+A **grayscale** value can be used by passing a number between 0 and 1 as a string. In this representation, `'0.0'` corresponds to black and `'1.0'` corresponds to white. 
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+```{python}
+# Specifying greyscale with a intensity value [0-1]:
+plt.plot(x, y, color='0.25')
+```
+
+#### Using hex codes to define colors
+
+Another way to define colors is to use [**color hex codes**](https://www.color-hex.com/color-names.html), which represent colors as hexadecimals ranging from 0 to FF. Color hex codes consist of a hash character `#` followed by six hex values (e.g. `#AFD645`). Hex codes must be passed as strings (e.g. `'#AFD645'`) in `matplotlib` and are perhaps the most flexible way to select colors.
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Specifying color with a hex code:
+plt.plot(x, y, color='#C6E2FF')
+```
+
+
+### Linestyles
+
+Using the `linestyle` keyword argument, you can change the style of the line plotted using `plt.plot()`. These can be specified either by their name or a shortcut. A few of the style options (and their `matplotlib` shortcuts) are shown in the table below. To see a full list of `linestyle` options, see the [docs](https://matplotlib.org/3.1.0/gallery/lines_bars_and_markers/linestyles.html).
+
+| Short code | Line style |
+| :--------: | :--------- |
+| **`'-'`**  | `solid`   |
+| **`'--'`** | `dashed`  |
+| **`':'`**  | `dotted`  |
+| **`'-.'`** | `dashdot` |
+
+
+As we've already seen, the default `linestyle` is solid. The syntax for changing a line's style is:
+
+```python
+plt.plot(x, y, linestyle='dashed')
+```
+
+or, more commonly:
+
+```python
+plt.plot(x, y, linestyle='--')
+```
+
+Let's adjust the style of our waveform plot using the `linestyle` keyword argument.
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Initialize empty figure
+fig1 = plt.figure()
+# Plot sine wave with different colors + linestyles
+plt.plot(x, np.sin(x - 0), color='darkblue', linestyle='-')
+plt.plot(x, np.sin(x - 1), color='m', linestyle='dashed')
+plt.plot(x, np.sin(x - 2), color=(0.0,0.8,0.81), linestyle=':') 
+plt.plot(x, np.sin(x - 3), color='0.65', linestyle='solid')
+plt.plot(x, np.sin(x - 4), color='#B8D62E', linestyle='-.')
+```
+
+#### Markers
+
+Markers can be used in `plt.plot()` and `plt.scatter()`. There are several [available markers](https://matplotlib.org/api/markers_api.html#module-matplotlib.markers) in `matplotlib`, and you can also define your own. A few of the most useful are shown in the table below. 
+
+| Marker code | Symbol | Description |
+| :---------: | :----: | :---------- |
+| **`'o'`** | &#x25CF;   | circle   |
+| **`'.'`** | **&sdot;** | point    |
+| **`'*'`** | &#x2605;   | star     |
+| **`'+'`** | $+$        | plus     |
+| **`'x'`** | $\times$   | x        |
+| **`'^'`** | &#x25B2;   | triangle |
+| **`'s'`** | &#x25FC;   | square   |
+
+Note that unlike `color` and `linestyle`, the `marker` keyword argument only accepts a code to specify the marker style.
+
+```python
+plt.scatter(x, y, marker='+')
+```
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Initialize empty figure
+fig1 = plt.figure()
+# Plot sine wave as scatter plot with different colors + markers
+plt.scatter(xscat, yscat-0, color='darkblue', marker='o')
+plt.scatter(xscat, yscat-1, color='m', marker='.')
+plt.scatter(xscat, yscat-2, color=(0.0,0.8,0.81), marker='+')
+plt.scatter(xscat, yscat-3, color='0.65', marker='*')
+plt.scatter(xscat, yscat-4, color='#B8D62E', marker='s')
+```
+
+Using the `marker` keyword argument with the `plt.plot()` function creates a connected line plot, where the data points are designated by markers and connected by lines.
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Initialize empty figure
+fig1 = plt.figure()
+# Plot sine wave with different colors + markers
+plt.plot(xscat, np.sin(xscat - 0), color='darkblue', marker='o')
+plt.plot(xscat, np.sin(xscat - 1), color='m', marker='.')
+plt.plot(xscat, np.sin(xscat - 2), color=(0.0,0.8,0.81), marker='+')
+plt.plot(xscat, np.sin(xscat - 3), color='0.65', marker='*')
+plt.plot(xscat, np.sin(xscat - 4), color='#B8D62E', marker='s')
+```
+
+#### Explicit definitions vs. shortcuts
+
+Up to now, we have used **explicit definitions** to specify keyword arguments. While this is generally preferable, `matplotlib` does allow `color`, `linestyle`, and `marker` codes to be combined into a single, non-keyword argument. For example:
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+```{python}
+# Plot a dashed red line
+plt.plot(x, y, 'r--')
+```
+
+Several examples are presented in the cell below.
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Initialize empty figure
+fig1 = plt.figure()
+# Plot sine wave with different colors + markers
+plt.plot(xscat, yscat-0, 'b-o')    # Solid blue line with circle markers
+plt.plot(xscat, yscat-1, 'm--*')   # Dashed magenta line with star markers
+plt.plot(xscat, yscat-2, 'c+')     # Cyan plus markers
+plt.plot(xscat, yscat-3, 'k')      # Solid black line
+plt.plot(xscat, yscat-4, 'y-s')    # Solid yellow line with square markers
+```
+
+:::{.callout-note}
+As you can see, the downside of this method is that you are limited to the eight colors that have a single-letter code. To use other colors, you must use explicitly defined keyword arguments.
+:::
+
+In addition to those we explored in this section, other useful keyword arguments include `linewidth` and `markersize`, which do exactly what you'd expect them to do. For a full list of keyword arguments (you should know what's coming by now), see the [docs](https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot).
+
+## Axes settings
+
+Next, we will explore how to scale and annotate a plot using axes routines that control what goes on around the edges of the plot. 
+
+### Limits
+
+By default, `matplotlib` will attempt to determine **x- and y-axis limits**, which usually work pretty well. Sometimes, however, it is useful to have finer control. The simplest way to adjust the display limits is to use the `plt.xlim()` and `plt.ylim()` methods.
+
+
+In the example below, adjust the numbers (these can be `int` or `float` values) to see how the plot changes.
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Initialize empty figure
+fig1 = plt.figure()
+# Plot sine wave 
+plt.plot(x, ysin, color='darkblue')
+
+# Set axis limits
+plt.xlim(-5,5)
+plt.ylim(-2,2)
+```
+
+### Ticks and Tick Labels
+
+You may also find it useful to adjust the **ticks** and/or **tick labels** that `matplotlib ` displays by default. The `plt.xticks()` and `plt.yticks()` methods allow you to control the locations of both the ticks and the labels on the x- and y-axes, respectively. Both methods accept two list or array-like arguments, as well as optional keyword arguments. The first corresponds to the ticks, while the second controls the tick labels.
+
+```python
+# Set x-axis ticks at 0, 0.25, 0.5, 0.75, 1.0 with all labeled
+plt.xticks([0,0.25,0.5,0.75,1.0])
+# Set y-axis ticks from 0 to 100 with ticks on 10s and labels on 20s
+plt.yticks(np.arange(0,101,10),['0','','20','','40','','60','','80','','100'])
+```
+
+:::{.callout-important}
+If the labels are not specified, all ticks will be labeled accordingly. To only label certain ticks, you must pass a list with empty strings in the location of the ticks you wish to leave unlabeled (or the ticks will be labeled in order).
+:::
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Initialize empty figure
+fig1 = plt.figure()
+# Plot sine wave 
+plt.plot(x, ysin, color='darkblue')
+
+# Set x-axis limits
+plt.xlim(-5,5)
+
+# Set axis ticks
+plt.xticks([-4,-3,-2,-1,0,1,2,3,4],['-4','','-2','','0','','2','','4'])
+plt.yticks([-1,-0.5,0,0.5,1])
+```
+
+As with any plot, it is imperative to include **x- and y-axis labels**. This can be done by passing strings to the `plt.xlabel()` and `plt.ylabel()` methods:
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Initialize empty figure
+fig1 = plt.figure()
+# Plot sine wave 
+plt.plot(x, ysin, color='darkblue')
+
+# Set x-axis limits
+plt.xlim(-5,5)
+
+# Set axis ticks
+plt.xticks([-4,-3,-2,-1,0,1,2,3,4],['-4','','-2','','0','','2','','4'])
+plt.yticks([-1,-0.5,0,0.5,1])
+
+# Set axis labels
+plt.xlabel('x-axis')
+plt.ylabel('y-axis')
+```
+
+A nice feature about `matplotlib` is that it supports TeX formatting for [mathematical expressions](https://matplotlib.org/tutorials/text/mathtext.html). This is quite useful for displaying equations, exponents, units, and other mathematical operators. The syntax for TeX expressions is `'r$TeX expression here$'`. For example, we can display the axis labels as $x$ and $\sin{(x)}$ as follows:
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Initialize empty figure
+fig1 = plt.figure()
+# Plot sine wave 
+plt.plot(x, ysin, color='darkblue')
+
+# Set x-axis limits
+plt.xlim(-5,5)
+
+# Set axis ticks
+plt.xticks([-4,-3,-2,-1,0,1,2,3,4],['-4','','-2','','0','','2','','4'])
+plt.yticks([-1,-0.5,0,0.5,1])
+
+# Set axis labels
+plt.xlabel(r'$x$')
+plt.ylabel(r'$\sin{(x)}$')
+```
+
+### Titles
+
+Adding a **title** to your plot is analogous to labeling the x- and y-axes. The `plt.title()` method allows you to set the title of your plot by passing a string:
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Initialize empty figure
+fig1 = plt.figure()
+# Plot sine wave 
+plt.plot(x, ysin, color='darkblue')
+plt.plot(x, ycos, color='#B8D62E')
+
+# Set x-axis limits
+plt.xlim(-5,5)
+
+# Set axis ticks
+plt.xticks([-4,-3,-2,-1,0,1,2,3,4],['-4','','-2','','0','','2','','4'])
+plt.yticks([-1,-0.5,0,0.5,1])
+
+# Set axis labels
+plt.xlabel(r'$x$')
+plt.ylabel(r'$y$')
+
+# Set title
+plt.title('Sinusoidal functions')
+```
+
+### Legends
+
+When multiple datasets are plotted on the same axes it is often useful to include a **legend** that labels each line or set of points. `Matplotlib` has a quick way of displaying a legend using the `plt.legend()` method. There are multiple ways of specifying the label for each dataset; I prefer to pass a list of strings to `plt.legend()`:
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Initialize empty figure
+fig1 = plt.figure()
+# Plot sine wave 
+plt.plot(x, ysin, color='darkblue')
+plt.plot(x, ycos, color='#B8D62E')
+
+# Set x-axis limits
+plt.xlim(-5,5)
+
+# Set axis ticks
+plt.xticks([-4,-3,-2,-1,0,1,2,3,4],['-4','','-2','','0','','2','','4'])
+plt.yticks([-1,-0.5,0,0.5,1])
+
+# Set axis labels
+plt.xlabel(r'$x$')
+plt.ylabel(r'$y$')
+
+# Set title
+plt.title('Sinusoidal functions')
+
+# Legend
+plt.legend(labels=['sin(x)','cos(x)'])
+```
+
+:::{.callout-note}
+Another way of setting the data labels is to use the `label` keyword argument in the `plt.plot()` (or `plt.scatter()`) function:
+
+```python
+# Plot data
+plt.plot(x1, y1, label='Data1')
+plt.plot(x2, y2, label='Data2')
+
+# Legend
+plt.legend()
+```
+
+Note that you must still run `plt.legend()` to display the legend.
+:::
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Initialize empty figure
+fig1 = plt.figure()
+# Plot sine wave 
+plt.plot(x, ysin, label='sin(x)', color='darkblue')
+plt.plot(x, ycos, label='cos(x)', color='#B8D62E')
+
+# Set x-axis limits
+plt.xlim(-5,5)
+
+# Set axis ticks
+plt.xticks([-4,-3,-2,-1,0,1,2,3,4],['-4','','-2','','0','','2','','4'])
+plt.yticks([-1,-0.5,0,0.5,1])
+
+# Set axis labels
+plt.xlabel(r'$x$')
+plt.ylabel(r'$y$')
+
+# Set title
+plt.title('Sinusoidal functions')
+
+# Legend
+plt.legend()
+```
+
+## Subplots + multiple axes
+
+Now that we've established the basics of plotting in `matplotlib`, let's get a bit more complicated. Oftentimes, you may want to plot data on multiple axes within the same figure. The easiest way to do this in `matplotlib` is to use the `plt.subplot()` function, which takes three non-keyword arguments: `nrows`, `ncols`, and `index`. `nrows` and `ncols` correspond to the total number of rows and columns of the entire figure, while `index` refers to the index position of the current axes. Importantly (and annoyingly), the `index` for subplots starts in the upper left corner at **1** (not 0)!. The image below contains a few examples of how `matplotlib` arranges subplots.
+
+
+::: {style="width: 80%; margin: auto;"}
+![matplotlib subplots](../images/mpl_subplot.svg)
+:::
+
+
+The most explicit way of adding subplots is to use the `fig.add_subplot()` command to initialize new axes as variables. This allows you to access each `Axes` object later to plot data and adjust the axes parameters.
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+
+```{python}
+# Initialize empty figure
+fig = plt.figure()
+# Add four axes
+ax1 = fig.add_subplot(2,2,1)
+ax2 = fig.add_subplot(2,2,2)
+ax3 = fig.add_subplot(2,2,3)
+ax4 = fig.add_subplot(2,2,4)
+```
+
+To plot data, we use `ax.plot()` or `ax.scatter()`. These methods are analogous to `plt.plot()` and `plt.scatter()`, but they act on individual `Axes`, rather than the `Figure` object.
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Initialize empty figure
+fig = plt.figure()
+# Add four axes
+ax1 = fig.add_subplot(2,2,1)
+ax2 = fig.add_subplot(2,2,2)
+ax3 = fig.add_subplot(2,2,3)
+ax4 = fig.add_subplot(2,2,4)
+
+# Plot data
+# Plot sine wave with different colors on different axes
+ax1.plot(x, np.sin(x - 0), color='darkblue')
+ax2.plot(x, np.sin(x - 1), color='m')
+ax3.plot(x, np.sin(x - 2), color=(0.0,0.8,0.81))
+ax4.plot(x, np.sin(x - 4), color='#B8D62E')
+```
+
+### `Figure` vs. `Axes` methods
+
+Perhaps the trickiest part about subplots – and `Axes` methods in general – is adjusting the axes settings. While most `Figure` functions translate directly `Axes` methods (e.g. `plt.plot()` $\rightarrow$ `ax.plot()`, `plt.legend()` $\rightarrow$ `ax.legend()`), commands to set limits, ticks, labels, and titles are slightly modified. Some important `Figure` methods and their `Axes` counterparts are shown in the table below.
+
+| `Figure` command | `Axes` command |
+|:-----------------|:---------------|
+| `plt.xlabel()`   | `ax.set_xlabel()` |
+| `plt.ylabel()`   | `ax.set_ylabel()` |
+| `plt.xlim()`     | `ax.set_xlim()` |
+| `plt.ylim()`     | `ax.set_ylim()` |
+| `plt.xticks()`   | `ax.set_xticks()` |
+| `plt.yticks()`   | `ax.set_yticks()` |
+
+:::{.callout-note}
+These commands are different primarily because the `Figure` functions are inherited from MATLAB syntax (remember, `matplotlib` was design to work _exactly_ like matlab functions), while the `Axes` functions were developed later and are object-oriented. *Generally*, the arguments are similar – if not identical – between the two.
+:::
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Initialize empty figure
+fig = plt.figure()
+# Add four axes
+ax1 = fig.add_subplot(2,2,1)
+ax2 = fig.add_subplot(2,2,2)
+ax3 = fig.add_subplot(2,2,3)
+ax4 = fig.add_subplot(2,2,4)
+
+# Plot data
+# Plot sine wave with different colors on different axes
+ax1.plot(x, np.sin(x - 0), color='darkblue')
+ax2.plot(x, np.sin(x - 1), color='m')
+ax3.plot(x, np.sin(x - 2), color=(0.0,0.8,0.81))
+ax4.plot(x, np.sin(x - 4), color='#B8D62E')
+
+# Set axes limits, labels, + ticks
+for i,ax in enumerate([ax1,ax2,ax3,ax4]):
+    # i is the list index, but subplots count from 1.
+    # so make a new variable to keep track of subplot number:
+    subplot_number =  i + 1 
+    # Set x limits 
+    ax.set_xlim(-5,5)
+    # Set title
+    ax.set_title(f'$\sin{{(x - {i})}}$')
+    # Only label x ticks and x-axis on bottom row
+    if subplot_number < 3:
+        ax.set_xticklabels([])
+    else:
+        ax.set_xlabel('x')
+    # Only label y ticks and y-axis on left column
+    if subplot_number == 1 or subplot_number == 3:
+        ax.set_ylabel('y')
+    else:
+        ax.set_yticklabels([])
+
+plt.tight_layout()
+```
+
+:::{.callout-note}
+In the last example, we included a command, `plt.tight_layout()`, which automatically formats the figure to fit the window. This is most useful when using an IDE with a separate plotting window, rather than with in-line plots like those in a notebook. To get a sense of what `plt.tight_layout()` does, try re-running the above cell with this command commented out.
+:::
+
+To go beyond regularly gridded subplots and create subplots that span multiple rows and/or columns, check out [`GridSpec`](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.gridspec.GridSpec.html#matplotlib.gridspec.GridSpec).
+
+
+::: {.center-text .body-text-xl .teal-text}
+End interactive session 7A
+:::

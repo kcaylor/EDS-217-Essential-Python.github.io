@@ -1,0 +1,426 @@
+---
+title: "Interactive Session 7B"
+subtitle: "Data Visualization with Seaborn & Matplotlib (Part II)"
+editor_options: 
+  chunk_output_type: console
+jupyter: eds217_2025
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 60%; margin: auto;"}
+![](images/visualization_1.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A panda is in an art studio painting on a large canvas. The painting is in the impressionistic style. The painting depicts a statistical box plot, similar to what is often found in research articles and data science presentations.* [MidJourney 5](https://www.midjourney.com/jobs/025e9e6c-6f3a-418f-bbb7-8435b81bdb92?index=0)
+:::
+
+## Getting Started
+
+Before we begin our interactive session, please follow these steps to set up your Jupyter Notebook:
+
+1. Open JupyterLab and create a new notebook:
+   - Click on the `+` button in the top left corner
+   - Select `Python 3.11.0` from the Notebook options
+
+2. Rename your notebook:
+   - Right-click on the `Untitled.ipynb` tab
+   - Select "Rename"
+   - Name your notebook with the format: `Session_XY_Topic.ipynb`
+     (Replace X with the day number and Y with the session number)
+
+3. Add a title cell:
+   - In the first cell of your notebook, change the cell type to "Markdown"
+   - Add the following content (replace the placeholders with the actual information):
+
+```markdown
+# Day 7: Session A - Visualizations, Part II
+
+[Link to session webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/7a_visualizations_2.html)
+
+Date: 09/10/2025
+```
+
+4. Add a code cell:
+   - Below the title cell, add a new cell
+   - Ensure it's set as a "Code" cell
+   - This will be where you start writing your Python code for the session
+
+5. Throughout the session:
+   - Take notes in Markdown cells
+   - Copy or write code in Code cells
+   - Run cells to test your code
+   - Ask questions if you need clarification
+
+:::{.callout-caution}
+Remember to save your work frequently by clicking the save icon or using the keyboard shortcut (Ctrl+S or Cmd+S).
+:::
+
+Let's begin our interactive session!
+<hr>
+
+## Using the Seaborn Library
+
+This session provides a deeper introduction to the [<span class="codeb">Seaborn</span>](https://seaborn.pydata.org) visualization library. 
+
+<span class="code">Seaborn</span> helps you explore and understand your data. Its plotting functions operate on dataframes and arrays containing whole datasets and internally perform the necessary semantic mapping and statistical aggregation to produce informative plots. Its dataset-oriented, declarative API lets you focus on what the different elements of your plots mean, rather than on the details of how to draw them.
+
+Here's an example of seaborne's capabilities.
+
+```{python}
+# Import seaborn
+import seaborn as sns
+
+# Apply the default theme
+sns.set_theme()
+
+# Load an example dataset
+tips = sns.load_dataset("tips")
+
+# Create a visualization
+sns.relplot(
+    data=tips,
+    x="total_bill", y="tip", col="time",
+    hue="sex", style="smoker", size="size",
+)
+
+tips.head()
+```
+
+Behind the scenes, seaborn uses matplotlib to draw its plots. The plot above shows the relationship between five variables in the built-in `tips` dataset using a single call to the seaborn function `relplot()`. 
+
+**Notice that you only need to provide the _names_ of the variables and their _roles_ in the plot.** 
+
+This interface is different from `matplotlib`, in that you do not need to specify attributes of the plot elements in terms of the color values or marker codes. 
+
+Behind the scenes, seaborn handled the translation from values in the dataframe to arguments that matplotlib understands. This **declarative approach** lets you stay focused on the questions that you want to answer, rather than on the details of how to control matplotlib.
+
+### Seaborn `relplot()`
+
+The function `relplot()` is named that way because it is designed to visualize many different statistical relationships. While scatter plots are often effective, relationships where one variable represents a measure of time are better represented by a line. The relplot() function has a convenient `kind` parameter that lets you easily switch to this alternate representation:
+
+```{python}
+dots = sns.load_dataset("dots")
+sns.relplot(
+    data=dots, kind="line",
+    x="time", y="firing_rate", col="align",
+    hue="choice", size="coherence", style="choice",
+    facet_kws=dict(sharex=False),
+)
+```
+
+
+If you compare the two calls to `relplot()` in the two examples so far, you will see that the `size` and `style` parameters are used in both the scatter plots (first example) and line plots (second example). However, they affect the two visualizations differently.
+
+In a scatter plot, the `size` and `style` arguments affect _marker area_ and _symbol_ representation.
+
+In a line plot, the `size` and `style` arguments alter the _line width_ and _dashing_. 
+
+Allowing the same arguments (syntax) to change meaning (semantics) across different contexts is more characteristic of natural languages than formal ones. In this case, `seaborn` is attempting to allow you to write in a ["grammar of graphics"](http://vita.had.co.nz/papers/layered-grammar.html), which is the same concept underlying ggplot created by Hadley Wickham. 
+
+The benefit of adopting this less formal specification is that you do not need to worry about as many syntax details and instead can focus more on the overall structure of the plot and the information you want it to convey.
+
+### Comparing `matplotlib` to `seaborn`
+
+A focus of today's activities is translation, so let's look at translating some of the examples from yesterday's `matplotlib` exercise into seaborn.
+
+First, as always, let's import our important packages:
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+
+```{python}
+# Imports
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+```
+
+### Basic line plots (`sns.lineplot`)
+
+Let's use a couple of common, predictable functions for an example, $y_{\sin} = \sin{(x)}$ and $y_{\cos} = \cos{(x)}$:
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+# Generate a 1D array with 300 points between -5 and 5
+x = np.linspace(-5,5,300)
+# Generate sine wave
+ysin = np.sin(x)
+# Generate cosine wave
+ycos = np.cos(x)
+
+# Now let's make a dataframe from these arrays:
+df = pd.DataFrame({
+    'x': x,
+    'ysin': ysin,
+    'ycos': ycos
+    })
+```
+
+We can plot these on the same figure without instancing `plt.figure()` as follows:
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+# Plot sine wave
+plt.plot(x,ysin)
+# Plot cosine wave
+plt.plot(x,ycos)
+```
+
+Seaborn uses the `lineplot` command to plot line plots:
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+sns.lineplot(data=df,x='x',y='ysin')
+sns.lineplot(data=df,x='x',y='ycos')
+```
+
+<!-- 
+## 📚 Practice
+
+1. Load the `flights` dataset using the `sns.load_dataset("flights")` command. 
+1. Explore the dataframe (it contains passenger data by month and year).
+1. Use `sns.lineplot()` to plot the number of passengers throughout the data set.
+1. Create a new dataset that contains data on a specific month (your choice) to see how monthly passengers have changed over time. 
+1. Create a plot that shows the average and range of passengers by year. (Hint: This is much easier than it sounds in seaborn!)
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook, then write code to generate a plot.
+</div>
+
+```{python}
+flights = sns.load_dataset("flights")
+
+
+
+```
+ -->
+
+### Working with real data
+<hr style="border-top: 0.2px solid gray; margin-top: 12px; margin-bottom: 1px"></hr>
+
+Working with real-world data usually complicates things, and plotting is no exception. In particular, working with time series can get a bit messy. Let's take a look at some data on solar radiation as an example.
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+# Import data
+bsrn = pd.read_csv(
+    'https://bit.ly/bsrn_data',
+    index_col=0,
+    parse_dates=True
+    )
+
+print(bsrn.head())
+
+```
+
+
+Now that we've imported our data, let's make a quick plot of incoming shortwave radiation over time.
+
+<div class="example"> 
+✏️ Apply it. Translate the cell below into seaborn using the `sns.lineplot` command. 
+</div>
+
+```{python}
+# # Initialize empty figure
+# fig = plt.figure()
+# # Plot incoming SW radiation
+# plt.plot(bsrn.index,bsrn.SWD_Wm2)
+# # Label y-axis
+# plt.ylabel(r'Incoming SW radiation (W m$^{-2}$)')
+
+
+```
+
+You should end up with something that looks like this:
+```{python}
+#| echo: false
+
+sns.lineplot(data=bsrn,x='DATE',y='SWD_Wm2')
+plt.ylabel(r'Incoming SW radiation (W m$^{-2}$)')
+
+```
+
+The x-axis looks rather messy because the tick labels are *timestamps*, which are, by nature, very long. Luckily, there a few approaches you can use to wrangle your x-axis labels when working with long timeseries.
+
+### Technique 1: Use figsize to alter the aspect ratio and layout.
+
+The default figure size and aspect ratio aren't that great for long time series, which are usually a wider aspect ratio (think old TV shows vs. widescreen movies). So, often, you can make things work a lot better by just tinkering with the figure size using the `plt.figure()` command and a `figsize` argument:
+
+<div class="example"> 
+✏️ Try it. Add the cell below to your notebook and run it.
+</div>
+
+```{python}
+#| echo: true
+# Example 1: Without explicitly setting figsize
+sns.lineplot(data=bsrn, x='DATE', y='SWD_Wm2')
+plt.ylabel(r'Incoming SW radiation (W m$^{-2}$)')
+plt.title('Default Figure Size')
+plt.show()
+
+# Example 2: With explicitly setting figsize
+plt.figure(figsize=(12, 6))
+sns.lineplot(data=bsrn, x='DATE', y='SWD_Wm2')
+plt.ylabel(r'Incoming SW radiation (W m$^{-2}$)')
+plt.title('Custom Figure Size (12x6 inches)')
+plt.show()
+```
+
+The wider aspect ratio creates more room for your crowded x-axes labels! However, you can still see that the labels are still almost running together on the far right of the figure.
+
+### Technique 2: Rotate X-axis Labels
+
+Another simple approach is to rotate the x-axis labels:
+
+```{python}
+#| echo: true
+
+plt.figure(figsize=(12, 6))
+sns.lineplot(data=bsrn, x='DATE', y='SWD_Wm2')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.show()
+```
+
+
+### Technique 3: Use Fewer X-axis Labels
+
+If your dataset spans a long time period, you might want to show fewer labels:
+
+```{python}
+#| echo: true
+
+plt.figure(figsize=(12, 6))
+sns.lineplot(data=bsrn, x='DATE', y='SWD_Wm2')
+
+# Show only 5 evenly spaced labels
+plt.gca().xaxis.set_major_locator(plt.MaxNLocator(5))
+
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.show()
+```
+
+### Technique 4: Use a Time-based Moving Average
+
+If you have too many data points, you might want to resample your data. Here we create a new column from the dataframe index (which contains our dates). We then resample the dataframe to get hourly averages of the data and plot these instead of the raw data, which is collected every minute
+
+```{python}
+#| echo: true
+# Ensure DATE is a datetime column
+bsrn['DATE'] = pd.to_datetime(bsrn.index)
+
+# Resample to monthly mean
+bsrn_monthly = bsrn.resample('h', on='DATE').mean().reset_index()
+
+plt.figure(figsize=(12, 6))
+sns.lineplot(data=bsrn_monthly, x='DATE', y='SWD_Wm2')
+
+plt.xticks(rotation=45, ha='right')
+plt.title('BSRN Hourly Average Time Series')
+plt.tight_layout()
+plt.show()
+```
+
+
+:::{.callout-note}
+<b>Advanced Axis Labeling: Date Locators and Formatters</b>
+
+While beyond the scope of this course, date locators and formatters in Matplotlib are powerful tools for customizing time-based axes in your plots. They allow you to:
+
+- Control which dates are shown on the axis (locators)
+- Determine how those dates are displayed (formatters)
+
+These tools are particularly useful when working with time series data spanning different time scales (e.g., hours, days, months, years).
+
+If you're interested in learning more about these advanced techniques, here are some helpful resources:
+
+1. [Matplotlib Date Formatting](https://matplotlib.org/stable/gallery/text_labels_and_annotations/date.html)
+   - Official examples of date formatting in Matplotlib
+
+2. [Date tick labels](https://matplotlib.org/stable/gallery/ticks/date_concise_formatter.html)
+   - Concise date formatters in Matplotlib
+
+3. [Customizing Date Ticks](https://matplotlib.org/stable/gallery/ticks/date_index_formatter.html)
+   - Examples of customizing date ticks
+
+4. [Python Graph Gallery - Time Series](https://python-graph-gallery.com/timeseries/)
+   - Various examples of time series plots, some using date locators and formatters
+
+Remember, while these tools can create more polished and precise time-based plots, the techniques we've covered in this course are sufficient for many basic time series visualizations.
+:::
+
+
+<div class="example"> 
+✏️ Try it. Add a cell to your notebook and add code for the following exercise.
+</div>
+
+
+##   📚  <b> Practice </b> 
+Plot temperature and relative humidity (ideally using subplots) over the month of October 2019 at the BSRN station. Be sure to format the timestamps and include axis labels, a title, and a legend, if necessary.
+
+```{python}
+# Add your code here!
+
+# Step 1: Filter the dataframe to October 2019. You can use .loc to filter, as the index of the dataframe is already a datetime. Just filter from the start to end date that you want.
+
+# Step 2: Create a figure with two subplots using the `plt.subplots` command.
+
+```
+
+Here's one way your plots may turn out:
+
+```{python}
+#| echo: false
+#| include: true
+
+# Filter data for October 2019
+october_2019 = bsrn.loc['2019-10-01':'2019-10-31']
+
+# Create a figure with two subplots
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
+
+# Plot temperature
+sns.lineplot(data=october_2019, x=october_2019.index, y='T_degC', ax=ax1, color='red')
+ax1.set_ylabel('Temperature (°C)')
+ax1.set_title('Temperature in October 2019')
+
+# Plot relative humidity
+sns.lineplot(data=october_2019, x=october_2019.index, y='RH', ax=ax2, color='blue')
+ax2.set_ylabel('Relative Humidity (%)')
+ax2.set_title('Relative Humidity in October 2019')
+
+plt.xticks(rotation=45, ha='right')
+
+# Set overall title
+fig.suptitle('Temperature and Relative Humidity at BSRN Station (October 2019)', fontsize=16)
+
+# Adjust layout
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+```
+
+::: {.center-text .body-text-xl .teal-text}
+End interactive session 7B
+:::

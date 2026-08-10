@@ -1,0 +1,297 @@
+---
+title: "Interactive Session"
+subtitle: "Introduction to Pandas DataFrames with World Cities Data"
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+
+::: {style="width: 60%; margin: auto;"}
+![](images/dataframe.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A cartoon panda in a frame shop.* [MidJourney 5](https://www.midjourney.com/jobs/f7787b1d-a02e-488c-932e-42a5e6c43a47?index=0)
+:::
+
+
+## Getting Started
+
+Before we begin our interactive session, please follow these steps to set up your Jupyter Notebook:
+
+1. Open JupyterLab and create a new notebook:
+   - Click on the `+` button in the top left corner
+   - Select `Python 3.11.0` from the Notebook options
+
+2. Rename your notebook:
+   - Right-click on the `Untitled.ipynb` tab
+   - Select "Rename"
+   - Name your notebook with the format: `Session_XY_Topic.ipynb`
+     (Replace X with the day number and Y with the session number)
+
+3. Add a title cell:
+   - In the first cell of your notebook, change the cell type to "Markdown"
+   - Add the following content (replace the placeholders with the actual information):
+
+```markdown
+# Day 4: Session A - Dataframes
+
+[Link to session webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/4a_dataframes.html)
+
+Date: 09/05/2025
+
+```
+
+4. Add a code cell:
+   - Below the title cell, add a new cell
+   - Ensure it's set as a "Code" cell
+   - This will be where you start writing your Python code for the session
+
+5. Throughout the session:
+   - Take notes in Markdown cells
+   - Copy or write code in Code cells
+   - Run cells to test your code
+   - Ask questions if you need clarification
+
+:::{.callout-caution}
+Remember to save your work frequently by clicking the save icon or using the keyboard shortcut (Ctrl+S or Cmd+S).
+:::
+
+Let's begin our interactive session!
+
+## Introduction
+
+In this interactive session, we'll explore the basics of working with pandas DataFrames using a dataset of world cities. We'll cover importing data, basic DataFrame operations, and essential methods for data exploration and manipulation. This session will prepare you for more advanced data analysis tasks and upcoming collaborative coding exercises.
+
+## Learning Objectives
+
+By the end of this session, you will be able to:
+
+1. Import data into a pandas DataFrame
+2. Explore basic DataFrame properties and methods
+3. Perform simple data filtering and selection operations
+4. Use basic aggregation and grouping functions
+
+## Setting Up
+
+Let's start by importing the pandas library and loading our dataset.
+
+```{python}
+#| echo: true
+
+import pandas as pd
+import numpy as np
+```
+
+## 1. Basic _Data Importing_
+
+```{python}
+#| echo: true
+
+url = "https://raw.githubusercontent.com/datasets/world-cities/master/data/world-cities.csv"
+cities_df = pd.read_csv(url)
+```
+
+## 2. Basic _DataFrame Exploration_
+
+### Viewing the Data
+
+Let's take a look at the first few rows of our DataFrame:
+
+```{python}
+#| echo: true
+
+print(cities_df.head())
+```
+
+To see the last few rows, we can use:
+
+```{python}
+#| echo: true
+
+print(cities_df.tail())
+```
+
+### DataFrame Properties
+
+Now, let's explore some basic properties of our DataFrame:
+
+```{python}
+#| echo: true
+
+# Number of rows and columns
+print("Shape:", cities_df.shape)
+
+# Column names
+print("\nColumns:", cities_df.columns)
+
+# Data types of each column
+print("\nData types:\n", cities_df.dtypes)
+
+# Summary statistics of numeric columns (if any)
+print("\nSummary statistics:\n", cities_df.describe())
+```
+
+### Checking for Missing Values
+
+It's important to identify any missing data in your DataFrame:
+
+```{python}
+#| echo: true
+
+print(cities_df.isnull().sum())
+
+```
+
+## 3. Basic _Cleaning_
+
+Remove rows with missing data in subcountry using `dropna()` and the `subset` argument. 
+
+```{python}
+#| echo: true
+
+cities_df = cities_df.dropna(subset=['subcountry'])
+
+```
+
+## 4. Basic _Data Selection and Filtering_
+
+### Selecting Columns
+
+To select specific columns:
+
+```{python}
+#| echo: true
+
+# Select a single column
+print(cities_df['name'].head())
+
+# Select multiple columns
+print(cities_df[['name', 'country', 'subcountry']].head())
+```
+
+### Filtering Rows
+
+We can filter rows based on conditions:
+
+```{python}
+#| echo: true
+
+# Cities in the United States
+us_cities = cities_df[cities_df['country'] == 'United States']
+print(us_cities[['name', 'country']].head())
+
+# Cities in California
+california_cities = cities_df[(cities_df['country'] == 'United States') & (cities_df['subcountry'] == 'California')]
+print(california_cities[['name', 'country', 'subcountry']].head())
+```
+
+### Combining Conditions
+
+We can use logical operators to combine multiple conditions:
+
+```{python}
+#| echo: true
+
+# Cities in Canada that start with the letter 'T'
+canadian_t_cities = cities_df[(cities_df['country'] == 'Canada') & (cities_df['name'].str.startswith('T'))]
+print(canadian_t_cities[['name', 'country', 'subcountry']])
+```
+
+## 5. Basic _Sorting and Ranking_
+
+To sort the DataFrame based on one or more columns:
+
+```{python}
+#| echo: true
+
+# Sort cities alphabetically
+sorted_cities = cities_df.sort_values('name')
+print(sorted_cities[['name', 'country']].head())
+
+# Sort cities by country, then by name
+sorted_cities_by_country = cities_df.sort_values(['country', 'name'])
+print(sorted_cities_by_country[['name', 'country']].head())
+```
+
+## 6. Basic _Transformations_
+
+#### Creating New Columns
+
+We can create new columns based on existing data:
+
+```{python}
+#| echo: true
+
+# Create a column for city name length
+cities_df['name_length'] = cities_df['name'].str.len()
+
+# Display the top 5 cities with the longest names
+long_named_cities = cities_df.nlargest(5, 'name_length')
+print(long_named_cities[['name', 'country', 'name_length']])
+```
+
+#### Adding Series as Columns: Index Alignment
+
+When adding a Series as a new column, pandas aligns data by index:
+
+```{python}
+#| echo: true
+
+# This works - Series index matches DataFrame index
+sample_series = pd.Series([1, 2, 3], index=[0, 1, 2])
+small_df = pd.DataFrame({'A': ['x', 'y', 'z']})
+small_df['B'] = sample_series
+print("Aligned correctly:")
+print(small_df)
+
+# This creates unexpected results - misaligned indices
+misaligned_series = pd.Series([10, 20, 30], index=['a', 'b', 'c'])
+small_df['C'] = misaligned_series  # Results in NaN values!
+print("\nMisaligned indices:")
+print(small_df)
+
+# Solution: Use .reindex() or ensure matching indices
+small_df['D'] = misaligned_series.reindex(small_df.index, fill_value=0)
+print("\nCorrected alignment:")
+print(small_df)
+```
+
+## 7-8: Basic _Grouping_ and _Aggregation_
+
+Grouping allows us to perform operations on subsets of the data:
+
+```{python}
+#| echo: true
+
+# Number of cities by country
+cities_per_country = cities_df.groupby('country')['name'].count().sort_values(ascending=False)
+print(cities_per_country.head())
+
+# Number of subcountries (e.g., states, provinces) by country
+subcountries_per_country = cities_df.groupby('country')['subcountry'].nunique().sort_values(ascending=False)
+print(subcountries_per_country.head())
+```
+
+## Conclusion
+
+In this session, we've covered the basics of working with pandas DataFrames using a world cities dataset, including:
+
+- Importing data
+- Exploring DataFrame properties
+- Selecting and filtering data
+- Sorting and ranking
+- Grouping and aggregation
+- Creating new columns
+
+These skills form the foundation of data analysis with pandas and will be essential for upcoming exercises and projects. Remember, pandas has many more functions and methods that we haven't covered here. Don't hesitate to explore the pandas documentation for more advanced features!
+
+## Resources
+
+- [EDS 217 Pandas Cheatsheet](../cheatsheets/pandas_dataframes.qmd)
+- [Pandas Workflows Functions](../cheatsheets/workflow_methods.qmd)
+- [Pandas PDF Cheatsheet](../cheatsheets/Pandas_Cheat_Sheet.pdf)

@@ -1,0 +1,92 @@
+---
+title: "Final Activity"
+subtitle: "Creating a Comprehensive 9-Step Data Science Workflow"
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+## DIY Python Data ScienceWorkflow
+
+In this final class activity, you will work in small groups (2-3) to develop a example data science workflow. 
+
+1. Import Data
+2. Explore Data
+3. Clean Data
+4. Filter Data
+5. Sort Data
+6. Transform Data
+7. Group Data
+8. Aggregate Data
+9. Visualize Data
+
+## What to do
+
+To conduct this exercise, you should find a suitable dataset; it doesn't need to be environmental data per se - be creative in your search! You should also focus on making a number of exploratory and analysis visualizations using seaborn. You should avoid planning any analysis that absolutely require mapping and focus on using only `pandas`, `numpy`, `matplotlib`, and `seaborn` libraries.
+
+Your final product will be a self-contained notebook that is well-documented with markdown and code comments that you will walk through as a presentation to the rest of the class on the final day. 
+
+Your notebook should include each of the nine steps, even if you don't need to do much in each of them. 
+
+:::{.callout-note}
+You can include additional visualizations as part of your data exploration (step 2), or anywhere else it is helpful.
+:::
+
+Additional figures and graphics are also welcome - you are encouraged to make your notebooks as engaging and visually interesting as possible. 
+
+## Syncing your data to Github
+
+[Here](interactive-sessions/8a_github.qmd) are some directions for syncing your classwork with GitHub
+
+
+### General places to find fun data
+
+Here are some links to potential data resources that you can use to develop your analyses:
+
+- [Kaggle](https://www.kaggle.com/datasets?fileType=csv)
+- [Data is Plural](https://www.data-is-plural.com/)
+- [US Data.gov](https://data.gov/)
+- [Zenodo](https://zenodo.org/)
+- [R for Data Science](https://github.com/rfordatascience/tidytuesday/tree/master/data)
+
+### Oddly specific datasets
+
+- [Central Park Squirrel Survey](https://www.thesquirrelcensus.com/data)
+- [Harry Potter Characters Dataset](https://www.kaggle.com/datasets/gulsahdemiryurek/harry-potter-dataset)
+- [Spotify Tracks](https://www.kaggle.com/datasets/zaheenhamidani/ultimate-spotify-tracks-db)
+- [Lego Dataset](https://www.kaggle.com/datasets/rtatman/lego-database)
+
+## Using Google Drive to store your .csv files.
+
+Once you've found a .csv file (or .csv files) that you want to use, you should:
+
+1. Save your file to a google drive folder in your UCSB account. 
+2. Change the sharing settings to allow anyone with a link to view your file.
+3. Open the sharing dialog and copy the sharing link to your clipboard.
+4. Use the code below to download your file (you will need to add this code to the top of your notebook in the `Import Data` section)
+
+```{python}
+import pandas as pd
+import requests
+
+def extract_file_id(url):
+    """Extract file id from Google Drive Sharing URL."""
+    return url.split("/")[-2]
+
+def df_from_gdrive_csv(url):
+    """ Get the CSV file from a Google Drive Sharing URL."""
+    file_id = extract_file_id(url)
+    URL = "https://docs.google.com/uc?export=download"
+    session = requests.Session()
+    response = session.get(URL, params={"id": file_id}, stream=True)
+    return pd.read_csv(response.raw)
+
+# Example of how to use:
+# Note: your sharing link will be different, but should look like this:
+sharing_url = "https://drive.google.com/file/d/1RlilHNG7BtvXT2Pm4OpgNvEjVJJZNaps/view?usp=share_link"
+df = df_from_gdrive_csv(sharing_url)
+df.head()
+```

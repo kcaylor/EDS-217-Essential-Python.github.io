@@ -1,0 +1,163 @@
+---
+title: "Day 1: Answer Key"
+subtitle: "🎬 Preview: Your Data Science Future!"
+search: false
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: true
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](https://media.arcus.org/files/styles/juicebox_medium/public/ima/images/Martinez_IMG_4771.jpg?itok=V5IY36X3)
+:::
+
+:::{.gray-text .center-text}
+*Toolik from the boardwalk* (source)[https://media.arcus.org/album/polartrec-2019-alejandra-martinez/30679]
+:::
+
+## 🎯 **Welcome to Your Data Science Future!**
+
+**Today's Mission:** Get a sneak peek at where you're headed! Students copy and run Python code to see what's possible with data science. This is a "coming attractions" preview of their skills by Friday.
+
+### 🎬 **Enhanced Pedagogical Approach**
+- **Student role:** Copy, paste, and run code exactly as written
+- **Instructor role:** Focus on what's happening, not how it works yet
+- **Goal:** Inspiration and big picture understanding
+
+## Background and Data Source
+
+Arctic Long Term Ecological Research station climate data from Toolik Station, Alaska. The Arctic LTER project's goal is to understand and predict the effects of environmental change on arctic landscapes, both natural and anthropogenic. Researchers use long-term monitoring, experimental manipulation, and modeling to understand ecosystem controls. This is real climate research data that informs policy decisions.
+
+---
+
+## Instructions and Solutions
+
+### 🚀 **Step 1: Import the Magic Tools**
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+
+**Teaching Note:** Emphasize this loads powerful data science tools in just two lines. For R users, connect to `library()` function but highlight Python's aliasing convention.
+
+### 🚀 **Step 2: Load Real Climate Data**
+
+```{python}
+url = 'https://raw.githubusercontent.com/environmental-data-science/eds217-day0-comp/main/data/raw_data/toolik_weather.csv'
+df = pd.read_csv(url)
+```
+
+**Teaching Note:** 15,000+ rows loaded from the internet in one line - emphasize the power and simplicity. Draw direct parallels to R's `read.csv()` to build on existing knowledge.
+
+### 🚀 **Step 3: Peek at the Data**
+
+```{python}
+df.head()
+```
+
+**Teaching Note:** Show how easy it is to preview large datasets. Emphasize Python's object-oriented vs R's functional approach to help students understand the paradigm shift.
+
+### 🚀 **Step 4: Check Data Quality**
+
+```{python}
+df.isnull().sum()
+```
+
+**Teaching Note:** Real data science involves checking data quality - this is professional practice. Connect to R's `is.na()` to show similar concepts, different syntax.
+
+### 🚀 **Step 5: Get Data Summary Statistics**
+
+```{python}
+df.describe()
+df.info()
+```
+
+**Teaching Note:** Instant statistical overview of entire dataset. Link to R's `summary()` and `str()` functions to reinforce that students already know these concepts.
+
+### 🚀 **Step 6: Calculate Monthly Averages**
+
+```{python}
+monthly = df.groupby('Month')
+monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
+```
+
+**Teaching Note:** Transformed thousands of daily readings into meaningful monthly summaries. Directly comparable to dplyr's `group_by() %>% summarize()` - same analytical thinking, different syntax.
+
+### 🚀 **Step 7: Create Your First Visualization**
+
+```{python}
+plt.plot(monthly_means)
+```
+
+```{python}
+months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+plt.bar(months, monthly_means)
+```
+
+**Teaching Note:** Professional visualizations reveal Alaska's extreme seasonal patterns. Compare matplotlib's direct approach to ggplot2's grammar of graphics - both powerful, different philosophies.
+
+### 🚀 **Step 8: Analyze Climate Trends Over Time**
+
+```{python}
+year = df.groupby('Year')
+yearly_means = year['Daily_AirTemp_Mean_C'].mean()
+plt.plot(yearly_means)
+```
+
+```{python}
+year_list = df['Year'].unique()
+plt.bar(year_list, yearly_means)
+```
+
+**Teaching Note:** Real climate trend analysis across decades. Same analytical workflow as R - group by time period, calculate statistics, visualize trends.
+
+### 🚀 **Step 9: Save Your Work**
+
+```{python}
+monthly_means.to_csv("monthly_means.csv", header=True)
+```
+
+**Teaching Note:** Reproducible research requires saving results. Compare Python's object-oriented `.to_csv()` method to R's functional `write.csv()` approach.
+
+## 🎓 **Instructor Debrief Points**
+
+### **What Students Accomplished:**
+- Processed 15,000+ rows of real scientific data
+- Created professional visualizations
+- Performed climate trend analysis
+- Learned reproducible research practices
+
+### **Key Messages:**
+1. **Python is powerful yet accessible** - complex analysis in simple code
+2. **Data science is about insight** - numbers become understanding through visualization
+3. **Real-world relevance** - this is actual climate research methodology
+4. **Progressive learning** - they'll understand every line by Friday
+5. **R skills transfer** - same analytical thinking, new syntax to express familiar concepts
+
+### **Learning Trajectory Reinforcement:**
+- **Days 2-3:** The building blocks (variables, data types, control flows)
+- **Day 4:** Data loading and exploration (today's `pd.read_csv()` and `df.head()`)
+- **Day 5:** Data cleaning and quality checks
+- **Day 6:** Grouping and aggregation (today's `groupby()`)
+- **Day 7:** Visualization mastery (today's plotting)
+
+### **Assessment Questions:**
+1. What surprised students most about Python's capabilities?
+2. Which visualization was most meaningful to them?
+3. What questions do they have about the process?
+4. How do they envision using these skills?
+
+### **Common Student Reactions to Address:**
+- **"This seems too advanced"** → Emphasize it's a preview, mastery comes gradually
+- **"I don't understand the syntax"** → That's expected and exactly what we'll teach  
+- **"The data seems overwhelming"** → Show how tools make complex data manageable
+- **"This is so different from R"** → Highlight conceptual similarities, syntax differences
+- **"Why not just use R?"** → Explain complementary strengths, expanding toolkit
+
+::: {.center-text .body-text-xl .teal-text}
+End Activity Session (Day 1) - Successfully Introduced Data Science Pipeline!
+::: 

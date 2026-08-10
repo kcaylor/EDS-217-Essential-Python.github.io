@@ -1,0 +1,135 @@
+---
+title: EDS 217 Cheatsheet
+subtitle: <code>dict</code> Dictionaries
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+
+## 1. Creating Dictionaries
+
+### 1.1 Empty Dictionary
+```python
+my_dict = {}
+```
+
+### 1.2 Dictionary with Initial Values
+```python
+my_dict = {"name": "Alice", "age": 30}
+```
+
+### 1.3 Dictionary with Mixed Data Types
+```python
+mixed_dict = {"number": 42, "text": "hello", "list": [1, 2, 3], "flag": True}
+```
+
+### 1.4 Nested Dictionaries
+```python
+nested_dict = {
+    "person1": {"name": "Alice", "age": 25},
+    "person2": {"name": "Bob", "age": 30}
+}
+```
+
+## 2. Accessing Elements
+
+### 2.1 Access by Key
+```python
+print(my_dict["name"])  # Output: Alice
+```
+
+### 2.2 Safely Access Using `.get()`
+```python
+print(my_dict.get("name"))  # Output: Alice
+print(my_dict.get("profession", "Unknown"))  # Output: Unknown if not present
+```
+
+## 3. Modifying Dictionaries
+
+### 3.1 Add or Update an Element
+```python
+my_dict["profession"] = "Engineer"  # Adds a new key or updates if exists
+```
+
+### 3.2 Remove Elements
+```python
+del my_dict["age"]  # Removes the key 'age'
+profession = my_dict.pop("profession", "No profession found")  # Removes and returns
+my_dict.clear()  # Clears all elements
+```
+
+## 4. Dictionary Operations
+
+### 4.1 Check if Key Exists
+```python
+"name" in my_dict  # Returns True if 'name' is a key
+```
+
+### 4.2 Iterate Through Keys, Values, or Items
+```python
+for key in my_dict.keys():
+    print(key)
+for value in my_dict.values():
+    print(value)
+for key, value in my_dict.items():
+    print(f"{key}: {value}")
+```
+
+### 4.3 Dictionary Comprehensions
+```python
+squared = {x: x**2 for x in range(5)}  # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+```
+
+### 4.4 Merge Dictionaries
+```python
+dict1 = {"name": "Alice", "age": 25}
+dict2 = {"city": "New York", "age": 30}
+merged = {**dict1, **dict2}  # Python 3.5+ method
+```
+
+## 5. Common Dictionary Methods
+
+### 5.1 Get Dictionary Length
+```python
+len(my_dict)  # Returns the number of key-value pairs
+```
+
+### 5.2 Copy a Dictionary
+```python
+new_dict = my_dict.copy()  # Creates a shallow copy of the dictionary
+```
+
+### 5.3 Get All Keys or Values
+```python
+all_keys = list(my_dict.keys())
+all_values = list(my_dict.values())
+```
+
+### 5.4 Update Dictionary
+```python
+my_dict.update({"age": 26, "city": "Boston"})  # Updates and adds multiple keys
+```
+
+### 5.5 Set Default Value for Key
+```python
+my_dict.setdefault("age", 29)  # Sets 'age' to 29 if key is not present
+```
+
+## 6. Common Dictionary Pitfalls
+
+### 6.1 Avoid Modifying a Dictionary While Iterating
+```python
+# Incorrect
+for key in my_dict:
+    if key.startswith('a'):
+        del my_dict[key]
+
+# Correct (Using a copy of keys)
+for key in list(my_dict.keys()):
+    if key.startswith('a'):
+        del my_dict[key]
+```

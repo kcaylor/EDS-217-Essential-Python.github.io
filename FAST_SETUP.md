@@ -14,11 +14,11 @@ conda install mamba -n base -c conda-forge
 mamba env create -f environment-fast.yml
 
 # Or create manually with mamba
-mamba create -n eds217_2025 python=3.11 numpy pandas matplotlib seaborn jupyter jupyterlab ipykernel -c conda-forge
+mamba create -n eds217_2026 python=3.11 numpy pandas matplotlib seaborn jupyter jupyterlab ipykernel -c conda-forge
 
 # Activate and register
-conda activate eds217_2025
-python -m ipykernel install --user --name eds217_2025 --display-name "Python 3.11 (EDS 217 2025)"
+conda activate eds217_2026
+python -m ipykernel install --user --name eds217_2026 --display-name "Python 3.11 (EDS 217 2025)"
 ```
 
 ## Option 2: Step-by-Step Installation
@@ -27,10 +27,10 @@ Create the environment first, then add packages:
 
 ```bash
 # Create basic environment (fast)
-conda create -n eds217_2025 python=3.11 -c conda-forge
+conda create -n eds217_2026 python=3.11 -c conda-forge
 
 # Activate it
-conda activate eds217_2025
+conda activate eds217_2026
 
 # Install core packages in batches (faster than all at once)
 conda install numpy pandas -c conda-forge
@@ -38,7 +38,7 @@ conda install matplotlib seaborn -c conda-forge
 conda install jupyter jupyterlab ipykernel -c conda-forge
 
 # Register with Jupyter
-python -m ipykernel install --user --name eds217_2025 --display-name "Python 3.11 (EDS 217 2025)"
+python -m ipykernel install --user --name eds217_2026 --display-name "Python 3.11 (EDS 217 2025)"
 ```
 
 ## Option 3: Minimal + Install as Needed
@@ -47,11 +47,11 @@ Start with just the essentials and add packages when you need them:
 
 ```bash
 # Super minimal environment (very fast)
-conda create -n eds217_2025 python=3.11 pandas matplotlib jupyter jupyterlab -c conda-forge
+conda create -n eds217_2026 python=3.11 pandas matplotlib jupyter jupyterlab -c conda-forge
 
 # Activate and register
-conda activate eds217_2025
-python -m ipykernel install --user --name eds217_2025 --display-name "Python 3.11 (EDS 217 2025)"
+conda activate eds217_2026
+python -m ipykernel install --user --name eds217_2026 --display-name "Python 3.11 (EDS 217 2025)"
 
 # Add other packages as needed during the course
 # conda install seaborn scipy scikit-learn -c conda-forge
@@ -64,8 +64,8 @@ If conda is stuck:
 ```bash
 # Cancel the current operation (Ctrl+C)
 # Then try with just conda-forge channel:
-conda create -n eds217_2025 python=3.11 -c conda-forge
-conda activate eds217_2025
+conda create -n eds217_2026 python=3.11 -c conda-forge
+conda activate eds217_2026
 conda install numpy pandas matplotlib seaborn jupyter jupyterlab ipykernel -c conda-forge
 ```
 

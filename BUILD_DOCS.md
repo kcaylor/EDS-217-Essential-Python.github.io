@@ -10,7 +10,7 @@ The EDS 217 website is built using [Quarto](https://quarto.org/), which renders 
 - **Incremental builds by default**: Only rebuilds files that have changed since your last git commit
 - **Smart cleaning**: Remove intermediate files (HTML, _files/, etc.) from course materials
 - **Cross-platform**: Works on Windows, macOS, and Linux
-- **Integrated conda environment**: Automatically activates the `eds217_2025` environment
+- **Integrated conda environment**: Automatically activates the `eds217_2026` environment
 
 ## Build Script Usage
 
@@ -65,7 +65,7 @@ python build_docs.py --clean --full
 ## What the Script Does
 
 ### Standard Build Process
-1. **Activate Environment**: Automatically activate the `eds217_2025` conda environment
+1. **Activate Environment**: Automatically activate the `eds217_2026` conda environment
 2. **Check Prerequisites**: Verify that Quarto is installed and you're in the correct directory
 3. **🆕 Smart File Detection** (incremental mode): Use git to detect which `.qmd` and `.ipynb` files have changed since the last commit
 4. **Clean Previous Build**: Remove old files from the `docs/` directory
@@ -139,11 +139,11 @@ The script shows detailed progress information during builds:
 ## Prerequisites
 
 - [Quarto](https://quarto.org/docs/get-started/) must be installed
-- The `eds217_2025` conda environment must exist (see [Environment Setup](README.md#-getting-started))
+- The `eds217_2026` conda environment must exist (see [Environment Setup](README.md#-getting-started))
 - Run the script from the project root directory (where `_quarto.yml` is located)
 - **🆕 For incremental builds**: Git repository with at least one commit (automatic fallback to full build otherwise)
 
-**Note**: The script automatically activates the `eds217_2025` environment before building.
+**Note**: The script automatically activates the `eds217_2026` environment before building.
 
 ## Typical Workflows
 
@@ -242,7 +242,7 @@ The script shows detailed progress information during builds:
 
 ### General Issues
 - **"Quarto not found"**: Install Quarto from https://quarto.org/docs/get-started/
-- **"eds217_2025 environment not found"**: Create the environment using one of the setup guides in the README
+- **"eds217_2026 environment not found"**: Create the environment using one of the setup guides in the README
 - **"_quarto.yml not found"**: Make sure you're running the script from the project root directory
 - **Permission denied**: Make sure the script is executable with `chmod +x build_docs.py`
 

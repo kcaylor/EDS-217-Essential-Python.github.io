@@ -1,0 +1,171 @@
+---
+title: EDS 217 Cheatsheet
+subtitle: Functions <code>def function()</code>
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+# Python Function Cheat Sheet
+
+## Basics of Functions
+
+### Defining a Function
+
+In Python, a function is defined using the `def` keyword, followed by the function name and parentheses `()` that may include parameters.
+
+```{python}
+def function_name(parameters):
+    # Function body
+    return result
+```
+
+### Example: Convert Celsius to Fahrenheit
+
+```{python}
+def celsius_to_fahrenheit(celsius):
+    """Convert Celsius to Fahrenheit."""
+    fahrenheit = (celsius * 9/5) + 32
+    return fahrenheit
+```
+
+### Calling a Function
+
+Call a function by using its name followed by parentheses, and pass arguments if the function requires them.
+
+```{python}
+temperature_celsius = 25
+temperature_fahrenheit = celsius_to_fahrenheit(temperature_celsius)
+print(temperature_fahrenheit)  # Output: 77.0
+```
+
+## Common Unit Conversions
+
+### Example: Convert Kilometers to Miles
+
+```{python}
+def kilometers_to_miles(kilometers):
+    """Convert kilometers to miles."""
+    miles = kilometers * 0.621371
+    return miles
+
+# Usage
+distance_km = 10
+distance_miles = kilometers_to_miles(distance_km)
+print(distance_miles)  # Output: 6.21371
+```
+
+### Example: Convert Meters per Second to Kilometers per Hour
+
+```python
+def mps_to_kmph(mps):
+    """Convert meters per second to kilometers per hour."""
+    kmph = mps * 3.6
+    return kmph
+
+# Usage
+speed_mps = 5
+speed_kmph = mps_to_kmph(speed_mps)
+print(speed_kmph)  # Output: 18.0
+```
+
+## Handling Multiple Return Values
+
+### Example: Calculate Mean and Standard Deviation
+
+You can return multiple values from a function by using a tuple.
+
+```python
+import statistics
+
+def calculate_mean_std(data):
+    """Calculate mean and standard deviation of a dataset."""
+    mean = statistics.mean(data)
+    std_dev = statistics.stdev(data)
+    return mean, std_dev
+
+# Usage
+data = [12, 15, 20, 22, 25]
+mean, std_dev = calculate_mean_std(data)
+print(f"Mean: {mean}, Standard Deviation: {std_dev}")
+```
+
+## Default Parameters
+
+You can set default values for parameters, making them optional when calling the function.
+
+### Example: Convert Temperature with Default Unit
+
+```python
+def convert_temperature(temp, from_unit='C', to_unit='F'):
+    """Convert temperature between Celsius and Fahrenheit."""
+    if from_unit == 'C' and to_unit == 'F':
+        return (temp * 9/5) + 32
+    elif from_unit == 'F' and to_unit == 'C':
+        return (temp - 32) * 5/9
+    else:
+        return temp  # No conversion needed
+
+# Usage
+temp_in_fahrenheit = convert_temperature(25)  # Defaults to C to F
+temp_in_celsius = convert_temperature(77, from_unit='F', to_unit='C')
+print(temp_in_fahrenheit)  # Output: 77.0
+print(temp_in_celsius)     # Output: 25.0
+```
+
+## Using Keyword Arguments
+
+You can call a function using keyword arguments to make it clearer which arguments are being set, especially useful when many parameters are involved.
+
+```python
+# Call using keyword arguments
+temp = convert_temperature(temp=25, from_unit='C', to_unit='F')
+```
+
+## Higher-Order Functions
+
+A higher-order function is a function that can take other functions as arguments or return them as results.
+
+### Example: Apply a Function to a List
+
+```python
+def apply_conversion(conversion_func, data):
+    """Apply a conversion function to a list of data."""
+    return [conversion_func(value) for value in data]
+
+# Convert a list of temperatures from Celsius to Fahrenheit
+temperatures_celsius = [0, 20, 30, 40]
+temperatures_fahrenheit = apply_conversion(celsius_to_fahrenheit, temperatures_celsius)
+print(temperatures_fahrenheit)  # Output: [32.0, 68.0, 86.0, 104.0]
+```
+
+## Practical Example: Climate Data Analysis
+
+### Example: Function to Calculate Degree Days
+
+Degree days are a measure of heat accumulation used to predict plant and animal development rates.
+
+```python
+def calculate_degree_days(daily_temps, base_temp=10):
+    """Calculate degree days for a series of daily temperatures."""
+    degree_days = 0
+    for temp in daily_temps:
+        if temp > base_temp:
+            degree_days += temp - base_temp
+    return degree_days
+
+# Usage
+daily_temps = [12, 15, 10, 18, 20, 7]
+degree_days = calculate_degree_days(daily_temps)
+print(degree_days)  # Output: 35
+```
+
+### Key Points
+
+- **Functions** encapsulate reusable code logic and can simplify complex operations.
+- **Parameters** allow for input variability, while **return values** provide output.
+- Use **default parameters** and **keyword arguments** to enhance flexibility and readability.
+- **Higher-order functions** enable more abstract and powerful code structures.

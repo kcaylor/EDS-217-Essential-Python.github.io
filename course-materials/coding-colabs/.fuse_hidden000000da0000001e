@@ -1,0 +1,196 @@
+---
+title: "Day 7: 🙌 Coding Colab"
+subtitle: "Exploring Datasets with Seaborn"
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+## Introduction
+
+In this collaborative coding exercise, you'll work with a partner to explore a dataset using the seaborn library. You'll focus on a workflow that includes:
+
+1. Exploring distributions with histograms
+2. Examining correlations among variables
+3. Investigating relationships more closely with regression plots and joint distribution plots
+
+We'll be using the Palmer Penguins dataset, which contains information about different penguin species, their physical characteristics, and the islands they inhabit.
+
+## Setup
+
+First, let's import the necessary libraries and load our dataset.
+
+```{python}
+#| echo: true
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Set the style for better-looking plots
+sns.set_style("whitegrid")
+
+# Load the Palmer Penguins dataset
+penguins = sns.load_dataset("penguins")
+
+# Display the first few rows and basic information about the dataset
+print(penguins.head())
+print(penguins.info())
+```
+
+## Task 1: Exploring Distributions with Histograms
+
+Let's start by exploring the distributions of various numerical variables in our dataset using histograms.
+
+1. Create histograms for 'bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', and 'body_mass_g'.
+2. Experiment with different numbers of bins to see how it affects the visualization.
+3. Try using `sns.histplot()` with the 'kde' parameter set to True to overlay a kernel density estimate.
+
+```{python}
+#| echo: false
+#| eval: false
+
+# Answer for Task 1
+fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+sns.histplot(data=penguins, x='bill_length_mm', kde=True, ax=axes[0, 0])
+sns.histplot(data=penguins, x='bill_depth_mm', kde=True, ax=axes[0, 1])
+sns.histplot(data=penguins, x='flipper_length_mm', kde=True, ax=axes[1, 0])
+sns.histplot(data=penguins, x='body_mass_g', kde=True, ax=axes[1, 1])
+plt.tight_layout()
+plt.show()
+
+# Example with different number of bins
+sns.histplot(data=penguins, x='body_mass_g', bins=20, kde=True)
+plt.title('Body Mass Distribution (20 bins)')
+plt.show()
+```
+
+## Task 2: Examining Correlations
+
+Now, let's look at the correlations between the numerical variables in our dataset using Seaborn's built-in correlation plot.
+
+1. Use `sns.pairplot()` to create a grid of scatter plots for all numeric variables.
+2. Modify the pairplot to show the species information using different colors.
+3. Interpret the pairplot: which variables seem to be most strongly correlated? Do you notice any patterns related to species?
+
+
+```{python}
+#| echo: false
+#| include: false
+
+# Answer for Task 2
+# Create a pairplot for all numeric variables
+sns.pairplot(penguins)
+plt.tight_layout()
+plt.show()
+
+# Create a pairplot with species information
+sns.pairplot(penguins, hue='species')
+plt.tight_layout()
+plt.show()
+```
+
+
+## Task 3: Investigating Relationships with Regression Plots
+
+Let's dig deeper into the relationships between variables using regression plots.
+
+1. Create a regression plot (`sns.regplot`) showing the relationship between 'flipper_length_mm' and 'body_mass_g'.
+2. Create another regplot showing the relationship between 'bill_length_mm' and 'bill_depth_mm'.
+3. Try adding the 'species' information to one of these plots using different colors. Hint: You might want to use `sns.lmplot` for this.
+
+```{python}
+#| echo: false
+#| include: false
+
+# Answer for Task 3
+plt.figure(figsize=(10, 6))
+sns.regplot(data=penguins, x='flipper_length_mm', y='body_mass_g')
+plt.title('Relationship between Flipper Length and Body Mass')
+plt.show()
+
+plt.figure(figsize=(10, 6))
+sns.regplot(data=penguins, x='bill_length_mm', y='bill_depth_mm')
+plt.title('Relationship between Bill Length and Bill Depth')
+plt.show()
+
+sns.lmplot(data=penguins, x='bill_length_mm', y='bill_depth_mm', hue='species', height=6, aspect=1.5)
+plt.title('Bill Length vs Bill Depth by Species')
+plt.show()
+```
+
+## Task 4: Joint Distribution Plots
+
+Finally, let's use joint distribution plots to examine both the relationship between two variables and their individual distributions.
+
+1. Create a joint plot for 'flipper_length_mm' and 'body_mass_g'.
+2. Experiment with different `kind` parameters in the joint plot (e.g., 'scatter', 'kde', 'hex').
+3. Create another joint plot, this time for 'bill_length_mm' and 'bill_depth_mm', colored by species.
+
+```{python}
+#| echo: false
+#| include: false
+
+# Answer for Task 4
+sns.jointplot(data=penguins, x='flipper_length_mm', y='body_mass_g', kind='scatter')
+plt.show()
+
+sns.jointplot(data=penguins, x='flipper_length_mm', y='body_mass_g', kind='kde')
+plt.show()
+
+sns.jointplot(data=penguins, x='flipper_length_mm', y='body_mass_g', kind='hex')
+plt.show()
+
+sns.jointplot(data=penguins, x='bill_length_mm', y='bill_depth_mm', hue='species')
+plt.show()
+```
+
+## Bonus Challenge
+
+If you finish early, try this bonus challenge:
+
+Create a correlation matrix heatmap using Seaborn's `sns.heatmap()` function. This will provide a different view of the correlations between variables compared to the pairplot.
+
+1. Create a correlation matrix using the numerical columns in the dataset.
+
+:::{.callout-tip title="Creating correlation matricies in pandas"}
+Pandas dataframes include two built-in methods that can be combined to quickly create a correlation matrix between all the numerical data in a dataframe.
+
+- `.select_dtypes()` is a method that selects only the columns of a dataframe that match a type of data. Running the `.select_dtypes(include=np.number)` method on a dataframe will return a new dataframe that contains only the columns that have a numeric datatype. 
+
+- `.corr()` is a method that creates a correlation matrix between every column in a dataframe. For it to work, you need to make sure you only have numeric data in your dataframe, so chaining this method after the `.select_dtypes()` method will get you a complete correlation matrix in a single line of code!
+:::
+
+2. Visualize this correlation matrix using `sns.heatmap()`.
+3. Customize the heatmap by adding annotations and adjusting the colormap.
+4. Compare the insights from this heatmap with those from the pairplot. What additional information does each visualization provide?
+
+
+```{python}
+#| echo: false
+#| include: false
+
+# Answer for Bonus Challenge
+# Create correlation matrix
+corr_matrix = penguins.select_dtypes(include=[np.number]).corr()
+
+# Create heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', vmin=-1, vmax=1, center=0)
+plt.title('Correlation Heatmap of Penguin Features')
+plt.tight_layout()
+plt.show()
+```
+
+## Conclusion
+
+You've practiced using seaborn to explore a dataset through various visualization techniques. Often these visualizations can be very helpful at the start of a data exploration activity as they are fundamental to exploratory data analysis in Python. As such, they will be valuable as you continue to work with more complex datasets.
+
+::: {.center-text .body-text-xl .teal-text}
+End Coding Colab Session (Day 7)
+:::
+

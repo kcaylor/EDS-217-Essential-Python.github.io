@@ -1,0 +1,290 @@
+---
+title: "Interactive Session 2B"
+subtitle: "🐍 Essentials of `dict`ionaries"
+editor_options: 
+  chunk_output_type: console
+jupyter: eds217_2025
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](images/dictionary.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A cartoon drawing of the world's largest dictionary.* [MidJourney 5](https://www.midjourney.com/jobs/1d3c5710-e459-49b1-9101-6d1799cca95b?index=0)
+:::
+
+## Getting Started
+
+Before we begin our interactive session, please follow these steps to set up your Jupyter Notebook:
+
+1. Open JupyterLab and create a new notebook:
+   - Click on the `+` button in the top left corner
+   - Select `Python 3.11.0` from the Notebook options
+
+2. Rename your notebook:
+   - Right-click on the `Untitled.ipynb` tab
+   - Select "Rename"
+   - Name your notebook with the format: `Session_2B_Dictionaries.ipynb`
+
+3. Add a title cell:
+   - In the first cell of your notebook, change the cell type to "Markdown"
+   - Add the following content (replace the placeholders with the actual information):
+
+```markdown
+# Day 2: Session B - Dictionaries
+
+[Link to session webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/2b_dictionaries.html)
+
+Date: 09/03/2025
+```
+
+4. Add a code cell:
+   - Below the title cell, add a new cell
+   - Ensure it's set as a "Code" cell
+   - This will be where you start writing your Python code for the session
+
+5. Throughout the session:
+   - Take notes in Markdown cells
+   - Copy or write code in Code cells
+   - Run cells to test your code
+   - Ask questions if you need clarification
+
+:::{.callout-caution}
+Remember to save your work frequently by clicking the save icon or using the keyboard shortcut (Ctrl+S or Cmd+S).
+:::
+
+Let's begin our interactive session!
+
+## Part 1: Basic Concepts with Species Lookup Table
+
+### Introduction to Dictionaries
+
+Dictionaries in Python are collections of key-value pairs that allow for efficient data storage and retrieval. Each key maps to a specific value, making dictionaries ideal for representing real-world data in a structured format.
+
+Probably the easiest mental model for thinking about structured data is a spreadsheet. You are all familiar with Excel spreadsheets, with their numbered rows and lettered columns. In the spreadsheet, data is often "structured" so that each row is an entry, and each column is perhaps a variable recorded for that entry. 
+
+![structured-data](images/structured-data.png)
+
+## Instructions
+We will work through this material together, writing a new notebook as we go.
+
+:::{.callout-note}
+🐍 &nbsp; &nbsp; This symbol designates an important note about Python structure, syntax, or another quirk.
+:::
+
+
+::: {.custom-paragraph style="color:#008C96;"}
+**✏️ &nbsp; This symbol designates code you should add to your notebook and run.**
+:::
+
+## Dictionaries
+
+> **TLDR**: Dictionaries are a very common collection type that allows data to be organized using a `key:value` framework. Because of the similarity between `key:value` pairs and many data structures (e.g. "lookup tables"), you will see Dictionaries quite a bit when working in python
+
+The first collection we will look at today is the dictionary, or **dict**. This is one of the most powerful data structures in python. It is a `mutable`, `unordered` collection, which means that it can be altered, but elements within the structure cannot be referenced by their position and they cannot be sorted. 
+
+You can create a dictionary using the `{}`, providing both a `key` and a `value`, which are separated by a `:`.
+
+
+## Creating & Manipulating Dictionaries
+
+We'll start by creating a dictionary to store the common name of various species found in California's coastal tidepools.
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+
+```{python}
+# Define a dictionary with species data containing latin names and corresponding common names.
+species_dict = {
+    "P ochraceus": "Ochre sea star",
+    "M californianus": "California mussel",
+    "H rufescens": "Red abalone"
+}
+```
+
+
+:::{.callout-note}
+🐍 The use of whitespace and indentation is important in python. In the example above, the dictionary entries are indented relative to the brackets <code>{</code> and <code>}</code>. In addition, there is no space between the <code>'key'</code>, the <code>:</code>, and the <code>'value'</code> for each entry. Finally, notice that there is a <code>,</code> following each dictionary entry. This pattern is the same as all of the other <i>collection</i> data types we've seen so far, including <b>list</b>, <b>set</b>, and <b>tuple</b>.
+:::
+
+### Accessing elements in a dictionary
+
+Accessing an element in a dictionary is easy if you know what you are looking for. 
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+species_dict['M californianus']
+```
+
+
+### Adding a New Species
+
+
+Because dictionaries are _mutable_, it is easy to add additional entries and doing so is straightforward. You specify the key and the value it maps to.
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Adding a new entry for Leather star
+species_dict["D imbricata"] = "Leather star"
+```
+
+### Accessing and Modifying Data
+
+Accessing data in a dictionary can be done directly by the key, and modifications are just as direct.
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Accessing a species by its latin name
+print("Common name for P ochraceus:", species_dict["P ochraceus"])
+```
+
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Updating the common name for Ochre Sea Star abalone
+species_dict["P ochraceus"] = "Purple Starfish"
+print("Updated data for Pisaster ochraceus:", species_dict["P ochraceus"])
+```
+
+### Removing a Dictionary Element
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Removing "P ochraceus"
+del species_dict["P ochraceus"]
+print(f"Deleted data for Pisaster ochraceus, new dictionary: {species_dict}")
+```
+
+
+## Accessing dictionary `keys` and `values`
+
+Every dictionary has builtin methods to retrieve its `keys` and `values`. These functions are called, appropriately, `keys()` and `values()`
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Accessing the dictionary keys:
+latin_names = species_dict.keys()
+print(f"Dictionary keys (latin names): {latin_names}")
+```
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+# Accessing the dictionary values
+common_names = species_dict.values()
+print(f"Dictionary values (common names): {common_names}")
+```
+
+
+:::{.callout-note}
+🐍 The <code>keys()</code> and <code>values()</code> functions return a <code>dict_key</code> object and <code>dict_values</code> object, respectively. Each of these objects contains a <b>list</b> of either the keys or values. You can force the result of the <code>keys()</code> or <code>values()</code> function into a <b>list</b> by wrapping either one in a <code>list()</code> command. 
+:::
+
+
+## Looping through Dictionaries <a id="looping"></a>
+
+Python has an efficient way to loop through all the keys and values of a dictionary at the same time. The `items()` method returns a **tuple** containing a `(key, value)` for each element in a dictionary. In practice this means that we can loop through a dictionary in the following way:
+
+```{python}
+my_dict = {'name': 'Homer Simpson',
+           'occupation': 'nuclear engineer',
+           'address': '742 Evergreen Terrace',
+           'city': 'Springfield',
+           'state': ' ? '
+          }
+
+for key, value in my_dict.items():
+    print(f"{key.capitalize()}: {value}.")
+```
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+Add a new code cell and code to loop through the <code>species_dict</code> dictionary and print out a sentence providing the common name of each species (e.g. "The common name of M californianus" is...").
+
+## Accessing un-assigned elements in Dictionaries
+
+Attempting to retrieve an element of a dictionary that doesn't exist is the same as requesting an index of a **list** that doesn't exist - Python will raise an Exception. For example, if you attempt to retrieve the definition of a field that hasn't been defined, then you get an error:
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```python
+species_dict["E dofleini"]
+```
+
+You should get a `KeyError` exception:
+
+KeyError: 'E dofleini'
+
+
+To avoid getting an error when requesting an element from a **dict**, you can use the `get()` function. The `get()` function will return `None` if the element doesn't exist:
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+species_description = species_dict.get("E dofleini")
+print("Accessing non-existent latin name, E dofleini:\n", species_description)
+```
+
+You can also provide an argument to python to return if the item isn't found:
+
+::: {.example}
+✏️ **Try it.** Add the cell below to your notebook and run it.
+:::
+
+```{python}
+species_description = species_dict.get("E dofleini", "Species not found in dictionary")
+print("Accessing non-existent latin name, E dofleini:\n", species_description)
+```
+
+## Summary and Additional Resources
+
+We've explored the creation, modification, and application of dictionaries in Python, highlighting their utility in storing structured data. As you progress in Python, you'll find dictionaries indispensable across various applications, from data analysis to machine learning.
+
+For further study, consult the following resources:
+- [Python's Official Documentation on Dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)
+- Our class [Dictionary Cheatsheet](../cheatsheets/dictionaries.qmd)
+
+---
+
+::: {.center-text .body-text-xl .teal-text}
+End interactive session 2B
+:::
+
+

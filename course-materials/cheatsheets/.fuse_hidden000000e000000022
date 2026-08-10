@@ -1,0 +1,159 @@
+---
+title: EDS 217 Cheatsheet
+subtitle: <code>matplotlib</code>
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+:::{.callout-tip}
+For 🤯 inspiration + 👩‍💻 code, check out the [Python Graph Gallery](https://python-graph-gallery.com)
+:::
+
+## Basic Setup
+
+```python
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+
+# Set style for seaborn (optional)
+sns.set_style("whitegrid")
+```
+
+## Creating a Figure and Axes
+
+```python
+# Create a new figure and axis
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Create multiple subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+```
+
+## Common Plot Types
+
+### Line Plot
+
+```python
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+ax.plot(x, y, label='sin(x)')
+```
+
+### Scatter Plot
+
+```python
+x = np.random.rand(50)
+y = np.random.rand(50)
+plt.scatter(x, y, alpha=0.5)
+```
+
+### Bar Plot
+
+```python
+categories = ['A', 'B', 'C', 'D']
+values = [3, 7, 2, 5]
+plt.bar(categories, values)
+```
+
+### Histogram
+
+```python
+data = np.random.randn(1000)
+ax.hist(data, bins=30, edgecolor='black')
+```
+
+## Customizing Plots
+
+### Labels and Title
+
+```python
+ax.set_xlabel('X-axis label')
+ax.set_ylabel('Y-axis label')
+ax.set_title('Plot Title')
+```
+
+### Legend
+
+```python
+ax.legend()
+```
+
+### Axis Limits
+
+```python
+ax.set_xlim(0, 10)
+ax.set_ylim(-1, 1)
+```
+
+### Grid
+
+```python
+ax.grid(True, linestyle='--', alpha=0.7)
+```
+
+### Ticks
+
+```python
+ax.set_xticks([0, 2, 4, 6, 8, 10])
+ax.set_yticks([-1, -0.5, 0, 0.5, 1])
+```
+
+## Color and Style
+
+### Changing Colors
+
+```python
+ax.plot(x, y, color='r')  # 'r' for red
+ax.scatter(x, y, c='blue')
+```
+
+### Line Styles
+
+```python
+ax.plot(x, y, linestyle='--')  # dashed line
+ax.plot(x, y, ls=':')  # dotted line
+```
+
+### Marker Styles
+
+```python
+ax.plot(x, y, marker='o')  # circles
+ax.plot(x, y, marker='s')  # squares
+```
+
+## Saving and Displaying
+
+### Saving the Figure
+
+```python
+plt.savefig('my_plot.png', dpi=300, bbox_inches='tight')
+```
+
+### Displaying the Plot
+
+```python
+plt.show()
+```
+
+## Useful Tips for Seaborn Users
+
+1. Use `plt.subplots()` to create custom layouts that Seaborn doesn't provide.
+2. Access the underlying Matplotlib `Axes` object in Seaborn plots:
+   ```python
+   g = sns.scatterplot(x='x', y='y', data=df)
+   g.set_xlabel('Custom X Label')
+   ```
+3. Combine Seaborn and Matplotlib in the same figure:
+   ```python
+   fig, ax = plt.subplots()
+   sns.scatterplot(x='x', y='y', data=df, ax=ax)
+   ax.plot(x, y, color='r', linestyle='--')
+   ```
+4. Use Matplotlib's `plt.tight_layout()` to automatically adjust subplot parameters for better spacing.
+
+Remember, most Seaborn functions return a Matplotlib `Axes` object, allowing you to further customize your plots using Matplotlib functions.

@@ -1,0 +1,160 @@
+---
+title: "Introduction to Seaborn"
+jupyter: eds217_2025
+format: 
+  revealjs:
+    theme: "moon"
+---
+
+# Introduction to Seaborn
+
+`Seaborn` is a powerful Python visualization library that builds on `matplotlib` to create beautiful, high-level statistical graphics. It simplifies the process of creating insightful and attractive visualizations and is particularly suited for exploratory data analysis.
+
+---
+
+Origin of `seaborn`
+
+![](https://alchetron.com/cdn/sam-seaborn-db05da4e-4f95-494c-84c2-4dad51a0014-resize-750.jpeg)
+
+Seaborn is named after [Sam Seaborn](https://en.wikipedia.org/wiki/Sam_Seaborn), a character from the TV show, "[The West Wing](https://en.wikipedia.org/wiki/The_West_Wing)" (1999-2006), who was known for his expert communication skills and strategic thinking.
+
+## Philosophy of Seaborn
+
+Seaborn aims to make visualization a central part of exploring and understanding data. 
+
+Its dataset-oriented plotting functions operate on dataframes and arrays containing whole datasets. 
+
+It tries to automatically perform semantic mapping and statistical aggregation to produce informative plots.
+
+## Main Ideas in Seaborn
+
+
+- **Integration with Pandas**: Works well with Pandas data structures.
+
+- **Built-in Themes**: Provides built-in themes for styling matplotlib graphics.
+
+- **Color Palettes**: Offers a variety of color palettes to reveal patterns in the data.
+
+- **Statistical Estimation**: Seaborn includes functions to fit and visualize linear regression models.
+
+
+
+## Major Features of Seaborn
+
+Seaborn simplifies many aspects of creating complex visualizations in Python. Some of its major features include:
+
+- **FacetGrids and PairGrids**: For plotting conditional relationships.
+- **Factorplot**: For categorical variables.
+- **Jointplot**: For joint distributions.
+- **Time Series functionality**: Through functions like `tsplot`.
+
+## Using seaborn
+
+```python
+import seaborn as sns
+```
+Why `sns`?
+
+---
+
+Why `sns`?
+
+Sam wore monogrammed shirts on the show... 
+
+![](assets/SNS.png)
+
+but the monogram was incorrectly designed as "sNs"... 
+---
+
+## Theme Options
+
+```python
+# Set the theme to whitegrid
+sns.set_theme(style="whitegrid")
+```
+1. **`darkgrid`**: The default theme. Background is a dark gray grid (not to be confused with a solid gray).
+2. **`whitegrid`**: Similar to `darkgrid` but with a lighter background. This theme is particularly useful for plots with dense data points. 
+
+--- 
+
+## Themes (continued)
+3. **`dark`**: This theme provides a dark background without any grid lines. It’s suitable for presentations or where visuals are prioritized.
+4. **`white`**: Offers a clean, white background without grid lines. This is well in situations where the data and annotations need to stand out without any additional distraction.
+
+
+5. **`ticks`**: This theme is similar to the `white` theme but adds ticks on the axes, which enhances the precision of interpreting the data. 
+
+## Getting ready to Seaborn
+
+### Import the library and set a style
+
+```{python}
+#| echo: true
+import seaborn as sns # (but now you know it should have been ssn 🤓)
+sns.set(style="darkgrid") # This is the default, so skip it if wanted
+```
+
+---
+
+### Relational Plots (relplot)
+
+```{python}
+#| echo: true
+# Load the built-in example tips dataset
+tips = sns.load_dataset("tips")
+
+# Create a relational plot
+sns.relplot(x="total_bill", y="tip", data=tips, kind="line")
+```
+
+---
+
+### Categorical Plots (catplot)
+
+```{python}
+#| echo: true
+# Load the example titanic dataset
+titanic = sns.load_dataset("titanic")
+# Create a categorical plot
+sns.catplot(x="deck", kind="count", data=titanic)
+```
+
+---
+
+### Categorical Plots (catplot)
+
+The `palette` keyword specifies the [category color scale](https://seaborn.pydata.org/tutorial/color_palettes.html)
+
+```{python}
+#| echo: true
+# Create a categorical plot
+sns.catplot(x="deck", kind="count", palette="coolwarm", data=titanic)
+```
+
+---
+
+### Distribution Plots (displot)
+
+```{python}
+#| echo: true
+# Create a distribution plot
+sns.set(style="ticks") 
+sns.displot(tips['total_bill'], kde=True)
+```
+
+---
+
+### Regression Plots (regplot)
+
+```{python}
+#| echo: true
+sns.set(style="dark") 
+# Create a regression plot
+sns.regplot(x="total_bill", y="tip", data=tips)
+```
+
+---
+
+## Conclusion
+
+Seaborn is a versatile and powerful tool for statistical data visualization in Python. Whether you need to visualize the distribution of a dataset, the relationship between multiple variables, or the dependencies between categorical data, Seaborn has a plot type to make your analysis more intuitive and insightful.

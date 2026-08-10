@@ -1,0 +1,188 @@
+---
+title: EDS 217 Cheatsheet
+subtitle: Pandas DataFrames
+jupyter: eds217_2025
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+## Introduction
+
+This cheatsheet provides a quick reference for common operations on Pandas DataFrames. It's designed for beginning data science students who are just starting to work with Pandas.
+
+## Importing Pandas
+
+Always start by importing pandas:
+
+```{python}
+#| echo: true
+
+import pandas as pd
+```
+
+## Creating a DataFrame
+
+### From a dictionary
+
+```{python}
+#| echo: true
+
+data = {'Name': ['Alice', 'Bob', 'Charlie'],
+        'Age': [25, 30, 35],
+        'City': ['New York', 'San Francisco', 'Los Angeles']}
+df = pd.DataFrame(data)
+print(df)
+```
+
+### From a CSV file
+
+```{python}
+#| echo: true
+
+# Here's an example csv file we can use for read_csv:
+from io import StringIO
+# Create a CSV string
+csv_data = """
+Name,Age,City
+Alice,25,New York
+Bob,30,San Francisco
+Charlie,35,Los Angeles
+"""
+
+# Use StringIO to create a file-like object
+csv_file = StringIO(csv_data.strip())
+
+# Read the CSV data into a DataFrame
+df = pd.read_csv(csv_file)
+print(df)
+```
+
+## Basic DataFrame Information
+
+```{python}
+#| echo: true
+
+# Display the first few rows
+print(df.head())
+
+# Get basic information about the DataFrame
+print(df.info())
+
+# Get summary statistics
+print(df.describe())
+
+# Get column names
+print(df.columns)
+
+# Get dimensions (rows, columns)
+print(df.shape)
+```
+
+## Selecting Data
+
+### Selecting columns
+
+```{python}
+#| echo: true
+
+# Select a single column
+age_column = df['Age']
+
+# Select multiple columns
+subset = df[['Name', 'City']]
+```
+
+### Selecting rows
+
+```{python}
+#| echo: true
+
+# Select rows by index
+first_row = df.loc[0]
+
+# Select rows by condition
+adults = df[df['Age'] >= 18]
+```
+
+## Basic Data Manipulation
+
+### Adding a new column
+
+```{python}
+#| echo: true
+
+df['Is Adult'] = df['Age'] >= 18
+```
+
+### Renaming columns
+
+```{python}
+#| echo: true
+
+df = df.rename(columns={'Name': 'Full Name'})
+```
+
+### Handling missing values
+
+```{python}
+#| echo: true
+
+# Drop rows with any missing values
+df_cleaned = df.dropna()
+
+# Fill missing values
+df_filled = df.fillna(0)  # Fills with 0
+```
+
+## Basic Calculations
+
+```{python}
+#| echo: true
+
+# Calculate mean age
+mean_age = df['Age'].mean()
+
+# Count occurrences
+city_counts = df['City'].value_counts()
+```
+
+## Grouping and Aggregation
+
+```{python}
+#| echo: true
+
+# Group by city and calculate mean age
+city_age = df.groupby('City')['Age'].mean()
+```
+
+## Sorting
+
+```{python}
+#| echo: true
+
+# Sort by Age in descending order
+df_sorted = df.sort_values('Age', ascending=False)
+```
+
+## Saving a DataFrame
+
+```{python}
+#| echo: true
+
+# Save to CSV
+df.to_csv('output.csv', index=False)
+```
+
+## Further Learning
+
+For more advanced operations and in-depth explanations, check out these resources:
+
+1. [Pandas Official Documentation](https://pandas.pydata.org/docs/)
+2. [10 Minutes to Pandas](https://pandas.pydata.org/docs/user_guide/10min.html)
+3. [Python for Data Analysis](https://wesmckinney.com/book/) by Wes McKinney
+4. [Pandas Cheat Sheet](Pandas_Cheat_Sheet.pdf)
+
+Remember, practice is key! Try these operations with different datasets to become more comfortable with Pandas DataFrames.

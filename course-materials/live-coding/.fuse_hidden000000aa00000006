@@ -1,0 +1,207 @@
+---
+title: "Live Coding Session [Instructor Notes]"
+subtitle: "Importing data with read_csv()"
+search: false
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+jupyter: eds217_2025
+---
+
+## Session Overview
+- Duration: 45 minutes
+- Topic: Pandas `read_csv` function and its various options
+- Format: Live coding with student participation
+
+## 1. Setting Up Your Notebook (5 minutes)
+
+**Goal**: Start by having students set up their Jupyter notebook with markdown headers. This helps organize the session into distinct sections, making it easier for them to follow along and refer back to their work later.
+
+**Instructions:**
+1. Create a new Jupyter notebook or open an existing one for this session.
+2. Add markdown cells with the following headers, using `##` for each header.
+3. Place code cells between the headers where you'll write and execute your code.
+
+**Header Texts:**
+- First markdown cell:
+  ```markdown
+  ## Setup and Basic Usage
+  ```
+- Second markdown cell:
+  ```markdown
+  ## Specifying Delimiters
+  ```
+- Third markdown cell:
+  ```markdown
+  ## Handling Headers
+  ```
+- Fourth markdown cell:
+  ```markdown
+  ## Selecting Specific Columns
+  ```
+- Fifth markdown cell:
+  ```markdown
+  ## Handling Missing Values
+  ```
+  - Sixth markdown cell:
+  ```markdown
+  ## Parsing Dates
+  ```
+- Seventh markdown cell:
+  ```markdown
+  ## Handling Large Files
+  ```
+- Eighth markdown cell:
+  ```markdown
+  ## Summary and Best Practices
+  ```
+- Ninth markdown cell:
+  ```markdown
+  ## Reflections
+  ```
+
+## 2. Setup and Basic Usage (5 minutes)
+
+First, let's import pandas and set up our environment:
+
+```python
+import pandas as pd
+import numpy as np
+
+# Optional: Set display options for better output readability
+pd.set_option('display.max_columns', None)
+pd.set_option('display.expand_frame_repr', False)
+```
+
+Now, let's start with a simple CSV file and read it using `read_csv`:
+
+```python
+# Assuming 'basic_data.csv' is available at this URL
+url = "https://your-course-website.com/data/basic_data.csv"
+df = pd.read_csv(url)
+print(df.head())
+```
+
+Explain: This is the most basic usage of `read_csv`. It assumes comma-separated values and that the first row contains column names.
+
+## 3. Specifying Delimiters (5 minutes)
+
+Not all CSV files use commas. Let's try a file with a different delimiter:
+
+```python
+# Assuming 'tab_data.tsv' is available at this URL
+url = "https://your-course-website.com/data/tab_data.tsv"
+df_tab = pd.read_csv(url, sep='\t')
+print(df_tab.head())
+```
+
+Explain: The `sep` parameter allows us to specify the delimiter used in the file.
+
+## 4. Handling Headers (10 minutes)
+
+### No Header
+
+Sometimes, CSV files don't include headers:
+
+```python
+# Assuming 'no_header.csv' is available at this URL
+url = "https://your-course-website.com/data/no_header.csv"
+df_no_header = pd.read_csv(url, header=None)
+print(df_no_header.head())
+```
+
+### Specifying Column Names
+
+We can also provide our own column names:
+
+```python
+column_names = ['A', 'B', 'C', 'D']
+df_custom_header = pd.read_csv(url, header=None, names=column_names)
+print(df_custom_header.head())
+```
+
+Explain: The `header` and `names` parameters allow us to handle files without headers or specify custom column names.
+
+## 5. Selecting Specific Columns (5 minutes)
+
+Often, we only need certain columns from a large dataset:
+
+```python
+# Assuming 'large_dataset.csv' is available at this URL
+url = "https://your-course-website.com/data/large_dataset.csv"
+selected_columns = ['Name', 'Age', 'City']
+df_selected = pd.read_csv(url, usecols=selected_columns)
+print(df_selected.head())
+```
+
+Explain: The `usecols` parameter allows us to select only the columns we need, which can be more efficient for large datasets.
+
+## 6. Handling Missing Values (5 minutes)
+
+CSV files often contain missing values. Let's see how to handle them:
+
+```python
+# Assuming 'missing_values.csv' is available at this URL
+url = "https://your-course-website.com/data/missing_values.csv"
+df_missing = pd.read_csv(url, na_values=['N/A', 'Unknown'])
+print(df_missing.head())
+print(df_missing.isna().sum())
+```
+
+Explain: The `na_values` parameter allows us to specify additional strings to be treated as NaN/NA.
+
+## 7. Parsing Dates (5 minutes)
+
+Pandas can automatically parse date columns:
+
+```python
+# Assuming 'date_data.csv' is available at this URL
+url = "https://your-course-website.com/data/date_data.csv"
+df_dates = pd.read_csv(url, parse_dates=['Date'])
+print(df_dates.head())
+print(df_dates.dtypes)
+```
+
+Explain: The `parse_dates` parameter tells pandas which columns should be parsed as dates.
+
+## 8. Handling Large Files (5 minutes)
+
+For very large files, we might want to read only a portion:
+
+```python
+# Assuming 'large_file.csv' is available at this URL
+url = "https://your-course-website.com/data/large_file.csv"
+df_chunk = pd.read_csv(url, nrows=1000)
+print(df_chunk.shape)
+```
+
+Explain: The `nrows` parameter allows us to read only a specified number of rows, which can be useful for exploring large datasets.
+
+## 9. Summary and Best Practices (5 minutes)
+
+Recap the key parameters we've covered:
+- `sep` for specifying delimiters
+- `header` and `names` for handling column names
+- `usecols` for selecting specific columns
+- `na_values` for handling missing data
+- `parse_dates` for automatic date parsing
+- `nrows` for reading large files
+
+Discuss best practices:
+- Always check the first few rows of your data after reading
+- Be mindful of memory usage with large files
+- Use appropriate data types for columns (e.g., dates)
+- Handle missing values explicitly
+
+## 10. Reflections (5 minutes)
+
+Encourage students to reflect on what they've learned:
+- What new `read_csv` options did you find most useful?
+- How might these options help in your data analysis projects?
+- Are there any other CSV reading scenarios you'd like to explore further?
+
+## Additional Resources
+
+- [Pandas read_csv documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html)
+- [Pandas IO Tools (Text, CSV, HDF5, …)](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html)

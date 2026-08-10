@@ -13,6 +13,8 @@ website:
     right:
       - text: 🏠 home
         href: index.qmd
+      - text: 🔟 the workflow
+        href: course-materials/the-data-science-workflow.qmd
       - text: 📋 syllabus
         href: https://docs.google.com/document/d/1yBKyJFT22bKynDn4TzrNwdeZ6lb9NELqCeewhifcugo/edit?usp=sharing
         target: _blank
@@ -38,14 +40,14 @@ website:
             href: course-materials/day9.qmd
       - text: 💻 interactive sessions
         menu:
-          - text: Session 1a - ⚒️ JupyterLab Intro and IPython
-            href: course-materials/interactive-sessions/1a_iPython_JupyterLab.qmd
-          - text: Session 1b - ⚒️ Coding in Jupyter Notebooks
-            href: course-materials/interactive-sessions/1b_Jupyter_Notebooks.qmd
-          - text: Session 1c - 🐍 Exploring Variable Types and Methods in Python
-            href: course-materials/interactive-sessions/1c_variables_strings.qmd
-          - text: Session 1d - 🐍 Operators & Functions
-            href: course-materials/interactive-sessions/1d_operators_functions.qmd
+          - text: Session 1a - ⚒️ JupyterLab & Jupyter Notebooks
+            href: course-materials/interactive-sessions/1a_jupyterlab_notebooks.qmd
+          - text: Session 1b - 🐍 Python Essentials
+            href: course-materials/interactive-sessions/1b_python_essentials.qmd
+          - text: Session 1c - 🎬 The Whole Game, Part 1
+            href: course-materials/interactive-sessions/1c_whole_game_1.qmd
+          - text: Session 1d - 🎬 The Whole Game, Part 2
+            href: course-materials/interactive-sessions/1d_whole_game_2.qmd
           # - text: Session 2a - ⚒️ Getting help in Python
           #   href: course-materials/interactive-sessions/interactive-session-2a.qmd
           - text: Session 2a - 🐍 Lists

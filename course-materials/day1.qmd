@@ -1,5 +1,5 @@
 ---
-title: "Intro to Python and JupyterLab"
+title: "The Whole Game"
 subtitle: "Day 1"
 description: "Monday August 31^st^, 2026"
 ---
@@ -12,22 +12,29 @@ description: "Monday August 31^st^, 2026"
 
 <!-- No pre-class prep before our first day of class! -->
 
+Today you will run a complete data science workflow from a raw file on the internet
+to a finished figure, before you know how any single piece works. The morning gives you
+just enough Python to read the code. The afternoon plays the whole game.
+
 ## Class materials
 
 | {{< fa calendar-day title="A calendar with one day highlighted" >}} Session  | {{< fa laptop-code title="A laptop with on-screen code" >}} Session 1  |  {{< fa laptop-code title="A laptop with on-screen code" >}} Session 2 |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| day 1 / morning   | [ Python and Data Science](){target="_blank"} | [⚒️ Meet JupyterLab](interactive-sessions/1a_iPython_JupyterLab.qmd) <br> [⚒️ Coding in Jupyter Notebooks](interactive-sessions/1b_Jupyter_Notebooks.qmd)
-|
-| day 1 / afternoon | [🐍 Exploring Data Types and Methods](interactive-sessions/1c_variables_strings.qmd) |   [🐍 Variables & Operators](interactive-sessions/1d_operators_functions.qmd) |
+| day 1 / morning   | [⚒️ JupyterLab & Jupyter Notebooks](interactive-sessions/1a_jupyterlab_notebooks.qmd) | [🐍 Python Essentials: Variables, Strings & f-strings](interactive-sessions/1b_python_essentials.qmd) |
+| day 1 / afternoon | [🎬 The Whole Game, Part 1: Import to Aggregate](interactive-sessions/1c_whole_game_1.qmd) | [🎬 The Whole Game, Part 2: Visualize, Export & Name the Workflow](interactive-sessions/1d_whole_game_2.qmd) |
 : {.hover .bordered tbl-colwidths="[20,40,40]"} 
 
 ## End-of-day practice
 
-Our last task today is to work through an example of a Python data science workflow. This exercise "skips ahead" to content we will be learning later in the course, but provides a preview of where we are headed and how easy it is to do data science in python!
+Your last task today is to run the whole workflow again on your own, changing a few things
+as you go. You are not expected to understand every line yet. Reading working code and
+modifying it deliberately is the skill for today.
 
-- [{{< fa pencil title="A pencil" >}} **Day 1 Practice:** Example Python Data Science Workflow](eod-practice/eod-day1.qmd)
+- [{{< fa pencil title="A pencil" >}} **Day 1 Practice:** Rerun the Whole Game](eod-practice/eod-day1-2026.qmd)
 
 ## Additional Resources
 
-NA
-
+- [{{< fa diagram-project title="A workflow diagram" >}} The Data Science Workflow](the-data-science-workflow.qmd): the ten steps, and where you will learn each one
+- [{{< fa table title="A table" >}} Setting up Python](cheatsheets/setting_up_python.qmd)
+- [{{< fa table title="A table" >}} JupyterLab cheatsheet](cheatsheets/JupyterLab.qmd)
+- [{{< fa table title="A table" >}} First steps in Python](cheatsheets/first_steps.qmd)

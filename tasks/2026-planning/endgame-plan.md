@@ -94,6 +94,23 @@ Day 5 cannot be scoped correctly until Day 4 is fixed.
 
 Days 2, 3, and 5 are not cuttable. They carry the redesign.
 
+## Pre-launch checklist
+
+Run once the restructuring is done and the revisions are settled, before the deploy. These
+are cleanup items that would be premature while days are still moving.
+
+- [ ] **Retire the superseded 2025 files from the render.** They are unlinked from the navbar
+      and the day pages, but Quarto still builds them, so a student can reach a page teaching
+      material we cut. Known orphans: `2d_list_comprehensions.qmd` and its notes, `2a_lists`,
+      `2b_dictionaries`, `2c_lists_dictionaries_sets`, the 2025 `1a`-`1d`, plus whatever
+      Days 3-7 orphan as they are rebuilt. Decide per file: delete, or exclude via the
+      `render:` block in `_quarto.yml`. Do this last, since each rebuilt day adds to the list.
+- [ ] Run `python tools/run_cells.py` over every 2026 session and EOD.
+- [ ] Run `python tools/warm_cache.py`; expect every course-site URL to resolve.
+- [ ] Full `python build_docs.py --full` with no errors.
+- [ ] Update the syllabus Google Doc link and TA information.
+- [ ] Push to `origin`, then `live`, then verify the site serves `data/` correctly.
+
 ## Quality gates (unchanged, from work-plan.md)
 
 1. Every construct traces to a day scope table in `2026-day-skeleton.md`

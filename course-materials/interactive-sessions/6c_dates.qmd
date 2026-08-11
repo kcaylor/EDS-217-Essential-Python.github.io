@@ -1,8 +1,6 @@
 ---
-title: "Interactive Session 6C"
-subtitle: "Working with dates"
-editor_options: 
-  chunk_output_type: console
+title: "Interactive Session"
+subtitle: "📆 A Date Is Not a Number"
 jupyter: eds217_2026
 format:
   html:
@@ -10,7 +8,6 @@ format:
     toc-depth: 3
     code-fold: show
 ---
-
 
 ::: {style="width: 60%; margin: auto;"}
 ![](images/dates.jpeg)
@@ -20,380 +17,296 @@ format:
 *A cartoon panda is visiting Stonehenge.* [MidJourney 5](https://www.midjourney.com/jobs/68f2f16e-29bc-4981-ae9b-9c1edb669684?index=0)
 :::
 
+You owe two lines of code an explanation.
+
+On Thursday evening, an exercise handed you `.dt.year` inside a boxed aside and told you not to
+worry about it. Last night, another one handed you `aq['datetimeLocal'].str[11:13]` and told you
+the same thing. Both were doing the same job by different means: pulling a piece out of a date so
+you could group by it.
+
+This session is where that stops being a borrowed line.
+
+The reason dates get their own hour is not that the syntax is hard. It is that a date is one of
+the few things in a data file that is almost never stored as what it is. It arrives as text, or as
+an integer, or as five separate columns, and every one of those disguises works well enough to
+fool you until the moment it doesn't.
+
+By the end of this session you will be able to:
+
+- explain why a date stored as text or as a number is not a date
+- write the **parsing sentence**, `pd.to_datetime(column, format=...)`, and build a format string
+  out of `%Y`, `%m` and `%d`
+- pull the year, month and day out of a parsed date with the **`.dt` accessors**
+- use a date component as a grouping key, and answer a question that needs one
+
 ## Getting Started
 
-Before we begin our interactive session, please follow these steps to set up your Jupyter Notebook:
+1. **Create a new notebook** from the Launcher (**eds217_2026**).
 
-1. Open JupyterLab and create a new notebook:
-   - Click on the `+` button in the top left corner
-   - Select `Python 3.11.0` from the Notebook options
+2. **Rename your notebook** to: `Session_6C_Dates.ipynb`
 
-2. Rename your notebook:
-   - Right-click on the `Untitled.ipynb` tab
-   - Select "Rename"
-   - Name your notebook with the format: `Session_XY_Topic.ipynb`
-     (Replace X with the day number and Y with the session number)
-
-3. Add a title cell:
-   - In the first cell of your notebook, change the cell type to "Markdown"
-   - Add the following content (replace the placeholders with the actual information):
+3. **Add a title cell** (Markdown), updating the date to today:
 
 ```markdown
-# Day 6: Session C - Working with Dates
+# Day 6: Session 6C - A Date Is Not a Number
 
-[Link to session webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/6c_dates.html)
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/6c_dates.html)
 
 Date: 09/08/2026
-
 ```
 
-4. Add a code cell:
-   - Below the title cell, add a new cell
-   - Ensure it's set as a "Code" cell
-   - This will be where you start writing your Python code for the session
-
-5. Throughout the session:
-   - Take notes in Markdown cells
-   - Copy or write code in Code cells
-   - Run cells to test your code
-   - Ask questions if you need clarification
-
-:::{.callout-caution}
-Remember to save your work frequently by clicking the save icon or using the keyboard shortcut (Ctrl+S or Cmd+S).
-:::
-
-Let's begin our interactive session!
-<hr>
-
-## Introduction
-
-In this interactive session, we'll explore in more detail to work with dates in pandas, which is a crucial skill for environmental data scientists. We'll focus on:
-
-1. Parsing dates
-2. Using dates as an index for a DataFrame
-3. Selecting and filtering data based on date ranges
-
-Hopefully, by the end of this session, you'll be more comfortable manipulating time series data in pandas.
-
-## Setting Up
-
-First, let's import the necessary libraries and create a sample dataset.
-
-<div class="example"> 
-✏️ Try it. Add the cell below to your notebook and run it.
-</div>
+4. Read in a file you first met on the very first afternoon of this course:
 
 ```{python}
-#| echo: true
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 
-# Set a random seed for reproducibility
-np.random.seed(42)
+url = 'https://eds-217-essential-python.github.io/data/toolik_weather.csv'
+toolik = pd.read_csv(url)
 
-# Generate a sample dataset
-date_rng = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')
-temperature = np.random.normal(loc=15, scale=5, size=len(date_rng))
-rainfall = np.random.exponential(scale=5, size=len(date_rng))
-
-df = pd.DataFrame(data={'date': date_rng, 'temperature': temperature, 'rainfall': rainfall})
-print(df.head())
+toolik[['Year', 'Month', 'Date', 'Daily_AirTemp_Mean_C']].head()
 ```
 
-## Parsing Dates
+Daily weather from the Toolik Field Station on the North Slope of Alaska. One row per day, 11,171
+of them.
 
-Pandas provides powerful tools for parsing dates. Let's explore some common scenarios:
+## The disguise
 
-### Using pd.to_datetime()
+Look at the `Date` column, and then at what pandas thinks it is:
 
-The `pd.to_datetime()` function is versatile and can handle various date formats.
+```{python}
+toolik['Date'].dtype
+```
 
-:::{.callout-important}
-If you are parsing strings with different date formats, use the `format='mixed'` keyword argument to `pd.datetime()`
+`int64`. The first row's date is not the first of June 1988; it is the integer nineteen million,
+eight hundred and eighty thousand, six hundred and one.
+
+That works better than it has any right to. Sorting by it gives the right order, because
+`%Y%m%d` happens to sort the same way as text does. Filtering to a year works, because
+`19880000 < Date < 19890000` catches exactly 1988. You could get quite a long way like this.
+
+Then you subtract two of them:
+
+```{python}
+19880701 - 19880630
+```
+
+Seventy-one. The thirtieth of June and the first of July are one day apart, and the integer says
+seventy-one, because integers do not know that months end.
+
+Everything else that makes a date useful fails the same way. Which day of the week was it? How
+many days between sampling visits? Is this row in the growing season? None of those questions can
+be answered by arithmetic on `19880601`, and none of them will raise an error when you try. They
+will just be wrong.
+
+## The parsing sentence
+
+`pd.to_datetime()` takes a column of dates-in-disguise and hands back a column of real dates. You
+tell it the disguise with `format=`:
+
+```{python}
+toolik['date'] = pd.to_datetime(toolik['Date'], format='%Y%m%d')
+
+toolik[['Date', 'date']].head()
+```
+
+```python
+pd.to_datetime(column, format='%Y%m%d')
+#              ↑               ↑
+#              what to parse   how it is laid out
+```
+
+The format string is a **picture of the text you have**. `%Y` stands where the four-digit year
+sits, `%m` where the two-digit month sits, `%d` where the two-digit day sits, and any punctuation
+in between is typed literally.
+
+| Your data looks like | Your format string is |
+|---|---|
+| `19880601` | `'%Y%m%d'` |
+| `1988-06-01` | `'%Y-%m-%d'` |
+| `06/01/1988` | `'%m/%d/%Y'` |
+| `01/06/1988` | `'%d/%m/%Y'` |
+: {.hover .bordered}
+
+Look at the last two rows for as long as it takes to be alarmed. The same eight characters mean
+the first of June in most of the world and the sixth of January in the United States, and the
+only thing standing between those two readings is the format string you typed. Half of all
+date bugs in data science live in that one row of the table.
+
+:::{.callout-important title="`format=` is not optional, it is a safety net"}
+`pd.to_datetime()` will usually guess correctly if you leave `format=` out. Supply it anyway.
+
+A format string is an **assertion about your data**. If one row of your file is malformed, or the
+first five hundred rows are ISO dates and the rest are American ones, a supplied format raises an
+error and a guessed format silently produces a column of confidently wrong dates.
+
+Loud failure now beats quiet nonsense later. Type the format.
 :::
 
-<div class="example"> 
-✏️ Try it. Add the cell below to your notebook and run it.
-</div>
+Check what you got:
 
 ```{python}
-#| echo: true
-# Parse dates in different formats
-dates = ['2023-07-01', '7/2/23', 'July 3, 2023']
-parsed_dates = pd.to_datetime(dates, format='mixed')
-print(parsed_dates)
+print(toolik['date'].dtype)
+print(toolik['date'].min())
+print(toolik['date'].max())
 ```
 
-### Specifying Date Format
+`datetime64[ns]`, running from 1 June 1988 to 31 December 2018. Thirty years of Arctic weather,
+and now pandas knows it.
 
-Sometimes, you need to specify the format explicitly:
-
-<div class="example"> 
-✏️ Try it. Add the cell below to your notebook and run it.
-</div>
-
-```{python}
-#| echo: true
-custom_dates = ['01-Jul-2023', '02-Jul-2023', '03-Jul-2023']
-parsed_custom_dates = pd.to_datetime(custom_dates, format='%d-%b-%Y')
-print(parsed_custom_dates)
-```
-:::{.callout-info}
-## Date Format Strings Cheatsheet
-
-Common format codes for dates and times:
-
-- `%Y`: Year with century as a decimal number (e.g., 2023)
-- `%y`: Year without century as a zero-padded decimal number (e.g., 23)
-- `%m`: Month as a zero-padded decimal number (01-12)
-- `%d`: Day of the month as a zero-padded decimal number (01-31)
-- `%H`: Hour (24-hour clock) as a zero-padded decimal number (00-23)
-- `%M`: Minute as a zero-padded decimal number (00-59)
-- `%S`: Second as a zero-padded decimal number (00-59)
-- `%f`: Microsecond as a decimal number, zero-padded on the left (000000-999999)
-
-Additional useful codes:
-
-- `%b`: Month as locale's abbreviated name (e.g., Jan, Feb)
-- `%B`: Month as locale's full name (e.g., January, February)
-- `%a`: Weekday as locale's abbreviated name (e.g., Sun, Mon)
-- `%A`: Weekday as locale's full name (e.g., Sunday, Monday)
-- `%j`: Day of the year as a zero-padded decimal number (001-366)
-- `%U`: Week number of the year (Sunday as the first day of the week)
-- `%W`: Week number of the year (Monday as the first day of the week)
-
-Common combinations:
-
-- `%Y-%m-%d`: ISO date format (e.g., 2023-05-15)
-- `%d/%m/%Y`: Common date format in some countries (e.g., 15/05/2023)
-- `%Y-%m-%d %H:%M:%S`: ISO date and time format (e.g., 2023-05-15 14:30:00)
-
-Remember, when using these format strings with pandas, you typically use them with functions like `pd.to_datetime()` or when setting the `date_format` parameter in `read_csv()`.
+:::{.callout-tip title="✏️ Test your knowledge"}
+The `date_data.csv` file at
+`https://eds-217-essential-python.github.io/data/date_data.csv` has a `Date` column stored as
+text in the form `2023-11-02`. Read it in, write the parsing sentence for it with the correct
+format string, and print the dtype of the result to prove it worked.
 :::
 
-**Your turn:** Try parsing the following dates: '2023-07-04 14:30:00', '05/07/2023', 'June 6th, 2023'
+## The `.dt` accessors
 
-<div class="example"> 
-✏️ Try it. Add a new cell to your notebook and add code to parse the three strings above.
-</div>
-
-```{python}
-#| echo: true
-
-# add your code here!
-
-```
-
-## Using Dates as DataFrame Index
-
-Setting the date column as the index can make time-based operations more intuitive:
-
-<div class="example"> 
-✏️ Try it. Add the cell below to your notebook and run it.
-</div>
+A parsed date column knows what year, month and day each of its values belongs to, and `.dt`
+is how you ask:
 
 ```{python}
-#| echo: true
-# Set 'date' as the index
-df = df.set_index('date')
-print(df.head())
+toolik['year'] = toolik['date'].dt.year
+toolik['month'] = toolik['date'].dt.month
+toolik['day'] = toolik['date'].dt.day
+
+toolik[['date', 'year', 'month', 'day']].head()
 ```
 
-Once the index is set to a datetime, you can use the `.loc` selector to locate specific data in the dataframe:
-
-<div class="example"> 
-✏️ Try it. Add the cell below to your notebook and run it.
-</div>
-
-```{python}
-#| echo: true
-
-# Accessing data for a specific date
-print(df.loc['2023-01-15'])
-```
-
-### Resampling Time Series Data
-
-With dates as the index, we can easily resample our data using the `resample` command and a resampling interval. 
+`.dt` works the same way `.str` does. Both are doorways: `.str` gives you the string operations
+for a column of text, and `.dt` gives you the date operations for a column of dates. Neither one
+works on the wrong kind of column, which is a feature. If `.dt.year` raises an
+`AttributeError`, your column is not parsed yet.
 
 :::{.callout-note}
-#### Common Datetime Arguments for `resample`
+🐍 Other things `.dt` knows, for when you need them. You are only responsible for the first three
+in this course:
 
-- `'D'`: Calendar day
-- `'W'`: Week (Sunday)
-- `'W-MON'`: Week (Monday)
-- `'ME'`: Month end
-- `'MS'`: Month start
-- `'QE'`: Quarter end
-- `'QS'`: Quarter start
-- `'YE'` or `'AE'`: Year end
-- `'YS'` or `'AS'`: Year start
-- `'H'`: Hourly
-- `'T'` or `'min'`: Minutely
-- `'S'`: Secondly
-
-Note: You can also use multiples, e.g., `2D` for every 2 days, `4H` for every 4 hours.
+`.dt.year` · `.dt.month` · `.dt.day` · `.dt.hour` · `.dt.dayofyear` · `.dt.dayofweek` ·
+`.dt.quarter` · `.dt.date`
 :::
 
-:::{.callout-important}
-#### Changes in monthly resampling options
-The `M`, `ME`, and `MS` options relate to monthly resampling:
+### Proving it worked
 
-- `M` (Deprecated): This used to represent the end of the month. It's being phased out due to ambiguity.
-- `ME` (Month End): This is the direct replacement for `M`. It explicitly represents the last day of each month. When you resample with `ME`, the resulting timestamps will be on the last day of each month.
-- `MS` (Month Start): This represents the first day of each month. When you resample with `MS`, the resulting timestamps will be on the first day of each month.
+This file is unusually generous: it already carries its own `Year` and `Month` columns, written
+by whoever prepared the data. So you can check your parse against theirs.
+
+```{python}
+print((toolik['year'] == toolik['Year']).all())
+print((toolik['month'] == toolik['Month']).all())
+```
+
+Two `True`s. Every one of the 11,171 dates you parsed agrees with the year and month the station
+recorded independently.
+
+That check took two lines and it is worth doing every time you have anything to check against,
+because a wrong format string produces a column that looks completely normal. `'%d%m%Y'` on this
+file would have failed loudly, but on a file of American dates it would have quietly given you a
+year of 2019 for every row and never said a word.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Add a `dayofyear` column to `toolik` using the `.dt` accessor for it. Then use the filter
+sentence to show the rows where `dayofyear` is 366, and say in one sentence what those rows have
+in common.
 :::
 
-<div class="example"> 
-✏️ Try it. Add the cell below to your notebook and run it.
-</div>
+## Dates as grouping keys
+
+Here is what all of this was for. A date component is an ordinary column, so it is an ordinary
+grouping key, and Friday's sentence works on it unchanged:
 
 ```{python}
-#| echo: true
-# Resample to monthly average
-monthly_avg = df.resample('ME').mean()
-print(monthly_avg.head())
-
-# Plot monthly average temperature
-plt.figure(figsize=(12, 6))
-monthly_avg['temperature'].plot()
-plt.title('Monthly Average Temperature')
-plt.xlabel('Date')
-plt.ylabel('Temperature (°C)')
-plt.show()
+toolik.groupby('month')['Daily_AirTemp_Mean_C'].mean().round(2)
 ```
 
-**Your turn:** Try resampling the data to get weekly maximum rainfall. Plot the results.
+Thirty years of daily temperatures reduced to the twelve numbers that describe the Arctic year.
+January at −22.9 °C, July at +11.2 °C, and a thirty-four degree swing between them.
 
-## Selecting and Filtering by Date Ranges
-
-Pandas makes it easy to select data for specific date ranges. You can use list and array style slicing to get a range of dates from a datetime index. 
-<div class="example"> 
-✏️ Try it. Add the cell below to your notebook and run it.
-</div>
+Ask for the count alongside it, the way you now always do:
 
 ```{python}
-#| echo: true
-# Select data for the first quarter of 2023
-q1_data = df['2023-01-01':'2023-03-31']
-print(q1_data.head())
+toolik.groupby('year')['Daily_AirTemp_Mean_C'].agg(['count', 'mean']).head(3).round(2)
 ```
 
-Datetime objects contain a number of methods and attributes that provide information about them. 
+1988 has 214 rows because the station opened on the first of June. Its annual mean is warmer than
+every year that follows it, not because 1988 was warm but because 1988 has no January in it. That
+is the `.count()` lesson from Friday, arriving in a new costume.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Group `toolik` by `month` and take the mean of `Daily_Precip_Total_mm` instead of temperature.
+Which three months get the most precipitation? Then check `.isnull().sum()` on that column and
+say whether it changes how much you trust the answer.
+:::
+
+## The question that needs a month column
+
+Toolik has thirty years of data, and the obvious question to ask of thirty years of Arctic
+weather is whether it is getting warmer.
+
+Split the record into its first eleven years and its last ten, using Wednesday's filter sentence:
+
+```{python}
+early = toolik[toolik['year'] <= 1998]
+late = toolik[toolik['year'] >= 2009]
+
+print(early.shape)
+print(late.shape)
+```
+
+Then ask each half the same question, and put the two answers side by side:
+
+```{python}
+comparison = pd.DataFrame({
+    'early': early.groupby('month')['Daily_AirTemp_Mean_C'].mean(),
+    'late': late.groupby('month')['Daily_AirTemp_Mean_C'].mean(),
+})
+
+comparison['change'] = comparison['late'] - comparison['early']
+
+comparison.round(2)
+```
+
+Read the `change` column top to bottom.
+
+January is 3.5 °C warmer. October is 4.3 °C warmer. February, November and December are all up by
+one to two and a half degrees. And July, the month everybody thinks of when they think about
+warming, is 0.8 °C **cooler**, as are June, August and May.
+
+If you had computed a single annual mean for each half of the record you would have got a small
+positive number and concluded, correctly but uselessly, that Toolik has warmed a little. The
+month column is what turns that into the actual finding: **this site's warming is almost entirely
+a cold-season phenomenon.** That is a well-documented Arctic pattern, and it has physical causes
+you can reason about — snow arriving later, sea ice forming later, and both of them changing how
+much heat the land loses in the dark half of the year.
+
+You could not have seen it without a month, you did not have a month until you parsed the date,
+and the file had been sitting there the whole time with `19880601` in it.
 
 :::{.callout-note}
-#### Datetime Attributes:
-- `.year`: Year of the datetime
-- `.month`: Month of the datetime (1-12)
-- `.day`: Day of the month
-- `.hour`: Hour (0-23)
-- `.minute`: Minute (0-59)
-- `.second`: Second (0-59)
-- `.weekday()`: Day of the week (0-6, where 0 is Monday)
+🐍 Two honest caveats, because this is a real result and real results have them. Eleven years and
+ten years are short records for a climate claim, and one station is one station. What you have
+found is a pattern in this dataset, which is the correct thing to say about it.
 :::
 
-You can use these attributes to easily filter datetime indicies:
+## Key points
 
-<div class="example"> 
-✏️ Try it. Add the cell below to your notebook and run it.
-</div>
-
-```{python}
-#| echo: true
-
-# Filter for summer months (June, July, August)
-summer_data = df[(df.index.month >= 6) & (df.index.month <= 8)]
-print(summer_data.head())
-```
-
-
-### Useful Datetime Methods:
-
-- `.date()`: Returns the date part of the datetime
-- `.time()`: Returns the time part of the datetime
-- `.strftime(format)`: Converts datetime to string according to given format
-- `.isoformat()`: Returns a string representation of the date in ISO 8601 format
-
-
-### More examples of datetime selections:
-```{python}
-
-# Select data for a specific year
-df_2023 = df[df.index.year == 2023]
-print("Shape of 2023 data:", df_2023.shape)
-```
-```{python}
-#| echo: true
-
-# Select data for a specific month
-df_june = df[df.index.month == 6]
-print("Shape of June data:", df_june.shape)
-
-```
-
-```{python}
-#| echo: true
-
-# Select data for weekdays only (weekdays are zero-indexed!)
-df_weekdays = df[df.index.weekday < 5]
-print("Shape of weekday data:", df_weekdays.shape)
-
-```
-```{python}
-#| echo: true
-
-# Select data for a specific date range
-df_q2 = df['2023-04-01':'2023-06-30']
-print("Shape of Q2 data:", df_q2.shape)
-
-```
-```{python}
-#| echo: true
-
-# Resample to monthly frequency
-df_monthly = df.resample('MS').mean()
-print("Shape of monthly data:", df_monthly.shape)
-
-```
-```{python}
-#| echo: true
-
-# Demonstrate some useful datetime methods
-print("\nFirst date in ISO format:", df.index[0].isoformat())
-
-print("Last date formatted:", df.index[-1].strftime('%B %d, %Y'))
-```
-
-
-**Your turn:** Select data for all Mondays in the dataset. Calculate the average temperature for Mondays.
-
-<div class="example"> 
-✏️ Try it. Add the cell below to your notebook and write some code to solve the problem above.
-</div>
-
-```{python}
-#| echo: true
-
-
-# Add your code here!
-
-```
-
-## Key Points
-
-- Use `pd.to_datetime()` to parse dates in various formats.
-- Setting dates as the DataFrame index enables powerful time-based operations.
-- Resampling allows you to change the frequency of your time series data.
-- Pandas provides flexible ways to select and filter data based on date ranges.
+- A date stored as **text or as an integer is not a date**. It will sort correctly and then fail
+  at arithmetic, without complaining.
+- The **parsing sentence** is `pd.to_datetime(column, format='...')`.
+- A format string is a **picture of your data**: `%Y` for a four-digit year, `%m` for a two-digit
+  month, `%d` for a two-digit day, punctuation typed literally.
+- **Always supply `format=`.** It converts a silent wrong answer into a loud error.
+- `.dt` is to dates what `.str` is to text. `.dt.year`, `.dt.month`, `.dt.day`.
+- If `.dt` raises an `AttributeError`, the column has not been parsed.
+- **Check your parse** against anything you can: another column, a known date range, a row count.
+- Date components are ordinary columns, so they are ordinary **grouping keys**, and that is
+  usually the point of extracting them.
 
 ## Resources
 
-- [Pandas Time Series documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html)
-- [Datetime documentation](https://docs.python.org/3/library/datetime.html)
-- [EDS 217 Cheatsheet: Working with Dates in Pandas]
-
-Remember, working with dates and time series is a fundamental skill in environmental data science. Practice these concepts with your own datasets to become proficient!
-::: {.center-text .body-text-xl .teal-text}
-End interactive session 6C
-:::
+- [📖 EDS 217 cheatsheet: working with dates](../cheatsheets/timeseries.qmd)
+- [📖 EDS 217 cheatsheet: grouping and aggregating](../cheatsheets/data_grouping.qmd)
+- [pandas documentation: `pandas.to_datetime`](https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html){target="_blank"}
+- [pandas user guide: time series](https://pandas.pydata.org/docs/user_guide/timeseries.html){target="_blank"}
+- [Python documentation: format codes for dates](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes){target="_blank"}
+- [Toolik Field Station, Arctic LTER](https://arc-lter.ecosystems.mbl.edu/){target="_blank"}

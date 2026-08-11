@@ -271,9 +271,88 @@ Scope table:
 | `pd.merge` incl. `left_on/right_on`, `how='left'` | two-table, single-key | WRITE |
 | `pd.concat([a, b])` | row-wise, same columns | WRITE |
 | `pivot_table(index=, columns=, values=)` | single agg (default mean); reference resulting columns | WRITE |
-| `pd.to_datetime` + `.dt.` accessors | `%Y/%m/%d` formats; year/month accessors | WRITE |
+| `pd.to_datetime` + `.dt.` accessors | `%Y/%m/%d` formats; year/month accessors | WRITE (afternoon; exemption taken, audit below) |
 | `value_counts().reset_index()` + rename | as the "Series to table" move (fixes 2025 D6 gap) | WRITE |
-| MultiIndex `.idxmax()` on groups | 🧭 Field Note or redesigned away | ADAPT |
+| MultiIndex `.idxmax()` on groups | **CUT** — redesigned away, see below | — |
+
+**BUILT 2026-08-11 (commit PLACEHOLDER).** Files: `6a_joining_data.qmd`,
+`6b_reshaping_data.qmd`, `6c_dates.qmd` (name kept, content replaced),
+`6d_two_table_exercise.qmd` colab, `eod-day6-2026.qmd`. 74/74 python cells verified offline
+against pandas 2.3.3 with `FutureWarning` and `DeprecationWarning` escalated to errors. Scope
+table met exactly; no row added or promoted. **Zero Field Notes spent in the EOD** — the full
+budget of two is unspent, which the brief called a good outcome rather than a suspicious one.
+
+Four build decisions:
+
+1. **The MultiIndex `.idxmax()` row is CUT, not demoted.** The EOD's decade-winner task is
+   rebuilt on 5d's `for name, group in df.groupby(key):` loop plus `.agg(['count','mean'])`,
+   `.reset_index()`, the top-N sentence and `pd.concat()`. Every construct in it was taught. It
+   reproduces the original seven decade winners exactly, and the `count` column it now carries is
+   what makes two of those winners visibly untrustworthy (France 1950s on 3 entries, Serbia 2000s
+   on 2).
+2. **The Eurovision merge asymmetry was solved without editing a data file.** The brief proposed
+   trimming three or four countries from `eurovision_country_populations.csv` because all 52
+   countries appear in both files. Unnecessary: restrict the entry counts to **1990 onwards** and
+   **Morocco** drops out, because Morocco has competed exactly once, in 1980. Inner returns 51
+   rows, `how='right'` returns 52 with one null, and the missing row is a real fact about the
+   contest rather than a manufactured one. `eurovision_country_populations.csv` is unchanged.
+3. **`//` integer division is avoided, not Field-Noted.** It is taught nowhere in the 2026
+   Days 1–5 (`1d_operators_functions.qmd`, which has the operator table, is a 2025 orphan). The
+   decade column is `(col.dt.year / 10).astype(int) * 10`, and `4a_cleaning_data.qmd` already
+   states that `.astype(int)` truncates toward zero. That is the whole reason no Field Note was
+   needed.
+4. **`.corr()` was drafted into 6a and then removed** for scope discipline; it is not in the
+   scope table. 6a's joined-table payoff is the top-N sentence instead, which is a better artifact
+   anyway: four of Goleta's ten smokiest hours are at 01:00, when ozone is near its daily minimum,
+   so the two pollutants are not two symptoms of one process.
+
+Rehearsal-rule audit (quality gate 2). Four of the five WRITE constructs are **morning-taught**
+and need only the base rule. The fifth is afternoon-taught and **takes the exemption**:
+
+| WRITE construct | Taught | Written unaided |
+|---|---|---|
+| `pd.merge`, incl. `left_on`/`right_on` and `how=` | 6a, morning | 6a "Test your knowledge" x3; 6d tasks 2, 3, 15; EOD tasks 15, 16 |
+| `pd.concat([a, b])` | 6b, morning | 6b "Test your knowledge" x2 (reordered stack, two-file stack); EOD task 10 |
+| `pivot_table(index=, columns=, values=)` | 6b, morning | 6b "Test your knowledge" x1 (transpose); 6d tasks 11, 15; EOD tasks 19, 20 |
+| `value_counts().reset_index()` + rename | 6b, morning | 6b "Test your knowledge" x1 (per-parameter count table); EOD task 14 |
+| `pd.to_datetime` + `.dt.` accessors | **6c, afternoon** | **exemption taken**: (a) named "the parsing sentence"; (b) written unaided 4x; (c) across 6c ("Test your knowledge" x2, sole author) and the 6d colab (tasks 6, 7); (d) the EOD restates `pd.to_datetime(column, format='%Y')` and `column.dt.year` verbatim in "Today's sentences"; (e) this table |
+
+Dataset allocation, continuing Day 5's rule that each session inherits a table students already
+trust: **OpenAQ Goleta** (6a, one file split into two tables and joined back), **OpenAQ all three
+stations** (6b, which discharges the Day 5 EOD's supplied `pd.concat` block by making students
+write it), **Toolik** (6c, from Day 1 and Day 2), **GISTEMP + Mauna Loa** (6d colab), **Eurovision**
+(EOD).
+
+The colab-callback pattern held, but it moved into the morning sessions rather than the colab.
+6a and 6b both re-open Friday evening's OpenAQ work with Tuesday's tools, and 6b opens by naming
+the promise the Day 5 EOD Field Note made ("It is Tuesday"). 6c discharges the same Field Note's
+second half. The 6d colab is a genuine new build on GISTEMP and Mauna Loa, because both morning
+sessions had already spent the callback.
+
+Findings worth keeping, all verified:
+
+- Goleta records **no ozone at all at hour 03**, on any of the 31 days. An inner join of the
+  station's o3 and pm25 tables silently drops those 30 rows, and every one of them is the same
+  hour of the day. This is 6a's central lesson and it is real, not arranged: inner 704, left 711
+  (7 nulls), right 734 (30 nulls), outer 741.
+- `national_parks.csv` has an **eighth region code, `NT`**, on 76 rows, all of them the Blue Ridge
+  Parkway. A seven-row hand-written lookup table therefore loses a real American landmark to an
+  inner join without warning. This is 6a's `left_on`/`right_on` example.
+- Toolik's `Date` column is the **integer** `19880601`, so `format='%Y%m%d'` is exactly in scope,
+  and the file's own `Year` and `Month` columns let students verify the parse for free (both
+  match on all 11,171 rows). The payoff: comparing 1988–1998 with 2009–2018 month by month,
+  January is **+3.5 °C** and October **+4.3 °C**, while July is **−0.8 °C**. Toolik's warming is a
+  cold-season phenomenon, and it is invisible in an annual mean.
+- GISTEMP (1880–2024, 1,736 months) and Mauna Loa (1958–2024, 796 months) merge to **796 rows
+  inner and 1,736 left, with 940 nulls**. The best real inner-vs-left contrast in the whole data
+  directory, and the decision is a scientific one rather than a technical one.
+- Eurovision **2020 has 41 entries and zero non-null `points_final`**, because the contest was
+  cancelled. The 2025 EOD's `fillna(0)` turned that into a real decade winner. The 2026 EOD
+  filters 2020 out and spends a callout on why.
+- Eurovision entries per million (1990 onwards): San Marino 431, Andorra 110, Iceland 109,
+  Monaco 100, Malta 82; bottom, Yugoslavia 0.13, Russia 0.15. The population column is undated and
+  clearly historical (Iceland 255,866), which the EOD asks students to name as a limitation rather
+  than work around.
 
 ### Day 7: Visualize
 

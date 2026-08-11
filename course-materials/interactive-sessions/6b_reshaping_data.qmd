@@ -1,0 +1,356 @@
+---
+title: "Interactive Session"
+subtitle: "🧩 Long and Wide"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](../images/dataframes.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*The same data, arranged two ways.*
+
+:::
+
+Last night's exercise opened with a block of code I asked you to copy rather than write, and a
+promise that you would write it yourself on Tuesday.
+
+It is Tuesday.
+
+That block did two things. It **stacked** three files into one table, and it pulled an hour out
+of a timestamp. This session is the first of those; the second one is after lunch.
+
+Then it goes one step further, because stacking three files gives you a table in the shape that
+is easiest to build and hardest to read. Four thousand nine hundred and forty-two rows, each one
+a single number, with the labels that explain it spread across three other columns. Every
+comparison you made last night needed a `.groupby()` to get at it.
+
+There is a second shape the same data can take, and in that shape most of last night's questions
+are answered by simply looking.
+
+By the end of this session you will be able to:
+
+- write the **stacking sentence**, `pd.concat([a, b, c])`, and say what `ignore_index=True` fixes
+- describe the difference between a **long** table and a **wide** one, and say what each is good at
+- write the **pivot sentence**, `pivot_table(index=, columns=, values=)`, and read its result
+- turn a `.value_counts()` result back into a table you can merge with, using `.reset_index()`
+- say which shape you want **before** you start writing code
+
+## Getting Started
+
+1. **Create a new notebook** from the Launcher (**eds217_2026**).
+
+2. **Rename your notebook** to: `Session_6B_Reshaping_Data.ipynb`
+
+3. **Add a title cell** (Markdown), updating the date to today:
+
+```markdown
+# Day 6: Session 6B - Long and Wide
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/6b_reshaping_data.html)
+
+Date: 09/08/2026
+```
+
+4. Read the three station files. Nothing here is new:
+
+```{python}
+import pandas as pd
+
+base = 'https://eds-217-essential-python.github.io/data/'
+
+goleta = pd.read_csv(base + 'openaq_goleta_measurments.csv')
+santa_barbara = pd.read_csv(base + 'openaq_santa_barbara_measurments.csv')
+cnsi = pd.read_csv(base + 'openaq_CNSI_measurments.csv')
+
+print(goleta.shape)
+print(santa_barbara.shape)
+print(cnsi.shape)
+```
+
+## Stacking is not joining
+
+This morning you joined two tables **side by side**. The tables had different columns, they
+shared a key, and the result was wider than either input.
+
+Stacking is the other direction. The three station files have the **same fifteen columns** and
+different rows. You do not want to line them up by a key; you want to put one underneath the
+other and end up with a taller table.
+
+`pd.merge()` cannot do that. `pd.concat()` can, and it takes a **list** of DataFrames:
+
+```{python}
+aq = pd.concat([goleta, santa_barbara, cnsi])
+
+aq.shape
+```
+
+4,942 rows, which is 1,962 plus 2,266 plus 714. Nothing was matched, nothing was dropped;
+the three tables were laid end to end in the order you listed them.
+
+:::{.callout-important title="Label your pieces before you stack them"}
+Look at what you just built and try to answer a simple question: which of those 4,942 rows came
+from the CNSI monitor?
+
+You cannot. The three files never had a column saying which station they were, because each file
+only ever described one. The moment you stack them, that information exists only in the order of
+the rows, and the first operation that sorts or filters the table destroys it.
+
+So label first, stack second. Always.
+:::
+
+```{python}
+goleta['site'] = 'Goleta'
+santa_barbara['site'] = 'Santa Barbara'
+cnsi['site'] = 'CNSI'
+
+aq = pd.concat([goleta, santa_barbara, cnsi], ignore_index=True)
+
+aq.shape
+```
+
+Three derived-column sentences from Thursday, and now the stacked table knows where every row
+came from. That is the block you copied last night, written out.
+
+### What `ignore_index=True` fixes
+
+Stack the tables without it and look at the row labels at the join:
+
+```{python}
+messy = pd.concat([goleta, santa_barbara, cnsi])
+
+print(messy.index[:3])
+print(messy.index[-3:])
+```
+
+Each input table brought its own index along, numbered from zero. The stacked table therefore has
+three rows numbered 0, three numbered 1, and so on, and `.loc[0]` no longer identifies a single
+row. `ignore_index=True` throws the old numbering away and renumbers the result from 0 to 4,941.
+
+Use it every time, unless you have a specific reason not to.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Two things, both of them the stacking sentence written from scratch:
+
+1. Stack the three files again in a different order — CNSI first, then Goleta, then Santa Barbara
+   — with `ignore_index=True`. Confirm the shape is identical. Then use `.head()` to show that the
+   row order changed and `.value_counts()` on `site` to show that the contents did not.
+
+2. Stack only **two** of them, Goleta and CNSI, into a table called `two_sites`. Predict the row
+   count out loud before you run it, then check.
+:::
+
+## Long and wide
+
+Look at what one row of this table actually says:
+
+```{python}
+aq[['site', 'parameter', 'value', 'unit', 'datetimeLocal']].head()
+```
+
+One number per row, plus four columns of labels explaining what the number is. That shape has a
+name: the table is **long**. It is what almost every instrument, database and API hands you,
+because it is the shape you can keep appending to forever without changing the columns.
+
+It is also the shape in which nothing is directly comparable. To compare the mean PM2.5 across
+the three stations last night, you had to filter to one parameter and then group. To compare
+ozone and PM2.5 at Goleta this morning, you had to split the table in two and join it back
+together.
+
+The other shape is **wide**: one row per thing, one column per measurement, and the labels
+promoted out of the cells and into the column headers. In a wide table, a comparison is a glance.
+
+## The pivot sentence
+
+`pivot_table()` goes from long to wide. It takes three arguments, and each one is the name of a
+column in your long table:
+
+```{python}
+means = aq.pivot_table(index='site', columns='parameter', values='value')
+
+means
+```
+
+```python
+df.pivot_table(index='rows', columns='columns', values='numbers')
+#              ↑             ↑                  ↑
+#              what labels   what labels        what goes
+#              the rows      the columns        in the cells
+```
+
+- `index=` is the column whose values become the **row labels**.
+- `columns=` is the column whose values become the **column headers**.
+- `values=` is the column whose numbers fill the **cells**.
+
+Three stations, three parameters, nine cells, and two of them empty. The whole of last night's
+Part 1 and Part 2 is in that one small table, including the finding it took you four questions to
+reach: CNSI measures PM2.5 and nothing else.
+
+### What happens when a cell has more than one number
+
+There are 714 CNSI PM2.5 readings and exactly one cell to put them in, so `pivot_table` has to
+reduce them to a single number. By default it takes the **mean**, which is why the cells above
+are averages rather than counts or sums.
+
+You can ask for something else with `aggfunc=`:
+
+```{python}
+aq.pivot_table(index='site', columns='parameter', values='value', aggfunc='count')
+```
+
+That is the same shape, filled with the counts instead, and it is the table you should look at
+first every time. Two empty cells in the means table and two empty cells here: CNSI has no ozone
+and no PM10 at all, so the emptiness is real rather than an averaging accident.
+
+:::{.callout-note}
+🐍 `pivot_table` with `aggfunc=` is the split-apply-combine sentence in a different arrangement.
+`aq.groupby(['site', 'parameter'])['value'].mean()` computes exactly the same nine numbers; it
+just returns them stacked in a single column instead of laid out in a grid. Same calculation,
+different shape.
+:::
+
+## Reading a wide table
+
+The result of `pivot_table` is an ordinary DataFrame whose index is the `index=` column, so
+everything you know still works:
+
+```{python}
+means['pm25']
+```
+
+```{python}
+means.loc['Goleta', 'pm25']
+```
+
+The one thing that surprises people is that `site` is now the **index**, not a column, so
+`means['site']` raises a `KeyError`. When you want it back as a regular column, use
+`.reset_index()`, which you met on Friday:
+
+```{python}
+flat = means.reset_index()
+
+flat
+```
+
+Now `site` is a column again, and this table can be merged, filtered and sorted like any other.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Build a wide table with `parameter` down the rows and `site` across the columns — the transpose of
+the one above — by swapping the `index=` and `columns=` arguments. Then say in one sentence which
+of the two layouts you would put in a report for the Air Pollution Control District, and why.
+:::
+
+## From a Series back to a table
+
+One more small move, and it is the one that connects this morning's two sessions.
+
+`.value_counts()` has been your counting tool since Day 2, and it hands back a **Series**:
+
+```{python}
+aq['site'].value_counts()
+```
+
+That is fine to read and impossible to merge. `pd.merge()` needs two DataFrames with columns to
+join on, and a Series has an index instead. So you promote it:
+
+```{python}
+counts = aq['site'].value_counts().reset_index()
+
+counts
+```
+
+Two proper columns, `site` and `count`. The second name is generic, so rename it to say what it
+counts:
+
+```{python}
+counts = counts.rename(columns={'count': 'n_readings'})
+
+counts
+```
+
+Learn those three lines as one move, because you will use it constantly:
+
+```python
+counts = df['column'].value_counts().reset_index()
+counts = counts.rename(columns={'count': 'a_better_name'})
+```
+
+And now the two halves of this morning fit together. A wide table and a count table, joined by
+the station name:
+
+```{python}
+summary = pd.merge(flat, counts, on='site')
+
+summary
+```
+
+One table, three rows, everything you know about the three monitors. Last night that was an
+evening of `.groupby()` calls.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Build a count table of readings per `parameter` instead of per `site`, renaming the count column
+to `n_readings`. Then sort it so the best-measured parameter is first.
+:::
+
+## The shape that answers last night's best question
+
+Last night you found the daily ozone cycle by grouping one station's readings by hour. You could
+not easily do it for all three stations at once, because a grouped result is one column of numbers
+and you wanted three.
+
+Here it is, in one sentence, now that you can pivot. The `hour` column is last night's supplied
+line, which gets its proper explanation after lunch:
+
+```{python}
+aq['hour'] = aq['datetimeLocal'].str[11:13]
+
+pm25 = aq[aq['parameter'] == 'pm25'].copy()
+
+hourly = pm25.pivot_table(index='hour', columns='site', values='value')
+
+hourly.round(2)
+```
+
+Twenty-four rows, three columns, and the answer to a question you could not previously ask: do
+the three stations rise and fall together?
+
+Read down the columns. Goleta swings from about 3.5 in the small hours to about 9 in the evening.
+Santa Barbara does something similar with a smaller range. CNSI sits between 5.6 and 6.6 all day
+and barely moves at all. Three monitors, fifteen kilometres apart, and one of them is not
+recording the same phenomenon as the other two.
+
+That is a wide table earning its keep. Nothing was calculated here that `.groupby()` could not
+have calculated. What changed is that the comparison is now something you can see.
+
+## Key points
+
+- **`pd.concat([a, b, c])`** stacks tables with the same columns, top to bottom. It matches
+  nothing and drops nothing.
+- **Label the pieces before you stack them.** Once the rows are combined, "which file did this come
+  from" is not recoverable.
+- Use **`ignore_index=True`** so the stacked table gets one clean set of row numbers.
+- A **long** table has one measurement per row and its labels in columns. It is easy to append to
+  and hard to compare across.
+- A **wide** table has one row per thing and one column per measurement. It is easy to compare and
+  awkward to extend.
+- The **pivot sentence** is `df.pivot_table(index=, columns=, values=)`. It goes long to wide.
+- `pivot_table` averages by default. Pass **`aggfunc='count'`** and look at that version first.
+- The result is indexed by the `index=` column. **`.reset_index()`** turns it back into a plain
+  table.
+- **`.value_counts().reset_index()`** promotes a count Series into a two-column table you can merge
+  with. Rename the `count` column while you are there.
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: merging and joining data](../cheatsheets/data_merging.qmd)
+- [📖 EDS 217 cheatsheet: grouping and aggregating](../cheatsheets/data_grouping.qmd)
+- [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+- [pandas documentation: `pandas.concat`](https://pandas.pydata.org/docs/reference/api/pandas.concat.html){target="_blank"}
+- [pandas documentation: `DataFrame.pivot_table`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pivot_table.html){target="_blank"}
+- [pandas user guide: reshaping and pivot tables](https://pandas.pydata.org/docs/user_guide/reshaping.html){target="_blank"}

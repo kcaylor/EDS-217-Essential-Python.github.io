@@ -1,0 +1,237 @@
+---
+title: "Coding Colab"
+subtitle: "🌍 Two Records, Sixty-Six Years Apart"
+execute:
+  echo: false
+  include: false
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](../images/towersensors.jpeg)
+:::
+
+Two of the most important time series in environmental science are kept by different people, for
+different reasons, in different places.
+
+NASA's GISTEMP record estimates how far each month's global surface temperature sits from a
+twentieth-century baseline. It starts in **1880**, because that is roughly when enough
+thermometers existed to average.
+
+The Mauna Loa record measures the concentration of carbon dioxide in the atmosphere directly, in
+parts per million, from an observatory near the summit of a Hawaiian volcano. It starts in
+**1958**, because that is when Charles Keeling built the instrument.
+
+The most famous graph in climate science puts those two side by side. Doing that requires
+everything you learned today, and it requires you to make a decision in the first five minutes
+that changes what the rest of the analysis is about.
+
+Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
+finish a numbered task. The person not typing says out loud what they expect the answer to look
+like *before* the cell is run.
+
+You have 45 minutes.
+
+## The sentences you need
+
+All four are from this morning and the session you just finished.
+
+```python
+pd.merge(left, right, on='key')                       # the join sentence
+pd.merge(left, right, on='key', how='left')           # keep every row on the left
+
+pd.to_datetime(column, format='%Y-%m-%d')             # the parsing sentence
+column.dt.year                                        # and its accessors
+
+df.pivot_table(index=, columns=, values=)             # the pivot sentence
+```
+
+Plus the two you have been using all week:
+
+```python
+df.groupby('key')['column'].agg(['count', 'mean'])
+df.sort_values('column', ascending=False).head(n)
+```
+
+## Setup
+
+Create a notebook named `Colab_6D_Two_Records.ipynb`, with both partners' names in the title
+cell, then read the two files:
+
+```{python}
+#| echo: true
+#| include: true
+
+import pandas as pd
+
+base = 'https://eds-217-essential-python.github.io/data/'
+
+temp = pd.read_csv(base + 'monthly_temperature_data.csv')
+co2 = pd.read_csv(base + 'monthly_co2_concentration.csv')
+```
+
+## Part 1: One table out of two (about 12 minutes)
+
+Answer each question with code, then write the answer in a markdown cell underneath, in a
+complete sentence with the numbers in it.
+
+1. How many rows does each table have, and what columns? What is the earliest and latest `Date`
+   in each? (`.min()` and `.max()` on the `Date` column will do it, since these dates are text in
+   `%Y-%m-%d` form and text in that form sorts correctly.)
+
+```{python}
+print(temp.shape, list(temp.columns))
+print(co2.shape, list(co2.columns))
+print(temp['Date'].min(), temp['Date'].max())
+print(co2['Date'].min(), co2['Date'].max())
+```
+
+2. Merge the two tables on `Date`, with the default `how=`. How many rows come back?
+
+```{python}
+inner = pd.merge(temp, co2, on='Date')
+inner.shape
+```
+
+3. Merge them again with `how='left'`, putting `temp` on the left. How many rows now, and how many
+   nulls, in which column?
+
+```{python}
+left = pd.merge(temp, co2, on='Date', how='left')
+print(left.shape)
+print(left.isnull().sum())
+```
+
+4. In a markdown cell: the two merges differ by 940 rows. Say in one sentence what those 940 rows
+   are, without looking anything up — your answer to question 1 already told you.
+
+5. A decision, and there is no right answer that does not depend on the question. You are writing
+   one of the following two papers. For each one, say which merge you would use and why:
+
+   - *"Atmospheric CO₂ and global temperature move together"*
+   - *"The global surface temperature record, 1880 to the present"*
+
+## Part 2: Making the dates real (about 12 minutes)
+
+Work from the **inner** merge for the rest of the exercise, and give it a name you will not
+confuse with anything else.
+
+6. Copy the inner merge into a table called `climate`, ending the line with `.copy()`. Then parse
+   its `Date` column into a new column called `date`, and prove the parse worked by printing the
+   new column's dtype.
+
+```{python}
+climate = pd.merge(temp, co2, on='Date').copy()
+climate['date'] = pd.to_datetime(climate['Date'], format='%Y-%m-%d')
+climate['date'].dtype
+```
+
+7. Add `year` and `month` columns using the `.dt` accessors.
+
+```{python}
+climate['year'] = climate['date'].dt.year
+climate['month'] = climate['date'].dt.month
+climate[['Date', 'date', 'year', 'month']].head()
+```
+
+8. Build a table of annual means: group by `year` and report the **count** of months, the mean
+   `MonthlyAnomaly`, and the mean `CO2Concentration`. Show the first three rows and the last
+   three.
+
+```{python}
+annual = climate.groupby('year').agg({'Date': 'count',
+                                      'MonthlyAnomaly': 'mean',
+                                      'CO2Concentration': 'mean'})
+print(annual.head(3))
+print(annual.tail(3))
+```
+
+9. Two of the sixty-seven years in that table are not twelve months long. Which two, and why?
+   Filter them out into a table called `full_years` and say how many years survive.
+
+```{python}
+full_years = annual[annual['Date'] == 12]
+print(annual[annual['Date'] != 12])
+print(full_years.shape)
+```
+
+10. In a markdown cell: what would the 2024 row have done to a claim about the warmest year on
+    record, if you had not checked the count? Two sentences.
+
+## Part 3: The shape that shows the sawtooth (about 12 minutes)
+
+11. Build a wide table with `year` down the rows, `month` across the columns, and
+    `CO2Concentration` in the cells. Show the first three rows and the last three.
+
+```{python}
+co2_grid = climate.pivot_table(index='year', columns='month', values='CO2Concentration')
+print(co2_grid.head(3).round(2))
+print(co2_grid.tail(3).round(2))
+```
+
+12. That one table holds two different patterns at once. Read it **down** a single column, then
+    read it **across** a single row. In a markdown cell, describe both in one sentence each.
+
+13. Use the wide table to measure the second pattern. For every year, the difference between its
+    largest monthly value and its smallest is the size of the annual cycle. Compute that
+    difference for 1959 and for 2023, and report both.
+
+```{python}
+print(co2_grid.loc[1959].max() - co2_grid.loc[1959].min())
+print(co2_grid.loc[2023].max() - co2_grid.loc[2023].min())
+```
+
+14. In a markdown cell: the annual cycle in CO₂ is caused by the northern hemisphere's plants,
+    which take carbon out of the air in the growing season and put it back in the autumn. Given
+    that, say what your two numbers from question 13 might mean, and say honestly how confident
+    you are in a comparison of two single years.
+
+15. Build the same wide table for `MonthlyAnomaly`. Does the temperature record have a comparable
+    seasonal cycle in it? Say why or why not in one sentence. (The answer is in what the word
+    *anomaly* means.)
+
+```{python}
+temp_grid = climate.pivot_table(index='year', columns='month', values='MonthlyAnomaly')
+print(temp_grid.tail(3).round(2))
+```
+
+## Part 4: The claim (about 9 minutes)
+
+16. Using `full_years`, compare the 1960s with the 2010s. Compute the mean of each column for
+    `year` between 1960 and 1969, and again for `year` between 2010 and 2019, and report the
+    change in each.
+
+```{python}
+sixties = full_years[(full_years.index >= 1960) & (full_years.index <= 1969)]
+tens = full_years[(full_years.index >= 2010) & (full_years.index <= 2019)]
+
+print(sixties[['MonthlyAnomaly', 'CO2Concentration']].mean())
+print(tens[['MonthlyAnomaly', 'CO2Concentration']].mean())
+```
+
+17. In a markdown cell of four or five sentences: state the two changes you measured, with units.
+    Then state clearly what this analysis does **not** show. You have put two curves in the same
+    table and found that both went up; name one thing a scientist would need before calling that
+    a causal claim.
+
+## Before you stop
+
+Check that:
+
+- you can say, without looking, what `how='inner'` did to your row count and why
+- every mean you reported has a count beside it, or a filter that guaranteed the count
+- you supplied `format=` to every `pd.to_datetime()` call
+- your notebook reads top to bottom as a document, not as a pile of cells
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: merging and joining data](../cheatsheets/data_merging.qmd)
+- [📖 EDS 217 cheatsheet: working with dates](../cheatsheets/timeseries.qmd)
+- [📖 EDS 217 cheatsheet: grouping and aggregating](../cheatsheets/data_grouping.qmd)
+- [NASA GISS Surface Temperature Analysis](https://data.giss.nasa.gov/gistemp/){target="_blank"}
+- [NOAA Global Monitoring Laboratory: Mauna Loa CO₂](https://gml.noaa.gov/ccgg/trends/){target="_blank"}

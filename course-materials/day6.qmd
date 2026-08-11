@@ -1,36 +1,52 @@
 ---
-title: "Grouping, Joining and Sorting Data in Pandas"
+title: "Join, Reshape & Dates"
 subtitle: "Day 6"
 description: "Tuesday September 8^th^, 2026"
 ---
 
-::: {style="width: 60%; margin: auto;"}
-![](interactive-sessions/images/grouping_filtering.jpeg)
+::: {style="width: 80%; margin: auto;"}
+![](images/structured-data.png)
 :::
 
 :::{.gray-text .center-text}
-*A large crowd of pandas dressed in various colors. The pandas are trying to sort themselves based on their clothing color.* [MidJourney 5](https://www.midjourney.com/jobs/a0c058d4-d21b-469c-a71a-9e38e5715ab2?index=0)
+*The same data, in two different shapes.*
+
 :::
 
+For five days every question you asked was a question about one table, and you got away with it
+because somebody had already put everything you needed in one place.
+
+That is not how data usually arrives. It arrives as two files that describe the same thing from
+different angles, or as thirty files that describe different things in the same format, or as one
+file laid out at right angles to the question you want to ask. Before you can analyse any of that,
+you have to change its shape.
+
+Today you learn the three sentences that do it. One puts two tables **side by side**. One stacks
+many tables **top to bottom**. One takes a single table and **rotates** it. None of them calculates
+anything, and without them most of what you learned last week cannot be applied to real files.
+
+This afternoon you meet the column that is hardest to get into the right shape, because it usually
+does not admit to being a date at all.
 
 ## Class materials
 
 | {{< fa calendar-day title="A calendar with one day highlighted" >}} Session  | {{< fa laptop-code title="A laptop with on-screen code" >}} Session 1  |  {{< fa laptop-code title="A laptop with on-screen code" >}} Session 2 |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| day 6 / morning   | [🐼 Grouping, joining, sorting, and applying](interactive-sessions/6a_grouping_joining_sorting.qmd) | [🙌 Coding Colab: Data Manipulation](coding-colabs/6b_advanced_data_manipulation.qmd) |
-| day 6 / afternoon | [🐼 Working with dates](interactive-sessions/6c_dates.qmd) | End-of-day practice |
-
-: {.hover .bordered tbl-colwidths="[20,40,40]"} 
+| day 6 / morning   | [🔗 The Join Sentence](interactive-sessions/6a_joining_data.qmd) | [🧩 Long and Wide](interactive-sessions/6b_reshaping_data.qmd) |
+| day 6 / afternoon | [📆 A Date Is Not a Number](interactive-sessions/6c_dates.qmd) | [🙌 Two Records, Sixty-Six Years Apart](coding-colabs/6d_two_table_exercise.qmd) |
+: {.hover .bordered tbl-colwidths="[20,40,40]"}
 
 ## End-of-day practice
 
+Tonight you take sixty-four years of the Eurovision Song Contest, do all four of the day's moves
+on it, and find three separate reasons to distrust an answer you have just computed.
 
-Complete the following tasks / activities before heading home for the day!
-
-- [{{< fa pencil title="A pencil" >}} **Day 6 Practice:** 🕺 Eurovision Data Science 💃](eod-practice/eod-day6.qmd)
-
-
-
+- [{{< fa pencil title="A pencil" >}} **Day 6 Practice:** 🕺 Sixty-Four Contests, Two Tables 💃](eod-practice/eod-day6-2026.qmd)
 
 ## Additional Resources
 
+- [{{< fa diagram-project title="A workflow diagram" >}} The Data Science Workflow](the-data-science-workflow.qmd)
+- [{{< fa table title="A table" >}} merging and joining cheatsheet](cheatsheets/data_merging.qmd)
+- [{{< fa table title="A table" >}} working with timeseries cheatsheet](cheatsheets/timeseries.qmd)
+- [{{< fa table title="A table" >}} grouping and aggregating cheatsheet](cheatsheets/data_grouping.qmd)
+- [{{< fa table title="A table" >}} pandas DataFrames cheatsheet](cheatsheets/pandas_dataframes.qmd)

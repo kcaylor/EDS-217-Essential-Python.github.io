@@ -141,6 +141,83 @@ is in scope); `sets.qmd` and `comprehensions.qmd` had no inbound link from any 2
 from 2025 orphans; and no cheatsheet ever read the four sibling CSVs, so nothing needed to move
 into `data/`.
 
+## Answer keys for the 2026 activities (STARTED 2026-08-11, 1 of 12 built)
+
+Kelly raised this after the cheatsheet pass: the 2025 course had answer keys, students used them
+to check their work, and the 2026 activities have none. `answer-keys/answer_keys.qmd` still lists
+the 2025 keys, every one of which is an orphan.
+
+**The enabling fact:** all seven 2026 EODs and all five 2026 colabs already carry a complete,
+verified answer-code solution, hidden by `execute: echo: false, include: false` in the front
+matter. Roughly 200 python cells, all previously verified. So the code half of a key already
+exists and only has to be surfaced. What does **not** exist is the prose: these exercises ask
+students to answer in markdown cells ("say why that number is what it is", "what does this tell
+you about matching on text"), and that is the half a student cannot check alone.
+
+### Kelly's three decisions, 2026-08-11
+
+1. **Content: code plus written answers.** Not code alone. The written answers are the point,
+   because a student can already tell whether their code ran.
+2. **Coverage: all 12 files.** Seven EODs plus the five colabs (`3d_ranking_questions`,
+   `4d_cleaning_messy_data`, `5c_grouped_comparisons`, `6d_two_table_exercise`, `7c_penguins`).
+3. **Release: published from the start**, linked from the site, as in 2025.
+
+### The reference implementation
+
+**`answer-keys/eod-day3-2026-key.qmd` is built and verified** (20/20 cells clean, zero
+em-dashes). Copy its shape. The conventions it establishes:
+
+- Lives in `answer-keys/`, named `<source-stem>-key.qmd`. Relative links to `../cheatsheets/`
+  and `../eod-practice/` both work from there.
+- Front matter flips the two directives to `echo: true` and `include: true`, adds
+  `search: false`, and keeps the exercise's subtitle so the pair is obviously a pair.
+- Opens with a `.callout-important` on how to use the key, and a back-link to the exercise.
+- Reproduces the **questions** verbatim in bold, and the code, but **drops** the exercise's
+  narrative, images, Field Notes and wrap-up. A key is a key, not a second copy of the exercise.
+- Every interpretive question gets a `:::{.callout-note title="✅ Answer"}` block. Every one of
+  those answers states what the number **means**, not what it is.
+- Closes with a short "Where the marks are" list naming the three or four things most worth
+  self-checking.
+- Ends with a second back-link to the exercise.
+
+### Method, and it matters
+
+**Compute every number before writing a single answer.** The Day 3 key was written by first
+running the whole analysis through `tools/run_cells.py`'s offline cache and printing every
+figure the questions ask about, then writing prose against those figures. Do not write an answer
+from memory or from the exercise's own prose. Two of the Day 3 answers turned on facts that were
+not obvious until the numbers were on screen: questions 12 and 13 differ by exactly one row
+(Bananas itself, the only food scoring exactly 1.0), and `.filter(like='heese')` returns 12 rows
+of which three are not cheeses.
+
+Many verified numbers are already recorded in the `eds217-flight-packet-findings` memory note,
+which makes this much cheaper than it sounds. Check there before recomputing.
+
+### Remaining work: 11 files
+
+- [ ] `eod-day1-2026-key.qmd` (10 cells, smallest)
+- [ ] `eod-day2-2026-key.qmd` (17 cells, Toolik data biography)
+- [x] `eod-day3-2026-key.qmd` **DONE, the reference implementation**
+- [ ] `eod-day4-2026-key.qmd` (25 cells, the largest EOD)
+- [ ] `eod-day5-2026-key.qmd` (17 cells)
+- [ ] `eod-day6-2026-key.qmd` (15 cells)
+- [ ] `eod-day7-2026-key.qmd` (21 cells)
+- [ ] `3d_ranking_questions-key.qmd` (13 cells)
+- [ ] `4d_cleaning_messy_data-key.qmd`
+- [ ] `5c_grouped_comparisons-key.qmd` (12 cells)
+- [ ] `6d_two_table_exercise-key.qmd`
+- [ ] `7c_penguins-key.qmd` (16 cells)
+- [ ] **Rewrite `answer-keys/answer_keys.qmd`.** It currently lists only 2025 keys, all orphans.
+      This discharges the "revising answer_keys.qmd" item in the orphan-retirement task below.
+- [ ] **Link each key from its day page**, and decide whether the exercise itself carries a
+      forward link to its key. The Day 3 key links back to the exercise; the exercise does not
+      yet link forward.
+- [ ] Run `tools/run_cells.py` over all 12 keys, and `grep -c "—"` for the house style.
+
+**Do not edit the source exercises while building keys.** Days 1 through 7 are built, verified
+and signed off. If a key reveals a genuine error in an exercise, record it here rather than
+fixing it inline, so the correction is a deliberate decision rather than a side effect.
+
 ## Pre-launch checklist
 
 Run once the restructuring is done and the revisions are settled, before the deploy. These

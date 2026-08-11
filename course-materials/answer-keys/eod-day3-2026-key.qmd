@@ -1,0 +1,381 @@
+---
+title: "Answer Key"
+subtitle: "🍌 The Banana Index: Ranking the Cost of Food"
+search: false
+execute:
+  echo: true
+  include: true
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+:::{.callout-important title="How to use this key"}
+Work the exercise first, then come here. The code below is **one** correct answer, not the only
+one. If your code looks different but produces the same numbers, you were right.
+
+The written answers matter more than the code. You can already tell whether your code ran. What
+you cannot check on your own is whether you read the result correctly, and that is what the
+green **Answer** boxes are for. Compare your markdown cells against them.
+
+⬅️ Back to [the exercise](../eod-practice/eod-day3-2026.qmd)
+:::
+
+## Setup
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/banana_index.csv'
+df = pd.read_csv(url, index_col='entity')
+df.shape
+```
+
+```{python}
+df = df.drop(['year', 'Banana values', 'type', 'Chart?', 'Unnamed: 16'], axis='columns')
+df.columns.tolist()
+```
+
+## Part 1: Get your bearings
+
+**1. How many foods are in the dataset, and how many columns are left after the drop?**
+
+```{python}
+df.shape
+```
+
+:::{.callout-note title="✅ Answer"}
+**160 foods and 11 columns.** The file arrived with 16 columns and you dropped 5, so 11 remain.
+The number of rows never changed, because dropping columns does not remove foods.
+:::
+
+**2. Display the first few rows. What do the three columns whose names begin with `Bananas
+index` contain?**
+
+```{python}
+df.head()
+```
+
+:::{.callout-note title="✅ Answer"}
+Each one is a **ratio**, not a measurement. It says how many times the banana's climate cost a
+food carries, and the three columns differ only in what is being held constant: a kilogram of
+food, a thousand calories of food, or a hundred grams of protein. So a score of 20 means twenty
+bananas' worth, on whichever basis that column uses. The raw emissions columns those ratios were
+built from are still in the table, which is what lets you check the arithmetic yourself.
+:::
+
+**3. Run `.info()`. Two columns have missing values. Which, and how many?**
+
+```{python}
+df.info()
+```
+
+```{python}
+df.isnull().sum()
+```
+
+:::{.callout-note title="✅ Answer"}
+**`emissions_100g_protein` and `Land use per 100 grams of protein`, two missing values each.**
+
+Both are per-protein measures, and that is not a coincidence. A food with no protein at all
+cannot have a per-protein figure, because the division has nothing to divide by. The missing
+values are telling you something true about the food rather than something careless about the
+data collection. This is worth pausing on: a null is sometimes a fact.
+:::
+
+**4. What is the value of `Bananas index (kg)` for `Bananas` itself? Say why that number is what
+it is.**
+
+```{python}
+df.loc['Bananas', 'Bananas index (kg)']
+```
+
+:::{.callout-note title="✅ Answer"}
+**1.0**, and it could not be anything else. The index is each food's emissions divided by the
+banana's emissions, so the banana's own row is its emissions divided by itself. The banana is
+the unit of the scale, in the same way that a metre is one metre long.
+:::
+
+## Part 2: Three rankings
+
+**5, 6 and 7. The three top-10 lists.**
+
+```{python}
+df['Bananas index (kg)'].sort_values(ascending=False).head(10)
+```
+
+```{python}
+df['Bananas index (1000 kcalories)'].sort_values(ascending=False).head(10)
+```
+
+```{python}
+df['Bananas index (100g protein)'].sort_values(ascending=False).head(10)
+```
+
+**8. Describe in two or three sentences how the three lists differ. Which foods are near the top
+of all three? Which appear on only one, and can you say why?**
+
+:::{.callout-note title="✅ Answer"}
+Ranked **per kilogram**, the list is meat: four beef products, three lamb, two cheeses and
+prawns. Ranked **per thousand calories**, the beef stays but lamb largely drops out and lettuce
+and raspberries appear, because they are mostly water and you have to eat a great deal of either
+to obtain a thousand calories. Ranked **per hundred grams of protein**, the list stops being
+about meat at all: coconut milk, sugar, grapes and marmalade take the top places, because they
+contain almost no protein and so the division blows the ratio up.
+
+Beef is near the top of all three, which is the one robust finding. Sugar appears only in the
+protein ranking, and the reason is arithmetic rather than agriculture: it is the denominator
+approaching zero, not the numerator being large.
+:::
+
+## Part 3: Which foods are on every list?
+
+**9. Print the three lists and compare by eye. Which foods appear in all three?**
+
+```{python}
+print('Top 10 for Bananas index (kg):')
+print(df['Bananas index (kg)'].sort_values(ascending=False).head(10))
+
+print('\nTop 10 for Bananas index (1000 kcalories):')
+print(df['Bananas index (1000 kcalories)'].sort_values(ascending=False).head(10))
+
+print('\nTop 10 for Bananas index (100g protein):')
+print(df['Bananas index (100g protein)'].sort_values(ascending=False).head(10))
+```
+
+:::{.callout-note title="✅ Answer"}
+**Beef steak, Beef mince and Beef meatballs.** Those three, and nothing else, survive all three
+ways of asking the question.
+:::
+
+**10. What does it mean for a food to be near the top of all three lists at once? What would it
+mean for a food to top one list and appear on neither of the others? Name one food of each
+kind.**
+
+:::{.callout-note title="✅ Answer"}
+A food at the top of all three is expensive **however you measure it**. Its ranking does not
+depend on the choice of denominator, so no reasonable objection about the basis of comparison
+rescues it. **Beef steak** is the clearest case: first by weight, first by calorie, fourth by
+protein.
+
+A food that tops one list only is telling you about the **denominator**, not about the food.
+**Sugar** is second per hundred grams of protein and appears nowhere else, because sugar has
+essentially no protein, and a small number divided by a number close to zero is large. The
+ranking is real arithmetic and a misleading claim about sugar's climate cost.
+
+The practical lesson is that the choice of denominator is an argument, not a technicality. Pick
+the one that matches what the food is actually for. Compare protein sources per gram of protein
+and staples per calorie.
+:::
+
+## Part 4: Filtering by score
+
+**11. Every food with a `Bananas index (kg)` above 10. How many are there?**
+
+```{python}
+expensive_by_weight = df[df['Bananas index (kg)'] > 10]
+expensive_by_weight.shape
+```
+
+:::{.callout-note title="✅ Answer"}
+**34 foods**, which is a little over one fifth of the dataset.
+:::
+
+**12 and 13. The `~` version, the `< 1` version, and why they differ.**
+
+```{python}
+no_worse_than_banana = df[~(df['Bananas index (kg)'] > 1)]
+print(no_worse_than_banana.shape)
+
+better_than_banana = df[df['Bananas index (kg)'] < 1]
+print(better_than_banana.shape)
+```
+
+:::{.callout-note title="✅ Answer"}
+**26 and 25.** The difference is exactly one row, and it is **Bananas itself**.
+
+`~(df['Bananas index (kg)'] > 1)` keeps every food that is *not* above 1, which includes foods
+that equal 1. `df['Bananas index (kg)'] < 1` is strictly less than, so it drops them. Only one
+food in this dataset scores exactly 1.0, and by construction it is the banana.
+
+The general point is that `~(x > 1)` means `x <= 1`, not `x < 1`. Negating a strict comparison
+gives you a non-strict one, and the boundary value moves from one side to the other. Whenever a
+filter returns one row more or fewer than you expected, check the boundary first.
+:::
+
+**14. Two-condition filter: above 5 per kilogram and below 1 per 100 g of protein.**
+
+```{python}
+costly_but_protein_rich = df[
+    (df['Bananas index (kg)'] > 5) & (df['Bananas index (100g protein)'] < 1)
+].copy()
+
+print(costly_but_protein_rich.shape)
+
+costly_but_protein_rich[
+    ['Bananas index (kg)', 'Bananas index (100g protein)']
+].sort_values('Bananas index (kg)', ascending=False)
+```
+
+**15. What do these foods have in common? What is the argument this table makes about how we
+should compare foods?**
+
+:::{.callout-note title="✅ Answer"}
+**16 foods, and almost all of them are animal protein**: fish (tuna, cod, salmon, mackerel),
+poultry (chicken breast, thighs, wings, sausages, burger), pork, eggs, and halloumi. Olive oil is
+the one that does not fit the pattern, and it is here because its protein figure is essentially
+zero in the other direction, which is worth noticing rather than glossing over.
+
+The argument is this: these foods look costly when you weigh them and cheap when you weigh what
+you eat them **for**. Nobody eats 100 g of chicken as a substitute for 100 g of lettuce; they eat
+it as a source of protein. Comparing per kilogram flatters foods that are mostly water and
+penalises foods that are dense in the thing you actually want. Choosing a denominator is choosing
+what question you are asking, and this table is what that choice looks like when it changes the
+answer.
+:::
+
+## Part 5: Land, not carbon
+
+**16, 17 and 18.**
+
+```{python}
+banana_land_use = df.loc['Bananas', 'land_use_1000kcal']
+banana_land_use
+```
+
+```{python}
+df['land_use_1000kcal'].sort_values(ascending=False).head(10)
+```
+
+```{python}
+hungriest = df['land_use_1000kcal'].idxmax()
+print(hungriest)
+print(df.loc[hungriest, 'land_use_1000kcal'] / df.loc['Bananas', 'land_use_1000kcal'])
+```
+
+:::{.callout-note title="✅ Answer"}
+A banana uses **2.72 square metres** of land per thousand calories. The most land-hungry food is
+**beef steak**, at 223.7 square metres per thousand calories, which is **82.3 times** the
+banana's land use.
+
+Note that `.idxmax()` gave you the **label** and not the number. That is the whole reason it
+exists: paired with `.loc[]`, it lets you ask "which one?" and then "how much?" as two separate,
+readable steps.
+:::
+
+**19. Compare the land-use top 10 with the emissions top 10 from question 5. Are they the same
+foods? Name one that appears on one list and not the other.**
+
+:::{.callout-note title="✅ Answer"}
+**Seven of the ten are the same**: beef steak, beef mince, beef meatballs, beef burger, cottage
+cheese, lamb (leg) and lamb chops. So the two measures agree far more than they disagree, and
+beef sits at the top of both.
+
+Three appear only in the land-use list: **lentils**, lettuce and chilli con carne. Lentils are
+the interesting one. They take a lot of land per calorie and emit comparatively little, so a
+ranking built on carbon alone would tell you nothing about them. Three appear only in the
+emissions list: prawns, parmesan cheese and lamb burgers. Prawns are the mirror image, since
+much of their footprint comes from fuel and refrigeration rather than from land.
+
+Land and carbon are correlated but not interchangeable. A food can be costly in one and
+unremarkable in the other, and which you measure determines which foods you notice.
+:::
+
+## Part 6: Cheese
+
+**20. Build a table of just the cheeses, then find the cheese with the highest
+`Bananas index (1000 kcalories)`.**
+
+```{python}
+cheese = df.filter(like='heese', axis='rows')
+print(cheese.shape)
+
+cheese['Bananas index (1000 kcalories)'].sort_values(ascending=False)
+```
+
+:::{.callout-note title="✅ Answer"}
+**Cottage cheese, at 33.51.** It is far above the rest: the next cheese, mozzarella, is 7.72,
+so cottage cheese is more than four times the second-place figure. Cottage cheese is largely
+water, so a thousand calories of it is a great deal of cheese.
+:::
+
+**21. How many rows did `.filter(like='heese')` give you? Is every one of them a cheese? What
+does this tell you about matching on text?**
+
+```{python}
+cheese.index.tolist()
+```
+
+:::{.callout-note title="✅ Answer"}
+**12 rows, and no, they are not all cheeses.** `Cheesecake` and `Chocolate cheesecake` are
+desserts, and `Macaroni cheese` is a cooked dish rather than a cheese. Only nine of the twelve
+are cheese in the sense you meant.
+
+Matching on a substring matches **strings, not meanings**. `.filter(like='heese')` did exactly
+what you asked and had no way to know what you intended. This is why you print the labels and
+read them after any text-based selection, rather than trusting the row count. The habit of
+looking at what a filter caught, and not just how much it caught, will save you repeatedly.
+:::
+
+**22. Where does the top cheese sit in the whole dataset's calorie ranking? Check it against
+your answer to question 6.**
+
+```{python}
+df['Bananas index (1000 kcalories)'].sort_values(ascending=False).head(10)
+```
+
+:::{.callout-note title="✅ Answer"}
+**Fourth out of 160**, behind beef steak, beef mince and beef meatballs. It is visible in your
+question 6 answer, which is the check: cottage cheese was already sitting in that top 10, and
+finding it again from the cheese table means both calculations agree.
+
+Cottage cheese is the only non-meat food in the top four of the calorie ranking, which is what
+makes the cheese section worth having.
+:::
+
+## Part 7: Write it up
+
+There is no single right answer here. A strong response cites at least three numbers you
+computed, names at least one disagreement between the rankings, and reaches a conclusion the
+numbers support. Here is one that would earn full marks.
+
+:::{.callout-note title="✅ A model answer"}
+Cutting bananas is not where the gains are. A banana scores 1.0 on the kilogram index by
+definition, and it sits near the bottom of every ranking we computed. Beef steak scores 148.6 on
+the same scale, so a kilogram of steak carries roughly 149 times a kilogram of bananas'
+emissions, and 82.3 times the land use per thousand calories. Bananas are also unusually
+efficient per calorie, which matters because we eat them for calories rather than for protein.
+Removing them from a diet changes a very small number and creates a gap that has to be filled by
+something else.
+
+The dataset does make bananas look worse under one measure. Per hundred grams of protein they
+score above several meats, since a banana has almost no protein and the division inflates the
+ratio. That disagreement between the rankings is the point rather than a flaw. Coconut milk,
+sugar and grapes top the protein ranking for the same arithmetic reason, and nobody would argue
+that sugar is a worse climate choice than beef. The comparison is only meaningful when the
+denominator matches what the food is for, and bananas are not a protein source.
+
+If my friend wants a change that shows up in the numbers, the place to look is the 34 foods
+scoring above 10 per kilogram, which is a little over a fifth of this dataset and is dominated by
+beef, lamb and hard cheeses. Substituting one of those a week would move more carbon than
+eliminating bananas entirely.
+:::
+
+## Where the marks are
+
+If you compare your notebook against this key, look for these four things before you look at
+anything else.
+
+1. **Every number in your Part 7 write-up has a code cell above it that produced it.** Quoting a
+   number you did not compute is the single most common way to lose marks on this exercise.
+2. **Your Part 4 boundary answer is right.** Questions 12 and 13 differ by one row, and knowing
+   which row and why is the point of asking both.
+3. **You looked at the cheese labels** rather than trusting the count.
+4. **Your interpretation answers say what the number means**, not what the number is. "34 foods
+   score above 10" restates the output. "34 foods, a fifth of the dataset, and almost all of them
+   are meat or hard cheese" reads it.
+
+⬅️ Back to [the exercise](../eod-practice/eod-day3-2026.qmd)

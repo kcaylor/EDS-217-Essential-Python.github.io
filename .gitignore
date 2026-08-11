@@ -11,3 +11,8 @@ __pycache__/
 .ipynb_checkpoints/
 tools/__pycache__/
 _to_delete/
+
+# FUSE mount artifacts. The Cowork device bridge leaves shadow copies of open
+# files behind. They are invisible to Quarto but they match every grep-based
+# quality gate, so they must never be committed again.
+.fuse_hidden*

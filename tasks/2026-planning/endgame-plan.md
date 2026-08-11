@@ -158,7 +158,18 @@ are cleanup items that would be premature while days are still moving.
       and `eod-practice/eod-day6.qmd` with its `answer-keys/eod-day6-key.qmd`. Day 7 added five:
       `interactive-sessions/7a_visualizations_1.qmd`, `interactive-sessions/7b_visualizations_2.qmd`,
       `coding-colabs/7c_visualizations.qmd`, and `eod-practice/eod-day7.qmd` with its
-      `answer-keys/eod-day7-key.qmd`. Three of the Day 5
+      `answer-keys/eod-day7-key.qmd`.
+
+      **All seven 2025 EODs and all seven 2025 EOD keys are orphans, and Days 1 to 5 were not
+      named above.** Verified 2026-08-11: no day page and no navbar entry links any of
+      `eod-practice/eod-day1.qmd`, `eod-day1-draft.qmd`, `eod-day2.qmd`, `eod-day3.qmd`,
+      `eod-day4.qmd`, `eod-day5.qmd`, `eod-day6.qmd` or `eod-day7.qmd`. Their keys,
+      `answer-keys/eod-day1-key.qmd` through `eod-day7-key.qmd`, are linked only from
+      `answer_keys.qmd`. **`eod-day2-key.qmd` is where the last `lambda` in the course lives**,
+      so this pair in particular must not be skipped. The 2026 EODs have no answer keys at all,
+      which is why `answer_keys.qmd` needs rewriting rather than repointing.
+
+      Three of the Day 5
       four, two of the Day 6 six and at least one of the Day 7 five are still linked from
       `answer-keys/answer_keys.qmd`, **so that page needs revising in the same pass**, not just the
       render config. `7a_visualizations_1.qmd` also links its own retired sibling. Decide per file: delete, or exclude via the
@@ -265,7 +276,14 @@ are cleanup items that would be premature while days are still moving.
       references `images/collections.jpeg`, but there is no `coding-colabs/images/` directory.
       One-line fix: `../images/collections.jpeg`. The Day 3 and Day 4 colabs already use
       `../images/`.
-- [ ] **Remove the 61 remaining tracked `.fuse_hidden*` files.** These are stale byte-copies of
+- [x] **DONE 2026-08-11. Removed all 89 tracked `.fuse_hidden*` files and added
+      `.fuse_hidden*` to `.gitignore`.** Every one was a stale duplicate of a live file: 54
+      course pages still carrying `jupyter: eds217_2025`, plus shadow copies of
+      `environment.yml`, `environment-2026.yml`, `build_docs.py`, `README.md`, `BUILD_DOCS.md`,
+      `FAST_SETUP.md` and `KERNEL_FIX.md`. All are recoverable from git history. Original note
+      follows, for the reasoning.
+
+      ~~Remove the 61 remaining tracked `.fuse_hidden*` files.~~ These are stale byte-copies of
       course files left by the Cowork mount, committed at some point and still carrying
       `jupyter: eds217_2025`. They are invisible to Quarto but they match every grep-based
       quality gate, which is how they were found: the gate-5 `lambda` search and the
@@ -276,11 +294,15 @@ are cleanup items that would be premature while days are still moving.
       Add `.fuse_hidden*` to `.gitignore` in the same pass. Note that `rm` fails through the
       Cowork mount, so move them into the gitignored `_to_delete/` and let `git add -A` record
       the deletion.
-- [ ] **Last `lambda` in the course materials.** `answer-keys/eod-day2-key.qmd` line 164 uses
-      `max(..., key=lambda x: ...)`. This is the only genuine gate-5 failure left outside the
-      2025 orphans, and it sits in a Day 2 answer key, which is otherwise signed off.
-      `interactive-sessions/6b_grouping_joining_sorting_2_old.qmd` line 428 also has one, but
-      that file is already on the orphan-retirement list above and dies with it.
+- [ ] **Last `lambda` in the course materials: no separate work needed, but do not lose it.**
+      `answer-keys/eod-day2-key.qmd` line 164 uses `max(..., key=lambda x: ...)`. Checked
+      2026-08-11: **that file is a 2025 orphan, not a 2026 file.** Its subtitle is "Python Data
+      Structures Practice" and it is the key to `eod-practice/eod-day2.qmd`, the 2025 Day 2 EOD.
+      The 2026 Day 2 EOD is `eod-day2-2026.qmd`, the Toolik data biography, and it has no answer
+      key. So the last `lambda` disappears the moment the orphan sweep above runs, provided that
+      sweep covers the 2025 EOD and key pairs, which it must now do explicitly (see the expanded
+      list). `interactive-sessions/6b_grouping_joining_sorting_2_old.qmd` line 428 has the other
+      one and is already on the list. **After the sweep, re-run gate 5 to confirm it passes.**
 - [ ] **Four orphan CSVs in `course-materials/cheatsheets/`.** `ocean_temperatures.csv` (316 KB),
       `sample_time_data.csv`, `temp_data.csv` and `output.csv` are tracked, sit outside `data/`,
       and are read by nothing. The last two were render artifacts: `timeseries.qmd` used to write

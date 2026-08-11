@@ -1,0 +1,400 @@
+---
+title: "Live Coding Session"
+subtitle: "🎙️ Instructor Notes: When a Sentence Is Not Enough"
+jupyter: eds217_2026
+search: false
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+*Instructor run-through for Session 5D. Student-facing page:
+[5d_loops_over_groups.qmd](5d_loops_over_groups.qmd). Headings below match the markdown scaffold
+students set up, so everyone stays in the same place.*
+
+**Total: 28 minutes of coding, 17 minutes of buffer and questions.**
+
+:::{.callout-important title="Scope discipline"}
+This session teaches **iteration over a groupby object** at adapt level: students should be able
+to modify a `for name, group in grouped:` loop, not design one from nothing. Tonight's practice
+does not require a loop.
+
+Comprehensions are **read only**. Sections 5 and 6 are a prediction exercise. Do not set an
+exercise that asks a student to write one, do not use one in an answer key, and if a student
+writes one unprompted, say it is correct and move on rather than teaching the syntax to the
+room.
+
+This session teaches **no new aggregation**. Everything numeric here was taught this morning.
+
+Do not use `lambda` anywhere. It is not in this course.
+:::
+
+## Framing (2 min)
+
+Say something close to this:
+
+> This morning you learned a sentence that turns six piles of rows into six numbers. It is the
+> right tool for almost every grouped question you will ever ask, and I want to be clear that
+> nothing this afternoon replaces it.
+>
+> But it has one shape. One number per group, arithmetic only. If what you want per group is a
+> sentence, or a file, or a plot, or a yes-or-no check, the sentence cannot help you and you
+> have to open the groups up and walk through them.
+>
+> The good news is that you already know how. You wrote your first `for` loop on Tuesday.
+
+## Setup
+
+Rebuild the clean survey table. Students have this from 5A; paste it rather than retyping it
+line by line, and say so.
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/messy_field_survey.csv'
+survey = pd.read_csv(url)
+
+survey = survey.drop_duplicates()
+survey['site'] = survey['site'].str.strip()
+survey['site'] = survey['site'].str.lower()
+survey['site'] = survey['site'].str.replace('-', '_')
+survey['pH'] = survey['pH'].str.replace(',', '.')
+survey['pH'] = survey['pH'].astype(float)
+survey = survey.dropna(subset=['temperature_c', 'dissolved_oxygen_mg_L', 'conductivity_uS_cm'])
+survey['n_replicates'] = survey['n_replicates'].fillna(1)
+survey['n_replicates'] = survey['n_replicates'].astype(int)
+survey = survey[survey['temperature_c'] > -100].copy()
+survey = survey.rename(columns={'collection date': 'collection_date'})
+
+survey.shape
+```
+
+## 1. What groupby is holding (3 min)
+
+Make the split object again and refuse to aggregate it, on purpose:
+
+```{python}
+grouped = survey.groupby('site')
+grouped
+```
+
+> This morning we said this object is holding six piles of rows and waiting. Let us actually
+> look at the piles.
+
+```{python}
+grouped.ngroups
+```
+
+```{python}
+list(grouped.groups.keys())
+```
+
+Points to make:
+
+- `.ngroups` is how many piles
+- `.groups` is a dictionary. The keys are the group labels, the values are the row labels in
+  each pile. **This is the dictionary from Tuesday**, doing a real job.
+- Say out loud: the split has already been done. It is sitting there.
+
+Pull one pile out by name:
+
+```{python}
+site_c = grouped.get_group('site_c')
+site_c.shape
+```
+
+> That is a DataFrame. Forty-five rows, seven columns, all the same columns as `survey`. Hold on
+> to that, because it is the whole idea of the next section.
+
+## 2. Looping over the groups (5 min)
+
+The loop shape. **Write the two-variable version first and name both variables out loud**, then
+run it:
+
+```{python}
+for name, group in grouped:
+    print(name, group.shape)
+```
+
+Points to make, slowly, because this is the moment the session either works or does not:
+
+- `name` is the **group label**, one of the six site strings
+- `group` is the **DataFrame of rows in that pile**
+- the loop body runs six times, once per pile
+- the order is the sorted order of the keys, which is why `site_a` comes first
+
+Compare it directly to Tuesday's loop over a list. Put both on the screen:
+
+```{python}
+sites = ['site_a', 'site_b', 'site_c']
+
+for s in sites:
+    print(s)
+```
+
+> One variable when you loop over a list, two when you loop over a groupby. The reason is that
+> each item in a groupby has two halves: what it is called, and what is in it.
+
+The classic error, **run it on purpose**:
+
+```python
+for group in grouped:
+    print(group.shape)
+```
+
+> `AttributeError: 'tuple' object has no attribute 'shape'`
+
+Ask them to guess why before you explain. With one variable, `group` catches the pair, not the
+DataFrame.
+
+Now something the sentence cannot do. A formatted report line per site:
+
+```{python}
+for name, group in grouped:
+    print(f"{name}: {len(group)} samples, mean DO {group['dissolved_oxygen_mg_L'].mean():.2f} mg/L")
+```
+
+> Six lines of prose. `.groupby('site')['dissolved_oxygen_mg_L'].mean()` cannot produce those,
+> because it can only produce numbers. This is the first thing today that genuinely needs the
+> loop.
+
+:::{.callout-note title="f-strings, if they ask"}
+`f"{value:.2f}"` rounds to two decimal places inside the string. Students met f-strings on Day 1.
+If nobody asks, do not stop for it.
+:::
+
+## 3. One group is a DataFrame (4 min)
+
+Hammer the point from section 1. Inside the loop, `group` is a real DataFrame and **every method
+you know works on it**:
+
+```{python}
+for name, group in grouped:
+    warm = group[group['temperature_c'] > 20]
+    print(name, len(warm), 'of', len(group), 'samples above 20 C')
+```
+
+> That is the filter sentence from Wednesday, running inside a loop, six times. Nothing new. The
+> loop just handed you a smaller table each time round.
+
+One more, to show it is not only filtering:
+
+```{python}
+for name, group in grouped:
+    hottest = group['temperature_c'].idxmax()
+    print(name, 'warmest on', group.loc[hottest, 'collection_date'])
+```
+
+Points to make:
+
+- `.idxmax()` and `.loc[]` are Wednesday's tools, unchanged
+- the answer here is a **date**, not a number, which is exactly what a grouped aggregation
+  cannot return you
+
+:::{.callout-tip title="If you are running behind"}
+Cut this second example. Section 4 matters more.
+:::
+
+## 4. Building something up as you go (4 min)
+
+The other reason to loop: you want to **collect** results rather than print them.
+
+Start with the empty list from Tuesday and `.append()`:
+
+```{python}
+records = []
+
+for name, group in grouped:
+    records.append({
+        'site': name,
+        'n': len(group),
+        'mean_do': group['dissolved_oxygen_mg_L'].mean()
+    })
+
+records[0]
+```
+
+> A list of dictionaries. Both containers from Tuesday, in one place, doing the thing they are
+> for.
+
+And then the payoff, which lands well:
+
+```{python}
+pd.DataFrame(records)
+```
+
+> That is a DataFrame you built yourself, row by row, out of Python containers. Day 2 you read
+> one in from a file. Today you made one.
+
+Now the honest comparison. Put the one-liner underneath it:
+
+```{python}
+survey.groupby('site')['dissolved_oxygen_mg_L'].agg(['count', 'mean'])
+```
+
+> Same table. Nine lines versus one. **Use the one line.** The loop is for when the thing you
+> want in each row is not something `.agg()` can compute.
+
+A dictionary instead of a list, since they will see both:
+
+```{python}
+means = {}
+
+for name, group in grouped:
+    means[name] = group['dissolved_oxygen_mg_L'].mean()
+
+means
+```
+
+## 5. Reading a list comprehension (5 min)
+
+Transition explicitly:
+
+> On Tuesday somebody asked about the square-bracket thing and I said we would read some on
+> Friday. It is Friday. **You are not going to write these.** You are going to be able to look
+> at one and say what it does, because they are everywhere.
+
+Start from a loop that builds a list, written the long way:
+
+```{python}
+site_names = []
+
+for name, group in grouped:
+    site_names.append(name.upper())
+
+site_names
+```
+
+Then the same thing, one line:
+
+```{python}
+site_names = [name.upper() for name, group in grouped]
+site_names
+```
+
+How to teach the reading. Put this on the board:
+
+```
+[  what to keep     for  each thing  in  the collection  ]
+```
+
+Then read the line out loud in that order, pointing: *"`name.upper()`, for each name and group,
+in grouped."* Say that the loop body moved to the **front**, and that is the only real
+difference.
+
+Do a plain one over a list so the groupby is not a distraction:
+
+```{python}
+temps_c = [12.1, 18.4, 21.9, 7.2]
+
+temps_f = [c * 9 / 5 + 32 for c in temps_c]
+temps_f
+```
+
+**Prediction drill.** Write this on the screen and get an answer from the room *before* running
+it:
+
+```{python}
+[len(s) for s in ['site_a', 'bb', 'c']]
+```
+
+Expect `[6, 2, 1]`. If more than a couple of people miss it, do one more; if not, move on.
+
+## 6. Comprehensions you will meet in the wild (5 min)
+
+Three shapes, read only, one prediction each.
+
+**A dictionary comprehension.** Curly braces, and a `key: value` pair at the front:
+
+```{python}
+{name: len(group) for name, group in grouped}
+```
+
+> Same six numbers as `.value_counts()`. Ask them which they would rather read.
+
+**A comprehension with a filter.** The `if` goes at the **end**:
+
+```{python}
+[name for name, group in grouped if len(group) > 42]
+```
+
+Predict first. Point at the counts from section 2 while they think.
+
+**A comprehension over a DataFrame column**, which is the one they are most likely to meet in
+inherited code:
+
+```{python}
+[c.upper() for c in survey.columns]
+```
+
+Then, immediately, the pandas way to do the same job:
+
+```{python}
+survey.columns.str.upper()
+```
+
+> Both are correct. The second is the one to write, because pandas is faster at it and because
+> the first stops being readable the moment the expression gets long.
+
+:::{.callout-caution title="Do not go further than this"}
+Nested comprehensions, comprehensions with `else`, generator expressions and `lambda` are all
+out of scope. If a student raises one, confirm it exists, point at the cheatsheet, and move on.
+The goal of these ten minutes is recognition, not fluency.
+:::
+
+## 7. Which one should I reach for? (3 min)
+
+Build this table on the board with the room, rather than showing it finished:
+
+| What you want per group | Reach for |
+|---|---|
+| one number | `.groupby()...agg()` |
+| several numbers | `.agg(['count', 'mean'])` |
+| a formatted line of text | a `for` loop |
+| a saved file, a plot, a check that passes or fails | a `for` loop |
+| a small list built from something simple | a comprehension, if you like them |
+: {.hover .bordered}
+
+Close with the three questions:
+
+> Before you write a loop over groups, ask: **is the answer a number?** If yes, use the
+> sentence. **Is it one number per group?** If yes, definitely use the sentence. **Would the
+> loop body be one line of arithmetic?** If yes, you are writing nine lines to avoid learning
+> one.
+>
+> Loop when the answer is not a number. That is nearly the whole rule.
+
+## Timing checkpoints
+
+| Elapsed | You should be at |
+|---|---|
+| 0:02 | framing done, setup cell running |
+| 0:10 | end of section 2, the two-variable loop is on everyone's screen |
+| 0:18 | end of section 4, the `pd.DataFrame(records)` payoff |
+| 0:23 | end of section 5, first prediction drill done |
+| 0:28 | end of section 7 |
+| 0:28+ | questions, and the trailing exercise below if there is appetite |
+
+**If you are at 0:20 and not yet at section 5**, cut section 3's second example and the
+dictionary at the end of section 4. Sections 5 and 6 are the ones with a promise attached to
+them, and they cannot be the ones you drop.
+
+**If you finish at 0:22**, ask the room to write the loop from section 3 for a different
+threshold, or to predict `{name: group['pH'].max() for name, group in grouped}` before you run
+it.
+
+## What tonight's practice needs from this session
+
+Tonight's exercise is entirely `.groupby()` sentences. **No loop and no comprehension appears in
+it.** If a student asks whether they should be looping over the OpenAQ stations, the answer is
+no, and the reason is section 7: every answer they need tonight is a number, one per group.
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: grouping and aggregating](../cheatsheets/data_grouping.qmd)
+- [📖 EDS 217 cheatsheet: control flows](../cheatsheets/control_flows.qmd)
+- [📖 EDS 217 cheatsheet: lists](../cheatsheets/lists.qmd)
+- [📖 EDS 217 cheatsheet: dictionaries](../cheatsheets/dictionaries.qmd)
+- [pandas user guide: iterating through groups](https://pandas.pydata.org/docs/user_guide/groupby.html#iterating-through-groups){target="_blank"}

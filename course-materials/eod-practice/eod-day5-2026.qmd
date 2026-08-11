@@ -1,0 +1,360 @@
+---
+title: "Tasks & Activities"
+subtitle: "🌬️ Three Stations, One Air Shed"
+execute:
+  echo: false
+  include: false
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](../images/panda.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A panda, counting things by the hour.*
+
+:::
+
+Three air quality monitors sit within about fifteen kilometres of each other on the South Coast:
+one in Goleta, one in Santa Barbara, and one on the roof of the CNSI building on the UCSB
+campus. Between the 10th of July and the 11th of August 2024 they recorded 4,942 hourly
+measurements of ozone and particulate matter.
+
+They are close enough together that they are breathing the same air. They are far enough apart,
+and different enough in what they measure, that comparing them is a real question rather than an
+exercise.
+
+You have met one of these files before. On Wednesday you filtered and ranked the Goleta station
+one parameter at a time. Tonight you have all three, and you have the sentence that lets you ask
+about all of them at once.
+
+:::{.callout-note title="Reference"}
+OpenAQ, an open global air quality data platform. Data supplied to OpenAQ by AirNow.
+[https://openaq.org](https://openaq.org)
+:::
+
+## Today's sentence, in its three forms
+
+Everything below is built from these. You should not need to look them up more than once.
+
+```python
+grouped = df.groupby('key')                        # split
+grouped['col'].mean()                              # apply and combine
+
+df.groupby('key')['col'].mean()                    # the same sentence, one line
+
+df.groupby('key')['col'].agg(['count', 'mean'])    # several summaries at once
+df.groupby('key').agg({'a': 'mean', 'b': 'count'}) # different summaries, different columns
+```
+
+And the one from Wednesday that still does most of the work:
+
+```python
+df.sort_values('column', ascending=False).head(n)  # the top-N sentence
+```
+
+## Setup
+
+1. Create a new notebook named `EOD_Day5_Air_Quality.ipynb`.
+
+2. Add a title cell:
+
+```markdown
+# Day 5 EOD: Three Stations, One Air Shed
+
+Date: 09/04/2026
+```
+
+3. Read the three files and build the single table you will work from. The whole of this step is
+   supplied, for the reasons in the Field Note below.
+
+:::{.callout-tip title="🧭 Field Note: stacking three files, and pulling an hour out of a timestamp"}
+Two lines tonight use tools you have not been taught. Both of them are **setup**. Everything
+after this block is Day 5 material, and you should recognize all of it.
+
+**Stacking the files.** The three stations are in three separate CSVs with identical columns.
+`pd.concat()` takes a list of DataFrames and stacks them into one, top to bottom. The `site`
+column does not exist in the files; you are adding it first, so that the stacked table still
+knows which rows came from where.
+
+```python
+goleta['site'] = 'Goleta'
+santa_barbara['site'] = 'Santa Barbara'
+cnsi['site'] = 'CNSI'
+
+aq = pd.concat([goleta, santa_barbara, cnsi], ignore_index=True)
+```
+
+`ignore_index=True` renumbers the rows 0 to 4,941 instead of restarting at 0 three times.
+
+**Pulling the hour out.** `datetimeLocal` is text that looks like
+`2024-07-11T18:00:00-07:00`. Counting from zero, characters 11 and 12 are the hour. Square
+brackets on `.str` slice out a piece of every string in the column, the same way they slice a
+piece out of a list:
+
+```python
+aq['hour'] = aq['datetimeLocal'].str[11:13]
+```
+
+The result is **text**, not a number: `'06'`, `'14'`. That turns out to be convenient, because
+zero-padded text sorts into the same order as the numbers would.
+
+**Joining tables gets a full session on Tuesday, and dates get one the same day.** By the middle
+of next week you will write both of these yourself. Tonight, copy them.
+
+📖 [Cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd) ·
+[Cheatsheet: time series](../cheatsheets/timeseries.qmd)
+:::
+
+```{python}
+import pandas as pd
+
+base = 'https://eds-217-essential-python.github.io/data/'
+
+goleta = pd.read_csv(base + 'openaq_goleta_measurments.csv')
+santa_barbara = pd.read_csv(base + 'openaq_santa_barbara_measurments.csv')
+cnsi = pd.read_csv(base + 'openaq_CNSI_measurments.csv')
+
+goleta['site'] = 'Goleta'
+santa_barbara['site'] = 'Santa Barbara'
+cnsi['site'] = 'CNSI'
+
+aq = pd.concat([goleta, santa_barbara, cnsi], ignore_index=True)
+aq['hour'] = aq['datetimeLocal'].str[11:13]
+
+aq.shape
+```
+
+## Part 1: What is in each pile
+
+Answer each question with code, then write the answer in a markdown cell underneath, in a
+complete sentence with the numbers in it.
+
+1. How many readings came from each site? One line.
+
+```{python}
+aq.groupby('site')['value'].count()
+```
+
+2. How many distinct parameters does each site measure? Use the **dictionary** form of `.agg()`
+   to report the reading count and the parameter count side by side.
+
+```{python}
+aq.groupby('site').agg({'value': 'count', 'parameter': 'nunique'})
+```
+
+3. One of the three stations is not like the others. Name it, say what it does not do, and say
+   in one sentence what that means for any comparison you are about to make across all three.
+
+```{python}
+aq.groupby(['site', 'parameter'])['value'].count()
+```
+
+4. How many readings of each parameter are there across the whole table? Which parameter is the
+   best measured, and which the worst?
+
+```{python}
+aq.groupby('parameter')['value'].count().sort_values(ascending=False)
+```
+
+:::{.callout-important title="Before you go any further"}
+Run this and read it:
+
+```{python}
+aq.groupby('parameter')['unit'].nunique()
+```
+
+Ozone is reported in parts per million and the two particulate measurements in micrograms per
+cubic metre. **Never group across the `parameter` column without filtering to one parameter
+first.** A mean of ozone and PM10 together is not a number, it is a mistake with a decimal
+point in it. This is Wednesday's units problem, arriving for the third time.
+:::
+
+## Part 2: Compare the stations
+
+5. Build a table of just the PM2.5 readings, ending the line with `.copy()`, and call it `pm25`.
+   How many rows?
+
+```{python}
+pm25 = aq[aq['parameter'] == 'pm25'].copy()
+pm25.shape
+```
+
+6. Which site has the highest mean PM2.5? Write the split-apply-combine sentence, then rank the
+   result.
+
+```{python}
+pm25.groupby('site')['value'].mean().sort_values(ascending=False)
+```
+
+7. Those three means are within half a microgram of each other. Before you decide that means
+   anything, use `.agg()` with a list to report the **count, mean, min, max and standard
+   deviation** of PM2.5 at each site in one call.
+
+```{python}
+pm25.groupby('site')['value'].agg(['count', 'mean', 'min', 'max', 'std'])
+```
+
+8. In a markdown cell, three or four sentences. The means are nearly identical and the maxima
+   are not. What is different about these three stations, and which of the five columns in your
+   table told you? Would you describe the South Coast as having one air quality or three?
+
+9. Now do the same for PM10. Which site is higher, and by how much? Note which site is missing
+   from your answer and why.
+
+```{python}
+pm10 = aq[aq['parameter'] == 'pm10'].copy()
+pm10.groupby('site')['value'].agg(['count', 'mean', 'max'])
+```
+
+10. Use the filter sentence and the split-apply-combine sentence together: how many hours did
+    each site record a PM2.5 value above 12 µg/m³, the US annual standard?
+
+```{python}
+pm25[pm25['value'] > 12].groupby('site')['value'].count()
+```
+
+11. In a markdown cell: your answer to question 10 has a site missing from it entirely. Is that
+    because the air there was clean, or for another reason? Look back at your answer to question
+    7 before you commit.
+
+## Part 3: The data still has problems
+
+12. Ask for the minimum PM2.5 at each site.
+
+```{python}
+pm25.groupby('site')['value'].min()
+```
+
+13. Two of the three sites report a negative concentration of particulate matter, which is not a
+    thing that can happen. Count how many negative readings each site has.
+
+```{python}
+pm25[pm25['value'] < 0].groupby('site')['value'].count()
+```
+
+14. In a markdown cell, two or three sentences: the site with no negative readings is also the
+    site with the smallest standard deviation and the lowest maximum. Propose one explanation
+    that accounts for all three of those facts at once. You cannot confirm it with this data;
+    say what you would need.
+
+15. A decision, and there is no single right answer. Would you drop the negative readings before
+    computing site means? Compute both versions and report the difference, then say in one
+    sentence which you would publish and why.
+
+```{python}
+clean_pm25 = pm25[pm25['value'] >= 0]
+
+print(pm25.groupby('site')['value'].mean())
+print(clean_pm25.groupby('site')['value'].mean())
+```
+
+## Part 4: The question the day was for
+
+Everything so far has grouped by station. The interesting axis in this dataset is not where, it
+is **when**.
+
+16. Build a table of just the ozone readings, ending the line with `.copy()`, and call it `o3`.
+    Then group it by `hour` and report the count and mean of `value`, in hour order.
+
+```{python}
+o3 = aq[aq['parameter'] == 'o3'].copy()
+o3.groupby('hour')['value'].agg(['count', 'mean'])
+```
+
+17. Read the `count` column first. Twenty-two of the twenty-four hours have about the same
+    number of readings and two do not. Which two, and what does that tell you about how much
+    weight to put on their means?
+
+18. Now rank the means. Which hour of the day has the highest average ozone, and which the
+    lowest? What is the ratio between them?
+
+```{python}
+hourly_o3 = o3.groupby('hour')['value'].mean()
+
+print(hourly_o3.sort_values(ascending=False).head(5))
+print(hourly_o3.sort_values().head(5))
+print('peak hour:  ', hourly_o3.idxmax())
+print('lowest hour:', hourly_o3.idxmin())
+print('ratio:      ', hourly_o3.max() / hourly_o3.min())
+```
+
+19. Look at the full twenty-four-hour table from question 16 again, top to bottom. Describe the
+    shape of the curve in a markdown cell. Where does it start rising, where does it turn over,
+    and where does it stop falling?
+
+20. Ground-level ozone is not emitted by anything. It is manufactured in the air out of other
+    pollutants, by sunlight. In three or four sentences, connect that fact to the shape you just
+    described. Does the timing of the peak match what you would expect, and if it is later than
+    you expected, why might that be?
+
+21. Do the same grouping for PM2.5 and compare. Does particulate matter follow the same daily
+    pattern as ozone?
+
+```{python}
+hourly_pm25 = pm25.groupby('hour')['value'].mean()
+
+print(hourly_pm25.sort_values(ascending=False).head(5))
+print(hourly_pm25.sort_values().head(5))
+```
+
+22. In a markdown cell, two or three sentences: one of these two pollutants has a much sharper
+    daily cycle than the other. Which, and what does the difference suggest about where each one
+    comes from?
+
+## Part 5: Write it up
+
+In a single markdown cell of 200 to 300 words, answer this:
+
+> The Santa Barbara County Air Pollution Control District is deciding whether to keep funding all
+> three of these monitors. They ask you: **does the third one tell us anything the other two do
+> not?** You have one month of data and one evening.
+
+Your answer must cite at least four specific numbers you computed tonight, must name at least one
+thing that is genuinely different about the CNSI station, and must include at least one thing
+this month of data cannot tell them. Complete sentences, no bullet fragments.
+
+## The grammar minute
+
+Look back through your notebook. Nearly every code cell tonight was the same sentence, wearing
+different clothes:
+
+```python
+df.groupby('key')['col'].mean()               # one number per group
+df.groupby('key')['col'].agg([...])           # several numbers per group
+df.groupby('key').agg({...})                  # several columns, different summaries
+df.groupby('key')['col'].mean().sort_values() # and then rank the groups
+```
+
+What changed from cell to cell was not the grammar. It was the **key**. You grouped by `site`,
+by `parameter`, by both at once, and by `hour`, and each of those choices asked a different
+question of the same 4,942 rows.
+
+That is worth stopping on. `site` was a column in the files. `parameter` was a column in the
+files. `hour` was not: you made it in the setup block, out of a string, and it turned out to hold
+the most interesting result of the evening. The best grouping key in a dataset is very often one
+that is not in it yet.
+
+## Wrap-up
+
+Before you close your notebook, check that:
+
+- every grouped mean you reported has a count next to it, or a count printed above it
+- you filtered to a single `parameter` before every calculation that averaged anything
+- your Part 5 answer names a number that came from a grouping by `hour`
+- you can say out loud what `.groupby('site')` returns **before** you attach an aggregation to it
+- your notebook reads top to bottom as a document, not as a pile of cells
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: grouping and aggregating](../cheatsheets/data_grouping.qmd)
+- [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+- [📖 EDS 217 cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
+- [OpenAQ](https://openaq.org){target="_blank"}
+- [US EPA: ground-level ozone basics](https://www.epa.gov/ground-level-ozone-pollution/ground-level-ozone-basics){target="_blank"}

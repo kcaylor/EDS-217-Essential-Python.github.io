@@ -1,32 +1,48 @@
 ---
-title: "Selecting, Filtering, and Transforming Data in Pandas"
+title: "Group & Aggregate"
 subtitle: "Day 5"
 description: "Friday September 4^th^, 2026"
 ---
 
 ::: {style="width: 80%; margin: auto;"}
-![](images/transformation.jpeg)
+![](interactive-sessions/images/grouping_filtering.jpeg)
 :::
 
 :::{.gray-text .center-text}
-*A cartoon panda is transforming into a werewolf, but somehow it's cute and not scary or gross.* [MidJourney 5](https://www.midjourney.com/jobs/06f16858-a3d7-4953-a6e0-93692b79c3b8?index=0)
+*A crowd of pandas, waiting to be sorted into piles.*
+[MidJourney 5](https://www.midjourney.com)
 :::
+
+For four days you have been asking questions about a whole table. Today you learn to ask the
+same question of every part of it at once.
+
+Day 5 owns one sentence, and you will meet it in two forms that you have to recognize as the
+same sentence. The **split-apply-combine sentence** breaks a table into groups, runs a
+calculation on each, and hands back one answer per group. Almost every real question about data
+turns out to be that shape: not "what is the average", but "what is the average **for each**".
+
+This afternoon you meet the questions the sentence cannot answer, and the older, slower tool
+that handles them.
 
 ## Class materials
 
 | {{< fa calendar-day title="A calendar with one day highlighted" >}} Session  | {{< fa laptop-code title="A laptop with on-screen code" >}} Session 1  |  {{< fa laptop-code title="A laptop with on-screen code" >}} Session 2 |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| day 5 / morning   | [📝 Selecting and Filtering in Pandas](live-coding/5a_selecting_and_filtering.qmd){target="_blank"} | [🐼 Cleaning Data](interactive-sessions/5b_cleaning_data.qmd) |
-| day 5 / afternoon | [🙌 Coding Colab: Cleaning DataFrames](coding-colabs/5c_cleaning_data.qmd) | End-of-day practice |
-: {.hover .bordered tbl-colwidths="[20,40,40]"} 
+| day 5 / morning   | [🗂️ The Split-Apply-Combine Sentence](interactive-sessions/5a_grouping_data.qmd) | [📊 Several Answers at Once](interactive-sessions/5b_aggregating_data.qmd) |
+| day 5 / afternoon | [🙌 The Comparison You Made Last Night, Properly](coding-colabs/5c_grouped_comparisons.qmd) | [🔁 When a Sentence Is Not Enough](live-coding/5d_loops_over_groups.qmd) |
+: {.hover .bordered tbl-colwidths="[20,40,40]"}
 
 ## End-of-day practice
 
-Complete the following tasks / activities before heading home for the day!
+Tonight you take a month of hourly air quality readings from three monitoring stations on the
+South Coast and find the one pattern in them that no amount of filtering would have shown you.
 
-- [{{< fa pencil title="A pencil" >}} **Day 5 Practice:** 🍌 Analyzing the "Banana Index" 🍌](eod-practice/eod-day5.qmd)
-
-
+- [{{< fa pencil title="A pencil" >}} **Day 5 Practice:** Three Stations, One Air Shed](eod-practice/eod-day5-2026.qmd)
 
 ## Additional Resources
 
+- [{{< fa diagram-project title="A workflow diagram" >}} The Data Science Workflow](the-data-science-workflow.qmd)
+- [{{< fa table title="A table" >}} grouping and aggregating cheatsheet](cheatsheets/data_grouping.qmd)
+- [{{< fa table title="A table" >}} pandas DataFrames cheatsheet](cheatsheets/pandas_dataframes.qmd)
+- [{{< fa table title="A table" >}} dictionaries cheatsheet](cheatsheets/dictionaries.qmd)
+- [{{< fa table title="A table" >}} control flows cheatsheet](cheatsheets/control_flows.qmd)

@@ -1,0 +1,231 @@
+---
+title: "Coding Colab"
+subtitle: "🙌 The Comparison You Made Last Night, Properly"
+execute:
+  echo: false
+  include: false
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](../images/panda.jpeg)
+:::
+
+Last night you were asked whether there is more plastic in the Pacific than the Atlantic. You
+built two tables with two filters, ran `.describe()` on each, and wrote a paragraph to an
+imaginary journalist.
+
+You gave them an answer about two oceans because two was all you could afford. There are four
+oceans in that file, thirty-seven contributing studies, and ten different kinds of net.
+
+This afternoon you go back and do it properly, and somewhere around question 9 the answer you
+sent the journalist starts to look shaky.
+
+Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
+finish a numbered task. The person not typing says out loud what they expect the answer to look
+like *before* the cell is run.
+
+You have 45 minutes.
+
+## The sentences you need
+
+Both from this morning. You should not need to look them up more than once.
+
+```python
+df.groupby('key')['column'].mean()               # split, apply, combine
+df.groupby('key')['column'].agg(['count', 'mean'])   # several summaries at once
+df.groupby('key').agg({'a': 'mean', 'b': 'count'})   # different summaries, different columns
+```
+
+Plus the top-N sentence from Wednesday, which still works:
+
+```python
+df.sort_values('column', ascending=False).head(n)
+```
+
+## Setup
+
+Create a notebook named `Colab_5C_Grouped_Comparisons.ipynb`, with both partners' names in the
+title cell, then rebuild last night's `positive` table. Every line below is one you wrote
+yesterday evening:
+
+```{python}
+import pandas as pd
+import numpy as np
+
+url = 'https://eds-217-essential-python.github.io/data/marine_microplastics.csv'
+df = pd.read_csv(url)
+
+df = df.dropna(subset=['Measurement'])
+samples = df[df['Unit'] == 'pieces/m3'].copy()
+samples['ocean'] = samples['Oceans'].str.replace(' Ocean', '')
+positive = samples[samples['Measurement'] > 0].copy()
+
+positive.shape
+```
+
+7,091 rows. Every one of them is a water sample with a measured, non-zero concentration of
+plastic in pieces per cubic metre.
+
+## Part 1: All four oceans at once (about 10 minutes)
+
+Answer each question with code, then write the answer in a markdown cell underneath, in a
+complete sentence with the numbers in it.
+
+1. Last night you computed the mean `Measurement` for the Atlantic and the Pacific with two
+   filters. Do all four oceans in one line, and rank the result from dirtiest to cleanest.
+
+```{python}
+positive.groupby('ocean')['Measurement'].mean().sort_values(ascending=False)
+```
+
+2. Do the same with the **median** instead of the mean. The order changes. Which two oceans
+   swap, and by how much does the Pacific-to-Atlantic ratio differ between the two versions?
+
+```{python}
+positive.groupby('ocean')['Measurement'].median().sort_values(ascending=False)
+```
+
+```{python}
+means = positive.groupby('ocean')['Measurement'].mean()
+medians = positive.groupby('ocean')['Measurement'].median()
+
+print('mean ratio:  ', means['Pacific'] / means['Atlantic'])
+print('median ratio:', medians['Pacific'] / medians['Atlantic'])
+```
+
+3. How many samples went into each of those four numbers? One line.
+
+```{python}
+positive.groupby('ocean')['Measurement'].count().sort_values(ascending=False)
+```
+
+4. In a markdown cell: two of the four oceans have numbers you should refuse to report. Name
+   them and say why in one sentence.
+
+## Part 2: One call instead of four (about 8 minutes)
+
+5. Replace questions 1 through 3 with a **single** `.agg()` call that reports the count, median,
+   mean and max of `Measurement` for each ocean.
+
+```{python}
+positive.groupby('ocean')['Measurement'].agg(['count', 'median', 'mean', 'max'])
+```
+
+6. Look at the Atlantic row. Its median is 0.019 and its maximum is 110,480. In a markdown cell,
+   say what a single number that large does to a mean computed from 6,216 values, and which of
+   the two averages you would send to the journalist.
+
+7. Use the **dictionary** form of `.agg()`, grouped by `ocean`, to report the mean
+   `Measurement`, the number of distinct `Sampling Method` values, and the number of distinct
+   `Organization` values in each ocean.
+
+```{python}
+positive.groupby('ocean').agg({
+    'Measurement': 'mean',
+    'Sampling Method': 'nunique',
+    'Organization': 'nunique'
+})
+```
+
+8. In a markdown cell: the two columns you just counted are not measurements. Why did you ask
+   for them? What would it mean if one ocean had been sampled by one organization using one
+   method?
+
+## Part 3: Where the answer falls apart (about 15 minutes)
+
+9. Group by `Sampling Method` instead of by ocean, and report the count and median of
+   `Measurement` for each method. Rank by median, largest first.
+
+```{python}
+by_method = positive.groupby('Sampling Method')['Measurement'].agg(['count', 'median'])
+by_method.sort_values('median', ascending=False)
+```
+
+10. Write down the largest and smallest medians in that table. How many **orders of magnitude**
+    separate them? (`np.log10` of the ratio will tell you, or count the zeros.)
+
+```{python}
+medians_by_method = positive.groupby('Sampling Method')['Measurement'].median()
+print(medians_by_method.max(), medians_by_method.min())
+print(np.log10(medians_by_method.max() / medians_by_method.min()))
+```
+
+11. In a markdown cell, before you write any more code: **if the oceans were not sampled with
+    the same mix of methods, what does that do to your answer from question 1?** Two or three
+    sentences.
+
+12. Find out. Group by both `ocean` and `Sampling Method` at once and count the samples. Then
+    call `.reset_index()` on the result and look at the Atlantic and Pacific rows.
+
+```{python}
+ocean_method = positive.groupby(['ocean', 'Sampling Method'])['Measurement'].count()
+ocean_method.reset_index().head(15)
+```
+
+13. Simpler and more direct: run `.value_counts()` on `Sampling Method` for the Atlantic samples
+    and again for the Pacific samples. Which method dominates the Atlantic? What fraction of the
+    Pacific samples used it?
+
+```{python}
+atlantic = positive[positive['ocean'] == 'Atlantic']
+pacific = positive[positive['ocean'] == 'Pacific']
+
+print(atlantic['Sampling Method'].value_counts())
+print(pacific['Sampling Method'].value_counts())
+```
+
+14. Now control for it. Filter `positive` to the rows collected with a `'Neuston net'`, end the
+    line with `.copy()`, then group **that** by ocean and report count, median and mean.
+
+```{python}
+neuston = positive[positive['Sampling Method'] == 'Neuston net'].copy()
+neuston.groupby('ocean')['Measurement'].agg(['count', 'median', 'mean'])
+```
+
+15. In a markdown cell, three or four sentences. Compare this table with your answer to question
+    5. Does the Pacific still come out higher than the Atlantic? By how much, and is it the same
+    "how much" you reported last night? What happened to the number of Pacific samples you are
+    now relying on?
+
+:::{.callout-tip title="If your two tables disagree about the size of the effect"}
+They should. That is the finding. A difference that survives a control but changes size is a
+different claim from a difference that does not survive at all, and the two need different
+sentences in a report. Say which one you have.
+:::
+
+## Part 4: Write it again (about 10 minutes)
+
+16. The journalist replies: "Thanks. My editor wants one sentence with a number in it." Write
+    that sentence in a markdown cell. It must contain a number, must name the sampling method
+    you controlled for, and must not overstate what 158 samples can support.
+
+17. In a markdown cell of four or five sentences: **what changed between last night's answer and
+    this one, and was it the data or the question?** Name the specific line of code that made
+    the difference visible.
+
+:::{.callout-note title="If you finish early"}
+The `Regions` column is finer-grained than `Oceans`. Group by it, report count and median, and
+rank by count to find the ten most-sampled regions. One of them has a median a hundred thousand
+times larger than another. Look at which sampling methods were used there before you conclude
+anything about the water.
+
+Do **not** try to compare regions across years. That needs dates, and dates are Tuesday.
+:::
+
+## Wrap-up
+
+We will hear two or three pairs on question 17. Be ready to say which single grouped table
+changed your mind, not just what your final answer was.
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: grouping and aggregating](../cheatsheets/data_grouping.qmd)
+- [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+- [📖 EDS 217 cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
+- [NOAA NCEI marine microplastics](https://www.ncei.noaa.gov/products/microplastics){target="_blank"}

@@ -66,6 +66,8 @@ Claude session. Each brief carries:
 - the exact 2025 source files to adapt, with what to cut and what to keep
 - the sentence patterns the day owns
 - the EOD task list with its Field Note budget
+- for any afternoon-taught construct the EOD wants at WRITE depth, the rehearsal audit required
+  by skeleton decision 10
 - a drift checklist to self-run before committing
 
 Kelly drafts into the qmd files directly. Polish, answer keys, and rendering happen in a session
@@ -73,7 +75,7 @@ whenever there is bandwidth.
 
 ## Order of work on the road
 
-Teaching order, not risk order. The vocabulary budget and the half-day rule are sequential, so
+Teaching order, not risk order. The vocabulary budget and the rehearsal rule are sequential, so
 Day 5 cannot be scoped correctly until Day 4 is fixed.
 
 | Window | Location | Work |
@@ -114,7 +116,11 @@ are cleanup items that would be premature while days are still moving.
 ## Quality gates (unchanged, from work-plan.md)
 
 1. Every construct traces to a day scope table in `2026-day-skeleton.md`
-2. Half-day rule holds (afternoon-taught implies ADAPT at most in the same-day EOD)
+2. Rehearsal rule holds. For **every** construct at WRITE depth in an EOD, name the session and
+   the specific task where students wrote it unaided. If you cannot name one, it is not WRITE.
+   Afternoon-taught constructs additionally need the decision 10 exemption, with its audit table
+   recorded in the day's section of the skeleton. (Amended 2026-08-11; was "afternoon-taught
+   implies ADAPT at most in the same-day EOD".)
 3. At most 2 Field Notes per EOD
 4. Handout and answer key agree: no key-only tasks, names match
 5. `grep` for `lambda` returns nothing in course materials (currently fails: 3 files)

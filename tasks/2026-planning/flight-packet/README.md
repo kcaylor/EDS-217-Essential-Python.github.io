@@ -4,8 +4,13 @@ One brief per remaining day, written so drafting needs no network connection and
 session context. Each brief names the 2025 files to adapt, the scope table to respect, the
 required trims, and the verification commands.
 
-Order of work is teaching order, since the vocabulary budget and the half-day rule are
+Order of work is teaching order, since the vocabulary budget and the rehearsal rule are
 sequential: Day 4 cannot be scoped correctly until Day 3 is fixed.
+
+The half-day rule was replaced by the **rehearsal rule** on 2026-08-11 (skeleton decision 10).
+A construct is WRITE in an EOD only if students have already written it unaided at least three
+times, across at least two sessions, in at least one of which they were the sole author. Any
+brief written before that date states the old rule; read decision 10 first.
 
 | Brief | Day | Status |
 |---|---|---|

@@ -24,7 +24,9 @@ Days 6–9 materials (used Sep 8–11) get one final look Sun Aug 30 / Mon Aug 3
 ## Quality gates (every EOD, before M4)
 
 1. Every construct traces to a day scope table in `2026-day-skeleton.md`
-2. Half-day rule holds (afternoon-taught → ADAPT max same day)
+2. ~~Half-day rule holds (afternoon-taught → ADAPT max same day)~~ **Superseded 2026-08-11.**
+   The rehearsal rule replaces it; see skeleton decision 10 and the gate list in
+   `endgame-plan.md`, which is the current version of this section.
 3. ≤2 Field Notes per EOD
 4. Handout/answer-key drift check passes (no key-only tasks; names match)
 5. `grep` for lambda returns nothing in course materials

@@ -77,9 +77,12 @@ key refers to `Bananas index (kg)`, `Bananas index (1000 kcalories)`, and
 
 ## Rules that apply
 
-- **Half-day rule.** 3d is the last afternoon session, so anything it introduces can be ADAPT
-  at most in the same evening's EOD. 3a is morning, so booleans and conditionals are fair game
-  at WRITE depth.
+- **Rehearsal rule** (amended 2026-08-11; skeleton decision 10, which replaced the half-day
+  rule). A construct is WRITE in the EOD only if students have already written it unaided at
+  least three times, across at least two sessions, in at least one of which they were the sole
+  author. The top-N sentence is taught in the afternoon 3c session and still qualifies, via the
+  decision 10 exemption for named sentence patterns; the audit is recorded in the skeleton's
+  Day 3 section. 3d introduces nothing new, so nothing it touches needs the exemption.
 - **No `lambda`, anywhere, including answer keys.**
 - **Comprehensions are not taught.** They appear on Day 5 at reading level only.
 - **No h1 headers.** Largest heading is `##`. Notebook title cells inside fenced blocks are

@@ -7,7 +7,9 @@
 
 1. **Workflow as spine, segment as focus.** Every day (2–7) runs the complete Import→Visualize workflow in miniature; the day's teaching goes deep on one segment. The EOD is the day's "conversation": full workflow, with the focus segment done at WRITE depth and all prior segments done using already-mastered patterns.
 2. **Alignment by construction.** An EOD may only require WRITE depth for (a) the day's focus constructs and (b) patterns from previous days. Anything else appears at ADAPT (scaffolded) or READ (given) depth, or via a Field Note (see 5).
-3. **The half-day rule.** Constructs taught in the afternoon sessions appear in that day's EOD at ADAPT depth maximum. WRITE depth requires at least a half-day gap (morning teaching → afternoon EOD is acceptable; same-afternoon is not). This directly addresses the 2025 same-day fragility (comprehensions D2, date parsing D4, seaborn D7).
+3. **The rehearsal rule** (was the half-day rule; amended 2026-08-11, see decision 10). A construct may be required at WRITE depth in an EOD only if every student has already produced it unaided, from the pattern rather than by editing supplied code, in an earlier session that same course. Clock time is not the test. Rehearsal is. This addresses the 2025 same-day fragility (comprehensions D2, date parsing D4, seaborn D7), all three of which were taught once and then demanded without any student ever having typed them.
+
+   The rule cuts both ways, and the second half is the one that protects students. **A construct students have only read, or only watched the instructor type, is never WRITE, no matter which half of the day it was taught in.** A morning demonstration with no student-authored practice is exactly as weak as an afternoon one.
 4. **Vocabulary budget.** Each day introduces a bounded set of named constructs (target: ≤8 new WRITE-depth items/day). The per-day allocation tables below are the budget. If a session wants to teach something not in the table, it either displaces an item or waits.
 5. **Field Notes (in-EOD backfill).** The 2025 `~`/`.copy()` callouts become a named, styled mechanism: a "🧭 Field Note" callout that teaches a small construct exactly where it's needed, always paired with a cheatsheet link. Budget: ≤2 per EOD. Field Notes are recorded in the ledger like any taught construct.
 6. **Grammar minute.** Each day ends (last 5–10 min before EOD, or as the EOD's closing cell) with explicit consolidation: "here is the general form of the pattern you used three times today." Prevents idiom-only learning that can't generalize.
@@ -75,7 +77,7 @@ Scope table:
 | `df['col']` / `df[['a','b']]` | select one / list-of-columns | WRITE |
 | `.isnull().sum()` | as a fixed phrase, the missing-data count (added 2026-08-10) | WRITE |
 | list literal, indexing, `.append`, `len` | in service of column lists | WRITE |
-| `for x in list` | taught in 2d, which is afternoon; half-day rule applies | ADAPT |
+| `for x in list` | taught in 2d, which is afternoon; a fundamental, so no decision 10 exemption | ADAPT |
 | dict literal + `d[key]`, as `rename` mapping | NOT methods, NOT iteration, NOT nesting | WRITE |
 | `.rename(columns=dict)` | columns direction only | WRITE |
 
@@ -84,7 +86,8 @@ WRITE constructs: 8. At the vocabulary budget cap, not over it.
 Note (2026-08-10): `for x in list` was previously bundled into the list row at WRITE. That
 conflicted with the half-day rule, since loops are taught in the afternoon 2d session. Split
 out and demoted to ADAPT. The Day 2 EOD supplies the complete loop in a Field Note and asks
-students only to change the list.
+students only to change the list. Still correct under the amended rule (2026-08-11): loops are
+a fundamental, and decision 10's exemption reaches named sentence patterns only.
 
 ### Day 3: Filter + Sort
 
@@ -101,8 +104,8 @@ Scope table:
 | comparison + boolean ops | in mask context; bare `if/elif/else` for categorization | WRITE |
 | filter sentence + `.copy()` | single and two-condition masks | WRITE |
 | `.isin(list)` | list literal arg | WRITE |
-| `.sort_values(col, ascending=False)` | single key | WRITE |
-| top-N sentence | as a named pattern | WRITE |
+| `.sort_values(col, ascending=False)` | single key | WRITE (rehearsal exemption, decision 10) |
+| top-N sentence | as a named pattern | WRITE (rehearsal exemption, decision 10) |
 | `.loc[row_label, col_label]` | scalar lookup only (Banana task 4 needs it) | ADAPT |
 | `.idxmax()/.idxmin()` | on a single column, returning a label; paired with `.loc` (added 2026-08-11) | ADAPT |
 | `.filter(like=)` | 🧭 Field Note (cheese task); sets task cut per decision 5 | ADAPT |
@@ -113,11 +116,19 @@ row in this table. Session 3C teaches them and the Banana EOD uses `.idxmax()` i
 task, so they are recorded here at ADAPT. WRITE-depth constructs remain at five, under the
 budget of eight.
 
-Open question (2026-08-11): the scope table puts the filter sentence and the top-N sentence at
-WRITE depth in the Day 3 EOD, but 3C is an afternoon session, which quality gate 2 caps at
-ADAPT. Either 3C moves to the morning, or the EOD's ranking tasks are scaffolded. The Day 3
-build assumes WRITE, on the authority of this table, and supplies both sentences verbatim in a
-"Today's two sentences" box at the top of the EOD.
+Rehearsal exemption, recorded 2026-08-11 (decision 10). The top-N sentence is taught in 3C, an
+afternoon session, and is required at WRITE depth in the same evening's EOD. The rehearsal
+audit for that exemption:
+
+| Requirement | Day 3 evidence |
+|---|---|
+| named sentence pattern | top-N sentence, from the ledger's eight |
+| written unaided ≥3 times | 3 prompts in 3C, 6 questions in the 3D colab |
+| across ≥2 sessions, student sole author | 3C "Test your knowledge" boxes; 3D colab |
+| EOD restates the pattern verbatim | "Today's two sentences" box, above Part 1 |
+
+The filter sentence is morning-taught and needs no exemption, but it meets the same bar: 5
+prompts in 3B and 4 questions in the 3D colab.
 
 ### Day 4: Clean + Transform
 
@@ -187,7 +198,7 @@ Sessions (sketch):
 - 7b: seaborn: `sns.scatterplot/barplot/histplot` with `data=/x=/y=/hue=`; the Series `.values/.index` barplot idiom taught explicitly (2025 flag).
 - 7c (colab): Palmer penguins exploration (2025's 7c survives).
 - 7d (**decided**): project kickoff. Form teams, browse dataset sources (final_project.qmd list), draft the analysis question. Decompresses Day 8; students start the project with the full 10-step grammar fresh. Fallback if Day 7 runs hot: convert to buffer/review and push kickoff to Day 8 morning.
-- EOD: USDA hardiness zones (everything it needs is now taught: merge D6, pivot_table D6, concat D6; the `.str.split().str.get().astype()` chain in setup becomes a 🧭 Field Note; seaborn same-day, so per the half-day rule the EOD's seaborn tasks provide the call skeleton and students fill mappings: ADAPT-leaning WRITE).
+- EOD: USDA hardiness zones (everything it needs is now taught: merge D6, pivot_table D6, concat D6; the `.str.split().str.get().astype()` chain in setup becomes a 🧭 Field Note; seaborn is taught the same day). **Revisit under decision 10 when Day 7 is built.** The plotting sentences are named patterns, so the rehearsal exemption is available if 7c gives students enough sole-author practice with `data=/x=/y=/hue=`. If it does, the EOD's seaborn tasks can be WRITE. If it does not, they provide the call skeleton and students fill mappings, as originally planned. Decide by auditing 7c, not by the clock.
 
 ### Days 8–9: Project
 
@@ -242,7 +253,39 @@ Net new construction: one session (6b reshape), two EODs (D2, D5), heavy rework 
    chaining theory. Takes the eighth and last WRITE slot in the Day 2 vocabulary budget.
 9. **Day 2 EOD keeps one Field Note** (2026-08-10): the optional loop over a column list. The
    complete pattern is supplied, students change only the list, and the task is optional. This
-   is the half-day rule working as designed, since loops are taught in the afternoon 2d session.
+   is the rehearsal rule working as designed. Loops are taught in the afternoon 2d session and
+   no session asks a student to write one, so ADAPT is the ceiling. The exemption in decision
+   10 does not apply, because `for x in list` is a fundamental and not a named sentence
+   pattern.
+
+10. **The half-day rule becomes the rehearsal rule** (2026-08-11, Kelly). A construct taught in
+    an afternoon session may be required at WRITE depth in that same evening's EOD, but only
+    under all five of the following conditions. Any construct that fails even one of them is
+    ADAPT at most.
+
+    a. It is a **named sentence pattern**, one of the eight in the ledger. Fundamentals
+       (loops, comprehensions, `def`), library idioms, and format strings never qualify. Those
+       keep the original half-day separation.
+    b. Students have **written it themselves, unaided**, at least three times, producing it
+       from the named pattern rather than by editing supplied working code.
+    c. That practice is spread across **at least two sessions**, in at least one of which the
+       student is the sole author: a colab, a practice block, or a "Test your knowledge"
+       prompt. Coding along while the instructor types the same line does not count.
+    d. The EOD **restates the pattern verbatim once**, near the top, with no worked values in
+       it. The Day 3 "Today's two sentences" box is the reference implementation.
+    e. The day's scope table **marks the row** as a rehearsal exemption and the day's section
+       carries the audit table showing where (b) and (c) were satisfied.
+
+    Rationale, in Kelly's terms: a strict half-day separation makes it nearly impossible to
+    teach anything new after lunch, and the workaround is worse than the problem. Material
+    pushed out of the same-day EOD to protect students arrives instead on the following
+    morning, unpracticed, competing with that day's new material. The 2025 failures were not
+    caused by afternoon timing. They were caused by students being asked to produce something
+    they had never once produced.
+
+    **The backslide this must never permit:** an EOD demanding grammar the students have only
+    read. If you cannot name the session and the specific task where students wrote a construct
+    from scratch, it is not WRITE, and no amount of same-day proximity changes that.
 
 ## Risks
 

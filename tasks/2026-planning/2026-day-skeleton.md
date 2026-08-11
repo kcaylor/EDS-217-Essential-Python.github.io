@@ -104,8 +104,20 @@ Scope table:
 | `.sort_values(col, ascending=False)` | single key | WRITE |
 | top-N sentence | as a named pattern | WRITE |
 | `.loc[row_label, col_label]` | scalar lookup only (Banana task 4 needs it) | ADAPT |
+| `.idxmax()/.idxmin()` | on a single column, returning a label; paired with `.loc` (added 2026-08-11) | ADAPT |
 | `.filter(like=)` | 🧭 Field Note (cheese task); sets task cut per decision 5 | ADAPT |
 | `.drop(list, axis='columns')` | 🧭 Field Note in EOD setup | ADAPT |
+
+Note (2026-08-11): `.idxmax()/.idxmin()` were named in the 3c session sketch above but had no
+row in this table. Session 3C teaches them and the Banana EOD uses `.idxmax()` in a scaffolded
+task, so they are recorded here at ADAPT. WRITE-depth constructs remain at five, under the
+budget of eight.
+
+Open question (2026-08-11): the scope table puts the filter sentence and the top-N sentence at
+WRITE depth in the Day 3 EOD, but 3C is an afternoon session, which quality gate 2 caps at
+ADAPT. Either 3C moves to the morning, or the EOD's ranking tasks are scaffolded. The Day 3
+build assumes WRITE, on the authority of this table, and supplies both sentences verbatim in a
+"Today's two sentences" box at the top of the EOD.
 
 ### Day 4: Clean + Transform
 

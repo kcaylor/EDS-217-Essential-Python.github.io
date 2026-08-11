@@ -1,0 +1,341 @@
+---
+title: "Tasks & Activities"
+subtitle: "🍌 The Banana Index: Ranking the Cost of Food"
+execute:
+  echo: false
+  include: false
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](images/banana_panda.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A cartoon panda is eating a banana.* [MidJourney 5](https://www.midjourney.com)
+
+:::
+
+In 2023 *The Economist* published a way of talking about the climate cost of food that anyone
+can hold in their head. Instead of grams of CO₂, express everything as **bananas**: how many
+times more carbon does a kilogram of this food emit than a kilogram of bananas?
+
+They computed it three ways, because "a kilogram of lettuce" and "a kilogram of beef" are not
+the same amount of food. Per kilogram, per thousand calories, and per hundred grams of
+protein. The three rankings disagree, and the disagreement is the interesting part.
+
+Tonight you rank this dataset three ways and work out what the disagreement means.
+
+:::{.callout-note title="Reference"}
+The Economist and Solstad, S., 2023. The Economist's Banana index. First published in the
+article "A different way to measure the climate impact of food", *The Economist*, April 11,
+2023. The data are [posted on GitHub](https://github.com/TheEconomist/banana-index-data).
+:::
+
+## Today's two sentences
+
+Everything below is built from these. You should not need to look them up more than once.
+
+```python
+df[df['column'] > value]                             # the filter sentence
+df.sort_values('column', ascending=False).head(n)    # the top-N sentence
+```
+
+## Setup
+
+1. Create a new notebook named `EOD_Day3_Banana_Index.ipynb`.
+
+2. Add a title cell:
+
+```markdown
+# Day 3 EOD: The Banana Index
+
+Date: 09/02/2026
+```
+
+3. Read the data, using `entity` as the index. The `entity` column holds the food names, and
+   making it the index means every ranking you print will be labelled with food names instead
+   of row numbers.
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/banana_index.csv'
+df = pd.read_csv(url, index_col='entity')
+df.shape
+```
+
+4. The file carries five columns that are bookkeeping rather than data: `year`,
+   `Banana values`, `type`, `Chart?`, and `Unnamed: 16`. Remove them.
+
+:::{.callout-tip title="🧭 Field Note: dropping columns you don't want"}
+`.drop()` takes a **list** of column names and `axis='columns'`, and returns a new DataFrame
+without them. Here is the whole line. Run it as written:
+
+```python
+df = df.drop(['year', 'Banana values', 'type', 'Chart?', 'Unnamed: 16'], axis='columns')
+```
+
+Two things to notice. The names go in a list, exactly like the lists you used to select
+columns yesterday. And `axis='columns'` is what tells pandas you mean columns and not rows,
+because `.drop()` can remove either.
+
+📖 [Cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+:::
+
+```{python}
+df = df.drop(['year', 'Banana values', 'type', 'Chart?', 'Unnamed: 16'], axis='columns')
+df.columns.tolist()
+```
+
+## Part 1: Get your bearings
+
+Start the way you started yesterday. Answer each in a markdown cell underneath the code.
+
+1. How many foods are in the dataset, and how many columns are left after the drop?
+2. Display the first few rows. What do the three columns whose names begin with `Bananas
+   index` contain?
+3. Run `.info()`. Two columns have missing values. Which, and how many?
+4. What is the value of `Bananas index (kg)` for `Bananas` itself? Say why that number is what
+   it is.
+
+```{python}
+df.shape
+```
+
+```{python}
+df.head()
+```
+
+```{python}
+df.info()
+```
+
+```{python}
+df.isnull().sum()
+```
+
+```{python}
+df.loc['Bananas', 'Bananas index (kg)']
+```
+
+## Part 2: Three rankings
+
+Each of the three `Bananas index` columns is a ranking waiting to happen.
+
+5. Use the top-N sentence to display the 10 highest-scoring foods for `Bananas index (kg)`.
+6. Do the same for `Bananas index (1000 kcalories)`.
+7. Do the same for `Bananas index (100g protein)`.
+
+Write each one out in full. Yes, that is the same sentence three times with one word changed.
+Notice how that feels.
+
+```{python}
+df['Bananas index (kg)'].sort_values(ascending=False).head(10)
+```
+
+```{python}
+df['Bananas index (1000 kcalories)'].sort_values(ascending=False).head(10)
+```
+
+```{python}
+df['Bananas index (100g protein)'].sort_values(ascending=False).head(10)
+```
+
+:::{.callout-note title="Hold that thought"}
+You just wrote the same six words three times. Tomorrow morning you'll learn how to write it
+once, give it a name, and call it three times. Copying a line and changing one word in it is
+exactly the itch that **functions** exist to scratch, and it is worth having felt the itch
+before you get the cure.
+:::
+
+8. In a markdown cell, describe in two or three sentences how the three lists differ. Which
+   foods are near the top of all three? Which appear on only one, and can you say why?
+
+## Part 3: Which foods are on every list?
+
+9. Print the three top-10 lists again, one after another, and compare them by eye. Write down,
+   in a markdown cell, the foods that appear in **all three**. There are three of them.
+
+```{python}
+print('Top 10 for Bananas index (kg):')
+print(df['Bananas index (kg)'].sort_values(ascending=False).head(10))
+
+print('\nTop 10 for Bananas index (1000 kcalories):')
+print(df['Bananas index (1000 kcalories)'].sort_values(ascending=False).head(10))
+
+print('\nTop 10 for Bananas index (100g protein):')
+print(df['Bananas index (100g protein)'].sort_values(ascending=False).head(10))
+```
+
+10. In a markdown cell: what does it mean for a food to be near the top of all three lists at
+    once? What would it mean for a food to top one list and appear on neither of the others?
+    Name one food of each kind.
+
+:::{.callout-tip title="Do this by reading, not by coding"}
+Comparing three short lists by eye is the right tool for three short lists. Print them, read
+them, write down what you see. Automating a comparison this small costs more than it saves.
+:::
+
+## Part 4: Filtering by score
+
+Now use the other sentence.
+
+11. Use the filter sentence to find every food with a `Bananas index (kg)` above 10. How many
+    are there?
+
+```{python}
+expensive_by_weight = df[df['Bananas index (kg)'] > 10]
+expensive_by_weight.shape
+```
+
+12. Use `~` to find the foods that are **not** above a score of 1 on `Bananas index (kg)`,
+    that is, foods no worse than a banana by weight. How many are there?
+
+13. Now filter for `Bananas index (kg)` **below** 1 instead. You get a different number.
+    Explain the difference in one sentence.
+
+```{python}
+no_worse_than_banana = df[~(df['Bananas index (kg)'] > 1)]
+print(no_worse_than_banana.shape)
+
+better_than_banana = df[df['Bananas index (kg)'] < 1]
+print(better_than_banana.shape)
+```
+
+14. Use a **two-condition** filter to find the foods that score above 5 per kilogram **and**
+    below 1 per 100 g of protein. End the line with `.copy()`, since you'll display it a
+    couple of ways. Display the two banana index columns for those foods, ranked by
+    `Bananas index (kg)`.
+
+```{python}
+costly_but_protein_rich = df[
+    (df['Bananas index (kg)'] > 5) & (df['Bananas index (100g protein)'] < 1)
+].copy()
+
+print(costly_but_protein_rich.shape)
+
+costly_but_protein_rich[
+    ['Bananas index (kg)', 'Bananas index (100g protein)']
+].sort_values('Bananas index (kg)', ascending=False)
+```
+
+15. In a markdown cell: what do the foods in question 14 have in common? What is the argument
+    this table makes about how we should compare foods?
+
+## Part 5: Land, not carbon
+
+The banana index columns are all about emissions. The dataset also carries land use, in
+`land_use_1000kcal`: square metres of land per thousand calories.
+
+16. Use `.loc[]` to look up the value of `land_use_1000kcal` for `Bananas`.
+17. Use the top-N sentence to display the 10 foods with the highest `land_use_1000kcal`.
+18. Use `.idxmax()` on `land_use_1000kcal` to get the name of the single most land-hungry food.
+    Then use two `.loc[]` lookups and a division to report how many times the banana's land
+    use that food requires.
+
+```{python}
+banana_land_use = df.loc['Bananas', 'land_use_1000kcal']
+banana_land_use
+```
+
+```{python}
+df['land_use_1000kcal'].sort_values(ascending=False).head(10)
+```
+
+```{python}
+hungriest = df['land_use_1000kcal'].idxmax()
+print(hungriest)
+print(df.loc[hungriest, 'land_use_1000kcal'] / df.loc['Bananas', 'land_use_1000kcal'])
+```
+
+19. Compare your land-use top 10 with your emissions top 10 from question 5. Are they the same
+    foods? Answer in a markdown cell, and name one food that appears on one list and not the
+    other.
+
+## Part 6: Cheese
+
+The dataset has a lot of cheese in it. Cheese is worth a section of its own, because it is the
+one dairy product that shows up alongside meat at the top of the emissions rankings.
+
+20. Build a table of just the cheeses, then find the cheese with the highest
+    `Bananas index (1000 kcalories)`.
+
+:::{.callout-tip title="🧭 Field Note: selecting rows whose label contains a word"}
+The food names are the **index** of your table, not a column, so the filter sentence cannot
+reach them. `.filter()` can. Given a substring, it keeps every row whose label contains it:
+
+```python
+cheese = df.filter(like='heese', axis='rows')
+```
+
+`like='heese'` rather than `'cheese'` so that `Cheddar cheese` and `Cheesecake` are both
+caught, whatever their capitalisation. Run the line as written, then rank `cheese` with the
+top-N sentence exactly as you have been doing all evening.
+
+📖 [Cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
+:::
+
+```{python}
+cheese = df.filter(like='heese', axis='rows')
+print(cheese.shape)
+
+cheese['Bananas index (1000 kcalories)'].sort_values(ascending=False)
+```
+
+21. How many rows did `.filter(like='heese')` give you? Look at the names carefully. Is every
+    one of them a cheese? In a markdown cell, say what this tells you about matching on text.
+
+22. Where does the top cheese sit in the whole dataset's calorie ranking? Check it against your
+    answer to question 6.
+
+## Part 7: Write it up
+
+In a single markdown cell of 200 to 300 words, answer this:
+
+> A friend tells you they are cutting bananas out of their diet for environmental reasons.
+> Using this dataset, what would you tell them?
+
+Your answer must cite at least three specific numbers you computed tonight, and must mention
+at least one place where the three rankings disagree with each other. Complete sentences, no
+bullet fragments.
+
+## The grammar minute
+
+Look back through your notebook. Almost every code cell you wrote tonight was one of two
+sentences:
+
+```python
+df[df['column'] > value]                             # filter: fewer rows
+df.sort_values('column', ascending=False).head(n)    # rank: same rows, new order, first few
+```
+
+Everything else was a variation. `&` and `|` joined two questions into one filter. `~` turned
+a question around. `.idxmax()` returned the label instead of the row. `.loc[]` looked up one
+value.
+
+Two sentences, one evening, and you answered every question in this document. That is what a
+sentence pattern is for, and you will be writing both of these every day for the rest of the
+course.
+
+## Wrap-up
+
+Before you close your notebook, check that:
+
+- every claim in your Part 7 write-up has a code cell above it that produced the number
+- you used the filter sentence and the top-N sentence at least three times each
+- you can say out loud what `&` needs that a single condition does not
+- your notebook reads top to bottom as a document, not as a pile of cells
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
+- [📖 EDS 217 cheatsheet: control flows](../cheatsheets/control_flows.qmd)
+- [📖 EDS 217 cheatsheet: lists](../cheatsheets/lists.qmd)
+- [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+- [The Economist: a different way to measure the climate impact of food](https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food){target="_blank"}

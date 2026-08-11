@@ -1,0 +1,132 @@
+---
+title: "Live Coding Session"
+subtitle: "🐍 Booleans & Conditionals, Asked of Data"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](assets/control_flow.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*An enormously complex tangle of piping and valves with numerous loops and on/off spigots that
+control the flow.* [MidJourney 5](https://www.midjourney.com)
+
+:::
+
+Every question you will ask of a dataset this week starts as a yes-or-no question about one
+value. Was this day above freezing? Is this reading from the ozone monitor? Did this park get
+more than a million visitors?
+
+Python has a type for the answer to a question like that, and it is called a **boolean**: a
+value that is either `True` or `False`. This morning we learn to write those questions, to
+combine them, and to act on the answers. By the end of the hour you will have asked a question
+of an entire column at once, which is the idea the rest of today is built on.
+
+## How a live coding session works
+
+We both start from an empty notebook and write everything together, live. There is no code on
+this page to copy, on purpose.
+
+- I write a line, explain it, and run it. You write the same line and run it.
+- When something breaks, we fix it together. Things will break. That's the useful part.
+- If you fall behind, say so. Someone else is behind too, and I would much rather slow down
+  than lose you.
+- Type the code. Do not copy it from a neighbor's screen. The typing is the point.
+
+## Set up your notebook
+
+1. Create a new notebook named `Session_3A_Booleans_and_Conditionals.ipynb`.
+
+2. Add a title cell:
+
+```markdown
+# Day 3: Session 3A - Booleans & Conditionals
+
+Date: 09/02/2026
+```
+
+3. Add the following **markdown cells** now, in this order, leaving space under each. We'll
+   fill in the code as we go, and having the structure in place means your notes stay
+   organized instead of becoming one long scroll.
+
+```markdown
+## 1. A yes-or-no question
+
+## 2. The comparison operators
+
+## 3. Asking two questions at once
+
+## 4. if / elif / else
+
+## 5. Asking a whole column
+
+## 6. Counting the Trues
+
+## 7. Where this goes next
+```
+
+4. Under each heading, add an empty code cell.
+
+That's your scaffold. Now close this page and switch to your notebook.
+
+## The data
+
+We'll use the Toolik Field Station weather record, the same file you wrote a biography of
+last night:
+
+```
+https://eds-217-essential-python.github.io/data/toolik_weather.csv
+```
+
+You already know what's in it, so nothing today will be a surprise about the *data*. That
+leaves your attention free for the *questions*.
+
+## What we'll cover
+
+**Booleans and comparisons** (about 8 minutes)
+
+- `True` and `False`, and what `type()` says about them
+- the six comparison operators, including the difference between `=` and `==`
+- reading one value out of a DataFrame with `.loc[]`
+- combining questions with `and`, `or`, and `not`
+
+**Conditionals** (about 8 minutes)
+
+- `if`, and why the colon and the indentation are not optional
+- `else` for the leftover case
+- `elif` for sorting a value into one of several categories
+- writing a small classifier: cold day, cool day, warm day
+
+**Asking a whole column** (about 9 minutes)
+
+- what happens when you compare an entire column to a number
+- the boolean **mask**, a column of `True` and `False` with the row labels still attached
+- `&`, `|`, and `~`, which are what pandas uses in place of `and`, `or`, and `not`
+- why every piece of a combined mask needs its own parentheses
+- counting with `.sum()`, because `True` counts as 1
+
+## What you should be able to do afterwards
+
+- write a comparison and predict whether it gives `True` or `False`
+- write an `if`/`elif`/`else` block that puts one number into one of three categories
+- compare a column to a value and explain what you get back
+- combine two column comparisons with `&` and get the parentheses right the first time
+- say, in one sentence, what a boolean mask is for
+
+## Where this goes next
+
+In the very next session you'll put a mask inside square brackets and get back a smaller
+table. That line is the **filter sentence**, and it is the single most useful thing you will
+learn this week. Everything in this session exists to make that line make sense.
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: control flows](../cheatsheets/control_flows.qmd)
+- [📖 EDS 217 cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
+- [Python tutorial: comparisons and boolean operations](https://docs.python.org/3/library/stdtypes.html#comparisons){target="_blank"}

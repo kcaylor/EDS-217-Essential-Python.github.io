@@ -1,0 +1,206 @@
+---
+title: "Coding Colab"
+subtitle: "🙌 Which One, and How Do You Know?"
+execute:
+  echo: false
+  include: false
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](../images/panda.jpeg)
+:::
+
+On Monday you and a partner worked out what was in the National Park Service visitor records
+and wrote five factual claims about them. You never got to ask the obvious question, because
+you did not yet have the tools.
+
+Today you do. Every question below is a "which one" or a "top ten" question, and every one of
+them is answered with the two sentences you learned this morning.
+
+Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
+finish a numbered task. The person not typing says out loud what they expect the answer to
+look like *before* the cell is run.
+
+You have 45 minutes.
+
+## The data
+
+The same file you explored on Monday:
+
+```
+https://eds-217-essential-python.github.io/data/national_parks.csv
+```
+
+Two things you found on Monday that will matter today:
+
+- the `year` column is stored as **text**, not as numbers
+- some rows have a `year` of `Total` rather than an actual year
+
+## Setup
+
+Create a notebook named `Colab_3D_Ranking_Questions.ipynb`, with both partners' names in the
+title cell, then read the file in and check its shape.
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/national_parks.csv'
+parks = pd.read_csv(url)
+parks.shape
+```
+
+```{python}
+parks.columns.tolist()
+```
+
+## The two sentences
+
+You have these on your session pages. You should not need to look them up more than once or
+twice today.
+
+```python
+df[df['column'] > value]                                # the filter sentence
+df.sort_values('column', ascending=False).head(n)       # the top-N sentence
+```
+
+## Part 1: Filtering (about 15 minutes)
+
+Answer each question with code, then write the answer in a markdown cell underneath, in a
+complete sentence with the number in it.
+
+1. How many rows describe units whose `unit_type` is exactly `National Park`?
+
+```{python}
+national_parks = parks[parks['unit_type'] == 'National Park']
+national_parks.shape
+```
+
+2. How many rows have a `year` of `Total`? Use `~` or `!=` to build a table called
+   `by_year` that has none of them in it. How many rows does `by_year` have?
+
+```{python}
+totals = parks[parks['year'] == 'Total']
+print(totals.shape)
+
+by_year = parks[~(parks['year'] == 'Total')]
+print(by_year.shape)
+```
+
+3. The `region` column uses two-letter codes. Build a **list** of the codes `PW`, `IM`, and
+   `AK`, and use `.isin()` to filter `by_year` down to units in those three regions. How many
+   rows?
+
+```{python}
+western_regions = ['PW', 'IM', 'AK']
+western = by_year[by_year['region'].isin(western_regions)]
+western.shape
+```
+
+4. Using two conditions in one filter, find the rows that are National Parks **and** recorded
+   more than 5 million visitors. How many are there, and what does each row represent?
+
+```{python}
+big = by_year[(by_year['unit_type'] == 'National Park') & (by_year['visitors'] > 5_000_000)]
+print(big.shape)
+big[['year', 'unit_name', 'state', 'visitors']].sort_values('visitors', ascending=False).head()
+```
+
+:::{.callout-tip title="Stuck on the parentheses?"}
+Every comparison inside a combined filter needs its own set: `(a == b) & (c > d)`. If you get
+a `TypeError` that mentions something you did not write, missing parentheses are almost always
+the reason.
+:::
+
+## Part 2: Ranking (about 15 minutes)
+
+5. Rank **all** of `parks` by `visitors`, largest first, and look at the top 10. Something is
+   wrong with this answer. Say what, and say why in one sentence.
+
+```{python}
+parks.sort_values('visitors', ascending=False).head(10)[
+    ['year', 'unit_name', 'unit_type', 'visitors']
+]
+```
+
+6. Fix it, and rank `by_year` instead. Which single park unit had the highest visitor count in
+   any one year, and in what year?
+
+```{python}
+by_year.sort_values('visitors', ascending=False).head(10)[
+    ['year', 'unit_name', 'unit_type', 'state', 'visitors']
+]
+```
+
+7. Filter to National Parks in the year `2016`, then find the top 10 by visitors. Show only
+   the `unit_name`, `state`, and `visitors` columns.
+
+```{python}
+np_2016 = by_year[(by_year['unit_type'] == 'National Park') & (by_year['year'] == '2016')].copy()
+print(np_2016.shape)
+
+np_2016.sort_values('visitors', ascending=False).head(10)[['unit_name', 'state', 'visitors']]
+```
+
+8. How many of the 61 National Parks recorded more than a million visitors in 2016?
+
+```{python}
+(np_2016['visitors'] > 1_000_000).sum()
+```
+
+9. Use `.idxmax()` and `.loc[]` on `np_2016` to print the name of the most-visited National
+   Park of 2016 on its own, without displaying the whole row.
+
+```{python}
+busiest = np_2016['visitors'].idxmax()
+print(np_2016.loc[busiest, 'unit_name'])
+print(np_2016.loc[busiest, 'visitors'])
+```
+
+## Part 3: Put them together (about 10 minutes)
+
+10. Build a list of the state codes `CA`, `UT`, and `AZ`. Filter `np_2016` to National Parks
+    in those three states, rank them by visitors, and display the whole ranked list.
+
+```{python}
+southwest_states = ['CA', 'UT', 'AZ']
+southwest = np_2016[np_2016['state'].isin(southwest_states)].copy()
+
+southwest.sort_values('visitors', ascending=False)[['unit_name', 'state', 'visitors']]
+```
+
+11. Which of those three states has the park at the top of your list, and which has the most
+    parks in it? Answer both in a markdown cell. You can count the parks per state by eye from
+    your ranked table.
+
+```{python}
+southwest['state'].value_counts()
+```
+
+12. In one markdown cell of three or four sentences, answer this: **a colleague asks you which
+    national park is "the busiest". What do you need to know before you can answer, and what
+    would you tell them?** Use at least two numbers from today's work.
+
+:::{.callout-note title="If you finish early"}
+Pick a year other than 2016 and produce the same top 10. Did the order change? Name one park
+that moved several places, and say what you would need in order to find out whether that
+movement is real or an artifact of how the data was recorded.
+
+Do not try to compare all the years at once. That needs grouping, and grouping is Friday.
+:::
+
+## Wrap-up
+
+We'll hear two or three pairs on question 12. Be ready to say which filter you would insist on
+before answering, not just what your answer was.
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
+- [📖 EDS 217 cheatsheet: lists](../cheatsheets/lists.qmd)
+- [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)

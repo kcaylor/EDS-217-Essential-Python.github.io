@@ -1,5 +1,5 @@
 ---
-title: "Control and Comprehensions"
+title: "Filter & Sort"
 subtitle: "Day 3"
 description: "Wednesday September 2^nd^, 2026"
 ---
@@ -9,26 +9,37 @@ description: "Wednesday September 2^nd^, 2026"
 :::
 
 :::{.gray-text .center-text}
-*A cartoon panda is a school crossing guard. He is directing traffic with a hand-held Stop sign and allowing an adorable group of school-aged pythons cross the street.* [MidJourney 5](https://www.midjourney.com/jobs/1742d0fb-148a-4fb3-a3d4-9594a00fc805?index=0)
+*A cartoon panda is a school crossing guard. He is directing traffic with a hand-held Stop sign
+and allowing an adorable group of school-aged pythons cross the street.*
+[MidJourney 5](https://www.midjourney.com/jobs/1742d0fb-148a-4fb3-a3d4-9594a00fc805?index=0)
 :::
 
+Yesterday you learned to describe a dataset. Today you start interrogating one.
 
+Day 3 owns two sentences, and between them they answer most of the questions anyone asks of a
+table. The **filter sentence** keeps the rows that satisfy a condition. The **top-N sentence**
+puts rows in order and takes the front of the list. Booleans, comparison operators and
+`if`/`elif`/`else` arrive this morning because a filter needs them.
 
 ## Class materials
 
 | {{< fa calendar-day title="A calendar with one day highlighted" >}} Session  | {{< fa laptop-code title="A laptop with on-screen code" >}} Session 1  |  {{< fa laptop-code title="A laptop with on-screen code" >}} Session 2 |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| day 3 / morning   | [📝 Control Flows](live-coding/3a_control_flows.qmd){target="_blank"} | [🙌 Coding Colab: Control flows and data science](coding-colabs/3b_control_flows.qmd) |
-| day 3 / afternoon | [🐼 Intro to Arrays and Series](interactive-sessions/3c_arrays_and_series.qmd){target="_blank"} | [🙌 Coding Colab: Working with Pandas Series](coding-colabs/3d_pandas_series.qmd) |
-: {.hover .bordered tbl-colwidths="[20,40,40]"} 
+| day 3 / morning   | [📝 Booleans & Conditionals, Asked of Data](live-coding/3a_booleans_and_conditionals.qmd) | [🔍 The Filter Sentence](interactive-sessions/3b_filtering_data.qmd) |
+| day 3 / afternoon | [🥇 The Top-N Sentence](interactive-sessions/3c_sorting_and_ranking.qmd) | [🙌 Which One, and How Do You Know?](coding-colabs/3d_ranking_questions.qmd) |
+: {.hover .bordered tbl-colwidths="[20,40,40]"}
 
 ## End-of-day practice
 
-Complete the following tasks / activities before heading home for the day!
+Tonight you rank a dataset three different ways, and work out what it means when the three
+rankings disagree.
 
-- [{{< fa pencil title="A pencil" >}} **Day 3 Practice:** Using Pandas Series for Data Analysis](eod-practice/eod-day3.qmd)
+- [{{< fa pencil title="A pencil" >}} **Day 3 Practice:** The Banana Index](eod-practice/eod-day3-2026.qmd)
 
 ## Additional Resources
 
-
-
+- [{{< fa diagram-project title="A workflow diagram" >}} The Data Science Workflow](the-data-science-workflow.qmd)
+- [{{< fa table title="A table" >}} data selection and filtering cheatsheet](cheatsheets/data_selection.qmd)
+- [{{< fa table title="A table" >}} control flows cheatsheet](cheatsheets/control_flows.qmd)
+- [{{< fa table title="A table" >}} pandas DataFrames cheatsheet](cheatsheets/pandas_dataframes.qmd)
+- [{{< fa table title="A table" >}} lists cheatsheet](cheatsheets/lists.qmd)

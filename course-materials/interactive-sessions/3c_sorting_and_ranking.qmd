@@ -1,0 +1,254 @@
+---
+title: "Interactive Session"
+subtitle: "🥇 The Top-N Sentence"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](images/selecting_indexing.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A panda, putting things in order.* [MidJourney 5](https://www.midjourney.com)
+
+:::
+
+"Which one is the worst?" is probably the most common question anyone asks of a dataset. So is
+"what are the top ten?" Both are the same operation: put the rows in order, then take the ones
+at the front.
+
+This session gives you that operation as a named pattern, and gives you two small companions
+for the case where you want the *label* of the winner rather than the row.
+
+By the end of this session you will be able to:
+
+- reorder a table with `.sort_values()`, in either direction
+- write the **top-N sentence**, `df.sort_values('col', ascending=False).head(n)`
+- explain why a ranking is meaningless until you have filtered first
+- find the label of the largest or smallest value with `.idxmax()` and `.idxmin()`
+- look up a single value with `.loc[row_label, column_label]`
+
+## Getting Started
+
+1. **Create a new notebook** from the Launcher (**eds217_2026**).
+
+2. **Rename your notebook** to: `Session_3C_Sorting_and_Ranking.ipynb`
+
+3. **Add a title cell** (Markdown), updating the date to today:
+
+```markdown
+# Day 3: Session 3C - The Top-N Sentence
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/3c_sorting_and_ranking.html)
+
+Date: 09/02/2026
+```
+
+4. Read in the Goleta air quality data and rebuild the `pm25` subset from the last session:
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/openaq_goleta_measurments.csv'
+goleta = pd.read_csv(url)
+
+pm25 = goleta[goleta['parameter'] == 'pm25'].copy()
+pm25.shape
+```
+
+## Putting a table in order
+
+`.sort_values()` takes the name of a column and reorders the whole table by it:
+
+```{python}
+pm25.sort_values('value').head()
+```
+
+Smallest first, which is the default. Those negative readings are the ones you flagged
+yesterday, and here they are at the bottom of the ranking where you would expect them.
+
+To go the other way, pass `ascending=False`:
+
+```{python}
+pm25.sort_values('value', ascending=False).head()
+```
+
+Now the largest values are on top. `ascending=` is a keyword argument, the same kind of
+argument as `index_col=` from Monday: you pass it by name, after the column.
+
+Sorting works on text columns too, alphabetically:
+
+```{python}
+goleta.sort_values('parameter').head(3)
+```
+
+:::{.callout-note}
+🐍 `.sort_values()` returns a **new** DataFrame in the new order and leaves the original
+alone. Look at `pm25.head()` after all that sorting and the rows are exactly where they were.
+:::
+
+```{python}
+pm25.head(3)
+```
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Sort `pm25` by `datetimeLocal` instead of by `value`. What does the first row give you? Say in
+one sentence what sorting by a timestamp column does.
+:::
+
+## The top-N sentence
+
+Sorting gives you the whole table in order. Almost always you want the front of it, so pair
+the sort with `.head()`:
+
+```{python}
+pm25.sort_values('value', ascending=False).head(10)
+```
+
+That is the **top-N sentence**:
+
+```python
+df.sort_values('column', ascending=False).head(n)
+```
+
+Read it left to right as three instructions: sort by this column, biggest first, and give me
+the first `n`. Drop `ascending=False` and the same sentence gives you the bottom N instead.
+
+You will write this line more often than any other line this week. Learn it as one unit
+rather than as three separate methods, because you will almost never want one without the
+others.
+
+Often you only care about a couple of columns, so select them after ranking:
+
+```{python}
+pm25.sort_values('value', ascending=False).head(10)[['datetimeLocal', 'value', 'unit']]
+```
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Write the top-N sentence to find the **five cleanest** hours in `pm25`, that is, the five
+lowest values. Then say why the answer you get is not very useful, and what you would have to
+do about it first.
+:::
+
+## Filter first, then rank
+
+Here is what happens if you rank without filtering:
+
+```{python}
+goleta.sort_values('value', ascending=False).head(5)[['parameter', 'value', 'unit']]
+```
+
+Every row at the top is `pm10`, because particulates are reported in micrograms per cubic
+metre and ozone is reported in parts per million. A number in µg/m³ will beat a number in ppm
+every time, and the ranking tells you nothing except which column has the bigger units.
+
+The two sentences you learned today are meant to be used in that order:
+
+```{python}
+goleta[goleta['parameter'] == 'pm10'].sort_values('value', ascending=False).head(5)[
+    ['datetimeLocal', 'value', 'unit']
+]
+```
+
+**Filter to one comparable thing, then rank it.** That sequence is most of practical data
+analysis, and forgetting the first half is one of the most common ways to publish a wrong
+number.
+
+:::{.callout-important title="A ranking is only as good as the group it ranks"}
+Before you report a "top ten", ask yourself what the ten are being compared against, and
+whether every row in the table belongs in that comparison. Yesterday's units problem and
+today's ranking problem are the same problem, arriving twice.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Filter `goleta` to ozone, then rank it to find the five highest ozone readings. What are the
+values, and what unit are they in?
+:::
+
+## Finding the label instead of the row
+
+Sometimes you don't want the row. You want to know *which one* it was: which day, which
+station, which food.
+
+`.idxmax()` gives you the **index label** of the largest value in a column:
+
+```{python}
+pm25['value'].idxmax()
+```
+
+That number is a row label, not a value and not a position. Hand it to `.loc[]` with a column
+name and you get the one thing you were after:
+
+```{python}
+worst_hour = pm25['value'].idxmax()
+pm25.loc[worst_hour, 'datetimeLocal']
+```
+
+`.loc[row_label, column_label]` reads as "the value at this row, in this column". You saw it
+this morning on the Toolik data, and it is the natural partner to `.idxmax()`.
+
+`.idxmin()` does the same for the smallest value:
+
+```{python}
+cleanest_hour = pm25['value'].idxmin()
+print(cleanest_hour)
+print(pm25.loc[cleanest_hour, 'datetimeLocal'])
+print(pm25.loc[cleanest_hour, 'value'])
+```
+
+:::{.callout-caution title="`.idxmax()` reports one winner, even when there are two"}
+Two hours in this dataset are tied at the maximum of 22 µg/m³, and `.idxmax()` names only one
+of them. It does not warn you that the other exists.
+
+Whenever the answer to your question would change if there were a tie, use the top-N sentence
+and read the result, rather than trusting a single label:
+:::
+
+```{python}
+pm25.sort_values('value', ascending=False).head(3)[['datetimeLocal', 'value']]
+```
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Use `.idxmax()` and `.loc[]` on the ozone subset to find the timestamp of the highest ozone
+reading. Then check your answer with the top-N sentence.
+:::
+
+## Putting it together
+
+The two sentences of Day 3, in one workflow:
+
+```{python}
+pm10 = goleta[goleta['parameter'] == 'pm10'].copy()
+
+worst_ten = pm10.sort_values('value', ascending=False).head(10)
+worst_ten[['datetimeLocal', 'value', 'unit']]
+```
+
+```{python}
+worst = pm10['value'].idxmax()
+print('Worst pm10 hour:', pm10.loc[worst, 'datetimeLocal'])
+print('Value:', pm10.loc[worst, 'value'], pm10.loc[worst, 'unit'])
+```
+
+## Key points
+
+- `.sort_values('col')` reorders a table, smallest first. `ascending=False` reverses it.
+- The **top-N sentence** is `df.sort_values('col', ascending=False).head(n)`. Learn it as one
+  unit.
+- Sorting returns a new DataFrame. Assign it to a name to keep it.
+- **Filter first, then rank.** A ranking across categories that are not comparable is not an
+  answer.
+- `.idxmax()` and `.idxmin()` give the index **label** of the extreme value, not the value.
+- `.loc[row_label, column_label]` looks up a single value.
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
+- [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+- [pandas documentation: `DataFrame.sort_values`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html){target="_blank"}
+- [pandas documentation: `Series.idxmax`](https://pandas.pydata.org/docs/reference/api/pandas.Series.idxmax.html){target="_blank"}

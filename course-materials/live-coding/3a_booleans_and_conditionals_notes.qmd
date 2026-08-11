@@ -1,0 +1,367 @@
+---
+title: "Live Coding Session"
+subtitle: "🎙️ Instructor Notes: Booleans & Conditionals"
+jupyter: eds217_2026
+search: false
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+*Instructor run-through for Session 3A. Student-facing page:
+[3a_booleans_and_conditionals.qmd](3a_booleans_and_conditionals.qmd). Headings below match the
+markdown scaffold students set up, so everyone stays in the same place.*
+
+**Total: 25 minutes of coding, 20 minutes of buffer and questions.**
+
+:::{.callout-important title="Scope discipline"}
+This session teaches booleans, comparison operators, `if`/`elif`/`else`, and the boolean mask.
+It does **not** teach filtering. The filter sentence belongs to Session 3B, and section 7 is
+deliberately a one-line preview with no explanation.
+
+No loops are taught today. Students met `for` yesterday afternoon, and section 4 uses one as a
+convenience for running a classifier over three values. Say out loud that it is a convenience,
+and cut it if you are behind.
+
+Do not use `lambda` anywhere. It is not in this course.
+:::
+
+## Framing (1 min)
+
+Say something close to this:
+
+> Yesterday you described a dataset. Today you start interrogating one. Every question worth
+> asking of data starts as a yes-or-no question about a single value, and Python has a type
+> for that answer. Learn to write those questions well and the rest of the week is bookkeeping.
+
+## Setup
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/toolik_weather.csv'
+toolik = pd.read_csv(url)
+toolik.shape
+```
+
+## 1. A yes-or-no question (3 min)
+
+Start with a bare value so the boolean is the subject, not the DataFrame:
+
+```{python}
+temperature = 8.4
+temperature > 0
+```
+
+```{python}
+type(temperature > 0)
+```
+
+Points to make:
+
+- the answer is a value, with a type, like any other value
+- `bool` has exactly two members, `True` and `False`, capitalized
+- you can store the answer in a variable
+
+```{python}
+above_freezing = temperature > 0
+above_freezing
+```
+
+Now show where the `8.4` came from. This is the first time they see `.loc[]`:
+
+```{python}
+toolik.loc[0, 'Daily_AirTemp_Mean_C']
+```
+
+> `.loc[]` takes a row label, then a column label, and hands back the one value sitting at
+> that intersection. Row `0` is the first day of the record. We'll use this again this
+> afternoon.
+
+```{python}
+toolik.loc[0, 'Daily_AirTemp_Mean_C'] > 0
+```
+
+## 2. The comparison operators (3 min)
+
+Write all six on the board and demonstrate quickly:
+
+```{python}
+print(temperature > 0)
+print(temperature < 0)
+print(temperature >= 8.4)
+print(temperature <= 8.4)
+print(temperature == 8.4)
+print(temperature != 8.4)
+```
+
+Then the error that matters, **run it on purpose**:
+
+```python
+temperature = 0
+```
+
+> That did not ask a question. It answered one, destructively. `=` assigns, `==` compares.
+> This is the most common bug in the room for the next three days, and it is silent, because
+> assignment does not raise an error.
+
+Reset and move on:
+
+```{python}
+temperature = 8.4
+```
+
+Equality on text, since they'll need it in an hour:
+
+```{python}
+toolik.loc[0, 'Station'] == 'TLKMAIN'
+```
+
+Point to make: strings compare with `==` too, and they are case-sensitive.
+
+## 3. Asking two questions at once (3 min)
+
+```{python}
+temperature = 8.4
+precipitation = 0.0
+
+print(temperature > 0 and precipitation == 0)
+print(temperature > 0 or precipitation > 10)
+print(not temperature > 0)
+```
+
+Points to make:
+
+- `and` is `True` only when both sides are `True`
+- `or` is `True` when at least one side is
+- `not` flips the answer
+
+Draw the two-by-two on the board if they look uncertain. Do not go near truth tables as a
+formal topic; two minutes of examples is enough.
+
+:::{.callout-note title="Flag this now, pay it off in section 5"}
+Tell them these three words work on **single values**. When we ask the same question of a
+whole column, we will need three different symbols. Say that you are flagging it deliberately
+and that you will come back to it. It arrives in section 5 and it is much less confusing if
+they were warned.
+:::
+
+## 4. if / elif / else (5 min)
+
+Build it in three steps, running after each.
+
+```{python}
+temperature = 8.4
+
+if temperature > 0:
+    print('Above freezing')
+```
+
+Do the colon error live:
+
+```python
+if temperature > 0
+    print('Above freezing')
+```
+
+> `SyntaxError`. Python wants the colon.
+
+Then the indentation error live:
+
+```python
+if temperature > 0:
+print('Above freezing')
+```
+
+> `IndentationError`. Same rule as yesterday's `for` loop: the indented block is the body.
+
+Add `else`:
+
+```{python}
+temperature = -12.0
+
+if temperature > 0:
+    print('Above freezing')
+else:
+    print('Below freezing')
+```
+
+Then `elif`, which is the point of the section, because categorization is what they'll do in
+tonight's practice:
+
+```{python}
+temperature = -12.0
+
+if temperature > 10:
+    category = 'warm'
+elif temperature > 0:
+    category = 'cool'
+else:
+    category = 'cold'
+
+category
+```
+
+Points to make:
+
+- Python checks the conditions **in order** and stops at the first `True`
+- so `elif temperature > 0` never sees a value above 10, and does not need to say so
+- `else` catches everything left over; it takes no condition
+
+Test the classifier on three real values so they see it work rather than take it on faith:
+
+```{python}
+for value in [toolik.loc[0, 'Daily_AirTemp_Mean_C'],
+              toolik.loc[5000, 'Daily_AirTemp_Mean_C'],
+              toolik.loc[10, 'Daily_AirTemp_Mean_C']]:
+    if value > 10:
+        print(value, 'warm')
+    elif value > 0:
+        print(value, 'cool')
+    else:
+        print(value, 'cold')
+```
+
+:::{.callout-tip title="If you are running long"}
+The loop above is a convenience, not a lesson. If you are behind, run the classifier on one
+value and move on. Loops are not in today's scope table.
+:::
+
+## 5. Asking a whole column (5 min)
+
+This is the section the day depends on. Slow down.
+
+```{python}
+toolik['Daily_AirTemp_Mean_C'] > 0
+```
+
+Let the output sit on screen and ask what they're looking at before you say anything.
+
+Points to make:
+
+- one question, asked of every row at once
+- what comes back is a **Series** of `True` and `False`, with the same row labels
+- it is exactly as long as the column you asked about
+
+```{python}
+mask = toolik['Daily_AirTemp_Mean_C'] > 0
+mask.head()
+```
+
+```{python}
+len(mask), len(toolik)
+```
+
+Name it: **this is a boolean mask.** Write the word on the board.
+
+Now the promised payoff from section 3. Try `and` on purpose:
+
+```python
+(toolik['Daily_AirTemp_Mean_C'] > 0) and (toolik['Daily_Precip_Total_mm'] == 0)
+```
+
+> `ValueError: The truth value of a Series is ambiguous.`
+
+Say why: `and` wants one `True` or `False` on each side, and you handed it eleven thousand of
+each. pandas cannot guess whether you meant "all of them" or "any of them", so it refuses.
+
+The pandas version:
+
+```{python}
+warm_and_dry = (toolik['Daily_AirTemp_Mean_C'] > 0) & (toolik['Daily_Precip_Total_mm'] == 0)
+warm_and_dry.head()
+```
+
+```{python}
+either_one = (toolik['Daily_AirTemp_Mean_C'] > 10) | (toolik['Daily_Precip_Total_mm'] > 10)
+either_one.head()
+```
+
+```{python}
+not_freezing = ~(toolik['Daily_AirTemp_Mean_C'] <= 0)
+not_freezing.head()
+```
+
+Then drop the parentheses on purpose, because they will all do this:
+
+```python
+toolik['Daily_AirTemp_Mean_C'] > 0 & toolik['Daily_Precip_Total_mm'] == 0
+```
+
+> `TypeError`. `&` binds more tightly than `>`, so Python tried to compute
+> `0 & toolik['Daily_Precip_Total_mm']` first. **Every comparison in a combined mask gets its
+> own parentheses.** No exceptions, no judgment calls.
+
+Put the three symbols and their single-value counterparts side by side on the board:
+
+- one value: `and`, `or`, `not`
+- a whole column: `&`, `|`, `~`
+
+## 6. Counting the Trues (3 min)
+
+```{python}
+mask.sum()
+```
+
+```{python}
+len(mask)
+```
+
+Points to make:
+
+- `True` counts as 1 and `False` as 0, so `.sum()` on a mask is a count of the `True`s
+- that is 3,817 days above freezing out of 11,171 days on record
+
+```{python}
+warm_and_dry.sum()
+```
+
+Ask them to predict whether `warm_and_dry.sum()` will be larger or smaller than `mask.sum()`
+before you run it. Adding a condition can only shrink the count, and hearing them say why is
+worth the thirty seconds.
+
+## 7. Where this goes next (2 min)
+
+One line, no explanation:
+
+```{python}
+toolik[mask].shape
+```
+
+Say:
+
+> A mask in square brackets gives you back only the rows where the answer was `True`. That is
+> the filter sentence, and it is the whole of the next session. You have just written the hard
+> part of it.
+
+Stop there. Do not explain `.copy()`, do not explain chained conditions on a filtered frame.
+That is 3B's material and it lands better with a clean start.
+
+## Timing checkpoints
+
+| Elapsed | Should be at |
+|---|---|
+| 6 min | end of section 2, `=` versus `==` demonstrated |
+| 12 min | end of section 4, `elif` classifier running |
+| 20 min | end of section 5, the `&` parentheses rule on the board |
+| 25 min | section 7 previewed, session closed |
+
+If you're behind at 12 minutes, cut the `or`/`not` examples in section 3 and the loop at the
+end of section 4. Do not cut section 5; everything else today assumes it.
+
+## Common problems
+
+- **`=` versus `==`.** Trigger it deliberately in section 2. It is silent when it happens for
+  real, which is what makes it expensive.
+- **Missing parentheses around each comparison.** Trigger it deliberately in section 5 and
+  state the rule as absolute. Students who learn it as a style preference get it wrong.
+- **`and` on a Series.** The `ValueError` message does not say "use `&`", so they will not
+  work it out unaided. Show it, then show the fix.
+- **`elif` conditions written to be mutually exclusive.** Someone will write
+  `elif temperature > 0 and temperature <= 10`. It is not wrong, and it is not needed. Explain
+  the first-match-wins rule rather than marking it as an error.
+- **NaN.** `Daily_Precip_Total_mm` is missing on 420 days. A comparison against a missing
+  value is `False`, so those rows quietly drop out of `warm_and_dry`. Mention it in one
+  sentence if a student notices the count looks low; Day 4 handles missing data properly.

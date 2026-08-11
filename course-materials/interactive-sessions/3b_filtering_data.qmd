@@ -1,0 +1,320 @@
+---
+title: "Interactive Session"
+subtitle: "🔍 The Filter Sentence"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](images/grouping_filtering.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A panda, sorting the wheat from the chaff.* [MidJourney 5](https://www.midjourney.com)
+
+:::
+
+An hour ago you wrote a question and asked it of an entire column. What came back was a
+**boolean mask**: a `True` or a `False` for every row.
+
+A mask by itself is not very interesting. What you actually want is the rows it says `True`
+about. Getting them takes one line, and that line is the most useful thing you will learn this
+week.
+
+By the end of this session you will be able to:
+
+- write the **filter sentence**, `df[df['col'] > value]`, without looking it up
+- filter on text as well as on numbers
+- combine two conditions with `&` and `|`, and get the parentheses right
+- invert a condition with `~`
+- match against a list of values with `.isin()`
+- say what `.copy()` is for, and use it when you intend to keep a result
+
+## Getting Started
+
+1. **Create a new notebook:**
+   - Click the `+` button to open a Launcher.
+   - Under **Notebook**, click **eds217_2026**.
+
+2. **Rename your notebook** to: `Session_3B_Filtering_Data.ipynb`
+
+3. **Add a title cell** (Markdown), updating the date to today:
+
+```markdown
+# Day 3: Session 3B - The Filter Sentence
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/3b_filtering_data.html)
+
+Date: 09/02/2026
+```
+
+4. Read in the Goleta air quality data you explored yesterday:
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/openaq_goleta_measurments.csv'
+goleta = pd.read_csv(url)
+goleta.shape
+```
+
+:::{.callout-caution}
+Save your work frequently with `Ctrl+S` (`Cmd+S` on macOS).
+:::
+
+## The sentence
+
+Here it is, whole:
+
+```{python}
+goleta[goleta['value'] > 20]
+```
+
+Read it from the inside out. `goleta['value'] > 20` is the mask you learned to write this
+morning: `True` on every row where the value is above 20, `False` everywhere else. Wrapping it
+in `goleta[ ... ]` says "give me the rows where that was `True`."
+
+That is the **filter sentence**. The general form is:
+
+```python
+df[df['column'] <comparison> value]
+```
+
+The `df` appears twice, and that trips people up at first. The inner one builds the question.
+The outer one applies the answer. They are the same table both times.
+
+Assign it a name if you want to use the result:
+
+```{python}
+high_readings = goleta[goleta['value'] > 20]
+high_readings.shape
+```
+
+115 rows out of 1,962. Compare the shapes and you can see the filter did something:
+
+```{python}
+print('before:', goleta.shape)
+print('after: ', high_readings.shape)
+```
+
+:::{.callout-note}
+🐍 Filtering never changes the original. `goleta` still has all 1,962 rows. What you get back
+is a new, smaller table, and if you don't give it a name it is displayed and then discarded.
+This is the same rule you met with `.rename()` yesterday.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Filter `goleta` to the rows where `value` is **below zero**. How many are there? A
+concentration below zero is not physically possible, so make a note of what you find; we will
+deal with values like these on Day 4.
+:::
+
+## Filtering on text
+
+The same sentence works on text columns. Use `==` for an exact match:
+
+```{python}
+ozone = goleta[goleta['parameter'] == 'o3']
+ozone.head()
+```
+
+```{python}
+ozone.shape
+```
+
+711 ozone readings. Text comparisons are exact and case-sensitive, so `'O3'` would have
+matched nothing at all:
+
+```{python}
+goleta[goleta['parameter'] == 'O3'].shape
+```
+
+An empty result is not an error. It is an answer, and it is usually a spelling problem.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Filter `goleta` to the `pm25` readings and store them in a variable called `pm25`. How many
+rows? Check your number against `goleta['parameter'].value_counts()` from yesterday.
+:::
+
+## Why this matters here
+
+Yesterday you found that `goleta['value']` stacks three different pollutants, in two different
+units, in one column. That made `.describe()` on the whole column meaningless.
+
+Filtering is the fix:
+
+```{python}
+goleta['value'].describe()
+```
+
+```{python}
+goleta[goleta['parameter'] == 'pm25']['value'].describe()
+```
+
+The first summary averages micrograms per cubic metre together with parts per million. The
+second one describes 734 particulate readings, all in µg/m³. Only the second one is a fact.
+
+## Two conditions at once
+
+`&` means "and". Every comparison gets its own parentheses:
+
+```{python}
+goleta[(goleta['parameter'] == 'pm25') & (goleta['value'] > 12)]
+```
+
+51 hours where fine particulate matter was above 12 µg/m³, which is the level the US EPA uses
+as its annual air quality standard.
+
+`|` means "or":
+
+```{python}
+particulates = goleta[(goleta['parameter'] == 'pm25') | (goleta['parameter'] == 'pm10')]
+particulates.shape
+```
+
+:::{.callout-important title="The parentheses are not optional"}
+Leave them out and you get an error that has nothing to do with what you meant:
+
+```python
+goleta[goleta['parameter'] == 'pm25' & goleta['value'] > 12]
+```
+
+`&` binds more tightly than `==` and `>`, so Python tries to combine the wrong pieces. The
+rule is absolute: **wrap every comparison in its own parentheses.** Do it even when there is
+only one condition if it helps you build the habit.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Find the ozone readings above 0.04 ppm. Then find the readings that are **either** ozone above
+0.04 ppm **or** pm25 above 20 µg/m³. How many rows does each give you?
+:::
+
+## Turning a condition around with `~`
+
+`~` inverts a mask: every `True` becomes `False` and every `False` becomes `True`.
+
+```{python}
+not_ozone = goleta[~(goleta['parameter'] == 'o3')]
+not_ozone.shape
+```
+
+1,251 rows, which is 1,962 minus the 711 ozone readings. You could have written
+`!=` here and gotten the same answer:
+
+```{python}
+goleta[goleta['parameter'] != 'o3'].shape
+```
+
+`~` earns its keep when the condition is more complicated than a single comparison, and you
+would rather say "not that" than rewrite the whole thing backwards.
+
+## Matching a list of values with `.isin()`
+
+Writing `(col == 'a') | (col == 'b') | (col == 'c')` gets tedious fast. `.isin()` takes a
+**list** and matches any of its members:
+
+```{python}
+particulates = goleta[goleta['parameter'].isin(['pm25', 'pm10'])]
+particulates.shape
+```
+
+Same 1,251 rows as the `|` version above, in a line that stays readable when the list grows.
+
+The argument is an ordinary Python list, so you can build it first and pass it by name:
+
+```{python}
+of_interest = ['pm25', 'pm10']
+goleta[goleta['parameter'].isin(of_interest)].shape
+```
+
+:::{.callout-note}
+🐍 `.isin()` hangs off the **column**, not off the DataFrame: `df['col'].isin([...])`. It
+returns a mask, exactly like a comparison does, so it goes in the same place inside the
+brackets.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Build a list called `keep_parameters` holding `'o3'` and `'pm10'`, then use `.isin()` to
+filter `goleta` down to those two pollutants. Check your row count against the two numbers in
+`goleta['parameter'].value_counts()`; they should add up.
+:::
+
+## Keeping a result with `.copy()`
+
+Once you have a subset you like, you will usually want to keep working on it, and often that
+means adding a column to it later this week.
+
+When you plan to keep and modify a filtered result, say `.copy()`:
+
+```{python}
+pm25 = goleta[goleta['parameter'] == 'pm25'].copy()
+pm25.shape
+```
+
+`.copy()` gives you a table of your own, with no remaining connection to `goleta`. Without it,
+pandas may hand you back something that is still tied to the original table. When you then try
+to change it, you get either a warning you don't understand or a change that quietly does not
+stick.
+
+The habit is easy to state:
+
+> If the filtered result is going to be a **thing you keep and change**, end the line with
+> `.copy()`. If you are just looking at it, don't bother.
+
+```{python}
+pm25.head()
+```
+
+:::{.callout-caution title="A warning you will meet"}
+`SettingWithCopyWarning` is pandas telling you it isn't sure whether you meant to change the
+subset or the original. It is not always a real problem, but it is always worth reading. Adding
+`.copy()` at the point where you made the subset is the fix nine times out of ten.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Make a `.copy()` of the ozone readings called `ozone`, then confirm with `.shape` and
+`.head()` that you have what you expect. Keep it in your notebook; you'll use it in the next
+session.
+:::
+
+## Putting it together
+
+A real filter is usually two or three of these ideas in one line:
+
+```{python}
+summer_particulates = goleta[
+    goleta['parameter'].isin(['pm25', 'pm10']) & (goleta['value'] > 15)
+].copy()
+
+summer_particulates.shape
+```
+
+```{python}
+summer_particulates[['parameter', 'value', 'unit', 'datetimeLocal']].head()
+```
+
+Notice that the line is broken across several lines inside the square brackets. Python doesn't
+mind, and a long filter is much easier to read that way.
+
+## Key points
+
+- The **filter sentence** is `df[df['col'] <comparison> value]`. The inner `df` builds the
+  mask; the outer one applies it.
+- Filtering returns a **new** DataFrame. Assign it to a name to keep it.
+- `==` matches text exactly, and is case-sensitive. An empty result is an answer, not an error.
+- Combine conditions with `&` for and, `|` for or, `~` for not. **Every comparison needs its
+  own parentheses.**
+- `df['col'].isin([...])` matches any value in a list, and replaces a pile of `|`.
+- End a filter with `.copy()` when you plan to keep the result and change it later.
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
+- [📖 EDS 217 cheatsheet: lists](../cheatsheets/lists.qmd)
+- [📖 EDS 217 cheatsheet: control flows](../cheatsheets/control_flows.qmd)
+- [pandas documentation: boolean indexing](https://pandas.pydata.org/docs/user_guide/indexing.html#boolean-indexing){target="_blank"}
+- [pandas documentation: `Series.isin`](https://pandas.pydata.org/docs/reference/api/pandas.Series.isin.html){target="_blank"}

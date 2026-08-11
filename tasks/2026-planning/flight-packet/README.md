@@ -18,7 +18,7 @@ brief written before that date states the old rule; read decision 10 first.
 | `day4-build-brief.md` | Thu Sep 3, Clean + Transform | **built 2026-08-11** |
 | `day5-build-brief.md` | Fri Sep 4, Group + Aggregate | **built 2026-08-11** |
 | `day6-build-brief.md` | Tue Sep 8, Join + Reshape + Dates | **built 2026-08-11** |
-| `day7-build-brief.md` | Wed Sep 9, Visualize | ready |
+| `day7-build-brief.md` | Wed Sep 9, Visualize | **built 2026-08-11** |
 
 Two corrections to the Day 4 brief, found while building it and recorded in the skeleton's
 Day 4 section. Bare `.hist()` is **not** in Day 2's explore toolkit (it appears nowhere in the
@@ -57,6 +57,21 @@ so the Day 6 rebuild must pick a different day-page image. `dates.jpeg` went to 
 those are placeholders**, and prompts for bespoke Day 6 panels belong in the pre-launch checklist
 alongside the Day 4 and Day 5 EOD prompts. `matplotlib_panda.jpeg` and `panda_seaborn.jpeg`
 remain unclaimed and reserved for Day 7.
+
+Six corrections to the Day 7 brief, recorded in the skeleton's Day 7 section. The largest:
+**7a is a rebuild, not a trim.** Everything that survives the brief's 320-line cut of
+`7a_visualizations_1.qmd` is synthetic `np.linspace`/`np.sin` waveforms, and numpy appears in no
+2026 session, so 7a was rebuilt on Toolik instead, re-opening the Day 1 Whole Game figure and 6c's
+monthly comparison. **`plt.xticks(rotation=)` is READ in the EOD**, not WRITE: no EOD figure needs
+it, because the only bar chart is horizontal. **The `longitude < -60` filter is one corrupted
+record**, not a territory filter — these files are the contiguous 48 states plus DC, and the single
+row above −60 is Alexandria VA mislocated to the sea off Brittany, so the EOD makes students find
+it rather than handing them the filter. The index-aligned subtraction was redesigned away as the
+brief preferred, so the **second Field Note is unspent**; penguins is cached to
+`data/penguins.csv`; and `final_project.qmd` was corrected from nine steps to ten.
+
+Day 7's colab callback lived in the morning sessions again, exactly as on Day 6: 7a re-opens Day 1
+and 6c, 7b re-opens the Thursday colab's field survey, so 7c is free for genuinely new data.
 
 Effort is not even across the four. Day 5 has two files with no usable 2025 ancestor, and Day 7
 needs 7b rewritten rather than trimmed, because two of the three seaborn functions its exercise

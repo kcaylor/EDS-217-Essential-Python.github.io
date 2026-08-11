@@ -110,12 +110,34 @@ are cleanup items that would be premature while days are still moving.
       `coding-colabs/5c_cleaning_data.qmd`. Day 6 added six:
       `interactive-sessions/6a_grouping_joining_sorting.qmd` and both its `_old` siblings,
       `coding-colabs/6b_advanced_data_manipulation.qmd` and `coding-colabs/6b_preprocess.ipynb`,
-      and `eod-practice/eod-day6.qmd` with its `answer-keys/eod-day6-key.qmd`. Three of the Day 5
-      four and two of the Day 6 six are still linked from `answer-keys/answer_keys.qmd`, **so that
-      page needs revising in the same pass**, not just the render config. Note that
+      and `eod-practice/eod-day6.qmd` with its `answer-keys/eod-day6-key.qmd`. Day 7 added five:
+      `interactive-sessions/7a_visualizations_1.qmd`, `interactive-sessions/7b_visualizations_2.qmd`,
+      `coding-colabs/7c_visualizations.qmd`, and `eod-practice/eod-day7.qmd` with its
+      `answer-keys/eod-day7-key.qmd`. Three of the Day 5
+      four, two of the Day 6 six and at least one of the Day 7 five are still linked from
+      `answer-keys/answer_keys.qmd`, **so that page needs revising in the same pass**, not just the
+      render config. `7a_visualizations_1.qmd` also links its own retired sibling. Note that
       `cheatsheets/data_merging.qmd` also names `6b_advanced_data_manipulation` in a section
       heading; that is prose, not a link, but it should be reworded. Decide per file: delete, or exclude via the
       `render:` block in `_quarto.yml`. Do this last, since each rebuilt day adds to the list.
+- [ ] **Replace the four Day 7 placeholder images with bespoke panels.** Day 7 claimed four
+      existing files and downloaded one. `7a_matplotlib.qmd` uses `images/matplotlib_panda.jpeg`
+      and `7b_seaborn.qmd` uses `images/panda_seaborn.jpeg`; both were generated for this purpose
+      and are fine as they stand, though `panda_seaborn.jpeg` (a panda at a press-conference
+      podium) fits "presenting a result" better than it fits seaborn. Two are genuine
+      placeholders: the 7c colab uses `../images/horst-samples.jpg` (Allison Horst's two
+      distributions, on point but not house style) and 7d uses `images/ds_friends.jpg` (the
+      dancing-tools cartoon). `eod-practice/images/hardiness_panda.jpeg` is the 2025 EOD's
+      gardening panda, pulled off the MidJourney CDN and committed so the page renders offline;
+      it is correct and needs nothing.
+
+      Prompts, if bespoke panels are wanted:
+
+      - 7c: *A cartoon panda in an Antarctic field station, three penguins of visibly different
+        sizes lined up beside a set of calipers, painterly, square, no lettering.*
+      - 7d: *A cartoon panda standing in front of a whiteboard covered in question marks and one
+        circled question, a laptop open beside it, painterly, square, no lettering.*
+
 - [ ] **Generate the Day 4 EOD header image.** `eod-day4-2026.qmd` currently points at
       `../images/panda.jpeg`, a stock photo used as a placeholder. Every other EOD carries a
       themed MidJourney panda in `eod-practice/images/`. Generate one, save it as

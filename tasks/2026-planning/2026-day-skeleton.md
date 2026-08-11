@@ -359,9 +359,125 @@ Findings worth keeping, all verified:
 Sessions (sketch):
 - 7a: matplotlib anatomy (figure/axes, `plt.figure(figsize=)`, labels, titles, `xticks(rotation=)`, `tight_layout`). 2025's 7a largely survives, now with the D6-2025 sequencing bug fixed because no earlier EOD demands styled matplotlib anymore (D4 EOD keeps only bare `.hist()`, taught as part of Explore's toolkit).
 - 7b: seaborn: `sns.scatterplot/barplot/histplot` with `data=/x=/y=/hue=`; the Series `.values/.index` barplot idiom taught explicitly (2025 flag).
-- 7c (colab): Palmer penguins exploration (2025's 7c survives).
+- 7c (colab): Palmer penguins exploration (rebuilt around the three seaborn functions; 2025's 7c did not survive, see below).
 - 7d (**decided**): project kickoff. Form teams, browse dataset sources (final_project.qmd list), draft the analysis question. Decompresses Day 8; students start the project with the full 10-step grammar fresh. Fallback if Day 7 runs hot: convert to buffer/review and push kickoff to Day 8 morning.
 - EOD: USDA hardiness zones (everything it needs is now taught: merge D6, pivot_table D6, concat D6; the `.str.split().str.get().astype()` chain in setup becomes a 🧭 Field Note; seaborn is taught the same day). **Revisit under decision 10 when Day 7 is built.** The plotting sentences are named patterns, so the rehearsal exemption is available if 7c gives students enough sole-author practice with `data=/x=/y=/hue=`. If it does, the EOD's seaborn tasks can be WRITE. If it does not, they provide the call skeleton and students fill mappings, as originally planned. Decide by auditing 7c, not by the clock.
+
+Scope table (drafted in the flight-packet brief, finalised at build time):
+
+| Construct | Scope taught | Session | EOD depth |
+|---|---|---|---|
+| `plt.figure(figsize=)` | figure sizing only, inches | 7a, morning | WRITE |
+| `plt.xlabel/ylabel/title` | labels and a title, units required in axis labels | 7a, morning | WRITE |
+| `plt.tight_layout()` | as a closing line | 7a, morning | WRITE |
+| `plt.legend()` with `label=` | one `label=` per series, one `legend()` per figure | 7a, morning | READ (the EOD never puts two series on one axes) |
+| `plt.xticks(rotation=, ha=)` | rotation of tick labels | 7a, morning | READ (see correction 2) |
+| `plt.plot` / `plt.scatter` | two sequences, ordered vs unordered x | 7a, morning | READ |
+| `sns.scatterplot(data=, x=, y=, hue=)` | those four arguments | 7b, morning | WRITE |
+| `sns.histplot(data=, x=, hue=)` | single variable; heights are counts | 7b, morning | WRITE |
+| `sns.barplot`, incl. `x=series.values, y=series.index` | both forms; the Series idiom taught explicitly, and the `data=` form's silent mean flagged | 7b, morning | WRITE |
+| `.str.zfill(5)` + `.str.split().str.get(n).astype(int)` | one combined 🧭 Field Note in EOD setup | — | ADAPT |
+| index-aligned Series subtraction | **CUT** — redesigned away, see correction 3 | — | — |
+
+Six WRITE constructs, against a budget of eight.
+
+**BUILT 2026-08-11.** Files: `7a_matplotlib.qmd`, `7b_seaborn.qmd`, `7c_penguins.qmd` (colab),
+`7d_project_kickoff.qmd` (new, no ancestor), `eod-day7-2026.qmd`. `day7.qmd` and the navbar
+rewired; `final_project.qmd` updated from nine steps to ten. 60/60 python cells verified offline
+against pandas 2.3.3 / seaborn 0.13.2 with `FutureWarning` and `DeprecationWarning` escalated to
+errors. **One Field Note spent in the EOD**, of a budget of two.
+
+Six corrections to the build brief:
+
+1. **7a is a rebuild, not a trim.** The brief said to cut about 320 of `7a_visualizations_1.qmd`'s
+   740 lines. What survives that cut is entirely `np.linspace`/`np.sin` synthetic waveforms, and
+   numpy appears in no 2026 session at all. 7a is therefore built on **Toolik**, opening on the
+   figure students drew on Day 1 (`plt.plot(monthly_means)`, under a box promising "you will learn
+   how visualization really works on Day 7") and closing on 6c's early-versus-late monthly
+   comparison. Nothing from the 2025 file is retained verbatim; only its section order survives.
+   `plt.xlim`/`plt.ylim` were dropped too — not in the scope table, and nothing needs them.
+2. **`plt.xticks(rotation=, ha=)` is READ in the EOD, not WRITE.** None of the EOD's six figures
+   needs it: the only bar chart is horizontal, and 7b argues for horizontal bars precisely because
+   they make rotation unnecessary. It is still taught in 7a, with its own unaided "Test your
+   knowledge", because the Day 8–9 project will want it.
+3. **The index-aligned subtraction is redesigned away**, as the brief preferred, so the second
+   Field Note is unspent. The top-ten-states task groups the `pivot_table` difference by `state`,
+   which is Day 5 and Day 6 vocabulary end to end.
+4. **The `longitude < -60` filter is one corrupted record, not a territory filter.** These files
+   cover the contiguous 48 states plus DC — no Alaska, Hawaii or Puerto Rico, so nothing is being
+   excluded on geographic grounds. Exactly one zip code exceeds −60: **22350, Alexandria VA,
+   recorded at 48.31 N, 2.12 W**, which is in the sea off Brittany. Two rows out of 80,455, and
+   they flatten the map into the left third of the figure. The EOD therefore makes students draw
+   the broken figure, notice it, and find the row, rather than handing them the filter as the 2025
+   version did. It is the clearest demonstration in the course of what a plot does that
+   `.describe()` does not.
+5. **`sns.load_dataset("penguins")` is cached** to `data/penguins.csv` (344 × 7) and 7c reads it
+   from the course site like every other file. The colab is otherwise a rebuild: `relplot`,
+   `pairplot`, `regplot`, `lmplot`, `jointplot` and `heatmap` are all out of scope and gone, and
+   `.corr()` stays uncalled per the Day 6 decision. `pd.crosstab` was drafted and replaced with
+   `pivot_table(aggfunc='count')`, which is taught.
+6. **`final_project.qmd` said nine steps.** It now says ten, names Join/Reshape as step 9, and
+   points at `the-data-science-workflow.qmd`. 7d sends students there, so the mismatch would have
+   been visible in the room.
+
+Rehearsal-rule audit (quality gate 2). **All six WRITE constructs are morning-taught**, so the
+base rule applies and no exemption is needed. Day 7 is the second clean case after Day 5:
+
+| WRITE construct | Taught | Written unaided |
+|---|---|---|
+| `plt.figure(figsize=)` | 7a, morning | 7a "Test your knowledge" ×3; 7b ×3; 7c questions 5–16 |
+| `plt.xlabel/ylabel/title` | 7a, morning | 7a ×3; 7b ×3; every figure in 7c |
+| `plt.tight_layout()` | 7a, morning | 7a "Test your knowledge" (precipitation counts by year); 7b "Test your knowledge" (conductivity bars) |
+| `sns.scatterplot(data=, x=, y=, hue=)` | 7b, morning | 7b "Test your knowledge" ×1; 7c questions 8, 9, 10, 11 — four sole-author uses |
+| `sns.histplot(data=, x=, hue=)` | 7b, morning | 7b "Test your knowledge" ×1; 7c questions 5, 6, 7 |
+| `sns.barplot` + the Series idiom | 7b, morning | 7b "Test your knowledge" ×1; 7c questions 13, 15, 16 |
+
+Dataset allocation: **Toolik** (7a — Day 1's figure and 6c's table, both re-opened),
+**messy_field_survey** (7b — Friday's grouped means, now visible as one relationship),
+**Palmer penguins** (7c colab, genuinely new), **hardiness zones + zip code database** (EOD).
+The colab callback again lived in the **morning** sessions, as on Day 6, which freed 7c for new
+data.
+
+Verified numbers, so a later session need not recompute:
+
+- Toolik early-versus-late monthly change, plotted as bars, is the day's best "the table said it,
+  the picture shows it" moment: January **+3.46 °C**, October **+4.27 °C**, February +2.48,
+  November +2.37, December +1.20, against March −2.02, April −1.45, May −0.91, July −0.77. The
+  two-line version of the same figure is honest and nearly useless, because a 3.5 °C signal sits
+  on an axis that must span 35 °C. 7a spends a section on exactly that.
+- Toolik air temperature has **31 complete years except 1988** (214 days). Precipitation is
+  another story: 1995 has **182** readings, 1994 has 273, 1990 has 277, 2004 has 314. That is the
+  rotation "Test your knowledge" and it earns the caveat in the one after it.
+- `messy_field_survey` cleaned: temperature against dissolved oxygen is a clean negative
+  relationship, and with `hue='site'` the six sites lie **along** it in exactly the order 5A's two
+  grouped means gave (d, a, b, e, c, f). One argument turns two printed lists into one claim.
+- Penguins (333 rows after `dropna()`): bill length against bill depth is **negative across the
+  pooled data and positive within every species** — Simpson's paradox, revealed by `hue='species'`
+  and by nothing else. Adélie and Chinstrap mean body mass are 3706 g and 3733 g, nearly identical
+  despite obviously different bills, which is what makes question 14 work. Chinstrap appear only on
+  Dream and Gentoo only on Biscoe, so island and species are confounded.
+- Hardiness zones: 2012 is 40,534 × 4 and 2023 is 39,921 × 4, no nulls, `trange` is **always**
+  exactly three whitespace-separated tokens in both years, so the `.str` chain yields zero nulls.
+  Stacked: 80,455. Mean `trange_min` **−1.900 °F in 2012 and +1.017 °F in 2023, a difference of
+  2.917**. The merge against the zip code database loses **103 rows covering 63 zip codes**.
+- The pivoted difference table has 40,492 rows, of which **634 have a null `temp_diff`** (a zip
+  code present in one map and not the other). `temp_diff` takes only **eleven distinct values, all
+  multiples of five**: 0 on 16,574 zip codes and +5 on 22,374, with a thin tail out to −30 and
+  +25. It is a zone-boundary crossing, not a measured temperature change, and the EOD's histogram
+  is what makes that unmissable. Classified: **warmer 22,888, unchanged 16,574, colder 396**.
+- The extremes are all mountains: the five largest increases are 95604 CA (+25), 59761 MT (+20),
+  37729 TN (+15), 80442 CO (+15), 83246 ID (+15); the largest decreases are 95321 CA (−30), 95644
+  CA (−20) and 95223 CA (−20), all in the Sierra Nevada. Six zones of movement in eleven years is
+  a methodology change in terrain with huge within-zip-code elevation range, not a climate signal.
+- Top ten states by mean increase, with the counts that matter: **DC 7.18 on 275 zip codes** (one
+  city), TN 4.37 (774), **DE 4.35 on 93**, MO 4.12 (1,142), AL 4.02 (803), WV 4.00 (842), KY 3.99
+  (929), MD 3.82 (599), GA 3.72 (937), AR 3.68 (690). Bottom five: **CA 0.82 on 2,552 zip codes**,
+  the largest count in the file, then AZ 0.99 (520), ND 1.00 (404), IA 1.20 (1,042), UT 1.31 (336).
+
+Images claimed: `matplotlib_panda.jpeg` → 7a, `panda_seaborn.jpeg` → 7b, `horst-samples.jpg` →
+7c, `ds_friends.jpg` → 7d, and a new `eod-practice/images/hardiness_panda.jpeg` (the 2025 EOD's
+gardening panda, pulled off the MidJourney CDN and committed so the page renders offline).
+`visualization_1.jpeg` stays on `day7.qmd`.
 
 ### Days 8–9: Project
 

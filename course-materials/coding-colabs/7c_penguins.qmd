@@ -1,0 +1,311 @@
+---
+title: "Coding Colab"
+subtitle: "🐧 One Cloud of Points, Three Species"
+execute:
+  echo: false
+  include: false
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](../images/horst-samples.jpg)
+:::
+
+:::{.gray-text .center-text}
+*Two distributions, being distributions.* Artwork by [Allison Horst](https://allisonhorst.com){target="_blank"}
+
+:::
+
+Between 2007 and 2009, researchers at the Palmer Station on the Antarctic Peninsula measured 344
+penguins of three species: Adélie, Chinstrap and Gentoo. For each bird they recorded four numbers,
+the island it was caught on, and its sex.
+
+The file is small, clean by the standards of anything you have opened this week, and it contains
+a result that you cannot get to without a figure. Not a result that is *easier* with a figure. One
+that a table of summary statistics will actively point you away from.
+
+Your job this afternoon is to find it.
+
+Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
+finish a numbered task. The person not typing says out loud what they expect the figure to look
+like *before* the cell is run, and is allowed to be wrong.
+
+You have 45 minutes.
+
+## The sentences you need
+
+All from this morning.
+
+```python
+sns.scatterplot(data=df, x='col', y='col')             # one measurement against another
+sns.histplot(data=df, x='col')                         # the distribution of one column
+sns.barplot(x=series.values, y=series.index)           # a grouped Series, as bars
+
+hue='col'                                              # works on all three
+```
+
+Plus the matplotlib frame:
+
+```python
+plt.figure(figsize=(w, h))
+plt.xlabel(...) ; plt.ylabel(...) ; plt.title(...)
+plt.tight_layout()
+```
+
+And these, from earlier in the week:
+
+```python
+df.dropna()
+df.groupby('key')['column'].agg(['count', 'mean'])
+df['column'].value_counts()
+df.sort_values('column', ascending=False)
+```
+
+## Setup
+
+Create a notebook named `Colab_7C_Penguins.ipynb`, with both partners' names in the title cell,
+then read the file:
+
+```{python}
+#| echo: true
+#| include: true
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+url = 'https://eds-217-essential-python.github.io/data/penguins.csv'
+penguins = pd.read_csv(url)
+```
+
+## Part 1: What is in the file (about 8 minutes)
+
+Answer each question with code, then write the answer in a markdown cell underneath, in a complete
+sentence with the numbers in it.
+
+1. How many rows and columns? What are the column names, and which are numeric?
+
+```{python}
+print(penguins.shape)
+print(penguins.dtypes)
+```
+
+2. Count the rows for each `species`, and separately for each `island`. Which species is rarest,
+   and which island has the most birds?
+
+```{python}
+print(penguins['species'].value_counts())
+print(penguins['island'].value_counts())
+```
+
+3. Run `.isnull().sum()`. Two different things are going on in that output. Say what each one
+   probably is.
+
+```{python}
+penguins.isnull().sum()
+```
+
+4. Build a clean table called `birds` by dropping every row with any missing value, and report how
+   many rows you lost. Then re-run the species counts on `birds` and say whether the losses fell
+   evenly across the three species.
+
+```{python}
+birds = penguins.dropna().copy()
+
+print(penguins.shape, birds.shape)
+print(birds['species'].value_counts())
+```
+
+## Part 2: Distributions (about 8 minutes)
+
+5. Draw a histogram of `flipper_length_mm` for the whole table. Label the x-axis with units and
+   give the figure a title. Describe the shape in one sentence.
+
+```{python}
+plt.figure(figsize=(7, 5))
+sns.histplot(data=birds, x='flipper_length_mm')
+plt.xlabel('Flipper length (mm)')
+plt.title('Flipper length, all penguins')
+plt.show()
+```
+
+6. Draw it again, split by `species`. In a markdown cell, say what the two humps in question 5
+   turned out to be, and whether "the average penguin has a flipper of about 201 mm" is a useful
+   sentence.
+
+```{python}
+plt.figure(figsize=(7, 5))
+sns.histplot(data=birds, x='flipper_length_mm', hue='species')
+plt.xlabel('Flipper length (mm)')
+plt.title('Flipper length by species')
+plt.show()
+```
+
+7. Pick one of `bill_length_mm`, `bill_depth_mm` or `body_mass_g` and do the same pair of figures
+   for it. Does that measurement separate the species as cleanly as flipper length does?
+
+```{python}
+plt.figure(figsize=(7, 5))
+sns.histplot(data=birds, x='body_mass_g', hue='species')
+plt.xlabel('Body mass (g)')
+plt.title('Body mass by species')
+plt.show()
+```
+
+## Part 3: Relationships (about 15 minutes)
+
+This is the part with the result in it. Do not skip ahead to the answer key, and do not skip
+question 9.
+
+8. Draw a scatter plot of `body_mass_g` against `flipper_length_mm`, with flipper length across
+   the bottom. Label both axes and title it. Describe the relationship in one sentence.
+
+```{python}
+plt.figure(figsize=(7, 5))
+sns.scatterplot(data=birds, x='flipper_length_mm', y='body_mass_g')
+plt.xlabel('Flipper length (mm)')
+plt.ylabel('Body mass (g)')
+plt.title('Body mass against flipper length')
+plt.show()
+```
+
+9. Draw the same figure with `hue='species'`. Does adding the species change what you would say
+   about the relationship, or just make it prettier? One sentence.
+
+```{python}
+plt.figure(figsize=(7, 5))
+sns.scatterplot(data=birds, x='flipper_length_mm', y='body_mass_g', hue='species')
+plt.xlabel('Flipper length (mm)')
+plt.ylabel('Body mass (g)')
+plt.title('Body mass against flipper length, by species')
+plt.show()
+```
+
+10. Now a different pair of columns. Draw a scatter plot of `bill_depth_mm` against
+    `bill_length_mm`, with bill length across the bottom, and **no** `hue=`. Label it.
+
+    Before you go on, write down in a markdown cell what this figure says: as a penguin's bill
+    gets longer, does it get deeper or shallower?
+
+```{python}
+plt.figure(figsize=(7, 5))
+sns.scatterplot(data=birds, x='bill_length_mm', y='bill_depth_mm')
+plt.xlabel('Bill length (mm)')
+plt.ylabel('Bill depth (mm)')
+plt.title('Bill depth against bill length')
+plt.show()
+```
+
+11. Draw it once more with `hue='species'`.
+
+```{python}
+plt.figure(figsize=(7, 5))
+sns.scatterplot(data=birds, x='bill_length_mm', y='bill_depth_mm', hue='species')
+plt.xlabel('Bill length (mm)')
+plt.ylabel('Bill depth (mm)')
+plt.title('Bill depth against bill length, by species')
+plt.show()
+```
+
+12. Read your answer to question 10 back, then look at question 11. Within each of the three
+    species, longer bills go with **deeper** bills. Across all three together, longer bills go with
+    **shallower** ones.
+
+    In a markdown cell of four or five sentences: explain how both of those can be true at once.
+    Your explanation should mention where the three species sit relative to each other, and it
+    should not use the word "wrong" about either figure.
+
+:::{.callout-important title="This has a name"}
+A relationship that runs one way inside every group and the other way across the pooled data is
+called **Simpson's paradox**. It is not a curiosity. It is one of the most common ways that a
+perfectly correct summary of a dataset produces a conclusion that is the reverse of the truth, and
+it happens whenever the groups differ both in what you are measuring and in how many of them there
+are.
+
+You found it here in one argument, `hue='species'`. Without the figure you would have needed to
+suspect it first.
+:::
+
+## Part 4: Summaries, and what they hide (about 10 minutes)
+
+13. Build a Series of mean `body_mass_g` by species, sorted from heaviest to lightest, and draw it
+    as **horizontal** bars using the `.values` and `.index` idiom. Label both axes and title it.
+
+```{python}
+mean_mass = birds.groupby('species')['body_mass_g'].mean().sort_values(ascending=False)
+
+plt.figure(figsize=(7, 4))
+sns.barplot(x=mean_mass.values, y=mean_mass.index)
+plt.xlabel('Mean body mass (g)')
+plt.ylabel('Species')
+plt.title('Mean body mass by species')
+plt.show()
+```
+
+14. Two of those three bars are nearly the same height. Look back at your figure from question 11.
+    In one sentence: would you say those two species are similar birds?
+
+15. Run `.agg(['count', 'mean'])` on the same grouping and print it. Then build a Series of the
+    number of birds on each island with `.value_counts()`, and draw **that** as horizontal bars
+    too.
+
+```{python}
+print(birds.groupby('species')['body_mass_g'].agg(['count', 'mean']).round(1))
+
+island_counts = birds['island'].value_counts()
+
+plt.figure(figsize=(7, 4))
+sns.barplot(x=island_counts.values, y=island_counts.index)
+plt.xlabel('Number of penguins')
+plt.ylabel('Island')
+plt.title('Sampling effort by island')
+plt.show()
+```
+
+16. Draw a bar chart of mean `body_mass_g` by species, split by sex. This one is easier with the
+    `data=` form, because you want two bars per species:
+    `sns.barplot(data=birds, x='species', y='body_mass_g', hue='sex')`.
+
+    Then say in one sentence what the sex split adds to your answer to question 14.
+
+```{python}
+plt.figure(figsize=(7, 5))
+sns.barplot(data=birds, x='species', y='body_mass_g', hue='sex')
+plt.xlabel('Species')
+plt.ylabel('Mean body mass (g)')
+plt.title('Mean body mass by species and sex')
+plt.show()
+```
+
+17. Last one, and it is a trap worth walking into. Build a wide table with `species` down the rows,
+    `island` across the columns, and a **count** of `body_mass_g` in the cells. This is yesterday
+    morning's pivot sentence with `aggfunc='count'`.
+
+    In a markdown cell, two or three sentences: given that table, what would go wrong if somebody
+    used this dataset to compare Biscoe island with Dream island?
+
+```{python}
+birds.pivot_table(index='species', columns='island', values='body_mass_g', aggfunc='count')
+```
+
+## Before you stop
+
+Check that:
+
+- every figure you made has an x-label, a y-label and a title, and the labels carry units
+- you can say out loud what `hue=` did in each of the three kinds of plot you used it in
+- your answer to question 12 does not describe either figure as wrong
+- your notebook reads top to bottom as a document, not as a pile of cells
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: seaborn](../cheatsheets/seaborn.qmd)
+- [📖 EDS 217 cheatsheet: bar plots](../cheatsheets/bar_plots.qmd)
+- [📖 EDS 217 cheatsheet: grouping and aggregating](../cheatsheets/data_grouping.qmd)
+- [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/){target="_blank"}
+- [Gorman KB, Williams TD, Fraser WR (2014), the paper the data comes from](https://doi.org/10.1371/journal.pone.0090081){target="_blank"}

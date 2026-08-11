@@ -1,5 +1,5 @@
 ---
-title: "Data Visualization"
+title: "Visualize"
 subtitle: "Day 7"
 description: "Wednesday September 9^th^, 2026"
 ---
@@ -9,23 +9,44 @@ description: "Wednesday September 9^th^, 2026"
 :::
 
 :::{.gray-text .center-text}
-*A panda is in an art studio painting on a large canvas. The painting is in the impressionistic style. The painting depicts a statistical box plot, similar to what is often found in research articles and data science presentations.* [MidJourney 5](https://www.midjourney.com/jobs/025e9e6c-6f3a-418f-bbb7-8435b81bdb92?index=0)
+*A panda paints a box plot.* [MidJourney 5](https://www.midjourney.com/jobs/025e9e6c-6f3a-418f-bbb7-8435b81bdb92?index=0)
+
 :::
+
+You have not made a picture since Monday.
+
+That was deliberate. For two full days everything you produced was a table: grouped, aggregated,
+joined, stacked, pivoted and parsed. Some of those tables held real findings, and you read them the
+way you read a spreadsheet, one number at a time, taking my word for it that the ordering meant
+something.
+
+Today is the tenth step, and it is the one all the others were for. You will learn the anatomy of a
+figure, so that you can control one instead of accepting whatever the defaults give you. Then you
+will learn a library that takes a whole table and the names of two columns and does the rest, and
+one argument in it — `hue=` — that will change how you look at data for the rest of your career.
+
+This afternoon you pick your project.
 
 ## Class materials
 
 | {{< fa calendar-day title="A calendar with one day highlighted" >}} Session  | {{< fa laptop-code title="A laptop with on-screen code" >}} Session 1  |  {{< fa laptop-code title="A laptop with on-screen code" >}} Session 2 |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| day 7 / morning   | [📊 Data visualization (Part I)](interactive-sessions/7a_visualizations_1.qmd) | [📊 Data visualization (Part II)](interactive-sessions/7b_visualizations_2.qmd) |
-| day 7 / afternoon | [🙌 Coding Colab: Exploring data through visualizations](coding-colabs/7c_visualizations.qmd) | |
-: {.hover .bordered tbl-colwidths="[20,40,40]"} 
+| day 7 / morning   | [🖼️ The Anatomy of a Figure](interactive-sessions/7a_matplotlib.qmd) | [🎨 Name the Columns, Not the Colours](interactive-sessions/7b_seaborn.qmd) |
+| day 7 / afternoon | [🙌 One Cloud of Points, Three Species](coding-colabs/7c_penguins.qmd) | [🚀 Project Kickoff](interactive-sessions/7d_project_kickoff.qmd) |
+: {.hover .bordered tbl-colwidths="[20,40,40]"}
 
 ## End-of-day practice
 
+Tonight you take two versions of the USDA plant hardiness map, eleven years apart, and find out
+what you can honestly say about the difference between them. Six figures, and only one of them is
+the one the evening was about.
 
-Complete the following tasks / activities before heading home for the day!
-
-- [{{< fa pencil title="A pencil" >}} **Day 7 Practice:**  🌲 USDA Plant Hardiness Zones 🌴](eod-practice/eod-day7.qmd)
-
+- [{{< fa pencil title="A pencil" >}} **Day 7 Practice:** 🌲 Forty Thousand Zip Codes 🌴](eod-practice/eod-day7-2026.qmd)
 
 ## Additional Resources
+
+- [{{< fa diagram-project title="A workflow diagram" >}} The Data Science Workflow](the-data-science-workflow.qmd)
+- [{{< fa table title="A table" >}} matplotlib cheatsheet](cheatsheets/matplotlib.qmd)
+- [{{< fa table title="A table" >}} seaborn cheatsheet](cheatsheets/seaborn.qmd)
+- [{{< fa table title="A table" >}} bar plots cheatsheet](cheatsheets/bar_plots.qmd)
+- [{{< fa table title="A table" >}} chart customization cheatsheet](cheatsheets/chart_customization.qmd)

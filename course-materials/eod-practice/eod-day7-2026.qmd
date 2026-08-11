@@ -1,0 +1,501 @@
+---
+title: "Tasks & Activities"
+subtitle: "🌲 Forty Thousand Zip Codes 🌴"
+execute:
+  echo: false
+  include: false
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](images/hardiness_panda.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A panda, gardening.* [MidJourney 5](https://www.midjourney.com)
+
+:::
+
+The USDA Plant Hardiness Zone Map tells you which plants will survive the winter where you live.
+It is built from one number: the average annual **minimum** temperature at a location, in degrees
+Fahrenheit. Locations whose coldest night averages within the same five degrees get the same zone
+label, from `1a` in interior Alaska to `13b` in Puerto Rico.
+
+Gardeners have used it for decades. It is printed on the back of seed packets.
+
+In November 2023 the USDA released a new version, built by the PRISM group at Oregon State from
+thirty years of weather station records. It was the first update since 2012, and it moved about
+half the country half a zone warmer. That was reported widely, and mostly reported badly.
+
+Tonight you have both maps, one row per zip code, and every tool you have learned this week.
+The question is not whether the country got warmer. The question is what you can honestly say
+about it from these two files, and where each of the obvious answers goes wrong.
+
+:::{.callout-note title="Reference"}
+USDA Plant Hardiness Zone Maps for 2012 and 2023, prepared by the
+[PRISM Climate Group](https://prism.oregonstate.edu/projects/plant_hardiness_zones.php){target="_blank"}
+at Oregon State University, distributed by zip code. Zip code locations from a public zip code
+database.
+:::
+
+## Today's sentences
+
+Everything you draw tonight is built from these five.
+
+```python
+plt.figure(figsize=(w, h))                             # the canvas
+plt.xlabel(...) ; plt.ylabel(...) ; plt.title(...)     # always
+plt.tight_layout()                                     # last
+
+sns.scatterplot(data=df, x='col', y='col', hue='col')  # one measurement against another
+sns.histplot(data=df, x='col')                         # the shape of one column
+sns.barplot(x=series.values, y=series.index)           # a grouped Series, as bars
+```
+
+And these, from earlier in the week:
+
+```python
+pd.concat([a, b], ignore_index=True)                   # the stacking sentence
+pd.merge(left, right, left_on='a', right_on='b')       # the join sentence
+df.pivot_table(index=, columns=, values=)              # the pivot sentence
+df.groupby('key')['col'].agg(['count', 'mean'])        # split, apply, combine
+df.sort_values('col', ascending=False).head(n)         # the top-N sentence
+df['new'] = df['col'].apply(named_function)            # the derived-column sentence
+```
+
+## Setup
+
+1. Create a new notebook named `EOD_Day7_Hardiness_Zones.ipynb`.
+
+2. Add a title cell:
+
+```markdown
+# Day 7 EOD: Forty Thousand Zip Codes
+
+Date: 09/09/2026
+```
+
+3. Read the three files:
+
+```{python}
+#| echo: true
+#| include: true
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+base = 'https://eds-217-essential-python.github.io/data/'
+
+zones_2012 = pd.read_csv(base + 'hardiness_zones_2012.csv')
+zones_2023 = pd.read_csv(base + 'hardiness_zones_2023.csv')
+zipcodes = pd.read_csv(base + 'zip_code_database.csv')
+```
+
+:::{.callout-tip title="🧭 Field Note: getting text into a shape you can use"}
+Two lines of setup tonight use string operations you have not been taught. Both are the same kind
+of move: taking a column of text and reshaping it into something you can join on or do arithmetic
+with. Copy them as given.
+
+**Padding a zip code.** All three files store zip codes as **integers**, so `01001` arrives as the
+number `1001` and the leading zero is gone. Two files that lost their zeros in the same way will
+still match each other, but the moment you print one or compare it to a real zip code you have a
+problem. `.str.zfill(5)` **z**ero-**fill**s a string out to five characters:
+
+```python
+zones_2023['zipcode'] = zones_2023['zipcode'].astype(str).str.zfill(5)
+```
+
+**Splitting a range.** The `trange` column holds text like `'-10 to -5'`. To do arithmetic on the
+cold end of that range you need the first piece of it, as a number:
+
+```python
+zones['trange_min'] = zones['trange'].str.split().str.get(0).astype(int)
+```
+
+`.str.split()` cuts the text at every space, giving `['-10', 'to', '-5']`. `.str.get(0)` takes the
+first piece from each row. `.astype(int)` turns `'-10'` into `-10`.
+
+On Thursday, 4C told you that `.str` methods chained together were a Day 7 problem. This is Day 7,
+and this is the chain. Three methods, in a row, each one operating on what the last one handed it,
+which is exactly the pattern you have been reading all week in
+`.sort_values(...).head(10)` — a chain is just a sentence with more than one verb in it.
+:::
+
+4. Pad the zip codes in all three tables:
+
+```{python}
+#| echo: true
+#| include: true
+
+zones_2023['zipcode'] = zones_2023['zipcode'].astype(str).str.zfill(5)
+zones_2012['zipcode'] = zones_2012['zipcode'].astype(str).str.zfill(5)
+zipcodes['zip'] = zipcodes['zip'].astype(str).str.zfill(5)
+```
+
+## Part 1: Three files
+
+Answer each question with code, then write the answer in a markdown cell underneath, in a complete
+sentence with the numbers in it.
+
+1. How many rows and columns does each of the three tables have? What are the column names of the
+   two zone tables, and are they the same?
+
+```{python}
+print(zones_2012.shape, list(zones_2012.columns))
+print(zones_2023.shape, list(zones_2023.columns))
+print(zipcodes.shape)
+```
+
+2. Run `.isnull().sum()` on both zone tables. Then look at `.head()` of either one and say, in one
+   sentence, what `zone`, `trange` and `zonetitle` each hold and which of the three is redundant.
+
+```{python}
+print(zones_2012.isnull().sum())
+print(zones_2023.head())
+```
+
+3. The two files do not have the same number of rows. Before you do anything else, write down two
+   different explanations for that which do not involve anybody making a mistake.
+
+## Part 2: One table out of three
+
+4. Add a `year` column to each zone table, then stack the two of them into one table called
+   `zones`, using the stacking sentence. How many rows?
+
+```{python}
+zones_2023['year'] = 2023
+zones_2012['year'] = 2012
+
+zones = pd.concat([zones_2023, zones_2012], ignore_index=True)
+
+zones.shape
+```
+
+5. Add `trange_min` using the line from the Field Note, then confirm it has no nulls and look at
+   its distinct values with `.value_counts().sort_index()`. In a markdown cell, say what you notice
+   about the spacing of those values and what that means for the phrase "how much warmer".
+
+```{python}
+zones['trange_min'] = zones['trange'].str.split().str.get(0).astype(int)
+
+print(zones['trange_min'].isnull().sum())
+print(zones['trange_min'].value_counts().sort_index())
+```
+
+6. Compute the mean `trange_min` for each year and report the difference. This is the headline
+   number, and you are about to spend the rest of the evening finding out how much it is worth.
+
+```{python}
+means = zones.groupby('year')['trange_min'].mean()
+
+print(means.round(3))
+print(round(means[2023] - means[2012], 3))
+```
+
+7. Merge `zones` with `zipcodes` to attach a state, a latitude and a longitude to every row. The
+   key columns are called different things in the two tables. **Compare the row count before and
+   after**, then run the merge again with `how='left'` and find out how many rows failed to match
+   and how many distinct zip codes that is.
+
+```{python}
+located = pd.merge(zones, zipcodes, left_on='zipcode', right_on='zip')
+
+print(zones.shape)
+print(located.shape)
+
+check = pd.merge(zones, zipcodes, left_on='zipcode', right_on='zip', how='left')
+missing = check[check['zip'].isnull()]
+
+print(missing.shape)
+print(missing['zipcode'].nunique())
+```
+
+8. In a markdown cell: 103 rows out of 80,455 did not match, covering 63 zip codes. Is that a
+   number you would fix, a number you would mention, or a number you would ignore? Say which and
+   why. There is more than one defensible answer.
+
+## Part 3: The first map
+
+9. Filter `located` to the 2023 rows only, then draw a scatter plot with `longitude` across the
+   bottom, `latitude` up the side, and `hue='trange_min'`. Make the figure twelve inches by seven.
+   Label both axes and title it.
+
+```{python}
+recent = located[located['year'] == 2023]
+
+plt.figure(figsize=(12, 7))
+sns.scatterplot(data=recent, x='longitude', y='latitude', hue='trange_min')
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+plt.title('Average annual minimum temperature by zip code, 2023')
+plt.tight_layout()
+plt.show()
+```
+
+10. Something is wrong with that figure, and it is not subtle. Describe it in a markdown cell.
+
+11. Find the culprit. Use the filter sentence on `located` to pull out every row with a
+    `longitude` greater than −60, and print its zip code, state, city, latitude and longitude.
+
+```{python}
+located[located['longitude'] > -60][['zipcode', 'state', 'primary_city',
+                                      'latitude', 'longitude', 'year']]
+```
+
+12. In a markdown cell, two or three sentences. That is **one** zip code, appearing once in each
+    year: two rows out of eighty thousand. Look up roughly where latitude 48.3, longitude −2.1 is.
+    Is the temperature reading wrong, or is something else wrong? And say plainly what those two
+    rows did to your figure.
+
+:::{.callout-important title="Two rows in eighty thousand"}
+Nothing about those rows is unusual in a table. They are not null, not duplicated, not miscast,
+and they would survive every cleaning step you learned on Thursday untouched. `.describe()` on
+`longitude` would have shown a maximum of −2.12 and you would have had no reason to look at it.
+
+A figure found them in one second, because a plot is the only summary of a dataset that gives an
+outlier as much room as it gives everything else. This is a large part of what visualization is
+*for*, and it happens before any of the storytelling.
+:::
+
+13. Build a table called `usa` holding only the rows with `longitude` less than −60, and redraw the
+    2023 map from it. Then draw the same map for 2012.
+
+```{python}
+usa = located[located['longitude'] < -60].copy()
+
+plt.figure(figsize=(12, 7))
+sns.scatterplot(data=usa[usa['year'] == 2023], x='longitude', y='latitude', hue='trange_min')
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+plt.title('Average annual minimum temperature by zip code, 2023')
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(12, 7))
+sns.scatterplot(data=usa[usa['year'] == 2012], x='longitude', y='latitude', hue='trange_min')
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+plt.title('Average annual minimum temperature by zip code, 2012')
+plt.tight_layout()
+plt.show()
+```
+
+14. You have just drawn a recognizable map of the United States without a mapping library, a
+    projection, or a shapefile. In a markdown cell, one sentence on why that worked here. Then one
+    more: run `usa['state'].nunique()` and say which parts of the country are not in these files
+    at all.
+
+```{python}
+print(usa['state'].nunique())
+print(sorted(usa['state'].unique()))
+```
+
+15. Put the two maps side by side on your screen and try to see the difference between them. In one
+    honest sentence: can you?
+
+## Part 4: What actually changed
+
+Comparing two maps by eye does not work. So compute the change and map **that** instead, which is
+the move you learned this morning.
+
+16. Use the pivot sentence to build a table with one row per zip code and one column per year.
+    Index it on `['zipcode', 'state', 'latitude', 'longitude']` so those come along for the ride,
+    put `year` across the columns and `trange_min` in the cells, then `.reset_index()`.
+    What shape is it, and why is that number smaller than 80,000?
+
+```{python}
+change = usa.pivot_table(index=['zipcode', 'state', 'latitude', 'longitude'],
+                         columns='year', values='trange_min').reset_index()
+
+change.shape
+```
+
+17. Add a `temp_diff` column: the 2023 value minus the 2012 value. Count its nulls and say what a
+    null means here. Then drop those rows.
+
+:::{.callout-note}
+🐍 The two year columns are named with the **integers** `2012` and `2023`, not with strings,
+because that is what was in the `year` column you pivoted on. So it is `change[2023]`, with no
+quotes. Everything else about column-to-column arithmetic is the same as it was on Thursday.
+:::
+
+```{python}
+change['temp_diff'] = change[2023] - change[2012]
+
+print(change['temp_diff'].isnull().sum())
+
+change = change.dropna(subset=['temp_diff']).copy()
+
+change.shape
+```
+
+18. Draw a histogram of `temp_diff`. Label it. Then print
+    `change['temp_diff'].value_counts().sort_index()` and read the two together.
+
+    In a markdown cell, three or four sentences: what is the most common value, what is the second
+    most common, and how many distinct values are there in total? Given that, is `temp_diff` a
+    measurement of how much a place warmed, or is it something else? Be precise.
+
+```{python}
+plt.figure(figsize=(9, 5))
+sns.histplot(data=change, x='temp_diff')
+plt.xlabel('Change in zone minimum temperature, 2023 minus 2012 (°F)')
+plt.title('How zip codes moved between the two maps')
+plt.tight_layout()
+plt.show()
+
+change['temp_diff'].value_counts().sort_index()
+```
+
+19. The tails of that histogram are worth a minute. Use the top-N sentence twice to show the five
+    zip codes with the largest increase and the five with the largest decrease, with their states
+    and coordinates.
+
+    In a markdown cell, two or three sentences: a zip code that moved by 25 or 30 °F has moved five
+    or six whole zones. Do you believe that is a change in the climate? What else could produce it?
+    (Look at where they are.)
+
+```{python}
+cols = ['zipcode', 'state', 'latitude', 'longitude', 2012, 2023, 'temp_diff']
+print(change.sort_values('temp_diff', ascending=False).head(5)[cols])
+print(change.sort_values('temp_diff').head(5)[cols])
+```
+
+20. `temp_diff` has too many values to use as a `hue=` and too few to be interesting as a number.
+    Write a named function called `classify_shift` that takes one difference and returns
+    `'warmer'`, `'colder'` or `'unchanged'`, apply it to build a `shift` column, and count the
+    three categories.
+
+```{python}
+def classify_shift(diff):
+    """Label a zone change as warmer, colder, or unchanged."""
+    if diff > 0:
+        return 'warmer'
+    elif diff < 0:
+        return 'colder'
+    else:
+        return 'unchanged'
+
+
+change['shift'] = change['temp_diff'].apply(classify_shift)
+
+change['shift'].value_counts()
+```
+
+21. Draw the change map: `longitude` and `latitude` again, this time with `hue='shift'`. Twelve by
+    seven, labelled, titled.
+
+```{python}
+plt.figure(figsize=(12, 7))
+sns.scatterplot(data=change, x='longitude', y='latitude', hue='shift')
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+plt.title('Zip codes that moved between the 2012 and 2023 hardiness maps')
+plt.tight_layout()
+plt.show()
+```
+
+22. In a markdown cell, four or five sentences. This is the figure the whole evening was for, so
+    describe it properly. Where is the country almost uniformly warmer? Where is it patchy? Where
+    are the `'colder'` points, and does their location connect to your answer to question 19?
+
+    Then compare this figure with the two maps from question 13, and say in one sentence why the
+    difference had to be computed rather than looked at.
+
+## Part 5: States, and the count column
+
+23. Group `change` by `state` and use `.agg(['count', 'mean'])` on `temp_diff`. Show the ten states
+    with the largest mean increase.
+
+```{python}
+by_state = change.groupby('state')['temp_diff'].agg(['count', 'mean'])
+
+by_state.sort_values('mean', ascending=False).head(10).round(2)
+```
+
+24. Read the `count` column before you read the `mean` column, the way you have every day since
+    Friday. Two entries in that top ten should stop you. Name them and say why in one sentence
+    each.
+
+25. Build a Series of the ten largest mean increases, sorted, and draw it as horizontal bars using
+    the `.values` and `.index` idiom. Label both axes with units and title it.
+
+```{python}
+top_states = change.groupby('state')['temp_diff'].mean().sort_values(ascending=False).head(10)
+
+plt.figure(figsize=(9, 6))
+sns.barplot(x=top_states.values, y=top_states.index)
+plt.xlabel('Mean change in zone minimum temperature (°F)')
+plt.ylabel('State')
+plt.title('Ten states whose zip codes moved warmest, 2012 to 2023')
+plt.tight_layout()
+plt.show()
+```
+
+26. Now the other end. Show the five states with the smallest mean increase, with their counts.
+    In a markdown cell, one or two sentences: one of those states has more zip codes in it than
+    any other state in the file. Does that make its small number more trustworthy or less, and
+    does it make the ranking more interesting or less?
+
+```{python}
+by_state.sort_values('mean').head(5).round(2)
+```
+
+## Part 6: Write it up
+
+In a single markdown cell of 250 to 350 words, answer this:
+
+> A local newspaper is running a story headlined **"Our State Is Now a Zone Warmer."** They have
+> your two files and they want one figure and one number from you. **What do you send them, and
+> what do you tell them it does not mean?**
+
+Your answer must cite at least three specific numbers you computed tonight, must name at least two
+distinct reasons the comparison is harder than it sounds, and must end by naming the single figure
+you would send. Complete sentences, no bullet fragments.
+
+## The figure minute
+
+Look back through your notebook. You made six figures tonight, and they did four different jobs:
+
+- Question 9 found a **data error**, in a file that was not otherwise wrong.
+- Question 13 drew a **map** out of two ordinary numeric columns.
+- Question 18 showed you that your "temperature change" is **six distinct values**, which is the
+  single most important thing to know about it and is invisible in any mean.
+- Question 21 answered the **question**.
+
+Only one of the six was the figure the evening was about. The other five were how you found out
+what you had. That ratio is normal, and it is worth expecting: most of the plots you make in your
+career will never be shown to anybody, because their job is to tell **you** something before you
+say it out loud.
+
+## Wrap-up
+
+Before you close your notebook, check that:
+
+- every figure has an x-label, a y-label, a title, and units where units exist
+- you compared the row count before and after your merge
+- you never described `temp_diff` as a measured temperature change
+- every mean you reported in Part 5 has a count beside it
+- your Part 6 answer names something these files cannot tell the newspaper
+- your notebook reads top to bottom as a document, not as a pile of cells
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: seaborn](../cheatsheets/seaborn.qmd)
+- [📖 EDS 217 cheatsheet: matplotlib](../cheatsheets/matplotlib.qmd)
+- [📖 EDS 217 cheatsheet: merging and joining data](../cheatsheets/data_merging.qmd)
+- [📖 EDS 217 cheatsheet: grouping and aggregating](../cheatsheets/data_grouping.qmd)
+- [USDA Plant Hardiness Zone Map](https://planthardiness.ars.usda.gov/){target="_blank"}
+- [PRISM Climate Group, plant hardiness zones](https://prism.oregonstate.edu/projects/plant_hardiness_zones.php){target="_blank"}
+
+::: {.callout-tip}
+## Looking ahead to Day 8
+Tomorrow you stop being handed datasets. You and your team pick your own, and walk it through all
+ten steps yourselves. Bring the notebook you started this afternoon.
+:::

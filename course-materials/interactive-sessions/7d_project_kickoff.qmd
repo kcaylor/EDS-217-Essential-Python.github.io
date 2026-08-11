@@ -1,0 +1,263 @@
+---
+title: "Interactive Session"
+subtitle: "🚀 Project Kickoff"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](images/ds_friends.jpg)
+:::
+
+:::{.gray-text .center-text}
+*The tools, at the end of a long week.*
+
+:::
+
+You have now been taught every step of the workflow.
+
+Tomorrow and Friday you build one of your own: a notebook that takes a dataset nobody in this room
+has seen, walks it through the ten steps, and ends with a figure and a claim. You will do it in
+teams, and on Friday afternoon each team walks the class through theirs.
+
+The single biggest predictor of how those two days go is whether you leave this room with a
+dataset you have already opened and a question you have already written down. That is the whole
+job of this session. There is no new Python in it.
+
+By the end of this session your team will have:
+
+- **a team**, of two or three people
+- **a dataset**, loaded into a DataFrame, with its shape and its nulls printed
+- **three candidate questions**, written down in complete sentences
+- **one figure**, however ugly, made from that data
+- **a written record** of all of the above, in a notebook, saved
+
+## Getting Started
+
+This session produces one notebook per **team**, not one per person, so wait until you have a team
+before you make it.
+
+1. **Create a new notebook** from the Launcher (**eds217_2026**).
+
+2. **Rename it** to `Project_<your team name>.ipynb`.
+
+3. **Add a title cell** (Markdown), with every team member's name in it:
+
+```markdown
+# EDS 217 Final Project: <team name>
+
+Members: <names>
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/7d_project_kickoff.html)
+
+Date: 09/09/2026
+```
+
+This is the file you will still be working in on Friday afternoon. Decide now whose machine it
+lives on, and get it into a shared folder or a repository before you leave.
+
+## The ten steps, one last time
+
+Your project notebook is graded against [the ten-step workflow](../the-data-science-workflow.qmd),
+and every step should appear in it under a markdown heading, even where the step is one line long.
+
+| # | Step | Taught |
+|---|------|--------|
+| 1 | Import | Day 2 |
+| 2 | Explore | Day 2 |
+| 3 | Clean | Day 4 |
+| 4 | Filter | Day 3 |
+| 5 | Sort | Day 3 |
+| 6 | Transform | Day 4 |
+| 7 | Group | Day 5 |
+| 8 | Aggregate | Day 5 |
+| 9 | Join / Reshape | Day 6 |
+| 10 | Visualize | Day 7 |
+: {.hover .bordered}
+
+"Even where the step is one line long" is not a loophole, it is the point. A project where the
+Clean step reads *"this file arrived clean; `.isnull().sum()` is zero in every column and there
+are no duplicate rows"* has done the Clean step properly. A project that silently skips it has
+not, and neither you nor anyone reading it knows which situation you were in.
+
+## Step 1: Form a team
+
+Teams of **two or three**. Three is fine; four is not, because on a two-day project the fourth
+person ends up watching.
+
+Take five minutes. When you have a team, open one shared notebook, name it after your team, and
+put everybody's name in the first markdown cell.
+
+## Step 2: Find a dataset
+
+You are looking for a CSV. Not a database, not an API, not a shapefile, not a zip of forty files.
+
+::: {.callout-tip title="What makes a dataset workable in two days"}
+Check all five before you commit to it:
+
+1. **It is a single CSV file**, and you can get its download URL.
+2. **It has more than a couple of hundred rows.** Fewer than that and every group has three
+   members in it and nothing you compute means anything.
+3. **It has at least two numeric columns.** You need two to make a scatter plot.
+4. **It has at least one categorical column** with a handful of repeated values: species, region,
+   year, type, country. This is what you will group by and what you will pass to `hue=`. A dataset
+   without one is a dataset where half of what you learned this week does not apply.
+5. **You can say where it came from and what one row is.** If you cannot answer "what does one row
+   of this file represent" in a sentence, keep looking.
+:::
+
+It does not have to be environmental data. Be curious. A dataset you actually want to know the
+answer about will carry you through Friday morning better than a worthy one you find dull.
+
+### Where to look
+
+General collections:
+
+- [Kaggle datasets, filtered to CSV](https://www.kaggle.com/datasets?fileType=csv){target="_blank"}
+- [Data is Plural](https://www.data-is-plural.com/){target="_blank"}, a weekly newsletter of
+  strange and good datasets, with a searchable archive
+- [data.gov](https://data.gov/){target="_blank"}
+- [Zenodo](https://zenodo.org/){target="_blank"}, where a lot of published research data lives
+- [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data){target="_blank"},
+  a weekly dataset series, all CSV, all small enough to work with
+
+Oddly specific, and all of them fine choices:
+
+- [The Central Park Squirrel Census](https://www.thesquirrelcensus.com/data){target="_blank"}
+- [Harry Potter characters](https://www.kaggle.com/datasets/gulsahdemiryurek/harry-potter-dataset){target="_blank"}
+- [Spotify tracks](https://www.kaggle.com/datasets/zaheenhamidani/ultimate-spotify-tracks-db){target="_blank"}
+- [The Lego database](https://www.kaggle.com/datasets/rtatman/lego-database){target="_blank"}
+
+If your file is not already at a public URL, put it in a Google Drive folder in your UCSB account
+and use the loading recipe at the bottom of the
+[final project page](../final_project.qmd).
+
+## Step 3: The twenty-minute smoke test
+
+Do not spend the afternoon reading a dataset's documentation. Load it and look at it. Everything
+below is Day 2 vocabulary, and it takes four cells:
+
+```python
+import pandas as pd
+
+url = '...'                  # your file
+df = pd.read_csv(url)
+
+print(df.shape)
+print(df.dtypes)
+```
+
+```python
+df.head()
+```
+
+```python
+df.isnull().sum()
+```
+
+```python
+df.describe()
+```
+
+Here is what that looks like on a file you already know, so you can see the shape of the thing:
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/penguins.csv'
+df = pd.read_csv(url)
+
+print(df.shape)
+print(df.dtypes)
+```
+
+```{python}
+df.isnull().sum()
+```
+
+If the smoke test turns up a file with 30 rows, or 400 columns, or one usable numeric column, drop
+it now and find another one. Twenty minutes of looking beats two days of coping.
+
+## Step 4: Write three questions
+
+A good project question has a shape, and it is a shape you have been building all week:
+
+> **For each `<category>`, how does `<measurement>` compare?**
+>
+> **Does the relationship between `<measurement>` and `<measurement>` differ by `<category>`?**
+>
+> **Has `<measurement>` changed between `<time>` and `<time>`, and is the change the same
+> everywhere?**
+
+Those are the three shapes the ten steps are built to answer. Write **three** questions about your
+dataset in those shapes, in complete sentences, with your actual column names in them.
+
+Three, not one, because the first question you write about a new dataset is usually the one the
+data cannot answer, and you will not find that out until Thursday afternoon.
+
+::: {.callout-note}
+🐍 Questions to avoid, and why:
+
+- *"Can we predict X from Y?"* Prediction is a different course. You have not been taught a model
+  and you are not expected to fit one.
+- *"Is X significantly higher in group A?"* You have not been taught a hypothesis test. You can
+  say a difference is large or small, and show the counts it rests on, which is honest. Do not use
+  the word *significant*.
+- *"What are all the interesting patterns in this data?"* Not a question. You will produce
+  fourteen figures and no claim.
+:::
+
+## Step 5: Make one figure
+
+Before you leave, make one. Any of the three from this morning, on any two columns, with `hue=` on
+your categorical column if it fits.
+
+It does not have to be good. It has to exist, because a figure is the fastest way to find out that
+your categorical column has 340 distinct values, or that your numeric column is stored as text, or
+that half your rows are a footer that pandas read as data.
+
+## What to save
+
+By the end of the session, your team notebook should hold:
+
+1. A title cell with the team's names and the date.
+2. The dataset's name, its URL, and one sentence saying **what one row represents**.
+3. The output of `.shape`, `.dtypes` and `.isnull().sum()`.
+4. Three candidate questions, in markdown, in complete sentences.
+5. One figure, with axis labels.
+6. A markdown cell naming which of the ten steps you expect to be the hard one for this dataset.
+
+Save it. Tomorrow morning starts from this file.
+
+::: {.callout-tip collapse="true" title="Note for the instructor: if Day 7 has run long"}
+This session is the designated buffer for Day 7. If 7A, 7B and 7C have run over, or if the class
+is visibly out of road, convert this slot to review and questions and move the kickoff to Day 8
+morning.
+
+If you do, still take five minutes at the end of today to form the teams, so that tomorrow starts
+with people sitting together rather than with a negotiation. Teams are the part of this session
+that cannot be compressed; dataset browsing and question drafting can.
+:::
+
+## Key points
+
+- Teams of two or three, one shared notebook.
+- A workable dataset is **one CSV, a few hundred rows, two numeric columns, one categorical
+  column**, and you can say what one row is.
+- Load it before you commit to it. The smoke test is four cells and it saves days.
+- Write **three** questions, not one, in the shapes the workflow answers.
+- Make one figure today, however rough.
+- Every one of the ten steps appears in the final notebook, under its own heading, even when the
+  honest content of a step is a single sentence.
+
+## Resources
+
+- [🔟 The Data Science Workflow](../the-data-science-workflow.qmd)
+- [📝 The final project](../final_project.qmd)
+- [📖 EDS 217 cheatsheet: reading data with `read_csv`](../cheatsheets/read_csv.qmd)
+- [📖 EDS 217 cheatsheet: workflow methods](../cheatsheets/workflow_methods.qmd)
+- [📖 EDS 217 cheatsheet: seaborn](../cheatsheets/seaborn.qmd)

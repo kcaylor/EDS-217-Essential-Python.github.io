@@ -19,19 +19,28 @@ This cheatsheet covers essential datetime and time series operations in pandas n
 #| echo: true
 
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+import math
+import random
 
 # Set random seed for reproducible examples
-np.random.seed(42)
+random.seed(42)
 
 # Create sample time series data
 dates = pd.date_range('2020-01-01', '2023-12-31', freq='ME')
-temperature = np.random.normal(15, 5, len(dates)) + 10 * np.sin(np.arange(len(dates)) * 2 * np.pi / 12)
+
+temperature = []
+co2 = []
+level = 400.0
+for i in range(len(dates)):
+    temperature.append(15 + 10 * math.sin(i * 2 * math.pi / 12) + random.gauss(0, 5))
+    level = level + random.gauss(0.1, 0.5)
+    co2.append(level)
+
 sample_df = pd.DataFrame({
     'date': dates,
     'temperature': temperature,
-    'co2': 400 + np.cumsum(np.random.normal(0.1, 0.5, len(dates)))
+    'co2': co2
 })
 ```
 
@@ -42,12 +51,13 @@ sample_df = pd.DataFrame({
 ```{python}
 #| echo: true
 
-# Parse dates while reading CSV (most efficient method)
-# df = pd.read_csv('data.csv', parse_dates=['Date'])
+# Parse dates while reading a CSV (the way you will do it on real data)
+# df = pd.read_csv('https://eds-217-essential-python.github.io/data/some_file.csv',
+#                  parse_dates=['Date'])
 
-# For demonstration, save and reload sample data
-sample_df.to_csv('temp_data.csv', index=False)
-df = pd.read_csv('temp_data.csv', parse_dates=['date'])
+# For demonstration here, round-trip the sample data through text rather than a file
+from io import StringIO
+df = pd.read_csv(StringIO(sample_df.to_csv(index=False)), parse_dates=['date'])
 
 print(f"Date column dtype: {df['date'].dtype}")
 print(f"Data shape: {df.shape}")
@@ -90,7 +100,7 @@ df['month'] = df['date'].dt.month
 df['quarter'] = df['date'].dt.quarter
 
 # Create decade grouping (useful for climate analysis)
-df['decade'] = (df['date'].dt.year // 10) * 10
+df['decade'] = (df['date'].dt.year / 10).astype(int) * 10
 
 print(df[['date', 'year', 'month', 'decade']].head())
 ```
@@ -225,10 +235,13 @@ print(f"2020s decade: {len(recent_decade)}")
 
 # Create second dataset with different frequency
 daily_dates = pd.date_range('2022-01-01', '2022-12-31', freq='D')
-np.random.seed(123)
-daily_data = pd.DataFrame({
-    'precipitation': np.random.exponential(2, len(daily_dates))
-}, index=daily_dates)
+random.seed(123)
+
+precipitation = []
+for i in range(len(daily_dates)):
+    precipitation.append(random.expovariate(1 / 2))
+
+daily_data = pd.DataFrame({'precipitation': precipitation}, index=daily_dates)
 
 # Resample to monthly to match original data frequency
 monthly_precip = daily_data.resample('ME').sum()

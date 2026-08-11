@@ -1,170 +1,265 @@
 ---
-title: "EDS 217 Cheatsheet"
+title: EDS 217 Cheatsheet
 subtitle: "Customizing Plots with Matplotlib and Seaborn"
 jupyter: eds217_2026
-format:
+format: 
     html:
         toc: true
         toc-depth: 3
         code-fold: show
 ---
 
+This page covers the adjustments you make **after** a figure exists: sizing it, colouring it,
+labelling it, and making the labels readable. For the plotting commands themselves, see the
+[matplotlib](matplotlib.qmd) and [seaborn](seaborn.qmd) cheatsheets.
+
+## Setup
+
+```{python}
+#| echo: true
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+temps = [-22.89, -20.70, -20.69, -11.76, -0.80, 8.59,
+         11.22, 7.23, -0.11, -10.54, -18.34, -21.44]
+```
+
 ## Matplotlib Customization
 
-### Basic Plot Setup
+### Figure size
+
+`figsize` is in inches, width then height. A wide, short figure suits a long time axis. A
+square one suits a scatter.
 
 ```{python}
 #| echo: true
-import matplotlib.pyplot as plt
-import numpy as np
 
-x = np.linspace(0, 10, 100)
-y = np.sin(x)
-
-plt.figure(figsize=(10, 6))
-plt.plot(x, y)
+plt.figure(figsize=(10, 4))
+plt.plot(months, temps)
+plt.ylabel('Mean air temperature (deg C)')
+plt.tight_layout()
 plt.show()
 ```
 
-### Customizing Line Plots
+### Colour, line style and markers
 
 ```{python}
 #| echo: true
-plt.figure(figsize=(10, 6))
-plt.plot(x, y, color='red', linestyle='--', linewidth=2, marker='o', markersize=5)
-plt.title('Customized Line Plot', fontsize=16)
-plt.xlabel('X-axis', fontsize=12)
-plt.ylabel('Y-axis', fontsize=12)
-plt.grid(True, linestyle=':')
+
+plt.figure(figsize=(8, 4))
+plt.plot(months, temps, color='firebrick', linestyle='--', linewidth=2,
+         marker='o', markersize=5)
+plt.ylabel('Mean air temperature (deg C)')
+plt.tight_layout()
 plt.show()
 ```
 
-### Adjusting Axes
+Common values: colours by name (`'firebrick'`, `'steelblue'`) or single letter (`'r'`, `'b'`,
+`'g'`, `'k'`); line styles `'-'`, `'--'`, `':'`, `'-.'`; markers `'o'`, `'s'`, `'^'`, `'.'`.
+
+### Axis labels and title
+
+Axis labels should carry units. A title should say what the figure shows, not repeat the axis
+names.
 
 ```{python}
 #| echo: true
-plt.figure(figsize=(10, 6))
-plt.plot(x, y)
-plt.xlim(0, 5)
-plt.ylim(-1.5, 1.5)
-plt.xticks(np.arange(0, 6, 1))
-plt.yticks(np.arange(-1.5, 1.6, 0.5))
+
+plt.figure(figsize=(8, 4))
+plt.bar(months, temps)
+plt.xlabel('Month')
+plt.ylabel('Mean air temperature (deg C)')
+plt.title('Toolik Lake, 2008 to 2019')
+plt.tight_layout()
 plt.show()
 ```
 
-### Adding Legend
+### Rotating tick labels
+
+When category names collide, rotate them. `ha='right'` aligns each rotated label under its own
+tick rather than beside it.
 
 ```{python}
 #| echo: true
-plt.figure(figsize=(10, 6))
-plt.plot(x, np.sin(x), label='sin(x)')
-plt.plot(x, np.cos(x), label='cos(x)')
-plt.legend(fontsize=12, loc='upper right')
+
+long_labels = ['Great Smoky Mountains', 'Grand Canyon', 'Cuyahoga Valley',
+               'Olympic', 'Rocky Mountain']
+visitors = [6.069, 2.097, 2.093, 1.960, 1.765]
+
+plt.figure(figsize=(7, 4))
+plt.bar(long_labels, visitors)
+plt.xticks(rotation=45, ha='right')
+plt.ylabel('Mean annual visitors (millions)')
+plt.tight_layout()
 plt.show()
 ```
 
-### Customizing Text and Annotations
+Before you rotate, ask whether a horizontal bar chart would read better. It usually does.
 
 ```{python}
 #| echo: true
-plt.figure(figsize=(10, 6))
-plt.plot(x, y)
-plt.title('Sine Wave', fontsize=16, fontweight='bold')
-plt.text(5, 0.5, 'Peak', fontsize=14, color='red')
-plt.annotate('Trough', xy=(3*np.pi/2, -1), xytext=(6, -0.5),
-             arrowprops=dict(facecolor='black', shrink=0.05))
+
+plt.figure(figsize=(7, 4))
+plt.barh(long_labels, visitors)
+plt.xlabel('Mean annual visitors (millions)')
+plt.tight_layout()
 plt.show()
+```
+
+### Legends
+
+Label each series as you draw it, then call `legend()` once.
+
+```{python}
+#| echo: true
+
+early = [-24.1, -22.0, -21.5, -12.4, -1.2, 8.1, 11.6, 7.0, -1.3, -12.0, -19.5, -22.0]
+
+plt.figure(figsize=(9, 4))
+plt.plot(months, early, label='Early period')
+plt.plot(months, temps, label='Late period')
+plt.ylabel('Mean air temperature (deg C)')
+plt.legend()
+plt.tight_layout()
+plt.show()
+```
+
+### Grid lines
+
+```{python}
+#| echo: true
+
+plt.figure(figsize=(8, 4))
+plt.bar(months, temps)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.ylabel('Mean air temperature (deg C)')
+plt.tight_layout()
+plt.show()
+```
+
+### Fixing crowded layouts, and saving
+
+```{python}
+#| echo: true
+
+plt.figure(figsize=(8, 4))
+plt.bar(months, temps)
+plt.ylabel('Mean air temperature (deg C)')
+plt.tight_layout()     # keeps labels from being cut off
+plt.show()
+```
+
+```python
+plt.savefig('toolik_monthly.png', dpi=300)   # call this before plt.show()
 ```
 
 ## Seaborn Customization
 
-### Setting the Style
+Seaborn draws onto a matplotlib figure, so everything above still applies. Size the figure with
+`plt.figure()` first, then call seaborn, then label with `plt.xlabel()` and friends.
 
 ```{python}
 #| echo: true
-import seaborn as sns
-import pandas as pd
 
-sns.set_style("whitegrid")
-sns.set_palette("deep")
+penguins = pd.read_csv('https://eds-217-essential-python.github.io/data/penguins.csv')
+penguins = penguins.dropna()
 ```
 
-### Loading and Preparing Data
+### Colouring by a category with `hue=`
 
 ```{python}
 #| echo: true
-# Load the tips dataset
-tips = sns.load_dataset("tips")
 
-# Display the first few rows and data types
-print(tips.head())
-print("\nData Types:")
-print(tips.dtypes)
-
-# Select only numeric columns for correlation
-numeric_columns = tips.select_dtypes(include=[np.number]).columns
-tips_numeric = tips[numeric_columns]
-```
-
-### Customizing a Scatter Plot
-
-```{python}
-#| echo: true
-plt.figure(figsize=(10, 6))
-sns.scatterplot(data=tips, x="total_bill", y="tip", hue="time", size="size")
-plt.title("Tips vs Total Bill", fontsize=16)
+plt.figure(figsize=(7, 5))
+sns.scatterplot(data=penguins, x='bill_length_mm', y='bill_depth_mm', hue='species')
+plt.xlabel('Bill length (mm)')
+plt.ylabel('Bill depth (mm)')
+plt.tight_layout()
 plt.show()
 ```
 
-### Customizing a Box Plot
+### Point size and transparency
+
+`s=` sets the marker size and `alpha=` sets transparency. Lower the transparency when points
+overlap heavily.
 
 ```{python}
 #| echo: true
-plt.figure(figsize=(10, 6))
-sns.boxplot(data=tips, x="day", y="total_bill", palette="Set3")
-plt.title("Total Bill by Day", fontsize=16)
+
+plt.figure(figsize=(7, 5))
+sns.scatterplot(data=penguins, x='flipper_length_mm', y='body_mass_g',
+                hue='species', s=60, alpha=0.6)
+plt.xlabel('Flipper length (mm)')
+plt.ylabel('Body mass (g)')
+plt.tight_layout()
 plt.show()
 ```
 
-### Customizing a Heatmap (Correlation of Numeric Columns)
+### Histogram bin count
+
+`bins=` controls how finely the range is divided. Too few bins hides structure and too many
+turns the figure into noise. Try a few.
 
 ```{python}
 #| echo: true
-corr = tips_numeric.corr()
-plt.figure(figsize=(8, 6))
-sns.heatmap(corr, annot=True, cmap="coolwarm", linewidths=0.5)
-plt.title("Correlation Heatmap of Numeric Columns", fontsize=16)
+
+plt.figure(figsize=(7, 4))
+sns.histplot(data=penguins, x='body_mass_g', bins=20)
+plt.xlabel('Body mass (g)')
+plt.tight_layout()
 plt.show()
 ```
 
-### Customizing a Pair Plot
+### Ordering bars
+
+A bar chart of unordered categories is easier to read when you sort it first.
 
 ```{python}
 #| echo: true
-sns.pairplot(tips, hue="time", palette="husl", height=2.5, 
-             vars=["total_bill", "tip", "size"])
-plt.suptitle("Pair Plot of Tips Dataset", y=1.02, fontsize=16)
+
+mean_mass = penguins.groupby('species')['body_mass_g'].mean().sort_values()
+
+plt.figure(figsize=(7, 3.5))
+sns.barplot(x=mean_mass.values, y=mean_mass.index)
+plt.xlabel('Mean body mass (g)')
+plt.ylabel('Species')
+plt.tight_layout()
 plt.show()
 ```
 
-### Customizing a Regression Plot
+## Key Points
 
-```{python}
-#| echo: true
-plt.figure(figsize=(10, 6))
-sns.regplot(data=tips, x="total_bill", y="tip", scatter_kws={"color": "blue"}, line_kws={"color": "red"})
-plt.title("Regression Plot: Tip vs Total Bill", fontsize=16)
-plt.show()
+1. Size the figure first, plot second, label third, `tight_layout()` last.
+2. Axis labels carry units. A figure without them is not finished.
+3. Prefer horizontal bars to rotated labels when the categories are words.
+4. Sort a bar chart before you draw it.
+5. `savefig()` goes before `show()`, because showing a figure clears it.
+
+## Beyond EDS 217
+
+Not used in this course, listed so you recognize it elsewhere. Not run here.
+
+```python
+# Global styling: changes the look of every figure drawn afterwards
+sns.set_theme(style='whitegrid')
+sns.set_palette('deep')
+
+# Named colour palettes for a hue variable
+sns.scatterplot(data=df, x='a', y='b', hue='group', palette='Set2')
+
+# Text and arrows placed at a data coordinate
+plt.annotate('Trough', xy=(3, -1), xytext=(6, -0.5),
+             arrowprops=dict(facecolor='black', shrink=0.05))
+
+# Manual tick positions
+plt.xticks([0, 2, 4, 6, 8, 10])
+plt.ylim(-30, 15)
+
+# Several panels in one figure
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 ```
 
-### Customizing a Categorical Plot
-
-```{python}
-#| echo: true
-plt.figure(figsize=(12, 6))
-sns.catplot(data=tips, x="day", y="total_bill", hue="sex", kind="violin", split=True)
-plt.title("Distribution of Total Bill by Day and Sex", fontsize=16)
-plt.show()
-```
-
-Remember, you can always combine Matplotlib and Seaborn customizations for even more control over your visualizations!
+See the [seaborn cheatsheet](seaborn.qmd) for the seaborn functions this course does not use.

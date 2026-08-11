@@ -1,5 +1,5 @@
 ---
-title: "EDS 217 Cheatsheet"
+title: EDS 217 Cheatsheet
 subtitle: "Seaborn Plotting Library"
 jupyter: eds217_2026
 format: 
@@ -11,270 +11,229 @@ format:
 
 ## Introduction to Seaborn
 
-Seaborn is a powerful Python data visualization library built on top of Matplotlib. It provides a high-level interface for drawing attractive statistical graphics. Seaborn is particularly useful for creating complex visualizations with just a few lines of code.
+Seaborn draws statistical figures directly from a DataFrame. You name the DataFrame with
+`data=`, and then name columns with `x=`, `y=` and `hue=`. Seaborn works out the rest.
 
-Key features:
-- Built-in themes for attractive plots
-- Statistical plot types
-- Integration with Pandas DataFrames
-- Automatic estimation and plotting of statistical models
+This course uses **three** seaborn functions: `scatterplot`, `histplot` and `barplot`. Those
+three cover the great majority of what environmental data science figures need. Seaborn has
+many more, and a selection is listed at the bottom of this page under
+[Beyond EDS 217](#beyond-eds-217), for reference rather than for use in class.
 
-## Setting up Seaborn
-
-To use Seaborn, you need to import it along with other necessary libraries:
+## Setup
 
 ```{python}
 #| echo: true
+
+import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
 
-# Set the style for all plots
-sns.set_style("whitegrid")
-```
-
-## Common Plot Types in Environmental Data Science
-
-For these examples, we'll use various built-in datasets provided by Seaborn. These datasets are included with the library and are commonly used for demonstration purposes.
-
-### 1. Scatter Plots
-
-Useful for showing relationships between two continuous variables.
-
-```{python}
-#| echo: true
-# Load the tips dataset
-tips = sns.load_dataset("tips")
-print(tips.head())
-```
-```{python}
-#| echo: true
-
-# Basic scatter plot
-plt.figure(figsize=(10, 6))
-sns.scatterplot(x='total_bill', y='tip', data=tips)
-plt.title('Relationship between Total Bill and Tip')
-plt.show()
-```
-```{python}
-#| echo: true
-
-# Add hue for a third variable
-plt.figure(figsize=(10, 6))
-sns.scatterplot(x='total_bill', y='tip', hue='time', data=tips)
-plt.title('Relationship between Total Bill and Tip, colored by Time of Day')
-plt.show()
-```
-
-The 'tips' dataset contains information about restaurant bills and tips. It's a classic dataset used for demonstrating various plotting techniques.
-
-### 2. Line Plots
-
-Ideal for time series data or showing trends.
-
-```{python}
-#| echo: true
-# Load the flights dataset
-flights = sns.load_dataset("flights")
-print(flights.head())
-```
-```{python}
-#| echo: true
-
-# Basic line plot (uncertainty bounds calculated auto-magically by grouping rows containing the same year!)
-plt.figure(figsize=(12, 6))
-sns.lineplot(x='year', y='passengers', data=flights)
-plt.title('Number of Passengers over Time')
-plt.show()
-```
-```{python}
-#| echo: true
-
-# Multiple lines with confidence intervals
-plt.figure(figsize=(12, 6))
-sns.lineplot(x='year', y='passengers', hue='month', data=flights)
-plt.title('Number of Passengers over Time, by Month')
-plt.show()
-```
-
-The 'flights' dataset contains information about passenger numbers for flights over time. It's useful for demonstrating time series visualizations.
-
-### 3. Bar Plots
-
-Great for comparing quantities across different categories.
-
-```{python}
-#| echo: true
-# Load the titanic dataset
-titanic = sns.load_dataset("titanic")
-print(titanic.head())
-```
-```{python}
-#| echo: true
-
-# Basic bar plot
-plt.figure(figsize=(10, 6))
-sns.barplot(x='class', y='fare', data=titanic)
-plt.title('Average Fare by Passenger Class')
-plt.show()
-```
-
-```{python}
-#| echo: true
-
-# Grouped bar plot
-plt.figure(figsize=(10, 6))
-sns.barplot(x='class', y='fare', hue='sex', data=titanic)
-plt.title('Average Fare by Passenger Class and Sex')
-plt.show()
-```
-
-The 'titanic' dataset contains information about passengers on the Titanic, including their class, sex, age, and survival status.
-
-### 4. Box Plots
-
-Useful for showing distribution of data across categories.
-
-```{python}
-#| echo: true
-# Basic box plot
-plt.figure(figsize=(10, 6))
-sns.boxplot(x='class', y='age', data=titanic)
-plt.title('Distribution of Age by Passenger Class')
-plt.show()
-```
-
-```{python}
-#| echo: true
-
-# Add individual data points
-plt.figure(figsize=(10, 6))
-sns.boxplot(x='class', y='age', data=titanic)
-sns.swarmplot(x='class', y='age', data=titanic, color=".25", size=3)
-plt.title('Distribution of Age by Passenger Class with Individual Points')
-plt.show()
-```
-
-### 5. Violin Plots
-
-Similar to box plots but show the full distribution of data.
-
-```{python}
-#| echo: true
-plt.figure(figsize=(10, 6))
-sns.violinplot(x='class', y='age', data=titanic)
-plt.title('Distribution of Age by Passenger Class (Violin Plot)')
-plt.show()
-```
-
-### 6. Heatmaps
-
-Excellent for visualizing correlation matrices or gridded data.
-
-```{python}
-#| echo: true
-# Load the penguins dataset
-penguins = sns.load_dataset("penguins")
-print(penguins.head(5))
-```
-```{python}
-#| echo: true
-
-# Correlation heatmap
-plt.figure(figsize=(10, 8))
-correlation = penguins.select_dtypes(include=[np.number]).corr()
-sns.heatmap(correlation, annot=True, cmap='coolwarm')
-plt.title('Correlation Heatmap of Penguin Measurements')
-plt.show()
-```
-
-The 'penguins' dataset contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica.
-
-## Using Seaborn for Data Exploration with DataFrames
-
-Seaborn is particularly powerful when working with Pandas DataFrames, as it can automatically infer variable types and choose appropriate plot types.
-
-### Quick Data Overview
-
-Recall the structure of the penguins dataframe, which has a combination of measured and categorical values:
-```{python}
+penguins = pd.read_csv('https://eds-217-essential-python.github.io/data/penguins.csv')
+penguins = penguins.dropna()
+print(penguins.shape)
 print(penguins.head())
 ```
 
-We can explore the distribution of every _numerical_ variable as well as the pair-wise relationship between all the variables in a dataframe using `pairplot` and  can use a categorical variable to further organize the data within each plot using the `hue` argument.
+:::{.callout-note}
+You will see `sns.set_theme()` in seaborn code elsewhere. It changes the look of every figure
+you draw afterwards. This course does not call it, so that figures look the same from one
+session to the next.
+:::
+
+## 1. Scatter Plots
+
+Use a scatter plot to show the relationship between two numeric columns. Each row of the
+DataFrame becomes one point.
 
 ```{python}
 #| echo: true
-# Get a quick overview of numerical variables
-sns.pairplot(penguins, hue='species')
-plt.suptitle('Overview of Penguin Measurements by Species', y=1.02)
+
+plt.figure(figsize=(7, 5))
+sns.scatterplot(data=penguins, x='bill_length_mm', y='bill_depth_mm')
+plt.xlabel('Bill length (mm)')
+plt.ylabel('Bill depth (mm)')
+plt.tight_layout()
 plt.show()
 ```
+
+### Adding a third variable with `hue=`
+
+`hue=` colours the points by a category column. It is the single most useful argument in
+seaborn, because it can reveal structure that the pooled figure hides.
+
 ```{python}
 #| echo: true
 
-# Visualize distributions of all numerical variables
-sns.displot(penguins['bill_length_mm'], kind='kde')
-plt.suptitle('Distribution of Penguin Bill Lengths',y=1.02)
+plt.figure(figsize=(7, 5))
+sns.scatterplot(data=penguins, x='bill_length_mm', y='bill_depth_mm', hue='species')
+plt.xlabel('Bill length (mm)')
+plt.ylabel('Bill depth (mm)')
+plt.tight_layout()
 plt.show()
 ```
 
-### Exploring Relationships
+Compare the two figures above. Pooled together, longer bills look shallower. Within each
+species, longer bills are deeper. One argument changed the conclusion.
+
+## 2. Histograms
+
+A histogram takes **one** numeric column and shows how its values are distributed. The bar
+heights are counts of rows, so there is no `y=` argument.
 
 ```{python}
 #| echo: true
-# Explore relationship between variables
-sns.relplot(data=penguins, x='bill_length_mm', y='bill_depth_mm', hue='species', style='sex')
-plt.title('Relationship between Bill Length and Depth')
+
+plt.figure(figsize=(7, 5))
+sns.histplot(data=penguins, x='body_mass_g')
+plt.xlabel('Body mass (g)')
+plt.tight_layout()
 plt.show()
 ```
+
+### Splitting a histogram by category
+
 ```{python}
 #| echo: true
 
-# Facet plots for multi-dimensional exploration
-g = sns.FacetGrid(penguins, col='species', row='sex')
-g.map(sns.scatterplot, 'bill_length_mm', 'bill_depth_mm')
-g.add_legend()
-plt.suptitle('Bill Measurements by Species and Sex', y=1.02)
+plt.figure(figsize=(7, 5))
+sns.histplot(data=penguins, x='body_mass_g', hue='species')
+plt.xlabel('Body mass (g)')
+plt.tight_layout()
 plt.show()
 ```
 
-### Categorical Data Exploration
+## 3. Bar Plots
+
+Seaborn's `barplot` has two forms, and it is worth knowing which one you are using.
+
+### Form 1: from a DataFrame, with `data=`
+
+Given a category column and a numeric column, `barplot` **computes the mean** of the numeric
+column within each category, and draws a bar for each mean. The vertical line on each bar is a
+confidence interval.
 
 ```{python}
 #| echo: true
-# Compare distributions across categories
-sns.catplot(data=penguins, kind='box', x='species', y='body_mass_g', hue='sex')
-plt.title('Body Mass Distribution by Species and Sex')
+
+plt.figure(figsize=(7, 5))
+sns.barplot(data=penguins, x='species', y='body_mass_g')
+plt.xlabel('Species')
+plt.ylabel('Mean body mass (g)')
+plt.tight_layout()
 plt.show()
 ```
+
+:::{.callout-important}
+The mean is silent. Nothing in the code above says `mean`, and nothing in the figure says so
+either. Say it in your axis label, as above, or your reader will not know what the bar height
+is.
+:::
+
+### Form 2: from a Series, with `.values` and `.index`
+
+When you already have a result, such as a `value_counts()` or a grouped mean, you pass its two
+pieces separately. The values are the bar lengths and the index holds the labels.
+
 ```{python}
 #| echo: true
 
-# Count plots for categorical variables
-sns.countplot(data=penguins, x='island', hue='species')
-plt.title('Penguin Species Count by Island')
+counts = penguins['species'].value_counts()
+print(counts)
+
+plt.figure(figsize=(7, 4))
+sns.barplot(x=counts.values, y=counts.index)
+plt.xlabel('Number of penguins')
+plt.ylabel('Species')
+plt.tight_layout()
 plt.show()
 ```
 
-### Time Series Exploration
+Putting the categories on the y axis gives their names room to be read left to right. Prefer
+horizontal bars whenever the labels are words rather than numbers, instead of rotating them.
+
+### The same move on a grouped result
 
 ```{python}
 #| echo: true
-# Visualize trends over time
-sns.lineplot(data=flights, x='year', y='passengers', hue='month')
-plt.title('Passenger Numbers by Year and Month')
+
+mean_mass = penguins.groupby('island')['body_mass_g'].mean().sort_values()
+print(mean_mass)
+
+plt.figure(figsize=(7, 4))
+sns.barplot(x=mean_mass.values, y=mean_mass.index)
+plt.xlabel('Mean body mass (g)')
+plt.ylabel('Island')
+plt.tight_layout()
 plt.show()
 ```
+
+## Labelling Seaborn Figures
+
+Seaborn draws onto a matplotlib figure, so every matplotlib labelling command works on a
+seaborn plot. Call them after the seaborn call.
+
+```{python}
+#| echo: true
+
+plt.figure(figsize=(7, 5))
+sns.scatterplot(data=penguins, x='flipper_length_mm', y='body_mass_g', hue='species')
+plt.xlabel('Flipper length (mm)')
+plt.ylabel('Body mass (g)')
+plt.title('Penguin body mass against flipper length')
+plt.tight_layout()
+plt.show()
+```
+
+See the [matplotlib cheatsheet](matplotlib.qmd) for figure sizing, titles, legends and saving.
 
 ## Key Points
 
-- Seaborn works seamlessly with Pandas DataFrames, making it easy to create plots directly from your data.
-- The library offers a wide range of plot types suitable for various environmental data science tasks.
-- Seaborn's statistical plotting functions (like `regplot` and `lmplot`) can automatically fit and visualize linear regressions.
-- The `pairplot` function and `FacetGrid` class are powerful for creating multi-panel plots to explore complex datasets.
-- Seaborn's themes and color palettes help create publication-quality figures with minimal customization.
+1. `data=` names the DataFrame. `x=`, `y=` and `hue=` name **columns**, as strings.
+2. `histplot` takes `x=` only. The heights are counts.
+3. `barplot` with `data=` computes a mean without saying so. Put the word in your axis label.
+4. `barplot` with `x=series.values, y=series.index` draws a result you already have.
+5. Horizontal bars for word labels. Rotation is a last resort.
+6. Label the axes with units before you call the figure finished.
+
+## Beyond EDS 217
+
+The functions below are **not used in this course**. They are listed so you recognize them in
+other people's code and know what to search for later. The code is shown for reference and is
+not run here.
+
+```python
+# Line plot: for ordered x values, with a confidence band across repeated observations
+sns.lineplot(data=df, x='year', y='temperature')
+
+# Box plot and violin plot: distribution summaries per category
+sns.boxplot(data=df, x='species', y='body_mass_g')
+sns.violinplot(data=df, x='species', y='body_mass_g')
+
+# Count plot: a bar chart of value_counts, computed for you
+sns.countplot(data=df, x='island')
+
+# Strip and swarm plots: the individual points behind a box plot
+sns.stripplot(data=df, x='species', y='body_mass_g')
+sns.swarmplot(data=df, x='species', y='body_mass_g')
+
+# Heatmap: a matrix drawn as coloured cells, often a correlation matrix
+sns.heatmap(df.corr(numeric_only=True), annot=True)
+
+# Pair plot: every numeric column against every other, in a grid
+sns.pairplot(df, hue='species')
+
+# Regression plots: a scatter with a fitted line through it
+sns.regplot(data=df, x='bill_length_mm', y='bill_depth_mm')
+sns.lmplot(data=df, x='bill_length_mm', y='bill_depth_mm', hue='species')
+
+# Joint plot: a scatter with marginal distributions on both axes
+sns.jointplot(data=df, x='bill_length_mm', y='bill_depth_mm')
+
+# Figure-level functions: draw a grid of small multiples from one call
+sns.relplot(data=df, x='bill_length_mm', y='bill_depth_mm', col='species')
+sns.catplot(data=df, x='species', y='body_mass_g', kind='box')
+sns.displot(data=df, x='body_mass_g', col='species')
+```
 
 ## Resources
 
@@ -282,7 +241,3 @@ plt.show()
 - [Seaborn Tutorial](https://seaborn.pydata.org/tutorial.html)
 - [Seaborn Example Gallery](https://seaborn.pydata.org/examples/index.html)
 - [Seaborn Examples at the Python Graph Gallery](https://python-graph-gallery.com/seaborn/)
-- [Visualization in Seaborn (Jake VanderPlas)](https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html)
-
-Remember, while Seaborn is powerful, it's built on matplotlib. For more customization options, you might need to use [matplotlib](../cheatsheets/matplotlib.qmd) functions directly.
-

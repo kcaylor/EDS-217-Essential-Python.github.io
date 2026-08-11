@@ -11,105 +11,108 @@ format:
 
 ## Conditional Statements
 
-### if-elif-else
+### if / elif / else
+
+A conditional runs one block of code and skips the others, depending on which test is true.
+Python checks the tests in order and stops at the first one that passes.
 
 ```{python}
 #| echo: true
-x = 10
-if x > 0:
-    print("Positive")
-elif x < 0:
-    print("Negative")
+temperature = 10
+
+if temperature > 25:
+    print("hot")
+elif temperature > 5:
+    print("mild")
 else:
-    print("Zero")
+    print("cold")
+```
+
+The `elif` and `else` branches are both optional. You can write an `if` on its own.
+
+### Comparison operators
+
+| Operator | Meaning |
+|---|---|
+| `==` | equal to |
+| `!=` | not equal to |
+| `>` `<` | greater than, less than |
+| `>=` `<=` | greater than or equal to, less than or equal to |
+| `in` | is a member of |
+
+### Combining tests
+
+```{python}
+#| echo: true
+temperature = 10
+raining = True
+
+if temperature > 5 and not raining:
+    print("go outside")
+else:
+    print("stay in")
+```
+
+In plain Python you combine tests with `and`, `or` and `not`. Inside a pandas filter you use
+`&`, `|` and `~` instead, and every condition needs its own parentheses. See the
+[data selection cheatsheet](data_selection.qmd).
+
+## Categorizing a value with a function
+
+Conditionals become most useful when you wrap them in a function and hand that function to
+`.apply()`, which is the Day 4 pattern.
+
+```{python}
+#| echo: true
+def classify(temperature):
+    """Return a text label for a temperature in degrees C."""
+    if temperature > 25:
+        return "hot"
+    elif temperature > 5:
+        return "mild"
+    else:
+        return "cold"
+
+print(classify(30), classify(10), classify(-2))
 ```
 
 ## Loops
 
-### for loop
+### Looping over a list
 
 ```{python}
 #| echo: true
-fruits = ["apple", "banana", "cherry"]
-for fruit in fruits:
-    print(fruit)
+sites = ["Toolik", "Goleta", "CNSI"]
+
+for site in sites:
+    print(site)
 ```
 
-### while loop
+The loop variable, `site` here, takes each value in turn. The name is yours to choose.
+
+### Looping over groups in a DataFrame
+
+This is the form live-coding session 5d uses, for the cases where one grouped sentence is not
+enough. Each turn of the loop gives you the group's name and the rows belonging to it.
 
 ```{python}
 #| echo: true
-count = 0
-while count < 5:
-    print(count)
-    count += 1
+import pandas as pd
+
+df = pd.DataFrame({
+    "site": ["a", "a", "b", "b", "c"],
+    "temperature_c": [16.1, 17.0, 18.2, 18.0, 21.9],
+})
+
+for name, group in df.groupby("site"):
+    print(f"site {name}: {len(group)} rows, mean {group['temperature_c'].mean():.2f} C")
 ```
 
-## Loop Control
+Reach for a loop when you need to do something to each group that `.agg()` cannot express, or
+when you want to build up a list of results and combine them afterwards with `pd.concat()`.
 
-### break
+## Resources
 
-```{python}
-#| echo: true
-for i in range(10):
-    if i == 5:
-        break
-    print(i)
-```
-
-### continue
-
-```{python}
-#| echo: true
-for i in range(5):
-    if i == 2:
-        continue
-    print(i)
-```
-
-## Comprehensions
-
-### List Comprehension
-
-```{python}
-#| echo: true
-squares = [x**2 for x in range(5)]
-print(squares)
-```
-
-### Dictionary Comprehension
-
-```{python}
-#| echo: true
-squares_dict = {x: x**2 for x in range(5)}
-print(squares_dict)
-```
-
-## Exception Handling
-
-### try-except
-
-```{python}
-#| echo: true
-try:
-    result = 10 / 0
-except ZeroDivisionError:
-    print("Cannot divide by zero")
-```
-
-### try-except-else-finally
-
-```{python}
-#| echo: true
-try:
-    x = 5
-    result = 10 / x
-except ZeroDivisionError:
-    print("Cannot divide by zero")
-else:
-    print(f"Result: {result}")
-finally:
-    print("Execution completed")
-```
-
-For more detailed information on Python control flows, refer to the [Python documentation on Control Flow Tools](https://docs.python.org/3/tutorial/controlflow.html).
+- [EDS 217 cheatsheet: functions](functions.qmd)
+- [EDS 217 cheatsheet: grouping and aggregating](data_grouping.qmd)
+- [Python documentation on Control Flow Tools](https://docs.python.org/3/tutorial/controlflow.html)

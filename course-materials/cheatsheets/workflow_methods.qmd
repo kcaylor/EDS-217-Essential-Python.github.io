@@ -38,8 +38,6 @@ This table maps commonly used pandas DataFrame methods to the steps in the cours
 | [`unique()`](https://pandas.pydata.org/docs/reference/api/pandas.Series.unique.html) |   | ✓ |   |   |   |   |   |   |   |
 | [`nunique()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.nunique.html) |   | ✓ |   |   |   |   |   | ✓ |   |
 | [`sample()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sample.html) |   | ✓ |   | ✓ |   |   |   |   |   |
-| [`corr()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html) |   | ✓ |   |   |   |   |   | ✓ | ✓ |
-| [`cov()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.cov.html) |   | ✓ |   |   |   |   |   | ✓ |   |
 | [`groupby()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html) |   |   |   |   |   |   | ✓ |   |   |
 | [`agg()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.agg.html) |   |   |   |   |   |   | ✓ | ✓ |   |
 | [`apply()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.apply.html) |   |   |   |   | ✓ |   |   |   |   |
@@ -58,9 +56,13 @@ This table maps commonly used pandas DataFrame methods to the steps in the cours
 | [`get_dummies()`](https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html) |   |   |   |   | ✓ |   |   |   |   |
 | [`iloc[]`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html) |   |   |   | ✓ |   |   |   |   |   |
 | [`loc[]`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html) |   |   |   | ✓ |   |   |   |   |   |
-| [`plot()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.html) |   | ✓ |   |   |   |   |   |   | ✓ |
 
 Note: This table includes some of the most commonly used DataFrame methods, but it's not exhaustive. Some methods may be applicable to multiple steps depending on the specific use case.
+
+The Visualizing column is empty on purpose. In this course, visualization does not come from a
+DataFrame method. It comes from `matplotlib` and `seaborn`, which take a DataFrame or a Series
+as an argument instead. See the [matplotlib](matplotlib.qmd) and [seaborn](seaborn.qmd)
+cheatsheets.
 
 ## Key Takeaways
 

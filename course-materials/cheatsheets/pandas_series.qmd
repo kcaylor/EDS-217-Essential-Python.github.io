@@ -185,17 +185,6 @@ def squared(x):
 s_squared = s.apply(squared)
 ```
 
-#### Applying a lambda (temporary) function
-
-```{python}
-#| echo: true
-
-s_squared = s.apply(lambda x: x**2)
-
-```
-
-[Lambda functions](https://realpython.com/python-lambda/) allow for doing transformations with temporary functions instead of having to define functions seperately. They are good for quick, 1-off transformations. 
-
 ### Handling missing values
 
 ```{python}

@@ -91,10 +91,55 @@ Day 5 cannot be scoped correctly until Day 4 is fixed.
 
 1. 7d project kickoff session (fallback already designed: buffer, kickoff moves to Day 8 morning)
 2. Day 6 rebuild (ship 2025's Day 6; costs the pivot_table and concat fix)
-3. Cheatsheet updates (ship 2025 versions)
+3. ~~Cheatsheet updates (ship 2025 versions)~~ **DONE 2026-08-11, not cut.** See
+   "Cheatsheet revision" below.
 4. Day 4 colab polish
 
 Days 2, 3, and 5 are not cuttable. They carry the redesign.
+
+## Cheatsheet revision (done 2026-08-11)
+
+The 28 cheatsheets were audited against the per-day scope tables in `2026-day-skeleton.md` and
+revised. **24 remain.** Kelly's decisions, and what was done under each:
+
+1. **`data_aggregation.qmd` deleted.** It was a 14-line stub reading "To be added", linked from
+   `1c_whole_game_1.qmd`, the first session of the first day. The link is removed from 1c, which
+   already links `data_grouping.qmd` on the line above it.
+2. **Three unreferenced pages retired**, and three kept behind a scope banner.
+   Retired: `random_numbers.qmd`, `datetimeindex_vs_columns.qmd`, `emoji_visualizations.qmd`.
+   The last of those fetched PNGs from `raw.githubusercontent.com` at render time and would have
+   failed offline. Kept with a "Not used in EDS 217" callout: `sets.qmd`, `comprehensions.qmd`
+   and `numpy.qmd`, now grouped under a new **Beyond EDS 217** heading in `cheatsheets.qmd`.
+3. **`seaborn.qmd` and `chart_customization.qmd` restructured**, in-scope material first and the
+   rest under a "Beyond EDS 217" heading shown as syntax only. All five `sns.load_dataset` calls
+   replaced with `data/penguins.csv` read from the course site.
+4. **Surgical scope trim** rather than a full pass over all sixteen over-scope files.
+   `matplotlib.qmd` was rewritten from the `fig, ax` API to the `plt.*` API Day 7 actually
+   teaches, which was the worst mismatch in the set. `dictionaries.qmd` was cut back to literals
+   and lookup, per the Day 2 scope row that says "NOT methods, NOT iteration, NOT nesting", and
+   gained a closing section on the two places the course uses a dict (`rename` and `.agg`).
+   `control_flows.qmd` was cut to `if/elif/else` plus loops, and gained the `for name, group in`
+   form from 5d. numpy was stripped from every file that only used it to build demo data.
+   `workflow_methods.qmd` lost its `plot()`, `corr()` and `cov()` rows, and gained a note saying
+   the Visualizing column is empty on purpose.
+
+Also fixed in the same pass: the `lambda` section in `pandas_series.qmd` (quality gate 5), the
+`6b_advanced_data_manipulation` heading in `data_merging.qmd`, an `astype(`string`)` typo and a
+numpy-free z-score in `data_cleaning.qmd`, two invalid `::: {type="note"}` divs in `print.qmd`,
+a `DataFrameGroupBy.apply` FutureWarning in `data_grouping.qmd`, and the missing comprehensions
+cheatsheet link in `5d_loops_over_groups.qmd` that the Day 5 scope table had promised.
+
+**Verification:** 150 python cells across the 15 executable cheatsheets, 148 clean. The two
+failures are the IPython magics in `JupyterLab.qmd` (`%whos`, `!ls`), which are valid under the
+Jupyter kernel Quarto renders with and cannot run under `run_cells.py`'s plain `exec`. Zero
+em-dashes, zero `lambda`, zero `load_dataset`, zero pandas `.plot` accessor references, zero
+references to retired files.
+
+**Three corrections to the audit that preceded this pass**, worth keeping: the pandas `.plot`
+accessor appeared in one file rather than four (the other three were `plt.plot`/`ax.plot`, which
+is in scope); `sets.qmd` and `comprehensions.qmd` had no inbound link from any 2026 file, only
+from 2025 orphans; and no cheatsheet ever read the four sibling CSVs, so nothing needed to move
+into `data/`.
 
 ## Pre-launch checklist
 
@@ -116,9 +161,7 @@ are cleanup items that would be premature while days are still moving.
       `answer-keys/eod-day7-key.qmd`. Three of the Day 5
       four, two of the Day 6 six and at least one of the Day 7 five are still linked from
       `answer-keys/answer_keys.qmd`, **so that page needs revising in the same pass**, not just the
-      render config. `7a_visualizations_1.qmd` also links its own retired sibling. Note that
-      `cheatsheets/data_merging.qmd` also names `6b_advanced_data_manipulation` in a section
-      heading; that is prose, not a link, but it should be reworded. Decide per file: delete, or exclude via the
+      render config. `7a_visualizations_1.qmd` also links its own retired sibling. Decide per file: delete, or exclude via the
       `render:` block in `_quarto.yml`. Do this last, since each rebuilt day adds to the list.
 - [ ] **Replace the four Day 7 placeholder images with bespoke panels.** Day 7 claimed four
       existing files and downloaded one. `7a_matplotlib.qmd` uses `images/matplotlib_panda.jpeg`
@@ -222,6 +265,34 @@ are cleanup items that would be premature while days are still moving.
       references `images/collections.jpeg`, but there is no `coding-colabs/images/` directory.
       One-line fix: `../images/collections.jpeg`. The Day 3 and Day 4 colabs already use
       `../images/`.
+- [ ] **Remove the 61 remaining tracked `.fuse_hidden*` files.** These are stale byte-copies of
+      course files left by the Cowork mount, committed at some point and still carrying
+      `jupyter: eds217_2025`. They are invisible to Quarto but they match every grep-based
+      quality gate, which is how they were found: the gate-5 `lambda` search and the
+      `load_dataset` search both reported failures that were entirely these shadow files. The 28
+      in `course-materials/cheatsheets/` were removed on 2026-08-11. The rest are spread across
+      `answer-keys` (10), `interactive-sessions` (21), `eod-practice` (8), `lectures` (6),
+      `live-coding` (4), `coding-colabs` (3), `course-materials` (1) and the repo root (8).
+      Add `.fuse_hidden*` to `.gitignore` in the same pass. Note that `rm` fails through the
+      Cowork mount, so move them into the gitignored `_to_delete/` and let `git add -A` record
+      the deletion.
+- [ ] **Last `lambda` in the course materials.** `answer-keys/eod-day2-key.qmd` line 164 uses
+      `max(..., key=lambda x: ...)`. This is the only genuine gate-5 failure left outside the
+      2025 orphans, and it sits in a Day 2 answer key, which is otherwise signed off.
+      `interactive-sessions/6b_grouping_joining_sorting_2_old.qmd` line 428 also has one, but
+      that file is already on the orphan-retirement list above and dies with it.
+- [ ] **Four orphan CSVs in `course-materials/cheatsheets/`.** `ocean_temperatures.csv` (316 KB),
+      `sample_time_data.csv`, `temp_data.csv` and `output.csv` are tracked, sit outside `data/`,
+      and are read by nothing. The last two were render artifacts: `timeseries.qmd` used to write
+      and re-read `temp_data.csv`, which was fixed on 2026-08-11 by round-tripping through
+      `StringIO` instead. **`pandas_dataframes.qmd` still calls `df.to_csv('output.csv')`**, so it
+      writes a file into whatever the working directory happens to be every time it renders.
+      Either point it at a throwaway path or make it a non-executing block.
+- [ ] **Check `JupyterLab.qmd` and `setting_up_python.qmd` against the 2026 setup.** The first
+      references `https://workbench-1.bren.ucsb.edu`; confirm that is still the Bren workbench
+      address. The second installs a package list by hand; confirm it agrees with
+      `environment-2026.yml`. Neither is a scope problem, both are the kind of thing a student
+      hits in the first hour of Day 1.
 - [ ] Run `python tools/run_cells.py` over every 2026 session and EOD.
 - [ ] Run `python tools/warm_cache.py`; expect every course-site URL to resolve.
 - [ ] Full `python build_docs.py --full` with no errors.

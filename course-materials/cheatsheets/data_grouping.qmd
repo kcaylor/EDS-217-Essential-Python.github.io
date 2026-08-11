@@ -17,7 +17,6 @@ Grouping data allows you to split your DataFrame into groups based on one or mor
 #| echo: true
 
 import pandas as pd
-import numpy as np
 
 # Sample DataFrame
 df = pd.DataFrame({
@@ -96,7 +95,7 @@ df['value_normalized'] = grouped['value'].transform(normalize)
 def group_range(x):
     return x['value'].max() - x['value'].min()
 
-result = grouped.apply(group_range)
+result = grouped.apply(group_range, include_groups=False)
 ```
 
 
@@ -134,7 +133,7 @@ print(pivot_table)
 
 # Pivot table with multiple aggregation functions
 pivot_multi = pd.pivot_table(df, values='sales', index='date', columns='product', 
-                             aggfunc=[np.sum, np.mean])
+                             aggfunc=['sum', 'mean'])
 print(pivot_multi)
 ```
 

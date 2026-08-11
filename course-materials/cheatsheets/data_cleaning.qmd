@@ -87,7 +87,7 @@ df['column_name'] = pd.to_numeric(df['column_name'], errors='coerce')
 df['date_column'] = pd.to_datetime(df['date_column'])
 
 # Convert a column to string
-df['column_name'] = df['column_name'].astype(`string`)
+df['column_name'] = df['column_name'].astype(str)
 
 ```
 
@@ -104,10 +104,10 @@ df_filtered = df[(df['column1'] > 5) & (df['column2'] < 10)]
 ## Handling Outliers
 
 ```python
-# Remove outliers using Z-score
-from scipy import stats
-# Only keep data with a Z-score < 3
-df_no_outliers = df[(np.abs(stats.zscore(df['column_name'])) < 3)]
+# Remove outliers using a z-score, computed with pandas
+z = (df['column_name'] - df['column_name'].mean()) / df['column_name'].std()
+# Only keep rows within 3 standard deviations of the mean
+df_no_outliers = df[z.abs() < 3]
 
 # Cap outliers at a specific percentile
 lower = df['column_name'].quantile(0.05)

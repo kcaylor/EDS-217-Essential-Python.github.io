@@ -178,11 +178,8 @@ print(df)
 
 ```{python}
 #| echo: true
-import numpy as np
-
 # Generate a large CSV string (100,000 rows)
-np.random.seed(0)
-large_csv_data = "id,value\n" + "\n".join([f"{i},{np.random.rand()}" for i in range(100000)])
+large_csv_data = "id,value\n" + "\n".join([f"{i},{i * 0.001}" for i in range(100000)])
 
 # Read the large CSV in chunks
 chunk_size = 20000

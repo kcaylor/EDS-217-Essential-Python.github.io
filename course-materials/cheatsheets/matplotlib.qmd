@@ -15,145 +15,154 @@ For 🤯 inspiration + 👩‍💻 code, check out the [Python Graph Gallery](ht
 
 ## Basic Setup
 
+Every figure in this course starts with one import.
+
 ```python
 import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
-
-# Set style for seaborn (optional)
-sns.set_style("whitegrid")
 ```
 
-## Creating a Figure and Axes
+The commands below all act on "the current figure". You make a figure, add things to it, and
+then show it. You do not have to keep track of an object in between.
+
+## Sample Data
+
+The examples use Toolik Lake monthly mean air temperatures, the same table Day 7 plots.
 
 ```python
-# Create a new figure and axis
-fig, ax = plt.subplots(figsize=(10, 6))
+months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+temps = [-22.89, -20.70, -20.69, -11.76, -0.80, 8.59,
+         11.22, 7.23, -0.11, -10.54, -18.34, -21.44]
+```
 
-# Create multiple subplots
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+## Sizing the Figure
+
+`figsize` is given in inches, as width then height. Start a figure with it whenever the
+default proportions do not suit the data.
+
+```python
+plt.figure(figsize=(10, 5))
 ```
 
 ## Common Plot Types
 
-### Line Plot
+### Line plot
+
+Use a line when the x values have a meaningful order, such as time.
 
 ```python
-x = np.linspace(0, 10, 100)
-y = np.sin(x)
-ax.plot(x, y, label='sin(x)')
+plt.plot(months, temps)
 ```
 
-### Scatter Plot
+### Scatter plot
+
+Use a scatter when the x values have no order, and each point is an independent observation.
 
 ```python
-x = np.random.rand(50)
-y = np.random.rand(50)
-plt.scatter(x, y, alpha=0.5)
+plt.scatter(bill_length, bill_depth)
 ```
 
-### Bar Plot
+### Bar plot
 
 ```python
-categories = ['A', 'B', 'C', 'D']
-values = [3, 7, 2, 5]
-plt.bar(categories, values)
+plt.bar(months, temps)      # vertical bars
+plt.barh(months, temps)     # horizontal bars, easier to read with long category names
 ```
 
 ### Histogram
 
+A histogram takes one sequence of numbers and shows how they are distributed. The bar heights
+are counts.
+
 ```python
-data = np.random.randn(1000)
-ax.hist(data, bins=30, edgecolor='black')
+plt.hist(temps, bins=10)
 ```
 
-## Customizing Plots
+## Labelling a Figure
 
-### Labels and Title
+An unlabelled figure is not finished. Axis labels should carry units.
 
 ```python
-ax.set_xlabel('X-axis label')
-ax.set_ylabel('Y-axis label')
-ax.set_title('Plot Title')
+plt.xlabel('Month')
+plt.ylabel('Mean air temperature (deg C)')
+plt.title('Toolik Lake monthly mean air temperature')
 ```
 
-### Legend
+## Legends
+
+Give each series a `label=` when you draw it, then call `legend()` once for the whole figure.
 
 ```python
-ax.legend()
+plt.plot(months, early_temps, label='1988 to 2002')
+plt.plot(months, late_temps, label='2003 to 2018')
+plt.legend()
 ```
 
-### Axis Limits
+## Rotating Tick Labels
+
+When category names collide along the x axis, rotate them. `ha='right'` sets the horizontal
+alignment so that the rotated labels line up under their ticks.
 
 ```python
-ax.set_xlim(0, 10)
-ax.set_ylim(-1, 1)
+plt.xticks(rotation=45, ha='right')
 ```
 
-### Grid
+## Fixing Crowded Layouts
+
+`tight_layout()` adjusts the spacing so that labels are not cut off. Call it last, just before
+showing the figure.
 
 ```python
-ax.grid(True, linestyle='--', alpha=0.7)
+plt.tight_layout()
 ```
 
-### Ticks
+## Showing and Saving
 
 ```python
-ax.set_xticks([0, 2, 4, 6, 8, 10])
-ax.set_yticks([-1, -0.5, 0, 0.5, 1])
+plt.show()                                    # display the figure
+plt.savefig('my_plot.png', dpi=300)           # save it to a file
 ```
 
-## Color and Style
+Call `savefig()` before `show()`. Showing a figure clears it.
 
-### Changing Colors
-
-```python
-ax.plot(x, y, color='r')  # 'r' for red
-ax.scatter(x, y, c='blue')
-```
-
-### Line Styles
+## A Complete Example
 
 ```python
-ax.plot(x, y, linestyle='--')  # dashed line
-ax.plot(x, y, ls=':')  # dotted line
-```
+import matplotlib.pyplot as plt
 
-### Marker Styles
+months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+temps = [-22.89, -20.70, -20.69, -11.76, -0.80, 8.59,
+         11.22, 7.23, -0.11, -10.54, -18.34, -21.44]
 
-```python
-ax.plot(x, y, marker='o')  # circles
-ax.plot(x, y, marker='s')  # squares
-```
-
-## Saving and Displaying
-
-### Saving the Figure
-
-```python
-plt.savefig('my_plot.png', dpi=300, bbox_inches='tight')
-```
-
-### Displaying the Plot
-
-```python
+plt.figure(figsize=(10, 5))
+plt.bar(months, temps)
+plt.xlabel('Month')
+plt.ylabel('Mean air temperature (deg C)')
+plt.title('Toolik Lake monthly mean air temperature')
+plt.tight_layout()
 plt.show()
 ```
 
-## Useful Tips for Seaborn Users
+## Plotting from a pandas Series
 
-1. Use `plt.subplots()` to create custom layouts that Seaborn doesn't provide.
-2. Access the underlying Matplotlib `Axes` object in Seaborn plots:
-   ```python
-   g = sns.scatterplot(x='x', y='y', data=df)
-   g.set_xlabel('Custom X Label')
-   ```
-3. Combine Seaborn and Matplotlib in the same figure:
-   ```python
-   fig, ax = plt.subplots()
-   sns.scatterplot(x='x', y='y', data=df, ax=ax)
-   ax.plot(x, y, color='r', linestyle='--')
-   ```
-4. Use Matplotlib's `plt.tight_layout()` to automatically adjust subplot parameters for better spacing.
+A grouped result is a Series: its index holds the labels and its values hold the numbers. Pass
+those two pieces to any plotting command.
 
-Remember, most Seaborn functions return a Matplotlib `Axes` object, allowing you to further customize your plots using Matplotlib functions.
+```python
+monthly = df.groupby('month')['temp_c'].mean()
+
+plt.figure(figsize=(10, 5))
+plt.bar(monthly.index, monthly.values)
+plt.xlabel('Month')
+plt.ylabel('Mean air temperature (deg C)')
+plt.tight_layout()
+plt.show()
+```
+
+## Matplotlib and Seaborn
+
+These are the only two plotting libraries this course uses. Seaborn draws the figure for you
+from a DataFrame, and matplotlib gives you the commands to label and size the result. The two
+work on the same figure, so you can call `plt.xlabel()` after `sns.scatterplot()`.
+
+See the [seaborn cheatsheet](seaborn.qmd), the [bar plot cheatsheet](bar_plots.qmd), and the
+[matplotlib PDF reference](matplotlib_cheatsheet.pdf).

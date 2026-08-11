@@ -107,9 +107,14 @@ are cleanup items that would be premature while days are still moving.
       `2b_dictionaries`, `2c_lists_dictionaries_sets`, the 2025 `1a`-`1d`, plus whatever
       Days 3-7 orphan as they are rebuilt. Day 5 added four: `live-coding/5a_selecting_and_filtering.qmd`
       and its notes, `interactive-sessions/5b_cleaning_data.qmd`, and
-      `coding-colabs/5c_cleaning_data.qmd`. Three of those four are still linked from
-      `answer-keys/answer_keys.qmd`, **so that page needs revising in the same pass**, not
-      just the render config. Decide per file: delete, or exclude via the
+      `coding-colabs/5c_cleaning_data.qmd`. Day 6 added six:
+      `interactive-sessions/6a_grouping_joining_sorting.qmd` and both its `_old` siblings,
+      `coding-colabs/6b_advanced_data_manipulation.qmd` and `coding-colabs/6b_preprocess.ipynb`,
+      and `eod-practice/eod-day6.qmd` with its `answer-keys/eod-day6-key.qmd`. Three of the Day 5
+      four and two of the Day 6 six are still linked from `answer-keys/answer_keys.qmd`, **so that
+      page needs revising in the same pass**, not just the render config. Note that
+      `cheatsheets/data_merging.qmd` also names `6b_advanced_data_manipulation` in a section
+      heading; that is prose, not a link, but it should be reworded. Decide per file: delete, or exclude via the
       `render:` block in `_quarto.yml`. Do this last, since each rebuilt day adds to the list.
 - [ ] **Generate the Day 4 EOD header image.** `eod-day4-2026.qmd` currently points at
       `../images/panda.jpeg`, a stock photo used as a placeholder. Every other EOD carries a
@@ -174,10 +179,22 @@ are cleanup items that would be premature while days are still moving.
       otherwise signed off**, so it is worth checking before the deploy rather than after. Either
       point it at `../images/collections.jpg` or copy the file into `live-coding/assets/`.
 
-- [ ] **Give `day6.qmd` its own image.** `day5.qmd` now uses
-      `interactive-sessions/images/grouping_filtering.jpeg`, which `day6.qmd` also uses. Whichever
-      is rebuilt second should change; `dates.jpeg` is the obvious choice for Day 6 and
-      `panda_seaborn.jpeg` for Day 7.
+- [ ] **Generate four Day 6 images.** The collision with `day5.qmd` is resolved, but every Day 6
+      panel is now a placeholder pulled from the 2025 stock. `dates.jpeg` went to `6c_dates.qmd`,
+      which is the one assignment worth keeping. The other four want bespoke panels in house style
+      (a single anthropomorphic panda, painterly, square, no lettering):
+
+      - `course-materials/day6.qmd`, currently `images/structured-data.png` — a panda standing
+        between two piles of paper, one tall and narrow, one short and wide, holding one sheet up
+        to compare them
+      - `6a_joining_data.qmd`, currently `../images/panda.jpeg` — a panda fitting two halves of a
+        torn map together on a table so the roads line up across the seam
+      - `6b_reshaping_data.qmd`, currently `../images/dataframes.jpeg` — a panda turning a long
+        paper scroll sideways on a light table so its rows become columns
+      - `6d_two_table_exercise.qmd`, currently `../images/towersensors.jpeg` — a panda at a desk
+        with two long paper strip-charts of different lengths, sliding them until the dates align
+
+      `panda_seaborn.jpeg` and `matplotlib_panda.jpeg` remain reserved for Day 7.
 
 - [ ] **Fix the broken image in the 2c colab.** `coding-colabs/2c_exploring_unfamiliar_data.qmd`
       references `images/collections.jpeg`, but there is no `coding-colabs/images/` directory.

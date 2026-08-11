@@ -275,7 +275,7 @@ Scope table:
 | `value_counts().reset_index()` + rename | as the "Series to table" move (fixes 2025 D6 gap) | WRITE |
 | MultiIndex `.idxmax()` on groups | **CUT** — redesigned away, see below | — |
 
-**BUILT 2026-08-11 (commit PLACEHOLDER).** Files: `6a_joining_data.qmd`,
+**BUILT 2026-08-11 (commit 0aabec7).** Files: `6a_joining_data.qmd`,
 `6b_reshaping_data.qmd`, `6c_dates.qmd` (name kept, content replaced),
 `6d_two_table_exercise.qmd` colab, `eod-day6-2026.qmd`. 74/74 python cells verified offline
 against pandas 2.3.3 with `FutureWarning` and `DeprecationWarning` escalated to errors. Scope

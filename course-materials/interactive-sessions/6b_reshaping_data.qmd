@@ -138,8 +138,8 @@ Use it every time, unless you have a specific reason not to.
 :::{.callout-tip title="✏️ Test your knowledge"}
 Two things, both of them the stacking sentence written from scratch:
 
-1. Stack the three files again in a different order — CNSI first, then Goleta, then Santa Barbara
-   — with `ignore_index=True`. Confirm the shape is identical. Then use `.head()` to show that the
+1. Stack the three files again with `ignore_index=True`, in a different order: CNSI first, then
+   Goleta, then Santa Barbara. Confirm the shape is identical. Then use `.head()` to show that the
    row order changed and `.value_counts()` on `site` to show that the contents did not.
 
 2. Stack only **two** of them, Goleta and CNSI, into a table called `two_sites`. Predict the row
@@ -241,8 +241,8 @@ flat
 Now `site` is a column again, and this table can be merged, filtered and sorted like any other.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Build a wide table with `parameter` down the rows and `site` across the columns — the transpose of
-the one above — by swapping the `index=` and `columns=` arguments. Then say in one sentence which
+Build a wide table with `parameter` down the rows and `site` across the columns, which is the
+transpose of the one above, by swapping the `index=` and `columns=` arguments. Then say which
 of the two layouts you would put in a report for the Air Pollution Control District, and why.
 :::
 

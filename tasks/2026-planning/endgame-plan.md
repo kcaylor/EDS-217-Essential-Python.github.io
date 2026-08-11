@@ -107,6 +107,42 @@ are cleanup items that would be premature while days are still moving.
       `2b_dictionaries`, `2c_lists_dictionaries_sets`, the 2025 `1a`-`1d`, plus whatever
       Days 3-7 orphan as they are rebuilt. Decide per file: delete, or exclude via the
       `render:` block in `_quarto.yml`. Do this last, since each rebuilt day adds to the list.
+- [ ] **Generate the Day 4 EOD header image.** `eod-day4-2026.qmd` currently points at
+      `../images/panda.jpeg`, a stock photo used as a placeholder. Every other EOD carries a
+      themed MidJourney panda in `eod-practice/images/`. Generate one, save it as
+      `course-materials/eod-practice/images/microplastics_panda.jpeg`, then replace lines 15-21
+      of the qmd with:
+
+      ```
+      ::: {style="width: 80%; margin: auto;"}
+      ![](images/microplastics_panda.jpeg)
+      :::
+
+      :::{.gray-text .center-text}
+      *A cartoon panda in waders picks flecks of plastic out of a plankton net and sorts them
+      into labelled sample jars.* [MidJourney 5](https://www.midjourney.com)
+
+      :::
+      ```
+
+      Note the path changes from `../images/` to `images/`, since the new file lives in
+      `eod-practice/images/` alongside `banana_panda.jpeg`.
+
+      Prompt:
+
+      > a cartoon panda in yellow waders and an orange life vest stands on the deck of a small
+      > research vessel, hauling a fine-mesh plankton net up over the rail; he is picking tiny
+      > bright fragments of plastic out of the net with tweezers and dropping them into labelled
+      > glass sample jars lined up on a crate beside him; grey open ocean and overcast sky
+      > behind him; painterly illustration, muted palette with a few saturated plastic colours,
+      > warm and gently comic, no text --ar 1:1 --style raw
+
+      The house style across the other EOD images is one anthropomorphic panda doing the thing
+      the exercise is about, painterly rather than photographic, square, no lettering.
+- [ ] **Fix the broken image in the 2c colab.** `coding-colabs/2c_exploring_unfamiliar_data.qmd`
+      references `images/collections.jpeg`, but there is no `coding-colabs/images/` directory.
+      One-line fix: `../images/collections.jpeg`. The Day 3 and Day 4 colabs already use
+      `../images/`.
 - [ ] Run `python tools/run_cells.py` over every 2026 session and EOD.
 - [ ] Run `python tools/warm_cache.py`; expect every course-site URL to resolve.
 - [ ] Full `python build_docs.py --full` with no errors.

@@ -15,10 +15,15 @@ brief written before that date states the old rule; read decision 10 first.
 | Brief | Day | Status |
 |---|---|---|
 | `day3-build-brief.md` | Wed Sep 2, Filter + Sort | **built 2026-08-11** |
-| day 4 | Thu Sep 3, Clean + Transform | to write |
-| day 5 | Fri Sep 4, Group + Aggregate | to write |
-| day 6 | Tue Sep 8, Join + Reshape + Dates | to write |
-| day 7 | Wed Sep 9, Visualize | to write |
+| `day4-build-brief.md` | Thu Sep 3, Clean + Transform | ready |
+| `day5-build-brief.md` | Fri Sep 4, Group + Aggregate | ready |
+| `day6-build-brief.md` | Tue Sep 8, Join + Reshape + Dates | ready |
+| `day7-build-brief.md` | Wed Sep 9, Visualize | ready |
+
+Effort is not even across the four. Day 5 has two files with no usable 2025 ancestor, and Day 7
+needs 7b rewritten rather than trimmed, because two of the three seaborn functions its exercise
+requires are taught nowhere in the 2025 sessions. Days 4 and 6 are closer to relocation and
+trimming. Each brief says so at the top.
 
 ## Starting a fresh session
 

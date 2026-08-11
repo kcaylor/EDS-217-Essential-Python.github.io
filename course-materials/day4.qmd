@@ -1,29 +1,45 @@
 ---
-title: "Working with DataFrames in Pandas"
+title: "Clean & Transform"
 subtitle: "Day 4"
 description: "Thursday September 3^rd^, 2026"
 ---
 
 ::: {style="width: 80%; margin: auto;"}
-![](images/dataframes.jpeg)
+![](images/datacleaning.jpg)
 :::
 
 :::{.gray-text .center-text}
-*An office worker panda is attempting to manage an enormous and complex computer spreadsheet.* [MidJourney 5](https://www.midjourney.com/jobs/a5412bc0-5f50-4bea-a807-f21715a18abf?index=0)
+*Survey of data scientists, CrowdFlower, 2016.*
 :::
+
+Yesterday you interrogated a table that behaved itself. Today you meet one that does not, and
+you spend the whole day with it.
+
+Day 4 owns three sentences. The **missing-data sentence** decides what to do about the holes.
+The **string-cleaning sentence** tidies text so that comparisons work. The **derived-column
+sentence** adds the column that holds your answer, which is almost never one of the columns in
+the file. Functions arrive this morning, because by last night you had written the same line
+three times and felt why they exist.
 
 ## Class materials
 
 | {{< fa calendar-day title="A calendar with one day highlighted" >}} Session  | {{< fa laptop-code title="A laptop with on-screen code" >}} Session 1  |  {{< fa laptop-code title="A laptop with on-screen code" >}} Session 2 |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| day 4 / morning   | [🐼 Intro to DataFrames](interactive-sessions/4a_dataframes.qmd){target="_blank"} | [🙌 Coding Colab: Working with DataFrames](coding-colabs/4b_pandas_dataframes.qmd){target="_blank"} |
-| day 4 / afternoon | [🐼 DataFrame Workflows](interactive-sessions/4c_dataframe_workflows.qmd) | [📝 Data Import/Export](live-coding/4d_data_import_export.qmd) |
-: {.hover .bordered tbl-colwidths="[20,40,40]"} 
+| day 4 / morning   | [🧼 Missing, Duplicated, Miscast](interactive-sessions/4a_cleaning_data.qmd) | [⚙️ Write It Once, Name It, Use It](interactive-sessions/4b_functions.qmd) |
+| day 4 / afternoon | [➕ The Derived-Column Sentence](interactive-sessions/4c_transforming_data.qmd) | [🙌 From Field Sheet to DataFrame](coding-colabs/4d_cleaning_messy_data.qmd) |
+: {.hover .bordered tbl-colwidths="[20,40,40]"}
 
 ## End-of-day practice
 
-Complete the following tasks / activities before heading home for the day!
+Tonight you take NOAA's marine microplastics archive from the raw download to a defensible
+answer about whether the Atlantic and the Pacific are different.
 
-- [{{< fa pencil title="A pencil" >}} **Day 4 Practice:** Reading, Visualizing, and Exporting Data in Pandas](eod-practice/eod-day4.qmd)
+- [{{< fa pencil title="A pencil" >}} **Day 4 Practice:** Microplastics, From Raw File to Real Numbers](eod-practice/eod-day4-2026.qmd)
 
 ## Additional Resources
+
+- [{{< fa diagram-project title="A workflow diagram" >}} The Data Science Workflow](the-data-science-workflow.qmd)
+- [{{< fa table title="A table" >}} cleaning data cheatsheet](cheatsheets/data_cleaning.qmd)
+- [{{< fa table title="A table" >}} functions cheatsheet](cheatsheets/functions.qmd)
+- [{{< fa table title="A table" >}} pandas DataFrames cheatsheet](cheatsheets/pandas_dataframes.qmd)
+- [{{< fa table title="A table" >}} data selection and filtering cheatsheet](cheatsheets/data_selection.qmd)

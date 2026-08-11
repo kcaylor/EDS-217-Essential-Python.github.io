@@ -1,0 +1,377 @@
+---
+title: "Interactive Session"
+subtitle: "➕ The Derived-Column Sentence"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](../images/transformation.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A cartoon panda, mid-transformation.* [MidJourney 5](https://www.midjourney.com)
+
+:::
+
+Everything you have done so far this week takes a table and gives you back a smaller piece of
+it. Filtering gives you fewer rows. Sorting gives you the same rows in a different order.
+Cleaning gives you fewer rows and tidier ones.
+
+This session is the first one that makes the table **bigger**. You are going to add columns
+that were not in the file: a unit somebody should have recorded, a comparison somebody should
+have computed, a label somebody should have written down.
+
+That is most of what data science is. The number you need is almost never the number in the
+file.
+
+By the end of this session you will be able to:
+
+- write the **derived-column sentence**, `df['new'] = expression`
+- build a new column from a column and a number, and from two columns
+- use `np.log10()` when a column spans several orders of magnitude
+- tidy a text column with `.str.strip()`, `.str.lower()`, and `.str.replace()`
+
+## Getting Started
+
+1. **Create a new notebook:**
+   - Click the `+` button to open a Launcher.
+   - Under **Notebook**, click **eds217_2026**.
+
+2. **Rename your notebook** to: `Session_4C_Transforming_Data.ipynb`
+
+3. **Add a title cell** (Markdown), updating the date to today:
+
+```markdown
+# Day 4: Session 4C - The Derived-Column Sentence
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/4c_transforming_data.html)
+
+Date: 09/03/2026
+```
+
+4. Read the microplastics data and keep only the samples reported in pieces per cubic metre,
+   which is the unit you can actually do arithmetic with:
+
+```{python}
+import pandas as pd
+import numpy as np
+
+url = 'https://eds-217-essential-python.github.io/data/marine_microplastics.csv'
+plastics = pd.read_csv(url)
+
+m3 = plastics[plastics['Unit'] == 'pieces/m3'].copy()
+m3.shape
+```
+
+10,178 samples, all in the same unit. Note the `.copy()`: you are about to change this table,
+which is exactly the case Day 3 told you to copy for.
+
+:::{.callout-caution}
+Save your work frequently with `Ctrl+S` (`Cmd+S` on macOS).
+:::
+
+## The sentence
+
+Here it is, whole:
+
+```{python}
+m3['pieces_per_liter'] = m3['Measurement'] / 1000
+```
+
+```{python}
+m3[['Measurement', 'Unit', 'pieces_per_liter']].head()
+```
+
+That is the **derived-column sentence**. The general form is:
+
+```python
+df['new_column'] = expression
+```
+
+The left side is a column name that does not exist yet, in square brackets, exactly the way you
+would ask for a column that does. The right side is any expression that produces one value per
+row. Assignment creates the column.
+
+Two things are worth stopping on.
+
+First, the arithmetic happened on the whole column at once. You did not write a loop. You said
+"divide this column by a thousand" and pandas did it 10,178 times.
+
+```{python}
+m3['pieces_per_liter'].describe()
+```
+
+Second, unlike almost everything else you have learned this week, this one **does** change the
+table in place. There is nothing to assign back, because the assignment is the whole sentence.
+
+```{python}
+m3.shape
+```
+
+23 columns now, up from 22.
+
+:::{.callout-note}
+🐍 If the name on the left already exists, pandas overwrites it without a word of warning. That
+is occasionally what you want, and is more often how you lose the original values. Use a new
+name unless you are certain.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Latitude is in degrees. Add a column called `latitude_radians` holding the same values in
+radians, by multiplying by `3.141592653589793 / 180`. Display `Latitude` and
+`latitude_radians` side by side for the first few rows, and check that 90 degrees would give
+about 1.57.
+:::
+
+## A column and a column
+
+The right side can name more than one column. When it does, pandas lines the columns up row by
+row and computes each row's answer from that row's values.
+
+Last night you ranked foods by the Economist's banana index. Today you can build it yourself.
+
+```{python}
+url = 'https://eds-217-essential-python.github.io/data/banana_index.csv'
+foods = pd.read_csv(url, index_col='entity')
+foods[['emissions_kg', 'land_use_kg', 'Bananas index (kg)']].head()
+```
+
+`emissions_kg` is kilograms of CO₂ per kilogram of food. The banana index is just that number
+divided by the same number for bananas:
+
+```{python}
+banana_emissions = foods.loc['Bananas', 'emissions_kg']
+banana_emissions
+```
+
+```{python}
+foods['my_banana_index'] = foods['emissions_kg'] / banana_emissions
+foods[['emissions_kg', 'Bananas index (kg)', 'my_banana_index']].head()
+```
+
+Your column and theirs agree to seven decimal places. The thing you spent an evening ranking
+was one derived column, and now you can make your own.
+
+So make one they did not:
+
+```{python}
+foods['land_per_emission'] = foods['land_use_kg'] / foods['emissions_kg']
+foods['land_per_emission'].sort_values(ascending=False).head(5)
+```
+
+Square metres of land per kilogram of CO₂. Almonds and beans sit at the top: foods that ask for
+a lot of ground and very little atmosphere. That question was not answerable from any column in
+the file, and it took one line.
+
+:::{.callout-important title="Row alignment is the whole point"}
+`foods['land_use_kg'] / foods['emissions_kg']` divides each food's land use by **that same
+food's** emissions. Pandas matches the two columns up by row label before it computes anything.
+
+This is why you can write column arithmetic as if it were ordinary algebra, and why a
+misaligned index is one of the few ways it can go wrong. Day 6 will show you that failure mode
+on purpose.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Add a column called `emissions_per_calorie_ratio` holding `emissions_1000kcal` divided by
+`emissions_kg`. Then use the top-N sentence from yesterday to display the five foods with the
+largest values. In a markdown cell, say what a large value of that ratio means about a food.
+:::
+
+## When a column spans orders of magnitude
+
+Back to the plastics. Look at the range of measurements:
+
+```{python}
+m3['Measurement'].describe()
+```
+
+The median is 0.0072 pieces per cubic metre and the maximum is 110,480. That is seven orders of
+magnitude in one column, and no histogram, no mean and no eye can cope with it.
+
+The fix is to work with the logarithm. Vectorised mathematics in Python comes from **numpy**,
+which you imported at the top of the notebook as `np`:
+
+```{python}
+positive = m3[m3['Measurement'] > 0].copy()
+positive.shape
+```
+
+```{python}
+positive['log10_measurement'] = np.log10(positive['Measurement'])
+positive[['Measurement', 'log10_measurement']].head()
+```
+
+```{python}
+positive['log10_measurement'].describe()
+```
+
+A range from -3.2 to 5.0, which is a number of orders of magnitude, and now the column is
+something you can average and plot.
+
+Notice the filter on the line before. 3,087 of these samples recorded exactly zero pieces, and
+the logarithm of zero is undefined. Filtering them out first, with yesterday's filter sentence
+and a `.copy()`, is the whole fix.
+
+:::{.callout-important title="This is your entire numpy budget"}
+`np.log10()` is the one numpy function this course asks you to know. You will meet numpy again
+if you go further into modelling or image work, but for tabular environmental data, pandas
+covers you.
+
+What matters here is not numpy. It is that **a function applied to a column returns a column**,
+so it goes on the right-hand side of the derived-column sentence like any other expression.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Add a column to `positive` called `log10_per_liter` holding the base-10 logarithm of the
+`pieces_per_liter` column you built earlier. Then say, in one sentence, how it relates
+numerically to `log10_measurement`. (It differs by a constant. What constant, and why?)
+:::
+
+## Tidying text with `.str`
+
+Text columns need their own kind of transformation. Every pandas column of text carries a
+`.str` attribute, and through it you reach the string methods, applied to every row at once.
+
+### `.str.strip()` removes stray whitespace
+
+Ask this table for every sample tagged with the research vessel Tara:
+
+```{python}
+plastics[plastics['Keywords'] == 'R/V Tara'].shape
+```
+
+Zero rows. On Day 3 you learned that an empty result is an answer, and that it is usually a
+spelling problem. It is one here too, but it is a spelling problem you cannot see. Ask pandas
+for the distinct values and it prints them with quotation marks around each one, which is the
+only way to spot the difference:
+
+```{python}
+plastics['Keywords'].unique()[10:14]
+```
+
+```{python}
+plastics[plastics['Keywords'] == 'R/V Tara '].shape
+```
+
+The stored value is `'R/V Tara '`, with a trailing space that nobody can see in a table. 23
+rows were invisible to a filter that looked correct.
+
+`.str.strip()` removes whitespace from both ends of every value:
+
+```{python}
+plastics['Keywords'] = plastics['Keywords'].str.strip()
+plastics[plastics['Keywords'] == 'R/V Tara'].shape
+```
+
+:::{.callout-note}
+🐍 Strip text columns as a reflex, the way you check `.isnull().sum()` as a reflex. Trailing
+spaces are invisible, they survive every copy and export, and they break exact matches
+silently. Three values in this column carried them.
+:::
+
+### `.str.lower()` makes matching predictable
+
+```{python}
+plastics['Density Class'].value_counts()
+```
+
+```{python}
+plastics['density_class'] = plastics['Density Class'].str.lower()
+plastics['density_class'].value_counts()
+```
+
+Lower-casing a label column before you compare or count means `'Medium'`, `'medium'` and
+`'MEDIUM'` stop being three different categories.
+
+### `.str.replace()` swaps one piece of text for another
+
+```{python}
+plastics['Oceans'].value_counts()
+```
+
+Every value ends in the word "Ocean", which is four wasted characters on every axis label you
+will ever draw from this column. `.str.replace()` takes the text to find and the text to put in
+its place:
+
+```{python}
+plastics['ocean'] = plastics['Oceans'].str.replace(' Ocean', '')
+plastics['ocean'].value_counts()
+```
+
+:::{.callout-important title="One method at a time"}
+You will see code online that runs several of these together:
+
+```python
+df['site'] = df['site'].str.strip().str.lower().str.replace('-', '_')
+```
+
+That works, and it is not what we are doing this week. Write one method per line, assign it
+back, and look at the result before you write the next one. Chained cleaning is exactly where a
+step that silently does nothing hides.
+
+You will see one of those silent failures in the colab, in a moment.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+The `Sampling Method` column contains values like `'Neuston net'` and `'Grab sample'`. Make a
+new column called `sampling_method_clean` that is the same text in lower case. Then use
+`.value_counts()` on it and say how many distinct methods this archive used.
+:::
+
+## Putting it together
+
+Cleaning and transforming are the same pass. Here is Day 4 so far, as a workflow:
+
+```{python}
+url = 'https://eds-217-essential-python.github.io/data/marine_microplastics.csv'
+plastics = pd.read_csv(url)
+
+# Clean (session 4A)
+plastics['Keywords'] = plastics['Keywords'].str.strip()
+plastics = plastics.dropna(subset=['Measurement'])
+
+# Select one unit, so arithmetic means something (session 3B)
+samples = plastics[plastics['Unit'] == 'pieces/m3'].copy()
+samples = samples[samples['Measurement'] > 0].copy()
+
+# Transform (this session)
+samples['ocean'] = samples['Oceans'].str.replace(' Ocean', '')
+samples['pieces_per_liter'] = samples['Measurement'] / 1000
+samples['log10_measurement'] = np.log10(samples['Measurement'])
+
+samples[['ocean', 'Measurement', 'pieces_per_liter', 'log10_measurement']].head()
+```
+
+```{python}
+samples.shape
+```
+
+Read it as a paragraph. Nine lines took a 16,245-row archive with three incompatible units and
+seven orders of magnitude to 7,091 comparable samples with three columns that were not in the
+file. Every line is a sentence you learned this week.
+
+## Key points
+
+- The **derived-column sentence** is `df['new'] = expression`. Assignment creates the column,
+  and unlike most pandas operations it changes the table in place.
+- Arithmetic on a column applies to every row at once. No loop.
+- Naming two columns on the right side computes row by row, matched up by row label.
+- Reusing an existing name overwrites it with no warning.
+- `np.log10()` rescales a column that spans orders of magnitude. Filter out zeros first, since
+  the logarithm of zero is undefined.
+- Text columns are cleaned through `.str`: `.strip()` for invisible whitespace, `.lower()` for
+  predictable matching, `.replace(old, new)` for everything else. **One method per line.**
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: cleaning data](../cheatsheets/data_cleaning.qmd)
+- [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+- [📖 EDS 217 cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
+- [pandas documentation: working with text data](https://pandas.pydata.org/docs/user_guide/text.html){target="_blank"}
+- [numpy documentation: `np.log10`](https://numpy.org/doc/stable/reference/generated/numpy.log10.html){target="_blank"}

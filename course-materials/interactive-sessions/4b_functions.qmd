@@ -1,0 +1,325 @@
+---
+title: "Interactive Session"
+subtitle: "⚙️ Write It Once, Name It, Use It"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 70%; margin: auto;"}
+![](images/variable_2.jpeg)
+:::
+
+:::{.gray-text .center-text}
+*A lightbulb, in the middle of having an idea.* [MidJourney 5](https://www.midjourney.com)
+
+:::
+
+Last night you wrote this three times, changing one word each time:
+
+```python
+df['Bananas index (kg)'].sort_values(ascending=False).head(10)
+```
+
+and we told you to notice how that felt. Copying a line and editing one word in the copy is how
+almost every data-analysis bug gets written. You fix the original, forget the copies, and now
+your notebook contains two answers to the same question.
+
+A **function** is the cure. You write the work once, give it a name, and then you have a new
+verb that you and pandas can both use.
+
+By the end of this session you will be able to:
+
+- define a function with `def` and hand a value back with `return`
+- call your function, and store what it gives you
+- give a parameter a **default**, so the common case is short to type
+- call a function with **keyword arguments**, so the reader can see what each one means
+- run a function down an entire column with `.apply()`
+
+## Getting Started
+
+1. **Create a new notebook:**
+   - Click the `+` button to open a Launcher.
+   - Under **Notebook**, click **eds217_2026**.
+
+2. **Rename your notebook** to: `Session_4B_Functions.ipynb`
+
+3. **Add a title cell** (Markdown), updating the date to today:
+
+```markdown
+# Day 4: Session 4B - Write It Once, Name It, Use It
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/4b_functions.html)
+
+Date: 09/03/2026
+```
+
+4. Read in the microplastics data you cleaned an hour ago:
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/marine_microplastics.csv'
+plastics = pd.read_csv(url)
+plastics.shape
+```
+
+:::{.callout-caution}
+Save your work frequently with `Ctrl+S` (`Cmd+S` on macOS).
+:::
+
+## `def` and `return`
+
+Here is a whole function:
+
+```{python}
+def celsius_to_fahrenheit(celsius):
+    fahrenheit = (celsius * 9 / 5) + 32
+    return fahrenheit
+```
+
+Four pieces, and they are always in this order:
+
+- `def` announces that a definition is coming.
+- `celsius_to_fahrenheit` is the name. You choose it, and you should choose it well.
+- `(celsius)` is the **parameter**: a name for the value that will be handed in.
+- everything indented under the `def` line is the **body**, and `return` says what comes back.
+
+Running that cell does not convert anything. It teaches Python a new word. To use it, call it:
+
+```{python}
+celsius_to_fahrenheit(25)
+```
+
+```{python}
+water_temp = celsius_to_fahrenheit(12.4)
+water_temp
+```
+
+The indentation is not decoration. Python uses it to decide where the body ends, exactly the
+way it decided which lines belonged to an `if` block yesterday.
+
+:::{.callout-note}
+🐍 A function without `return` still runs, but it hands back `None`. If your function seems to
+"do nothing," a missing `return` is the first thing to check.
+
+```{python}
+def broken(celsius):
+    (celsius * 9 / 5) + 32
+
+print(broken(25))
+```
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Write a function called `meters_to_feet` that takes a number of metres and returns the same
+distance in feet. One metre is 3.28084 feet. Call it on `1000` and check that you get about
+3,281.
+:::
+
+## Naming things well
+
+The name is most of the value. Compare:
+
+```{python}
+def f(x):
+    return x * 1000
+```
+
+```{python}
+def ppm_to_ppb(concentration_ppm):
+    """Convert a concentration from parts per million to parts per billion."""
+    return concentration_ppm * 1000
+```
+
+They compute the same thing. Only one of them will still make sense to you in November.
+
+The line in triple quotes is a **docstring**. It is optional, it goes on the first line of the
+body, and Python will show it back to you when you ask for help:
+
+```{python}
+help(ppm_to_ppb)
+```
+
+Write one whenever the function's name does not fully explain itself.
+
+## Default values
+
+A parameter can carry a default, which is used when the caller does not supply that argument:
+
+```{python}
+def convert_depth(depth, units='meters'):
+    """Convert a depth in metres to metres, feet, or fathoms."""
+    if units == 'meters':
+        return depth
+    elif units == 'feet':
+        return depth * 3.28084
+    elif units == 'fathoms':
+        return depth * 0.546807
+    else:
+        return None
+```
+
+```{python}
+convert_depth(100)
+```
+
+```{python}
+convert_depth(100, 'feet')
+```
+
+Notice what is inside that function: the `if`/`elif`/`else` you learned yesterday, doing exactly
+what it did yesterday. Functions are not a new kind of code. They are a wrapper that lets you
+name code you already know how to write.
+
+:::{.callout-important title="Parameters with defaults go last"}
+```python
+def convert_depth(units='meters', depth):   # SyntaxError
+```
+
+Python needs to match the values you pass to the parameters in order, so every parameter with a
+default has to come after every parameter without one. The error message says
+`non-default argument follows default argument`, which is worth recognising on sight.
+:::
+
+## Keyword arguments
+
+When you call a function, you can name the arguments instead of relying on their order:
+
+```{python}
+convert_depth(depth=100, units='fathoms')
+```
+
+```{python}
+convert_depth(units='fathoms', depth=100)
+```
+
+Both give the same answer, because naming the arguments makes their order irrelevant. This is
+the same thing you have been doing all week without thinking about it:
+
+```python
+pd.read_csv(url, index_col='entity')
+df.sort_values('visitors', ascending=False)
+df.dropna(subset=['Measurement'])
+```
+
+`index_col=`, `ascending=` and `subset=` are keyword arguments to somebody else's functions.
+Now you know what the equals sign was doing.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Write a function `classify_latitude` that takes a latitude and returns `'tropical'` if it is
+between -23.5 and 23.5, `'polar'` if it is below -66.5 or above 66.5, and `'temperate'`
+otherwise. Test it on `0`, `45`, and `-70`.
+
+Keep this function. You will use it in the next section.
+:::
+
+## The payoff: `.apply()`
+
+You now have functions that work on one number. Your data has ten thousand numbers in a column.
+
+`.apply()` runs a function once for every value in a column and gives you back a column of the
+results:
+
+```{python}
+plastics['Latitude'].head()
+```
+
+```{python}
+def classify_latitude(latitude):
+    """Label a latitude as tropical, temperate, or polar."""
+    if -23.5 <= latitude <= 23.5:
+        return 'tropical'
+    elif latitude < -66.5 or latitude > 66.5:
+        return 'polar'
+    else:
+        return 'temperate'
+```
+
+```{python}
+plastics['Latitude'].apply(classify_latitude).head()
+```
+
+Read the call carefully, because the shape of it matters:
+
+```python
+df['column'].apply(function_name)
+```
+
+The function's **name** goes inside the parentheses, with no parentheses of its own. You are
+handing pandas the function itself, not the result of calling it. Add parentheses by mistake
+and Python tries to call your function with no arguments, and tells you so.
+
+Like everything else in pandas, `.apply()` returns a new column and changes nothing. Assign it
+to keep it:
+
+```{python}
+plastics['zone'] = plastics['Latitude'].apply(classify_latitude)
+plastics['zone'].value_counts()
+```
+
+That last line is a real result. Three quarters of this archive was sampled in temperate water,
+and 56 samples out of 16,245 came from the poles, which tells you something about where the
+ships were and nothing at all about where the plastic is.
+
+:::{.callout-note}
+🐍 `.apply()` hangs off a **column**, like `.isin()` and `.fillna()` do. The function you hand
+it should take **one value** and return **one value**. Pandas takes care of the repetition.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Write a function `hemisphere` that returns `'northern'` when a latitude is above zero and
+`'southern'` otherwise. Apply it to `plastics['Latitude']`, store the result in a new column
+called `hemisphere`, and use `.value_counts()` to report the split.
+:::
+
+## Writing a function for the work you keep repeating
+
+Here is last night's problem, solved. The top-N sentence, written once:
+
+```{python}
+def top_n(df, column, n=10):
+    """Return the n rows of df with the largest values in the named column."""
+    return df.sort_values(column, ascending=False).head(n)
+```
+
+```{python}
+top_n(plastics, 'Measurement', 5)[['Measurement', 'Unit', 'Oceans']]
+```
+
+```{python}
+top_n(plastics, 'Latitude')[['Latitude', 'Oceans', 'zone']]
+```
+
+Two parameters without defaults, one with. Change your mind about how ranking should work and
+there is exactly one line to edit.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Write a function `count_missing(df, column)` that returns the number of missing values in a
+named column. Use `.isnull().sum()` inside it. Call it on `'Measurement'`, `'Oceans'`, and
+`'SubRegions'`, and check your three answers against the `.isnull().sum()` you ran in 4A.
+:::
+
+## Key points
+
+- `def name(parameter):` opens a function; the indented body is what it does; `return` is what
+  it hands back. No `return` means it hands back `None`.
+- Defining a function runs nothing. Calling it does.
+- Name functions for what they produce. Add a docstring when the name is not enough.
+- Parameters can have **defaults**, and every defaulted parameter comes after the undefaulted
+  ones.
+- **Keyword arguments** name the value at the call site. You have been using other people's
+  keyword arguments all week.
+- `df['col'].apply(function_name)` runs your function down a whole column. Pass the name, with
+  no parentheses of its own.
+- Write a function the second time you need something, not the fifth.
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: functions](../cheatsheets/functions.qmd)
+- [📖 EDS 217 cheatsheet: control flows](../cheatsheets/control_flows.qmd)
+- [Python tutorial: defining functions](https://docs.python.org/3/tutorial/controlflow.html#defining-functions){target="_blank"}
+- [pandas documentation: `Series.apply`](https://pandas.pydata.org/docs/reference/api/pandas.Series.apply.html){target="_blank"}

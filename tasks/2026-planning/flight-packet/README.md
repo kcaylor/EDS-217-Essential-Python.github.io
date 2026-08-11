@@ -15,10 +15,16 @@ brief written before that date states the old rule; read decision 10 first.
 | Brief | Day | Status |
 |---|---|---|
 | `day3-build-brief.md` | Wed Sep 2, Filter + Sort | **built 2026-08-11** |
-| `day4-build-brief.md` | Thu Sep 3, Clean + Transform | ready |
+| `day4-build-brief.md` | Thu Sep 3, Clean + Transform | **built 2026-08-11** |
 | `day5-build-brief.md` | Fri Sep 4, Group + Aggregate | ready |
 | `day6-build-brief.md` | Tue Sep 8, Join + Reshape + Dates | ready |
 | `day7-build-brief.md` | Wed Sep 9, Visualize | ready |
+
+Two corrections to the Day 4 brief, found while building it and recorded in the skeleton's
+Day 4 section. Bare `.hist()` is **not** in Day 2's explore toolkit (it appears nowhere in the
+2026 Days 1-3); the EOD uses `plt.hist()` behind a Field Note instead, which spends the second
+Field Note. And `data/messy.csv` was replaced rather than extended: the 4d colab now uses
+`data/messy_field_survey.csv`, authored for the course by `tools/make_messy_field_survey.py`.
 
 Effort is not even across the four. Day 5 has two files with no usable 2025 ancestor, and Day 7
 needs 7b rewritten rather than trimmed, because two of the three seaborn functions its exercise

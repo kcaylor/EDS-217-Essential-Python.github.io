@@ -1,0 +1,330 @@
+---
+title: "Coding Colab"
+subtitle: "🙌 From Field Sheet to DataFrame"
+execute:
+  echo: false
+  include: false
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 80%; margin: auto;"}
+![](../images/datacleaning.jpg)
+:::
+
+:::{.gray-text .center-text}
+*Survey of data scientists, CrowdFlower, 2016.*
+
+:::
+
+Sixty percent. That is not a complaint about the profession, it is a description of the job.
+The hour you spend this afternoon is a scale model of your next two years.
+
+Today's file is a season of stream chemistry from six monitoring sites, transcribed from paper
+field sheets by four different undergraduates. Nobody was careless. They just each made
+reasonable decisions, and the decisions were not the same.
+
+Your job is to turn it into a table you would let somebody publish from.
+
+Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
+finish a numbered task. **Check `.shape` after every step that could remove rows**, and say the
+new number out loud before you move on. That habit is most of what this exercise is teaching.
+
+You have 45 minutes.
+
+## The data
+
+```
+https://eds-217-essential-python.github.io/data/messy_field_survey.csv
+```
+
+| Column | What it should be |
+|---|---|
+| `site` | one of six site labels |
+| `collection date` | the date the sample was taken |
+| `temperature_c` | water temperature, °C |
+| `pH` | pH, a decimal number |
+| `dissolved_oxygen_mg_L` | dissolved oxygen, mg/L |
+| `conductivity_uS_cm` | specific conductance, µS/cm |
+| `n_replicates` | how many bottles were filled, a whole number |
+: {.hover .bordered}
+
+## The sentences you need
+
+All of these are from today. You should not need anything else.
+
+```python
+df.drop_duplicates()                    # and subset=[...]
+df.dropna(subset=['col'])               # remove rows missing a named column
+df['col'] = df['col'].fillna(value)     # fill the gaps instead
+df['col'] = df['col'].astype(float)     # int, float, str
+df['col'] = df['col'].str.strip()       # .lower(), .replace(old, new)
+df['new'] = expression                  # the derived-column sentence
+df['new'] = df['col'].apply(my_func)    # run your own function down a column
+```
+
+## Setup
+
+Create a notebook named `Colab_4D_Cleaning_Messy_Data.ipynb`, with both partners' names in the
+title cell, then read the file in.
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/messy_field_survey.csv'
+survey = pd.read_csv(url)
+survey.shape
+```
+
+## Part 1: Find out what is wrong (about 10 minutes)
+
+Do not fix anything yet. Diagnose first, and write what you find in a markdown cell as you go.
+
+1. How many rows and columns? Run `.head()` and `.info()`. Which columns came in as `object`
+   when you expected a number, and which came in as `float64` when you expected a whole number?
+
+```{python}
+print(survey.shape)
+survey.head()
+```
+
+```{python}
+survey.info()
+```
+
+2. Run `.isnull().sum()`. Which four columns have gaps, and how many each?
+
+```{python}
+survey.isnull().sum()
+```
+
+3. Run `.duplicated().sum()`. How many rows are exact copies of an earlier row?
+
+```{python}
+survey.duplicated().sum()
+```
+
+4. Run `survey['site'].value_counts()`. There are six sites. How many distinct labels does the
+   file contain? Look carefully at the quotation marks in the output of
+   `survey['site'].unique()`.
+
+```{python}
+print(survey['site'].nunique())
+survey['site'].value_counts()
+```
+
+```{python}
+survey['site'].unique()
+```
+
+5. Run `.describe()` on `temperature_c`. The minimum is not a temperature any stream has ever
+   had. What do you think it means?
+
+```{python}
+survey['temperature_c'].describe()
+```
+
+:::{.callout-tip title="What the minimum means"}
+Dataloggers that fail often write a value chosen to be obviously impossible rather than leaving
+the field blank. `-999`, `-9999` and `NA` are the usual ones. It is missing data wearing a
+costume, and `.isnull()` will never find it. **Only `.describe()` and your own knowledge of the
+measurement will.**
+:::
+
+## Part 2: Clean it (about 20 minutes)
+
+Work in the order below and check `.shape` after each step.
+
+6. Remove the exact duplicate rows. How many rows are left?
+
+```{python}
+survey = survey.drop_duplicates()
+survey.shape
+```
+
+7. Fix the `site` column so that all six sites have one label each. You will need three
+   separate statements, one per method, each assigned back to `survey['site']`: strip the
+   whitespace, lower-case the text, and replace the hyphens with underscores. Confirm with
+   `.value_counts()` that you have exactly six.
+
+```{python}
+survey['site'] = survey['site'].str.strip()
+survey['site'] = survey['site'].str.lower()
+survey['site'] = survey['site'].str.replace('-', '_')
+survey['site'].value_counts()
+```
+
+:::{.callout-important title="Do not chain these"}
+Write one method per line. There is a version of this that runs them all together on one line,
+and there is a version of that version which contains a silent bug, and telling them apart is
+harder than typing three lines.
+:::
+
+8. `pH` came in as text. Find out why by looking at
+   `survey['pH'].unique()`, then fix it with one `.str.replace()` and one `.astype()`, in that
+   order. Confirm the dtype is `float64` and that `.describe()` gives a plausible pH range.
+
+```{python}
+survey['pH'].unique()[:12]
+```
+
+```{python}
+survey['pH'] = survey['pH'].str.replace(',', '.')
+survey['pH'] = survey['pH'].astype(float)
+print(survey['pH'].dtype)
+survey['pH'].describe()
+```
+
+:::{.callout-note}
+🐍 Try `survey['pH'].astype(float)` **before** the replace, on purpose, and read the error. It
+names the exact value it could not parse. That message is the fastest debugging tool in pandas,
+and it is worth having seen once when nothing is at stake.
+:::
+
+9. Three measurement columns have blanks: `temperature_c`, `dissolved_oxygen_mg_L`, and
+   `conductivity_uS_cm`. A row with no measurement is no use to you, so drop those rows in a
+   single `.dropna()` call with a list in `subset=`. How many rows did that cost?
+
+```{python}
+survey = survey.dropna(subset=['temperature_c', 'dissolved_oxygen_mg_L', 'conductivity_uS_cm'])
+survey.shape
+```
+
+10. `n_replicates` also has blanks, but here a blank means the field sheet recorded a single
+    bottle and nobody bothered to write "1". Fill those with `1` instead of dropping the rows,
+    then convert the column to `int`. Confirm with `.value_counts()`.
+
+```{python}
+survey['n_replicates'] = survey['n_replicates'].fillna(1)
+survey['n_replicates'] = survey['n_replicates'].astype(int)
+survey['n_replicates'].value_counts()
+```
+
+11. Now deal with the impossible temperatures. Use the **filter sentence** from Day 3 to keep
+    only the rows where `temperature_c` is above `-100`, and end the line with `.copy()`. How
+    many rows did the loggers ruin?
+
+```{python}
+survey = survey[survey['temperature_c'] > -100].copy()
+survey.shape
+```
+
+12. Re-run `.describe()` on `temperature_c`. Compare the mean to the one you got in task 5. In
+    a markdown cell, write one sentence about what nine bad rows did to the average of three
+    hundred good ones.
+
+```{python}
+survey['temperature_c'].describe()
+```
+
+13. Rename `collection date` to `collection_date`, so you can reach it without quoting trouble
+    later. `.rename()` is from Day 2; it takes `columns=` and a dictionary.
+
+```{python}
+survey = survey.rename(columns={'collection date': 'collection_date'})
+survey.columns.tolist()
+```
+
+## Part 3: Transform it (about 10 minutes)
+
+14. Add a column called `conductivity_mS_cm` holding conductivity in millisiemens per
+    centimetre, which is the microsiemens value divided by 1000.
+
+```{python}
+survey['conductivity_mS_cm'] = survey['conductivity_uS_cm'] / 1000
+survey[['conductivity_uS_cm', 'conductivity_mS_cm']].head()
+```
+
+15. Add a column called `temperature_f` holding the temperature in Fahrenheit. Do it twice:
+    once with the derived-column sentence and plain arithmetic, and once by writing a function
+    `celsius_to_fahrenheit` and using `.apply()`. Check that the two columns agree.
+
+```{python}
+survey['temperature_f'] = survey['temperature_c'] * 9 / 5 + 32
+
+
+def celsius_to_fahrenheit(celsius):
+    """Convert a temperature in Celsius to Fahrenheit."""
+    return (celsius * 9 / 5) + 32
+
+
+survey['temperature_f_applied'] = survey['temperature_c'].apply(celsius_to_fahrenheit)
+survey[['temperature_c', 'temperature_f', 'temperature_f_applied']].head()
+```
+
+16. Write a function called `classify_ph` that takes a pH value and returns `'acidic'` below
+    6.5, `'alkaline'` above 7.5, and `'neutral'` in between. Apply it to the `pH` column, store
+    the result in a column called `ph_class`, and report the counts.
+
+```{python}
+def classify_ph(value):
+    """Label a pH value as acidic, neutral, or alkaline."""
+    if value < 6.5:
+        return 'acidic'
+    elif value > 7.5:
+        return 'alkaline'
+    else:
+        return 'neutral'
+
+
+survey['ph_class'] = survey['pH'].apply(classify_ph)
+survey['ph_class'].value_counts()
+```
+
+## Part 4: Ask it something (about 5 minutes)
+
+You now have a table you can trust. Use it.
+
+17. Use the filter sentence to build a table of just the acidic samples. Which sites do they
+    come from? Use `.value_counts()` on `site`.
+
+```{python}
+acidic = survey[survey['ph_class'] == 'acidic']
+acidic['site'].value_counts()
+```
+
+18. Two of the six sites account for nearly all the acidic samples. Filter to one of those
+    sites and to `site_d`, and compare the mean of `dissolved_oxygen_mg_L` for each. (Two
+    filters, two `.mean()` calls. Tomorrow you will learn to do all six at once.)
+
+```{python}
+site_f = survey[survey['site'] == 'site_f']
+site_d = survey[survey['site'] == 'site_d']
+
+print('site_f mean DO:', site_f['dissolved_oxygen_mg_L'].mean())
+print('site_d mean DO:', site_d['dissolved_oxygen_mg_L'].mean())
+```
+
+19. In a markdown cell of three or four sentences: **what would you tell the person who
+    collected this data?** Name the single change to their field sheet that would have saved
+    you the most time this afternoon, and say what evidence in the file makes you pick that
+    one.
+
+## Wrap-up
+
+Before you close the notebook, check that:
+
+- your notebook records the row count after every step that removed rows
+- you can say how many rows the original file had, how many you finished with, and where the
+  difference went
+- every cleaning decision has a markdown sentence next to it saying **why**, not just what
+
+We will hear two or three pairs on question 19.
+
+:::{.callout-note title="If you finish early"}
+Go back to task 11. You filtered the sentinel temperatures out. Would you get the same final
+table if you had done that step first, before the `.dropna()` in task 9? Work out the answer by
+reasoning about the two masks, then test it. Say in a markdown cell whether the order of
+cleaning steps matters here, and whether you would expect that to be true in general.
+:::
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: cleaning data](../cheatsheets/data_cleaning.qmd)
+- [📖 EDS 217 cheatsheet: functions](../cheatsheets/functions.qmd)
+- [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+- [📖 EDS 217 cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)

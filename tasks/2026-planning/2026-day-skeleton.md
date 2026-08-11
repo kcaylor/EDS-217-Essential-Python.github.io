@@ -132,23 +132,73 @@ prompts in 3B and 4 questions in the 3D colab.
 
 ### Day 4: Clean + Transform
 
-Sessions (sketch):
-- 4a: missing-data sentence completed (diagnose Day 2 → treat today: `.dropna()`, `.fillna()`, the `~ .isnull()` mask re-using Day 3 grammar); `.astype()`; `.drop_duplicates()`.
-- 4b: derived-column sentence (`df['new'] = expr`), column arithmetic, scalar broadcast; basic `.str` methods (`.strip/.lower/.replace`, scoped; chains deferred to Day 7 Field Note).
-- 4c: functions, properly: `def`/`return`/default args, motivated by "you've now written the same filter-sort-head three times" (fixes the 2025 Day 5 gap where functions were effectively learned inside the EOD); `.apply(func)` on a column as the payoff.
-- 4d (colab): clean a deliberately messy dataset in pairs.
-- EOD: marine microplastics (relocated from 2025 Day 4; now everything it needs is taught: masks Day 3, `~` and `.copy()` Day 3, derived column and `np.log10` today). Its groupby tasks become ADAPT preview cells for Day 5, or get trimmed.
+**Built 2026-08-11.** Files: `4a_cleaning_data`, `4b_functions`, `4c_transforming_data`,
+`4d_cleaning_messy_data` (colab), `eod-day4-2026`.
+
+Sessions (**4b and 4c swapped 2026-08-11**; see the note below):
+- 4a (morning): missing-data sentence completed (diagnose Day 2 → treat today: `.dropna()`, `.fillna()`); `.astype()`; `.duplicated()`/`.drop_duplicates()` with `subset=`.
+- 4b (morning): functions, properly: `def`/`return`/default args/keyword args, motivated by "you've now written the same filter-sort-head three times" (fixes the 2025 Day 5 gap where functions were effectively learned inside the EOD); `.apply(named_func)` on a column as the payoff.
+- 4c (afternoon): derived-column sentence (`df['new'] = expr`), column arithmetic, scalar broadcast, `np.log10`; basic `.str` methods (`.strip/.lower/.replace`, scoped; chains deferred to Day 7 Field Note).
+- 4d (colab, afternoon): clean a deliberately messy dataset in pairs.
+- EOD: marine microplastics (relocated from 2025 Day 4; now everything it needs is taught: masks Day 3, `~` and `.copy()` Day 3, derived column and `np.log10` today). Its groupby tasks are **cut**, not previewed: the ocean comparison is done with two filters instead.
+
+Note (2026-08-11), why 4b and 4c swapped: `def`/`return` and `.apply` are **fundamentals**, and
+decision 10's rehearsal exemption reaches named sentence patterns only. Left in the afternoon
+they would cap at ADAPT in the same evening's EOD, re-creating the exact 2025 failure 4b exists
+to fix. The derived-column and string-cleaning sentences **are** named patterns, so they sit in
+the afternoon and take the exemption, rehearsed by 4d.
+
+Dataset allocation: marine microplastics is the spine (4a cleans it, 4b applies functions to
+it, 4c transforms it, the EOD carries it the whole way); banana_index returns for one section
+of 4c so that column-to-column arithmetic has two related numeric columns to work with; the 4d
+colab uses `messy_field_survey.csv`, authored for this course (see below).
 
 Scope table:
-| Construct | Scope taught | EOD depth |
+| Construct | Scope taught | Session | EOD depth |
+|---|---|---|---|
+| `.dropna()/.fillna(value)` | whole-frame and single-column; `subset=[...]` | 4a, morning | WRITE |
+| `.astype(str/int/float)` | single cast, no chains | 4a, morning | WRITE |
+| `.duplicated()/.drop_duplicates()` | bare and `subset=[...]`; `keep=False` shown | 4a, morning | WRITE |
+| `def f(x): return ...`; default args; keyword args | 1–3 param functions returning a value | 4b, morning | WRITE |
+| `.apply(func)` | named function only, NO lambda | 4b, morning | WRITE |
+| derived-column sentence | arithmetic of columns and scalars; one numpy function (`np.log10`) as "vectorized math comes from numpy", total intended numpy exposure for the course | 4c, afternoon | WRITE (rehearsal exemption, decision 10) |
+| `.str.strip/.lower/.replace` | single method, no chaining | 4c, afternoon | WRITE (rehearsal exemption, decision 10) |
+| `read_csv(parse_dates=, date_format=)` + `.dt.year` | 🧭 Field Note, both lines supplied (full datetime treatment Day 6) | EOD setup | ADAPT |
+| `plt.hist(series)` | 🧭 Field Note, line supplied; extends Day 1's `plt.plot()`/`plt.bar()` | EOD task 15 | ADAPT |
+
+Seven WRITE constructs, under the budget of eight. Field Notes in the EOD: 2, the budget.
+
+Rehearsal exemption, recorded 2026-08-11 (decision 10). Both afternoon-taught sentence patterns
+are required at WRITE depth in the same evening's EOD. The audit:
+
+| Requirement | derived-column sentence | string-cleaning sentence |
 |---|---|---|
-| `.dropna()/.fillna(value)` | whole-frame and single-column | WRITE |
-| `.astype(str/int/float)` | single cast, no chains | WRITE |
-| derived-column sentence | arithmetic of columns and scalars; one numpy function (`np.log10`) as "vectorized math comes from numpy", total intended numpy exposure for the course | WRITE |
-| `.str.strip/.lower/.replace` | single method, no chaining | WRITE |
-| `def f(x): return ...`; default args | 1–2 param functions returning a value | WRITE |
-| `.apply(func)` | named function only, NO lambda | WRITE |
-| `read_csv(parse_dates=['col'])` | 🧭 Field Note (full datetime treatment Day 6) | ADAPT |
+| named sentence pattern | yes, from the ledger's eight | yes, from the ledger's eight |
+| written unaided ≥3 times | 4C "Test your knowledge" ×3 (latitude→radians, emissions ratio, log10 per litre); 4D tasks 14, 15, 16 | 4C "Test your knowledge" ×1 (sampling method), 4D tasks 7 and 8 (four separate `.str` statements) |
+| across ≥2 sessions, student sole author | 4C TYK boxes (sole author); 4D colab | 4C TYK box (sole author); 4D colab |
+| EOD restates the pattern verbatim | "Today's three sentences" box, above Setup | same box |
+
+The morning constructs need no exemption, but quality gate 2 asks where each was written
+unaided anyway: `.dropna`/`.fillna` in 4A TYK ×2 and 4D tasks 9–10; `.astype` in 4A TYK and 4D
+tasks 8 and 10; `.drop_duplicates` in 4A TYK and 4D task 6; `def`/`return` in 4B TYK ×4 and 4D
+tasks 15–16; `.apply` in 4B TYK ×1 and 4D tasks 15–16.
+
+Deviation from the build brief, recorded 2026-08-11: the brief said bare `.hist()` was already
+in Day 2's explore toolkit and could be kept without a Field Note. It is not — `.hist()` appears
+nowhere in the 2026 Days 1–3, and the only plotting students have is `plt.plot()`/`plt.bar()`
+from the Day 1 Whole Game. The EOD therefore uses `plt.hist()`, which matches that prefix and
+Day 7's matplotlib base, and spends the second Field Note on it. The `.hist()` → `plt.hist()`
+substitution is the reason the Field Note budget is fully spent.
+
+New dataset: `data/messy_field_survey.csv`, 320 rows × 7 columns, authored for this course
+(generator: `tools/make_messy_field_survey.py`, seed 217). `data/messy.csv` is five data rows,
+too small for a 45-minute colab; Kelly chose to author a larger one rather than degrade a real
+file. Planted defects, each fixable with Day 4 scope only: 20 exact duplicate rows; 36 spellings
+of 6 site labels (case, leading/trailing space, hyphen-for-underscore); `pH` typed as text
+because 24 values use a decimal comma; blanks in three measurement columns; blanks in
+`n_replicates` forcing it to float; 9 `-999.0` datalogger sentinels in `temperature_c`; a column
+name with a space. Cleaned it runs 320 → 300 → 264 → 255 rows and shows a real gradient (sites
+c and f warm, acidic, oxygen-poor; sites a and d cool, alkaline, oxygen-rich).
 
 ### Day 5: Group + Aggregate
 

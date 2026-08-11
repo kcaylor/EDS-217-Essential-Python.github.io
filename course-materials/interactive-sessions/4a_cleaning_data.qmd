@@ -1,0 +1,392 @@
+---
+title: "Interactive Session"
+subtitle: "🧼 Missing, Duplicated, Miscast"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+::: {style="width: 60%; margin: auto;"}
+![](images/cleaning.png)
+:::
+
+:::{.gray-text .center-text}
+*A cartoon panda is getting a bubble bath.* [MidJourney 5](https://www.midjourney.com)
+
+:::
+
+For three days you have asked questions of tables that behaved themselves. Today you meet one
+that does not.
+
+Real environmental data arrives with holes in it, with the same sample entered twice, and with
+numbers stored as text. None of that is a mistake anyone made. It is what happens when
+sixteen thousand measurements are pooled from thirty-seven separate studies over thirty-five
+years. Your job is not to be annoyed by it. Your job is to find it, decide what to do about
+it, and write down what you decided.
+
+Today's dataset is NOAA's marine microplastics archive, and you will be with it all day: this
+morning to clean it, this afternoon to transform it, and tonight to answer questions with it.
+
+By the end of this session you will be able to:
+
+- count what is missing, and say which columns are missing it
+- remove rows with `.dropna()`, and say why the bare version is almost always wrong
+- fill gaps with `.fillna(value)` when removal would cost too much
+- find duplicated rows with `.duplicated()`, and drop them with `.drop_duplicates()`
+- read a column's dtype and change it with `.astype()`
+
+## Getting Started
+
+1. **Create a new notebook:**
+   - Click the `+` button to open a Launcher.
+   - Under **Notebook**, click **eds217_2026**.
+
+2. **Rename your notebook** to: `Session_4A_Cleaning_Data.ipynb`
+
+3. **Add a title cell** (Markdown), updating the date to today:
+
+```markdown
+# Day 4: Session 4A - Missing, Duplicated, Miscast
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/4a_cleaning_data.html)
+
+Date: 09/03/2026
+```
+
+4. Read in the marine microplastics data:
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/marine_microplastics.csv'
+plastics = pd.read_csv(url)
+plastics.shape
+```
+
+16,245 rows and 22 columns. Every row is one water sample, somewhere in an ocean, on some day
+between 1972 and 2022.
+
+```{python}
+plastics.columns.tolist()
+```
+
+:::{.callout-caution}
+Save your work frequently with `Ctrl+S` (`Cmd+S` on macOS).
+:::
+
+## What is missing
+
+You met this sentence on Day 2. It is the first thing to run on a table you did not create:
+
+```{python}
+plastics.isnull().sum()
+```
+
+Five columns have holes in them. Two of the holes are enormous:
+
+```{python}
+plastics.isnull().sum().sort_values(ascending=False).head(5)
+```
+
+`SubRegions` is missing on 15,657 rows out of 16,245, and `Regions` on 8,249. `Measurement`,
+which is the actual number this whole archive exists to record, is missing on 5,792.
+
+:::{.callout-note}
+🐍 `.isnull()` returns a `True`/`False` for every cell, and `.sum()` counts the `True`s, one
+column at a time. It is the same "add up a mask" trick you used on Day 3 when you counted rows
+that passed a filter.
+:::
+
+## Dropping rows: `.dropna()`
+
+The obvious move is to throw away the incomplete rows. `.dropna()` does that:
+
+```{python}
+plastics.dropna().shape
+```
+
+**588 rows.** You started with 16,245 and kept 3.6% of them.
+
+That is not a cleaning step. That is destroying the dataset. And notice how quietly it
+happened: one method, no arguments, no warning, no error message.
+
+:::{.callout-important title="Bare `.dropna()` is almost always the wrong tool"}
+With no arguments, `.dropna()` removes every row that has a missing value **in any column at
+all**. Here, a sample with a perfectly good measurement gets deleted because nobody recorded
+its `SubRegions`.
+
+The fix is to say which columns you actually care about.
+:::
+
+## Dropping on purpose: `.dropna(subset=[...])`
+
+`subset=` takes a **list** of column names, and only those columns can get a row deleted:
+
+```{python}
+measured = plastics.dropna(subset=['Measurement'])
+measured.shape
+```
+
+10,453 rows. That is a defensible cleaning step and a terrible one, and which it is depends
+entirely on a question you have not asked yet.
+
+Ask it now. Compare the units before and after:
+
+```{python}
+plastics['Unit'].value_counts()
+```
+
+```{python}
+measured['Unit'].value_counts()
+```
+
+An entire unit vanished. All 5,792 `pieces/10 mins` samples had a missing `Measurement`, so
+dropping on `Measurement` deleted every one of them, and with them every sample taken by the
+one study that used that method.
+
+:::{.callout-important title="Missing values are rarely scattered at random"}
+On Day 2 you learned that `value` columns stack incompatible units. This is the other half of
+that lesson: **missingness is itself a variable**. Here it lines up exactly with sampling
+method, so a filter that looks like it removes bad rows actually removes one team's entire
+field campaign.
+
+Before you drop anything, count what you are dropping and look at what it has in common.
+:::
+
+That does not mean you should keep them. If you are about to average measurements, rows with no
+measurement are useless to you. It means you should be able to say, out loud, *what* you
+removed, and record it in your notebook.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+`Oceans` is missing on 271 rows. Use `.dropna()` with `subset=` to build a table called
+`located` that has none of them, and report its shape. Then check whether those 271 rows had
+anything in common: compare `plastics['Unit'].value_counts()` with the same call on `located`.
+:::
+
+## Filling gaps: `.fillna(value)`
+
+Sometimes the missing value means something, and removing the row throws that meaning away.
+`Regions` is missing on 8,249 rows not because anyone forgot, but because the sample was in
+open ocean, outside any named sea.
+
+`.fillna()` replaces the gaps with a value you choose:
+
+```{python}
+plastics['Regions'] = plastics['Regions'].fillna('Unspecified')
+plastics['Regions'].value_counts().head(5)
+```
+
+Two things worth noticing in that one line. `.fillna()` hangs off a **column**, not the whole
+table. And it returns a new column, so you have to assign it back to `plastics['Regions']` for
+the change to stick. That is the same rule you have met every day this week: pandas hands you a
+result, and it is yours to keep or to discard.
+
+```{python}
+plastics.isnull().sum().sort_values(ascending=False).head(3)
+```
+
+`Regions` is now at zero.
+
+:::{.callout-note}
+🐍 Choose your fill value on purpose. `'Unspecified'` is honest: it says "we know this is
+blank." Filling with `0` would have been a lie, because zero is a real measurement. Never fill
+a numeric column with a number that could be mistaken for data.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+`SubRegions` is missing on 15,657 rows. Fill it with `'Unspecified'`, assign the result back,
+and re-run `plastics.isnull().sum()` to confirm it worked. Then, in a markdown cell, say
+whether filling or dropping was the right call for that column, and why.
+:::
+
+## Duplicated rows
+
+The other classic defect is the same sample entered twice. `.duplicated()` returns a mask, one
+`True` or `False` per row, and `.sum()` counts them:
+
+```{python}
+plastics.duplicated().sum()
+```
+
+Zero. Clean data, then.
+
+Except no. Look at the columns again:
+
+```{python}
+plastics[['OBJECTID', 'GlobalID', 'Latitude', 'Longitude', 'Date', 'Measurement']].head(3)
+```
+
+`OBJECTID` and `GlobalID` are identifiers, assigned one per record when the archive was built.
+No two rows can ever share them, so no two rows can ever be identical, so `.duplicated()` can
+only ever return zero. The answer was never about the data.
+
+`subset=` fixes this the same way it fixed `.dropna()`. Point it at the columns that carry the
+science:
+
+```{python}
+sample_columns = ['Latitude', 'Longitude', 'Date', 'Measurement', 'Unit']
+plastics.duplicated(subset=sample_columns).sum()
+```
+
+856 rows record the same measurement, in the same unit, at the same coordinates, on the same
+day, as some earlier row.
+
+:::{.callout-important title="`.duplicated()` is only as good as the columns you point it at"}
+This is the single most common way people convince themselves a dataset is clean. Any table
+with an auto-generated ID column will report zero duplicates forever.
+
+Decide what "the same observation" means for *your* data, put those column names in a list, and
+pass the list to `subset=`.
+:::
+
+`.drop_duplicates()` takes the same argument and returns a table with the repeats removed,
+keeping the first of each:
+
+```{python}
+deduplicated = plastics.drop_duplicates(subset=sample_columns)
+deduplicated.shape
+```
+
+Now the hard part, which pandas cannot do for you. Are those 856 rows really duplicates? Two
+tows through the same patch of water on the same day, both finding zero pieces per cubic metre,
+would look exactly like this and would both be real:
+
+```{python}
+repeats = plastics[plastics.duplicated(subset=sample_columns, keep=False)]
+repeats[['Measurement', 'Unit', 'Sampling Method', 'Short Reference']].head(6)
+```
+
+```{python}
+(repeats['Measurement'] == 0).sum()
+```
+
+Of the 1,465 rows involved, 652 report a measurement of zero. That is a strong hint that many
+of these are genuine repeat samples which happened to agree, rather than double entries, so we
+will **keep** them and say so in the notebook.
+
+:::{.callout-note}
+🐍 `keep=False` marks *every* member of a duplicated group, not just the later ones. Use it
+when you want to look at duplicates; use the default when you want to drop them.
+:::
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Build a different list of columns that you think defines "the same observation" here, and count
+the duplicates it finds. Try dropping `Measurement` from the list, or adding
+`Sampling Method`. Write one sentence in a markdown cell saying which definition you would
+defend to a reviewer.
+:::
+
+## Types: reading them and changing them
+
+Every column has a **dtype**, which is what pandas believes the column contains:
+
+```{python}
+plastics.dtypes
+```
+
+`float64` is a decimal number, `int64` a whole number, and `object` is pandas saying "text, or
+something I could not identify." Three of these are wrong for what the column means.
+
+`Accession Number` is stored as an integer:
+
+```{python}
+plastics['Accession Number'].head(3)
+```
+
+It is not a quantity. Nobody will ever add two accession numbers together or take their mean.
+It is a label that happens to be spelled with digits, and leaving it numeric invites pandas to
+average it for you in some later summary. `.astype()` converts a column to the type you name:
+
+```{python}
+plastics['Accession Number'] = plastics['Accession Number'].astype(str)
+plastics['Accession Number'].head(3)
+```
+
+```{python}
+plastics['Accession Number'].dtype
+```
+
+`object`, which is what text looks like. The same assign-it-back rule applies: `.astype()`
+returns a converted column and changes nothing until you store it.
+
+The three conversions you will use all week are `.astype(float)`, `.astype(int)`, and
+`.astype(str)`:
+
+```{python}
+plastics['Latitude'].astype(int).head(3)
+```
+
+That one is a demonstration, not a suggestion. `.astype(int)` truncates toward zero, so
+-58.4283 becomes -58, and nearly half a degree of latitude, about 47 kilometres, is gone.
+Converting to a narrower type throws information away, silently.
+
+:::{.callout-caution title="`.astype()` fails loudly on text it cannot parse"}
+If a numeric column has even one entry like `'not recorded'`, `.astype(float)` raises a
+`ValueError` naming the offending value. That is pandas doing you a favour. Read the value it
+names, fix that, and convert again.
+
+You will meet exactly this in the colab this afternoon.
+:::
+
+`Date` is an `object` too, because it is text like `2/3/2017 12:00:00 AM`. Dates are their own
+subject and they get a whole session on Day 6, so leave that one alone for now.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Convert `OBJECTID` to text with `.astype(str)`, assign it back, and confirm the change with
+`.dtype`. Then, in a markdown cell, name one other column in this table whose dtype does not
+match what the column means, and say what it should be.
+:::
+
+## Putting it together
+
+A cleaning pass is a short, ordered list of decisions, each one a line of code with a comment
+saying why:
+
+```{python}
+clean = plastics.copy()
+
+# Open-ocean samples have no named region; that is information, not a gap.
+clean['SubRegions'] = clean['SubRegions'].fillna('Unspecified')
+
+# Accession numbers are labels, not quantities.
+clean['Accession Number'] = clean['Accession Number'].astype(str)
+
+# Keep only samples that carry a measurement. This drops all 5,792 'pieces/10 mins'
+# rows, which is acceptable here because we are about to average measurements.
+clean = clean.dropna(subset=['Measurement'])
+
+clean.shape
+```
+
+```{python}
+clean.isnull().sum().sort_values(ascending=False).head(3)
+```
+
+Four lines, three decisions, and a note in the code saying what the third one cost. If a
+colleague asks you next month why your row count is 10,453 and not 16,245, the answer is right
+there.
+
+## Key points
+
+- Run `df.isnull().sum()` first, every time, on any table you did not build yourself.
+- Bare `.dropna()` deletes a row for a gap in **any** column. Here that cost 96% of the data.
+  Use `.dropna(subset=['col'])` and name the columns you actually need.
+- Before you drop, **count what you are dropping and look at what it has in common.**
+  Missingness usually lines up with something.
+- `.fillna(value)` replaces gaps with a value you choose. Choose one that cannot be mistaken
+  for data.
+- `.duplicated()` and `.drop_duplicates()` both take `subset=[...]`. Without it, any table with
+  an ID column reports zero duplicates forever.
+- `.astype(str/int/float)` converts a column. It returns a new column, so assign it back, and
+  remember that narrowing a type throws information away.
+
+## Resources
+
+- [📖 EDS 217 cheatsheet: cleaning data](../cheatsheets/data_cleaning.qmd)
+- [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
+- [pandas documentation: working with missing data](https://pandas.pydata.org/docs/user_guide/missing_data.html){target="_blank"}
+- [pandas documentation: `DataFrame.drop_duplicates`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop_duplicates.html){target="_blank"}
+- [NOAA NCEI marine microplastics](https://www.ncei.noaa.gov/products/microplastics){target="_blank"}

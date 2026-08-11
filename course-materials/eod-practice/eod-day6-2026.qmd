@@ -40,7 +40,7 @@ Eurovision Song Contest contestant data, compiled from the contest's public resu
 
 ## Today's sentences
 
-Everything below is built from these four, plus what you already had.
+Everything below is built from these three, plus what you already had.
 
 ```python
 pd.merge(left, right, on='key')                        # the join sentence
@@ -50,9 +50,6 @@ pd.merge(left, right, on='key', how='left')            # keep every row on the l
 pd.concat([a, b, c], ignore_index=True)                # the stacking sentence
 
 df.pivot_table(index=, columns=, values=)              # the pivot sentence
-
-pd.to_datetime(column, format='%Y')                    # the parsing sentence
-column.dt.year                                         # and its accessors
 
 counts = df['col'].value_counts().reset_index()        # Series to table
 ```
@@ -141,48 +138,33 @@ A null means *no value*. A zero means *the value is zero*. Filling one with the 
 tidying, it is fabrication, and pandas will help you do it without a word of complaint.
 :::
 
-## Part 2: Making the year a date
+## Part 2: Decades
 
-6. `year` arrived as an integer. Parse it into a new column called `contest_date` using the
-   parsing sentence and a one-character format string, then print the new column's dtype and its
-   minimum and maximum.
-
-```{python}
-contests['contest_date'] = pd.to_datetime(contests['year'], format='%Y')
-
-print(contests['contest_date'].dtype)
-print(contests['contest_date'].min())
-print(contests['contest_date'].max())
-```
-
-7. This file is one of the rare ones where you can check your parse for free: the raw column is
-   right there. Confirm that `.dt.year` on your parsed column equals the original `year` column on
-   every row.
+6. Add a `decade` column. Divide `year` by ten, convert the result to an integer, and multiply by
+   ten. `.astype(int)` truncates toward zero, which is exactly what you want here. Then count the
+   entries in each decade.
 
 ```{python}
-(contests['contest_date'].dt.year == contests['year']).all()
-```
-
-:::{.callout-note}
-🐍 It is fair to ask what that bought you. On this file, nothing you can see. `year` was already a
-number, arithmetic on it already worked, and the parsed column agrees with it exactly.
-
-The habit is the point. A column that means a date gets parsed the moment it arrives, and
-everything downstream is built from the parsed column rather than the raw one. That costs one line
-here. In the file you open next month, where the same column reads `Jun-1956`, it will save you an
-afternoon, and you will not have to remember to start doing it because you never stopped.
-:::
-
-8. Add a `decade` column. Divide the parsed year by ten, convert the result to an integer, and
-   multiply by ten. `.astype(int)` truncates toward zero, which is exactly what you want here.
-
-```{python}
-contests['decade'] = (contests['contest_date'].dt.year / 10).astype(int) * 10
+contests['decade'] = (contests['year'] / 10).astype(int) * 10
 
 contests['decade'].value_counts().sort_index()
 ```
 
-9. Count the entries in each year from 2000 to 2007. Something changes abruptly. What, and in
+:::{.callout-note}
+🐍 Notice what this part does not do. You spent an hour this morning parsing dates, and there is a
+column here called `year`. It is tempting to reach for `pd.to_datetime()`.
+
+Leave it alone. `year` is a number that happens to name a year, and this file holds nothing below
+the year: no month, no day, no hour. Parsing it would produce a column whose only useful accessor,
+`.dt.year`, hands back the integer you started with. The parse earns its place in files that carry
+a real date, like the Toolik record from this morning, where `.dt.month` and `.dt.dayofyear` tell
+you something the raw column does not.
+
+Recognizing which tool a file does not need is as much a part of the job as knowing which one it
+does.
+:::
+
+7. Count the entries in each year from 2000 to 2007. Something changes abruptly. What, and in
    which year? In a markdown cell, say what a sudden jump in entries per contest would do to a
    comparison of average scores between the 1990s and the 2010s.
 
@@ -195,7 +177,7 @@ contests.groupby('year')['to_country'].count().loc[2000:2007]
 This is the question the file invites, and answering it well takes the loop from yesterday
 afternoon and the stacking sentence from this morning.
 
-10. Build a table with one row per decade, holding the country with the highest average
+8. Build a table with one row per decade, holding the country with the highest average
     `points_final` in that decade, how many entries that average came from, and the average
     itself.
 
@@ -219,18 +201,18 @@ decade_winners = pd.concat(decade_winners_list, ignore_index=True)
 decade_winners[['decade', 'to_country', 'count', 'mean']]
 ```
 
-11. Read the `count` column before you read the `mean` column. Two of the seven winners won on
+9. Read the `count` column before you read the `mean` column. Two of the seven winners won on
     fewer than four entries. Name them, and say in one sentence why you would not put either one
     in a headline.
 
-12. The `mean` column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown
+10. The `mean` column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown
     cell, two or three sentences: is Europe getting better at writing songs? What else changed
     between 1956 and 2019 that would produce exactly this pattern, and what would you have to
     divide by to remove it?
 
 ## Part 4: The second table
 
-13. Read the population file at
+11. Read the population file at
     `https://eds-217-essential-python.github.io/data/eurovision_country_populations.csv`.
     How many rows, and what are its columns?
 
@@ -242,7 +224,7 @@ print(populations.shape)
 print(list(populations.columns))
 ```
 
-14. Build a table called `modern` holding only contests from 1990 onwards, then count the entries
+12. Build a table called `modern` holding only contests from 1990 onwards, then count the entries
     per country and turn that count into a two-column table using the Series-to-table move. Rename
     the columns to `country` and `entries`.
 
@@ -255,7 +237,7 @@ counts = counts.rename(columns={'to_country': 'country', 'count': 'entries'})
 counts.head()
 ```
 
-15. Merge `counts` with `populations`. The key columns have different names, so you will need
+13. Merge `counts` with `populations`. The key columns have different names, so you will need
     `left_on=` and `right_on=`. Do it twice, once with the default `how=` and once with
     `how='right'`, and report both shapes.
 
@@ -267,7 +249,7 @@ print(entries.shape)
 print(check.shape)
 ```
 
-16. One country is in the population file and not in your counts. Find it, name it, and then find
+14. One country is in the population file and not in your counts. Find it, name it, and then find
     every row for it in the **full** `eurovision` table. In a markdown cell, say what you learned
     and why the inner merge was right to drop it.
 
@@ -276,7 +258,7 @@ print(check[check['entries'].isnull()][['country_name', 'population']])
 print(eurovision[eurovision['to_country'] == 'Morocco'][['year', 'performer', 'song', 'place_contest']])
 ```
 
-17. Add an `entries_per_million` column to `entries`: the entry count divided by the population in
+15. Add an `entries_per_million` column to `entries`: the entry count divided by the population in
     millions. (`1_000_000` is a perfectly good way to write a million in Python; the underscores
     are ignored.) Rank it and show the top eight and the bottom five.
 
@@ -289,7 +271,7 @@ print(ranked[['country', 'entries', 'population', 'entries_per_million']].head(8
 print(ranked[['country', 'entries', 'population', 'entries_per_million']].tail(5))
 ```
 
-18. The top of that ranking is San Marino, Andorra, Iceland, Monaco and Malta, and the bottom is
+16. The top of that ranking is San Marino, Andorra, Iceland, Monaco and Malta, and the bottom is
     Russia, Italy and Ukraine. In a markdown cell, three or four sentences: is *entries per
     million people* a meaningful quantity? What is it actually measuring, and what would you have
     to know about how the file's population numbers were collected before you would publish this
@@ -303,7 +285,7 @@ real dataset, and naming it is a better answer than working around it.
 
 ## Part 5: The whole contest in one grid
 
-19. Build a wide table with `to_country` down the rows, `decade` across the columns, and the mean
+17. Build a wide table with `to_country` down the rows, `decade` across the columns, and the mean
     `points_final` in the cells. What shape is it?
 
 ```{python}
@@ -312,7 +294,7 @@ grid = contests.pivot_table(index='to_country', columns='decade', values='points
 grid.shape
 ```
 
-20. Build the same table again with `aggfunc='count'`, and look at both for four countries that
+18. Build the same table again with `aggfunc='count'`, and look at both for four countries that
     have competed throughout: Ireland, Sweden, the United Kingdom and Norway.
 
 ```{python}
@@ -323,7 +305,7 @@ print(grid.loc[['Ireland', 'Sweden', 'United Kingdom', 'Norway']].round(1))
 print(grid_n.loc[['Ireland', 'Sweden', 'United Kingdom', 'Norway']])
 ```
 
-21. In a markdown cell: the empty cells in the means grid are not all the same kind of empty. Name
+19. In a markdown cell: the empty cells in the means grid are not all the same kind of empty. Name
     two different reasons a country might have no number in a given decade, and say how you would
     tell them apart using the counts grid.
 
@@ -340,22 +322,21 @@ number you would actually send them. Complete sentences, no bullet fragments.
 
 ## The grammar minute
 
-Look back through your notebook. Four sentences did all of the structural work tonight, and none
+Look back through your notebook. Three sentences did all of the structural work tonight, and none
 of them calculated anything:
 
 ```python
 pd.merge(a, b, left_on=, right_on=)    # two tables become one, side by side
 pd.concat([...], ignore_index=True)    # many tables become one, top to bottom
 df.pivot_table(index=, columns=, ...)  # one long table becomes one wide one
-pd.to_datetime(col, format=)           # a number becomes a date
 ```
 
 Every other line in your notebook was something you already knew, operating on a table that one of
-those four sentences had put into the right shape.
+those three sentences had put into the right shape.
 
 That is the whole of today, and it is worth saying plainly. Most of the difficulty in real data
 analysis is not the analysis. It is that the numbers you need to compare are in two files, or in
-one file at right angles to each other, or in a column that says it is an integer. The four
+one file at right angles to each other. The three
 sentences above are how you fix that, and after tonight none of them should be mysterious.
 
 ## Wrap-up
@@ -364,7 +345,6 @@ Before you close your notebook, check that:
 
 - you never called `.fillna(0)` on a whole DataFrame
 - every average you reported has a count beside it
-- you supplied `format=` to your `pd.to_datetime()` call
 - you compared the row count before and after **both** of your merges
 - your Part 6 answer names something the data cannot tell the editor
 - your notebook reads top to bottom as a document, not as a pile of cells
@@ -372,7 +352,6 @@ Before you close your notebook, check that:
 ## Resources
 
 - [📖 EDS 217 cheatsheet: merging and joining data](../cheatsheets/data_merging.qmd)
-- [📖 EDS 217 cheatsheet: working with dates](../cheatsheets/timeseries.qmd)
 - [📖 EDS 217 cheatsheet: grouping and aggregating](../cheatsheets/data_grouping.qmd)
 - [📖 EDS 217 cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
 - [pandas user guide: merge, join, concatenate](https://pandas.pydata.org/docs/user_guide/merging.html){target="_blank"}

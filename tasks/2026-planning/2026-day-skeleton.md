@@ -395,7 +395,7 @@ Six corrections to the build brief:
    figure students drew on Day 1 (`plt.plot(monthly_means)`, under a box promising "you will learn
    how visualization really works on Day 7") and closing on 6c's early-versus-late monthly
    comparison. Nothing from the 2025 file is retained verbatim; only its section order survives.
-   `plt.xlim`/`plt.ylim` were dropped too — not in the scope table, and nothing needs them.
+   `plt.xlim`/`plt.ylim` were dropped too, since they are not in the scope table and nothing needs them.
 2. **`plt.xticks(rotation=, ha=)` is READ in the EOD, not WRITE.** None of the EOD's six figures
    needs it: the only bar chart is horizontal, and 7b argues for horizontal bars precisely because
    they make rotation unnecessary. It is still taught in 7a, with its own unaided "Test your
@@ -404,8 +404,8 @@ Six corrections to the build brief:
    Field Note is unspent. The top-ten-states task groups the `pivot_table` difference by `state`,
    which is Day 5 and Day 6 vocabulary end to end.
 4. **The `longitude < -60` filter is one corrupted record, not a territory filter.** These files
-   cover the contiguous 48 states plus DC — no Alaska, Hawaii or Puerto Rico, so nothing is being
-   excluded on geographic grounds. Exactly one zip code exceeds −60: **22350, Alexandria VA,
+   cover the contiguous 48 states plus DC, with no Alaska, Hawaii or Puerto Rico, so nothing is
+   being excluded on geographic grounds. Exactly one zip code exceeds −60: **22350, Alexandria VA,
    recorded at 48.31 N, 2.12 W**, which is in the sea off Brittany. Two rows out of 80,455, and
    they flatten the map into the left third of the figure. The EOD therefore makes students draw
    the broken figure, notice it, and find the row, rather than handing them the filter as the 2025
@@ -428,12 +428,12 @@ base rule applies and no exemption is needed. Day 7 is the second clean case aft
 | `plt.figure(figsize=)` | 7a, morning | 7a "Test your knowledge" ×3; 7b ×3; 7c questions 5–16 |
 | `plt.xlabel/ylabel/title` | 7a, morning | 7a ×3; 7b ×3; every figure in 7c |
 | `plt.tight_layout()` | 7a, morning | 7a "Test your knowledge" (precipitation counts by year); 7b "Test your knowledge" (conductivity bars) |
-| `sns.scatterplot(data=, x=, y=, hue=)` | 7b, morning | 7b "Test your knowledge" ×1; 7c questions 8, 9, 10, 11 — four sole-author uses |
+| `sns.scatterplot(data=, x=, y=, hue=)` | 7b, morning | 7b "Test your knowledge" ×1; 7c questions 8, 9, 10, 11, four sole-author uses |
 | `sns.histplot(data=, x=, hue=)` | 7b, morning | 7b "Test your knowledge" ×1; 7c questions 5, 6, 7 |
 | `sns.barplot` + the Series idiom | 7b, morning | 7b "Test your knowledge" ×1; 7c questions 13, 15, 16 |
 
-Dataset allocation: **Toolik** (7a — Day 1's figure and 6c's table, both re-opened),
-**messy_field_survey** (7b — Friday's grouped means, now visible as one relationship),
+Dataset allocation: **Toolik** (7a, where Day 1's figure and 6c's table are both re-opened),
+**messy_field_survey** (7b, where Friday's grouped means become one visible relationship),
 **Palmer penguins** (7c colab, genuinely new), **hardiness zones + zip code database** (EOD).
 The colab callback again lived in the **morning** sessions, as on Day 6, which freed 7c for new
 data.
@@ -452,8 +452,8 @@ Verified numbers, so a later session need not recompute:
   relationship, and with `hue='site'` the six sites lie **along** it in exactly the order 5A's two
   grouped means gave (d, a, b, e, c, f). One argument turns two printed lists into one claim.
 - Penguins (333 rows after `dropna()`): bill length against bill depth is **negative across the
-  pooled data and positive within every species** — Simpson's paradox, revealed by `hue='species'`
-  and by nothing else. Adélie and Chinstrap mean body mass are 3706 g and 3733 g, nearly identical
+  pooled data and positive within every species**, which is Simpson's paradox, revealed by
+  `hue='species'` and by nothing else. Adélie and Chinstrap mean body mass are 3706 g and 3733 g, nearly identical
   despite obviously different bills, which is what makes question 14 work. Chinstrap appear only on
   Dream and Gentoo only on Biscoe, so island and species are confounded.
 - Hardiness zones: 2012 is 40,534 × 4 and 2023 is 39,921 × 4, no nulls, `trange` is **always**

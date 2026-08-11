@@ -64,7 +64,7 @@ Six corrections to the Day 7 brief, recorded in the skeleton's Day 7 section. Th
 2026 session, so 7a was rebuilt on Toolik instead, re-opening the Day 1 Whole Game figure and 6c's
 monthly comparison. **`plt.xticks(rotation=)` is READ in the EOD**, not WRITE: no EOD figure needs
 it, because the only bar chart is horizontal. **The `longitude < -60` filter is one corrupted
-record**, not a territory filter — these files are the contiguous 48 states plus DC, and the single
+record**, not a territory filter: these files are the contiguous 48 states plus DC, and the single
 row above −60 is Alexandria VA mislocated to the sea off Brittany, so the EOD makes students find
 it rather than handing them the filter. The index-aligned subtraction was redesigned away as the
 brief preferred, so the **second Field Note is unspent**; penguins is cached to

@@ -9,7 +9,7 @@ sequential: Day 4 cannot be scoped correctly until Day 3 is fixed.
 
 | Brief | Day | Status |
 |---|---|---|
-| `day3-build-brief.md` | Wed Sep 2, Filter + Sort | ready |
+| `day3-build-brief.md` | Wed Sep 2, Filter + Sort | **built 2026-08-11** |
 | day 4 | Thu Sep 3, Clean + Transform | to write |
 | day 5 | Fri Sep 4, Group + Aggregate | to write |
 | day 6 | Tue Sep 8, Join + Reshape + Dates | to write |

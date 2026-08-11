@@ -105,7 +105,11 @@ are cleanup items that would be premature while days are still moving.
       and the day pages, but Quarto still builds them, so a student can reach a page teaching
       material we cut. Known orphans: `2d_list_comprehensions.qmd` and its notes, `2a_lists`,
       `2b_dictionaries`, `2c_lists_dictionaries_sets`, the 2025 `1a`-`1d`, plus whatever
-      Days 3-7 orphan as they are rebuilt. Decide per file: delete, or exclude via the
+      Days 3-7 orphan as they are rebuilt. Day 5 added four: `live-coding/5a_selecting_and_filtering.qmd`
+      and its notes, `interactive-sessions/5b_cleaning_data.qmd`, and
+      `coding-colabs/5c_cleaning_data.qmd`. Three of those four are still linked from
+      `answer-keys/answer_keys.qmd`, **so that page needs revising in the same pass**, not
+      just the render config. Decide per file: delete, or exclude via the
       `render:` block in `_quarto.yml`. Do this last, since each rebuilt day adds to the list.
 - [ ] **Generate the Day 4 EOD header image.** `eod-day4-2026.qmd` currently points at
       `../images/panda.jpeg`, a stock photo used as a placeholder. Every other EOD carries a
@@ -139,6 +143,42 @@ are cleanup items that would be premature while days are still moving.
 
       The house style across the other EOD images is one anthropomorphic panda doing the thing
       the exercise is about, painterly rather than photographic, square, no lettering.
+- [ ] **Generate the Day 5 EOD header image.** Same situation as Day 4: `eod-day5-2026.qmd`
+      points at `../images/panda.jpeg` as a placeholder. Save the result as
+      `course-materials/eod-practice/images/airquality_panda.jpeg` and replace lines 15-21 of the
+      qmd with:
+
+      ```
+      ::: {style="width: 80%; margin: auto;"}
+      ![](images/airquality_panda.jpeg)
+      :::
+
+      :::{.gray-text .center-text}
+      *A cartoon panda on a rooftop checks an air quality monitor while the afternoon haze
+      builds behind him.* [MidJourney 5](https://www.midjourney.com)
+
+      :::
+      ```
+
+      Prompt:
+
+      > a cartoon panda in a field technician's vest stands on a flat building rooftop beside a
+      > white cylindrical air quality monitor on a tripod, reading a clipboard and adjusting a
+      > dial on the instrument; behind him a low coastal city and ocean under a hazy yellow
+      > early-afternoon sky; painterly illustration, warm muted palette, gently comic, no text
+      > --ar 1:1 --style raw
+
+- [ ] **Fix the broken image in the 2d live-coding page.**
+      `live-coding/2d_lists_and_dicts.qmd` line 13 references `images/collections.jpg`, but
+      `live-coding/` has no `images/` directory, only `assets/`. This is a **Day 2 page, which is
+      otherwise signed off**, so it is worth checking before the deploy rather than after. Either
+      point it at `../images/collections.jpg` or copy the file into `live-coding/assets/`.
+
+- [ ] **Give `day6.qmd` its own image.** `day5.qmd` now uses
+      `interactive-sessions/images/grouping_filtering.jpeg`, which `day6.qmd` also uses. Whichever
+      is rebuilt second should change; `dates.jpeg` is the obvious choice for Day 6 and
+      `panda_seaborn.jpeg` for Day 7.
+
 - [ ] **Fix the broken image in the 2c colab.** `coding-colabs/2c_exploring_unfamiliar_data.qmd`
       references `images/collections.jpeg`, but there is no `coding-colabs/images/` directory.
       One-line fix: `../images/collections.jpeg`. The Day 3 and Day 4 colabs already use

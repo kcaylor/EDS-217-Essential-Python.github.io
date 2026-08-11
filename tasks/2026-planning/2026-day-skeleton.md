@@ -220,6 +220,40 @@ Scope table:
 | loop over groupby | `for name, group in ...` shown | ADAPT |
 | comprehensions | READ/gloss + cheatsheet | READ |
 
+**BUILT 2026-08-11 (commit 83055c6).** Files: `5a_grouping_data.qmd`,
+`5b_aggregating_data.qmd`, `5c_grouped_comparisons.qmd` colab,
+`5d_loops_over_groups{,_notes}.qmd`, `eod-day5-2026.qmd`. Scope table above was met exactly; no
+row was added or promoted. 86/86 python cells verified offline against pandas 2.3.3.
+
+Two build decisions, both Kelly's:
+
+1. **The EOD spends one Field Note, not two.** The brief offered Option A (separate notes for
+   `pd.concat` and for `.str[11:13]`) or Option B (neither, one station at a time). Neither was
+   taken. Both lines are *setup*, so they share a single combined Field Note before Task 1. The
+   EOD gets Option A's full richness and still holds one Field Note in reserve.
+2. **WRITE stays at three.** The brief flagged real headroom under the budget of eight and
+   invited spending it. It was left unspent, deliberately, for Days 6 and 7. Group-and-aggregate
+   is one sentence in two forms; the day buys fluency by repetition rather than coverage.
+
+Rehearsal-rule audit (quality gate 2). **No exemption needed** — all three WRITE constructs are
+morning-taught in 5a/5b:
+
+| WRITE construct | Taught | Written unaided |
+|---|---|---|
+| split-apply-combine, both forms | 5a, morning | 5a "Test your knowledge" x4; 5c tasks 1, 2, 3, 6, 9, 12, 14; EOD tasks 1, 4, 6 |
+| `.agg()` list and dict forms | 5b, morning | 5b "Test your knowledge" x2; 5c tasks 5, 7, 9, 14; EOD tasks 2, 7, 9, 16 |
+| grouped result -> top-N | 5b, morning | 5b "Test your knowledge" x2; 5c tasks 1, 9; EOD tasks 6, 18 |
+
+Dataset allocation, chosen so each session inherits a table students already trust:
+`messy_field_survey` (5a and 5d, rebuilt clean from the 4d colab), `national_parks` (5b, from the
+3d colab), `marine_microplastics` (5c, from the Day 4 EOD), OpenAQ (EOD, all three stations).
+
+The 5a payoff is real and was not arranged: across the six survey sites, mean dissolved oxygen
+and mean temperature rank the sites in exactly mirrored order, no exceptions. The 5b argument for
+`.agg(['count', ...])` is the NE region, which has the highest mean visitor count of any region
+and contains exactly two parks. The EOD closes on mean ozone by hour, which climbs monotonically
+from 0.0111 ppm at hour `'06'` to 0.0309 at `'14'` and falls back, a ratio of 2.77.
+
 ### Day 6: Join + Reshape + Dates
 
 The new-content day that fixes the two ❌ never-taught findings (pivot_table, concat). No new fundamentals; Python grammar consolidates.

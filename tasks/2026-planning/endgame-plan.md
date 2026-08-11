@@ -212,7 +212,9 @@ which makes this much cheaper than it sounds. Check there before recomputing.
 - [ ] **Link each key from its day page**, and decide whether the exercise itself carries a
       forward link to its key. The Day 3 key links back to the exercise; the exercise does not
       yet link forward.
-- [ ] Run `tools/run_cells.py` over all 12 keys, and `grep -c "—"` for the house style.
+- [ ] Run `tools/run_cells.py` over all 12 keys, and run the house-style em-dash check on them
+      (the same `grep -c` used before every commit; the character is not spelled out here so that
+      this checklist does not trip its own test).
 
 **Do not edit the source exercises while building keys.** Days 1 through 7 are built, verified
 and signed off. If a key reveals a genuine error in an exercise, record it here rather than

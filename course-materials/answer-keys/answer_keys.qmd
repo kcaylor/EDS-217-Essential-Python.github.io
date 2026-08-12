@@ -1,41 +1,69 @@
 ---
 title: "Answer Keys"
-subtitle: "Keys to Colab, Live Coding, and End of Day Activities"
+subtitle: "Worked solutions for the coding colabs and the end-of-day practice"
 jupyter: eds217_2026
 search: false
-format: 
+format:
     html:
         toc: true
         toc-depth: 2
 ---
 
-## 💻 Interactive Session Answer Keys
+Every coding colab and every end-of-day practice exercise has a key. The keys are published from
+the start of the course, so you can check your work the same evening you do it.
 
-- [Session 1C: Variable Types and Strings](1c_variables_strings-key.qmd)
+:::{.callout-important title="How to get the most out of a key"}
+**Work the exercise first, then come here.** A key you read before you try the problem teaches you
+very little, because reading working code feels much easier than writing it.
 
-## 🙌 Coding Colab Answer Keys
+The code in a key is **one** correct answer, not the only one. If your code looks different but
+produces the same numbers, you were right.
 
-- [Session 2C: Working with lists, dictionaries, and sets](2c_lists_dictionaries_sets-key.qmd)
-- [Session 3B: Control Flows](3b_control_flows-key.qmd)
-- [Session 4B: Pandas DataFrames](4b_pandas_dataframes-key.qmd)
-- [Session 5C: Cleaning Data](5c_cleaning_data-key.qmd)
-- [Session 6B: Advanced Data Manipulation](6b_advanced_data_manipulation-key.qmd)
-- [Session 7C: Visualizations](7c_visualizations-key.qmd)
+**The written answers matter more than the code.** You can already tell whether your code ran. What
+you cannot check on your own is whether you read the result correctly, and that is what the green
+**Answer** boxes are for. Compare them against your own markdown cells, and pay attention to the
+difference between stating a number and reading it.
+:::
 
-## End of Day Activities
+## 🙌 Coding colabs
 
-- [Day 1: Example Python Data Science Workflow](eod-day1-key.qmd)
-- [Day 2: Python Data Structures Practice](eod-day2-key.qmd)
-- [Day 3: Using Pandas Series for Data Analysis](eod-day3-key.qmd)
-- [Day 4: Reading, Filtering, and Visualizing Data in Pandas](eod-day4-key.qmd)
-- [Day 5: Exploring the Banana Index](eod-day5-key.qmd)
-- [Day 6: Eurovision Data Analysis Exercise](eod-day6-key.qmd)
-- [Day 7: Plant Hardiness Zones](eod-day7-key.qmd)
+| Day | Colab | Key |
+|-----|-------|-----|
+| 3 | [Which One, and How Do You Know?](../coding-colabs/3d_ranking_questions.qmd) | [🔑 key](3d_ranking_questions-key.qmd) |
+| 4 | [From Field Sheet to DataFrame](../coding-colabs/4d_cleaning_messy_data.qmd) | [🔑 key](4d_cleaning_messy_data-key.qmd) |
+| 5 | [The Comparison You Made Last Night, Properly](../coding-colabs/5c_grouped_comparisons.qmd) | [🔑 key](5c_grouped_comparisons-key.qmd) |
+| 6 | [Two Records, Sixty-Six Years Apart](../coding-colabs/6d_two_table_exercise.qmd) | [🔑 key](6d_two_table_exercise-key.qmd) |
+| 7 | [One Cloud of Points, Three Species](../coding-colabs/7c_penguins.qmd) | [🔑 key](7c_penguins-key.qmd) |
+: {.hover .bordered tbl-colwidths="[10,60,30]"}
 
-## Live Coding Session Notes
+The Day 2 colab, [Five Claims About a Dataset You've Never
+Seen](../coding-colabs/2c_exploring_unfamiliar_data.qmd), has no key on purpose. You choose which
+five claims to make, so there is no fixed set of numbers to check yours against. Bring your claims
+to the Day 3 morning session instead.
 
-- [Session 2D: List Comprehensions](../live-coding/2d_list_comprehensions_notes.qmd) (NOTE: Not in course schedule)
-- [Session 3A: Control Flows](../live-coding/3a_control_flows_notes.qmd)
-- [Session 4B: Exploring DataFrames](../live-coding/4b_exploring_dataframes_notes.qmd)
-- [Session 4D: Data Import and Export](../live-coding/4b_exploring_dataframes_notes.qmd)
-- [Session 5A: Selecting and Filtering](../live-coding/5a_selecting_and_filtering_notes.qmd)
+## 📝 End-of-day practice
+
+| Day | Exercise | Key |
+|-----|----------|-----|
+| 1 | [🎬 Rerun the Whole Game](../eod-practice/eod-day1-2026.qmd) | [🔑 key](eod-day1-2026-key.qmd) |
+| 2 | [🔬 A Data Biography: Toolik Field Station](../eod-practice/eod-day2-2026.qmd) | [🔑 key](eod-day2-2026-key.qmd) |
+| 3 | [🍌 The Banana Index](../eod-practice/eod-day3-2026.qmd) | [🔑 key](eod-day3-2026-key.qmd) |
+| 4 | [🌊 Microplastics: From Raw File to Real Numbers](../eod-practice/eod-day4-2026.qmd) | [🔑 key](eod-day4-2026-key.qmd) |
+| 5 | [🌬️ Three Stations, One Air Shed](../eod-practice/eod-day5-2026.qmd) | [🔑 key](eod-day5-2026-key.qmd) |
+| 6 | [🕺 Sixty-Four Contests, Two Tables 💃](../eod-practice/eod-day6-2026.qmd) | [🔑 key](eod-day6-2026-key.qmd) |
+| 7 | [🌲 Forty Thousand Zip Codes 🌴](../eod-practice/eod-day7-2026.qmd) | [🔑 key](eod-day7-2026-key.qmd) |
+: {.hover .bordered tbl-colwidths="[10,60,30]"}
+
+Days 8 and 9 have no keys, because you build your own project rather than work a set exercise. See
+[the final project](../final_project.qmd) for what is expected there.
+
+## What a good written answer looks like
+
+Each key closes with a short list called **Where the marks are**, naming the three or four things
+most worth checking in that exercise. One item appears in every list, so it is worth stating here
+as well.
+
+An answer should say what a number **means**, not what it is. "34 foods score above 10" repeats the
+output. "34 foods, a fifth of the dataset, and almost all of them meat or hard cheese" reads it.
+The second sentence is the one that shows you understood the result, and it is the habit the keys
+are trying to build.

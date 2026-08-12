@@ -1,0 +1,383 @@
+---
+title: "Answer Key"
+subtitle: "🔬 A Data Biography: Toolik Field Station"
+search: false
+execute:
+  echo: true
+  include: true
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+:::{.callout-important title="How to use this key"}
+Work the exercise first, then come here. The code below is **one** correct answer, not the only
+one. If your code looks different but produces the same numbers, you were right.
+
+The written answers matter more than the code. You can already tell whether your code ran. What
+you cannot check on your own is whether you read the result correctly, and that is what the
+green **Answer** boxes are for. Compare your markdown cells against them.
+
+⬅️ Back to [the exercise](../eod-practice/eod-day2-2026.qmd)
+:::
+
+## Setup
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/toolik_weather.csv'
+toolik = pd.read_csv(url)
+```
+
+## Part 1: Vital statistics
+
+**1. How many rows and how many columns does the dataset have?**
+
+```{python}
+toolik.shape
+```
+
+:::{.callout-note title="✅ Answer"}
+**11,171 rows and 21 columns.** One row per day. That row count is worth holding on to, because
+almost every later question compares some column's count against it: 11,171 is what "complete"
+looks like in this file.
+:::
+
+**2. What are the column names? Get them as a Python list.**
+
+```{python}
+toolik.columns.tolist()
+```
+
+:::{.callout-note title="✅ Answer"}
+Twenty-one names, and they fall into three groups. Three are time labels (`Year`, `Month`,
+`Date`), two identify the site (`LTER_Site`, `Station`), and the rest alternate between a
+measurement and a `Flag_` column belonging to it. Notice that the flag prefix is spelled
+`Flag_` on some columns and `FLAG_` on others. Python string matching is case sensitive, so any
+attempt to select "all the flag columns" by name has to account for both spellings.
+:::
+
+**3. What is the data type of each column?**
+
+```{python}
+toolik.dtypes
+```
+
+:::{.callout-note title="✅ Answer"}
+**Three `int64` columns, nine `float64`, and nine `object`.** The nine object columns are the
+site and station labels, the six flag columns and `Comments`, all of which hold text.
+
+The important one is **`Date`, which pandas has stored as `int64`, not as a date.** The file
+writes 1 June 1988 as `19880601`, which is a valid integer, so `read_csv` took it as a number.
+That means you can add 1 to it and get `19880602` by luck, and add 31 to `19880601` and get
+`19880632`, which is not a day. Nothing here is broken, but until this column is converted, on
+Day 6, treat it as a label rather than as a date.
+:::
+
+**4. What years does the record cover? (You can read the earliest and latest year off
+`.describe()`.)**
+
+```{python}
+toolik.describe()
+```
+
+:::{.callout-note title="✅ Answer"}
+**1988 to 2018**, read off the `min` and `max` of `Year`: 31 calendar years.
+
+The `Date` column tells you more. Its minimum prints as `1.988060e+07`, which is `19880601`, and
+its maximum is `20181231`. So the record does not begin on 1 January 1988. It begins on **1 June
+1988** and ends on 31 December 2018. That is the explanation for a detail you meet again in
+question 10.
+
+`.describe()` also quietly reports on completeness. Read the `count` row across the columns:
+`Daily_AirTemp_Mean_C` has all 11,171 values, but `Daily_globalrad_total_jcm2` has only 4,118.
+:::
+
+## Part 2: The health check
+
+**5. Run `.info()`. How many columns have fewer non-null values than there are rows?**
+
+```{python}
+toolik.info()
+```
+
+:::{.callout-note title="✅ Answer"}
+**15 of the 21 columns.** Only six are complete at 11,171 values: `Year`, `Month`, `Date`,
+`LTER_Site`, `Station` and `Daily_AirTemp_Mean_C`. Every other column, including every
+measurement other than the mean air temperature, has gaps somewhere.
+
+The one genuinely good piece of news is that the column yesterday's workflow was built on,
+`Daily_AirTemp_Mean_C`, is the one measurement with no missing values at all.
+:::
+
+**6. Use `.isnull().sum()` to count missing values per column. Which three columns are the
+emptiest?**
+
+```{python}
+toolik.isnull().sum()
+```
+
+:::{.callout-note title="✅ Answer"}
+**`FLAG_Daily_windsp_mean_msec` (11,170 missing), `FLAG_Daily_globalrad_total_mjm2` (11,156) and
+`Flag_Daily_AirTemp_AbsMax_C` (10,151).** All three are flag columns, and in fact all six flag
+columns sit at the top of the list, followed by `Daily_globalrad_total_jcm2` with 7,053 missing
+and `Comments` with 2,247.
+
+Ranking columns by emptiness sorts this file into flags first and measurements second, which is
+the first hint that the flag columns are working as designed. See question 7.
+:::
+
+**7. One of the flag columns is missing a value in all but a handful of rows. Which one, and
+how many values does it actually have?**
+
+```{python}
+toolik.isnull().sum().head(20)
+```
+
+:::{.callout-note title="✅ Answer"}
+**`FLAG_Daily_windsp_mean_msec`, which is missing in 11,170 of 11,171 rows and therefore holds
+exactly one value.** The runner-up, `FLAG_Daily_globalrad_total_mjm2`, holds 15.
+
+A flag column is an annotation, not a measurement. It is there to mark the days on which
+something was unusual about the reading, and on an ordinary day there is nothing to say, so the
+cell is left empty. An almost-empty flag column means almost every wind speed reading was
+routine. If a flag column were full, that would be the alarming result.
+
+The practical consequence is that emptiness alone is not a quality score. `Comments` is 20%
+empty and `Daily_globalrad_total_jcm2` is 63% empty, and those two nulls mean completely
+different things: one is a note nobody needed to write, the other is a measurement nobody made.
+:::
+
+## Part 3: What varies, and what doesn't
+
+**8. Use `.value_counts()` on `LTER_Site` and on `Station`. What do you learn? Is either
+column carrying information?**
+
+```{python}
+toolik['LTER_Site'].value_counts()
+```
+
+```{python}
+toolik['Station'].value_counts()
+```
+
+:::{.callout-note title="✅ Answer"}
+**Neither column carries any information.** `LTER_Site` is `ARC` in all 11,171 rows and
+`Station` is `TLKMAIN` in all 11,171 rows. A column with one distinct value cannot distinguish
+one row from another, so it can never explain anything, and grouping by it would return a
+single group.
+
+They still have a use. They record **provenance**: they record that every row came from the
+main meteorological station at the Arctic LTER site, so this file is one instrument at one
+place. That matters for the biography. It means nothing here needs to be averaged across
+stations, and it also means these data describe one point on the North Slope rather than the
+Arctic in general.
+:::
+
+**9. Use `.value_counts()` on `Flag_Daily_AirTemp_Mean_C`. What values appear, and what do you
+think they mean?**
+
+```{python}
+toolik['Flag_Daily_AirTemp_Mean_C'].value_counts()
+```
+
+:::{.callout-note title="✅ Answer"}
+**One value appears, `E`, on 1,310 days.** In the Arctic LTER flag convention, `E` marks a value
+that was **estimated** rather than measured directly, usually filled in from a nearby sensor by
+regression when the main logger failed. The `Comments` column says so in words on those rows,
+with entries such as "Air temp 1 & 5 meter estimated from regression".
+
+Now combine this with question 5. `Daily_AirTemp_Mean_C` has no missing values, which made it
+look like the most trustworthy column in the file, but 1,310 of its 11,171 values, or 11.7%, are
+flagged as estimated. The column is complete because somebody filled the gaps, not because the
+instrument never stopped. A completeness check alone would never have shown you this, and it is
+the single most useful thing in this dataset to know before you compute a trend from it.
+
+Note also that `.value_counts()` drops nulls by default, which is why the 9,861 unflagged days
+do not appear. Use `.value_counts(dropna=False)` when you want to see them.
+:::
+
+**10. Use `.value_counts()` on the `Year` column and look at both ends of the result, with
+`.head()` and then with `.tail()`. Do all years have the same number of observations? What would
+explain a year with fewer?**
+
+```{python}
+toolik['Year'].value_counts().head()
+```
+
+```{python}
+toolik['Year'].value_counts().tail()
+```
+
+:::{.callout-note title="✅ Answer"}
+**No, and the two ends of the result show you two different things.** `.value_counts()` sorts by
+count from largest to smallest, so `.head()` returns the five years with the *most* rows: 1992,
+1996, 2000, 2012 and 2016, all with 366. Those are the leap years, and every other full year has
+365. `.tail()` returns the other end of the same list, and that is where the short year sits:
+**1988 has 214 rows.**
+
+That is why the question asks for both. A list sorted by count puts each year wherever its count
+happens to fall, so a year with fewer observations than its neighbours sorts to the bottom and is
+invisible from the top. Whenever you use `.value_counts()` to check whether groups are the same
+size, read both ends of it.
+
+Those 214 days are the start of the record rather than a gap in the middle of a year. Counting
+back 214 days from 31 December 1988 reaches 1 June, which agrees with the `Date` minimum of
+`19880601` you saw in question 4. Toolik began recording in mid-year.
+
+The consequence is a real one. Any per-year summary you compute for 1988 covers June to December
+only, so it will exclude the coldest five months and will not be comparable with any other year
+in the file. Whenever a group has fewer rows than its neighbours, find out which rows are
+missing before you compare the groups.
+:::
+
+## Part 4: The numbers
+
+**11. What is the mean daily air temperature across the whole record? The minimum? The maximum?**
+
+```{python}
+toolik['Daily_AirTemp_Mean_C'].describe()
+```
+
+**12. Are those values plausible for a site above the Arctic Circle? Say why or why not.**
+
+:::{.callout-note title="✅ Answer"}
+**Mean -8.20 °C, minimum -55.60 °C, maximum 20.70 °C, over all 11,171 days**, with a standard
+deviation of 14.83 °C and a median of -7.10 °C.
+
+All three are plausible for the North Slope of Alaska. A mean well below freezing is what makes
+this a permafrost site. The extremes are extremes of a *daily mean*, not of an instantaneous
+reading, so -55.6 °C is a day that averaged -55.6 °C, which is more remarkable than a brief cold
+spike. The quartiles are the useful check on plausibility: 25% of days average below -19.7 °C
+and 75% are below 4.4 °C, so this is a place that spends most of the year frozen and thaws
+briefly.
+
+One caution about that mean. It is the average of every day in the file, and the file starts on
+1 June 1988, so the first year contributes a summer and no winter. The effect is small here,
+-8.26 °C if you exclude 1988 entirely against -8.20 °C with it, but the direction is predictable:
+an unbalanced record pulls the average toward whatever season is over-represented.
+:::
+
+**13. Pick one other numeric column and report its range. Does anything about it look wrong?**
+
+```{python}
+toolik[['Daily_AirTemp_Mean_C', 'Daily_Precip_Total_mm', 'Daily_windsp_mean_msec']].describe()
+```
+
+:::{.callout-note title="✅ Answer"}
+**`Daily_Precip_Total_mm` runs from 0 to 64.5 mm, with a mean of 0.95 mm.** Nothing in that
+range is physically impossible. What is wrong is the `count`: **10,751**, which is 420 days
+short of the 11,171 in the file, and those absences are not spread evenly. They fall in 1995
+(183 missing days), 1994 (92), 1990 (88) and 2004 (52). So 1995 reports precipitation on 182
+days out of 365, and any annual rainfall total for that year would be roughly half a year of
+rain presented as a whole one.
+
+The trap is that a missing day and a dry day look the same once they are summed. The median
+precipitation is 0.0 mm, because 7,278 of the recorded days had no rain at all, so a missing day
+silently resembles the most common real value. Reporting the mean of 0.95 mm is safe, since
+pandas divides by the days it actually has, but any `.sum()` over this column will undercount
+without warning.
+
+`Daily_windsp_mean_msec` shows the same pattern more mildly: 0 to 12.5 m/s over 10,345 days, so
+826 days have no wind reading. If you looked at `Daily_globalrad_total_jcm2` instead, its
+minimum of -2.0 J/cm² is genuinely impossible, since a day cannot receive negative sunlight, and
+that single value is a good example of an error that only a physical sanity check will catch.
+:::
+
+## Part 5: A tidier table
+
+**14. Build a list of the five columns you'd keep if you had to hand this dataset to a
+colleague who only cared about temperature. Use it to make a smaller DataFrame.**
+
+```{python}
+temp_columns = ['Year', 'Month', 'Date', 'Daily_AirTemp_Mean_C', 'Daily_AirTemp_AbsMin_C']
+toolik_temps = toolik[temp_columns]
+toolik_temps.head()
+```
+
+**15. Build a dictionary that renames at least two of those columns to something shorter
+and clearer. Apply it with `.rename(columns=...)` and confirm the new names.**
+
+```{python}
+shorter = {
+    'Daily_AirTemp_Mean_C': 'temp_mean_c',
+    'Daily_AirTemp_AbsMin_C': 'temp_min_c',
+}
+toolik_temps = toolik_temps.rename(columns=shorter)
+toolik_temps.columns.tolist()
+```
+
+:::{.callout-note title="✅ Answer"}
+Two Day 2 collections doing two different jobs. The **list** is an ordered selection: passing it
+to `toolik[...]` returns the columns in the order you wrote them, so the list decides both what
+is kept and how it is arranged. The **dictionary** is a lookup from old name to new name, and
+because it is a mapping rather than a sequence, its order is irrelevant and it may name only
+some of the columns. Anything not mentioned as a key keeps its current name.
+
+Two things to check in your own version. First, keeping the time columns matters: a table of
+temperatures with no `Year`, `Month` or `Date` cannot be plotted against time, so the useful
+five columns are three labels and two measurements. Second, `.rename()` returns a **new**
+DataFrame and does not alter the original, which is why the code reassigns `toolik_temps`.
+Confirm this by running `toolik.columns.tolist()` again: the full table still has
+`Daily_AirTemp_Mean_C` under its original name. Keeping units in the new names, as `temp_mean_c`
+does, is worth the two extra characters.
+:::
+
+## Part 6: Write the biography
+
+There is no single right answer here. A strong biography states a number for every claim, names
+at least one problem that the file does not announce, and gives a fitness-for-purpose verdict
+with a condition attached rather than an unqualified yes. Here is one that would earn full marks.
+
+:::{.callout-note title="✅ A model answer"}
+This file holds daily weather from the main meteorological station (`TLKMAIN`) at Toolik Field
+Station, part of the Arctic LTER site (`ARC`) on the North Slope of Alaska. Both identifier
+columns hold a single value in all rows, so every observation comes from one instrument cluster
+at one place. The 21 columns cover air temperature (daily mean, absolute maximum, absolute
+minimum), precipitation, mean and maximum wind speed, global radiation, and moss and 20 cm soil
+temperature, each measurement accompanied by a flag column.
+
+Coverage is 11,171 daily rows from 1 June 1988 to 31 December 2018. Every calendar day in that
+span is present. 1988 holds only 214 rows because the record starts in June, so 1988 is a partial
+year and not a lost one.
+
+Fifteen of the 21 columns have missing values. Daily mean air temperature is complete at 11,171
+values and is the column I would trust most. I would not trust global radiation, which has 4,118
+values and includes an impossible -2.0 J/cm², or annual precipitation totals, since 420 days are
+absent and 183 of them fall in 1995 alone.
+
+Two cautions. First, `Date` is stored as the integer 19880601, not as a date, so it cannot be
+sorted or differenced as a date until it is converted. Second, the complete temperature column
+is not fully measured: 1,310 days, 11.7% of the record, carry an `E` flag meaning the value was
+estimated from a nearby sensor.
+
+Could this describe change in Arctic summer temperatures since 1988? Yes, with one check first.
+All 31 years have complete June to August coverage and no missing means, but 85 of the 92 summer
+days in 1988 are flagged estimated, and no summer day after 2006 carries a flag. Since 1988 is the first year of any
+trend, I would confirm the result holds when the estimated days are excluded.
+:::
+
+## Where the marks are
+
+If you compare your notebook against this key, look for these four things before you look at
+anything else.
+
+1. **Every factual claim in your biography has a code cell above it that produced it.** A
+   sentence such as "the record covers about thirty years" is the failure mode this exercise is
+   built to catch. "1 June 1988 to 31 December 2018, 11,171 daily rows" is the pass.
+2. **You found 1988 and explained it.** Reporting that 1988 has 214 rows is half the answer. The
+   mark is for saying why: the record begins on 1 June 1988, so 1988 is a partial year rather
+   than a year with days missing from it, and no per-year figure for 1988 is comparable with any
+   other year in the file.
+3. **You read the flag columns as part of the file's design rather than as errors,** and you connected them back to
+   `Daily_AirTemp_Mean_C`. The column with no missing values contains 1,310 estimated ones, and
+   that is the finding on which the value of the whole biography depends.
+4. **Your answers say what a number means rather than what it is.** "420 values are missing from
+   precipitation" restates the output. "420 missing days, 183 of them in 1995, so an annual total
+   for that year covers half a year of rain" reads it.
+
+⬅️ Back to [the exercise](../eod-practice/eod-day2-2026.qmd)

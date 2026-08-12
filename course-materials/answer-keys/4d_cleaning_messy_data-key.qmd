@@ -1,0 +1,484 @@
+---
+title: "Answer Key"
+subtitle: "🙌 From Field Sheet to DataFrame"
+search: false
+execute:
+  echo: true
+  include: true
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+:::{.callout-important title="How to use this key"}
+Work the colab first, then come here. The code below is **one** correct answer, not the only one.
+This is a colab, so you wrote every line yourself and there are more reasonable ways to write it
+than there are on a guided exercise. If your code looks different but produces the same numbers,
+you were right.
+
+The written answers matter more than the code. You can already tell whether your code ran. What
+you cannot check on your own is whether you read the result correctly, and that is what the
+green **Answer** boxes are for. Compare your markdown cells against them.
+
+⬅️ Back to [the colab](../coding-colabs/4d_cleaning_messy_data.qmd)
+:::
+
+## Setup
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/messy_field_survey.csv'
+survey = pd.read_csv(url)
+survey.shape
+```
+
+## Part 1: Find out what is wrong
+
+**1. How many rows and columns? Run `.head()` and `.info()`. Which columns came in as `object`
+when you expected a number, and which came in as `float64` when you expected a whole number?**
+
+```{python}
+print(survey.shape)
+survey.head()
+```
+
+```{python}
+survey.info()
+```
+
+:::{.callout-note title="✅ Answer"}
+**320 rows and 7 columns.** `pH` is the column that came in as `object` when you expected a
+number. `site` and `collection date` are also `object`, but that is correct for text and a date
+read as text.
+
+`n_replicates` is the `float64` that should be a whole number. Pandas cannot store a missing
+value in an integer column, so a single blank anywhere in the column forces the whole thing to
+float, and you get `4.0` and `3.0` instead of `4` and `3`. The dtype is therefore evidence: a
+count column arriving as float almost always means it has gaps.
+:::
+
+**2. Run `.isnull().sum()`. Which four columns have gaps, and how many each?**
+
+```{python}
+survey.isnull().sum()
+```
+
+:::{.callout-note title="✅ Answer"}
+**`temperature_c` 18, `dissolved_oxygen_mg_L` 11, `conductivity_uS_cm` 7, and `n_replicates` 5.**
+That is 41 blanks in total, but they are not 41 blank rows, and you cannot tell yet how many rows
+they occupy.
+
+Note what is not in this list. `temperature_c` also contains nine impossible values that
+`.isnull()` counts as present, because `-999` is a number. This count is a lower bound on your
+missing data, not the whole of it.
+:::
+
+**3. Run `.duplicated().sum()`. How many rows are exact copies of an earlier row?**
+
+```{python}
+survey.duplicated().sum()
+```
+
+:::{.callout-note title="✅ Answer"}
+**20 rows.** `.duplicated()` flags the second and later copies only, so 20 flagged rows means 40
+rows of the file are involved, each record appearing exactly twice. That is the usual signature of
+a transcriber entering a page, losing their place, and entering it again.
+:::
+
+**4. Run `survey['site'].value_counts()`. There are six sites. How many distinct labels does the
+file contain? Look carefully at the quotation marks in the output of `survey['site'].unique()`.**
+
+```{python}
+print(survey['site'].nunique())
+survey['site'].value_counts()
+```
+
+```{python}
+survey['site'].unique()
+```
+
+:::{.callout-note title="✅ Answer"}
+**36 distinct labels for six sites.** Three separate kinds of damage are stacked on top of each
+other: capitalisation (`SITE_F`, `Site_C`, `site_a`), the separator character (`site-d` against
+`site_d`), and leading or trailing whitespace.
+
+The whitespace is the one worth dwelling on. In the `.value_counts()` output, `site_b` appears on
+two separate rows with 7 each, and nothing on screen tells you why. Only `.unique()` shows it,
+because it prints the quotation marks, and `' site-c'` and `'site_c '` are visibly different from
+`'site_c'` once the quotes are there. A label you cannot see is still a label pandas will group
+separately.
+:::
+
+**5. Run `.describe()` on `temperature_c`. The minimum is not a temperature any stream has ever
+had. What do you think it means?**
+
+```{python}
+survey['temperature_c'].describe()
+```
+
+:::{.callout-note title="✅ Answer"}
+**The minimum is -999, which is the value the logger records when a reading fails.** No stream is at -999 °C,
+which is below absolute zero, so the value is not a measurement at all. It is missing data
+recorded as a number so that the field would not be left empty.
+
+Look at what it has already done to the summary. The mean of this column reads **-11.21 °C** and
+the standard deviation reads **173.44**. The reported average is colder than every real
+observation in the column. When a mean sits outside the range of the plausible data, the
+cause is not skew. Some values in the column are not measurements.
+:::
+
+## Part 2: Clean it
+
+**6. Remove the exact duplicate rows. How many rows are left?**
+
+```{python}
+survey = survey.drop_duplicates()
+survey.shape
+```
+
+:::{.callout-note title="✅ Answer"}
+**300 rows**, down from 320. The 20 duplicated rows were complete records, which you can confirm
+later: the null counts you found in question 2 are unchanged after this step, so no blanks were
+removed along with the copies.
+:::
+
+**7. Fix the `site` column so that all six sites have one label each. You will need three separate
+statements, one per method, each assigned back to `survey['site']`: strip the whitespace,
+lower-case the text, and replace the hyphens with underscores. Confirm with `.value_counts()` that
+you have exactly six.**
+
+```{python}
+survey['site'] = survey['site'].str.strip()
+survey['site'] = survey['site'].str.lower()
+survey['site'] = survey['site'].str.replace('-', '_')
+survey['site'].value_counts()
+```
+
+:::{.callout-note title="✅ Answer"}
+**Six labels, with exactly 50 rows each.** Thirty-six labels collapsed to six, and the perfect
+balance is your evidence that you caught all of them: the survey design was 50 visits per site, so
+any leftover variant would show up as one site with 49 and a stray label with 1.
+
+Each statement is assigned back to `survey['site']`, which matters. `.str.strip()` returns a new
+Series and does not change the column in place, so a line without the assignment runs without
+error and does nothing at all.
+:::
+
+**8. `pH` came in as text. Find out why by looking at `survey['pH'].unique()`, then fix it with
+one `.str.replace()` and one `.astype()`, in that order. Confirm the dtype is `float64` and that
+`.describe()` gives a plausible pH range.**
+
+```{python}
+survey['pH'].unique()[:12]
+```
+
+```{python}
+survey['pH'] = survey['pH'].str.replace(',', '.')
+survey['pH'] = survey['pH'].astype(float)
+print(survey['pH'].dtype)
+survey['pH'].describe()
+```
+
+:::{.callout-note title="✅ Answer"}
+**One of the four transcribers used a comma as the decimal separator**, so values like `'7,64'`
+sit alongside `'5.89'`. Twenty-four of the 300 values are written that way, and pandas reads the whole
+column as text, because a single unparseable entry forces the dtype
+for all of them.
+
+After the fix the column is `float64` and runs from **5.78 to 8.33 with a mean of 7.02**, which is
+a sensible range for stream water. The order matters: `.astype(float)` before the replace raises a
+`ValueError`, and the message names the exact string it could not convert.
+:::
+
+**9. Three measurement columns have blanks: `temperature_c`, `dissolved_oxygen_mg_L`, and
+`conductivity_uS_cm`. A row with no measurement is no use to you, so drop those rows in a single
+`.dropna()` call with a list in `subset=`. How many rows did that cost?**
+
+```{python}
+survey = survey.dropna(subset=['temperature_c', 'dissolved_oxygen_mg_L', 'conductivity_uS_cm'])
+survey.shape
+```
+
+:::{.callout-note title="✅ Answer"}
+**36 rows, leaving 264.** That is 18 + 11 + 7 exactly, which tells you something you did not know
+before: no row was missing two of the three measurements. Every blank sits in a row that is
+otherwise complete.
+
+Had any row been missing two, the drop would have cost fewer than 36, because `.dropna()` removes
+rows and not blanks. Comparing the rows lost against the sum of the column counts is a cheap check
+on whether your missing data is scattered or concentrated.
+:::
+
+**10. `n_replicates` also has blanks, but here a blank means the field sheet recorded a single
+bottle and nobody bothered to write "1". Fill those with `1` instead of dropping the rows, then
+convert the column to `int`. Confirm with `.value_counts()`.**
+
+```{python}
+survey['n_replicates'] = survey['n_replicates'].fillna(1)
+survey['n_replicates'] = survey['n_replicates'].astype(int)
+survey['n_replicates'].value_counts()
+```
+
+:::{.callout-note title="✅ Answer"}
+**3 is the usual number of bottles (158 rows), then 2 (55) and 4 (46), and there are exactly 5
+ones.** Five is also the number of blanks you filled, so the column contained no explicit `1`
+before you started. That is the evidence for the assumption you were handed: if some sheets wrote
+`1` and others left it blank, you would expect to see both, and you do not.
+
+The two lines have to run in this order. `.astype(int)` on a column containing `NaN` raises an
+error, because a missing value cannot be an integer. Filling first is what makes the conversion
+legal, and the conversion is what turns `3.0` back into `3`.
+:::
+
+**11. Now deal with the impossible temperatures. Use the filter sentence from Day 3 to keep only
+the rows where `temperature_c` is above `-100`, and end the line with `.copy()`. How many rows did
+the loggers ruin?**
+
+```{python}
+survey = survey[survey['temperature_c'] > -100].copy()
+survey.shape
+```
+
+:::{.callout-note title="✅ Answer"}
+**Nine rows, leaving 255.** All nine are `-999`, and all nine were otherwise complete records with
+good dissolved oxygen and conductivity, which is why question 9 did not remove them and why they
+were still here to catch.
+
+The threshold is `-100` and not `-999` on purpose. You are excluding a physically impossible
+range, not one specific number, so the filter still works if a second logger writes `-9999`. The
+`.copy()` tells pandas you want a new table rather than a view of the old one, which is what
+prevents the `SettingWithCopyWarning` when you add columns in Part 3.
+:::
+
+**12. Re-run `.describe()` on `temperature_c`. Compare the mean to the one you got in task 5. In a
+markdown cell, write one sentence about what nine bad rows did to the average of three hundred
+good ones.**
+
+```{python}
+survey['temperature_c'].describe()
+```
+
+:::{.callout-note title="✅ Answer"}
+**The mean moved from -11.21 °C to 19.22 °C, and the standard deviation from 173.44 to 3.18.**
+Nine rows out of 302 moved the average by more than 30 degrees, and you can check that directly:
+each `-999` sits about 1018 below the true mean, and 9 × 1018 / 302 is about 30.3, which is the
+whole of the shift. The other rows you removed changed the mean by less than a tenth of a degree.
+
+The standard deviation is the more reliable warning sign. A stream survey with a standard deviation of 173 °C
+should have stopped you at question 5. Means can be argued about, but a spread fifty times larger
+than the plausible range of the measurement indicates a broken column rather than a real result.
+:::
+
+**13. Rename `collection date` to `collection_date`, so you can reach it without quoting trouble
+later. `.rename()` is from Day 2; it takes `columns=` and a dictionary.**
+
+```{python}
+survey = survey.rename(columns={'collection date': 'collection_date'})
+survey.columns.tolist()
+```
+
+## Part 3: Transform it
+
+**14. Add a column called `conductivity_mS_cm` holding conductivity in millisiemens per
+centimetre, which is the microsiemens value divided by 1000.**
+
+```{python}
+survey['conductivity_mS_cm'] = survey['conductivity_uS_cm'] / 1000
+survey[['conductivity_uS_cm', 'conductivity_mS_cm']].head()
+```
+
+**15. Add a column called `temperature_f` holding the temperature in Fahrenheit. Do it twice: once
+with the derived-column sentence and plain arithmetic, and once by writing a function
+`celsius_to_fahrenheit` and using `.apply()`. Check that the two columns agree.**
+
+```{python}
+survey['temperature_f'] = survey['temperature_c'] * 9 / 5 + 32
+
+
+def celsius_to_fahrenheit(celsius):
+    """Convert a temperature in Celsius to Fahrenheit."""
+    return (celsius * 9 / 5) + 32
+
+
+survey['temperature_f_applied'] = survey['temperature_c'].apply(celsius_to_fahrenheit)
+survey[['temperature_c', 'temperature_f', 'temperature_f_applied']].head()
+```
+
+:::{.callout-note title="✅ Answer"}
+**The two columns are identical, value for value.** They perform the same arithmetic on the same
+numbers, so they agree to the last decimal place.
+
+The difference is where the arithmetic happens. The first version hands the whole column to pandas
+at once. The second hands pandas your function and pandas calls it 255 times, once per value. For
+a one-line formula the first is faster and easier to read, and you should prefer it. `.apply()`
+earns its place when the operation cannot be written as arithmetic on a whole column, which is
+exactly what question 16 asks for.
+:::
+
+**16. Write a function called `classify_ph` that takes a pH value and returns `'acidic'` below
+6.5, `'alkaline'` above 7.5, and `'neutral'` in between. Apply it to the `pH` column, store the
+result in a column called `ph_class`, and report the counts.**
+
+```{python}
+def classify_ph(value):
+    """Label a pH value as acidic, neutral, or alkaline."""
+    if value < 6.5:
+        return 'acidic'
+    elif value > 7.5:
+        return 'alkaline'
+    else:
+        return 'neutral'
+
+
+survey['ph_class'] = survey['pH'].apply(classify_ph)
+survey['ph_class'].value_counts()
+```
+
+:::{.callout-note title="✅ Answer"}
+**171 neutral, 42 acidic and 42 alkaline**, which adds to 255, so every row was classified and
+none returned `None`. The two tails are the same size, which is a reassuring sign that the
+thresholds are placed sensibly for this dataset rather than cutting it in an arbitrary place.
+
+Watch the boundaries. The function uses strict `<` and `>`, so a sample sitting at exactly 6.5 is
+labelled neutral, and two rows in this table are at exactly 6.5. Had you written `<=`, your acidic
+count would be 44 and not 42. The comparison you choose is part of the definition, so say in your
+notebook which side the boundary falls on.
+:::
+
+## Part 4: Ask it something
+
+**17. Use the filter sentence to build a table of just the acidic samples. Which sites do they
+come from? Use `.value_counts()` on `site`.**
+
+```{python}
+acidic = survey[survey['ph_class'] == 'acidic']
+acidic['site'].value_counts()
+```
+
+:::{.callout-note title="✅ Answer"}
+**Almost all of them come from two sites: `site_f` with 27 and `site_c` with 14, plus a single
+sample from `site_e`.** That is 41 of the 42 acidic samples in two of the six sites, and three
+sites contribute none at all.
+
+This is a real spatial pattern rather than noise. Acidity is a property of these two streams, not
+something scattered evenly across the survey, and it is the first result in this exercise that you
+could not have obtained from the file as it arrived. With 36 site labels, `site_f` alone was split
+across six spellings.
+:::
+
+**18. Two of the six sites account for nearly all the acidic samples. Filter to one of those sites
+and to `site_d`, and compare the mean of `dissolved_oxygen_mg_L` for each. (Two filters, two
+`.mean()` calls. Tomorrow you will learn to do all six at once.)**
+
+```{python}
+site_f = survey[survey['site'] == 'site_f']
+site_d = survey[survey['site'] == 'site_d']
+
+print('site_f mean DO:', site_f['dissolved_oxygen_mg_L'].mean())
+print('site_d mean DO:', site_d['dissolved_oxygen_mg_L'].mean())
+```
+
+```{python}
+print('site_f mean temperature:', site_f['temperature_c'].mean())
+print('site_d mean temperature:', site_d['temperature_c'].mean())
+```
+
+:::{.callout-note title="✅ Answer"}
+**`site_d` averages 10.05 mg/L of dissolved oxygen and `site_f` averages 6.18 mg/L**, a difference
+of 3.87 mg/L. `site_d` carries roughly 1.6 times as much oxygen as `site_f`, and 6 mg/L is around
+the level below which cold-water fish are stressed, so the gap is biologically
+meaningful and not merely a number.
+
+The second cell gives the reason. `site_f` averages 23.30 °C and `site_d` averages 15.18 °C, a
+difference of 8.1 degrees, and the two rankings run in opposite directions. Warm water holds less
+dissolved gas, so the site with the highest temperature has the lowest oxygen. When you rank all
+six sites with `.groupby()` tomorrow, you will find the two orderings are exact mirrors of each
+other with no exceptions.
+
+That result is what the afternoon of cleaning made possible. It is only visible because 36 site labels became six.
+Before you cleaned the column, `site_f` was six separate groups, the largest of them 12 rows, and
+no comparison between sites was possible at all.
+:::
+
+**19. In a markdown cell of three or four sentences: what would you tell the person who collected
+this data? Name the single change to their field sheet that would have saved you the most time
+this afternoon, and say what evidence in the file makes you pick that one.**
+
+There is no single right answer here. A strong response names one change, cites a number from
+your own output as the evidence, and explains why that change beats the runners-up. Here is one
+that would earn full marks.
+
+:::{.callout-note title="✅ A model answer"}
+Print the six site codes on the sheet with a tick box next to each one, so that nobody ever writes
+a site name by hand again. The evidence is that six sites arrived as 36 distinct labels, and
+repairing them took three separate operations for three separate kinds of damage. The worst of
+those was whitespace, which `.value_counts()` shows as two identical-looking rows and only
+`.unique()` reveals, so it is the error most likely to survive into a published analysis.
+
+The change also protects the result rather than only my time. Every comparison between sites in
+Part 4 was impossible until that column was consistent, because `site_f` was six groups of at most
+12 rows.
+
+The runner-up is the decimal comma in `pH`, which affected 24 values, and a sheet that showed
+`_ . _ _` in the pH box would have prevented it. I would still rank the site codes first, because
+a wrong pH format raises an error and the whole column fails to convert, while a trailing space
+raises no error and splits your data without warning. The `-999` temperatures are the logger's doing rather
+than the transcriber's, so I would raise those with whoever maintains the instrument.
+:::
+
+## If you finish early
+
+**Would you get the same final table if you had filtered out the sentinel temperatures first,
+before the `.dropna()` in task 9? Does the order of cleaning steps matter here, and would you
+expect that to be true in general?**
+
+```{python}
+check = pd.read_csv(url).drop_duplicates()
+check['site'] = check['site'].str.strip().str.lower().str.replace('-', '_')
+check['pH'] = check['pH'].str.replace(',', '.').astype(float)
+
+check = check[check['temperature_c'] > -100]
+print('after filtering first:', check.shape)
+
+check = check.dropna(subset=['temperature_c', 'dissolved_oxygen_mg_L', 'conductivity_uS_cm'])
+print('after dropna second: ', check.shape)
+```
+
+:::{.callout-note title="✅ Answer"}
+**The same 255 rows, in the same order.** Both steps are row selections that read the table without
+changing any value in it, so the surviving rows are the intersection of the two conditions, and an
+intersection does not care which condition you apply first.
+
+The intermediate number does change: filtering first leaves 273 rows rather than 264. That is
+because `-999 > -100` is `False` and `NaN > -100` is also `False`, so the comparison quietly
+removes the 18 rows with a missing temperature as well as the 9 sentinels. Reversing the order
+moves 18 rows from one step's tally to the other's, which is worth knowing if you are reporting
+how many rows each step cost.
+
+In general order does matter, and the safe rule is that it is only free when every step is a pure
+selection. As soon as a step fills a value, derives a column or converts a dtype, the steps stop
+commuting. Task 10 is the clear case in this exercise: `.fillna(1)` then `.astype(int)` works, and
+the same two lines in the other order raises an error.
+:::
+
+## Where the marks are
+
+If you compare your notebook against this key, look for these four things before you look at
+anything else.
+
+1. **Your notebook records the row count after every step that removed rows**, and you can say
+   where the 65 lost rows went: 320 to 300 to 264 to 255, which is 20 duplicates, 36 rows with no
+   measurement, and 9 broken loggers.
+2. **You found all three kinds of damage in the `site` column**, including the whitespace that
+   `.value_counts()` cannot show you. Six labels at 50 rows each is the check.
+3. **You recognised `-999` as missing data rather than as an outlier**, and your task 12 sentence
+   says what it did to the mean and to the standard deviation.
+4. **Your interpretation answers say what the number means**, not what the number is. "site_f
+   averages 6.18 mg/L" restates the output. "site_f averages 6.18 mg/L, the lowest of the six, and
+   it is also the warmest at 23.30 °C" reads it.
+
+⬅️ Back to [the colab](../coding-colabs/4d_cleaning_messy_data.qmd)

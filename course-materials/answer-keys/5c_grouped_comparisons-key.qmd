@@ -1,0 +1,394 @@
+---
+title: "Answer Key"
+subtitle: "🙌 The Comparison You Made Last Night, Properly"
+search: false
+execute:
+  echo: true
+  include: true
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+:::{.callout-important title="How to use this key"}
+Work the colab through with your partner first, then come here. The code below is **one** correct
+answer, not the only one. This was a 45 minute pair exercise with very little scaffolding, so
+there are several reasonable ways to write almost every cell. If your code looks different but
+produces the same numbers, you were right.
+
+The written answers matter more than the code. You can already tell whether your code ran. What
+you cannot check on your own is whether you read the result correctly, and that is what the
+green **Answer** boxes are for. Compare your markdown cells against them.
+
+⬅️ Back to [the colab](../coding-colabs/5c_grouped_comparisons.qmd)
+:::
+
+## Setup
+
+```{python}
+import pandas as pd
+import numpy as np
+
+url = 'https://eds-217-essential-python.github.io/data/marine_microplastics.csv'
+df = pd.read_csv(url)
+
+df = df.dropna(subset=['Measurement'])
+samples = df[df['Unit'] == 'pieces/m3'].copy()
+samples['ocean'] = samples['Oceans'].str.replace(' Ocean', '')
+positive = samples[samples['Measurement'] > 0].copy()
+
+positive.shape
+```
+
+## Part 1: All four oceans at once
+
+**1. Last night you computed the mean `Measurement` for the Atlantic and the Pacific with two
+filters. Do all four oceans in one line, and rank the result from dirtiest to cleanest.**
+
+```{python}
+positive.groupby('ocean')['Measurement'].mean().sort_values(ascending=False)
+```
+
+:::{.callout-note title="✅ Answer"}
+**Pacific 595.2, Atlantic 282.7, Arctic 2.28, Southern 0.076 pieces/m3.** One line replaces the
+two filters, two subsets and two `.describe()` calls you wrote last night, and it also gives you
+the two oceans you did not ask about. The spread is the first thing to notice: the Pacific mean is
+nearly eight thousand times the Southern mean, which is a larger difference than any plausible
+difference in ocean water, and should make you suspicious before you go any further.
+:::
+
+**2. Do the same with the median instead of the mean. The order changes. Which two oceans swap,
+and by how much does the Pacific-to-Atlantic ratio differ between the two versions?**
+
+```{python}
+positive.groupby('ocean')['Measurement'].median().sort_values(ascending=False)
+```
+
+```{python}
+means = positive.groupby('ocean')['Measurement'].mean()
+medians = positive.groupby('ocean')['Measurement'].median()
+
+print('mean ratio:  ', means['Pacific'] / means['Atlantic'])
+print('median ratio:', medians['Pacific'] / medians['Atlantic'])
+```
+
+:::{.callout-note title="✅ Answer"}
+**The Arctic and the Atlantic swap.** By mean the Atlantic is second at 282.7 and the Arctic third
+at 2.28; by median the Arctic is second at 0.0440 and the Atlantic third at 0.0194 pieces/m3.
+
+The Pacific-to-Atlantic ratio is **2.11 on the means and 6.00 on the medians**, so the choice of
+average changes the size of the claim by a factor of about three. Note also how far the two
+averages are from each other within a single ocean: the Atlantic mean is 282.7 and the Atlantic
+median is 0.0194, roughly fifteen thousand times smaller. A gap that large between mean and median
+always means a few enormous values, and it is a warning that the mean is describing those values
+rather than the ocean.
+:::
+
+**3. How many samples went into each of those four numbers? One line.**
+
+```{python}
+positive.groupby('ocean')['Measurement'].count().sort_values(ascending=False)
+```
+
+:::{.callout-note title="✅ Answer"}
+**Atlantic 6,216, Pacific 799, Arctic 58, Southern 18.** The four numbers you have been ranking
+rest on wildly different amounts of evidence: the Atlantic alone is 88% of the file, and the
+Arctic and Southern together are 76 rows, about 1% of the 7,091. `.count()` costs one line and
+tells you which rows of a grouped table you are allowed to take seriously.
+:::
+
+**4. In a markdown cell: two of the four oceans have numbers you should refuse to report. Name
+them and say why in one sentence.**
+
+:::{.callout-note title="✅ Answer"}
+**The Arctic (58 samples) and the Southern Ocean (18 samples).** Both are too thin to describe an
+ocean: the Southern figure comes from 18 samples collected by three organizations, 14 of them by
+one method, so it describes a handful of cruises rather than a body of water covering twenty
+million square kilometres. A grouped table prints a number for every group it finds, whether or
+not that group has enough rows to support one, so reading the `count` column is part of reading
+the result.
+:::
+
+## Part 2: One call instead of four
+
+**5. Replace questions 1 through 3 with a single `.agg()` call that reports the count, median,
+mean and max of `Measurement` for each ocean.**
+
+```{python}
+positive.groupby('ocean')['Measurement'].agg(['count', 'median', 'mean', 'max'])
+```
+
+**6. Look at the Atlantic row. Its median is 0.019 and its maximum is 110,480. In a markdown
+cell, say what a single number that large does to a mean computed from 6,216 values, and which of
+the two averages you would send to the journalist.**
+
+:::{.callout-note title="✅ Answer"}
+**That one value contributes about 17.8 to the Atlantic mean of 282.7, which is 6% of it, and the
+ten largest values together contribute 38%.** A mean adds every value and divides by the count, so
+dividing a value 5.7 million times the median by 6,216 reduces it only a little, so most of it
+remains in the mean. The result is a mean that only 294 of the 6,216 Atlantic samples, under
+5%, actually exceed. An average that is larger than 95% of the data is not describing a typical
+sample.
+
+**Send the median, 0.0194 pieces/m3**, and say how many samples it came from. If the journalist
+wants the extremes, give them the maximum separately as a maximum, which is an honest way to
+report a large number without letting it stand in for the ocean.
+:::
+
+**7. Use the dictionary form of `.agg()`, grouped by `ocean`, to report the mean `Measurement`,
+the number of distinct `Sampling Method` values, and the number of distinct `Organization` values
+in each ocean.**
+
+```{python}
+positive.groupby('ocean').agg({
+    'Measurement': 'mean',
+    'Sampling Method': 'nunique',
+    'Organization': 'nunique'
+})
+```
+
+**8. In a markdown cell: the two columns you just counted are not measurements. Why did you ask
+for them? What would it mean if one ocean had been sampled by one organization using one
+method?**
+
+:::{.callout-note title="✅ Answer"}
+They describe **how the number was produced rather than what was measured**, and that is exactly
+what you need in order to decide whether two oceans can be compared. The Atlantic figure comes
+from 20 organizations using 10 methods; the Southern figure comes from 3 organizations using 2.
+
+If an ocean had one organization and one method, its mean would be a property of that study, not
+of that ocean: any habit of that group, any bias in that instrument, would be inseparable from the
+result, and there would be no second measurement to check it against. The Southern Ocean is close
+enough to that situation to be worth the caution. `nunique` on a non-numeric column is a cheap way
+to ask "how many independent sources agree with this?" before you quote it.
+:::
+
+## Part 3: Where the answer falls apart
+
+**9. Group by `Sampling Method` instead of by ocean, and report the count and median of
+`Measurement` for each method. Rank by median, largest first.**
+
+```{python}
+by_method = positive.groupby('Sampling Method')['Measurement'].agg(['count', 'median'])
+by_method.sort_values('median', ascending=False)
+```
+
+**10. Write down the largest and smallest medians in that table. How many orders of magnitude
+separate them?**
+
+```{python}
+medians_by_method = positive.groupby('Sampling Method')['Measurement'].median()
+print(medians_by_method.max(), medians_by_method.min())
+print(np.log10(medians_by_method.max() / medians_by_method.min()))
+```
+
+:::{.callout-note title="✅ Answer"}
+**21,840 pieces/m3 for the stainless steel spoon and 0.0060 for the grab sample: 6.56 on a log10
+scale, so more than six orders of magnitude, a factor of about 3.6 million.**
+
+The methods sort into two families, and the reason is physical. The spoon, the Van Dorn sampler
+(2,000), the aluminum bucket (1,710) and the PVC cylinder (1,410) all scoop a small, fixed volume
+of surface water and count everything in it, including fibres a few tenths of a millimetre long.
+The nets, Manta at 0.253, Neuston at 0.0151, AVANI at 0.0475, tow a mesh through hundreds of cubic
+metres and keep only what the mesh cannot pass. Both report pieces per cubic metre, and the unit
+column says they are comparable, but they are counting different objects. No difference between
+oceans in this file is anywhere near six orders of magnitude, so method is the largest single
+influence on `Measurement` in the dataset.
+:::
+
+**11. In a markdown cell, before you write any more code: if the oceans were not sampled with the
+same mix of methods, what does that do to your answer from question 1?**
+
+:::{.callout-note title="✅ A model answer"}
+It makes question 1 partly a comparison of sampling methods labelled as a comparison of oceans. If one ocean
+happens to have more bucket and cylinder samples, its mean will be higher no matter what is in the
+water, because those methods report values thousands of times larger than the nets do. The ocean
+means would then be measuring the composition of the sampling effort as much as the plastic, and I
+cannot tell which until I count the methods within each ocean.
+
+Full marks here are for writing the prediction **before** running question 12 and for naming the
+mechanism, not just the risk. Writing the prediction down and then testing it is how you find a
+confound, rather than only naming one.
+:::
+
+**12. Find out. Group by both `ocean` and `Sampling Method` at once and count the samples. Then
+call `.reset_index()` on the result and look at the Atlantic and Pacific rows.**
+
+```{python}
+ocean_method = positive.groupby(['ocean', 'Sampling Method'])['Measurement'].count()
+ocean_method.reset_index().head(15)
+```
+
+```{python}
+ocean_method.reset_index()
+```
+
+:::{.callout-note title="✅ Answer"}
+**The two oceans were sampled with almost opposite method mixes.** The full table is 23 rows, one
+per ocean and method pair that actually occurs, and `.head(15)` stops one row into the Pacific,
+which is why the second cell prints all of it.
+
+The Atlantic is 4,390 Neuston net out of 6,216, then 748 grab samples and 631 Manta net: three
+low-reading methods account for 93% of it. The Pacific is spread across Manta 226, PVC cylinder
+188, grab 166 and Neuston 158. The PVC cylinder row is the one to stop on: 188 of the Pacific's
+799 samples used a method whose median across the whole file is 1,410 pieces/m3, and the Pacific
+mean of 595 follows from that fact rather than from the Pacific. In the other direction, the
+stainless steel spoon and the Van Dorn sampler, the two highest medians in the file, appear in the
+Atlantic and in no other ocean, and so does the aluminum bucket.
+
+Grouping by two keys is what made this visible. Either key on its own averages the other one away.
+:::
+
+**13. Simpler and more direct: run `.value_counts()` on `Sampling Method` for the Atlantic samples
+and again for the Pacific samples. Which method dominates the Atlantic? What fraction of the
+Pacific samples used it?**
+
+```{python}
+atlantic = positive[positive['ocean'] == 'Atlantic']
+pacific = positive[positive['ocean'] == 'Pacific']
+
+print(atlantic['Sampling Method'].value_counts())
+print(pacific['Sampling Method'].value_counts())
+```
+
+:::{.callout-note title="✅ Answer"}
+**The Neuston net dominates the Atlantic, 4,390 of 6,216 samples, or 71%. In the Pacific it is 158
+of 799, or 20%.** The Atlantic is effectively one method with a few others attached; the Pacific is
+four methods of comparable size, and its most common one, the Manta net at 226, is not the
+Atlantic's most common one.
+
+That is enough to explain the difference you reported last night without any reference to the amount of
+plastic in the water. The Neuston net has the second lowest median of any method in the file at 0.0151, so an
+ocean measured mostly by Neuston net will read low, and the Atlantic is that ocean.
+:::
+
+**14. Now control for it. Filter `positive` to the rows collected with a `'Neuston net'`, end the
+line with `.copy()`, then group that by ocean and report count, median and mean.**
+
+```{python}
+neuston = positive[positive['Sampling Method'] == 'Neuston net'].copy()
+neuston.groupby('ocean')['Measurement'].agg(['count', 'median', 'mean'])
+```
+
+```{python}
+neuston[neuston['ocean'] == 'Pacific']['Organization'].value_counts()
+```
+
+**15. In a markdown cell, three or four sentences. Compare this table with your answer to question
+5. Does the Pacific still come out higher than the Atlantic? By how much, and is it the same "how
+much" you reported last night? What happened to the number of Pacific samples you are now relying
+on?**
+
+:::{.callout-note title="✅ Answer"}
+**Yes, the Pacific is still higher, but the claim shrinks from a factor of 6.0 to a factor of 2.0
+and the evidence for it shrinks from 799 samples to 158.** Within Neuston net samples only, the
+Pacific median is 0.0307 pieces/m3 against the Atlantic's 0.0151. That is a real difference, it
+points the same way it did last night, and it is now a comparison of like with like.
+
+The means change the most. They fall from 595.2 and 282.7 to **0.396 and
+0.0858**, a drop of three orders of magnitude in both oceans, because the extreme values behind
+the question 5 means came from the scoop methods and not from the nets. The 2.1-fold difference in
+means you reported last night did not describe seawater. It described 188 PVC cylinder samples in
+the Pacific against 4,390 Neuston tows in the Atlantic.
+
+So the effect **survives the control and changes size**, which is a different claim from either
+"the Pacific is dirtier" or "the difference was an artefact". Both halves have to be said. And the
+158 Pacific samples that carry the surviving claim come from only three organizations, 82 of them
+from one, so this is not 158 independent lines of evidence. It is a difference worth reporting with its sample size
+attached and worth checking against another single method, for example the Manta net, before
+anyone builds on it.
+:::
+
+## Part 4: Write it again
+
+**16. The journalist replies: "Thanks. My editor wants one sentence with a number in it." Write
+that sentence in a markdown cell. It must contain a number, must name the sampling method you
+controlled for, and must not overstate what 158 samples can support.**
+
+:::{.callout-note title="✅ A model answer"}
+Comparing only samples taken with a Neuston net, the one method used in both oceans in reasonable
+numbers, the median Pacific sample contains about twice as much floating plastic as the median
+Atlantic sample, 0.031 against 0.015 pieces per cubic metre, though the Pacific figure rests on
+158 samples from three research groups and should be treated as provisional.
+
+Full marks for a sentence that carries all four things: the number, the method, the direction, and
+the limit. The common failure is dropping the last one, or quoting the mean because it sounds more
+impressive. The sentence must also survive the reader asking "compared with what?", which is why
+the method is named inside it rather than in a footnote.
+:::
+
+**17. In a markdown cell of four or five sentences: what changed between last night's answer and
+this one, and was it the data or the question? Name the specific line of code that made the
+difference visible.**
+
+:::{.callout-note title="✅ A model answer"}
+The data did not change. It is the same 7,091 rows and the same `Measurement` column, and last
+night's arithmetic was correct: the Pacific mean really is 595.2 and the Atlantic mean really is
+282.7. What changed is the question. Last night I asked which ocean has the larger average, and
+this afternoon I asked whether the two averages were produced in comparable ways, which is a
+question about the sampling rather than about the water.
+
+The line that made it visible is:
+
+```python
+positive.groupby(['ocean', 'Sampling Method'])['Measurement'].count()
+```
+
+Grouping by two keys at once showed 4,390 Neuston tows in the Atlantic against 188 PVC cylinder
+samples in the Pacific, and once that table is on screen the ocean means cannot be read as ocean
+means. Question 14 then measured what was left after holding the method fixed: a two-fold
+difference in the medians, on 158 Pacific samples. The general lesson is that a `groupby` on one
+column silently averages over every column you did not group by, and if one of those columns
+drives the measurement, your comparison is partly about that column instead.
+:::
+
+## If you finish early
+
+**Group by `Regions`, report count and median, and rank by count to find the ten most-sampled
+regions. Look at which sampling methods were used in the extremes.**
+
+```{python}
+by_region = positive.groupby('Regions')['Measurement'].agg(['count', 'median'])
+by_region.sort_values('count', ascending=False).head(10)
+```
+
+```{python}
+print(positive[positive['Regions'] == 'Gulf of California']['Sampling Method'].value_counts())
+print(positive[positive['Regions'] ==
+               'Coastal Waters of Southeast Alaska and British Columbia']['Sampling Method'].value_counts())
+```
+
+:::{.callout-note title="✅ Answer"}
+**The Gulf of California has a median of 1,410 pieces/m3 and coastal Alaska and British Columbia
+has 0.0035, a ratio of about 403,000.** The same explanation as Part 3 applies, only more starkly:
+70 of the Gulf of California's 85 samples were taken with a PVC cylinder, and all 22 Alaska
+samples were grab samples. Those are the extremes of the method table from question 9.
+
+The Gulf of Mexico row makes the point a third time, with a median of exactly 1,000.0 across 263
+samples. A median that comes out as an exact round number usually reflects a reporting convention
+or a detection threshold rather than the water, and it is worth investigating before it goes into
+any comparison. Finer geography does not remove a method confound. It only makes the groups
+smaller, so the confound is harder to see.
+:::
+
+## Where the marks are
+
+If you compare your notebook against this key, look for these four things before you look at
+anything else.
+
+1. **Your question 15 answer says both halves.** The Pacific is still higher after controlling for
+   method, and the size of the difference falls from 6.0 to 2.0 while the sample count falls from
+   799 to 158. An answer that reports only the survival, or only the collapse, is half the finding.
+2. **You read the `count` column of every grouped table before quoting a number from it.** The
+   Southern Ocean's 18 rows and the Pacific's 158 Neuston samples are the two places this matters
+   most in the colab.
+3. **You wrote your question 11 prediction before running question 12.** The value of the exercise
+   is in committing to an expectation and then testing it, not in the table itself.
+4. **Your interpretation answers say what the number means**, not what the number is. "The Pacific
+   mean is 595.2" restates the output. "The Pacific mean is 595.2, and 188 of its 799 samples used
+   a method whose median is 1,410" reads it.
+
+⬅️ Back to [the colab](../coding-colabs/5c_grouped_comparisons.qmd)

@@ -1,0 +1,543 @@
+---
+title: "Answer Key"
+subtitle: "🌬️ Three Stations, One Air Shed"
+search: false
+execute:
+  echo: true
+  include: true
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+:::{.callout-important title="How to use this key"}
+Work the exercise first, then come here. The code below is **one** correct answer, not the only
+one. If your code looks different but produces the same numbers, you were right.
+
+The written answers matter more than the code. You can already tell whether your code ran. What
+you cannot check on your own is whether you read the result correctly, and that is what the
+green **Answer** boxes are for. Compare your markdown cells against them.
+
+⬅️ Back to [the exercise](../eod-practice/eod-day5-2026.qmd)
+:::
+
+## Setup
+
+```{python}
+import pandas as pd
+
+base = 'https://eds-217-essential-python.github.io/data/'
+
+goleta = pd.read_csv(base + 'openaq_goleta_measurments.csv')
+santa_barbara = pd.read_csv(base + 'openaq_santa_barbara_measurments.csv')
+cnsi = pd.read_csv(base + 'openaq_CNSI_measurments.csv')
+
+goleta['site'] = 'Goleta'
+santa_barbara['site'] = 'Santa Barbara'
+cnsi['site'] = 'CNSI'
+
+aq = pd.concat([goleta, santa_barbara, cnsi], ignore_index=True)
+aq['hour'] = aq['datetimeLocal'].str[11:13]
+
+aq.shape
+```
+
+## Part 1: What is in each pile
+
+**1. How many readings came from each site? One line.**
+
+```{python}
+aq.groupby('site')['value'].count()
+```
+
+:::{.callout-note title="✅ Answer"}
+**Santa Barbara 2,266, Goleta 1,962 and CNSI 714**, which add to the 4,942 rows in the stacked
+table. The piles are very uneven, and the reason is not that one station ran for fewer days. All
+three cover the same month. Santa Barbara has more than three times as many readings as CNSI
+because it measures three things and CNSI measures one, which is what question 2 makes visible.
+:::
+
+**2. How many distinct parameters does each site measure? Use the dictionary form of `.agg()` to
+report the reading count and the parameter count side by side.**
+
+```{python}
+aq.groupby('site').agg({'value': 'count', 'parameter': 'nunique'})
+```
+
+:::{.callout-note title="✅ Answer"}
+**Goleta and Santa Barbara measure 3 parameters each, CNSI measures 1.** Notice what the
+dictionary form gives you: one call, two different summaries, applied to two different columns.
+`'count'` on `value` counts readings and `'nunique'` on `parameter` counts distinct labels, so the
+714 and the 1 in the CNSI row are answering two unrelated questions about the same group.
+:::
+
+**3. One of the three stations is not like the others. Name it, say what it does not do, and say
+in one sentence what that means for any comparison you are about to make across all three.**
+
+```{python}
+aq.groupby(['site', 'parameter'])['value'].count()
+```
+
+:::{.callout-note title="✅ Answer"}
+**CNSI measures PM2.5 and nothing else**: 714 PM2.5 readings, no ozone and no PM10. Goleta and
+Santa Barbara each report all three.
+
+The consequence is that PM2.5 is the only parameter on which all three stations can be compared,
+and every ozone or PM10 result in the rest of the evening is a two-station result whether or not
+you say so. Grouping by `site` will silently return two rows instead of three, and it is your job
+to notice which one is absent and why.
+
+Note also that the two grouping keys nest: `groupby(['site', 'parameter'])` gives you one row per
+combination that actually occurs, so combinations with no data simply do not appear rather than
+appearing as zero.
+:::
+
+**4. How many readings of each parameter are there across the whole table? Which parameter is the
+best measured, and which the worst?**
+
+```{python}
+aq.groupby('parameter')['value'].count().sort_values(ascending=False)
+```
+
+:::{.callout-note title="✅ Answer"}
+**PM2.5 is best measured at 2,214 readings and PM10 worst at 1,283**, with ozone between them at
+1,445. PM2.5 leads partly because three stations report it rather than two.
+
+PM10 is short for a second reason as well. Santa Barbara returned 766 PM10 readings and Goleta
+only 517, although Goleta returned 734 PM2.5 readings over the same month. So roughly 30 per cent
+of Goleta's PM10 hours are missing, and that is instrument downtime rather than a station that
+does not measure PM10 at all. Missing hours are not distributed evenly across stations, which is
+the sort of thing a count column tells you and a mean column never will.
+:::
+
+**The units check.**
+
+```{python}
+aq.groupby('parameter')['unit'].nunique()
+```
+
+:::{.callout-note title="✅ Answer"}
+Each parameter uses exactly **one** unit, which is the reassuring part. The trap is between
+parameters: ozone is in parts per million and both particulate measures are in micrograms per
+cubic metre. Averaging a column that mixes 0.03 ppm with 17 µg/m³ produces a number that has no
+unit and no meaning. Filter to one parameter before you aggregate, every time.
+:::
+
+## Part 2: Compare the stations
+
+**5. Build a table of just the PM2.5 readings, ending the line with `.copy()`, and call it
+`pm25`. How many rows?**
+
+```{python}
+pm25 = aq[aq['parameter'] == 'pm25'].copy()
+pm25.shape
+```
+
+:::{.callout-note title="✅ Answer"}
+**2,214 rows and 17 columns**, matching the PM2.5 count from question 4. The column count is
+unchanged because filtering rows never touches columns. The `.copy()` matters because everything
+after this modifies or aggregates `pm25`, and a copy makes it a table in its own right rather
+than a view onto `aq`.
+:::
+
+**6 and 7. Rank the site means, then report count, mean, min, max and standard deviation of PM2.5
+at each site.**
+
+```{python}
+pm25.groupby('site')['value'].mean().sort_values(ascending=False)
+```
+
+```{python}
+pm25.groupby('site')['value'].agg(['count', 'mean', 'min', 'max', 'std'])
+```
+
+:::{.callout-note title="✅ Answer"}
+**Goleta is highest at 6.481 µg/m³**, then Santa Barbara at 6.172 and CNSI at 6.083. The full
+spread across the three stations is 0.397 µg/m³, which is less than one tenth of a standard
+deviation at any of them. Ranking these three means is technically correct and practically
+meaningless.
+
+The five-column table is the reason you can say that. The counts are comparable (714 to 766), so
+no site is being averaged out of a handful of readings, but the standard deviations are not: 3.651
+at Goleta, 3.041 at Santa Barbara and 1.745 at CNSI. Adding `'count'` and `'std'` to an `.agg()`
+list costs you nothing and is what turns a ranking into a judgement about whether the ranking
+means anything.
+:::
+
+**8. In a markdown cell, three or four sentences. The means are nearly identical and the maxima
+are not. What is different about these three stations, and which of the five columns in your
+table told you? Would you describe the South Coast as having one air quality or three?**
+
+:::{.callout-note title="✅ A model answer"}
+The three stations agree almost exactly on the average hour and disagree completely on the
+extreme hour. Goleta reaches 22.0 µg/m³, Santa Barbara 17.0 and CNSI only 12.0, and the standard
+deviations rank the same way, 3.651 against 3.041 against 1.745. The `max` and `std` columns
+carried all of the information here; the `mean` column carried none of it.
+
+The typical hour is a regional quantity, so on the mean the South Coast has **one** air quality
+and the stations are three measurements of it. The excursions are local, and CNSI never records
+one. Whether that is because the CNSI site is genuinely calmer or because its instrument responds
+differently is the question you cannot settle from this table, and question 14 is where you have
+to commit to a hypothesis.
+
+Full marks for naming `max` or `std` as the informative column, quoting at least two of the
+values, and separating the regional signal from the local excursions instead of declaring one
+station cleanest.
+:::
+
+**9. Now do the same for PM10. Which site is higher, and by how much? Note which site is missing
+from your answer and why.**
+
+```{python}
+pm10 = aq[aq['parameter'] == 'pm10'].copy()
+pm10.groupby('site')['value'].agg(['count', 'mean', 'max'])
+```
+
+:::{.callout-note title="✅ Answer"}
+**Santa Barbara is higher, at 17.564 µg/m³ against Goleta's 14.973**, a difference of 2.591
+µg/m³, or about 17 per cent. Santa Barbara's maximum is also higher, 47.0 against 40.0. Unlike
+the PM2.5 comparison, this gap is large enough relative to the data to be worth a sentence.
+
+**CNSI is missing because it does not measure PM10 at all**, which you established in question 3.
+The output shows two rows and gives no warning that a third station exists. That is the ordinary
+behaviour of `groupby`: it reports the groups present in the data you handed it, not the groups
+you were expecting.
+
+Also read the counts before you read the means. Goleta contributes 517 readings against Santa
+Barbara's 766, so the two means are averages over different numbers of hours, and Goleta's missing
+hours are not a random sample of the month.
+:::
+
+**10. Use the filter sentence and the split-apply-combine sentence together: how many hours did
+each site record a PM2.5 value above 12 µg/m³, the US annual standard?**
+
+```{python}
+pm25[pm25['value'] > 12].groupby('site')['value'].count()
+```
+
+```{python}
+pm25[pm25['value'] == 12].groupby('site')['value'].count()
+```
+
+:::{.callout-note title="✅ Answer"}
+**Goleta 51 hours and Santa Barbara 25.** CNSI does not appear at all.
+
+The second cell is why this question is worth more than it looks. Goleta and Santa Barbara report
+PM2.5 as whole micrograms, so readings of exactly 12 are common: 11 at Goleta, 17 at Santa
+Barbara and 3 at CNSI. Writing `>= 12` instead of `> 12` would give 62, 42 and 3, which changes
+Goleta by a fifth and Santa Barbara by two thirds. When a measurement is reported in whole units
+and your threshold is a whole number, a large share of the data sits exactly on the boundary, and
+strict against non-strict stops being a technicality.
+
+One more caution about the framing: 12 µg/m³ is an **annual mean** standard, so counting hours
+above it is a rough screen for bad hours, not a compliance test. The comparable annual figure here
+would be the site means from question 6, and all three are close to 6.
+:::
+
+**11. In a markdown cell: your answer to question 10 has a site missing from it entirely. Is that
+because the air there was clean, or for another reason? Look back at your answer to question 7
+before you commit.**
+
+:::{.callout-note title="✅ Answer"}
+**CNSI is missing, and not because its air was clean.** Its mean of 6.083 µg/m³ is within 0.4 of
+both other stations, so on a typical hour it measures the same air they do.
+
+It is missing because of the top of its range. CNSI's maximum for the whole month is exactly
+**12.0**, and the filter asked for values strictly greater than 12, so its three highest readings
+were excluded by 0.0. A station whose largest observed value equals your threshold will vanish
+from a `>` filter and survive a `>=` one, and here it is the same three readings deciding it
+either way.
+
+What that really tells you is what question 7 already showed: CNSI's standard deviation is 1.745
+against Goleta's 3.651. CNSI does not record extremes, whether or not extremes occurred there.
+Absence from a threshold count is a statement about the instrument's range as much as about the
+air.
+:::
+
+## Part 3: The data still has problems
+
+**12 and 13. The minimum PM2.5 at each site, and a count of the negative readings.**
+
+```{python}
+pm25.groupby('site')['value'].min()
+```
+
+```{python}
+pm25[pm25['value'] < 0].groupby('site')['value'].count()
+```
+
+```{python}
+pm25[pm25['value'] < 0].groupby('hour')['value'].count()
+```
+
+:::{.callout-note title="✅ Answer"}
+**Goleta 11 negative readings and Santa Barbara 3, out of 2,214.** CNSI has none, and its minimum
+is 3.0 µg/m³ against Goleta's -4.0 and Santa Barbara's -1.0.
+
+The third cell is the useful one. Thirteen of the fourteen negative readings fall between 02:00
+and 08:00, with six of them at 05:00, and one lone case at 17:00. That is exactly the trough of
+the daily PM2.5 cycle you will compute in question 21. Negative values are not scattered at
+random through the month, they cluster in the hours when the true concentration is closest to
+zero, which is the signature of instrument noise around a small number rather than of a broken
+sensor.
+:::
+
+**14. In a markdown cell, two or three sentences: the site with no negative readings is also the
+site with the smallest standard deviation and the lowest maximum. Propose one explanation that
+accounts for all three of those facts at once. You cannot confirm it with this data; say what you
+would need.**
+
+:::{.callout-note title="✅ A model answer"}
+One explanation covers all three facts: CNSI is a different instrument, sited differently, and
+reporting a smoother quantity. Its readings run from 3.0 to 12.0 with a standard deviation of
+1.745, while Goleta ranges from -4.0 to 22.0 with a standard deviation of 3.651. An instrument
+that averages over a longer window, or sits on a roof rather than at street level, sees the
+regional background rather than the local plumes, and a series that never approaches zero cannot
+produce a negative reading, never spikes, and has a small spread. That is one cause with three
+consequences, which is better than three separate explanations.
+
+There is supporting evidence in the numbers themselves. CNSI reports 73 distinct values in its 714
+readings, in steps of 0.1 µg/m³ below 10, while Goleta reports 26 distinct values and Santa
+Barbara 19, all whole micrograms. These are not the same measurement pipeline.
+
+To confirm it you would need the station metadata: instrument make and model, the averaging
+period behind each hourly value, the stated detection limit, the sampling height, and the
+calibration record. A period of co-located operation, two instruments sampling the same air side
+by side, would settle it directly. Full marks for one explanation that accounts for all three
+facts and a specific, obtainable piece of evidence that would test it.
+:::
+
+**15. A decision, and there is no single right answer. Would you drop the negative readings before
+computing site means? Compute both versions and report the difference, then say in one sentence
+which you would publish and why.**
+
+```{python}
+clean_pm25 = pm25[pm25['value'] >= 0]
+
+print(pm25.groupby('site')['value'].mean())
+print(clean_pm25.groupby('site')['value'].mean())
+```
+
+:::{.callout-note title="✅ A model answer"}
+Dropping the negatives moves Goleta from 6.481 to 6.614 µg/m³, a rise of 0.133, and Santa Barbara
+from 6.172 to 6.201, a rise of 0.028. CNSI is unchanged because it had none. The effect is small,
+about 2 per cent at Goleta, but it is not neutral: every mean went up and none went down, and the
+gap between the highest and lowest station widened from 0.397 to 0.531.
+
+That asymmetry is the argument against dropping them. A negative PM2.5 reading comes from measurement
+noise rather than from a data entry error. It is what an instrument reports when the true concentration is near its detection limit
+and the measurement noise happens to fall on the low side. The matching positive errors are still
+in the table, indistinguishable from real readings. Removing only the low half of the noise
+biases the mean upward by construction, and the bias is largest at the station that already reads
+highest, which is the station you least want to inflate.
+
+**I would publish the uncorrected means and state the negatives explicitly**, reporting that 14 of
+2,214 readings are below zero, that they cluster in the pre-dawn hours, and that they are noise at
+the detection limit rather than errors. Full marks for computing both versions, quoting the
+difference in µg/m³, and giving a reason that refers to what a negative reading is rather than to
+tidiness.
+:::
+
+## Part 4: The question the day was for
+
+**16. Build a table of just the ozone readings, ending the line with `.copy()`, and call it `o3`.
+Then group it by `hour` and report the count and mean of `value`, in hour order.**
+
+```{python}
+o3 = aq[aq['parameter'] == 'o3'].copy()
+o3.groupby('hour')['value'].agg(['count', 'mean'])
+```
+
+**17. Read the `count` column first. Twenty-two of the twenty-four hours have about the same
+number of readings and two do not. Which two, and what does that tell you about how much weight
+to put on their means?**
+
+```{python}
+o3.groupby(['hour', 'site'])['value'].count().head(8)
+```
+
+:::{.callout-note title="✅ Answer"}
+**Hours `'02'` and `'03'`, with 30 and 32 readings against 62 or 63 everywhere else.** Half the
+usual sample would already be a reason for caution, but the second cell shows something worse:
+every hour `'02'` reading is from **Goleta** and every hour `'03'` reading is from **Santa
+Barbara**. Each station is missing one hour of every day, and they are missing different ones.
+
+So those two means are single-station means sitting in a column of two-station means. Goleta averages 0.02247 ppm of
+ozone across the month and Santa Barbara 0.01982, so hour `'02'` is tilted toward the higher
+station and hour `'03'` toward the lower one, and the difference between them tells you nothing
+about the time of day.
+
+This is the argument for putting `'count'` first in every `.agg()` list. The mean column looked
+perfectly reasonable at both hours. Only the count showed that two rows of the table were built
+differently from the other twenty-two.
+:::
+
+**18. Now rank the means. Which hour of the day has the highest average ozone, and which the
+lowest? What is the ratio between them?**
+
+```{python}
+hourly_o3 = o3.groupby('hour')['value'].mean()
+
+print(hourly_o3.sort_values(ascending=False).head(5))
+print(hourly_o3.sort_values().head(5))
+print('peak hour:  ', hourly_o3.idxmax())
+print('lowest hour:', hourly_o3.idxmin())
+print('ratio:      ', hourly_o3.max() / hourly_o3.min())
+```
+
+:::{.callout-note title="✅ Answer"}
+**Hour `'14'` is highest at 0.03087 ppm and hour `'06'` lowest at 0.01113 ppm, a ratio of 2.77.**
+Ozone is nearly three times as concentrated in the middle of the afternoon as it is at dawn, in
+the same air, at the same stations, in the same month.
+
+The neighbouring hours agree, which is what makes the result trustworthy. The top five are
+`'14'`, `'15'`, `'13'`, `'16'` and `'12'`, a contiguous afternoon block, and the bottom five are
+`'06'`, `'05'`, `'07'`, `'04'` and `'02'`, a contiguous pre-dawn block. Neither extreme is a single
+odd hour, and neither is one of the two hours that question 17 flagged.
+
+`.idxmax()` returns the **label** `'14'` and not the value, which is what you want: the hour is
+the answer, and the concentration is a follow-up. The labels are text, so they sort as `'00'`
+through `'23'`, which is exactly hour order because the zeros are padded.
+:::
+
+**19. Look at the full twenty-four-hour table from question 16 again, top to bottom. Describe the
+shape of the curve in a markdown cell. Where does it start rising, where does it turn over, and
+where does it stop falling?**
+
+:::{.callout-note title="✅ Answer"}
+The curve is a single broad hump with one minimum and one maximum, and no second peak.
+
+It **stops falling at hour `'06'`** (0.01113 ppm), which is the bottom of an overnight decline
+that has been running since midnight. It **starts rising at `'07'`** and climbs steadily for seven
+hours, roughly 0.002 to 0.003 ppm per hour, through 0.02018 at `'09'` and 0.02625 at `'11'`. It
+**turns over at `'14'`** (0.03087), holds nearly flat across `'13'` to `'16'`, then declines for
+the rest of the day and through the night at a gentler rate than it rose.
+
+The asymmetry is worth naming: the rise takes about eight hours and the fall takes about sixteen.
+The curve is not symmetric about noon: it climbs steeply through the morning and declines slowly
+through the evening.
+:::
+
+**20. Ground-level ozone is not emitted by anything. It is manufactured in the air out of other
+pollutants, by sunlight. In three or four sentences, connect that fact to the shape you just
+described. Does the timing of the peak match what you would expect, and if it is later than you
+expected, why might that be?**
+
+:::{.callout-note title="✅ A model answer"}
+The curve is a production curve, not an emission curve. Nothing releases ozone, so its
+concentration rises only while sunlight is driving the reactions that build it out of nitrogen
+oxides and volatile organic compounds, and it falls whenever removal outpaces production. That is
+why the minimum at hour `'06'` sits at the end of the night, when there has been no sunlight for
+hours and the overnight chemistry has consumed what was left.
+
+The peak at `'14'`, two hours after solar noon, is later than the sun and that is the expected
+result. Ozone accumulates: each hour of sunlight adds to what the previous hours already made, so
+the concentration keeps climbing as long as production exceeds loss, and it turns over when those
+two balance rather than when sunlight is strongest. The morning traffic peak also loads the air
+with precursors several hours before the reactions have finished converting them.
+
+The long slow evening decline fits the same picture. Production stops at sunset, but the ozone
+already present is removed only gradually, by deposition to surfaces and reaction with fresh
+emissions, so it takes most of the night to reach the dawn minimum. A pollutant that was emitted
+directly would track its sources hour by hour instead; this one follows the total amount of
+sunlight received so far that day.
+:::
+
+**21. Do the same grouping for PM2.5 and compare. Does particulate matter follow the same daily
+pattern as ozone?**
+
+```{python}
+hourly_pm25 = pm25.groupby('hour')['value'].mean()
+
+print(hourly_pm25.sort_values(ascending=False).head(5))
+print(hourly_pm25.sort_values().head(5))
+```
+
+:::{.callout-note title="✅ Answer"}
+**There is a daily cycle in PM2.5, but it is a different shape and much weaker.** The peak is at
+hour `'12'` (7.842 µg/m³) and the trough at `'05'` (4.500), a ratio of 1.74 against ozone's 2.77.
+
+The top five hours are `'12'`, `'13'`, `'14'`, `'11'` and `'19'`, and that last entry is the
+interesting one. Hours `'11'` to `'14'` are a midday block like ozone's, but `'19'` at 7.055 is a
+separate evening rise that has nothing to do with sunlight and would look out of place in the
+ozone table. PM2.5 has two busy periods per day, ozone has one.
+
+One caveat on the comparison. The PM2.5 hourly means pool all three stations and the ozone means
+pool only two, and CNSI's own hourly cycle is nearly flat, so including it damps the pooled PM2.5
+amplitude. The gap between the two pollutants is real, but part of its size comes from which
+stations are in each average.
+:::
+
+**22. In a markdown cell, two or three sentences: one of these two pollutants has a much sharper
+daily cycle than the other. Which, and what does the difference suggest about where each one comes
+from?**
+
+:::{.callout-note title="✅ Answer"}
+**Ozone has the sharper cycle**, a peak-to-trough ratio of 2.77 against 1.74 for PM2.5, and the
+difference points at the source. Ozone is manufactured on site by a process that runs only in
+daylight, so its concentration is set almost entirely by the time of day and swings by a factor
+of nearly three.
+
+PM2.5 is emitted rather than made: by traffic, cooking, wood smoke, sea salt, dust, and any
+regional smoke drifting in. Some of those sources follow the clock, which is why the midday and
+evening bumps exist, but a large fraction of the particulate load is background that is present at
+every hour. A high floor and a moderate peak is the signature of a pollutant with a permanent
+baseline plus intermittent local additions, and the evening peak at hour `'19'` with no sunlight to
+explain it is the clearest evidence that a source rather than a chemical reaction produces it.
+:::
+
+## Part 5: Write it up
+
+A strong answer cites at least four numbers computed tonight, names something genuinely different
+about CNSI, and states at least one thing a single month cannot settle. Here is one that would
+earn full marks.
+
+:::{.callout-note title="✅ A model answer"}
+On the question as asked, the CNSI monitor adds less than its cost suggests, but it is not
+redundant either, and the reason matters for what you would do next.
+
+Start with what it duplicates. Averaged over the month, all three stations measure the same air:
+6.481 µg/m³ of PM2.5 at Goleta, 6.172 at Santa Barbara and 6.083 at CNSI, a total spread of 0.397
+µg/m³ across fifteen kilometres. For the regional average, two stations would have told you what
+three did. CNSI also measures only PM2.5, in 714 readings, while the other two return ozone and
+PM10 as well, so it cannot contribute to two of the three parameters at all. On the pollutant with
+the largest and most policy-relevant daily swing, ozone, which runs from 0.01113 ppm at hour 06 to
+0.03087 ppm at hour 14, CNSI reports no ozone at all.
+
+What is genuinely different about it is its behaviour at the extremes. Its standard deviation is
+1.745 µg/m³ against Goleta's 3.651, its month-long maximum is 12.0 against Goleta's 22.0, and it
+recorded none of the 14 negative readings that the other two produced near their detection limits.
+It also reports at 0.1 µg/m³ resolution while the other two report whole micrograms. Either it
+sits in a genuinely calmer spot, on a roof above street-level plumes, or its instrument responds
+more slowly than theirs. Those two possibilities have opposite implications, and the district
+should care which is true, because Goleta recorded 51 hours above 12 µg/m³ and CNSI recorded none.
+
+What one month cannot tell them: whether any of this holds outside a single summer. This window
+contains no winter inversions, no rain, and no wildfire smoke event, which is when the stations
+would most likely disagree and when a third measurement would be worth most. Before cutting the
+site, I would ask for a co-located comparison against a reference monitor to settle the instrument
+question, and a full year of data.
+:::
+
+## Where the marks are
+
+If you compare your notebook against this key, look for these four things before you look at
+anything else.
+
+1. **Every mean you reported has a count beside it.** Question 17 is the whole argument for this
+   habit: the ozone means at hours `'02'` and `'03'` looked entirely normal, and only the count
+   column revealed that each was a single station rather than two.
+2. **You filtered to one parameter before every average.** Ozone is in ppm and the particulates in
+   µg/m³, so any mean taken across the `parameter` column produces a number that has no
+   unit.
+3. **Your question 10 answer treats the boundary explicitly.** CNSI's maximum is exactly 12.0 and
+   the filter asked for values above 12, so a station disappeared from the result by 0.0. With
+   `>=` instead, Goleta goes from 51 hours to 62 and Santa Barbara from 25 to 42.
+4. **Your interpretation answers say what the number means, not what it is.** "Goleta has the
+   highest mean" restates the output. "Goleta is highest by 0.397 µg/m³, less than a tenth of the
+   standard deviation at any station, so the ranking carries no weight" reads it.
+
+⬅️ Back to [the exercise](../eod-practice/eod-day5-2026.qmd)

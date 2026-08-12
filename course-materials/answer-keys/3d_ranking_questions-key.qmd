@@ -1,0 +1,335 @@
+---
+title: "Answer Key"
+subtitle: "🙌 Which One, and How Do You Know?"
+search: false
+execute:
+  echo: true
+  include: true
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+:::{.callout-important title="How to use this key"}
+Work the colab through with your partner first, then come here. The code below is **one** correct
+answer, not the only one. This was a 45 minute pair exercise with very little scaffolding, so
+there are several reasonable ways to write almost every cell. If your code looks different but
+produces the same numbers, you were right.
+
+The written answers matter more than the code. You can already tell whether your code ran. What
+you cannot check on your own is whether you read the result correctly, and that is what the
+green **Answer** boxes are for. Compare your markdown cells against them.
+
+⬅️ Back to [the colab](../coding-colabs/3d_ranking_questions.qmd)
+:::
+
+## Setup
+
+```{python}
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/national_parks.csv'
+parks = pd.read_csv(url)
+parks.shape
+```
+
+```{python}
+parks.columns.tolist()
+```
+
+## Part 1: Filtering
+
+**1. How many rows describe units whose `unit_type` is exactly `National Park`?**
+
+```{python}
+national_parks = parks[parks['unit_type'] == 'National Park']
+national_parks.shape
+```
+
+```{python}
+national_parks['unit_name'].nunique()
+```
+
+:::{.callout-note title="✅ Answer"}
+**4,743 rows, but only 61 National Parks.** A row is one park in one year, not one park, and the
+file covers 113 years of records. If you wrote "there are 4,743 National Parks" you read the row
+count as a count of things in the world, which it is not.
+
+`National Park` is also only one of 30 values in `unit_type`. Most of the file is National
+Monuments, Historic Sites and the rest of the National Park Service, so this filter throws away
+about four fifths of the table.
+:::
+
+**2. How many rows have a `year` of `Total`? Use `~` or `!=` to build a table called `by_year`
+that has none of them in it. How many rows does `by_year` have?**
+
+```{python}
+totals = parks[parks['year'] == 'Total']
+print(totals.shape)
+
+by_year = parks[~(parks['year'] == 'Total')]
+print(by_year.shape)
+```
+
+:::{.callout-note title="✅ Answer"}
+**386 `Total` rows, leaving 21,174 rows in `by_year`.** The number 386 is not arbitrary: it is
+exactly the number of distinct units in the file, so every unit carries one and only one `Total`
+row.
+
+Those rows are sums of the other rows in the same table. Great Smoky Mountains has a `Total` of
+521,947,058, and adding up its 113 yearly values gives 521,947,058 as well. Leaving them in means
+counting every visitor twice, once in the year they visited and once in the lifetime sum. Every
+ranking in Parts 2 and 3 depends on having removed them first.
+:::
+
+**3. The `region` column uses two-letter codes. Build a list of the codes `PW`, `IM`, and `AK`,
+and use `.isin()` to filter `by_year` down to units in those three regions. How many rows?**
+
+```{python}
+western_regions = ['PW', 'IM', 'AK']
+western = by_year[by_year['region'].isin(western_regions)]
+western.shape
+```
+
+```{python}
+by_year['region'].value_counts()
+```
+
+:::{.callout-note title="✅ Answer"}
+**9,894 rows, which is 46.7% of `by_year`.** Three of the eight region codes hold almost half the
+records, and `IM` on its own is the largest region at 5,682 rows. That is a fact about where the
+Park Service has units, not about where people go.
+
+`.isin()` with a list does the work of three separate comparisons joined by `|`. The list is the
+part you edit later, which is why building it as a named variable is worth the extra line.
+:::
+
+**4. Using two conditions in one filter, find the rows that are National Parks and recorded more
+than 5 million visitors. How many are there, and what does each row represent?**
+
+```{python}
+big = by_year[(by_year['unit_type'] == 'National Park') & (by_year['visitors'] > 5_000_000)]
+print(big.shape)
+big[['year', 'unit_name', 'state', 'visitors']].sort_values('visitors', ascending=False).head()
+```
+
+```{python}
+big['unit_name'].value_counts()
+```
+
+:::{.callout-note title="✅ Answer"}
+**59 rows, and each one is a single park in a single year.** So the honest sentence is "there
+were 59 park-years above 5 million visitors", not "59 parks passed 5 million".
+
+The distinction matters because only **four** parks ever did it. Great Smoky Mountains accounts
+for 55 of the 59 rows, Grand Canyon for two (2015 and 2016), Yosemite for one (2016) and Acadia
+for one (1989). A row count of 59 sounds like a broad group and is in fact one park repeated.
+
+Acadia's single appearance is worth a second look. It recorded 5,440,952 visitors in 1989,
+4,502,283 in 1988, and then 2,339,591 in 1990. A 57% drop in one year almost certainly reflects a
+change in how the Park Service counted visitors rather than a real change in visits. Keep that in mind
+before treating any single year as a fact about the world.
+:::
+
+## Part 2: Ranking
+
+**5. Rank all of `parks` by `visitors`, largest first, and look at the top 10. Something is wrong
+with this answer. Say what, and say why in one sentence.**
+
+```{python}
+parks.sort_values('visitors', ascending=False).head(10)[
+    ['year', 'unit_name', 'unit_type', 'visitors']
+]
+```
+
+:::{.callout-note title="✅ Answer"}
+**Every one of the top 10 is a `Total` row.** Sorting the unfiltered table compares 113-year lifetime
+sums against single years, and a lifetime sum is always the larger number. The largest value,
+Blue Ridge Parkway at 871,922,828, is not a number of visitors in any year at all.
+
+Notice what the wrong answer looks like. There is no error message. The output is a clean,
+well-formatted table built from the wrong rows. Nothing in the output tells you the rows are not
+comparable. You have to know that from having looked at the `year` column.
+:::
+
+**6. Fix it, and rank `by_year` instead. Which single park unit had the highest visitor count in
+any one year, and in what year?**
+
+```{python}
+by_year.sort_values('visitors', ascending=False).head(10)[
+    ['year', 'unit_name', 'unit_type', 'state', 'visitors']
+]
+```
+
+:::{.callout-note title="✅ Answer"}
+**Golden Gate National Recreation Area, in 1987, with 21,767,176 visitors.**
+
+The part worth arguing about with your partner is that it is not a National Park. The whole top
+10 is Golden Gate National Recreation Area and Blue Ridge Parkway, and no National Park appears
+anywhere in it. The question asked about park *units*, and units include parkways, recreation
+areas and memorials, most of which are free, urban, and easy to drive through.
+
+If you answered "Great Smoky Mountains", you answered a different and narrower question. That is
+not a small slip. It is the same ambiguity question 12 asks you to name.
+:::
+
+**7. Filter to National Parks in the year `2016`, then find the top 10 by visitors. Show only the
+`unit_name`, `state`, and `visitors` columns.**
+
+```{python}
+np_2016 = by_year[(by_year['unit_type'] == 'National Park') & (by_year['year'] == '2016')].copy()
+print(np_2016.shape)
+
+np_2016.sort_values('visitors', ascending=False).head(10)[['unit_name', 'state', 'visitors']]
+```
+
+:::{.callout-note title="✅ Answer"}
+**61 National Parks reported a 2016 figure, and Great Smoky Mountains leads with 11,312,786
+visitors, close to twice the second-place Grand Canyon at 5,969,811.** After that the list
+descends gently: Yosemite 5,028,868, Rocky Mountain 4,517,585, Zion 4,295,127, and on down to
+Glacier at 2,946,681.
+
+The shape of the ranking matters more than its order. These ten parks account for 57.5 percent of
+all 83,920,334 National Park visits in 2016, so the distribution is heavily concentrated at the
+top and has a long thin tail. Note also that this is a different table from question 6, where no
+National Park appeared at all.
+:::
+
+**8. How many of the 61 National Parks recorded more than a million visitors in 2016?**
+
+```{python}
+(np_2016['visitors'] > 1_000_000).sum()
+```
+
+```{python}
+print(np_2016['visitors'].sum())
+print(np_2016[np_2016['visitors'] > 1_000_000]['visitors'].sum() / np_2016['visitors'].sum())
+print(np_2016['visitors'].median())
+```
+
+:::{.callout-note title="✅ Answer"}
+**22 of the 61, so just over a third.** Those 22 parks account for 81.4% of the 83,920,334 visits
+recorded to National Parks in 2016, which is the more useful way to say it: a third of the parks
+receive four fifths of the visits.
+
+The other 39 are much smaller than the top 10 table suggests. The median park recorded 607,479
+visitors, and the smallest, Gates of the Arctic in Alaska, recorded 10,047. Any sentence that
+begins "national parks are crowded" is really a sentence about roughly twenty of them.
+
+Note that `(np_2016['visitors'] > 1_000_000).sum()` counts `True` values rather than adding
+visitors. Summing a boolean Series is the standard way to count matches without building a second
+table.
+:::
+
+**9. Use `.idxmax()` and `.loc[]` on `np_2016` to print the name of the most-visited National Park
+of 2016 on its own, without displaying the whole row.**
+
+```{python}
+busiest = np_2016['visitors'].idxmax()
+print(np_2016.loc[busiest, 'unit_name'])
+print(np_2016.loc[busiest, 'visitors'])
+```
+
+:::{.callout-note title="✅ Answer"}
+**Great Smoky Mountains National Park, with 11,312,786 visitors**, which is 1.9 times Grand
+Canyon's 5,969,811 and 13.5% of all National Park visits that year. The gap between first and
+second place is larger than second place itself.
+
+`.idxmax()` returned the index **label** of the largest row, not the value. That is exactly why it
+is paired with `.loc[]`: one step answers "which one?" and the next answers "how much?", and
+neither step requires you to look at a table with your eyes.
+:::
+
+## Part 3: Put them together
+
+**10. Build a list of the state codes `CA`, `UT`, and `AZ`. Filter `np_2016` to National Parks in
+those three states, rank them by visitors, and display the whole ranked list.**
+
+```{python}
+southwest_states = ['CA', 'UT', 'AZ']
+southwest = np_2016[np_2016['state'].isin(southwest_states)].copy()
+
+southwest.sort_values('visitors', ascending=False)[['unit_name', 'state', 'visitors']]
+```
+
+**11. Which of those three states has the park at the top of your list, and which has the most
+parks in it? Answer both in a markdown cell. You can count the parks per state by eye from your
+ranked table.**
+
+```{python}
+southwest['state'].value_counts()
+```
+
+```{python}
+{state: southwest[southwest['state'] == state]['visitors'].sum() for state in southwest_states}
+```
+
+:::{.callout-note title="✅ Answer"}
+**Arizona has the top park; California has the most parks.** Grand Canyon leads the list with
+5,969,811 visitors, and Arizona has only three National Parks in total. California has nine, more
+than Utah's five and Arizona's three, and its best park, Yosemite at 5,028,868, is second.
+
+The two questions have different answers, and that is the reason both were asked. Arizona reaches
+7,433,511 visits in 2016 with three parks, four fifths of them at one park. California reaches
+12,345,331 with nine, of which five recorded under 610,000 apiece. "Which state has the busiest
+park" and "which state has the most park visiting" and "which state has the most parks" are three
+different questions, and a single ranked table answers none of them by itself.
+
+These 17 parks are 28% of the 61 National Parks and 35.6% of 2016 National Park visits.
+:::
+
+**12. In one markdown cell of three or four sentences, answer this: a colleague asks you which
+national park is "the busiest". What do you need to know before you can answer, and what would you
+tell them? Use at least two numbers from today's work.**
+
+```{python}
+y2016 = by_year[by_year['year'] == '2016']
+y2016.sort_values('visitors', ascending=False).head(5)[
+    ['unit_name', 'unit_type', 'state', 'visitors']
+]
+```
+
+There is no single right answer here. A strong response names at least two of the three choices
+that have to be settled before the question means anything, quotes at least two numbers it
+actually computed, and gives the colleague a usable answer rather than only an objection. Here is
+one that would earn full marks.
+
+:::{.callout-note title="✅ A model answer"}
+Before I can answer I need three things settled. First, which units count: only the 61 National
+Parks, or all 386 National Park Service units? Second, which year, or whether they mean the
+all-time total. Third, whether the `Total` rows have been removed, because leaving them in makes
+every answer a lifetime sum.
+
+If they mean National Parks in 2016, the answer is Great Smoky Mountains with 11,312,786 visitors,
+nearly twice Grand Canyon's 5,969,811. If they mean all Park Service units in 2016, Great Smoky
+Mountains is third: Golden Gate National Recreation Area recorded 15,638,777 and Blue Ridge
+Parkway 15,175,578. If they mean the busiest single year ever recorded, it is Golden Gate in 1987
+at 21,767,176.
+
+So the answer I would give is: for National Parks, Great Smoky Mountains, and the margin is large. But
+if they are asking because they want to know where the crowds are, the parkways and recreation
+areas beat every National Park, and I would want to know what they are planning to do with the
+number before I picked one.
+:::
+
+## Where the marks are
+
+If you compare your notebook against this key, look for these four things before you look at
+anything else.
+
+1. **Your `by_year` has 21,174 rows, and you built it before you ranked anything.** Every wrong
+   answer in Part 2 traces back to the 386 `Total` rows.
+2. **Your answer to question 6 names a unit that is not a National Park.** Golden Gate National
+   Recreation Area in 1987 is the correct answer. If you wrote a National Park, you filtered when
+   the question did not ask you to.
+3. **You compared `year` to the string `'2016'`, with quotes.** The column is text. Comparing it
+   to the integer `2016` returns zero rows and raises no error, which makes it one of the hardest
+   mistakes in pandas to notice.
+4. **Your answers say what a row is.** 4,743 rows is not 4,743 parks, and 59 rows above 5 million
+   is four parks, not 59. Every count in this file is a count of park-years until you say
+   otherwise.
+
+⬅️ Back to [the colab](../coding-colabs/3d_ranking_questions.qmd)

@@ -1,0 +1,394 @@
+---
+title: "Answer Key"
+subtitle: "🌍 Two Records, Sixty-Six Years Apart"
+search: false
+execute:
+  echo: true
+  include: true
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+:::{.callout-important title="How to use this key"}
+Work the colab first, then come here. The code below is **one** correct answer, not the only one.
+This exercise gives you less scaffolding than an end-of-day activity does, so there are more ways
+to reach each number than usual. If your code looks different but produces the same numbers, you
+were right.
+
+The written answers matter more than the code. You can already tell whether your code ran. What
+you cannot check on your own is whether you read the result correctly, and that is what the
+green **Answer** boxes are for. Compare your markdown cells against them.
+
+⬅️ Back to [the colab](../coding-colabs/6d_two_table_exercise.qmd)
+:::
+
+## Setup
+
+```{python}
+import pandas as pd
+
+base = 'https://eds-217-essential-python.github.io/data/'
+
+temp = pd.read_csv(base + 'monthly_temperature_data.csv')
+co2 = pd.read_csv(base + 'monthly_co2_concentration.csv')
+```
+
+## Part 1: One table out of two
+
+**1. How many rows does each table have, and what columns? What is the earliest and latest `Date`
+in each? (`.min()` and `.max()` on the `Date` column will do it, since these dates are text in
+`%Y-%m-%d` form and text in that form sorts correctly.)**
+
+```{python}
+print(temp.shape, list(temp.columns))
+print(co2.shape, list(co2.columns))
+print(temp['Date'].min(), temp['Date'].max())
+print(co2['Date'].min(), co2['Date'].max())
+```
+
+:::{.callout-note title="✅ Answer"}
+**Temperature: 1736 rows, two columns (`Date`, `MonthlyAnomaly`), January 1880 to August 2024.
+CO₂: 796 rows, two columns (`Date`, `CO2Concentration`), April 1958 to July 2024.**
+
+Both tables carry one row per month, and both row counts are exactly what the date spans require:
+1880-01 through 2024-08 is 144 years and 8 months, which is 1736 months, and 1958-04 through
+2024-07 is 796 months. Neither record has an internal gap, so every difference you find between
+the two tables from here on is a difference at the ends and not a hole in the middle.
+
+Note the second date pair as well as the first. The records start 78 years apart, but they also
+**stop one month apart**, and that second fact matters in question 4.
+:::
+
+**2. Merge the two tables on `Date`, with the default `how=`. How many rows come back?**
+
+```{python}
+inner = pd.merge(temp, co2, on='Date')
+inner.shape
+```
+
+:::{.callout-note title="✅ Answer"}
+**796 rows**, which is exactly the CO₂ table's row count. The default is `how='inner'`, so a row
+survives only when the same `Date` appears in both tables.
+
+That the answer equals 796 and not something smaller tells you every CO₂ month has a matching
+temperature row. The temperature record fully contains the CO₂ record in time, so the inner
+merge is limited entirely by the shorter of the two series. The 66 years of overlap are the CO₂
+record, and nothing else.
+:::
+
+**3. Merge them again with `how='left'`, putting `temp` on the left. How many rows now, and how
+many nulls, in which column?**
+
+```{python}
+left = pd.merge(temp, co2, on='Date', how='left')
+print(left.shape)
+print(left.isnull().sum())
+```
+
+:::{.callout-note title="✅ Answer"}
+**1736 rows, with 940 nulls, all of them in `CO2Concentration`.** A left merge keeps every row of
+the left table whether or not a match exists, so the row count is the temperature table's row
+count unchanged.
+
+The nulls are all in one column, and that is the signature of a left merge: the left table's
+columns are complete by construction, and only the columns brought in from the right can be
+empty. 1736 minus 940 is 796, the inner merge's answer, which is a useful arithmetic check that
+you merged what you thought you merged.
+:::
+
+**4. In a markdown cell: the two merges differ by 940 rows. Say in one sentence what those 940
+rows are, without looking anything up, since your answer to question 1 already told you.**
+
+```{python}
+missing = left[left['CO2Concentration'].isnull()]
+print(missing['Date'].min(), missing['Date'].max())
+```
+
+:::{.callout-note title="✅ Answer"}
+**They are the months when a temperature reading exists and a CO₂ reading does not**, which is
+the 939 months from January 1880 through March 1958, before Keeling's instrument was running,
+**plus one more at the far end: August 2024**.
+
+That last row is the part most pairs miss. It is easy to picture the gap as a single block at the
+start of the record, but the temperature series runs one month further than the CO₂ series does,
+so the unmatched months are at both ends. Your question 1 output said so: `2024-08-01` against
+`2024-07-01`. 939 plus 1 is 940, and if you predicted 939 you had the right idea and read only
+one of the two date pairs.
+:::
+
+**5. A decision, and there is no right answer that does not depend on the question. You are
+writing one of the following two papers. For each one, say which merge you would use and why:**
+
+- *"Atmospheric CO₂ and global temperature move together"*
+- *"The global surface temperature record, 1880 to the present"*
+
+:::{.callout-note title="✅ Answer"}
+**The first paper takes the inner merge, the second takes the left merge.**
+
+The first paper's claim is about the two variables **together**. A month with no CO₂ value cannot
+contribute anything to a statement about how the two move in relation to each other, so those 940
+rows are not data for this question. The inner merge's 796 rows are the honest sample, and the
+paper's title should really say 1958 to 2024, not 1880.
+
+The second paper is about temperature and mentions CO₂ nowhere. Throwing away 939 months of
+perfectly good thermometer readings because a different instrument had not been built yet would
+be a serious error, so the left merge is right. Better still, this paper does not need a merge at
+all; `temp` on its own is the dataset, and the CO₂ column is only there if you want it for
+context.
+
+The general point is that the `how=` argument is a decision about **which question you are
+asking**, not a technical detail of pandas. Choose it after you know what the analysis is for.
+:::
+
+## Part 2: Making the dates real
+
+**6 and 7. Build `climate`, parse the dates, add `year` and `month`.**
+
+```{python}
+climate = pd.merge(temp, co2, on='Date').copy()
+climate['date'] = pd.to_datetime(climate['Date'], format='%Y-%m-%d')
+climate['date'].dtype
+```
+
+```{python}
+climate['year'] = climate['date'].dt.year
+climate['month'] = climate['date'].dt.month
+climate[['Date', 'date', 'year', 'month']].head()
+```
+
+:::{.callout-note title="✅ Answer"}
+The dtype prints as **`datetime64[ns]`**, which is the proof the question asked for. If it still
+says `object`, the parse silently did not happen and every `.dt` call after it will fail.
+
+Keep both columns for now. `Date` is text and `date` is a real timestamp, and they look identical
+when printed side by side, which is exactly why the dtype check is worth doing rather than
+eyeballing the head of the table.
+:::
+
+**8. Build a table of annual means: group by `year` and report the *count* of months, the mean
+`MonthlyAnomaly`, and the mean `CO2Concentration`. Show the first three rows and the last three.**
+
+```{python}
+annual = climate.groupby('year').agg({'Date': 'count',
+                                      'MonthlyAnomaly': 'mean',
+                                      'CO2Concentration': 'mean'})
+print(annual.head(3))
+print(annual.tail(3))
+```
+
+**9. Two of the sixty-seven years in that table are not twelve months long. Which two, and why?
+Filter them out into a table called `full_years` and say how many years survive.**
+
+```{python}
+full_years = annual[annual['Date'] == 12]
+print(annual[annual['Date'] != 12])
+print(full_years.shape)
+```
+
+:::{.callout-note title="✅ Answer"}
+**1958, with 9 months, and 2024, with 7. Sixty-five years survive, 1959 through 2023.**
+
+Both are the ends of the CO₂ record rather than anything wrong with the data. Keeling's first
+reading is April 1958, so 1958 contributes April through December, and the file was downloaded
+after July 2024, so 2024 contributes January through July.
+
+The `count` column is doing the work here. A `mean` never tells you how many values it averaged,
+so a nine-month mean and a twelve-month mean print in the same format, to the same number of
+decimal places, and look equally trustworthy. Asking for `count` alongside every `mean` is the
+habit that catches this, and it costs one extra line.
+:::
+
+**10. In a markdown cell: what would the 2024 row have done to a claim about the warmest year on
+record, if you had not checked the count? Two sentences.**
+
+:::{.callout-note title="✅ Answer"}
+**2024 would have taken first place, at a mean anomaly of 1.287 °C against 2023's 1.169 °C**, and
+the claim would have been built on seven months of data compared against sixty-five twelve-month
+averages.
+
+The comparison is not sound even though 2024 really was warm, because a partial year is not the
+same quantity as a full year. 2023 makes the point on its own: its January to July mean is
+1.036 °C and its August to December mean is 1.356 °C, so which months you happen to have changes
+the answer by more than the gap between the top two years. `full_years` exists so that every
+number you compare is built from the same twelve slots.
+:::
+
+## Part 3: The shape that shows the sawtooth
+
+**11. Build a wide table with `year` down the rows, `month` across the columns, and
+`CO2Concentration` in the cells. Show the first three rows and the last three.**
+
+```{python}
+co2_grid = climate.pivot_table(index='year', columns='month', values='CO2Concentration')
+print(co2_grid.head(3).round(2))
+print(co2_grid.tail(3).round(2))
+```
+
+**12. That one table holds two different patterns at once. Read it *down* a single column, then
+read it *across* a single row. In a markdown cell, describe both in one sentence each.**
+
+:::{.callout-note title="✅ Answer"}
+**Down a column is the trend:** May goes from 318.29 ppm in 1959 to 424.00 ppm in 2023, a rise of
+105.71 ppm over 64 years, and the same rise appears in whichever month you pick.
+
+**Across a row is the seasonal cycle:** within 2023 the value climbs to a peak of 424.00 ppm in
+May and falls to a trough of 418.50 ppm in September before starting to climb again.
+
+The pivot separates the two patterns because it puts one on each axis. In the raw monthly column
+they are added together and you see a jagged rising line, which is harder to measure. Reshaping
+data is often what makes a comparison possible, and the `NaN` values
+in the 1958 and 2024 rows are the same two part years from question 9 showing up in a new shape.
+:::
+
+**13. Use the wide table to measure the second pattern. For every year, the difference between its
+largest monthly value and its smallest is the size of the annual cycle. Compute that difference
+for 1959 and for 2023, and report both.**
+
+```{python}
+print(co2_grid.loc[1959].max() - co2_grid.loc[1959].min())
+print(co2_grid.loc[2023].max() - co2_grid.loc[2023].min())
+```
+
+:::{.callout-note title="✅ Answer"}
+**4.96 ppm in 1959 and 5.50 ppm in 2023**, an increase of 0.54 ppm in the size of the annual
+cycle across 64 years. That is about 11 percent larger, on a cycle that was already the most
+regular feature of the record.
+
+Report these to two decimal places. The 1959 figure prints as `4.960000000000036`, which is
+floating-point arithmetic showing through and not a real precision claim: the underlying
+measurements have two decimals, so their difference has two decimals.
+:::
+
+**14. In a markdown cell: the annual cycle in CO₂ is caused by the northern hemisphere's plants,
+which take carbon out of the air in the growing season and put it back in the autumn. Given that,
+say what your two numbers from question 13 might mean, and say honestly how confident you are in
+a comparison of two single years.**
+
+```{python}
+for y in [1959, 1960, 1965, 1991, 2000, 2016, 2023]:
+    print(y, round(co2_grid.loc[y].max() - co2_grid.loc[y].min(), 2))
+```
+
+:::{.callout-note title="✅ Answer"}
+**The reading is that the northern hemisphere's growing season now moves more carbon each year
+than it did in 1959, and the confidence you should have in it, from two years, is very low.**
+
+The mechanism supports the reading. A larger swing means plants drew down more carbon between
+spring and autumn and released more of it again, which is what you would expect from a longer
+growing season, a warmer high-latitude spring, or simply more vegetation taking part.
+
+The evidence does not support it. Run the same subtraction on a few more years and the year to
+year scatter is larger than the change you are trying to see: 1960 is 6.20 ppm, larger than 2023's
+5.50, and 2000 is 4.83, smaller than 1959's 4.96. 1959 is the third smallest cycle in all 65 full
+years, so question 13 compared a year with an unusually small cycle against an ordinary one. The honest
+statement is that two years cannot separate a trend from noise, and that measuring this properly
+means averaging the cycle over a decade at each end, or fitting a line through all 65 values.
+:::
+
+**15. Build the same wide table for `MonthlyAnomaly`. Does the temperature record have a
+comparable seasonal cycle in it? Say why or why not in one sentence. (The answer is in what the
+word *anomaly* means.)**
+
+```{python}
+temp_grid = climate.pivot_table(index='year', columns='month', values='MonthlyAnomaly')
+print(temp_grid.tail(3).round(2))
+```
+
+```{python}
+temp_grid.mean().round(3)
+```
+
+:::{.callout-note title="✅ Answer"}
+**No, and it is missing by construction.** An anomaly is already a difference: each month's
+temperature minus that same month's long-term average. January is compared against Januaries and
+July against Julys, so the seasonal cycle has been subtracted out before the number reaches your
+table.
+
+The column means show it. Averaged over the whole table the twelve months span 0.350 °C in August
+to 0.446 °C in March, a spread of about 0.10 °C, and some of even that comes from the two
+incomplete years contributing to some columns and not others. Compare that with CO₂, where a
+single year swings 5 ppm out of a total range of about 110 ppm.
+
+Individual rows do vary. 2023 runs from 0.87 °C in January to 1.48 °C in September, a spread of
+0.61 °C. That is real variation in how far each month sat above its own baseline, not a repeating
+seasonal shape, and it does not line up with the same months from one year to the next.
+:::
+
+## Part 4: The claim
+
+**16. Using `full_years`, compare the 1960s with the 2010s. Compute the mean of each column for
+`year` between 1960 and 1969, and again for `year` between 2010 and 2019, and report the change in
+each.**
+
+```{python}
+sixties = full_years[(full_years.index >= 1960) & (full_years.index <= 1969)]
+tens = full_years[(full_years.index >= 2010) & (full_years.index <= 2019)]
+
+print(sixties[['MonthlyAnomaly', 'CO2Concentration']].mean())
+print(tens[['MonthlyAnomaly', 'CO2Concentration']].mean())
+```
+
+:::{.callout-note title="✅ Answer"}
+**CO₂ rose from 320.29 ppm to 400.41 ppm, an increase of 80.12 ppm, and the temperature anomaly
+rose from -0.030 °C to 0.805 °C, an increase of 0.835 °C.**
+
+Both decades are ten complete years drawn from `full_years`, which is what makes the two means
+comparable. The 1960s anomaly is very slightly negative, meaning that decade sat a hundredth of a
+degree below the twentieth-century baseline, so the 2010s figure is a rise from roughly zero
+rather than a rise from something already elevated. In relative terms the CO₂ increase is 25.0
+percent of the 1960s level.
+:::
+
+**17. In a markdown cell of four or five sentences: state the two changes you measured, with
+units. Then state clearly what this analysis does *not* show. You have put two curves in the
+same table and found that both went up; name one thing a scientist would need before calling that
+a causal claim.**
+
+There is no single right answer here. A strong response quotes both changes with their units,
+says plainly that the analysis is a comparison of two rising series, and names something concrete
+that would be needed to go further. Here is one that would earn full marks.
+
+:::{.callout-note title="✅ A model answer"}
+Between the 1960s and the 2010s, atmospheric CO₂ measured at Mauna Loa rose by 80.12 ppm, from a
+decadal mean of 320.29 ppm to 400.41 ppm, and the global temperature anomaly rose by 0.835 °C,
+from -0.030 °C to 0.805 °C. Both decades are built from ten complete twelve-month years, so the
+two means are comparable and neither is distorted by a partial year.
+
+What this analysis shows is that two quantities both increased over the same 66 years. It does
+not show that one caused the other. Any pair of series that both rise steadily will agree in this
+test, including many with no physical connection at all, and this comparison has no way to tell
+them apart. The 796-row overlap is also a single sample of a single planet, so there is no control
+case in which CO₂ stayed flat and we could see what temperature did.
+
+Before calling this causal, a scientist would need a physical mechanism that predicts the size of
+the effect in advance, and here that mechanism exists: the radiative absorption properties of CO₂
+were measured in the laboratory in the nineteenth century, and they predict roughly this much
+warming for roughly this much CO₂. The prediction came first and the observation matched it, and that is
+what makes the argument strong. It would also help to rule out the alternatives, showing that
+solar output and volcanic aerosols over the same period do not account for the trend. My two
+columns are consistent with the accepted explanation, and consistency is not evidence of cause on
+its own.
+:::
+
+## Where the marks are
+
+If you compare your notebook against this key, look for these four things before you look at
+anything else.
+
+1. **You know why the inner merge returned exactly 796 rows.** Not "because inner keeps matches",
+   but because 796 is the CO₂ table's own row count, which means the shorter record set the limit
+   and nothing was lost from it.
+2. **Your question 4 answer counts both ends.** 939 months at the start and one month, August
+   2024, at the finish. Question 1 printed the evidence for both.
+3. **Every mean you reported came with a count, or from `full_years`.** The 2024 row is the
+   cautionary case: a seven-month mean that would have topped the warmest-year ranking, with
+   nothing in the output to show that it came from seven months.
+4. **Your question 14 answer is honest about two years.** Naming the mechanism is the easy half.
+   Saying that 1959 against 2023 cannot separate a trend from year to year scatter is the half
+   that earns the marks, and the extra years above are how you check it.
+
+⬅️ Back to [the colab](../coding-colabs/6d_two_table_exercise.qmd)

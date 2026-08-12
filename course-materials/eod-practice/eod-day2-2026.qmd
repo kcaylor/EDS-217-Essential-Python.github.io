@@ -134,8 +134,9 @@ empty by design. This is the difference between reading a table and understandin
    column carrying information?
 9. Use `.value_counts()` on `Flag_Daily_AirTemp_Mean_C`. What values appear, and what do you
    think they mean?
-10. Use `.value_counts().head()` on the `Year` column. Do all years have the same number of
-    observations? What would explain a year with fewer?
+10. Use `.value_counts()` on the `Year` column and look at both ends of the result, with
+    `.head()` and then with `.tail()`. Do all years have the same number of observations? What
+    would explain a year with fewer?
 
 ```{python}
 toolik['LTER_Site'].value_counts()
@@ -151,6 +152,10 @@ toolik['Flag_Daily_AirTemp_Mean_C'].value_counts()
 
 ```{python}
 toolik['Year'].value_counts().head()
+```
+
+```{python}
+toolik['Year'].value_counts().tail()
 ```
 
 ## Part 4: The numbers

@@ -440,8 +440,8 @@ plt.show()
 
 26. Now the other end. Show the five states with the smallest mean increase, with their counts.
     In a markdown cell, one or two sentences: one of those states has more zip codes in it than
-    any other state in the file. Does that make its small number more trustworthy or less, and
-    does it make the ranking more interesting or less?
+    all but one other state in the file. Does that make its small number more trustworthy or
+    less, and does it make the ranking more interesting or less?
 
 ```{python}
 by_state.sort_values('mean').head(5).round(2)
@@ -465,8 +465,8 @@ Look back through your notebook. You made six figures tonight, and they did four
 
 - Question 9 found a **data error**, in a file that was not otherwise wrong.
 - Question 13 drew a **map** out of two ordinary numeric columns.
-- Question 18 showed you that your "temperature change" is **six distinct values**, which is the
-  single most important thing to know about it and is invisible in any mean.
+- Question 18 showed you that your "temperature change" is **eleven distinct values**, which is
+  the single most important thing to know about it and is invisible in any mean.
 - Question 21 answered the **question**.
 
 Only one of the six was the figure the evening was about. The other five were how you found out

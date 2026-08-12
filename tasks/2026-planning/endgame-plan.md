@@ -141,84 +141,142 @@ is in scope); `sets.qmd` and `comprehensions.qmd` had no inbound link from any 2
 from 2025 orphans; and no cheatsheet ever read the four sibling CSVs, so nothing needed to move
 into `data/`.
 
-## Answer keys for the 2026 activities (STARTED 2026-08-11, 1 of 12 built)
+## Answer keys for the 2026 activities (COMPLETE 2026-08-11, 12 of 12 built)
 
 Kelly raised this after the cheatsheet pass: the 2025 course had answer keys, students used them
-to check their work, and the 2026 activities have none. `answer-keys/answer_keys.qmd` still lists
-the 2025 keys, every one of which is an orphan.
+to check their work, and the 2026 activities had none.
 
-**The enabling fact:** all seven 2026 EODs and all five 2026 colabs already carry a complete,
-verified answer-code solution, hidden by `execute: echo: false, include: false` in the front
-matter. Roughly 200 python cells, all previously verified. So the code half of a key already
-exists and only has to be surfaced. What does **not** exist is the prose: these exercises ask
-students to answer in markdown cells ("say why that number is what it is", "what does this tell
-you about matching on text"), and that is the half a student cannot check alone.
+**The enabling fact:** all seven 2026 EODs and all five 2026 colabs already carried a complete,
+verified answer-code solution, hidden by `execute: echo: false, include: false`. The code half of
+a key already existed and only had to be surfaced. What did not exist was the prose, and that is
+the half a student cannot check alone.
 
 ### Kelly's three decisions, 2026-08-11
 
-1. **Content: code plus written answers.** Not code alone. The written answers are the point,
-   because a student can already tell whether their code ran.
-2. **Coverage: all 12 files.** Seven EODs plus the five colabs (`3d_ranking_questions`,
-   `4d_cleaning_messy_data`, `5c_grouped_comparisons`, `6d_two_table_exercise`, `7c_penguins`).
+1. **Content: code plus written answers.** Not code alone.
+2. **Coverage: all 12 files.** Seven EODs plus the five colabs.
 3. **Release: published from the start**, linked from the site, as in 2025.
 
-### The reference implementation
+### What was built
 
-**`answer-keys/eod-day3-2026-key.qmd` is built and verified** (20/20 cells clean, zero
-em-dashes). Copy its shape. The conventions it establishes:
+All twelve keys live in `answer-keys/`, named `<source-stem>-key.qmd`. **228 of 228 python cells
+run clean** under `tools/run_cells.py` on Kelly's machine (pandas 2.3.3, seaborn 0.13.2), and the
+em-dash count is zero in every one.
 
-- Lives in `answer-keys/`, named `<source-stem>-key.qmd`. Relative links to `../cheatsheets/`
-  and `../eod-practice/` both work from there.
-- Front matter flips the two directives to `echo: true` and `include: true`, adds
-  `search: false`, and keeps the exercise's subtitle so the pair is obviously a pair.
-- Opens with a `.callout-important` on how to use the key, and a back-link to the exercise.
-- Reproduces the **questions** verbatim in bold, and the code, but **drops** the exercise's
-  narrative, images, Field Notes and wrap-up. A key is a key, not a second copy of the exercise.
-- Every interpretive question gets a `:::{.callout-note title="✅ Answer"}` block. Every one of
-  those answers states what the number **means**, not what it is.
-- Closes with a short "Where the marks are" list naming the three or four things most worth
-  self-checking.
-- Ends with a second back-link to the exercise.
+| Key | Cells |
+|-----|-------|
+| `eod-day1-2026-key.qmd` | 15 |
+| `eod-day2-2026-key.qmd` | 17 |
+| `eod-day3-2026-key.qmd` | 20 (the reference implementation, commit 714c233) |
+| `eod-day4-2026-key.qmd` | 26 |
+| `eod-day5-2026-key.qmd` | 20 |
+| `eod-day6-2026-key.qmd` | 16 |
+| `eod-day7-2026-key.qmd` | 23 |
+| `3d_ranking_questions-key.qmd` | 19 |
+| `4d_cleaning_messy_data-key.qmd` | 24 |
+| `5c_grouped_comparisons-key.qmd` | 16 |
+| `6d_two_table_exercise-key.qmd` | 15 |
+| `7c_penguins-key.qmd` | 17 |
 
-### Method, and it matters
+Every key follows the Day 3 shape: front matter flipping the two execute directives and adding
+`search: false`, an opening `.callout-important` on how to use the key with a back-link, questions
+reproduced verbatim in bold, a `:::{.callout-note title="✅ Answer"}` on every interpretive
+question, a closing "Where the marks are" list, and a second back-link. Narrative, images, Field
+Notes, R-versus-Python tips and wrap-ups are dropped.
 
-**Compute every number before writing a single answer.** The Day 3 key was written by first
-running the whole analysis through `tools/run_cells.py`'s offline cache and printing every
-figure the questions ask about, then writing prose against those figures. Do not write an answer
-from memory or from the exercise's own prose. Two of the Day 3 answers turned on facts that were
-not obvious until the numbers were on screen: questions 12 and 13 differ by exactly one row
-(Bananas itself, the only food scoring exactly 1.0), and `.filter(like='heese')` returns 12 rows
-of which three are not cheeses.
+**Method used throughout:** every number was computed before any answer was written, by running
+the exercise's whole hidden solution through the offline cache and printing every figure the
+questions ask about. No answer was written from memory or by paraphrasing the exercise's own prose.
 
-Many verified numbers are already recorded in the `eds217-flight-packet-findings` memory note,
-which makes this much cheaper than it sounds. Check there before recomputing.
+### Wiring, done in the same pass
 
-### Remaining work: 11 files
+- **`answer_keys.qmd` rewritten** around the twelve 2026 keys, as two tables (colabs, end-of-day
+  practice) with the exercise and its key side by side. Every 2025 link is gone, which discharges
+  the "revising answer_keys.qmd" half of the orphan-retirement item below. It explains why the
+  Day 2 colab has no key, and it states the "say what the number means" standard once, centrally.
+- **Each key linked from its day page.** `day1.qmd` through `day7.qmd` gained an `## Answer keys`
+  section between End-of-day practice and Additional Resources.
+- **`_quarto.yml` navbar gained a `🔑 answer keys` entry** pointing at `answer_keys.qmd`, which
+  was previously unreachable from anywhere on the site. Every key keeps `search: false`, so the
+  navbar is the deliberate route in and a student cannot stumble onto an answer while searching.
 
-- [ ] `eod-day1-2026-key.qmd` (10 cells, smallest)
-- [ ] `eod-day2-2026-key.qmd` (17 cells, Toolik data biography)
-- [x] `eod-day3-2026-key.qmd` **DONE, the reference implementation**
-- [ ] `eod-day4-2026-key.qmd` (25 cells, the largest EOD)
-- [ ] `eod-day5-2026-key.qmd` (17 cells)
-- [ ] `eod-day6-2026-key.qmd` (15 cells)
-- [ ] `eod-day7-2026-key.qmd` (21 cells)
-- [ ] `3d_ranking_questions-key.qmd` (13 cells)
-- [ ] `4d_cleaning_messy_data-key.qmd`
-- [ ] `5c_grouped_comparisons-key.qmd` (12 cells)
-- [ ] `6d_two_table_exercise-key.qmd`
-- [ ] `7c_penguins-key.qmd` (16 cells)
-- [ ] **Rewrite `answer-keys/answer_keys.qmd`.** It currently lists only 2025 keys, all orphans.
-      This discharges the "revising answer_keys.qmd" item in the orphan-retirement task below.
-- [ ] **Link each key from its day page**, and decide whether the exercise itself carries a
-      forward link to its key. The Day 3 key links back to the exercise; the exercise does not
-      yet link forward.
-- [ ] Run `tools/run_cells.py` over all 12 keys, and run the house-style em-dash check on them
-      (the same `grep -c` used before every commit; the character is not spelled out here so that
-      this checklist does not trip its own test).
+### Decided 2026-08-11: no forward links, and no key URLs on the site
 
-**Do not edit the source exercises while building keys.** Days 1 through 7 are built, verified
-and signed off. If a key reveals a genuine error in an exercise, record it here rather than
-fixing it inline, so the correction is a deliberate decision rather than a side effect.
+**The exercises do not link forward to their keys, and they should not.** Every key links back to
+its exercise; nothing links the other way. Kelly's reasoning: he will give out key URLs in class
+as he judges each one is due, so that students do not treat a key as a crutch available the moment
+they get stuck. A forward link on the exercise page would put the answer one click away while the
+exercise is still being worked, which is precisely the behaviour the timing is meant to prevent.
+
+This does not need revisiting. If a future pass adds a key, it gets a back-link only.
+
+The `🔑 answer keys` navbar entry and `answer_keys.qmd` remain, since Kelly wants the keys
+published and reachable once he has named them. `search: false` on every key means a student
+cannot arrive at one by searching the site.
+
+### Errors found in the source exercises, corrected 2026-08-11
+
+Building a key runs the exercise honestly for the first time since it was written, so five factual
+slips surfaced, plus one design problem and one house-style nit. **All seven were corrected on
+2026-08-11**, in a single deliberate pass with the "do not edit Days 1 to 7" rule suspended for
+these items only. Every number was recomputed through the offline cache before any edit was made,
+and every claim below reproduced exactly. The four affected keys were reconciled in the same pass,
+since each had been written around the error and said so.
+
+1. **Day 4 EOD, task 3** said "Four columns have gaps." There are **five**: `SubRegions` 15,657,
+   `Regions` 8,249, `Measurement` 5,792, `Oceans` 271, and `Keywords` 18. Now reads "Five".
+   The key's task 3 answer no longer opens "There are five, not four" and no longer teaches the
+   discrepancy as a lesson in reading output against expectations, since there is no longer a
+   discrepancy. It names the five and keeps the point that `Keywords` is easy to skim past.
+2. **Day 4 EOD, task 7** said to "confirm with `.isnull().sum()` that nothing is missing anywhere."
+   After filling `Regions` and `SubRegions`, `Keywords` still has 18 nulls. Now reads "confirm
+   that only `Keywords` is still missing anything." The key's task 7 answer leads with `Keywords`
+   as the expected result rather than as a gap the student had to catch.
+3. **Day 6 EOD, question 9** said two decade winners rest on fewer than four entries. There are
+   **three**: France in the 1950s (3 entries, 19.7), Serbia in the 2000s (2 finals, 214.0) and
+   Bulgaria in the 2010s (3, 362.7). Now reads "Three", with "either one" changed to "any of them"
+   for grammar. The key names all three in its opening sentence and drops "not two, so count the
+   rows yourself rather than taking the question's word for it."
+4. **Day 7 EOD, "the figure minute"** said question 18 showed "six distinct values". The correct
+   count is **eleven**, all multiples of five, from -30 to +25. Now reads "eleven". The Day 7 key
+   already said eleven throughout and needed no change here.
+5. **Day 7 EOD, question 26** said one of the bottom-five states "has more zip codes in it than any
+   other state in the file." California has 2,552 in `change`, second to **Texas at 2,566**. Now
+   reads "than all but one other state in the file", which keeps the teaching point that a small
+   mean resting on a very large count is more trustworthy and less interesting. The key's answer
+   drops the "the largest count in this table but one" workaround and states it directly.
+
+**The design problem. Day 2 EOD, question 10** asked "do all years have the same number of
+observations?" but prescribed `.value_counts().head()`, which sorts by count descending and
+therefore returns five leap years at 366 and never surfaces 1988's 214 rows. A student following
+it exactly would conclude that all years are the same length.
+
+**Decision: run both ends, `.head()` and then `.tail()`.** The question now reads "Use
+`.value_counts()` on the `Year` column and look at both ends of the result, with `.head()` and
+then with `.tail()`", and a second one-line cell was added after the existing one. Switching to
+`.tail()` alone was the smaller edit and was tried first, but it makes only half the question
+answerable: the tail shows 1988 at 214 against four years of 365 and hides the five leap years at
+366, so a student reading only the tail would answer "yes, 365 each except 1988", which is also
+wrong. Running both ends is the smallest change that lets both halves of the question be answered
+from true output. It also puts the sorting behaviour of `.value_counts()` in front of the student,
+which is the conceptual gap that produced the error. `.groupby('Year').size()` was rejected: it
+preserves year order but introduces a construct that Day 2 does not have, since Day 2 holds only
+the collections vocabulary plus the explore toolkit. The key's question 10 answer was rewritten to
+explain what each end shows rather than to catch the student out, and its "Where the marks are"
+item 2 no longer treats the call as a trap. It now asks for the explanation of 1988 rather than
+the discovery of it.
+
+**The house-style nit. Day 4 EOD, question 23** used "land" as a metaphorical verb ("samples they
+called `Very Low` land in your `high` bin"). Changed to "fall in", in the exercise and in
+`eod-day4-2026-key.qmd`, which reproduces the question verbatim.
+
+**Verification.** `python tools/run_cells.py` over the four edited exercises and all twelve keys
+stayed at 228/228 clean on the keys. Zero em-dash characters in every touched file. No question
+was renumbered, no section restructured, and nothing outside these seven items was changed. No
+forward links from any exercise to its key were added, per the decision above.
+
+**Still true: do not edit the source exercises casually.** This pass was the deliberate correction
+the rule was reserving. The rule is back in force.
 
 ## Pre-launch checklist
 

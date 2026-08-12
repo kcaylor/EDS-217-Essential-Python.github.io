@@ -201,8 +201,8 @@ decade_winners = pd.concat(decade_winners_list, ignore_index=True)
 decade_winners[['decade', 'to_country', 'count', 'mean']]
 ```
 
-9. Read the `count` column before you read the `mean` column. Two of the seven winners won on
-    fewer than four entries. Name them, and say in one sentence why you would not put either one
+9. Read the `count` column before you read the `mean` column. Three of the seven winners won on
+    fewer than four entries. Name them, and say in one sentence why you would not put any of them
     in a headline.
 
 10. The `mean` column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown

@@ -112,7 +112,7 @@ Answer each of these in a markdown cell underneath the code that produced it.
 
 1. How many rows and columns? Display the first few rows.
 2. Run `.info()`. Which columns are `object`, and which of those *should* be something else?
-3. Run `.isnull().sum()`. Four columns have gaps. Name them and their counts.
+3. Run `.isnull().sum()`. Five columns have gaps. Name them and their counts.
 4. `Oceans` is missing on 271 rows and `Measurement` on 5,792. Are those the same rows? Find
    out, and say how you know.
 
@@ -160,7 +160,8 @@ df['Unit'].value_counts()
 ```
 
 7. Fill the gaps in `Regions` and `SubRegions` with `'Unspecified'`, one column at a time,
-   assigning each result back. Confirm with `.isnull().sum()` that nothing is missing anywhere.
+   assigning each result back. Confirm with `.isnull().sum()` that only `Keywords` is still
+   missing anything.
 
 ```{python}
 df['Regions'] = df['Regions'].fillna('Unspecified')
@@ -330,7 +331,7 @@ print(noaa_very_low['my_class'].value_counts())
 ```
 
 23. Something is wrong, and it is not your function. In a markdown cell, explain what NOAA's
-    `Density Class` must actually mean, given that samples they called `Very Low` land in your
+    `Density Class` must actually mean, given that samples they called `Very Low` fall in your
     `high` bin. Then say whether you would use their column in an analysis, and why.
 
 :::{.callout-tip title="A hint, if you want one"}

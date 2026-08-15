@@ -14,7 +14,7 @@ interactive sessions carry none. Delivered before Session 1a.*
 
 ## Logistics
 - **Schedule:** 4 interactive sessions/day + an end-of-day (EOD) practice; morning teaching, afternoon apply. (Day 1: Mon Aug 31.)
-- **Where we work:** Posit Workbench → JupyterLab; everything in the browser, nothing to install.
+- **Where we work:** Posit Workbench → Positron, the same IDE you used in your R course; everything in the browser, nothing to install.
 - **Materials:** course website (sessions, cheatsheets, EODs); notebooks you create and save each session.
 - **Getting help:** ask in the room, pair with your neighbor, use the cheatsheets; TA + instructor circulating.
 - **Assessment:** participation + EOD practice + the Day 8–9 project; low-stakes, learning-focused.
@@ -24,8 +24,8 @@ interactive sessions carry none. Delivered before Session 1a.*
 - Today you only need to *read and modify* working code; understanding the pieces is what the next eight days are for.
 
 ## Environment check (2–3 min, do together)
-- Log in to Workbench → launch JupyterLab → confirm the **eds217_2026** kernel appears.
+- Log in to Workbench → launch a **Positron Pro** session → confirm the interpreter dropdown offers **eds217_2026**.
 - Open a notebook, run `print("ready!")`, confirm output, so everyone is green before Session 1a.
 
 ## Handoff
-- "Close the slides and open Session 1a on the course site. Let's meet JupyterLab."
+- "Close the slides and open Session 1a on the course site. Let's see what changes when Positron runs Python."

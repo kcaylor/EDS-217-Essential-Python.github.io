@@ -9,7 +9,11 @@ format:
         code-fold: show
 ---
 
-This guide will help you set up Python 3.11 and JupyterLab on your local machine using Miniconda. We'll also install core data science libraries.
+This guide will help you set up Python 3.11 and the Positron IDE on your local machine using Miniconda. We'll also install core data science libraries.
+
+::: {.callout-note}
+You do not need any of this for class. In EDS 217 we work in Positron on the Bren Posit Workbench server, where everything is already installed. This guide is here for when you want Python on your own machine.
+:::
 
 ## Step 0: Opening a Terminal
 
@@ -62,10 +66,10 @@ Run the following commands:
 
 ```
 conda install python=3.11
-conda install jupyter jupyterlab numpy pandas matplotlib seaborn
+conda install jupyter ipykernel numpy pandas matplotlib seaborn
 ```
 
-This will install Python 3.11, JupyterLab, and the core data science libraries in your base environment.
+This will install Python 3.11, the Jupyter kernel machinery that Positron uses to run notebooks, and the core data science libraries in your base environment.
 
 ## Alternative: Create a Dedicated EDS 217 Environment
 
@@ -79,13 +83,13 @@ conda create -n eds217_2026 python=3.11
 conda activate eds217_2026
 
 # Install packages in the dedicated environment
-conda install jupyter jupyterlab ipykernel numpy pandas matplotlib seaborn scipy scikit-learn
+conda install jupyter ipykernel numpy pandas matplotlib seaborn scipy scikit-learn
 
 # Register the environment with Jupyter
 python -m ipykernel install --user --name eds217_2026 --display-name "Python 3.11 (EDS 217 2026)"
 ```
 
-When using JupyterLab, you can then select "Python 3.11 (EDS 217 2026)" as your kernel.
+In Positron, you can then select "Python 3.11 (EDS 217 2026)" in a notebook's Kernel Selector, or in the interpreter dropdown in the top right corner.
 
 ## Step 3: Verify Installation
 
@@ -94,12 +98,15 @@ When using JupyterLab, you can then select "Python 3.11 (EDS 217 2026)" as your 
    python --version
    ```
 
-2. To launch JupyterLab, run:
+2. To check that the environment registered as a kernel, run:
    ```
-   jupyter lab
+   jupyter kernelspec list
    ```
+   You should see `eds217_2026` in the list.
 
-This should open JupyterLab in your default web browser. You can now create new notebooks and start coding!
+## Step 4: Install Positron
+
+Download Positron from [positron.posit.co](https://positron.posit.co/) and install it the way you would any other application. Open it, create a new notebook from the Command Palette (**Create: New Jupyter Notebook**), and choose the `eds217_2026` kernel. You can now write notebooks on your own machine exactly as you do in class.
 
 ## Additional Notes
 

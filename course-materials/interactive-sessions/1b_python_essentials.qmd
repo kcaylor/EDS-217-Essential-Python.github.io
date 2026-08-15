@@ -17,7 +17,7 @@ format:
 *A cartoon depicting the idea of a variable.* [MidJourney 5](https://www.midjourney.com/jobs/7d8b78b4-61a1-49b2-9187-0bed8b4d8127?index=0)
 :::
 
-Now that you're comfortable moving around JupyterLab, let's meet the handful of Python
+Now that you're comfortable moving around Positron, let's meet the handful of Python
 building blocks you'll use in every single notebook this week: **variables**, **strings**,
 the **`print()`** and **`type()`** functions, and the star of today, **f-strings**, for
 building readable output. We're keeping the vocabulary small on purpose so you can use it
@@ -28,16 +28,11 @@ fluently.
 Set up your notebook using the same ritual from this morning:
 
 1. **Create a new notebook:**
-   - Click the `+` button to open a Launcher.
-   - Under **Notebook**, click **eds217_2026**.
+   - Open the Command Palette with `Ctrl + Shift + P` (`Cmd + Shift + P` on macOS)
+     and run **Create: New Jupyter Notebook**.
+   - Confirm the Kernel Selector in the notebook's action bar reads **eds217_2026**.
 
-2. **Rename your notebook** to: `Session_1B_Python_Essentials.ipynb`
-   (right-click the `Untitled.ipynb` tab → **Rename**).
-
-:::{.callout-tip title="Right-clicking in JupyterLab"}
-If right-clicking shows a system menu instead of the Jupyter menu, try `CTRL-Right Click`
-or `OPTION-Right Click`.
-:::
+2. **Save your notebook** (`Ctrl + S`, or `Cmd + S` on macOS) as: `Session_1B_Python_Essentials.ipynb`
 
 3. **Add a title cell** (Markdown), updating the date to today:
 

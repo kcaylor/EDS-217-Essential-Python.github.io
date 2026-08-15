@@ -171,6 +171,7 @@ df_sorted = df.sort_values('Age', ascending=False)
 
 ```{python}
 #| echo: true
+#| eval: false
 
 # Save to CSV
 df.to_csv('output.csv', index=False)

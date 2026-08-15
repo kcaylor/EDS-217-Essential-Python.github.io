@@ -79,7 +79,7 @@ conda create -n eds217_2026 python=3.11
 conda activate eds217_2026
 
 # Install packages in the dedicated environment
-conda install jupyter jupyterlab numpy pandas matplotlib seaborn scipy scikit-learn
+conda install jupyter jupyterlab ipykernel numpy pandas matplotlib seaborn scipy scikit-learn
 
 # Register the environment with Jupyter
 python -m ipykernel install --user --name eds217_2026 --display-name "Python 3.11 (EDS 217 2026)"

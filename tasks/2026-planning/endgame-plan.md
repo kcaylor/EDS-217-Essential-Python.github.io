@@ -19,12 +19,12 @@ at any point in the trip, the course still runs.
 
 ## Two gates
 
-**Gate A — Fri Aug 14, before departure.**
+**Gate A. Fri Aug 14, before departure.**
 Site live on the org repo and verified. All mechanical updates done. Day 1 and Day 2 final in
 the 2026 design. Days 3–9 running 2025 materials with 2026 dates. Offline toolchain confirmed
 working on the laptop.
 
-**Gate B — Wed Aug 26, from Nairobi.**
+**Gate B. Wed Aug 26, from Nairobi.**
 Days 3–7 rebuilt to the skeleton, all six quality gates passed, full render clean, pushed and
 verified. Days 6–7 hold a real reserve window over Sep 5–7 because they are not taught until
 Sep 8–9.
@@ -283,34 +283,51 @@ the rule was reserving. The rule is back in force.
 Run once the restructuring is done and the revisions are settled, before the deploy. These
 are cleanup items that would be premature while days are still moving.
 
-- [ ] **Retire the superseded 2025 files from the render.** They are unlinked from the navbar
-      and the day pages, but Quarto still builds them, so a student can reach a page teaching
-      material we cut. Known orphans: `2d_list_comprehensions.qmd` and its notes, `2a_lists`,
-      `2b_dictionaries`, `2c_lists_dictionaries_sets`, the 2025 `1a`-`1d`, plus whatever
-      Days 3-7 orphan as they are rebuilt. Day 5 added four: `live-coding/5a_selecting_and_filtering.qmd`
-      and its notes, `interactive-sessions/5b_cleaning_data.qmd`, and
-      `coding-colabs/5c_cleaning_data.qmd`. Day 6 added six:
-      `interactive-sessions/6a_grouping_joining_sorting.qmd` and both its `_old` siblings,
-      `coding-colabs/6b_advanced_data_manipulation.qmd` and `coding-colabs/6b_preprocess.ipynb`,
-      and `eod-practice/eod-day6.qmd` with its `answer-keys/eod-day6-key.qmd`. Day 7 added five:
-      `interactive-sessions/7a_visualizations_1.qmd`, `interactive-sessions/7b_visualizations_2.qmd`,
-      `coding-colabs/7c_visualizations.qmd`, and `eod-practice/eod-day7.qmd` with its
-      `answer-keys/eod-day7-key.qmd`.
+- [x] **Retire the superseded 2025 files from the render. DONE 2026-08-15.**
 
-      **All seven 2025 EODs and all seven 2025 EOD keys are orphans, and Days 1 to 5 were not
-      named above.** Verified 2026-08-11: no day page and no navbar entry links any of
-      `eod-practice/eod-day1.qmd`, `eod-day1-draft.qmd`, `eod-day2.qmd`, `eod-day3.qmd`,
-      `eod-day4.qmd`, `eod-day5.qmd`, `eod-day6.qmd` or `eod-day7.qmd`. Their keys,
-      `answer-keys/eod-day1-key.qmd` through `eod-day7-key.qmd`, are linked only from
-      `answer_keys.qmd`. **`eod-day2-key.qmd` is where the last `lambda` in the course lives**,
-      so this pair in particular must not be skipped. The 2026 EODs have no answer keys at all,
-      which is why `answer_keys.qmd` needs rewriting rather than repointing.
+      The candidate list was rebuilt mechanically rather than taken from the enumeration that
+      used to sit here. A breadth-first walk from the 42 roots in `_quarto.yml` plus `index.qmd`,
+      following link chains so that a file reachable only through another orphan still counts as
+      an orphan, found 98 of 163 renderable files reachable and 65 unreachable. The result was
+      cross-checked in the opposite direction by grepping all 98 reachable files for every
+      orphan's filename stem; the only hits were word-boundary false positives (`eod-day1` inside
+      `eod-day1-2026`, the words "dictionaries" and "lectures" in prose). No live page linked any
+      orphan, so nothing broke.
 
-      Three of the Day 5
-      four, two of the Day 6 six and at least one of the Day 7 five are still linked from
-      `answer-keys/answer_keys.qmd`, **so that page needs revising in the same pass**, not just the
-      render config. `7a_visualizations_1.qmd` also links its own retired sibling. Decide per file: delete, or exclude via the
-      `render:` block in `_quarto.yml`. Do this last, since each rebuilt day adds to the list.
+      **Kept live, deliberately unlinked (3).** The instructor-notes siblings of the three live
+      2026 live-coding sessions: `live-coding/2d_lists_and_dicts_notes.qmd`,
+      `3a_booleans_and_conditionals_notes.qmd` and `5d_loops_over_groups_notes.qmd`. Each opens
+      "Instructor run-through for Session 2D / 3A / 5D" and links its live student-facing parent.
+      A content scan confirmed this independently: these are the only three orphans carrying any
+      2026 marker (a Field Note, or the `lambda` prohibition).
+
+      **Deleted (59),** since git history preserves every one and 59 exclusion lines would have
+      made the four-line render block unusable. By day: Day 1 (8), Day 2 (9), Day 3 (9),
+      Day 4 (11), Day 5 (7), Day 6 (8), Day 7 (6), plus `lectures/lectures.ipynb`. This covers all
+      seven 2025 EOD and key pairs including `eod-day1-draft.qmd`, both `_old` 6a/6b siblings,
+      `coding-colabs/6b_preprocess.ipynb`, and the five 2025 colab keys. Moved through
+      `_to_delete/2025-orphan-sweep/` because `rm` fails on the Cowork mount.
+
+      **Excluded via the `render:` block in `_quarto.yml` (3).** Three pages that are unlinked but
+      are general references rather than day sessions, and are superseded by nothing in 2026:
+      `interactive-sessions/2c_exceptions_and_errors.qmd` (325 lines on reading Python errors),
+      `2a_getting_help.qmd` (100 lines on `help()`), and `interactive-session-git.qmd` (a sidebar
+      on Git for notebooks). They stay in the working tree as instructor reference and stop being
+      reachable on the site.
+
+      **Two claims in the old text had gone stale and are recorded here for the history.**
+      `answer-keys/answer_keys.qmd` links none of the fifteen 2025 keys, having been rewritten on
+      2026-08-11 around the twelve 2026 keys, so it needed no revision in this pass. And the
+      `jupyter:` field is not a 2025-versus-2026 discriminator, since an earlier pass renamed the
+      kernel across the whole tree; classification used the link graph plus subtitle and content
+      instead. The single exception found: `lectures/lectures.ipynb` still read
+      `jupyter: eds217_2025`, because its YAML sits in a raw notebook cell that the rename missed.
+      It was deleted as a superseded two-cell stub of `lectures.qmd`.
+
+      **Also found and worth knowing.** `interactive-sessions/4c_dataframe_workflows.qmd`, now
+      deleted, taught the **nine**-step workflow that the 2026 build corrected to ten, so it
+      contradicted `final_project.qmd` rather than merely being superseded.
+
 - [ ] **Replace the four Day 7 placeholder images with bespoke panels.** Day 7 claimed four
       existing files and downloaded one. `7a_matplotlib.qmd` uses `images/matplotlib_panda.jpeg`
       and `7b_seaborn.qmd` uses `images/panda_seaborn.jpeg`; both were generated for this purpose
@@ -386,6 +403,18 @@ are cleanup items that would be premature while days are still moving.
       > early-afternoon sky; painterly illustration, warm muted palette, gently comic, no text
       > --ar 1:1 --style raw
 
+- [ ] **Four broken image paths, all one-line fixes.** Two more were found on 2026-08-15 by a
+      whole-tree internal-link scan, and both are on live 2026 pages:
+
+      - `eod-practice/eod-day2-2026.qmd` line 16 references `images/kenya_landscape.png`. The file
+        is at `course-materials/images/kenya_landscape.png`, so the path wants `../images/`. This
+        is the **Day 2 EOD header image on a signed-off page.**
+      - `lectures/pandas_workflow.qmd` line 13 references `assets/workflows_panads.png`. The file
+        is `assets/workflow_pandas.jpeg`. Three errors in one path: transposed letters in
+        "panads", a spurious plural in "workflows", and the wrong extension.
+
+      The other two, already known:
+
 - [ ] **Fix the broken image in the 2d live-coding page.**
       `live-coding/2d_lists_and_dicts.qmd` line 13 references `images/collections.jpg`, but
       `live-coding/` has no `images/` directory, only `assets/`. This is a **Day 2 page, which is
@@ -397,14 +426,14 @@ are cleanup items that would be premature while days are still moving.
       which is the one assignment worth keeping. The other four want bespoke panels in house style
       (a single anthropomorphic panda, painterly, square, no lettering):
 
-      - `course-materials/day6.qmd`, currently `images/structured-data.png` — a panda standing
+      - `course-materials/day6.qmd`, currently `images/structured-data.png`. A panda standing
         between two piles of paper, one tall and narrow, one short and wide, holding one sheet up
         to compare them
-      - `6a_joining_data.qmd`, currently `../images/panda.jpeg` — a panda fitting two halves of a
+      - `6a_joining_data.qmd`, currently `../images/panda.jpeg`. A panda fitting two halves of a
         torn map together on a table so the roads line up across the seam
-      - `6b_reshaping_data.qmd`, currently `../images/dataframes.jpeg` — a panda turning a long
+      - `6b_reshaping_data.qmd`, currently `../images/dataframes.jpeg`. A panda turning a long
         paper scroll sideways on a light table so its rows become columns
-      - `6d_two_table_exercise.qmd`, currently `../images/towersensors.jpeg` — a panda at a desk
+      - `6d_two_table_exercise.qmd`, currently `../images/towersensors.jpeg`. A panda at a desk
         with two long paper strip-charts of different lengths, sliding them until the dates align
 
       `panda_seaborn.jpeg` and `matplotlib_panda.jpeg` remain reserved for Day 7.
@@ -431,15 +460,25 @@ are cleanup items that would be premature while days are still moving.
       Add `.fuse_hidden*` to `.gitignore` in the same pass. Note that `rm` fails through the
       Cowork mount, so move them into the gitignored `_to_delete/` and let `git add -A` record
       the deletion.
-- [ ] **Last `lambda` in the course materials: no separate work needed, but do not lose it.**
-      `answer-keys/eod-day2-key.qmd` line 164 uses `max(..., key=lambda x: ...)`. Checked
-      2026-08-11: **that file is a 2025 orphan, not a 2026 file.** Its subtitle is "Python Data
-      Structures Practice" and it is the key to `eod-practice/eod-day2.qmd`, the 2025 Day 2 EOD.
-      The 2026 Day 2 EOD is `eod-day2-2026.qmd`, the Toolik data biography, and it has no answer
-      key. So the last `lambda` disappears the moment the orphan sweep above runs, provided that
-      sweep covers the 2025 EOD and key pairs, which it must now do explicitly (see the expanded
-      list). `interactive-sessions/6b_grouping_joining_sorting_2_old.qmd` line 428 has the other
-      one and is already on the list. **After the sweep, re-run gate 5 to confirm it passes.**
+- [x] **Last `lambda` in the course materials. DONE 2026-08-15, gate 5 passes.**
+      The orphan sweep removed `answer-keys/eod-day2-key.qmd` line 164 and
+      `interactive-sessions/6b_grouping_joining_sorting_2_old.qmd` line 428 as planned.
+
+      **The old accounting here was incomplete: it counted only `.qmd` files.**
+      `lectures/00_intro_to_python.ipynb` carried two real `lambda` calls at lines 894 and 932,
+      and that notebook is tracked, rendered, and reachable from the navbar through
+      `lectures.qmd`. Both were rewritten as dict comprehensions, which are in course scope:
+      the `rename(columns=...)` call now builds a `language_names` dict first, and the
+      `apply(...)` call now builds a `response_percentages` dict and passes it to
+      `pd.DataFrame(...)`. Behaviour is identical. The inner `.fillna(0)` in the original was a
+      no-op, since `value_counts` never yields NaN, and the cross-column NaNs that alignment
+      produces were not filled before and are not filled now. Quarto does not re-execute `.ipynb`
+      files, so the stored outputs stay consistent. The diff is 6 insertions and 2 deletions,
+      confined to the two cells.
+
+      The seventh naive-grep hit was `lectures/.ipynb_checkpoints/00_intro_to_python-checkpoint.ipynb`,
+      which is untracked and gitignored. The tightened gate-5 grep skips that directory.
+
 - [ ] **Four orphan CSVs in `course-materials/cheatsheets/`.** `ocean_temperatures.csv` (316 KB),
       `sample_time_data.csv`, `temp_data.csv` and `output.csv` are tracked, sit outside `data/`,
       and are read by nothing. The last two were render artifacts: `timeseries.qmd` used to write
@@ -452,6 +491,14 @@ are cleanup items that would be premature while days are still moving.
       address. The second installs a package list by hand; confirm it agrees with
       `environment-2026.yml`. Neither is a scope problem, both are the kind of thing a student
       hits in the first hour of Day 1.
+- [x] **`search: false` added to `live-coding/2d_lists_and_dicts_notes.qmd`. DONE 2026-08-15.**
+      Six of the seven `_notes.qmd` files carried it; this one did not, so the Day 2 instructor
+      run-through was indexed by site search and a student could find it.
+- [x] **`tools/run_cells.py` now honours `#| eval: false`. DONE 2026-08-15.** The checker used to
+      report eight failures in `interactive-sessions/8a_github.qmd`, whose `{python}` blocks hold
+      shell commands and are all marked `eval: false`, so Quarto never runs them. Those eight were
+      false failures in the tool, not defects in the page. Skipped blocks are now counted and
+      reported separately.
 - [ ] Run `python tools/run_cells.py` over every 2026 session and EOD.
 - [ ] Run `python tools/warm_cache.py`; expect every course-site URL to resolve.
 - [ ] Full `python build_docs.py --full` with no errors.
@@ -468,5 +515,17 @@ are cleanup items that would be premature while days are still moving.
    implies ADAPT at most in the same-day EOD".)
 3. At most 2 Field Notes per EOD
 4. Handout and answer key agree: no key-only tasks, names match
-5. `grep` for `lambda` returns nothing in course materials (currently fails: 3 files)
+5. `grep` for `lambda` returns nothing in course materials. **Passes as of 2026-08-15.** The
+   naive `grep -r lambda` produced false positives on prose (the live 2026 instructor notes
+   each carry the line "Do not use `lambda` anywhere. It is not in this course.") and on the
+   untracked `.ipynb_checkpoints/` copies. The gate is now:
+
+   ```
+   grep -rnE 'lambda[[:alnum:]_, *]*:' course-materials \
+     --include='*.qmd' --include='*.ipynb' --exclude-dir='.ipynb_checkpoints'
+   ```
+
+   Requiring the parameter list and colon matches real lambdas in all three forms
+   (`key=lambda r:`, bare `lambda:`, multi-arg `lambda a, b:`) and never matches backticked
+   prose. Verified against a probe file carrying all three forms.
 6. 2025 EOD alignment checklist run and archived

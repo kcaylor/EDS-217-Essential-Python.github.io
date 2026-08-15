@@ -18,12 +18,18 @@ total = failed_total = 0
 for f in sys.argv[1:]:
     src = pathlib.Path(f).read_text()
     blocks = re.findall(r"```\{python\}\n(.*?)```", src, re.S)
-    ns, fails, skipped = {}, 0, 0
+    ns, fails, skipped = {}, 0, []
     for i, b in enumerate(blocks, 1):
         # Quarto never executes a block marked `eval: false`, so neither do we.
         # These are usually shell commands or deliberately broken examples.
         if re.search(r"^#\|\s*eval:\s*false\s*$", b, re.M):
-            skipped += 1
+            skipped.append("eval: false")
+            continue
+        # IPython magics (%whos) and shell escapes (!ls, files = !ls) are valid in
+        # the Jupyter kernel Quarto renders through, but not in plain exec(). We
+        # cannot check these blocks, so skip them rather than report a false failure.
+        if re.search(r"^\s*[%!]|=\s*!", b, re.M):
+            skipped.append("IPython magic")
             continue
         try:
             with contextlib.redirect_stdout(io.StringIO()):
@@ -33,9 +39,10 @@ for f in sys.argv[1:]:
             print(f"  {f} CELL {i} FAILED")
             print(f"    {b.strip().splitlines()[0][:100]}")
             print(f"    {traceback.format_exc().strip().splitlines()[-1]}")
-    ran = len(blocks) - skipped
+    ran = len(blocks) - len(skipped)
     total += ran; failed_total += fails
-    note = f"   ({skipped} skipped, eval: false)" if skipped else ""
+    reasons = ", ".join(sorted(set(skipped)))
+    note = f"   ({len(skipped)} skipped: {reasons})" if skipped else ""
     print(f"{ran-fails:>3}/{ran:<3} cells clean   {f}{note}")
 print(f"\n{total-failed_total}/{total} cells ran clean across {len(sys.argv)-1} files")
 sys.exit(1 if failed_total else 0)

@@ -36,7 +36,15 @@ BARE = re.compile(r"""['"](https?://[^'"]+\.(?:csv|tsv|txt|json|xlsx|xls))['"]""
 # Illustrative URLs, not course data. The final-project page shows students how
 # to load their OWN Google Drive CSV; the link there is an example, and each
 # student substitutes their own. Nothing to mirror.
-ILLUSTRATIVE = re.compile(r"drive\.google\.com|docs\.google\.com", re.IGNORECASE)
+# URLs that appear only as teaching placeholders and are never fetched. Google Drive
+# and Docs links are student-supplied. example.org is the RFC 2606 reserved example
+# domain, used in 2a_reading_data.qmd to contrast a web address with a local path.
+# some_file.csv is the generic stand-in in the parse_dates example: it appears only
+# on a commented-out line in timeseries.qmd and inside a plain ```python block (not
+# ```{python}) in 2a_reading_data.qmd, so neither reference ever executes.
+ILLUSTRATIVE = re.compile(
+    r"drive\.google\.com|docs\.google\.com|example\.(org|com|net)|some_file\.csv",
+    re.IGNORECASE)
 
 
 def collect():
@@ -61,9 +69,11 @@ def main() -> int:
     args = ap.parse_args()
 
     found = collect()
-    course = {u: f for u, f in found.items() if u.startswith(cache.COURSE_DATA_BASE)}
-    example = {u: f for u, f in found.items()
-               if u not in course and ILLUSTRATIVE.search(u)}
+    # Illustrative first: a placeholder wins regardless of which host it imitates,
+    # otherwise a course-site-shaped placeholder is reported as missing data.
+    example = {u: f for u, f in found.items() if ILLUSTRATIVE.search(u)}
+    course = {u: f for u, f in found.items()
+              if u not in example and u.startswith(cache.COURSE_DATA_BASE)}
     other = {u: f for u, f in found.items() if u not in course and u not in example}
 
     print(f"{len(found)} data URLs in the course materials")

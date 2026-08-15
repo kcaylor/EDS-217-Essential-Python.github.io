@@ -403,23 +403,16 @@ are cleanup items that would be premature while days are still moving.
       > early-afternoon sky; painterly illustration, warm muted palette, gently comic, no text
       > --ar 1:1 --style raw
 
-- [ ] **Four broken image paths, all one-line fixes.** Two more were found on 2026-08-15 by a
-      whole-tree internal-link scan, and both are on live 2026 pages:
+- [x] **Four broken image paths. DONE 2026-08-15.** All four targets existed; each reference was
+      missing a `../` or carried a typo. `live-coding/2d_lists_and_dicts.qmd` and
+      `coding-colabs/2c_exploring_unfamiliar_data.qmd` now use `../images/`, matching the pattern
+      all six live 2026 colabs already use. `eod-practice/eod-day2-2026.qmd` likewise, and
+      `lectures/pandas_workflow.qmd` now points at `assets/workflow_pandas.jpeg` rather than the
+      misspelled `assets/workflows_panads.png`.
 
-      - `eod-practice/eod-day2-2026.qmd` line 16 references `images/kenya_landscape.png`. The file
-        is at `course-materials/images/kenya_landscape.png`, so the path wants `../images/`. This
-        is the **Day 2 EOD header image on a signed-off page.**
-      - `lectures/pandas_workflow.qmd` line 13 references `assets/workflows_panads.png`. The file
-        is `assets/workflow_pandas.jpeg`. Three errors in one path: transposed letters in
-        "panads", a spurious plural in "workflows", and the wrong extension.
-
-      The other two, already known:
-
-- [ ] **Fix the broken image in the 2d live-coding page.**
-      `live-coding/2d_lists_and_dicts.qmd` line 13 references `images/collections.jpg`, but
-      `live-coding/` has no `images/` directory, only `assets/`. This is a **Day 2 page, which is
-      otherwise signed off**, so it is worth checking before the deploy rather than after. Either
-      point it at `../images/collections.jpg` or copy the file into `live-coding/assets/`.
+      The `.jpg` versus `.jpeg` difference was a red herring: `images/collections.jpg` (189 KB,
+      2023) and `images/collections.jpeg` (231 KB, 2024) are two genuinely different files, so
+      nothing needed copying or renaming.
 
 - [ ] **Generate four Day 6 images.** The collision with `day5.qmd` is resolved, but every Day 6
       panel is now a placeholder pulled from the 2025 stock. `dates.jpeg` went to `6c_dates.qmd`,
@@ -479,18 +472,32 @@ are cleanup items that would be premature while days are still moving.
       The seventh naive-grep hit was `lectures/.ipynb_checkpoints/00_intro_to_python-checkpoint.ipynb`,
       which is untracked and gitignored. The tightened gate-5 grep skips that directory.
 
-- [ ] **Four orphan CSVs in `course-materials/cheatsheets/`.** `ocean_temperatures.csv` (316 KB),
-      `sample_time_data.csv`, `temp_data.csv` and `output.csv` are tracked, sit outside `data/`,
-      and are read by nothing. The last two were render artifacts: `timeseries.qmd` used to write
-      and re-read `temp_data.csv`, which was fixed on 2026-08-11 by round-tripping through
-      `StringIO` instead. **`pandas_dataframes.qmd` still calls `df.to_csv('output.csv')`**, so it
-      writes a file into whatever the working directory happens to be every time it renders.
-      Either point it at a throwaway path or make it a non-executing block.
-- [ ] **Check `JupyterLab.qmd` and `setting_up_python.qmd` against the 2026 setup.** The first
-      references `https://workbench-1.bren.ucsb.edu`; confirm that is still the Bren workbench
-      address. The second installs a package list by hand; confirm it agrees with
-      `environment-2026.yml`. Neither is a scope problem, both are the kind of thing a student
-      hits in the first hour of Day 1.
+- [x] **Four orphan CSVs in `course-materials/cheatsheets/`. DONE 2026-08-15.** The live cause
+      was `pandas_dataframes.qmd` calling `df.to_csv('output.csv')` on every render. That block is
+      now `#| eval: false`, so the syntax still displays but nothing is written. A full cheatsheet
+      run afterwards confirmed no `output.csv` is recreated anywhere. All four files were then
+      removed. `ocean_temperatures.csv` was byte-identical to `data/ocean_temperatures.csv` (same
+      md5), so it was a 316 KB duplicate of the cached copy rather than a unique asset.
+
+- [x] **Checked `JupyterLab.qmd` and `setting_up_python.qmd`. DONE 2026-08-15.**
+
+      `workbench-1.bren.ucsb.edu` is still correct and needs no change. Bren's own compute
+      documentation lists `workbench-1` as the coursework server and `workbench-2` as the capstone
+      server, with neither marked retired or renamed, and the MEDS installation guide names the
+      same pair.
+
+      `setting_up_python.qmd` agrees with `environment-2026.yml` on everything the course uses.
+      The environment name (`eds217_2026`) and Python version (3.11) match exactly. An import
+      audit across all 51 live 2026 files plus the 24 cheatsheets found exactly four third-party
+      packages in use: **pandas, numpy, matplotlib, seaborn**, all of which both install paths
+      cover. The divergence runs the other way: the yml carries nine packages no 2026 material
+      imports (scipy, scikit-learn, plotly, statsmodels, requests, beautifulsoup4, openpyxl, xlrd,
+      lxml). That is not a problem to fix before the course, but a leaner environment would
+      install faster for students, and it is worth revisiting for 2027.
+
+      One real gap was fixed: line 82 ran `python -m ipykernel install` without ever installing
+      `ipykernel`. It arrives as a dependency of `jupyter`, so it worked, but it is now explicit.
+
 - [x] **`search: false` added to `live-coding/2d_lists_and_dicts_notes.qmd`. DONE 2026-08-15.**
       Six of the seven `_notes.qmd` files carried it; this one did not, so the Day 2 instructor
       run-through was indexed by site search and a student could find it.
@@ -499,9 +506,26 @@ are cleanup items that would be premature while days are still moving.
       shell commands and are all marked `eval: false`, so Quarto never runs them. Those eight were
       false failures in the tool, not defects in the page. Skipped blocks are now counted and
       reported separately.
-- [ ] Run `python tools/run_cells.py` over every 2026 session and EOD.
-- [ ] Run `python tools/warm_cache.py`; expect every course-site URL to resolve.
-- [ ] Full `python build_docs.py --full` with no errors.
+- [x] **`run_cells.py` over every 2026 session, EOD, key and cheatsheet. DONE 2026-08-15:
+      933/933 cells clean across 76 files, zero failures.** The twelve keys hold at 228/228.
+      Two checker defects were fixed along the way, both of which produced false failures:
+      `#| eval: false` blocks were being executed (8 in `8a_github.qmd`), and IPython magics and
+      shell escapes were being executed (2 in `JupyterLab.qmd`). Skipped blocks are now counted
+      and reported with their reason.
+- [x] **`warm_cache.py`. DONE 2026-08-15: all 10 real course-site URLs resolve, 0 external,
+      exit 0, and it now runs with no network at all.** The offline caching work is complete:
+      the "26 files fetching from 10 external hosts" problem is fully closed.
+
+      Two phantom failures were fixed first, and both would have cost time during Gate A. The
+      tool classified course-site URLs before illustrative ones, so
+      `data/some_file.csv`, a placeholder that appears only on a commented-out line in
+      `timeseries.qmd` and inside a plain ```` ```python ```` block in `2a_reading_data.qmd`, was
+      reported as missing data. Illustrative now wins regardless of which host a placeholder
+      imitates, and the pattern covers `example.org` (RFC 2606) alongside the Google Drive links.
+- [ ] Full `python build_docs.py --full` with no errors. **Not runnable in the Cowork VM: Quarto
+      is not installed there.** Run this on the laptop. A whole-tree internal link and asset scan
+      over all 101 rendered files returned zero broken references on 2026-08-15, which covers what
+      the render would catch for the changes made this week.
 - [ ] Update the syllabus Google Doc link and TA information.
 - [ ] Push to `origin`, then `live`, then verify the site serves `data/` correctly.
 

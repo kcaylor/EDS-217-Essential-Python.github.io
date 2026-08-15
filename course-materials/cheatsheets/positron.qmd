@@ -1,0 +1,144 @@
+---
+title: "EDS 217 Cheatsheet"
+subtitle: "Positron Basics: Variables Pane, Magic Commands, and Shortcuts"
+jupyter: eds217_2026
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        code-fold: show
+---
+
+## Sessions and interpreters
+
+### Starting a session
+
+1. Go to `https://workbench-1.bren.ucsb.edu` and log in.
+2. Click **+ New Session** and choose **Positron Pro**.
+3. Allocate at least **2.5 GB** of memory if the dialog asks.
+4. Click **Launch**.
+
+### Choosing where Python runs
+
+Positron has two separate settings, and both need to read `eds217_2026`:
+
+| Setting | Where it is | What it controls |
+|---|---|---|
+| Interpreter | Dropdown in the top right corner | The Console |
+| Kernel | Kernel Selector in a notebook's action bar | That one notebook |
+
+Switching the interpreter shuts down the running one and starts the new one, so every
+variable you had defined is cleared. Choose it before you start working.
+
+To change a notebook's kernel from the keyboard, open the Command Palette
+(`Ctrl + Shift + P` or `Cmd + Shift + P`) and run **Positron Notebook: Change Kernel**.
+
+## Inspecting variables
+
+### The Variables pane
+
+Positron shows your variables in the **Variables** pane on the right. Nothing needs to be
+installed, and the pane updates as you run cells. It shows:
+
+- Variable names
+- Types
+- Values and shapes
+- Length or count for collections
+
+```{python}
+#| echo: true
+
+# Example variables
+x = 5
+y = "Hello"
+z = [1, 2, 3]
+
+# These appear in the Variables pane
+```
+
+### The Data Explorer
+
+Click a DataFrame in the Variables pane to open it in the **Data Explorer**, a sortable and
+filterable table view. This is the fastest way to look at a dataset you have just loaded.
+
+:::{.callout-warning title="Limits of the Variables pane"}
+**The Variables pane is not suitable for very large DataFrames or arrays.** Use the standard
+commands `df.head()`, `df.tail()`, `df.info()`, and `df.describe()` to inspect large
+DataFrames.
+:::
+
+## Essential Magic Commands
+
+Magic commands start with `%` (line magics) or `%%` (cell magics). They come from IPython,
+which is the Python kernel your notebooks run on, so they work in any editor that runs
+notebooks. Available magic commands vary with your environment and installed extensions.
+
+### Viewing Variables
+
+```{python}
+#| echo: true
+
+# List all variables with type and value
+%whos
+
+# List just variable names
+%who
+```
+
+### Running Shell Commands
+
+```{python}
+#| echo: true
+
+# Run a shell command
+!echo "Hello from the shell!"
+
+# Capture output in a variable
+files = !ls
+print(files)
+```
+
+## Useful Keyboard Shortcuts
+
+Positron's shortcuts are, with a few exceptions, a superset of the Visual Studio Code
+shortcuts.
+
+### Notebooks
+
+| Action | Windows/Linux | Mac |
+|--------|---------------|-----|
+| Run cell and select below | Shift + Enter | Shift + Enter |
+| Run cell and stay put | Ctrl + Enter | Cmd + Enter |
+| Save notebook | Ctrl + S | Cmd + S |
+| Command Palette | Ctrl + Shift + P | Cmd + Shift + P |
+
+### Editor and Console
+
+| Action | Windows/Linux | Mac |
+|--------|---------------|-----|
+| Run the current line or selection | Ctrl + Enter | Cmd + Enter |
+| Contextual help for the name under the cursor | F1 | F1 |
+| Clear the Console | Ctrl + L | Ctrl + L |
+| Command Palette | Ctrl + Shift + P | Cmd + Shift + P |
+
+Every command Positron knows is in the Command Palette, and the palette shows the shortcut
+next to each command. When you cannot remember a shortcut, search the palette for the action
+by name.
+
+## Tips for Beginners
+
+1. Use `Tab` for code completion.
+2. Add `?` after a function name for more detailed help (for example, `print?`).
+3. Press `F1` with your cursor on a name to open its documentation in the **Help** pane.
+4. Use `dir()` to see available attributes and methods (for example, `dir(str)`).
+5. Use the `help()` command to get information about functions and objects.
+6. Restart the kernel from the notebook action bar when things stop making sense, then
+   re-run your cells from the top.
+
+## Resources for Further Learning
+
+- [Positron Documentation](https://positron.posit.co/)
+- [Jupyter Notebooks in Positron](https://positron.posit.co/jupyter-notebooks.html)
+- [The Positron Notebook Editor](https://positron.posit.co/positron-notebook-editor.html)
+- [Positron Pro on Posit Workbench](https://docs.posit.co/ide/server-pro/user/positron/getting-started/)
+- [IPython Documentation (for magic commands)](https://ipython.readthedocs.io/en/stable/interactive/magics.html)

@@ -1,0 +1,287 @@
+---
+title: "Interactive Session"
+subtitle: "⚒️ Positron & Jupyter Notebooks"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+![](images/Jupyter.png)
+
+Welcome to your first hands-on session. You have already met **Positron** in your R course,
+so the workspace itself will look familiar. Over the next hour you will learn what changes
+when the language is Python, and you will build the first of the **Jupyter Notebooks** you
+will write your code in for the rest of this course.
+
+::: {.center-text .body-text-m}
+Always remember: [**Python is the programming language. Positron is the IDE.**]{.teal-text}
+:::
+
+An *IDE* (integrated development environment) is a workspace that puts your code, its
+output, your notes, and your files together in one place. Positron is the IDE we use.
+Python is the language we write in it.
+
+::: {.callout-note}
+Positron runs both R and Python. The panes you learned in your R course, the Console, the
+Variables pane, the Plots pane, and the file Explorer, all do the same jobs here. What
+changes is the interpreter Positron is talking to, and the file format we write in.
+:::
+
+## Meet Positron on Posit Workbench
+
+We run Positron on a shared **Posit Workbench** server, so there is nothing to install.
+Everything happens in your browser.
+
+#### Step 1: Log in to Posit Workbench
+
+1. Open a browser and go to [workbench-1.bren.ucsb.edu](https://workbench-1.bren.ucsb.edu).
+2. Enter your login credentials to access the server.
+
+#### Step 2: Launch a Positron session
+
+1. Click **+ New Session** and select **Positron Pro** from the list of session types.
+2. If the dialog asks you to allocate resources, give the session at least **2.5 GB** of
+   memory.
+3. Click **Launch**. Workbench opens the session in your current browser window once the
+   server has started it.
+
+<!-- ![](images/positron_launch.png) -->
+
+#### Step 3: Get your bearings
+
+The Positron layout is the same one you used for R:
+
+- The **Editor** in the center, where your notebooks and files open as tabs.
+- The **Console** below or beside it, where Python evaluates code you type directly.
+- The **Sidebar** on the left, holding the file **Explorer**.
+- The **Session panes** on the right: **Variables**, **Plots**, and **Help**.
+- The **interpreter dropdown** in the top right corner, showing which Python or R is
+  currently running.
+
+<!-- ![](images/interface-positron.png) -->
+
+::: {.callout-note}
+An IDE like Positron supports **interactive computing**: you run your code a piece at a
+time and see each result immediately. That fast feedback loop is what makes it useful for
+exploring data.
+:::
+
+#### Step 4: Point Positron at the course environment
+
+Look at the interpreter dropdown in the top right. If it shows R, or shows a Python that is
+not ours, click the ellipsis (`...`) next to it and choose **eds217_2026** from the list of
+available interpreters.
+
+:::{.callout-caution title="Switching interpreters clears your session"}
+Changing the interpreter shuts down the old one and starts the new one, so any variables
+you had defined are lost. Choose the right interpreter first, then start working.
+:::
+
+## Two ways to run Python
+
+Positron can run your Python code in two places. It is worth seeing both once so you know
+the difference.
+
+### The Console (a REPL)
+
+The Console is a Python prompt. This is a **REPL**, which stands for Read-Eval-Print Loop,
+and it is the same idea as the R console you already use.
+
+::: {.callout-note}
+A **REPL** **R**eads what you type, **E**valuates it, **P**rints the result, and **L**oops
+back for more. It is an interactive prompt for trying one line at a time.
+:::
+
+Click into the Console, type an expression, and press Enter:
+
+```python
+21 * 2
+```
+
+```
+42
+```
+
+That is the whole read-eval-print idea: you typed an expression, it evaluated it, it
+printed `42`. We are just watching the environment work here. You will learn Python's
+syntax properly this afternoon, and its full set of operators on Day 3.
+
+The Console is useful for quick checks, but nothing you type there is saved. That is why we
+work in notebooks.
+
+### Jupyter Notebooks (what we will use)
+
+For the rest of this course you will write your code in **Jupyter Notebooks**, files ending
+in `.ipynb`. A notebook lets you combine **code**, its **output**, and **narrative text** in
+one document, so your analysis and the story of your analysis stay together. That is what we
+want for data science, so notebooks are our home base from here on.
+
+## Getting Started
+
+Let's make the notebook you will use for this session. **We follow this same setup ritual at
+the start of every session**, so it will quickly become second nature.
+
+1. **Create a new notebook:**
+   - Open the Command Palette with `Ctrl + Shift + P` (`Cmd + Shift + P` on macOS).
+   - Type `New Jupyter Notebook` and select **Create: New Jupyter Notebook**.
+   - A new, untitled notebook opens in the Editor.
+
+2. **Save and name your notebook:**
+   - Press `Ctrl + S` (`Cmd + S` on macOS) right away.
+   - Name it with the format: `Session_1A_Positron.ipynb`
+   - Saving immediately means you never lose work to a forgotten file name.
+
+3. **Check the kernel:**
+   - Look at the **Kernel Selector** in the notebook's action bar, along the top of the
+     notebook.
+   - It should read **eds217_2026**. If it does not, click it and choose that kernel.
+
+:::{.callout-note title="Interpreter and kernel are two separate settings"}
+The dropdown in the top right controls the Console. The Kernel Selector in the action bar
+controls the notebook. Each notebook keeps its own kernel, so check it every time you open
+a new one.
+:::
+
+4. **Add a title cell:**
+   - Click the first cell and change its type to **Markdown**.
+   - Add the following content (update the date to today):
+
+```markdown
+# Day 1: Session 1A - Positron & Jupyter Notebooks
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1a_positron_notebooks.html)
+
+Date: 08/31/2026
+```
+
+5. **Add a code cell** below the title cell. This is where you will start writing Python.
+
+:::{.callout-caution}
+Save your work frequently. Click the save icon or press `Ctrl + S` (`Cmd + S` on macOS).
+:::
+
+Throughout the session: take notes in Markdown cells, write and run code in Code cells, and
+ask questions whenever you need to.
+
+## Working with cells
+
+A notebook is a stack of **cells**. Two kinds matter to us:
+
+- **Code cells** for writing and running Python.
+- **Markdown cells** for writing formatted text (notes, headings, links).
+
+### Running a code cell
+
+Click into your empty code cell, type the classic first line of code, and run it with
+`Shift + Enter`:
+
+```{python}
+print("Hello, Positron!")
+```
+
+The output appears directly below the cell. `Shift + Enter` runs the cell and moves to the
+next one. `Ctrl + Enter` (`Cmd + Enter`) runs it and stays put.
+
+Watch the Console while you do this. Positron shows notebook execution there too, so the
+Console and your notebook are working with the same Python session.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Change the message inside the quotes to greet yourself by name, then re-run the cell with
+`Shift + Enter`. Did the output update?
+:::
+
+### Adding and moving cells
+
+Hover between two cells, or below the last one, and Positron offers buttons to insert a new
+**Code** cell or a new **Markdown** cell at that point. Each cell also carries its own small
+toolbar for running, moving, and deleting it.
+
+### Writing a Markdown cell
+
+Add a new Markdown cell and try some formatting:
+
+```markdown
+## My notes
+
+This is a **Markdown** cell. I can write:
+
+- **Bold** with `**text**`
+- *Italic* with `*text*`
+- [Links](https://positron.posit.co/)
+```
+
+Run the Markdown cell (`Shift + Enter`) to **render** it into formatted text.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+Add one more bullet to your Markdown cell, a link to the course website, then re-render it.
+Try double-clicking the rendered cell to edit it again.
+:::
+
+## Handy Positron features
+
+A few features that will save you time all week:
+
+- **The Variables pane:** shows the names, types, and values of everything you have defined,
+  and it updates as you run cells. This is the same pane you used to watch your R objects.
+  It works for notebooks and the Console alike, with no extension to install.
+- **The Data Explorer:** click a DataFrame in the Variables pane to open it as a sortable,
+  filterable table. You will use this constantly from Day 4 onward.
+- **Tab completion:** start typing a name and press `Tab` to auto-complete it or see
+  suggestions.
+- **Built-in help:** type `help(print)` in a code cell to read a function's documentation,
+  or add a `?` after a name (`print?`) for a quick description. Pressing `F1` with your
+  cursor on a name opens the same documentation in the **Help** pane.
+- **Magic commands:** IPython adds special commands prefixed with `%`, like `%whos` to list
+  your variables. You will meet these as needed.
+
+:::{.callout-tip title="✏️ Test your knowledge"}
+In a code cell, type `pri` and press `Tab`. Does Positron offer to complete it to `print`?
+Then run `help(print)` and skim the description.
+:::
+
+:::{.callout-warning title="Limits of the Variables pane"}
+The Variables pane is not the right tool for very large DataFrames or arrays. Use
+`df.head()`, `df.info()`, and `df.describe()` for those, which you will learn on Day 4.
+:::
+
+## Saving and exporting
+
+- **Save:** the save icon, or `Ctrl + S` / `Cmd + S`. Do this often.
+- **Restart:** if your notebook stops behaving, use the restart icon in the action bar. This
+  clears every variable, so re-run your cells from the top afterward.
+- **Export:** Positron can render a notebook to other formats through Quarto. You will not
+  need this until the final project, and we will cover it then.
+
+## Key Points
+
+- **Python is the language. Positron is the IDE** you run it in, hosted on Posit Workbench,
+  so it is all in your browser.
+- Positron runs Python in a **Console** (a read-eval-print prompt) or in **notebooks**, and
+  we use notebooks from here on, because notebooks are saved and the Console is not.
+- Set the **interpreter** in the top right for the Console, and the **kernel** in the action
+  bar for each notebook. Both should read **eds217_2026**.
+- A notebook combines **code cells**, their **output**, and **Markdown** narrative in one
+  document.
+- Run a cell with `Shift + Enter`. Use `Ctrl + Enter` to run without moving on.
+- Start every session with the same ritual: **create, save with a name, check the kernel,
+  title cell, save often.**
+
+## Resources
+
+- [Course Cheatsheet: Positron Basics](../cheatsheets/positron.qmd) covers the Variables
+  pane, magic commands, and keyboard shortcuts.
+- [Course Cheatsheet: Setting up Python](../cheatsheets/setting_up_python.qmd)
+- [Course Cheatsheet: First Steps](../cheatsheets/first_steps.qmd)
+- [Positron User Guide](https://positron.posit.co/) is the official documentation.
+- [Jupyter Notebooks in Positron](https://positron.posit.co/jupyter-notebooks.html) covers
+  the notebook editor in more detail.
+- A [curated gallery of Jupyter Notebooks](https://gist.github.com/kcaylor/79d9b9304764b825e0fe365df17d09fb)
+  showing textbooks, articles, and analyses written as notebooks. Worth a browse to see
+  where this can go.
+
+::: {.center-text .body-text-xl .teal-text}
+End interactive session 1A
+:::

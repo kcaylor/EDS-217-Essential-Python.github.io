@@ -328,6 +328,56 @@ are cleanup items that would be premature while days are still moving.
       deleted, taught the **nine**-step workflow that the 2026 build corrected to ten, so it
       contradicted `final_project.qmd` rather than merely being superseded.
 
+- [x] **Switch the course from JupyterLab to Positron. DONE 2026-08-15.**
+
+      MEDS runs Positron in 2026, and students arrive having used it in their R course, so
+      Session 1a was rewritten to teach what changes when the interpreter is Python rather than
+      to introduce an IDE from nothing. `1a_jupyterlab_notebooks.qmd` became
+      `1a_positron_notebooks.qmd`, and `cheatsheets/JupyterLab.qmd` became
+      `cheatsheets/positron.qmd`. Both old files were retired through
+      `_to_delete/positron-switch/`. Navbar, `cheatsheets.qmd` and `day1.qmd` follow the renames,
+      and the navbar reference link now points at the Positron documentation.
+
+      **The wider change was the setup ritual, not the two Day 1 pages.** Fifteen sessions across
+      Days 1 through 7 told students to open a JupyterLab Launcher and click a kernel tile, then
+      rename the untitled tab. Nine used the compact one-line form and six the expanded form, and
+      neither is reachable by grepping for "JupyterLab", which is why the first scan missed them.
+      All fifteen now read: create from the Command Palette, confirm the Kernel Selector reads
+      `eds217_2026`, save with a name straight away. Prose only; no code cell changed, and
+      `run_cells.py` reports 21/21 clean over the three files with executable blocks.
+
+      **Content that changed rather than moved.** The cheatsheet dropped the
+      `lckr-jupyterlab-variableinspector` install, which Positron's Variables pane makes
+      unnecessary, and gained the Data Explorer, the interpreter-against-kernel distinction, and a
+      corrected shortcut table. Session 1a gained a section on choosing the interpreter, and a
+      caution that switching it clears the session. `setting_up_python.qmd` now installs the
+      kernel machinery and Positron rather than JupyterLab, with a note that the guide is optional
+      because class runs on Workbench. `day1-welcome-outline.md` says Positron Pro in the
+      logistics and environment-check bullets.
+
+      **Left alone deliberately.** `environment-2026.yml` still pins `jupyterlab>=4.4,<5.0`. It is
+      harmless, it keeps a fallback available on Workbench, and removing it would mean rebuilding
+      the environment two weeks before class.
+
+- [ ] **Capture two Positron screenshots for Session 1a.** The page carries two commented-out
+      image references at the exact insertion points: `images/positron_launch.png` after the
+      launch steps, and `images/interface-positron.png` after the interface tour. Both need
+      screenshots from a live Positron Pro session on `workbench-1.bren.ucsb.edu`, since the old
+      `JupyterLab_launch.png` and `interface-jupyterlab.png` no longer show what students will
+      see. Those two files, plus `JupyterLab_launcher.png`, are now unreferenced by any page and
+      can be retired once the replacements are in. `images/Jupyter.png` is still the Session 1a
+      header and is still correct, since the session is about Jupyter notebooks.
+
+- [ ] **Verify the Session 1a instructions against a live Positron Pro session.** Four claims were
+      written from the Posit documentation rather than from the running environment, and each is a
+      first-hour step: that the Workbench session type is labelled **Positron Pro**; that
+      **Create: New Jupyter Notebook** is the Command Palette entry; that saving a new untitled
+      notebook with `Ctrl + S` prompts for a file name; and that the `eds217_2026` kernel appears
+      in the notebook Kernel Selector without further configuration. Posit does not publish
+      cell-level notebook shortcuts for the Positron Notebook Editor, so the cheatsheet lists only
+      `Shift + Enter`, `Ctrl + Enter`, save, and the Command Palette, and tells students to search
+      the palette for anything else.
+
 - [ ] **Replace the four Day 7 placeholder images with bespoke panels.** Day 7 claimed four
       existing files and downloaded one. `7a_matplotlib.qmd` uses `images/matplotlib_panda.jpeg`
       and `7b_seaborn.qmd` uses `images/panda_seaborn.jpeg`; both were generated for this purpose

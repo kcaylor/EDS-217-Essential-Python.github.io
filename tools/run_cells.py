@@ -18,8 +18,13 @@ total = failed_total = 0
 for f in sys.argv[1:]:
     src = pathlib.Path(f).read_text()
     blocks = re.findall(r"```\{python\}\n(.*?)```", src, re.S)
-    ns, fails = {}, 0
+    ns, fails, skipped = {}, 0, 0
     for i, b in enumerate(blocks, 1):
+        # Quarto never executes a block marked `eval: false`, so neither do we.
+        # These are usually shell commands or deliberately broken examples.
+        if re.search(r"^#\|\s*eval:\s*false\s*$", b, re.M):
+            skipped += 1
+            continue
         try:
             with contextlib.redirect_stdout(io.StringIO()):
                 exec(compile(b, f"<cell {i}>", "exec"), ns)
@@ -28,7 +33,9 @@ for f in sys.argv[1:]:
             print(f"  {f} CELL {i} FAILED")
             print(f"    {b.strip().splitlines()[0][:100]}")
             print(f"    {traceback.format_exc().strip().splitlines()[-1]}")
-    total += len(blocks); failed_total += fails
-    print(f"{len(blocks)-fails:>3}/{len(blocks):<3} cells clean   {f}")
+    ran = len(blocks) - skipped
+    total += ran; failed_total += fails
+    note = f"   ({skipped} skipped, eval: false)" if skipped else ""
+    print(f"{ran-fails:>3}/{ran:<3} cells clean   {f}{note}")
 print(f"\n{total-failed_total}/{total} cells ran clean across {len(sys.argv)-1} files")
 sys.exit(1 if failed_total else 0)

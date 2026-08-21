@@ -481,10 +481,11 @@ are cleanup items that would be premature while days are still moving.
 
       `panda_seaborn.jpeg` and `matplotlib_panda.jpeg` remain reserved for Day 7.
 
-- [ ] **Fix the broken image in the 2c colab.** `coding-colabs/2c_exploring_unfamiliar_data.qmd`
-      references `images/collections.jpeg`, but there is no `coding-colabs/images/` directory.
-      One-line fix: `../images/collections.jpeg`. The Day 3 and Day 4 colabs already use
-      `../images/`.
+- [x] **Fix the broken image in the 2c colab. DONE 2026-08-15, ticked 2026-08-21.** This was
+      already carried out under the "Four broken image paths" item above, which repointed the
+      2c colab at `../images/collections.jpeg` along with three others. A whole-tree link scan
+      on 2026-08-21 confirms the reference resolves. The item stayed open here because it was
+      written before the four-path item absorbed it.
 - [x] **DONE 2026-08-11. Removed all 89 tracked `.fuse_hidden*` files and added
       `.fuse_hidden*` to `.gitignore`.** Every one was a stale duplicate of a live file: 54
       course pages still carrying `jupyter: eds217_2025`, plus shadow copies of

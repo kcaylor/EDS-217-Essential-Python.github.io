@@ -12,6 +12,7 @@ import shutil
 import argparse
 import time
 import glob
+import re
 from pathlib import Path
 
 def run_command(command, description):
@@ -83,25 +84,58 @@ def get_changed_files():
         print("   Falling back to full build")
         return None
 
+def _render_exclusions():
+    """The paths _quarto.yml tells quarto not to render.
+
+    Quarto builds every .qmd and .ipynb in the tree except the entries listed
+    with a leading "!" in the project render block. Reading them here is what
+    keeps a full build from rendering retired 2025 pages back onto the site.
+    """
+    patterns, inside, indent = [], False, None
+    for line in Path("_quarto.yml").read_text().splitlines():
+        stripped = line.strip()
+        if stripped == "render:":
+            inside = True
+            indent = len(line) - len(line.lstrip())
+            continue
+        if inside:
+            current = len(line) - len(line.lstrip())
+            if stripped and not stripped.startswith("#") and current <= indent:
+                break
+            m = re.match(r'^-\s*"?([^"#]+?)"?\s*$', stripped)
+            if m:
+                patterns.append(m.group(1))
+    return [p[1:] for p in patterns if p.startswith("!")]
+
+
+def _matches_glob(path, pattern):
+    """Match a path against a quarto render pattern, including ** segments."""
+    rx = re.escape(pattern)
+    rx = rx.replace(r"\*\*/", "(?:.*/)?").replace(r"\*\*", ".*")
+    rx = rx.replace(r"\*", "[^/]*").replace(r"\?", ".")
+    return re.fullmatch(rx, path) is not None
+
+
+# Directories that are never part of the site whatever _quarto.yml says.
+# _to_delete/ holds retired files awaiting manual removal, and the checkpoint
+# directories hold stale copies Jupyter writes.
+NEVER_BUILD = {"_to_delete", ".ipynb_checkpoints", "docs", ".quarto", "__pycache__"}
+
+
 def get_all_buildable_files():
-    """Get all .qmd and .ipynb files that should be built according to _quarto.yml."""
+    """Every file quarto renders, per the render block in _quarto.yml."""
+    excluded = _render_exclusions()
     all_files = []
-    
-    # Get all .qmd files (excluding patterns from _quarto.yml)
-    for qmd_file in Path(".").rglob("*.qmd"):
-        # Skip files in excluded directories
-        if "nbs/" in str(qmd_file) or "extra_files/" in str(qmd_file):
-            continue
-        all_files.append(str(qmd_file))
-    
-    # Get all .ipynb files (excluding patterns from _quarto.yml)
-    for ipynb_file in Path(".").rglob("*.ipynb"):
-        # Skip files in excluded directories
-        if "nbs/" in str(ipynb_file) or "extra_files/" in str(ipynb_file):
-            continue
-        all_files.append(str(ipynb_file))
-    
-    return all_files
+    for pattern in ("*.qmd", "*.ipynb"):
+        for path in Path(".").rglob(pattern):
+            rel = str(path)
+            if NEVER_BUILD & set(path.parts):
+                continue
+            if any(_matches_glob(rel, ex) for ex in excluded):
+                continue
+            all_files.append(rel)
+    return sorted(all_files)
+
 
 def activate_conda_environment():
     """Activate the eds217_2026 conda environment."""
@@ -173,6 +207,25 @@ def check_prerequisites():
         print("❌ Error: _quarto.yml not found. Are you in the project root directory?")
         sys.exit(1)
     print("   ✅ _quarto.yml found")
+
+def ensure_docs_intact():
+    """An incremental build adds to docs/. It must never be the thing that empties it.
+
+    clean_docs() used to run on every path, so building one changed page deleted
+    the whole rendered site and replaced it with that page. If docs/ is already
+    incomplete when an incremental build starts, an earlier run left it that way
+    and rendering on top of it would publish the gap. Stop and say so.
+    """
+    docs_path = Path("docs")
+    docs_path.mkdir(exist_ok=True)
+    pages = list(docs_path.rglob("*.html"))
+    if len(pages) < 50:
+        print(f"\u274c docs/ holds only {len(pages)} rendered page(s).")
+        print("   An incremental build would leave the published site incomplete.")
+        print("   Run a full rebuild instead:  python build_docs.py --full")
+        sys.exit(1)
+    print(f"\U0001f4c1 docs/ holds {len(pages)} rendered pages; adding to them.")
+
 
 def clean_docs():
     """Clean the docs directory and any stray HTML files."""
@@ -443,8 +496,11 @@ def main():
         
         if args.clean:
             clean_intermediate_files()
-        
-        clean_docs()
+
+        if args.full:
+            clean_docs()
+        else:
+            ensure_docs_intact()
         build_site(files_to_build, args.full)
         verify_build()
         

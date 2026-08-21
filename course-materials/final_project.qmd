@@ -72,6 +72,7 @@ Once you've found a .csv file (or .csv files) that you want to use, you should:
 4. Use the code below to download your file (you will need to add this code to the top of your notebook in the `Import Data` section)
 
 ```{python}
+#| eval: false
 import pandas as pd
 import requests
 

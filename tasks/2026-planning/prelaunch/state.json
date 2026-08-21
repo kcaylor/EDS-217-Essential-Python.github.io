@@ -44,6 +44,14 @@
         }
       ]
     },
+    "C3": {
+      "notes": [
+        {
+          "at": "2026-08-21T04:55:46",
+          "text": "The Bren directory lists the TA's address as annaboser@bren.ucsb.edu, not the @ucsb.edu form the page used. index.qmd now shows and links that address, but whether she is the 2026 TA is still open."
+        }
+      ]
+    },
     "C4": {
       "checks": [
         {
@@ -253,6 +261,12 @@
           "git_sha": "98e9108",
           "ok": false
         }
+      ],
+      "notes": [
+        {
+          "at": "2026-08-21T04:55:46",
+          "text": "Rehearsed in the cloud sandbox on 2026-08-21 against the same source tree, with quarto 1.6.40 and an eds217_2026 kernel: quarto render finished at exit 0 with 89 of 89 pages, 31 files copied into docs/data, 612 search entries, no lectures directory, no 2025 orphans, and no warnings other than the kernel's TCP notice. The render itself is therefore known to be clean; what remains is running it on the laptop, where the images directories are present."
+        }
       ]
     },
     "D6": {
@@ -274,6 +288,14 @@
           "exit": 1,
           "git_sha": "98e9108",
           "ok": false
+        }
+      ]
+    },
+    "D7": {
+      "notes": [
+        {
+          "at": "2026-08-21T04:55:46",
+          "text": "Cannot be tested from a session: the Cowork VM has no network egress to GitHub. Note that origin carries a caylor@ username in its URL and live does not, so live is the one to test first."
         }
       ]
     },
@@ -340,6 +362,15 @@
           "exit": 1,
           "git_sha": "98e9108",
           "ok": false
+        },
+        {
+          "at": "2026-08-21T04:48:52",
+          "cmd": "python3 tools/prelaunch_checks.py h4_stale_checklist_item",
+          "could_not_run": false,
+          "evidence": "PASS  h4_stale_checklist_item\n  open items in the endgame plan: 6\n  No open item duplicates completed work.",
+          "exit": 0,
+          "git_sha": "b6eeda5",
+          "ok": true
         }
       ]
     },
@@ -499,5 +530,5 @@
     }
   },
   "schema": 1,
-  "updated": "2026-08-21T04:44:13"
+  "updated": "2026-08-21T04:55:46"
 }

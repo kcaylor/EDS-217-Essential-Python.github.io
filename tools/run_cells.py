@@ -14,8 +14,17 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import eds217_offline_cache as cache
 cache.install()
 
+files = sys.argv[1:]
+if not files:
+    # Exiting 0 here would let a wrapper whose glob matched nothing report a
+    # passing gate. Say what is wrong instead.
+    print("run_cells.py was given no files, so it checked nothing.")
+    print("Usage: python tools/run_cells.py <file.qmd> [<file.qmd> ...]")
+    print("For the whole 2026 corpus, use: make cells")
+    sys.exit(2)
+
 total = failed_total = 0
-for f in sys.argv[1:]:
+for f in files:
     src = pathlib.Path(f).read_text()
     blocks = re.findall(r"```\{python\}\n(.*?)```", src, re.S)
     ns, fails, skipped = {}, 0, []
@@ -44,5 +53,5 @@ for f in sys.argv[1:]:
     reasons = ", ".join(sorted(set(skipped)))
     note = f"   ({len(skipped)} skipped: {reasons})" if skipped else ""
     print(f"{ran-fails:>3}/{ran:<3} cells clean   {f}{note}")
-print(f"\n{total-failed_total}/{total} cells ran clean across {len(sys.argv)-1} files")
+print(f"\n{total-failed_total}/{total} cells ran clean across {len(files)} files")
 sys.exit(1 if failed_total else 0)

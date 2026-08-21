@@ -33,6 +33,16 @@ ASSIGN = re.compile(r"""^\s*\w*url\w*\s*=\s*['"](https?://[^'"]+)['"]""",
 BARE = re.compile(r"""['"](https?://[^'"]+\.(?:csv|tsv|txt|json|xlsx|xls))['"]""",
                   re.IGNORECASE)
 
+# Seven datasets are loaded only as `base + 'name.csv'`, where `base` is assigned
+# once at the top of the block. The three patterns above match literal strings and
+# never see them, so the tool used to report "all data URLs resolve" while covering
+# ten of the seventeen datasets the course loads. A checker that reports green on a
+# set it cannot see is worse than no checker, so concatenation is resolved here.
+BASEVAR = re.compile(r"""^\s*(\w+)\s*=\s*['"](https?://[^'"]+/)['"]""", re.MULTILINE)
+CONCAT = re.compile(
+    r"""(\w+)\s*\+\s*['"]([A-Za-z0-9_.\-]+\.(?:csv|tsv|txt|json|xlsx|xls))['"]""",
+    re.IGNORECASE)
+
 # Illustrative URLs, not course data. The final-project page shows students how
 # to load their OWN Google Drive CSV; the link there is an example, and each
 # student substitutes their own. Nothing to mirror.
@@ -59,6 +69,10 @@ def collect():
         for rx in (DIRECT, ASSIGN, BARE):
             for m in rx.finditer(text):
                 found.setdefault(m.group(1), set()).add(str(p.relative_to(ROOT)))
+        bases = dict(BASEVAR.findall(text))
+        for var, name in CONCAT.findall(text):
+            if var in bases:
+                found.setdefault(bases[var] + name, set()).add(str(p.relative_to(ROOT)))
     return found
 
 
@@ -76,7 +90,9 @@ def main() -> int:
               if u not in example and u.startswith(cache.COURSE_DATA_BASE)}
     other = {u: f for u, f in found.items() if u not in course and u not in example}
 
-    print(f"{len(found)} data URLs in the course materials")
+    datasets = {u.rsplit("/", 1)[-1] for u in found if u not in example}
+    print(f"{len(found)} data URLs in the course materials, "
+          f"{len(datasets)} distinct datasets")
     print(f"  {len(course)} served from the repo's data/ directory")
     print(f"  {len(other)} external")
     print(f"  {len(example)} illustrative (student-supplied, nothing to mirror)\n")

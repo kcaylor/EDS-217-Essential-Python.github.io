@@ -1,0 +1,786 @@
+# EDS 217 2026: pre-launch punch list
+#
+# This file is the source of truth for what remains before the course goes live.
+# It is read and written by tools/prelaunch.py. Edit it by hand if you want, but
+# prefer the CLI for state changes so that certification records stay consistent.
+#
+#   python tools/prelaunch.py status          overview table
+#   python tools/prelaunch.py next            the next item that is not blocked
+#   python tools/prelaunch.py show D5         full detail for one item
+#   python tools/prelaunch.py check D5        run the verification, record evidence
+#   python tools/prelaunch.py certify D5      record Kelly's sign-off
+#   python tools/prelaunch.py dashboard       rebuild the HTML dashboard
+#
+# States: open -> in_progress -> verified -> certified. Also: blocked, deferred.
+# An item reaches "verified" only when its verification command passes.
+# An item reaches "certified" only when Kelly signs off on a verified item.
+
+meta:
+  course: EDS 217, Python for Environmental Data Science
+  term: Summer 2026
+  first_class_day: 2026-08-31
+  repo: EDS-217-Essential-Python.github.io
+  branch: main
+  live_site: https://eds-217-essential-python.github.io/
+  remotes:
+    origin: https://github.com/kcaylor/EDS-217-Essential-Python.github.io
+    live: https://github.com/EDS-217-Essential-Python/EDS-217-Essential-Python.github.io
+  audited: 2026-08-21
+  schema: 1
+
+items:
+
+# ---------------------------------------------------------------------------
+# DEPLOY. Nothing else matters until these are done.
+# ---------------------------------------------------------------------------
+
+- id: D1
+  title: Stop an incremental build from destroying the rendered site
+  category: deploy
+  severity: blocker
+  owner: claude
+  state: open
+  why: |
+    build_docs.py calls clean_docs() on every code path, including the
+    incremental one. clean_docs() runs shutil.rmtree("docs"). An incremental
+    build therefore deletes the whole rendered site and then re-renders only the
+    files git reports as changed. This already happened on 2026-08-16 and is the
+    direct cause of the 391 deleted files sitting in the working tree today.
+  evidence: |
+    build_docs.py line 447 calls clean_docs() unconditionally; line 189 is
+    shutil.rmtree(docs_path). Working tree: 391 deletions under docs/, two
+    surviving HTML files, both re-rendered at 2026-08-16 00:31.
+  action: |
+    Move the clean_docs() call inside the --full branch so an incremental build
+    leaves docs/ alone. Add a guard that refuses to proceed if a non-full build
+    would leave fewer than 50 HTML files in docs/.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py d1_clean_docs_guard
+    expect: exit 0
+  blocks: [D5]
+
+- id: D2
+  title: Correct the full-render file set
+  category: deploy
+  severity: blocker
+  owner: claude
+  state: open
+  why: |
+    get_all_buildable_files() globs every qmd and ipynb in the tree and skips
+    only paths containing "nbs/" or "extra_files/". It therefore renders 166
+    files where the correct set is 101. The 65 extras are the 59 retired 2025
+    pages under the gitignored _to_delete/2025-orphan-sweep/, two under
+    _to_delete/positron-switch/, the three pages _quarto.yml explicitly excludes,
+    and an .ipynb_checkpoints copy. Rendering retired 2025 pages puts them back
+    on the live site, which is exactly what the orphan sweep removed.
+  evidence: |
+    build_docs.py --full enumerates 166 files. The endgame plan and the
+    _quarto.yml render block agree the correct count is 101.
+  action: |
+    Teach get_all_buildable_files() to honour the _quarto.yml render exclusions
+    and to skip _to_delete/ and .ipynb_checkpoints/.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py d2_render_set
+    expect: the buildable set is 101 files
+  blocks: [D5]
+
+- id: D3
+  title: Clear the 2025 kernel from the lecture notebooks
+  category: deploy
+  severity: blocker
+  owner: claude
+  state: open
+  why: |
+    Six notebooks under course-materials/lectures/ still declare
+    jupyter: eds217_2025, either in a raw YAML cell or in kernelspec. That
+    kernel does not exist on any 2026 machine. These files are inside the render
+    set, so they are the leading candidate for what aborted the 2026-08-16
+    render. The endgame plan records lectures/lectures.ipynb as "the single
+    exception found", which is wrong.
+  evidence: |
+    grep -o 'eds217_2025' course-materials/lectures/*.ipynb returns hits in
+    00_intro_to_python, 01_the_zen_of_python, 02_helpGPT, 03-debugging,
+    04-next_steps and 99_dry_vs_wet.
+  action: |
+    If D4 is taken, the lectures directory leaves the render set and this becomes
+    moot for the site, though the files should still be corrected so they open on
+    a 2026 machine. If D4 is not taken, rename the kernel in all six.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py d3_lecture_kernels
+    expect: no eds217_2025 kernel in any rendered notebook
+  blocks: [D5]
+
+- id: D4
+  title: Take the lectures directory out of the render
+  category: deploy
+  severity: blocker
+  owner: claude
+  state: open
+  why: |
+    Twelve pages under course-materials/lectures/ render, carry no
+    search: false, and are reachable by site search, while the navbar entry for
+    them is commented out. One of them, pandas_workflow.qmd, teaches an
+    eight-step data science workflow. The site elsewhere teaches ten steps, and
+    the final project is graded against the ten. A student searching "workflow"
+    during Days 8 and 9 can reach a page that contradicts the rubric. This is the
+    same defect that caused 4c_dataframe_workflows.qmd to be deleted for teaching
+    nine steps; the orphan sweep covered day sessions and left lectures alone.
+  evidence: |
+    course-materials/lectures/pandas_workflow.qmd heading reads
+    "An 8-Step Data Science Workflows in Pandas". _quarto.yml lines 116 and 117
+    have the lectures navbar entry commented out. No lecture page carries
+    search: false.
+  action: |
+    Add "!course-materials/lectures/**" to the render block in _quarto.yml,
+    matching the treatment already given to the three orphaned interactive
+    sessions. The files stay in the working tree as instructor reference.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py d4_lectures_excluded
+    expect: lectures excluded from render and unreachable from any live page
+  blocks: [D5]
+
+- id: D5
+  title: Run a clean full render on the laptop
+  category: deploy
+  severity: blocker
+  owner: kelly
+  state: open
+  why: |
+    docs/ is the published site. It currently holds two HTML files. Until a full
+    render completes without errors there is nothing correct to publish, and the
+    last full render attempt did not finish.
+  evidence: |
+    find docs -name '*.html' | wc -l returns 2. Quarto and conda are absent from
+    the Cowork VM, so this step can only run on the laptop.
+  action: |
+    make render
+    which is: conda activate eds217_2026 && python build_docs.py --full
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py d5_render_complete
+    expect: about 101 HTML files in docs/, 31 files in docs/data/, Summer 2026 on the index
+  blocked_by: [D1, D2, D3, D4, C2, C4]
+  blocks: [D6]
+
+- id: D6
+  title: Commit the rendered site, including docs/data
+  category: deploy
+  severity: blocker
+  owner: kelly
+  state: open
+  why: |
+    Every dataset in the 2026 course loads from
+    https://eds-217-essential-python.github.io/data/. That path returns 404
+    today. Quarto copies data/ into docs/data/ because of the resources key in
+    _quarto.yml, but docs/data/ has never been staged in any commit on any
+    branch. Unless it is committed and pushed, every read_csv in every session,
+    every end-of-day activity and every answer key fails on Day 1.
+  evidence: |
+    git ls-tree -r --name-only HEAD docs/data | wc -l returns 0.
+    git log --oneline --all -- docs/data returns nothing.
+    A fetch of the live URL for toolik_weather.csv returns 404.
+  action: |
+    git add -A docs
+    confirm 31 files under docs/data are staged
+    git commit -m "render(2026): rebuild the site for Summer 2026 and publish data/"
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py d6_docs_data_tracked
+    expect: 31 files under docs/data tracked at HEAD
+  blocked_by: [D5]
+  blocks: [D8]
+
+- id: D7
+  title: Confirm push rights on the org remote
+  category: deploy
+  severity: blocker
+  owner: kelly
+  state: open
+  why: |
+    The public course site is served from the EDS-217-Essential-Python org repo,
+    which the local clone calls "live". The origin remote URL carries a caylor@
+    username; the live remote does not. If that push prompts or is refused, it is
+    a credential problem worth finding today rather than on the 30th.
+  evidence: |
+    git remote -v shows live at github.com/EDS-217-Essential-Python without a
+    username in the URL. No network egress from the Cowork VM, so this cannot be
+    tested from here.
+  action: |
+    On the laptop, run: git fetch --all --prune && git push --dry-run live main
+    Confirm it reports a fast-forward and does not prompt for a password.
+  verify:
+    kind: manual
+    cmd: git push --dry-run live main
+    expect: reports a fast-forward, no credential prompt
+  blocks: [D8]
+
+- id: D8
+  title: Push to both remotes and verify the published site
+  category: deploy
+  severity: blocker
+  owner: kelly
+  state: open
+  why: |
+    All 51 commits of the 2026 rebuild are unpushed. Both remotes sit at a
+    commit from 2025-09-12. The public site still shows Summer 2025, Day 1 on
+    9/2, and JupyterLab. Pushing to origin alone does not update the site the
+    course URLs point at.
+  evidence: |
+    git rev-list --left-right --count live/main...HEAD returns 0 and 51.
+    The live index page reads "Summer 2025".
+  action: |
+    git push origin main
+    git push live main
+    then wait for the Pages build and run: make verify-live
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py d8_live_site
+    expect: live index says Summer 2026, data URL returns 200, Positron session page returns 200
+  blocked_by: [D6, D7]
+
+# ---------------------------------------------------------------------------
+# CONTENT
+# ---------------------------------------------------------------------------
+
+- id: C1
+  title: Specify Days 8 and 9
+  category: content
+  severity: blocker
+  owner: either
+  state: open
+  why: |
+    Two of nine days, about thirteen contact hours and the only graded
+    deliverable, are described in 32 and 33 lines. There is no hour by hour
+    schedule, no presentation length or order or format, no submission mechanism
+    and no deadline, and no rubric. The single grading reference on the whole
+    site is one line in 7d_project_kickoff.qmd saying the notebook is graded
+    against the ten-step workflow. answer_keys.qmd points students at
+    final_project.qmd for what is expected, and final_project.qmd does not say.
+  evidence: |
+    wc -l on day8.qmd and day9.qmd returns 32 and 33. A grep across all live
+    content for rubric, graded, assessment or "will be evaluated" returns one
+    line. A grep for submit, due, deadline or "turn in" returns nothing.
+  action: |
+    Write the Day 8 and Day 9 specification: a timed schedule for both days,
+    the deliverable definition with file naming and length, the submission
+    mechanism and deadline, presentation logistics, and a rubric keyed to the
+    ten-step workflow. 7d_project_kickoff.qmd is strong and carries the front
+    half of this already; the work is everything after the kickoff.
+  verify:
+    kind: manual
+    cmd: read course-materials/day8.qmd, day9.qmd and final_project.qmd
+    expect: schedule, deliverable, submission, presentation logistics and rubric all present
+
+- id: C2
+  title: Fix the broken contact links on the front page
+  category: content
+  severity: blocker
+  owner: claude
+  state: open
+  why: |
+    Both email links on index.qmd use mailto:: with a doubled colon, so neither
+    works. Separately, the TA entry displays anaboser@ucsb.edu with one n while
+    the link target uses annaboser@ucsb.edu with two. A student who copies the
+    visible text mails an address that does not exist. This affects every student
+    who tries to contact the teaching team.
+  evidence: |
+    index.qmd line 54 and line 71 both read mailto:: rather than mailto:.
+  action: |
+    Correct both to a single colon and reconcile the displayed TA address with
+    the link target, once C3 confirms who the 2026 TA is.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py c2_mailto
+    expect: no doubled-colon mailto, displayed address matches link target
+
+- id: C3
+  title: Confirm the 2026 syllabus link, the TA, and office hours
+  category: content
+  severity: blocker
+  owner: kelly
+  state: open
+  why: |
+    The syllabus navbar entry points at a Google Doc that cannot be checked from
+    here, and it is the only route to the syllabus on the site. The front page
+    lists Anna Boser as TA, which is the 2025 staffing. There are no office hours
+    anywhere on the site.
+  evidence: |
+    _quarto.yml line 26 links docs.google.com document 1yBKyJFT22bKynDn4TzrNwde
+    Z6lb9NELqCeewhifcugo. A grep for "office hour" or "drop-in" across all live
+    content returns nothing.
+  action: |
+    Confirm the Google Doc is the 2026 syllabus and is shared with students.
+    Confirm the 2026 TA and supply a photo if the person has changed. Decide
+    whether office hours belong on the site and, if so, where.
+  verify:
+    kind: manual
+    cmd: open the syllabus link as a student would; confirm the TA
+    expect: syllabus is the 2026 version and readable by students, TA is correct
+
+- id: C4
+  title: Stop the final project page fetching over the network at render
+  category: content
+  severity: high
+  owner: claude
+  state: open
+  why: |
+    final_project.qmd line 74 is an executing python block that imports requests
+    and fetches a hardcoded Google Drive URL. _quarto.yml sets no freeze or
+    execute defaults, so it runs on every render. If that Drive file is unshared
+    or Drive rate-limits, the render of the project page fails. The offline cache
+    does not cover it, because warm_cache.py classifies Drive links as
+    illustrative. This is a plausible second cause of a failed full render.
+  evidence: |
+    final_project.qmd line 74 opens a ```{python} block containing an import of
+    requests and a Drive URL.
+  action: |
+    Add "#| eval: false" to that block so the syntax still displays and nothing
+    executes.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py c4_no_network_at_render
+    expect: no executing block in live content imports requests or fetches a URL
+  blocks: [D5]
+
+- id: C5
+  title: Verify the Session 1a instructions against a live Positron Pro session
+  category: content
+  severity: high
+  owner: kelly
+  state: open
+  why: |
+    Four claims in Session 1a were written from the Posit documentation rather
+    than from the running environment, and each is a first-hour step on Day 1. If
+    any is wrong, the first thing twenty students do together does not work.
+  evidence: |
+    Recorded in claude/eds217-positron-switch-record.md and in the endgame plan.
+  action: |
+    In a live Positron Pro session on workbench-1.bren.ucsb.edu, confirm four
+    things. That the Workbench session type is labelled Positron Pro. That
+    "Create: New Jupyter Notebook" is the Command Palette entry. That saving a
+    new untitled notebook with Ctrl + S prompts for a file name. That the
+    eds217_2026 kernel appears in the notebook Kernel Selector with no further
+    configuration. While there, test whether the VS Code cell shortcuts Esc, A,
+    B, M and Y work in the Positron Notebook Editor; if they do, the cheatsheet
+    is worth extending.
+  verify:
+    kind: manual
+    cmd: run the four steps in Workbench
+    expect: all four claims confirmed or the page corrected
+
+- id: C6
+  title: Capture the two Positron screenshots for Session 1a
+  category: content
+  severity: high
+  owner: kelly
+  state: open
+  why: |
+    Session 1a carries two commented-out image references at the exact insertion
+    points. Until the files exist, the first hour of Day 1 teaches an unfamiliar
+    interface with no picture of it.
+  evidence: |
+    1a_positron_notebooks.qmd line 51 references images/positron_launch.png and
+    line 64 references images/interface-positron.png, both inside HTML comments,
+    and neither file exists.
+  action: |
+    Capture both from the live Positron Pro session, save them into
+    course-materials/interactive-sessions/images/, and uncomment the two lines.
+    Once they are in, JupyterLab_launch.png, JupyterLab_launcher.png and
+    interface-jupyterlab.png can be retired.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py c6_positron_screenshots
+    expect: both files exist and both references are uncommented
+  blocked_by: [C5]
+
+- id: C7
+  title: Add the missing Date line to the Day 1 end-of-day activity
+  category: content
+  severity: low
+  owner: claude
+  state: open
+  why: |
+    Six of the seven 2026 end-of-day activities carry a Date line that students
+    paste into their notebooks. eod-day1-2026.qmd does not.
+  evidence: |
+    A scan of the 28 in-session Date strings found all correct, with
+    eod-day1-2026.qmd the only file of its kind lacking one.
+  action: |
+    Add the Date line, reading 08/31/2026, in the same position the other six use.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py c7_eod_dates
+    expect: all seven 2026 end-of-day files carry a correct Date line
+
+- id: C8
+  title: Remove the two empty headings on the Day 8 and Day 9 pages
+  category: content
+  severity: low
+  owner: claude
+  state: open
+  why: |
+    Both pages end with an "Additional Resources" heading and no content under
+    it. These are the only two empty sections in student-visible content on the
+    whole site.
+  evidence: day8.qmd line 32 and day9.qmd line 33.
+  action: Remove both headings, or fill them as part of C1.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py c8_empty_headings
+    expect: no empty heading at the end of any day page
+
+- id: C9
+  title: Cache the Day 1 end-of-day header image locally
+  category: content
+  severity: medium
+  owner: kelly
+  state: open
+  why: |
+    eod-day1-2026.qmd loads its header photograph from media.arcus.org. It is the
+    only image on any live page served from another host. If that host is slow,
+    moved or unreachable, the first page students open outside class shows a
+    broken image. The same reasoning retired the external data hosts, and the
+    argument applies to assets as well as data.
+  evidence: |
+    A scan of all live pages finds one external image reference, at
+    eod-day1-2026.qmd line 16, pointing at media.arcus.org. The other two hits in
+    the tree are in lectures/ and in an excluded page, neither of which renders.
+  action: |
+    On the laptop, download it beside the other end-of-day headers and repoint the
+    page:
+
+      curl -L -o course-materials/eod-practice/images/toolik_boardwalk.jpg \
+        "https://media.arcus.org/files/styles/juicebox_medium/public/ima/images/Martinez_IMG_4771.jpg?itok=V5IY36X3"
+
+    then change line 16 to reference images/toolik_boardwalk.jpg and keep the
+    existing alt text and the photograph credit.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py c9_no_external_images
+    expect: no live page references an image on another host
+
+# ---------------------------------------------------------------------------
+# TOOLING. These decide whether the gates can be trusted.
+# ---------------------------------------------------------------------------
+
+- id: T1
+  title: Teach warm_cache.py about concatenated data URLs
+  category: tooling
+  severity: high
+  owner: claude
+  state: open
+  why: |
+    warm_cache.py matches literal URL strings. Seven datasets are loaded only as
+    base + 'name.csv', so the tool never sees them. It reports "All data URLs
+    resolve" while covering 10 of the 17 datasets the course actually loads.
+    Delete any of those seven and the gate stays green while Days 5, 6 and 7
+    break in class. A checker that reports green on a set it cannot see is worse
+    than no checker.
+  evidence: |
+    The seven are hardiness_zones_2012, hardiness_zones_2023,
+    zip_code_database, monthly_co2_concentration, monthly_temperature_data,
+    openaq_CNSI_measurments and openaq_santa_barbara_measurments. All exist in
+    data/ today.
+  action: |
+    Resolve simple concatenation against an assigned base variable, and widen
+    the ASSIGN pattern so a variable named base is recognised. Report the covered
+    dataset count so the coverage claim is visible.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py t1_warm_cache_coverage
+    expect: warm_cache reports at least 17 datasets and exits 0
+
+- id: T2
+  title: Build a runner for the six quality gates
+  category: tooling
+  severity: high
+  owner: claude
+  state: open
+  why: |
+    The six gates are run by hand from prose in the endgame plan. There is no
+    script, no Makefile and no CI anywhere in the repo. Four of the six are
+    mechanically checkable and two are not; the runner should say which is which
+    rather than implying all six were machine-verified.
+  evidence: |
+    A grep for "quality gate" across py, sh and yml files returns nothing.
+    There is no .github directory.
+  action: |
+    Add tools/gates.sh running gates 3, 4 (structural half), 5 and 6, reporting
+    gates 1 and 2 as human gates with a pointer to where they were recorded.
+  verify:
+    kind: command
+    cmd: bash tools/gates.sh
+    expect: exit 0, with gates 1 and 2 reported as human gates
+
+- id: T3
+  title: Make fetch_data.py --check fail when a dataset is missing
+  category: tooling
+  severity: medium
+  owner: claude
+  state: open
+  why: |
+    In check mode, a missing upstream dataset goes into a local list that the
+    return statement never consults, so --check exits 0 with datasets missing.
+  evidence: |
+    The check branch appends to "missing" and continues, while the return reads
+    "1 if (failed or absent)"; failed is always empty in check mode.
+  action: Include the missing list in the exit status.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py t3_fetch_check_exit
+    expect: --check returns non-zero when a SOURCES dataset is absent
+
+- id: T4
+  title: Make run_cells.py fail when it is given no files
+  category: tooling
+  severity: medium
+  owner: claude
+  state: open
+  why: |
+    With zero arguments the tool prints "0/0 cells ran clean across 0 files" and
+    exits 0. A wrapper whose glob matches nothing therefore reports a green gate.
+    The docstring's own suggested invocation needs globstar to work in bash.
+  evidence: Confirmed by running it with no arguments.
+  action: Exit non-zero on an empty file list, with a message naming the problem.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py t4_run_cells_empty
+    expect: non-zero exit and a clear message when called with no files
+
+- id: T5
+  title: Give penguins.csv a provenance record
+  category: tooling
+  severity: medium
+  owner: claude
+  state: open
+  why: |
+    penguins.csv is loaded by five live pages and appears in neither
+    data/data_urls.py nor tools/fetch_data.py. It is the only dataset with no
+    provenance record and no coverage in any check, so its loss would be
+    invisible until a session failed. messy_field_survey.csv is in fetch_data.py
+    but not in data_urls.py, so that module's claim to list every dataset is
+    inaccurate for two files.
+  evidence: |
+    Loaded by 7c_penguins.qmd, 7c_penguins-key.qmd, 7d_project_kickoff.qmd,
+    cheatsheets/seaborn.qmd and cheatsheets/chart_customization.qmd.
+  action: Add both files to data_urls.py and add penguins.csv to the IN_REPO set.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py t5_dataset_catalog
+    expect: every file in data/ that a live page loads appears in data_urls.py
+
+- id: T6
+  title: Scope the cell checker to the pages the site actually renders
+  category: tooling
+  severity: high
+  owner: claude
+  state: open
+  why: |
+    Running run_cells.py over everything under course-materials reports fifteen
+    failures, and every one is in a page that is excluded from the render:
+    2a_getting_help.qmd, and lectures/pandas_workflow.qmd and lectures/seaborn.qmd.
+    Two of those need the network, since seaborn.load_dataset downloads. A red
+    result that is entirely pages nobody sees is a checker you stop reading, so
+    the checker should walk the render set rather than the directory.
+  evidence: |
+    960 of 975 cells clean across 96 files. Restricted to the 89-file render set,
+    every cell passes.
+  action: |
+    Add a --render-set listing to prelaunch_checks.py, and point the cells target
+    in the Makefile and in render-check.sh at it. Keep t6_cells_clean as the
+    standing gate, so a broken cell on a live page is caught before a render.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py t6_cells_clean
+    expect: every cell on every rendered page runs clean
+
+# ---------------------------------------------------------------------------
+# ASSETS. None of these breaks anything. All are visible to students.
+# ---------------------------------------------------------------------------
+
+- id: A1
+  title: Generate the Day 4 and Day 5 end-of-day header images
+  category: assets
+  severity: medium
+  owner: kelly
+  state: open
+  why: |
+    Both pages point at ../images/panda.jpeg, a 989 by 556 stock photo. Every
+    other end-of-day activity carries a square themed panda. Day 4 and Day 5 show
+    the identical image on consecutive days, which is the most noticeable of the
+    remaining art gaps.
+  evidence: |
+    eod-day4-2026.qmd line 16 and eod-day5-2026.qmd line 16 both resolve to
+    course-materials/images/panda.jpeg.
+  action: |
+    Generate both, save as eod-practice/images/microplastics_panda.jpeg and
+    eod-practice/images/airquality_panda.jpeg, then replace lines 15 to 21 of
+    each page. The path changes from ../images/ to images/, since the new files
+    sit beside banana_panda.jpeg. Prompts are written out in full in the endgame
+    plan under "Generate the Day 4 EOD header image" and "Generate the Day 5 EOD
+    header image".
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py a1_day45_headers
+    expect: both new files exist and both pages reference them
+
+- id: A2
+  title: Generate the four Day 6 panels
+  category: assets
+  severity: low
+  owner: kelly
+  state: open
+  why: |
+    Every Day 6 panel is a placeholder borrowed from the 2025 stock. One of them,
+    the 6d header, is a 2 MB 4032 by 3024 phone photo, by far the heaviest image
+    on the site.
+  evidence: |
+    day6.qmd uses images/structured-data.png, 6a uses ../images/panda.jpeg,
+    6b uses ../images/dataframes.jpeg, 6d uses ../images/towersensors.jpeg.
+  action: |
+    Four bespoke panels in house style, one anthropomorphic panda, painterly,
+    square, no lettering. Descriptions are in the endgame plan under "Generate
+    four Day 6 images". Note that 6b's current image is already square and in
+    house style, so it is the one worth cutting if time runs short.
+  verify:
+    kind: manual
+    cmd: view the four Day 6 pages
+    expect: four bespoke panels in house style
+
+- id: A3
+  title: Generate the two Day 7 panels
+  category: assets
+  severity: low
+  owner: kelly
+  state: open
+  why: |
+    The 7c colab uses Allison Horst's two-distributions figure, which is on point
+    but not house style, and 7d uses the dancing-tools cartoon. The other two Day
+    7 images are already correct and need nothing.
+  evidence: |
+    7c_penguins.qmd uses ../images/horst-samples.jpg and 7d_project_kickoff.qmd
+    uses images/ds_friends.jpg.
+  action: |
+    Two panels. Prompts are written out in the endgame plan under "Replace the
+    four Day 7 placeholder images with bespoke panels".
+  verify:
+    kind: manual
+    cmd: view the two Day 7 pages
+    expect: two bespoke panels in house style
+
+# ---------------------------------------------------------------------------
+# HOUSEKEEPING. Safe to defer past the start of class.
+# ---------------------------------------------------------------------------
+
+- id: H1
+  title: Remove the orphan images and the tracked render leftovers
+  category: housekeeping
+  severity: low
+  owner: claude
+  state: open
+  why: |
+    124 image files totalling 61 MB are referenced by nothing, including three
+    copies of the same 3.2 MB file and eight untitled screenshots. Separately,
+    course-materials/eod-practice/ carries tracked render leftovers, among them a
+    13.5 MB sample_plot.tiff that is larger than every referenced image on the
+    site combined. Nothing in the current corpus regenerates them.
+  evidence: |
+    176 image files exist, 52 are referenced. sample_plot.{tiff,jpg,png,svg,pdf}
+    and monthly_means.{csv,json,pkl} are tracked and referenced by no page.
+  action: |
+    Move them through _to_delete/ as usual, since rm fails on the Cowork mount,
+    and let git add -A record the deletion. Do this after D8, not before, so the
+    deploy is not carrying an unrelated change.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py h1_orphan_assets
+    expect: no unreferenced image over 500 KB and no tracked render leftovers
+  blocked_by: [D8]
+
+- id: H2
+  title: Trim the environment file for 2027
+  category: housekeeping
+  severity: low
+  owner: kelly
+  state: deferred
+  why: |
+    environment-2026.yml carries nine packages no 2026 material imports: scipy,
+    scikit-learn, plotly, statsmodels, requests, beautifulsoup4, openpyxl, xlrd
+    and lxml. The course uses exactly four third-party packages. A leaner
+    environment installs faster for students. It also still pins jupyterlab,
+    deliberately, as a Workbench fallback.
+  evidence: |
+    An import audit across all 51 live 2026 files plus the 24 cheatsheets found
+    pandas, numpy, matplotlib and seaborn and nothing else.
+  action: Revisit for 2027. Do not rebuild the environment ten days before class.
+  verify:
+    kind: manual
+    cmd: none
+    expect: deferred to 2027
+
+- id: H3
+  title: Decide what to do about the absolute footer logo path
+  category: housekeeping
+  severity: low
+  owner: kelly
+  state: open
+  why: |
+    The page footer uses a root-absolute path for the Bren logo. That is correct
+    on the org site, which is served at the domain root. On the kcaylor mirror,
+    which is served under a project path, it resolves to the wrong place and the
+    logo is missing. Cosmetic, and only on the mirror.
+  evidence: _quarto.yml page-footer left key uses /images/bren-logo.png.
+  action: |
+    Either leave it, and never point students at the kcaylor URL, or set
+    site-url in _quarto.yml so Quarto can resolve it per site.
+  verify:
+    kind: manual
+    cmd: view the footer on both hosts
+    expect: a decision recorded either way
+
+- id: H4
+  title: Tick the stale endgame-plan item for the 2c colab image
+  category: housekeeping
+  severity: low
+  owner: claude
+  state: open
+  why: |
+    The plan still carries an open item to fix images/collections.jpeg in the 2c
+    colab. That was already fixed under the "Four broken image paths" item on
+    2026-08-15, and a full link scan confirms it resolves.
+  evidence: |
+    2c_exploring_unfamiliar_data.qmd line 16 reads ../images/collections.jpeg and
+    course-materials/images/collections.jpeg exists.
+  action: Mark it done in the endgame plan with a pointer to the item that did it.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py h4_stale_checklist_item
+    expect: no open checklist item for work already completed
+
+- id: H5
+  title: Clear the stale git locks and the _to_delete directory on the laptop
+  category: housekeeping
+  severity: low
+  owner: kelly
+  state: open
+  why: |
+    The Cowork mount cannot delete files, so every git write from a session
+    leaves a lock file behind and every retired file has been moved into
+    _to_delete/ rather than removed. .git/index.lock is present right now and
+    will make the next git write fail. _to_delete/git-stale-locks/ holds fifteen
+    HEAD.lock files and six index.lock files.
+  evidence: |
+    .git/index.lock dated 2026-08-21 04:09 exists. _to_delete/ holds
+    2025-orphan-sweep/, positron-switch/ and git-stale-locks/.
+  action: |
+    On the laptop: rm -f .git/index.lock .git/HEAD.lock, then rm -rf _to_delete
+    once you are satisfied nothing in it is wanted. It is gitignored, so nothing
+    in git changes either way.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py h5_locks_clear
+    expect: no lock file present under .git

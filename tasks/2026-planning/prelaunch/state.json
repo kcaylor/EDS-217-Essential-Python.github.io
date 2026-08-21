@@ -1,0 +1,503 @@
+{
+  "items": {
+    "A1": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:35:01",
+          "cmd": "python3 tools/prelaunch_checks.py a1_day45_headers",
+          "could_not_run": false,
+          "evidence": "FAIL  a1_day45_headers\n  day 4: microplastics_panda.jpeg exists False, referenced False\n  day 5: airquality_panda.jpeg exists False, referenced False",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:44:09",
+          "cmd": "python3 tools/prelaunch_checks.py a1_day45_headers",
+          "could_not_run": false,
+          "evidence": "FAIL  a1_day45_headers\n  day 4: microplastics_panda.jpeg exists False, referenced False\n  day 5: airquality_panda.jpeg exists False, referenced False",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        }
+      ]
+    },
+    "C2": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:54",
+          "cmd": "python3 tools/prelaunch_checks.py c2_mailto",
+          "could_not_run": false,
+          "evidence": "FAIL  c2_mailto\n  line 54: doubled colon, link does not work: **Email:** [caylor@ucsb.edu](mailto::caylor@ucsb.edu)\n  line 71: doubled colon, link does not work: **Email:** [anaboser@ucsb.edu](mailto::annaboser@ucsb.edu)\n  displayed 'anaboser@ucsb.edu' does not match link target 'annaboser@ucsb.edu'",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:52",
+          "cmd": "python3 tools/prelaunch_checks.py c2_mailto",
+          "could_not_run": false,
+          "evidence": "PASS  c2_mailto\n  Every mailto link on index.qmd is well formed and matches its label.",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    },
+    "C4": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:54",
+          "cmd": "python3 tools/prelaunch_checks.py c4_no_network_at_render",
+          "could_not_run": false,
+          "evidence": "FAIL  c4_no_network_at_render\n  executing python blocks scanned across 95 live pages\n  course-materials/final_project.qmd: executes import requests at render time",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:52",
+          "cmd": "python3 tools/prelaunch_checks.py c4_no_network_at_render",
+          "could_not_run": false,
+          "evidence": "PASS  c4_no_network_at_render\n  executing python blocks scanned across 89 live pages\n  No executing block reaches the network.",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    },
+    "C6": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:55",
+          "cmd": "python3 tools/prelaunch_checks.py c6_positron_screenshots",
+          "could_not_run": false,
+          "evidence": "FAIL  c6_positron_screenshots\n  positron_launch.png: file exists False, referenced True, still commented out True\n  interface-positron.png: file exists False, referenced True, still commented out True",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:53",
+          "cmd": "python3 tools/prelaunch_checks.py c6_positron_screenshots",
+          "could_not_run": false,
+          "evidence": "FAIL  c6_positron_screenshots\n  positron_launch.png: file exists False, referenced True, still commented out True\n  interface-positron.png: file exists False, referenced True, still commented out True",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        }
+      ]
+    },
+    "C7": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:55",
+          "cmd": "python3 tools/prelaunch_checks.py c7_eod_dates",
+          "could_not_run": false,
+          "evidence": "FAIL  c7_eod_dates\n  day 1: no Date line\n  day 2: Date 09/01/2026\n  day 3: Date 09/02/2026\n  day 4: Date 09/03/2026\n  day 5: Date 09/04/2026\n  day 6: Date 09/08/2026\n  day 7: Date 09/09/2026",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:53",
+          "cmd": "python3 tools/prelaunch_checks.py c7_eod_dates",
+          "could_not_run": false,
+          "evidence": "PASS  c7_eod_dates\n  day 1: Date 08/31/2026\n  day 2: Date 09/01/2026\n  day 3: Date 09/02/2026\n  day 4: Date 09/03/2026\n  day 5: Date 09/04/2026\n  day 6: Date 09/08/2026\n  day 7: Date 09/09/2026",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    },
+    "C8": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:56",
+          "cmd": "python3 tools/prelaunch_checks.py c8_empty_headings",
+          "could_not_run": false,
+          "evidence": "FAIL  c8_empty_headings\n  day8.qmd ends on an empty heading: ## Additional Resources\n  day9.qmd ends on an empty heading: ## Additional Resources",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:53",
+          "cmd": "python3 tools/prelaunch_checks.py c8_empty_headings",
+          "could_not_run": false,
+          "evidence": "PASS  c8_empty_headings\n  No day page ends on an empty heading.",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    },
+    "C9": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:43:53",
+          "cmd": "python3 tools/prelaunch_checks.py c9_no_external_images",
+          "could_not_run": false,
+          "evidence": "FAIL  c9_no_external_images\n  live pages scanned: 89\n  course-materials/eod-practice/eod-day1-2026.qmd: https://media.arcus.org/files/styles/juicebox_medium/public/ima/images/Martinez_IMG_4771.jpg?itok=V5IY36X3",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        }
+      ]
+    },
+    "D1": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:45",
+          "cmd": "python3 tools/prelaunch_checks.py d1_clean_docs_guard",
+          "could_not_run": false,
+          "evidence": "FAIL  d1_clean_docs_guard\n  clean_docs() runs unguarded at line(s) [447]. An incremental build would delete the rendered site.\n  line 447: UNGUARDED, runs on every build path",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:43",
+          "cmd": "python3 tools/prelaunch_checks.py d1_clean_docs_guard",
+          "could_not_run": false,
+          "evidence": "PASS  d1_clean_docs_guard\n  clean_docs() is called only on the full-build path.\n  line 501: guarded by  if args.full",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    },
+    "D2": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:45",
+          "cmd": "python3 tools/prelaunch_checks.py d2_render_set",
+          "could_not_run": false,
+          "evidence": "FAIL  d2_render_set\n  _quarto.yml render exclusions: ['nbs/**', 'extra_files/**', 'course-materials/interactive-sessions/2a_getting_help.qmd', 'course-materials/interactive-sessions/2c_exceptions_and_errors.qmd', 'course-materials/interactive-sessions/interactive-session-git.qmd']\n  correct render set: 101 files\n  build_docs.get_all_buildable_files(): 166 files\n  would render 65 files it must not, first ten:\n    _to_delete/2025-orphan-sweep/course-materials_answer-keys_1c_variables_strings-key.qmd\n    _to_delete/2025-orphan-sweep/course-materials_answer-keys_2c_lists_dictionaries_sets-key.qmd\n    _to_delete/2025-orphan-sweep/course-materials_answer-keys_3b_control_flows-key.qmd\n    _to_delete/2025-orphan-sweep/course-materials_answer-keys_3d_pandas_series-key.qmd\n    _to_delete/2025-orphan-sweep/course-materials_answer-keys_4b_pandas_dataframes-key.qmd\n    _to_delete/2025-orphan-sweep/course-materials_answer-keys_5c_cleaning_data-key.qmd\n    _to_delete/2025-orphan-sweep/course-materials_answer-keys_6b_advanced_data_manipulation-key.qmd\n    _to_delete/2025-orphan-sweep/course-materials_answer-keys_7c_visualizations-key.qmd\n    _to_delete/2025-orphan-sweep/course-materials_answer-keys_eod-day1-key.qmd\n    _to_delete/2025-orphan-sweep/course-materials_answer-keys_eod-day2-key.qmd",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:43",
+          "cmd": "python3 tools/prelaunch_checks.py d2_render_set",
+          "could_not_run": false,
+          "evidence": "PASS  d2_render_set\n  _quarto.yml render exclusions: ['nbs/**', 'extra_files/**', 'course-materials/interactive-sessions/2a_getting_help.qmd', 'course-materials/interactive-sessions/2c_exceptions_and_errors.qmd', 'course-materials/interactive-sessions/interactive-session-git.qmd', 'course-materials/lectures/**']\n  correct render set: 89 files\n  build_docs.get_all_buildable_files(): 89 files",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    },
+    "D3": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:48",
+          "cmd": "python3 tools/prelaunch_checks.py d3_lecture_kernels",
+          "could_not_run": false,
+          "evidence": "FAIL  d3_lecture_kernels\n  notebooks in the render set: 6\n  course-materials/lectures/00_intro_to_python.ipynb: 2 reference(s) to eds217_2025\n  course-materials/lectures/01_the_zen_of_python.ipynb: 3 reference(s) to eds217_2025\n  course-materials/lectures/02_helpGPT.ipynb: 1 reference(s) to eds217_2025\n  course-materials/lectures/03-debugging.ipynb: 2 reference(s) to eds217_2025\n  course-materials/lectures/04-next_steps.ipynb: 1 reference(s) to eds217_2025\n  course-materials/lectures/99_dry_vs_wet.ipynb: 1 reference(s) to eds217_2025",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:46",
+          "cmd": "python3 tools/prelaunch_checks.py d3_lecture_kernels",
+          "could_not_run": false,
+          "evidence": "PASS  d3_lecture_kernels\n  notebooks in the render set: 0\n  No rendered notebook names the 2025 kernel.",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    },
+    "D4": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:51",
+          "cmd": "python3 tools/prelaunch_checks.py d4_lectures_excluded",
+          "could_not_run": false,
+          "evidence": "FAIL  d4_lectures_excluded\n  render exclusions naming lectures: none\n  lecture files still in the render set: 12\n    course-materials/lectures/00_intro_to_python.ipynb\n    course-materials/lectures/01_the_zen_of_python.ipynb\n    course-materials/lectures/02_helpGPT.ipynb\n    course-materials/lectures/03-debugging.ipynb\n    course-materials/lectures/04-next_steps.ipynb\n    course-materials/lectures/05_Drop_or_Impute.qmd\n    course-materials/lectures/05_Session_1A.qmd\n    course-materials/lectures/99_dry_vs_wet.ipynb",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:49",
+          "cmd": "python3 tools/prelaunch_checks.py d4_lectures_excluded",
+          "could_not_run": false,
+          "evidence": "PASS  d4_lectures_excluded\n  render exclusions naming lectures: ['course-materials/lectures/**']\n  lecture files still in the render set: 0",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    },
+    "D5": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:52",
+          "cmd": "python3 tools/prelaunch_checks.py d5_render_complete",
+          "could_not_run": false,
+          "evidence": "FAIL  d5_render_complete\n  rendered HTML files: 2  (render set is 101)\n  docs/data files: 31  (data/ holds 31)\n  search.json entries: 9\n  index.html says Summer 2026: True",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:50",
+          "cmd": "python3 tools/prelaunch_checks.py d5_render_complete",
+          "could_not_run": false,
+          "evidence": "FAIL  d5_render_complete\n  rendered HTML files: 2  (render set is 89)\n  docs/data files: 31  (data/ holds 31)\n  search.json entries: 9\n  index.html says Summer 2026: True",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        }
+      ]
+    },
+    "D6": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:54",
+          "cmd": "python3 tools/prelaunch_checks.py d6_docs_data_tracked",
+          "could_not_run": false,
+          "evidence": "FAIL  d6_docs_data_tracked\n  files tracked at HEAD under docs/data: 0\n  files in data/: 31\n  not tracked, so they will 404 on the live site: 31\n    banana_index.csv\n    basic_data.csv\n    bsrn_gob_2019-10.csv\n    data_urls.py\n    date_data.csv\n    eurovision_contestants.csv\n    eurovision_country_populations.csv\n    gistemp_global.csv\n    gistemp_nh.csv\n    gistemp_sh.csv",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:52",
+          "cmd": "python3 tools/prelaunch_checks.py d6_docs_data_tracked",
+          "could_not_run": false,
+          "evidence": "FAIL  d6_docs_data_tracked\n  files tracked at HEAD under docs/data: 0\n  files in data/: 31\n  not tracked, so they will 404 on the live site: 31\n    banana_index.csv\n    basic_data.csv\n    bsrn_gob_2019-10.csv\n    data_urls.py\n    date_data.csv\n    eurovision_contestants.csv\n    eurovision_country_populations.csv\n    gistemp_global.csv\n    gistemp_nh.csv\n    gistemp_sh.csv",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        }
+      ]
+    },
+    "D8": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:54",
+          "cmd": "python3 tools/prelaunch_checks.py d8_live_site",
+          "could_not_run": true,
+          "evidence": "COULD NOT RUN  d8_live_site\n  no network access from here: <urlopen error Tunnel connection failed: 403 Forbidden>",
+          "exit": 2,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:52",
+          "cmd": "python3 tools/prelaunch_checks.py d8_live_site",
+          "could_not_run": true,
+          "evidence": "COULD NOT RUN  d8_live_site\n  no network access from here: <urlopen error Tunnel connection failed: 403 Forbidden>",
+          "exit": 2,
+          "git_sha": "98e9108",
+          "ok": false
+        }
+      ]
+    },
+    "H1": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:35:01",
+          "cmd": "python3 tools/prelaunch_checks.py h1_orphan_assets",
+          "could_not_run": false,
+          "evidence": "FAIL  h1_orphan_assets\n  unreferenced images over 500 KB: 23\n  render leftovers under course-materials: 10\n    13.5 MB  course-materials/eod-practice/sample_plot.tiff\n    3.9 MB  course-materials/images/mpala.jpeg\n    3.2 MB  images/horst-repos.png\n    3.2 MB  course-materials/lectures/assets/horst-repos.png\n    3.2 MB  course-materials/images/horst-repos.png\n    3.1 MB  course-materials/interactive-sessions/images/git_bunnies_1.jpg\n    2.7 MB  course-materials/images/mpala1.jpeg\n    2.6 MB  course-materials/interactive-sessions/images/variables.jpg\n    2.6 MB  course-materials/images/variables.jpg\n    1.7 MB  course-materials/interactive-sessions/images/list.jpg\n    course-materials/answer-keys/monthly_means.csv\n    course-materials/eod-practice/eod-day3.qmd.copy\n    course-materials/eod-practice/monthly_means.csv\n    course-materials/eod-practice/monthly_means.json\n    course-materials/eod-practice/monthly_means.pkl\n    course-materials/eod-practice/sample_plot.jpg\n    course-materials/eod-practice/sample_plot.pdf\n    course-materials/eod-practice/sample_plot.png\n    course-materials/eod-practice/sample_plot.svg\n    course-materials/eod-practice/sample_plot.tiff",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:44:09",
+          "cmd": "python3 tools/prelaunch_checks.py h1_orphan_assets",
+          "could_not_run": false,
+          "evidence": "FAIL  h1_orphan_assets\n  unreferenced images over 500 KB: 23\n  render leftovers under course-materials: 10\n    13.5 MB  course-materials/eod-practice/sample_plot.tiff\n    3.9 MB  course-materials/images/mpala.jpeg\n    3.2 MB  images/horst-repos.png\n    3.2 MB  course-materials/lectures/assets/horst-repos.png\n    3.2 MB  course-materials/images/horst-repos.png\n    3.1 MB  course-materials/interactive-sessions/images/git_bunnies_1.jpg\n    2.7 MB  course-materials/images/mpala1.jpeg\n    2.6 MB  course-materials/interactive-sessions/images/variables.jpg\n    2.6 MB  course-materials/images/variables.jpg\n    1.7 MB  course-materials/interactive-sessions/images/list.jpg\n    course-materials/answer-keys/monthly_means.csv\n    course-materials/eod-practice/eod-day3.qmd.copy\n    course-materials/eod-practice/monthly_means.csv\n    course-materials/eod-practice/monthly_means.json\n    course-materials/eod-practice/monthly_means.pkl\n    course-materials/eod-practice/sample_plot.jpg\n    course-materials/eod-practice/sample_plot.pdf\n    course-materials/eod-practice/sample_plot.png\n    course-materials/eod-practice/sample_plot.svg\n    course-materials/eod-practice/sample_plot.tiff",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        }
+      ]
+    },
+    "H4": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:35:04",
+          "cmd": "python3 tools/prelaunch_checks.py h4_stale_checklist_item",
+          "could_not_run": false,
+          "evidence": "FAIL  h4_stale_checklist_item\n  open items in the endgame plan: 7\n  still open but already done: Fix the broken image in the 2c colab.",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:44:13",
+          "cmd": "python3 tools/prelaunch_checks.py h4_stale_checklist_item",
+          "could_not_run": false,
+          "evidence": "FAIL  h4_stale_checklist_item\n  open items in the endgame plan: 7\n  still open but already done: Fix the broken image in the 2c colab.",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        }
+      ]
+    },
+    "H5": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:35:04",
+          "cmd": "python3 tools/prelaunch_checks.py h5_locks_clear",
+          "could_not_run": false,
+          "evidence": "FAIL  h5_locks_clear\n  lock files under .git: 4\n    .git/index.lock\n    .git/HEAD.lock\n    .git/index 4.lock\n    .git/objects/maintenance.lock",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:44:13",
+          "cmd": "python3 tools/prelaunch_checks.py h5_locks_clear",
+          "could_not_run": false,
+          "evidence": "FAIL  h5_locks_clear\n  lock files under .git: 4\n    .git/index.lock\n    .git/HEAD.lock\n    .git/index 4.lock\n    .git/objects/maintenance.lock",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        }
+      ]
+    },
+    "T1": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:56",
+          "cmd": "python3 tools/prelaunch_checks.py t1_warm_cache_coverage",
+          "could_not_run": false,
+          "evidence": "FAIL  t1_warm_cache_coverage\n  datasets the live corpus loads: 18\n  datasets warm_cache.py reports on: 10\n  warm_cache.py exit status: 0\n  outside the gate, so their loss would not be detected:\n    date_data.csv\n    hardiness_zones_2012.csv\n    hardiness_zones_2023.csv\n    monthly_co2_concentration.csv\n    monthly_temperature_data.csv\n    openaq_CNSI_measurments.csv\n    openaq_santa_barbara_measurments.csv\n    zip_code_database.csv",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:55",
+          "cmd": "python3 tools/prelaunch_checks.py t1_warm_cache_coverage",
+          "could_not_run": false,
+          "evidence": "PASS  t1_warm_cache_coverage\n  datasets the live corpus loads: 18\n  datasets warm_cache.py reports on: 18\n  warm_cache.py exit status: 0",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    },
+    "T2": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:59",
+          "cmd": "bash tools/gates.sh",
+          "could_not_run": false,
+          "evidence": "bash: tools/gates.sh: No such file or directory",
+          "exit": 127,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:36:50",
+          "cmd": "bash tools/gates.sh",
+          "could_not_run": false,
+          "evidence": "EDS 217 quality gates\n\nHUMAN  Gate 1  every construct traces to a day scope table\n       Deciding what counts as a construct and matching it to a prose scope\n       table is a reading task. Recorded per day in\n       tasks/2026-planning/2026-day-skeleton.md.\nHUMAN  Gate 2  the rehearsal rule holds for every WRITE-depth construct\n       Depth labels and rehearsal claims are prose. Afternoon-taught constructs\n       additionally need the decision 10 exemption and its audit table, also in\n       2026-day-skeleton.md.\nPASS   Gate 3  at most two Field Notes per end-of-day activity\n\n       day 1: 0\n       day 2: 1\n       day 3: 2\n       day 4: 2\n       day 5: 1\n       day 6: 0\n       day 7: 1\nPASS   Gate 4  handout and answer key agree, structurally\n\n       day 2: 6 parts, handout and key agree\n       day 3: 7 parts, handout and key agree\n       day 4: 7 parts, handout and key agree\n       day 5: 5 parts, handout and key agree\n       day 6: 6 parts, handout and key agree\n       day 7: 6 parts, handout and key agree\n       day 1: structured without Part headings, read it by hand\n       The structural half is mechanical. Task-by-task agreement is not, because\n       handouts number tasks and keys group them under parts.\nPASS   Gate 5  no lambda anywhere in the course materials\n       Pattern requires a parameter list and a colon, so backticked prose about\n       lambda does not match.\nPASS   Gate 6  the 2025 alignment checklist and all seven per-day audits are archived\n       File existence only. Whether the checklist was applied is a reading task.\n\nFour mechanical gates pass. Two human gates are noted above.",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        },
+        {
+          "at": "2026-08-21T04:43:58",
+          "cmd": "bash tools/gates.sh",
+          "could_not_run": false,
+          "evidence": "EDS 217 quality gates\n\nHUMAN  Gate 1  every construct traces to a day scope table\n       Deciding what counts as a construct and matching it to a prose scope\n       table is a reading task. Recorded per day in\n       tasks/2026-planning/2026-day-skeleton.md.\nHUMAN  Gate 2  the rehearsal rule holds for every WRITE-depth construct\n       Depth labels and rehearsal claims are prose. Afternoon-taught constructs\n       additionally need the decision 10 exemption and its audit table, also in\n       2026-day-skeleton.md.\nPASS   Gate 3  at most two Field Notes per end-of-day activity\n\n       day 1: 0\n       day 2: 1\n       day 3: 2\n       day 4: 2\n       day 5: 1\n       day 6: 0\n       day 7: 1\nPASS   Gate 4  handout and answer key agree, structurally\n\n       day 2: 6 parts, handout and key agree\n       day 3: 7 parts, handout and key agree\n       day 4: 7 parts, handout and key agree\n       day 5: 5 parts, handout and key agree\n       day 6: 6 parts, handout and key agree\n       day 7: 6 parts, handout and key agree\n       day 1: structured without Part headings, read it by hand\n       The structural half is mechanical. Task-by-task agreement is not, because\n       handouts number tasks and keys group them under parts.\nPASS   Gate 5  no lambda anywhere in the course materials\n       Pattern requires a parameter list and a colon, so backticked prose about\n       lambda does not match.\nPASS   Gate 6  the 2025 alignment checklist and all seven per-day audits are archived\n       File existence only. Whether the checklist was applied is a reading task.\n\nFour mechanical gates pass. Two human gates are noted above.",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    },
+    "T3": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:59",
+          "cmd": "python3 tools/prelaunch_checks.py t3_fetch_check_exit",
+          "could_not_run": false,
+          "evidence": "FAIL  t3_fetch_check_exit\n  exit-status expressions in fetch_data.py: ['1 if failed or absent else 0']\n  The missing-dataset list is never consulted, so --check cannot fail.",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:58",
+          "cmd": "python3 tools/prelaunch_checks.py t3_fetch_check_exit",
+          "could_not_run": false,
+          "evidence": "PASS  t3_fetch_check_exit\n  exit-status expressions in fetch_data.py: ['1 if failed or absent or missing else 0']\n  The missing-dataset list is consulted.",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    },
+    "T4": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:59",
+          "cmd": "python3 tools/prelaunch_checks.py t4_run_cells_empty",
+          "could_not_run": false,
+          "evidence": "FAIL  t4_run_cells_empty\n  exit status with no file arguments: 0\n  stdout: 0/0 cells ran clean across 0 files\n  Exits 0 having checked nothing, so an empty glob reports a passing gate.",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:58",
+          "cmd": "python3 tools/prelaunch_checks.py t4_run_cells_empty",
+          "could_not_run": false,
+          "evidence": "PASS  t4_run_cells_empty\n  exit status with no file arguments: 2\n  stdout: run_cells.py was given no files, so it checked nothing.\nUsage: python tools/run_cells.py <file.qmd> [<file.qmd> ...]\nFor the whole 2026 corpus, use: make cells\n  Reports a problem rather than a green result.",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    },
+    "T5": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:34:59",
+          "cmd": "python3 tools/prelaunch_checks.py t5_dataset_catalog",
+          "could_not_run": false,
+          "evidence": "FAIL  t5_dataset_catalog\n  datasets loaded by live pages: 18\n  absent from data/data_urls.py: ['messy_field_survey.csv', 'penguins.csv']\n  absent from tools/fetch_data.py: ['penguins.csv']",
+          "exit": 1,
+          "git_sha": "98e9108",
+          "ok": false
+        },
+        {
+          "at": "2026-08-21T04:43:59",
+          "cmd": "python3 tools/prelaunch_checks.py t5_dataset_catalog",
+          "could_not_run": false,
+          "evidence": "PASS  t5_dataset_catalog\n  datasets loaded by live pages: 18\n  Every loaded dataset is catalogued in both places.",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    },
+    "T6": {
+      "checks": [
+        {
+          "at": "2026-08-21T04:44:00",
+          "cmd": "python3 tools/prelaunch_checks.py t6_cells_clean",
+          "could_not_run": false,
+          "evidence": "PASS  t6_cells_clean\n  pages in the render set: 89\n  933/933 cells ran clean across 89 files",
+          "exit": 0,
+          "git_sha": "98e9108",
+          "ok": true
+        }
+      ]
+    }
+  },
+  "schema": 1,
+  "updated": "2026-08-21T04:44:13"
+}

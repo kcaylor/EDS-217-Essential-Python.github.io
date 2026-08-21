@@ -13,6 +13,11 @@ project:
     - "!course-materials/interactive-sessions/2a_getting_help.qmd"
     - "!course-materials/interactive-sessions/2c_exceptions_and_errors.qmd"
     - "!course-materials/interactive-sessions/interactive-session-git.qmd"
+    # The lectures are 2025 material, unlinked from the navbar and superseded
+    # by the 2026 sessions. pandas_workflow.qmd in particular teaches an
+    # eight-step workflow, which contradicts the ten steps the final project is
+    # graded against. Kept in the tree as instructor reference, off the site.
+    - "!course-materials/lectures/**"
 
 website:
   navbar:

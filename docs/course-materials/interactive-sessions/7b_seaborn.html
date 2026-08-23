@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Interactive Session</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../course-materials/assets/css/exercises.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">EDS 217</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">🏠 home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../course-materials/the-data-science-workflow.html"> 
+<span class="menu-text">🔟 the workflow</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://docs.google.com/document/d/1yBKyJFT22bKynDn4TzrNwdeZ6lb9NELqCeewhifcugo/edit?usp=sharing" target="_blank"> 
+<span class="menu-text">📋 syllabus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-daily-materials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">🗓️ daily materials</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-daily-materials">    
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day1.html">
+ <span class="dropdown-text">1️⃣ Day 1 (8/31)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day2.html">
+ <span class="dropdown-text">2️⃣ Day 2 (9/1)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day3.html">
+ <span class="dropdown-text">3️⃣ Day 3 (9/2)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day4.html">
+ <span class="dropdown-text">4️⃣ Day 4 (9/3)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day5.html">
+ <span class="dropdown-text">5️⃣ Day 5 (9/4)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day6.html">
+ <span class="dropdown-text">6️⃣ Day 6 (9/8)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day7.html">
+ <span class="dropdown-text">7️⃣ Day 7 (9/9)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day8.html">
+ <span class="dropdown-text">8️⃣ Day 8 (9/10)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day9.html">
+ <span class="dropdown-text">9️⃣ Day 9 (9/11)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-interactive-sessions" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">💻 interactive sessions</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-interactive-sessions">    
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/1a_positron_notebooks.html">
+ <span class="dropdown-text">Session 1a - ⚒️ Positron &amp; Jupyter Notebooks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/1b_python_essentials.html">
+ <span class="dropdown-text">Session 1b - 🐍 Python Essentials</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/1c_whole_game_1.html">
+ <span class="dropdown-text">Session 1c - 🎬 The Whole Game, Part 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/1d_whole_game_2.html">
+ <span class="dropdown-text">Session 1d - 🎬 The Whole Game, Part 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/2a_reading_data.html">
+ <span class="dropdown-text">Session 2a - 🐼 Reading Data into pandas</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/2b_exploring_data.html">
+ <span class="dropdown-text">Session 2b - 🔎 Exploring a DataFrame</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/2d_lists_and_dicts.html">
+ <span class="dropdown-text">Session 2d - 📝 Lists &amp; Dictionaries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/3a_booleans_and_conditionals.html">
+ <span class="dropdown-text">Session 3a - 📝 Booleans &amp; Conditionals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
+ <span class="dropdown-text">Session 4a - 🧼 Missing, Duplicated, Miscast</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/4b_functions.html">
+ <span class="dropdown-text">Session 4b - ⚙️ Write It Once, Name It, Use It</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
+ <span class="dropdown-text">Session 5b - 📊 Several Answers at Once</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
+ <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
+ <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
+ <span class="dropdown-text">Session 6b - 🧩 Long and Wide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/6c_dates.html">
+ <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
+ <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/7b_seaborn.html">
+ <span class="dropdown-text">Session 7b - 🎨 Name the Columns, Not the Colours</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/7d_project_kickoff.html">
+ <span class="dropdown-text">Session 7d - 🚀 Project Kickoff</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-coding-colabs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">🙌 coding colabs</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-coding-colabs">    
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/2c_exploring_unfamiliar_data.html">
+ <span class="dropdown-text">🙌 Session 2c - Five Claims About a Dataset You’ve Never Seen</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/3d_ranking_questions.html">
+ <span class="dropdown-text">🙌 Session 3d - Which One, and How Do You Know?</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/4d_cleaning_messy_data.html">
+ <span class="dropdown-text">🙌 Session 4d - From Field Sheet to DataFrame</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/5c_grouped_comparisons.html">
+ <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Last Night, Properly</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/6d_two_table_exercise.html">
+ <span class="dropdown-text">🙌 Session 6d - Two Records, Sixty-Six Years Apart</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/7c_penguins.html">
+ <span class="dropdown-text">🙌 Session 7c - One Cloud of Points, Three Species</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../cheatsheets.html"> 
+<span class="menu-text">👀 cheatsheets</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
+<span class="menu-text">🔑 answer keys</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">📚 resources</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-resources">    
+        <li>
+    <a class="dropdown-item" href="https://docs.python.org/3/" target="_blank">
+ <span class="dropdown-text">📚 Python Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://pandas.pydata.org/docs/" target="_blank">
+ <span class="dropdown-text">📚 Pandas Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://numpy.org/doc/stable/" target="_blank">
+ <span class="dropdown-text">📚 Numpy Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://matplotlib.org/stable/contents.html" target="_blank">
+ <span class="dropdown-text">📚 Matplotlib Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://seaborn.pydata.org/" target="_blank">
+ <span class="dropdown-text">📚 Seaborn Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://positron.posit.co/" target="_blank">
+ <span class="dropdown-text">📚 Positron Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://docs.anaconda.com/" target="_blank">
+ <span class="dropdown-text">📚 Anaconda Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://stackoverflow.com/" target="_blank">
+ <span class="dropdown-text">📚 Stack Overflow</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://realpython.com/" target="_blank">
+ <span class="dropdown-text">📚 Real Python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://towardsdatascience.com/" target="_blank">
+ <span class="dropdown-text">📚 Towards Data Science</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.datacamp.com/" target="_blank">
+ <span class="dropdown-text">📚 DataCamp</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.kaggle.com/" target="_blank">
+ <span class="dropdown-text">📚 Kaggle</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="http://pythontutor.com/" target="_blank">
+ <span class="dropdown-text">🧰 Python Tutor</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://pandastutor.com/vis.html#" target="_blank">
+ <span class="dropdown-text">🧰 Pandas Tutor</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://wesmckinney.com/book/" target="_blank">
+ <span class="dropdown-text">📙 Python for Data Analysis</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://jakevdp.github.io/PythonDataScienceHandbook/" target="_blank">
+ <span class="dropdown-text">📙 Python for Data Science Handbook</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/jakevdp/PythonDataScienceHandbook" target="_blank">
+ <span class="dropdown-text">📙 Python Data Science Handbook (GitHub)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://talkpython.fm/" target="_blank">
+ <span class="dropdown-text">📻 Talk Python to Me</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EDS-217-Essential-Python/EDS-217-Essential-Python.github.io" target="_blank"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Interactive Session</h1>
+            <p class="subtitle lead">🎨 Name the Columns, Not the Colours</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a></li>
+  <li><a href="#the-same-figure-said-two-ways" id="toc-the-same-figure-said-two-ways" class="nav-link" data-scroll-target="#the-same-figure-said-two-ways">The same figure, said two ways</a></li>
+  <li><a href="#hue-and-what-a-table-cannot-show-you" id="toc-hue-and-what-a-table-cannot-show-you" class="nav-link" data-scroll-target="#hue-and-what-a-table-cannot-show-you"><code>hue=</code>, and what a table cannot show you</a></li>
+  <li><a href="#sns.histplot-the-shape-of-one-column" id="toc-sns.histplot-the-shape-of-one-column" class="nav-link" data-scroll-target="#sns.histplot-the-shape-of-one-column"><code>sns.histplot</code>: the shape of one column</a></li>
+  <li><a href="#sns.barplot-and-the-series-idiom" id="toc-sns.barplot-and-the-series-idiom" class="nav-link" data-scroll-target="#sns.barplot-and-the-series-idiom"><code>sns.barplot</code>, and the Series idiom</a></li>
+  <li><a href="#seaborn-draws-on-matplotlib" id="toc-seaborn-draws-on-matplotlib" class="nav-link" data-scroll-target="#seaborn-draws-on-matplotlib">seaborn draws on matplotlib</a></li>
+  <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key points</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<div style="width: 60%; margin: auto;">
+<p><img src="images/panda_seaborn.jpeg" class="img-fluid"></p>
+</div>
+<div class="gray-text center-text">
+<p><em>A panda presents its findings.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
+</div>
+<p>Everything you drew an hour ago, you drew by handing matplotlib two sequences of numbers and then describing, one command at a time, what you wanted done to them.</p>
+<p>That works, and it is worth knowing, because underneath every Python figure you will ever make there is a matplotlib figure and a matplotlib axes. But it means that a plot of your data has nothing to do with your data. <code>plt.scatter(wet_days['Daily_AirTemp_Mean_C'], wet_days['Daily_Precip_Total_mm'])</code> does not know it is looking at a DataFrame, does not know what those columns are called, and cannot use anything else in the table.</p>
+<p><strong>seaborn</strong> takes the other approach. You give it the table and the names of the columns, and it works out the drawing. In exchange for that one change of framing you get, almost for free, the single most useful thing a figure can do: show you that your data is made of groups.</p>
+<p>By the end of this session you will be able to:</p>
+<ul>
+<li>write the three seaborn calls this course uses: <code>sns.scatterplot</code>, <code>sns.histplot</code> and <code>sns.barplot</code></li>
+<li>pass a whole table with <code>data=</code> and name the columns with <code>x=</code> and <code>y=</code></li>
+<li>split any of those three plots by a categorical column with <code>hue=</code>, and read the result</li>
+<li>feed a <strong>grouped Series</strong> to <code>sns.barplot</code> using its <code>.values</code> and its <code>.index</code></li>
+<li>keep using every matplotlib command from the last session on a seaborn figure</li>
+</ul>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<ol type="1">
+<li><p><strong>Create a new notebook</strong> from the Command Palette (<strong>Create: New Jupyter Notebook</strong>), and confirm its kernel reads <strong>eds217_2026</strong>.</p></li>
+<li><p><strong>Save your notebook</strong> (<code>Ctrl + S</code>, or <code>Cmd + S</code> on macOS) as: <code>Session_7B_Seaborn.ipynb</code></p></li>
+<li><p><strong>Add a title cell</strong> (Markdown), updating the date to today:</p></li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Day 7: Session 7B - Name the Columns, Not the Colours</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Session Webpage</span><span class="co">](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/7b_seaborn.html)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Date: 09/09/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>Rebuild Friday’s clean stream-chemistry table. Every line below is one you have run before, in the Thursday colab and again in 5A:</li>
+</ol>
+<div id="70f7e4bd" class="cell" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/messy_field_survey.csv'</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> survey.drop_duplicates()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'site'</span>] <span class="op">=</span> survey[<span class="st">'site'</span>].<span class="bu">str</span>.strip()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'site'</span>] <span class="op">=</span> survey[<span class="st">'site'</span>].<span class="bu">str</span>.lower()</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'site'</span>] <span class="op">=</span> survey[<span class="st">'site'</span>].<span class="bu">str</span>.replace(<span class="st">'-'</span>, <span class="st">'_'</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'pH'</span>] <span class="op">=</span> survey[<span class="st">'pH'</span>].<span class="bu">str</span>.replace(<span class="st">','</span>, <span class="st">'.'</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'pH'</span>] <span class="op">=</span> survey[<span class="st">'pH'</span>].astype(<span class="bu">float</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> survey.dropna(subset<span class="op">=</span>[<span class="st">'temperature_c'</span>, <span class="st">'dissolved_oxygen_mg_L'</span>, <span class="st">'conductivity_uS_cm'</span>])</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'n_replicates'</span>] <span class="op">=</span> survey[<span class="st">'n_replicates'</span>].fillna(<span class="dv">1</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'n_replicates'</span>] <span class="op">=</span> survey[<span class="st">'n_replicates'</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> survey[survey[<span class="st">'temperature_c'</span>] <span class="op">&gt;</span> <span class="op">-</span><span class="dv">100</span>].copy()</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> survey.rename(columns<span class="op">=</span>{<span class="st">'collection date'</span>: <span class="st">'collection_date'</span>})</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>survey.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>(255, 7)</code></pre>
+</div>
+</div>
+<p>255 rows, six sites, four measurements each.</p>
+<p>The standard import line is <code>import seaborn as sns</code>, and <code>sns</code> is as fixed a convention as <code>pd</code> and <code>plt</code>. Nobody remembers why.</p>
+</section>
+<section id="the-same-figure-said-two-ways" class="level2">
+<h2 class="anchored" data-anchor-id="the-same-figure-said-two-ways">The same figure, said two ways</h2>
+<p>Here is a scatter of water temperature against dissolved oxygen, drawn the way you drew things an hour ago:</p>
+<div id="9ca50f97" class="cell" data-execution_count="2">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.scatter(survey[<span class="st">'temperature_c'</span>], survey[<span class="st">'dissolved_oxygen_mg_L'</span>])</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Water temperature (°C)'</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Dissolved oxygen (mg/L)'</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7b_seaborn_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And here is the same figure in seaborn:</p>
+<div id="9bf442ea" class="cell" data-execution_count="3">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>survey, x<span class="op">=</span><span class="st">'temperature_c'</span>, y<span class="op">=</span><span class="st">'dissolved_oxygen_mg_L'</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7b_seaborn_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'column_name'</span>, y<span class="op">=</span><span class="st">'column_name'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#               ↑        ↑                ↑</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#               the      which column     which column</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#               table    across           up</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Three differences, and the third is the one that matters.</p>
+<ul>
+<li><code>data=</code> takes the <strong>whole table</strong>, once.</li>
+<li><code>x=</code> and <code>y=</code> take <strong>column names as strings</strong>, not the columns themselves.</li>
+<li>The axes came out <strong>labelled</strong>, because seaborn knew what the columns were called and matplotlib never did.</li>
+</ul>
+<p>That last one is a small convenience and a large hint. seaborn is not a drawing library that happens to accept DataFrames. It is a library built on the assumption that your data is a tidy table, and it uses everything it knows about that table to make decisions you would otherwise make by hand.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>🐍 Column names are not automatically good axis labels. <code>temperature_c</code> is a variable name; <em>Water temperature (°C)</em> is a label. Everything from the last session still works, so override them whenever you would show the figure to somebody:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>survey, x<span class="op">=</span><span class="st">'temperature_c'</span>, y<span class="op">=</span><span class="st">'dissolved_oxygen_mg_L'</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Water temperature (°C)'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Dissolved oxygen (mg/L)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="hue-and-what-a-table-cannot-show-you" class="level2">
+<h2 class="anchored" data-anchor-id="hue-and-what-a-table-cannot-show-you"><code>hue=</code>, and what a table cannot show you</h2>
+<p>On Friday morning you computed two small tables from this file and read them side by side:</p>
+<div id="17ddda58" class="cell" data-execution_count="4">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].mean().sort_values())</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(survey.groupby(<span class="st">'site'</span>)[<span class="st">'temperature_c'</span>].mean().sort_values())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>site
+site_f     6.180233
+site_c     6.873111
+site_e     7.410930
+site_b     8.601220
+site_a     9.485909
+site_d    10.053333
+Name: dissolved_oxygen_mg_L, dtype: float64
+site
+site_d    15.179487
+site_a    16.600000
+site_b    18.102439
+site_e    19.730233
+site_c    21.911111
+site_f    23.297674
+Name: temperature_c, dtype: float64</code></pre>
+</div>
+</div>
+<p>Two orderings of six sites, and one is the exact reverse of the other. You concluded, correctly, that the warm sites are the low-oxygen sites. You believed it because the two lists happened to line up.</p>
+<p>Now add one argument to the scatter you already made:</p>
+<div id="c7a884ec" class="cell" data-execution_count="5">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>survey, x<span class="op">=</span><span class="st">'temperature_c'</span>, y<span class="op">=</span><span class="st">'dissolved_oxygen_mg_L'</span>, hue<span class="op">=</span><span class="st">'site'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Water temperature (°C)'</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Dissolved oxygen (mg/L)'</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Six sites on one line'</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7b_seaborn_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>hue=</code> takes a column name and gives every distinct value in that column its own colour, with a legend built for free.</p>
+<p>Read what came back. The six sites are not scattered through the cloud; they are laid out <strong>along it</strong>, in order, from <code>site_d</code> in the cool oxygen-rich corner to <code>site_f</code> in the warm oxygen-poor one, with <code>site_a</code>, <code>site_b</code>, <code>site_e</code> and <code>site_c</code> strung between them in exactly the order your two tables gave.</p>
+<p>The tables told you six sites have six means. The figure tells you that all 255 samples, from all six sites, lie along one relationship, and that the sites differ because they sit at different places on it. That is a stronger claim and a different one, and no table you built this week could have made it.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="`hue=` is the argument you came for">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<code>hue=</code> is the argument you came for
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Almost every serious question in environmental data science is <em>does this relationship differ between groups</em>. Sites, species, seasons, treatments, oceans, decades.</p>
+<p><code>hue=</code> is how you ask it, and it works the same way on all three of the functions below. When you have a figure and a categorical column, try <code>hue=</code> before you try anything else.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✏️ Test your knowledge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Write a seaborn scatter plot of <code>conductivity_uS_cm</code> against <code>dissolved_oxygen_mg_L</code>, coloured by <code>site</code>, inside a figure eight inches by five. Label both axes with units and give it a title.</p>
+<p>Then, in a markdown cell: do the sites separate as cleanly here as they did for temperature? Name one thing this figure tells you about the six streams that the temperature figure did not.</p>
+</div>
+</div>
+</section>
+<section id="sns.histplot-the-shape-of-one-column" class="level2">
+<h2 class="anchored" data-anchor-id="sns.histplot-the-shape-of-one-column"><code>sns.histplot</code>: the shape of one column</h2>
+<p>A scatter needs two variables. When you have one and want to know how its values are distributed, you want a histogram: the values sorted into bins, with a bar showing how many landed in each.</p>
+<div id="fc1d4cd3" class="cell" data-execution_count="6">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>survey, x<span class="op">=</span><span class="st">'temperature_c'</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Water temperature (°C)'</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of water temperature across all sites'</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7b_seaborn_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>data=</code> and <code>x=</code>, and no <code>y=</code>, because the height of each bar is a count that seaborn works out. This is the same picture <code>plt.hist()</code> drew for you behind a boxed note on Thursday evening, now with a name and an argument you can use.</p>
+<p>And <code>hue=</code> works here too:</p>
+<div id="385f491f" class="cell" data-execution_count="7">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>survey, x<span class="op">=</span><span class="st">'temperature_c'</span>, hue<span class="op">=</span><span class="st">'site'</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Water temperature (°C)'</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Water temperature by site'</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7b_seaborn_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>One broad hump has become six narrow ones, mostly side by side. That is worth pausing on: the overall distribution looked like one population with a wide spread, and it is nothing of the sort. It is six streams, each fairly consistent, at six different temperatures.</p>
+<p>A histogram of a column that mixes groups almost always looks wider and vaguer than any of the groups in it. Splitting by <code>hue=</code> is how you find out whether the width is variability or structure.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✏️ Test your knowledge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Draw a histogram of <code>pH</code>, then draw it again with <code>hue='site'</code>. Label the axes.</p>
+<p>In a markdown cell, say whether pH separates the sites as sharply as temperature did, and what that means for the <code>ph_class</code> column you built on Thursday: is it labelling chemistry, or is it labelling which stream the bottle came from?</p>
+</div>
+</div>
+</section>
+<section id="sns.barplot-and-the-series-idiom" class="level2">
+<h2 class="anchored" data-anchor-id="sns.barplot-and-the-series-idiom"><code>sns.barplot</code>, and the Series idiom</h2>
+<p>A bar chart compares one number per category, which makes it the natural picture for the output of a <code>.groupby()</code>. seaborn will do the whole thing in one line if you let it:</p>
+<div id="b0113e1c" class="cell" data-execution_count="8">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>survey, x<span class="op">=</span><span class="st">'site'</span>, y<span class="op">=</span><span class="st">'dissolved_oxygen_mg_L'</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Site'</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Mean dissolved oxygen (mg/L)'</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7b_seaborn_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Six bars, and you never called <code>.groupby()</code>. Given a categorical <code>x=</code> and a numeric <code>y=</code>, <code>sns.barplot</code> groups the table by <code>x</code> and draws the <strong>mean</strong> of <code>y</code> for each group.</p>
+<p>That convenience comes with two things you did not ask for.</p>
+<p>The little black line on each bar is a measure of how uncertain that mean is, computed by resampling the data hundreds of times. It is a reasonable thing to want and this course has not taught you what it means, which is a poor reason to have it in your figure.</p>
+<p>And the bars are in whatever order the sites appear in the file, which is no order at all.</p>
+<p>The alternative is to compute the number yourself, with Friday’s sentence, and hand seaborn the answer:</p>
+<div id="dc5f38e6" class="cell" data-execution_count="9">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mean_do <span class="op">=</span> survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>mean_do.<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>site
+site_d    10.05
+site_a     9.49
+site_b     8.60
+site_e     7.41
+site_c     6.87
+site_f     6.18
+Name: dissolved_oxygen_mg_L, dtype: float64</code></pre>
+</div>
+</div>
+<p>That is a <strong>Series</strong>: six values, indexed by site name. A Series carries its numbers in <code>.values</code> and its labels in <code>.index</code>, and those are exactly the two things a bar chart needs.</p>
+<div id="2dc1d579" class="cell" data-execution_count="10">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>mean_do.values, y<span class="op">=</span>mean_do.index)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Mean dissolved oxygen (mg/L)'</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Site'</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Mean dissolved oxygen by site'</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7b_seaborn_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>series.values, y<span class="op">=</span>series.index)   <span class="co"># horizontal bars, sorted as you sorted them</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sns.barplot(y<span class="op">=</span>series.values, x<span class="op">=</span>series.index)   <span class="co"># vertical bars, same data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Learn this as one unit. It is the sentence that connects the six days of table-shaping you have just done to the pictures you make of the results, and you will type it constantly:</p>
+<p><strong>group, aggregate, sort, then plot the <code>.values</code> against the <code>.index</code>.</strong></p>
+<p>Three things came out of doing it the long way. The bars are in the order you sorted them, so the figure ranks the sites. There is no uncertainty interval, because you drew a mean and only a mean. And putting the values on <code>x=</code> and the labels on <code>y=</code> makes the bars horizontal, which means the site labels read left to right instead of needing rotation. With longer labels, that last one stops being cosmetic.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>🐍 Note what this cell did <strong>not</strong> need. No <code>data=</code>, because there is no table: a Series is not a DataFrame, and <code>.values</code> and <code>.index</code> are two plain sequences. This is the one place in seaborn where you go back to handing over raw numbers, and it is worth knowing that the option exists.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✏️ Test your knowledge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Build a Series of mean <code>conductivity_uS_cm</code> by site, sorted from highest to lowest, and draw it as horizontal bars using the <code>.values</code> and <code>.index</code> idiom. Label both axes with units, give the figure a title, and end the cell with <code>plt.tight_layout()</code>.</p>
+<p>Then compare it with the dissolved-oxygen ranking above. Do the two orderings agree, disagree, or neither? Answer in one sentence with the site names in it.</p>
+</div>
+</div>
+</section>
+<section id="seaborn-draws-on-matplotlib" class="level2">
+<h2 class="anchored" data-anchor-id="seaborn-draws-on-matplotlib">seaborn draws on matplotlib</h2>
+<p>Every seaborn call in this session sat inside a <code>plt.figure()</code> and was followed by <code>plt.xlabel()</code> and friends, and all of it worked. That is not a coincidence and it is not seaborn being polite.</p>
+<p>seaborn draws onto a matplotlib axes. If none exists it makes one, exactly the way <code>plt.plot()</code> does. So the whole of the last session applies unchanged:</p>
+<div id="49c3acc4" class="cell" data-execution_count="11">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>mean_do.index, y<span class="op">=</span>mean_do.values)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Site'</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Mean dissolved oxygen (mg/L)'</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Mean dissolved oxygen by site, 2025 field season'</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7b_seaborn_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>figsize</code>, labels, title, rotation, <code>tight_layout</code>. Same commands, different drawing call in the middle.</p>
+<p>This is the division of labour worth remembering: <strong>seaborn decides what the marks are and where they go; matplotlib owns the frame around them.</strong> When you want to change something about the data, change a seaborn argument. When you want to change something about the figure, reach for <code>plt</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>🐍 seaborn has far more than three functions, and a <code>sns.set_theme()</code> call that restyles every figure in your notebook at once. Explore both when you have time. Three functions and <code>hue=</code> will carry you through this course and most of a first job, and they are worth knowing cold before you collect any more.</p>
+</div>
+</div>
+</section>
+<section id="key-points" class="level2">
+<h2 class="anchored" data-anchor-id="key-points">Key points</h2>
+<ul>
+<li>The seaborn call shape is <code>sns.function(data=df, x='col', y='col')</code>. The table goes in whole and the columns are named as <strong>strings</strong>.</li>
+<li><strong><code>hue='col'</code></strong> splits any of these plots by a categorical column and builds the legend for you. It is the argument that makes seaborn worth learning.</li>
+<li><code>sns.scatterplot</code> for one measurement against another.</li>
+<li><code>sns.histplot(data=, x=)</code> for the distribution of a single column. No <code>y=</code>; the heights are counts.</li>
+<li><code>sns.barplot(data=, x='category', y='value')</code> <strong>silently computes a mean</strong> and draws an uncertainty interval you did not ask for.</li>
+<li>Prefer the explicit route: <code>.groupby()</code>, aggregate, <code>.sort_values()</code>, then <code>sns.barplot(x=series.values, y=series.index)</code>. You control the number and the order.</li>
+<li>seaborn draws on matplotlib, so <code>plt.figure(figsize=)</code>, <code>plt.xlabel()</code>, <code>plt.title()</code>, <code>plt.xticks(rotation=)</code> and <code>plt.tight_layout()</code> all still work.</li>
+<li>A distribution that mixes groups looks wider than any group in it. Split it before you describe it.</li>
+</ul>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><a href="../../course-materials/cheatsheets/seaborn.html">📖 EDS 217 cheatsheet: seaborn</a></li>
+<li><a href="../../course-materials/cheatsheets/bar_plots.html">📖 EDS 217 cheatsheet: bar plots</a></li>
+<li><a href="../../course-materials/cheatsheets/data_grouping.html">📖 EDS 217 cheatsheet: grouping and aggregating</a></li>
+<li><a href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html" target="_blank">seaborn documentation: <code>scatterplot</code></a></li>
+<li><a href="https://seaborn.pydata.org/generated/seaborn.histplot.html" target="_blank">seaborn documentation: <code>histplot</code></a></li>
+<li><a href="https://seaborn.pydata.org/generated/seaborn.barplot.html" target="_blank">seaborn documentation: <code>barplot</code></a></li>
+<li><a href="https://seaborn.pydata.org/examples/index.html" target="_blank">seaborn example gallery</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="../../images/bren-logo.png" alt="The Bren School of Environmental Science &amp; Management logo" width="250"></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This website is built with <a href="https://github.com/EDS-217-Essential-Python/EDS-217-Essential-Python.github.io"><i class="fa-brands fa-github" title="the github octocat logo" aria-label="github"></i></a> and <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

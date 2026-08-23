@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Interactive Session</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../course-materials/assets/css/exercises.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">EDS 217</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">🏠 home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../course-materials/the-data-science-workflow.html"> 
+<span class="menu-text">🔟 the workflow</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://docs.google.com/document/d/1yBKyJFT22bKynDn4TzrNwdeZ6lb9NELqCeewhifcugo/edit?usp=sharing" target="_blank"> 
+<span class="menu-text">📋 syllabus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-daily-materials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">🗓️ daily materials</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-daily-materials">    
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day1.html">
+ <span class="dropdown-text">1️⃣ Day 1 (8/31)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day2.html">
+ <span class="dropdown-text">2️⃣ Day 2 (9/1)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day3.html">
+ <span class="dropdown-text">3️⃣ Day 3 (9/2)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day4.html">
+ <span class="dropdown-text">4️⃣ Day 4 (9/3)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day5.html">
+ <span class="dropdown-text">5️⃣ Day 5 (9/4)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day6.html">
+ <span class="dropdown-text">6️⃣ Day 6 (9/8)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day7.html">
+ <span class="dropdown-text">7️⃣ Day 7 (9/9)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day8.html">
+ <span class="dropdown-text">8️⃣ Day 8 (9/10)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day9.html">
+ <span class="dropdown-text">9️⃣ Day 9 (9/11)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-interactive-sessions" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">💻 interactive sessions</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-interactive-sessions">    
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/1a_positron_notebooks.html">
+ <span class="dropdown-text">Session 1a - ⚒️ Positron &amp; Jupyter Notebooks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/1b_python_essentials.html">
+ <span class="dropdown-text">Session 1b - 🐍 Python Essentials</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/1c_whole_game_1.html">
+ <span class="dropdown-text">Session 1c - 🎬 The Whole Game, Part 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/1d_whole_game_2.html">
+ <span class="dropdown-text">Session 1d - 🎬 The Whole Game, Part 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/2a_reading_data.html">
+ <span class="dropdown-text">Session 2a - 🐼 Reading Data into pandas</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/2b_exploring_data.html">
+ <span class="dropdown-text">Session 2b - 🔎 Exploring a DataFrame</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/2d_lists_and_dicts.html">
+ <span class="dropdown-text">Session 2d - 📝 Lists &amp; Dictionaries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/3a_booleans_and_conditionals.html">
+ <span class="dropdown-text">Session 3a - 📝 Booleans &amp; Conditionals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
+ <span class="dropdown-text">Session 4a - 🧼 Missing, Duplicated, Miscast</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/4b_functions.html">
+ <span class="dropdown-text">Session 4b - ⚙️ Write It Once, Name It, Use It</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
+ <span class="dropdown-text">Session 5b - 📊 Several Answers at Once</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
+ <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
+ <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
+ <span class="dropdown-text">Session 6b - 🧩 Long and Wide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/6c_dates.html">
+ <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
+ <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/7b_seaborn.html">
+ <span class="dropdown-text">Session 7b - 🎨 Name the Columns, Not the Colours</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/7d_project_kickoff.html">
+ <span class="dropdown-text">Session 7d - 🚀 Project Kickoff</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-coding-colabs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">🙌 coding colabs</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-coding-colabs">    
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/2c_exploring_unfamiliar_data.html">
+ <span class="dropdown-text">🙌 Session 2c - Five Claims About a Dataset You’ve Never Seen</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/3d_ranking_questions.html">
+ <span class="dropdown-text">🙌 Session 3d - Which One, and How Do You Know?</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/4d_cleaning_messy_data.html">
+ <span class="dropdown-text">🙌 Session 4d - From Field Sheet to DataFrame</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/5c_grouped_comparisons.html">
+ <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Last Night, Properly</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/6d_two_table_exercise.html">
+ <span class="dropdown-text">🙌 Session 6d - Two Records, Sixty-Six Years Apart</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/7c_penguins.html">
+ <span class="dropdown-text">🙌 Session 7c - One Cloud of Points, Three Species</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../cheatsheets.html"> 
+<span class="menu-text">👀 cheatsheets</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
+<span class="menu-text">🔑 answer keys</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">📚 resources</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-resources">    
+        <li>
+    <a class="dropdown-item" href="https://docs.python.org/3/" target="_blank">
+ <span class="dropdown-text">📚 Python Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://pandas.pydata.org/docs/" target="_blank">
+ <span class="dropdown-text">📚 Pandas Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://numpy.org/doc/stable/" target="_blank">
+ <span class="dropdown-text">📚 Numpy Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://matplotlib.org/stable/contents.html" target="_blank">
+ <span class="dropdown-text">📚 Matplotlib Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://seaborn.pydata.org/" target="_blank">
+ <span class="dropdown-text">📚 Seaborn Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://positron.posit.co/" target="_blank">
+ <span class="dropdown-text">📚 Positron Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://docs.anaconda.com/" target="_blank">
+ <span class="dropdown-text">📚 Anaconda Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://stackoverflow.com/" target="_blank">
+ <span class="dropdown-text">📚 Stack Overflow</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://realpython.com/" target="_blank">
+ <span class="dropdown-text">📚 Real Python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://towardsdatascience.com/" target="_blank">
+ <span class="dropdown-text">📚 Towards Data Science</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.datacamp.com/" target="_blank">
+ <span class="dropdown-text">📚 DataCamp</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.kaggle.com/" target="_blank">
+ <span class="dropdown-text">📚 Kaggle</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="http://pythontutor.com/" target="_blank">
+ <span class="dropdown-text">🧰 Python Tutor</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://pandastutor.com/vis.html#" target="_blank">
+ <span class="dropdown-text">🧰 Pandas Tutor</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://wesmckinney.com/book/" target="_blank">
+ <span class="dropdown-text">📙 Python for Data Analysis</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://jakevdp.github.io/PythonDataScienceHandbook/" target="_blank">
+ <span class="dropdown-text">📙 Python for Data Science Handbook</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/jakevdp/PythonDataScienceHandbook" target="_blank">
+ <span class="dropdown-text">📙 Python Data Science Handbook (GitHub)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://talkpython.fm/" target="_blank">
+ <span class="dropdown-text">📻 Talk Python to Me</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EDS-217-Essential-Python/EDS-217-Essential-Python.github.io" target="_blank"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Interactive Session</h1>
+            <p class="subtitle lead">🧼 Missing, Duplicated, Miscast</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a></li>
+  <li><a href="#what-is-missing" id="toc-what-is-missing" class="nav-link" data-scroll-target="#what-is-missing">What is missing</a></li>
+  <li><a href="#dropping-rows-.dropna" id="toc-dropping-rows-.dropna" class="nav-link" data-scroll-target="#dropping-rows-.dropna">Dropping rows: <code>.dropna()</code></a></li>
+  <li><a href="#dropping-on-purpose-.dropnasubset..." id="toc-dropping-on-purpose-.dropnasubset..." class="nav-link" data-scroll-target="#dropping-on-purpose-.dropnasubset...">Dropping on purpose: <code>.dropna(subset=[...])</code></a></li>
+  <li><a href="#filling-gaps-.fillnavalue" id="toc-filling-gaps-.fillnavalue" class="nav-link" data-scroll-target="#filling-gaps-.fillnavalue">Filling gaps: <code>.fillna(value)</code></a></li>
+  <li><a href="#duplicated-rows" id="toc-duplicated-rows" class="nav-link" data-scroll-target="#duplicated-rows">Duplicated rows</a></li>
+  <li><a href="#types-reading-them-and-changing-them" id="toc-types-reading-them-and-changing-them" class="nav-link" data-scroll-target="#types-reading-them-and-changing-them">Types: reading them and changing them</a></li>
+  <li><a href="#putting-it-together" id="toc-putting-it-together" class="nav-link" data-scroll-target="#putting-it-together">Putting it together</a></li>
+  <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key points</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<div style="width: 60%; margin: auto;">
+<p><img src="images/cleaning.png" class="img-fluid"></p>
+</div>
+<div class="gray-text center-text">
+<p><em>A cartoon panda is getting a bubble bath.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
+</div>
+<p>For three days you have asked questions of tables that behaved themselves. Today you meet one that does not.</p>
+<p>Real environmental data arrives with holes in it, with the same sample entered twice, and with numbers stored as text. None of that is a mistake anyone made. It is what happens when sixteen thousand measurements are pooled from thirty-seven separate studies over thirty-five years. Your job is not to be annoyed by it. Your job is to find it, decide what to do about it, and write down what you decided.</p>
+<p>Today’s dataset is NOAA’s marine microplastics archive, and you will be with it all day: this morning to clean it, this afternoon to transform it, and tonight to answer questions with it.</p>
+<p>By the end of this session you will be able to:</p>
+<ul>
+<li>count what is missing, and say which columns are missing it</li>
+<li>remove rows with <code>.dropna()</code>, and say why the bare version is almost always wrong</li>
+<li>fill gaps with <code>.fillna(value)</code> when removal would cost too much</li>
+<li>find duplicated rows with <code>.duplicated()</code>, and drop them with <code>.drop_duplicates()</code></li>
+<li>read a column’s dtype and change it with <code>.astype()</code></li>
+</ul>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<ol type="1">
+<li><p><strong>Create a new notebook:</strong></p>
+<ul>
+<li>Open the Command Palette with <code>Ctrl + Shift + P</code> (<code>Cmd + Shift + P</code> on macOS) and run <strong>Create: New Jupyter Notebook</strong>.</li>
+<li>Confirm the Kernel Selector in the notebook’s action bar reads <strong>eds217_2026</strong>.</li>
+</ul></li>
+<li><p><strong>Save your notebook</strong> (<code>Ctrl + S</code>, or <code>Cmd + S</code> on macOS) as: <code>Session_4A_Cleaning_Data.ipynb</code></p></li>
+<li><p><strong>Add a title cell</strong> (Markdown), updating the date to today:</p></li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Day 4: Session 4A - Missing, Duplicated, Miscast</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Session Webpage</span><span class="co">](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/4a_cleaning_data.html)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Date: 09/03/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>Read in the marine microplastics data:</li>
+</ol>
+<div id="ad09c126" class="cell" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/marine_microplastics.csv'</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plastics <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plastics.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>(16245, 22)</code></pre>
+</div>
+</div>
+<p>16,245 rows and 22 columns. Every row is one water sample, somewhere in an ocean, on some day between 1972 and 2022.</p>
+<div id="4e2b63f6" class="cell" data-execution_count="2">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plastics.columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>['OBJECTID',
+ 'Oceans',
+ 'Regions',
+ 'SubRegions',
+ 'Sampling Method',
+ 'Measurement',
+ 'Unit',
+ 'Density Range',
+ 'Density Class',
+ 'Short Reference',
+ 'Long Reference',
+ 'DOI',
+ 'Organization',
+ 'Keywords',
+ 'Accession Number',
+ 'Accession Link',
+ 'Latitude',
+ 'Longitude',
+ 'Date',
+ 'GlobalID',
+ 'x',
+ 'y']</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Save your work frequently with <code>Ctrl+S</code> (<code>Cmd+S</code> on macOS).</p>
+</div>
+</div>
+</section>
+<section id="what-is-missing" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-missing">What is missing</h2>
+<p>You met this sentence on Day 2. It is the first thing to run on a table you did not create:</p>
+<div id="5eeefb14" class="cell" data-execution_count="3">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plastics.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>OBJECTID                0
+Oceans                271
+Regions              8249
+SubRegions          15657
+Sampling Method         0
+Measurement          5792
+Unit                    0
+Density Range           0
+Density Class           0
+Short Reference         0
+Long Reference          0
+DOI                     0
+Organization            0
+Keywords               18
+Accession Number        0
+Accession Link          0
+Latitude                0
+Longitude               0
+Date                    0
+GlobalID                0
+x                       0
+y                       0
+dtype: int64</code></pre>
+</div>
+</div>
+<p>Five columns have holes in them. Two of the holes are enormous:</p>
+<div id="db3e47f0" class="cell" data-execution_count="4">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plastics.isnull().<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>SubRegions     15657
+Regions         8249
+Measurement     5792
+Oceans           271
+Keywords          18
+dtype: int64</code></pre>
+</div>
+</div>
+<p><code>SubRegions</code> is missing on 15,657 rows out of 16,245, and <code>Regions</code> on 8,249. <code>Measurement</code>, which is the actual number this whole archive exists to record, is missing on 5,792.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>🐍 <code>.isnull()</code> returns a <code>True</code>/<code>False</code> for every cell, and <code>.sum()</code> counts the <code>True</code>s, one column at a time. It is the same “add up a mask” trick you used on Day 3 when you counted rows that passed a filter.</p>
+</div>
+</div>
+</section>
+<section id="dropping-rows-.dropna" class="level2">
+<h2 class="anchored" data-anchor-id="dropping-rows-.dropna">Dropping rows: <code>.dropna()</code></h2>
+<p>The obvious move is to throw away the incomplete rows. <code>.dropna()</code> does that:</p>
+<div id="74fe25fc" class="cell" data-execution_count="5">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plastics.dropna().shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>(588, 22)</code></pre>
+</div>
+</div>
+<p><strong>588 rows.</strong> You started with 16,245 and kept 3.6% of them.</p>
+<p>That is not a cleaning step. That is destroying the dataset. And notice how quietly it happened: one method, no arguments, no warning, no error message.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Bare `.dropna()` is almost always the wrong tool">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Bare <code>.dropna()</code> is almost always the wrong tool
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>With no arguments, <code>.dropna()</code> removes every row that has a missing value <strong>in any column at all</strong>. Here, a sample with a perfectly good measurement gets deleted because nobody recorded its <code>SubRegions</code>.</p>
+<p>The fix is to say which columns you actually care about.</p>
+</div>
+</div>
+</section>
+<section id="dropping-on-purpose-.dropnasubset..." class="level2">
+<h2 class="anchored" data-anchor-id="dropping-on-purpose-.dropnasubset...">Dropping on purpose: <code>.dropna(subset=[...])</code></h2>
+<p><code>subset=</code> takes a <strong>list</strong> of column names, and only those columns can get a row deleted:</p>
+<div id="8bbedc86" class="cell" data-execution_count="6">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>measured <span class="op">=</span> plastics.dropna(subset<span class="op">=</span>[<span class="st">'Measurement'</span>])</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>measured.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>(10453, 22)</code></pre>
+</div>
+</div>
+<p>10,453 rows. That is a defensible cleaning step and a terrible one, and which it is depends entirely on a question you have not asked yet.</p>
+<p>Ask it now. Compare the units before and after:</p>
+<div id="b90114da" class="cell" data-execution_count="7">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Unit'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>Unit
+pieces/m3           10178
+pieces/10 mins       5792
+pieces kg-1 d.w.      275
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="78d90f0d" class="cell" data-execution_count="8">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>measured[<span class="st">'Unit'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>Unit
+pieces/m3           10178
+pieces kg-1 d.w.      275
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<p>An entire unit vanished. All 5,792 <code>pieces/10 mins</code> samples had a missing <code>Measurement</code>, so dropping on <code>Measurement</code> deleted every one of them, and with them every sample taken by the one study that used that method.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Missing values are rarely scattered at random">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Missing values are rarely scattered at random
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>On Day 2 you learned that <code>value</code> columns stack incompatible units. This is the other half of that lesson: <strong>missingness is itself a variable</strong>. Here it lines up exactly with sampling method, so a filter that looks like it removes bad rows actually removes one team’s entire field campaign.</p>
+<p>Before you drop anything, count what you are dropping and look at what it has in common.</p>
+</div>
+</div>
+<p>That does not mean you should keep them. If you are about to average measurements, rows with no measurement are useless to you. It means you should be able to say, out loud, <em>what</em> you removed, and record it in your notebook.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✏️ Test your knowledge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>Oceans</code> is missing on 271 rows. Use <code>.dropna()</code> with <code>subset=</code> to build a table called <code>located</code> that has none of them, and report its shape. Then check whether those 271 rows had anything in common: compare <code>plastics['Unit'].value_counts()</code> with the same call on <code>located</code>.</p>
+</div>
+</div>
+</section>
+<section id="filling-gaps-.fillnavalue" class="level2">
+<h2 class="anchored" data-anchor-id="filling-gaps-.fillnavalue">Filling gaps: <code>.fillna(value)</code></h2>
+<p>Sometimes the missing value means something, and removing the row throws that meaning away. <code>Regions</code> is missing on 8,249 rows not because anyone forgot, but because the sample was in open ocean, outside any named sea.</p>
+<p><code>.fillna()</code> replaces the gaps with a value you choose:</p>
+<div id="34098fe6" class="cell" data-execution_count="9">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Regions'</span>] <span class="op">=</span> plastics[<span class="st">'Regions'</span>].fillna(<span class="st">'Unspecified'</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Regions'</span>].value_counts().head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>Regions
+Unspecified          8249
+Gulf of Mexico       4817
+Caribbean Sea        1886
+Mediterranean Sea     345
+North Sea             252
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<p>Two things worth noticing in that one line. <code>.fillna()</code> hangs off a <strong>column</strong>, not the whole table. And it returns a new column, so you have to assign it back to <code>plastics['Regions']</code> for the change to stick. That is the same rule you have met every day this week: pandas hands you a result, and it is yours to keep or to discard.</p>
+<div id="2b8795b1" class="cell" data-execution_count="10">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plastics.isnull().<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>SubRegions     15657
+Measurement     5792
+Oceans           271
+dtype: int64</code></pre>
+</div>
+</div>
+<p><code>Regions</code> is now at zero.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>🐍 Choose your fill value on purpose. <code>'Unspecified'</code> is honest: it says “we know this is blank.” Filling with <code>0</code> would have been a lie, because zero is a real measurement. Never fill a numeric column with a number that could be mistaken for data.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✏️ Test your knowledge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>SubRegions</code> is missing on 15,657 rows. Fill it with <code>'Unspecified'</code>, assign the result back, and re-run <code>plastics.isnull().sum()</code> to confirm it worked. Then, in a markdown cell, say whether filling or dropping was the right call for that column, and why.</p>
+</div>
+</div>
+</section>
+<section id="duplicated-rows" class="level2">
+<h2 class="anchored" data-anchor-id="duplicated-rows">Duplicated rows</h2>
+<p>The other classic defect is the same sample entered twice. <code>.duplicated()</code> returns a mask, one <code>True</code> or <code>False</code> per row, and <code>.sum()</code> counts them:</p>
+<div id="a09fd99b" class="cell" data-execution_count="11">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plastics.duplicated().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>np.int64(0)</code></pre>
+</div>
+</div>
+<p>Zero. Clean data, then.</p>
+<p>Except no. Look at the columns again:</p>
+<div id="1256fe32" class="cell" data-execution_count="12">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>plastics[[<span class="st">'OBJECTID'</span>, <span class="st">'GlobalID'</span>, <span class="st">'Latitude'</span>, <span class="st">'Longitude'</span>, <span class="st">'Date'</span>, <span class="st">'Measurement'</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">OBJECTID</th>
+<th data-quarto-table-cell-role="th">GlobalID</th>
+<th data-quarto-table-cell-role="th">Latitude</th>
+<th data-quarto-table-cell-role="th">Longitude</th>
+<th data-quarto-table-cell-role="th">Date</th>
+<th data-quarto-table-cell-role="th">Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>10008</td>
+<td>1e5b8e71-037b-4887-a276-f1e4552acb1f</td>
+<td>-58.428300</td>
+<td>-64.1640</td>
+<td>2/3/2017 12:00:00 AM</td>
+<td>0.020000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>8680</td>
+<td>a40f7f7c-1025-4aac-ad16-ee4cba196870</td>
+<td>-51.308200</td>
+<td>-60.5467</td>
+<td>11/17/2013 12:00:00 AM</td>
+<td>0.008000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>13257</td>
+<td>febf79b8-7e2c-46e6-bc15-e08492ec2029</td>
+<td>-51.826667</td>
+<td>-72.5750</td>
+<td>12/26/2015 12:00:00 AM</td>
+<td>0.019886</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><code>OBJECTID</code> and <code>GlobalID</code> are identifiers, assigned one per record when the archive was built. No two rows can ever share them, so no two rows can ever be identical, so <code>.duplicated()</code> can only ever return zero. The answer was never about the data.</p>
+<p><code>subset=</code> fixes this the same way it fixed <code>.dropna()</code>. Point it at the columns that carry the science:</p>
+<div id="d126ff54" class="cell" data-execution_count="13">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>sample_columns <span class="op">=</span> [<span class="st">'Latitude'</span>, <span class="st">'Longitude'</span>, <span class="st">'Date'</span>, <span class="st">'Measurement'</span>, <span class="st">'Unit'</span>]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>plastics.duplicated(subset<span class="op">=</span>sample_columns).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>np.int64(856)</code></pre>
+</div>
+</div>
+<p>856 rows record the same measurement, in the same unit, at the same coordinates, on the same day, as some earlier row.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="`.duplicated()` is only as good as the columns you point it at">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<code>.duplicated()</code> is only as good as the columns you point it at
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is the single most common way people convince themselves a dataset is clean. Any table with an auto-generated ID column will report zero duplicates forever.</p>
+<p>Decide what “the same observation” means for <em>your</em> data, put those column names in a list, and pass the list to <code>subset=</code>.</p>
+</div>
+</div>
+<p><code>.drop_duplicates()</code> takes the same argument and returns a table with the repeats removed, keeping the first of each:</p>
+<div id="56b121a0" class="cell" data-execution_count="14">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>deduplicated <span class="op">=</span> plastics.drop_duplicates(subset<span class="op">=</span>sample_columns)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>deduplicated.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>(15389, 22)</code></pre>
+</div>
+</div>
+<p>Now the hard part, which pandas cannot do for you. Are those 856 rows really duplicates? Two tows through the same patch of water on the same day, both finding zero pieces per cubic metre, would look exactly like this and would both be real:</p>
+<div id="56c2dd5a" class="cell" data-execution_count="15">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>repeats <span class="op">=</span> plastics[plastics.duplicated(subset<span class="op">=</span>sample_columns, keep<span class="op">=</span><span class="va">False</span>)]</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>repeats[[<span class="st">'Measurement'</span>, <span class="st">'Unit'</span>, <span class="st">'Sampling Method'</span>, <span class="st">'Short Reference'</span>]].head(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Measurement</th>
+<th data-quarto-table-cell-role="th">Unit</th>
+<th data-quarto-table-cell-role="th">Sampling Method</th>
+<th data-quarto-table-cell-role="th">Short Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>0.000000</td>
+<td>pieces kg-1 d.w.</td>
+<td>Megacorer</td>
+<td>Courtene-Jones et al. 2020</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">37</td>
+<td>2115.655853</td>
+<td>pieces/m3</td>
+<td>PVC cylinder</td>
+<td>Alvarez-Zeferino et al. 2020</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">40</td>
+<td>NaN</td>
+<td>pieces/10 mins</td>
+<td>Hand picking</td>
+<td>Tunnell et al. 2020</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">46</td>
+<td>NaN</td>
+<td>pieces/10 mins</td>
+<td>Hand picking</td>
+<td>Tunnell et al. 2020</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">52</td>
+<td>0.000000</td>
+<td>pieces/m3</td>
+<td>Neuston net</td>
+<td>Law et al.2010</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">73</td>
+<td>0.002088</td>
+<td>pieces/m3</td>
+<td>Neuston net</td>
+<td>Law et al.2010</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="eb1a23a4" class="cell" data-execution_count="16">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>(repeats[<span class="st">'Measurement'</span>] <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>np.int64(652)</code></pre>
+</div>
+</div>
+<p>Of the 1,465 rows involved, 652 report a measurement of zero. That is a strong hint that many of these are genuine repeat samples which happened to agree, rather than double entries, so we will <strong>keep</strong> them and say so in the notebook.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>🐍 <code>keep=False</code> marks <em>every</em> member of a duplicated group, not just the later ones. Use it when you want to look at duplicates; use the default when you want to drop them.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✏️ Test your knowledge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Build a different list of columns that you think defines “the same observation” here, and count the duplicates it finds. Try dropping <code>Measurement</code> from the list, or adding <code>Sampling Method</code>. Write one sentence in a markdown cell saying which definition you would defend to a reviewer.</p>
+</div>
+</div>
+</section>
+<section id="types-reading-them-and-changing-them" class="level2">
+<h2 class="anchored" data-anchor-id="types-reading-them-and-changing-them">Types: reading them and changing them</h2>
+<p>Every column has a <strong>dtype</strong>, which is what pandas believes the column contains:</p>
+<div id="33014ab7" class="cell" data-execution_count="17">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plastics.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>OBJECTID              int64
+Oceans               object
+Regions              object
+SubRegions           object
+Sampling Method      object
+Measurement         float64
+Unit                 object
+Density Range        object
+Density Class        object
+Short Reference      object
+Long Reference       object
+DOI                  object
+Organization         object
+Keywords             object
+Accession Number      int64
+Accession Link       object
+Latitude            float64
+Longitude           float64
+Date                 object
+GlobalID             object
+x                   float64
+y                   float64
+dtype: object</code></pre>
+</div>
+</div>
+<p><code>float64</code> is a decimal number, <code>int64</code> a whole number, and <code>object</code> is pandas saying “text, or something I could not identify.” Three of these are wrong for what the column means.</p>
+<p><code>Accession Number</code> is stored as an integer:</p>
+<div id="0940ae32" class="cell" data-execution_count="18">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Accession Number'</span>].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>0    211009
+1    211009
+2    276422
+Name: Accession Number, dtype: int64</code></pre>
+</div>
+</div>
+<p>It is not a quantity. Nobody will ever add two accession numbers together or take their mean. It is a label that happens to be spelled with digits, and leaving it numeric invites pandas to average it for you in some later summary. <code>.astype()</code> converts a column to the type you name:</p>
+<div id="56eedb51" class="cell" data-execution_count="19">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Accession Number'</span>] <span class="op">=</span> plastics[<span class="st">'Accession Number'</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Accession Number'</span>].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>0    211009
+1    211009
+2    276422
+Name: Accession Number, dtype: object</code></pre>
+</div>
+</div>
+<div id="fc1397b2" class="cell" data-execution_count="20">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Accession Number'</span>].dtype</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>dtype('O')</code></pre>
+</div>
+</div>
+<p><code>object</code>, which is what text looks like. The same assign-it-back rule applies: <code>.astype()</code> returns a converted column and changes nothing until you store it.</p>
+<p>The three conversions you will use all week are <code>.astype(float)</code>, <code>.astype(int)</code>, and <code>.astype(str)</code>:</p>
+<div id="d404a0fc" class="cell" data-execution_count="21">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Latitude'</span>].astype(<span class="bu">int</span>).head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>0   -58
+1   -51
+2   -51
+Name: Latitude, dtype: int64</code></pre>
+</div>
+</div>
+<p>That one is a demonstration, not a suggestion. <code>.astype(int)</code> truncates toward zero, so -58.4283 becomes -58, and nearly half a degree of latitude, about 47 kilometres, is gone. Converting to a narrower type throws information away, silently.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="`.astype()` fails loudly on text it cannot parse">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<code>.astype()</code> fails loudly on text it cannot parse
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If a numeric column has even one entry like <code>'not recorded'</code>, <code>.astype(float)</code> raises a <code>ValueError</code> naming the offending value. That is pandas doing you a favour. Read the value it names, fix that, and convert again.</p>
+<p>You will meet exactly this in the colab this afternoon.</p>
+</div>
+</div>
+<p><code>Date</code> is an <code>object</code> too, because it is text like <code>2/3/2017 12:00:00 AM</code>. Dates are their own subject and they get a whole session on Day 6, so leave that one alone for now.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✏️ Test your knowledge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Convert <code>OBJECTID</code> to text with <code>.astype(str)</code>, assign it back, and confirm the change with <code>.dtype</code>. Then, in a markdown cell, name one other column in this table whose dtype does not match what the column means, and say what it should be.</p>
+</div>
+</div>
+</section>
+<section id="putting-it-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-together">Putting it together</h2>
+<p>A cleaning pass is a short, ordered list of decisions, each one a line of code with a comment saying why:</p>
+<div id="1665d340" class="cell" data-execution_count="22">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>clean <span class="op">=</span> plastics.copy()</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Open-ocean samples have no named region; that is information, not a gap.</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>clean[<span class="st">'SubRegions'</span>] <span class="op">=</span> clean[<span class="st">'SubRegions'</span>].fillna(<span class="st">'Unspecified'</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Accession numbers are labels, not quantities.</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>clean[<span class="st">'Accession Number'</span>] <span class="op">=</span> clean[<span class="st">'Accession Number'</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only samples that carry a measurement. This drops all 5,792 'pieces/10 mins'</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="co"># rows, which is acceptable here because we are about to average measurements.</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>clean <span class="op">=</span> clean.dropna(subset<span class="op">=</span>[<span class="st">'Measurement'</span>])</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>clean.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>(10453, 22)</code></pre>
+</div>
+</div>
+<div id="a4ce5dc0" class="cell" data-execution_count="23">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>clean.isnull().<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>Keywords    18
+OBJECTID     0
+Oceans       0
+dtype: int64</code></pre>
+</div>
+</div>
+<p>Four lines, three decisions, and a note in the code saying what the third one cost. If a colleague asks you next month why your row count is 10,453 and not 16,245, the answer is right there.</p>
+</section>
+<section id="key-points" class="level2">
+<h2 class="anchored" data-anchor-id="key-points">Key points</h2>
+<ul>
+<li>Run <code>df.isnull().sum()</code> first, every time, on any table you did not build yourself.</li>
+<li>Bare <code>.dropna()</code> deletes a row for a gap in <strong>any</strong> column. Here that cost 96% of the data. Use <code>.dropna(subset=['col'])</code> and name the columns you actually need.</li>
+<li>Before you drop, <strong>count what you are dropping and look at what it has in common.</strong> Missingness usually lines up with something.</li>
+<li><code>.fillna(value)</code> replaces gaps with a value you choose. Choose one that cannot be mistaken for data.</li>
+<li><code>.duplicated()</code> and <code>.drop_duplicates()</code> both take <code>subset=[...]</code>. Without it, any table with an ID column reports zero duplicates forever.</li>
+<li><code>.astype(str/int/float)</code> converts a column. It returns a new column, so assign it back, and remember that narrowing a type throws information away.</li>
+</ul>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><a href="../../course-materials/cheatsheets/data_cleaning.html">📖 EDS 217 cheatsheet: cleaning data</a></li>
+<li><a href="../../course-materials/cheatsheets/pandas_dataframes.html">📖 EDS 217 cheatsheet: pandas DataFrames</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/missing_data.html" target="_blank">pandas documentation: working with missing data</a></li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop_duplicates.html" target="_blank">pandas documentation: <code>DataFrame.drop_duplicates</code></a></li>
+<li><a href="https://www.ncei.noaa.gov/products/microplastics" target="_blank">NOAA NCEI marine microplastics</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="../../images/bren-logo.png" alt="The Bren School of Environmental Science &amp; Management logo" width="250"></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This website is built with <a href="https://github.com/EDS-217-Essential-Python/EDS-217-Essential-Python.github.io"><i class="fa-brands fa-github" title="the github octocat logo" aria-label="github"></i></a> and <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

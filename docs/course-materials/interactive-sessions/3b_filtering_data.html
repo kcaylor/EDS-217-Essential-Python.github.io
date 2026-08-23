@@ -1,0 +1,2809 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Interactive Session</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../course-materials/assets/css/exercises.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">EDS 217</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">🏠 home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../course-materials/the-data-science-workflow.html"> 
+<span class="menu-text">🔟 the workflow</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://docs.google.com/document/d/1yBKyJFT22bKynDn4TzrNwdeZ6lb9NELqCeewhifcugo/edit?usp=sharing" target="_blank"> 
+<span class="menu-text">📋 syllabus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-daily-materials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">🗓️ daily materials</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-daily-materials">    
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day1.html">
+ <span class="dropdown-text">1️⃣ Day 1 (8/31)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day2.html">
+ <span class="dropdown-text">2️⃣ Day 2 (9/1)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day3.html">
+ <span class="dropdown-text">3️⃣ Day 3 (9/2)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day4.html">
+ <span class="dropdown-text">4️⃣ Day 4 (9/3)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day5.html">
+ <span class="dropdown-text">5️⃣ Day 5 (9/4)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day6.html">
+ <span class="dropdown-text">6️⃣ Day 6 (9/8)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day7.html">
+ <span class="dropdown-text">7️⃣ Day 7 (9/9)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day8.html">
+ <span class="dropdown-text">8️⃣ Day 8 (9/10)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/day9.html">
+ <span class="dropdown-text">9️⃣ Day 9 (9/11)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-interactive-sessions" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">💻 interactive sessions</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-interactive-sessions">    
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/1a_positron_notebooks.html">
+ <span class="dropdown-text">Session 1a - ⚒️ Positron &amp; Jupyter Notebooks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/1b_python_essentials.html">
+ <span class="dropdown-text">Session 1b - 🐍 Python Essentials</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/1c_whole_game_1.html">
+ <span class="dropdown-text">Session 1c - 🎬 The Whole Game, Part 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/1d_whole_game_2.html">
+ <span class="dropdown-text">Session 1d - 🎬 The Whole Game, Part 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/2a_reading_data.html">
+ <span class="dropdown-text">Session 2a - 🐼 Reading Data into pandas</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/2b_exploring_data.html">
+ <span class="dropdown-text">Session 2b - 🔎 Exploring a DataFrame</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/2d_lists_and_dicts.html">
+ <span class="dropdown-text">Session 2d - 📝 Lists &amp; Dictionaries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/3a_booleans_and_conditionals.html">
+ <span class="dropdown-text">Session 3a - 📝 Booleans &amp; Conditionals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
+ <span class="dropdown-text">Session 4a - 🧼 Missing, Duplicated, Miscast</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/4b_functions.html">
+ <span class="dropdown-text">Session 4b - ⚙️ Write It Once, Name It, Use It</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
+ <span class="dropdown-text">Session 5b - 📊 Several Answers at Once</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
+ <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
+ <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
+ <span class="dropdown-text">Session 6b - 🧩 Long and Wide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/6c_dates.html">
+ <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
+ <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/7b_seaborn.html">
+ <span class="dropdown-text">Session 7b - 🎨 Name the Columns, Not the Colours</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/interactive-sessions/7d_project_kickoff.html">
+ <span class="dropdown-text">Session 7d - 🚀 Project Kickoff</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-coding-colabs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">🙌 coding colabs</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-coding-colabs">    
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/2c_exploring_unfamiliar_data.html">
+ <span class="dropdown-text">🙌 Session 2c - Five Claims About a Dataset You’ve Never Seen</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/3d_ranking_questions.html">
+ <span class="dropdown-text">🙌 Session 3d - Which One, and How Do You Know?</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/4d_cleaning_messy_data.html">
+ <span class="dropdown-text">🙌 Session 4d - From Field Sheet to DataFrame</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/5c_grouped_comparisons.html">
+ <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Last Night, Properly</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/6d_two_table_exercise.html">
+ <span class="dropdown-text">🙌 Session 6d - Two Records, Sixty-Six Years Apart</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../course-materials/coding-colabs/7c_penguins.html">
+ <span class="dropdown-text">🙌 Session 7c - One Cloud of Points, Three Species</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../cheatsheets.html"> 
+<span class="menu-text">👀 cheatsheets</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
+<span class="menu-text">🔑 answer keys</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">📚 resources</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-resources">    
+        <li>
+    <a class="dropdown-item" href="https://docs.python.org/3/" target="_blank">
+ <span class="dropdown-text">📚 Python Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://pandas.pydata.org/docs/" target="_blank">
+ <span class="dropdown-text">📚 Pandas Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://numpy.org/doc/stable/" target="_blank">
+ <span class="dropdown-text">📚 Numpy Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://matplotlib.org/stable/contents.html" target="_blank">
+ <span class="dropdown-text">📚 Matplotlib Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://seaborn.pydata.org/" target="_blank">
+ <span class="dropdown-text">📚 Seaborn Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://positron.posit.co/" target="_blank">
+ <span class="dropdown-text">📚 Positron Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://docs.anaconda.com/" target="_blank">
+ <span class="dropdown-text">📚 Anaconda Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://stackoverflow.com/" target="_blank">
+ <span class="dropdown-text">📚 Stack Overflow</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://realpython.com/" target="_blank">
+ <span class="dropdown-text">📚 Real Python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://towardsdatascience.com/" target="_blank">
+ <span class="dropdown-text">📚 Towards Data Science</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.datacamp.com/" target="_blank">
+ <span class="dropdown-text">📚 DataCamp</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.kaggle.com/" target="_blank">
+ <span class="dropdown-text">📚 Kaggle</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="http://pythontutor.com/" target="_blank">
+ <span class="dropdown-text">🧰 Python Tutor</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://pandastutor.com/vis.html#" target="_blank">
+ <span class="dropdown-text">🧰 Pandas Tutor</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://wesmckinney.com/book/" target="_blank">
+ <span class="dropdown-text">📙 Python for Data Analysis</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://jakevdp.github.io/PythonDataScienceHandbook/" target="_blank">
+ <span class="dropdown-text">📙 Python for Data Science Handbook</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/jakevdp/PythonDataScienceHandbook" target="_blank">
+ <span class="dropdown-text">📙 Python Data Science Handbook (GitHub)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://talkpython.fm/" target="_blank">
+ <span class="dropdown-text">📻 Talk Python to Me</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EDS-217-Essential-Python/EDS-217-Essential-Python.github.io" target="_blank"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Interactive Session</h1>
+            <p class="subtitle lead">🔍 The Filter Sentence</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a></li>
+  <li><a href="#the-sentence" id="toc-the-sentence" class="nav-link" data-scroll-target="#the-sentence">The sentence</a></li>
+  <li><a href="#filtering-on-text" id="toc-filtering-on-text" class="nav-link" data-scroll-target="#filtering-on-text">Filtering on text</a></li>
+  <li><a href="#why-this-matters-here" id="toc-why-this-matters-here" class="nav-link" data-scroll-target="#why-this-matters-here">Why this matters here</a></li>
+  <li><a href="#two-conditions-at-once" id="toc-two-conditions-at-once" class="nav-link" data-scroll-target="#two-conditions-at-once">Two conditions at once</a></li>
+  <li><a href="#turning-a-condition-around-with" id="toc-turning-a-condition-around-with" class="nav-link" data-scroll-target="#turning-a-condition-around-with">Turning a condition around with <code>~</code></a></li>
+  <li><a href="#matching-a-list-of-values-with-.isin" id="toc-matching-a-list-of-values-with-.isin" class="nav-link" data-scroll-target="#matching-a-list-of-values-with-.isin">Matching a list of values with <code>.isin()</code></a></li>
+  <li><a href="#keeping-a-result-with-.copy" id="toc-keeping-a-result-with-.copy" class="nav-link" data-scroll-target="#keeping-a-result-with-.copy">Keeping a result with <code>.copy()</code></a></li>
+  <li><a href="#putting-it-together" id="toc-putting-it-together" class="nav-link" data-scroll-target="#putting-it-together">Putting it together</a></li>
+  <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key points</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<div style="width: 80%; margin: auto;">
+<p><img src="images/grouping_filtering.jpeg" class="img-fluid"></p>
+</div>
+<div class="gray-text center-text">
+<p><em>A panda, sorting the wheat from the chaff.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
+</div>
+<p>An hour ago you wrote a question and asked it of an entire column. What came back was a <strong>boolean mask</strong>: a <code>True</code> or a <code>False</code> for every row.</p>
+<p>A mask by itself is not very interesting. What you actually want is the rows it says <code>True</code> about. Getting them takes one line, and that line is the most useful thing you will learn this week.</p>
+<p>By the end of this session you will be able to:</p>
+<ul>
+<li>write the <strong>filter sentence</strong>, <code>df[df['col'] &gt; value]</code>, without looking it up</li>
+<li>filter on text as well as on numbers</li>
+<li>combine two conditions with <code>&amp;</code> and <code>|</code>, and get the parentheses right</li>
+<li>invert a condition with <code>~</code></li>
+<li>match against a list of values with <code>.isin()</code></li>
+<li>say what <code>.copy()</code> is for, and use it when you intend to keep a result</li>
+</ul>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<ol type="1">
+<li><p><strong>Create a new notebook:</strong></p>
+<ul>
+<li>Open the Command Palette with <code>Ctrl + Shift + P</code> (<code>Cmd + Shift + P</code> on macOS) and run <strong>Create: New Jupyter Notebook</strong>.</li>
+<li>Confirm the Kernel Selector in the notebook’s action bar reads <strong>eds217_2026</strong>.</li>
+</ul></li>
+<li><p><strong>Save your notebook</strong> (<code>Ctrl + S</code>, or <code>Cmd + S</code> on macOS) as: <code>Session_3B_Filtering_Data.ipynb</code></p></li>
+<li><p><strong>Add a title cell</strong> (Markdown), updating the date to today:</p></li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Day 3: Session 3B - The Filter Sentence</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Session Webpage</span><span class="co">](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/3b_filtering_data.html)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Date: 09/02/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>Read in the Goleta air quality data you explored yesterday:</li>
+</ol>
+<div id="058f5f22" class="cell" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/openaq_goleta_measurments.csv'</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>goleta <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>goleta.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>(1962, 15)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Save your work frequently with <code>Ctrl+S</code> (<code>Cmd+S</code> on macOS).</p>
+</div>
+</div>
+</section>
+<section id="the-sentence" class="level2">
+<h2 class="anchored" data-anchor-id="the-sentence">The sentence</h2>
+<p>Here it is, whole:</p>
+<div id="8b1d3492" class="cell" data-execution_count="2">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">20</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">location_id</th>
+<th data-quarto-table-cell-role="th">location_name</th>
+<th data-quarto-table-cell-role="th">parameter</th>
+<th data-quarto-table-cell-role="th">value</th>
+<th data-quarto-table-cell-role="th">unit</th>
+<th data-quarto-table-cell-role="th">datetimeUtc</th>
+<th data-quarto-table-cell-role="th">datetimeLocal</th>
+<th data-quarto-table-cell-role="th">timezone</th>
+<th data-quarto-table-cell-role="th">latitude</th>
+<th data-quarto-table-cell-role="th">longitude</th>
+<th data-quarto-table-cell-role="th">country_iso</th>
+<th data-quarto-table-cell-role="th">isMobile</th>
+<th data-quarto-table-cell-role="th">isMonitor</th>
+<th data-quarto-table-cell-role="th">owner_name</th>
+<th data-quarto-table-cell-role="th">provider</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">720</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm10</td>
+<td>21.0</td>
+<td>µg/m³</td>
+<td>2024-07-17T14:00:00+00:00</td>
+<td>2024-07-17T07:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">746</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm10</td>
+<td>21.0</td>
+<td>µg/m³</td>
+<td>2024-07-22T20:00:00+00:00</td>
+<td>2024-07-22T13:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">795</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm10</td>
+<td>38.0</td>
+<td>µg/m³</td>
+<td>2024-07-24T21:00:00+00:00</td>
+<td>2024-07-24T14:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">796</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm10</td>
+<td>36.0</td>
+<td>µg/m³</td>
+<td>2024-07-24T22:00:00+00:00</td>
+<td>2024-07-24T15:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">797</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm10</td>
+<td>23.0</td>
+<td>µg/m³</td>
+<td>2024-07-24T23:00:00+00:00</td>
+<td>2024-07-24T16:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1226</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm10</td>
+<td>27.0</td>
+<td>µg/m³</td>
+<td>2024-08-11T23:00:00+00:00</td>
+<td>2024-08-11T16:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1227</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm10</td>
+<td>23.0</td>
+<td>µg/m³</td>
+<td>2024-08-12T00:00:00+00:00</td>
+<td>2024-08-11T17:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1376</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>22.0</td>
+<td>µg/m³</td>
+<td>2024-07-18T08:00:00+00:00</td>
+<td>2024-07-18T01:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1712</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>22.0</td>
+<td>µg/m³</td>
+<td>2024-08-01T08:00:00+00:00</td>
+<td>2024-08-01T01:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1873</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>21.0</td>
+<td>µg/m³</td>
+<td>2024-08-08T08:00:00+00:00</td>
+<td>2024-08-08T01:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+</tbody>
+</table>
+
+<p>115 rows × 15 columns</p>
+</div>
+</div>
+</div>
+<p>Read it from the inside out. <code>goleta['value'] &gt; 20</code> is the mask you learned to write this morning: <code>True</code> on every row where the value is above 20, <code>False</code> everywhere else. Wrapping it in <code>goleta[ ... ]</code> says “give me the rows where that was <code>True</code>.”</p>
+<p>That is the <strong>filter sentence</strong>. The general form is:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&lt;</span>comparison<span class="op">&gt;</span> value]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>df</code> appears twice, and that trips people up at first. The inner one builds the question. The outer one applies the answer. They are the same table both times.</p>
+<p>Assign it a name if you want to use the result:</p>
+<div id="99d2bac5" class="cell" data-execution_count="3">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>high_readings <span class="op">=</span> goleta[goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">20</span>]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>high_readings.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>(115, 15)</code></pre>
+</div>
+</div>
+<p>115 rows out of 1,962. Compare the shapes and you can see the filter did something:</p>
+<div id="89231220" class="cell" data-execution_count="4">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'before:'</span>, goleta.shape)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'after: '</span>, high_readings.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>before: (1962, 15)
+after:  (115, 15)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>🐍 Filtering never changes the original. <code>goleta</code> still has all 1,962 rows. What you get back is a new, smaller table, and if you don’t give it a name it is displayed and then discarded. This is the same rule you met with <code>.rename()</code> yesterday.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✏️ Test your knowledge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Filter <code>goleta</code> to the rows where <code>value</code> is <strong>below zero</strong>. How many are there? A concentration below zero is not physically possible, so make a note of what you find; we will deal with values like these on Day 4.</p>
+</div>
+</div>
+</section>
+<section id="filtering-on-text" class="level2">
+<h2 class="anchored" data-anchor-id="filtering-on-text">Filtering on text</h2>
+<p>The same sentence works on text columns. Use <code>==</code> for an exact match:</p>
+<div id="9ca07047" class="cell" data-execution_count="5">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ozone <span class="op">=</span> goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'o3'</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ozone.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">location_id</th>
+<th data-quarto-table-cell-role="th">location_name</th>
+<th data-quarto-table-cell-role="th">parameter</th>
+<th data-quarto-table-cell-role="th">value</th>
+<th data-quarto-table-cell-role="th">unit</th>
+<th data-quarto-table-cell-role="th">datetimeUtc</th>
+<th data-quarto-table-cell-role="th">datetimeLocal</th>
+<th data-quarto-table-cell-role="th">timezone</th>
+<th data-quarto-table-cell-role="th">latitude</th>
+<th data-quarto-table-cell-role="th">longitude</th>
+<th data-quarto-table-cell-role="th">country_iso</th>
+<th data-quarto-table-cell-role="th">isMobile</th>
+<th data-quarto-table-cell-role="th">isMonitor</th>
+<th data-quarto-table-cell-role="th">owner_name</th>
+<th data-quarto-table-cell-role="th">provider</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>o3</td>
+<td>0.025</td>
+<td>ppm</td>
+<td>2024-07-12T01:00:00+00:00</td>
+<td>2024-07-11T18:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>o3</td>
+<td>0.028</td>
+<td>ppm</td>
+<td>2024-07-12T02:00:00+00:00</td>
+<td>2024-07-11T19:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>o3</td>
+<td>0.029</td>
+<td>ppm</td>
+<td>2024-07-12T03:00:00+00:00</td>
+<td>2024-07-11T20:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>o3</td>
+<td>0.027</td>
+<td>ppm</td>
+<td>2024-07-12T04:00:00+00:00</td>
+<td>2024-07-11T21:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>o3</td>
+<td>0.026</td>
+<td>ppm</td>
+<td>2024-07-12T05:00:00+00:00</td>
+<td>2024-07-11T22:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="32cc1249" class="cell" data-execution_count="6">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ozone.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>(711, 15)</code></pre>
+</div>
+</div>
+<p>711 ozone readings. Text comparisons are exact and case-sensitive, so <code>'O3'</code> would have matched nothing at all:</p>
+<div id="cdf87aca" class="cell" data-execution_count="7">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'O3'</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>(0, 15)</code></pre>
+</div>
+</div>
+<p>An empty result is not an error. It is an answer, and it is usually a spelling problem.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✏️ Test your knowledge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Filter <code>goleta</code> to the <code>pm25</code> readings and store them in a variable called <code>pm25</code>. How many rows? Check your number against <code>goleta['parameter'].value_counts()</code> from yesterday.</p>
+</div>
+</div>
+</section>
+<section id="why-this-matters-here" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-matters-here">Why this matters here</h2>
+<p>Yesterday you found that <code>goleta['value']</code> stacks three different pollutants, in two different units, in one column. That made <code>.describe()</code> on the whole column meaningless.</p>
+<p>Filtering is the fix:</p>
+<div id="08cfc1c7" class="cell" data-execution_count="8">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'value'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>count    1962.000000
+mean        6.378173
+std         7.313763
+min        -4.000000
+25%         0.027000
+50%         5.000000
+75%        10.000000
+max        40.000000
+Name: value, dtype: float64</code></pre>
+</div>
+</div>
+<div id="b8f76ccd" class="cell" data-execution_count="9">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>][<span class="st">'value'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>count    734.000000
+mean       6.480926
+std        3.651091
+min       -4.000000
+25%        4.000000
+50%        6.000000
+75%        8.000000
+max       22.000000
+Name: value, dtype: float64</code></pre>
+</div>
+</div>
+<p>The first summary averages micrograms per cubic metre together with parts per million. The second one describes 734 particulate readings, all in µg/m³. Only the second one is a fact.</p>
+</section>
+<section id="two-conditions-at-once" class="level2">
+<h2 class="anchored" data-anchor-id="two-conditions-at-once">Two conditions at once</h2>
+<p><code>&amp;</code> means “and”. Every comparison gets its own parentheses:</p>
+<div id="7d9b8eed" class="cell" data-execution_count="10">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>goleta[(goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>) <span class="op">&amp;</span> (goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">12</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">location_id</th>
+<th data-quarto-table-cell-role="th">location_name</th>
+<th data-quarto-table-cell-role="th">parameter</th>
+<th data-quarto-table-cell-role="th">value</th>
+<th data-quarto-table-cell-role="th">unit</th>
+<th data-quarto-table-cell-role="th">datetimeUtc</th>
+<th data-quarto-table-cell-role="th">datetimeLocal</th>
+<th data-quarto-table-cell-role="th">timezone</th>
+<th data-quarto-table-cell-role="th">latitude</th>
+<th data-quarto-table-cell-role="th">longitude</th>
+<th data-quarto-table-cell-role="th">country_iso</th>
+<th data-quarto-table-cell-role="th">isMobile</th>
+<th data-quarto-table-cell-role="th">isMonitor</th>
+<th data-quarto-table-cell-role="th">owner_name</th>
+<th data-quarto-table-cell-role="th">provider</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1261</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>14.0</td>
+<td>µg/m³</td>
+<td>2024-07-13T10:00:00+00:00</td>
+<td>2024-07-13T03:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1331</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-07-16T08:00:00+00:00</td>
+<td>2024-07-16T01:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1376</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>22.0</td>
+<td>µg/m³</td>
+<td>2024-07-18T08:00:00+00:00</td>
+<td>2024-07-18T01:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1460</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-07-21T20:00:00+00:00</td>
+<td>2024-07-21T13:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1465</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>15.0</td>
+<td>µg/m³</td>
+<td>2024-07-22T01:00:00+00:00</td>
+<td>2024-07-21T18:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1496</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>14.0</td>
+<td>µg/m³</td>
+<td>2024-07-23T08:00:00+00:00</td>
+<td>2024-07-23T01:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1520</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>15.0</td>
+<td>µg/m³</td>
+<td>2024-07-24T08:00:00+00:00</td>
+<td>2024-07-24T01:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1529</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>14.0</td>
+<td>µg/m³</td>
+<td>2024-07-24T17:00:00+00:00</td>
+<td>2024-07-24T10:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1533</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>15.0</td>
+<td>µg/m³</td>
+<td>2024-07-24T21:00:00+00:00</td>
+<td>2024-07-24T14:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1534</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>17.0</td>
+<td>µg/m³</td>
+<td>2024-07-24T22:00:00+00:00</td>
+<td>2024-07-24T15:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1536</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>16.0</td>
+<td>µg/m³</td>
+<td>2024-07-25T00:00:00+00:00</td>
+<td>2024-07-24T17:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1537</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-07-25T01:00:00+00:00</td>
+<td>2024-07-24T18:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1556</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-07-25T20:00:00+00:00</td>
+<td>2024-07-25T13:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1586</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>15.0</td>
+<td>µg/m³</td>
+<td>2024-07-27T02:00:00+00:00</td>
+<td>2024-07-26T19:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1587</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-07-27T03:00:00+00:00</td>
+<td>2024-07-26T20:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1592</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>17.0</td>
+<td>µg/m³</td>
+<td>2024-07-27T08:00:00+00:00</td>
+<td>2024-07-27T01:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1600</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>14.0</td>
+<td>µg/m³</td>
+<td>2024-07-27T16:00:00+00:00</td>
+<td>2024-07-27T09:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1601</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-07-27T17:00:00+00:00</td>
+<td>2024-07-27T10:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1602</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>14.0</td>
+<td>µg/m³</td>
+<td>2024-07-27T18:00:00+00:00</td>
+<td>2024-07-27T11:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1603</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>15.0</td>
+<td>µg/m³</td>
+<td>2024-07-27T19:00:00+00:00</td>
+<td>2024-07-27T12:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1608</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-07-28T00:00:00+00:00</td>
+<td>2024-07-27T17:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1609</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>15.0</td>
+<td>µg/m³</td>
+<td>2024-07-28T01:00:00+00:00</td>
+<td>2024-07-27T18:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1610</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>14.0</td>
+<td>µg/m³</td>
+<td>2024-07-28T02:00:00+00:00</td>
+<td>2024-07-27T19:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1630</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-07-28T22:00:00+00:00</td>
+<td>2024-07-28T15:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1640</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>14.0</td>
+<td>µg/m³</td>
+<td>2024-07-29T08:00:00+00:00</td>
+<td>2024-07-29T01:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1651</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-07-29T19:00:00+00:00</td>
+<td>2024-07-29T12:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1712</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>22.0</td>
+<td>µg/m³</td>
+<td>2024-08-01T08:00:00+00:00</td>
+<td>2024-08-01T01:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1802</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>15.0</td>
+<td>µg/m³</td>
+<td>2024-08-05T02:00:00+00:00</td>
+<td>2024-08-04T19:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1803</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>14.0</td>
+<td>µg/m³</td>
+<td>2024-08-05T03:00:00+00:00</td>
+<td>2024-08-04T20:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1837</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-08-06T19:00:00+00:00</td>
+<td>2024-08-06T12:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1838</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>19.0</td>
+<td>µg/m³</td>
+<td>2024-08-06T20:00:00+00:00</td>
+<td>2024-08-06T13:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1839</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>16.0</td>
+<td>µg/m³</td>
+<td>2024-08-06T21:00:00+00:00</td>
+<td>2024-08-06T14:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1840</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>16.0</td>
+<td>µg/m³</td>
+<td>2024-08-06T23:00:00+00:00</td>
+<td>2024-08-06T16:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1842</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>14.0</td>
+<td>µg/m³</td>
+<td>2024-08-07T01:00:00+00:00</td>
+<td>2024-08-06T18:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1844</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-08-07T03:00:00+00:00</td>
+<td>2024-08-06T20:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1859</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>15.0</td>
+<td>µg/m³</td>
+<td>2024-08-07T18:00:00+00:00</td>
+<td>2024-08-07T11:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1860</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-08-07T19:00:00+00:00</td>
+<td>2024-08-07T12:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1861</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>14.0</td>
+<td>µg/m³</td>
+<td>2024-08-07T20:00:00+00:00</td>
+<td>2024-08-07T13:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1862</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>14.0</td>
+<td>µg/m³</td>
+<td>2024-08-07T21:00:00+00:00</td>
+<td>2024-08-07T14:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1863</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>19.0</td>
+<td>µg/m³</td>
+<td>2024-08-07T22:00:00+00:00</td>
+<td>2024-08-07T15:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1873</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>21.0</td>
+<td>µg/m³</td>
+<td>2024-08-08T08:00:00+00:00</td>
+<td>2024-08-08T01:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1928</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-08-10T15:00:00+00:00</td>
+<td>2024-08-10T08:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1929</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>14.0</td>
+<td>µg/m³</td>
+<td>2024-08-10T16:00:00+00:00</td>
+<td>2024-08-10T09:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1930</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>20.0</td>
+<td>µg/m³</td>
+<td>2024-08-10T17:00:00+00:00</td>
+<td>2024-08-10T10:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1932</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>15.0</td>
+<td>µg/m³</td>
+<td>2024-08-10T19:00:00+00:00</td>
+<td>2024-08-10T12:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1934</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-08-10T21:00:00+00:00</td>
+<td>2024-08-10T14:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1940</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-08-11T03:00:00+00:00</td>
+<td>2024-08-10T20:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1953</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>16.0</td>
+<td>µg/m³</td>
+<td>2024-08-11T16:00:00+00:00</td>
+<td>2024-08-11T09:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1954</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>16.0</td>
+<td>µg/m³</td>
+<td>2024-08-11T17:00:00+00:00</td>
+<td>2024-08-11T10:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1955</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>13.0</td>
+<td>µg/m³</td>
+<td>2024-08-11T18:00:00+00:00</td>
+<td>2024-08-11T11:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1956</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>14.0</td>
+<td>µg/m³</td>
+<td>2024-08-11T19:00:00+00:00</td>
+<td>2024-08-11T12:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>51 hours where fine particulate matter was above 12 µg/m³, which is the level the US EPA uses as its annual air quality standard.</p>
+<p><code>|</code> means “or”:</p>
+<div id="b3d77c4c" class="cell" data-execution_count="11">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>particulates <span class="op">=</span> goleta[(goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>) <span class="op">|</span> (goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm10'</span>)]</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>particulates.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>(1251, 15)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="The parentheses are not optional">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The parentheses are not optional
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Leave them out and you get an error that has nothing to do with what you meant:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span> <span class="op">&amp;</span> goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">12</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>&amp;</code> binds more tightly than <code>==</code> and <code>&gt;</code>, so Python tries to combine the wrong pieces. The rule is absolute: <strong>wrap every comparison in its own parentheses.</strong> Do it even when there is only one condition if it helps you build the habit.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✏️ Test your knowledge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Find the ozone readings above 0.04 ppm. Then find the readings that are <strong>either</strong> ozone above 0.04 ppm <strong>or</strong> pm25 above 20 µg/m³. How many rows does each give you?</p>
+</div>
+</div>
+</section>
+<section id="turning-a-condition-around-with" class="level2">
+<h2 class="anchored" data-anchor-id="turning-a-condition-around-with">Turning a condition around with <code>~</code></h2>
+<p><code>~</code> inverts a mask: every <code>True</code> becomes <code>False</code> and every <code>False</code> becomes <code>True</code>.</p>
+<div id="0dd02ae5" class="cell" data-execution_count="12">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>not_ozone <span class="op">=</span> goleta[<span class="op">~</span>(goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'o3'</span>)]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>not_ozone.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>(1251, 15)</code></pre>
+</div>
+</div>
+<p>1,251 rows, which is 1,962 minus the 711 ozone readings. You could have written <code>!=</code> here and gotten the same answer:</p>
+<div id="4bd08044" class="cell" data-execution_count="13">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">!=</span> <span class="st">'o3'</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>(1251, 15)</code></pre>
+</div>
+</div>
+<p><code>~</code> earns its keep when the condition is more complicated than a single comparison, and you would rather say “not that” than rewrite the whole thing backwards.</p>
+</section>
+<section id="matching-a-list-of-values-with-.isin" class="level2">
+<h2 class="anchored" data-anchor-id="matching-a-list-of-values-with-.isin">Matching a list of values with <code>.isin()</code></h2>
+<p>Writing <code>(col == 'a') | (col == 'b') | (col == 'c')</code> gets tedious fast. <code>.isin()</code> takes a <strong>list</strong> and matches any of its members:</p>
+<div id="774ff787" class="cell" data-execution_count="14">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>particulates <span class="op">=</span> goleta[goleta[<span class="st">'parameter'</span>].isin([<span class="st">'pm25'</span>, <span class="st">'pm10'</span>])]</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>particulates.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>(1251, 15)</code></pre>
+</div>
+</div>
+<p>Same 1,251 rows as the <code>|</code> version above, in a line that stays readable when the list grows.</p>
+<p>The argument is an ordinary Python list, so you can build it first and pass it by name:</p>
+<div id="42f6cf35" class="cell" data-execution_count="15">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>of_interest <span class="op">=</span> [<span class="st">'pm25'</span>, <span class="st">'pm10'</span>]</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>].isin(of_interest)].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>(1251, 15)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>🐍 <code>.isin()</code> hangs off the <strong>column</strong>, not off the DataFrame: <code>df['col'].isin([...])</code>. It returns a mask, exactly like a comparison does, so it goes in the same place inside the brackets.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✏️ Test your knowledge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Build a list called <code>keep_parameters</code> holding <code>'o3'</code> and <code>'pm10'</code>, then use <code>.isin()</code> to filter <code>goleta</code> down to those two pollutants. Check your row count against the two numbers in <code>goleta['parameter'].value_counts()</code>; they should add up.</p>
+</div>
+</div>
+</section>
+<section id="keeping-a-result-with-.copy" class="level2">
+<h2 class="anchored" data-anchor-id="keeping-a-result-with-.copy">Keeping a result with <code>.copy()</code></h2>
+<p>Once you have a subset you like, you will usually want to keep working on it, and often that means adding a column to it later this week.</p>
+<p>When you plan to keep and modify a filtered result, say <code>.copy()</code>:</p>
+<div id="2c9ce22d" class="cell" data-execution_count="16">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pm25 <span class="op">=</span> goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>].copy()</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>pm25.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>(734, 15)</code></pre>
+</div>
+</div>
+<p><code>.copy()</code> gives you a table of your own, with no remaining connection to <code>goleta</code>. Without it, pandas may hand you back something that is still tied to the original table. When you then try to change it, you get either a warning you don’t understand or a change that quietly does not stick.</p>
+<p>The habit is easy to state:</p>
+<blockquote class="blockquote">
+<p>If the filtered result is going to be a <strong>thing you keep and change</strong>, end the line with <code>.copy()</code>. If you are just looking at it, don’t bother.</p>
+</blockquote>
+<div id="9efc5df9" class="cell" data-execution_count="17">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pm25.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">location_id</th>
+<th data-quarto-table-cell-role="th">location_name</th>
+<th data-quarto-table-cell-role="th">parameter</th>
+<th data-quarto-table-cell-role="th">value</th>
+<th data-quarto-table-cell-role="th">unit</th>
+<th data-quarto-table-cell-role="th">datetimeUtc</th>
+<th data-quarto-table-cell-role="th">datetimeLocal</th>
+<th data-quarto-table-cell-role="th">timezone</th>
+<th data-quarto-table-cell-role="th">latitude</th>
+<th data-quarto-table-cell-role="th">longitude</th>
+<th data-quarto-table-cell-role="th">country_iso</th>
+<th data-quarto-table-cell-role="th">isMobile</th>
+<th data-quarto-table-cell-role="th">isMonitor</th>
+<th data-quarto-table-cell-role="th">owner_name</th>
+<th data-quarto-table-cell-role="th">provider</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1228</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>3.0</td>
+<td>µg/m³</td>
+<td>2024-07-12T01:00:00+00:00</td>
+<td>2024-07-11T18:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1229</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>8.0</td>
+<td>µg/m³</td>
+<td>2024-07-12T02:00:00+00:00</td>
+<td>2024-07-11T19:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1230</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>6.0</td>
+<td>µg/m³</td>
+<td>2024-07-12T03:00:00+00:00</td>
+<td>2024-07-11T20:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1231</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>4.0</td>
+<td>µg/m³</td>
+<td>2024-07-12T04:00:00+00:00</td>
+<td>2024-07-11T21:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1232</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>9.0</td>
+<td>µg/m³</td>
+<td>2024-07-12T05:00:00+00:00</td>
+<td>2024-07-11T22:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="A warning you will meet">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A warning you will meet
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>SettingWithCopyWarning</code> is pandas telling you it isn’t sure whether you meant to change the subset or the original. It is not always a real problem, but it is always worth reading. Adding <code>.copy()</code> at the point where you made the subset is the fix nine times out of ten.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✏️ Test your knowledge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make a <code>.copy()</code> of the ozone readings called <code>ozone</code>, then confirm with <code>.shape</code> and <code>.head()</code> that you have what you expect. Keep it in your notebook; you’ll use it in the next session.</p>
+</div>
+</div>
+</section>
+<section id="putting-it-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-together">Putting it together</h2>
+<p>A real filter is usually two or three of these ideas in one line:</p>
+<div id="09ab9bab" class="cell" data-execution_count="18">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>summer_particulates <span class="op">=</span> goleta[</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    goleta[<span class="st">'parameter'</span>].isin([<span class="st">'pm25'</span>, <span class="st">'pm10'</span>]) <span class="op">&amp;</span> (goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">15</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>].copy()</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>summer_particulates.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>(246, 15)</code></pre>
+</div>
+</div>
+<div id="3d6c204f" class="cell" data-execution_count="19">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>summer_particulates[[<span class="st">'parameter'</span>, <span class="st">'value'</span>, <span class="st">'unit'</span>, <span class="st">'datetimeLocal'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">parameter</th>
+<th data-quarto-table-cell-role="th">value</th>
+<th data-quarto-table-cell-role="th">unit</th>
+<th data-quarto-table-cell-role="th">datetimeLocal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">711</td>
+<td>pm10</td>
+<td>20.0</td>
+<td>µg/m³</td>
+<td>2024-07-16T22:00:00-07:00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">720</td>
+<td>pm10</td>
+<td>21.0</td>
+<td>µg/m³</td>
+<td>2024-07-17T07:00:00-07:00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">721</td>
+<td>pm10</td>
+<td>20.0</td>
+<td>µg/m³</td>
+<td>2024-07-17T08:00:00-07:00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">746</td>
+<td>pm10</td>
+<td>21.0</td>
+<td>µg/m³</td>
+<td>2024-07-22T13:00:00-07:00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">748</td>
+<td>pm10</td>
+<td>16.0</td>
+<td>µg/m³</td>
+<td>2024-07-22T15:00:00-07:00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Notice that the line is broken across several lines inside the square brackets. Python doesn’t mind, and a long filter is much easier to read that way.</p>
+</section>
+<section id="key-points" class="level2">
+<h2 class="anchored" data-anchor-id="key-points">Key points</h2>
+<ul>
+<li>The <strong>filter sentence</strong> is <code>df[df['col'] &lt;comparison&gt; value]</code>. The inner <code>df</code> builds the mask; the outer one applies it.</li>
+<li>Filtering returns a <strong>new</strong> DataFrame. Assign it to a name to keep it.</li>
+<li><code>==</code> matches text exactly, and is case-sensitive. An empty result is an answer, not an error.</li>
+<li>Combine conditions with <code>&amp;</code> for and, <code>|</code> for or, <code>~</code> for not. <strong>Every comparison needs its own parentheses.</strong></li>
+<li><code>df['col'].isin([...])</code> matches any value in a list, and replaces a pile of <code>|</code>.</li>
+<li>End a filter with <code>.copy()</code> when you plan to keep the result and change it later.</li>
+</ul>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><a href="../../course-materials/cheatsheets/data_selection.html">📖 EDS 217 cheatsheet: data selection and filtering</a></li>
+<li><a href="../../course-materials/cheatsheets/lists.html">📖 EDS 217 cheatsheet: lists</a></li>
+<li><a href="../../course-materials/cheatsheets/control_flows.html">📖 EDS 217 cheatsheet: control flows</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/indexing.html#boolean-indexing" target="_blank">pandas documentation: boolean indexing</a></li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.isin.html" target="_blank">pandas documentation: <code>Series.isin</code></a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="../../images/bren-logo.png" alt="The Bren School of Environmental Science &amp; Management logo" width="250"></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This website is built with <a href="https://github.com/EDS-217-Essential-Python/EDS-217-Essential-Python.github.io"><i class="fa-brands fa-github" title="the github octocat logo" aria-label="github"></i></a> and <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,17 +1,41 @@
 ---
 title: "Final Activity"
-subtitle: "Creating a Comprehensive 10-Step Data Science Workflow"
+subtitle: "Your own ten-step data science workflow"
 jupyter: eds217_2026
-format: 
+format:
     html:
         toc: true
         toc-depth: 3
         code-fold: show
 ---
 
-## DIY Python Data ScienceWorkflow
+Over Days 8 and 9 your team builds one notebook: it takes a dataset nobody in the room has seen,
+walks it through the ten steps, and ends with a figure and a claim. On Friday afternoon each team
+walks the class through theirs.
 
-In this final class activity, you will work in small groups (2-3) to develop a example data science workflow. 
+This page is the description of the finished thing. The [project
+kickoff](interactive-sessions/7d_project_kickoff.qmd) covers choosing a team, a dataset and a
+question. [Day 8](day8.qmd) and [Day 9](day9.qmd) carry the hour-by-hour plan.
+
+## What you are building
+
+One Jupyter notebook, per team, named `Project_<team name>.ipynb`.
+
+It is **self-contained**: somebody who has your notebook and nothing else can restart the kernel,
+run every cell from the top, and get your figures back. That single property matters more than
+anything else on this page, and it is the one most often lost, usually to a cell that was deleted
+after the variable it defined was already in memory.
+
+It is **documented**: markdown cells explain what each step was for and what it found, and code
+comments explain anything a reader could not work out from the code.
+
+It uses **pandas, numpy, matplotlib and seaborn**, and nothing else. Avoid analyses that need
+mapping.
+
+## The ten steps
+
+Every one of the ten steps appears in the notebook under its own markdown heading, in this order,
+even where the honest content of a step is one sentence.
 
 1. Import Data
 2. Explore Data
@@ -24,52 +48,112 @@ In this final class activity, you will work in small groups (2-3) to develop a e
 9. Join / Reshape Data
 10. Visualize Data
 
-These are the same ten steps described on [The Data Science Workflow](the-data-science-workflow.qmd) page.
+These are the same ten steps described on [The Data Science
+Workflow](the-data-science-workflow.qmd).
 
-## What to do
+Step 9 is the one most likely to be short. If your project uses a single table and needs neither a
+join nor a reshape, write that under the heading and move on. Step 3 is the next most likely: a
+file that arrives clean has still been cleaned, and *"`.isnull().sum()` is zero in every column and
+there are no duplicate rows"* is that step done properly. A step that is skipped silently is
+different, because then nobody reading the notebook knows whether the work was unnecessary or
+merely undone.
 
-To conduct this exercise, you should find a suitable dataset; it doesn't need to be environmental data per se - be creative in your search! You should also focus on making a number of exploratory and analysis visualizations using seaborn. You should avoid planning any analysis that absolutely require mapping and focus on using only `pandas`, `numpy`, `matplotlib`, and `seaborn` libraries.
+## What "done" looks like
 
-Your final product will be a self-contained notebook that is well-documented with markdown and code comments that you will walk through as a presentation to the rest of the class on the final day. 
+This is a checklist, not a grading scheme. Nothing here is scored. It is the list I would use if
+you asked me whether your notebook was finished, so you may as well have it.
 
-Your notebook should include each of the ten steps, even if you don't need to do much in each of them. Step 9 is the one most likely to be short: if your project uses a single table, say so under that heading and move on.
+**The notebook runs.**
 
-:::{.callout-note}
-You can include additional visualizations as part of your data exploration (step 2), or anywhere else it is helpful.
-:::
+- [ ] Restart the kernel, run all, no errors.
+- [ ] Every dataset loads from a URL or a path that will still work on somebody else's machine.
 
-Additional figures and graphics are also welcome - you are encouraged to make your notebooks as engaging and visually interesting as possible. 
+**The ten steps are all there.**
 
-## Syncing your data to Github
+- [ ] Ten markdown headings, in order, matching the list above.
+- [ ] Under each, either the work or a sentence saying why the step needed none.
 
-[Here](interactive-sessions/8a_github.qmd) are some directions for syncing your classwork with GitHub
+**The analysis answers a question you wrote down.**
 
+- [ ] The question appears near the top, in a complete sentence, with your column names in it.
+- [ ] The two questions you set aside are named, with a sentence on why.
+- [ ] One sentence says what one row of the dataset represents.
 
-### General places to find fun data
+**The figure carries the claim.**
 
-Here are some links to potential data resources that you can use to develop your analyses:
+- [ ] At least one figure made with seaborn or matplotlib.
+- [ ] Axis labels with units where units exist.
+- [ ] A title that states the finding rather than naming the variables.
+- [ ] A legend, if you used `hue=`.
 
-- [Kaggle](https://www.kaggle.com/datasets?fileType=csv)
+**The claim is stated and supported.**
+
+- [ ] Two or three sentences near the top: what you asked, what you found, what it rests on.
+- [ ] The counts behind any group comparison are visible somewhere in the notebook.
+- [ ] The word *significant* does not appear, because you have not run a hypothesis test.
+
+**Somebody else can read it.**
+
+- [ ] No cells left over from an approach you abandoned.
+- [ ] Markdown between the code, not just at the top.
+- [ ] Every team member's name in the first cell.
+
+## Handing it in
+
+The notebook is due **at 11:45 on Friday, September 11**, when you push it. There is nothing to
+submit after class.
+
+1. Put the project notebook in its **own repository**, separate from your coursework repository.
+2. **Keep the outputs.** The [GitHub session](interactive-sessions/8a_github.qmd) has you
+   configure `nbstripout`, which strips figures and printed output from every commit. That is
+   right for coursework and wrong here, because your figures are the deliverable. Do not configure
+   `nbstripout` on this repository.
+3. Add a short `README.md`: the team, the dataset, its source URL, and the question.
+4. Push, then open the repository in a browser. GitHub renders `.ipynb` directly, so you can
+   confirm in ten seconds that the figures are showing.
+5. Send me the repository URL.
+
+## The presentation
+
+**Twelve minutes, then three for questions.** Present from the notebook itself rather than from
+slides, and see [Day 9](day9.qmd) for a walkthrough plan that fits the twelve minutes.
+
+Additional figures are welcome, and you are encouraged to make the notebook engaging to read.
+Exploratory figures belong under Step 2, where they were actually made.
+
+## Finding a dataset
+
+The five tests for a workable dataset are in the [project
+kickoff](interactive-sessions/7d_project_kickoff.qmd), and they are worth applying before you
+commit to anything: one CSV, more than a couple of hundred rows, at least two numeric columns, at
+least one categorical column, and you can say what one row represents.
+
+It does not need to be environmental data. Be curious.
+
+### General collections
+
+- [Kaggle datasets, filtered to CSV](https://www.kaggle.com/datasets?fileType=csv)
 - [Data is Plural](https://www.data-is-plural.com/)
 - [US Data.gov](https://data.gov/)
 - [Zenodo](https://zenodo.org/)
-- [R for Data Science](https://github.com/rfordatascience/tidytuesday/tree/master/data)
+- [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data)
 
-### Oddly specific datasets
+### Oddly specific, and all fine choices
 
-- [Central Park Squirrel Survey](https://www.thesquirrelcensus.com/data)
-- [Harry Potter Characters Dataset](https://www.kaggle.com/datasets/gulsahdemiryurek/harry-potter-dataset)
+- [Central Park Squirrel Census](https://www.thesquirrelcensus.com/data)
+- [Harry Potter Characters](https://www.kaggle.com/datasets/gulsahdemiryurek/harry-potter-dataset)
 - [Spotify Tracks](https://www.kaggle.com/datasets/zaheenhamidani/ultimate-spotify-tracks-db)
 - [Lego Dataset](https://www.kaggle.com/datasets/rtatman/lego-database)
 
-## Using Google Drive to store your .csv files.
+## Loading a CSV from Google Drive
 
-Once you've found a .csv file (or .csv files) that you want to use, you should:
+If your file is not already at a public URL, put it in a Google Drive folder in your UCSB account
+and load it from there:
 
-1. Save your file to a google drive folder in your UCSB account. 
-2. Change the sharing settings to allow anyone with a link to view your file.
-3. Open the sharing dialog and copy the sharing link to your clipboard.
-4. Use the code below to download your file (you will need to add this code to the top of your notebook in the `Import Data` section)
+1. Save the file to a Google Drive folder in your UCSB account.
+2. Change the sharing settings to allow anyone with the link to view it.
+3. Open the sharing dialog and copy the link.
+4. Put this code in the Import Data section at the top of your notebook.
 
 ```{python}
 #| eval: false
@@ -94,3 +178,17 @@ sharing_url = "https://drive.google.com/file/d/1RlilHNG7BtvXT2Pm4OpgNvEjVJJZNaps
 df = df_from_gdrive_csv(sharing_url)
 df.head()
 ```
+
+::: {.callout-warning title="Check this on Thursday morning, not Friday"}
+A Drive link that has not been shared correctly fails silently for everybody except the person who
+uploaded it. Have a teammate run the loading cell on their own machine on Day 8, before you build
+anything on top of it.
+:::
+
+## Resources
+
+- [{{< fa diagram-project title="A workflow diagram" >}} The Data Science Workflow](the-data-science-workflow.qmd)
+- [{{< fa rocket title="A rocket" >}} Project kickoff](interactive-sessions/7d_project_kickoff.qmd)
+- [{{< fa code-branch title="A branching line" >}} Putting your work on GitHub](interactive-sessions/8a_github.qmd)
+- [{{< fa table title="A table" >}} Workflow methods cheatsheet](cheatsheets/workflow_methods.qmd)
+- [{{< fa table title="A table" >}} seaborn cheatsheet](cheatsheets/seaborn.qmd)

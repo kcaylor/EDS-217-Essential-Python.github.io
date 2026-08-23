@@ -294,15 +294,27 @@ items:
     content for rubric, graded, assessment or "will be evaluated" returns one
     line. A grep for submit, due, deadline or "turn in" returns nothing.
   action: |
-    Write the Day 8 and Day 9 specification: a timed schedule for both days,
-    the deliverable definition with file naming and length, the submission
-    mechanism and deadline, presentation logistics, and a rubric keyed to the
-    ten-step workflow. 7d_project_kickoff.qmd is strong and carries the front
-    half of this already; the work is everything after the kickoff.
+    Written 2026-08-23. Decisions taken with Kelly: hand-in is a GitHub
+    repository, due when it is pushed at 11:45 on Day 9; assessment is completion
+    only, so the notebook carries a checklist of what finished means rather than
+    a rubric; presentations are twelve minutes plus three for questions; Day 8
+    runs as open work against three stated checkpoints.
+
+    day8.qmd now carries a timed schedule and the three checkpoints, each naming
+    which of the ten steps should be done, plus what to cut when a team is behind
+    at each one. day9.qmd carries the morning freeze at 11:45, the hand-in steps,
+    a twelve-minute walkthrough plan, and the afternoon timing.
+    final_project.qmd is rewritten as the definition of the deliverable.
+
+    Two conflicts were resolved rather than left. 8a_github.qmd configures
+    nbstripout, which strips the figures that are the point of this notebook, so
+    the project goes in its own repository with outputs kept and the pages say
+    why. And 7d_project_kickoff.qmd said the notebook was "graded against" the
+    ten steps, which no longer holds; it now says built around them.
   verify:
-    kind: manual
-    cmd: read course-materials/day8.qmd, day9.qmd and final_project.qmd
-    expect: schedule, deliverable, submission, presentation logistics and rubric all present
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py c1_day89_specified
+    expect: both day pages and the project page carry a schedule, checkpoints, a submission mechanism, a deadline, presentation logistics and a definition of finished
 
 - id: C2
   title: Fix the broken contact links on the front page
@@ -731,6 +743,30 @@ items:
     kind: manual
     cmd: view the two Day 7 pages
     expect: two bespoke panels in house style
+
+- id: A4
+  title: Give Day 8 and Day 9 different header images
+  category: assets
+  severity: low
+  owner: kelly
+  state: open
+  why: |
+    Both day pages use images/presentation.png, so the last two days of the
+    course open with the same picture. This is the same situation as the Day 4
+    and Day 5 end-of-day headers, and it is the more visible of the two, since
+    these are day landing pages rather than activity pages.
+  evidence: |
+    A grep for presentation.png across course-materials returns day8.qmd and
+    day9.qmd and nothing else.
+  action: |
+    Keep the presenting panda on Day 9, where the presentations actually happen.
+    Generate one for Day 8 in house style: a cartoon panda at a desk late in the
+    day, two laptops open, a whiteboard behind it with ten numbered boxes and the
+    first seven ticked, painterly, square, no lettering.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py a4_day89_headers
+    expect: Day 8 and Day 9 reference different images
 
 # ---------------------------------------------------------------------------
 # HOUSEKEEPING. Safe to defer past the start of class.

@@ -12,19 +12,119 @@ description: "Friday September 11^th^, 2026"
 *A cartoon panda is presenting important data science findings to a group of colleagues.* [MidJourney 5](https://www.midjourney.com/jobs/f9613559-9db7-4c36-bf8b-e34663ea7a3e?index=0)
 :::
 
-## Class materials
+Yesterday you finished the analysis. Today you finish the notebook, and then you tell eleven other
+teams what you found.
 
-| {{< fa calendar-day title="A calendar with one day highlighted" >}} Session  | {{< fa laptop-code title="A laptop with on-screen code" >}} Session 1  |  {{< fa laptop-code title="A laptop with on-screen code" >}} Session 2 |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| day 9 / morning   |  Working on [Final Data Science Project](final_project.qmd) <br> (all morning) |  |
-| day 9 / afternoon |  Data Science Project Presentations <br> (all afternoon) |  |
-: {.hover .bordered tbl-colwidths="[20,40,40]"} 
+The morning is deliberately short. Work expands to fill a project, and a project that is still
+being written at 1:00 is a project nobody has practised presenting. The notebook stops at 11:45
+whatever state it is in, and the last fifteen minutes before lunch are for putting it on GitHub.
 
-## Syncing your classwork to Github
+## The shape of the day
 
-[Here](interactive-sessions/8a_github.qmd) are some directions for syncing your classwork with a GitHub repository
+| {{< fa clock title="A clock" >}} When | {{< fa laptop-code title="A laptop with on-screen code" >}} What |
+|------------------|------------------------------------------------------------------|
+| 10:00 to 11:45   | Step 10 and the write-up. Make the figure readable and the notebook legible. |
+| 11:45 to 12:00   | **Notebook freeze.** Restart the kernel, run everything, push to GitHub. |
+| 12:00 to 1:00    | Lunch |
+| 1:00 to 1:10     | Running order, and connect the first machine to the projector. |
+| 1:10 to 2:40     | Presentations, first half |
+| 2:40 to 2:55     | Break |
+| 2:55 to 4:25     | Presentations, second half |
+| 4:25 to 4:30     | Close |
+: {.hover .bordered tbl-colwidths="[25,75]"}
 
+## The morning: what "finished" looks like
 
-## End-of-day practice
+Nothing in the morning is new analysis. If you find yourself computing something you have not
+computed before, you are adding scope on the last morning, and the answer is almost always to stop.
 
-End of Class! Congratulations!!
+Work through these in order, because each one is worth more than the one after it:
+
+1. **Restart the kernel and run every cell from the top.** Do this first, not last. A notebook that
+   only runs in the order you happened to write it is a notebook that will fail in front of the
+   class.
+2. **Step 10, Visualize.** One figure that carries the claim. Axis labels with units, a title that
+   states the finding rather than naming the variables, and a legend if you used `hue=`.
+3. **A markdown cell under every one of the ten headings.** Where a step was genuinely not needed,
+   the cell says so in a sentence. An empty heading is the only thing here that reads as unfinished.
+4. **The claim, near the top.** Two or three sentences: what you asked, what you found, and what
+   the finding rests on. Somebody who reads only that and looks at your figure should understand
+   the project.
+5. **Delete the wreckage.** Every project accumulates cells that were a good idea on Thursday.
+   Remove them. Your notebook is easier to present when it contains only the path you took.
+
+The full description of the deliverable is on the [final project page](final_project.qmd).
+
+## Handing it in
+
+The notebook is due when you push it, at **11:45 on Friday**. There is nothing to submit after
+class.
+
+1. Put the project notebook in its **own repository**, not in your coursework repository.
+2. **Keep the outputs.** This is the one place where the advice in the
+   [GitHub session](interactive-sessions/8a_github.qmd) does not apply: `nbstripout` removes
+   figures and printed output from every commit, which is right for coursework and wrong for a
+   notebook whose figures are the point. Do not configure `nbstripout` on this repository.
+3. Add a one-paragraph `README.md` naming the team, the dataset, its source URL, and the question.
+4. Push, then open the repository in a browser and confirm the notebook renders with its figures
+   showing. GitHub renders `.ipynb` files directly, so this takes ten seconds and catches the
+   problem while you can still fix it.
+5. Send me the repository URL.
+
+::: {.callout-tip title="If git is fighting you at 11:40"}
+Do not lose the notebook to a merge conflict on the last morning. Download the `.ipynb` from
+Positron, email it to me, and sort the repository out afterwards. The work is the thing that
+matters; the repository is how it travels.
+:::
+
+## The presentations
+
+**Twelve minutes per team, then three for questions.** I will keep time and I will be strict about
+it, because the last team of the afternoon deserves the same twelve minutes as the first.
+
+Present **from your notebook**, not from slides. Scroll through it and talk. You have already
+written the structure, and rebuilding it in Google Slides on Friday morning is work that teaches
+you nothing.
+
+A twelve-minute walkthrough that works, every time:
+
+| Minutes | What |
+|---------|------|
+| 0 to 2  | The dataset. Where it came from, what one row is, how many rows, and why you chose it. |
+| 2 to 4  | The question, and the two you set aside. |
+| 4 to 7  | What the data needed before it could answer it. Cleaning, filtering, transforming, and anything surprising. |
+| 7 to 10 | The figure. Talk the class through the axes before you talk about the finding. |
+| 10 to 12 | The claim, what it rests on, and what you would do with another week. |
+: {.hover .bordered tbl-colwidths="[20,80]"}
+
+Both members present. On a team of three, one can drive the notebook while the other two talk.
+
+::: {.callout-note title="Things worth saying out loud"}
+The most interesting minute in most of these presentations is the one where a team says what went
+wrong. A column that turned out to be text, a grouping that produced a group of one, a question
+the data could not answer. Say those things. Everybody else hit the same wall and thinks they were
+the only one.
+:::
+
+::: {.callout-important title="Two things to avoid"}
+- **Do not say "significant".** You have not been taught a hypothesis test and you are not
+  expected to have run one. Say a difference is large or small, and show the counts it rests on.
+- **Do not apologise for your project.** Every project in this room was built in two days by people
+  who learned pandas eight days ago. Present what you found.
+:::
+
+## After the last presentation
+
+That is the course. You arrived on the 31st, and in nine days you have imported, explored, cleaned,
+filtered, sorted, transformed, grouped, aggregated, joined, reshaped and visualised real data, and
+then done all of it again on a dataset nobody chose for you.
+
+Everything on this site stays where it is. The cheatsheets in particular are written to be returned
+to, and you will return to them.
+
+## Additional Resources
+
+- [{{< fa diagram-project title="A workflow diagram" >}} The Data Science Workflow](the-data-science-workflow.qmd)
+- [{{< fa pencil title="A pencil" >}} The final project](final_project.qmd)
+- [{{< fa code-branch title="A branching line" >}} Putting your work on GitHub](interactive-sessions/8a_github.qmd)
+- [{{< fa table title="A table" >}} All cheatsheets](../cheatsheets.qmd)

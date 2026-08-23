@@ -382,6 +382,36 @@ def d8_live_site():
 
 # ---------------------------------------------------------------- C checks
 
+def c1_day89_specified():
+    """Days 8 and 9 must say enough to be taught and handed in."""
+    d8 = (ROOT / "course-materials/day8.qmd").read_text()
+    d9 = (ROOT / "course-materials/day9.qmd").read_text()
+    fp = (ROOT / "course-materials/final_project.qmd").read_text()
+    joined = d8 + d9 + fp
+
+    want = {
+        "a timed schedule on Day 8": bool(re.search(r"10:00 to 11:30", d8)),
+        "a timed schedule on Day 9": bool(re.search(r"11:45", d9)),
+        "checkpoints on Day 8": d8.count("Checkpoint") >= 3,
+        "a submission mechanism": "own repository" in joined,
+        "a deadline": bool(re.search(r"due .{0,40}11:45|11:45 on Friday", joined)),
+        "presentation length": bool(re.search(r"[Tt]welve minutes", joined)),
+        "what to present": "walkthrough" in joined or "0 to 2" in d9,
+        "a definition of finished": "What \"done\" looks like" in fp,
+        "the ten steps enumerated": fp.count("Visualize Data") >= 1,
+        "no empty trailing heading": not any(
+            [l for l in x.splitlines() if l.strip()][-1].lstrip().startswith("#")
+            for x in (d8, d9, fp)),
+    }
+    lines = [f"  {'yes' if ok else 'NO '}  {name}" for name, ok in want.items()]
+    missing = [n for n, ok in want.items() if not ok]
+    lines.insert(0, f"Days 8 and 9 carry {len(want) - len(missing)} of {len(want)} "
+                    f"things a student or an instructor needs.")
+    if missing:
+        lines.append(f"still missing: {', '.join(missing)}")
+    return result(not missing, lines)
+
+
 def c2_mailto():
     """Both contact links on the front page must work."""
     text = (ROOT / "index.qmd").read_text()
@@ -628,6 +658,21 @@ def _referenced_names():
         refs.update(re.findall(r"[A-Za-z0-9_.\- ]+\.(?:png|jpe?g|webp|svg|gif|tiff)",
                                f.read_text(errors="replace")))
     return {r.strip() for r in refs}
+
+
+def a4_day89_headers():
+    """The last two day pages should not open with the same picture."""
+    import re as _re
+    imgs = {}
+    for d in (8, 9):
+        text = (ROOT / f"course-materials/day{d}.qmd").read_text()
+        m = _re.search(r"!\[[^\]]*\]\(([^)]+)\)", text)
+        imgs[d] = m.group(1) if m else None
+    lines = [f"  day {d}: {v}" for d, v in imgs.items()]
+    same = imgs[8] == imgs[9]
+    lines.append("Day 8 and Day 9 share a header image." if same
+                 else "The two day pages use different images.")
+    return result(not same, lines)
 
 
 def h1_orphan_assets():

@@ -40,6 +40,32 @@
         }
       ]
     },
+    "A4": {
+      "checks": [
+        {
+          "at": "2026-08-23T09:09:49",
+          "cmd": "python3 tools/prelaunch_checks.py a4_day89_headers",
+          "could_not_run": false,
+          "evidence": "FAIL  a4_day89_headers\n  day 8: images/presentation.png\n  day 9: images/presentation.png\n  Day 8 and Day 9 share a header image.",
+          "exit": 1,
+          "git_sha": "3b03867",
+          "ok": false
+        }
+      ]
+    },
+    "C1": {
+      "checks": [
+        {
+          "at": "2026-08-23T09:09:49",
+          "cmd": "python3 tools/prelaunch_checks.py c1_day89_specified",
+          "could_not_run": false,
+          "evidence": "PASS  c1_day89_specified\n  Days 8 and 9 carry 10 of 10 things a student or an instructor needs.\n  yes  a timed schedule on Day 8\n  yes  a timed schedule on Day 9\n  yes  checkpoints on Day 8\n  yes  a submission mechanism\n  yes  a deadline\n  yes  presentation length\n  yes  what to present\n  yes  a definition of finished\n  yes  the ten steps enumerated\n  yes  no empty trailing heading",
+          "exit": 0,
+          "git_sha": "3b03867",
+          "ok": true
+        }
+      ]
+    },
     "C2": {
       "checks": [
         {
@@ -1178,5 +1204,5 @@
     }
   },
   "schema": 1,
-  "updated": "2026-08-23T11:59:08"
+  "updated": "2026-08-23T09:09:49"
 }

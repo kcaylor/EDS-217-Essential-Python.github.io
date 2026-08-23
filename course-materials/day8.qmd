@@ -12,19 +12,114 @@ description: "Thursday September 10^th^, 2026"
 *A cartoon panda is presenting important data science findings to a group of colleagues.* [MidJourney 5](https://www.midjourney.com/jobs/f9613559-9db7-4c36-bf8b-e34663ea7a3e?index=0)
 :::
 
+Yesterday afternoon you left with a team, a dataset, three questions and one rough figure.
+
+Today you turn one of those questions into an analysis. There is no new Python in the next two
+days, and there is not meant to be. Every method the project needs, you have written at least once
+this week, and most of them you have written three times. What is new is that nobody will tell you
+which method to reach for.
+
+The work today is choosing which of your three questions the data can actually answer, and then
+walking it through the ten steps in order.
+
+## The shape of the day
+
+| {{< fa clock title="A clock" >}} When | {{< fa laptop-code title="A laptop with on-screen code" >}} What |
+|------------------|------------------------------------------------------------------|
+| 10:00 to 11:30   | Choose the question. Steps 1 and 2, import and explore.            |
+| **11:30**        | **Checkpoint 1** |
+| 11:30 to 12:00   | Begin Step 3, clean. |
+| 12:00 to 1:00    | Lunch |
+| 1:00 to 2:30     | Steps 3 to 6: clean, filter, sort, transform. |
+| **2:30**         | **Checkpoint 2** |
+| 2:30 to 4:30     | Steps 7 to 9: group, aggregate, join or reshape. One real figure. |
+| **4:30**         | **Checkpoint 3** |
+: {.hover .bordered tbl-colwidths="[25,75]"}
+
+Nothing is handed in today. The checkpoints exist so that a team which is stuck finds out on
+Thursday, while there is still a day to spend, rather than on Friday at noon.
+
+## The three checkpoints
+
+### Checkpoint 1, about 11:30. One question, and the data in front of you
+
+By late morning your notebook should hold:
+
+- **One question**, chosen from the three you wrote yesterday, in a markdown cell near the top,
+  in a complete sentence, with your actual column names in it.
+- A sentence saying **why the other two were set aside**. Usually it is that the data cannot
+  answer them, and that sentence is worth keeping.
+- **Step 1, Import**, under its own heading: the read, the URL, and one sentence on what one row
+  represents.
+- **Step 2, Explore**, under its own heading: `.shape`, `.dtypes`, `.isnull().sum()`, `.describe()`,
+  and a written note on anything surprising.
+
+If you are still choosing between datasets at 11:30, stop choosing and take the one that loaded
+cleanly. A good analysis of a dull dataset finishes. A great idea about a dataset you cannot open
+does not.
+
+### Checkpoint 2, about 2:30. The data is in the shape the question needs
+
+By mid afternoon, steps 3 to 6 should be done and written up:
+
+- **Step 3, Clean.** What was missing, what you did about it, and how many rows that cost you.
+  If the file arrived clean, say so under the heading and move on. That is the step done properly.
+- **Step 4, Filter.** Which rows the question is about, and which it is not.
+- **Step 5, Sort.** Even if sorting is only how you looked at the result.
+- **Step 6, Transform.** Any column you derived, with the reason you needed it.
+
+The test for this checkpoint is not how much code you have written. It is whether you can point at
+one DataFrame and say, in a sentence, that this is the table the question is about.
+
+### Checkpoint 3, 4:30. The analysis is finished
+
+By the end of the day the answer should exist, even if it is ugly:
+
+- **Steps 7 and 8, Group and Aggregate.** The split, apply and combine that produces the numbers
+  your claim rests on, with the counts each group is built from.
+- **Step 9, Join or Reshape.** If your project uses a single table and needs neither, write that
+  under the heading and move on.
+- **One real figure**, with axis labels, that shows the thing you are going to claim.
+- **One sentence** in markdown saying what you found.
+
+That sentence is the point of the whole exercise. Tomorrow morning is for making it presentable,
+and you cannot make a claim presentable before you have one.
+
+## If you are behind at a checkpoint
+
+Being behind at a checkpoint is a normal thing that happens on a two-day project. It is not a
+reason to work faster, it is a reason to cut.
+
+- **Behind at Checkpoint 1.** The dataset is the problem. Change it. Go back to the five tests in
+  the [project kickoff](interactive-sessions/7d_project_kickoff.qmd) and pick something that
+  passes all five. You will lose an hour and save a day.
+- **Behind at Checkpoint 2.** The question is too big. Narrow it, usually by dropping a
+  comparison: two groups instead of six, one year instead of a decade.
+- **Behind at Checkpoint 3.** Stop adding and start writing. A finished small analysis presents
+  well. An unfinished large one does not.
+
+Come and find me at any of the three. That is what the day is for.
+
 ## Class materials
 
 | {{< fa calendar-day title="A calendar with one day highlighted" >}} Session  | {{< fa laptop-code title="A laptop with on-screen code" >}} Session 1  |  {{< fa laptop-code title="A laptop with on-screen code" >}} Session 2 |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| day 8 / morning   | Working on [Final Data Science Project](final_project.qmd) (all day) |  |
-| day 8 / afternoon |  |  |
-
-: {.hover .bordered tbl-colwidths="[20,40,40]"} 
-
-## Syncing your classwork to Github
-
-[Here](interactive-sessions/8a_github.qmd) are some directions for syncing your classwork with a GitHub repository
+|-------------------|-------------------------------------------------------|--------------------------------------|
+| day 8 / morning   | [📝 Final project](final_project.qmd), steps 1 and 2   | Checkpoint 1                          |
+| day 8 / afternoon | [📝 Final project](final_project.qmd), steps 3 to 9    | Checkpoints 2 and 3                   |
+: {.hover .bordered tbl-colwidths="[20,40,40]"}
 
 ## End-of-day practice
 
-There are no additional end-of-day tasks / activities today!
+There is no end-of-day activity today. The project is the work.
+
+If you have twenty minutes tonight and want to spend them well, read your own notebook from the
+top as though somebody else wrote it, and fix every place where you cannot tell what a cell was
+for.
+
+## Additional Resources
+
+- [{{< fa diagram-project title="A workflow diagram" >}} The Data Science Workflow](the-data-science-workflow.qmd)
+- [{{< fa rocket title="A rocket" >}} Project kickoff, including the dataset tests](interactive-sessions/7d_project_kickoff.qmd)
+- [{{< fa code-branch title="A branching line" >}} Putting your work on GitHub](interactive-sessions/8a_github.qmd)
+- [{{< fa table title="A table" >}} Workflow methods cheatsheet](cheatsheets/workflow_methods.qmd)
+- [{{< fa table title="A table" >}} seaborn cheatsheet](cheatsheets/seaborn.qmd)

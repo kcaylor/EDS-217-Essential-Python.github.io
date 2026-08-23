@@ -139,6 +139,33 @@ def sentence_initial_demonstratives(text):
     return out
 
 
+# The same failure in a different costume. "any of the three", "all five", "the
+# two you set aside" all ask the reader to supply a noun the writer left out.
+# Flagged when the numeral is followed by punctuation or a function word, which
+# means no noun follows it.
+ELLIPTIC = re.compile(
+    r"\b(?:the|all|any of the|one of the|both of the|first|last|other)\s+"
+    r"(two|three|four|five|six|seven|eight|nine|ten)\b"
+    r"(?=\s*[.,;:)]|\s+(?:you|they|we|i|it|and|or|but|that|which|who|whose|"
+    r"is|are|was|were|will|would|can|properly|cleanly|already|here|there)\b)",
+    re.I)
+
+
+def elliptical_numerals(text):
+    """Numerals used as nouns, with the noun left for the reader to supply."""
+    protected = regions(text)
+    blocked = [(a, b) for _, a, b, _ in protected]
+    out = []
+    line_no = 1
+    for m in ELLIPTIC.finditer(text):
+        if any(a <= m.start() < b for a, b in blocked):
+            continue
+        line_no = text.count("\n", 0, m.start()) + 1
+        snippet = text[max(0, m.start() - 40):m.end() + 40].replace("\n", " ").strip()
+        out.append((line_no, m.group(0), snippet))
+    return out
+
+
 def cmd_referents(paths):
     total = deictic_n = 0
     for p in paths:
@@ -158,12 +185,28 @@ def cmd_referents(paths):
         print(f"\n{rel}  ({len(real)})")
         for line_no, word, noun, _, snippet in real:
             print(f"  line {line_no}: {snippet}")
+    ell_total = 0
+    for p in paths:
+        hits = elliptical_numerals(Path(p).read_text(errors="replace"))
+        if not hits:
+            continue
+        ell_total += len(hits)
+        rel = Path(p).resolve()
+        try:
+            rel = rel.relative_to(ROOT)
+        except ValueError:
+            pass
+        print(f"\n{rel}  ({len(hits)} elliptical numeral(s))")
+        for line_no, phrase, snippet in hits:
+            print(f"  line {line_no}: \"{phrase}\"  ...{snippet}...")
+
     print(f"\n{total} sentence(s) open with a demonstrative.")
     print(f"{deictic_n} of those point at the document itself (\"This session\", \"This")
     print(f"morning\"). The other {total - deictic_n} point back into the text and are the ones")
     print("Kelly's rule is about: a student reading for comprehension should not have to")
     print("hold the previous sentence in mind to parse the next one.")
-    return 1 if (total - deictic_n) else 0
+    print(f"\n{ell_total} numeral(s) used as a noun with the noun left out.")
+    return 1 if (total - deictic_n or ell_total) else 0
 
 
 def head_version(path):

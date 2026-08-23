@@ -15,17 +15,20 @@ description: "Friday September 11^th^, 2026"
 Yesterday you finished the analysis. Today you finish the notebook, and then you tell eleven other
 teams what you found.
 
-The morning is deliberately short. Work expands to fill a project, and a project that is still
-being written at 1:00 is a project nobody has practised presenting. The notebook stops at 11:45
-whatever state it is in, and the last fifteen minutes before lunch are for putting it on GitHub.
+The whole morning is yours to finish in. Presentations are in the afternoon for that reason. The
+one thing the morning is not for is new analysis: if you find yourself computing something you have
+not computed before, you are adding scope on the last morning, and the answer is almost always to
+stop.
+
+The notebook is due when you push it, before you go to lunch.
 
 ## The shape of the day
 
 | {{< fa clock title="A clock" >}} When | {{< fa laptop-code title="A laptop with on-screen code" >}} What |
 |------------------|------------------------------------------------------------------|
 | 10:00 to 11:45   | Step 10 and the write-up. Make the figure readable and the notebook legible. |
-| 11:45 to 12:00   | **Notebook freeze.** Restart the kernel, run everything, push to GitHub. |
-| 12:00 to 1:00    | Lunch |
+| 11:45 to 12:00   | Restart the kernel, run everything, push to GitHub. |
+| 12:00 to 1:00    | Lunch. **The notebook is done.** |
 | 1:00 to 1:10     | Running order, and connect the first machine to the projector. |
 | 1:10 to 2:40     | Presentations, first half |
 | 2:40 to 2:55     | Break |
@@ -35,10 +38,8 @@ whatever state it is in, and the last fifteen minutes before lunch are for putti
 
 ## The morning: what "finished" looks like
 
-Nothing in the morning is new analysis. If you find yourself computing something you have not
-computed before, you are adding scope on the last morning, and the answer is almost always to stop.
-
-Work through these in order, because each one is worth more than the one after it:
+Work through these in order, because each one is worth more than the one after it. If you run out
+of morning, having done the first three properly beats having started all five:
 
 1. **Restart the kernel and run every cell from the top.** Do this first, not last. A notebook that
    only runs in the order you happened to write it is a notebook that will fail in front of the
@@ -57,8 +58,9 @@ The full description of the deliverable is on the [final project page](final_pro
 
 ## Handing it in
 
-The notebook is due when you push it, at **11:45 on Friday**. There is nothing to submit after
-class.
+The notebook is due when you push it, **before lunch on Friday**. Leave yourself the last fifteen
+minutes of the morning for it, because this is the step that goes wrong under time pressure. There
+is nothing to submit after class.
 
 1. Put the project notebook in its **own repository**, not in your coursework repository.
 2. **Keep the outputs.** This is the one place where the advice in the
@@ -71,7 +73,7 @@ class.
    problem while you can still fix it.
 5. Send me the repository URL.
 
-::: {.callout-tip title="If git is fighting you at 11:40"}
+::: {.callout-tip title="If git is fighting you at five to twelve"}
 Do not lose the notebook to a merge conflict on the last morning. Download the `.ipynb` from
 Positron, email it to me, and sort the repository out afterwards. The work is the thing that
 matters; the repository is how it travels.

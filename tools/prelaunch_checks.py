@@ -391,10 +391,10 @@ def c1_day89_specified():
 
     want = {
         "a timed schedule on Day 8": bool(re.search(r"10:00 to 11:30", d8)),
-        "a timed schedule on Day 9": bool(re.search(r"11:45", d9)),
+        "a timed schedule on Day 9": bool(re.search(r"10:00 to 11:45", d9)),
         "checkpoints on Day 8": d8.count("Checkpoint") >= 3,
         "a submission mechanism": "own repository" in joined,
-        "a deadline": bool(re.search(r"due .{0,40}11:45|11:45 on Friday", joined)),
+        "a deadline": bool(re.search(r"due .{0,60}(before lunch|[0-9]{1,2}:[0-9]{2})", joined)),
         "presentation length": bool(re.search(r"[Tt]welve minutes", joined)),
         "what to present": "walkthrough" in joined or "0 to 2" in d9,
         "a definition of finished": "What \"done\" looks like" in fp,

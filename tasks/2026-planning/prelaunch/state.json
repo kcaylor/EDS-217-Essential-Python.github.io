@@ -63,6 +63,15 @@
           "exit": 0,
           "git_sha": "3b03867",
           "ok": true
+        },
+        {
+          "at": "2026-08-23T09:26:39",
+          "cmd": "python3 tools/prelaunch_checks.py c1_day89_specified",
+          "could_not_run": false,
+          "evidence": "PASS  c1_day89_specified\n  Days 8 and 9 carry 10 of 10 things a student or an instructor needs.\n  yes  a timed schedule on Day 8\n  yes  a timed schedule on Day 9\n  yes  checkpoints on Day 8\n  yes  a submission mechanism\n  yes  a deadline\n  yes  presentation length\n  yes  what to present\n  yes  a definition of finished\n  yes  the ten steps enumerated\n  yes  no empty trailing heading",
+          "exit": 0,
+          "git_sha": "a51fdaf",
+          "ok": true
         }
       ]
     },
@@ -1204,5 +1213,5 @@
     }
   },
   "schema": 1,
-  "updated": "2026-08-23T09:09:49"
+  "updated": "2026-08-23T09:26:39"
 }

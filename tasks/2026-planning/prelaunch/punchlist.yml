@@ -504,6 +504,46 @@ items:
     cmd: python3 tools/prelaunch_checks.py c9_no_external_images
     expect: no live page references an image on another host
 
+- id: C10
+  title: Run a write-as-kelly voice pass over every live page
+  category: content
+  severity: medium
+  owner: either
+  state: open
+  why: |
+    The 2026 pages were written across many sessions and several rebuilds, so the
+    voice varies. Some pages read as Kelly wrote them and some read as a machine
+    did. Students spend nine days inside this prose, and a consistent voice is
+    part of what makes the site feel like a course rather than documentation.
+
+    The mechanical half of house style already passes on all 89 live pages: no
+    em-dash, no metaphorical "land" or "hinge", no "with a hint of". What remains
+    is judgement, and it is Kelly's.
+  evidence: |
+    89 live pages. tools/prelaunch_checks.py c10_house_style reports zero hard
+    violations and flags 22 lines across 18 pages using the "not X, it is Y"
+    shape, which is glib as a flourish and clear as a plain correction. A regex
+    cannot separate those, so the check reports them without failing.
+  action: |
+    Work in passes, most-read pages first, rather than attempting all 89 at once:
+
+    1. index.qmd and the nine day pages. These set the register and are the pages
+       every student sees.
+    2. The seven end-of-day activities. Longest time-on-page of anything on the
+       site.
+    3. The 22 interactive sessions, colabs and live-coding pages.
+    4. The 24 cheatsheets. Reference prose, so the bar is different: terse beats
+       characterful here.
+    5. The answer keys, last. Students read them after the fact, and the written
+       answers matter more than the voice around them.
+
+    Run the mechanical check after each pass. Use the advisory list as a starting
+    worklist, keeping the plain corrections and rewriting the flourishes.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py c10_house_style
+    expect: zero hard violations, with the advisory count reported for the reader to judge
+
 # ---------------------------------------------------------------------------
 # TOOLING. These decide whether the gates can be trusted.
 # ---------------------------------------------------------------------------

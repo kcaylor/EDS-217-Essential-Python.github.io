@@ -412,6 +412,66 @@ def c1_day89_specified():
     return result(not missing, lines)
 
 
+# House style has a mechanical half and a judgement half, and mixing them
+# produces a checker nobody reads. Only rules that cannot reasonably fire on
+# correct prose belong in HARD. "land" is here as a verb only: "land use" and
+# "land-hungry" are the noun and are fine, while "makes the argument land" is not.
+HARD_RULES = [
+    ("em-dash", re.compile("\u2014")),
+    ("metaphorical 'land'", re.compile(
+        r"\b(?:to|will|would|should|does|do|did|can|could|may|might|must|really|"
+        r"never|always|truly)\s+land\b|\bland(?:ed|ing)\s+(?:well|badly|flat|hard)\b",
+        re.I)),
+    ("metaphorical 'hinge'", re.compile(r"\bhinges?\b|\bhinging\b", re.I)),
+    ("'X with a hint of Y'", re.compile(r"with a (?:hint|touch|dash) of", re.I)),
+]
+
+# Advisory only. The "not X, it is Y" shape is glib when it is a rhetorical
+# flourish and perfectly clear when it is a plain correction, and no regex can
+# tell those apart. Counted and listed for the voice pass, never failed on.
+ADVISORY_RULES = [
+    ("'not X, it is Y' shape", re.compile(
+        r"(is|are|was|were)\s+not\s+[^.;:]{3,60}[.,]\s*(it|they|that)\s+(is|are|was|were)\b",
+        re.I)),
+]
+
+
+def _style_scan(rules):
+    hits = []
+    for f in live_qmd():
+        text = (ROOT / f).read_text(errors="replace")
+        for i, line in enumerate(text.splitlines(), 1):
+            for name, rx in rules:
+                if rx.search(line):
+                    hits.append((str(f), i, name, line.strip()[:88]))
+    return hits
+
+
+def c10_house_style():
+    """The mechanical half of house style, across every page a student can reach."""
+    hard = _style_scan(HARD_RULES)
+    advisory = _style_scan(ADVISORY_RULES)
+    pages = live_qmd()
+
+    lines = [f"pages scanned: {len(pages)}"]
+    if hard:
+        lines.append(f"HARD violations: {len(hard)} across "
+                     f"{len({h[0] for h in hard})} page(s)")
+        for f, i, name, text in hard[:20]:
+            lines.append(f"    {f}:{i}  [{name}]  {text}")
+        if len(hard) > 20:
+            lines.append(f"    ... and {len(hard) - 20} more")
+    else:
+        lines.append("HARD violations: none. No em-dash, no metaphorical land or "
+                     "hinge, no 'with a hint of' on any live page.")
+
+    lines.append(f"advisory, for the voice pass to judge: {len(advisory)} line(s) "
+                 f"across {len({h[0] for h in advisory})} page(s) use the "
+                 f"'not X, it is Y' shape. Some of those are plain corrections and "
+                 f"are fine. No regex can tell which, so this never fails the check.")
+    return result(not hard, lines)
+
+
 def c2_mailto():
     """Both contact links on the front page must work."""
     text = (ROOT / "index.qmd").read_text()

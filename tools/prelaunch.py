@@ -196,7 +196,20 @@ def cmd_check(args, meta, items, state):
 
 
 def cmd_certify(args, meta, items, state):
-    item = items[args.id]
+    """Sign off one item, or several that one sentence covers."""
+    ids = args.ids
+    if len(ids) > 1:
+        rc = 0
+        for one in ids:
+            sub = argparse.Namespace(**vars(args))
+            sub.ids = [one]
+            rc |= _certify_one(sub, meta, items, state)
+        return rc
+    return _certify_one(args, meta, items, state)
+
+
+def _certify_one(args, meta, items, state):
+    item = items[args.ids[0]]
     entry = state["items"].setdefault(item["id"], {})
     kind = item.get("verify", {}).get("kind")
     last = (entry.get("checks") or [None])[-1]
@@ -307,6 +320,26 @@ def cmd_show(args, meta, items, state):
 
 
 def cmd_next(args, meta, items, state):
+    # Sign-offs come first. A verified item holds up everything that waits on it,
+    # and clearing one costs a sentence, so it is always the cheapest next move.
+    awaiting = [i for i in items.values() if effective(i, items, state) == "verified"]
+    if awaiting:
+        awaiting.sort(key=lambda i: sort_key(i, items, state))
+        print(BOLD(f"{len(awaiting)} item(s) verified and waiting on your sign-off.\n"))
+        for i in awaiting:
+            entry = state["items"].get(i["id"], {})
+            last = (entry.get("checks") or [None])[-1]
+            unblocks = [b for b in i.get("blocks", []) if b in items]
+            print(f"  {BOLD(i['id']):<6} {i['title']}")
+            if last:
+                first = (last["evidence"] or "").splitlines()
+                if len(first) > 1:
+                    print(DIM(f"         {first[1].strip()[:88]}"))
+            if unblocks:
+                print(DIM(f"         signing this off unblocks {', '.join(unblocks)}"))
+            print(DIM(f"         python tools/prelaunch.py certify {i['id']} -n \"...\""))
+        print()
+
     ready = [i for i in items.values()
              if effective(i, items, state) in ("open", "in_progress")]
     if not ready:
@@ -462,8 +495,8 @@ def main(argv=None):
     s.add_argument("-v", "--verbose", action="store_true")
     s.set_defaults(fn=cmd_check)
 
-    s = sub.add_parser("certify", help="record a sign-off")
-    s.add_argument("id")
+    s = sub.add_parser("certify", help="record a sign-off, on one item or several")
+    s.add_argument("ids", nargs="+", metavar="ID")
     s.add_argument("-n", "--note", help="what you confirmed")
     s.add_argument("--by", default=DEFAULT_SIGNER)
     s.add_argument("--force", action="store_true",

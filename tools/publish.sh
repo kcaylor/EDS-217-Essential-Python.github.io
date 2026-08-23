@@ -41,12 +41,24 @@ ok "No hook will interfere."
 
 say ""
 say "4. Working tree"
-if [ -n "$(git status --porcelain)" ]; then
-  git status --short | head -20
+# The punch-list record is rewritten by every verification run, including the
+# ones this script just did. It is a record of the work, not part of the site,
+# so a dirty copy of it is expected here and must not stop a publish.
+RECORD="tasks/2026-planning/prelaunch/state.json"
+DIRTY="$(git status --porcelain | grep -v " ${RECORD}\$" || true)"
+if [ -n "$DIRTY" ]; then
+  printf '%s\n' "$DIRTY" | head -20
   bad "Commit or stash the above before publishing."
   exit 1
 fi
-ok "Clean."
+if ! git diff --quiet -- "$RECORD" 2>/dev/null || ! git diff --cached --quiet -- "$RECORD" 2>/dev/null; then
+  echo "   ${C_YEL}${RECORD} is uncommitted.${C_0} It records the checks and does"
+  echo "   not affect the published site, so this is not a blocker. Commit it after"
+  echo "   the push with:"
+  echo "     git add ${RECORD} && git commit -m 'prelaunch: record the publish run'"
+else
+  ok "Clean."
+fi
 
 say ""
 say "5. Remote state"

@@ -14,6 +14,9 @@
 # or pushes except `publish`, which asks first.
 
 SHELL := /bin/bash
+
+# Every python target runs inside eds217_2026. See tools/run.sh for why.
+RUN := bash tools/run.sh
 PAGE ?=
 DAY ?=
 
@@ -49,63 +52,69 @@ help:
 	@echo "    make certify ID=D6 NOTE=\"what you confirmed\""
 	@echo "    make publish             guarded push to origin and live"
 	@echo ""
+	@echo "  When git says another process is running"
+	@echo "    make unlock              clear the lock files a session left behind"
+	@echo ""
 
 status:
-	@python tools/prelaunch.py status
+	@$(RUN) python tools/prelaunch.py status
 
 status-all:
-	@python tools/prelaunch.py status --all
+	@$(RUN) python tools/prelaunch.py status --all
 
 next:
-	@python tools/prelaunch.py next
+	@$(RUN) python tools/prelaunch.py next
 
 show:
 	@test -n "$(ID)" || { echo "usage: make show ID=D6"; exit 1; }
-	@python tools/prelaunch.py show $(ID)
+	@$(RUN) python tools/prelaunch.py show $(ID)
 
 dashboard:
-	@python tools/prelaunch.py dashboard
+	@$(RUN) python tools/prelaunch.py dashboard
 
 board:
-	@python tools/prelaunch.py dashboard --open
+	@$(RUN) python tools/prelaunch.py dashboard --open
 
 preview:
 	@bash tools/preview.sh $(PAGE)
 
 render:
-	@python build_docs.py --full
+	@$(RUN) python build_docs.py --full
 
 check:
-	@python tools/prelaunch.py check --all
-	@python tools/prelaunch.py dashboard
+	@$(RUN) python tools/prelaunch.py check --all
+	@$(RUN) python tools/prelaunch.py dashboard
 
 gates:
 	@bash tools/gates.sh
 
 cells:
-	@python tools/run_cells.py $$(python tools/prelaunch_checks.py --render-set | grep '\.qmd$$')
+	@$(RUN) python tools/run_cells.py $$($(RUN) python tools/prelaunch_checks.py --render-set | grep '\.qmd$$')
 
 cache:
-	@python tools/warm_cache.py
+	@$(RUN) python tools/warm_cache.py
 
 verify:
 	@bash tools/render-check.sh
 
 verify-live:
-	@python tools/prelaunch_checks.py d8_live_site
+	@$(RUN) python tools/prelaunch_checks.py d8_live_site
 
 certify:
 	@test -n "$(ID)" || { echo "usage: make certify ID=D6 NOTE=\"...\""; exit 1; }
 	@test -n "$(NOTE)" || { echo "a sign-off needs a NOTE saying what you confirmed"; exit 1; }
-	@python tools/prelaunch.py certify $(ID) -n "$(NOTE)"
-	@python tools/prelaunch.py dashboard
+	@$(RUN) python tools/prelaunch.py certify $(ID) -n "$(NOTE)"
+	@$(RUN) python tools/prelaunch.py dashboard
+
+unlock:
+	@bash tools/unlock.sh
 
 publish:
 	@bash tools/publish.sh
 
 env:
 	@echo "conda env: $${CONDA_DEFAULT_ENV:-none}"
-	@python -c "import sys, pandas, numpy, matplotlib, seaborn; \
+	@$(RUN) python -c "import sys, pandas, numpy, matplotlib, seaborn; \
 	print('python', sys.version.split()[0]); \
 	print('pandas', pandas.__version__); print('numpy', numpy.__version__); \
 	print('matplotlib', matplotlib.__version__); print('seaborn', seaborn.__version__)"

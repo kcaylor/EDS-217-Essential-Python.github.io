@@ -36,6 +36,35 @@ eds217_activate() {
   conda activate "$ENV_NAME"
 }
 
+eds217_clear_stale_locks() {
+  # Every git command run from a Cowork session leaves a lock file behind,
+  # because that mount cannot delete files. The next git command then reports
+  # "Another git process seems to be running", which is misleading: nothing is
+  # running. Clear them here, but only after confirming that is true.
+  if pgrep -x git >/dev/null 2>&1; then
+    echo "A git process is running. Not touching the lock files." >&2
+    pgrep -l git >&2
+    return 1
+  fi
+  local cleared=0 stuck=0 f
+  for f in .git/*.lock .git/refs/heads/*.lock; do
+    [ -e "$f" ] || continue
+    if rm -f "$f" 2>/dev/null; then
+      cleared=$((cleared + 1))
+    else
+      stuck=$((stuck + 1))
+      echo "Could not remove $f" >&2
+    fi
+  done
+  [ "$cleared" -gt 0 ] && echo "Cleared $cleared stale git lock file(s)."
+  if [ "$stuck" -gt 0 ]; then
+    echo "$stuck lock file(s) could not be removed. If you are in a Cowork" >&2
+    echo "session, delete them from a terminal on the machine itself." >&2
+    return 1
+  fi
+  return 0
+}
+
 eds217_need() {
   command -v "$1" >/dev/null 2>&1 || {
     echo "$1 is not installed or not on PATH." >&2

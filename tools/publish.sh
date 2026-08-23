@@ -14,7 +14,11 @@ say()  { echo "${C_B}$1${C_0}"; }
 bad()  { echo "${C_RED}$1${C_0}" >&2; }
 ok()   { echo "${C_GRN}$1${C_0}"; }
 
-say "1. Checking the render before anything else"
+say "1. Clearing any lock a session left behind"
+eds217_clear_stale_locks || exit 1
+
+say ""
+say "2. Checking the render"
 if ! python tools/prelaunch_checks.py d5_render_complete; then
   bad "docs/ does not hold a complete render. Run 'make render' first."
   exit 1
@@ -28,7 +32,7 @@ fi
 ok "The render is complete and the datasets are committed."
 
 say ""
-say "2. Local git hooks"
+say "3. Local git hooks"
 if ! python tools/prelaunch_checks.py d9_push_hooks; then
   bad "A local hook would refuse to run and stop the push."
   exit 1
@@ -36,7 +40,7 @@ fi
 ok "No hook will interfere."
 
 say ""
-say "3. Working tree"
+say "4. Working tree"
 if [ -n "$(git status --porcelain)" ]; then
   git status --short | head -20
   bad "Commit or stash the above before publishing."
@@ -45,7 +49,7 @@ fi
 ok "Clean."
 
 say ""
-say "4. Remote state"
+say "5. Remote state"
 git fetch --all --prune
 for remote in origin live; do
   behind=$(git rev-list --count "HEAD..${remote}/main" 2>/dev/null || echo "?")
@@ -58,7 +62,7 @@ for remote in origin live; do
 done
 
 say ""
-say "5. Dry run"
+say "6. Dry run"
 git push --dry-run origin main
 git push --dry-run live main
 ok "Both remotes accept a fast-forward."
@@ -75,7 +79,7 @@ git push live main
 ok "Pushed."
 
 say ""
-say "6. Waiting for the Pages build, then checking the live site"
+say "7. Waiting for the Pages build, then checking the live site"
 for i in 1 2 3 4 5 6; do
   sleep 30
   echo "   attempt ${i}"

@@ -602,6 +602,37 @@ items:
     cmd: python3 tools/prelaunch_checks.py t5_dataset_catalog
     expect: every file in data/ that a live page loads appears in data_urls.py
 
+- id: T7
+  title: Make every make target run inside the course environment
+  category: tooling
+  severity: high
+  owner: claude
+  state: open
+  why: |
+    The Makefile called bare python, so a target inherited whatever environment
+    the shell happened to be in. Run outside eds217_2026, `make cells` reported
+    108 failing cells across seven pages, all of them tracing back to a single
+    missing seaborn. That reads as a large content defect and it is nothing of
+    the kind: the full quarto render passed every one of those pages, because
+    build_docs.py activates the environment itself. A checker that turns a shell
+    problem into an apparent content problem costs more than it saves.
+  evidence: |
+    make cells on 2026-08-23 reported ModuleNotFoundError for seaborn in
+    7c_penguins-key, eod-day7-2026-key, chart_customization, seaborn.qmd,
+    7c_penguins, eod-day7-2026 and 7b_seaborn, then 108 consequent NameErrors.
+    environment-2026.yml pins seaborn>=0.13, and the render of all seven pages
+    succeeded the same day.
+  action: |
+    Add tools/run.sh, which sources tools/_env.sh, activates the environment and
+    execs the command, and route every python recipe in the Makefile through it.
+    Separately, give run_cells.py a preflight that names the missing package, the
+    interpreter and the active environment, then exits 2 rather than executing
+    cells it cannot possibly pass.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py t7_make_targets_use_the_env
+    expect: tools/run.sh exists and no recipe line calls python outside it
+
 - id: T6
   title: Scope the cell checker to the pages the site actually renders
   category: tooling
@@ -806,9 +837,12 @@ items:
     .git/index.lock dated 2026-08-21 04:09 exists. _to_delete/ holds
     2025-orphan-sweep/, positron-switch/ and git-stale-locks/.
   action: |
-    On the laptop: rm -f .git/index.lock .git/HEAD.lock, then rm -rf _to_delete
-    once you are satisfied nothing in it is wanted. It is gitignored, so nothing
-    in git changes either way.
+    Run `make unlock`, which checks that no git process is actually running and
+    then removes the lock files. It is also the first thing `make publish` does,
+    so the publish path can no longer be stopped by one.
+
+    Separately, `rm -rf _to_delete` on the laptop once you are satisfied nothing
+    in it is wanted. It is gitignored, so nothing in git changes either way.
   verify:
     kind: command
     cmd: python3 tools/prelaunch_checks.py h5_locks_clear

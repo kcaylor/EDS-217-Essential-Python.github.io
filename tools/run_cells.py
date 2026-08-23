@@ -19,11 +19,47 @@ import os
 # instead of being left to whoever happens to invoke the script.
 os.environ["MPLBACKEND"] = "Agg"
 
-import re, sys, io, traceback, contextlib, pathlib
+import re, sys, io, traceback, contextlib, pathlib, warnings
+
+# plt.show() is a no-op under Agg and warns each time. The pages call it
+# deliberately, so the warning says nothing about whether the cell is correct.
+warnings.filterwarnings("ignore", message=".*non-interactive.*cannot be shown.*")
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import eds217_offline_cache as cache
 cache.install()
+
+REQUIRED = ("pandas", "numpy", "matplotlib", "seaborn")
+
+
+def check_environment():
+    """Refuse to run outside an environment that can execute the material.
+
+    Every page in this course imports from a fixed set of four packages. If one
+    is absent, every cell that touches it fails, and the report then reads as
+    dozens of defects in the course materials when the only defect is a shell
+    that never activated eds217_2026. Say that once, plainly, and stop.
+    """
+    import importlib
+    missing = []
+    for name in REQUIRED:
+        try:
+            importlib.import_module(name)
+        except ImportError:
+            missing.append(name)
+    if missing:
+        env = os.environ.get("CONDA_DEFAULT_ENV", "none")
+        print(f"Cannot check anything: {', '.join(missing)} not importable.")
+        print(f"  python:      {sys.executable}")
+        print(f"  conda env:   {env}")
+        print("The course materials import pandas, numpy, matplotlib and seaborn.")
+        print("Run this through the environment that has them:")
+        print("  make cells")
+        print("or activate it first:  conda activate eds217_2026")
+        sys.exit(2)
+
+
+check_environment()
 
 files = sys.argv[1:]
 if not files:

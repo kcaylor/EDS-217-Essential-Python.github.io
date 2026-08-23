@@ -526,6 +526,29 @@ def t6_cells_clean():
     return result(code == 0 and not fails, lines)
 
 
+def t7_make_targets_use_the_env():
+    """Every make target that runs python must run it inside eds217_2026."""
+    mk = (ROOT / "Makefile").read_text()
+    bare, invoking, continued = [], 0, False
+    for line in mk.splitlines():
+        is_recipe = line.startswith("\t")
+        # A recipe line ending in a backslash continues into the next one, and
+        # the continuation is not a separate invocation.
+        if is_recipe and not continued and "python" in line:
+            invoking += 1
+            if "$(RUN)" not in line and not line.strip().startswith("#"):
+                bare.append(line.strip())
+        continued = is_recipe and line.rstrip().endswith("\\")
+    wrapper = (ROOT / "tools/run.sh")
+    lines = [f"tools/run.sh present: {wrapper.exists()}",
+             f"recipe lines invoking python: {invoking}",
+             f"of those, not routed through the wrapper: {len(bare)}"]
+    lines += ["    " + b for b in bare[:8]]
+    if wrapper.exists() and not bare:
+        lines.append("Every python target activates the course environment first.")
+    return result(wrapper.exists() and not bare, lines)
+
+
 def t3_fetch_check_exit():
     """fetch_data.py --check must fail when a dataset is absent."""
     src = (ROOT / "tools/fetch_data.py").read_text()

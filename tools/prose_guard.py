@@ -73,78 +73,97 @@ def prose_only(text):
     return "".join(out)
 
 
-# A paragraph that opens with "That sentence", "This step", "These files" and so
-# on has to reach backwards for its referent. That is usually fine mid-paragraph,
-# and usually not fine when the thing it reaches across is a bulleted list, a
-# table or a heading, because the reader's eye has just left a structure. Two of
-# these were caught by hand on one page, so they are worth finding mechanically.
-# This is a readability flag, not a style rule: some of them will be perfectly
-# clear and should stay.
-DEMONSTRATIVE = re.compile(r"^(That|This|These|Those)\s+([a-z]+)\b")
+# Kelly's rule for the teaching register, given 2026-08-23:
+#
+#   "Do not use referent nouns (That) unless they are absolutely necessary, and
+#    NEVER to start a sentence. You aren't conversing with the student... They are
+#    reading for understanding and comprehension. There is a huge difference."
+#
+# A demonstrative opening a sentence makes the reader hold the previous sentence
+# in mind while parsing the next one. In conversation that is free, because the
+# listener has just heard it. A student reading to understand is doing other work
+# with that capacity. So: sentence-initial That, This, These and Those are wrong
+# in course prose, whatever precedes them.
+SENTENCE_START = re.compile(
+    r"(?:^|(?<=[.!?]\s)|(?<=[.!?]\s\s))(That|This|These|Those)\b")
+
+# Everything the demonstrative might be pointing at, if it is pointing at the
+# document rather than back into the text. Reported separately because "This
+# session teaches..." is a different act from "That sentence is the point...".
+DEICTIC_NOUNS = {
+    "session", "page", "morning", "afternoon", "evening", "week", "course",
+    "exercise", "activity", "colab", "notebook", "chapter", "cheatsheet",
+}
 
 
-def dangling_referents(text):
-    """Paragraphs opening with a demonstrative right after a list, table or heading."""
-    lines = text.splitlines()
+def sentence_initial_demonstratives(text):
+    """Every sentence that opens with That, This, These or Those, outside code."""
+    sys.path.insert(0, str(ROOT / "tools"))
+    protected = regions(text)
+    blocked = [(s_, e_) for _, s_, e_, _ in protected]
+
+    def inside_protected(pos):
+        return any(s_ <= pos < e_ for s_, e_ in blocked)
+
     out = []
-    for i, line in enumerate(lines):
-        m = DEMONSTRATIVE.match(line.strip())
-        if not m:
+    line_starts = [0]
+    for i, ch in enumerate(text):
+        if ch == "\n":
+            line_starts.append(i + 1)
+
+    def line_of(pos):
+        lo, hi = 0, len(line_starts) - 1
+        while lo < hi:
+            mid = (lo + hi + 1) // 2
+            if line_starts[mid] <= pos:
+                lo = mid
+            else:
+                hi = mid - 1
+        return lo + 1
+
+    for m in SENTENCE_START.finditer(text):
+        pos = m.start(1)
+        if inside_protected(pos):
             continue
-        # Walk back past blank lines to whatever structure precedes this paragraph.
-        j = i - 1
-        while j >= 0 and not lines[j].strip():
-            j -= 1
-        if j < 0:
+        line_no = line_of(pos)
+        raw = text[line_starts[line_no - 1]:].split("\n", 1)[0]
+        # Skip markdown structure: headings, table rows, list markers are not prose.
+        stripped = raw.lstrip()
+        if stripped.startswith(("#", "|", ">", ":::", "!", "-", "*", "+")):
             continue
-        prev = lines[j].strip()
-        kind = None
-        if re.match(r"^[-*+]\s|^\d+\.\s", prev):
-            kind = "a list item"
-        elif prev.startswith("|") or prev.startswith(": {"):
-            kind = "a table"
-        elif prev.startswith("#"):
-            kind = "a heading"
-        elif prev.startswith(":::"):
-            kind = "a callout fence"
-        if kind:
-            # "This session", "This morning", "This page" point at the document
-            # the reader is holding, so they need no antecedent. "That sentence",
-            # "That step", "Those files" point back into the text and do.
-            deictic = m.group(2) in {
-                "session", "page", "morning", "afternoon", "evening", "day",
-                "week", "course", "exercise", "activity", "colab", "notebook",
-                "time", "one",
-            } and m.group(1) in {"This", "These"}
-            out.append((i + 1, kind, m.group(0), line.strip()[:88], deictic))
+        rest = text[m.end(1):m.end(1) + 40].strip().split()
+        noun = rest[0].rstrip(".,;:").lower() if rest else ""
+        deictic = m.group(1) in {"This", "These"} and noun in DEICTIC_NOUNS
+        snippet = text[pos:pos + 90].split("\n")[0]
+        out.append((line_no, m.group(1), noun, deictic, snippet))
     return out
 
 
 def cmd_referents(paths):
     total = deictic_n = 0
     for p in paths:
-        hits = dangling_referents(Path(p).read_text(errors="replace"))
+        hits = sentence_initial_demonstratives(Path(p).read_text(errors="replace"))
         if not hits:
             continue
         total += len(hits)
-        deictic_n += sum(1 for h in hits if h[4])
+        deictic_n += sum(1 for h in hits if h[3])
+        real = [h for h in hits if not h[3]]
+        if not real:
+            continue
         rel = Path(p).resolve()
         try:
             rel = rel.relative_to(ROOT)
         except ValueError:
             pass
-        anaphoric = [h for h in hits if not h[4]]
-        if not anaphoric:
-            continue
-        print(f"\n{rel}")
-        for line_no, kind, phrase, text, _ in anaphoric:
-            print(f"  line {line_no}: \"{phrase}\" reaches back across {kind}")
-            print(f"    {text}")
-    print(f"\n{total} paragraph(s) open with a demonstrative straight after a structure.")
+        print(f"\n{rel}  ({len(real)})")
+        for line_no, word, noun, _, snippet in real:
+            print(f"  line {line_no}: {snippet}")
+    print(f"\n{total} sentence(s) open with a demonstrative.")
     print(f"{deictic_n} of those point at the document itself (\"This session\", \"This")
-    print("morning\") and need no antecedent. The rest are listed above: each one is a")
-    print("place to check that the referent is recoverable on a first read.")
-    return 0
+    print(f"morning\"). The other {total - deictic_n} point back into the text and are the ones")
+    print("Kelly's rule is about: a student reading for comprehension should not have to")
+    print("hold the previous sentence in mind to parse the next one.")
+    return 1 if (total - deictic_n) else 0
 
 
 def head_version(path):

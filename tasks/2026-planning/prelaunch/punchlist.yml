@@ -525,8 +525,10 @@ items:
     shape, which is glib as a flourish and clear as a plain correction. A regex
     cannot separate those, so the check reports them without failing.
   action: |
-    Use the write-as-kelly skill and the verified samples in ~/dev/kkc_corpus,
-    not a list of rules. Rules keep an edit between the lines; they do not make
+    Read tasks/2026-planning/prelaunch/house-style.md first. It holds the rules
+    Kelly has stated directly for the teaching register, which the corpus does not
+    cover. Then use the write-as-kelly skill and the verified samples in
+    ~/dev/kkc_corpus, not a list of rules. Rules keep an edit between the lines; they do not make
     the prose Kelly's. tools/prose_guard.py fences the pass instead: it protects
     YAML front matter, fenced code blocks, inline code spans, quarto shortcodes,
     link and image targets, div fences and attribute blocks, and proves after
@@ -535,6 +537,11 @@ items:
 
       python tools/prose_guard.py regions <file>   what is off-limits, and the word count that is not
       python tools/prose_guard.py verify --all     nothing outside prose moved
+      python tools/prose_guard.py referents --all  sentence-initial demonstratives
+
+    The referent count is the most useful single measure of how much of this pass
+    is left. On 2026-08-23 it stood at 188 across the 89 live pages, excluding the
+    21 deictic uses that are fine.
 
     Work in passes, most-read pages first, rather than attempting all 89 at once:
 
@@ -564,8 +571,8 @@ items:
     much better and is worth doing before 2027.
   verify:
     kind: command
-    cmd: bash -c 'python3 tools/prelaunch_checks.py c10_house_style && python3 tools/prose_guard.py verify --all'
-    expect: zero hard style violations, and no code block, header, link target or shortcode changed by the pass
+    cmd: bash -c 'python3 tools/prelaunch_checks.py c10_house_style && python3 tools/prose_guard.py verify --all && python3 tools/prose_guard.py referents --all'
+    expect: zero hard style violations, nothing outside prose changed, and no sentence opening with a demonstrative that points back into the text
 
 # ---------------------------------------------------------------------------
 # TOOLING. These decide whether the gates can be trusted.

@@ -22,9 +22,9 @@ question. [Day 8](day8.qmd) and [Day 9](day9.qmd) carry the hour-by-hour plan.
 One Jupyter notebook, per team, named `Project_<team name>.ipynb`.
 
 It is **self-contained**: somebody who has your notebook and nothing else can restart the kernel,
-run every cell from the top, and get your figures back. That single property matters more than
-anything else on this page, and it is the one most often lost, usually to a cell that was deleted
-after the variable it defined was already in memory.
+run every cell from the top, and get your figures back. Self-containment matters more than
+anything else on this page, and it is the property most often lost, usually to a cell that was
+deleted after the variable it defined was already in memory.
 
 It is **documented**: markdown cells explain what each step was for and what it found, and code
 comments explain anything a reader could not work out from the code.
@@ -106,9 +106,9 @@ to submit after class.
 
 1. Put the project notebook in its **own repository**, separate from your coursework repository.
 2. **Keep the outputs.** The [GitHub session](interactive-sessions/8a_github.qmd) has you
-   configure `nbstripout`, which strips figures and printed output from every commit. That is
-   right for coursework and wrong here, because your figures are the deliverable. Do not configure
-   `nbstripout` on this repository.
+   configure `nbstripout`, which strips figures and printed output from every commit. Stripping
+   output is right for coursework and wrong here, because your figures are the deliverable. Do not
+   configure `nbstripout` on this repository.
 3. Add a short `README.md`: the team, the dataset, its source URL, and the question.
 4. Push, then open the repository in a browser. GitHub renders `.ipynb` directly, so you can
    confirm in ten seconds that the figures are showing.

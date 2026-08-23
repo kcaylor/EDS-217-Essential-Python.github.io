@@ -85,6 +85,15 @@
           "exit": 0,
           "git_sha": "c9901a0",
           "ok": true
+        },
+        {
+          "at": "2026-08-23T14:30:48",
+          "cmd": "bash -c 'python3 tools/prelaunch_checks.py c10_house_style && python3 tools/prose_guard.py verify --all'",
+          "could_not_run": false,
+          "evidence": "PASS  c10_house_style\n  pages scanned: 89\n  HARD violations: none. No em-dash, no metaphorical land or hinge, no 'with a hint of' on any live page.\n  advisory, for the voice pass to judge: 21 line(s) across 17 page(s) use the 'not X, it is Y' shape. Some of those are plain corrections and are fine. No regex can tell which, so this never fails the check.\n89 file(s) checked. Every code block, header, link target and shortcode is unchanged from HEAD.",
+          "exit": 0,
+          "git_sha": "35d3dfb",
+          "ok": true
         }
       ]
     },
@@ -1226,5 +1235,5 @@
     }
   },
   "schema": 1,
-  "updated": "2026-08-23T09:28:40"
+  "updated": "2026-08-23T14:30:52"
 }

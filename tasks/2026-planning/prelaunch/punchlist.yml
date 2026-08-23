@@ -525,6 +525,17 @@ items:
     shape, which is glib as a flourish and clear as a plain correction. A regex
     cannot separate those, so the check reports them without failing.
   action: |
+    Use the write-as-kelly skill and the verified samples in ~/dev/kkc_corpus,
+    not a list of rules. Rules keep an edit between the lines; they do not make
+    the prose Kelly's. tools/prose_guard.py fences the pass instead: it protects
+    YAML front matter, fenced code blocks, inline code spans, quarto shortcodes,
+    link and image targets, div fences and attribute blocks, and proves after
+    each page that every one of them is byte-identical to HEAD. Prose is then
+    free to be rewritten.
+
+      python tools/prose_guard.py regions <file>   what is off-limits, and the word count that is not
+      python tools/prose_guard.py verify --all     nothing outside prose moved
+
     Work in passes, most-read pages first, rather than attempting all 89 at once:
 
     1. index.qmd and the nine day pages. These set the register and are the pages
@@ -537,12 +548,24 @@ items:
     5. The answer keys, last. Students read them after the fact, and the written
        answers matter more than the voice around them.
 
-    Run the mechanical check after each pass. Use the advisory list as a starting
-    worklist, keeping the plain corrections and rewriting the flourishes.
+    Run c10_house_style and prose_guard after each page. Use the advisory list as
+    a worklist, keeping the plain corrections and rewriting the flourishes.
+
+    **A limitation worth recording.** The corpus has no teaching register. Its
+    folders are email, letters, reviews, grants, evaluative and longform, and
+    longform holds one 2003 dissertation abstract. There is no verified sample of
+    Kelly writing instructional prose for beginners, so this pass extrapolates
+    from habits that do carry across registers: concrete specifics over
+    adjectives, parenthetical self-correction, rhythm that varies hard with short
+    blunt landings, rhetorical questions in place of flat negation, naming real
+    constraints, and light self-deprecation. The corpus's own authenticity rule
+    says to say so plainly rather than guess, so it is said here. Adding two or
+    three verified pre-2022 teaching samples to the corpus would make this pass
+    much better and is worth doing before 2027.
   verify:
     kind: command
-    cmd: python3 tools/prelaunch_checks.py c10_house_style
-    expect: zero hard violations, with the advisory count reported for the reader to judge
+    cmd: bash -c 'python3 tools/prelaunch_checks.py c10_house_style && python3 tools/prose_guard.py verify --all'
+    expect: zero hard style violations, and no code block, header, link target or shortcode changed by the pass
 
 # ---------------------------------------------------------------------------
 # TOOLING. These decide whether the gates can be trusted.

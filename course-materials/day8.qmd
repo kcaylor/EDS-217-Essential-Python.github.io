@@ -14,13 +14,11 @@ description: "Thursday September 10^th^, 2026"
 
 Yesterday afternoon you left with a team, a dataset, three questions and one rough figure.
 
-Today you turn one of those questions into an analysis. There is no new Python in the next two
-days, and there is not meant to be. Every method the project needs, you have written at least once
-this week, and most of them you have written three times. What is new is that nobody will tell you
-which method to reach for.
-
-The work today is choosing which of your three questions the data can actually answer, and then
-walking it through the ten steps in order.
+Today you find out which of the three your data can actually answer. There is no new Python in the
+next two days and there is not meant to be, since every method this project needs is one you have
+already written (the split-apply-combine sentence alone you wrote in 5a, again in that afternoon's
+colab, and three more times in the evening's practice). What is new is that nobody is going to tell
+you which one to reach for.
 
 ## The shape of the day
 
@@ -54,9 +52,8 @@ By late morning your notebook should hold:
 - **Step 2, Explore**, under its own heading: `.shape`, `.dtypes`, `.isnull().sum()`, `.describe()`,
   and a written note on anything surprising.
 
-If you are still choosing between datasets at 11:30, stop choosing and take the one that loaded
-cleanly. A good analysis of a dull dataset finishes. A great idea about a dataset you cannot open
-does not.
+If you are still choosing between datasets at 11:30, stop choosing and take whichever one loaded
+cleanly. A dull dataset you can open beats an exciting one you cannot.
 
 ### Checkpoint 2, about 2:30. The data is in the shape the question needs
 
@@ -68,8 +65,8 @@ By mid afternoon, steps 3 to 6 should be done and written up:
 - **Step 5, Sort.** Even if sorting is only how you looked at the result.
 - **Step 6, Transform.** Any column you derived, with the reason you needed it.
 
-The test for this checkpoint is not how much code you have written. It is whether you can point at
-one DataFrame and say, in a sentence, that this is the table the question is about.
+The test is whether you can point at one DataFrame and say, in a sentence, what question that
+table is about. How much code it took to get there does not come into it.
 
 ### Checkpoint 3, 4:30. The analysis is finished
 
@@ -83,12 +80,12 @@ By the end of the day the answer should exist, even if it is ugly:
 - **One sentence** in markdown saying what you found.
 
 That sentence is the point of the whole exercise. Tomorrow morning is for making it presentable,
-and you cannot make a claim presentable before you have one.
+and there is nothing to make presentable until it exists.
 
 ## If you are behind at a checkpoint
 
-Being behind at a checkpoint is a normal thing that happens on a two-day project. It is not a
-reason to work faster, it is a reason to cut.
+Being behind at a checkpoint is normal on a two-day project. The fix is almost never to work
+faster.
 
 - **Behind at Checkpoint 1.** The dataset is the problem. Change it. Go back to the five tests in
   the [project kickoff](interactive-sessions/7d_project_kickoff.qmd) and pick something that
@@ -98,7 +95,7 @@ reason to work faster, it is a reason to cut.
 - **Behind at Checkpoint 3.** Stop adding and start writing. A finished small analysis presents
   well. An unfinished large one does not.
 
-Come and find me at any of the three. That is what the day is for.
+Come and find me at any of the three.
 
 ## Class materials
 
@@ -112,9 +109,9 @@ Come and find me at any of the three. That is what the day is for.
 
 There is no end-of-day activity today. The project is the work.
 
-If you have twenty minutes tonight and want to spend them well, read your own notebook from the
-top as though somebody else wrote it, and fix every place where you cannot tell what a cell was
-for.
+If you have twenty minutes tonight, read your own notebook from the top as though somebody else
+wrote it, and fix every place where you cannot tell what a cell was for. You will find more than you
+expect. I always do.
 
 ## Additional Resources
 

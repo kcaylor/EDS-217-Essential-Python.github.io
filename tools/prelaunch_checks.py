@@ -430,6 +430,12 @@ HARD_RULES = [
 # flourish and perfectly clear when it is a plain correction, and no regex can
 # tell those apart. Counted and listed for the voice pass, never failed on.
 ADVISORY_RULES = [
+    # "since" is first a temporal word, so a causal use costs the reader a
+    # restart. Advisory because the temporal use is correct and common.
+    ("causal 'since', where 'because' is meant", re.compile(
+        r"\bsince\s+(?!then\b|yesterday\b|last\b|\d{4}\b|Day \d|Monday|Tuesday|"
+        r"Wednesday|Thursday|Friday|Saturday|Sunday|January|February|March|April|"
+        r"May|June|July|August|September|October|November|December)", re.I)),
     ("'not X, it is Y' shape", re.compile(
         r"(is|are|was|were)\s+not\s+[^.;:]{3,60}[.,]\s*(it|they|that)\s+(is|are|was|were)\b",
         re.I)),

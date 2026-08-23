@@ -243,6 +243,13 @@ def cmd_regions(paths):
 
 
 def cmd_verify(paths):
+    """Compare protected regions against HEAD as multisets, not by position.
+
+    A positional comparison reports a cascade the moment a region is added, so
+    inserting one legitimate link makes every later region look changed. What
+    matters is which regions appeared, which disappeared, and which were altered.
+    """
+    from collections import Counter
     bad, checked, missing = [], 0, []
     for p in paths:
         after = Path(p).read_text()
@@ -251,32 +258,34 @@ def cmd_verify(paths):
             missing.append(str(p))
             continue
         checked += 1
-        h_before, parts_before = fingerprint(before)
-        h_after, parts_after = fingerprint(after)
-        if h_before == h_after:
+        b = Counter(f"{lab}\x00{body}" for lab, _, _, body in regions(before))
+        a = Counter(f"{lab}\x00{body}" for lab, _, _, body in regions(after))
+        removed = sorted((b - a).elements())
+        added = sorted((a - b).elements())
+        if not removed and not added:
             continue
-        rel = Path(p).resolve().relative_to(ROOT)
-        diffs = []
-        for i, (b, a) in enumerate(zip(parts_before, parts_after)):
-            if b != a:
-                diffs.append((b, a))
-        if len(parts_before) != len(parts_after):
-            diffs.append((f"({len(parts_before)} protected regions)",
-                          f"({len(parts_after)} protected regions)"))
-        bad.append((str(rel), diffs))
+        rel = Path(p).resolve()
+        try:
+            rel = rel.relative_to(ROOT)
+        except ValueError:
+            pass
+        bad.append((str(rel), removed, added))
 
-    for rel, diffs in bad:
-        print(f"CHANGED  {rel}")
-        for b, a in diffs[:5]:
-            print(f"    was: {b.strip()[:100]}")
-            print(f"    now: {a.strip()[:100]}")
-        if len(diffs) > 5:
-            print(f"    ... and {len(diffs) - 5} more")
+    for rel, removed, added in bad:
+        print(f"\n{rel}")
+        for r in removed:
+            lab, body = r.split("\x00", 1)
+            print(f"  GONE     [{lab}] {body.strip()[:88]}")
+        for a_ in added:
+            lab, body = a_.split("\x00", 1)
+            print(f"  NEW      [{lab}] {body.strip()[:88]}")
     for m in missing:
         print(f"SKIPPED  {m}  (not in HEAD)")
 
     if bad:
-        print(f"\n{len(bad)} file(s) changed something a voice pass must not touch.")
+        print(f"\n{len(bad)} file(s) changed something outside prose.")
+        print("A NEW link or code span is usually a deliberate content edit and is fine.")
+        print("A GONE region, or a pair that reads as one thing rewritten, needs a reason.")
         return 1
     print(f"{checked} file(s) checked. Every code block, header, link target and "
           f"shortcode is unchanged from HEAD.")

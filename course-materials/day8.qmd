@@ -15,10 +15,10 @@ description: "Thursday September 10^th^, 2026"
 Yesterday afternoon you left with a team, a dataset, three questions and one rough figure.
 
 Today you find out which of your three questions the data can actually answer. There is no new
-Python in the next two days and there is not meant to be, since every method this project needs is
-one you have already written (you wrote the split-apply-combine sentence in 5a, again in that
-afternoon's colab, and three more times in the evening's practice). What is new is that nobody is
-going to tell you which one to reach for.
+Python in the next two days, because every method this project needs is one you have already
+written. You wrote the split-apply-combine sentence in Session 5a on Friday morning, again in that
+afternoon's colab, and three more times in Friday's end-of-day practice. What is new is that nobody
+is going to tell you which method to reach for.
 
 ## The shape of the day
 
@@ -60,8 +60,8 @@ cleanly. A dull dataset you can open beats an exciting one you cannot.
 By mid afternoon, steps 3 to 6 should be done and written up:
 
 - **Step 3, Clean.** What was missing, what you did about it, and how many rows that cost you.
-  If the file arrived clean, say so under the heading and move on. Saying so is the step done
-  properly.
+  If the file arrived clean, write that under the Clean heading and move on. Writing it down is how
+  Step 3 gets done when there is nothing to clean.
 - **Step 4, Filter.** Which rows the question is about, and which it is not.
 - **Step 5, Sort.** Even if sorting is only how you looked at the result.
 - **Step 6, Transform.** Any column you derived, with the reason you needed it.
@@ -88,9 +88,10 @@ presentable, and there is nothing to make presentable until you have written it 
 Being behind at a checkpoint is normal on a two-day project. The fix is almost never to work
 faster.
 
-- **Behind at Checkpoint 1.** The dataset is the problem. Change it. Go back to the five tests in
-  the [project kickoff](interactive-sessions/7d_project_kickoff.qmd) and pick something that
-  passes all five tests. You will lose an hour and save a day.
+- **Behind at Checkpoint 1.** The dataset is the problem. Change it. Go back to the checklist
+  headed "What makes a dataset workable in two days" in the
+  [project kickoff](interactive-sessions/7d_project_kickoff.qmd), and pick a file that passes all
+  five of its tests. You will lose an hour and save a day.
 - **Behind at Checkpoint 2.** The question is too big. Narrow it, usually by dropping a
   comparison: two groups instead of six, one year instead of a decade.
 - **Behind at Checkpoint 3.** Stop adding and start writing. A finished small analysis presents
@@ -102,8 +103,8 @@ Come and find me at any of the three checkpoints.
 
 | {{< fa calendar-day title="A calendar with one day highlighted" >}} Session  | {{< fa laptop-code title="A laptop with on-screen code" >}} Session 1  |  {{< fa laptop-code title="A laptop with on-screen code" >}} Session 2 |
 |-------------------|-------------------------------------------------------|--------------------------------------|
-| day 8 / morning   | [📝 Final project](final_project.qmd), steps 1 and 2   | Checkpoint 1                          |
-| day 8 / afternoon | [📝 Final project](final_project.qmd), steps 3 to 9    | Checkpoints 2 and 3                   |
+| day 8 / morning   | [📝 Final project](final_project.qmd): choose the question, then Steps 1 to 3 | Checkpoint 1 at 11:30 |
+| day 8 / afternoon | [📝 Final project](final_project.qmd): Steps 3 to 9, and one figure | Checkpoint 2 at 2:30, Checkpoint 3 at 4:30 |
 : {.hover .bordered tbl-colwidths="[20,40,40]"}
 
 ## End-of-day practice

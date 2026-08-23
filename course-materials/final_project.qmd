@@ -1,5 +1,5 @@
 ---
-title: "Final Activity"
+title: "The Final Project"
 subtitle: "Your own ten-step data science workflow"
 jupyter: eds217_2026
 format:
@@ -9,9 +9,10 @@ format:
         code-fold: show
 ---
 
-Over Days 8 and 9 your team builds one notebook: it takes a dataset nobody in the room has seen,
-walks it through the ten steps, and ends with a figure and a claim. On Friday afternoon each team
-walks the class through theirs.
+Over Days 8 and 9 your team builds one notebook. You take the dataset you chose on Wednesday
+afternoon, walk it through the ten steps, and end with a figure and a claim. Nobody outside your
+team has seen the data, so on Friday afternoon you introduce it to the class as well as report on
+it.
 
 This page is the description of the finished thing. The [project
 kickoff](interactive-sessions/7d_project_kickoff.qmd) covers choosing a team, a dataset and a
@@ -22,15 +23,20 @@ question. [Day 8](day8.qmd) and [Day 9](day9.qmd) carry the hour-by-hour plan.
 One Jupyter notebook, per team, named `Project_<team name>.ipynb`.
 
 It is **self-contained**: somebody who has your notebook and nothing else can restart the kernel,
-run every cell from the top, and get your figures back. Self-containment matters more than
-anything else on this page, and it is the property most often lost, usually to a cell that was
-deleted after the variable it defined was already in memory.
+run every cell from the top, and get your figures back. Self-containment matters more than anything
+else on this page.
+
+It is also the property most often lost, and it is lost in one particular way. You define a
+variable in a cell, you run the cell, and later you delete it. The variable stays alive in the
+kernel, so the notebook still works for you. It will not work for anybody else. Restarting and
+running from the top is the only way to find out.
 
 It is **documented**: markdown cells explain what each step was for and what it found, and code
 comments explain anything a reader could not work out from the code.
 
-It uses **pandas, numpy, matplotlib and seaborn**, and nothing else. Avoid analyses that need
-mapping.
+The analysis uses **pandas, numpy, matplotlib and seaborn**. The only other import you may need is
+`requests`, and only if your file lives in Google Drive rather than at a public URL, which the
+recipe at the bottom of this page explains. Avoid analyses that need mapping.
 
 ## The ten steps
 
@@ -152,9 +158,11 @@ If your file is not already at a public URL, put it in a Google Drive folder in 
 and load it from there:
 
 1. Save the file to a Google Drive folder in your UCSB account.
-2. Change the sharing settings to allow anyone with the link to view it.
-3. Open the sharing dialog and copy the link.
-4. Put this code in the Import Data section at the top of your notebook.
+2. Right-click the file and choose **Share**.
+3. Under **General access**, change **Restricted** to **Anyone with the link**.
+4. Click **Copy link**, then **Done**.
+5. Put the code below in the Import Data section at the top of your notebook, with your own link
+   in place of the example.
 
 ```{python}
 #| eval: false

@@ -27,7 +27,7 @@ The notebook is due when you push it, before you go to lunch.
 | {{< fa clock title="A clock" >}} When | {{< fa laptop-code title="A laptop with on-screen code" >}} What |
 |------------------|------------------------------------------------------------------|
 | 10:00 to 11:45   | Step 10 and the write-up. Make the figure readable and the notebook legible. |
-| 11:45 to 12:00   | Restart the kernel, run everything, push to GitHub. |
+| 11:45 to 12:00   | Restart and run everything one last time, then push to GitHub. |
 | 12:00 to 1:00    | Lunch. **The notebook is done.** |
 | 1:00 to 1:10     | Running order, and connect the first machine to the projector. |
 | 1:10 to 2:40     | Presentations, first half |
@@ -38,16 +38,17 @@ The notebook is due when you push it, before you go to lunch.
 
 ## The morning: what "finished" looks like
 
-The five steps below are in order of value, and the first is worth more than the last. If you run
-out of morning, finishing the first three steps properly beats starting all five of them:
+The list below is in order of value, and each item is worth more than the one after it. If you run
+out of morning, finishing the first three items properly beats starting all five items:
 
-1. **Restart the kernel and run every cell from the top.** Do this first, not last. A notebook that
-   only runs in the order you happened to write it is a notebook that will fail in front of the
-   class.
+1. **Restart the kernel and run every cell from the top.** Do this at the start of the morning,
+   not only at 11:45. A notebook that runs only in the order you happened to write it is a notebook
+   that will fail in front of the class, and you want to find that out at 10am.
 2. **Step 10, Visualize.** One figure that carries the claim. Axis labels with units, a title that
    states the finding rather than naming the variables, and a legend if you used `hue=`.
-3. **A markdown cell under every one of the ten headings.** Where a step was genuinely not needed,
-   the cell says so in a sentence. An empty heading is the only thing here that reads as unfinished.
+3. **A markdown cell under every one of the ten workflow headings**, which are listed on the
+   [final project page](final_project.qmd). Where a step was genuinely not needed, the cell says so
+   in a sentence. An empty heading is the only thing here that reads as unfinished.
 4. **The claim, near the top.** Two or three sentences: what you asked, what you found, and what
    the finding rests on. Somebody who reads only that and looks at your figure should understand
    the project.
@@ -99,7 +100,8 @@ A twelve-minute walkthrough that works, every time:
 | 10 to 12 | The claim, what it rests on, and what you would do with another week. |
 : {.hover .bordered tbl-colwidths="[20,80]"}
 
-Both members present. On a team of three, one can drive the notebook while the other two talk.
+Everybody on the team speaks. On a team of three, one person can drive the notebook while the
+other two talk, and then take a section of their own.
 
 ::: {.callout-note title="Things worth saying out loud"}
 The most interesting minute in most of these presentations is the one where a team says what went
@@ -117,7 +119,7 @@ the only one.
 
 ## After the last presentation
 
-That is the course. You arrived on the 31st, and in nine days you have imported, explored, cleaned,
+That is the course. You arrived on August 31st, and in nine days you have imported, explored, cleaned,
 filtered, sorted, transformed, grouped, aggregated, joined, reshaped and visualised real data, and
 then done all of it again on a dataset nobody chose for you.
 

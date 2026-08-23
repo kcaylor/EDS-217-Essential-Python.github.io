@@ -49,6 +49,31 @@ demonstrative points back into the text.
 
 ---
 
+## "because", not "since", for an explanatory clause
+
+**Stated 2026-08-23.**
+
+> I also really prefer to use "because" to join an explanatory clause and not
+> "since". They mean different things. Kelly Clarkson's hit single "Since you've
+> been gone" would be a very different song if the title had been "Because you've
+> been gone". Words have meaning. Choose wisely.
+
+"Since" is first a temporal word. A reader meets it and starts a clock, then has
+to go back and restart when the clause turns out to be causal. In course prose
+that costs a re-read on every occurrence.
+
+Reserve "since" for time: *since Monday*, *since Day 2*, *since 2019*. Use
+"because" for cause.
+
+| Instead of | Write |
+|---|---|
+| There is no new Python, since every method is one you have written. | There is no new Python, because every method is one you have written. |
+| Step 9 is short, since your project uses a single table. | Step 9 is short, because your project uses a single table. |
+
+The count across the live pages stood at 31 causal uses on 2026-08-23.
+
+---
+
 ## No em-dashes
 
 Long-standing, and it now matches `~/dev/kkc_corpus/STYLE.md`, which records it

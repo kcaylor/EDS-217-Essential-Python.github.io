@@ -218,6 +218,35 @@ items:
     expect: reports a fast-forward, no credential prompt
   blocks: [D8]
 
+- id: D9
+  title: Retire the Git LFS hooks that block every push
+  category: deploy
+  severity: blocker
+  owner: claude
+  state: open
+  why: |
+    The clone carries four Git LFS hooks from an old `git lfs install`, and the
+    pre-push hook exits 2 when git-lfs is not on PATH. Since git-lfs is not
+    installed, `git push` fails before it contacts either remote. The repository
+    has no .gitattributes and no LFS objects, so nothing is actually stored in
+    LFS and the hooks do no work. This would have stopped the publish at the last
+    step, on the day it mattered, with an error about a feature the repo does not
+    use.
+  evidence: |
+    .git/hooks/pre-push reads: command -v git-lfs || { printf ...; exit 2; }
+    Also present: post-commit, post-checkout, post-merge, all the same shape.
+    `cat .gitattributes` returns no such file, and `git lfs ls-files` cannot run.
+    The warning was visible on every commit this session.
+  action: |
+    Move the four hooks into _to_delete/git-lfs-hooks/. They are regenerable at
+    any time with `git lfs install` if LFS is ever wanted. If you would rather
+    keep them, install git-lfs instead: `brew install git-lfs && git lfs install`.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py d9_push_hooks
+    expect: no active hook exits non-zero for a missing binary
+  blocks: [D8]
+
 - id: D8
   title: Push to both remotes and verify the published site
   category: deploy
@@ -240,7 +269,7 @@ items:
     kind: command
     cmd: python3 tools/prelaunch_checks.py d8_live_site
     expect: live index says Summer 2026, data URL returns 200, Positron session page returns 200
-  blocked_by: [D6, D7]
+  blocked_by: [D6, D7, D9]
 
 # ---------------------------------------------------------------------------
 # CONTENT

@@ -319,6 +319,38 @@ def d6_docs_data_tracked():
     return result(not missing and bool(tracked), lines)
 
 
+def d9_push_hooks():
+    """No local git hook may refuse to run for want of a binary that is absent."""
+    code, out, _ = sh("git config --get core.hookspath")
+    hookdir = ROOT / (out.strip() or ".git/hooks")
+    if not hookdir.exists():
+        return result(True, [f"no hook directory at {hookdir}"])
+    active = [h for h in sorted(hookdir.iterdir())
+              if h.is_file() and not h.name.endswith(".sample")]
+    lines = [f"active hooks in {hookdir.relative_to(ROOT) if ROOT in hookdir.parents or hookdir.parent == ROOT else hookdir}: "
+             f"{len(active)}"]
+    bad = []
+    for h in active:
+        try:
+            text = h.read_text(errors="replace")
+        except OSError:
+            continue
+        for binary in ("git-lfs",):
+            if binary in text:
+                present = subprocess.run(["bash", "-lc", f"command -v {binary}"],
+                                         capture_output=True, text=True).returncode == 0
+                lines.append(f"  {h.name}: needs {binary}, on PATH: {present}")
+                if not present:
+                    bad.append(h.name)
+    if not active:
+        lines.append("No hook can interfere with a commit or a push.")
+    elif not bad:
+        lines.append("Every active hook can run.")
+    else:
+        lines.append(f"These exit non-zero and would block the operation: {bad}")
+    return result(not bad, lines)
+
+
 def d8_live_site():
     """The published site must be the 2026 build and must serve data/."""
     import urllib.request

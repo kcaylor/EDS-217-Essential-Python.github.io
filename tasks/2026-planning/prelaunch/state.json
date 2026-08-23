@@ -368,6 +368,15 @@
           "exit": 0,
           "git_sha": "aca3495",
           "ok": true
+        },
+        {
+          "at": "2026-08-23T07:34:31",
+          "cmd": "python3 tools/prelaunch_checks.py d5_render_complete",
+          "could_not_run": false,
+          "evidence": "PASS  d5_render_complete\n  rendered HTML files: 89  (render set is 89)\n  docs/data files: 31  (data/ holds 31)\n  search.json entries: 612\n  index.html says Summer 2026: True",
+          "exit": 0,
+          "git_sha": "6d6876f",
+          "ok": true
         }
       ],
       "notes": [
@@ -444,6 +453,19 @@
           "exit": 1,
           "git_sha": "aca3495",
           "ok": false
+        }
+      ]
+    },
+    "D9": {
+      "checks": [
+        {
+          "at": "2026-08-23T07:34:22",
+          "cmd": "python3 tools/prelaunch_checks.py d9_push_hooks",
+          "could_not_run": false,
+          "evidence": "PASS  d9_push_hooks\n  active hooks in .git/hooks: 0\n  No hook can interfere with a commit or a push.",
+          "exit": 0,
+          "git_sha": "6d6876f",
+          "ok": true
         }
       ]
     },
@@ -732,6 +754,15 @@
           "exit": 0,
           "git_sha": "aca3495",
           "ok": true
+        },
+        {
+          "at": "2026-08-23T07:34:22",
+          "cmd": "python3 tools/prelaunch_checks.py t6_cells_clean",
+          "could_not_run": false,
+          "evidence": "PASS  t6_cells_clean\n  pages in the render set: 89\n  933/933 cells ran clean across 89 files",
+          "exit": 0,
+          "git_sha": "6d6876f",
+          "ok": true
         }
       ],
       "notes": [
@@ -743,5 +774,5 @@
     }
   },
   "schema": 1,
-  "updated": "2026-08-23T07:33:01"
+  "updated": "2026-08-23T07:34:33"
 }

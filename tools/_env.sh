@@ -12,6 +12,10 @@ cd "$REPO_ROOT"
 
 ENV_NAME="${EDS217_ENV:-eds217_2026}"
 
+# Headless plotting for every script here. Without this, a plt.show() in a page
+# opens a window, or on macOS aborts the process outright.
+export MPLBACKEND="${MPLBACKEND:-Agg}"
+
 eds217_activate() {
   if [ "${CONDA_DEFAULT_ENV:-}" = "$ENV_NAME" ]; then
     return 0

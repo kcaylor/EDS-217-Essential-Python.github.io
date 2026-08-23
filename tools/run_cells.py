@@ -8,6 +8,17 @@ to the repo's data/ directory.
 
     python tools/run_cells.py course-materials/**/2*.qmd
 """
+import os
+
+# Force a headless plotting backend before anything imports matplotlib.
+# On macOS matplotlib defaults to the "macosx" backend, and a plt.show() in an
+# answer key then tries to start a GUI event loop inside this process, which
+# aborts the interpreter outright. Quarto does not hit this, because it renders
+# through a Jupyter kernel using the inline backend. The crash is therefore a
+# defect in this checker rather than in the page, so the backend is pinned here
+# instead of being left to whoever happens to invoke the script.
+os.environ["MPLBACKEND"] = "Agg"
+
 import re, sys, io, traceback, contextlib, pathlib
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -48,6 +59,11 @@ for f in files:
             print(f"  {f} CELL {i} FAILED")
             print(f"    {b.strip().splitlines()[0][:100]}")
             print(f"    {traceback.format_exc().strip().splitlines()[-1]}")
+    try:
+        import matplotlib.pyplot as _plt
+        _plt.close("all")
+    except Exception:
+        pass
     ran = len(blocks) - len(skipped)
     total += ran; failed_total += fails
     reasons = ", ".join(sorted(set(skipped)))

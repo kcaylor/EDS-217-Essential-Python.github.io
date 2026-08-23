@@ -325,7 +325,19 @@
           "text": "2026-08-23: a sign-off was recorded on D1 through D4 and C4 by the assistant and immediately reversed. It was not Kelly's, and no sign-off in this file is his unless he said so."
         }
       ],
-      "state": "open"
+      "signoff": {
+        "at": "2026-08-23T11:59:00",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "a49a41b",
+        "note": "Confirmed fixes for these blockers",
+        "verification": {
+          "at": "2026-08-23T11:33:15",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "D2": {
       "checks": [
@@ -366,7 +378,19 @@
           "ok": true
         }
       ],
-      "state": "open"
+      "signoff": {
+        "at": "2026-08-23T11:59:00",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "a49a41b",
+        "note": "Confirmed fixes for these blockers",
+        "verification": {
+          "at": "2026-08-23T11:33:16",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "D3": {
       "checks": [
@@ -407,7 +431,19 @@
           "ok": true
         }
       ],
-      "state": "open"
+      "signoff": {
+        "at": "2026-08-23T11:59:00",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "a49a41b",
+        "note": "Confirmed fixes for these blockers",
+        "verification": {
+          "at": "2026-08-23T11:33:16",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "D4": {
       "checks": [
@@ -448,7 +484,19 @@
           "ok": true
         }
       ],
-      "state": "open"
+      "signoff": {
+        "at": "2026-08-23T11:59:00",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "a49a41b",
+        "note": "Confirmed fixes for these blockers",
+        "verification": {
+          "at": "2026-08-23T11:33:16",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "D5": {
       "checks": [
@@ -503,7 +551,20 @@
           "at": "2026-08-21T04:55:46",
           "text": "Rehearsed in the cloud sandbox on 2026-08-21 against the same source tree, with quarto 1.6.40 and an eds217_2026 kernel: quarto render finished at exit 0 with 89 of 89 pages, 31 files copied into docs/data, 612 search entries, no lectures directory, no 2025 orphans, and no warnings other than the kernel's TCP notice. The render itself is therefore known to be clean; what remains is running it on the laptop, where the images directories are present."
         }
-      ]
+      ],
+      "signoff": {
+        "at": "2026-08-23T11:59:00",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "a49a41b",
+        "note": "Confirmed fixes for these blockers",
+        "verification": {
+          "at": "2026-08-23T11:33:16",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "D6": {
       "checks": [
@@ -542,8 +603,30 @@
           "exit": 1,
           "git_sha": "74b9d68",
           "ok": false
+        },
+        {
+          "at": "2026-08-23T11:40:36",
+          "cmd": "python3 tools/prelaunch_checks.py d6_docs_data_tracked",
+          "could_not_run": false,
+          "evidence": "PASS  d6_docs_data_tracked\n  files tracked at HEAD under docs/data: 31\n  files in data/: 31\n  Every dataset is committed under docs/data.",
+          "exit": 0,
+          "git_sha": "326f8d7",
+          "ok": true
         }
-      ]
+      ],
+      "signoff": {
+        "at": "2026-08-23T11:59:00",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "a49a41b",
+        "note": "Confirmed fixes for these blockers",
+        "verification": {
+          "at": "2026-08-23T11:40:36",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "D7": {
       "notes": [
@@ -551,7 +634,20 @@
           "at": "2026-08-21T04:55:46",
           "text": "Cannot be tested from a session: the Cowork VM has no network egress to GitHub. Note that origin carries a caylor@ username in its URL and live does not, so live is the one to test first."
         }
-      ]
+      ],
+      "signoff": {
+        "at": "2026-08-23T11:59:08",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "a49a41b",
+        "note": "push to live succeeded, credentials work",
+        "verification": {
+          "at": null,
+          "kind": "manual",
+          "ok": false
+        }
+      },
+      "state": "certified"
     },
     "D8": {
       "checks": [
@@ -590,8 +686,30 @@
           "exit": 1,
           "git_sha": "74b9d68",
           "ok": false
+        },
+        {
+          "at": "2026-08-23T11:56:27",
+          "cmd": "python3 tools/prelaunch_checks.py d8_live_site",
+          "could_not_run": false,
+          "evidence": "PASS  d8_live_site\n  200  https://eds-217-essential-python.github.io/   contains 'Summer 2026': True\n  200  https://eds-217-essential-python.github.io/data/toolik_weather.csv\n  200  https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1a_positron_notebooks.html",
+          "exit": 0,
+          "git_sha": "a49a41b",
+          "ok": true
         }
-      ]
+      ],
+      "signoff": {
+        "at": "2026-08-23T11:56:32",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "a49a41b",
+        "note": "pushed and verified live",
+        "verification": {
+          "at": "2026-08-23T11:56:27",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "D9": {
       "checks": [
@@ -622,7 +740,20 @@
           "git_sha": "5a23206",
           "ok": true
         }
-      ]
+      ],
+      "signoff": {
+        "at": "2026-08-23T11:59:00",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "a49a41b",
+        "note": "Confirmed fixes for these blockers",
+        "verification": {
+          "at": "2026-08-23T08:35:03",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "H1": {
       "checks": [
@@ -1047,5 +1178,5 @@
     }
   },
   "schema": 1,
-  "updated": "2026-08-23T08:35:12"
+  "updated": "2026-08-23T11:59:08"
 }

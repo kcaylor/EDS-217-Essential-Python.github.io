@@ -66,7 +66,10 @@ first-time reader feels even when they cannot name them:
 
 5. **Any sentence that opens with That, This, These or Those** and points back
    into the text rather than at the page you are holding. Say what you had to
-   reach back for.
+   reach back for. Also report a demonstrative that points at the document itself
+   ("This session teaches...") where a grounded adjective would tell you more
+   ("Today's lesson is...", "Tonight's practice is..."). Say whether you could
+   tell where in the nine days you were.
 6. **Any numeral used as a noun with the noun left out**, such as "any of the
    three" or "all five". Say "three what".
 7. **Any clause that announces an explanation instead of giving one**: "and here

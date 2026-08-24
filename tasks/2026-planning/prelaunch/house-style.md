@@ -33,10 +33,45 @@ mid-sentence use needs a reason. Name the thing instead.
 | That sentence is the point of the whole exercise. | The one-sentence finding is the point of the whole exercise. |
 | That is right for coursework and wrong here. | Stripping output is right for coursework and wrong here. |
 
-The exception is deictic use, where the demonstrative points at the document the
-student is holding rather than back into the text: "This session teaches lists
-and dictionaries", "This morning you learned a sentence that answers most grouped
-questions". Those need no antecedent and are fine.
+### Ground the reader in the course, not in the document
+
+**Refined 2026-08-24.**
+
+> I would still prefer a more direct adjective "Today's lesson", "This morning's
+> lesson", etc... to ground the reader in the course experience. I realize this
+> could break if we move things around... (Today is always Today, but This Morning
+> could become This Afternoon). However, we can catch that as we go, and I think
+> the payoff is worth the price.
+
+A demonstrative pointing at the document the student is holding needs no
+antecedent, so "This session teaches lists and dictionaries" is not wrong. It is
+just ungrounded: it tells the reader where they are in a file rather than where
+they are in the week.
+
+| Instead of | Write |
+|---|---|
+| This session teaches lists and dictionaries. | Today's lesson is lists and dictionaries. |
+| This exercise takes about 45 minutes. | Tonight's practice takes about 45 minutes. |
+| In this session we cover grouping. | This morning we cover grouping. |
+
+**Durability, and the price Kelly has accepted.** "Today" and "tonight" are true
+whatever else moves, because a day page is a day. "This morning" and "this
+afternoon" are true only while the session stays in that half of the day. Prefer
+the most durable phrasing that still grounds, and accept the rest.
+
+The price is paid by a checker rather than by caution:
+
+```
+python tools/prose_guard.py deictics --all    bare deictics still to ground
+python tools/prose_guard.py timeclaims        every grounded claim, and whether it moved
+```
+
+`timeclaims` records which half of which day each session is linked from, and
+reports any page whose placement has changed since the last snapshot while still
+making a temporal claim. It does not judge whether a claim is correct, because
+that needs to know where the referenced content is taught. A first version tried
+to, and reported twelve failures of which nearly all were correct backward
+references from an afternoon colab to the morning.
 
 Check with:
 

@@ -166,6 +166,120 @@ def elliptical_numerals(text):
     return out
 
 
+# Kelly prefers a grounded temporal adjective to a bare deictic: "Today's lesson"
+# rather than "This session". The price is that a temporal claim breaks if the
+# thing it points at moves between halves of a day, and he has accepted that
+# price. So the job here is not to judge whether a claim is right, which needs to
+# know where the referenced *content* is taught, but to notice when the ground
+# moves underneath one.
+#
+# A first version of this reported twelve mismatches, and nearly all were correct:
+# an afternoon colab saying "this morning you learned X" is a backward reference.
+# Asserting a verdict the data cannot support is how a checker stops being read.
+TIME_PHRASE = re.compile(
+    r"\b(this morning|this afternoon|this evening|yesterday morning|"
+    r"yesterday afternoon|tomorrow morning|tomorrow afternoon|tonight)\b", re.I)
+
+BARE_DEICTIC = re.compile(
+    r"\bThis (session|page|exercise|colab|notebook|activity|practice|cheatsheet)\b")
+
+PLACEMENTS = ROOT / "tasks/2026-planning/prelaunch/time-claims.json"
+
+
+def day_placements():
+    """Which half of which day each session is linked from."""
+    out = {}
+    for d in range(1, 10):
+        page = ROOT / f"course-materials/day{d}.qmd"
+        if not page.exists():
+            continue
+        for line in page.read_text().splitlines():
+            m = re.match(r"\|\s*day \d+ / (morning|afternoon)\b(.*)", line)
+            if not m:
+                continue
+            for link in re.findall(r"\]\(([^)]+\.qmd)\)", m.group(2)):
+                target = (page.parent / link).resolve()
+                try:
+                    rel = str(target.relative_to(ROOT))
+                except ValueError:
+                    continue
+                out.setdefault(rel, set()).add(f"day{d}/{m.group(1)}")
+    return {k: sorted(v) for k, v in out.items()}
+
+
+def cmd_timeclaims(paths):
+    """List grounded temporal claims, and report where the ground has moved."""
+    import json as _json
+    place = day_placements()
+    current = {}
+    for rel, slots in sorted(place.items()):
+        f = ROOT / rel
+        if not f.exists():
+            continue
+        prose = prose_only(f.read_text(errors="replace"))
+        phrases = sorted({m.group(0).lower() for m in TIME_PHRASE.finditer(prose)})
+        if phrases:
+            current[rel] = {"slots": slots, "phrases": phrases}
+
+    old = {}
+    if PLACEMENTS.exists():
+        old = _json.loads(PLACEMENTS.read_text()).get("pages", {})
+
+    moved = []
+    for rel, info in current.items():
+        was = old.get(rel, {}).get("slots")
+        if was and was != info["slots"]:
+            moved.append((rel, was, info["slots"], info["phrases"]))
+
+    print(f"{len(current)} page(s) make a grounded temporal claim.")
+    for rel, info in current.items():
+        print(f"  {rel}")
+        print(f"      placed {', '.join(info['slots'])}; says {', '.join(info['phrases'])}")
+
+    if moved:
+        print(f"\n{len(moved)} page(s) MOVED since the last snapshot, and their")
+        print("temporal claims may now be wrong:")
+        for rel, was, now, phrases in moved:
+            print(f"  {rel}: {', '.join(was)} -> {', '.join(now)}")
+            print(f"      check: {', '.join(phrases)}")
+    elif old:
+        print("\nNo page has moved since the last snapshot.")
+    else:
+        print("\nNo previous snapshot. Writing one now, so the next run can compare.")
+
+    PLACEMENTS.parent.mkdir(parents=True, exist_ok=True)
+    PLACEMENTS.write_text(_json.dumps({"pages": current}, indent=1, sort_keys=True) + "\n")
+    return 1 if moved else 0
+
+
+def cmd_deictics(paths):
+    """Bare deictics that could be grounded in the course calendar instead."""
+    total = 0
+    for p in paths:
+        text = Path(p).read_text(errors="replace")
+        prose = prose_only(text)
+        hits = []
+        for m in BARE_DEICTIC.finditer(prose):
+            ctx = prose[max(0, m.start() - 40):m.end() + 45].replace("\n", " ").strip()
+            hits.append((m.group(0), ctx))
+        if not hits:
+            continue
+        total += len(hits)
+        rel = Path(p).resolve()
+        try:
+            rel = rel.relative_to(ROOT)
+        except ValueError:
+            pass
+        print(f"\n{rel}  ({len(hits)})")
+        for phrase, ctx in hits:
+            print(f"  {phrase}: ...{ctx}...")
+    print(f"\n{total} bare deictic(s). Prefer a grounded adjective: "
+          f"\"Today's lesson\", \"This morning's session\".")
+    print("\"Today\" is durable. \"This morning\" is not, and prose_guard.py timeclaims")
+    print("watches for the day it stops being true.")
+    return 1 if total else 0
+
+
 def cmd_referents(paths):
     total = deictic_n = 0
     for p in paths:
@@ -298,10 +412,12 @@ def main(argv):
         return 0
     cmd = argv[1]
     args = argv[2:]
-    if cmd in ("verify", "referents") and args[:1] == ["--all"]:
+    if cmd in ("verify", "referents", "deictics") and args[:1] == ["--all"]:
         paths = live_pages()
     else:
         paths = [Path(a) for a in args]
+    if cmd == "timeclaims":
+        return cmd_timeclaims(paths)
     if not paths:
         print("no files given")
         return 2
@@ -311,6 +427,10 @@ def main(argv):
         return cmd_verify(paths)
     if cmd == "referents":
         return cmd_referents(paths)
+    if cmd == "timeclaims":
+        return cmd_timeclaims(paths)
+    if cmd == "deictics":
+        return cmd_deictics(paths)
     print(f"unknown command: {cmd}")
     return 2
 

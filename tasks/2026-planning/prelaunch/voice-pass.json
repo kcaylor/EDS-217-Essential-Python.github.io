@@ -1022,20 +1022,313 @@
   },
   "course-materials/the-data-science-workflow.qmd": {
    "batch": 1,
-   "findings": [],
-   "history": [],
-   "metrics": {},
-   "status": "pending"
+   "findings": [
+    {
+     "id": 1,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:33:02",
+     "severity": "high",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "'Day 2's end-of-day practice is writing one.' Missing noun, four sentences after 'a data biography'. The only sentence on the page naming work to hand in."
+    },
+    {
+     "id": 2,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:33:02",
+     "severity": "high",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "Key Points said 'always in this order' after a whole section explaining that the teaching order and the workflow order differ. Read as the table's order, which is the opposite of what the page means."
+    },
+    {
+     "id": 3,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:33:02",
+     "severity": "high",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "'The teaching order is not the workflow order, because Filter and Sort are easier to learn before Clean, so Day 3 covers steps 4 and 5 and Day 4 comes back for step 3.' 34 words, because-so structure, and step numbers where the names were already given."
+    },
+    {
+     "id": 4,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:33:03",
+     "severity": "medium",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "'Step 2 has a written half.' Step 2 is never named at that point, and nothing earlier on the page says Explore involves writing."
+    },
+    {
+     "id": 5,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:33:03",
+     "severity": "medium",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "'the ones they use come in this order' pointed forward at a list not yet shown, with a three-link pronoun chain: them, the ones, they."
+    },
+    {
+     "id": 6,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:33:03",
+     "severity": "medium",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "'This includes adding a time dimension with dates.' Opened with a demonstrative, and left it unclear whether Dates is part of step 9 or an eleventh thing."
+    },
+    {
+     "id": 7,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:33:03",
+     "severity": "medium",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "'every statement in it must be backed by a cell that produced it' has two its with different referents, and a cell produces a number, not a statement."
+    },
+    {
+     "id": 8,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:33:03",
+     "severity": "medium",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "'with the cell that showed it sitting directly above' garden-paths into 'the cell showed it sitting above'. Also unclear that the contrast is vagueness rather than a factual error."
+    },
+    {
+     "id": 9,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:33:03",
+     "severity": "medium",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "'Working data scientists write these constantly' uses a plural pronoun for a singular antecedent, and 'the problem' is definite with no problem yet mentioned."
+    },
+    {
+     "id": 10,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:33:03",
+     "severity": "low",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "Heading 'Where you'll learn each step' and table column 'You'll learn it on' write a fact about the schedule at the student. Changed to 'Where each step is taught' and 'Taught on'."
+    },
+    {
+     "id": 11,
+     "note": "Not a prose fix.",
+     "resolved_at": "2026-08-24T08:33:03",
+     "severity": "low",
+     "sha": "03cf721",
+     "status": "needs-kelly",
+     "text": "The mermaid diagram uses the same emoji for step 5 Sort and step 10 Visualize, so the chain reads as ending twice when scanned."
+    },
+    {
+     "id": 12,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:33:03",
+     "severity": "low",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "'Part 1 and Part 2 are Day 1's run through the workflow' pairs a plural subject with a singular predicate noun."
+    },
+    {
+     "id": 13,
+     "note": "Not a prose fix.",
+     "resolved_at": "2026-08-24T08:33:03",
+     "severity": "low",
+     "sha": "03cf721",
+     "status": "needs-kelly",
+     "text": "The page carries no date or day anchor, so a student cannot tell from it where in the nine days they are."
+    }
+   ],
+   "history": [
+    {
+     "at": "2026-08-24T08:28:21",
+     "event": "started",
+     "sha": "03cf721"
+    },
+    {
+     "at": "2026-08-24T08:32:56",
+     "event": "edited",
+     "guard_forced": true,
+     "note": "One link added, to Day 2's end-of-day practice, so the data biography section names the exercise it describes.",
+     "sha": "03cf721"
+    },
+    {
+     "at": "2026-08-24T08:32:56",
+     "event": "cold_read",
+     "findings": 13,
+     "sha": "03cf721"
+    },
+    {
+     "at": "2026-08-24T08:33:03",
+     "event": "resolved",
+     "sha": "03cf721"
+    }
+   ],
+   "metrics": {
+    "after": {
+     "causal_since": 0,
+     "elliptical_numerals": 0,
+     "em_dashes": 0,
+     "sentence_initial_demonstratives": 0,
+     "words": 788
+    },
+    "before": {
+     "causal_since": 0,
+     "elliptical_numerals": 0,
+     "em_dashes": 0,
+     "sentence_initial_demonstratives": 1,
+     "words": 553
+    }
+   },
+   "status": "resolved"
   },
   "index.qmd": {
    "batch": 1,
-   "findings": [],
-   "history": [],
-   "metrics": {},
-   "status": "pending"
+   "findings": [
+    {
+     "id": 1,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:27:52",
+     "severity": "high",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "Said Day 8 sets up the final-project repository. 8a_github is the coursework repo, done on your own time, and day9 says the project needs its own repository with nbstripout off."
+    },
+    {
+     "id": 2,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:27:52",
+     "severity": "high",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "'Day 8 sets up' had no human subject, and Day 8's timetable has no GitHub block. The session is filed under 'any time'."
+    },
+    {
+     "id": 3,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:27:52",
+     "severity": "medium",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "'before then' pointed at Day 8 while day8.qmd says the repository is needed before Friday. Two different deadlines."
+    },
+    {
+     "id": 4,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:27:52",
+     "severity": "medium",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "Heading says classwork, sentence said final project, three lines apart, without saying whether they are one repository or two."
+    },
+    {
+     "id": 5,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:27:52",
+     "severity": "medium",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "Opening list of gerunds left 'it' and 'the result' without referents: 'writing it, reading data into it... drawing the result'."
+    },
+    {
+     "id": 6,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:27:52",
+     "severity": "low",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "'the rest of the year' used without saying which year, twice on the page."
+    },
+    {
+     "id": 7,
+     "note": "Rewritten in this pass.",
+     "resolved_at": "2026-08-24T08:27:52",
+     "severity": "low",
+     "sha": "03cf721",
+     "status": "fixed",
+     "text": "'the field' and 'the order a working analysis actually runs' used as known terms, with no link to the workflow page that defines the order."
+    },
+    {
+     "id": 8,
+     "note": "Catalog text or a structural choice, not mine to change.",
+     "resolved_at": "2026-08-24T08:27:56",
+     "severity": "medium",
+     "sha": "03cf721",
+     "status": "needs-kelly",
+     "text": "Learning objective 'Implement basic algorithms for data processing' matches nothing on the site. The word algorithm appears in no other course-materials page."
+    },
+    {
+     "id": 9,
+     "note": "Catalog text or a structural choice, not mine to change.",
+     "resolved_at": "2026-08-24T08:27:56",
+     "severity": "low",
+     "sha": "03cf721",
+     "status": "needs-kelly",
+     "text": "NumPy given equal billing with pandas in the objectives, but has one cheatsheet and no session of its own."
+    },
+    {
+     "id": 10,
+     "note": "Catalog text or a structural choice, not mine to change.",
+     "resolved_at": "2026-08-24T08:27:56",
+     "severity": "medium",
+     "sha": "03cf721",
+     "status": "needs-kelly",
+     "text": "The landing page carries no start date, no meeting time and no link to any day page. Only temporal anchor in the body is 'Day 8'."
+    },
+    {
+     "id": 11,
+     "note": "Catalog text or a structural choice, not mine to change.",
+     "resolved_at": "2026-08-24T08:27:56",
+     "severity": "high",
+     "sha": "03cf721",
+     "status": "needs-kelly",
+     "text": "Teaching Team still lists Anna Boser as TA for 2026."
+    }
+   ],
+   "history": [
+    {
+     "at": "2026-08-24T08:23:39",
+     "event": "started",
+     "sha": "03cf721"
+    },
+    {
+     "at": "2026-08-24T08:27:42",
+     "event": "cold_read",
+     "findings": 11,
+     "sha": "03cf721"
+    },
+    {
+     "at": "2026-08-24T08:27:48",
+     "event": "resolved",
+     "sha": "03cf721"
+    },
+    {
+     "at": "2026-08-24T08:27:52",
+     "event": "cold_read",
+     "findings": 11,
+     "sha": "03cf721"
+    },
+    {
+     "at": "2026-08-24T08:27:56",
+     "event": "resolved",
+     "sha": "03cf721"
+    }
+   ],
+   "metrics": {
+    "before": {
+     "causal_since": 0,
+     "elliptical_numerals": 0,
+     "em_dashes": 0,
+     "sentence_initial_demonstratives": 0,
+     "words": 224
+    }
+   },
+   "status": "resolved"
   }
  },
  "schema": 1,
  "started": "2026-08-24T04:26:44",
- "updated": "2026-08-24T06:23:50"
+ "updated": "2026-08-24T08:33:03"
 }

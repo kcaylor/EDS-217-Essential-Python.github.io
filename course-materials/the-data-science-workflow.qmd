@@ -9,10 +9,10 @@ format:
     code-fold: show
 ---
 
-Almost every data analysis you will ever do, in this course and in your career, is some path
-through the same ten steps. Most analyses use a subset of them, and they come in this order. On
-Day 1 you played through a short path, the "Whole Game." Over the following days you will learn
-each step in depth.
+Almost every data analysis you will ever do, in this course and in your career, is a path
+through the same ten steps, listed below. Most analyses use only some of the ten steps, and the
+ones an analysis does use always run in the order they are numbered. On Day 1 we ran a short path end
+to end, the "Whole Game." Over the following days we work through each step in depth.
 
 ```{mermaid}
 flowchart LR
@@ -37,14 +37,18 @@ flowchart LR
 8. **Aggregate.** Collapse each bucket down to a single summary number, like a mean, sum, or
    count.
 9. **Join / Reshape.** Combine multiple tables, and pivot or stack the data into the shape your
-   analysis needs. This includes adding a time dimension with dates.
-10. **Visualize.** Turn your numbers into charts that reveal the story.
+   analysis needs. Working with dates belongs to step 9 as well, because a date column is what
+   lets you reshape a table along time.
+10. **Visualize.** Turn your numbers into charts, so that a reader can see the result rather
+    than work it out from a table.
 
-## Where you'll learn each step
+## Where each step is taught
 
-Each step gets its own teaching day. Everything in the course maps back to this table:
+Days 2 through 7 each teach one or two of the steps. The teaching order is not the workflow
+order. Filter and Sort are easier to learn first, so Day 3 teaches them, and Day 4 comes back
+for Clean afterwards.
 
-| # | Step | What it does | You'll learn it on |
+| # | Step | What it does | Taught on |
 |---|------|--------------|--------------------|
 | 1 | Import | Load data into a DataFrame | **Day 2: Import + Explore** |
 | 2 | Explore | Get to know the table | **Day 2: Import + Explore** |
@@ -61,21 +65,33 @@ Days 8 and 9 put the whole workflow together in your own project.
 
 ## The Data Biography
 
-<!-- filled by D2 EOD build -->
+Exploring a dataset, step 2, has a written half that the step list does not show. A **data
+biography** is a short account of a dataset: where it came from, what it covers, what shape it is
+in, and what a reader needs to know before trusting anything computed from it. Working data
+scientists write a biography for most datasets they touch, usually in the first cells of a
+notebook. The alternative is discovering a flaw in the data after an analysis has already been
+built on it.
 
-*Coming on Day 2.*
+One rule makes a biography worth reading: every claim in it must sit directly below the cell that
+produced the number behind it. Not "the data covers about thirty years", which is too vague to
+check, but "the data covers 1988 to 2018", with the cell that printed those two years directly
+above the sentence.
+
+[Day 2's end-of-day practice](eod-practice/eod-day2-2026.qmd) is writing a data biography of the
+Toolik Field Station weather record.
 
 ## Key Points
 
-- Real analyses are paths through these ten steps, always in this order, though few analyses use
-  every step.
-- Days 2 through 7 each teach one or two steps. Day 1's "Whole Game" gives you the big picture
-  first.
+- Real analyses are paths through the ten steps, always in the numbered workflow order rather
+  than the order the course teaches them in, though few analyses use every step.
+- Days 2 through 7 each teach one or two steps, in an order chosen for learning rather than for
+  the workflow. Day 1's "Whole Game" gives you the big picture first.
 - When you feel lost later in the course, come back here and ask yourself which step you are on.
 
 ## Resources
 
 - [The Whole Game, Part 1](interactive-sessions/1c_whole_game_1.qmd) and
-  [Part 2](interactive-sessions/1d_whole_game_2.qmd) are Day 1's run through the workflow.
+  [Part 2](interactive-sessions/1d_whole_game_2.qmd) together are Day 1's run through the
+  workflow.
 - [Course Cheatsheet: Workflow Methods](cheatsheets/workflow_methods.qmd)
 - [Course Cheatsheet: First Steps](cheatsheets/first_steps.qmd)

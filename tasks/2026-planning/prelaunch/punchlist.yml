@@ -509,70 +509,62 @@ items:
   category: content
   severity: medium
   owner: either
-  state: open
+  state: in_progress
   why: |
     The 2026 pages were written across many sessions and several rebuilds, so the
     voice varies. Some pages read as Kelly wrote them and some read as a machine
-    did. Students spend nine days inside this prose, and a consistent voice is
-    part of what makes the site feel like a course rather than documentation.
+    did. Students spend nine days inside this prose.
 
-    The mechanical half of house style already passes on all 89 live pages: no
-    em-dash, no metaphorical "land" or "hinge", no "with a hint of". What remains
-    is judgement, and it is Kelly's.
+    The pass is also the only thing that finds comprehension defects. On
+    2026-08-23 a cold reader was run over three pages that had just been called
+    finished, and found eighteen problems, four of them contradictions introduced
+    by the voice pass itself and one that would have made a team throw away their
+    dataset on the Thursday night. None of those was a style problem. The
+    mechanical checks were all green at the time.
   evidence: |
-    89 live pages. tools/prelaunch_checks.py c10_house_style reports zero hard
-    violations and flags 22 lines across 18 pages using the "not X, it is Y"
-    shape, which is glib as a flourish and clear as a plain correction. A regex
-    cannot separate those, so the check reports them without failing.
+    89 live pages, tracked page by page in
+    tasks/2026-planning/prelaunch/voice-pass.json. Baseline on 2026-08-23: 188
+    sentence-initial demonstratives that point back into the text, 43 numerals
+    used as nouns, 31 causal uses of "since", zero em-dashes.
   action: |
-    Read tasks/2026-planning/prelaunch/house-style.md first. It holds the rules
-    Kelly has stated directly for the teaching register, which the corpus does not
-    cover. Then use the write-as-kelly skill and the verified samples in
-    ~/dev/kkc_corpus, not a list of rules. Rules keep an edit between the lines; they do not make
-    the prose Kelly's. tools/prose_guard.py fences the pass instead: it protects
-    YAML front matter, fenced code blocks, inline code spans, quarto shortcodes,
-    link and image targets, div fences and attribute blocks, and proves after
-    each page that every one of them is byte-identical to HEAD. Prose is then
-    free to be rewritten.
+    **Read these three first.** They are the whole method:
 
-      python tools/prose_guard.py regions <file>   what is off-limits, and the word count that is not
-      python tools/prose_guard.py verify --all     nothing outside prose moved
-      python tools/prose_guard.py referents --all  sentence-initial demonstratives
+      tasks/2026-planning/prelaunch/house-style.md      the rules Kelly has stated
+      tasks/2026-planning/prelaunch/cold-read-prompt.md the editor preflight, verbatim
+      tools/voicepass.py --help                          the state machine
 
-    The referent count is the most useful single measure of how much of this pass
-    is left. On 2026-08-23 it stood at 188 across the 89 live pages, excluding the
-    21 deictic uses that are fine.
+    Never edit a page outside the state machine, because sessions drop and the
+    ledger is the only memory. One page at a time, committed on its own, so a
+    lost connection costs one page at most.
 
-    Work in passes, most-read pages first, rather than attempting all 89 at once:
+      python tools/voicepass.py resume        says exactly what to do next
+      python tools/voicepass.py start <page>  records the SHA and the counts
+      <run the write-as-kelly pass, fenced by tools/prose_guard.py>
+      python tools/voicepass.py edited <page> refuses if the guard sees a non-prose change
+      <cold-read it with a subagent, using the prompt above>
+      python tools/voicepass.py record <page> findings.json
+      python tools/voicepass.py resolve <page> <n> fixed|needs-kelly|wontfix -n "..."
+      python tools/voicepass.py signoff <page> -n "..."
 
-    1. index.qmd and the nine day pages. These set the register and are the pages
-       every student sees.
-    2. The seven end-of-day activities. Longest time-on-page of anything on the
-       site.
-    3. The 22 interactive sessions, colabs and live-coding pages.
-    4. The 24 cheatsheets. Reference prose, so the bar is different: terse beats
-       characterful here.
-    5. The answer keys, last. Students read them after the fact, and the written
-       answers matter more than the voice around them.
+    A page is not signed off while a finding is open. A finding is only
+    needs-kelly when the answer is a fact only Kelly holds.
 
-    Run c10_house_style and prose_guard after each page. Use the advisory list as
-    a worklist, keeping the plain corrections and rewriting the flourishes.
+    Five batches, most-read first: the front page, day pages, workflow and project
+    spec (12); the end-of-day activities (7); sessions, colabs and live coding
+    (35); cheatsheets (24); answer keys (11).
 
-    **A limitation worth recording.** The corpus has no teaching register. Its
-    folders are email, letters, reviews, grants, evaluative and longform, and
-    longform holds one 2003 dissertation abstract. There is no verified sample of
-    Kelly writing instructional prose for beginners, so this pass extrapolates
-    from habits that do carry across registers: concrete specifics over
-    adjectives, parenthetical self-correction, rhythm that varies hard with short
-    blunt landings, rhetorical questions in place of flat negation, naming real
-    constraints, and light self-deprecation. The corpus's own authenticity rule
-    says to say so plainly rather than guess, so it is said here. Adding two or
-    three verified pre-2022 teaching samples to the corpus would make this pass
-    much better and is worth doing before 2027.
+    **A limitation worth recording.** The corpus at ~/dev/kkc_corpus has no
+    teaching register. Its folders are email, letters, reviews, grants, evaluative
+    and longform, and longform holds one 2003 dissertation abstract. There is no
+    verified sample of Kelly writing instructional prose for beginners, so the
+    voice half of this pass extrapolates from habits that carry across registers.
+    The rules he has stated directly are in house-style.md and are the reliable
+    part. Adding two or three verified pre-2022 teaching samples to the corpus
+    would improve this a great deal, and is worth doing before 2027.
   verify:
     kind: command
-    cmd: bash -c 'python3 tools/prelaunch_checks.py c10_house_style && python3 tools/prose_guard.py verify --all && python3 tools/prose_guard.py referents --all'
-    expect: zero hard style violations, nothing outside prose changed, and no sentence opening with a demonstrative that points back into the text
+    cmd: bash -c 'python3 tools/prelaunch_checks.py c10_house_style && python3 tools/prose_guard.py verify --all && python3 tools/voicepass.py status'
+    expect: zero hard style violations, nothing outside prose changed, and every page in the ledger signed off
 
 # ---------------------------------------------------------------------------
 # TOOLING. These decide whether the gates can be trusted.

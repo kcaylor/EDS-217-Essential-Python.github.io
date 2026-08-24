@@ -56,6 +56,32 @@ BATCHES = [
      "Read after the fact. The written answers matter more than the voice."),
 ]
 
+# Cold-reading related pages together is not only cheaper, it finds a class of
+# defect a single-page read cannot: of the eighteen findings on the first group,
+# four were contradictions BETWEEN pages. So the pass edits page by page and reads
+# group by group.
+GROUPS = [
+    ("front-matter", 1, ["index.qmd",
+                         "course-materials/the-data-science-workflow.qmd",
+                         "course-materials/final_project.qmd"]),
+    ("days-1-3", 1, ["course-materials/day1.qmd", "course-materials/day2.qmd",
+                     "course-materials/day3.qmd"]),
+    ("days-4-6", 1, ["course-materials/day4.qmd", "course-materials/day5.qmd",
+                     "course-materials/day6.qmd"]),
+    ("days-7-9", 1, ["course-materials/day7.qmd", "course-materials/day8.qmd",
+                     "course-materials/day9.qmd"]),
+    ("eod-1-3", 2, [f"course-materials/eod-practice/eod-day{d}-2026.qmd" for d in (1, 2, 3)]),
+    ("eod-4-5", 2, [f"course-materials/eod-practice/eod-day{d}-2026.qmd" for d in (4, 5)]),
+    ("eod-6-7", 2, [f"course-materials/eod-practice/eod-day{d}-2026.qmd" for d in (6, 7)]),
+]
+
+# Batch 5 is the answer keys. They are read with the handout beside them, after
+# the work is done, so an ambiguity costs a moment rather than a wrong action.
+# They get the voice pass and the mechanical checks but no cold read. What they
+# get instead is tools/key_check.py, because a wrong NUMBER in a key is worse
+# than ambiguous prose, and that is the failure a cold read would not catch.
+NO_COLD_READ = 5
+
 COLOR = sys.stdout.isatty()
 def paint(s, c): return f"\033[{c}m{s}\033[0m" if COLOR else s
 B = lambda s: paint(s, "1")
@@ -159,6 +185,56 @@ def log(entry, event, **kw):
 
 
 # ------------------------------------------------------------------ commands
+
+def group_of(path):
+    for name, _b, pages in GROUPS:
+        if str(path) in pages:
+            return name
+    return None
+
+
+def group_pages(name, led):
+    for gname, _b, pages in GROUPS:
+        if gname == name:
+            return [p for p in pages if p in led["pages"]]
+    return []
+
+
+def cmd_group(a, led):
+    """Show a cold-read group, or the next one that is ready."""
+    if a.name:
+        names = [a.name]
+    else:
+        names = [g[0] for g in GROUPS]
+    shown = False
+    for name in names:
+        pages = group_pages(name, led)
+        if not pages:
+            continue
+        states = {p: led["pages"][p]["status"] for p in pages}
+        done = all(v in ("signed_off", "skipped") for v in states.values())
+        if not a.name and done:
+            continue
+        shown = True
+        ready = all(v in ("edited", "cold_read", "resolved", "signed_off", "skipped")
+                    for v in states.values())
+        print(B(f"\n{name}") + D(f"  {len(pages)} page(s)"))
+        for p in pages:
+            print(f"    {states[p]:<12} {p}")
+        if ready and any(v == "edited" for v in states.values()):
+            print(G("\n  Every page is edited. Cold-read them together:"))
+            print(D("    use tasks/2026-planning/prelaunch/cold-read-prompt.md with this file list"))
+            for p in pages:
+                print(D(f"      {p}"))
+        elif not ready:
+            todo = [p for p, v in states.items() if v in ("pending", "started")]
+            print(D(f"\n  Still to edit: {', '.join(todo)}"))
+        if not a.name:
+            break
+    if not shown:
+        print(G("\nEvery group is finished."))
+    return 0
+
 
 def cmd_status(a, led):
     print(B("\nEDS 217 voice pass"))
@@ -432,6 +508,8 @@ def main(argv=None):
     s.add_argument("--by", default="Kelly Caylor"); s.set_defaults(fn=cmd_signoff)
     s = sub.add_parser("skip"); s.add_argument("page"); s.add_argument("-n", "--note")
     s.set_defaults(fn=cmd_skip)
+    s = sub.add_parser("group"); s.add_argument("name", nargs="?")
+    s.set_defaults(fn=cmd_group)
     s = sub.add_parser("reopen"); s.add_argument("page"); s.add_argument("-n", "--note")
     s.set_defaults(fn=cmd_reopen)
     s = sub.add_parser("pending"); s.set_defaults(fn=cmd_pending)

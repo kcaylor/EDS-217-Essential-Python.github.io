@@ -29,7 +29,7 @@ The notebook is due when you push it, before you go to lunch.
 | 10:00 to 11:45   | Step 10 and the write-up. Make the figure readable and the notebook legible. |
 | 11:45 to 12:00   | Restart and run everything one last time, then push to GitHub. |
 | 12:00 to 1:00    | Lunch. **The notebook is done.** |
-| 1:00 to 1:10     | Running order, and connect the first machine to the projector. |
+| 1:00 to 1:10     | Settle, and get the first notebook on the projector. |
 | 1:10 to 2:40     | Presentations, first half |
 | 2:40 to 2:55     | Break |
 | 2:55 to 4:25     | Presentations, second half |
@@ -44,8 +44,9 @@ out of morning, finishing the first three items properly beats starting all five
 1. **Restart the kernel and run every cell from the top.** Do this at the start of the morning,
    not only at 11:45. A notebook that runs only in the order you happened to write it is a notebook
    that will fail in front of the class, and you want to find that out at 10am.
-2. **Step 10, Visualize.** One figure that carries the claim. Axis labels with units, a title that
-   states the finding rather than naming the variables, and a legend if you used `hue=`.
+2. **Step 10, Visualize.** Take yesterday's figure and make it carry the claim. Axis labels with
+   units, a title that states the finding rather than naming the variables, and a legend if you
+   used `hue=`. Refining one figure beats starting a new one.
 3. **A markdown cell under every one of the ten workflow headings**, which are listed on the
    [final project page](final_project.qmd). Where a step was genuinely not needed, the cell says so
    in a sentence. An empty heading is the only thing here that reads as unfinished.
@@ -64,15 +65,17 @@ minutes of the morning for it, because this is the step that goes wrong under ti
 is nothing to submit after class.
 
 1. Put the project notebook in its **own repository**, not in your coursework repository.
-2. **Keep the outputs.** This is the one place where the advice in the
-   [GitHub session](interactive-sessions/8a_github.qmd) does not apply: `nbstripout` removes
-   figures and printed output from every commit, which is right for coursework and wrong for a
-   notebook whose figures are the point. Do not configure `nbstripout` on this repository.
+2. **Keep the outputs.** The advice in the [GitHub session](interactive-sessions/8a_github.qmd)
+   does not apply here: `nbstripout` removes figures and printed output from every commit, which is
+   right for coursework and wrong for a notebook whose figures are the point. Do not configure
+   `nbstripout` on this repository.
 3. Add a one-paragraph `README.md` naming the team, the dataset, its source URL, and the question.
 4. Push, then open the repository in a browser and confirm the notebook renders with its figures
    showing. GitHub renders `.ipynb` files directly, so this takes ten seconds and catches the
    problem while you can still fix it.
-5. Send me the repository URL.
+5. **Submit through the course form**, linked at the top of the
+   [final project page](final_project.qmd). One submission per team. It asks for the repository
+   URL, an export of the notebook, and your slides if you made any.
 
 ::: {.callout-tip title="If git is fighting you at five to twelve"}
 Do not lose the notebook to a merge conflict on the last morning. Download the `.ipynb` from
@@ -85,9 +88,10 @@ matters; the repository is how it travels.
 **Twelve minutes per team, then three for questions.** I will keep time and I will be strict about
 it, because the last team of the afternoon deserves the same twelve minutes as the first.
 
-Present **from your notebook**, not from slides. Scroll through it and talk. You have already
-written the structure, and rebuilding it in Google Slides on Friday morning is work that teaches
-you nothing.
+Present **from your notebook**. Scroll through it and talk. You have already written the
+structure, and rebuilding it as slides on Friday morning is work that teaches you nothing. If your
+team has already made slides and would rather use them, that is fine, but do not make them for the
+sake of it.
 
 A twelve-minute walkthrough that works, every time:
 

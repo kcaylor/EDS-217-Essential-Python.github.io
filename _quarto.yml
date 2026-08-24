@@ -116,8 +116,11 @@ website:
             href: course-materials/coding-colabs/7c_penguins.qmd
       - text: 👀 cheatsheets
         href: cheatsheets.qmd
-      - text: 🔑 answer keys
-        href: course-materials/answer-keys/answer_keys.qmd
+      # Answer keys are deliberately not in the navbar. The pages still render
+      # and keep their URLs, and Kelly hands those out in Slack or on the
+      # whiteboard once a session has had its turn at trial and error.
+      # - text: 🔑 answer keys
+      #   href: course-materials/answer-keys/answer_keys.qmd
       # - text: 🎓 lectures
         #   href: course-materials/lectures/lectures.qmd
       - text: 📚 resources

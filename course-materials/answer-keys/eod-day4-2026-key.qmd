@@ -332,9 +332,14 @@ going to behave on a linear axis. Task 15 is about to show you that.
 **15 and 16. The histogram, and why it is useless.**
 
 ```{python}
-plt.hist(samples['Measurement'])
+counts, edges, _ = plt.hist(samples['Measurement'])
 plt.xlabel('pieces per cubic metre')
 plt.show()
+
+# plt.hist hands back the bin counts and edges, which is how we read a figure
+# we cannot see anything in.
+print('bin width:', edges[1] - edges[0])
+print('counts per bin:', counts)
 ```
 
 :::{.callout-note title="✅ Answer"}

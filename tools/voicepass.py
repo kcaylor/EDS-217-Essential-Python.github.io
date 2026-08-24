@@ -377,6 +377,26 @@ def cmd_skip(a, led):
     return 0
 
 
+def cmd_reopen(a, led):
+    """Send a page back to the start of the pass.
+
+    Kelly states a new rule roughly once a sitting, and a rule stated on Tuesday
+    applies to the page signed off on Monday. Reopening is normal, not a failure,
+    so it is a first-class move rather than something done by hand in the JSON.
+    """
+    e = get(led, a.page)
+    if not a.note:
+        sys.exit("a reopened page needs a note saying what changed")
+    was = e["status"]
+    e["status"] = "started"
+    e.setdefault("metrics", {})["before"] = measure(a.page)
+    log(e, "reopened", was=was, note=a.note)
+    save(led)
+    print(f"{a.page} reopened from {was}: {a.note}")
+    print(D("  Earlier findings and their resolutions are kept in the history."))
+    return 0
+
+
 def cmd_pending(a, led):
     rows = [(k, f) for k, v in sorted(led["pages"].items()) for f in v["findings"]
             if f["status"] == "needs-kelly"]
@@ -412,6 +432,8 @@ def main(argv=None):
     s.add_argument("--by", default="Kelly Caylor"); s.set_defaults(fn=cmd_signoff)
     s = sub.add_parser("skip"); s.add_argument("page"); s.add_argument("-n", "--note")
     s.set_defaults(fn=cmd_skip)
+    s = sub.add_parser("reopen"); s.add_argument("page"); s.add_argument("-n", "--note")
+    s.set_defaults(fn=cmd_reopen)
     s = sub.add_parser("pending"); s.set_defaults(fn=cmd_pending)
 
     a = p.parse_args(argv)

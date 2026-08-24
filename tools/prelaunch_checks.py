@@ -455,6 +455,15 @@ HARD_RULES = [
         re.I)),
     ("metaphorical 'hinge'", re.compile(r"\bhinges?\b|\bhinging\b", re.I)),
     ("'X with a hint of Y'", re.compile(r"with a (?:hint|touch|dash) of", re.I)),
+    # A clause that announces an explanation instead of giving one.
+    ("promise instead of tell", re.compile(
+        r"and here (?:is|are|'s) why"
+        r"|for (?:a|the) reason (?:you|we)(?:'ll| will) see"
+        r"|as (?:you|we)(?:'ll| will) see\b"
+        r"|(?:you|we)(?:'ll| will) see why"
+        r"|more on (?:this|that) (?:below|later|shortly)"
+        r"|(?:we|you)(?:'ll| will) come back to (?:this|that)"
+        r"|for reasons? (?:that )?(?:will become|becomes) clear", re.I)),
 ]
 
 # Advisory only. The "not X, it is Y" shape is glib when it is a rhetorical

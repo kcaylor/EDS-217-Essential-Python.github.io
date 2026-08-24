@@ -23,8 +23,8 @@ you will know how all of it works.
 We will use real Arctic weather data from the [Arctic LTER](https://lternet.edu/site/arctic-lter/)
 station at Toolik Lake, Alaska: daily measurements from 1988 onward. This session covers the
 first half of the workflow: Import, Explore, Group, and Aggregate. We skip Clean along the way,
-for a reason you will see. Session 1d finishes the job with Visualize and Export, and gives the
-whole workflow its name.
+because this particular file has nothing wrong with it. Session 1d finishes the job with
+Visualize and Export, and gives the whole workflow its name.
 
 ## Getting Started
 
@@ -169,15 +169,15 @@ print(f"The Toolik dataset has {n_rows} daily records.")
 Now write a second sentence of your own, maybe about how many columns there are.
 :::
 
-## Step 3: Clean 🧹 (skipped today, and here is why)
+## Step 3: Clean 🧹, which we skip today
 
 The next step in a normal workflow is **Clean**: fixing missing values, wrong types, and
 duplicate rows. Our health check already showed that `Daily_AirTemp_Mean_C` has no missing
-values, so there is nothing to clean for today's analysis, and we can go straight on.
+values, so we have nothing to clean today and can go straight on.
 
 :::{.callout-note}
 Enjoy this while it lasts. Most real datasets need real cleaning, and it is often the biggest
-part of a project. You will spend all of Day 4 on it. Today the data came ready to use.
+part of a project. We spend all of Day 4 on it. Today the data came ready to use.
 :::
 
 ## Step 4: Group 👥

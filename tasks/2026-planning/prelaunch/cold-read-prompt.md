@@ -61,9 +61,27 @@ survives a writer's own proofread:
 4. Any sentence longer than about 35 words. Read it twice and say whether it
    survived.
 
-DO NOT report: style preferences, tone, word choice you merely dislike, or
-anything you understood on the first read. Only report comprehension failures and
-factual inconsistencies.
+ALSO REPORT these four, which are house rules rather than taste, and which a
+first-time reader feels even when they cannot name them:
+
+5. **Any sentence that opens with That, This, These or Those** and points back
+   into the text rather than at the page you are holding. Say what you had to
+   reach back for.
+6. **Any numeral used as a noun with the noun left out**, such as "any of the
+   three" or "all five". Say "three what".
+7. **Any clause that announces an explanation instead of giving one**: "and here
+   is why", "for a reason you will see", "as you will see", "more on this below".
+8. **Any declarative sentence about what the class does that is written at you
+   rather than with you**, or that has no subject at all. Teaching prose uses the
+   first person plural for what happens in the room ("We skip Clean today"), the
+   imperative for instructions ("Create a new notebook"), and the second person
+   only for what you personally own or produce ("Your notebook should hold four
+   things"). Report sentences in the first category written as "you" or written
+   with the subject dropped.
+
+DO NOT report: tone, word choice you merely dislike, or anything you understood on
+the first read. Only report comprehension failures, factual inconsistencies, and
+the four house rules above.
 
 Return a numbered list, worst first, where "worst" means most likely to make a
 student do the wrong thing tomorrow. If a page is clean, say so plainly rather

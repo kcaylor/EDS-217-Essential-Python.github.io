@@ -49,6 +49,57 @@ demonstrative points back into the text.
 
 ---
 
+## Teach in the first person plural
+
+**Stated 2026-08-24.**
+
+> It is generally better to write in the 1st person plural (We are skipping this
+> today), so the student feels like they are part of a group of learners and that
+> the authorial voice is participating equally with the learner. This puts the
+> student in a more collaborative mood, versus "You" or what you did, which was
+> to (bizarrely!) omit the subject entirely.
+
+Counted on 2026-08-24 across the day pages and end-of-day activities: **11 uses of
+we, our or us against 508 of you or your.** The site talks at students almost
+exclusively.
+
+The rule is not to replace every "you". Three cases, and they are different:
+
+| Case | Person | Example |
+|---|---|---|
+| What happens in the room | **we** | We skip Clean today. We use pandas because it is what the field uses. |
+| An instruction to carry out | **imperative, no subject** | Create a new notebook. Copy this cell and run it. |
+| What the individual student owns or must produce | **you** | Your notebook should hold four things. Name the file after your team. |
+
+Never omit the subject in a declarative sentence. "Skipped today, and here is why"
+has no actor at all, which is worse than either person.
+
+The boundary case is a shared experience described from outside, as in Day 7's
+"You have not made a picture since Monday". By this rule it becomes "We have not
+made a picture since Monday", and the sentence is better for it, because the
+instructor made that choice and is owning it.
+
+## No promise-instead-of-tell constructions
+
+**Stated 2026-08-24.**
+
+> Basically, all your "X is Y, and here's Z" crap has got to go.
+
+A clause that announces an explanation instead of giving one. The reader stops,
+expects the answer, and gets a signpost.
+
+| Instead of | Write |
+|---|---|
+| Step 3: Clean (skipped today, and here is why) | Step 3: Clean, which we skip today |
+| We skip Clean along the way, for a reason you will see. | We skip Clean, because this file has nothing wrong with it. |
+| That is why the exercise asks for it. | The exercise asks for it because a third of the rows are affected. |
+
+The same shape includes "as you will see", "more on this below", "we will come
+back to this", and "for reasons that will become clear". If the explanation is
+short, give it. If it is long, give the one-line version and link the long one.
+
+---
+
 ## "because", not "since", for an explanatory clause
 
 **Stated 2026-08-23.**

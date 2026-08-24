@@ -134,8 +134,7 @@ print(df.shape[0] / 16245)
 
 :::{.callout-note title="✅ Answer"}
 **10,453 rows, which is 64.3 percent of the file.** One line removed 5,792 rows, more than a
-third of everything you downloaded, and that is why the exercise asks you to print the shape
-after every step.
+third of everything you downloaded. Printing the shape after every step is how we notice.
 
 Now compare that with what a bare `.dropna()` would have done. Bare `.dropna()` removes any row
 with a null anywhere, and `SubRegions` is null on 15,657 rows, so it would have left you **588

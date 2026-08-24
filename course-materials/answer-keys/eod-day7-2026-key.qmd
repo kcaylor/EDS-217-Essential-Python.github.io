@@ -589,6 +589,12 @@ make the ranking more interesting or less?**
 by_state.sort_values('mean').head(5).round(2)
 ```
 
+```{python}
+# The answer compares California's count with the largest in the table, so put
+# the count column in front of us rather than reasoning about it from memory.
+by_state.sort_values('count', ascending=False).head(3).round(2)
+```
+
 :::{.callout-note title="✅ Answer"}
 **California, 0.82 °F over 2,552 zip codes. Only Texas has more, at 2,566.** California carries
 about 6 percent of the country's zip codes, so its 0.82 °F is the best-supported number in the

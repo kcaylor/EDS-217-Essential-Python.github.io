@@ -971,3 +971,57 @@ items:
     kind: command
     cmd: python3 tools/prelaunch_checks.py h5_locks_clear
     expect: no lock file present under .git
+
+- id: C11
+  title: Every answer key matches its exercise, cell for cell
+  category: content
+  severity: high
+  owner: kelly
+  state: verified
+  why: |
+    Kelly's requirement, 2026-08-24: keys should match assignments cell for cell,
+    with the output matching what the students were asked to generate. A key that
+    states a number its own code contradicts sends every student who checks their
+    work into a hole they did not dig, and a cold read cannot catch it, because a
+    reader has no way to run the code.
+  evidence: |
+    tools/key_check.py compares each of the twelve handout and key pairs three
+    ways: every numbered task has an answer, every cell in the key runs, and
+    every number the key states in an answer callout appears in the output of
+    the key's own code.
+
+    The first full run found one wrong value and three unsupported claims:
+
+      Day 1 said the yearly means run to -6.609016 (2016). 2016 is the second
+      warmest year. The warmest is 1993 at -5.806575, and the spread is 4.8
+      degrees rather than 4. Fixed.
+
+      Day 1 said "31 numbers, one per year" with no cell reporting the count.
+      Day 4 stated a gear breakdown by ocean, 4,390 neuston net tows against 188
+      PVC cylinder samples, that no cell computed. Day 4 stated that 10,147 of
+      10,178 values fall in the first histogram bin, about a figure. Day 7
+      compared California's 2,552 zip codes against Texas's 2,566, from a table
+      sorted the other way. 7c stated island counts and a mean flipper length
+      that no cell produced.
+
+      Each of those cells now computes and prints what the key claims, which
+      also gives the students the output they need to check themselves against.
+
+    All twelve pairs pass. The checker was tested against planted errors of each
+    kind it claims to catch: a changed count, a removed answer heading, and a
+    raised exception. It reports all three.
+  action: |
+    Run `make keys` after any edit to an exercise or a key. `make keys
+    PAIR=eod-day3` checks one pair; `make keys-tasks` checks structure without
+    executing anything, which is the fast version.
+
+    Read the run before signing off. The middle tier, "the code did not print
+    this, but it is one step of arithmetic from numbers it did", is where a
+    plausible wrong number would hide, so those lines are worth an eye even
+    though they do not fail the run.
+  verify:
+    kind: command
+    cmd: python3 tools/key_check.py --tasks-only
+    expect: 12 of 12 pairs clean
+  blocked_by: []
+  blocks: []

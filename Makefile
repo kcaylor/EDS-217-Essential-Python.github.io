@@ -43,6 +43,9 @@ help:
 	@echo "    make check               run every punch-list verification"
 	@echo "    make gates               the six quality gates"
 	@echo "    make cells               execute every code cell in the 2026 corpus"
+	@echo "    make keys                check every key against its own output"
+	@echo "    make keys PAIR=eod-day3  check one handout and key pair"
+	@echo "    make keys-tasks          key structure only, no execution"
 	@echo "    make cache               confirm every data URL resolves"
 	@echo "    make render              full render into docs/"
 	@echo "    make verify              render plus all of the above"
@@ -93,6 +96,12 @@ cells:
 
 cache:
 	@$(RUN) python tools/warm_cache.py
+
+keys:
+	@$(RUN) python tools/key_check.py $(PAIR)
+
+keys-tasks:
+	@$(RUN) python tools/key_check.py --tasks-only
 
 verify:
 	@bash tools/render-check.sh

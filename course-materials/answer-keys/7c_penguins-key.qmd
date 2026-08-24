@@ -151,6 +151,12 @@ sns.histplot(data=birds, x='flipper_length_mm', hue='species')
 plt.xlabel('Flipper length (mm)')
 plt.title('Flipper length by species')
 plt.show()
+
+# The mean the histogram argues against, and how few birds are near it.
+print('mean flipper length:', birds['flipper_length_mm'].mean().round(2))
+print('birds within 5 mm of the mean:',
+      (birds['flipper_length_mm'].sub(birds['flipper_length_mm'].mean())
+       .abs() < 5).sum())
 ```
 
 :::{.callout-note title="✅ Answer"}
@@ -338,6 +344,9 @@ plt.xlabel('Number of penguins')
 plt.ylabel('Island')
 plt.title('Sampling effort by island')
 plt.show()
+
+# The figure shows the imbalance. The counts name it.
+print(birds['island'].value_counts())
 ```
 
 :::{.callout-note title="✅ Answer"}

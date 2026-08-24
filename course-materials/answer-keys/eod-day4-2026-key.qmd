@@ -589,6 +589,17 @@ choice you owe the reader an explanation for.**
 would you need to know about *how the samples were collected* before you would publish a
 comparison between these two oceans?**
 
+```{python}
+print(positive['ocean'].value_counts())
+
+# The question is about gear, so count the methods within each ocean.
+for name in ['Atlantic', 'Pacific']:
+    print()
+    print(name)
+    print(positive[positive['ocean'] == name]['Sampling Method']
+          .value_counts().head(4))
+```
+
 :::{.callout-note title="✅ Answer"}
 **799 Pacific samples out of 7,091, which is 11.3 percent**, and task 12 shows the same
 imbalance before the zeros were removed: 9,039 Atlantic against 1,050 Pacific.

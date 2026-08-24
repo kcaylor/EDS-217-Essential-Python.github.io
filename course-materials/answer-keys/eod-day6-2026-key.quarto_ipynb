@@ -1,0 +1,687 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Answer Key\"\n",
+        "subtitle: \"🕺 Sixty-Four Contests, Two Tables 💃\"\n",
+        "search: false\n",
+        "execute:\n",
+        "  echo: true\n",
+        "  include: true\n",
+        "jupyter: eds217_2026\n",
+        "format:\n",
+        "  html:\n",
+        "    toc: true\n",
+        "    toc-depth: 3\n",
+        "    code-fold: show\n",
+        "---\n",
+        "\n",
+        "\n",
+        ":::{.callout-important title=\"How to use this key\"}\n",
+        "Work the exercise first, then come here. The code below is **one** correct answer, not the only\n",
+        "one. If your code looks different but produces the same numbers, you were right.\n",
+        "\n",
+        "The written answers matter more than the code. You can already tell whether your code ran. What\n",
+        "you cannot check on your own is whether you read the result correctly, and that is what the\n",
+        "green **Answer** boxes are for. Compare your markdown cells against them.\n",
+        "\n",
+        "⬅️ Back to [the exercise](../eod-practice/eod-day6-2026.qmd)\n",
+        ":::\n",
+        "\n",
+        "## Setup\n"
+      ],
+      "id": "f00f0954"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import pandas as pd; raise ValueError(\"planted\")\n",
+        "\n",
+        "url = 'https://eds-217-essential-python.github.io/data/eurovision_contestants.csv'\n",
+        "eurovision = pd.read_csv(url)"
+      ],
+      "id": "56f8538b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Part 1: What is in this file, and what is missing from it\n",
+        "\n",
+        "**1. How many rows and columns? What are the column names, and what is the range of `year`?**\n"
+      ],
+      "id": "9d48b13d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(eurovision.shape)\n",
+        "print(list(eurovision.columns))\n",
+        "print(eurovision['year'].min(), eurovision['year'].max())"
+      ],
+      "id": "9454c7a0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**1,603 rows and 21 columns, covering 1956 to 2020.** The unit of a row is one country's entry in\n",
+        "one contest, not one contest, which is why there are 1,603 rows for 65 years.\n",
+        "\n",
+        "That span of 65 years contains 65 distinct values of `year`, so every year in the range is\n",
+        "represented in the file, including the one that did not happen. Of the 21 columns, most describe\n",
+        "a result rather than a song: place and points in the final, place and points in the semi-final,\n",
+        "and since 2016 the jury and televote components of each.\n",
+        ":::\n",
+        "\n",
+        "**2. Run `.isnull().sum()`. Several columns are null on well over a thousand of the 1,603 rows.\n",
+        "Pick two of them and, in a markdown cell, propose an explanation for each that has nothing to do\n",
+        "with anybody making a mistake.**\n"
+      ],
+      "id": "5abb7d4c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "eurovision.isnull().sum()"
+      ],
+      "id": "ab4d1b00",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**Both of the worst columns are null because the thing they measure did not exist yet.**\n",
+        "\n",
+        "`sf_num` is null on 1,046 rows. The 557 rows where it is present all fall in 2004 or later, which\n",
+        "is when the contest introduced a semi-final. Before 2004 there was no semi-final to number, so\n",
+        "`place_sf`, `points_sf` and `running_sf` are null on 1,081 rows for the same reason.\n",
+        "\n",
+        "`points_tele_final` and `points_jury_final` are null on 1,499 rows. The 104 rows where they are\n",
+        "present are all from 2016 to 2019, which is when the contest began publishing the televote and\n",
+        "the jury vote as two separate scores instead of one combined number. The earlier scores were recorded as one combined\n",
+        "number and never split into two.\n",
+        "\n",
+        "This is the distinction worth carrying forward: a null can mean \"not recorded\", but here it means\n",
+        "\"not applicable\", and neither one is a mistake. Dropping every row with a null in this file would\n",
+        "leave you with almost nothing.\n",
+        ":::\n",
+        "\n",
+        "**3. `points_final` is the column the rest of this exercise depends on, and it is null on 295\n",
+        "rows. Group by `year` and count the non-null `points_final` values in each. Look at the last few\n",
+        "years.**\n"
+      ],
+      "id": "b079d448"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "eurovision.groupby('year')['points_final'].count().tail(6)"
+      ],
+      "id": "2608b6b3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**The recent years sit at 26 or 27 finalists each, and then 2020 reports 0.** Note that `.count()`\n",
+        "counts non-null values, which is exactly why it is the right verb here: 26 is the number of\n",
+        "countries that reached the final and were scored, not the number that entered.\n",
+        ":::\n",
+        "\n",
+        "**4. One year has a count of zero. Which one, and what happened? (You may look this up. It is the\n",
+        "only fact in this exercise that is not in the file.)**\n",
+        "\n",
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**2020.** The contest was cancelled in March 2020 because of the COVID-19 pandemic, the first\n",
+        "cancellation in its history. The 41 entries are in the file with their performers and songs\n",
+        "because they had been selected before the cancellation, but no country ever performed and no\n",
+        "points were ever awarded, so `points_final` and `place_contest` are null on all 41 rows.\n",
+        "\n",
+        "There is a second year at zero, and the `.tail(6)` hides it. Print the head of the same series:\n"
+      ],
+      "id": "bf986f04"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "eurovision.groupby('year')['points_final'].count().head(6)"
+      ],
+      "id": "e5d84c1c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "**1956 also has a count of zero**, on 12 entries, and for a completely different reason: the\n",
+        "scores of the first contest were never published. Only the winner was announced. The two zeros look\n",
+        "identical and have different causes: in 2020 no contest took place, and in 1956 the contest took\n",
+        "place and the numbers were not released. A count is a useful diagnostic, but it tells you the size of a hole\n",
+        "and not its cause.\n",
+        ":::\n",
+        "\n",
+        "**5. Build a table called `contests` that excludes that year, using the filter sentence and\n",
+        "ending the line with `.copy()`. How many rows does it have?**\n"
+      ],
+      "id": "e9f4cf13"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "contests = eurovision[eurovision['year'] != 2020].copy()\n",
+        "contests.shape"
+      ],
+      "id": "f597e954",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**1,562 rows**, exactly 41 fewer than the 1,603 you started with, which confirms you removed the\n",
+        "2020 entries and nothing else. Checking the row count against a number you can predict is the\n",
+        "cheapest way to know a filter did what you meant.\n",
+        "\n",
+        "Note that 1956 is still in `contests`. Its 12 rows have null `points_final`, so every mean and\n",
+        "count in the rest of the evening quietly ignores them, and that is the correct behaviour: pandas\n",
+        "skips nulls in `.mean()` and `.count()` rather than treating them as zero.\n",
+        ":::\n",
+        "\n",
+        "## Part 2: Decades\n",
+        "\n",
+        "**6. Add a `decade` column. Divide `year` by ten, convert the result to an integer, and multiply\n",
+        "by ten. `.astype(int)` truncates toward zero, which is exactly what you want here. Then count the\n",
+        "entries in each decade.**\n"
+      ],
+      "id": "8131b97d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "contests['decade'] = (contests['year'] / 10).astype(int) * 10\n",
+        "\n",
+        "contests['decade'].value_counts().sort_index()"
+      ],
+      "id": "62470e1d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**The count rises from 43 entries in the 1950s to 408 in the 2010s, roughly a tenfold increase.**\n",
+        "Some of that is real growth in the number of competing countries, but part of it is an artifact of\n",
+        "the bin: the 1950s decade holds only four contests, 1956 to 1959, while every later decade holds\n",
+        "ten. A per-decade total is not comparable across decades unless you also know how many contests\n",
+        "each decade contains.\n",
+        ":::\n",
+        "\n",
+        "**7. Count the entries in each year from 2000 to 2007. Something changes abruptly. What, and in\n",
+        "which year? In a markdown cell, say what a sudden jump in entries per contest would do to a\n",
+        "comparison of average scores between the 1990s and the 2010s.**\n"
+      ],
+      "id": "d202cfd9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "contests.groupby('year')['to_country'].count().loc[2000:2007]"
+      ],
+      "id": "387a8703",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**The field jumps from 26 entries in 2003 to 36 in 2004, and keeps growing to 42 by 2007.** That\n",
+        "is the year the semi-final was introduced, which is the same 2004 that first fills in `sf_num`.\n",
+        "Once countries no longer all had to fit into one evening, many more could enter.\n",
+        "\n",
+        "For a comparison of average scores this is a serious problem. Points are awarded by the competing\n",
+        "countries, so a larger field means more voters, which means more points in circulation, which\n",
+        "raises every score whether or not any song improved. A 2010s average and a 1990s average are\n",
+        "measured on scales that differ by roughly a factor of two in the number of voters, so comparing\n",
+        "them directly measures the size of the contest rather than the quality of the entries.\n",
+        ":::\n",
+        "\n",
+        "## Part 3: The best country of each decade\n",
+        "\n",
+        "**8. Build a table with one row per decade, holding the country with the highest average\n",
+        "`points_final` in that decade, how many entries that average came from, and the average itself.**\n"
+      ],
+      "id": "d9ca0f31"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "decade_winners_list = []\n",
+        "\n",
+        "for decade, decade_data in contests.groupby('decade'):\n",
+        "    country_avg = decade_data.groupby('to_country')['points_final'].agg(['count', 'mean'])\n",
+        "    country_avg = country_avg.reset_index()\n",
+        "    top_country = country_avg.sort_values('mean', ascending=False).head(1).copy()\n",
+        "    top_country['decade'] = decade\n",
+        "    decade_winners_list.append(top_country)\n",
+        "\n",
+        "decade_winners = pd.concat(decade_winners_list, ignore_index=True)\n",
+        "\n",
+        "decade_winners[['decade', 'to_country', 'count', 'mean']]"
+      ],
+      "id": "f4339008",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "**9. Read the `count` column before you read the `mean` column. Three of the seven winners won on\n",
+        "fewer than four entries. Name them, and say in one sentence why you would not put any of them in a\n",
+        "headline.**\n",
+        "\n",
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**France, which tops the 1950s at 19.7 points from 3 entries; Serbia, which tops the 2000s at\n",
+        "214.0 from 2 finals; and Bulgaria, which tops the 2010s at 362.7 from 3.** A mean of two or three\n",
+        "numbers moves by tens of points if a single entry is different, so none of the three is stable\n",
+        "enough to call a country the best of its decade.\n",
+        "\n",
+        "The other four winners are the ones with enough behind them to report: the United Kingdom in the\n",
+        "1960s and 1970s, on 10 entries each, and Ireland in the 1980s and 1990s, on 9 and 10. Three of\n",
+        "seven decade winners resting on three entries or fewer is itself a result about the method rather\n",
+        "than about the countries, since taking the highest mean in a group is exactly the operation that\n",
+        "selects for small counts.\n",
+        ":::\n",
+        "\n",
+        "**10. The `mean` column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown\n",
+        "cell, two or three sentences: is Europe getting better at writing songs? What else changed\n",
+        "between 1956 and 2019 that would produce exactly this pattern, and what would you have to divide\n",
+        "by to remove it?**\n",
+        "\n",
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**No. What changed is the scale on which points are awarded.** Points come from the competing countries, and the field\n",
+        "grew from about ten entrants in the 1950s to 42 in 2007, so the total number of points available\n",
+        "grew with it. On top of that, the contest split the jury vote and the televote into two separate\n",
+        "awards in 2016, which roughly doubled the points available again: the winning score was 152 in\n",
+        "1975 and 148 in 1995, but 365 in 2015 and 498 in 2019.\n",
+        "\n",
+        "To remove the effect you would divide each score by the total points available in that year, or\n",
+        "by the year's winning score, turning an absolute total into a share. A mean of shares is\n",
+        "comparable across decades. A mean of raw points measures how many countries were\n",
+        "competing.\n",
+        ":::\n",
+        "\n",
+        "## Part 4: The second table\n",
+        "\n",
+        "**11. Read the population file at\n",
+        "`https://eds-217-essential-python.github.io/data/eurovision_country_populations.csv`.\n",
+        "How many rows, and what are its columns?**\n"
+      ],
+      "id": "d679aade"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "pop_url = 'https://eds-217-essential-python.github.io/data/eurovision_country_populations.csv'\n",
+        "populations = pd.read_csv(pop_url)\n",
+        "\n",
+        "print(populations.shape)\n",
+        "print(list(populations.columns))"
+      ],
+      "id": "44471d66",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**52 rows and two columns, `country_name` and `population`.** 52 is the number of countries that\n",
+        "have ever entered, so this file has one row per country over the whole history of the contest,\n",
+        "while `contests` has one row per country per year. The two tables are at different grains, and\n",
+        "that is exactly why a merge is needed rather than a concatenation.\n",
+        ":::\n",
+        "\n",
+        "**12. Build a table called `modern` holding only contests from 1990 onwards, then count the\n",
+        "entries per country and turn that count into a two-column table using the Series-to-table move.\n",
+        "Rename the columns to `country` and `entries`.**\n"
+      ],
+      "id": "18a4575a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "modern = contests[contests['year'] >= 1990].copy()\n",
+        "\n",
+        "counts = modern['to_country'].value_counts().reset_index()\n",
+        "counts = counts.rename(columns={'to_country': 'country', 'count': 'entries'})\n",
+        "\n",
+        "counts.head()"
+      ],
+      "id": "9b002450",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**51 countries, and four of them are at the ceiling of 30: France, the United Kingdom, Spain and\n",
+        "Sweden.** The window 1990 to 2019 holds exactly 30 contests, and no country can enter a contest\n",
+        "twice, so 30 means \"entered every single year\" and no number in this column can ever exceed it.\n",
+        "Knowing the maximum a count is allowed to reach is worth as much as knowing the count.\n",
+        ":::\n",
+        "\n",
+        "**13. Merge `counts` with `populations`. The key columns have different names, so you will need\n",
+        "`left_on=` and `right_on=`. Do it twice, once with the default `how=` and once with\n",
+        "`how='right'`, and report both shapes.**\n"
+      ],
+      "id": "80bfe2eb"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "entries = pd.merge(counts, populations, left_on='country', right_on='country_name')\n",
+        "check = pd.merge(counts, populations, left_on='country', right_on='country_name', how='right')\n",
+        "\n",
+        "print(entries.shape)\n",
+        "print(check.shape)"
+      ],
+      "id": "dae628a7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**51 rows from the default inner merge and 52 from the right merge, a difference of exactly one\n",
+        "row.** The default `how='inner'` keeps only keys present in both tables, so it returns the 51\n",
+        "countries that have both a modern entry count and a population. `how='right'` keeps every row of\n",
+        "the population file whether or not the left table matched, so the 52nd country arrives with nulls\n",
+        "in its `country` and `entries` columns.\n",
+        "\n",
+        "Running the merge twice is the diagnostic. The inner merge alone would have told you 51 and given\n",
+        "you no way to know that anything was dropped.\n",
+        ":::\n",
+        "\n",
+        "**14. One country is in the population file and not in your counts. Find it, name it, and then\n",
+        "find every row for it in the full `eurovision` table. In a markdown cell, say what you learned\n",
+        "and why the inner merge was right to drop it.**\n"
+      ],
+      "id": "c874f902"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(check[check['entries'].isnull()][['country_name', 'population']])\n",
+        "print(eurovision[eurovision['to_country'] == 'Morocco'][['year', 'performer', 'song', 'place_contest']])"
+      ],
+      "id": "d12a66a9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**Morocco, population 24,807,462, with exactly one row in the whole file: Samira Bensaïd singing\n",
+        "\"Bitakat Hob\" in 1980, finishing 18th with 7 points.** Morocco has never returned.\n",
+        "\n",
+        "The inner merge was right because `counts` is a table of entries since 1990, and Morocco has none.\n",
+        "It is absent from `value_counts()` output for the plain reason that `value_counts()` can only\n",
+        "count values that appear, and a country with no rows in `modern` has no value to count. Dropping\n",
+        "it keeps the table honest about what it contains: countries that compete in the modern contest.\n",
+        "\n",
+        "The subtle part is what the null in the right merge means. It does not mean Morocco's entry count\n",
+        "is unknown, and it does not mean it is zero in general, since the 1980 entry is real. It means\n",
+        "\"this key had no match on the left\", and only you can decide which of those three readings applies.\n",
+        "Had you filled it with zero and kept it, the entries-per-million table in the next question would\n",
+        "carry a country that stopped competing ten years before the window opens.\n",
+        ":::\n",
+        "\n",
+        "**15. Add an `entries_per_million` column to `entries`: the entry count divided by the population\n",
+        "in millions. (`1_000_000` is a perfectly good way to write a million in Python; the underscores\n",
+        "are ignored.) Rank it and show the top eight and the bottom five.**\n"
+      ],
+      "id": "521c2e59"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "entries['entries_per_million'] = entries['entries'] / (entries['population'] / 1_000_000)\n",
+        "\n",
+        "ranked = entries.sort_values('entries_per_million', ascending=False)\n",
+        "\n",
+        "print(ranked[['country', 'entries', 'population', 'entries_per_million']].head(8))\n",
+        "print(ranked[['country', 'entries', 'population', 'entries_per_million']].tail(5))"
+      ],
+      "id": "b977bd66",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "**16. The top of that ranking is San Marino, Andorra, Iceland, Monaco and Malta, and the bottom is\n",
+        "Russia, Italy and Ukraine. In a markdown cell, three or four sentences: is *entries per million\n",
+        "people* a meaningful quantity? What is it actually measuring, and what would you have to know\n",
+        "about how the file's population numbers were collected before you would publish this table?**\n",
+        "\n",
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**It is arithmetically correct and close to meaningless, because it is almost entirely a ranking\n",
+        "of small populations.** The numerator cannot exceed 30, so it varies by a factor of about ten\n",
+        "across the table, while the denominator varies by a factor of more than six thousand, from San\n",
+        "Marino at 23,186 to Russia at 148,005,704. Whichever country is smallest will top this ranking\n",
+        "almost regardless of how often it competes: San Marino reaches 431.3 entries per million on only\n",
+        "10 entries, while Russia's 22 entries give 0.149.\n",
+        "\n",
+        "What it actually measures is roughly one divided by population, presented as a rate. It says\n",
+        "nothing about enthusiasm per person, because a country sends one entry no matter how many people\n",
+        "live in it. The quantity would be meaningful only if the numerator could scale with population,\n",
+        "and here by rule it cannot.\n",
+        "\n",
+        "Before publishing it you would need to know what year each population figure is from, and the\n",
+        "file does not say. Iceland is listed at 255,866 and the United Kingdom at 57,247,586, both of\n",
+        "which are roughly late-1980s figures, and the file still carries rows for Yugoslavia (23,818,000)\n",
+        "and Serbia & Montenegro (9,791,475), states that ceased to exist in 1992 and 2006. So the\n",
+        "denominators come from mixed and unstated years, and some of them describe countries that did not\n",
+        "exist for most of the 1990 to 2019 window the numerator covers.\n",
+        ":::\n",
+        "\n",
+        "## Part 5: The whole contest in one grid\n",
+        "\n",
+        "**17. Build a wide table with `to_country` down the rows, `decade` across the columns, and the\n",
+        "mean `points_final` in the cells. What shape is it?**\n"
+      ],
+      "id": "573a386d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "grid = contests.pivot_table(index='to_country', columns='decade', values='points_final')\n",
+        "\n",
+        "grid.shape"
+      ],
+      "id": "ff01e7db",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**51 rows by 7 columns, one row per country and one column per decade.** The seven columns are the\n",
+        "seven decades, which you already know from question 6.\n",
+        "\n",
+        "The 51 is worth a second look. There are 52 distinct countries in `contests`, so one is absent\n",
+        "from this grid entirely. It is Andorra, whose six entries between 2004 and 2009 never reached a\n",
+        "final, so `points_final` is null on every one of them. `pivot_table` drops an all-null row by\n",
+        "default, and it does so silently. A pivot table with fewer rows than your data has groups is\n",
+        "reporting that some group had nothing to aggregate.\n",
+        ":::\n",
+        "\n",
+        "**18. Build the same table again with `aggfunc='count'`, and look at both for four countries that\n",
+        "have competed throughout: Ireland, Sweden, the United Kingdom and Norway.**\n"
+      ],
+      "id": "e3da477b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "grid_n = contests.pivot_table(index='to_country', columns='decade',\n",
+        "                              values='points_final', aggfunc='count')\n",
+        "\n",
+        "print(grid.loc[['Ireland', 'Sweden', 'United Kingdom', 'Norway']].round(1))\n",
+        "print(grid_n.loc[['Ireland', 'Sweden', 'United Kingdom', 'Norway']])"
+      ],
+      "id": "90b7d371",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**The counts grid counts finals reached, not entries submitted, and the difference shows up after\n",
+        "2004.** Ireland's counts run 5, 10, 9, 10 through the 1990s and then fall to 6 and 5, but Ireland\n",
+        "entered nine times in the 2000s and ten times in the 2010s. The missing entries were eliminated in\n",
+        "the semi-final and so have a null `points_final`. The United Kingdom shows 10 in every full\n",
+        "decade, because the largest financial contributors are seeded straight into the final, a rule that\n",
+        "is not in the file.\n",
+        "\n",
+        "That changes how you read the means beside them. Ireland's 2000s mean of 42.7 is an average over\n",
+        "the six years it qualified, so it excludes its three worst years by construction, and it is still\n",
+        "the country's weakest decade. Sweden's 2010s mean of 268.3 comes from 9 finals out of 10 entries.\n",
+        "An average computed only over the occasions when a country did well enough to be scored is biased\n",
+        "upward, and the counts grid is how you see that it is happening.\n",
+        ":::\n",
+        "\n",
+        "**19. In a markdown cell: the empty cells in the means grid are not all the same kind of empty.\n",
+        "Name two different reasons a country might have no number in a given decade, and say how you\n",
+        "would tell them apart using the counts grid.**\n",
+        "\n",
+        ":::{.callout-note title=\"✅ Answer\"}\n",
+        "**Reason one: the country did not compete in that decade at all.** Ireland in the 1950s and Norway\n",
+        "in the 1950s are examples. There are no rows to aggregate, so both grids are empty in that cell.\n",
+        "\n",
+        "**Reason two: the country competed and never reached a final.** Slovakia in the 2000s and again in\n",
+        "the 2010s, and the Czech Republic, Monaco, Montenegro and San Marino in the 2000s, all entered and\n",
+        "were all eliminated in every semi-final of the decade. Every `points_final` is null, so the mean\n",
+        "is empty, but there were rows to count.\n",
+        "\n",
+        "The counts grid separates the two: an empty cell there means no entries, while a `0.0` means\n",
+        "entries but no finals. Six cells in the counts grid hold `0.0` while the means grid is empty, and\n",
+        "they are the second kind of empty. Andorra is the third and most easily missed case, since it has\n",
+        "`0.0` in the counts grid for the 2000s but no row at all in the means grid.\n",
+        "\n",
+        "The reading matters because the two look identical in a plot or a report. One says a country was\n",
+        "not there. The other says it was there and never got far enough to be scored, which is a result,\n",
+        "not an absence.\n",
+        ":::\n",
+        "\n",
+        "## Part 6: Write it up\n",
+        "\n",
+        "There is no single right answer. A strong response cites at least three numbers you computed,\n",
+        "names at least two distinct reasons the question is harder than it sounds, and ends with a\n",
+        "specific table or number you would actually send. Here is one that would earn full marks.\n",
+        "\n",
+        ":::{.callout-note title=\"✅ A model answer\"}\n",
+        "Partly, and only for a period that ended twenty years ago. Ireland has the highest average\n",
+        "`points_final` of any country in both the 1980s and the 1990s, at 99.2 points from 9 finals and\n",
+        "119.2 from 10, and those are the two most trustworthy rows in the decade-winners table because\n",
+        "every other winner rests on ten entries or fewer than four. On that evidence Ireland was the\n",
+        "strongest country of two consecutive decades, which no other country in the file achieved.\n",
+        "\n",
+        "The claim stops being supportable as soon as it is extended to \"in history\", for two reasons. The\n",
+        "first is that points are not comparable across eras. The field grew from 26 entries in 2003 to 36\n",
+        "in 2004 when the semi-final was introduced, and the winning score rose from 148 in 1995 to 498 in\n",
+        "2019, so a raw mean rewards recency rather than quality. The second is that the counts grid shows\n",
+        "Ireland reaching only 6 finals in the 2000s and 5 in the 2010s, and its mean in those decades,\n",
+        "42.7 and 66.2, is an average over its better years alone, since the years it failed to qualify\n",
+        "contribute nothing. Sweden's 268.3 in the 2010s is on the same inflated scale and cannot be set\n",
+        "against Ireland's 119.2 from the 1990s.\n",
+        "\n",
+        "What the data cannot tell the editor is who is best overall, because no common scale exists. I\n",
+        "would send the two pivot tables together, means beside counts, for the countries that competed\n",
+        "throughout, and the sentence that goes with them: Ireland dominated the 1980s and 1990s, and the\n",
+        "question of the best country in history is not answerable from points.\n",
+        ":::\n",
+        "\n",
+        "## Where the marks are\n",
+        "\n",
+        "If you compare your notebook against this key, look for these four things before anything else.\n",
+        "\n",
+        "1. **You ran both merges and compared 51 to 52.** The single dropped row was the whole point of\n",
+        "   question 13, and an inner merge on its own gives you no signal that anything went missing.\n",
+        "2. **You read the `count` column before the `mean` column, every time.** Three of the seven decade\n",
+        "   winners rest on fewer than four entries, and in Part 5 the counts grid is what tells you that\n",
+        "   Ireland's later means were computed over qualifying years only.\n",
+        "3. **You can distinguish the two kinds of empty cell.** A null in the means grid with `0.0` beside\n",
+        "   it in the counts grid is a country that competed and never made a final. A null in both is a\n",
+        "   country that was not there.\n",
+        "4. **You never called `.fillna(0)`.** Doing it to 2020 would have given 41 real scores of zero, and\n",
+        "   doing it to the merge would have put a country that last competed in 1980 into a table about\n",
+        "   the modern contest.\n",
+        "\n",
+        "⬅️ Back to [the exercise](../eod-practice/eod-day6-2026.qmd)"
+      ],
+      "id": "7f9424cd"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "eds217_2026",
+      "language": "python",
+      "display_name": "eds217_2026",
+      "path": "/Users/kellycaylor/Library/Jupyter/kernels/eds217_2026"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

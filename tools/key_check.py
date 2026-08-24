@@ -92,20 +92,68 @@ def prose_of(text):
 LEAD_TASK = re.compile(r"\A(?:\d{1,2})(?:(?:,|\s+and)\s*\d{1,2})*\s*[.:](?!\d)\s*")
 
 
+# A key refers back to earlier work constantly, "the near tie in question 13",
+# "carry that into Part 5". Those numbers name a place in the handout and assert
+# nothing about the data, so they are removed before the rest is read.
+XREF = re.compile(r"\b(?:questions?|tasks?|parts?|steps?)\s+"
+                  r"\d{1,2}(?:\s*(?:,|and|to|through)\s*\d{1,2})*", re.I)
+
+# "Every one of the top 10 is a Total row" counts list entries, not data. The
+# number says how long a list is, which the student chose when writing .head().
+LISTSIZE = re.compile(
+    r"\b(?:top|bottom|first|last|largest|smallest|highest|lowest)[- ]\d{1,3}\b"
+    r"|\b(?:top|bottom|first|last)\s+\d{1,3}\b"
+    r"|\b\d{1,3}\s+(?:largest|smallest|highest|lowest|biggest)\b", re.I)
+
+
+# Every key puts its findings inside this callout and restates the task outside
+# it. Reading only the callouts is what separates a claim about the output from
+# the wording of the question, which carries numbers of its own: "why is that
+# number smaller than 80,000?"
+ANSWER_BLOCK = re.compile(
+    r"^:::+\s*\{\s*\.callout-note[^}]*✅ Answer[^}]*\}\s*$(.*?)^:::+\s*$",
+    re.M | re.S)
+
+
+def answer_prose(key_text):
+    """The text of every answer callout, with code and cross-references gone."""
+    blocks = ANSWER_BLOCK.findall(prose_of(key_text))
+    return LISTSIZE.sub(" ", XREF.sub(" ", "\n\n".join(blocks)))
+
+
+def code_literals(key_text):
+    """Numbers written into the key's own cells.
+
+    A threshold the exercise sets, "-100", is a number the student types rather
+    than one the run produces, so a key that quotes it back is not making a
+    claim about output.
+    """
+    lits = set()
+    for b in CODE.findall(key_text):
+        for m in NUM.finditer(b):
+            lits.add(m.group(0).replace(",", ""))
+    return lits
+
+
 def asserted_numbers(key_text):
     """Numbers the key states as findings: bolded, or in inline code, in prose."""
-    prose = prose_of(key_text)
+    prose = answer_prose(key_text)
+    literals = code_literals(key_text)
     found = []
     for m in BOLD.finditer(prose):
         body = LEAD_TASK.sub("", m.group(1))
         for n in NUM.finditer(body):
-            found.append((n.group(0), body.strip()[:70]))
+            if n.group(0).replace(",", "") in literals:
+                continue
+            found.append((n.group(0), " ".join(body.split())))
     for m in INLINE.finditer(prose):
         body = m.group(0).strip("`")
         # Inline code that is a bare value, not an expression or a column name.
         if re.fullmatch(r"[-\d,.\s%]+", body):
             for n in NUM.finditer(body):
-                found.append((n.group(0), body.strip()[:70]))
+                if n.group(0).replace(",", "") in literals:
+                    continue
+                found.append((n.group(0), " ".join(body.split())))
     return found
 
 
@@ -263,11 +311,17 @@ def derived_index(produced, depth=4):
     vals = sorted({v for v, _ in produced})[:200]
     index = {d: set() for d in range(depth + 1)}
 
+    # Significant-figure buckets carry the hedged claims, "a ratio of about
+    # 403,000", where the key rounds a derived value to three digits.
+    sigs = {n: set() for n in range(1, 7)}
+
     def add(x):
         if x is None or x != x or abs(x) > 1e12:
             return
         for d in index:
             index[d].add(round(x, d))
+        for n in sigs:
+            sigs[n].add(round_sig(x, n))
 
     # Only ratios. Sums and differences of two hundred printed values cover the
     # integer line so densely that every wrong count looks explainable, which
@@ -278,14 +332,107 @@ def derived_index(produced, depth=4):
             if y:
                 add(100.0 * x / y)
                 add(x / y)
-    return index
+    return index, sigs
 
 
-def is_derived(asserted, index):
+HEDGE = re.compile(r"\b(about|roughly|approximately|around|nearly|some|"
+                   r"a little (over|under)|just (over|under))\s*$", re.I)
+
+
+def hedged(context, asserted):
+    """Was the number introduced as an approximation?
+
+    Either a hedging word stands in front of it, or the number is round enough
+    to be one on its face: "40,000 points are enough to draw a map" is a stated
+    approximation of 40,492 whether or not the word "about" appears.
+    """
+    at = context.find(asserted)
+    if at > 0 and HEDGE.search(context[:at]):
+        return True
+    bare = asserted.replace(",", "").lstrip("-")
+    return len(bare) >= 4 and bare.endswith("000")
+
+
+def approximates(asserted, produced, sigs):
+    """A hedged number need only agree to the digits it was written with."""
     raw = asserted.replace(",", "")
     try:
         a = float(raw)
     except ValueError:
+        return False
+    sig = significant(raw)
+    target = round_sig(a, sig)
+    if sig in sigs and target in sigs[sig]:
+        return True
+    return any(p_ and target == round_sig(p_, sig) for p_, _ in produced)
+
+
+# Numbers a key states that its own output cannot show, checked by hand and
+# recorded here so the run stays readable. Each entry names why.
+ACCEPTED = {
+    ("4d_cleaning_messy_data-key.qmd", "-9999"):
+        "hypothetical, the sentence explains why the filter uses a range "
+        "rather than one sentinel value",
+    ("eod-day4-2026-key.qmd", "10,147"):
+        "verified by hand against np.histogram; the cell now prints its bin "
+        "counts, so this entry is a safety net rather than the reason it passes",
+}
+
+
+def from_neighbours(asserted, context):
+    """Is the number the sum, difference or ratio of others in the same sentence?
+
+    "CO2 rose from 320.29 ppm to 400.41 ppm, an increase of 80.12 ppm" states
+    its own arithmetic. Restricting the operands to one sentence keeps this from
+    excusing any number at all, which is what happened when sums and differences
+    ranged over every value the run printed.
+    """
+    raw = asserted.replace(",", "")
+    try:
+        a = float(raw)
+    except ValueError:
+        return False
+    dec = len(raw.split(".")[1]) if "." in raw else 0
+    near = []
+    for m in NUM.finditer(context):
+        t = m.group(0).replace(",", "")
+        if t == raw:
+            continue
+        try:
+            near.append(float(t))
+        except ValueError:
+            pass
+    for x in near:
+        for y in near:
+            if x is y:
+                continue
+            for cand in (x - y, x + y, (x / y if y else None),
+                         (100.0 * x / y if y else None)):
+                if cand is not None and round(cand, dec) == round(a, dec):
+                    return True
+    return False
+
+
+PCT = re.compile(r"per ?cent|%")
+
+
+def is_derived(asserted, context, index):
+    """A percentage the code did not print but that its numbers imply.
+
+    Only percentages. Ratios of every printed value against every other cover
+    the small integers so completely that an injected 166 for 160 passed as
+    explainable. A percentage is bounded and usually carries a decimal, so the
+    same index is a real constraint rather than a rubber stamp. Everything else
+    has to be printed, or derivable from numbers in its own sentence.
+    """
+    if not PCT.search(context):
+        return False
+    raw = asserted.replace(",", "")
+    try:
+        a = float(raw)
+    except ValueError:
+        return False
+    if not 0 <= a <= 100:
         return False
     dec = len(raw.split(".")[1]) if "." in raw else 0
     return dec in index and round(a, dec) in index[dec]
@@ -400,15 +547,25 @@ def check(handout, key, tasks_only=False):
         print(G(f"  all {len(claims)} asserted numbers appear in the output"))
         return problems
 
-    index = derived_index(produced)
-    derived = [(a, ctx) for a, ctx in unmatched if is_derived(a, index)]
-    missing = [(a, ctx) for a, ctx in unmatched if not is_derived(a, index)]
+    index, sigs = derived_index(produced)
+    derived, missing, allowed = [], [], []
+    for a, ctx in unmatched:
+        if (kp.name, a) in ACCEPTED:
+            allowed.append((a, ctx))
+        elif (is_derived(a, ctx, index) or from_neighbours(a, ctx)
+              or (hedged(ctx, a) and approximates(a, produced, sigs))):
+            derived.append((a, ctx))
+        else:
+            missing.append((a, ctx))
+
+    for a, ctx in allowed:
+        print(D(f"  {a} allowed: {ACCEPTED[(kp.name, a)]}"))
 
     if derived:
         print(D(f"  {len(derived)} asserted number(s) the code did not print, "
                 f"each one step of arithmetic from numbers it did:"))
         for a, ctx in derived[:8]:
-            print(D(f"    {a:>12}   in: {ctx}"))
+            print(D(f"    {a:>12}   in: {ctx[:70]}"))
         if len(derived) > 8:
             print(D(f"    ... and {len(derived) - 8} more"))
 
@@ -417,7 +574,7 @@ def check(handout, key, tasks_only=False):
         print(R(f"  {len(missing)} asserted number(s) the output does not "
                 f"support:"))
         for a, ctx in missing:
-            print(R(f"    {a:>12}   in: {ctx}"))
+            print(R(f"    {a:>12}   in: {ctx[:70]}"))
     else:
         print(G("  every asserted number is in the output or derived from it"))
     return problems

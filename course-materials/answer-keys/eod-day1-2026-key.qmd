@@ -169,6 +169,8 @@ temperature column into new variables.
 ```{python}
 by_year = df.groupby('Year')
 yearly_means = by_year['Daily_AirTemp_Mean_C'].mean()
+
+print(f'{len(yearly_means)} yearly means')
 yearly_means
 ```
 

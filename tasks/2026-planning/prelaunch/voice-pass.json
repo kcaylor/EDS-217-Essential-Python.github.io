@@ -310,10 +310,185 @@
   },
   "course-materials/day1.qmd": {
    "batch": 1,
-   "findings": [],
-   "history": [],
-   "metrics": {},
-   "status": "pending"
+   "findings": [
+    {
+     "id": 1,
+     "note": "Clean removed and replaced with an explicit sentence saying Day 1 does not clean and Day 4 is where cleaning lives.",
+     "resolved_at": "2026-08-24T04:33:28",
+     "severity": "blocker",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "'cleaned it' promised a step Day 1 explicitly skips. 1c Step 3 is headed 'Clean (skipped today, and here is why)'. A student would arrive expecting to fix bad data."
+    },
+    {
+     "id": 2,
+     "note": "The morning paragraph now names both sessions, says Positron runs in a browser on a Bren server, and tells students to bring their UCSB login and install nothing.",
+     "resolved_at": "2026-08-24T04:33:28",
+     "severity": "blocker",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "The morning paragraph described only session 1b, and nothing on the page said students need a browser, the workbench-1.bren.ucsb.edu server, and a UCSB login. A student could arrive at 10am unable to start."
+    },
+    {
+     "id": 3,
+     "note": "The resource link is relabelled: only if you want Python on your own laptop as well, class runs on the Bren server and needs no install.",
+     "resolved_at": "2026-08-24T04:33:28",
+     "severity": "blocker",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "The 'Setting up Python' link leads to instructions for installing Miniconda and Positron on a personal laptop, which session 1a contradicts with 'there is nothing to install'. A student would waste the evening before Day 1."
+    },
+    {
+     "id": 4,
+     "note": "The page now opens the second paragraph with 'Class runs 10:00 to 4:30'.",
+     "resolved_at": "2026-08-24T04:33:28",
+     "severity": "major",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "'by 4:30' gave no am/pm and the page never stated the class hours."
+    },
+    {
+     "id": 5,
+     "note": "Defined in the opening: playing the whole game means going through the entire thing once, roughly, so the next eight days have somewhere to attach.",
+     "resolved_at": "2026-08-24T04:33:28",
+     "severity": "major",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "'the whole game' is the page title and is used in the prose, and was never defined anywhere on the page or in 1c and 1d."
+    },
+    {
+     "id": 6,
+     "note": "Now reads June 1988 to December 2018, checked against the first and last rows of data/toolik_weather.csv.",
+     "resolved_at": "2026-08-24T04:33:28",
+     "severity": "major",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "'thirty years' was a rounding no other file uses, and 1988 is a partial year of 214 rows starting in June. The real span is June 1988 to December 2018."
+    },
+    {
+     "id": 7,
+     "note": "Verb list rebuilt against the actual step headings in 1c and 1d: imported, explored, grouped, aggregated, drawn, exported.",
+     "resolved_at": "2026-08-24T04:33:28",
+     "severity": "major",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "The list of verbs was wrong in both directions: it claimed Clean, which does not happen, and omitted Explore, Aggregate and Export, which do."
+    },
+    {
+     "id": 8,
+     "note": "'figure' replaced with 'chart' throughout.",
+     "resolved_at": "2026-08-24T04:33:28",
+     "severity": "major",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "'a finished figure' reads first as a number rather than a chart, and the ambiguity survives until 'drawn a picture of it' four lines later."
+    },
+    {
+     "id": 9,
+     "note": "Recast as 'Today is teaching one skill, which is reading working code and changing it on purpose'.",
+     "resolved_at": "2026-08-24T04:33:29",
+     "severity": "major",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "'Reading working code and changing it on purpose is the skill today is teaching' garden-paths twice: 'the skill today' parses as one noun phrase, and 'working code' parses as a verb phrase."
+    },
+    {
+     "id": 10,
+     "note": "Now two sentences, the second naming copying explicitly.",
+     "resolved_at": "2026-08-24T04:33:29",
+     "severity": "minor",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "'Some of the afternoon will feel like copying, because it is' leaves the complement out, so the reader supplies 'copying' themselves."
+    },
+    {
+     "id": 11,
+     "note": "Headers are now When, First session, Second session. The same change is due on day2 through day9 as they come through this batch.",
+     "resolved_at": "2026-08-24T04:33:29",
+     "severity": "minor",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "Table headers read Session, Session 1, Session 2, so the first column of times is labelled Session and the page appears to describe two sessions rather than four."
+    },
+    {
+     "id": 12,
+     "note": "Now 'what a variable is', matching 'what a string is'.",
+     "resolved_at": "2026-08-24T04:33:29",
+     "severity": "minor",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "'how to make a variable' assumes the reader knows what a variable is, while the neighbouring 'what a string is' does not."
+    },
+    {
+     "id": 13,
+     "note": "Now 'Work the practice first'.",
+     "resolved_at": "2026-08-24T04:33:29",
+     "severity": "minor",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "'Work the exercise first' uses 'exercise' where the previous section and its link both say 'practice'."
+    },
+    {
+     "id": 14,
+     "note": "Rewritten to say the keys give the numbers your answers should match, matching what the key itself claims.",
+     "resolved_at": "2026-08-24T04:33:29",
+     "severity": "minor",
+     "sha": "967a2e9",
+     "status": "fixed",
+     "text": "'the half you cannot check on your own' follows a list of two things, so the reader must work out which half, and the key itself says the uncheckable part is whether your numbers match."
+    },
+    {
+     "id": 15,
+     "note": "Link labels are the session titles and are navigational. Renaming them would desynchronise the day pages from the navbar and the session pages themselves. The vocabulary is introduced on the day it is taught.",
+     "resolved_at": "2026-08-24T04:33:29",
+     "severity": "minor",
+     "sha": "967a2e9",
+     "status": "wontfix",
+     "text": "Link labels carry vocabulary the page never introduces: Aggregate, Export, f-strings, Positron, Jupyter."
+    }
+   ],
+   "history": [
+    {
+     "at": "2026-08-24T04:27:27",
+     "event": "started",
+     "sha": "967a2e9"
+    },
+    {
+     "at": "2026-08-24T04:27:57",
+     "event": "edited",
+     "guard_forced": false,
+     "note": "Concrete opening naming the dataset and the 4:30 promise; end-of-day framing tightened.",
+     "sha": "967a2e9"
+    },
+    {
+     "at": "2026-08-24T04:33:14",
+     "event": "cold_read",
+     "findings": 15,
+     "sha": "967a2e9"
+    },
+    {
+     "at": "2026-08-24T04:33:29",
+     "event": "resolved",
+     "sha": "967a2e9"
+    }
+   ],
+   "metrics": {
+    "after": {
+     "causal_since": 0,
+     "elliptical_numerals": 0,
+     "em_dashes": 0,
+     "sentence_initial_demonstratives": 0,
+     "words": 322
+    },
+    "before": {
+     "causal_since": 0,
+     "elliptical_numerals": 0,
+     "em_dashes": 0,
+     "sentence_initial_demonstratives": 0,
+     "words": 254
+    }
+   },
+   "status": "resolved"
   },
   "course-materials/day2.qmd": {
    "batch": 1,
@@ -893,5 +1068,5 @@
  },
  "schema": 1,
  "started": "2026-08-24T04:26:44",
- "updated": "2026-08-24T04:26:44"
+ "updated": "2026-08-24T04:33:29"
 }

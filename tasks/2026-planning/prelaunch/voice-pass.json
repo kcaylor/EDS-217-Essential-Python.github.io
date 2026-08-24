@@ -313,138 +313,87 @@
    "findings": [
     {
      "id": 1,
-     "note": "Clean removed and replaced with an explicit sentence saying Day 1 does not clean and Day 4 is where cleaning lives.",
-     "resolved_at": "2026-08-24T04:33:28",
+     "note": null,
      "severity": "blocker",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "'cleaned it' promised a step Day 1 explicitly skips. 1c Step 3 is headed 'Clean (skipped today, and here is why)'. A student would arrive expecting to fix bad data."
+     "status": "open",
+     "text": "'nothing in this file needs cleaning' is false. Daily_AirTemp_Mean_C has zero missing values, but Daily_Precip_Total_mm has 8,002 #N/A entries and other columns are worse. 1c says it correctly: only the column we analyse is clean. The page teaches a wrong lesson about the dataset on the first page a student reads."
     },
     {
      "id": 2,
-     "note": "The morning paragraph now names both sessions, says Positron runs in a browser on a Bren server, and tells students to bring their UCSB login and install nothing.",
-     "resolved_at": "2026-08-24T04:33:28",
-     "severity": "blocker",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "The morning paragraph described only session 1b, and nothing on the page said students need a browser, the workbench-1.bren.ucsb.edu server, and a UCSB login. A student could arrive at 10am unable to start."
+     "note": null,
+     "severity": "major",
+     "status": "open",
+     "text": "Two counts of the remaining days that cannot both be true: 'the next eight days' on line 18 and 'the next nine days' on line 21."
     },
     {
      "id": 3,
-     "note": "The resource link is relabelled: only if you want Python on your own laptop as well, class runs on the Bren server and needs no install.",
-     "resolved_at": "2026-08-24T04:33:28",
-     "severity": "blocker",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "The 'Setting up Python' link leads to instructions for installing Miniconda and Positron on a personal laptop, which session 1a contradicts with 'there is nothing to install'. A student would waste the evening before Day 1."
+     "note": null,
+     "severity": "major",
+     "status": "open",
+     "text": "The page never mentions f-strings, which 1b calls 'the one thing you should be able to write on your own after today', and which both afternoon sessions then require in boxes headed 'Say it in a sentence (required)'. A student would arrive expecting only to read and copy code."
     },
     {
      "id": 4,
-     "note": "The page now opens the second paragraph with 'Class runs 10:00 to 4:30'.",
-     "resolved_at": "2026-08-24T04:33:28",
+     "note": null,
      "severity": "major",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "'by 4:30' gave no am/pm and the page never stated the class hours."
+     "status": "open",
+     "text": "'Today we teach one skill' names a different single skill from the one 1b names. Two documents each claim the day's one thing."
     },
     {
      "id": 5,
-     "note": "Defined in the opening: playing the whole game means going through the entire thing once, roughly, so the next eight days have somewhere to attach.",
-     "resolved_at": "2026-08-24T04:33:28",
+     "note": null,
      "severity": "major",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "'the whole game' is the page title and is used in the prose, and was never defined anywhere on the page or in 1c and 1d."
+     "status": "open",
+     "text": "'First we meet Positron' implies a first introduction, but 1a opens 'You have already met Positron in your R course'. Either the page misdescribes the session, or a student who did not take that course gets no warning."
     },
     {
      "id": 6,
-     "note": "Now reads June 1988 to December 2018, checked against the first and last rows of data/toolik_weather.csv.",
-     "resolved_at": "2026-08-24T04:33:28",
+     "note": null,
      "severity": "major",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "'thirty years' was a rounding no other file uses, and 1988 is a partial year of 214 rows starting in June. The real span is June 1988 to December 2018."
+     "status": "open",
+     "text": "'By 4:30 you will have imported that file' has no antecedent for 'that file' in its own paragraph. The preceding sentence names weather, not a file."
     },
     {
      "id": 7,
-     "note": "Verb list rebuilt against the actual step headings in 1c and 1d: imported, explored, grouped, aggregated, drawn, exported.",
-     "resolved_at": "2026-08-24T04:33:28",
-     "severity": "major",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "The list of verbs was wrong in both directions: it claimed Clean, which does not happen, and omitted Explore, Aggregate and Export, which do."
+     "note": null,
+     "severity": "minor",
+     "status": "open",
+     "text": "'Today we teach one skill' uses 'we' to mean the instructors, while every earlier 'we' on the page includes the student."
     },
     {
      "id": 8,
-     "note": "'figure' replaced with 'chart' throughout.",
-     "resolved_at": "2026-08-24T04:33:28",
-     "severity": "major",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "'a finished figure' reads first as a number rather than a chart, and the ambiguity survives until 'drawn a picture of it' four lines later."
+     "note": null,
+     "severity": "minor",
+     "status": "open",
+     "text": "'before anybody in the room knows how the individual pieces work' literally includes the instructor."
     },
     {
      "id": 9,
-     "note": "Recast as 'Today is teaching one skill, which is reading working code and changing it on purpose'.",
-     "resolved_at": "2026-08-24T04:33:29",
-     "severity": "major",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "'Reading working code and changing it on purpose is the skill today is teaching' garden-paths twice: 'the skill today' parses as one noun phrase, and 'working code' parses as a verb phrase."
+     "note": null,
+     "severity": "minor",
+     "status": "open",
+     "text": "'daily Arctic weather from Toolik Lake in Alaska, running from June 1988 to December 2018' attaches the participle to Alaska."
     },
     {
      "id": 10,
-     "note": "Now two sentences, the second naming copying explicitly.",
-     "resolved_at": "2026-08-24T04:33:29",
+     "note": null,
      "severity": "minor",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "'Some of the afternoon will feel like copying, because it is' leaves the complement out, so the reader supplies 'copying' themselves."
+     "status": "open",
+     "text": "'Playing the whole game means going through the entire thing once' defines the phrase with itself, and 'so that the next eight days have somewhere to attach' leaves both ends of the attachment unnamed."
     },
     {
      "id": 11,
-     "note": "Headers are now When, First session, Second session. The same change is due on day2 through day9 as they come through this batch.",
-     "resolved_at": "2026-08-24T04:33:29",
+     "note": null,
      "severity": "minor",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "Table headers read Session, Session 1, Session 2, so the first column of times is labelled Session and the page appears to describe two sessions rather than four."
+     "status": "open",
+     "text": "'how to print one' reads first as print(1), which is a plausible first line of Python."
     },
     {
      "id": 12,
-     "note": "Now 'what a variable is', matching 'what a string is'.",
-     "resolved_at": "2026-08-24T04:33:29",
+     "note": null,
      "severity": "minor",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "'how to make a variable' assumes the reader knows what a variable is, while the neighbouring 'what a string is' does not."
-    },
-    {
-     "id": 13,
-     "note": "Now 'Work the practice first'.",
-     "resolved_at": "2026-08-24T04:33:29",
-     "severity": "minor",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "'Work the exercise first' uses 'exercise' where the previous section and its link both say 'practice'."
-    },
-    {
-     "id": 14,
-     "note": "Rewritten to say the keys give the numbers your answers should match, matching what the key itself claims.",
-     "resolved_at": "2026-08-24T04:33:29",
-     "severity": "minor",
-     "sha": "967a2e9",
-     "status": "fixed",
-     "text": "'the half you cannot check on your own' follows a list of two things, so the reader must work out which half, and the key itself says the uncheckable part is whether your numbers match."
-    },
-    {
-     "id": 15,
-     "note": "Link labels are the session titles and are navigational. Renaming them would desynchronise the day pages from the navbar and the session pages themselves. The vocabulary is introduced on the day it is taught.",
-     "resolved_at": "2026-08-24T04:33:29",
-     "severity": "minor",
-     "sha": "967a2e9",
-     "status": "wontfix",
-     "text": "Link labels carry vocabulary the page never introduces: Aggregate, Export, f-strings, Positron, Jupyter."
+     "status": "open",
+     "text": "'because nothing in this file needs cleaning and Day 4 is the day we spend on cleaning' presents the Day 4 schedule as a reason today's data is clean."
     }
    ],
    "history": [
@@ -477,6 +426,19 @@
      "note": "Two rules stated after the page was resolved: teach in the first person plural, and no promise-instead-of-tell constructions.",
      "sha": "1a5edc1",
      "was": "resolved"
+    },
+    {
+     "at": "2026-08-24T06:23:50",
+     "event": "edited",
+     "guard_forced": false,
+     "note": "Recast in the first person plural and grounded in the course calendar.",
+     "sha": "c7cf311"
+    },
+    {
+     "at": "2026-08-24T06:23:50",
+     "event": "cold_read",
+     "findings": 12,
+     "sha": "c7cf311"
     }
    ],
    "metrics": {
@@ -485,7 +447,7 @@
      "elliptical_numerals": 0,
      "em_dashes": 0,
      "sentence_initial_demonstratives": 0,
-     "words": 322
+     "words": 469
     },
     "before": {
      "causal_since": 0,
@@ -495,7 +457,7 @@
      "words": 458
     }
    },
-   "status": "started"
+   "status": "cold_read"
   },
   "course-materials/day2.qmd": {
    "batch": 1,
@@ -1075,5 +1037,5 @@
  },
  "schema": 1,
  "started": "2026-08-24T04:26:44",
- "updated": "2026-08-24T04:42:51"
+ "updated": "2026-08-24T06:23:50"
 }

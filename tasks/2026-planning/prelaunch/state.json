@@ -396,6 +396,19 @@
       },
       "state": "certified"
     },
+    "D10": {
+      "checks": [
+        {
+          "at": "2026-08-24T04:35:05",
+          "cmd": "python3 tools/prelaunch_checks.py d10_render_current",
+          "could_not_run": false,
+          "evidence": "PASS  d10_render_current\n  pages in the render set: 89\n  never rendered: 0\n  rendered before their source last changed: 0\n  Every page in docs/ was rendered after its source last changed.",
+          "exit": 0,
+          "git_sha": "f2e1bcf",
+          "ok": true
+        }
+      ]
+    },
     "D2": {
       "checks": [
         {
@@ -1235,5 +1248,5 @@
     }
   },
   "schema": 1,
-  "updated": "2026-08-23T14:30:52"
+  "updated": "2026-08-24T04:35:08"
 }

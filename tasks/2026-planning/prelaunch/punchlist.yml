@@ -275,6 +275,32 @@ items:
 # CONTENT
 # ---------------------------------------------------------------------------
 
+- id: D10
+  title: Re-render and re-publish after the voice pass
+  category: deploy
+  severity: high
+  owner: kelly
+  state: open
+  why: |
+    The voice pass edits pages over several days. Previewing a page re-renders
+    only that page, so docs/ can hold a site that looks complete while its pages
+    were built from different versions of the source. Counting files does not
+    catch it. The live site is correct today, and every page the pass touches
+    makes it a little less so until the next full render.
+  evidence: |
+    d10_render_current compares each source's modification time against its
+    rendered page. It passed on 2026-08-24 with 89 of 89 current, which is the
+    baseline this item exists to protect.
+  action: |
+    After each batch of the voice pass closes, run `make verify` and then
+    `make publish`. Not after each page: a full render takes ten minutes and the
+    live site is already correct.
+  verify:
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py d10_render_current
+    expect: every page in docs/ was rendered after its source last changed
+  blocked_by: [C10]
+
 - id: C1
   title: Specify Days 8 and 9
   category: content

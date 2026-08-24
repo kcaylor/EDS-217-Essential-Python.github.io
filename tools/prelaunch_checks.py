@@ -300,6 +300,37 @@ def d5_render_complete():
     return result(ok, lines)
 
 
+def d10_render_current():
+    """Every rendered page must be newer than the source it came from.
+
+    The voice pass edits pages over several days, and previewing one page
+    re-renders only that page. So docs/ can hold a coherent-looking site whose
+    pages were built from different versions of the source. Counting files does
+    not catch it; comparing timestamps does.
+    """
+    docs = ROOT / "docs"
+    if not docs.exists():
+        return result(False, ["docs/ does not exist. Run: make render"])
+    stale, missing = [], []
+    for src in correct_render_set():
+        if not src.endswith(".qmd"):
+            continue
+        out = docs / (src[:-4] + ".html")
+        if not out.exists():
+            missing.append(src)
+            continue
+        if (ROOT / src).stat().st_mtime > out.stat().st_mtime + 1:
+            stale.append(src)
+    lines = [f"pages in the render set: "
+             f"{sum(1 for f in correct_render_set() if f.endswith('.qmd'))}",
+             f"never rendered: {len(missing)}",
+             f"rendered before their source last changed: {len(stale)}"]
+    lines += ["    " + s_ for s_ in (missing + stale)[:12]]
+    if not missing and not stale:
+        lines.append("Every page in docs/ was rendered after its source last changed.")
+    return result(not missing and not stale, lines)
+
+
 def d6_docs_data_tracked():
     """Every dataset must be committed under docs/data or the live site 404s."""
     code, out, err = sh("git ls-tree -r --name-only HEAD docs/data")

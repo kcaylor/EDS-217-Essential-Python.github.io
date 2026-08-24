@@ -36,7 +36,7 @@ help:
 	@echo "    make board               rebuild the dashboard and open it"
 	@echo ""
 	@echo "  Reading and editing"
-	@echo "    make preview             live preview of the whole site"
+	@echo "    make preview             live preview (writes into docs/)"
 	@echo "    make preview PAGE=day3   live preview of one page"
 	@echo ""
 	@echo "  Verifying"

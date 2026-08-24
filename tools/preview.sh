@@ -6,9 +6,14 @@
 #   tools/preview.sh 5a_grouping  any page whose filename contains this
 #
 # Quarto watches the source and reloads the browser on save, so this is the
-# loop for reading a page, editing the qmd, and seeing the result. It renders
-# into a scratch directory rather than docs/, so a preview can never leave the
-# published output in a half-built state.
+# loop for reading a page, editing the qmd, and seeing the result.
+#
+# It renders into docs/, the same directory the site publishes from. An earlier
+# version of this comment claimed otherwise and was wrong. The consequence is
+# that previewing leaves docs/ holding a mix of pages rendered at different
+# times, which is harmless in itself. What makes docs/ coherent again is
+# `make render`, and `make publish` refuses to push until the render is
+# complete and current.
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/_env.sh"
 eds217_activate

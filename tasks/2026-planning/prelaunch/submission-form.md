@@ -1,8 +1,20 @@
 # The final project submission form
 
 Decided 2026-08-24. One Google Form, one submission per team, and its timestamp
-is the deadline. Kelly builds it; the URL then goes into `final_project.qmd` and
-`day9.qmd`, both of which currently point at "the course form" without a link.
+is the deadline.
+
+**Built and published 2026-08-25.** Responders are restricted to University of
+California, Santa Barbara, so a personal Google account is turned away. The link
+is live in `final_project.qmd` (under Handing it in) and `day9.qmd` (step 5).
+
+- Responder link: <https://docs.google.com/forms/d/e/1FAIpQLSdfFOUGbZHfXONdrP1adl6D-8H90DSHgnMic4I2-YwQyLre8A/viewform>
+- Edit link: <https://docs.google.com/forms/d/11V-4tFtEVcPeC0XSsXhycm5g7AFDr4_BUe0TioBrlLQ/edit>
+
+Built as specified below, with two deliberate changes. The total upload ceiling
+is 10 GB rather than the 1 GB default, because twelve teams at up to 100 MB each
+could approach 1 GB and Forms stops accepting responses at the limit rather than
+warning. And the UCSB restriction is set as the publish audience, which is where
+that control now lives, rather than as a separate setting.
 
 ## Questions
 

@@ -276,7 +276,7 @@ items:
 # ---------------------------------------------------------------------------
 
 - id: D10
-  title: Re-render and re-publish after the voice pass
+  title: Re-render and re-publish, and again after every content change
   category: deploy
   severity: high
   owner: kelly
@@ -299,7 +299,7 @@ items:
     kind: command
     cmd: python3 tools/prelaunch_checks.py d10_render_current
     expect: every page in docs/ was rendered after its source last changed
-  blocked_by: [C10]
+  blocked_by: []
 
 - id: C1
   title: Specify Days 8 and 9
@@ -539,70 +539,58 @@ items:
     expect: no live page references an image on another host
 
 - id: C10
-  title: Run a write-as-kelly voice pass over every live page
+  title: Voice pass over the pages that carry the most reading
   category: content
   severity: medium
-  owner: either
+  owner: kelly
   state: in_progress
   why: |
-    The 2026 pages were written across many sessions and several rebuilds, so the
-    voice varies. Some pages read as Kelly wrote them and some read as a machine
-    did. Students spend nine days inside this prose.
+    The site talks at students almost exclusively, and the writing is mine rather
+    than Kelly's. A full pass over 89 pages was the original scope. With six days
+    left that is not the job any more, so this item is now the triaged version.
 
-    The pass is also the only thing that finds comprehension defects. On
-    2026-08-23 a cold reader was run over three pages that had just been called
-    finished, and found eighteen problems, four of them contradictions introduced
-    by the voice pass itself and one that would have made a team throw away their
-    dataset on the Thursday night. None of those was a style problem. The
-    mechanical checks were all green at the time.
+    The method matters more than the coverage. Editing against style rules and
+    re-reading my own work does not find anything, because I supply the meaning I
+    intended. The cold read is what finds it: on three pages already called
+    finished it found eighteen problems, and on index.qmd it caught a factual
+    error the pass itself had introduced, one that would have sent every team to
+    the wrong GitHub repository.
   evidence: |
-    89 live pages, tracked page by page in
-    tasks/2026-planning/prelaunch/voice-pass.json. Baseline on 2026-08-23: 188
-    sentence-initial demonstratives that point back into the text, 43 numerals
-    used as nouns, 31 causal uses of "since", zero em-dashes.
+    2026-08-25: 2 pages resolved and awaiting sign-off, index.qmd and
+    the-data-science-workflow.qmd. day1.qmd has 12 open findings from an earlier
+    pass. 87 pages unread.
+
+    Counted 2026-08-24 across the day pages and end-of-day activities: 11 uses of
+    we, our or us against 508 of you or your.
   action: |
-    **Read these three first.** They are the whole method:
+    Before class, in this order. Anything below the line waits until after.
 
-      tasks/2026-planning/prelaunch/house-style.md      the rules Kelly has stated
-      tasks/2026-planning/prelaunch/cold-read-prompt.md the editor preflight, verbatim
-      tools/voicepass.py --help                          the state machine
+    1. **day1.qmd**, and its 12 open findings. Every student reads it, on the
+       morning when nothing else is familiar.
+    2. **The four end-of-day practices for days 1 to 4.** Longest time on page of
+       anything on the site, read alone at night with nobody to ask.
+    3. **day2.qmd through day7.qmd.** Short pages, mostly tables, quick to read.
 
-    Never edit a page outside the state machine, because sessions drop and the
-    ledger is the only memory. One page at a time, committed on its own, so a
-    lost connection costs one page at most.
+    ----- the line -----
 
-      python tools/voicepass.py resume        says exactly what to do next
-      python tools/voicepass.py start <page>  records the SHA and the counts
-      <run the write-as-kelly pass, fenced by tools/prose_guard.py>
-      python tools/voicepass.py edited <page> refuses if the guard sees a non-prose change
-      <cold-read it with a subagent, using the prompt above>
-      python tools/voicepass.py record <page> findings.json
-      python tools/voicepass.py resolve <page> <n> fixed|needs-kelly|wontfix -n "..."
-      python tools/voicepass.py signoff <page> -n "..."
+    4. Interactive sessions, colabs, cheatsheets, answer keys. Read in the room
+       with the instructor present, so a confusing sentence gets asked about
+       rather than blocking someone.
 
-    A page is not signed off while a finding is open. A finding is only
-    needs-kelly when the answer is a fact only Kelly holds.
+    The method, unchanged and not negotiable:
+    tasks/2026-planning/prelaunch/house-style.md      the rules Kelly stated
+    tasks/2026-planning/prelaunch/cold-read-prompt.md the editor preflight
+    python tools/voicepass.py resume                  says what to do next
 
-    Five batches, most-read first: the front page, day pages, workflow and project
-    spec (12); the end-of-day activities (7); sessions, colabs and live coding
-    (35); cheatsheets (24); answer keys (11).
-
-    **A limitation worth recording.** The corpus at ~/dev/kkc_corpus has no
-    teaching register. Its folders are email, letters, reviews, grants, evaluative
-    and longform, and longform holds one 2003 dissertation abstract. There is no
-    verified sample of Kelly writing instructional prose for beginners, so the
-    voice half of this pass extrapolates from habits that carry across registers.
-    The rules he has stated directly are in house-style.md and are the reliable
-    part. Adding two or three verified pre-2022 teaching samples to the corpus
-    would improve this a great deal, and is worth doing before 2027.
+    One page at a time, committed on its own, so a dropped connection costs one
+    page. Never edit outside the state machine, because the ledger is the only
+    memory across sessions.
   verify:
     kind: command
-    cmd: bash -c 'python3 tools/prelaunch_checks.py c10_house_style && python3 tools/prose_guard.py verify --all && python3 tools/voicepass.py status'
-    expect: zero hard style violations, nothing outside prose changed, and every page in the ledger signed off
-
-# ---------------------------------------------------------------------------
-# TOOLING. These decide whether the gates can be trusted.
-# ---------------------------------------------------------------------------
+    cmd: python3 tools/prelaunch_checks.py c10_house_style
+    expect: no hard style violation on any live page, and the priority pages signed off
+  blocked_by: []
+  blocks: []
 
 - id: T1
   title: Teach warm_cache.py about concatenated data URLs
@@ -1031,5 +1019,69 @@ items:
     kind: command
     cmd: python3 tools/key_check.py --tasks-only
     expect: 12 of 12 pairs clean
+  blocked_by: []
+  blocks: []
+
+
+- id: C12
+  title: Decide whether the errors session returns for 2026
+  category: content
+  severity: high
+  owner: kelly
+  state: open
+  why: |
+    A room that has never seen a traceback will meet one within an hour of Day 1,
+    and nothing on the 2026 schedule teaches how to read it. Session 2c,
+    "Understanding and Interpreting Python Errors", exists in the tree but
+    _quarto.yml excludes it from the render and no day page links it. Session 2a,
+    "Getting help() in Jupyter Notebooks", is in the same position.
+
+    Both were retired on purpose, in commit 9298632, as 2025 reference material.
+    The question is whether that was the right call for errors specifically. Every
+    other retired page was superseded by a 2026 session. These two were not.
+  evidence: |
+    _quarto.yml lines 13 and 14 exclude 2a_getting_help.qmd and
+    2c_exceptions_and_errors.qmd. Neither is linked from any day page. Found while
+    auditing the schedule for the learning objectives on 2026-08-25.
+  action: |
+    Decide one of three:
+
+    1. Leave both out. Errors get handled live, in the room, when they happen.
+    2. Bring 2c back on Day 1 or Day 2, which means finding it a slot in a day
+       that is already full.
+    3. Keep them off the schedule but link them from a day page as reference, so
+       a student who hits a traceback at 9pm has somewhere to go.
+
+    Option 3 costs one line and no class time, and is the cheapest thing that
+    closes the gap.
+  verify:
+    kind: manual
+    cmd: decide, and either relink or record the decision here
+    expect: a deliberate answer rather than an inherited exclusion
+  blocked_by: []
+  blocks: []
+
+- id: C13
+  title: Reconcile the learning objectives with the course catalog
+  category: content
+  severity: medium
+  owner: kelly
+  state: open
+  why: |
+    The front-page objectives were rewritten on 2026-08-25 from the 2026
+    schedule. The old list promised algorithms, Python scripts and NumPy, none of
+    which the course teaches. If the official catalog entry carries the old
+    wording, the site and the catalog now disagree.
+  evidence: |
+    index.qmd carries the eight new objectives. The catalog entry has not been
+    checked from here.
+  action: |
+    Look at the catalog entry. If it matches the old list, decide whether to
+    update it, or to accept that the site is more specific than the catalog and
+    note that here so the next person does not treat it as a defect.
+  verify:
+    kind: manual
+    cmd: compare index.qmd against the catalog entry
+    expect: either they agree, or the difference is deliberate and recorded
   blocked_by: []
   blocks: []

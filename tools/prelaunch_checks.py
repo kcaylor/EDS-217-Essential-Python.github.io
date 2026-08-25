@@ -515,7 +515,26 @@ def c10_house_style():
                  f"across {len({h[0] for h in advisory})} page(s) use the "
                  f"'not X, it is Y' shape. Some of those are plain corrections and "
                  f"are fine. No regex can tell which, so this never fails the check.")
-    return result(not hard, lines)
+
+    # The mechanical rules are the smaller half. Without the ledger below, this
+    # check reported PASS while two pages out of eighty-nine had been read, which
+    # is worse than no check at all: it says the work is done.
+    ledger = ROOT / "tasks/2026-planning/prelaunch/voice-pass.json"
+    signed = 0
+    total = len(pages)
+    if ledger.exists():
+        import json
+        data = json.loads(ledger.read_text())
+        entries = data.get("pages", data)
+        signed = sum(1 for e in entries.values()
+                     if isinstance(e, dict) and e.get("status") in ("signed_off", "skipped"))
+        total = len(entries)
+    lines.append(f"pages signed off: {signed} of {total}")
+    if signed < total:
+        lines.append(f"    {total - signed} page(s) have not been read. The mechanical "
+                     f"rules above are clean, which is not the same as the pass being done.")
+
+    return result(bool(not hard and signed >= total), lines)
 
 
 def c2_mailto():

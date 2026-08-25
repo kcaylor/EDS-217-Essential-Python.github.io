@@ -1,5 +1,10 @@
 # Two proposals for the front page and the workflow diagram
 
+**Both applied 2026-08-25.** Kelly took the diagram remapping in full, and
+revised the objectives before approving them. The wording that shipped is at the
+end of this file, under "What shipped". Everything above it is the proposal as
+written, kept because the audit behind it is worth having.
+
 Written 2026-08-25, from the 2026 schedule rather than from the 2025 text.
 
 ## What the 2026 course actually covers
@@ -119,3 +124,57 @@ render, so the diagram is not taking on a new risk.
 The minimal version, if the full remapping is more churn than it is worth, is to
 change step 5 to 🥇 and leave the other nine alone. That fixes the collision the
 cold read reported and nothing else.
+
+
+---
+
+## What shipped
+
+### Objectives, as Kelly revised them
+
+- Read environmental data into a pandas DataFrame and inspect its structure and contents
+- Filter, sort, clean and transform a table to answer a question
+- Group rows and aggregate them into the comparison a question needs
+- Combine two tables, reshape between long and wide, and handle dates as objects
+- Build a figure in matplotlib or seaborn that demonstrates a pattern or relationship in data
+- Write your own Python: variables, collections, conditionals, loops and functions
+- Keep a Jupyter notebook in which every conclusion is matched to the cell that produced it
+- Work with a partner on a short piece of analysis, and present the result to the class
+
+His edits to the draft, and what they do:
+
+| Draft | Shipped | Effect |
+|---|---|---|
+| say what it contains before analysing it | inspect its structure and contents | names the two things Day 2 actually does, `.shape` and `.head()` |
+| a question you have chosen | a question | drops a claim about ownership that only holds for the project |
+| handle dates as dates | handle dates as objects | the technical point of Day 6's session, that a date is not a number |
+| carries the finding on its own | demonstrates a pattern or relationship in data | says what the figure shows rather than how well it does it |
+| every claim sits below the cell that produced it | every conclusion is matched to the cell that produced it | drops the layout instruction, keeps the requirement |
+| an analysis | a short piece of analysis | sizes the colab work honestly |
+
+Each objective maps to scheduled 2026 content:
+
+| Objective | Taught in |
+|---|---|
+| Read and inspect a DataFrame | Day 2, sessions 2a and 2b |
+| Filter, sort, clean, transform | Day 3 sessions 3b and 3c; Day 4 sessions 4a and 4c |
+| Group and aggregate | Day 5, sessions 5a and 5b |
+| Combine, reshape, dates | Day 6, sessions 6a, 6b, 6c |
+| matplotlib or seaborn | Day 7, sessions 7a and 7b |
+| Your own Python | Day 1 session 1b; Day 2 live coding 2d; Day 3 live coding 3a; Day 4 session 4b; Day 5 live coding 5d |
+| Notebook with evidence under every conclusion | Day 2 end-of-day practice, the data biography |
+| Partner work and presenting | Nine coding colabs, then Days 8 and 9 |
+
+Nothing on the list is unsupported by the schedule, which was the failure in the
+2025 text: it promised algorithms, scripts and NumPy, none of which the 2026
+course teaches.
+
+### The diagram
+
+Applied in full. All ten steps now carry a distinct emoji, and each one is the
+emoji of the session that teaches that step.
+
+### Still open
+
+Whether the official course catalog entry carries the old bullets. If it does,
+the site and the catalog now disagree, and one of them has to move.

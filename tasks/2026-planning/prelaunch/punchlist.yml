@@ -373,20 +373,28 @@ items:
   why: |
     The syllabus navbar entry points at a Google Doc that cannot be checked from
     here, and it is the only route to the syllabus on the site. The front page
-    lists Anna Boser as TA, which is the 2025 staffing. There are no office hours
+    listed Anna Boser as TA, which is the 2025 staffing. There are no office hours
     anywhere on the site.
   evidence: |
     _quarto.yml line 26 links docs.google.com document 1yBKyJFT22bKynDn4TzrNwde
     Z6lb9NELqCeewhifcugo. A grep for "office hour" or "drop-in" across all live
     content returns nothing.
+
+    2026-08-25: Kelly named Cella Schnabel as the 2026 TA. The front page now
+    carries her name, cellaschnabel@ucsb.edu, and a link to her emLab profile at
+    emlab.ucsb.edu/about/our-team/cella-schnabel. Two parts of C3 remain: the
+    photo file, and the syllabus and office hours.
   action: |
-    Confirm the Google Doc is the 2026 syllabus and is shared with students.
-    Confirm the 2026 TA and supply a photo if the person has changed. Decide
-    whether office hours belong on the site and, if so, where.
+    1. Save Cella's headshot as images/cella.png. It is on her emLab profile
+       page. index.qmd already points at that path, so the front page shows a
+       broken image until the file is there, and `make check` fails on
+       c3_images_present until it is.
+    2. Confirm the Google Doc is the 2026 syllabus and is shared with students.
+    3. Decide whether office hours belong on the site and, if so, where.
   verify:
-    kind: manual
-    cmd: open the syllabus link as a student would; confirm the TA
-    expect: syllabus is the 2026 version and readable by students, TA is correct
+    kind: command
+    cmd: python3 tools/prelaunch_checks.py c3_images_present
+    expect: every image index.qmd references exists on disk, syllabus and office hours confirmed by hand
 
 - id: C4
   title: Stop the final project page fetching over the network at render

@@ -536,6 +536,28 @@ def c2_mailto():
     return result(ok, lines)
 
 
+IMG_REF = re.compile(r"!\[[^\]]*\]\((images/[^)\s]+)\)")
+
+
+def c3_images_present():
+    """Every image the front page names has to exist on disk.
+
+    A missing headshot renders as a broken image on the landing page, which is
+    the first thing a student sees. The teaching team block is the case that
+    prompted this: a photo referenced before the file was saved.
+    """
+    text = (ROOT / "index.qmd").read_text()
+    lines, ok = [], True
+    for m in IMG_REF.finditer(text):
+        rel = m.group(1)
+        if not (ROOT / rel).exists():
+            ok = False
+            lines.append(f"  {rel} is referenced by index.qmd but not on disk")
+    if ok:
+        lines.append("Every image index.qmd references exists.")
+    return result(ok, lines)
+
+
 NET_CALL = re.compile(r"(import\s+requests|requests\.(get|post)|urlopen|urlretrieve|urllib\.request)")
 
 

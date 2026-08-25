@@ -463,7 +463,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="7e83af27" class="cell" data-execution_count="1">
+<div id="911cc036" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -487,7 +487,7 @@ How to use this key
 <section id="part-1-all-four-oceans-at-once" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-all-four-oceans-at-once">Part 1: All four oceans at once</h2>
 <p><strong>1. Last night you computed the mean <code>Measurement</code> for the Atlantic and the Pacific with two filters. Do all four oceans in one line, and rank the result from dirtiest to cleanest.</strong></p>
-<div id="843146d2" class="cell" data-execution_count="2">
+<div id="5edb0d95" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>positive.groupby(<span class="st">'ocean'</span>)[<span class="st">'Measurement'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -515,7 +515,7 @@ Name: Measurement, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>2. Do the same with the median instead of the mean. The order changes. Which two oceans swap, and by how much does the Pacific-to-Atlantic ratio differ between the two versions?</strong></p>
-<div id="085f6e45" class="cell" data-execution_count="3">
+<div id="57420a37" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>positive.groupby(<span class="st">'ocean'</span>)[<span class="st">'Measurement'</span>].median().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -529,7 +529,7 @@ Southern    0.011500
 Name: Measurement, dtype: float64</code></pre>
 </div>
 </div>
-<div id="58c00da0" class="cell" data-execution_count="4">
+<div id="59e9ac75" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> positive.groupby(<span class="st">'ocean'</span>)[<span class="st">'Measurement'</span>].mean()</span>
@@ -558,7 +558,7 @@ median ratio: 6.001286008230453</code></pre>
 </div>
 </div>
 <p><strong>3. How many samples went into each of those four numbers? One line.</strong></p>
-<div id="33c07a50" class="cell" data-execution_count="5">
+<div id="ee315810" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>positive.groupby(<span class="st">'ocean'</span>)[<span class="st">'Measurement'</span>].count().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -603,7 +603,7 @@ Name: Measurement, dtype: int64</code></pre>
 <section id="part-2-one-call-instead-of-four" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-one-call-instead-of-four">Part 2: One call instead of four</h2>
 <p><strong>5. Replace questions 1 through 3 with a single <code>.agg()</code> call that reports the count, median, mean and max of <code>Measurement</code> for each ocean.</strong></p>
-<div id="f5f5be7c" class="cell" data-execution_count="6">
+<div id="8d780586" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>positive.groupby(<span class="st">'ocean'</span>)[<span class="st">'Measurement'</span>].agg([<span class="st">'count'</span>, <span class="st">'median'</span>, <span class="st">'mean'</span>, <span class="st">'max'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -680,7 +680,7 @@ Name: Measurement, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>7. Use the dictionary form of <code>.agg()</code>, grouped by <code>ocean</code>, to report the mean <code>Measurement</code>, the number of distinct <code>Sampling Method</code> values, and the number of distinct <code>Organization</code> values in each ocean.</strong></p>
-<div id="23f85ee2" class="cell" data-execution_count="7">
+<div id="1b0bc29c" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>positive.groupby(<span class="st">'ocean'</span>).agg({</span>
@@ -758,7 +758,7 @@ Name: Measurement, dtype: int64</code></pre>
 <section id="part-3-where-the-answer-falls-apart" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-where-the-answer-falls-apart">Part 3: Where the answer falls apart</h2>
 <p><strong>9. Group by <code>Sampling Method</code> instead of by ocean, and report the count and median of <code>Measurement</code> for each method. Rank by median, largest first.</strong></p>
-<div id="98d18bc4" class="cell" data-execution_count="8">
+<div id="a4989cbb" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>by_method <span class="op">=</span> positive.groupby(<span class="st">'Sampling Method'</span>)[<span class="st">'Measurement'</span>].agg([<span class="st">'count'</span>, <span class="st">'median'</span>])</span>
@@ -849,7 +849,7 @@ Name: Measurement, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>10. Write down the largest and smallest medians in that table. How many orders of magnitude separate them?</strong></p>
-<div id="53773ae9" class="cell" data-execution_count="9">
+<div id="cbd235a0" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>medians_by_method <span class="op">=</span> positive.groupby(<span class="st">'Sampling Method'</span>)[<span class="st">'Measurement'</span>].median()</span>
@@ -891,7 +891,7 @@ Name: Measurement, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>12. Find out. Group by both <code>ocean</code> and <code>Sampling Method</code> at once and count the samples. Then call <code>.reset_index()</code> on the result and look at the Atlantic and Pacific rows.</strong></p>
-<div id="f71ea304" class="cell" data-execution_count="10">
+<div id="abde93b1" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ocean_method <span class="op">=</span> positive.groupby([<span class="st">'ocean'</span>, <span class="st">'Sampling Method'</span>])[<span class="st">'Measurement'</span>].count()</span>
@@ -1007,7 +1007,7 @@ Name: Measurement, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="1e3c240e" class="cell" data-execution_count="11">
+<div id="db7fb525" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ocean_method.reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1186,7 +1186,7 @@ Name: Measurement, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>13. Simpler and more direct: run <code>.value_counts()</code> on <code>Sampling Method</code> for the Atlantic samples and again for the Pacific samples. Which method dominates the Atlantic? What fraction of the Pacific samples used it?</strong></p>
-<div id="0adf4fb3" class="cell" data-execution_count="12">
+<div id="972a2c9f" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>atlantic <span class="op">=</span> positive[positive[<span class="st">'ocean'</span>] <span class="op">==</span> <span class="st">'Atlantic'</span>]</span>
@@ -1234,7 +1234,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>14. Now control for it. Filter <code>positive</code> to the rows collected with a <code>'Neuston net'</code>, end the line with <code>.copy()</code>, then group that by ocean and report count, median and mean.</strong></p>
-<div id="719aa0e3" class="cell" data-execution_count="13">
+<div id="17c9976f" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>neuston <span class="op">=</span> positive[positive[<span class="st">'Sampling Method'</span>] <span class="op">==</span> <span class="st">'Neuston net'</span>].copy()</span>
@@ -1284,7 +1284,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="d07f27cc" class="cell" data-execution_count="14">
+<div id="0cf8d0a9" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>neuston[neuston[<span class="st">'ocean'</span>] <span class="op">==</span> <span class="st">'Pacific'</span>][<span class="st">'Organization'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1352,7 +1352,7 @@ Name: count, dtype: int64</code></pre>
 <section id="if-you-finish-early" class="level2">
 <h2 class="anchored" data-anchor-id="if-you-finish-early">If you finish early</h2>
 <p><strong>Group by <code>Regions</code>, report count and median, and rank by count to find the ten most-sampled regions. Look at which sampling methods were used in the extremes.</strong></p>
-<div id="84d95dfc" class="cell" data-execution_count="15">
+<div id="2a5f1594" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>by_region <span class="op">=</span> positive.groupby(<span class="st">'Regions'</span>)[<span class="st">'Measurement'</span>].agg([<span class="st">'count'</span>, <span class="st">'median'</span>])</span>
@@ -1432,7 +1432,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="c14c10c0" class="cell" data-execution_count="16">
+<div id="74cb0cc7" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(positive[positive[<span class="st">'Regions'</span>] <span class="op">==</span> <span class="st">'Gulf of California'</span>][<span class="st">'Sampling Method'</span>].value_counts())</span>

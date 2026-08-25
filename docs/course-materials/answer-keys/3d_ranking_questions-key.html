@@ -461,7 +461,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="c563d381" class="cell" data-execution_count="1">
+<div id="aa25b322" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -474,7 +474,7 @@ How to use this key
 <pre><code>(21560, 12)</code></pre>
 </div>
 </div>
-<div id="83c7fb30" class="cell" data-execution_count="2">
+<div id="c77b4fcc" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>parks.columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -498,7 +498,7 @@ How to use this key
 <section id="part-1-filtering" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-filtering">Part 1: Filtering</h2>
 <p><strong>1. How many rows describe units whose <code>unit_type</code> is exactly <code>National Park</code>?</strong></p>
-<div id="1058a9c1" class="cell" data-execution_count="3">
+<div id="da761275" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>national_parks <span class="op">=</span> parks[parks[<span class="st">'unit_type'</span>] <span class="op">==</span> <span class="st">'National Park'</span>]</span>
@@ -508,7 +508,7 @@ How to use this key
 <pre><code>(4743, 12)</code></pre>
 </div>
 </div>
-<div id="3a93ea4a" class="cell" data-execution_count="4">
+<div id="d49cf3b9" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>national_parks[<span class="st">'unit_name'</span>].nunique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -532,7 +532,7 @@ How to use this key
 </div>
 </div>
 <p><strong>2. How many rows have a <code>year</code> of <code>Total</code>? Use <code>~</code> or <code>!=</code> to build a table called <code>by_year</code> that has none of them in it. How many rows does <code>by_year</code> have?</strong></p>
-<div id="4745772b" class="cell" data-execution_count="5">
+<div id="6cb77e2a" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>totals <span class="op">=</span> parks[parks[<span class="st">'year'</span>] <span class="op">==</span> <span class="st">'Total'</span>]</span>
@@ -561,7 +561,7 @@ How to use this key
 </div>
 </div>
 <p><strong>3. The <code>region</code> column uses two-letter codes. Build a list of the codes <code>PW</code>, <code>IM</code>, and <code>AK</code>, and use <code>.isin()</code> to filter <code>by_year</code> down to units in those three regions. How many rows?</strong></p>
-<div id="d48e5d6b" class="cell" data-execution_count="6">
+<div id="2d6dd285" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>western_regions <span class="op">=</span> [<span class="st">'PW'</span>, <span class="st">'IM'</span>, <span class="st">'AK'</span>]</span>
@@ -572,7 +572,7 @@ How to use this key
 <pre><code>(9894, 12)</code></pre>
 </div>
 </div>
-<div id="acfde4f4" class="cell" data-execution_count="7">
+<div id="f7e1baa4" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>by_year[<span class="st">'region'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -605,7 +605,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>4. Using two conditions in one filter, find the rows that are National Parks and recorded more than 5 million visitors. How many are there, and what does each row represent?</strong></p>
-<div id="6d6ea1cf" class="cell" data-execution_count="8">
+<div id="b767753f" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>big <span class="op">=</span> by_year[(by_year[<span class="st">'unit_type'</span>] <span class="op">==</span> <span class="st">'National Park'</span>) <span class="op">&amp;</span> (by_year[<span class="st">'visitors'</span>] <span class="op">&gt;</span> <span class="dv">5_000_000</span>)]</span>
@@ -671,7 +671,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="2735afda" class="cell" data-execution_count="9">
+<div id="31a368ab" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>big[<span class="st">'unit_name'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -704,7 +704,7 @@ Name: count, dtype: int64</code></pre>
 <section id="part-2-ranking" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-ranking">Part 2: Ranking</h2>
 <p><strong>5. Rank all of <code>parks</code> by <code>visitors</code>, largest first, and look at the top 10. Something is wrong with this answer. Say what, and say why in one sentence.</strong></p>
-<div id="fc2de51f" class="cell" data-execution_count="10">
+<div id="0335c0e0" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>parks.sort_values(<span class="st">'visitors'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)[</span>
@@ -817,7 +817,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>6. Fix it, and rank <code>by_year</code> instead. Which single park unit had the highest visitor count in any one year, and in what year?</strong></p>
-<div id="ec1865c7" class="cell" data-execution_count="11">
+<div id="fcfce629" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>by_year.sort_values(<span class="st">'visitors'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)[</span>
@@ -942,7 +942,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>7. Filter to National Parks in the year <code>2016</code>, then find the top 10 by visitors. Show only the <code>unit_name</code>, <code>state</code>, and <code>visitors</code> columns.</strong></p>
-<div id="92519b56" class="cell" data-execution_count="12">
+<div id="caae973f" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>np_2016 <span class="op">=</span> by_year[(by_year[<span class="st">'unit_type'</span>] <span class="op">==</span> <span class="st">'National Park'</span>) <span class="op">&amp;</span> (by_year[<span class="st">'year'</span>] <span class="op">==</span> <span class="st">'2016'</span>)].copy()</span>
@@ -1048,7 +1048,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>8. How many of the 61 National Parks recorded more than a million visitors in 2016?</strong></p>
-<div id="04b83c0b" class="cell" data-execution_count="13">
+<div id="d8a72eef" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(np_2016[<span class="st">'visitors'</span>] <span class="op">&gt;</span> <span class="dv">1_000_000</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1057,7 +1057,7 @@ Name: count, dtype: int64</code></pre>
 <pre><code>np.int64(22)</code></pre>
 </div>
 </div>
-<div id="6d7b925c" class="cell" data-execution_count="14">
+<div id="47383946" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np_2016[<span class="st">'visitors'</span>].<span class="bu">sum</span>())</span>
@@ -1086,7 +1086,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>9. Use <code>.idxmax()</code> and <code>.loc[]</code> on <code>np_2016</code> to print the name of the most-visited National Park of 2016 on its own, without displaying the whole row.</strong></p>
-<div id="f2b3eeb9" class="cell" data-execution_count="15">
+<div id="34b8025f" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>busiest <span class="op">=</span> np_2016[<span class="st">'visitors'</span>].idxmax()</span>
@@ -1116,7 +1116,7 @@ Name: count, dtype: int64</code></pre>
 <section id="part-3-put-them-together" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-put-them-together">Part 3: Put them together</h2>
 <p><strong>10. Build a list of the state codes <code>CA</code>, <code>UT</code>, and <code>AZ</code>. Filter <code>np_2016</code> to National Parks in those three states, rank them by visitors, and display the whole ranked list.</strong></p>
-<div id="9f9d981c" class="cell" data-execution_count="16">
+<div id="5a1244f0" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>southwest_states <span class="op">=</span> [<span class="st">'CA'</span>, <span class="st">'UT'</span>, <span class="st">'AZ'</span>]</span>
@@ -1247,7 +1247,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>11. Which of those three states has the park at the top of your list, and which has the most parks in it? Answer both in a markdown cell. You can count the parks per state by eye from your ranked table.</strong></p>
-<div id="5247167d" class="cell" data-execution_count="17">
+<div id="58b9cf2e" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>southwest[<span class="st">'state'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1260,7 +1260,7 @@ AZ    3
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="84a655bc" class="cell" data-execution_count="18">
+<div id="21f3a2b1" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>{state: southwest[southwest[<span class="st">'state'</span>] <span class="op">==</span> state][<span class="st">'visitors'</span>].<span class="bu">sum</span>() <span class="cf">for</span> state <span class="kw">in</span> southwest_states}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1287,7 +1287,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>12. In one markdown cell of three or four sentences, answer this: a colleague asks you which national park is “the busiest”. What do you need to know before you can answer, and what would you tell them? Use at least two numbers from today’s work.</strong></p>
-<div id="555a1a54" class="cell" data-execution_count="19">
+<div id="2de40074" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>y2016 <span class="op">=</span> by_year[by_year[<span class="st">'year'</span>] <span class="op">==</span> <span class="st">'2016'</span>]</span>

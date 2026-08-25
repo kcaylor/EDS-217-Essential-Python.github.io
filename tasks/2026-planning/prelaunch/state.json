@@ -64,6 +64,33 @@
           "exit": 1,
           "git_sha": "32569bf",
           "ok": false
+        },
+        {
+          "at": "2026-08-25T15:44:15",
+          "cmd": "python3 tools/prelaunch_checks.py a1_day45_headers",
+          "could_not_run": false,
+          "evidence": "FAIL  a1_day45_headers\n  day 4: microplastics_panda.jpeg exists False, referenced False\n  day 5: airquality_panda.jpeg exists False, referenced False",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:13",
+          "cmd": "python3 tools/prelaunch_checks.py a1_day45_headers",
+          "could_not_run": false,
+          "evidence": "FAIL  a1_day45_headers\n  day 4: microplastics_panda.jpeg exists False, referenced False\n  day 5: airquality_panda.jpeg exists False, referenced False",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:32",
+          "cmd": "python3 tools/prelaunch_checks.py a1_day45_headers",
+          "could_not_run": false,
+          "evidence": "FAIL  a1_day45_headers\n  day 4: microplastics_panda.jpeg exists False, referenced False\n  day 5: airquality_panda.jpeg exists False, referenced False",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
         }
       ]
     },
@@ -103,6 +130,33 @@
           "evidence": "FAIL  a4_day89_headers\n  day 8: images/presentation.png\n  day 9: images/presentation.png\n  Day 8 and Day 9 share a header image.",
           "exit": 1,
           "git_sha": "32569bf",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:44:15",
+          "cmd": "python3 tools/prelaunch_checks.py a4_day89_headers",
+          "could_not_run": false,
+          "evidence": "FAIL  a4_day89_headers\n  day 8: images/presentation.png\n  day 9: images/presentation.png\n  Day 8 and Day 9 share a header image.",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:13",
+          "cmd": "python3 tools/prelaunch_checks.py a4_day89_headers",
+          "could_not_run": false,
+          "evidence": "FAIL  a4_day89_headers\n  day 8: images/presentation.png\n  day 9: images/presentation.png\n  Day 8 and Day 9 share a header image.",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:32",
+          "cmd": "python3 tools/prelaunch_checks.py a4_day89_headers",
+          "could_not_run": false,
+          "evidence": "FAIL  a4_day89_headers\n  day 8: images/presentation.png\n  day 9: images/presentation.png\n  Day 8 and Day 9 share a header image.",
+          "exit": 1,
+          "git_sha": "667ad75",
           "ok": false
         }
       ]
@@ -153,6 +207,33 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:01",
+          "cmd": "python3 tools/prelaunch_checks.py c1_day89_specified",
+          "could_not_run": false,
+          "evidence": "PASS  c1_day89_specified\n  Days 8 and 9 carry 10 of 10 things a student or an instructor needs.\n  yes  a timed schedule on Day 8\n  yes  a timed schedule on Day 9\n  yes  checkpoints on Day 8\n  yes  a submission mechanism\n  yes  a deadline\n  yes  presentation length\n  yes  what to present\n  yes  a definition of finished\n  yes  the ten steps enumerated\n  yes  no empty trailing heading",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:03",
+          "cmd": "python3 tools/prelaunch_checks.py c1_day89_specified",
+          "could_not_run": false,
+          "evidence": "PASS  c1_day89_specified\n  Days 8 and 9 carry 10 of 10 things a student or an instructor needs.\n  yes  a timed schedule on Day 8\n  yes  a timed schedule on Day 9\n  yes  checkpoints on Day 8\n  yes  a submission mechanism\n  yes  a deadline\n  yes  presentation length\n  yes  what to present\n  yes  a definition of finished\n  yes  the ten steps enumerated\n  yes  no empty trailing heading",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:22",
+          "cmd": "python3 tools/prelaunch_checks.py c1_day89_specified",
+          "could_not_run": false,
+          "evidence": "PASS  c1_day89_specified\n  Days 8 and 9 carry 10 of 10 things a student or an instructor needs.\n  yes  a timed schedule on Day 8\n  yes  a timed schedule on Day 9\n  yes  checkpoints on Day 8\n  yes  a submission mechanism\n  yes  a deadline\n  yes  presentation length\n  yes  what to present\n  yes  a definition of finished\n  yes  the ten steps enumerated\n  yes  no empty trailing heading",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ]
     },
@@ -202,6 +283,33 @@
           "exit": 1,
           "git_sha": "32569bf",
           "ok": false
+        },
+        {
+          "at": "2026-08-25T15:44:02",
+          "cmd": "python3 tools/prelaunch_checks.py c10_house_style",
+          "could_not_run": false,
+          "evidence": "FAIL  c10_house_style\n  pages scanned: 89\n  HARD violations: none. No em-dash, no metaphorical land or hinge, no 'with a hint of' on any live page.\n  advisory, for the voice pass to judge: 44 line(s) across 30 page(s) use the 'not X, it is Y' shape. Some of those are plain corrections and are fine. No regex can tell which, so this never fails the check.\n  pages signed off: 0 of 89\n    89 page(s) have not been read. The mechanical rules above are clean, which is not the same as the pass being done.",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:03",
+          "cmd": "python3 tools/prelaunch_checks.py c10_house_style",
+          "could_not_run": false,
+          "evidence": "FAIL  c10_house_style\n  pages scanned: 89\n  HARD violations: none. No em-dash, no metaphorical land or hinge, no 'with a hint of' on any live page.\n  advisory, for the voice pass to judge: 44 line(s) across 30 page(s) use the 'not X, it is Y' shape. Some of those are plain corrections and are fine. No regex can tell which, so this never fails the check.\n  pages signed off: 0 of 89\n    89 page(s) have not been read. The mechanical rules above are clean, which is not the same as the pass being done.",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:23",
+          "cmd": "python3 tools/prelaunch_checks.py c10_house_style",
+          "could_not_run": false,
+          "evidence": "FAIL  c10_house_style\n  pages scanned: 89\n  HARD violations: none. No em-dash, no metaphorical land or hinge, no 'with a hint of' on any live page.\n  advisory, for the voice pass to judge: 44 line(s) across 30 page(s) use the 'not X, it is Y' shape. Some of those are plain corrections and are fine. No regex can tell which, so this never fails the check.\n  pages signed off: 0 of 89\n    89 page(s) have not been read. The mechanical rules above are clean, which is not the same as the pass being done.",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
         }
       ]
     },
@@ -232,6 +340,33 @@
           "evidence": "eod-day1-2026.qmd  ->  eod-day1-2026-key.qmd\n  unnumbered handout, compared by marker: Required 3/3, Your change 3/3\n  every marked task has a matching block in the key\n\neod-day2-2026.qmd  ->  eod-day2-2026-key.qmd\n  handout tasks: 15   key answers: 15\n  all 15 tasks answered, none extra\n\neod-day3-2026.qmd  ->  eod-day3-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day4-2026.qmd  ->  eod-day4-2026-key.qmd\n  handout tasks: 27   key answers: 27\n  all 27 tasks answered, none extra\n\neod-day5-2026.qmd  ->  eod-day5-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day6-2026.qmd  ->  eod-day6-2026-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\neod-day7-2026.qmd  ->  eod-day7-2026-key.qmd\n  handout tasks: 26   key answers: 26\n  all 26 tasks answered, none extra\n\n3d_ranking_questions.qmd  ->  3d_ranking_questions-key.qmd\n  handout tasks: 12   key answers: 12\n  all 12 tasks answered, none extra\n\n4d_cleaning_messy_data.qmd  ->  4d_cleaning_messy_data-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\n5c_grouped_comparisons.qmd  ->  5c_grouped_comparisons-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n6d_two_table_exercise.qmd  ->  6d_two_table_exercise-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n7c_penguins.qmd  ->  7c_penguins-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n12 of 12 pair(s) clean",
           "exit": 0,
           "git_sha": "32569bf",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:16",
+          "cmd": "python3 tools/key_check.py --tasks-only",
+          "could_not_run": false,
+          "evidence": "eod-day1-2026.qmd  ->  eod-day1-2026-key.qmd\n  unnumbered handout, compared by marker: Required 3/3, Your change 3/3\n  every marked task has a matching block in the key\n\neod-day2-2026.qmd  ->  eod-day2-2026-key.qmd\n  handout tasks: 15   key answers: 15\n  all 15 tasks answered, none extra\n\neod-day3-2026.qmd  ->  eod-day3-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day4-2026.qmd  ->  eod-day4-2026-key.qmd\n  handout tasks: 27   key answers: 27\n  all 27 tasks answered, none extra\n\neod-day5-2026.qmd  ->  eod-day5-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day6-2026.qmd  ->  eod-day6-2026-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\neod-day7-2026.qmd  ->  eod-day7-2026-key.qmd\n  handout tasks: 26   key answers: 26\n  all 26 tasks answered, none extra\n\n3d_ranking_questions.qmd  ->  3d_ranking_questions-key.qmd\n  handout tasks: 12   key answers: 12\n  all 12 tasks answered, none extra\n\n4d_cleaning_messy_data.qmd  ->  4d_cleaning_messy_data-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\n5c_grouped_comparisons.qmd  ->  5c_grouped_comparisons-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n6d_two_table_exercise.qmd  ->  6d_two_table_exercise-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n7c_penguins.qmd  ->  7c_penguins-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n12 of 12 pair(s) clean",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:14",
+          "cmd": "python3 tools/key_check.py --tasks-only",
+          "could_not_run": false,
+          "evidence": "eod-day1-2026.qmd  ->  eod-day1-2026-key.qmd\n  unnumbered handout, compared by marker: Required 3/3, Your change 3/3\n  every marked task has a matching block in the key\n\neod-day2-2026.qmd  ->  eod-day2-2026-key.qmd\n  handout tasks: 15   key answers: 15\n  all 15 tasks answered, none extra\n\neod-day3-2026.qmd  ->  eod-day3-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day4-2026.qmd  ->  eod-day4-2026-key.qmd\n  handout tasks: 27   key answers: 27\n  all 27 tasks answered, none extra\n\neod-day5-2026.qmd  ->  eod-day5-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day6-2026.qmd  ->  eod-day6-2026-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\neod-day7-2026.qmd  ->  eod-day7-2026-key.qmd\n  handout tasks: 26   key answers: 26\n  all 26 tasks answered, none extra\n\n3d_ranking_questions.qmd  ->  3d_ranking_questions-key.qmd\n  handout tasks: 12   key answers: 12\n  all 12 tasks answered, none extra\n\n4d_cleaning_messy_data.qmd  ->  4d_cleaning_messy_data-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\n5c_grouped_comparisons.qmd  ->  5c_grouped_comparisons-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n6d_two_table_exercise.qmd  ->  6d_two_table_exercise-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n7c_penguins.qmd  ->  7c_penguins-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n12 of 12 pair(s) clean",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:33",
+          "cmd": "python3 tools/key_check.py --tasks-only",
+          "could_not_run": false,
+          "evidence": "eod-day1-2026.qmd  ->  eod-day1-2026-key.qmd\n  unnumbered handout, compared by marker: Required 3/3, Your change 3/3\n  every marked task has a matching block in the key\n\neod-day2-2026.qmd  ->  eod-day2-2026-key.qmd\n  handout tasks: 15   key answers: 15\n  all 15 tasks answered, none extra\n\neod-day3-2026.qmd  ->  eod-day3-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day4-2026.qmd  ->  eod-day4-2026-key.qmd\n  handout tasks: 27   key answers: 27\n  all 27 tasks answered, none extra\n\neod-day5-2026.qmd  ->  eod-day5-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day6-2026.qmd  ->  eod-day6-2026-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\neod-day7-2026.qmd  ->  eod-day7-2026-key.qmd\n  handout tasks: 26   key answers: 26\n  all 26 tasks answered, none extra\n\n3d_ranking_questions.qmd  ->  3d_ranking_questions-key.qmd\n  handout tasks: 12   key answers: 12\n  all 12 tasks answered, none extra\n\n4d_cleaning_messy_data.qmd  ->  4d_cleaning_messy_data-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\n5c_grouped_comparisons.qmd  ->  5c_grouped_comparisons-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n6d_two_table_exercise.qmd  ->  6d_two_table_exercise-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n7c_penguins.qmd  ->  7c_penguins-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n12 of 12 pair(s) clean",
+          "exit": 0,
+          "git_sha": "667ad75",
           "ok": true
         }
       ]
@@ -300,8 +435,48 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:01",
+          "cmd": "python3 tools/prelaunch_checks.py c2_mailto",
+          "could_not_run": false,
+          "evidence": "PASS  c2_mailto\n  Every mailto link on index.qmd is well formed and matches its label.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:03",
+          "cmd": "python3 tools/prelaunch_checks.py c2_mailto",
+          "could_not_run": false,
+          "evidence": "PASS  c2_mailto\n  Every mailto link on index.qmd is well formed and matches its label.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:22",
+          "cmd": "python3 tools/prelaunch_checks.py c2_mailto",
+          "could_not_run": false,
+          "evidence": "PASS  c2_mailto\n  Every mailto link on index.qmd is well formed and matches its label.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
-      ]
+      ],
+      "signoff": {
+        "at": "2026-08-25T15:49:56",
+        "by": "kelly",
+        "forced": false,
+        "git_sha": "667ad75",
+        "note": "Kelly confirms Cella Schnabel is the 2026 TA and cellaschnabel@ucsb.edu is her address. Both mailto links on index.qmd are well formed, displayed text matches link target in both, and no mailto:: survives anywhere in source.",
+        "verification": {
+          "at": "2026-08-25T15:44:01",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "C3": {
       "checks": [
@@ -331,6 +506,33 @@
           "exit": 1,
           "git_sha": "32569bf",
           "ok": false
+        },
+        {
+          "at": "2026-08-25T15:44:02",
+          "cmd": "python3 tools/prelaunch_checks.py c3_images_present",
+          "could_not_run": false,
+          "evidence": "PASS  c3_images_present\n  Every image index.qmd references exists.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:03",
+          "cmd": "python3 tools/prelaunch_checks.py c3_images_present",
+          "could_not_run": false,
+          "evidence": "PASS  c3_images_present\n  Every image index.qmd references exists.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:22",
+          "cmd": "python3 tools/prelaunch_checks.py c3_images_present",
+          "could_not_run": false,
+          "evidence": "PASS  c3_images_present\n  Every image index.qmd references exists.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ],
       "notes": [
@@ -404,6 +606,33 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:02",
+          "cmd": "python3 tools/prelaunch_checks.py c4_no_network_at_render",
+          "could_not_run": false,
+          "evidence": "PASS  c4_no_network_at_render\n  executing python blocks scanned across 89 live pages\n  No executing block reaches the network.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:03",
+          "cmd": "python3 tools/prelaunch_checks.py c4_no_network_at_render",
+          "could_not_run": false,
+          "evidence": "PASS  c4_no_network_at_render\n  executing python blocks scanned across 89 live pages\n  No executing block reaches the network.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:22",
+          "cmd": "python3 tools/prelaunch_checks.py c4_no_network_at_render",
+          "could_not_run": false,
+          "evidence": "PASS  c4_no_network_at_render\n  executing python blocks scanned across 89 live pages\n  No executing block reaches the network.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ],
       "state": "open"
@@ -472,6 +701,33 @@
           "exit": 1,
           "git_sha": "32569bf",
           "ok": false
+        },
+        {
+          "at": "2026-08-25T15:44:02",
+          "cmd": "python3 tools/prelaunch_checks.py c6_positron_screenshots",
+          "could_not_run": false,
+          "evidence": "FAIL  c6_positron_screenshots\n  positron_launch.png: file exists False, referenced True, still commented out True\n  interface-positron.png: file exists False, referenced True, still commented out True",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:03",
+          "cmd": "python3 tools/prelaunch_checks.py c6_positron_screenshots",
+          "could_not_run": false,
+          "evidence": "FAIL  c6_positron_screenshots\n  positron_launch.png: file exists False, referenced True, still commented out True\n  interface-positron.png: file exists False, referenced True, still commented out True",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:22",
+          "cmd": "python3 tools/prelaunch_checks.py c6_positron_screenshots",
+          "could_not_run": false,
+          "evidence": "FAIL  c6_positron_screenshots\n  positron_launch.png: file exists False, referenced True, still commented out True\n  interface-positron.png: file exists False, referenced True, still commented out True",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
         }
       ]
     },
@@ -538,6 +794,33 @@
           "evidence": "PASS  c7_eod_dates\n  day 1: Date 08/31/2026\n  day 2: Date 09/01/2026\n  day 3: Date 09/02/2026\n  day 4: Date 09/03/2026\n  day 5: Date 09/04/2026\n  day 6: Date 09/08/2026\n  day 7: Date 09/09/2026",
           "exit": 0,
           "git_sha": "32569bf",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:02",
+          "cmd": "python3 tools/prelaunch_checks.py c7_eod_dates",
+          "could_not_run": false,
+          "evidence": "PASS  c7_eod_dates\n  day 1: Date 08/31/2026\n  day 2: Date 09/01/2026\n  day 3: Date 09/02/2026\n  day 4: Date 09/03/2026\n  day 5: Date 09/04/2026\n  day 6: Date 09/08/2026\n  day 7: Date 09/09/2026",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:03",
+          "cmd": "python3 tools/prelaunch_checks.py c7_eod_dates",
+          "could_not_run": false,
+          "evidence": "PASS  c7_eod_dates\n  day 1: Date 08/31/2026\n  day 2: Date 09/01/2026\n  day 3: Date 09/02/2026\n  day 4: Date 09/03/2026\n  day 5: Date 09/04/2026\n  day 6: Date 09/08/2026\n  day 7: Date 09/09/2026",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:22",
+          "cmd": "python3 tools/prelaunch_checks.py c7_eod_dates",
+          "could_not_run": false,
+          "evidence": "PASS  c7_eod_dates\n  day 1: Date 08/31/2026\n  day 2: Date 09/01/2026\n  day 3: Date 09/02/2026\n  day 4: Date 09/03/2026\n  day 5: Date 09/04/2026\n  day 6: Date 09/08/2026\n  day 7: Date 09/09/2026",
+          "exit": 0,
+          "git_sha": "667ad75",
           "ok": true
         }
       ]
@@ -606,6 +889,33 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:02",
+          "cmd": "python3 tools/prelaunch_checks.py c8_empty_headings",
+          "could_not_run": false,
+          "evidence": "PASS  c8_empty_headings\n  No day page ends on an empty heading.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:03",
+          "cmd": "python3 tools/prelaunch_checks.py c8_empty_headings",
+          "could_not_run": false,
+          "evidence": "PASS  c8_empty_headings\n  No day page ends on an empty heading.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:22",
+          "cmd": "python3 tools/prelaunch_checks.py c8_empty_headings",
+          "could_not_run": false,
+          "evidence": "PASS  c8_empty_headings\n  No day page ends on an empty heading.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ]
     },
@@ -664,20 +974,38 @@
           "exit": 1,
           "git_sha": "32569bf",
           "ok": false
+        },
+        {
+          "at": "2026-08-25T15:44:02",
+          "cmd": "python3 tools/prelaunch_checks.py c9_no_external_images",
+          "could_not_run": false,
+          "evidence": "FAIL  c9_no_external_images\n  live pages scanned: 89\n  course-materials/eod-practice/eod-day1-2026.qmd: https://media.arcus.org/files/styles/juicebox_medium/public/ima/images/Martinez_IMG_4771.jpg?itok=V5IY36X3",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:03",
+          "cmd": "python3 tools/prelaunch_checks.py c9_no_external_images",
+          "could_not_run": false,
+          "evidence": "FAIL  c9_no_external_images\n  live pages scanned: 89\n  course-materials/eod-practice/eod-day1-2026.qmd: https://media.arcus.org/files/styles/juicebox_medium/public/ima/images/Martinez_IMG_4771.jpg?itok=V5IY36X3",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:22",
+          "cmd": "python3 tools/prelaunch_checks.py c9_no_external_images",
+          "could_not_run": false,
+          "evidence": "FAIL  c9_no_external_images\n  live pages scanned: 89\n  course-materials/eod-practice/eod-day1-2026.qmd: https://media.arcus.org/files/styles/juicebox_medium/public/ima/images/Martinez_IMG_4771.jpg?itok=V5IY36X3",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
         }
       ]
     },
     "D1": {
       "checks": [
-        {
-          "at": "2026-08-21T04:34:45",
-          "cmd": "python3 tools/prelaunch_checks.py d1_clean_docs_guard",
-          "could_not_run": false,
-          "evidence": "FAIL  d1_clean_docs_guard\n  clean_docs() runs unguarded at line(s) [447]. An incremental build would delete the rendered site.\n  line 447: UNGUARDED, runs on every build path",
-          "exit": 1,
-          "git_sha": "98e9108",
-          "ok": false
-        },
         {
           "at": "2026-08-21T04:43:43",
           "cmd": "python3 tools/prelaunch_checks.py d1_clean_docs_guard",
@@ -730,6 +1058,42 @@
           "evidence": "PASS  d1_clean_docs_guard\n  clean_docs() is called only on the full-build path.\n  line 501: guarded by  if args.full",
           "exit": 0,
           "git_sha": "32569bf",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T12:37:46",
+          "cmd": "python3 tools/prelaunch_checks.py d1_clean_docs_guard",
+          "could_not_run": false,
+          "evidence": "PASS  d1_clean_docs_guard\n  clean_docs() is called only on the full-build path.\n  line 501: guarded by  if args.full",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:43:57",
+          "cmd": "python3 tools/prelaunch_checks.py d1_clean_docs_guard",
+          "could_not_run": false,
+          "evidence": "PASS  d1_clean_docs_guard\n  clean_docs() is called only on the full-build path.\n  line 501: guarded by  if args.full",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:49:59",
+          "cmd": "python3 tools/prelaunch_checks.py d1_clean_docs_guard",
+          "could_not_run": false,
+          "evidence": "PASS  d1_clean_docs_guard\n  clean_docs() is called only on the full-build path.\n  line 501: guarded by  if args.full",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:16",
+          "cmd": "python3 tools/prelaunch_checks.py d1_clean_docs_guard",
+          "could_not_run": false,
+          "evidence": "PASS  d1_clean_docs_guard\n  clean_docs() is called only on the full-build path.\n  line 501: guarded by  if args.full",
+          "exit": 0,
+          "git_sha": "667ad75",
           "ok": true
         }
       ],
@@ -789,6 +1153,33 @@
           "evidence": "PASS  d10_render_current\n  pages in the render set: 89\n  never rendered: 0\n  rendered before their source last changed: 0\n  Every page in docs/ was rendered after its source last changed.",
           "exit": 0,
           "git_sha": "32569bf",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:01",
+          "cmd": "python3 tools/prelaunch_checks.py d10_render_current",
+          "could_not_run": false,
+          "evidence": "FAIL  d10_render_current\n  pages in the render set: 89\n  never rendered: 52\n  rendered before their source last changed: 0\n    course-materials/cheatsheets/data_cleaning.qmd\n    course-materials/cheatsheets/data_grouping.qmd\n    course-materials/cheatsheets/data_merging.qmd\n    course-materials/cheatsheets/data_selection.qmd\n    course-materials/cheatsheets/dictionaries.qmd\n    course-materials/cheatsheets/first_steps.qmd\n    course-materials/cheatsheets/functions.qmd\n    course-materials/cheatsheets/lists.qmd\n    course-materials/cheatsheets/matplotlib.qmd\n    course-materials/cheatsheets/numpy.qmd\n    course-materials/cheatsheets/pandas_dataframes.qmd\n    course-materials/cheatsheets/pandas_series.qmd",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:02",
+          "cmd": "python3 tools/prelaunch_checks.py d10_render_current",
+          "could_not_run": false,
+          "evidence": "PASS  d10_render_current\n  pages in the render set: 89\n  never rendered: 0\n  rendered before their source last changed: 0\n  Every page in docs/ was rendered after its source last changed.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:22",
+          "cmd": "python3 tools/prelaunch_checks.py d10_render_current",
+          "could_not_run": false,
+          "evidence": "PASS  d10_render_current\n  pages in the render set: 89\n  never rendered: 0\n  rendered before their source last changed: 0\n  Every page in docs/ was rendered after its source last changed.",
+          "exit": 0,
+          "git_sha": "667ad75",
           "ok": true
         }
       ]
@@ -856,6 +1247,33 @@
           "evidence": "PASS  d2_render_set\n  _quarto.yml render exclusions: ['nbs/**', 'extra_files/**', 'course-materials/interactive-sessions/2a_getting_help.qmd', 'course-materials/interactive-sessions/2c_exceptions_and_errors.qmd', 'course-materials/interactive-sessions/interactive-session-git.qmd', 'course-materials/lectures/**']\n  correct render set: 89 files\n  build_docs.get_all_buildable_files(): 89 files",
           "exit": 0,
           "git_sha": "32569bf",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:43:57",
+          "cmd": "python3 tools/prelaunch_checks.py d2_render_set",
+          "could_not_run": false,
+          "evidence": "PASS  d2_render_set\n  _quarto.yml render exclusions: ['nbs/**', 'extra_files/**', 'course-materials/interactive-sessions/2a_getting_help.qmd', 'course-materials/interactive-sessions/2c_exceptions_and_errors.qmd', 'course-materials/interactive-sessions/interactive-session-git.qmd', 'course-materials/lectures/**']\n  correct render set: 89 files\n  build_docs.get_all_buildable_files(): 89 files",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:49:59",
+          "cmd": "python3 tools/prelaunch_checks.py d2_render_set",
+          "could_not_run": false,
+          "evidence": "PASS  d2_render_set\n  _quarto.yml render exclusions: ['nbs/**', 'extra_files/**', 'course-materials/interactive-sessions/2a_getting_help.qmd', 'course-materials/interactive-sessions/2c_exceptions_and_errors.qmd', 'course-materials/interactive-sessions/interactive-session-git.qmd', 'course-materials/lectures/**']\n  correct render set: 89 files\n  build_docs.get_all_buildable_files(): 89 files",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:16",
+          "cmd": "python3 tools/prelaunch_checks.py d2_render_set",
+          "could_not_run": false,
+          "evidence": "PASS  d2_render_set\n  _quarto.yml render exclusions: ['nbs/**', 'extra_files/**', 'course-materials/interactive-sessions/2a_getting_help.qmd', 'course-materials/interactive-sessions/2c_exceptions_and_errors.qmd', 'course-materials/interactive-sessions/interactive-session-git.qmd', 'course-materials/lectures/**']\n  correct render set: 89 files\n  build_docs.get_all_buildable_files(): 89 files",
+          "exit": 0,
+          "git_sha": "667ad75",
           "ok": true
         }
       ],
@@ -937,6 +1355,33 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T15:43:58",
+          "cmd": "python3 tools/prelaunch_checks.py d3_lecture_kernels",
+          "could_not_run": false,
+          "evidence": "PASS  d3_lecture_kernels\n  notebooks in the render set: 0\n  No rendered notebook names the 2025 kernel.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:49:59",
+          "cmd": "python3 tools/prelaunch_checks.py d3_lecture_kernels",
+          "could_not_run": false,
+          "evidence": "PASS  d3_lecture_kernels\n  notebooks in the render set: 0\n  No rendered notebook names the 2025 kernel.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:16",
+          "cmd": "python3 tools/prelaunch_checks.py d3_lecture_kernels",
+          "could_not_run": false,
+          "evidence": "PASS  d3_lecture_kernels\n  notebooks in the render set: 0\n  No rendered notebook names the 2025 kernel.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ],
       "signoff": {
@@ -1017,6 +1462,33 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T15:43:58",
+          "cmd": "python3 tools/prelaunch_checks.py d4_lectures_excluded",
+          "could_not_run": false,
+          "evidence": "PASS  d4_lectures_excluded\n  render exclusions naming lectures: ['course-materials/lectures/**']\n  lecture files still in the render set: 0",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:49:59",
+          "cmd": "python3 tools/prelaunch_checks.py d4_lectures_excluded",
+          "could_not_run": false,
+          "evidence": "PASS  d4_lectures_excluded\n  render exclusions naming lectures: ['course-materials/lectures/**']\n  lecture files still in the render set: 0",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:16",
+          "cmd": "python3 tools/prelaunch_checks.py d4_lectures_excluded",
+          "could_not_run": false,
+          "evidence": "PASS  d4_lectures_excluded\n  render exclusions naming lectures: ['course-materials/lectures/**']\n  lecture files still in the render set: 0",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ],
       "signoff": {
@@ -1035,24 +1507,6 @@
     },
     "D5": {
       "checks": [
-        {
-          "at": "2026-08-21T04:34:52",
-          "cmd": "python3 tools/prelaunch_checks.py d5_render_complete",
-          "could_not_run": false,
-          "evidence": "FAIL  d5_render_complete\n  rendered HTML files: 2  (render set is 101)\n  docs/data files: 31  (data/ holds 31)\n  search.json entries: 9\n  index.html says Summer 2026: True",
-          "exit": 1,
-          "git_sha": "98e9108",
-          "ok": false
-        },
-        {
-          "at": "2026-08-21T04:43:50",
-          "cmd": "python3 tools/prelaunch_checks.py d5_render_complete",
-          "could_not_run": false,
-          "evidence": "FAIL  d5_render_complete\n  rendered HTML files: 2  (render set is 89)\n  docs/data files: 31  (data/ holds 31)\n  search.json entries: 9\n  index.html says Summer 2026: True",
-          "exit": 1,
-          "git_sha": "98e9108",
-          "ok": false
-        },
         {
           "at": "2026-08-23T10:13:45",
           "cmd": "python3 tools/prelaunch_checks.py d5_render_complete",
@@ -1106,6 +1560,42 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T12:37:46",
+          "cmd": "python3 tools/prelaunch_checks.py d5_render_complete",
+          "could_not_run": false,
+          "evidence": "FAIL  d5_render_complete\n  rendered HTML files: 21  (render set is 89)\n  docs/data files: 31  (data/ holds 31)\n  search.json entries: 41\n  index.html says Summer 2026: False",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:43:58",
+          "cmd": "python3 tools/prelaunch_checks.py d5_render_complete",
+          "could_not_run": false,
+          "evidence": "FAIL  d5_render_complete\n  rendered HTML files: 36  (render set is 89)\n  docs/data files: 31  (data/ holds 31)\n  search.json entries: 160\n  index.html says Summer 2026: True",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:00",
+          "cmd": "python3 tools/prelaunch_checks.py d5_render_complete",
+          "could_not_run": false,
+          "evidence": "PASS  d5_render_complete\n  rendered HTML files: 89  (render set is 89)\n  docs/data files: 31  (data/ holds 31)\n  search.json entries: 617\n  index.html says Summer 2026: True",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:16",
+          "cmd": "python3 tools/prelaunch_checks.py d5_render_complete",
+          "could_not_run": false,
+          "evidence": "PASS  d5_render_complete\n  rendered HTML files: 89  (render set is 89)\n  docs/data files: 31  (data/ holds 31)\n  search.json entries: 617\n  index.html says Summer 2026: True",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ],
       "notes": [
@@ -1130,24 +1620,6 @@
     },
     "D6": {
       "checks": [
-        {
-          "at": "2026-08-21T04:34:54",
-          "cmd": "python3 tools/prelaunch_checks.py d6_docs_data_tracked",
-          "could_not_run": false,
-          "evidence": "FAIL  d6_docs_data_tracked\n  files tracked at HEAD under docs/data: 0\n  files in data/: 31\n  not tracked, so they will 404 on the live site: 31\n    banana_index.csv\n    basic_data.csv\n    bsrn_gob_2019-10.csv\n    data_urls.py\n    date_data.csv\n    eurovision_contestants.csv\n    eurovision_country_populations.csv\n    gistemp_global.csv\n    gistemp_nh.csv\n    gistemp_sh.csv",
-          "exit": 1,
-          "git_sha": "98e9108",
-          "ok": false
-        },
-        {
-          "at": "2026-08-21T04:43:52",
-          "cmd": "python3 tools/prelaunch_checks.py d6_docs_data_tracked",
-          "could_not_run": false,
-          "evidence": "FAIL  d6_docs_data_tracked\n  files tracked at HEAD under docs/data: 0\n  files in data/: 31\n  not tracked, so they will 404 on the live site: 31\n    banana_index.csv\n    basic_data.csv\n    bsrn_gob_2019-10.csv\n    data_urls.py\n    date_data.csv\n    eurovision_contestants.csv\n    eurovision_country_populations.csv\n    gistemp_global.csv\n    gistemp_nh.csv\n    gistemp_sh.csv",
-          "exit": 1,
-          "git_sha": "98e9108",
-          "ok": false
-        },
         {
           "at": "2026-08-23T10:13:46",
           "cmd": "python3 tools/prelaunch_checks.py d6_docs_data_tracked",
@@ -1201,6 +1673,42 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T12:37:47",
+          "cmd": "python3 tools/prelaunch_checks.py d6_docs_data_tracked",
+          "could_not_run": false,
+          "evidence": "PASS  d6_docs_data_tracked\n  files tracked at HEAD under docs/data: 31\n  files in data/: 31\n  Every dataset is committed under docs/data.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:43:58",
+          "cmd": "python3 tools/prelaunch_checks.py d6_docs_data_tracked",
+          "could_not_run": false,
+          "evidence": "PASS  d6_docs_data_tracked\n  files tracked at HEAD under docs/data: 31\n  files in data/: 31\n  Every dataset is committed under docs/data.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:00",
+          "cmd": "python3 tools/prelaunch_checks.py d6_docs_data_tracked",
+          "could_not_run": false,
+          "evidence": "PASS  d6_docs_data_tracked\n  files tracked at HEAD under docs/data: 31\n  files in data/: 31\n  Every dataset is committed under docs/data.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:16",
+          "cmd": "python3 tools/prelaunch_checks.py d6_docs_data_tracked",
+          "could_not_run": false,
+          "evidence": "PASS  d6_docs_data_tracked\n  files tracked at HEAD under docs/data: 31\n  files in data/: 31\n  Every dataset is committed under docs/data.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ],
       "signoff": {
@@ -1240,15 +1748,6 @@
     },
     "D8": {
       "checks": [
-        {
-          "at": "2026-08-21T04:34:54",
-          "cmd": "python3 tools/prelaunch_checks.py d8_live_site",
-          "could_not_run": true,
-          "evidence": "COULD NOT RUN  d8_live_site\n  no network access from here: <urlopen error Tunnel connection failed: 403 Forbidden>",
-          "exit": 2,
-          "git_sha": "98e9108",
-          "ok": false
-        },
         {
           "at": "2026-08-21T04:43:52",
           "cmd": "python3 tools/prelaunch_checks.py d8_live_site",
@@ -1310,6 +1809,33 @@
           "evidence": "PASS  d8_live_site\n  200  https://eds-217-essential-python.github.io/   contains 'Summer 2026': True\n  200  https://eds-217-essential-python.github.io/data/toolik_weather.csv\n  200  https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1a_positron_notebooks.html",
           "exit": 0,
           "git_sha": "32569bf",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:43:58",
+          "cmd": "python3 tools/prelaunch_checks.py d8_live_site",
+          "could_not_run": false,
+          "evidence": "PASS  d8_live_site\n  200  https://eds-217-essential-python.github.io/   contains 'Summer 2026': True\n  200  https://eds-217-essential-python.github.io/data/toolik_weather.csv\n  200  https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1a_positron_notebooks.html",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:00",
+          "cmd": "python3 tools/prelaunch_checks.py d8_live_site",
+          "could_not_run": false,
+          "evidence": "PASS  d8_live_site\n  200  https://eds-217-essential-python.github.io/   contains 'Summer 2026': True\n  200  https://eds-217-essential-python.github.io/data/toolik_weather.csv\n  200  https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1a_positron_notebooks.html",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:17",
+          "cmd": "python3 tools/prelaunch_checks.py d8_live_site",
+          "could_not_run": false,
+          "evidence": "PASS  d8_live_site\n  200  https://eds-217-essential-python.github.io/   contains 'Summer 2026': True\n  200  https://eds-217-essential-python.github.io/data/toolik_weather.csv\n  200  https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1a_positron_notebooks.html",
+          "exit": 0,
+          "git_sha": "667ad75",
           "ok": true
         }
       ],
@@ -1381,6 +1907,33 @@
           "evidence": "PASS  d9_push_hooks\n  active hooks in .git/hooks: 0\n  No hook can interfere with a commit or a push.",
           "exit": 0,
           "git_sha": "32569bf",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:43:58",
+          "cmd": "python3 tools/prelaunch_checks.py d9_push_hooks",
+          "could_not_run": false,
+          "evidence": "PASS  d9_push_hooks\n  active hooks in .git/hooks: 0\n  No hook can interfere with a commit or a push.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:00",
+          "cmd": "python3 tools/prelaunch_checks.py d9_push_hooks",
+          "could_not_run": false,
+          "evidence": "PASS  d9_push_hooks\n  active hooks in .git/hooks: 0\n  No hook can interfere with a commit or a push.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:16",
+          "cmd": "python3 tools/prelaunch_checks.py d9_push_hooks",
+          "could_not_run": false,
+          "evidence": "PASS  d9_push_hooks\n  active hooks in .git/hooks: 0\n  No hook can interfere with a commit or a push.",
+          "exit": 0,
+          "git_sha": "667ad75",
           "ok": true
         }
       ],
@@ -1462,20 +2015,38 @@
           "exit": 1,
           "git_sha": "32569bf",
           "ok": false
+        },
+        {
+          "at": "2026-08-25T15:44:15",
+          "cmd": "python3 tools/prelaunch_checks.py h1_orphan_assets",
+          "could_not_run": false,
+          "evidence": "FAIL  h1_orphan_assets\n  unreferenced images over 500 KB: 23\n  render leftovers under course-materials: 10\n    13.5 MB  course-materials/eod-practice/sample_plot.tiff\n    3.9 MB  course-materials/images/mpala.jpeg\n    3.2 MB  images/horst-repos.png\n    3.2 MB  course-materials/lectures/assets/horst-repos.png\n    3.2 MB  course-materials/images/horst-repos.png\n    3.1 MB  course-materials/interactive-sessions/images/git_bunnies_1.jpg\n    2.7 MB  course-materials/images/mpala1.jpeg\n    2.6 MB  course-materials/interactive-sessions/images/variables.jpg\n    2.6 MB  course-materials/images/variables.jpg\n    1.7 MB  course-materials/interactive-sessions/images/list.jpg\n    course-materials/answer-keys/monthly_means.csv\n    course-materials/eod-practice/eod-day3.qmd.copy\n    course-materials/eod-practice/monthly_means.csv\n    course-materials/eod-practice/monthly_means.json\n    course-materials/eod-practice/monthly_means.pkl\n    course-materials/eod-practice/sample_plot.jpg\n    course-materials/eod-practice/sample_plot.pdf\n    course-materials/eod-practice/sample_plot.png\n    course-materials/eod-practice/sample_plot.svg\n    course-materials/eod-practice/sample_plot.tiff",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:13",
+          "cmd": "python3 tools/prelaunch_checks.py h1_orphan_assets",
+          "could_not_run": false,
+          "evidence": "FAIL  h1_orphan_assets\n  unreferenced images over 500 KB: 23\n  render leftovers under course-materials: 10\n    13.5 MB  course-materials/eod-practice/sample_plot.tiff\n    3.9 MB  course-materials/images/mpala.jpeg\n    3.2 MB  images/horst-repos.png\n    3.2 MB  course-materials/lectures/assets/horst-repos.png\n    3.2 MB  course-materials/images/horst-repos.png\n    3.1 MB  course-materials/interactive-sessions/images/git_bunnies_1.jpg\n    2.7 MB  course-materials/images/mpala1.jpeg\n    2.6 MB  course-materials/interactive-sessions/images/variables.jpg\n    2.6 MB  course-materials/images/variables.jpg\n    1.7 MB  course-materials/interactive-sessions/images/list.jpg\n    course-materials/answer-keys/monthly_means.csv\n    course-materials/eod-practice/eod-day3.qmd.copy\n    course-materials/eod-practice/monthly_means.csv\n    course-materials/eod-practice/monthly_means.json\n    course-materials/eod-practice/monthly_means.pkl\n    course-materials/eod-practice/sample_plot.jpg\n    course-materials/eod-practice/sample_plot.pdf\n    course-materials/eod-practice/sample_plot.png\n    course-materials/eod-practice/sample_plot.svg\n    course-materials/eod-practice/sample_plot.tiff",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:32",
+          "cmd": "python3 tools/prelaunch_checks.py h1_orphan_assets",
+          "could_not_run": false,
+          "evidence": "FAIL  h1_orphan_assets\n  unreferenced images over 500 KB: 23\n  render leftovers under course-materials: 10\n    13.5 MB  course-materials/eod-practice/sample_plot.tiff\n    3.9 MB  course-materials/images/mpala.jpeg\n    3.2 MB  images/horst-repos.png\n    3.2 MB  course-materials/lectures/assets/horst-repos.png\n    3.2 MB  course-materials/images/horst-repos.png\n    3.1 MB  course-materials/interactive-sessions/images/git_bunnies_1.jpg\n    2.7 MB  course-materials/images/mpala1.jpeg\n    2.6 MB  course-materials/interactive-sessions/images/variables.jpg\n    2.6 MB  course-materials/images/variables.jpg\n    1.7 MB  course-materials/interactive-sessions/images/list.jpg\n    course-materials/answer-keys/monthly_means.csv\n    course-materials/eod-practice/eod-day3.qmd.copy\n    course-materials/eod-practice/monthly_means.csv\n    course-materials/eod-practice/monthly_means.json\n    course-materials/eod-practice/monthly_means.pkl\n    course-materials/eod-practice/sample_plot.jpg\n    course-materials/eod-practice/sample_plot.pdf\n    course-materials/eod-practice/sample_plot.png\n    course-materials/eod-practice/sample_plot.svg\n    course-materials/eod-practice/sample_plot.tiff",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
         }
       ]
     },
     "H4": {
       "checks": [
-        {
-          "at": "2026-08-21T04:35:04",
-          "cmd": "python3 tools/prelaunch_checks.py h4_stale_checklist_item",
-          "could_not_run": false,
-          "evidence": "FAIL  h4_stale_checklist_item\n  open items in the endgame plan: 7\n  still open but already done: Fix the broken image in the 2c colab.",
-          "exit": 1,
-          "git_sha": "98e9108",
-          "ok": false
-        },
         {
           "at": "2026-08-21T04:44:13",
           "cmd": "python3 tools/prelaunch_checks.py h4_stale_checklist_item",
@@ -1538,20 +2109,38 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:16",
+          "cmd": "python3 tools/prelaunch_checks.py h4_stale_checklist_item",
+          "could_not_run": false,
+          "evidence": "PASS  h4_stale_checklist_item\n  open items in the endgame plan: 6\n  No open item duplicates completed work.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:14",
+          "cmd": "python3 tools/prelaunch_checks.py h4_stale_checklist_item",
+          "could_not_run": false,
+          "evidence": "PASS  h4_stale_checklist_item\n  open items in the endgame plan: 6\n  No open item duplicates completed work.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:33",
+          "cmd": "python3 tools/prelaunch_checks.py h4_stale_checklist_item",
+          "could_not_run": false,
+          "evidence": "PASS  h4_stale_checklist_item\n  open items in the endgame plan: 6\n  No open item duplicates completed work.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ]
     },
     "H5": {
       "checks": [
-        {
-          "at": "2026-08-21T04:35:04",
-          "cmd": "python3 tools/prelaunch_checks.py h5_locks_clear",
-          "could_not_run": false,
-          "evidence": "FAIL  h5_locks_clear\n  lock files under .git: 4\n    .git/index.lock\n    .git/HEAD.lock\n    .git/index 4.lock\n    .git/objects/maintenance.lock",
-          "exit": 1,
-          "git_sha": "98e9108",
-          "ok": false
-        },
         {
           "at": "2026-08-21T04:44:13",
           "cmd": "python3 tools/prelaunch_checks.py h5_locks_clear",
@@ -1613,6 +2202,33 @@
           "evidence": "FAIL  h5_locks_clear\n  lock files under .git: 2\n    .git/HEAD.lock\n    .git/objects/maintenance.lock",
           "exit": 1,
           "git_sha": "32569bf",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:44:16",
+          "cmd": "python3 tools/prelaunch_checks.py h5_locks_clear",
+          "could_not_run": false,
+          "evidence": "FAIL  h5_locks_clear\n  lock files under .git: 1\n    .git/objects/maintenance.lock",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:14",
+          "cmd": "python3 tools/prelaunch_checks.py h5_locks_clear",
+          "could_not_run": false,
+          "evidence": "FAIL  h5_locks_clear\n  lock files under .git: 1\n    .git/objects/maintenance.lock",
+          "exit": 1,
+          "git_sha": "667ad75",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T15:50:33",
+          "cmd": "python3 tools/prelaunch_checks.py h5_locks_clear",
+          "could_not_run": false,
+          "evidence": "FAIL  h5_locks_clear\n  lock files under .git: 1\n    .git/objects/maintenance.lock",
+          "exit": 1,
+          "git_sha": "667ad75",
           "ok": false
         }
       ],
@@ -1687,20 +2303,38 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:03",
+          "cmd": "python3 tools/prelaunch_checks.py t1_warm_cache_coverage",
+          "could_not_run": false,
+          "evidence": "PASS  t1_warm_cache_coverage\n  datasets the live corpus loads: 18\n  datasets warm_cache.py reports on: 18\n  warm_cache.py exit status: 0",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:04",
+          "cmd": "python3 tools/prelaunch_checks.py t1_warm_cache_coverage",
+          "could_not_run": false,
+          "evidence": "PASS  t1_warm_cache_coverage\n  datasets the live corpus loads: 18\n  datasets warm_cache.py reports on: 18\n  warm_cache.py exit status: 0",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:23",
+          "cmd": "python3 tools/prelaunch_checks.py t1_warm_cache_coverage",
+          "could_not_run": false,
+          "evidence": "PASS  t1_warm_cache_coverage\n  datasets the live corpus loads: 18\n  datasets warm_cache.py reports on: 18\n  warm_cache.py exit status: 0",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ]
     },
     "T2": {
       "checks": [
-        {
-          "at": "2026-08-21T04:34:59",
-          "cmd": "bash tools/gates.sh",
-          "could_not_run": false,
-          "evidence": "bash: tools/gates.sh: No such file or directory",
-          "exit": 127,
-          "git_sha": "98e9108",
-          "ok": false
-        },
         {
           "at": "2026-08-21T04:36:50",
           "cmd": "bash tools/gates.sh",
@@ -1762,6 +2396,33 @@
           "evidence": "EDS 217 quality gates\n\nHUMAN  Gate 1  every construct traces to a day scope table\n       Deciding what counts as a construct and matching it to a prose scope\n       table is a reading task. Recorded per day in\n       tasks/2026-planning/2026-day-skeleton.md.\nHUMAN  Gate 2  the rehearsal rule holds for every WRITE-depth construct\n       Depth labels and rehearsal claims are prose. Afternoon-taught constructs\n       additionally need the decision 10 exemption and its audit table, also in\n       2026-day-skeleton.md.\nPASS   Gate 3  at most two Field Notes per end-of-day activity\n\n       day 1: 0\n       day 2: 1\n       day 3: 2\n       day 4: 2\n       day 5: 1\n       day 6: 0\n       day 7: 1\nPASS   Gate 4  handout and answer key agree, structurally\n\n       day 2: 6 parts, handout and key agree\n       day 3: 7 parts, handout and key agree\n       day 4: 7 parts, handout and key agree\n       day 5: 5 parts, handout and key agree\n       day 6: 6 parts, handout and key agree\n       day 7: 6 parts, handout and key agree\n       day 1: structured without Part headings, read it by hand\n       The structural half is mechanical. Task-by-task agreement is not, because\n       handouts number tasks and keys group them under parts.\nPASS   Gate 5  no lambda anywhere in the course materials\n       Pattern requires a parameter list and a colon, so backticked prose about\n       lambda does not match.\nPASS   Gate 6  the 2025 alignment checklist and all seven per-day audits are archived\n       File existence only. Whether the checklist was applied is a reading task.\n\nFour mechanical gates pass. Two human gates are noted above.",
           "exit": 0,
           "git_sha": "32569bf",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:03",
+          "cmd": "bash tools/gates.sh",
+          "could_not_run": false,
+          "evidence": "EDS 217 quality gates\n\nHUMAN  Gate 1  every construct traces to a day scope table\n       Deciding what counts as a construct and matching it to a prose scope\n       table is a reading task. Recorded per day in\n       tasks/2026-planning/2026-day-skeleton.md.\nHUMAN  Gate 2  the rehearsal rule holds for every WRITE-depth construct\n       Depth labels and rehearsal claims are prose. Afternoon-taught constructs\n       additionally need the decision 10 exemption and its audit table, also in\n       2026-day-skeleton.md.\nPASS   Gate 3  at most two Field Notes per end-of-day activity\n\n       day 1: 0\n       day 2: 1\n       day 3: 2\n       day 4: 2\n       day 5: 1\n       day 6: 0\n       day 7: 1\nPASS   Gate 4  handout and answer key agree, structurally\n\n       day 2: 6 parts, handout and key agree\n       day 3: 7 parts, handout and key agree\n       day 4: 7 parts, handout and key agree\n       day 5: 5 parts, handout and key agree\n       day 6: 6 parts, handout and key agree\n       day 7: 6 parts, handout and key agree\n       day 1: structured without Part headings, read it by hand\n       The structural half is mechanical. Task-by-task agreement is not, because\n       handouts number tasks and keys group them under parts.\nPASS   Gate 5  no lambda anywhere in the course materials\n       Pattern requires a parameter list and a colon, so backticked prose about\n       lambda does not match.\nPASS   Gate 6  the 2025 alignment checklist and all seven per-day audits are archived\n       File existence only. Whether the checklist was applied is a reading task.\n\nFour mechanical gates pass. Two human gates are noted above.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:04",
+          "cmd": "bash tools/gates.sh",
+          "could_not_run": false,
+          "evidence": "EDS 217 quality gates\n\nHUMAN  Gate 1  every construct traces to a day scope table\n       Deciding what counts as a construct and matching it to a prose scope\n       table is a reading task. Recorded per day in\n       tasks/2026-planning/2026-day-skeleton.md.\nHUMAN  Gate 2  the rehearsal rule holds for every WRITE-depth construct\n       Depth labels and rehearsal claims are prose. Afternoon-taught constructs\n       additionally need the decision 10 exemption and its audit table, also in\n       2026-day-skeleton.md.\nPASS   Gate 3  at most two Field Notes per end-of-day activity\n\n       day 1: 0\n       day 2: 1\n       day 3: 2\n       day 4: 2\n       day 5: 1\n       day 6: 0\n       day 7: 1\nPASS   Gate 4  handout and answer key agree, structurally\n\n       day 2: 6 parts, handout and key agree\n       day 3: 7 parts, handout and key agree\n       day 4: 7 parts, handout and key agree\n       day 5: 5 parts, handout and key agree\n       day 6: 6 parts, handout and key agree\n       day 7: 6 parts, handout and key agree\n       day 1: structured without Part headings, read it by hand\n       The structural half is mechanical. Task-by-task agreement is not, because\n       handouts number tasks and keys group them under parts.\nPASS   Gate 5  no lambda anywhere in the course materials\n       Pattern requires a parameter list and a colon, so backticked prose about\n       lambda does not match.\nPASS   Gate 6  the 2025 alignment checklist and all seven per-day audits are archived\n       File existence only. Whether the checklist was applied is a reading task.\n\nFour mechanical gates pass. Two human gates are noted above.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:23",
+          "cmd": "bash tools/gates.sh",
+          "could_not_run": false,
+          "evidence": "EDS 217 quality gates\n\nHUMAN  Gate 1  every construct traces to a day scope table\n       Deciding what counts as a construct and matching it to a prose scope\n       table is a reading task. Recorded per day in\n       tasks/2026-planning/2026-day-skeleton.md.\nHUMAN  Gate 2  the rehearsal rule holds for every WRITE-depth construct\n       Depth labels and rehearsal claims are prose. Afternoon-taught constructs\n       additionally need the decision 10 exemption and its audit table, also in\n       2026-day-skeleton.md.\nPASS   Gate 3  at most two Field Notes per end-of-day activity\n\n       day 1: 0\n       day 2: 1\n       day 3: 2\n       day 4: 2\n       day 5: 1\n       day 6: 0\n       day 7: 1\nPASS   Gate 4  handout and answer key agree, structurally\n\n       day 2: 6 parts, handout and key agree\n       day 3: 7 parts, handout and key agree\n       day 4: 7 parts, handout and key agree\n       day 5: 5 parts, handout and key agree\n       day 6: 6 parts, handout and key agree\n       day 7: 6 parts, handout and key agree\n       day 1: structured without Part headings, read it by hand\n       The structural half is mechanical. Task-by-task agreement is not, because\n       handouts number tasks and keys group them under parts.\nPASS   Gate 5  no lambda anywhere in the course materials\n       Pattern requires a parameter list and a colon, so backticked prose about\n       lambda does not match.\nPASS   Gate 6  the 2025 alignment checklist and all seven per-day audits are archived\n       File existence only. Whether the checklist was applied is a reading task.\n\nFour mechanical gates pass. Two human gates are noted above.",
+          "exit": 0,
+          "git_sha": "667ad75",
           "ok": true
         }
       ]
@@ -1830,6 +2491,33 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:04",
+          "cmd": "python3 tools/prelaunch_checks.py t3_fetch_check_exit",
+          "could_not_run": false,
+          "evidence": "PASS  t3_fetch_check_exit\n  exit-status expressions in fetch_data.py: ['1 if failed or absent or missing else 0']\n  The missing-dataset list is consulted.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:04",
+          "cmd": "python3 tools/prelaunch_checks.py t3_fetch_check_exit",
+          "could_not_run": false,
+          "evidence": "PASS  t3_fetch_check_exit\n  exit-status expressions in fetch_data.py: ['1 if failed or absent or missing else 0']\n  The missing-dataset list is consulted.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:23",
+          "cmd": "python3 tools/prelaunch_checks.py t3_fetch_check_exit",
+          "could_not_run": false,
+          "evidence": "PASS  t3_fetch_check_exit\n  exit-status expressions in fetch_data.py: ['1 if failed or absent or missing else 0']\n  The missing-dataset list is consulted.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ]
     },
@@ -1896,6 +2584,33 @@
           "evidence": "PASS  t4_run_cells_empty\n  exit status with no file arguments: 2\n  stdout: run_cells.py was given no files, so it checked nothing.\nUsage: python tools/run_cells.py <file.qmd> [<file.qmd> ...]\nFor the whole 2026 corpus, use: make cells\n  Reports a problem rather than a green result.",
           "exit": 0,
           "git_sha": "32569bf",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:04",
+          "cmd": "python3 tools/prelaunch_checks.py t4_run_cells_empty",
+          "could_not_run": false,
+          "evidence": "PASS  t4_run_cells_empty\n  exit status with no file arguments: 2\n  stdout: run_cells.py was given no files, so it checked nothing.\nUsage: python tools/run_cells.py <file.qmd> [<file.qmd> ...]\nFor the whole 2026 corpus, use: make cells\n  Reports a problem rather than a green result.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:04",
+          "cmd": "python3 tools/prelaunch_checks.py t4_run_cells_empty",
+          "could_not_run": false,
+          "evidence": "PASS  t4_run_cells_empty\n  exit status with no file arguments: 2\n  stdout: run_cells.py was given no files, so it checked nothing.\nUsage: python tools/run_cells.py <file.qmd> [<file.qmd> ...]\nFor the whole 2026 corpus, use: make cells\n  Reports a problem rather than a green result.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:24",
+          "cmd": "python3 tools/prelaunch_checks.py t4_run_cells_empty",
+          "could_not_run": false,
+          "evidence": "PASS  t4_run_cells_empty\n  exit status with no file arguments: 2\n  stdout: run_cells.py was given no files, so it checked nothing.\nUsage: python tools/run_cells.py <file.qmd> [<file.qmd> ...]\nFor the whole 2026 corpus, use: make cells\n  Reports a problem rather than a green result.",
+          "exit": 0,
+          "git_sha": "667ad75",
           "ok": true
         }
       ]
@@ -1964,6 +2679,33 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:06",
+          "cmd": "python3 tools/prelaunch_checks.py t5_dataset_catalog",
+          "could_not_run": false,
+          "evidence": "PASS  t5_dataset_catalog\n  datasets loaded by live pages: 18\n  Every loaded dataset is catalogued in both places.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:06",
+          "cmd": "python3 tools/prelaunch_checks.py t5_dataset_catalog",
+          "could_not_run": false,
+          "evidence": "PASS  t5_dataset_catalog\n  datasets loaded by live pages: 18\n  Every loaded dataset is catalogued in both places.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:25",
+          "cmd": "python3 tools/prelaunch_checks.py t5_dataset_catalog",
+          "could_not_run": false,
+          "evidence": "PASS  t5_dataset_catalog\n  datasets loaded by live pages: 18\n  Every loaded dataset is catalogued in both places.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ]
     },
@@ -2031,6 +2773,33 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:06",
+          "cmd": "python3 tools/prelaunch_checks.py t6_cells_clean",
+          "could_not_run": false,
+          "evidence": "PASS  t6_cells_clean\n  pages in the render set: 89\n  935/935 cells ran clean across 89 files",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:06",
+          "cmd": "python3 tools/prelaunch_checks.py t6_cells_clean",
+          "could_not_run": false,
+          "evidence": "PASS  t6_cells_clean\n  pages in the render set: 89\n  935/935 cells ran clean across 89 files",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:25",
+          "cmd": "python3 tools/prelaunch_checks.py t6_cells_clean",
+          "could_not_run": false,
+          "evidence": "PASS  t6_cells_clean\n  pages in the render set: 89\n  935/935 cells ran clean across 89 files",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ],
       "notes": [
@@ -2086,10 +2855,37 @@
           "exit": 0,
           "git_sha": "32569bf",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T15:44:06",
+          "cmd": "python3 tools/prelaunch_checks.py t7_make_targets_use_the_env",
+          "could_not_run": false,
+          "evidence": "PASS  t7_make_targets_use_the_env\n  tools/run.sh present: True\n  recipe lines invoking python: 17\n  of those, not routed through the wrapper: 0\n  Every python target activates the course environment first.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:06",
+          "cmd": "python3 tools/prelaunch_checks.py t7_make_targets_use_the_env",
+          "could_not_run": false,
+          "evidence": "PASS  t7_make_targets_use_the_env\n  tools/run.sh present: True\n  recipe lines invoking python: 17\n  of those, not routed through the wrapper: 0\n  Every python target activates the course environment first.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T15:50:25",
+          "cmd": "python3 tools/prelaunch_checks.py t7_make_targets_use_the_env",
+          "could_not_run": false,
+          "evidence": "PASS  t7_make_targets_use_the_env\n  tools/run.sh present: True\n  recipe lines invoking python: 17\n  of those, not routed through the wrapper: 0\n  Every python target activates the course environment first.",
+          "exit": 0,
+          "git_sha": "667ad75",
+          "ok": true
         }
       ]
     }
   },
   "schema": 1,
-  "updated": "2026-08-25T15:33:21"
+  "updated": "2026-08-25T15:50:33"
 }

@@ -500,7 +500,7 @@ Caution
 <section id="importing-pandas" class="level2">
 <h2 class="anchored" data-anchor-id="importing-pandas">Importing pandas</h2>
 <p>Every notebook that touches data starts the same way:</p>
-<div id="75709c0d" class="cell" data-execution_count="1">
+<div id="adda59b9" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -511,7 +511,7 @@ Caution
 <section id="our-data-for-today" class="level2">
 <h2 class="anchored" data-anchor-id="our-data-for-today">Our data for today</h2>
 <p>We’ll work with air quality measurements from an OpenAQ monitoring station in Goleta, just up the road from Bren.</p>
-<div id="4bb86d09" class="cell" data-execution_count="2">
+<div id="6fa75c97" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/openaq_goleta_measurments.csv'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -522,14 +522,14 @@ Caution
 <section id="pd.read_csv" class="level2">
 <h2 class="anchored" data-anchor-id="pd.read_csv"><code>pd.read_csv()</code></h2>
 <p>Here is the whole sentence:</p>
-<div id="47b1014e" class="cell" data-execution_count="3">
+<div id="39d903a5" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>goleta <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>That’s it. <code>pd.read_csv()</code> takes a location, goes and gets the file, parses the commas, and hands you back a <strong>DataFrame</strong>. Let’s look at the first few rows:</p>
-<div id="3d8604f5" class="cell" data-execution_count="4">
+<div id="3ba73985" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>goleta.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -690,7 +690,7 @@ Note
 <h2 class="anchored" data-anchor-id="dataframes-and-series">DataFrames and Series</h2>
 <p>A <strong>DataFrame</strong> is a table: rows and named columns, like a well-behaved spreadsheet.</p>
 <p>Pull a single column out and you get a <strong>Series</strong>, which is one column of values with the row labels still attached:</p>
-<div id="b9f555e2" class="cell" data-execution_count="5">
+<div id="9c0dc5a5" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'value'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -711,7 +711,7 @@ Name: value, Length: 1962, dtype: float64</code></pre>
 </div>
 </div>
 <p>Check the types to see the difference plainly:</p>
-<div id="27ff20ce" class="cell" data-execution_count="6">
+<div id="ef5bbd82" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(goleta))</span>
@@ -723,7 +723,7 @@ Name: value, Length: 1962, dtype: float64</code></pre>
 </div>
 </div>
 <p>This distinction matters more than it looks. Many pandas methods return a Series, and knowing you’re holding one column rather than a table tells you what you can do next.</p>
-<div id="34394612" class="cell" data-execution_count="7">
+<div id="f53598ba" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'value'</span>].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -769,7 +769,7 @@ Note
 <section id="column-names-as-a-list" class="level2">
 <h2 class="anchored" data-anchor-id="column-names-as-a-list">Column names as a list</h2>
 <p>You often want to know what’s in a table before you do anything else. The <code>.columns</code> attribute tells you:</p>
-<div id="d6dad5be" class="cell" data-execution_count="8">
+<div id="09380d1d" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>goleta.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -782,7 +782,7 @@ Note
 </div>
 </div>
 <p>That’s a pandas object. To get a plain Python <strong>list</strong>, which is easier to read and to work with, use <code>.tolist()</code>:</p>
-<div id="bc65fc9b" class="cell" data-execution_count="9">
+<div id="41fb3d84" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>column_names <span class="op">=</span> goleta.columns.tolist()</span>
@@ -807,7 +807,7 @@ Note
 </div>
 </div>
 <p>A <strong>list</strong> is Python’s basic container for an ordered collection of things. You write one with square brackets and commas:</p>
-<div id="8466144b" class="cell" data-execution_count="10">
+<div id="e6ba3e4e" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>parameters_we_care_about <span class="op">=</span> [<span class="st">'o3'</span>, <span class="st">'pm25'</span>]</span>
@@ -818,7 +818,7 @@ Note
 </div>
 </div>
 <p>You get items out by <strong>position</strong>, counting from zero:</p>
-<div id="c57eb64f" class="cell" data-execution_count="11">
+<div id="e4c190b5" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(column_names[<span class="dv">0</span>])</span>
@@ -830,7 +830,7 @@ location_name</code></pre>
 </div>
 </div>
 <p>And <code>len()</code> tells you how many items there are:</p>
-<div id="5e5e70fe" class="cell" data-execution_count="12">
+<div id="3ed9eee5" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(column_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -852,7 +852,7 @@ Note
 <p>🐍 Counting from zero trips up everyone at first. The first item is at position <code>0</code>, the second at <code>1</code>, and the last one is at <code>len(x) - 1</code>. You can also count backwards: <code>[-1]</code> is the last item.</p>
 </div>
 </div>
-<div id="b3cf97b2" class="cell" data-execution_count="13">
+<div id="6194f461" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>column_names[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -865,7 +865,7 @@ Note
 <section id="selecting-columns-with-a-list" class="level2">
 <h2 class="anchored" data-anchor-id="selecting-columns-with-a-list">Selecting columns with a list</h2>
 <p>Here’s where the list pays off. Hand <code>read_csv</code>’s result a list of column names and you get a smaller DataFrame with just those columns:</p>
-<div id="6ed531f0" class="cell" data-execution_count="14">
+<div id="7cd78467" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>keep <span class="op">=</span> [<span class="st">'location_name'</span>, <span class="st">'parameter'</span>, <span class="st">'value'</span>, <span class="st">'unit'</span>]</span>
@@ -928,7 +928,7 @@ Note
 </div>
 </div>
 <p>You’ll see this written both ways. The inner brackets are the list, the outer brackets are the selection:</p>
-<div id="c83c83c5" class="cell" data-execution_count="15">
+<div id="4c6e407c" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>goleta[[<span class="st">'location_name'</span>, <span class="st">'parameter'</span>, <span class="st">'value'</span>, <span class="st">'unit'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1007,7 +1007,7 @@ Note
 <h2 class="anchored" data-anchor-id="choosing-the-index-with-index_col">Choosing the index with <code>index_col=</code></h2>
 <p>Every DataFrame has an <strong>index</strong>: the labels down the left-hand side. By default pandas numbers the rows <code>0, 1, 2, ...</code>. You saw those numbers in <code>head()</code>.</p>
 <p>Sometimes a column in the file is a better label than a row number. <code>index_col=</code> tells <code>read_csv</code> to use one:</p>
-<div id="18cddf38" class="cell" data-execution_count="16">
+<div id="3513a3f9" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>goleta_by_time <span class="op">=</span> pd.read_csv(url, index_col<span class="op">=</span><span class="st">'datetimeLocal'</span>)</span>
@@ -1147,7 +1147,7 @@ Note
 </div>
 </div>
 <p>The local timestamp is now the row label, and it’s no longer one of the columns:</p>
-<div id="79ed9b5d" class="cell" data-execution_count="17">
+<div id="3f8eeaca" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>goleta_by_time.columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

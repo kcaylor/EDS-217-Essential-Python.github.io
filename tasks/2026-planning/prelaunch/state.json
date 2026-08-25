@@ -280,7 +280,20 @@
           "git_sha": "14230ad",
           "ok": true
         }
-      ]
+      ],
+      "signoff": {
+        "at": "2026-08-25T16:22:01",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "8c280e0",
+        "note": "All checks passing. Still need to create google form, but we are close enough to certify",
+        "verification": {
+          "at": "2026-08-25T13:17:23",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "C10": {
       "checks": [
@@ -675,7 +688,20 @@
           "at": "2026-08-21T04:55:46",
           "text": "The Bren directory lists the TA's address as annaboser@bren.ucsb.edu, not the @ucsb.edu form the page used. index.qmd now shows and links that address, but whether she is the 2026 TA is still open."
         }
-      ]
+      ],
+      "signoff": {
+        "at": "2026-08-25T16:21:09",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "8c280e0",
+        "note": "Image saved, emails confirmed, office hours in syllabus (link confirmed)",
+        "verification": {
+          "at": "2026-08-25T13:17:23",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "C4": {
       "checks": [
@@ -770,7 +796,19 @@
           "ok": true
         }
       ],
-      "state": "open"
+      "signoff": {
+        "at": "2026-08-25T16:23:18",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "8c280e0",
+        "note": "Test passing, all network requests are removed",
+        "verification": {
+          "at": "2026-08-25T13:17:23",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "C6": {
       "checks": [
@@ -3202,5 +3240,5 @@
     }
   },
   "schema": 1,
-  "updated": "2026-08-25T13:17:42"
+  "updated": "2026-08-25T16:23:18"
 }

@@ -121,8 +121,12 @@ unlock:
 publish:
 	@bash tools/publish.sh
 
+# The env label goes through the wrapper like everything else. Echoed from the
+# outer shell, it named whatever environment happened to invoke make while the
+# versions below it came from eds217_2026, so the one target whose job is to
+# name the environment named the wrong one.
 env:
-	@echo "conda env: $${CONDA_DEFAULT_ENV:-none}"
+	@$(RUN) bash -c 'echo "conda env: $${CONDA_DEFAULT_ENV:-none}"'
 	@$(RUN) python -c "import sys, pandas, numpy, matplotlib, seaborn; \
 	print('python', sys.version.split()[0]); \
 	print('pandas', pandas.__version__); print('numpy', numpy.__version__); \

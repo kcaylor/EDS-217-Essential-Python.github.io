@@ -21,3 +21,8 @@ _to_delete/
 # Rebuild with: make dashboard
 tasks/2026-planning/prelaunch/dashboard.html
 tasks/2026-planning/prelaunch/dashboard.body.html
+
+# Quarto writes these beside a .qmd while rendering and does not clean them up.
+# One was committed by accident and carried 687 lines of build output in the
+# repository until 2026-08-25.
+*.quarto_ipynb

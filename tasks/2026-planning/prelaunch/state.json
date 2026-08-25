@@ -234,6 +234,24 @@
           "exit": 0,
           "git_sha": "667ad75",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T13:04:26",
+          "cmd": "python3 tools/prelaunch_checks.py c1_day89_specified",
+          "could_not_run": false,
+          "evidence": "PASS  c1_day89_specified\n  Days 8 and 9 carry 10 of 10 things a student or an instructor needs.\n  yes  a timed schedule on Day 8\n  yes  a timed schedule on Day 9\n  yes  checkpoints on Day 8\n  yes  a submission mechanism\n  yes  a deadline\n  yes  presentation length\n  yes  what to present\n  yes  a definition of finished\n  yes  the ten steps enumerated\n  yes  no empty trailing heading",
+          "exit": 0,
+          "git_sha": "29298a5",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T13:04:35",
+          "cmd": "python3 tools/prelaunch_checks.py c1_day89_specified",
+          "could_not_run": false,
+          "evidence": "PASS  c1_day89_specified\n  Days 8 and 9 carry 10 of 10 things a student or an instructor needs.\n  yes  a timed schedule on Day 8\n  yes  a timed schedule on Day 9\n  yes  checkpoints on Day 8\n  yes  a submission mechanism\n  yes  a deadline\n  yes  presentation length\n  yes  what to present\n  yes  a definition of finished\n  yes  the ten steps enumerated\n  yes  no empty trailing heading",
+          "exit": 0,
+          "git_sha": "29298a5",
+          "ok": true
         }
       ]
     },
@@ -367,6 +385,24 @@
           "evidence": "eod-day1-2026.qmd  ->  eod-day1-2026-key.qmd\n  unnumbered handout, compared by marker: Required 3/3, Your change 3/3\n  every marked task has a matching block in the key\n\neod-day2-2026.qmd  ->  eod-day2-2026-key.qmd\n  handout tasks: 15   key answers: 15\n  all 15 tasks answered, none extra\n\neod-day3-2026.qmd  ->  eod-day3-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day4-2026.qmd  ->  eod-day4-2026-key.qmd\n  handout tasks: 27   key answers: 27\n  all 27 tasks answered, none extra\n\neod-day5-2026.qmd  ->  eod-day5-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day6-2026.qmd  ->  eod-day6-2026-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\neod-day7-2026.qmd  ->  eod-day7-2026-key.qmd\n  handout tasks: 26   key answers: 26\n  all 26 tasks answered, none extra\n\n3d_ranking_questions.qmd  ->  3d_ranking_questions-key.qmd\n  handout tasks: 12   key answers: 12\n  all 12 tasks answered, none extra\n\n4d_cleaning_messy_data.qmd  ->  4d_cleaning_messy_data-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\n5c_grouped_comparisons.qmd  ->  5c_grouped_comparisons-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n6d_two_table_exercise.qmd  ->  6d_two_table_exercise-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n7c_penguins.qmd  ->  7c_penguins-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n12 of 12 pair(s) clean",
           "exit": 0,
           "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T13:04:28",
+          "cmd": "python3 tools/key_check.py --tasks-only",
+          "could_not_run": false,
+          "evidence": "eod-day1-2026.qmd  ->  eod-day1-2026-key.qmd\n  unnumbered handout, compared by marker: Required 3/3, Your change 3/3\n  every marked task has a matching block in the key\n\neod-day2-2026.qmd  ->  eod-day2-2026-key.qmd\n  handout tasks: 15   key answers: 15\n  all 15 tasks answered, none extra\n\neod-day3-2026.qmd  ->  eod-day3-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day4-2026.qmd  ->  eod-day4-2026-key.qmd\n  handout tasks: 27   key answers: 27\n  all 27 tasks answered, none extra\n\neod-day5-2026.qmd  ->  eod-day5-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day6-2026.qmd  ->  eod-day6-2026-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\neod-day7-2026.qmd  ->  eod-day7-2026-key.qmd\n  handout tasks: 26   key answers: 26\n  all 26 tasks answered, none extra\n\n3d_ranking_questions.qmd  ->  3d_ranking_questions-key.qmd\n  handout tasks: 12   key answers: 12\n  all 12 tasks answered, none extra\n\n4d_cleaning_messy_data.qmd  ->  4d_cleaning_messy_data-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\n5c_grouped_comparisons.qmd  ->  5c_grouped_comparisons-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n6d_two_table_exercise.qmd  ->  6d_two_table_exercise-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n7c_penguins.qmd  ->  7c_penguins-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n12 of 12 pair(s) clean",
+          "exit": 0,
+          "git_sha": "29298a5",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T13:04:36",
+          "cmd": "python3 tools/key_check.py --tasks-only",
+          "could_not_run": false,
+          "evidence": "eod-day1-2026.qmd  ->  eod-day1-2026-key.qmd\n  unnumbered handout, compared by marker: Required 3/3, Your change 3/3\n  every marked task has a matching block in the key\n\neod-day2-2026.qmd  ->  eod-day2-2026-key.qmd\n  handout tasks: 15   key answers: 15\n  all 15 tasks answered, none extra\n\neod-day3-2026.qmd  ->  eod-day3-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day4-2026.qmd  ->  eod-day4-2026-key.qmd\n  handout tasks: 27   key answers: 27\n  all 27 tasks answered, none extra\n\neod-day5-2026.qmd  ->  eod-day5-2026-key.qmd\n  handout tasks: 22   key answers: 22\n  all 22 tasks answered, none extra\n\neod-day6-2026.qmd  ->  eod-day6-2026-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\neod-day7-2026.qmd  ->  eod-day7-2026-key.qmd\n  handout tasks: 26   key answers: 26\n  all 26 tasks answered, none extra\n\n3d_ranking_questions.qmd  ->  3d_ranking_questions-key.qmd\n  handout tasks: 12   key answers: 12\n  all 12 tasks answered, none extra\n\n4d_cleaning_messy_data.qmd  ->  4d_cleaning_messy_data-key.qmd\n  handout tasks: 19   key answers: 19\n  all 19 tasks answered, none extra\n\n5c_grouped_comparisons.qmd  ->  5c_grouped_comparisons-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n6d_two_table_exercise.qmd  ->  6d_two_table_exercise-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n7c_penguins.qmd  ->  7c_penguins-key.qmd\n  handout tasks: 17   key answers: 17\n  all 17 tasks answered, none extra\n\n12 of 12 pair(s) clean",
+          "exit": 0,
+          "git_sha": "29298a5",
           "ok": true
         }
       ]
@@ -533,6 +569,24 @@
           "exit": 0,
           "git_sha": "667ad75",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T13:04:26",
+          "cmd": "python3 tools/prelaunch_checks.py c3_front_page_ready",
+          "could_not_run": false,
+          "evidence": "FAIL  c3_front_page_ready\n  Every image index.qmd references exists.\n  the 2026 syllabus link: NOT confirmed. Record a date in tasks/2026-planning/prelaunch/confirmations.yml\n  office hours: NOT confirmed. Record a date in tasks/2026-planning/prelaunch/confirmations.yml",
+          "exit": 1,
+          "git_sha": "29298a5",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T13:04:35",
+          "cmd": "python3 tools/prelaunch_checks.py c3_front_page_ready",
+          "could_not_run": false,
+          "evidence": "FAIL  c3_front_page_ready\n  Every image index.qmd references exists.\n  the 2026 syllabus link: NOT confirmed. Record a date in tasks/2026-planning/prelaunch/confirmations.yml\n  office hours: NOT confirmed. Record a date in tasks/2026-planning/prelaunch/confirmations.yml",
+          "exit": 1,
+          "git_sha": "29298a5",
+          "ok": false
         }
       ],
       "notes": [
@@ -544,24 +598,6 @@
     },
     "C4": {
       "checks": [
-        {
-          "at": "2026-08-21T04:34:54",
-          "cmd": "python3 tools/prelaunch_checks.py c4_no_network_at_render",
-          "could_not_run": false,
-          "evidence": "FAIL  c4_no_network_at_render\n  executing python blocks scanned across 95 live pages\n  course-materials/final_project.qmd: executes import requests at render time",
-          "exit": 1,
-          "git_sha": "98e9108",
-          "ok": false
-        },
-        {
-          "at": "2026-08-21T04:43:52",
-          "cmd": "python3 tools/prelaunch_checks.py c4_no_network_at_render",
-          "could_not_run": false,
-          "evidence": "PASS  c4_no_network_at_render\n  executing python blocks scanned across 89 live pages\n  No executing block reaches the network.",
-          "exit": 0,
-          "git_sha": "98e9108",
-          "ok": true
-        },
         {
           "at": "2026-08-23T10:13:48",
           "cmd": "python3 tools/prelaunch_checks.py c4_no_network_at_render",
@@ -632,6 +668,24 @@
           "evidence": "PASS  c4_no_network_at_render\n  executing python blocks scanned across 89 live pages\n  No executing block reaches the network.",
           "exit": 0,
           "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T13:04:26",
+          "cmd": "python3 tools/prelaunch_checks.py c4_no_network_at_render",
+          "could_not_run": false,
+          "evidence": "PASS  c4_no_network_at_render\n  executing python blocks scanned across 89 live pages\n  No executing block reaches the network.",
+          "exit": 0,
+          "git_sha": "29298a5",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T13:04:35",
+          "cmd": "python3 tools/prelaunch_checks.py c4_no_network_at_render",
+          "could_not_run": false,
+          "evidence": "PASS  c4_no_network_at_render\n  executing python blocks scanned across 89 live pages\n  No executing block reaches the network.",
+          "exit": 0,
+          "git_sha": "29298a5",
           "ok": true
         }
       ],
@@ -1181,6 +1235,24 @@
           "exit": 0,
           "git_sha": "667ad75",
           "ok": true
+        },
+        {
+          "at": "2026-08-25T13:04:28",
+          "cmd": "python3 tools/prelaunch_checks.py d10_render_current",
+          "could_not_run": false,
+          "evidence": "FAIL  d10_render_current\n  pages in the render set: 89\n  never rendered: 16\n  rendered before their source last changed: 0\n    course-materials/interactive-sessions/5a_grouping_data.qmd\n    course-materials/interactive-sessions/5b_aggregating_data.qmd\n    course-materials/interactive-sessions/6a_joining_data.qmd\n    course-materials/interactive-sessions/6b_reshaping_data.qmd\n    course-materials/interactive-sessions/6c_dates.qmd\n    course-materials/interactive-sessions/7a_matplotlib.qmd\n    course-materials/interactive-sessions/7b_seaborn.qmd\n    course-materials/interactive-sessions/7d_project_kickoff.qmd\n    course-materials/interactive-sessions/8a_github.qmd\n    course-materials/live-coding/2d_lists_and_dicts.qmd\n    course-materials/live-coding/2d_lists_and_dicts_notes.qmd\n    course-materials/live-coding/3a_booleans_and_conditionals.qmd",
+          "exit": 1,
+          "git_sha": "29298a5",
+          "ok": false
+        },
+        {
+          "at": "2026-08-25T13:04:36",
+          "cmd": "python3 tools/prelaunch_checks.py d10_render_current",
+          "could_not_run": false,
+          "evidence": "FAIL  d10_render_current\n  pages in the render set: 89\n  never rendered: 14\n  rendered before their source last changed: 0\n    course-materials/interactive-sessions/6a_joining_data.qmd\n    course-materials/interactive-sessions/6b_reshaping_data.qmd\n    course-materials/interactive-sessions/6c_dates.qmd\n    course-materials/interactive-sessions/7a_matplotlib.qmd\n    course-materials/interactive-sessions/7b_seaborn.qmd\n    course-materials/interactive-sessions/7d_project_kickoff.qmd\n    course-materials/interactive-sessions/8a_github.qmd\n    course-materials/live-coding/2d_lists_and_dicts.qmd\n    course-materials/live-coding/2d_lists_and_dicts_notes.qmd\n    course-materials/live-coding/3a_booleans_and_conditionals.qmd\n    course-materials/live-coding/3a_booleans_and_conditionals_notes.qmd\n    course-materials/live-coding/5d_loops_over_groups.qmd",
+          "exit": 1,
+          "git_sha": "29298a5",
+          "ok": false
         }
       ]
     },
@@ -1840,13 +1912,13 @@
         }
       ],
       "signoff": {
-        "at": "2026-08-23T11:56:32",
+        "at": "2026-08-25T15:55:58",
         "by": "Kelly Caylor",
         "forced": false,
-        "git_sha": "a49a41b",
+        "git_sha": "29298a5",
         "note": "pushed and verified live",
         "verification": {
-          "at": "2026-08-23T11:56:27",
+          "at": "2026-08-25T15:50:17",
           "kind": "command",
           "ok": true
         }
@@ -2336,15 +2408,6 @@
     "T2": {
       "checks": [
         {
-          "at": "2026-08-21T04:36:50",
-          "cmd": "bash tools/gates.sh",
-          "could_not_run": false,
-          "evidence": "EDS 217 quality gates\n\nHUMAN  Gate 1  every construct traces to a day scope table\n       Deciding what counts as a construct and matching it to a prose scope\n       table is a reading task. Recorded per day in\n       tasks/2026-planning/2026-day-skeleton.md.\nHUMAN  Gate 2  the rehearsal rule holds for every WRITE-depth construct\n       Depth labels and rehearsal claims are prose. Afternoon-taught constructs\n       additionally need the decision 10 exemption and its audit table, also in\n       2026-day-skeleton.md.\nPASS   Gate 3  at most two Field Notes per end-of-day activity\n\n       day 1: 0\n       day 2: 1\n       day 3: 2\n       day 4: 2\n       day 5: 1\n       day 6: 0\n       day 7: 1\nPASS   Gate 4  handout and answer key agree, structurally\n\n       day 2: 6 parts, handout and key agree\n       day 3: 7 parts, handout and key agree\n       day 4: 7 parts, handout and key agree\n       day 5: 5 parts, handout and key agree\n       day 6: 6 parts, handout and key agree\n       day 7: 6 parts, handout and key agree\n       day 1: structured without Part headings, read it by hand\n       The structural half is mechanical. Task-by-task agreement is not, because\n       handouts number tasks and keys group them under parts.\nPASS   Gate 5  no lambda anywhere in the course materials\n       Pattern requires a parameter list and a colon, so backticked prose about\n       lambda does not match.\nPASS   Gate 6  the 2025 alignment checklist and all seven per-day audits are archived\n       File existence only. Whether the checklist was applied is a reading task.\n\nFour mechanical gates pass. Two human gates are noted above.",
-          "exit": 0,
-          "git_sha": "98e9108",
-          "ok": true
-        },
-        {
           "at": "2026-08-21T04:43:58",
           "cmd": "bash tools/gates.sh",
           "could_not_run": false,
@@ -2423,6 +2486,15 @@
           "evidence": "EDS 217 quality gates\n\nHUMAN  Gate 1  every construct traces to a day scope table\n       Deciding what counts as a construct and matching it to a prose scope\n       table is a reading task. Recorded per day in\n       tasks/2026-planning/2026-day-skeleton.md.\nHUMAN  Gate 2  the rehearsal rule holds for every WRITE-depth construct\n       Depth labels and rehearsal claims are prose. Afternoon-taught constructs\n       additionally need the decision 10 exemption and its audit table, also in\n       2026-day-skeleton.md.\nPASS   Gate 3  at most two Field Notes per end-of-day activity\n\n       day 1: 0\n       day 2: 1\n       day 3: 2\n       day 4: 2\n       day 5: 1\n       day 6: 0\n       day 7: 1\nPASS   Gate 4  handout and answer key agree, structurally\n\n       day 2: 6 parts, handout and key agree\n       day 3: 7 parts, handout and key agree\n       day 4: 7 parts, handout and key agree\n       day 5: 5 parts, handout and key agree\n       day 6: 6 parts, handout and key agree\n       day 7: 6 parts, handout and key agree\n       day 1: structured without Part headings, read it by hand\n       The structural half is mechanical. Task-by-task agreement is not, because\n       handouts number tasks and keys group them under parts.\nPASS   Gate 5  no lambda anywhere in the course materials\n       Pattern requires a parameter list and a colon, so backticked prose about\n       lambda does not match.\nPASS   Gate 6  the 2025 alignment checklist and all seven per-day audits are archived\n       File existence only. Whether the checklist was applied is a reading task.\n\nFour mechanical gates pass. Two human gates are noted above.",
           "exit": 0,
           "git_sha": "667ad75",
+          "ok": true
+        },
+        {
+          "at": "2026-08-25T13:04:30",
+          "cmd": "bash tools/gates.sh",
+          "could_not_run": false,
+          "evidence": "EDS 217 quality gates\n\nHUMAN  Gate 1  every construct traces to a day scope table\n       Deciding what counts as a construct and matching it to a prose scope\n       table is a reading task. Recorded per day in\n       tasks/2026-planning/2026-day-skeleton.md.\nHUMAN  Gate 2  the rehearsal rule holds for every WRITE-depth construct\n       Depth labels and rehearsal claims are prose. Afternoon-taught constructs\n       additionally need the decision 10 exemption and its audit table, also in\n       2026-day-skeleton.md.\nPASS   Gate 3  at most two Field Notes per end-of-day activity\n\n       day 1: 0\n       day 2: 1\n       day 3: 2\n       day 4: 2\n       day 5: 1\n       day 6: 0\n       day 7: 1\nPASS   Gate 4  handout and answer key agree, structurally\n\n       day 2: 6 parts, handout and key agree\n       day 3: 7 parts, handout and key agree\n       day 4: 7 parts, handout and key agree\n       day 5: 5 parts, handout and key agree\n       day 6: 6 parts, handout and key agree\n       day 7: 6 parts, handout and key agree\n       day 1: structured without Part headings, read it by hand\n       The structural half is mechanical. Task-by-task agreement is not, because\n       handouts number tasks and keys group them under parts.\nPASS   Gate 5  no lambda anywhere in the course materials\n       Pattern requires a parameter list and a colon, so backticked prose about\n       lambda does not match.\nPASS   Gate 6  the 2025 alignment checklist and all seven per-day audits are archived\n       File existence only. Whether the checklist was applied is a reading task.\n\nFour mechanical gates pass. Two human gates are noted above.",
+          "exit": 0,
+          "git_sha": "29298a5",
           "ok": true
         }
       ]
@@ -2887,5 +2959,5 @@
     }
   },
   "schema": 1,
-  "updated": "2026-08-25T15:50:33"
+  "updated": "2026-08-25T13:04:39"
 }

@@ -393,8 +393,8 @@ items:
     3. Decide whether office hours belong on the site and, if so, where.
   verify:
     kind: command
-    cmd: python3 tools/prelaunch_checks.py c3_images_present
-    expect: every image index.qmd references exists on disk, syllabus and office hours confirmed by hand
+    cmd: python3 tools/prelaunch_checks.py c3_front_page_ready
+    expect: the TA photo is on disk, and the syllabus link and office hours are both recorded as confirmed
 
 - id: C4
   title: Stop the final project page fetching over the network at render

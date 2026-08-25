@@ -558,6 +558,48 @@ def c2_mailto():
 IMG_REF = re.compile(r"!\[[^\]]*\]\((images/[^)\s]+)\)")
 
 
+def _confirmations():
+    """Hand-recorded confirmations for things no script can reach."""
+    f = ROOT / "tasks/2026-planning/prelaunch/confirmations.yml"
+    if not f.exists():
+        return {}
+    import yaml
+    return yaml.safe_load(f.read_text()) or {}
+
+
+def c3_front_page_ready():
+    """The whole of C3, not just the half a script can see.
+
+    Three parts: the images index.qmd names, the syllabus link, and office
+    hours. Only the first is mechanical. Reporting PASS on that one alone said
+    the item was finished while a student still could not open the syllabus.
+    """
+    text = (ROOT / "index.qmd").read_text()
+    lines, ok = [], True
+
+    missing = [m.group(1) for m in IMG_REF.finditer(text)
+               if not (ROOT / m.group(1)).exists()]
+    if missing:
+        ok = False
+        for rel in missing:
+            lines.append(f"  {rel} is referenced by index.qmd but not on disk")
+    else:
+        lines.append("Every image index.qmd references exists.")
+
+    conf = _confirmations()
+    for key, label in (("syllabus_2026_shared", "the 2026 syllabus link"),
+                       ("office_hours", "office hours")):
+        entry = conf.get(key) or {}
+        when = entry.get("confirmed")
+        if when:
+            lines.append(f"{label}: confirmed {when}")
+        else:
+            ok = False
+            lines.append(f"{label}: NOT confirmed. Record a date in "
+                         f"tasks/2026-planning/prelaunch/confirmations.yml")
+    return result(ok, lines)
+
+
 def c3_images_present():
     """Every image the front page names has to exist on disk.
 
@@ -703,26 +745,37 @@ def t6_cells_clean():
     return result(code == 0 and not fails, lines)
 
 
+# A recipe line depends on the environment if it runs an interpreter that lives
+# in the environment, or reports on the environment itself. Matching the bare
+# word `python` was too narrow: it missed the label line of `make env`, which
+# echoed $CONDA_DEFAULT_ENV from whatever shell invoked make while the versions
+# printed underneath came from the wrapper, so the one target whose job is to
+# name the environment named the wrong one. quarto is deliberately absent from
+# this pattern: it is a system install at /usr/local/bin, identical inside the
+# environment and out, and build_docs.py activates the environment itself.
+ENV_SENSITIVE = re.compile(r"\b(python3?|pip3?|conda|mamba|jupyter)\b|CONDA_DEFAULT_ENV")
+
+
 def t7_make_targets_use_the_env():
-    """Every make target that runs python must run it inside eds217_2026."""
+    """Every make target that depends on the environment must run inside it."""
     mk = (ROOT / "Makefile").read_text()
     bare, invoking, continued = [], 0, False
     for line in mk.splitlines():
         is_recipe = line.startswith("\t")
         # A recipe line ending in a backslash continues into the next one, and
         # the continuation is not a separate invocation.
-        if is_recipe and not continued and "python" in line:
+        if is_recipe and not continued and ENV_SENSITIVE.search(line):
             invoking += 1
             if "$(RUN)" not in line and not line.strip().startswith("#"):
                 bare.append(line.strip())
         continued = is_recipe and line.rstrip().endswith("\\")
     wrapper = (ROOT / "tools/run.sh")
     lines = [f"tools/run.sh present: {wrapper.exists()}",
-             f"recipe lines invoking python: {invoking}",
+             f"recipe lines that depend on the environment: {invoking}",
              f"of those, not routed through the wrapper: {len(bare)}"]
     lines += ["    " + b for b in bare[:8]]
     if wrapper.exists() and not bare:
-        lines.append("Every python target activates the course environment first.")
+        lines.append("Every environment-dependent target activates eds217_2026 first.")
     return result(wrapper.exists() and not bare, lines)
 
 

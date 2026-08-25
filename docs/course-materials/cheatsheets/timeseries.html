@@ -218,11 +218,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -234,11 +234,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -246,11 +246,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -308,10 +308,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -475,7 +471,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="bae9154c" class="cell" data-execution_count="1">
+<div id="aa3118c2" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -509,7 +505,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="loading-time-series-data">Loading Time Series Data</h2>
 <section id="reading-csv-with-date-parsing" class="level3">
 <h3 class="anchored" data-anchor-id="reading-csv-with-date-parsing">Reading CSV with Date Parsing</h3>
-<div id="379d6cc3" class="cell" data-execution_count="2">
+<div id="040ac73b" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse dates while reading a CSV (the way you will do it on real data)</span></span>
@@ -531,7 +527,7 @@ Data shape: (48, 3)</code></pre>
 </section>
 <section id="converting-strings-to-datetime" class="level3">
 <h3 class="anchored" data-anchor-id="converting-strings-to-datetime">Converting Strings to Datetime</h3>
-<div id="bc644d46" class="cell" data-execution_count="3">
+<div id="8c4370f4" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert year-only data to datetime (common in environmental datasets)</span></span>
@@ -555,7 +551,7 @@ Data shape: (48, 3)</code></pre>
 </section>
 <section id="setting-datetime-index" class="level2">
 <h2 class="anchored" data-anchor-id="setting-datetime-index">Setting DateTime Index</h2>
-<div id="2ed05a15" class="cell" data-execution_count="4">
+<div id="c60870ab" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set date column as index for time series operations</span></span>
@@ -577,7 +573,7 @@ date
 </section>
 <section id="extracting-date-components" class="level2">
 <h2 class="anchored" data-anchor-id="extracting-date-components">Extracting Date Components</h2>
-<div id="1409c253" class="cell" data-execution_count="5">
+<div id="6f39c1f4" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract date components using .dt accessor</span></span>
@@ -601,7 +597,7 @@ date
 </div>
 <section id="creating-seasonal-groupings" class="level3">
 <h3 class="anchored" data-anchor-id="creating-seasonal-groupings">Creating Seasonal Groupings</h3>
-<div id="c7d5c9fa" class="cell" data-execution_count="6">
+<div id="cc447729" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define seasonal groupings as constants</span></span>
@@ -636,7 +632,7 @@ date
 <h2 class="anchored" data-anchor-id="time-series-resampling">Time Series Resampling</h2>
 <section id="basic-resampling" class="level3">
 <h3 class="anchored" data-anchor-id="basic-resampling">Basic Resampling</h3>
-<div id="00f857e7" class="cell" data-execution_count="7">
+<div id="21f86367" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Resample monthly data to annual averages</span></span>
@@ -720,7 +716,7 @@ Handling Mixed Data Types
 <h2 class="anchored" data-anchor-id="time-series-calculations">Time Series Calculations</h2>
 <section id="year-over-year-changes" class="level3">
 <h3 class="anchored" data-anchor-id="year-over-year-changes">Year-over-Year Changes</h3>
-<div id="6ce8967b" class="cell" data-execution_count="8">
+<div id="945369e6" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate year-over-year changes</span></span>
@@ -744,7 +740,7 @@ date
 </section>
 <section id="rolling-averages" class="level3">
 <h3 class="anchored" data-anchor-id="rolling-averages">Rolling Averages</h3>
-<div id="f3761755" class="cell" data-execution_count="9">
+<div id="6af4586b" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 12-month rolling average</span></span>
@@ -780,7 +776,7 @@ date
 <h2 class="anchored" data-anchor-id="time-series-filtering">Time Series Filtering</h2>
 <section id="selecting-date-ranges" class="level3">
 <h3 class="anchored" data-anchor-id="selecting-date-ranges">Selecting Date Ranges</h3>
-<div id="09e3a48e" class="cell" data-execution_count="10">
+<div id="66fa999b" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select data from specific year</span></span>
@@ -804,7 +800,7 @@ Modern data (2022+): 24 records</code></pre>
 </section>
 <section id="filtering-by-date-components" class="level3">
 <h3 class="anchored" data-anchor-id="filtering-by-date-components">Filtering by Date Components</h3>
-<div id="a4a709db" class="cell" data-execution_count="11">
+<div id="f1150499" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter by month (e.g., all January data)</span></span>
@@ -830,7 +826,7 @@ Winter records: 12
 </section>
 <section id="merging-time-series-data" class="level2">
 <h2 class="anchored" data-anchor-id="merging-time-series-data">Merging Time Series Data</h2>
-<div id="5875729e" class="cell" data-execution_count="12">
+<div id="f62e3fa1" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create second dataset with different frequency</span></span>

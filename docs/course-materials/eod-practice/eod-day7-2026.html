@@ -221,11 +221,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -237,11 +237,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -249,11 +249,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -311,10 +311,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -433,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#todays-sentences" id="toc-todays-sentences" class="nav-link active" data-scroll-target="#todays-sentences">Today’s sentences</a></li>
+  <li><a href="#todays-patterns" id="toc-todays-patterns" class="nav-link active" data-scroll-target="#todays-patterns">Today’s patterns</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#part-1-three-files" id="toc-part-1-three-files" class="nav-link" data-scroll-target="#part-1-three-files">Part 1: Three files</a></li>
   <li><a href="#part-2-one-table-out-of-three" id="toc-part-2-one-table-out-of-three" class="nav-link" data-scroll-target="#part-2-one-table-out-of-three">Part 2: One table out of three</a></li>
@@ -477,8 +473,8 @@ Reference
 <p>USDA Plant Hardiness Zone Maps for 2012 and 2023, prepared by the <a href="https://prism.oregonstate.edu/projects/plant_hardiness_zones.php" target="_blank">PRISM Climate Group</a> at Oregon State University, distributed by zip code. Zip code locations from a public zip code database.</p>
 </div>
 </div>
-<section id="todays-sentences" class="level2">
-<h2 class="anchored" data-anchor-id="todays-sentences">Today’s sentences</h2>
+<section id="todays-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="todays-patterns">Today’s patterns</h2>
 <p>Everything you draw tonight is built from these five.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(w, h))                             <span class="co"># the canvas</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(...) <span class="op">;</span> plt.ylabel(...) <span class="op">;</span> plt.title(...)     <span class="co"># always</span></span>
@@ -488,12 +484,12 @@ Reference
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'col'</span>)                         <span class="co"># the shape of one column</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>series.values, y<span class="op">=</span>series.index)           <span class="co"># a grouped Series, as bars</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And these, from earlier in the week:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.concat([a, b], ignore_index<span class="op">=</span><span class="va">True</span>)                   <span class="co"># the stacking sentence</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, left_on<span class="op">=</span><span class="st">'a'</span>, right_on<span class="op">=</span><span class="st">'b'</span>)       <span class="co"># the join sentence</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span>, columns<span class="op">=</span>, values<span class="op">=</span>)              <span class="co"># the pivot sentence</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.concat([a, b], ignore_index<span class="op">=</span><span class="va">True</span>)                   <span class="co"># the stacking pattern</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, left_on<span class="op">=</span><span class="st">'a'</span>, right_on<span class="op">=</span><span class="st">'b'</span>)       <span class="co"># the join pattern</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span>, columns<span class="op">=</span>, values<span class="op">=</span>)              <span class="co"># the pivot pattern</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>])        <span class="co"># split, apply, combine</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'col'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)         <span class="co"># the top-N sentence</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">apply</span>(named_function)            <span class="co"># the derived-column sentence</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'col'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)         <span class="co"># the top-N pattern</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">apply</span>(named_function)            <span class="co"># the derived-column pattern</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
@@ -507,7 +503,7 @@ Reference
 <ol start="3" type="1">
 <li>Read the three files:</li>
 </ol>
-<div id="3a2daa40" class="cell" data-execution_count="1">
+<div id="9513e068" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -537,13 +533,13 @@ Reference
 <p><strong>Splitting a range.</strong> The <code>trange</code> column holds text like <code>'-10 to -5'</code>. To do arithmetic on the cold end of that range you need the first piece of it, as a number:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>zones[<span class="st">'trange_min'</span>] <span class="op">=</span> zones[<span class="st">'trange'</span>].<span class="bu">str</span>.split().<span class="bu">str</span>.get(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>.str.split()</code> cuts the text at every space, giving <code>['-10', 'to', '-5']</code>. <code>.str.get(0)</code> takes the first piece from each row. <code>.astype(int)</code> turns <code>'-10'</code> into <code>-10</code>.</p>
-<p>On Thursday, 4C told you that <code>.str</code> methods chained together were a Day 7 problem. This is Day 7, and this is the chain. Three methods, in a row, each one operating on what the last one handed it, which is exactly the pattern you have been reading all week in <code>.sort_values(...).head(10)</code>, because a chain is just a sentence with more than one verb in it.</p>
+<p>On Thursday, 4C told you that <code>.str</code> methods chained together were a Day 7 problem. This is Day 7, and this is the chain. Three methods, in a row, each one operating on what the last one handed it, which is exactly the pattern you have been reading all week in <code>.sort_values(...).head(10)</code>, because a chain is two patterns run one after the other.</p>
 </div>
 </div>
 <ol start="4" type="1">
 <li>Pad the zip codes in all three tables:</li>
 </ol>
-<div id="c52f9a97" class="cell" data-execution_count="2">
+<div id="ae88ad45" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>zones_2023[<span class="st">'zipcode'</span>] <span class="op">=</span> zones_2023[<span class="st">'zipcode'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>
@@ -564,7 +560,7 @@ Reference
 <section id="part-2-one-table-out-of-three" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-one-table-out-of-three">Part 2: One table out of three</h2>
 <ol start="4" type="1">
-<li><p>Add a <code>year</code> column to each zone table, then stack the two of them into one table called <code>zones</code>, using the stacking sentence. How many rows?</p></li>
+<li><p>Add a <code>year</code> column to each zone table, then stack the two of them into one table called <code>zones</code>, using the stacking pattern. How many rows?</p></li>
 <li><p>Add <code>trange_min</code> using the line from the Field Note, then confirm it has no nulls and look at its distinct values with <code>.value_counts().sort_index()</code>. In a markdown cell, say what you notice about the spacing of those values and what that means for the phrase “how much warmer”.</p></li>
 <li><p>Compute the mean <code>trange_min</code> for each year and report the difference. This is the headline number, and you are about to spend the rest of the evening finding out how much it is worth.</p></li>
 <li><p>Merge <code>zones</code> with <code>zipcodes</code> to attach a state, a latitude and a longitude to every row. The key columns are called different things in the two tables. <strong>Compare the row count before and after</strong>, then run the merge again with <code>how='left'</code> and find out how many rows failed to match and how many distinct zip codes that is.</p></li>
@@ -576,7 +572,7 @@ Reference
 <ol start="9" type="1">
 <li><p>Filter <code>located</code> to the 2023 rows only, then draw a scatter plot with <code>longitude</code> across the bottom, <code>latitude</code> up the side, and <code>hue='trange_min'</code>. Make the figure twelve inches by seven. Label both axes and title it.</p></li>
 <li><p>Something is wrong with that figure, and it is not subtle. Describe it in a markdown cell.</p></li>
-<li><p>Find the culprit. Use the filter sentence on <code>located</code> to pull out every row with a <code>longitude</code> greater than −60, and print its zip code, state, city, latitude and longitude.</p></li>
+<li><p>Find the culprit. Use the filter pattern on <code>located</code> to pull out every row with a <code>longitude</code> greater than −60, and print its zip code, state, city, latitude and longitude.</p></li>
 <li><p>In a markdown cell, two or three sentences. That is <strong>one</strong> zip code, appearing once in each year: two rows out of eighty thousand. Look up roughly where latitude 48.3, longitude −2.1 is. Is the temperature reading wrong, or is something else wrong? And say plainly what those two rows did to your figure.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Two rows in eighty thousand">
@@ -603,7 +599,7 @@ Two rows in eighty thousand
 <h2 class="anchored" data-anchor-id="part-4-what-actually-changed">Part 4: What actually changed</h2>
 <p>Comparing two maps by eye does not work. So compute the change and map <strong>that</strong> instead, which is the move you learned this morning.</p>
 <ol start="16" type="1">
-<li><p>Use the pivot sentence to build a table with one row per zip code and one column per year. Index it on <code>['zipcode', 'state', 'latitude', 'longitude']</code> so those come along for the ride, put <code>year</code> across the columns and <code>trange_min</code> in the cells, then <code>.reset_index()</code>. What shape is it, and why is that number smaller than 80,000?</p></li>
+<li><p>Use the pivot pattern to build a table with one row per zip code and one column per year. Index it on <code>['zipcode', 'state', 'latitude', 'longitude']</code> so those come along for the ride, put <code>year</code> across the columns and <code>trange_min</code> in the cells, then <code>.reset_index()</code>. What shape is it, and why is that number smaller than 80,000?</p></li>
 <li><p>Add a <code>temp_diff</code> column: the 2023 value minus the 2012 value. Count its nulls and say what a null means here. Then drop those rows.</p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -622,7 +618,7 @@ Note
 <ol start="18" type="1">
 <li><p>Draw a histogram of <code>temp_diff</code>. Label it. Then print <code>change['temp_diff'].value_counts().sort_index()</code> and read the two together.</p>
 <p>In a markdown cell, three or four sentences: what is the most common value, what is the second most common, and how many distinct values are there in total? Given that, is <code>temp_diff</code> a measurement of how much a place warmed, or is it something else? Be precise.</p></li>
-<li><p>The tails of that histogram are worth a minute. Use the top-N sentence twice to show the five zip codes with the largest increase and the five with the largest decrease, with their states and coordinates.</p>
+<li><p>The tails of that histogram are worth a minute. Use the top-N pattern twice to show the five zip codes with the largest increase and the five with the largest decrease, with their states and coordinates.</p>
 <p>In a markdown cell, two or three sentences: a zip code that moved by 25 or 30 °F has moved five or six whole zones. Do you believe that is a change in the climate? What else could produce it? (Look at where they are.)</p></li>
 <li><p><code>temp_diff</code> has too many values to use as a <code>hue=</code> and too few to be interesting as a number. Write a named function called <code>classify_shift</code> that takes one difference and returns <code>'warmer'</code>, <code>'colder'</code> or <code>'unchanged'</code>, apply it to build a <code>shift</code> column, and count the three categories.</p></li>
 <li><p>Draw the change map: <code>longitude</code> and <code>latitude</code> again, this time with <code>hue='shift'</code>. Twelve by seven, labelled, titled.</p></li>

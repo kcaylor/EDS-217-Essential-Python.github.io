@@ -221,11 +221,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -237,11 +237,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -249,11 +249,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -311,10 +311,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -433,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-sentences-you-need" id="toc-the-sentences-you-need" class="nav-link active" data-scroll-target="#the-sentences-you-need">The sentences you need</a></li>
+  <li><a href="#the-patterns-you-need" id="toc-the-patterns-you-need" class="nav-link active" data-scroll-target="#the-patterns-you-need">The patterns you need</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#part-1-what-is-in-the-file-about-8-minutes" id="toc-part-1-what-is-in-the-file-about-8-minutes" class="nav-link" data-scroll-target="#part-1-what-is-in-the-file-about-8-minutes">Part 1: What is in the file (about 8 minutes)</a></li>
   <li><a href="#part-2-distributions-about-8-minutes" id="toc-part-2-distributions-about-8-minutes" class="nav-link" data-scroll-target="#part-2-distributions-about-8-minutes">Part 2: Distributions (about 8 minutes)</a></li>
@@ -462,8 +458,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Your job this afternoon is to find it.</p>
 <p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing says out loud what they expect the figure to look like <em>before</em> the cell is run, and is allowed to be wrong.</p>
 <p>You have 45 minutes.</p>
-<section id="the-sentences-you-need" class="level2">
-<h2 class="anchored" data-anchor-id="the-sentences-you-need">The sentences you need</h2>
+<section id="the-patterns-you-need" class="level2">
+<h2 class="anchored" data-anchor-id="the-patterns-you-need">The patterns you need</h2>
 <p>All from this morning.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'col'</span>, y<span class="op">=</span><span class="st">'col'</span>)             <span class="co"># one measurement against another</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'col'</span>)                         <span class="co"># the distribution of one column</span></span>
@@ -483,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Create a notebook named <code>Colab_7C_Penguins.ipynb</code>, with both partners’ names in the title cell, then read the file:</p>
-<div id="a483a128" class="cell" data-execution_count="1">
+<div id="ece35ca4" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -548,7 +544,7 @@ This has a name
 <li><p>Run <code>.agg(['count', 'mean'])</code> on the same grouping and print it. Then build a Series of the number of birds on each island with <code>.value_counts()</code>, and draw <strong>that</strong> as horizontal bars too.</p></li>
 <li><p>Draw a bar chart of mean <code>body_mass_g</code> by species, split by sex. This one is easier with the <code>data=</code> form, because you want two bars per species: <code>sns.barplot(data=birds, x='species', y='body_mass_g', hue='sex')</code>.</p>
 <p>Then say in one sentence what the sex split adds to your answer to question 14.</p></li>
-<li><p>Last one, and it is a trap worth walking into. Build a wide table with <code>species</code> down the rows, <code>island</code> across the columns, and a <strong>count</strong> of <code>body_mass_g</code> in the cells. This is yesterday morning’s pivot sentence with <code>aggfunc='count'</code>.</p>
+<li><p>Last one, and it is a trap worth walking into. Build a wide table with <code>species</code> down the rows, <code>island</code> across the columns, and a <strong>count</strong> of <code>body_mass_g</code> in the cells. This is yesterday morning’s pivot pattern with <code>aggfunc='count'</code>.</p>
 <p>In a markdown cell, two or three sentences: given that table, what would go wrong if somebody used this dataset to compare Biscoe island with Dream island?</p></li>
 </ol>
 </section>

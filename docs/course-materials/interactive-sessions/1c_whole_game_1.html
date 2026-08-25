@@ -221,11 +221,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -237,11 +237,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -249,11 +249,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -311,10 +311,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -440,7 +436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#the-health-check" id="toc-the-health-check" class="nav-link" data-scroll-target="#the-health-check">The health check</a></li>
   </ul></li>
-  <li><a href="#step-3-clean-skipped-today-and-here-is-why" id="toc-step-3-clean-skipped-today-and-here-is-why" class="nav-link" data-scroll-target="#step-3-clean-skipped-today-and-here-is-why">Step 3: Clean 🧹 (skipped today, and here is why)</a></li>
+  <li><a href="#step-3-clean-which-we-skip-today" id="toc-step-3-clean-which-we-skip-today" class="nav-link" data-scroll-target="#step-3-clean-which-we-skip-today">Step 3: Clean 🧹, which we skip today</a></li>
   <li><a href="#step-4-group" id="toc-step-4-group" class="nav-link" data-scroll-target="#step-4-group">Step 4: Group 👥</a></li>
   <li><a href="#step-5-aggregate" id="toc-step-5-aggregate" class="nav-link" data-scroll-target="#step-5-aggregate">Step 5: Aggregate 📈</a></li>
   <li><a href="#sandbox-5-minutes" id="toc-sandbox-5-minutes" class="nav-link" data-scroll-target="#sandbox-5-minutes">🧪 Sandbox (5 minutes)</a></li>
@@ -470,7 +466,7 @@ Don’t panic 🚀
 <p>You are not expected to understand every line today. Your job is to copy code, run it, and change one thing at a time. Our job is to show you what a workflow looks like. By next Friday you will know how all of it works.</p>
 </div>
 </div>
-<p>We will use real Arctic weather data from the <a href="https://lternet.edu/site/arctic-lter/">Arctic LTER</a> station at Toolik Lake, Alaska: daily measurements from 1988 onward. This session covers the first half of the workflow: Import, Explore, Group, and Aggregate. We skip Clean along the way, for a reason you will see. Session 1d finishes the job with Visualize and Export, and gives the whole workflow its name.</p>
+<p>We will use real Arctic weather data from the <a href="https://lternet.edu/site/arctic-lter/">Arctic LTER</a> station at Toolik Lake, Alaska: daily measurements from 1988 onward. This session covers the first half of the workflow: Import, Explore, Group, and Aggregate. We skip Clean along the way, because this particular file has nothing wrong with it. Session 1d finishes the job with Visualize and Export, and gives the whole workflow its name.</p>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
 <p>Set up your notebook with the usual ritual:</p>
@@ -513,7 +509,7 @@ Caution
 <h2 class="anchored" data-anchor-id="step-1-import">Step 1: Import 📂</h2>
 <p><strong>Import</strong> means loading your tools and then loading your data.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="b929e2f4" class="cell" data-execution_count="1">
+<div id="657cbaf8" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -556,7 +552,7 @@ Note
 <p>Your original <code>df</code> stays exactly as it was. You have simply made a second copy under a new name.</p>
 </div>
 </div>
-<div id="ed0e9d61" class="cell" data-execution_count="2">
+<div id="07bc9b45" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: same data under a new name. Reads url again; leaves df alone.</span></span>
@@ -581,7 +577,7 @@ Note
 <h2 class="anchored" data-anchor-id="step-2-explore">Step 2: Explore 🔍</h2>
 <p><strong>Explore</strong> means getting to know the table before you analyze it.</p>
 <p>✅ <strong>Canonical cell. Preview the first rows:</strong></p>
-<div id="39237bc7" class="cell" data-execution_count="3">
+<div id="22efc1c6" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -763,7 +759,7 @@ Note
 <p>Each one looks at <code>df</code> without changing it.</p>
 </div>
 </div>
-<div id="8636ad87" class="cell" data-execution_count="4">
+<div id="989a8760" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: a structural overview instead of a row preview. Reads df; leaves it alone.</span></span>
@@ -800,7 +796,7 @@ dtypes: float64(9), int64(3), object(9)
 memory usage: 1.8+ MB</code></pre>
 </div>
 </div>
-<div id="1a107b02" class="cell" data-execution_count="5">
+<div id="2ef5df2a" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: summary statistics. Reads df; leaves it alone.</span></span>
@@ -958,7 +954,7 @@ memory usage: 1.8+ MB</code></pre>
 <section id="the-health-check" class="level3">
 <h3 class="anchored" data-anchor-id="the-health-check">The health check</h3>
 <p>Before you trust a dataset, run a quick <strong>health check</strong>. This is a fixed phrase you will reuse all course long. It counts the missing values in every column:</p>
-<div id="74381199" class="cell" data-execution_count="6">
+<div id="e4af00c4" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1019,9 +1015,9 @@ Important
 </div>
 </section>
 </section>
-<section id="step-3-clean-skipped-today-and-here-is-why" class="level2">
-<h2 class="anchored" data-anchor-id="step-3-clean-skipped-today-and-here-is-why">Step 3: Clean 🧹 (skipped today, and here is why)</h2>
-<p>The next step in a normal workflow is <strong>Clean</strong>: fixing missing values, wrong types, and duplicate rows. Our health check already showed that <code>Daily_AirTemp_Mean_C</code> has no missing values, so there is nothing to clean for today’s analysis, and we can go straight on.</p>
+<section id="step-3-clean-which-we-skip-today" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-clean-which-we-skip-today">Step 3: Clean 🧹, which we skip today</h2>
+<p>The next step in a normal workflow is <strong>Clean</strong>: fixing missing values, wrong types, and duplicate rows. Our health check already showed that <code>Daily_AirTemp_Mean_C</code> has no missing values, so we have nothing to clean today and can go straight on.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1032,7 +1028,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Enjoy this while it lasts. Most real datasets need real cleaning, and it is often the biggest part of a project. You will spend all of Day 4 on it. Today the data came ready to use.</p>
+<p>Enjoy this while it lasts. Most real datasets need real cleaning, and it is often the biggest part of a project. We spend all of Day 4 on it. Today the data came ready to use.</p>
 </div>
 </div>
 </section>
@@ -1040,7 +1036,7 @@ Note
 <h2 class="anchored" data-anchor-id="step-4-group">Step 4: Group 👥</h2>
 <p><strong>Group</strong> means splitting the rows into buckets by some key. Here we bucket every daily record by its <strong>Month</strong>, so all the Januaries sit together, all the Februaries, and so on.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="a6a40178" class="cell" data-execution_count="7">
+<div id="e7af465c" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby(<span class="st">'Month'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1064,7 +1060,7 @@ Note
 <p>Both read <code>df</code> without changing it, and neither touches your <code>monthly</code> grouping.</p>
 </div>
 </div>
-<div id="b54bf8b6" class="cell" data-execution_count="8">
+<div id="4a9dcf54" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: group by Year instead of Month. Reads df; leaves df and `monthly` alone.</span></span>
@@ -1076,7 +1072,7 @@ Note
 <h2 class="anchored" data-anchor-id="step-5-aggregate">Step 5: Aggregate 📈</h2>
 <p><strong>Aggregate</strong> means collapsing each bucket down to a single number. Here we take the mean temperature within each month. Notice the two-step shape: first group, then pick a column and average it.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="f7594ea4" class="cell" data-execution_count="9">
+<div id="44f2a95c" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>monthly_means <span class="op">=</span> monthly[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span>
@@ -1118,7 +1114,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 <p>Store the result under a new name so your <code>monthly_means</code> stays put.</p>
 </div>
 </div>
-<div id="53fe02f2" class="cell" data-execution_count="10">
+<div id="51df56da" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: average a different column. Reads `monthly`; leaves monthly_means alone.</span></span>
@@ -1173,7 +1169,7 @@ Name: Daily_Precip_Total_mm, dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>When the five minutes are up, run this cell to reload the data and rebuild the canonical results. Everyone returns to the same state, ready for Part 2:</p>
-<div id="8b5bb3d5" class="cell" data-execution_count="11">
+<div id="5b214db8" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart: reload df and rebuild the canonical results</span></span>

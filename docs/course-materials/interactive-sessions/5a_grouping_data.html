@@ -218,11 +218,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -234,11 +234,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -246,11 +246,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -308,10 +308,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -409,7 +405,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
       <h1 class="title">Interactive Session</h1>
-            <p class="subtitle lead">🗂️ The Split-Apply-Combine Sentence</p>
+            <p class="subtitle lead">🗂️ The Split-Apply-Combine Pattern</p>
                       </div>
   </div>
     
@@ -433,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a></li>
   <li><a href="#the-question-you-could-not-answer-yesterday" id="toc-the-question-you-could-not-answer-yesterday" class="nav-link" data-scroll-target="#the-question-you-could-not-answer-yesterday">The question you could not answer yesterday</a></li>
   <li><a href="#split-apply-combine" id="toc-split-apply-combine" class="nav-link" data-scroll-target="#split-apply-combine">Split, apply, combine</a></li>
-  <li><a href="#the-same-sentence-on-one-line" id="toc-the-same-sentence-on-one-line" class="nav-link" data-scroll-target="#the-same-sentence-on-one-line">The same sentence, on one line</a></li>
+  <li><a href="#the-same-pattern-on-one-line" id="toc-the-same-pattern-on-one-line" class="nav-link" data-scroll-target="#the-same-pattern-on-one-line">The same pattern, on one line</a></li>
   <li><a href="#reading-the-result" id="toc-reading-the-result" class="nav-link" data-scroll-target="#reading-the-result">Reading the result</a></li>
   <li><a href="#choosing-the-aggregation" id="toc-choosing-the-aggregation" class="nav-link" data-scroll-target="#choosing-the-aggregation">Choosing the aggregation</a></li>
   <li><a href="#what-can-be-a-key" id="toc-what-can-be-a-key" class="nav-link" data-scroll-target="#what-can-be-a-key">What can be a key</a></li>
@@ -458,11 +454,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Yesterday afternoon, at the very end of the colab, you were asked to compare the mean dissolved oxygen at two of the six sites. It took two filters and two <code>.mean()</code> calls, and the instructions ended with a promise: <em>tomorrow you will learn to do all six at once.</em></p>
 <p>This is that. One line, six answers, and the line is the same length as the one that gave you two.</p>
-<p>Almost every real question about data has the same shape. Not “what is the average”, but “what is the average <strong>for each</strong>”: for each site, for each species, for each year, for each ocean. Today you learn the sentence that answers all of those, and you learn it in the two forms you will see it written.</p>
+<p>Almost every real question about data has the same shape. Not “what is the average”, but “what is the average <strong>for each</strong>”: for each site, for each species, for each year, for each ocean. Today you learn the pattern that answers all of those, and you learn it in the two forms you will see it written.</p>
 <p>By the end of this session you will be able to:</p>
 <ul>
 <li>describe what <code>.groupby()</code> does in terms of <strong>split, apply, combine</strong></li>
-<li>write the split-apply-combine sentence in its <strong>two-step</strong> form and its <strong>one-line</strong> form, and say why they are the same sentence</li>
+<li>write the split-apply-combine pattern in its <strong>two-step</strong> form and its <strong>one-line</strong> form, and say why they are the same pattern</li>
 <li>choose the aggregation that answers the question you actually asked</li>
 <li>read the result of a grouped calculation and say what its index means</li>
 <li>explain why a grouped answer is more honest than a whole-column answer</li>
@@ -474,7 +470,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Save your notebook</strong> (<code>Ctrl + S</code>, or <code>Cmd + S</code> on macOS) as: <code>Session_5A_Grouping_Data.ipynb</code></p></li>
 <li><p><strong>Add a title cell</strong> (Markdown), updating the date to today:</p></li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Day 5: Session 5A - The Split-Apply-Combine Sentence</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Day 5: Session 5A - The Split-Apply-Combine Pattern</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Session Webpage</span><span class="co">](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/5a_grouping_data.html)</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -482,7 +478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="4" type="1">
 <li>Rebuild yesterday’s clean stream-chemistry table. Every line below is one you wrote in the colab, collected here so you can start from a table you trust:</li>
 </ol>
-<div id="b2859802" class="cell" data-execution_count="1">
+<div id="98dbf601" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -517,7 +513,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-question-you-could-not-answer-yesterday" class="level2">
 <h2 class="anchored" data-anchor-id="the-question-you-could-not-answer-yesterday">The question you could not answer yesterday</h2>
 <p>Here is the whole-table average dissolved oxygen:</p>
-<div id="f4216573" class="cell" data-execution_count="2">
+<div id="5e1520a2" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'dissolved_oxygen_mg_L'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -528,7 +524,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>That number is true and almost useless. It describes no site. It is the average of six streams that are not the same stream, and the moment anybody asks “is that good?” you have to admit you cannot tell them.</p>
 <p>Yesterday you got at two of the six the only way you could:</p>
-<div id="c9394ffb" class="cell" data-execution_count="3">
+<div id="65425bca" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>site_d <span class="op">=</span> survey[survey[<span class="st">'site'</span>] <span class="op">==</span> <span class="st">'site_d'</span>]</span>
@@ -549,19 +545,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The pattern in those twelve lines has a name, and pandas has one verb for the whole of it.</p>
 <p><strong>Split</strong> the table into one group per site. <strong>Apply</strong> the same calculation to each group. <strong>Combine</strong> the answers into a single result, labelled by group.</p>
 <p>That is <code>.groupby()</code>. In its first form you do it in two steps, because doing it in two steps makes both halves visible:</p>
-<div id="1011c888" class="cell" data-execution_count="4">
+<div id="9d42deb7" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>grouped <span class="op">=</span> survey.groupby(<span class="st">'site'</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>grouped</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x1afc61f50&gt;</code></pre>
+<pre><code>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x1af114510&gt;</code></pre>
 </div>
 </div>
 <p>Look carefully at what that printed. It is not a table. <code>.groupby()</code> on its own does the <strong>split</strong> and then stops, holding six piles of rows and waiting to be told what to do with them. Nothing has been calculated yet.</p>
 <p>The second step picks a column and names the calculation:</p>
-<div id="9a051e0c" class="cell" data-execution_count="5">
+<div id="62029fa3" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>grouped[<span class="st">'dissolved_oxygen_mg_L'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -589,7 +585,7 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>🐍 The object <code>.groupby()</code> returns is a real thing you can keep in a variable and use more than once. Ask it for a different column and it splits nothing again, because the split has already happened:</p>
-<div id="98e68a99" class="cell" data-execution_count="6">
+<div id="3de2a104" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>grouped[<span class="st">'temperature_c'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -608,10 +604,10 @@ Name: temperature_c, dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="the-same-sentence-on-one-line" class="level2">
-<h2 class="anchored" data-anchor-id="the-same-sentence-on-one-line">The same sentence, on one line</h2>
+<section id="the-same-pattern-on-one-line" class="level2">
+<h2 class="anchored" data-anchor-id="the-same-pattern-on-one-line">The same pattern, on one line</h2>
 <p>You will rarely need the grouped object for its own sake, so almost all of the pandas code you read will run the two steps together:</p>
-<div id="dfb72dea" class="cell" data-execution_count="7">
+<div id="d3dc5765" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -627,7 +623,7 @@ site_f     6.180233
 Name: dissolved_oxygen_mg_L, dtype: float64</code></pre>
 </div>
 </div>
-<p><strong>These are the same sentence.</strong> The two-step version stores the middle of it in a variable; the one-line version does not. Same split, same apply, same combine, same answer.</p>
+<p><strong>These are the same pattern.</strong> The two-step version stores the middle of it in a variable; the one-line version does not. Same split, same apply, same combine, same answer.</p>
 <p>Read the one-line form left to right as three instructions:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'column'</span>].aggregation()</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#          split      pick        apply</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -636,7 +632,7 @@ Name: dissolved_oxygen_mg_L, dtype: float64</code></pre>
 <li><code>['column']</code> says <strong>which column to do arithmetic on</strong>.</li>
 <li><code>.mean()</code> says <strong>what arithmetic</strong>.</li>
 </ul>
-<p>Learn it as one unit, the way you learned the top-N sentence on Wednesday. You will type it more often this quarter than you will type your own name.</p>
+<p>Learn it as one unit, the way you learned the top-N pattern on Wednesday. You will type it more often this quarter than you will type your own name.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -654,7 +650,7 @@ Name: dissolved_oxygen_mg_L, dtype: float64</code></pre>
 <section id="reading-the-result" class="level2">
 <h2 class="anchored" data-anchor-id="reading-the-result">Reading the result</h2>
 <p>The result is a <strong>Series</strong>, which is the one-column object you met on Day 2. It has an index, and the index is made of the group labels:</p>
-<div id="5f3394f4" class="cell" data-execution_count="8">
+<div id="67359c11" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mean_do <span class="op">=</span> survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].mean()</span>
@@ -668,7 +664,7 @@ Index(['site_a', 'site_b', 'site_c', 'site_d', 'site_e', 'site_f'], dtype='objec
 </div>
 </div>
 <p>That matters because the index is now something you can look things up by. The site labels have stopped being data inside a column and have become the labels of rows:</p>
-<div id="ff8d60b7" class="cell" data-execution_count="9">
+<div id="fa44ef7b" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mean_do[<span class="st">'site_c'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -678,7 +674,7 @@ Index(['site_a', 'site_b', 'site_c', 'site_d', 'site_e', 'site_f'], dtype='objec
 </div>
 </div>
 <p>It also means everything you already know about a Series still works here. <code>.idxmax()</code>, from Wednesday afternoon, gives you the label of the largest value, and the label is now a site name:</p>
-<div id="6d43bf8c" class="cell" data-execution_count="10">
+<div id="41cb2420" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mean_do.idxmax()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -687,7 +683,7 @@ Index(['site_a', 'site_b', 'site_c', 'site_d', 'site_e', 'site_f'], dtype='objec
 <pre><code>'site_d'</code></pre>
 </div>
 </div>
-<div id="8c0a88ef" class="cell" data-execution_count="11">
+<div id="6fe12934" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Best site:'</span>, mean_do.idxmax())</span>
@@ -715,7 +711,7 @@ Worst site: site_f</code></pre>
 <section id="choosing-the-aggregation" class="level2">
 <h2 class="anchored" data-anchor-id="choosing-the-aggregation">Choosing the aggregation</h2>
 <p><code>.mean()</code> is not special. Any of the summaries you have been running on whole columns since Tuesday will run on each group instead:</p>
-<div id="731f55c8" class="cell" data-execution_count="12">
+<div id="c7630c6f" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].<span class="bu">max</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -731,7 +727,7 @@ site_f     7.77
 Name: dissolved_oxygen_mg_L, dtype: float64</code></pre>
 </div>
 </div>
-<div id="0c370f0c" class="cell" data-execution_count="13">
+<div id="a2efe9eb" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].<span class="bu">min</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -747,7 +743,7 @@ site_f    4.14
 Name: dissolved_oxygen_mg_L, dtype: float64</code></pre>
 </div>
 </div>
-<div id="cad42428" class="cell" data-execution_count="14">
+<div id="fe2484d7" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>survey.groupby(<span class="st">'site'</span>)[<span class="st">'n_replicates'</span>].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -764,7 +760,7 @@ Name: n_replicates, dtype: int64</code></pre>
 </div>
 </div>
 <p><code>.count()</code> is the one worth pausing on, because it answers a different kind of question. It does not summarise the measurement, it tells you <strong>how many rows are in each pile</strong>:</p>
-<div id="6ff83348" class="cell" data-execution_count="15">
+<div id="9f8f9abb" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -856,7 +852,7 @@ Name: dissolved_oxygen_mg_L, dtype: int64</code></pre>
 <p>Any column whose values repeat can be a grouping key. The values do not have to be text, and they do not have to be tidy, but they do have to mean something.</p>
 <p><code>site</code> works because six labels describe two hundred and fifty-five rows. <code>pH</code> would not work, because almost every value is unique and you would get two hundred groups of one.</p>
 <p>Yesterday you built a column of your own that groups beautifully:</p>
-<div id="db202434" class="cell" data-execution_count="16">
+<div id="bd3f8291" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_ph(value):</span>
@@ -880,7 +876,7 @@ alkaline     42
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="f7f8b2d1" class="cell" data-execution_count="17">
+<div id="73f9c615" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>survey.groupby(<span class="st">'ph_class'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -893,7 +889,7 @@ neutral     8.019181
 Name: dissolved_oxygen_mg_L, dtype: float64</code></pre>
 </div>
 </div>
-<p>That is the derived-column sentence and the split-apply-combine sentence working together, and it is worth naming what just happened. <strong><code>ph_class</code> was not in the file.</strong> You invented the categories yesterday, and today they are a grouping key. Most of the interesting groupings in your career will be ones you made rather than ones you were handed.</p>
+<p>That is the derived-column pattern and the split-apply-combine pattern working together, and it is worth naming what just happened. <strong><code>ph_class</code> was not in the file.</strong> You invented the categories yesterday, and today they are a grouping key. Most of the interesting groupings in your career will be ones you made rather than ones you were handed.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -905,7 +901,7 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>🐍 <code>.value_counts()</code>, which you have used since Day 2, is a grouped count in disguise. These two lines produce the same numbers:</p>
-<div id="e4bd7b5a" class="cell" data-execution_count="18">
+<div id="21c56e8d" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(survey[<span class="st">'site'</span>].value_counts())</span>
@@ -950,7 +946,7 @@ Name: site, dtype: int64</code></pre>
 <section id="putting-it-together" class="level2">
 <h2 class="anchored" data-anchor-id="putting-it-together">Putting it together</h2>
 <p>The honest version of “what is the dissolved oxygen in this stream system”, in three lines:</p>
-<div id="189ad0cf" class="cell" data-execution_count="19">
+<div id="7752bc33" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].count())</span>
@@ -991,8 +987,8 @@ Name: temperature_c, dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="key-points">Key points</h2>
 <ul>
 <li><strong>Split, apply, combine</strong>: <code>.groupby()</code> splits the table into piles, an aggregation runs on each pile, and the answers come back as one labelled result.</li>
-<li>The <strong>split-apply-combine sentence</strong> is <code>df.groupby('key')['column'].aggregation()</code>.</li>
-<li>The <strong>two-step form</strong> and the <strong>one-line form</strong> are the same sentence. The two-step version keeps the split in a variable so you can reuse it.</li>
+<li>The <strong>split-apply-combine pattern</strong> is <code>df.groupby('key')['column'].aggregation()</code>.</li>
+<li>The <strong>two-step form</strong> and the <strong>one-line form</strong> are the same pattern. The two-step version keeps the split in a variable so you can reuse it.</li>
 <li><code>.groupby()</code> on its own calculates nothing. It waits.</li>
 <li>The result is a <strong>Series indexed by the group labels</strong>, so <code>.idxmax()</code>, <code>.idxmin()</code> and label lookup all still work.</li>
 <li>Any aggregation you can run on a column can run on a group: <code>.mean()</code>, <code>.sum()</code>, <code>.count()</code>, <code>.min()</code>, <code>.max()</code>, <code>.median()</code>, <code>.std()</code>.</li>

@@ -221,11 +221,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -237,11 +237,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -249,11 +249,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -311,10 +311,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -486,7 +482,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="4" type="1">
 <li>Read in a file you first met on the very first afternoon of this course:</li>
 </ol>
-<div id="8e7bb67a" class="cell" data-execution_count="1">
+<div id="4c887a85" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -557,7 +553,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-disguise" class="level2">
 <h2 class="anchored" data-anchor-id="the-disguise">The disguise</h2>
 <p>Look at the <code>Date</code> column, and then at what pandas thinks it is:</p>
-<div id="481d97b0" class="cell" data-execution_count="2">
+<div id="65e3e8b6" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Date'</span>].dtype</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -569,7 +565,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>int64</code>. The first row’s date is not the first of June 1988; it is the integer nineteen million, eight hundred and eighty thousand, six hundred and one.</p>
 <p>That works better than it has any right to. Sorting by it gives the right order, because <code>%Y%m%d</code> happens to sort the same way as text does. Filtering to a year works, because <code>19880000 &lt; Date &lt; 19890000</code> catches exactly 1988. You could get quite a long way like this.</p>
 <p>Then you subtract two of them:</p>
-<div id="1cb378e4" class="cell" data-execution_count="3">
+<div id="1671690c" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">19880701</span> <span class="op">-</span> <span class="dv">19880630</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -584,7 +580,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-parsing-sentence" class="level2">
 <h2 class="anchored" data-anchor-id="the-parsing-sentence">The parsing sentence</h2>
 <p><code>pd.to_datetime()</code> takes a column of dates-in-disguise and hands back a column of real dates. You tell it the disguise with <code>format=</code>:</p>
-<div id="8a28823f" class="cell" data-execution_count="4">
+<div id="ba616e62" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(toolik[<span class="st">'Date'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>)</span>
@@ -682,7 +678,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Check what you got:</p>
-<div id="4951fc9e" class="cell" data-execution_count="5">
+<div id="52c75aa4" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(toolik[<span class="st">'date'</span>].dtype)</span>
@@ -713,7 +709,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-.dt-accessors" class="level2">
 <h2 class="anchored" data-anchor-id="the-.dt-accessors">The <code>.dt</code> accessors</h2>
 <p>A parsed date column knows what year, month and day each of its values belongs to, and <code>.dt</code> is how you ask:</p>
-<div id="2fb029f6" class="cell" data-execution_count="6">
+<div id="943d26c5" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'year'</span>] <span class="op">=</span> toolik[<span class="st">'date'</span>].dt.year</span>
@@ -796,7 +792,7 @@ Note
 <section id="proving-it-worked" class="level3">
 <h3 class="anchored" data-anchor-id="proving-it-worked">Proving it worked</h3>
 <p>This file is unusually generous: it already carries its own <code>Year</code> and <code>Month</code> columns, written by whoever prepared the data. So you can check your parse against theirs.</p>
-<div id="8d05149f" class="cell" data-execution_count="7">
+<div id="e5148529" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((toolik[<span class="st">'year'</span>] <span class="op">==</span> toolik[<span class="st">'Year'</span>]).<span class="bu">all</span>())</span>
@@ -819,7 +815,7 @@ True</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Add a <code>dayofyear</code> column to <code>toolik</code> using the <code>.dt</code> accessor for it. Then use the filter sentence to show the rows where <code>dayofyear</code> is 366, and say in one sentence what those rows have in common.</p>
+<p>Add a <code>dayofyear</code> column to <code>toolik</code> using the <code>.dt</code> accessor for it. Then use the filter pattern to show the rows where <code>dayofyear</code> is 366, and say in one sentence what those rows have in common.</p>
 </div>
 </div>
 </section>
@@ -827,7 +823,7 @@ True</code></pre>
 <section id="dates-as-grouping-keys" class="level2">
 <h2 class="anchored" data-anchor-id="dates-as-grouping-keys">Dates as grouping keys</h2>
 <p>Here is what all of this was for. A date component is an ordinary column, so it is an ordinary grouping key, and Friday’s sentence works on it unchanged:</p>
-<div id="df61c02b" class="cell" data-execution_count="8">
+<div id="b629fb93" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>toolik.groupby(<span class="st">'month'</span>)[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean().<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -851,7 +847,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 <p>Thirty years of daily temperatures reduced to the twelve numbers that describe the Arctic year. January at −22.9 °C, July at +11.2 °C, and a thirty-four degree swing between them.</p>
 <p>Ask for the count alongside it, the way you now always do:</p>
-<div id="dc15508e" class="cell" data-execution_count="9">
+<div id="38bdc152" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>toolik.groupby(<span class="st">'year'</span>)[<span class="st">'Daily_AirTemp_Mean_C'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>]).head(<span class="dv">3</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -913,8 +909,8 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 <section id="the-question-that-needs-a-month-column" class="level2">
 <h2 class="anchored" data-anchor-id="the-question-that-needs-a-month-column">The question that needs a month column</h2>
 <p>Toolik has thirty years of data, and the obvious question to ask of thirty years of Arctic weather is whether it is getting warmer.</p>
-<p>Split the record into its first eleven years and its last ten, using Wednesday’s filter sentence:</p>
-<div id="209cf28f" class="cell" data-execution_count="10">
+<p>Split the record into its first eleven years and its last ten, using Wednesday’s filter pattern:</p>
+<div id="fddca913" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>early <span class="op">=</span> toolik[toolik[<span class="st">'year'</span>] <span class="op">&lt;=</span> <span class="dv">1998</span>]</span>
@@ -929,7 +925,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <p>Then ask each half the same question, and put the two answers side by side:</p>
-<div id="b9ea6c8a" class="cell" data-execution_count="11">
+<div id="7b1c5788" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> pd.DataFrame({</span>

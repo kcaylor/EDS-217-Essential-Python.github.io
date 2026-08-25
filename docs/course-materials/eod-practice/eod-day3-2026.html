@@ -221,11 +221,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -237,11 +237,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -249,11 +249,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -311,10 +311,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -480,8 +476,8 @@ Reference
 <section id="todays-two-sentences" class="level2">
 <h2 class="anchored" data-anchor-id="todays-two-sentences">Today’s two sentences</h2>
 <p>Everything below is built from these. You should not need to look them up more than once.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&gt;</span> value]                             <span class="co"># the filter sentence</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)    <span class="co"># the top-N sentence</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&gt;</span> value]                             <span class="co"># the filter pattern</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)    <span class="co"># the top-N pattern</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
@@ -527,11 +523,11 @@ Reference
 <h2 class="anchored" data-anchor-id="part-2-three-rankings">Part 2: Three rankings</h2>
 <p>Each of the three <code>Bananas index</code> columns is a ranking waiting to happen.</p>
 <ol start="5" type="1">
-<li>Use the top-N sentence to display the 10 highest-scoring foods for <code>Bananas index (kg)</code>.</li>
+<li>Use the top-N pattern to display the 10 highest-scoring foods for <code>Bananas index (kg)</code>.</li>
 <li>Do the same for <code>Bananas index (1000 kcalories)</code>.</li>
 <li>Do the same for <code>Bananas index (100g protein)</code>.</li>
 </ol>
-<p>Write each one out in full. Yes, that is the same sentence three times with one word changed. Notice how that feels.</p>
+<p>Write each one out in full. Yes, that is the same pattern three times with one word changed. Notice how that feels.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Hold that thought">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -573,7 +569,7 @@ Do this by reading, not by coding
 <h2 class="anchored" data-anchor-id="part-4-filtering-by-score">Part 4: Filtering by score</h2>
 <p>Now use the other sentence.</p>
 <ol start="11" type="1">
-<li><p>Use the filter sentence to find every food with a <code>Bananas index (kg)</code> above 10. How many are there?</p></li>
+<li><p>Use the filter pattern to find every food with a <code>Bananas index (kg)</code> above 10. How many are there?</p></li>
 <li><p>Use <code>~</code> to find the foods that are <strong>not</strong> above a score of 1 on <code>Bananas index (kg)</code>, that is, foods no worse than a banana by weight. How many are there?</p></li>
 <li><p>Now filter for <code>Bananas index (kg)</code> <strong>below</strong> 1 instead. You get a different number. Explain the difference in one sentence.</p></li>
 <li><p>Use a <strong>two-condition</strong> filter to find the foods that score above 5 per kilogram <strong>and</strong> below 1 per 100 g of protein. End the line with <code>.copy()</code>, since you’ll display it a couple of ways. Display the two banana index columns for those foods, ranked by <code>Bananas index (kg)</code>.</p></li>
@@ -585,7 +581,7 @@ Do this by reading, not by coding
 <p>The banana index columns are all about emissions. The dataset also carries land use, in <code>land_use_1000kcal</code>: square metres of land per thousand calories.</p>
 <ol start="16" type="1">
 <li><p>Use <code>.loc[]</code> to look up the value of <code>land_use_1000kcal</code> for <code>Bananas</code>.</p></li>
-<li><p>Use the top-N sentence to display the 10 foods with the highest <code>land_use_1000kcal</code>.</p></li>
+<li><p>Use the top-N pattern to display the 10 foods with the highest <code>land_use_1000kcal</code>.</p></li>
 <li><p>Use <code>.idxmax()</code> on <code>land_use_1000kcal</code> to get the name of the single most land-hungry food. Then use two <code>.loc[]</code> lookups and a division to report how many times the banana’s land use that food requires.</p></li>
 <li><p>Compare your land-use top 10 with your emissions top 10 from question 5. Are they the same foods? Answer in a markdown cell, and name one food that appears on one list and not the other.</p></li>
 </ol>
@@ -606,9 +602,9 @@ Do this by reading, not by coding
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The food names are the <strong>index</strong> of your table, not a column, so the filter sentence cannot reach them. <code>.filter()</code> can. Given a substring, it keeps every row whose label contains it:</p>
+<p>The food names are the <strong>index</strong> of your table, not a column, so the filter pattern cannot reach them. <code>.filter()</code> can. Given a substring, it keeps every row whose label contains it:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cheese <span class="op">=</span> df.<span class="bu">filter</span>(like<span class="op">=</span><span class="st">'heese'</span>, axis<span class="op">=</span><span class="st">'rows'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>like='heese'</code> rather than <code>'cheese'</code> so that <code>Cheddar cheese</code> and <code>Cheesecake</code> are both caught, whatever their capitalisation. Run the line as written, then rank <code>cheese</code> with the top-N sentence exactly as you have been doing all evening.</p>
+<p><code>like='heese'</code> rather than <code>'cheese'</code> so that <code>Cheddar cheese</code> and <code>Cheesecake</code> are both caught, whatever their capitalisation. Run the line as written, then rank <code>cheese</code> with the top-N pattern exactly as you have been doing all evening.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/data_selection.html">Cheatsheet: data selection and filtering</a></p>
 </div>
 </div>
@@ -638,7 +634,7 @@ Do this by reading, not by coding
 <p>Before you close your notebook, check that:</p>
 <ul>
 <li>every claim in your Part 7 write-up has a code cell above it that produced the number</li>
-<li>you used the filter sentence and the top-N sentence at least three times each</li>
+<li>you used the filter pattern and the top-N pattern at least three times each</li>
 <li>you can say out loud what <code>&amp;</code> needs that a single condition does not</li>
 <li>your notebook reads top to bottom as a document, not as a pile of cells</li>
 </ul>

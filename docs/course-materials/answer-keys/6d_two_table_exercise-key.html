@@ -221,11 +221,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -237,11 +237,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -249,11 +249,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -311,10 +311,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -466,7 +462,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="9b4b1dcb" class="cell" data-execution_count="1">
+<div id="8943c859" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -481,7 +477,7 @@ How to use this key
 <section id="part-1-one-table-out-of-two" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-one-table-out-of-two">Part 1: One table out of two</h2>
 <p><strong>1. How many rows does each table have, and what columns? What is the earliest and latest <code>Date</code> in each? (<code>.min()</code> and <code>.max()</code> on the <code>Date</code> column will do it, since these dates are text in <code>%Y-%m-%d</code> form and text in that form sorts correctly.)</strong></p>
-<div id="9b1d9f94" class="cell" data-execution_count="2">
+<div id="f5b7df8c" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temp.shape, <span class="bu">list</span>(temp.columns))</span>
@@ -512,7 +508,7 @@ How to use this key
 </div>
 </div>
 <p><strong>2. Merge the two tables on <code>Date</code>, with the default <code>how=</code>. How many rows come back?</strong></p>
-<div id="64fa2ae1" class="cell" data-execution_count="3">
+<div id="1810275d" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>inner <span class="op">=</span> pd.merge(temp, co2, on<span class="op">=</span><span class="st">'Date'</span>)</span>
@@ -537,7 +533,7 @@ How to use this key
 </div>
 </div>
 <p><strong>3. Merge them again with <code>how='left'</code>, putting <code>temp</code> on the left. How many rows now, and how many nulls, in which column?</strong></p>
-<div id="875cd6fc" class="cell" data-execution_count="4">
+<div id="8c30af6b" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> pd.merge(temp, co2, on<span class="op">=</span><span class="st">'Date'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
@@ -567,7 +563,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>4. In a markdown cell: the two merges differ by 940 rows. Say in one sentence what those 940 rows are, without looking anything up, since your answer to question 1 already told you.</strong></p>
-<div id="6ad7c578" class="cell" data-execution_count="5">
+<div id="8c241aa7" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>missing <span class="op">=</span> left[left[<span class="st">'CO2Concentration'</span>].isnull()]</span>
@@ -616,7 +612,7 @@ dtype: int64</code></pre>
 <section id="part-2-making-the-dates-real" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-making-the-dates-real">Part 2: Making the dates real</h2>
 <p><strong>6 and 7. Build <code>climate</code>, parse the dates, add <code>year</code> and <code>month</code>.</strong></p>
-<div id="50faeb51" class="cell" data-execution_count="6">
+<div id="c038d715" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>climate <span class="op">=</span> pd.merge(temp, co2, on<span class="op">=</span><span class="st">'Date'</span>).copy()</span>
@@ -627,7 +623,7 @@ dtype: int64</code></pre>
 <pre><code>dtype('&lt;M8[ns]')</code></pre>
 </div>
 </div>
-<div id="5455898c" class="cell" data-execution_count="7">
+<div id="1597b03c" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>climate[<span class="st">'year'</span>] <span class="op">=</span> climate[<span class="st">'date'</span>].dt.year</span>
@@ -705,7 +701,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>8. Build a table of annual means: group by <code>year</code> and report the <em>count</em> of months, the mean <code>MonthlyAnomaly</code>, and the mean <code>CO2Concentration</code>. Show the first three rows and the last three.</strong></p>
-<div id="4bfd75a8" class="cell" data-execution_count="8">
+<div id="86d18963" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>annual <span class="op">=</span> climate.groupby(<span class="st">'year'</span>).agg({<span class="st">'Date'</span>: <span class="st">'count'</span>,</span>
@@ -728,7 +724,7 @@ year
 </div>
 </div>
 <p><strong>9. Two of the sixty-seven years in that table are not twelve months long. Which two, and why? Filter them out into a table called <code>full_years</code> and say how many years survive.</strong></p>
-<div id="46fa3de0" class="cell" data-execution_count="9">
+<div id="abd60bbc" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>full_years <span class="op">=</span> annual[annual[<span class="st">'Date'</span>] <span class="op">==</span> <span class="dv">12</span>]</span>
@@ -777,7 +773,7 @@ year
 <section id="part-3-the-shape-that-shows-the-sawtooth" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-the-shape-that-shows-the-sawtooth">Part 3: The shape that shows the sawtooth</h2>
 <p><strong>11. Build a wide table with <code>year</code> down the rows, <code>month</code> across the columns, and <code>CO2Concentration</code> in the cells. Show the first three rows and the last three.</strong></p>
-<div id="06416274" class="cell" data-execution_count="10">
+<div id="3b715243" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>co2_grid <span class="op">=</span> climate.pivot_table(index<span class="op">=</span><span class="st">'year'</span>, columns<span class="op">=</span><span class="st">'month'</span>, values<span class="op">=</span><span class="st">'CO2Concentration'</span>)</span>
@@ -826,7 +822,7 @@ year
 </div>
 </div>
 <p><strong>13. Use the wide table to measure the second pattern. For every year, the difference between its largest monthly value and its smallest is the size of the annual cycle. Compute that difference for 1959 and for 2023, and report both.</strong></p>
-<div id="91bb84c6" class="cell" data-execution_count="11">
+<div id="5f734d63" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(co2_grid.loc[<span class="dv">1959</span>].<span class="bu">max</span>() <span class="op">-</span> co2_grid.loc[<span class="dv">1959</span>].<span class="bu">min</span>())</span>
@@ -852,7 +848,7 @@ year
 </div>
 </div>
 <p><strong>14. In a markdown cell: the annual cycle in CO₂ is caused by the northern hemisphere’s plants, which take carbon out of the air in the growing season and put it back in the autumn. Given that, say what your two numbers from question 13 might mean, and say honestly how confident you are in a comparison of two single years.</strong></p>
-<div id="88167429" class="cell" data-execution_count="12">
+<div id="527c6f92" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="dv">1959</span>, <span class="dv">1960</span>, <span class="dv">1965</span>, <span class="dv">1991</span>, <span class="dv">2000</span>, <span class="dv">2016</span>, <span class="dv">2023</span>]:</span>
@@ -884,7 +880,7 @@ year
 </div>
 </div>
 <p><strong>15. Build the same wide table for <code>MonthlyAnomaly</code>. Does the temperature record have a comparable seasonal cycle in it? Say why or why not in one sentence. (The answer is in what the word <em>anomaly</em> means.)</strong></p>
-<div id="5033d091" class="cell" data-execution_count="13">
+<div id="22d9deeb" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>temp_grid <span class="op">=</span> climate.pivot_table(index<span class="op">=</span><span class="st">'year'</span>, columns<span class="op">=</span><span class="st">'month'</span>, values<span class="op">=</span><span class="st">'MonthlyAnomaly'</span>)</span>
@@ -898,7 +894,7 @@ year
 2024   1.24  1.43  1.40  1.32  1.16  1.25  1.21   NaN   NaN   NaN   NaN   NaN</code></pre>
 </div>
 </div>
-<div id="b167172b" class="cell" data-execution_count="14">
+<div id="6266d14c" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>temp_grid.mean().<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -939,7 +935,7 @@ dtype: float64</code></pre>
 <section id="part-4-the-claim" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-the-claim">Part 4: The claim</h2>
 <p><strong>16. Using <code>full_years</code>, compare the 1960s with the 2010s. Compute the mean of each column for <code>year</code> between 1960 and 1969, and again for <code>year</code> between 2010 and 2019, and report the change in each.</strong></p>
-<div id="248f140d" class="cell" data-execution_count="15">
+<div id="fefa1d46" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sixties <span class="op">=</span> full_years[(full_years.index <span class="op">&gt;=</span> <span class="dv">1960</span>) <span class="op">&amp;</span> (full_years.index <span class="op">&lt;=</span> <span class="dv">1969</span>)]</span>

@@ -187,11 +187,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -203,11 +203,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -215,11 +215,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -277,10 +277,6 @@ ul.task-list li input[type="checkbox"] {
   <li class="nav-item">
     <a class="nav-link" href="../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -400,7 +396,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#the-ten-steps" id="toc-the-ten-steps" class="nav-link active" data-scroll-target="#the-ten-steps">The ten steps</a></li>
-  <li><a href="#where-youll-learn-each-step" id="toc-where-youll-learn-each-step" class="nav-link" data-scroll-target="#where-youll-learn-each-step">Where you’ll learn each step</a></li>
+  <li><a href="#where-each-step-is-taught" id="toc-where-each-step-is-taught" class="nav-link" data-scroll-target="#where-each-step-is-taught">Where each step is taught</a></li>
   <li><a href="#the-data-biography" id="toc-the-data-biography" class="nav-link" data-scroll-target="#the-data-biography">The Data Biography</a></li>
   <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key Points</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
@@ -414,17 +410,17 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>Almost every data analysis you will ever do, in this course and in your career, is some path through the same ten steps. Most analyses use a subset of them, and they come in this order. On Day 1 you played through a short path, the “Whole Game.” Over the following days you will learn each step in depth.</p>
+<p>Almost every data analysis you will ever do, in this course and in your career, is a path through the same ten steps, listed below. Most analyses use only some of the ten steps, and the ones an analysis does use always run in the order they are numbered. On Day 1 we ran a short path end to end, the “Whole Game.” Over the following days we work through each step in depth.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-    A["1. Import 📂"] --&gt; B["2. Explore 🔍"] --&gt; C["3. Clean 🧹"]
-    C --&gt; D["4. Filter 🎯"] --&gt; E["5. Sort 📊"] --&gt; F["6. Transform 🔧"]
-    F --&gt; G["7. Group 👥"] --&gt; H["8. Aggregate 📈"] --&gt; I["9. Join / Reshape 🔗"]
-    I --&gt; J["10. Visualize 📊"]
+    A["1. Import 📂"] --&gt; B["2. Explore 🔎"] --&gt; C["3. Clean 🧼"]
+    C --&gt; D["4. Filter 🎯"] --&gt; E["5. Sort 🥇"] --&gt; F["6. Transform ➕"]
+    F --&gt; G["7. Group 🗂️"] --&gt; H["8. Aggregate 📊"] --&gt; I["9. Join / Reshape 🔗"]
+    I --&gt; J["10. Visualize 🖼️"]
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -442,13 +438,13 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Transform.</strong> Build new columns from existing ones, such as calculations, conversions, or categories.</li>
 <li><strong>Group.</strong> Split the rows into buckets that share a common key.</li>
 <li><strong>Aggregate.</strong> Collapse each bucket down to a single summary number, like a mean, sum, or count.</li>
-<li><strong>Join / Reshape.</strong> Combine multiple tables, and pivot or stack the data into the shape your analysis needs. This includes adding a time dimension with dates.</li>
-<li><strong>Visualize.</strong> Turn your numbers into charts that reveal the story.</li>
+<li><strong>Join / Reshape.</strong> Combine multiple tables, and pivot or stack the data into the shape your analysis needs. Working with dates belongs to step 9 as well, because a date column is what lets you reshape a table along time.</li>
+<li><strong>Visualize.</strong> Turn your numbers into charts, so that a reader can see the result rather than work it out from a table.</li>
 </ol>
 </section>
-<section id="where-youll-learn-each-step" class="level2">
-<h2 class="anchored" data-anchor-id="where-youll-learn-each-step">Where you’ll learn each step</h2>
-<p>Each step gets its own teaching day. Everything in the course maps back to this table:</p>
+<section id="where-each-step-is-taught" class="level2">
+<h2 class="anchored" data-anchor-id="where-each-step-is-taught">Where each step is taught</h2>
+<p>Days 2 through 7 each teach one or two of the steps. The teaching order is not the workflow order. Filter and Sort are easier to learn first, so Day 3 teaches them, and Day 4 comes back for Clean afterwards.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 6%">
@@ -461,7 +457,7 @@ ul.task-list li input[type="checkbox"] {
 <th>#</th>
 <th>Step</th>
 <th>What it does</th>
-<th>You’ll learn it on</th>
+<th>Taught on</th>
 </tr>
 </thead>
 <tbody>
@@ -531,21 +527,22 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="the-data-biography" class="level2">
 <h2 class="anchored" data-anchor-id="the-data-biography">The Data Biography</h2>
-<!-- filled by D2 EOD build -->
-<p><em>Coming on Day 2.</em></p>
+<p>Exploring a dataset, step 2, has a written half that the step list does not show. A <strong>data biography</strong> is a short account of a dataset: where it came from, what it covers, what shape it is in, and what a reader needs to know before trusting anything computed from it. Working data scientists write a biography for most datasets they touch, usually in the first cells of a notebook. The alternative is discovering a flaw in the data after an analysis has already been built on it.</p>
+<p>One rule makes a biography worth reading: every claim in it must sit directly below the cell that produced the number behind it. Not “the data covers about thirty years”, which is too vague to check, but “the data covers 1988 to 2018”, with the cell that printed those two years directly above the sentence.</p>
+<p><a href="../course-materials/eod-practice/eod-day2-2026.html">Day 2’s end-of-day practice</a> is writing a data biography of the Toolik Field Station weather record.</p>
 </section>
 <section id="key-points" class="level2">
 <h2 class="anchored" data-anchor-id="key-points">Key Points</h2>
 <ul>
-<li>Real analyses are paths through these ten steps, always in this order, though few analyses use every step.</li>
-<li>Days 2 through 7 each teach one or two steps. Day 1’s “Whole Game” gives you the big picture first.</li>
+<li>Real analyses are paths through the ten steps, always in the numbered workflow order rather than the order the course teaches them in, though few analyses use every step.</li>
+<li>Days 2 through 7 each teach one or two steps, in an order chosen for learning rather than for the workflow. Day 1’s “Whole Game” gives you the big picture first.</li>
 <li>When you feel lost later in the course, come back here and ask yourself which step you are on.</li>
 </ul>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
-<li><a href="../course-materials/interactive-sessions/1c_whole_game_1.html">The Whole Game, Part 1</a> and <a href="../course-materials/interactive-sessions/1d_whole_game_2.html">Part 2</a> are Day 1’s run through the workflow.</li>
+<li><a href="../course-materials/interactive-sessions/1c_whole_game_1.html">The Whole Game, Part 1</a> and <a href="../course-materials/interactive-sessions/1d_whole_game_2.html">Part 2</a> together are Day 1’s run through the workflow.</li>
 <li><a href="../course-materials/cheatsheets/workflow_methods.html">Course Cheatsheet: Workflow Methods</a></li>
 <li><a href="../course-materials/cheatsheets/first_steps.html">Course Cheatsheet: First Steps</a></li>
 </ul>

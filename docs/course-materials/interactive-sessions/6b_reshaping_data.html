@@ -221,11 +221,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -237,11 +237,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -249,11 +249,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -311,10 +311,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -439,7 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-ignore_indextrue-fixes" id="toc-what-ignore_indextrue-fixes" class="nav-link" data-scroll-target="#what-ignore_indextrue-fixes">What <code>ignore_index=True</code> fixes</a></li>
   </ul></li>
   <li><a href="#long-and-wide" id="toc-long-and-wide" class="nav-link" data-scroll-target="#long-and-wide">Long and wide</a></li>
-  <li><a href="#the-pivot-sentence" id="toc-the-pivot-sentence" class="nav-link" data-scroll-target="#the-pivot-sentence">The pivot sentence</a>
+  <li><a href="#the-pivot-pattern" id="toc-the-pivot-pattern" class="nav-link" data-scroll-target="#the-pivot-pattern">The pivot pattern</a>
   <ul class="collapse">
   <li><a href="#what-happens-when-a-cell-has-more-than-one-number" id="toc-what-happens-when-a-cell-has-more-than-one-number" class="nav-link" data-scroll-target="#what-happens-when-a-cell-has-more-than-one-number">What happens when a cell has more than one number</a></li>
   </ul></li>
@@ -471,9 +467,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>There is a second shape the same data can take, and in that shape most of last night’s questions are answered by simply looking.</p>
 <p>By the end of this session you will be able to:</p>
 <ul>
-<li>write the <strong>stacking sentence</strong>, <code>pd.concat([a, b, c])</code>, and say what <code>ignore_index=True</code> fixes</li>
+<li>write the <strong>stacking pattern</strong>, <code>pd.concat([a, b, c])</code>, and say what <code>ignore_index=True</code> fixes</li>
 <li>describe the difference between a <strong>long</strong> table and a <strong>wide</strong> one, and say what each is good at</li>
-<li>write the <strong>pivot sentence</strong>, <code>pivot_table(index=, columns=, values=)</code>, and read its result</li>
+<li>write the <strong>pivot pattern</strong>, <code>pivot_table(index=, columns=, values=)</code>, and read its result</li>
 <li>turn a <code>.value_counts()</code> result back into a table you can merge with, using <code>.reset_index()</code></li>
 <li>say which shape you want <strong>before</strong> you start writing code</li>
 </ul>
@@ -492,7 +488,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="4" type="1">
 <li>Read the three station files. Nothing here is new:</li>
 </ol>
-<div id="d262d2a8" class="cell" data-execution_count="1">
+<div id="b14dcbd6" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -519,7 +515,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This morning you joined two tables <strong>side by side</strong>. The tables had different columns, they shared a key, and the result was wider than either input.</p>
 <p>Stacking is the other direction. The three station files have the <strong>same fifteen columns</strong> and different rows. You do not want to line them up by a key; you want to put one underneath the other and end up with a taller table.</p>
 <p><code>pd.merge()</code> cannot do that. <code>pd.concat()</code> can, and it takes a <strong>list</strong> of DataFrames:</p>
-<div id="30034158" class="cell" data-execution_count="2">
+<div id="1e438e3a" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>aq <span class="op">=</span> pd.concat([goleta, santa_barbara, cnsi])</span>
@@ -546,7 +542,7 @@ Label your pieces before you stack them
 <p>So label first, stack second. Always.</p>
 </div>
 </div>
-<div id="717f2aaf" class="cell" data-execution_count="3">
+<div id="17db6672" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'site'</span>] <span class="op">=</span> <span class="st">'Goleta'</span></span>
@@ -561,11 +557,11 @@ Label your pieces before you stack them
 <pre><code>(4942, 16)</code></pre>
 </div>
 </div>
-<p>Three derived-column sentences from Thursday, and now the stacked table knows where every row came from. That is the block you copied last night, written out.</p>
+<p>Three derived-column patterns from Thursday, and now the stacked table knows where every row came from. That is the block you copied last night, written out.</p>
 <section id="what-ignore_indextrue-fixes" class="level3">
 <h3 class="anchored" data-anchor-id="what-ignore_indextrue-fixes">What <code>ignore_index=True</code> fixes</h3>
 <p>Stack the tables without it and look at the row labels at the join:</p>
-<div id="ef754708" class="cell" data-execution_count="4">
+<div id="567b75dd" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>messy <span class="op">=</span> pd.concat([goleta, santa_barbara, cnsi])</span>
@@ -590,7 +586,7 @@ Index([711, 712, 713], dtype='int64')</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Two things, both of them the stacking sentence written from scratch:</p>
+<p>Two things, both of them the stacking pattern written from scratch:</p>
 <ol type="1">
 <li><p>Stack the three files again with <code>ignore_index=True</code>, in a different order: CNSI first, then Goleta, then Santa Barbara. Confirm the shape is identical. Then use <code>.head()</code> to show that the row order changed and <code>.value_counts()</code> on <code>site</code> to show that the contents did not.</p></li>
 <li><p>Stack only <strong>two</strong> of them, Goleta and CNSI, into a table called <code>two_sites</code>. Predict the row count out loud before you run it, then check.</p></li>
@@ -602,7 +598,7 @@ Index([711, 712, 713], dtype='int64')</code></pre>
 <section id="long-and-wide" class="level2">
 <h2 class="anchored" data-anchor-id="long-and-wide">Long and wide</h2>
 <p>Look at what one row of this table actually says:</p>
-<div id="74ac139f" class="cell" data-execution_count="5">
+<div id="b169b671" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>aq[[<span class="st">'site'</span>, <span class="st">'parameter'</span>, <span class="st">'value'</span>, <span class="st">'unit'</span>, <span class="st">'datetimeLocal'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -673,10 +669,10 @@ Index([711, 712, 713], dtype='int64')</code></pre>
 <p>It is also the shape in which nothing is directly comparable. To compare the mean PM2.5 across the three stations last night, you had to filter to one parameter and then group. To compare ozone and PM2.5 at Goleta this morning, you had to split the table in two and join it back together.</p>
 <p>The other shape is <strong>wide</strong>: one row per thing, one column per measurement, and the labels promoted out of the cells and into the column headers. In a wide table, a comparison is a glance.</p>
 </section>
-<section id="the-pivot-sentence" class="level2">
-<h2 class="anchored" data-anchor-id="the-pivot-sentence">The pivot sentence</h2>
+<section id="the-pivot-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="the-pivot-pattern">The pivot pattern</h2>
 <p><code>pivot_table()</code> goes from long to wide. It takes three arguments, and each one is the name of a column in your long table:</p>
-<div id="3f53c7c9" class="cell" data-execution_count="6">
+<div id="1cefef81" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> aq.pivot_table(index<span class="op">=</span><span class="st">'site'</span>, columns<span class="op">=</span><span class="st">'parameter'</span>, values<span class="op">=</span><span class="st">'value'</span>)</span>
@@ -741,7 +737,7 @@ Index([711, 712, 713], dtype='int64')</code></pre>
 <h3 class="anchored" data-anchor-id="what-happens-when-a-cell-has-more-than-one-number">What happens when a cell has more than one number</h3>
 <p>There are 714 CNSI PM2.5 readings and exactly one cell to put them in, so <code>pivot_table</code> has to reduce them to a single number. By default it takes the <strong>mean</strong>, which is why the cells above are averages rather than counts or sums.</p>
 <p>You can ask for something else with <code>aggfunc=</code>:</p>
-<div id="8589f88c" class="cell" data-execution_count="7">
+<div id="3441c16f" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>aq.pivot_table(index<span class="op">=</span><span class="st">'site'</span>, columns<span class="op">=</span><span class="st">'parameter'</span>, values<span class="op">=</span><span class="st">'value'</span>, aggfunc<span class="op">=</span><span class="st">'count'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -801,7 +797,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 <code>pivot_table</code> with <code>aggfunc=</code> is the split-apply-combine sentence in a different arrangement. <code>aq.groupby(['site', 'parameter'])['value'].mean()</code> computes exactly the same nine numbers; it just returns them stacked in a single column instead of laid out in a grid. Same calculation, different shape.</p>
+<p>🐍 <code>pivot_table</code> with <code>aggfunc=</code> is the split-apply-combine pattern in a different arrangement. <code>aq.groupby(['site', 'parameter'])['value'].mean()</code> computes exactly the same nine numbers; it just returns them stacked in a single column instead of laid out in a grid. Same calculation, different shape.</p>
 </div>
 </div>
 </section>
@@ -809,7 +805,7 @@ Note
 <section id="reading-a-wide-table" class="level2">
 <h2 class="anchored" data-anchor-id="reading-a-wide-table">Reading a wide table</h2>
 <p>The result of <code>pivot_table</code> is an ordinary DataFrame whose index is the <code>index=</code> column, so everything you know still works:</p>
-<div id="892a8911" class="cell" data-execution_count="8">
+<div id="86a21df1" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>means[<span class="st">'pm25'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -822,7 +818,7 @@ Santa Barbara    6.172324
 Name: pm25, dtype: float64</code></pre>
 </div>
 </div>
-<div id="d5353246" class="cell" data-execution_count="9">
+<div id="6f2325d0" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>means.loc[<span class="st">'Goleta'</span>, <span class="st">'pm25'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -832,7 +828,7 @@ Name: pm25, dtype: float64</code></pre>
 </div>
 </div>
 <p>The one thing that surprises people is that <code>site</code> is now the <strong>index</strong>, not a column, so <code>means['site']</code> raises a <code>KeyError</code>. When you want it back as a regular column, use <code>.reset_index()</code>, which you met on Friday:</p>
-<div id="9c694d57" class="cell" data-execution_count="10">
+<div id="8aa21f25" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>flat <span class="op">=</span> means.reset_index()</span>
@@ -900,7 +896,7 @@ Name: pm25, dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="from-a-series-back-to-a-table">From a Series back to a table</h2>
 <p>One more small move, and it is the one that connects this morning’s two sessions.</p>
 <p><code>.value_counts()</code> has been your counting tool since Day 2, and it hands back a <strong>Series</strong>:</p>
-<div id="296237f1" class="cell" data-execution_count="11">
+<div id="eb33f242" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>aq[<span class="st">'site'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -914,7 +910,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>That is fine to read and impossible to merge. <code>pd.merge()</code> needs two DataFrames with columns to join on, and a Series has an index instead. So you promote it:</p>
-<div id="f66a149e" class="cell" data-execution_count="12">
+<div id="808a3930" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> aq[<span class="st">'site'</span>].value_counts().reset_index()</span>
@@ -956,7 +952,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>Two proper columns, <code>site</code> and <code>count</code>. The second name is generic, so rename it to say what it counts:</p>
-<div id="49bf13d9" class="cell" data-execution_count="13">
+<div id="7439ffae" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> counts.rename(columns<span class="op">=</span>{<span class="st">'count'</span>: <span class="st">'n_readings'</span>})</span>
@@ -1001,7 +997,7 @@ Name: count, dtype: int64</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> df[<span class="st">'column'</span>].value_counts().reset_index()</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> counts.rename(columns<span class="op">=</span>{<span class="st">'count'</span>: <span class="st">'a_better_name'</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And now the two halves of this morning fit together. A wide table and a count table, joined by the station name:</p>
-<div id="2d5e6b0b" class="cell" data-execution_count="14">
+<div id="84e3d8f4" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> pd.merge(flat, counts, on<span class="op">=</span><span class="st">'site'</span>)</span>
@@ -1073,7 +1069,7 @@ Name: count, dtype: int64</code></pre>
 <h2 class="anchored" data-anchor-id="the-shape-that-answers-last-nights-best-question">The shape that answers last night’s best question</h2>
 <p>Last night you found the daily ozone cycle by grouping one station’s readings by hour. You could not easily do it for all three stations at once, because a grouped result is one column of numbers and you wanted three.</p>
 <p>Here it is, in one sentence, now that you can pivot. The <code>hour</code> column is last night’s supplied line, which gets its proper explanation after lunch:</p>
-<div id="4b54d252" class="cell" data-execution_count="15">
+<div id="70083b48" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>aq[<span class="st">'hour'</span>] <span class="op">=</span> aq[<span class="st">'datetimeLocal'</span>].<span class="bu">str</span>[<span class="dv">11</span>:<span class="dv">13</span>]</span>
@@ -1266,7 +1262,7 @@ Name: count, dtype: int64</code></pre>
 <li>Use <strong><code>ignore_index=True</code></strong> so the stacked table gets one clean set of row numbers.</li>
 <li>A <strong>long</strong> table has one measurement per row and its labels in columns. It is easy to append to and hard to compare across.</li>
 <li>A <strong>wide</strong> table has one row per thing and one column per measurement. It is easy to compare and awkward to extend.</li>
-<li>The <strong>pivot sentence</strong> is <code>df.pivot_table(index=, columns=, values=)</code>. It goes long to wide.</li>
+<li>The <strong>pivot pattern</strong> is <code>df.pivot_table(index=, columns=, values=)</code>. It goes long to wide.</li>
 <li><code>pivot_table</code> averages by default. Pass <strong><code>aggfunc='count'</code></strong> and look at that version first.</li>
 <li>The result is indexed by the <code>index=</code> column. <strong><code>.reset_index()</code></strong> turns it back into a plain table.</li>
 <li><strong><code>.value_counts().reset_index()</code></strong> promotes a count Series into a two-column table you can merge with. Rename the <code>count</code> column while you are there.</li>

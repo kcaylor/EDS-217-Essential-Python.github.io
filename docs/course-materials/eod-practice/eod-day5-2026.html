@@ -221,11 +221,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -237,11 +237,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -249,11 +249,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -311,10 +311,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -461,7 +457,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Three air quality monitors sit within about fifteen kilometres of each other on the South Coast: one in Goleta, one in Santa Barbara, and one on the roof of the CNSI building on the UCSB campus. Between the 10th of July and the 11th of August 2024 they recorded 4,942 hourly measurements of ozone and particulate matter.</p>
 <p>They are close enough together that they are breathing the same air. They are far enough apart, and different enough in what they measure, that comparing them is a real question rather than an exercise.</p>
-<p>You have met one of these files before. On Wednesday you filtered and ranked the Goleta station one parameter at a time. Tonight you have all three, and you have the sentence that lets you ask about all of them at once.</p>
+<p>You have met one of these files before. On Wednesday you filtered and ranked the Goleta station one parameter at a time. Tonight you have all three, and you have the pattern that lets you ask about all of them at once.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -481,12 +477,12 @@ Reference
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>grouped <span class="op">=</span> df.groupby(<span class="st">'key'</span>)                        <span class="co"># split</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>grouped[<span class="st">'col'</span>].mean()                              <span class="co"># apply and combine</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean()                    <span class="co"># the same sentence, one line</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean()                    <span class="co"># the same pattern, one line</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>])    <span class="co"># several summaries at once</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>).agg({<span class="st">'a'</span>: <span class="st">'mean'</span>, <span class="st">'b'</span>: <span class="st">'count'</span>}) <span class="co"># different summaries, different columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And the one from Wednesday that still does most of the work:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)  <span class="co"># the top-N sentence</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)  <span class="co"># the top-N pattern</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
@@ -554,11 +550,11 @@ Before you go any further
 <h2 class="anchored" data-anchor-id="part-2-compare-the-stations">Part 2: Compare the stations</h2>
 <ol start="5" type="1">
 <li><p>Build a table of just the PM2.5 readings, ending the line with <code>.copy()</code>, and call it <code>pm25</code>. How many rows?</p></li>
-<li><p>Which site has the highest mean PM2.5? Write the split-apply-combine sentence, then rank the result.</p></li>
+<li><p>Which site has the highest mean PM2.5? Write the split-apply-combine pattern, then rank the result.</p></li>
 <li><p>Those three means are within half a microgram of each other. Before you decide that means anything, use <code>.agg()</code> with a list to report the <strong>count, mean, min, max and standard deviation</strong> of PM2.5 at each site in one call.</p></li>
 <li><p>In a markdown cell, three or four sentences. The means are nearly identical and the maxima are not. What is different about these three stations, and which of the five columns in your table told you? Would you describe the South Coast as having one air quality or three?</p></li>
 <li><p>Now do the same for PM10. Which site is higher, and by how much? Note which site is missing from your answer and why.</p></li>
-<li><p>Use the filter sentence and the split-apply-combine sentence together: how many hours did each site record a PM2.5 value above 12 µg/m³, the US annual standard?</p></li>
+<li><p>Use the filter pattern and the split-apply-combine pattern together: how many hours did each site record a PM2.5 value above 12 µg/m³, the US annual standard?</p></li>
 <li><p>In a markdown cell: your answer to question 10 has a site missing from it entirely. Is that because the air there was clean, or for another reason? Look back at your answer to question 7 before you commit.</p></li>
 </ol>
 </section>
@@ -594,7 +590,7 @@ Before you go any further
 </section>
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
-<p>Look back through your notebook. Nearly every code cell tonight was the same sentence, wearing different clothes:</p>
+<p>Look back through your notebook. Nearly every code cell tonight was the same pattern, wearing different clothes:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean()               <span class="co"># one number per group</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].agg([...])           <span class="co"># several numbers per group</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>).agg({...})                  <span class="co"># several columns, different summaries</span></span>

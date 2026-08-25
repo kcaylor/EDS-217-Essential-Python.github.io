@@ -218,11 +218,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -234,11 +234,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -246,11 +246,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -308,10 +308,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -480,7 +476,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="4" type="1">
 <li>Rebuild Friday’s clean stream-chemistry table. Every line below is one you have run before, in the Thursday colab and again in 5A:</li>
 </ol>
-<div id="70f7e4bd" class="cell" data-execution_count="1">
+<div id="2d9a8ad2" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -518,7 +514,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-same-figure-said-two-ways" class="level2">
 <h2 class="anchored" data-anchor-id="the-same-figure-said-two-ways">The same figure, said two ways</h2>
 <p>Here is a scatter of water temperature against dissolved oxygen, drawn the way you drew things an hour ago:</p>
-<div id="9ca50f97" class="cell" data-execution_count="2">
+<div id="d59f7f47" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -538,7 +534,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>And here is the same figure in seaborn:</p>
-<div id="9bf442ea" class="cell" data-execution_count="3">
+<div id="729c28be" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -586,7 +582,7 @@ Note
 <section id="hue-and-what-a-table-cannot-show-you" class="level2">
 <h2 class="anchored" data-anchor-id="hue-and-what-a-table-cannot-show-you"><code>hue=</code>, and what a table cannot show you</h2>
 <p>On Friday morning you computed two small tables from this file and read them side by side:</p>
-<div id="17ddda58" class="cell" data-execution_count="4">
+<div id="4fe2e8e5" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].mean().sort_values())</span>
@@ -613,7 +609,7 @@ Name: temperature_c, dtype: float64</code></pre>
 </div>
 <p>Two orderings of six sites, and one is the exact reverse of the other. You concluded, correctly, that the warm sites are the low-oxygen sites. You believed it because the two lists happened to line up.</p>
 <p>Now add one argument to the scatter you already made:</p>
-<div id="c7a884ec" class="cell" data-execution_count="5">
+<div id="494755d8" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -668,7 +664,7 @@ Name: temperature_c, dtype: float64</code></pre>
 <section id="sns.histplot-the-shape-of-one-column" class="level2">
 <h2 class="anchored" data-anchor-id="sns.histplot-the-shape-of-one-column"><code>sns.histplot</code>: the shape of one column</h2>
 <p>A scatter needs two variables. When you have one and want to know how its values are distributed, you want a histogram: the values sorted into bins, with a bar showing how many landed in each.</p>
-<div id="fc1d4cd3" class="cell" data-execution_count="6">
+<div id="79912e33" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -689,7 +685,7 @@ Name: temperature_c, dtype: float64</code></pre>
 </div>
 <p><code>data=</code> and <code>x=</code>, and no <code>y=</code>, because the height of each bar is a count that seaborn works out. This is the same picture <code>plt.hist()</code> drew for you behind a boxed note on Thursday evening, now with a name and an argument you can use.</p>
 <p>And <code>hue=</code> works here too:</p>
-<div id="385f491f" class="cell" data-execution_count="7">
+<div id="869b54f9" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -728,7 +724,7 @@ Name: temperature_c, dtype: float64</code></pre>
 <section id="sns.barplot-and-the-series-idiom" class="level2">
 <h2 class="anchored" data-anchor-id="sns.barplot-and-the-series-idiom"><code>sns.barplot</code>, and the Series idiom</h2>
 <p>A bar chart compares one number per category, which makes it the natural picture for the output of a <code>.groupby()</code>. seaborn will do the whole thing in one line if you let it:</p>
-<div id="b0113e1c" class="cell" data-execution_count="8">
+<div id="e5641e99" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -752,7 +748,7 @@ Name: temperature_c, dtype: float64</code></pre>
 <p>The little black line on each bar is a measure of how uncertain that mean is, computed by resampling the data hundreds of times. It is a reasonable thing to want and this course has not taught you what it means, which is a poor reason to have it in your figure.</p>
 <p>And the bars are in whatever order the sites appear in the file, which is no order at all.</p>
 <p>The alternative is to compute the number yourself, with Friday’s sentence, and hand seaborn the answer:</p>
-<div id="dc5f38e6" class="cell" data-execution_count="9">
+<div id="b54f111c" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mean_do <span class="op">=</span> survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
@@ -771,7 +767,7 @@ Name: dissolved_oxygen_mg_L, dtype: float64</code></pre>
 </div>
 </div>
 <p>That is a <strong>Series</strong>: six values, indexed by site name. A Series carries its numbers in <code>.values</code> and its labels in <code>.index</code>, and those are exactly the two things a bar chart needs.</p>
-<div id="2dc1d579" class="cell" data-execution_count="10">
+<div id="5537a406" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -793,7 +789,7 @@ Name: dissolved_oxygen_mg_L, dtype: float64</code></pre>
 </div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>series.values, y<span class="op">=</span>series.index)   <span class="co"># horizontal bars, sorted as you sorted them</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sns.barplot(y<span class="op">=</span>series.values, x<span class="op">=</span>series.index)   <span class="co"># vertical bars, same data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Learn this as one unit. It is the sentence that connects the six days of table-shaping you have just done to the pictures you make of the results, and you will type it constantly:</p>
+<p>Learn this as one unit. It is the pattern that connects the six days of table-shaping you have just done to the pictures you make of the results, and you will type it constantly:</p>
 <p><strong>group, aggregate, sort, then plot the <code>.values</code> against the <code>.index</code>.</strong></p>
 <p>Three things came out of doing it the long way. The bars are in the order you sorted them, so the figure ranks the sites. There is no uncertainty interval, because you drew a mean and only a mean. And putting the values on <code>x=</code> and the labels on <code>y=</code> makes the bars horizontal, which means the site labels read left to right instead of needing rotation. With longer labels, that last one stops being cosmetic.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -828,7 +824,7 @@ Note
 <h2 class="anchored" data-anchor-id="seaborn-draws-on-matplotlib">seaborn draws on matplotlib</h2>
 <p>Every seaborn call in this session sat inside a <code>plt.figure()</code> and was followed by <code>plt.xlabel()</code> and friends, and all of it worked. That is not a coincidence and it is not seaborn being polite.</p>
 <p>seaborn draws onto a matplotlib axes. If none exists it makes one, exactly the way <code>plt.plot()</code> does. So the whole of the last session applies unchanged:</p>
-<div id="49c3acc4" class="cell" data-execution_count="11">
+<div id="d8cec6df" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>

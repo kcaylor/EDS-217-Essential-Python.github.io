@@ -221,11 +221,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -237,11 +237,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -249,11 +249,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -311,10 +311,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -433,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#todays-sentences" id="toc-todays-sentences" class="nav-link active" data-scroll-target="#todays-sentences">Today’s sentences</a></li>
+  <li><a href="#todays-patterns" id="toc-todays-patterns" class="nav-link active" data-scroll-target="#todays-patterns">Today’s patterns</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#part-1-what-is-in-this-file-and-what-is-missing-from-it" id="toc-part-1-what-is-in-this-file-and-what-is-missing-from-it" class="nav-link" data-scroll-target="#part-1-what-is-in-this-file-and-what-is-missing-from-it">Part 1: What is in this file, and what is missing from it</a></li>
   <li><a href="#part-2-decades" id="toc-part-2-decades" class="nav-link" data-scroll-target="#part-2-decades">Part 2: Decades</a></li>
@@ -476,23 +472,23 @@ Reference
 <p>Eurovision Song Contest contestant data, compiled from the contest’s public results archive.</p>
 </div>
 </div>
-<section id="todays-sentences" class="level2">
-<h2 class="anchored" data-anchor-id="todays-sentences">Today’s sentences</h2>
+<section id="todays-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="todays-patterns">Today’s patterns</h2>
 <p>Everything below is built from these three, plus what you already had.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, on<span class="op">=</span><span class="st">'key'</span>)                        <span class="co"># the join sentence</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, on<span class="op">=</span><span class="st">'key'</span>)                        <span class="co"># the join pattern</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, left_on<span class="op">=</span><span class="st">'a'</span>, right_on<span class="op">=</span><span class="st">'b'</span>)       <span class="co"># when the key names differ</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, on<span class="op">=</span><span class="st">'key'</span>, how<span class="op">=</span><span class="st">'left'</span>)            <span class="co"># keep every row on the left</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pd.concat([a, b, c], ignore_index<span class="op">=</span><span class="va">True</span>)                <span class="co"># the stacking sentence</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pd.concat([a, b, c], ignore_index<span class="op">=</span><span class="va">True</span>)                <span class="co"># the stacking pattern</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span>, columns<span class="op">=</span>, values<span class="op">=</span>)              <span class="co"># the pivot sentence</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span>, columns<span class="op">=</span>, values<span class="op">=</span>)              <span class="co"># the pivot pattern</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> df[<span class="st">'col'</span>].value_counts().reset_index()        <span class="co"># Series to table</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And these, from earlier in the week:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">!=</span> value].copy()                       <span class="co"># the filter sentence</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)      <span class="co"># the top-N sentence</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">!=</span> value].copy()                       <span class="co"># the filter pattern</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)      <span class="co"># the top-N pattern</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>])        <span class="co"># split, apply, combine</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> df.groupby(<span class="st">'key'</span>):                  <span class="co"># the loop, when a sentence is not enough</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> df.groupby(<span class="st">'key'</span>):                  <span class="co"># the loop, when a pattern is not enough</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
@@ -506,7 +502,7 @@ Reference
 <ol start="3" type="1">
 <li>Read the file:</li>
 </ol>
-<div id="82d79c5c" class="cell" data-execution_count="1">
+<div id="f1404934" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -524,7 +520,7 @@ Reference
 <li><p>Run <code>.isnull().sum()</code>. Several columns are null on well over a thousand of the 1,603 rows. Pick two of them and, in a markdown cell, propose an explanation for each that has nothing to do with anybody making a mistake.</p></li>
 <li><p><code>points_final</code> is the column the rest of this exercise depends on, and it is null on 295 rows. Group by <code>year</code> and <strong>count</strong> the non-null <code>points_final</code> values in each. Look at the last few years.</p></li>
 <li><p>One year has a count of zero. Which one, and what happened? (You may look this up. It is the only fact in this exercise that is not in the file.)</p></li>
-<li><p>Build a table called <code>contests</code> that excludes that year, using the filter sentence and ending the line with <code>.copy()</code>. How many rows does it have?</p></li>
+<li><p>Build a table called <code>contests</code> that excludes that year, using the filter pattern and ending the line with <code>.copy()</code>. How many rows does it have?</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Why this matters more than it looks">
 <div class="callout-header d-flex align-content-center">
@@ -568,10 +564,10 @@ Note
 </section>
 <section id="part-3-the-best-country-of-each-decade" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-the-best-country-of-each-decade">Part 3: The best country of each decade</h2>
-<p>This is the question the file invites, and answering it well takes the loop from yesterday afternoon and the stacking sentence from this morning.</p>
+<p>This is the question the file invites, and answering it well takes the loop from yesterday afternoon and the stacking pattern from this morning.</p>
 <ol start="8" type="1">
 <li><p>Build a table with one row per decade, holding the country with the highest average <code>points_final</code> in that decade, how many entries that average came from, and the average itself.</p>
-<p>Do it with a loop over decade groups. For each decade: group by <code>to_country</code>, <code>.agg()</code> for the count and mean of <code>points_final</code>, <code>.reset_index()</code>, take the top row with the top-N sentence, add a <code>decade</code> column, and append the one-row table to a list. Then stack the list with <code>pd.concat()</code>.</p></li>
+<p>Do it with a loop over decade groups. For each decade: group by <code>to_country</code>, <code>.agg()</code> for the count and mean of <code>points_final</code>, <code>.reset_index()</code>, take the top row with the top-N pattern, add a <code>decade</code> column, and append the one-row table to a list. Then stack the list with <code>pd.concat()</code>.</p></li>
 <li><p>Read the <code>count</code> column before you read the <code>mean</code> column. Three of the seven winners won on fewer than four entries. Name them, and say in one sentence why you would not put any of them in a headline.</p></li>
 <li><p>The <code>mean</code> column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown cell, two or three sentences: is Europe getting better at writing songs? What else changed between 1956 and 2019 that would produce exactly this pattern, and what would you have to divide by to remove it?</p></li>
 </ol>

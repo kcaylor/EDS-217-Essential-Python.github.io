@@ -218,11 +218,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -234,11 +234,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -246,11 +246,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -308,10 +308,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -490,7 +486,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Let’s start by importing pandas and creating sample datasets to work with:</p>
-<div id="fcb87be5" class="cell" data-execution_count="1">
+<div id="a9e44573" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -538,7 +534,7 @@ Grades DataFrame:
 <section id="inner-join-default" class="level3">
 <h3 class="anchored" data-anchor-id="inner-join-default">Inner Join (Default)</h3>
 <p>Returns only rows that have matching keys in both DataFrames.</p>
-<div id="fc136250" class="cell" data-execution_count="2">
+<div id="efbe3f5d" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inner join - only students with grades</span></span>
@@ -558,7 +554,7 @@ Grades DataFrame:
 <section id="left-join" class="level3">
 <h3 class="anchored" data-anchor-id="left-join">Left Join</h3>
 <p>Returns all rows from the left DataFrame and matched rows from the right DataFrame.</p>
-<div id="93a2dc60" class="cell" data-execution_count="3">
+<div id="2b21cb63" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Left join - all students, with grades where available</span></span>
@@ -580,7 +576,7 @@ Grades DataFrame:
 <section id="right-join" class="level3">
 <h3 class="anchored" data-anchor-id="right-join">Right Join</h3>
 <p>Returns all rows from the right DataFrame and matched rows from the left DataFrame.</p>
-<div id="55b9ca12" class="cell" data-execution_count="4">
+<div id="5502381c" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Right join - all grades, with student info where available</span></span>
@@ -602,7 +598,7 @@ Grades DataFrame:
 <section id="outer-join" class="level3">
 <h3 class="anchored" data-anchor-id="outer-join">Outer Join</h3>
 <p>Returns all rows from both DataFrames, filling missing values with NaN.</p>
-<div id="87e07729" class="cell" data-execution_count="5">
+<div id="ab259f1b" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Outer join - all students and all grades</span></span>
@@ -627,7 +623,7 @@ Grades DataFrame:
 <section id="merging-with-different-column-names" class="level2">
 <h2 class="anchored" data-anchor-id="merging-with-different-column-names">Merging with Different Column Names</h2>
 <p>When the key columns have different names in each DataFrame:</p>
-<div id="a6258775" class="cell" data-execution_count="6">
+<div id="8b2518ea" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame with different column name</span></span>
@@ -659,7 +655,7 @@ Grades DataFrame:
 <section id="joining-on-index" class="level2">
 <h2 class="anchored" data-anchor-id="joining-on-index">Joining on Index</h2>
 <p>When you want to combine DataFrames based on their index (row labels), use the <code>.join()</code> method - it’s much simpler than merging:</p>
-<div id="6b890279" class="cell" data-execution_count="7">
+<div id="84b880dc" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrames with datetime indices (common in time series data)</span></span>
@@ -712,7 +708,7 @@ Joined weather data:
 <p>Use <code>pd.concat()</code> to stack DataFrames vertically or horizontally:</p>
 <section id="vertical-concatenation-stacking-rows" class="level3">
 <h3 class="anchored" data-anchor-id="vertical-concatenation-stacking-rows">Vertical Concatenation (Stacking Rows)</h3>
-<div id="d91a3eac" class="cell" data-execution_count="8">
+<div id="127be495" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create additional data for different years</span></span>
@@ -747,7 +743,7 @@ Joined weather data:
 </section>
 <section id="horizontal-concatenation-adding-columns" class="level3">
 <h3 class="anchored" data-anchor-id="horizontal-concatenation-adding-columns">Horizontal Concatenation (Adding Columns)</h3>
-<div id="19a70b04" class="cell" data-execution_count="9">
+<div id="28773200" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create separate DataFrames with same index</span></span>
@@ -773,7 +769,7 @@ Joined weather data:
 <h2 class="anchored" data-anchor-id="real-world-examples">Real-World Examples</h2>
 <section id="example-1-eurovision-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="example-1-eurovision-analysis">Example 1: Eurovision Analysis</h3>
-<div id="d95cef74" class="cell" data-execution_count="10">
+<div id="1bd65f51" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate the Eurovision data merging scenario</span></span>
@@ -805,7 +801,7 @@ Joined weather data:
 </section>
 <section id="example-2-climate-data-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="example-2-climate-data-analysis">Example 2: Climate Data Analysis</h3>
-<div id="0f858766" class="cell" data-execution_count="11">
+<div id="42da3c9d" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create simple temperature and CO2 data</span></span>
@@ -839,7 +835,7 @@ Joined weather data:
 <h2 class="anchored" data-anchor-id="handling-common-issues">Handling Common Issues</h2>
 <section id="missing-values-after-merge" class="level3">
 <h3 class="anchored" data-anchor-id="missing-values-after-merge">Missing Values After Merge</h3>
-<div id="ad6cbec5" class="cell" data-execution_count="12">
+<div id="8c0413f2" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrames with some non-matching records</span></span>
@@ -885,7 +881,7 @@ After dropping rows with NaN:
 </section>
 <section id="duplicate-column-names" class="level3">
 <h3 class="anchored" data-anchor-id="duplicate-column-names">Duplicate Column Names</h3>
-<div id="8fe8616a" class="cell" data-execution_count="13">
+<div id="62c9166b" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DataFrames with overlapping column names  </span></span>

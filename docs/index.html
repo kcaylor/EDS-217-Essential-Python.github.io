@@ -185,11 +185,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="./course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -201,11 +201,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="./course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -213,11 +213,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="./course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -275,10 +275,6 @@ ul.task-list li input[type="checkbox"] {
   <li class="nav-item">
     <a class="nav-link" href="./cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -414,20 +410,23 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <section id="course-description" class="level2">
 <h2 class="anchored" data-anchor-id="course-description">Course Description</h2>
-<p>Programming skills are critical when working with, understanding, analyzing, and gleaning insights from environmental data. In the intensive EDS 217 course, students will develop fundamental skills in Python programming, data manipulation, and data visualization, specifically tailored for environmental data science applications.</p>
-<p>The goal of EDS 217 (Python for Environmental Data Science) is to equip incoming MEDS students with the programming methods, skills, notation, and language commonly used in the python data science stack, which will be essential for their python-based data science courses and projects in the program as well as in their data science careers. By the end of the course, students should be able to:</p>
+<p>Almost every question you will ask of environmental data in this program needs code to answer it. Over nine days we build that code from nothing: writing Python, loading a dataset, reshaping the data into the form a question needs, and drawing the answer.</p>
+<p>EDS 217 comes first in the MEDS program, and the courses that follow assume the Python we cover here. We work on real environmental datasets, in the tools environmental data scientists use, following the same <a href="./course-materials/the-data-science-workflow.html">data science workflow</a> on every day of the course. By the end of the nine days you should be able to:</p>
 <ul>
-<li><p>Manipulate and analyze data using libraries like pandas and NumPy</p></li>
-<li><p>Visualize data using Matplotlib and Seaborn</p></li>
-<li><p>Write, interpret, and debug Python scripts</p></li>
-<li><p>Implement basic algorithms for data processing</p></li>
-<li><p>Utilize logical operations, control flow, and functions in programming</p></li>
-<li><p>Collaborate with peers to solve group programming tasks, and communicate the process and results to the rest of the class</p></li>
+<li><p>Read environmental data into a pandas DataFrame and inspect its structure and contents</p></li>
+<li><p>Filter, sort, clean and transform a table to answer a question</p></li>
+<li><p>Group rows and aggregate them into the comparison a question needs</p></li>
+<li><p>Combine two tables, reshape between long and wide, and handle dates as objects</p></li>
+<li><p>Build a figure in matplotlib or seaborn that demonstrates a pattern or relationship in data</p></li>
+<li><p>Write your own Python: variables, collections, conditionals, loops and functions</p></li>
+<li><p>Keep a Jupyter notebook in which every conclusion is matched to the cell that produced it</p></li>
+<li><p>Work with a partner on a short piece of analysis, and present the result to the class</p></li>
 </ul>
 </section>
 <section id="syncing-your-classwork-to-github" class="level2">
-<h2 class="anchored" data-anchor-id="syncing-your-classwork-to-github">Syncing your classwork to Github</h2>
-<p><a href="./course-materials/interactive-sessions/8a_github.html">Here</a> are some directions for syncing your classwork with a GitHub repository</p>
+<h2 class="anchored" data-anchor-id="syncing-your-classwork-to-github">Syncing your classwork to GitHub</h2>
+<p>Your daily notebooks belong in a GitHub repository that you create yourself, in your own time rather than in class. Follow the <a href="./course-materials/interactive-sessions/8a_github.html">directions for creating it</a> before Friday of the second week.</p>
+<p>The final project goes in a second repository, separate from your coursework. Day 9 covers what belongs in it, and the settings that differ.</p>
 </section>
 <section id="teaching-team" class="level2">
 <h2 class="anchored" data-anchor-id="teaching-team">Teaching Team</h2>
@@ -454,13 +453,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/anna.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
+<p><img src="images/cella.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
 </figure>
 </div>
 <div class="center-text">
-<p><span class="teal-text"><strong>Anna Boser</strong></span><br>
-<strong>Email:</strong> <a href="mailto:annaboser@bren.ucsb.edu">annaboser@bren.ucsb.edu</a><br>
-<strong>Learn more:</strong> <a href="https://bren.ucsb.edu/people/anna-boser">Bren profile</a></p>
+<p><span class="teal-text"><strong>Cella Schnabel</strong></span><br>
+<strong>Email:</strong> <a href="mailto:cellaschnabel@ucsb.edu">cellaschnabel@ucsb.edu</a><br>
+<strong>Learn more:</strong> <a href="https://emlab.ucsb.edu/about/our-team/cella-schnabel">emLab profile</a></p>
 </div>
 </div>
 </div>

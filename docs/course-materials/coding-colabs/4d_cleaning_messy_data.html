@@ -221,11 +221,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -237,11 +237,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -249,11 +249,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -311,10 +311,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -434,7 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data">The data</a></li>
-  <li><a href="#the-sentences-you-need" id="toc-the-sentences-you-need" class="nav-link" data-scroll-target="#the-sentences-you-need">The sentences you need</a></li>
+  <li><a href="#the-patterns-you-need" id="toc-the-patterns-you-need" class="nav-link" data-scroll-target="#the-patterns-you-need">The patterns you need</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#part-1-find-out-what-is-wrong-about-10-minutes" id="toc-part-1-find-out-what-is-wrong-about-10-minutes" class="nav-link" data-scroll-target="#part-1-find-out-what-is-wrong-about-10-minutes">Part 1: Find out what is wrong (about 10 minutes)</a></li>
   <li><a href="#part-2-clean-it-about-20-minutes" id="toc-part-2-clean-it-about-20-minutes" class="nav-link" data-scroll-target="#part-2-clean-it-about-20-minutes">Part 2: Clean it (about 20 minutes)</a></li>
@@ -505,15 +501,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="the-sentences-you-need" class="level2">
-<h2 class="anchored" data-anchor-id="the-sentences-you-need">The sentences you need</h2>
+<section id="the-patterns-you-need" class="level2">
+<h2 class="anchored" data-anchor-id="the-patterns-you-need">The patterns you need</h2>
 <p>All of these are from today. You should not need anything else.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.drop_duplicates()                    <span class="co"># and subset=[...]</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.dropna(subset<span class="op">=</span>[<span class="st">'col'</span>])               <span class="co"># remove rows missing a named column</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].fillna(value)     <span class="co"># fill the gaps instead</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].astype(<span class="bu">float</span>)     <span class="co"># int, float, str</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">str</span>.strip()       <span class="co"># .lower(), .replace(old, new)</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> expression                  <span class="co"># the derived-column sentence</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> expression                  <span class="co"># the derived-column pattern</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">apply</span>(my_func)    <span class="co"># run your own function down a column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="setup" class="level2">
@@ -583,7 +579,7 @@ Note
 <ol start="9" type="1">
 <li><p>Three measurement columns have blanks: <code>temperature_c</code>, <code>dissolved_oxygen_mg_L</code>, and <code>conductivity_uS_cm</code>. A row with no measurement is no use to you, so drop those rows in a single <code>.dropna()</code> call with a list in <code>subset=</code>. How many rows did that cost?</p></li>
 <li><p><code>n_replicates</code> also has blanks, but here a blank means the field sheet recorded a single bottle and nobody bothered to write “1”. Fill those with <code>1</code> instead of dropping the rows, then convert the column to <code>int</code>. Confirm with <code>.value_counts()</code>.</p></li>
-<li><p>Now deal with the impossible temperatures. Use the <strong>filter sentence</strong> from Day 3 to keep only the rows where <code>temperature_c</code> is above <code>-100</code>, and end the line with <code>.copy()</code>. How many rows did the loggers ruin?</p></li>
+<li><p>Now deal with the impossible temperatures. Use the <strong>filter pattern</strong> from Day 3 to keep only the rows where <code>temperature_c</code> is above <code>-100</code>, and end the line with <code>.copy()</code>. How many rows did the loggers ruin?</p></li>
 <li><p>Re-run <code>.describe()</code> on <code>temperature_c</code>. Compare the mean to the one you got in task 5. In a markdown cell, write one sentence about what nine bad rows did to the average of three hundred good ones.</p></li>
 <li><p>Rename <code>collection date</code> to <code>collection_date</code>, so you can reach it without quoting trouble later. <code>.rename()</code> is from Day 2; it takes <code>columns=</code> and a dictionary.</p></li>
 </ol>
@@ -592,7 +588,7 @@ Note
 <h2 class="anchored" data-anchor-id="part-3-transform-it-about-10-minutes">Part 3: Transform it (about 10 minutes)</h2>
 <ol start="14" type="1">
 <li><p>Add a column called <code>conductivity_mS_cm</code> holding conductivity in millisiemens per centimetre, which is the microsiemens value divided by 1000.</p></li>
-<li><p>Add a column called <code>temperature_f</code> holding the temperature in Fahrenheit. Do it twice: once with the derived-column sentence and plain arithmetic, and once by writing a function <code>celsius_to_fahrenheit</code> and using <code>.apply()</code>. Check that the two columns agree.</p></li>
+<li><p>Add a column called <code>temperature_f</code> holding the temperature in Fahrenheit. Do it twice: once with the derived-column pattern and plain arithmetic, and once by writing a function <code>celsius_to_fahrenheit</code> and using <code>.apply()</code>. Check that the two columns agree.</p></li>
 <li><p>Write a function called <code>classify_ph</code> that takes a pH value and returns <code>'acidic'</code> below 6.5, <code>'alkaline'</code> above 7.5, and <code>'neutral'</code> in between. Apply it to the <code>pH</code> column, store the result in a column called <code>ph_class</code>, and report the counts.</p></li>
 </ol>
 </section>
@@ -600,7 +596,7 @@ Note
 <h2 class="anchored" data-anchor-id="part-4-ask-it-something-about-5-minutes">Part 4: Ask it something (about 5 minutes)</h2>
 <p>You now have a table you can trust. Use it.</p>
 <ol start="17" type="1">
-<li><p>Use the filter sentence to build a table of just the acidic samples. Which sites do they come from? Use <code>.value_counts()</code> on <code>site</code>.</p></li>
+<li><p>Use the filter pattern to build a table of just the acidic samples. Which sites do they come from? Use <code>.value_counts()</code> on <code>site</code>.</p></li>
 <li><p>Two of the six sites account for nearly all the acidic samples. Filter to one of those sites and to <code>site_d</code>, and compare the mean of <code>dissolved_oxygen_mg_L</code> for each. (Two filters, two <code>.mean()</code> calls. Tomorrow you will learn to do all six at once.)</p></li>
 <li><p>In a markdown cell of three or four sentences: <strong>what would you tell the person who collected this data?</strong> Name the single change to their field sheet that would have saved you the most time this afternoon, and say what evidence in the file makes you pick that one.</p></li>
 </ol>

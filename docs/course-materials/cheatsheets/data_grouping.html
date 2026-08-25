@@ -218,11 +218,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3b_filtering_data.html">
- <span class="dropdown-text">Session 3b - 🔍 The Filter Sentence</span></a>
+ <span class="dropdown-text">Session 3b - 🔍 The Filter Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/3c_sorting_and_ranking.html">
- <span class="dropdown-text">Session 3c - 🥇 The Top-N Sentence</span></a>
+ <span class="dropdown-text">Session 3c - 🥇 The Top-N Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4a_cleaning_data.html">
@@ -234,11 +234,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/4c_transforming_data.html">
- <span class="dropdown-text">Session 4c - ➕ The Derived-Column Sentence</span></a>
+ <span class="dropdown-text">Session 4c - ➕ The Derived-Column Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5a_grouping_data.html">
- <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Sentence</span></a>
+ <span class="dropdown-text">Session 5a - 🗂️ The Split-Apply-Combine Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/5b_aggregating_data.html">
@@ -246,11 +246,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/live-coding/5d_loops_over_groups.html">
- <span class="dropdown-text">Session 5d - 🔁 When a Sentence Is Not Enough</span></a>
+ <span class="dropdown-text">Session 5d - 🔁 When a Pattern Is Not Enough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6a_joining_data.html">
- <span class="dropdown-text">Session 6a - 🔗 The Join Sentence</span></a>
+ <span class="dropdown-text">Session 6a - 🔗 The Join Pattern</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/6b_reshaping_data.html">
@@ -308,10 +308,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../cheatsheets.html"> 
 <span class="menu-text">👀 cheatsheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/answer-keys/answer_keys.html"> 
-<span class="menu-text">🔑 answer keys</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -455,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="grouping-data" class="level2">
 <h2 class="anchored" data-anchor-id="grouping-data">Grouping Data</h2>
 <p>Grouping data allows you to split your DataFrame into groups based on one or more columns.</p>
-<div id="b0ac95c9" class="cell" data-execution_count="1">
+<div id="0f50cf74" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -478,7 +474,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="creating-a-groupby-object" class="level3">
 <h3 class="anchored" data-anchor-id="creating-a-groupby-object">Creating a groupby object:</h3>
-<div id="8350bcdf" class="cell" data-execution_count="2">
+<div id="5ce2df4a" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by 'category'</span></span>
@@ -492,7 +488,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>After grouping, you can apply various aggregation functions to summarize the data within each group.</p>
 <section id="basic-aggregation" class="level4">
 <h4 class="anchored" data-anchor-id="basic-aggregation">Basic aggregation</h4>
-<div id="944f1a08" class="cell" data-execution_count="3">
+<div id="32dc9771" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic aggregations</span></span>
@@ -513,7 +509,7 @@ Name: value, dtype: int64</code></pre>
 </section>
 <section id="doing-multiple-aggregations-at-the-same-time-using-agg" class="level4">
 <h4 class="anchored" data-anchor-id="doing-multiple-aggregations-at-the-same-time-using-agg">Doing multiple aggregations at the same time using <code>agg()</code></h4>
-<div id="949fd9a1" class="cell" data-execution_count="4">
+<div id="abaf5544" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple aggregations</span></span>
@@ -529,7 +525,7 @@ B          3.0    6      2</code></pre>
 </section>
 <section id="aggregation-using-a-custom-function" class="level4">
 <h4 class="anchored" data-anchor-id="aggregation-using-a-custom-function">Aggregation using a custom function</h4>
-<div id="439ce263" class="cell" data-execution_count="5">
+<div id="11e64656" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Custom aggregation function</span></span>
@@ -564,7 +560,7 @@ Name: value, dtype: int64</code></pre>
 <p>You can apply operations to each group separately using <code>transform()</code> or <code>apply()</code>.</p>
 <section id="using-transform-to-alter-each-group-in-a-group-by-object" class="level4">
 <h4 class="anchored" data-anchor-id="using-transform-to-alter-each-group-in-a-group-by-object">Using <code>transform()</code> to alter each group in a group by object</h4>
-<div id="433faba4" class="cell" data-execution_count="6">
+<div id="cd0c1940" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform: apply function to each group, return same-sized DataFrame</span></span>
@@ -577,7 +573,7 @@ Name: value, dtype: int64</code></pre>
 </section>
 <section id="using-apply-to-alter-each-group-in-a-group-by-object" class="level4">
 <h4 class="anchored" data-anchor-id="using-apply-to-alter-each-group-in-a-group-by-object">Using <code>apply()</code> to alter each group in a group by object</h4>
-<div id="4a33b869" class="cell" data-execution_count="7">
+<div id="655664a2" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply: apply function to each group, return a DataFrame or Series</span></span>
@@ -594,7 +590,7 @@ Name: value, dtype: int64</code></pre>
 <p>Pivot tables are a powerful tool for reorganizing and summarizing data. They allow you to transform your data from a <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html">long format to a wide</a> format, making it easier to analyze and visualize patterns.</p>
 <section id="working-with-pivot-tables" class="level3">
 <h3 class="anchored" data-anchor-id="working-with-pivot-tables">Working with Pivot Tables</h3>
-<div id="da629b9d" class="cell" data-execution_count="8">
+<div id="c1aa785e" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample DataFrame</span></span>
@@ -615,7 +611,7 @@ Name: value, dtype: int64</code></pre>
 </div>
 <section id="pivot-tables-with-a-single-aggregation-function" class="level4">
 <h4 class="anchored" data-anchor-id="pivot-tables-with-a-single-aggregation-function">Pivot tables with a single aggregation function</h4>
-<div id="d8847b8f" class="cell" data-execution_count="9">
+<div id="3345be43" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a pivot table</span></span>
@@ -632,7 +628,7 @@ date
 </section>
 <section id="pivot-tables-with-multiple-aggregation" class="level4">
 <h4 class="anchored" data-anchor-id="pivot-tables-with-multiple-aggregation">Pivot tables with multiple aggregation</h4>
-<div id="817169c9" class="cell" data-execution_count="10">
+<div id="5c7179e0" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot table with multiple aggregation functions</span></span>

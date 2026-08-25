@@ -234,7 +234,7 @@ error, because a missing value cannot be an integer. Filling first is what makes
 legal, and the conversion is what turns `3.0` back into `3`.
 :::
 
-**11. Now deal with the impossible temperatures. Use the filter sentence from Day 3 to keep only
+**11. Now deal with the impossible temperatures. Use the filter pattern from Day 3 to keep only
 the rows where `temperature_c` is above `-100`, and end the line with `.copy()`. How many rows did
 the loggers ruin?**
 
@@ -292,7 +292,7 @@ survey[['conductivity_uS_cm', 'conductivity_mS_cm']].head()
 ```
 
 **15. Add a column called `temperature_f` holding the temperature in Fahrenheit. Do it twice: once
-with the derived-column sentence and plain arithmetic, and once by writing a function
+with the derived-column pattern and plain arithmetic, and once by writing a function
 `celsius_to_fahrenheit` and using `.apply()`. Check that the two columns agree.**
 
 ```{python}
@@ -351,7 +351,7 @@ notebook which side the boundary falls on.
 
 ## Part 4: Ask it something
 
-**17. Use the filter sentence to build a table of just the acidic samples. Which sites do they
+**17. Use the filter pattern to build a table of just the acidic samples. Which sites do they
 come from? Use `.value_counts()` on `site`.**
 
 ```{python}

@@ -20,7 +20,7 @@ format:
 
 Six sites and six means is a table you can read by eye. Most groupings are not six.
 
-This session takes the sentence you just learned and puts it under load. You will ask for
+This session takes the pattern you just learned and puts it under load. You will ask for
 several summaries in one call instead of one, ask for different summaries of different columns,
 rank a grouped result the way you ranked a raw table on Wednesday, and meet what happens when
 you group by two things at once.
@@ -32,7 +32,7 @@ By the end of this session you will be able to:
 
 - pass a **list** to `.agg()` to get several summaries of one column
 - pass a **dictionary** to `.agg()` to summarise several columns differently
-- apply the **top-N sentence** to a grouped result
+- apply the **top-N pattern** to a grouped result
 - recognize a **MultiIndex** produced by grouping on two keys, and flatten it with
   `.reset_index()`
 - say why a grouped mean without a count next to it is a number you should not publish
@@ -188,13 +188,13 @@ one sentence why the median might be the more honest of the two averages for thi
 
 ## Ranking a grouped result
 
-On Wednesday afternoon you learned the top-N sentence:
+On Wednesday afternoon you learned the top-N pattern:
 
 ```python
 df.sort_values('column', ascending=False).head(n)
 ```
 
-You wrote it against raw tables. A grouped result is a table too, so the sentence works there
+You wrote it against raw tables. A grouped result is a table too, so the pattern works there
 without modification, and the combination answers a question the raw table could not.
 
 Wednesday's ranking found the single busiest **park-year**. This finds the busiest **park**:
@@ -210,7 +210,7 @@ Great Smoky Mountains averages nearly three times the Grand Canyon over its reco
 what most people would guess. It is free to enter and it straddles a major road, and it has been
 the busiest unit in the system for most of a century.
 
-The same sentence run the other way gives the quietest parks:
+The same pattern run the other way gives the quietest parks:
 
 ```{python}
 national_parks.groupby('unit_name')['visitors'].mean().sort_values().head(5)
@@ -302,7 +302,7 @@ two-column DataFrame. That is often exactly what you want before plotting.
 :::{.callout-tip title="✏️ Test your knowledge"}
 Run `national_parks.groupby(['region', 'unit_name'])['visitors'].agg(['count', 'mean'])` and
 look at the shape of what comes back. Then call `.reset_index()` on it and use the top-N
-sentence to find the five busiest parks. Say in one sentence what `.reset_index()` changed.
+pattern to find the five busiest parks. Say in one sentence what `.reset_index()` changed.
 :::
 
 ## Putting it together
@@ -330,7 +330,7 @@ answer is a table you would be willing to defend.
 - `.agg({'col': 'fn', 'other': 'fn'})` runs **different summaries on different columns**. There
   is no `['column']` before it, because the dictionary keys name the columns.
 - Put `'count'` first, every time. A grouped mean without a count beside it is half a number.
-- The **top-N sentence** works on a grouped result: `.groupby(...)...sort_values(...).head(n)`.
+- The **top-N pattern** works on a grouped result: `.groupby(...)...sort_values(...).head(n)`.
 - On a grouped DataFrame, `.sort_values()` needs the name of the column to sort by.
 - Grouping by a **list** of keys produces a **MultiIndex**.
 - `.reset_index()` turns index levels back into columns. Use it whenever the result is going to

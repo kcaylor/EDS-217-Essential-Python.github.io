@@ -1,6 +1,6 @@
 ---
 title: "Interactive Session"
-subtitle: "➕ The Derived-Column Sentence"
+subtitle: "➕ The Derived-Column Pattern"
 jupyter: eds217_2026
 format:
   html:
@@ -31,7 +31,7 @@ file.
 
 By the end of this session you will be able to:
 
-- write the **derived-column sentence**, `df['new'] = expression`
+- write the **derived-column pattern**, `df['new'] = expression`
 - build a new column from a column and a number, and from two columns
 - use `np.log10()` when a column spans several orders of magnitude
 - tidy a text column with `.str.strip()`, `.str.lower()`, and `.str.replace()`
@@ -48,7 +48,7 @@ By the end of this session you will be able to:
 3. **Add a title cell** (Markdown), updating the date to today:
 
 ```markdown
-# Day 4: Session 4C - The Derived-Column Sentence
+# Day 4: Session 4C - The Derived-Column Pattern
 
 [Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/4c_transforming_data.html)
 
@@ -76,7 +76,7 @@ which is exactly the case Day 3 told you to copy for.
 Save your work frequently with `Ctrl+S` (`Cmd+S` on macOS).
 :::
 
-## The sentence
+## The pattern
 
 Here it is, whole:
 
@@ -88,7 +88,7 @@ m3['pieces_per_liter'] = m3['Measurement'] / 1000
 m3[['Measurement', 'Unit', 'pieces_per_liter']].head()
 ```
 
-That is the **derived-column sentence**. The general form is:
+That is the **derived-column pattern**. The general form is:
 
 ```python
 df['new_column'] = expression
@@ -180,7 +180,7 @@ on purpose.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Add a column called `emissions_per_calorie_ratio` holding `emissions_1000kcal` divided by
-`emissions_kg`. Then use the top-N sentence from yesterday to display the five foods with the
+`emissions_kg`. Then use the top-N pattern from yesterday to display the five foods with the
 largest values. In a markdown cell, say what a large value of that ratio means about a food.
 :::
 
@@ -216,7 +216,7 @@ A range from -3.2 to 5.0, which is a number of orders of magnitude, and now the 
 something you can average and plot.
 
 Notice the filter on the line before. 3,087 of these samples recorded exactly zero pieces, and
-the logarithm of zero is undefined. Filtering them out first, with yesterday's filter sentence
+the logarithm of zero is undefined. Filtering them out first, with yesterday's filter pattern
 and a `.copy()`, is the whole fix.
 
 :::{.callout-important title="This is your entire numpy budget"}
@@ -225,7 +225,7 @@ if you go further into modelling or image work, but for tabular environmental da
 covers you.
 
 What matters here is not numpy. It is that **a function applied to a column returns a column**,
-so it goes on the right-hand side of the derived-column sentence like any other expression.
+so it goes on the right-hand side of the derived-column pattern like any other expression.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -355,11 +355,11 @@ samples.shape
 
 Read it as a paragraph. Nine lines took a 16,245-row archive with three incompatible units and
 seven orders of magnitude to 7,091 comparable samples with three columns that were not in the
-file. Every line is a sentence you learned this week.
+file. Every line is a pattern you learned this week.
 
 ## Key points
 
-- The **derived-column sentence** is `df['new'] = expression`. Assignment creates the column,
+- The **derived-column pattern** is `df['new'] = expression`. Assignment creates the column,
   and unlike most pandas operations it changes the table in place.
 - Arithmetic on a column applies to every row at once. No loop.
 - Naming two columns on the right side computes row by row, matched up by row label.

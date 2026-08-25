@@ -37,18 +37,18 @@ like *before* the cell is run.
 
 You have 45 minutes.
 
-## The sentences you need
+## The patterns you need
 
 All four are from this morning and the session you just finished.
 
 ```python
-pd.merge(left, right, on='key')                       # the join sentence
+pd.merge(left, right, on='key')                       # the join pattern
 pd.merge(left, right, on='key', how='left')           # keep every row on the left
 
 pd.to_datetime(column, format='%Y-%m-%d')             # the parsing sentence
 column.dt.year                                        # and its accessors
 
-df.pivot_table(index=, columns=, values=)             # the pivot sentence
+df.pivot_table(index=, columns=, values=)             # the pivot pattern
 ```
 
 Plus the two you have been using all week:

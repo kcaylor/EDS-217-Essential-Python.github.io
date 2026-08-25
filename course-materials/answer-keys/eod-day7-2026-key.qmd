@@ -113,7 +113,7 @@ populations. Question 6 does exactly that, and question 17 is where you find out
 ## Part 2: One table out of three
 
 **4. Add a `year` column to each zone table, then stack the two of them into one table called
-`zones`, using the stacking sentence. How many rows?**
+`zones`, using the stacking pattern. How many rows?**
 
 ```{python}
 zones_2023['year'] = 2023
@@ -256,7 +256,7 @@ Nothing is wrong with the colours, the y-axis or the rest of the data. One value
 set the scale for the entire figure.
 :::
 
-**11. Find the culprit. Use the filter sentence on `located` to pull out every row with a
+**11. Find the culprit. Use the filter pattern on `located` to pull out every row with a
 `longitude` greater than −60, and print its zip code, state, city, latitude and longitude.**
 
 ```{python}
@@ -348,7 +348,7 @@ images. If you thought you saw a difference, you were seeing the difference you 
 
 ## Part 4: What actually changed
 
-**16. Use the pivot sentence to build a table with one row per zip code and one column per year.
+**16. Use the pivot pattern to build a table with one row per zip code and one column per year.
 Index it on `['zipcode', 'state', 'latitude', 'longitude']`, put `year` across the columns and
 `trange_min` in the cells, then `.reset_index()`. What shape is it, and why is that number smaller
 than 80,000?**
@@ -430,7 +430,7 @@ describes no zip code in the file, and it looks like a temperature. The histogra
 impossible to forget that you are counting boundary crossings.
 :::
 
-**19. Use the top-N sentence twice to show the five zip codes with the largest increase and the
+**19. Use the top-N pattern twice to show the five zip codes with the largest increase and the
 five with the largest decrease, with their states and coordinates. In a markdown cell, two or three
 sentences: a zip code that moved by 25 or 30 °F has moved five or six whole zones. Do you believe
 that is a change in the climate? What else could produce it?**

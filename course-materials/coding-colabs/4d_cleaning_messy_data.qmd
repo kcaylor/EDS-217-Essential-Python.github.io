@@ -53,7 +53,7 @@ https://eds-217-essential-python.github.io/data/messy_field_survey.csv
 | `n_replicates` | how many bottles were filled, a whole number |
 : {.hover .bordered}
 
-## The sentences you need
+## The patterns you need
 
 All of these are from today. You should not need anything else.
 
@@ -63,7 +63,7 @@ df.dropna(subset=['col'])               # remove rows missing a named column
 df['col'] = df['col'].fillna(value)     # fill the gaps instead
 df['col'] = df['col'].astype(float)     # int, float, str
 df['col'] = df['col'].str.strip()       # .lower(), .replace(old, new)
-df['new'] = expression                  # the derived-column sentence
+df['new'] = expression                  # the derived-column pattern
 df['new'] = df['col'].apply(my_func)    # run your own function down a column
 ```
 
@@ -204,7 +204,7 @@ survey['n_replicates'] = survey['n_replicates'].astype(int)
 survey['n_replicates'].value_counts()
 ```
 
-11. Now deal with the impossible temperatures. Use the **filter sentence** from Day 3 to keep
+11. Now deal with the impossible temperatures. Use the **filter pattern** from Day 3 to keep
     only the rows where `temperature_c` is above `-100`, and end the line with `.copy()`. How
     many rows did the loggers ruin?
 
@@ -240,7 +240,7 @@ survey[['conductivity_uS_cm', 'conductivity_mS_cm']].head()
 ```
 
 15. Add a column called `temperature_f` holding the temperature in Fahrenheit. Do it twice:
-    once with the derived-column sentence and plain arithmetic, and once by writing a function
+    once with the derived-column pattern and plain arithmetic, and once by writing a function
     `celsius_to_fahrenheit` and using `.apply()`. Check that the two columns agree.
 
 ```{python}
@@ -279,7 +279,7 @@ survey['ph_class'].value_counts()
 
 You now have a table you can trust. Use it.
 
-17. Use the filter sentence to build a table of just the acidic samples. Which sites do they
+17. Use the filter pattern to build a table of just the acidic samples. Which sites do they
     come from? Use `.value_counts()` on `site`.
 
 ```{python}

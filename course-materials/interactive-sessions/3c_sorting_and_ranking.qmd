@@ -1,6 +1,6 @@
 ---
 title: "Interactive Session"
-subtitle: "🥇 The Top-N Sentence"
+subtitle: "🥇 The Top-N Pattern"
 jupyter: eds217_2026
 format:
   html:
@@ -28,7 +28,7 @@ for the case where you want the *label* of the winner rather than the row.
 By the end of this session you will be able to:
 
 - reorder a table with `.sort_values()`, in either direction
-- write the **top-N sentence**, `df.sort_values('col', ascending=False).head(n)`
+- write the **top-N pattern**, `df.sort_values('col', ascending=False).head(n)`
 - explain why a ranking is meaningless until you have filtered first
 - find the label of the largest or smallest value with `.idxmax()` and `.idxmin()`
 - look up a single value with `.loc[row_label, column_label]`
@@ -43,7 +43,7 @@ By the end of this session you will be able to:
 3. **Add a title cell** (Markdown), updating the date to today:
 
 ```markdown
-# Day 3: Session 3C - The Top-N Sentence
+# Day 3: Session 3C - The Top-N Pattern
 
 [Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/3c_sorting_and_ranking.html)
 
@@ -102,7 +102,7 @@ Sort `pm25` by `datetimeLocal` instead of by `value`. What does the first row gi
 one sentence what sorting by a timestamp column does.
 :::
 
-## The top-N sentence
+## The top-N pattern
 
 Sorting gives you the whole table in order. Almost always you want the front of it, so pair
 the sort with `.head()`:
@@ -111,14 +111,14 @@ the sort with `.head()`:
 pm25.sort_values('value', ascending=False).head(10)
 ```
 
-That is the **top-N sentence**:
+That is the **top-N pattern**:
 
 ```python
 df.sort_values('column', ascending=False).head(n)
 ```
 
 Read it left to right as three instructions: sort by this column, biggest first, and give me
-the first `n`. Drop `ascending=False` and the same sentence gives you the bottom N instead.
+the first `n`. Drop `ascending=False` and the same pattern gives you the bottom N instead.
 
 You will write this line more often than any other line this week. Learn it as one unit
 rather than as three separate methods, because you will almost never want one without the
@@ -131,7 +131,7 @@ pm25.sort_values('value', ascending=False).head(10)[['datetimeLocal', 'value', '
 ```
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Write the top-N sentence to find the **five cleanest** hours in `pm25`, that is, the five
+Write the top-N pattern to find the **five cleanest** hours in `pm25`, that is, the five
 lowest values. Then say why the answer you get is not very useful, and what you would have to
 do about it first.
 :::
@@ -206,7 +206,7 @@ print(pm25.loc[cleanest_hour, 'value'])
 Two hours in this dataset are tied at the maximum of 22 µg/m³, and `.idxmax()` names only one
 of them. It does not warn you that the other exists.
 
-Whenever the answer to your question would change if there were a tie, use the top-N sentence
+Whenever the answer to your question would change if there were a tie, use the top-N pattern
 and read the result, rather than trusting a single label:
 :::
 
@@ -216,7 +216,7 @@ pm25.sort_values('value', ascending=False).head(3)[['datetimeLocal', 'value']]
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Use `.idxmax()` and `.loc[]` on the ozone subset to find the timestamp of the highest ozone
-reading. Then check your answer with the top-N sentence.
+reading. Then check your answer with the top-N pattern.
 :::
 
 ## Putting it together
@@ -239,7 +239,7 @@ print('Value:', pm10.loc[worst, 'value'], pm10.loc[worst, 'unit'])
 ## Key points
 
 - `.sort_values('col')` reorders a table, smallest first. `ascending=False` reverses it.
-- The **top-N sentence** is `df.sort_values('col', ascending=False).head(n)`. Learn it as one
+- The **top-N pattern** is `df.sort_values('col', ascending=False).head(n)`. Learn it as one
   unit.
 - Sorting returns a new DataFrame. Assign it to a name to keep it.
 - **Filter first, then rank.** A ranking across categories that are not comparable is not an

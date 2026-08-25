@@ -42,8 +42,8 @@ article "A different way to measure the climate impact of food", *The Economist*
 Everything below is built from these. You should not need to look them up more than once.
 
 ```python
-df[df['column'] > value]                             # the filter sentence
-df.sort_values('column', ascending=False).head(n)    # the top-N sentence
+df[df['column'] > value]                             # the filter pattern
+df.sort_values('column', ascending=False).head(n)    # the top-N pattern
 ```
 
 ## Setup
@@ -128,11 +128,11 @@ df.loc['Bananas', 'Bananas index (kg)']
 
 Each of the three `Bananas index` columns is a ranking waiting to happen.
 
-5. Use the top-N sentence to display the 10 highest-scoring foods for `Bananas index (kg)`.
+5. Use the top-N pattern to display the 10 highest-scoring foods for `Bananas index (kg)`.
 6. Do the same for `Bananas index (1000 kcalories)`.
 7. Do the same for `Bananas index (100g protein)`.
 
-Write each one out in full. Yes, that is the same sentence three times with one word changed.
+Write each one out in full. Yes, that is the same pattern three times with one word changed.
 Notice how that feels.
 
 ```{python}
@@ -186,7 +186,7 @@ them, write down what you see. Automating a comparison this small costs more tha
 
 Now use the other sentence.
 
-11. Use the filter sentence to find every food with a `Bananas index (kg)` above 10. How many
+11. Use the filter pattern to find every food with a `Bananas index (kg)` above 10. How many
     are there?
 
 ```{python}
@@ -234,7 +234,7 @@ The banana index columns are all about emissions. The dataset also carries land 
 `land_use_1000kcal`: square metres of land per thousand calories.
 
 16. Use `.loc[]` to look up the value of `land_use_1000kcal` for `Bananas`.
-17. Use the top-N sentence to display the 10 foods with the highest `land_use_1000kcal`.
+17. Use the top-N pattern to display the 10 foods with the highest `land_use_1000kcal`.
 18. Use `.idxmax()` on `land_use_1000kcal` to get the name of the single most land-hungry food.
     Then use two `.loc[]` lookups and a division to report how many times the banana's land
     use that food requires.
@@ -267,7 +267,7 @@ one dairy product that shows up alongside meat at the top of the emissions ranki
     `Bananas index (1000 kcalories)`.
 
 :::{.callout-tip title="🧭 Field Note: selecting rows whose label contains a word"}
-The food names are the **index** of your table, not a column, so the filter sentence cannot
+The food names are the **index** of your table, not a column, so the filter pattern cannot
 reach them. `.filter()` can. Given a substring, it keeps every row whose label contains it:
 
 ```python
@@ -276,7 +276,7 @@ cheese = df.filter(like='heese', axis='rows')
 
 `like='heese'` rather than `'cheese'` so that `Cheddar cheese` and `Cheesecake` are both
 caught, whatever their capitalisation. Run the line as written, then rank `cheese` with the
-top-N sentence exactly as you have been doing all evening.
+top-N pattern exactly as you have been doing all evening.
 
 📖 [Cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
 :::
@@ -328,7 +328,7 @@ course.
 Before you close your notebook, check that:
 
 - every claim in your Part 7 write-up has a code cell above it that produced the number
-- you used the filter sentence and the top-N sentence at least three times each
+- you used the filter pattern and the top-N pattern at least three times each
 - you can say out loud what `&` needs that a single condition does not
 - your notebook reads top to bottom as a document, not as a pile of cells
 

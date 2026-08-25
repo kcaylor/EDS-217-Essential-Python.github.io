@@ -43,7 +43,7 @@ at Oregon State University, distributed by zip code. Zip code locations from a p
 database.
 :::
 
-## Today's sentences
+## Today's patterns
 
 Everything you draw tonight is built from these five.
 
@@ -60,12 +60,12 @@ sns.barplot(x=series.values, y=series.index)           # a grouped Series, as ba
 And these, from earlier in the week:
 
 ```python
-pd.concat([a, b], ignore_index=True)                   # the stacking sentence
-pd.merge(left, right, left_on='a', right_on='b')       # the join sentence
-df.pivot_table(index=, columns=, values=)              # the pivot sentence
+pd.concat([a, b], ignore_index=True)                   # the stacking pattern
+pd.merge(left, right, left_on='a', right_on='b')       # the join pattern
+df.pivot_table(index=, columns=, values=)              # the pivot pattern
 df.groupby('key')['col'].agg(['count', 'mean'])        # split, apply, combine
-df.sort_values('col', ascending=False).head(n)         # the top-N sentence
-df['new'] = df['col'].apply(named_function)            # the derived-column sentence
+df.sort_values('col', ascending=False).head(n)         # the top-N pattern
+df['new'] = df['col'].apply(named_function)            # the derived-column pattern
 ```
 
 ## Setup
@@ -124,7 +124,7 @@ first piece from each row. `.astype(int)` turns `'-10'` into `-10`.
 On Thursday, 4C told you that `.str` methods chained together were a Day 7 problem. This is Day 7,
 and this is the chain. Three methods, in a row, each one operating on what the last one handed it,
 which is exactly the pattern you have been reading all week in
-`.sort_values(...).head(10)`, because a chain is just a sentence with more than one verb in it.
+`.sort_values(...).head(10)`, because a chain is two patterns run one after the other.
 :::
 
 4. Pad the zip codes in all three tables:
@@ -166,7 +166,7 @@ print(zones_2023.head())
 ## Part 2: One table out of three
 
 4. Add a `year` column to each zone table, then stack the two of them into one table called
-   `zones`, using the stacking sentence. How many rows?
+   `zones`, using the stacking pattern. How many rows?
 
 ```{python}
 zones_2023['year'] = 2023
@@ -240,7 +240,7 @@ plt.show()
 
 10. Something is wrong with that figure, and it is not subtle. Describe it in a markdown cell.
 
-11. Find the culprit. Use the filter sentence on `located` to pull out every row with a
+11. Find the culprit. Use the filter pattern on `located` to pull out every row with a
     `longitude` greater than −60, and print its zip code, state, city, latitude and longitude.
 
 ```{python}
@@ -304,7 +304,7 @@ print(sorted(usa['state'].unique()))
 Comparing two maps by eye does not work. So compute the change and map **that** instead, which is
 the move you learned this morning.
 
-16. Use the pivot sentence to build a table with one row per zip code and one column per year.
+16. Use the pivot pattern to build a table with one row per zip code and one column per year.
     Index it on `['zipcode', 'state', 'latitude', 'longitude']` so those come along for the ride,
     put `year` across the columns and `trange_min` in the cells, then `.reset_index()`.
     What shape is it, and why is that number smaller than 80,000?
@@ -353,7 +353,7 @@ plt.show()
 change['temp_diff'].value_counts().sort_index()
 ```
 
-19. The tails of that histogram are worth a minute. Use the top-N sentence twice to show the five
+19. The tails of that histogram are worth a minute. Use the top-N pattern twice to show the five
     zip codes with the largest increase and the five with the largest decrease, with their states
     and coordinates.
 

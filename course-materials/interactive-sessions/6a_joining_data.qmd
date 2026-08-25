@@ -1,6 +1,6 @@
 ---
 title: "Interactive Session"
-subtitle: "🔗 The Join Sentence"
+subtitle: "🔗 The Join Pattern"
 jupyter: eds217_2026
 format:
   html:
@@ -30,12 +30,12 @@ anything that needs both measurements **in the same row**: was the smoky hour al
 hour? Does high PM2.5 predict high ozone three hours later? What is the correlation between
 them?
 
-To ask those, the two measurements have to be in one table. Today you learn the sentence that
+To ask those, the two measurements have to be in one table. Today you learn the pattern that
 puts them there.
 
 By the end of this session you will be able to:
 
-- write the **join sentence**, `pd.merge(left, right, on='key')`, and say what the key does
+- write the **join pattern**, `pd.merge(left, right, on='key')`, and say what the key does
 - choose between `how='inner'` and `how='left'` and say what each one does to your row count
 - check a merge afterwards, and know which two numbers to look at first
 - join two tables whose key columns have **different names**, using `left_on=` and `right_on=`
@@ -51,7 +51,7 @@ By the end of this session you will be able to:
 3. **Add a title cell** (Markdown), updating the date to today:
 
 ```markdown
-# Day 6: Session 6A - The Join Sentence
+# Day 6: Session 6A - The Join Pattern
 
 [Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/6a_joining_data.html)
 
@@ -75,7 +75,7 @@ hour.
 ## Two tables out of one
 
 Before you can join two tables you need two tables, so start by making them. Both lines below are
-Wednesday's filter sentence, and nothing else:
+Wednesday's filter pattern, and nothing else:
 
 ```{python}
 o3 = goleta[goleta['parameter'] == 'o3'].copy()
@@ -109,7 +109,7 @@ o3.head()
 you will ever prevent.
 :::
 
-## The join sentence
+## The join pattern
 
 Two tables. One column in common: `datetimeLocal`, the hour the reading was taken. That shared
 column is the **key**, and a join is the operation that lines the two tables up by it.
@@ -279,7 +279,7 @@ Now that the two pollutants are in the same row, you can ask the question one ta
 answer. Last night you learned that ozone peaks in the early afternoon and PM2.5 peaks around
 midday, from which it is tempting to conclude that the bad hours are the same hours.
 
-Test it. The top-N sentence from Wednesday, applied to the joined table:
+Test it. The top-N pattern from Wednesday, applied to the joined table:
 
 ```{python}
 paired.sort_values('pm25_ugm3', ascending=False).head(10)
@@ -304,7 +304,7 @@ never tell you what happened in a particular hour. Only a joined table can.
 
 ## When the key columns have different names
 
-The join sentence so far assumes both tables call the key by the same name. Real tables rarely
+The join pattern so far assumes both tables call the key by the same name. Real tables rarely
 cooperate, so pandas gives you a way to say *this column here, that column there*.
 
 Here is a case you have already met. On Friday you grouped the national parks visitor records by
@@ -392,7 +392,7 @@ would use in a script that runs every month on a file somebody else maintains, a
 
 ## Key points
 
-- The **join sentence** is `pd.merge(left, right, on='key')`. The key is the column the two tables
+- The **join pattern** is `pd.merge(left, right, on='key')`. The key is the column the two tables
   have in common, and its values are how rows find each other.
 - Use `left_on=` and `right_on=` when the key columns have **different names** in the two tables.
 - `how=` decides which rows survive: `'inner'` keeps keys present in both (the default),

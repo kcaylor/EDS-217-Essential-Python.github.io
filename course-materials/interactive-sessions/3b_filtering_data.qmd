@@ -1,6 +1,6 @@
 ---
 title: "Interactive Session"
-subtitle: "🔍 The Filter Sentence"
+subtitle: "🔍 The Filter Pattern"
 jupyter: eds217_2026
 format:
   html:
@@ -27,7 +27,7 @@ week.
 
 By the end of this session you will be able to:
 
-- write the **filter sentence**, `df[df['col'] > value]`, without looking it up
+- write the **filter pattern**, `df[df['col'] > value]`, without looking it up
 - filter on text as well as on numbers
 - combine two conditions with `&` and `|`, and get the parentheses right
 - invert a condition with `~`
@@ -46,7 +46,7 @@ By the end of this session you will be able to:
 3. **Add a title cell** (Markdown), updating the date to today:
 
 ```markdown
-# Day 3: Session 3B - The Filter Sentence
+# Day 3: Session 3B - The Filter Pattern
 
 [Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/3b_filtering_data.html)
 
@@ -67,7 +67,7 @@ goleta.shape
 Save your work frequently with `Ctrl+S` (`Cmd+S` on macOS).
 :::
 
-## The sentence
+## The pattern
 
 Here it is, whole:
 
@@ -79,7 +79,7 @@ Read it from the inside out. `goleta['value'] > 20` is the mask you learned to w
 morning: `True` on every row where the value is above 20, `False` everywhere else. Wrapping it
 in `goleta[ ... ]` says "give me the rows where that was `True`."
 
-That is the **filter sentence**. The general form is:
+That is the **filter pattern**. The general form is:
 
 ```python
 df[df['column'] <comparison> value]
@@ -116,7 +116,7 @@ deal with values like these on Day 4.
 
 ## Filtering on text
 
-The same sentence works on text columns. Use `==` for an exact match:
+The same pattern works on text columns. Use `==` for an exact match:
 
 ```{python}
 ozone = goleta[goleta['parameter'] == 'o3']
@@ -303,7 +303,7 @@ mind, and a long filter is much easier to read that way.
 
 ## Key points
 
-- The **filter sentence** is `df[df['col'] <comparison> value]`. The inner `df` builds the
+- The **filter pattern** is `df[df['col'] <comparison> value]`. The inner `df` builds the
   mask; the outer one applies it.
 - Filtering returns a **new** DataFrame. Assign it to a name to keep it.
 - `==` matches text exactly, and is case-sensitive. An empty result is an answer, not an error.

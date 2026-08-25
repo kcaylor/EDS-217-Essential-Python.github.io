@@ -304,7 +304,7 @@ sns.barplot(x=series.values, y=series.index)   # horizontal bars, sorted as you 
 sns.barplot(y=series.values, x=series.index)   # vertical bars, same data
 ```
 
-Learn this as one unit. It is the sentence that connects the six days of table-shaping you have
+Learn this as one unit. It is the pattern that connects the six days of table-shaping you have
 just done to the pictures you make of the results, and you will type it constantly:
 
 **group, aggregate, sort, then plot the `.values` against the `.index`.**

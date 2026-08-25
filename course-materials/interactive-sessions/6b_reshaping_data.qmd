@@ -36,9 +36,9 @@ are answered by simply looking.
 
 By the end of this session you will be able to:
 
-- write the **stacking sentence**, `pd.concat([a, b, c])`, and say what `ignore_index=True` fixes
+- write the **stacking pattern**, `pd.concat([a, b, c])`, and say what `ignore_index=True` fixes
 - describe the difference between a **long** table and a **wide** one, and say what each is good at
-- write the **pivot sentence**, `pivot_table(index=, columns=, values=)`, and read its result
+- write the **pivot pattern**, `pivot_table(index=, columns=, values=)`, and read its result
 - turn a `.value_counts()` result back into a table you can merge with, using `.reset_index()`
 - say which shape you want **before** you start writing code
 
@@ -116,7 +116,7 @@ aq = pd.concat([goleta, santa_barbara, cnsi], ignore_index=True)
 aq.shape
 ```
 
-Three derived-column sentences from Thursday, and now the stacked table knows where every row
+Three derived-column patterns from Thursday, and now the stacked table knows where every row
 came from. That is the block you copied last night, written out.
 
 ### What `ignore_index=True` fixes
@@ -137,7 +137,7 @@ row. `ignore_index=True` throws the old numbering away and renumbers the result 
 Use it every time, unless you have a specific reason not to.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Two things, both of them the stacking sentence written from scratch:
+Two things, both of them the stacking pattern written from scratch:
 
 1. Stack the three files again with `ignore_index=True`, in a different order: CNSI first, then
    Goleta, then Santa Barbara. Confirm the shape is identical. Then use `.head()` to show that the
@@ -167,7 +167,7 @@ together.
 The other shape is **wide**: one row per thing, one column per measurement, and the labels
 promoted out of the cells and into the column headers. In a wide table, a comparison is a glance.
 
-## The pivot sentence
+## The pivot pattern
 
 `pivot_table()` goes from long to wide. It takes three arguments, and each one is the name of a
 column in your long table:
@@ -210,7 +210,7 @@ first every time. Two empty cells in the means table and two empty cells here: C
 and no PM10 at all, so the emptiness is real rather than an averaging accident.
 
 :::{.callout-note}
-🐍 `pivot_table` with `aggfunc=` is the split-apply-combine sentence in a different arrangement.
+🐍 `pivot_table` with `aggfunc=` is the split-apply-combine pattern in a different arrangement.
 `aq.groupby(['site', 'parameter'])['value'].mean()` computes exactly the same nine numbers; it
 just returns them stacked in a single column instead of laid out in a grid. Same calculation,
 different shape.
@@ -340,7 +340,7 @@ have calculated. What changed is that the comparison is now something you can se
   and hard to compare across.
 - A **wide** table has one row per thing and one column per measurement. It is easy to compare and
   awkward to extend.
-- The **pivot sentence** is `df.pivot_table(index=, columns=, values=)`. It goes long to wide.
+- The **pivot pattern** is `df.pivot_table(index=, columns=, values=)`. It goes long to wide.
 - `pivot_table` averages by default. Pass **`aggfunc='count'`** and look at that version first.
 - The result is indexed by the `index=` column. **`.reset_index()`** turns it back into a plain
   table.

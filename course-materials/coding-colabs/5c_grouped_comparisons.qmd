@@ -32,7 +32,7 @@ like *before* the cell is run.
 
 You have 45 minutes.
 
-## The sentences you need
+## The patterns you need
 
 Both from this morning. You should not need to look them up more than once.
 
@@ -42,7 +42,7 @@ df.groupby('key')['column'].agg(['count', 'mean'])   # several summaries at once
 df.groupby('key').agg({'a': 'mean', 'b': 'count'})   # different summaries, different columns
 ```
 
-Plus the top-N sentence from Wednesday, which still works:
+Plus the top-N pattern from Wednesday, which still works:
 
 ```python
 df.sort_values('column', ascending=False).head(n)

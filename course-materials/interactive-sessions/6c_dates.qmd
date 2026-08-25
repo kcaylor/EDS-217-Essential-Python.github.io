@@ -207,7 +207,7 @@ year of 2019 for every row and never said a word.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Add a `dayofyear` column to `toolik` using the `.dt` accessor for it. Then use the filter
-sentence to show the rows where `dayofyear` is 366, and say in one sentence what those rows have
+pattern to show the rows where `dayofyear` is 366, and say in one sentence what those rows have
 in common.
 :::
 
@@ -244,7 +244,7 @@ say whether it changes how much you trust the answer.
 Toolik has thirty years of data, and the obvious question to ask of thirty years of Arctic
 weather is whether it is getting warmer.
 
-Split the record into its first eleven years and its last ten, using Wednesday's filter sentence:
+Split the record into its first eleven years and its last ten, using Wednesday's filter pattern:
 
 ```{python}
 early = toolik[toolik['year'] <= 1998]

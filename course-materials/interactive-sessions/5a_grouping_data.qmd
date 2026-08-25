@@ -1,6 +1,6 @@
 ---
 title: "Interactive Session"
-subtitle: "🗂️ The Split-Apply-Combine Sentence"
+subtitle: "🗂️ The Split-Apply-Combine Pattern"
 jupyter: eds217_2026
 format:
   html:
@@ -27,14 +27,14 @@ two.
 
 Almost every real question about data has the same shape. Not "what is the average", but "what
 is the average **for each**": for each site, for each species, for each year, for each ocean.
-Today you learn the sentence that answers all of those, and you learn it in the two forms you
+Today you learn the pattern that answers all of those, and you learn it in the two forms you
 will see it written.
 
 By the end of this session you will be able to:
 
 - describe what `.groupby()` does in terms of **split, apply, combine**
-- write the split-apply-combine sentence in its **two-step** form and its **one-line** form,
-  and say why they are the same sentence
+- write the split-apply-combine pattern in its **two-step** form and its **one-line** form,
+  and say why they are the same pattern
 - choose the aggregation that answers the question you actually asked
 - read the result of a grouped calculation and say what its index means
 - explain why a grouped answer is more honest than a whole-column answer
@@ -49,7 +49,7 @@ By the end of this session you will be able to:
 3. **Add a title cell** (Markdown), updating the date to today:
 
 ```markdown
-# Day 5: Session 5A - The Split-Apply-Combine Sentence
+# Day 5: Session 5A - The Split-Apply-Combine Pattern
 
 [Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/5a_grouping_data.html)
 
@@ -151,7 +151,7 @@ grouped['temperature_c'].mean()
 ```
 :::
 
-## The same sentence, on one line
+## The same pattern, on one line
 
 You will rarely need the grouped object for its own sake, so almost all of the pandas code you
 read will run the two steps together:
@@ -160,7 +160,7 @@ read will run the two steps together:
 survey.groupby('site')['dissolved_oxygen_mg_L'].mean()
 ```
 
-**These are the same sentence.** The two-step version stores the middle of it in a variable;
+**These are the same pattern.** The two-step version stores the middle of it in a variable;
 the one-line version does not. Same split, same apply, same combine, same answer.
 
 Read the one-line form left to right as three instructions:
@@ -175,7 +175,7 @@ df.groupby('key')['column'].aggregation()
 - `['column']` says **which column to do arithmetic on**.
 - `.mean()` says **what arithmetic**.
 
-Learn it as one unit, the way you learned the top-N sentence on Wednesday. You will type it
+Learn it as one unit, the way you learned the top-N pattern on Wednesday. You will type it
 more often this quarter than you will type your own name.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -303,7 +303,7 @@ survey['ph_class'].value_counts()
 survey.groupby('ph_class')['dissolved_oxygen_mg_L'].mean()
 ```
 
-That is the derived-column sentence and the split-apply-combine sentence working together, and
+That is the derived-column pattern and the split-apply-combine pattern working together, and
 it is worth naming what just happened. **`ph_class` was not in the file.** You invented the
 categories yesterday, and today they are a grouping key. Most of the interesting groupings in
 your career will be ones you made rather than ones you were handed.
@@ -351,8 +351,8 @@ sentence.
 
 - **Split, apply, combine**: `.groupby()` splits the table into piles, an aggregation runs on
   each pile, and the answers come back as one labelled result.
-- The **split-apply-combine sentence** is `df.groupby('key')['column'].aggregation()`.
-- The **two-step form** and the **one-line form** are the same sentence. The two-step version
+- The **split-apply-combine pattern** is `df.groupby('key')['column'].aggregation()`.
+- The **two-step form** and the **one-line form** are the same pattern. The two-step version
   keeps the split in a variable so you can reuse it.
 - `.groupby()` on its own calculates nothing. It waits.
 - The result is a **Series indexed by the group labels**, so `.idxmax()`, `.idxmin()` and label

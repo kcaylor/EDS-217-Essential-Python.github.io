@@ -65,8 +65,8 @@ You have these on your session pages. You should not need to look them up more t
 twice today.
 
 ```python
-df[df['column'] > value]                                # the filter sentence
-df.sort_values('column', ascending=False).head(n)       # the top-N sentence
+df[df['column'] > value]                                # the filter pattern
+df.sort_values('column', ascending=False).head(n)       # the top-N pattern
 ```
 
 ## Part 1: Filtering (about 15 minutes)

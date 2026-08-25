@@ -1,6 +1,6 @@
 ---
 title: "Live Coding Session"
-subtitle: "🎙️ Instructor Notes: When a Sentence Is Not Enough"
+subtitle: "🎙️ Instructor Notes: When a Pattern Is Not Enough"
 jupyter: eds217_2026
 search: false
 format:
@@ -35,13 +35,13 @@ Do not use `lambda` anywhere. It is not in this course.
 
 Say something close to this:
 
-> This morning you learned a sentence that turns six piles of rows into six numbers. It is the
+> This morning you learned a pattern that turns six piles of rows into six numbers. It is the
 > right tool for almost every grouped question you will ever ask, and I want to be clear that
 > nothing this afternoon replaces it.
 >
 > But it has one shape. One number per group, arithmetic only. If what you want per group is a
-> sentence, or a file, or a plot, or a yes-or-no check, the sentence cannot help you and you
-> have to open the groups up and walk through them.
+> line of text, or a file, or a plot, or a yes-or-no check, the pattern cannot help you and
+> you have to open the groups up and walk through them.
 >
 > The good news is that you already know how. You wrote your first `for` loop on Tuesday.
 
@@ -149,7 +149,7 @@ for group in grouped:
 Ask them to guess why before you explain. With one variable, `group` catches the pair, not the
 DataFrame.
 
-Now something the sentence cannot do. A formatted report line per site:
+Now something the pattern cannot do. A formatted report line per site:
 
 ```{python}
 for name, group in grouped:
@@ -176,7 +176,7 @@ for name, group in grouped:
     print(name, len(warm), 'of', len(group), 'samples above 20 C')
 ```
 
-> That is the filter sentence from Wednesday, running inside a loop, six times. Nothing new. The
+> That is the filter pattern from Wednesday, running inside a loop, six times. Nothing new. The
 > loop just handed you a smaller table each time round.
 
 One more, to show it is not only filtering:
@@ -360,7 +360,7 @@ Build this table on the board with the room, rather than showing it finished:
 Close with the three questions:
 
 > Before you write a loop over groups, ask: **is the answer a number?** If yes, use the
-> sentence. **Is it one number per group?** If yes, definitely use the sentence. **Would the
+> pattern. **Is it one number per group?** If yes, definitely use the pattern. **Would the
 > loop body be one line of arithmetic?** If yes, you are writing nine lines to avoid learning
 > one.
 >
@@ -387,7 +387,7 @@ it.
 
 ## What tonight's practice needs from this session
 
-Tonight's exercise is entirely `.groupby()` sentences. **No loop and no comprehension appears in
+Tonight's exercise is entirely `.groupby()` patterns. **No loop and no comprehension appears in
 it.** If a student asks whether they should be looping over the OpenAQ stations, the answer is
 no, and the reason is section 7: every answer they need tonight is a number, one per group.
 

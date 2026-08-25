@@ -1,6 +1,6 @@
 ---
 title: "Live Coding Session"
-subtitle: "🔁 When a Sentence Is Not Enough"
+subtitle: "🔁 When a Pattern Is Not Enough"
 jupyter: eds217_2026
 format:
   html:
@@ -13,7 +13,7 @@ format:
 ![](assets/panda_list.jpeg)
 :::
 
-This morning you learned a sentence that answers most grouped questions in one line. This
+This morning you learned a pattern that answers most grouped questions in one line. This
 afternoon we look at the questions it does not answer, and at the older, slower tool that does.
 
 `.groupby()` gives you back **one number per group**. That covers a great deal of what you want.
@@ -46,7 +46,7 @@ this page to copy, on purpose.
 2. Add a title cell:
 
 ```markdown
-# Day 5: Session 5D - When a Sentence Is Not Enough
+# Day 5: Session 5D - When a Pattern Is Not Enough
 
 Date: 09/04/2026
 ```
@@ -104,7 +104,7 @@ That is your scaffold. Now close this page and switch to your notebook.
 - write a `for name, group in grouped:` loop and say what each of the two variables is
 - do something per group that is not a summary number
 - **read** a list comprehension and predict what it produces
-- say, for a given task, whether it wants the sentence or the loop
+- say, for a given task, whether it wants the pattern or the loop
 
 :::{.callout-note title="You are not being asked to write comprehensions"}
 Sections 5 and 6 are a reading exercise. Nothing this week, including tonight's practice and

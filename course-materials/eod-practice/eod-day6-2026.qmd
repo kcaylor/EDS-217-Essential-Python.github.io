@@ -38,18 +38,18 @@ exercise.
 Eurovision Song Contest contestant data, compiled from the contest's public results archive.
 :::
 
-## Today's sentences
+## Today's patterns
 
 Everything below is built from these three, plus what you already had.
 
 ```python
-pd.merge(left, right, on='key')                        # the join sentence
+pd.merge(left, right, on='key')                        # the join pattern
 pd.merge(left, right, left_on='a', right_on='b')       # when the key names differ
 pd.merge(left, right, on='key', how='left')            # keep every row on the left
 
-pd.concat([a, b, c], ignore_index=True)                # the stacking sentence
+pd.concat([a, b, c], ignore_index=True)                # the stacking pattern
 
-df.pivot_table(index=, columns=, values=)              # the pivot sentence
+df.pivot_table(index=, columns=, values=)              # the pivot pattern
 
 counts = df['col'].value_counts().reset_index()        # Series to table
 ```
@@ -57,10 +57,10 @@ counts = df['col'].value_counts().reset_index()        # Series to table
 And these, from earlier in the week:
 
 ```python
-df[df['column'] != value].copy()                       # the filter sentence
-df.sort_values('column', ascending=False).head(n)      # the top-N sentence
+df[df['column'] != value].copy()                       # the filter pattern
+df.sort_values('column', ascending=False).head(n)      # the top-N pattern
 df.groupby('key')['col'].agg(['count', 'mean'])        # split, apply, combine
-for name, group in df.groupby('key'):                  # the loop, when a sentence is not enough
+for name, group in df.groupby('key'):                  # the loop, when a pattern is not enough
 ```
 
 ## Setup
@@ -119,7 +119,7 @@ eurovision.groupby('year')['points_final'].count().tail(6)
 4. One year has a count of zero. Which one, and what happened? (You may look this up. It is the
    only fact in this exercise that is not in the file.)
 
-5. Build a table called `contests` that excludes that year, using the filter sentence and ending
+5. Build a table called `contests` that excludes that year, using the filter pattern and ending
    the line with `.copy()`. How many rows does it have?
 
 ```{python}
@@ -175,14 +175,14 @@ contests.groupby('year')['to_country'].count().loc[2000:2007]
 ## Part 3: The best country of each decade
 
 This is the question the file invites, and answering it well takes the loop from yesterday
-afternoon and the stacking sentence from this morning.
+afternoon and the stacking pattern from this morning.
 
 8. Build a table with one row per decade, holding the country with the highest average
     `points_final` in that decade, how many entries that average came from, and the average
     itself.
 
     Do it with a loop over decade groups. For each decade: group by `to_country`, `.agg()` for the
-    count and mean of `points_final`, `.reset_index()`, take the top row with the top-N sentence,
+    count and mean of `points_final`, `.reset_index()`, take the top row with the top-N pattern,
     add a `decade` column, and append the one-row table to a list. Then stack the list with
     `pd.concat()`.
 

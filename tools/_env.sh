@@ -17,23 +17,56 @@ ENV_NAME="${EDS217_ENV:-eds217_2026}"
 export MPLBACKEND="${MPLBACKEND:-Agg}"
 
 eds217_activate() {
+  if [ "${EDS217_SKIP_ENV:-0}" = "1" ]; then
+    return 0
+  fi
   if [ "${CONDA_DEFAULT_ENV:-}" = "$ENV_NAME" ]; then
     return 0
   fi
   if ! command -v conda >/dev/null 2>&1; then
     echo "conda is not on PATH. Open a shell where conda is initialised, or set" >&2
     echo "EDS217_SKIP_ENV=1 to run without it." >&2
-    [ "${EDS217_SKIP_ENV:-0}" = "1" ] && return 0
     exit 1
   fi
+
+  # Conda's activate and deactivate hooks are not written to survive `set -u`.
+  # The geotiff hook shipped with mambaforge reads _CONDA_SET_GEOTIFF_CSV with
+  # no default, so under `set -euo pipefail` the whole script dies on an unbound
+  # variable before a single page renders, and the only thing printed is a line
+  # number inside somebody else's deactivate script.
+  #
+  # Relax both options across the activation, then put back whatever was in
+  # force. The hooks are third-party code and we do not get to fix them.
+  local restore=""
+  case "$-" in *u*) restore="${restore}u";; esac
+  case "$-" in *e*) restore="${restore}e";; esac
+  set +u +e
+
   # shellcheck disable=SC1090
   eval "$(conda shell.bash hook)"
   if ! conda env list | grep -qE "^${ENV_NAME}[[:space:]]"; then
+    case "$restore" in *u*) set -u;; esac
+    case "$restore" in *e*) set -e;; esac
     echo "conda environment '${ENV_NAME}' does not exist." >&2
     echo "Create it with: conda env create -f environment-2026.yml" >&2
     exit 1
   fi
   conda activate "$ENV_NAME"
+  local rc=$?
+
+  case "$restore" in *u*) set -u;; esac
+  case "$restore" in *e*) set -e;; esac
+
+  if [ "$rc" -ne 0 ]; then
+    echo "conda activate ${ENV_NAME} failed with status ${rc}." >&2
+    exit 1
+  fi
+  if [ "${CONDA_DEFAULT_ENV:-}" != "$ENV_NAME" ]; then
+    echo "conda activate reported success but the active environment is" >&2
+    echo "'${CONDA_DEFAULT_ENV:-none}' rather than '${ENV_NAME}'." >&2
+    exit 1
+  fi
+  return 0
 }
 
 eds217_clear_stale_locks() {

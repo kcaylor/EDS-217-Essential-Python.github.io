@@ -11,7 +11,10 @@ project:
     # Retained as instructor reference, deliberately not part of the 2026 site.
     # See the "Retire the superseded 2025 files" item in tasks/2026-planning/endgame-plan.md.
     - "!course-materials/interactive-sessions/2a_getting_help.qmd"
-    - "!course-materials/interactive-sessions/2c_exceptions_and_errors.qmd"
+    # 2c is back in the render as reference only, not as a scheduled session. A room that
+    # has never seen a traceback meets one within an hour of Day 1, and nothing else on the
+    # 2026 schedule teaches how to read one. Linked from day1.qmd under Additional
+    # Resources, so a student stuck at 9pm has somewhere to go. Decided against C12.
     - "!course-materials/interactive-sessions/interactive-session-git.qmd"
     # The lectures are 2025 material, unlinked from the navbar and superseded
     # by the 2026 sessions. pandas_workflow.qmd in particular teaches an

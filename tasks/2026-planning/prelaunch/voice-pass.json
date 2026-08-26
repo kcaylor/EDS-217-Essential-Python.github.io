@@ -313,11 +313,11 @@
    "findings": [
     {
      "id": 1,
-     "note": "Survives Kelly's final draft, still as 'nothing in the file needs cleaning'. Verified against data/toolik_weather.csv on 2026-08-26: Daily_AirTemp_Mean_C is the only column with zero missing values; Daily_Precip_Total_mm has 420, wind speed 826, radiation 7053. 1c line 176 states it correctly and column-scoped. 1c line 25 carries the same overstatement. Page is locked, so this needs Kelly's word change.",
-     "resolved_at": "2026-08-26T04:20:41",
+     "note": "Kelly approved the wording on 2026-08-26. 'because nothing in the file needs cleaning' is now 'because the one column we analyze has no missing values', which matches how 1c states it. Verified against data/toolik_weather.csv: Daily_AirTemp_Mean_C is the only column with zero missing; Daily_Precip_Total_mm has 420, wind speed 826, global radiation 7053.",
+     "resolved_at": "2026-08-26T19:37:26",
      "severity": "blocker",
-     "sha": "a129b7d",
-     "status": "needs-kelly",
+     "sha": "a59ee28",
+     "status": "fixed",
      "text": "'nothing in this file needs cleaning' is false. Daily_AirTemp_Mean_C has zero missing values, but Daily_Precip_Total_mm has 8,002 #N/A entries and other columns are worse. 1c says it correctly: only the column we analyse is clean. The page teaches a wrong lesson about the dataset on the first page a student reads."
     },
     {
@@ -331,11 +331,11 @@
     },
     {
      "id": 3,
-     "note": "The Class materials table names f-strings in the 1b session title, but the prose still sets a read-and-copy expectation ('much of it will feel foreign', 'Today is just an introduction') while 1c and 1d both require writing an f-string in a box headed 'Say it in a sentence (required)'. Kelly's call whether the prose should warn them.",
-     "resolved_at": "2026-08-26T04:20:41",
+     "note": "Kelly approved on 2026-08-26. The paragraph now ends 'though you will write one thing yourself: the f-string you learn in the morning session', so the read-and-copy expectation no longer contradicts the required f-string boxes in 1c and 1d.",
+     "resolved_at": "2026-08-26T19:37:28",
      "severity": "major",
-     "sha": "a129b7d",
-     "status": "needs-kelly",
+     "sha": "a59ee28",
+     "status": "fixed",
      "text": "The page never mentions f-strings, which 1b calls 'the one thing you should be able to write on your own after today', and which both afternoon sessions then require in boxes headed 'Say it in a sentence (required)'. A student would arrive expecting only to read and copy code."
     },
     {
@@ -358,11 +358,11 @@
     },
     {
      "id": 6,
-     "note": "Unchanged. 'you will have imported that file' still has no file antecedent; the preceding clause names weather, not a file. One word fixes it, but the page is locked.",
-     "resolved_at": "2026-08-26T04:20:41",
+     "note": "Kelly approved on 2026-08-26. The preceding clause now reads 'we will analyze a single file of daily Arctic weather', so 'that file' has an antecedent in its own paragraph.",
+     "resolved_at": "2026-08-26T19:37:30",
      "severity": "major",
-     "sha": "a129b7d",
-     "status": "needs-kelly",
+     "sha": "a59ee28",
+     "status": "fixed",
      "text": "'By 4:30 you will have imported that file' has no antecedent for 'that file' in its own paragraph. The preceding sentence names weather, not a file."
     },
     {
@@ -385,11 +385,11 @@
     },
     {
      "id": 9,
-     "note": "Unchanged sentence, minor. 'from Toolik Lake in Alaska, running from June 1988 to December 2018' attaches the participle to Alaska. Kelly read and kept the sentence, so this may be deliberate.",
-     "resolved_at": "2026-08-26T04:20:41",
+     "note": "Kelly approved on 2026-08-26. Rewritten as 'recorded at Toolik Lake in Alaska between June 1988 and December 2018', which drops the participle rather than attaching it to Alaska.",
+     "resolved_at": "2026-08-26T19:37:31",
      "severity": "minor",
-     "sha": "a129b7d",
-     "status": "needs-kelly",
+     "sha": "a59ee28",
+     "status": "fixed",
      "text": "'daily Arctic weather from Toolik Lake in Alaska, running from June 1988 to December 2018' attaches the participle to Alaska."
     },
     {
@@ -544,11 +544,11 @@
     },
     {
      "id": 2,
-     "note": "Kelly decides whether Thursday's figure is Step 10.",
-     "resolved_at": "2026-08-24T04:26:44",
+     "note": "Answered on the page as it now stands. The Checkpoint 3 bullet reads 'A first version of your figure ... Tomorrow morning we refine this same figure into Step 10', which states outright that Thursday's figure and Friday's Step 10 are one figure rather than two.",
+     "resolved_at": "2026-08-26T19:30:23",
      "severity": "major",
-     "sha": "6fa4933",
-     "status": "needs-kelly",
+     "sha": "a59ee28",
+     "status": "fixed",
      "text": "Thursday asks for 'one real figure' and Friday asks for 'Step 10, Visualize'. A student cannot tell whether they are the same figure or two."
     },
     {
@@ -640,11 +640,11 @@
     },
     {
      "id": 2,
-     "note": "Kelly must supply the destination.",
-     "resolved_at": "2026-08-24T04:26:44",
+     "note": "Superseded by the C1 submission form. day9.qmd step 5 now reads 'Submit through the course form' with the live responder link, names one submission per team signed in with a UCSB account, and lists what the form asks for. The destination the finding said was missing is now explicit on the page and cross-linked from final_project.qmd.",
+     "resolved_at": "2026-08-26T19:29:22",
      "severity": "blocker",
-     "sha": "6fa4933",
-     "status": "needs-kelly",
+     "sha": "a59ee28",
+     "status": "fixed",
      "text": "'Send me the repository URL' names no destination. No email, no Slack, no form, on the last step of the only deadline."
     },
     {
@@ -685,11 +685,11 @@
     },
     {
      "id": 7,
-     "note": "Kelly decides: random, volunteers, or posted in advance.",
-     "resolved_at": "2026-08-24T04:26:44",
+     "note": "Kelly's call on 2026-08-26: leave it and decide the running order on the day. The agenda keeps 'Presentations, first half' and 'second half' without committing to how the order is drawn, which keeps the choice live in the room.",
+     "resolved_at": "2026-08-26T19:50:29",
      "severity": "minor",
-     "sha": "6fa4933",
-     "status": "needs-kelly",
+     "sha": "a59ee28",
+     "status": "wontfix",
      "text": "'Running order' is an agenda item with no explanation of how the order is decided or when a team learns its slot."
     }
    ],
@@ -881,14 +881,14 @@
    "metrics": {},
    "status": "pending"
   },
-  "course-materials/interactive-sessions/1c_whole_game_1.qmd": {
+  "course-materials/interactive-sessions/1c_data_science_workflow_1.qmd": {
    "batch": 3,
    "findings": [],
    "history": [],
    "metrics": {},
    "status": "pending"
   },
-  "course-materials/interactive-sessions/1d_whole_game_2.qmd": {
+  "course-materials/interactive-sessions/1d_data_science_workflow_2.qmd": {
    "batch": 3,
    "findings": [],
    "history": [],
@@ -1162,11 +1162,11 @@
     },
     {
      "id": 13,
-     "note": "Not a prose fix.",
-     "resolved_at": "2026-08-24T08:33:03",
+     "note": "Already anchored on the page, checked 2026-08-26. The subtitle reads 'The ten steps, and where you'll learn each one'; the opening paragraph says 'On Day 1 we run a short path end to end' and 'Over the following days we work through each step in depth'; and the section 'Where each step is taught' carries a table mapping all ten steps to a named day, Day 2 through Day 7, plus a paragraph explaining why the teaching order differs from the workflow order. A reader can tell which day teaches each step. The page carries no calendar date on purpose, because it is the map for all nine days rather than for any one of them.",
+     "resolved_at": "2026-08-26T19:50:31",
      "severity": "low",
-     "sha": "03cf721",
-     "status": "needs-kelly",
+     "sha": "a59ee28",
+     "status": "fixed",
      "text": "The page carries no date or day anchor, so a student cannot tell from it where in the nine days they are."
     }
    ],
@@ -1299,20 +1299,20 @@
     },
     {
      "id": 10,
-     "note": "Catalog text or a structural choice, not mine to change.",
-     "resolved_at": "2026-08-24T08:27:56",
+     "note": "Kelly approved the wording on 2026-08-26 after it was checked against house-style.md. index.qmd now carries a 'When we meet' section giving the dates (Monday August 31 to Friday September 11 2026, with no meeting on Monday September 7), the hours (10:00 am to 4:30 pm PT, verified against Day 8's own schedule table), where to ask questions, and a link into Day 1. Checkers on the new prose: 0 sentence-initial demonstratives, 0 bare deictics, 0 em-dashes, 0 causal 'since'.",
+     "resolved_at": "2026-08-26T20:01:24",
      "severity": "medium",
-     "sha": "03cf721",
-     "status": "needs-kelly",
+     "sha": "a59ee28",
+     "status": "fixed",
      "text": "The landing page carries no start date, no meeting time and no link to any day page. Only temporal anchor in the body is 'Day 8'."
     },
     {
      "id": 11,
-     "note": "Catalog text or a structural choice, not mine to change.",
-     "resolved_at": "2026-08-24T08:27:56",
+     "note": "Already fixed before the finding was reviewed. Commit 72579eb, 'Cella Schnabel replaces Anna Boser on the teaching team', updated the Teaching Team block. index.qmd now lists Cella Schnabel with a ucsb.edu address and an emLab profile link, and no Anna Boser reference remains on any live page. Confirmed 2026-08-26.",
+     "resolved_at": "2026-08-26T19:37:33",
      "severity": "high",
-     "sha": "03cf721",
-     "status": "needs-kelly",
+     "sha": "a59ee28",
+     "status": "fixed",
      "text": "Teaching Team still lists Anna Boser as TA for 2026."
     }
    ],
@@ -1359,5 +1359,5 @@
  },
  "schema": 1,
  "started": "2026-08-24T04:26:44",
- "updated": "2026-08-26T04:20:41"
+ "updated": "2026-08-26T20:01:24"
 }

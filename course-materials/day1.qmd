@@ -18,8 +18,8 @@ website to a finished chart. We're jumping right into this before we learn how a
 The morning session has two parts. First we meet python in Positron, which is the application we will write every line of code in for duration of the course (and, likely, for much of your year in the MEDS program). The version of Positron we will be using runs in a browser on the Bren server. Then we will cover just enough Python "grammar" to read the afternoon's code: what a variable is, what a string
 is, and how to use print statements.
 
-In the afternoon we will analyze daily Arctic weather from Toolik Lake in Alaska, running from June 1988 to December 2018. By the end of the day, you will have imported that file, explored it, grouped it, aggregated it, drawn a chart from it and exported the result. We do not
-clean the dataset, because nothing in the file needs cleaning. We will spend Day 4 on cleaning approaches. Some of the afternoon will feel like copy-and-paste and much of it will feel foreign. Today is just an introduction; by the end of the course, you will be able to look back at the commands and tools we use today with familiarity. 
+In the afternoon we will analyze a single file of daily Arctic weather, recorded at Toolik Lake in Alaska between June 1988 and December 2018. By the end of the day, you will have imported that file, explored it, grouped it, aggregated it, drawn a chart from it and exported the result. We do not
+clean the dataset, because the one column we analyze has no missing values. We will spend Day 4 on cleaning approaches. Some of the afternoon will feel like copy-and-paste and much of it will feel foreign, though you will write one thing yourself: the f-string you learn in the morning session. Today is just an introduction; by the end of the course, you will be able to look back at the commands and tools we use today with familiarity. 
 
 ## Class materials
 
@@ -52,3 +52,4 @@ Before leaving today, I encourage you to run the same workflow again on your own
   you want Python on your own laptop as well. This class runs entirely on the Bren server and needs no install.
 - [{{< fa table title="A table" >}} Positron cheatsheet](cheatsheets/positron.qmd)
 - [{{< fa table title="A table" >}} First steps in Python](cheatsheets/first_steps.qmd)
+- [{{< fa triangle-exclamation title="A warning triangle" >}} Reading Python errors](interactive-sessions/2c_exceptions_and_errors.qmd): what a traceback is telling you. We do not teach this in a session, so keep it to hand for the first error you hit on your own.

@@ -11,7 +11,7 @@ To rebuild `data/` from the original upstream sources, see
 
 BASE = "https://eds-217-essential-python.github.io/data/"
 
-# --- Day 1: The Whole Game -------------------------------------------------
+# --- Day 1: The Python Data Science Workflow -------------------------------------------------
 toolik_weather = BASE + "toolik_weather.csv"
 
 # --- Days 2-3: import, explore, filter, sort -------------------------------

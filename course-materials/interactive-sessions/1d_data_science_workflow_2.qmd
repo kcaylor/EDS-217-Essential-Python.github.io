@@ -1,6 +1,6 @@
 ---
 title: "Interactive Session"
-subtitle: "🎬 The Whole Game, Part 2: Visualize, Export & Name the Workflow"
+subtitle: "🎬 The Python Data Science Workflow, Part 2: Visualize, Export & Name the Workflow"
 jupyter: eds217_2026
 format:
   html:
@@ -10,8 +10,8 @@ format:
 ---
 
 In Part 1 you turned a raw file into a twelve-number monthly climate summary. Now you will
-finish the game. You will visualize those numbers, save your results, and put a name to the
-ten-step workflow you just played through.
+finish the workflow. You will visualize those numbers, save your results, and put a name to the
+ten-step workflow you just worked through.
 
 ::: {.callout-important title="Same idea as Part 1 🚀"}
 This is still a preview, so keep working the same way: copy a cell, run it, then change one
@@ -24,13 +24,13 @@ numbers into a picture.
 Set up your notebook with the usual ritual:
 
 1. **Create a new notebook** (`+` → **Notebook** → **eds217_2026**).
-2. **Rename it** to `Session_1D_Whole_Game_2.ipynb`.
+2. **Rename it** to `Session_1D_Workflow_2.ipynb`.
 3. **Add a title cell** (Markdown), updating the date:
 
 ```markdown
-# Day 1: Session 1D - The Whole Game, Part 2
+# Day 1: Session 1D - The Python Data Science Workflow, Part 2
 
-[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1d_whole_game_2.html)
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1d_data_science_workflow_2.html)
 
 Date: 08/31/2026
 ```
@@ -149,9 +149,9 @@ Name what you saved. For example, set `filename = "monthly_means.csv"` and then 
 `f"I saved my results to {filename}."`
 :::
 
-## Naming the whole game: the 10-step workflow
+## Naming what you just did: the 10-step workflow
 
-You just did it. Here is the workflow you played through, named in full. Every analysis in this
+You just did it. Here is the workflow you worked through, named in full. Every analysis in this
 course, and in your career, is some path through these ten steps:
 
 ```{mermaid}
@@ -219,7 +219,8 @@ monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
 - [Course Cheatsheet: Bar Plots](../cheatsheets/bar_plots.qmd)
 - [Course Cheatsheet: Chart Customization](../cheatsheets/chart_customization.qmd)
 
-🎉 **That is the whole game.** You ran a complete Python data science workflow today.
+🎉 **That is the complete workflow.** You ran it end to end today, from a data file on the
+course website to a finished chart.
 
 ::: {.center-text .body-text-xl .teal-text}
 End interactive session 1D

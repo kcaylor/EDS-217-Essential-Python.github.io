@@ -26,7 +26,7 @@ UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
 SOURCES = {
     "toolik_weather.csv": (
         "https://raw.githubusercontent.com/environmental-data-science/eds217-day0-comp/main/data/raw_data/toolik_weather.csv",
-        "Toolik Field Station daily weather (ARC LTER). Day 1 Whole Game."),
+        "Toolik Field Station daily weather (ARC LTER). Day 1 workflow sessions."),
     "banana_index.csv": (
         "https://github.com/TheEconomist/banana-index-data/releases/download/1.0/bananaindex.csv",
         "The Economist Banana Index. Day 3 EOD."),

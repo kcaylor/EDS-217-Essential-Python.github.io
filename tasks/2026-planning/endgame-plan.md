@@ -103,7 +103,7 @@ The 28 cheatsheets were audited against the per-day scope tables in `2026-day-sk
 revised. **24 remain.** Kelly's decisions, and what was done under each:
 
 1. **`data_aggregation.qmd` deleted.** It was a 14-line stub reading "To be added", linked from
-   `1c_whole_game_1.qmd`, the first session of the first day. The link is removed from 1c, which
+   `1c_data_science_workflow_1.qmd`, the first session of the first day. The link is removed from 1c, which
    already links `data_grouping.qmd` on the line above it.
 2. **Three unreferenced pages retired**, and three kept behind a scope banner.
    Retired: `random_numbers.qmd`, `datetimeindex_vs_columns.qmd`, `emoji_visualizations.qmd`.
@@ -277,6 +277,37 @@ forward links from any exercise to its key were added, per the decision above.
 
 **Still true: do not edit the source exercises casually.** This pass was the deliberate correction
 the rule was reserving. The rule is back in force.
+
+## Day 1 locked (2026-08-26)
+
+`course-materials/day1.qmd` is Kelly's final draft and is finished and ready for class. Do not
+edit it without asking him first.
+
+The draft renamed the two afternoon sessions, and the rename was carried through the rest of the
+materials in the same pass:
+
+- `1c_whole_game_1.qmd` is now `1c_data_science_workflow_1.qmd`, and `1d_whole_game_2.qmd` is now
+  `1d_data_science_workflow_2.qmd`. Both new URLs are live in `docs/`, and the two old pages are
+  gone from `docs/` and from `search.json`.
+- The "Whole Game" name is retired from every student-facing page. The two sessions, the Day 1
+  end-of-day practice and its answer key, the answer-key index and
+  `the-data-science-workflow.qmd` all now say workflow. The notebooks students are told to create
+  are `Session_1C_Workflow_1.ipynb`, `Session_1D_Workflow_2.ipynb` and `EOD_Day1_Workflow.ipynb`.
+- The planning documents in `tasks/2026-planning/` keep the original name, because they record
+  what was designed rather than what students read.
+
+Seven pages were re-rendered. The other 82 pages in `docs/` carry the interactive-sessions navbar,
+so their two menu entries were rewritten in place rather than by re-running the full site. After
+that: 89 rendered pages, zero broken internal links across all of them, 41 of 41 cells clean on the
+seven touched sources, and the four mechanical gates pass.
+
+**Four voice-pass findings on day1.qmd are waiting on Kelly**, recorded in
+`prelaunch/voice-pass.json`. Finding 1 is the one that matters: the page says "nothing in the file
+needs cleaning", and that is false. Verified against `data/toolik_weather.csv` on 2026-08-26,
+`Daily_AirTemp_Mean_C` is the only column with no missing values, while `Daily_Precip_Total_mm` has
+420, wind speed 826 and radiation 7053. Line 176 of 1c states it correctly and scoped to the one
+column; line 25 of 1c repeats the same overstatement and would need the same fix. The other eight
+findings from the 2026-08-24 cold read are resolved by this draft.
 
 ## Pre-launch checklist
 

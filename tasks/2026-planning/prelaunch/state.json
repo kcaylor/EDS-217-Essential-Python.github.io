@@ -1472,7 +1472,20 @@
           "git_sha": "a59ee28",
           "ok": true
         }
-      ]
+      ],
+      "signoff": {
+        "at": "2026-08-26T20:06:39",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "a45ea77",
+        "note": "Re-rendered and republished on 2026-08-26 after the C9, C12, day1, day2 and index changes. Full battery clean beforehand: 90 pages rendered, every executable cell on every live page ran, every data URL resolved, four mechanical gates pass. Pushed to origin and live at a45ea77, both fast-forward. d8_live_site passed on the first attempt. Confirmed live by fetch: index serves the new 'When we meet' block with the correct dates, day1 serves the corrected cleaning sentence, 2c_exceptions_and_errors.html returns 200, and the cached Toolik header returns 200.",
+        "verification": {
+          "at": "2026-08-26T19:51:11",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "D2": {
       "checks": [
@@ -3329,5 +3342,5 @@
     }
   },
   "schema": 1,
-  "updated": "2026-08-26T19:52:08"
+  "updated": "2026-08-26T20:06:39"
 }

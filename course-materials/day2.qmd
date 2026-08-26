@@ -12,26 +12,24 @@ description: "Tuesday September 1^st^, 2026"
 *An illustration of collectible toys.* [MidJourney 5](https://www.midjourney.com/jobs/7c249ba1-5cc4-4a9b-92d9-78ca3134f623?index=0)
 :::
 
-Yesterday you ran a complete workflow without knowing how any of it worked. Today we slow
-down on the first two steps of that workflow, **Import** and **Explore**, and you learn to
-find out what is actually in a file before you compute anything from it.
+Yesterday we ran a complete workflow to get a sense of what python syntax looks like and to meet the various libraries and commands that make up the python data science stack. Today we'll slow
+down and get to know the first two steps of that workflow, **Import** and **Explore**. You will learn to explore datasets and get basic information about their structure and contents.
 
-Python's two essential containers, **lists** and **dictionaries**, show up today in the
-places you actually need them: a list of columns to select, a dictionary to rename them.
+We will also meet python's two essential containers, **lists** and **dictionaries**. While they are used across python to store structured data, we will need them for two specific purposes: creating a list of columns to select, and using a dictionary to rename them.
 
 ## Class materials
 
 | {{< fa calendar-day title="A calendar with one day highlighted" >}} Session  | {{< fa laptop-code title="A laptop with on-screen code" >}} Session 1  |  {{< fa laptop-code title="A laptop with on-screen code" >}} Session 2 |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
 | day 2 / morning   | [🐼 Reading Data into pandas](interactive-sessions/2a_reading_data.qmd) | [🔎 Exploring a DataFrame](interactive-sessions/2b_exploring_data.qmd) |
-| day 2 / afternoon | [🙌 Five Claims About a Dataset You've Never Seen](coding-colabs/2c_exploring_unfamiliar_data.qmd) | [📝 Lists & Dictionaries, On Their Own Terms](live-coding/2d_lists_and_dicts.qmd) |
+| day 2 / afternoon | [🙌 Five Claims About a Dataset You've Never Seen](coding-colabs/2c_exploring_unfamiliar_data.qmd) | [📝 Lists & Dictionaries usage in Data Science](live-coding/2d_lists_and_dicts.qmd) |
 : {.hover .bordered tbl-colwidths="[20,40,40]"} 
 
 ## End-of-day practice
 
 Today's practice returns to the dataset you ran yesterday, and asks what was actually in it.
 
-- [{{< fa pencil title="A pencil" >}} **Day 2 Practice:** A Data Biography](eod-practice/eod-day2-2026.qmd)
+- [{{< fa pencil title="A pencil" >}} **Day 2 Practice:** Creating a Data Biography](eod-practice/eod-day2-2026.qmd)
 
 <!-- Answer keys are held back so that the room tries, gets stuck and asks.
      Kelly posts these URLs in Slack or on the whiteboard once a session has

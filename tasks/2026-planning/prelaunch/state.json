@@ -2797,7 +2797,20 @@
           "git_sha": "a59ee28",
           "ok": true
         }
-      ]
+      ],
+      "signoff": {
+        "at": "2026-08-26T20:33:19",
+        "by": "Kelly Caylor",
+        "forced": false,
+        "git_sha": "e8ec19e",
+        "note": "Kelly signed this off on 2026-08-26. tools/gates.sh was added in c09b13b and is wired to 'make gates'. Re-ran it at sign-off: exit 0. It runs the four mechanically checkable gates, 3 Field Notes counts, 4 handout and key structural agreement, 5 no lambda, and 6 the archived alignment checklist and seven per-day audits, and reports gates 1 and 2 as HUMAN rather than implying all six were machine-verified, which was the point of the item. Confirmed the human-gate pointer resolves: tasks/2026-planning/2026-day-skeleton.md exists at 47 KB and carries the scope-table and rehearsal records the two gates refer to. The runner also qualifies its own passes, noting that gate 4 covers only the structural half because handouts number tasks while keys group them under parts, and that gate 6 checks file existence rather than whether the checklist was applied. No .github directory exists, but CI was never in the item's ACTION, which asked only for the script.",
+        "verification": {
+          "at": "2026-08-26T19:51:13",
+          "kind": "command",
+          "ok": true
+        }
+      },
+      "state": "certified"
     },
     "T3": {
       "checks": [
@@ -3342,5 +3355,5 @@
     }
   },
   "schema": 1,
-  "updated": "2026-08-26T20:06:39"
+  "updated": "2026-08-26T20:33:19"
 }

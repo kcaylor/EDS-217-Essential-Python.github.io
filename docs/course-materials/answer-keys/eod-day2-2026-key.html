@@ -464,7 +464,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="0d69a7d2" class="cell" data-execution_count="1">
+<div id="fbfaac4c" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -477,7 +477,7 @@ How to use this key
 <section id="part-1-vital-statistics" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-vital-statistics">Part 1: Vital statistics</h2>
 <p><strong>1. How many rows and how many columns does the dataset have?</strong></p>
-<div id="adb97dc1" class="cell" data-execution_count="2">
+<div id="a7650639" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>toolik.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -500,7 +500,7 @@ How to use this key
 </div>
 </div>
 <p><strong>2. What are the column names? Get them as a Python list.</strong></p>
-<div id="35814f76" class="cell" data-execution_count="3">
+<div id="a36d7717" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>toolik.columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -543,7 +543,7 @@ How to use this key
 </div>
 </div>
 <p><strong>3. What is the data type of each column?</strong></p>
-<div id="8ea512d1" class="cell" data-execution_count="4">
+<div id="07ed47a5" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>toolik.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -588,7 +588,7 @@ dtype: object</code></pre>
 </div>
 </div>
 <p><strong>4. What years does the record cover? (You can read the earliest and latest year off <code>.describe()</code>.)</strong></p>
-<div id="1596316a" class="cell" data-execution_count="5">
+<div id="955d614d" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>toolik.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -761,7 +761,7 @@ dtype: object</code></pre>
 <section id="part-2-the-health-check" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-the-health-check">Part 2: The health check</h2>
 <p><strong>5. Run <code>.info()</code>. How many columns have fewer non-null values than there are rows?</strong></p>
-<div id="fe4538cc" class="cell" data-execution_count="6">
+<div id="a21119f6" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>toolik.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -812,7 +812,7 @@ memory usage: 1.8+ MB</code></pre>
 </div>
 </div>
 <p><strong>6. Use <code>.isnull().sum()</code> to count missing values per column. Which three columns are the emptiest?</strong></p>
-<div id="bf767bd6" class="cell" data-execution_count="7">
+<div id="1260b726" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>toolik.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -857,7 +857,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>7. One of the flag columns is missing a value in all but a handful of rows. Which one, and how many values does it actually have?</strong></p>
-<div id="e4a1cdb3" class="cell" data-execution_count="8">
+<div id="3caa6529" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>toolik.isnull().<span class="bu">sum</span>().head(<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -905,7 +905,7 @@ dtype: int64</code></pre>
 <section id="part-3-what-varies-and-what-doesnt" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-what-varies-and-what-doesnt">Part 3: What varies, and what doesn’t</h2>
 <p><strong>8. Use <code>.value_counts()</code> on <code>LTER_Site</code> and on <code>Station</code>. What do you learn? Is either column carrying information?</strong></p>
-<div id="e14c7c6a" class="cell" data-execution_count="9">
+<div id="70aaf84a" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'LTER_Site'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -916,7 +916,7 @@ ARC    11171
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="b52c1945" class="cell" data-execution_count="10">
+<div id="993eb50e" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Station'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -942,7 +942,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>9. Use <code>.value_counts()</code> on <code>Flag_Daily_AirTemp_Mean_C</code>. What values appear, and what do you think they mean?</strong></p>
-<div id="a3d918c6" class="cell" data-execution_count="11">
+<div id="82aaaada" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Flag_Daily_AirTemp_Mean_C'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -969,7 +969,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>10. Use <code>.value_counts()</code> on the <code>Year</code> column and look at both ends of the result, with <code>.head()</code> and then with <code>.tail()</code>. Do all years have the same number of observations? What would explain a year with fewer?</strong></p>
-<div id="bbc1cf90" class="cell" data-execution_count="12">
+<div id="5fd5acc7" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Year'</span>].value_counts().head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -984,7 +984,7 @@ Name: count, dtype: int64</code></pre>
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="9717f361" class="cell" data-execution_count="13">
+<div id="5af9cc96" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Year'</span>].value_counts().tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1019,7 +1019,7 @@ Name: count, dtype: int64</code></pre>
 <section id="part-4-the-numbers" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-the-numbers">Part 4: The numbers</h2>
 <p><strong>11. What is the mean daily air temperature across the whole record? The minimum? The maximum?</strong></p>
-<div id="f36b124b" class="cell" data-execution_count="14">
+<div id="dd25ad4f" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Daily_AirTemp_Mean_C'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1053,7 +1053,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>13. Pick one other numeric column and report its range. Does anything about it look wrong?</strong></p>
-<div id="82d801b9" class="cell" data-execution_count="15">
+<div id="8d637fe5" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>toolik[[<span class="st">'Daily_AirTemp_Mean_C'</span>, <span class="st">'Daily_Precip_Total_mm'</span>, <span class="st">'Daily_windsp_mean_msec'</span>]].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1145,7 +1145,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 <section id="part-5-a-tidier-table" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-a-tidier-table">Part 5: A tidier table</h2>
 <p><strong>14. Build a list of the five columns you’d keep if you had to hand this dataset to a colleague who only cared about temperature. Use it to make a smaller DataFrame.</strong></p>
-<div id="e4cfcead" class="cell" data-execution_count="16">
+<div id="62e6d3ea" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>temp_columns <span class="op">=</span> [<span class="st">'Year'</span>, <span class="st">'Month'</span>, <span class="st">'Date'</span>, <span class="st">'Daily_AirTemp_Mean_C'</span>, <span class="st">'Daily_AirTemp_AbsMin_C'</span>]</span>
@@ -1215,7 +1215,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>15. Build a dictionary that renames at least two of those columns to something shorter and clearer. Apply it with <code>.rename(columns=...)</code> and confirm the new names.</strong></p>
-<div id="09e976af" class="cell" data-execution_count="17">
+<div id="ac2d3ae9" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>shorter <span class="op">=</span> {</span>

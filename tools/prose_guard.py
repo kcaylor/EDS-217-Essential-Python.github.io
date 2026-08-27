@@ -5,7 +5,7 @@ Fence a voice pass to prose, and prove afterwards that nothing else moved.
 A style pass over 89 pages of teaching material is a judgement task, and the
 person doing it should be free to rewrite a paragraph. What they must not do is
 touch a code cell, a YAML header, a link target or a shortcode, because those
-carry behaviour rather than voice, and a single silent change there breaks a
+define behaviour rather than voice, and a single silent change there breaks a
 page for a student.
 
 Rules cannot make prose good. They can keep an editing pass off the parts of the
@@ -14,6 +14,7 @@ file that are not prose, which is what this does.
     python tools/prose_guard.py regions <file>        what is protected, and what is editable
     python tools/prose_guard.py verify <file> [...]   compare the working tree against HEAD
     python tools/prose_guard.py verify --all          every live page
+    python tools/prose_guard.py desync --all         exercise reworded, key not
 
 Exit status is 0 when every protected region is byte-identical to its committed
 version, and 1 when any of them changed.
@@ -27,7 +28,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# Everything here carries behaviour, not voice. A voice pass must not alter it.
+# Everything here defines behaviour, not voice. A voice pass must not alter it.
 PROTECTED = [
     ("yaml front matter", re.compile(r"\A---\n.*?\n---\n", re.S)),
     ("fenced code block", re.compile(r"^```.*?^```", re.M | re.S)),
@@ -323,6 +324,55 @@ def cmd_referents(paths):
     return 1 if (total - deictic_n or ell_total) else 0
 
 
+# An exercise page and its answer key repeat each other's question text
+# verbatim. A voice pass that rewords a question in one file and not the other
+# leaves a student reading one wording and checking themselves against another.
+# The first run of the editor stage did exactly this on eod-day3 question 4, so
+# the check exists rather than the instruction alone.
+def key_for(path):
+    """The answer key that pairs with an exercise page, if there is one."""
+    p = Path(path).resolve()
+    if "eod-practice" not in p.parts:
+        return None
+    k = ROOT / "course-materials/answer-keys" / (p.stem + "-key.qmd")
+    return k if k.exists() else None
+
+
+def cmd_desync(paths):
+    """Prose removed from an exercise in the working tree but still in its key."""
+    checked = bad = 0
+    for path in paths:
+        key = key_for(path)
+        if key is None:
+            continue
+        before = head_version(path)
+        if before is None:
+            continue
+        checked += 1
+        now = Path(path).read_text(errors="replace")
+        gone = set(prose_only(before).splitlines()) - set(prose_only(now).splitlines())
+        # Compare on whitespace-normalised text, because the exercise and the key
+        # wrap at different columns and a line that merely moved is not a change.
+        flat = lambda s: " ".join(s.split())
+        ktext = flat(prose_only(key.read_text(errors="replace")))
+        ntext = flat(prose_only(now))
+        hits = [l.strip() for l in gone
+                if len(l.strip()) > 25
+                and flat(l) in ktext          # the old wording survives in the key
+                and flat(l) not in ntext]     # and is genuinely gone from the exercise
+        if not hits:
+            continue
+        bad += len(hits)
+        print(f"\n{Path(path).relative_to(ROOT) if Path(path).is_absolute() else path}")
+        print(f"  reworded here, still the old wording in {key.name}:")
+        for h in sorted(hits):
+            print(f"    {h[:100]}")
+    print(f"\n{checked} exercise/key pair(s) checked. {bad} line(s) out of sync.")
+    if bad:
+        print("A student reads one wording and checks themselves against another.")
+    return 1 if bad else 0
+
+
 def head_version(path):
     rel = Path(path).resolve().relative_to(ROOT)
     r = subprocess.run(["git", "show", f"HEAD:{rel}"], cwd=str(ROOT),
@@ -412,7 +462,7 @@ def main(argv):
         return 0
     cmd = argv[1]
     args = argv[2:]
-    if cmd in ("verify", "referents", "deictics") and args[:1] == ["--all"]:
+    if cmd in ("verify", "referents", "deictics", "desync") and args[:1] == ["--all"]:
         paths = live_pages()
     else:
         paths = [Path(a) for a in args]
@@ -431,6 +481,8 @@ def main(argv):
         return cmd_timeclaims(paths)
     if cmd == "deictics":
         return cmd_deictics(paths)
+    if cmd == "desync":
+        return cmd_desync(paths)
     print(f"unknown command: {cmd}")
     return 2
 

@@ -30,8 +30,10 @@ read-only. Do not edit anything.
 
 WHO YOU ARE. You are a student in the first week of a Masters program. You
 learned pandas eight days ago. You read English fluently but it is your second
-language. You are reading these pages once, at 9pm, to find out what you have to
-do tomorrow. You cannot ask anyone a question.
+language. You are reading these pages once, quickly, in the last block of a long
+class day, to find out what you have to do. Cella and Kelly are in the room, but
+you are tired and you do not want to ask about something the page should have
+said.
 
 WHAT TO REPORT. Every place where you had to stop, re-read, or look backwards in
 the page to understand a sentence. For each one, give:
@@ -68,7 +70,7 @@ first-time reader feels even when they cannot name them:
    into the text rather than at the page you are holding. Say what you had to
    reach back for. Also report a demonstrative that points at the document itself
    ("This session teaches...") where a grounded adjective would tell you more
-   ("Today's lesson is...", "Tonight's practice is..."). Say whether you could
+   ("Today's lesson is...", "This afternoon's practice is..."). Say whether you could
    tell where in the nine days you were.
 6. **Any numeral used as a noun with the noun left out**, such as "any of the
    three" or "all five". Say "three what".
@@ -96,10 +98,17 @@ than inventing findings. It is a good outcome for this report to be short.
 ## Why the reader is given a persona rather than a rulebook
 
 The persona does the work a checklist cannot. "Second language" makes it stop at
-idioms. "Once, at 9pm" stops it re-reading charitably. "Cannot ask anyone" makes
-it treat every unresolved reference as a real failure rather than something a
-student would clear up in class. Those three constraints produced most of the
-eighteen findings.
+idioms. "Once, quickly" stops it re-reading charitably. "Tired, and does not want
+to ask" makes it treat every unresolved reference as a real failure rather than
+something a student would clear up in class. Those three constraints produced
+most of the eighteen findings.
+
+The persona said "at 9pm" and "cannot ask anyone" until 2026-08-27, on the
+assumption that an end-of-day practice was homework. It is not: the class runs to
+4:00 or 4:30 and there is no homework, so the practice happens in the room with
+the instructors present. Four editor passes were run against the wrong premise
+and wrote "tonight" and "ask Cella or Kelly in the morning" into pages where the
+answer was ten feet away.
 
 ## What to do with the findings
 

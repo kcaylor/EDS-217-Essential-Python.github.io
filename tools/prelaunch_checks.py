@@ -436,7 +436,7 @@ def c1_day89_specified():
     }
     lines = [f"  {'yes' if ok else 'NO '}  {name}" for name, ok in want.items()]
     missing = [n for n, ok in want.items() if not ok]
-    lines.insert(0, f"Days 8 and 9 carry {len(want) - len(missing)} of {len(want)} "
+    lines.insert(0, f"Days 8 and 9 name {len(want) - len(missing)} of {len(want)} "
                     f"things a student or an instructor needs.")
     if missing:
         lines.append(f"still missing: {', '.join(missing)}")
@@ -455,6 +455,50 @@ HARD_RULES = [
         re.I)),
     ("metaphorical 'hinge'", re.compile(r"\bhinges?\b|\bhinging\b", re.I)),
     ("'X with a hint of Y'", re.compile(r"with a (?:hint|touch|dash) of", re.I)),
+    # Carrying is a physical act. A file does not carry columns, a label does
+    # not carry units, and a sentence does not carry a claim. The verb always
+    # stands in for a relation the writer could have named: has, shows, means,
+    # holds, states. Two survivors are allow-listed: "carry out" where it means
+    # perform, and "carried forward" in the name of the LOCF imputation method.
+    ("metaphorical 'carry'", re.compile(
+        r"\bcarr(?:y|ies|ying)\b(?!\s+out\b)"
+        r"|\bcarried\b(?!\s+(?:out|forward)\b)", re.I)),
+    # An idiom standing where a plain noun exists. "The shape of the day" is an
+    # agenda or a plan. Literal geometry ("the shape of the curve", "the size
+    # and shape of a figure") is not this, so only abstract objects are listed.
+    # A short list of figures with no source domain to map from. A day has no
+    # shape literally or figuratively, so "the shape of the day" is a frame with
+    # nothing in it, in the manner of "the shape of water". These are rotten
+    # everywhere, and a heading is NOT exempt: the phrase that prompted the rule
+    # was itself a heading. Kelly's clever, highly contextual figures are wanted
+    # ("Exploring the TableLands", "Part 5: Land, not carbon"), and no regex can
+    # recognise one, so everything outside this list goes to ADVISORY_RULES for
+    # a reader to judge. "ranking" is not here because "the shape of the
+    # ranking" is often a real claim about a distribution.
+    ("figure with no source to map from", re.compile(
+        r"\bshape of (?:the |a |an |this |your |our |its |each )?"
+        r"(?:day|week|course|term|class|session|thing|problem|whole|"
+        r"exercise|project|argument|answer|assignment|lesson)\b", re.I)),
+    # Kelly, 2026-08-27: "a blanket prohibition on 'owns' as a verb that you use
+    # in any teaching material. It's almost never the correct word (same problem
+    # as 'carries') and it has baggage as a verb that I do not want to inject
+    # into my writing." The possessive and the adjective are untouched: "your own
+    # notebook", "on your own", "our own eyes".
+    ("'own' as a verb", re.compile(r"\bown(?:s|ed|ing)\b", re.I)),
+    # The pandas-volunteering joke, which the editor stage added by itself.
+    ("a tool given a will of its own", re.compile(
+        r"\b(?:pandas|seaborn|matplotlib|numpy|python|quarto|positron|jupyter)\s+"
+        r"(?:was|is|were|are)\s+(?:never\s+)?(?:going to|about to)\b"
+        r"|\bbeing polite\b", re.I)),
+    # A cleft opener defers the subject past the verb, so the reader parses an
+    # empty "What is" and holds it until the real subject arrives. As the last
+    # sentence of a paragraph it forces a re-read of the whole paragraph.
+    ("cleft opener, subject deferred", re.compile(
+        r"(?:(?<=[.!?]\s)|(?<=[.!?]\s\s)|^)"
+        r"(?:What\s+(?:is|was|are|were|makes|happens|comes|matters|counts|changes)\b"
+        r"[^.!?\n]{0,80}?\bis\s+that\b"
+        r"|What\s+(?:matters|counts|changes)\b[^.!?\n]{0,40}?\bis\b"
+        r"|The\s+(?:thing|point|catch|trick|upshot)\s+(?:is|about|here)\b)")),
     # A clause that announces an explanation instead of giving one.
     ("promise instead of tell", re.compile(
         r"and here (?:is|are|'s) why"
@@ -479,17 +523,41 @@ ADVISORY_RULES = [
     ("'not X, it is Y' shape", re.compile(
         r"(is|are|was|were)\s+not\s+[^.;:]{3,60}[.,]\s*(it|they|that)\s+(is|are|was|were)\b",
         re.I)),
+    # The wider personification. Reported rather than failed, because "Python
+    # tries to combine the wrong pieces" and "what pandas thinks it is" are close
+    # to how the error messages themselves read, and a reader has to judge.
+    ("a tool personified, check it earns it", re.compile(
+        r"\b(?:pandas|seaborn|matplotlib|numpy|python|quarto|positron|jupyter)\s+"
+        r"(?:decides?|wants?|knows?|tries|refuses?|volunteers?|likes?|thinks?|"
+        r"cares?|prefers?|expects?)\b", re.I)),
+    # Any other "shape of": literal geometry, a real claim about a distribution,
+    # or a heading, where a tuned pun is wanted and only pablum is not.
+    ("'shape of', check it is literal or a tuned heading", re.compile(
+        r"\bshape of\b", re.I)),
 ]
+
+
+def _mask_non_prose(text):
+    """Blank every code cell, YAML header and shortcode, keeping line numbers."""
+    sys.path.insert(0, str(ROOT / "tools"))
+    import prose_guard
+    out = list(text)
+    for _, start, end, _body in prose_guard.regions(text):
+        for j in range(start, end):
+            if out[j] != "\n":
+                out[j] = " "
+    return "".join(out)
 
 
 def _style_scan(rules):
     hits = []
     for f in live_qmd():
-        text = (ROOT / f).read_text(errors="replace")
-        for i, line in enumerate(text.splitlines(), 1):
+        raw = (ROOT / f).read_text(errors="replace")
+        raw_lines = raw.splitlines()
+        for i, line in enumerate(_mask_non_prose(raw).splitlines(), 1):
             for name, rx in rules:
                 if rx.search(line):
-                    hits.append((str(f), i, name, line.strip()[:88]))
+                    hits.append((str(f), i, name, raw_lines[i - 1].strip()[:88]))
     return hits
 
 
@@ -508,8 +576,9 @@ def c10_house_style():
         if len(hard) > 20:
             lines.append(f"    ... and {len(hard) - 20} more")
     else:
-        lines.append("HARD violations: none. No em-dash, no metaphorical land or "
-                     "hinge, no 'with a hint of' on any live page.")
+        lines.append("HARD violations: none. No em-dash, no metaphorical land, "
+                     "hinge, carry or own, no figure with nothing to map from, "
+                     "no cleft opener, no 'with a hint of' on any live page.")
 
     lines.append(f"advisory, for the voice pass to judge: {len(advisory)} line(s) "
                  f"across {len({h[0] for h in advisory})} page(s) use the "
@@ -672,7 +741,7 @@ def c6_positron_screenshots():
 
 
 def c7_eod_dates():
-    """Every end-of-day page must carry its own date."""
+    """Every end-of-day page must state its own date."""
     lines, ok = [], True
     for d in range(1, 8):
         f = ROOT / f"course-materials/eod-practice/eod-day{d}-2026.qmd"
@@ -903,7 +972,7 @@ def h1_orphan_assets():
 
 
 def h4_stale_checklist_item():
-    """The plan must not carry an open item for work already done."""
+    """The plan must not hold an open item for work already done."""
     plan = ROOT / "tasks/2026-planning/endgame-plan.md"
     text = plan.read_text()
     open_items = re.findall(r"^- \[ \] \*\*(.+?)\*\*", text, re.M)

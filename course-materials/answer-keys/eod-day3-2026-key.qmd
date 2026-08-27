@@ -61,7 +61,7 @@ df.head()
 
 :::{.callout-note title="✅ Answer"}
 Each one is a **ratio**, not a measurement. It says how many times the banana's climate cost a
-food carries, and the three columns differ only in what is being held constant: a kilogram of
+food has, and the three columns differ only in what is being held constant: a kilogram of
 food, a thousand calories of food, or a hundred grams of protein. So a score of 20 means twenty
 bananas' worth, on whichever basis that column uses. The raw emissions columns those ratios were
 built from are still in the table, which is what lets you check the arithmetic yourself.
@@ -86,8 +86,8 @@ values are telling you something true about the food rather than something carel
 data collection. This is worth pausing on: a null is sometimes a fact.
 :::
 
-**4. What is the value of `Bananas index (kg)` for `Bananas` itself? Say why that number is what
-it is.**
+**4. What is the value of `Bananas index (kg)` for `Bananas` itself? Explain in a sentence why
+the number has to come out that way.**
 
 ```{python}
 df.loc['Bananas', 'Bananas index (kg)']
@@ -345,7 +345,7 @@ numbers support. Here is one that would earn full marks.
 :::{.callout-note title="✅ A model answer"}
 Cutting bananas is not where the gains are. A banana scores 1.0 on the kilogram index by
 definition, and it sits near the bottom of every ranking we computed. Beef steak scores 148.6 on
-the same scale, so a kilogram of steak carries roughly 149 times a kilogram of bananas'
+the same scale, so a kilogram of steak emits roughly 149 times a kilogram of bananas'
 emissions, and 82.3 times the land use per thousand calories. Bananas are also unusually
 efficient per calorie, which matters because we eat them for calories rather than for protein.
 Removing them from a diet changes a very small number and creates a gap that has to be filled by

@@ -13,29 +13,27 @@ format:
 ---
 
 ::: {style="width: 80%; margin: auto;"}
-![](../images/kenya_landscape.png)
+![Toolik Field Station from the boardwalk](images/toolik_boardwalk.jpg)
 :::
 
-Yesterday you ran a complete data science workflow on `toolik_weather.csv`. You imported it,
-summarized it, plotted it, and exported a result. At no point did anyone ask you what was
-actually in that file.
-
-Today you find out.
+Yesterday we ran a complete workflow on the Toolik dataset using one column of it. Tonight you will
+write a **data biography** of the whole thing: where it came from, what it covers, what
+condition it is in, and what somebody needs to know before trusting a number computed from it.
 
 ## What is a data biography?
 
 A **data biography** is a short written account of a dataset: where it came from, what it
-covers, what shape it's in, and what a reader needs to know before trusting anything
-computed from it. Working data scientists write these constantly, usually in the first cells
-of a notebook, because the alternative is discovering a problem after you've built an
-analysis on top of it.
+covers, what condition it's in, and what a reader needs to know before trusting anything
+computed from it. Working data scientists write them constantly, usually in the first cells
+of a notebook, because the alternative is finding the problem after you've built a whole
+analysis on top of it (which is a much worse day!).
 
 Your deliverable today is a biography of the Toolik weather data, written in your notebook
 as markdown, with code cells showing the evidence for every claim you make.
 
-**This is the important part: every statement in your biography must be backed by a cell that
-produced it.** Not "the data covers about thirty years," but "the data covers 1988 to 2018,"
-with the cell that told you so sitting right above it.
+**Evidence is the important part: every statement in your biography must be backed by a cell
+that produced it.** Not "the data covers about thirty years," but "the data covers 1988 to
+2018," with the cell that told you so sitting right above it.
 
 ## Setup
 
@@ -66,13 +64,13 @@ toolik = pd.read_csv(url)
 :::{.callout-note title="About this station"}
 Toolik Field Station sits on the North Slope of Alaska, above the Arctic Circle, and is part
 of the Arctic Long Term Ecological Research (LTER) network. It has been collecting daily
-weather since the late 1980s. Keep that context in mind: it should make some of the numbers
-you find look reasonable, and it should make others look suspicious.
+weather since the late 1980s. Keep the location in mind while you work. Some of the numbers
+you find should look reasonable for an Arctic site, and some of them should look suspicious!
 :::
 
 ## Part 1: Vital statistics
 
-Answer each of these with code, then write the answer in a markdown cell beneath it.
+Answer each question below with code, then write the answer in a markdown cell beneath it.
 
 1. How many rows and how many columns does the dataset have?
 2. What are the column names? Get them as a Python list.
@@ -107,8 +105,8 @@ properly on Day 6.
 5. Run `.info()`. How many columns have fewer non-null values than there are rows?
 6. Use `.isnull().sum()` to count missing values per column. Which three columns are the
    emptiest?
-7. One of the flag columns is missing a value in all but a handful of rows. Which one, and
-   how many values does it actually have?
+7. One of the flag columns has a value in only a handful of rows, and is empty everywhere
+   else. Which one, and how many values does it actually have?
 
 ```{python}
 toolik.info()
@@ -124,14 +122,15 @@ toolik.isnull().sum().head(20)
 
 :::{.callout-important title="Interpret, don't just report"}
 A column that is 99% empty is not necessarily broken. Think about what a "flag" column is
-for in an environmental dataset, and offer a sentence explaining why it might be mostly
-empty by design. This is the difference between reading a table and understanding a dataset.
+for in an environmental dataset, and write a sentence explaining why it might be mostly
+empty by design. Reading a table tells you that the column is empty. Understanding the
+dataset tells you whether being empty is a problem.
 :::
 
 ## Part 3: What varies, and what doesn't
 
-8. Use `.value_counts()` on `LTER_Site` and on `Station`. What do you learn? Is either
-   column carrying information?
+8. Use `.value_counts()` on `LTER_Site` and on `Station`. What do you learn? Does either
+   column tell you anything?
 9. Use `.value_counts()` on `Flag_Daily_AirTemp_Mean_C`. What values appear, and what do you
    think they mean?
 10. Use `.value_counts()` on the `Year` column and look at both ends of the result, with
@@ -161,7 +160,8 @@ toolik['Year'].value_counts().tail()
 ## Part 4: The numbers
 
 11. What is the mean daily air temperature across the whole record? The minimum? The maximum?
-12. Are those values plausible for a site above the Arctic Circle? Say why or why not.
+12. Are the mean, the minimum and the maximum plausible for a site above the Arctic Circle?
+    Say why or why not.
 13. Pick one other numeric column and report its range. Does anything about it look wrong?
 
 ```{python}
@@ -208,8 +208,9 @@ In a single markdown cell, write 200 to 300 words covering:
 - **Condition.** What's missing and where. Which columns you would and would not trust.
 - **Cautions.** Two specific things a person using this data should know before computing
   anything from it.
-- **Fitness for purpose.** Could you use this to describe how Arctic summer temperatures have
-  changed since 1988? Say yes or no, and say what would need checking first.
+- **Fitness for purpose.** Could you use this dataset to describe how Arctic summer
+  temperatures have changed since 1988? Say yes or no, and say what would need checking
+  first.
 
 Write it for a colleague who has never opened the file. No bullet fragments; complete
 sentences.
@@ -224,7 +225,7 @@ for column_name in ['Daily_AirTemp_Mean_C', 'Daily_Precip_Total_mm']:
     print(column_name, toolik[column_name].isnull().sum())
 ```
 
-This is optional. Everything above can be done one column at a time.
+The loop is optional! Everything above can be done one column at a time.
 :::
 
 ```{python}
@@ -242,7 +243,12 @@ Before you close your notebook, check that:
 - you noticed at least one thing about this dataset that would have caused a problem if you
   hadn't looked
 
-That last one is the whole point of today.
+The last check is the whole point of this practice, because a problem you catch now is
+a problem you never have to unpick out of a finished analysis.
+
+If you get stuck, say what you tried and ask Cella or Kelly while you are still here. A small
+problem you have been staring at alone for twenty minutes usually turns out to be a small
+problem!
 
 ## Resources
 

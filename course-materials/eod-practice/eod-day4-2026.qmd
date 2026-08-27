@@ -26,27 +26,28 @@ microplastics measurement they can find: 16,245 water samples, pooled from thirt
 separate studies, taken between 1972 and 2022 by research vessels, citizen scientists, and
 undergraduates with nets.
 
-Nobody designed this dataset. It was assembled. That is true of most environmental data you
-will ever be handed, and it is why today mattered.
+Nobody designed this dataset. It was assembled, one study at a time. Most of the environmental
+data you will ever be handed was put together the same way, which is why today mattered.
 
-You have already met this file twice today. This evening you take it the whole way: from the
-raw download to a defensible answer about whether the Atlantic and the Pacific are different.
+You have already met this file twice today. Tonight you will take it the whole way: from the
+raw download to an answer you could defend about whether the Atlantic and the Pacific are
+different.
 
 :::{.callout-note title="Reference"}
 NOAA National Centers for Environmental Information, Marine Microplastics database.
 [https://www.ncei.noaa.gov/products/microplastics](https://www.ncei.noaa.gov/products/microplastics)
 :::
 
-## Today's three sentences
+## Today's three patterns
 
-Everything below is built from these, plus the two you learned yesterday. You should not need
-to look them up more than once.
+Everything below is built from these three patterns, plus two more you learned yesterday. You
+should not need to look any of them up more than once.
 
 ```python
 df['new'] = expression                     # the derived-column pattern
-df.dropna(subset=['col'])                  # the missing-data sentence, treat half
+df.dropna(subset=['col'])                  # the missing-data pattern, treat half
 df['col'] = df['col'].fillna(value)
-df['col'] = df['col'].str.strip()          # the string-cleaning sentence
+df['col'] = df['col'].str.strip()          # the string-cleaning pattern
 ```
 
 And the payoff from this morning:
@@ -84,7 +85,7 @@ The format string is a small language of its own. `%m/%d/%Y` is month, day, four
 expected to be able to write one of these yet.
 
 Once a column is a real date, you reach the pieces of it through `.dt`. You will need exactly
-one of these tonight, in task 13, and it also comes supplied:
+one of these in task 13, and we are giving it to you here:
 
 ```python
 samples['year'] = samples['Date'].dt.year
@@ -108,7 +109,7 @@ df.shape
 
 ## Part 1: Get your bearings
 
-Answer each of these in a markdown cell underneath the code that produced it.
+Answer each of these questions in a markdown cell underneath the code that produced the answer.
 
 1. How many rows and columns? Display the first few rows.
 2. Run `.info()`. Which columns are `object`, and which of those *should* be something else?
@@ -139,10 +140,11 @@ print(measured['Oceans'].isnull().sum())
 
 ## Part 2: Decide what to keep
 
-This is the part that takes judgement rather than syntax. Every task here removes rows, so
-**print `.shape` after every one of them** and record the number in a markdown cell.
+Part 2 takes judgement rather than syntax, and more than one answer here is defensible. Every
+task here removes rows, so **print `.shape` after every one of them** and record the number in
+a markdown cell.
 
-5. Use `.dropna()` with `subset=` to keep only the rows that carry a `Measurement`. How many
+5. Use `.dropna()` with `subset=` to keep only the rows with a `Measurement`. How many
    rows are left, and what fraction of the file is that?
 
 ```{python}
@@ -152,8 +154,8 @@ print(df.shape[0] / 16245)
 ```
 
 6. Compare `df['Unit'].value_counts()` now with what it was before task 5. What did that one
-   line cost you, and which sampling programme did it belong to? (Check `Sampling Method` and
-   `Organization` on the rows you removed, if you want to be sure.)
+   line cost you, and which sampling programme did the rows you lost belong to? (Check
+   `Sampling Method` and `Organization` on the rows you removed, if you want to be sure.)
 
 ```{python}
 df['Unit'].value_counts()
@@ -169,7 +171,7 @@ df['SubRegions'] = df['SubRegions'].fillna('Unspecified')
 df.isnull().sum()
 ```
 
-8. In a markdown cell: task 5 removed rows and task 7 kept them. Both were the right call.
+8. In a markdown cell: task 5 removed rows and task 7 kept them. Both were the right decision.
    Explain in two or three sentences what made them different.
 
 9. Check for duplicated rows. Do it twice: once bare, and once with `subset=` naming the
@@ -211,9 +213,9 @@ samples['ocean'].value_counts()
 
 13. Add a column called `year` holding the year each sample was taken, using the supplied line
     from the setup Field Note. Then run `.value_counts()` on `year`. Which single year
-    contributed the most samples? In a markdown cell, say whether this archive is spread evenly
-    across its fifty years, and what that means for anyone who wants to use it to describe a
-    trend.
+    contributed the most samples? In a markdown cell, say whether the archive is spread evenly
+    across its fifty years, and what an uneven spread would mean for anyone who wants to use it
+    to describe a trend.
 
 ```{python}
 samples['year'] = samples['Date'].dt.year
@@ -232,7 +234,7 @@ samples['Measurement'].describe()
 15. Draw a histogram of `Measurement`.
 
 :::{.callout-tip title="🧭 Field Note: a histogram in one line"}
-On Day 1 you drew a line with `plt.plot(series)`. A histogram is the same shape of call:
+On Day 1 you drew a line with `plt.plot(series)`. A histogram is the same kind of call:
 
 ```python
 plt.hist(samples['Measurement'])
@@ -253,8 +255,8 @@ plt.xlabel('pieces per cubic metre')
 plt.show()
 ```
 
-16. That plot is useless, and it is useless for a reason you can state in one sentence. State
-    it in a markdown cell.
+16. The histogram you just drew is useless, and it is useless for a reason you can state in one
+    sentence. State that reason in a markdown cell.
 
 17. Filter `samples` to the rows where `Measurement` is greater than zero, end the line with
     `.copy()`, and call it `positive`. How many samples reported exactly zero pieces? Is zero a
@@ -285,8 +287,9 @@ plt.show()
 
 ## Part 5: A classifier of your own
 
-The archive ships a column called `Density Class` with values like `Low` and `Very High`.
-Somebody decided those. Tonight you decide your own, and then find out whether you agree.
+The archive has a column called `Density Class` with values like `Low` and `Very High`.
+Somebody decided those cutoffs. Tonight you will decide your own, and then find out whether you
+agree with theirs.
 
 20. Write a function called `density_class` that takes a measurement in pieces per cubic metre
     and returns:
@@ -319,8 +322,9 @@ positive['my_class'] = positive['Measurement'].apply(density_class)
 positive['my_class'].value_counts()
 ```
 
-22. Now compare with NOAA's. Filter `positive` to the rows NOAA labelled `'Medium'`, and run
-    `.value_counts()` on `my_class` for just those rows. Do the same for NOAA's `'Very Low'`.
+22. Now compare your labels with NOAA's. Filter `positive` to the rows NOAA labelled
+    `'Medium'`, and run `.value_counts()` on `my_class` for just those rows. Do the same for
+    NOAA's `'Very Low'`.
 
 ```{python}
 noaa_medium = positive[positive['Density Class'] == 'Medium']
@@ -357,8 +361,8 @@ print(pacific.shape)
 ```
 
 25. Run `.describe()` on `Measurement` for each. Compare the two medians (the `50%` row), and
-    then compare the two means. They tell different stories. Which one would you put in a
-    report, and why?
+    then compare the two means. They will probably tell you two different stories. Which one
+    would you put in a report, and why?
 
 ```{python}
 print(atlantic['Measurement'].describe())
@@ -382,16 +386,16 @@ print(pacific['log10_measurement'].mean())
 In a single markdown cell of 200 to 300 words, answer this:
 
 > A journalist emails you: "Is there more plastic in the Pacific than the Atlantic? I heard
-> about the garbage patch." You have this dataset and one evening. What do you tell them?
+> about the garbage patch." You have this dataset and one afternoon. What do you tell them?
 
-Your answer must cite at least three specific numbers you computed tonight, must name at least
+Your answer must cite at least three specific numbers you computed here, must name at least
 one cleaning decision you made and what it cost, and must include at least one thing this
 dataset cannot tell them. Complete sentences, no bullet fragments.
 
 ## The grammar minute
 
-Look back through your notebook. Every code cell you wrote tonight was one of a handful of
-sentences:
+Look back through your notebook. Every code cell you wrote was one of a handful of
+patterns:
 
 ```python
 df.dropna(subset=['col'])                  # keep rows that have what you need
@@ -402,12 +406,12 @@ df['new'] = expression                     # add a column that was not in the fi
 df['new'] = df['col'].apply(my_function)   # add a column only you know how to compute
 ```
 
-Six sentences, and two of them you also used yesterday and the day before.
+Six patterns, and two of them you also used yesterday and the day before.
 
-Notice which one did the most work tonight. It was not any of the cleaning sentences. It was
-`df['new'] = expression`, four times: `ocean`, `year`, `log10_measurement`, `my_class`. The
-answer to the journalist's question was in none of the twenty-two columns you downloaded. You
-made the columns that held it.
+Notice which one did the most work today. It was `df['new'] = expression`, four times over:
+`ocean`, `year`, `log10_measurement`, and `my_class`, and none of the cleaning patterns comes
+close. The twenty-two columns you downloaded did not have the answer to the journalist's
+question in them, and the four columns you made yourself are where you found it!
 
 ## Wrap-up
 
@@ -418,6 +422,10 @@ Before you close your notebook, check that:
 - your Part 7 answer names a number that came from a column you derived
 - you can say out loud what `subset=` does, and why `.duplicated()` without it returned zero
 - your notebook reads top to bottom as a document, not as a pile of cells
+
+If something here did not work and you could not work out why, ask Cella or Kelly rather than
+fighting one cell to the end of the afternoon. Getting stuck on an end-of-day practice is
+normal and expected!
 
 ## Resources
 

@@ -21,15 +21,17 @@ format:
 
 :::
 
-In 2023 *The Economist* published a way of talking about the climate cost of food that anyone
-can hold in their head. Instead of grams of CO₂, express everything as **bananas**: how many
-times more carbon does a kilogram of this food emit than a kilogram of bananas?
+In 2023 *The Economist* published a way of talking about the climate cost of food that is
+easy to remember. Instead of reporting grams of CO₂, they express everything in **bananas**:
+how many times more carbon does a kilogram of this food emit than a kilogram of bananas?
 
-They computed it three ways, because "a kilogram of lettuce" and "a kilogram of beef" are not
-the same amount of food. Per kilogram, per thousand calories, and per hundred grams of
-protein. The three rankings disagree, and the disagreement is the interesting part.
+They computed the index three ways, because "a kilogram of lettuce" and "a kilogram of beef"
+are not the same amount of food at all. They ranked the foods per kilogram, per thousand
+calories, and per hundred grams of protein. The three rankings disagree with each other, and
+working out why they disagree is most of this practice.
 
-Tonight you rank this dataset three ways and work out what the disagreement means.
+Tonight you will rank this dataset all three ways yourself, and then work out what the
+disagreements between your three rankings actually mean.
 
 :::{.callout-note title="Reference"}
 The Economist and Solstad, S., 2023. The Economist's Banana index. First published in the
@@ -37,9 +39,10 @@ article "A different way to measure the climate impact of food", *The Economist*
 2023. The data are [posted on GitHub](https://github.com/TheEconomist/banana-index-data).
 :::
 
-## Today's two sentences
+## Today's two patterns
 
-Everything below is built from these. You should not need to look them up more than once.
+Every code cell in this practice is built from one of these two patterns, so you should not
+need to look them up more than once.
 
 ```python
 df[df['column'] > value]                             # the filter pattern
@@ -70,7 +73,7 @@ df = pd.read_csv(url, index_col='entity')
 df.shape
 ```
 
-4. The file carries five columns that are bookkeeping rather than data: `year`,
+4. The file has five columns that are bookkeeping rather than data: `year`,
    `Banana values`, `type`, `Chart?`, and `Unnamed: 16`. Remove them.
 
 :::{.callout-tip title="🧭 Field Note: dropping columns you don't want"}
@@ -81,9 +84,9 @@ without them. Here is the whole line. Run it as written:
 df = df.drop(['year', 'Banana values', 'type', 'Chart?', 'Unnamed: 16'], axis='columns')
 ```
 
-Two things to notice. The names go in a list, exactly like the lists you used to select
-columns yesterday. And `axis='columns'` is what tells pandas you mean columns and not rows,
-because `.drop()` can remove either.
+There are two things worth noticing here. The names go in a list, exactly like the lists you
+used to select columns yesterday. And `axis='columns'` tells pandas that you mean columns and
+not rows, because `.drop()` can remove either one.
 
 📖 [Cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd)
 :::
@@ -95,14 +98,15 @@ df.columns.tolist()
 
 ## Part 1: Get your bearings
 
-Start the way you started yesterday. Answer each in a markdown cell underneath the code.
+Start the way you started yesterday. Answer each question in a markdown cell underneath the
+code that produced the answer.
 
 1. How many foods are in the dataset, and how many columns are left after the drop?
 2. Display the first few rows. What do the three columns whose names begin with `Bananas
    index` contain?
 3. Run `.info()`. Two columns have missing values. Which, and how many?
-4. What is the value of `Bananas index (kg)` for `Bananas` itself? Say why that number is what
-   it is.
+4. What is the value of `Bananas index (kg)` for `Bananas` itself? Explain in a sentence why
+   the number has to come out that way.
 
 ```{python}
 df.shape
@@ -126,14 +130,14 @@ df.loc['Bananas', 'Bananas index (kg)']
 
 ## Part 2: Three rankings
 
-Each of the three `Bananas index` columns is a ranking waiting to happen.
+Each of the three `Bananas index` columns gives you a different ranking of the same foods.
 
 5. Use the top-N pattern to display the 10 highest-scoring foods for `Bananas index (kg)`.
 6. Do the same for `Bananas index (1000 kcalories)`.
 7. Do the same for `Bananas index (100g protein)`.
 
-Write each one out in full. Yes, that is the same pattern three times with one word changed.
-Notice how that feels.
+Write each one out in full. Yes, you are writing out the same pattern three times with a
+single word changed each time. Notice how that feels.
 
 ```{python}
 df['Bananas index (kg)'].sort_values(ascending=False).head(10)
@@ -148,10 +152,10 @@ df['Bananas index (100g protein)'].sort_values(ascending=False).head(10)
 ```
 
 :::{.callout-note title="Hold that thought"}
-You just wrote the same six words three times. Tomorrow morning you'll learn how to write it
-once, give it a name, and call it three times. Copying a line and changing one word in it is
-exactly the itch that **functions** exist to scratch, and it is worth having felt the itch
-before you get the cure.
+You just wrote the same six words three times. Tomorrow morning you will learn how to write
+them once, give them a name, and then call them three times. Copying a line and changing one
+word in it is exactly the itch that **functions** exist to scratch, and it helps a great deal
+to have felt the itch yourself before you get the cure.
 :::
 
 8. In a markdown cell, describe in two or three sentences how the three lists differ. Which
@@ -178,13 +182,14 @@ print(df['Bananas index (100g protein)'].sort_values(ascending=False).head(10))
     Name one food of each kind.
 
 :::{.callout-tip title="Do this by reading, not by coding"}
-Comparing three short lists by eye is the right tool for three short lists. Print them, read
-them, write down what you see. Automating a comparison this small costs more than it saves.
+Your own eyes are the right tool for comparing three short lists. Print the lists, read them,
+and write down what you see. Automating a comparison this small would cost you more time than
+it saves.
 :::
 
 ## Part 4: Filtering by score
 
-Now use the other sentence.
+Now use the other one, the filter pattern.
 
 11. Use the filter pattern to find every food with a `Bananas index (kg)` above 10. How many
     are there?
@@ -197,8 +202,8 @@ expensive_by_weight.shape
 12. Use `~` to find the foods that are **not** above a score of 1 on `Bananas index (kg)`,
     that is, foods no worse than a banana by weight. How many are there?
 
-13. Now filter for `Bananas index (kg)` **below** 1 instead. You get a different number.
-    Explain the difference in one sentence.
+13. Now filter for `Bananas index (kg)` **below** 1 instead. You should get a different number
+    from the one you got in question 12. Explain the difference in one sentence.
 
 ```{python}
 no_worse_than_banana = df[~(df['Bananas index (kg)'] > 1)]
@@ -209,9 +214,9 @@ print(better_than_banana.shape)
 ```
 
 14. Use a **two-condition** filter to find the foods that score above 5 per kilogram **and**
-    below 1 per 100 g of protein. End the line with `.copy()`, since you'll display it a
-    couple of ways. Display the two banana index columns for those foods, ranked by
-    `Bananas index (kg)`.
+    below 1 per 100 g of protein. End the line with `.copy()`, because you will display the
+    result a couple of different ways. Display the two banana index columns for those foods,
+    ranked by `Bananas index (kg)`.
 
 ```{python}
 costly_but_protein_rich = df[
@@ -230,14 +235,14 @@ costly_but_protein_rich[
 
 ## Part 5: Land, not carbon
 
-The banana index columns are all about emissions. The dataset also carries land use, in
-`land_use_1000kcal`: square metres of land per thousand calories.
+The banana index columns are all about emissions. The dataset also has a land use column,
+`land_use_1000kcal`, which gives square metres of land per thousand calories.
 
 16. Use `.loc[]` to look up the value of `land_use_1000kcal` for `Bananas`.
 17. Use the top-N pattern to display the 10 foods with the highest `land_use_1000kcal`.
 18. Use `.idxmax()` on `land_use_1000kcal` to get the name of the single most land-hungry food.
-    Then use two `.loc[]` lookups and a division to report how many times the banana's land
-    use that food requires.
+    Then use two `.loc[]` lookups and a division to work out how many times more land that
+    food needs than bananas do.
 
 ```{python}
 banana_land_use = df.loc['Bananas', 'land_use_1000kcal']
@@ -267,16 +272,17 @@ one dairy product that shows up alongside meat at the top of the emissions ranki
     `Bananas index (1000 kcalories)`.
 
 :::{.callout-tip title="🧭 Field Note: selecting rows whose label contains a word"}
-The food names are the **index** of your table, not a column, so the filter pattern cannot
-reach them. `.filter()` can. Given a substring, it keeps every row whose label contains it:
+The food names are the **index** of your table rather than a column, so the filter pattern
+will not work on them. `.filter()` will. Given a substring, it keeps every row whose label
+contains that substring:
 
 ```python
 cheese = df.filter(like='heese', axis='rows')
 ```
 
-`like='heese'` rather than `'cheese'` so that `Cheddar cheese` and `Cheesecake` are both
-caught, whatever their capitalisation. Run the line as written, then rank `cheese` with the
-top-N pattern exactly as you have been doing all evening.
+We use `like='heese'` rather than `'cheese'` so that both `Cheddar cheese` and `Cheesecake`
+match, whatever their capitalisation. Run the line as written, then rank `cheese` with the
+top-N pattern exactly as you have been doing all along.
 
 📖 [Cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
 :::
@@ -289,7 +295,8 @@ cheese['Bananas index (1000 kcalories)'].sort_values(ascending=False)
 ```
 
 21. How many rows did `.filter(like='heese')` give you? Look at the names carefully. Is every
-    one of them a cheese? In a markdown cell, say what this tells you about matching on text.
+    one of them a cheese? In a markdown cell, say what the result tells you about matching
+    rows on text.
 
 22. Where does the top cheese sit in the whole dataset's calorie ranking? Check it against your
     answer to question 6.
@@ -301,14 +308,14 @@ In a single markdown cell of 200 to 300 words, answer this:
 > A friend tells you they are cutting bananas out of their diet for environmental reasons.
 > Using this dataset, what would you tell them?
 
-Your answer must cite at least three specific numbers you computed tonight, and must mention
-at least one place where the three rankings disagree with each other. Complete sentences, no
-bullet fragments.
+Your answer must cite at least three specific numbers you computed here, and it must
+mention at least one place where the three rankings disagree with each other. Write your
+answer in complete sentences rather than in bullet fragments.
 
 ## The grammar minute
 
-Look back through your notebook. Almost every code cell you wrote tonight was one of two
-sentences:
+Look back through your notebook. Almost every code cell you wrote was one of two
+patterns:
 
 ```python
 df[df['column'] > value]                             # filter: fewer rows
@@ -319,9 +326,8 @@ Everything else was a variation. `&` and `|` joined two questions into one filte
 a question around. `.idxmax()` returned the label instead of the row. `.loc[]` looked up one
 value.
 
-Two sentences, one evening, and you answered every question in this document. That is what a
-sentence pattern is for, and you will be writing both of these every day for the rest of the
-course.
+Two patterns got you through every question in this document. You will be writing both of
+them nearly every day for the rest of the course.
 
 ## Wrap-up
 
@@ -329,8 +335,12 @@ Before you close your notebook, check that:
 
 - every claim in your Part 7 write-up has a code cell above it that produced the number
 - you used the filter pattern and the top-N pattern at least three times each
-- you can say out loud what `&` needs that a single condition does not
+- you can say out loud what a filter with `&` needs that a filter with one condition does not
 - your notebook reads top to bottom as a document, not as a pile of cells
+
+If one of these questions stumped you, or a cell would not run no matter what you tried, ask
+Cella or Kelly before you pack up. Getting stuck on a practice is normal and expected, and it
+is not a sign that you are behind!
 
 ## Resources
 

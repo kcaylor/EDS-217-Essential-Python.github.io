@@ -21,8 +21,8 @@ format:
 
 :::
 
-This afternoon you ran the complete workflow in sessions 1c and 1d. Now you run it again on your
-own and change a few things to see what happens.
+This afternoon we ran the complete workflow together in sessions 1c and 1d. Tonight you will run
+the whole thing again on your own, changing a few things along the way to see what happens.
 
 #### 🎬 "Coming Attractions"
 
@@ -31,8 +31,10 @@ own and change a few things to see what happens.
 - **The goal:** get comfortable running and modifying a real analysis.
 
 :::{.callout-important title="Don't panic 🚀"}
-You are not expected to understand every line today. You already used all of these tools this
-afternoon at a shallow level. Over the next six days you will learn each one properly.
+You are not expected to understand every line today! You already used all of these tools this
+afternoon, though only at a shallow level, and over the next six days we will cover each one
+properly. If a cell refuses to run and you cannot work out why, grab Cella or Kelly and show
+them what you saw.
 :::
 
 ## The data
@@ -41,7 +43,7 @@ You will use the same Arctic weather data from the [Arctic LTER](https://lternet
 station at Toolik Lake, Alaska: daily measurements from 1988 onward. The file lives in our
 course repository, so you can load it straight from its URL.
 
-## When you'll master these skills
+## When you'll learn these skills
 
 Everything in this workflow gets a full teaching day later in the course:
 
@@ -66,7 +68,7 @@ Everything in this workflow gets a full teaching day later in the course:
 Date: 08/31/2026
 ```
 
-3. Work through the rest of this page in that notebook. Copy each code cell, run it, then
+3. Work through the rest of this page in your new notebook. Copy each code cell, run it, then
    write a short markdown note under it saying what you saw.
 
 ## Rebuild the workflow
@@ -133,9 +135,9 @@ monthly_means
 ```
 
 :::{.callout-tip title="R vs Python: grouping"}
-This is the pandas version of `df %>% group_by(Month) %>% summarize(mean(...))` in dplyr. The
-two-step form `df.groupby('Month')` then `['col'].mean()` splits the rows into monthly groups and
-averages one column within each.
+In dplyr you would write `df %>% group_by(Month) %>% summarize(mean(...))`, and grouping in
+pandas does the same job. The two-step form `df.groupby('Month')` then `['col'].mean()` splits
+the rows into monthly groups and averages one column within each.
 :::
 
 ### 4. Plot it
@@ -163,15 +165,15 @@ In R you might draw this with `ggplot(...) + geom_line()`. Here `plt.plot(series
 twelve monthly values and draws them in order, and the label lines set the title and axes.
 :::
 
-You now have `df`, `monthly`, and `monthly_means`, the same state you finished the sessions
-with. The three tasks below each make one change to this workflow.
+You now have `df`, `monthly`, and `monthly_means` in your notebook, which is exactly where we
+ended up this afternoon. Each of the three tasks below makes one change to this workflow.
 
 ## 🔁 Task 1: monthly means for a different variable
 
 The rebuild averaged `Daily_AirTemp_Mean_C`. Keep the same grouping and average a **different
 column** instead.
 
-**Canonical form (from the rebuild):**
+**What you wrote in the rebuild:**
 
 ```python
 monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
@@ -184,8 +186,9 @@ variable so `monthly_means` stays put:
 - `Daily_Precip_Total_mm` (daily precipitation)
 - `Daily_windsp_mean_msec` (daily mean wind speed)
 
-For example, `monthly_radiation = monthly['Daily_globalrad_total_jcm2'].mean()`. This reads
-`monthly`, which was built from `df`, so it leaves both `df` and your `monthly_means` unchanged.
+For example, `monthly_radiation = monthly['Daily_globalrad_total_jcm2'].mean()`. The new line
+reads `monthly`, which was built from `df`, so it leaves both `df` and your `monthly_means`
+unchanged.
 
 ```{python}
 #| echo: false
@@ -216,7 +219,7 @@ print(f"At Toolik, June's average daily global radiation was {june_radiation} J/
 The rebuild grouped by `Month`. Now change the **grouping key** to `Year` to see the
 year-by-year trend across the whole record.
 
-**Canonical form (from the rebuild):**
+**What you wrote in the rebuild:**
 
 ```python
 monthly = df.groupby('Month')
@@ -232,7 +235,8 @@ yearly_means = by_year['Daily_AirTemp_Mean_C'].mean()
 yearly_means
 ```
 
-This reads `df` without changing it, and it leaves `monthly` and `monthly_means` alone.
+The new grouping reads `df` without changing it, and it leaves `monthly` and `monthly_means`
+alone.
 
 ```{python}
 #| echo: false
@@ -289,8 +293,8 @@ plt.show()
 The month names line up with the bars only because `monthly_means` is in calendar order, from
 month 1 to month 12. `plt.bar` pairs the first name with the first bar, the second name with the
 second bar, and so on down the list. If you ever re-sorted `monthly_means`, for example by value,
-the names would no longer match the bars, so keep the data in month order when you use a fixed
-label list like this one.
+the names would no longer match the bars, so keep your data in month order whenever you use a
+fixed label list like this one.
 :::
 
 **Your change:** give the chart a new title. Pick **one** and re-run:
@@ -318,10 +322,10 @@ print(f"Toolik's coldest month averages about {coldest} degrees Celsius.")
 
 ## Wrap-up
 
-You reran a complete data science workflow and changed three things in it: the variable you
-averaged, the grouping key, and a chart label. Each time, you reported a result in your own
-words with an f-string. That is the whole shape of the course in miniature, and starting Day 2
-you will learn how each step works.
+Nice work! You reran a complete data science workflow and changed three things in it: the
+variable you averaged, the grouping key, and a chart label. Each time, you reported a result in
+your own words with an f-string. The workflow you just reran is the plan for the whole course in
+miniature, and starting Day 2 we will cover how each step works, roughly one step per day.
 
 ::: {.center-text .body-text-xl .teal-text}
 End Activity Session (Day 1)

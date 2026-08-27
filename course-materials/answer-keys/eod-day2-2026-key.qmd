@@ -131,8 +131,8 @@ Ranking columns by emptiness sorts this file into flags first and measurements s
 the first hint that the flag columns are working as designed. See question 7.
 :::
 
-**7. One of the flag columns is missing a value in all but a handful of rows. Which one, and
-how many values does it actually have?**
+**7. One of the flag columns has a value in only a handful of rows, and is empty everywhere
+else. Which one, and how many values does it actually have?**
 
 ```{python}
 toolik.isnull().sum().head(20)
@@ -154,8 +154,8 @@ different things: one is a note nobody needed to write, the other is a measureme
 
 ## Part 3: What varies, and what doesn't
 
-**8. Use `.value_counts()` on `LTER_Site` and on `Station`. What do you learn? Is either
-column carrying information?**
+**8. Use `.value_counts()` on `LTER_Site` and on `Station`. What do you learn? Does either
+column tell you anything?**
 
 ```{python}
 toolik['LTER_Site'].value_counts()
@@ -166,7 +166,7 @@ toolik['Station'].value_counts()
 ```
 
 :::{.callout-note title="✅ Answer"}
-**Neither column carries any information.** `LTER_Site` is `ARC` in all 11,171 rows and
+**Neither column tells you anything.** `LTER_Site` is `ARC` in all 11,171 rows and
 `Station` is `TLKMAIN` in all 11,171 rows. A column with one distinct value cannot distinguish
 one row from another, so it can never explain anything, and grouping by it would return a
 single group.
@@ -243,7 +243,8 @@ missing before you compare the groups.
 toolik['Daily_AirTemp_Mean_C'].describe()
 ```
 
-**12. Are those values plausible for a site above the Arctic Circle? Say why or why not.**
+**12. Are the mean, the minimum and the maximum plausible for a site above the Arctic Circle?
+Say why or why not.**
 
 :::{.callout-note title="✅ Answer"}
 **Mean -8.20 °C, minimum -55.60 °C, maximum 20.70 °C, over all 11,171 days**, with a standard
@@ -352,12 +353,12 @@ absent and 183 of them fall in 1995 alone.
 
 Two cautions. First, `Date` is stored as the integer 19880601, not as a date, so it cannot be
 sorted or differenced as a date until it is converted. Second, the complete temperature column
-is not fully measured: 1,310 days, 11.7% of the record, carry an `E` flag meaning the value was
+is not fully measured: 1,310 days, 11.7% of the record, have an `E` flag meaning the value was
 estimated from a nearby sensor.
 
 Could this describe change in Arctic summer temperatures since 1988? Yes, with one check first.
 All 31 years have complete June to August coverage and no missing means, but 85 of the 92 summer
-days in 1988 are flagged estimated, and no summer day after 2006 carries a flag. Since 1988 is the first year of any
+days in 1988 are flagged estimated, and no summer day after 2006 has a flag. Since 1988 is the first year of any
 trend, I would confirm the result holds when the estimated days are excluded.
 :::
 

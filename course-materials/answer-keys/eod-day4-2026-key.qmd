@@ -123,7 +123,7 @@ The practical consequence is that you get the `Oceans` column cleaned for free. 
 
 ## Part 2: Decide what to keep
 
-**5. Use `.dropna()` with `subset=` to keep only the rows that carry a `Measurement`. How many
+**5. Use `.dropna()` with `subset=` to keep only the rows with a `Measurement`. How many
 rows are left, and what fraction of the file is that?**
 
 ```{python}
@@ -143,7 +143,7 @@ two-thirds of your data and keeping a twenty-eighth of it.
 :::
 
 **6. Compare `df['Unit'].value_counts()` now with what it was before task 5. What did that one
-line cost you, and which sampling programme did it belong to?**
+line cost you, and which sampling programme did the rows you lost belong to?**
 
 ```{python}
 df['Unit'].value_counts()
@@ -190,7 +190,7 @@ claim the sample came from a region, it records that the region was not reported
 show up in a `.value_counts()` as its own category instead of hiding.
 :::
 
-**8. Task 5 removed rows and task 7 kept them. Both were the right call. Explain in two or three
+**8. Task 5 removed rows and task 7 kept them. Both were the right decision. Explain in two or three
 sentences what made them different.**
 
 :::{.callout-note title="✅ Answer"}
@@ -198,10 +198,10 @@ sentences what made them different.**
 the variable the whole exercise is about, and there is no defensible way to invent a
 concentration for a sample that was never measured on that scale, so those rows cannot
 contribute and have to go. `Regions` and `SubRegions` are descriptive labels that no calculation
-tonight depends on, so a row with a valid measurement and a blank region is still a perfectly
+the practice depends on, so a row with a valid measurement and a blank region is still a perfectly
 good measurement.
 
-The rule to carry forward: **drop on the column you are measuring, fill on the columns you are
+The rule to remember: **drop on the column you are measuring, fill on the columns you are
 describing by.** Applied here it kept 10,453 rows instead of 588, and the 9,865 rows that lacked
 a sub-region are most of the data you went on to analyse.
 :::
@@ -219,9 +219,9 @@ print(df.duplicated(subset=sample_columns).sum())
 
 :::{.callout-note title="✅ Answer"}
 **Zero bare, 539 with the subset.** The zero is not evidence of a clean file. `.duplicated()`
-with no arguments asks whether two rows match in all 22 columns, and this file carries
+with no arguments asks whether two rows match in all 22 columns, and this file has
 `OBJECTID` and `GlobalID`, both of which hold 10,453 distinct values across 10,453 rows. Two
-rows can never be identical while they carry a unique key each, so bare `.duplicated()` on a
+rows can never be identical while they each have a unique key, so bare `.duplicated()` on a
 table with an ID column is guaranteed to return zero and tells you nothing.
 
 The subset asks the question you actually meant: did two rows record the same measurement, in
@@ -367,7 +367,7 @@ print(samples.shape[0] - positive.shape[0])
 **Zero is a measurement.** A net was towed, a known volume of water passed through it, and no
 plastic was found. That is a result, and it is a different kind of statement from the 5,792 rows
 you dropped in task 5, where no measurement of this kind was ever attempted. The file supports
-this reading: all 3,087 zeros carry a `Density Class` of `Very Low`, and 3,003 of them carry the
+this reading: all 3,087 zeros have a `Density Class` of `Very Low`, and 3,003 of them have the
 `Density Range` `'0-0.0005'`, so NOAA recorded them as observed values rather than gaps.
 
 Which means the filter in this task is not a cleaning step, and you should not describe it as
@@ -422,7 +422,7 @@ thousandths of a cubic metre and its contents are examined under a microscope, s
 in the bottle becomes 500 pieces per cubic metre. The two groups are both correctly reported and
 they are not measuring the same thing.
 
-You are not expected to have found this tonight. It is here because it is the reason the answer
+You are not expected to have found this yourself. It is here because it is the reason the answer
 to Part 6 has to be hedged, and because a second mode in a histogram is almost always a second
 population, which means a second protocol, a second instrument, or a second study.
 :::
@@ -495,8 +495,8 @@ to the study that contributed the row.** The table says it plainly: `Medium` is 
 and `'500-30000'`. `High` is both `'1-10'` and `'30000-40000'`. `Very High` is both `'>=10'` and
 `'>40000'`. `Very Low` here is `'0-100'`.
 
-The arithmetic matches exactly. Of the 5,034 NOAA `Medium` rows, 4,709 carry the range
-`'0.005-1'` and hold values from 0.005 to 0.996, while 325 carry the range `'500-30000'` and
+The arithmetic matches exactly. Of the 5,034 NOAA `Medium` rows, 4,709 have the range
+`'0.005-1'` and hold values from 0.005 to 0.996, while 325 have the range `'500-30000'` and
 hold values from 705 to 28,320. Those 325 are precisely the 325 that my classifier called high.
 Nothing has gone wrong on either side: NOAA is answering "was this sample high or low **for its
 own study**", and my function is answering "was this sample high or low **in pieces per cubic
@@ -535,7 +535,7 @@ table has been looked at.
 :::
 
 **25. Run `.describe()` on `Measurement` for each. Compare the two medians, then the two means.
-They tell different stories. Which one would you put in a report, and why?**
+They will probably tell you two different stories. Which one would you put in a report, and why?**
 
 ```{python}
 print(atlantic['Measurement'].describe())

@@ -20,7 +20,7 @@ CATEGORIES = [
     ("content", "Content", "What a student reads, clicks and is graded against."),
     ("tooling", "Tooling", "Whether the checks can be believed."),
     ("assets", "Assets", "Images students see. None of these breaks anything."),
-    ("housekeeping", "Housekeeping", "Safe to carry past the first day of class."),
+    ("housekeeping", "Housekeeping", "Safe to leave until after the first day of class."),
 ]
 
 STATE_LABEL = {

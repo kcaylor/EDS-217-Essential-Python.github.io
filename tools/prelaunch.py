@@ -4,7 +4,7 @@ EDS 217 pre-launch punch list.
 
 Definitions live in tasks/2026-planning/prelaunch/punchlist.yml, which is
 hand-editable and keeps its comments. Mutable state lives beside it in
-state.json, which this tool owns. Keeping them apart means the CLI never
+state.json, which this tool maintains. Keeping them apart means the CLI never
 rewrites the file you read.
 
     python tools/prelaunch.py status              what is left, grouped

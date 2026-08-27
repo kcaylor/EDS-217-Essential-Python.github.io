@@ -93,7 +93,7 @@ LEAD_TASK = re.compile(r"\A(?:\d{1,2})(?:(?:,|\s+and)\s*\d{1,2})*\s*[.:](?!\d)\s
 
 
 # A key refers back to earlier work constantly, "the near tie in question 13",
-# "carry that into Part 5". Those numbers name a place in the handout and assert
+# "use that in Part 5". Those numbers name a place in the handout and assert
 # nothing about the data, so they are removed before the rest is read.
 XREF = re.compile(r"\b(?:questions?|tasks?|parts?|steps?)\s+"
                   r"\d{1,2}(?:\s*(?:,|and|to|through)\s*\d{1,2})*", re.I)
@@ -108,7 +108,7 @@ LISTSIZE = re.compile(
 
 # Every key puts its findings inside this callout and restates the task outside
 # it. Reading only the callouts is what separates a claim about the output from
-# the wording of the question, which carries numbers of its own: "why is that
+# the wording of the question, which has numbers of its own: "why is that
 # number smaller than 80,000?"
 ANSWER_BLOCK = re.compile(
     r"^:::+\s*\{\s*\.callout-note[^}]*✅ Answer[^}]*\}\s*$(.*?)^:::+\s*$",
@@ -215,7 +215,7 @@ SCI = re.compile(r"(?<![\w.])(-?\d(?:\.\d+)?)[eE]([+-]?\d+)")
 
 
 def significant(raw):
-    """How many significant digits a printed number carries."""
+    """How many significant digits a printed number shows."""
     digits = raw.replace("-", "").replace(",", "").lstrip("0")
     if "." in digits:
         digits = digits.replace(".", "").lstrip("0")
@@ -260,7 +260,7 @@ def matches(asserted, produced):
         # A key often reports a percentage of something printed as a fraction.
         if dec and round(p * 100, dec) == round(a, dec):
             return True
-        # The output may carry fewer digits than the key, which is what happens
+        # The output may show fewer digits than the key, which is what happens
         # when pandas prints an integer in scientific notation.
         if p and round_sig(a, sig) == round_sig(p, sig):
             return True
@@ -311,7 +311,7 @@ def derived_index(produced, depth=4):
     vals = sorted({v for v, _ in produced})[:200]
     index = {d: set() for d in range(depth + 1)}
 
-    # Significant-figure buckets carry the hedged claims, "a ratio of about
+    # Significant-figure buckets hold the hedged claims, "a ratio of about
     # 403,000", where the key rounds a derived value to three digits.
     sigs = {n: set() for n in range(1, 7)}
 
@@ -421,7 +421,7 @@ def is_derived(asserted, context, index):
 
     Only percentages. Ratios of every printed value against every other cover
     the small integers so completely that an injected 166 for 160 passed as
-    explainable. A percentage is bounded and usually carries a decimal, so the
+    explainable. A percentage is bounded and usually has a decimal, so the
     same index is a real constraint rather than a rubber stamp. Everything else
     has to be printed, or derivable from numbers in its own sentence.
     """
@@ -502,7 +502,7 @@ def check(handout, key, tasks_only=False):
 
     if len(tasks) < 5:
         # Day 1 numbers only its setup steps and marks the actual work with
-        # headers, so the two files are compared by how many of each they carry.
+        # headers, so the two files are compared by how many of each they hold.
         hm, km = marker_counts(htext), marker_counts(ktext)
         print(f"  unnumbered handout, compared by marker: "
               + ", ".join(f"{n} {hm[n]}/{km[n]}" for n in hm))

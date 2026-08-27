@@ -463,7 +463,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="610928dd" class="cell" data-execution_count="1">
+<div id="0b2f6418" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -491,7 +491,7 @@ How to use this key
 <section id="part-1-what-is-in-each-pile" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-what-is-in-each-pile">Part 1: What is in each pile</h2>
 <p><strong>1. How many readings came from each site? One line.</strong></p>
-<div id="16f33f7b" class="cell" data-execution_count="2">
+<div id="d0d0f995" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>aq.groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -518,7 +518,7 @@ Name: value, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>2. How many distinct parameters does each site measure? Use the dictionary form of <code>.agg()</code> to report the reading count and the parameter count side by side.</strong></p>
-<div id="dd62569d" class="cell" data-execution_count="3">
+<div id="bc436b1e" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>aq.groupby(<span class="st">'site'</span>).agg({<span class="st">'value'</span>: <span class="st">'count'</span>, <span class="st">'parameter'</span>: <span class="st">'nunique'</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -576,7 +576,7 @@ Name: value, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>3. One of the three stations is not like the others. Name it, say what it does not do, and say in one sentence what that means for any comparison you are about to make across all three.</strong></p>
-<div id="a0796000" class="cell" data-execution_count="4">
+<div id="2cf7f260" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>aq.groupby([<span class="st">'site'</span>, <span class="st">'parameter'</span>])[<span class="st">'value'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -604,12 +604,12 @@ Name: value, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>CNSI measures PM2.5 and nothing else</strong>: 714 PM2.5 readings, no ozone and no PM10. Goleta and Santa Barbara each report all three.</p>
-<p>The consequence is that PM2.5 is the only parameter on which all three stations can be compared, and every ozone or PM10 result in the rest of the evening is a two-station result whether or not you say so. Grouping by <code>site</code> will silently return two rows instead of three, and it is your job to notice which one is absent and why.</p>
+<p>The consequence is that PM2.5 is the only parameter on which all three stations can be compared, and every ozone or PM10 result in the rest of the practice is a two-station result whether or not you say so. Grouping by <code>site</code> will silently return two rows instead of three, and it is your job to notice which one is absent and why.</p>
 <p>Note also that the two grouping keys nest: <code>groupby(['site', 'parameter'])</code> gives you one row per combination that actually occurs, so combinations with no data simply do not appear rather than appearing as zero.</p>
 </div>
 </div>
 <p><strong>4. How many readings of each parameter are there across the whole table? Which parameter is the best measured, and which the worst?</strong></p>
-<div id="080a4ef3" class="cell" data-execution_count="5">
+<div id="df3f6970" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>aq.groupby(<span class="st">'parameter'</span>)[<span class="st">'value'</span>].count().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -637,7 +637,7 @@ Name: value, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>The units check.</strong></p>
-<div id="458dc955" class="cell" data-execution_count="6">
+<div id="6526cc93" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>aq.groupby(<span class="st">'parameter'</span>)[<span class="st">'unit'</span>].nunique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -667,7 +667,7 @@ Name: unit, dtype: int64</code></pre>
 <section id="part-2-compare-the-stations" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-compare-the-stations">Part 2: Compare the stations</h2>
 <p><strong>5. Build a table of just the PM2.5 readings, ending the line with <code>.copy()</code>, and call it <code>pm25</code>. How many rows?</strong></p>
-<div id="284d7ceb" class="cell" data-execution_count="7">
+<div id="ae47308b" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pm25 <span class="op">=</span> aq[aq[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>].copy()</span>
@@ -691,7 +691,7 @@ Name: unit, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>6 and 7. Rank the site means, then report count, mean, min, max and standard deviation of PM2.5 at each site.</strong></p>
-<div id="01d3bf40" class="cell" data-execution_count="8">
+<div id="0a27571e" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pm25.groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -704,7 +704,7 @@ CNSI             6.083473
 Name: value, dtype: float64</code></pre>
 </div>
 </div>
-<div id="b85b136a" class="cell" data-execution_count="9">
+<div id="c2de2341" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pm25.groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>, <span class="st">'std'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -788,13 +788,13 @@ Name: value, dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The three stations agree almost exactly on the average hour and disagree completely on the extreme hour. Goleta reaches 22.0 µg/m³, Santa Barbara 17.0 and CNSI only 12.0, and the standard deviations rank the same way, 3.651 against 3.041 against 1.745. The <code>max</code> and <code>std</code> columns carried all of the information here; the <code>mean</code> column carried none of it.</p>
+<p>The three stations agree almost exactly on the average hour and disagree completely on the extreme hour. Goleta reaches 22.0 µg/m³, Santa Barbara 17.0 and CNSI only 12.0, and the standard deviations rank the same way, 3.651 against 3.041 against 1.745. The <code>max</code> and <code>std</code> columns held all of the information here; the <code>mean</code> column held none of it.</p>
 <p>The typical hour is a regional quantity, so on the mean the South Coast has <strong>one</strong> air quality and the stations are three measurements of it. The excursions are local, and CNSI never records one. Whether that is because the CNSI site is genuinely calmer or because its instrument responds differently is the question you cannot settle from this table, and question 14 is where you have to commit to a hypothesis.</p>
 <p>Full marks for naming <code>max</code> or <code>std</code> as the informative column, quoting at least two of the values, and separating the regional signal from the local excursions instead of declaring one station cleanest.</p>
 </div>
 </div>
 <p><strong>9. Now do the same for PM10. Which site is higher, and by how much? Note which site is missing from your answer and why.</strong></p>
-<div id="69923eef" class="cell" data-execution_count="10">
+<div id="7730c009" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pm10 <span class="op">=</span> aq[aq[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm10'</span>].copy()</span>
@@ -854,7 +854,7 @@ Name: value, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>10. Use the filter pattern and the split-apply-combine pattern together: how many hours did each site record a PM2.5 value above 12 µg/m³, the US annual standard?</strong></p>
-<div id="06cc0597" class="cell" data-execution_count="11">
+<div id="6b101772" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pm25[pm25[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">12</span>].groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -866,7 +866,7 @@ Santa Barbara    25
 Name: value, dtype: int64</code></pre>
 </div>
 </div>
-<div id="92bcbd5a" class="cell" data-execution_count="12">
+<div id="15573fd2" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pm25[pm25[<span class="st">'value'</span>] <span class="op">==</span> <span class="dv">12</span>].groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -914,7 +914,7 @@ Name: value, dtype: int64</code></pre>
 <section id="part-3-the-data-still-has-problems" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-the-data-still-has-problems">Part 3: The data still has problems</h2>
 <p><strong>12 and 13. The minimum PM2.5 at each site, and a count of the negative readings.</strong></p>
-<div id="526d0c80" class="cell" data-execution_count="13">
+<div id="5bef72ac" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pm25.groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].<span class="bu">min</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -927,7 +927,7 @@ Santa Barbara   -1.0
 Name: value, dtype: float64</code></pre>
 </div>
 </div>
-<div id="d3bb18cf" class="cell" data-execution_count="14">
+<div id="c42e9860" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pm25[pm25[<span class="st">'value'</span>] <span class="op">&lt;</span> <span class="dv">0</span>].groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -939,7 +939,7 @@ Santa Barbara     3
 Name: value, dtype: int64</code></pre>
 </div>
 </div>
-<div id="69d3bced" class="cell" data-execution_count="15">
+<div id="ebbfce8f" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pm25[pm25[<span class="st">'value'</span>] <span class="op">&lt;</span> <span class="dv">0</span>].groupby(<span class="st">'hour'</span>)[<span class="st">'value'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -986,7 +986,7 @@ Name: value, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>15. A decision, and there is no single right answer. Would you drop the negative readings before computing site means? Compute both versions and report the difference, then say in one sentence which you would publish and why.</strong></p>
-<div id="9899751f" class="cell" data-execution_count="16">
+<div id="4d0bb054" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>clean_pm25 <span class="op">=</span> pm25[pm25[<span class="st">'value'</span>] <span class="op">&gt;=</span> <span class="dv">0</span>]</span>
@@ -1026,7 +1026,7 @@ Name: value, dtype: float64</code></pre>
 <section id="part-4-the-question-the-day-was-for" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-the-question-the-day-was-for">Part 4: The question the day was for</h2>
 <p><strong>16. Build a table of just the ozone readings, ending the line with <code>.copy()</code>, and call it <code>o3</code>. Then group it by <code>hour</code> and report the count and mean of <code>value</code>, in hour order.</strong></p>
-<div id="4c1d7e4e" class="cell" data-execution_count="17">
+<div id="4503f9d5" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>o3 <span class="op">=</span> aq[aq[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'o3'</span>].copy()</span>
@@ -1177,7 +1177,7 @@ Name: value, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>17. Read the <code>count</code> column first. Twenty-two of the twenty-four hours have about the same number of readings and two do not. Which two, and what does that tell you about how much weight to put on their means?</strong></p>
-<div id="3a59a994" class="cell" data-execution_count="18">
+<div id="c983b951" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>o3.groupby([<span class="st">'hour'</span>, <span class="st">'site'</span>])[<span class="st">'value'</span>].count().head(<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1211,7 +1211,7 @@ Name: value, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>18. Now rank the means. Which hour of the day has the highest average ozone, and which the lowest? What is the ratio between them?</strong></p>
-<div id="64c01990" class="cell" data-execution_count="19">
+<div id="28ef0786" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>hourly_o3 <span class="op">=</span> o3.groupby(<span class="st">'hour'</span>)[<span class="st">'value'</span>].mean()</span>
@@ -1290,7 +1290,7 @@ ratio:       2.7746077032810277</code></pre>
 </div>
 </div>
 <p><strong>21. Do the same grouping for PM2.5 and compare. Does particulate matter follow the same daily pattern as ozone?</strong></p>
-<div id="e50c2291" class="cell" data-execution_count="20">
+<div id="12454908" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>hourly_pm25 <span class="op">=</span> pm25.groupby(<span class="st">'hour'</span>)[<span class="st">'value'</span>].mean()</span>
@@ -1348,7 +1348,7 @@ Name: value, dtype: float64</code></pre>
 </section>
 <section id="part-5-write-it-up" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-write-it-up">Part 5: Write it up</h2>
-<p>A strong answer cites at least four numbers computed tonight, names something genuinely different about CNSI, and states at least one thing a single month cannot settle. Here is one that would earn full marks.</p>
+<p>A strong answer cites at least four numbers computed in the practice, names something genuinely different about CNSI, and states at least one thing a single month cannot settle. Here is one that would earn full marks.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ A model answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1373,7 +1373,7 @@ Name: value, dtype: float64</code></pre>
 <li><strong>Every mean you reported has a count beside it.</strong> Question 17 is the whole argument for this habit: the ozone means at hours <code>'02'</code> and <code>'03'</code> looked entirely normal, and only the count column revealed that each was a single station rather than two.</li>
 <li><strong>You filtered to one parameter before every average.</strong> Ozone is in ppm and the particulates in µg/m³, so any mean taken across the <code>parameter</code> column produces a number that has no unit.</li>
 <li><strong>Your question 10 answer treats the boundary explicitly.</strong> CNSI’s maximum is exactly 12.0 and the filter asked for values above 12, so a station disappeared from the result by 0.0. With <code>&gt;=</code> instead, Goleta goes from 51 hours to 62 and Santa Barbara from 25 to 42.</li>
-<li><strong>Your interpretation answers say what the number means, not what it is.</strong> “Goleta has the highest mean” restates the output. “Goleta is highest by 0.397 µg/m³, less than a tenth of the standard deviation at any station, so the ranking carries no weight” reads it.</li>
+<li><strong>Your interpretation answers say what the number means, not what it is.</strong> “Goleta has the highest mean” restates the output. “Goleta is highest by 0.397 µg/m³, less than a tenth of the standard deviation at any station, so the ranking means nothing” reads it.</li>
 </ol>
 <p>⬅️ Back to <a href="../../course-materials/eod-practice/eod-day5-2026.html">the exercise</a></p>
 

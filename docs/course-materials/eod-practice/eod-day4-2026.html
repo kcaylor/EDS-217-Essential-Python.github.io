@@ -429,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#todays-three-sentences" id="toc-todays-three-sentences" class="nav-link active" data-scroll-target="#todays-three-sentences">Today’s three sentences</a></li>
+  <li><a href="#todays-three-patterns" id="toc-todays-three-patterns" class="nav-link active" data-scroll-target="#todays-three-patterns">Today’s three patterns</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#part-1-get-your-bearings" id="toc-part-1-get-your-bearings" class="nav-link" data-scroll-target="#part-1-get-your-bearings">Part 1: Get your bearings</a></li>
   <li><a href="#part-2-decide-what-to-keep" id="toc-part-2-decide-what-to-keep" class="nav-link" data-scroll-target="#part-2-decide-what-to-keep">Part 2: Decide what to keep</a></li>
@@ -458,8 +458,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>A panda, taking a moment before the hard part.</em></p>
 </div>
 <p>NOAA’s National Centers for Environmental Information maintain an archive of every marine microplastics measurement they can find: 16,245 water samples, pooled from thirty-seven separate studies, taken between 1972 and 2022 by research vessels, citizen scientists, and undergraduates with nets.</p>
-<p>Nobody designed this dataset. It was assembled. That is true of most environmental data you will ever be handed, and it is why today mattered.</p>
-<p>You have already met this file twice today. This evening you take it the whole way: from the raw download to a defensible answer about whether the Atlantic and the Pacific are different.</p>
+<p>Nobody designed this dataset. It was assembled, one study at a time. Most of the environmental data you will ever be handed was put together the same way, which is why today mattered.</p>
+<p>You have already met this file twice today. Tonight you will take it the whole way: from the raw download to an answer you could defend about whether the Atlantic and the Pacific are different.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -473,13 +473,13 @@ Reference
 <p>NOAA National Centers for Environmental Information, Marine Microplastics database. <a href="https://www.ncei.noaa.gov/products/microplastics">https://www.ncei.noaa.gov/products/microplastics</a></p>
 </div>
 </div>
-<section id="todays-three-sentences" class="level2">
-<h2 class="anchored" data-anchor-id="todays-three-sentences">Today’s three sentences</h2>
-<p>Everything below is built from these, plus the two you learned yesterday. You should not need to look them up more than once.</p>
+<section id="todays-three-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="todays-three-patterns">Today’s three patterns</h2>
+<p>Everything below is built from these three patterns, plus two more you learned yesterday. You should not need to look any of them up more than once.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> expression                     <span class="co"># the derived-column pattern</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df.dropna(subset<span class="op">=</span>[<span class="st">'col'</span>])                  <span class="co"># the missing-data sentence, treat half</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df.dropna(subset<span class="op">=</span>[<span class="st">'col'</span>])                  <span class="co"># the missing-data pattern, treat half</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].fillna(value)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">str</span>.strip()          <span class="co"># the string-cleaning sentence</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">str</span>.strip()          <span class="co"># the string-cleaning pattern</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And the payoff from this morning:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">apply</span>(my_function)   <span class="co"># your own verb, run down a column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -508,7 +508,7 @@ Reference
 <p><code>read_csv()</code> takes a <code>parse_dates=</code> argument naming the columns that hold dates, and a <code>date_format=</code> argument describing how they are written. Here is the whole line. <strong>Run it as written:</strong></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>], date_format<span class="op">=</span><span class="st">'%m/</span><span class="sc">%d</span><span class="st">/%Y %I:%M:%S %p'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The format string is a small language of its own. <code>%m/%d/%Y</code> is month, day, four-digit year; <code>%I:%M:%S</code> is a twelve-hour clock; and <code>%p</code> is the AM or PM that goes with it. You are not expected to be able to write one of these yet.</p>
-<p>Once a column is a real date, you reach the pieces of it through <code>.dt</code>. You will need exactly one of these tonight, in task 13, and it also comes supplied:</p>
+<p>Once a column is a real date, you reach the pieces of it through <code>.dt</code>. You will need exactly one of these in task 13, and we are giving it to you here:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'year'</span>] <span class="op">=</span> samples[<span class="st">'Date'</span>].dt.year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Dates get a full session on Day 6.</strong> By the middle of next week you will be writing both of these yourself. Tonight, copy them.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/read_csv.html">Cheatsheet: reading CSV files</a> · <a href="../../course-materials/cheatsheets/timeseries.html">Cheatsheet: time series</a></p>
@@ -517,7 +517,7 @@ Reference
 </section>
 <section id="part-1-get-your-bearings" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-get-your-bearings">Part 1: Get your bearings</h2>
-<p>Answer each of these in a markdown cell underneath the code that produced it.</p>
+<p>Answer each of these questions in a markdown cell underneath the code that produced the answer.</p>
 <ol type="1">
 <li>How many rows and columns? Display the first few rows.</li>
 <li>Run <code>.info()</code>. Which columns are <code>object</code>, and which of those <em>should</em> be something else?</li>
@@ -527,12 +527,12 @@ Reference
 </section>
 <section id="part-2-decide-what-to-keep" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-decide-what-to-keep">Part 2: Decide what to keep</h2>
-<p>This is the part that takes judgement rather than syntax. Every task here removes rows, so <strong>print <code>.shape</code> after every one of them</strong> and record the number in a markdown cell.</p>
+<p>Part 2 takes judgement rather than syntax, and more than one answer here is defensible. Every task here removes rows, so <strong>print <code>.shape</code> after every one of them</strong> and record the number in a markdown cell.</p>
 <ol start="5" type="1">
-<li><p>Use <code>.dropna()</code> with <code>subset=</code> to keep only the rows that carry a <code>Measurement</code>. How many rows are left, and what fraction of the file is that?</p></li>
-<li><p>Compare <code>df['Unit'].value_counts()</code> now with what it was before task 5. What did that one line cost you, and which sampling programme did it belong to? (Check <code>Sampling Method</code> and <code>Organization</code> on the rows you removed, if you want to be sure.)</p></li>
+<li><p>Use <code>.dropna()</code> with <code>subset=</code> to keep only the rows with a <code>Measurement</code>. How many rows are left, and what fraction of the file is that?</p></li>
+<li><p>Compare <code>df['Unit'].value_counts()</code> now with what it was before task 5. What did that one line cost you, and which sampling programme did the rows you lost belong to? (Check <code>Sampling Method</code> and <code>Organization</code> on the rows you removed, if you want to be sure.)</p></li>
 <li><p>Fill the gaps in <code>Regions</code> and <code>SubRegions</code> with <code>'Unspecified'</code>, one column at a time, assigning each result back. Confirm with <code>.isnull().sum()</code> that only <code>Keywords</code> is still missing anything.</p></li>
-<li><p>In a markdown cell: task 5 removed rows and task 7 kept them. Both were the right call. Explain in two or three sentences what made them different.</p></li>
+<li><p>In a markdown cell: task 5 removed rows and task 7 kept them. Both were the right decision. Explain in two or three sentences what made them different.</p></li>
 <li><p>Check for duplicated rows. Do it twice: once bare, and once with <code>subset=</code> naming the columns you think define a single observation. Report both numbers and say which one you believe.</p></li>
 </ol>
 </section>
@@ -542,7 +542,7 @@ Reference
 <li><p>Filter to the samples reported in <code>pieces/m3</code>, end the line with <code>.copy()</code>, and call the result <code>samples</code>. How many rows?</p></li>
 <li><p><code>Accession Number</code> is a label, not a quantity. Convert it to text with <code>.astype(str)</code> and assign it back. Confirm with <code>.dtype</code>.</p></li>
 <li><p>The <code>Oceans</code> values all end in the word “Ocean”. Use <code>.str.replace()</code> to make a new column called <code>ocean</code> holding the short name, and check it with <code>.value_counts()</code>.</p></li>
-<li><p>Add a column called <code>year</code> holding the year each sample was taken, using the supplied line from the setup Field Note. Then run <code>.value_counts()</code> on <code>year</code>. Which single year contributed the most samples? In a markdown cell, say whether this archive is spread evenly across its fifty years, and what that means for anyone who wants to use it to describe a trend.</p></li>
+<li><p>Add a column called <code>year</code> holding the year each sample was taken, using the supplied line from the setup Field Note. Then run <code>.value_counts()</code> on <code>year</code>. Which single year contributed the most samples? In a markdown cell, say whether the archive is spread evenly across its fifty years, and what an uneven spread would mean for anyone who wants to use it to describe a trend.</p></li>
 </ol>
 </section>
 <section id="part-4-the-derived-columns" class="level2">
@@ -561,7 +561,7 @@ Reference
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>On Day 1 you drew a line with <code>plt.plot(series)</code>. A histogram is the same shape of call:</p>
+<p>On Day 1 you drew a line with <code>plt.plot(series)</code>. A histogram is the same kind of call:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.hist(samples[<span class="st">'Measurement'</span>])</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'pieces per cubic metre'</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -570,7 +570,7 @@ Reference
 </div>
 </div>
 <ol start="16" type="1">
-<li><p>That plot is useless, and it is useless for a reason you can state in one sentence. State it in a markdown cell.</p></li>
+<li><p>The histogram you just drew is useless, and it is useless for a reason you can state in one sentence. State that reason in a markdown cell.</p></li>
 <li><p>Filter <code>samples</code> to the rows where <code>Measurement</code> is greater than zero, end the line with <code>.copy()</code>, and call it <code>positive</code>. How many samples reported exactly zero pieces? Is zero a measurement or a missing value? Defend your answer in one sentence.</p></li>
 <li><p>Add a column to <code>positive</code> called <code>log10_measurement</code> holding <code>np.log10()</code> of the measurement. Run <code>.describe()</code> on it, then draw the histogram again.</p></li>
 <li><p>In a markdown cell, describe the shape you can now see and could not see before. Name one thing about the data that this plot tells you and <code>.describe()</code> did not.</p></li>
@@ -578,7 +578,7 @@ Reference
 </section>
 <section id="part-5-a-classifier-of-your-own" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-a-classifier-of-your-own">Part 5: A classifier of your own</h2>
-<p>The archive ships a column called <code>Density Class</code> with values like <code>Low</code> and <code>Very High</code>. Somebody decided those. Tonight you decide your own, and then find out whether you agree.</p>
+<p>The archive has a column called <code>Density Class</code> with values like <code>Low</code> and <code>Very High</code>. Somebody decided those cutoffs. Tonight you will decide your own, and then find out whether you agree with theirs.</p>
 <ol start="20" type="1">
 <li><p>Write a function called <code>density_class</code> that takes a measurement in pieces per cubic metre and returns:</p>
 <ul>
@@ -588,7 +588,7 @@ Reference
 </ul>
 <p>Test it on <code>0.001</code>, <code>0.5</code>, and <code>50</code> before you go near the DataFrame.</p></li>
 <li><p>Use <code>.apply()</code> to run your function down <code>positive['Measurement']</code>, store the result in a column called <code>my_class</code>, and report the counts.</p></li>
-<li><p>Now compare with NOAA’s. Filter <code>positive</code> to the rows NOAA labelled <code>'Medium'</code>, and run <code>.value_counts()</code> on <code>my_class</code> for just those rows. Do the same for NOAA’s <code>'Very Low'</code>.</p></li>
+<li><p>Now compare your labels with NOAA’s. Filter <code>positive</code> to the rows NOAA labelled <code>'Medium'</code>, and run <code>.value_counts()</code> on <code>my_class</code> for just those rows. Do the same for NOAA’s <code>'Very Low'</code>.</p></li>
 <li><p>Something is wrong, and it is not your function. In a markdown cell, explain what NOAA’s <code>Density Class</code> must actually mean, given that samples they called <code>Very Low</code> fall in your <code>high</code> bin. Then say whether you would use their column in an analysis, and why.</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="A hint, if you want one">
@@ -609,7 +609,7 @@ A hint, if you want one
 <h2 class="anchored" data-anchor-id="part-6-the-question">Part 6: The question</h2>
 <ol start="24" type="1">
 <li><p>Build two tables with the filter pattern: the Atlantic samples and the Pacific samples, from <code>positive</code>. Report the row count of each.</p></li>
-<li><p>Run <code>.describe()</code> on <code>Measurement</code> for each. Compare the two medians (the <code>50%</code> row), and then compare the two means. They tell different stories. Which one would you put in a report, and why?</p></li>
+<li><p>Run <code>.describe()</code> on <code>Measurement</code> for each. Compare the two medians (the <code>50%</code> row), and then compare the two means. They will probably tell you two different stories. Which one would you put in a report, and why?</p></li>
 <li><p>Compare the mean of <code>log10_measurement</code> for each instead. In a markdown cell, say what that comparison is doing that the comparison of raw means was not.</p></li>
 <li><p>Before you conclude anything: how many Pacific samples are there, out of how many total? Look back at task 12. In one sentence, say what you would need to know about <em>how the samples were collected</em> before you would publish a comparison between these two oceans.</p></li>
 </ol>
@@ -618,21 +618,21 @@ A hint, if you want one
 <h2 class="anchored" data-anchor-id="part-7-write-it-up">Part 7: Write it up</h2>
 <p>In a single markdown cell of 200 to 300 words, answer this:</p>
 <blockquote class="blockquote">
-<p>A journalist emails you: “Is there more plastic in the Pacific than the Atlantic? I heard about the garbage patch.” You have this dataset and one evening. What do you tell them?</p>
+<p>A journalist emails you: “Is there more plastic in the Pacific than the Atlantic? I heard about the garbage patch.” You have this dataset and one afternoon. What do you tell them?</p>
 </blockquote>
-<p>Your answer must cite at least three specific numbers you computed tonight, must name at least one cleaning decision you made and what it cost, and must include at least one thing this dataset cannot tell them. Complete sentences, no bullet fragments.</p>
+<p>Your answer must cite at least three specific numbers you computed here, must name at least one cleaning decision you made and what it cost, and must include at least one thing this dataset cannot tell them. Complete sentences, no bullet fragments.</p>
 </section>
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
-<p>Look back through your notebook. Every code cell you wrote tonight was one of a handful of sentences:</p>
+<p>Look back through your notebook. Every code cell you wrote was one of a handful of patterns:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.dropna(subset<span class="op">=</span>[<span class="st">'col'</span>])                  <span class="co"># keep rows that have what you need</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].fillna(value)        <span class="co"># or keep the row and fill the hole</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].astype(<span class="bu">str</span>)          <span class="co"># tell pandas what a column is</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">str</span>.replace(a, b)    <span class="co"># tidy text</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> expression                     <span class="co"># add a column that was not in the file</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">apply</span>(my_function)   <span class="co"># add a column only you know how to compute</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Six sentences, and two of them you also used yesterday and the day before.</p>
-<p>Notice which one did the most work tonight. It was not any of the cleaning sentences. It was <code>df['new'] = expression</code>, four times: <code>ocean</code>, <code>year</code>, <code>log10_measurement</code>, <code>my_class</code>. The answer to the journalist’s question was in none of the twenty-two columns you downloaded. You made the columns that held it.</p>
+<p>Six patterns, and two of them you also used yesterday and the day before.</p>
+<p>Notice which one did the most work today. It was <code>df['new'] = expression</code>, four times over: <code>ocean</code>, <code>year</code>, <code>log10_measurement</code>, and <code>my_class</code>, and none of the cleaning patterns comes close. The twenty-two columns you downloaded did not have the answer to the journalist’s question in them, and the four columns you made yourself are where you found it!</p>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>
@@ -644,6 +644,7 @@ A hint, if you want one
 <li>you can say out loud what <code>subset=</code> does, and why <code>.duplicated()</code> without it returned zero</li>
 <li>your notebook reads top to bottom as a document, not as a pile of cells</li>
 </ul>
+<p>If something here did not work and you could not work out why, ask Cella or Kelly rather than fighting one cell to the end of the afternoon. Getting stuck on an end-of-day practice is normal and expected!</p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>

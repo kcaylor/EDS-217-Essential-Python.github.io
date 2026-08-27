@@ -148,7 +148,7 @@ Every row at the top is `pm10`, because particulates are reported in micrograms 
 metre and ozone is reported in parts per million. A number in µg/m³ will beat a number in ppm
 every time, and the ranking tells you nothing except which column has the bigger units.
 
-The two sentences you learned today are meant to be used in that order:
+The two patterns you learned today are meant to be used in that order:
 
 ```{python}
 goleta[goleta['parameter'] == 'pm10'].sort_values('value', ascending=False).head(5)[
@@ -221,7 +221,7 @@ reading. Then check your answer with the top-N pattern.
 
 ## Putting it together
 
-The two sentences of Day 3, in one workflow:
+The two patterns of Day 3, in one workflow:
 
 ```{python}
 pm10 = goleta[goleta['parameter'] == 'pm10'].copy()

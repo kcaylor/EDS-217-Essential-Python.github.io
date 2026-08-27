@@ -502,7 +502,7 @@ Reference
 <ol start="3" type="1">
 <li>Read the file:</li>
 </ol>
-<div id="2b62091c" class="cell" data-execution_count="1">
+<div id="b43a909d" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -533,7 +533,7 @@ Why this matters more than it looks
 </div>
 <div class="callout-body-container callout-body">
 <p>A very common first move on a file like this is <code>df.fillna(0)</code>, to make the nulls go away.</p>
-<p>Do it here and every one of that year’s 41 entries acquires a real score of zero points. Those zeros then flow into every average you compute for the rest of the evening, and one decade in your final table becomes an artifact of a contest that never took place.</p>
+<p>Do it here and every one of that year’s 41 entries acquires a real score of zero points. Those zeros then flow into every average you compute for the rest of the practice, and one decade in your final table becomes an artifact of a contest that never took place.</p>
 <p>A null means <em>no value</em>. A zero means <em>the value is zero</em>. Filling one with the other is not tidying, it is fabrication, and pandas will help you do it without a word of complaint.</p>
 </div>
 </div>
@@ -554,7 +554,7 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>🐍 Notice what this part does not do. You spent an hour this morning parsing dates, and there is a column here called <code>year</code>. It is tempting to reach for <code>pd.to_datetime()</code>.</p>
-<p>Leave it alone. <code>year</code> is a number that happens to name a year, and this file holds nothing below the year: no month, no day, no hour. Parsing it would produce a column whose only useful accessor, <code>.dt.year</code>, hands back the integer you started with. The parse earns its place in files that carry a real date, like the Toolik record from this morning, where <code>.dt.month</code> and <code>.dt.dayofyear</code> tell you something the raw column does not.</p>
+<p>Leave it alone. <code>year</code> is a number that happens to name a year, and this file holds nothing below the year: no month, no day, no hour. Parsing it would produce a column whose only useful accessor, <code>.dt.year</code>, hands back the integer you started with. The parse earns its place in files that hold a real date, like the Toolik record from this morning, where <code>.dt.month</code> and <code>.dt.dayofyear</code> tell you something the raw column does not.</p>
 <p>Recognizing which tool a file does not need is as much a part of the job as knowing which one it does.</p>
 </div>
 </div>
@@ -610,16 +610,16 @@ Look at the population column before you answer
 <blockquote class="blockquote">
 <p>A magazine editor has read that Ireland is the most successful country in Eurovision history and wants you to confirm it with the data. <strong>Can you?</strong></p>
 </blockquote>
-<p>Your answer must cite at least three specific numbers you computed tonight, must name at least two distinct reasons the question is harder than it sounds, and must end with the single table or number you would actually send them. Complete sentences, no bullet fragments.</p>
+<p>Your answer must cite at least three specific numbers you computed here, must name at least two distinct reasons the question is harder than it sounds, and must end with the single table or number you would actually send them. Complete sentences, no bullet fragments.</p>
 </section>
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
-<p>Look back through your notebook. Three sentences did all of the structural work tonight, and none of them calculated anything:</p>
+<p>Look back through your notebook. Three patterns did all of the structural work today, and none of them calculated anything:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pd.merge(a, b, left_on<span class="op">=</span>, right_on<span class="op">=</span>)    <span class="co"># two tables become one, side by side</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pd.concat([...], ignore_index<span class="op">=</span><span class="va">True</span>)    <span class="co"># many tables become one, top to bottom</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span>, columns<span class="op">=</span>, ...)  <span class="co"># one long table becomes one wide one</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Every other line in your notebook was something you already knew, operating on a table that one of those three sentences had put into the right shape.</p>
-<p>That is the whole of today, and it is worth saying plainly. Most of the difficulty in real data analysis is not the analysis. It is that the numbers you need to compare are in two files, or in one file at right angles to each other. The three sentences above are how you fix that, and after tonight none of them should be mysterious.</p>
+<p>Every other line in your notebook was something you already knew, operating on a table that one of those three patterns had put into the right shape.</p>
+<p>That is the whole of today, and it is worth saying plainly. Most of the difficulty in real data analysis is not the analysis. It is that the numbers you need to compare are in two files, or in one file at right angles to each other. The three patterns above are how you fix that, and after today none of them should be mysterious.</p>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>

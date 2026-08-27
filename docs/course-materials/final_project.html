@@ -428,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#what-you-are-building" id="toc-what-you-are-building" class="nav-link active" data-scroll-target="#what-you-are-building">What you are building</a></li>
   <li><a href="#the-ten-steps" id="toc-the-ten-steps" class="nav-link" data-scroll-target="#the-ten-steps">The ten steps</a></li>
-  <li><a href="#what-done-looks-like" id="toc-what-done-looks-like" class="nav-link" data-scroll-target="#what-done-looks-like">What “done” looks like</a></li>
+  <li><a href="#when-am-i-done" id="toc-when-am-i-done" class="nav-link" data-scroll-target="#when-am-i-done">When am I “done”?</a></li>
   <li><a href="#handing-it-in" id="toc-handing-it-in" class="nav-link" data-scroll-target="#handing-it-in">Handing it in</a></li>
   <li><a href="#the-presentation" id="toc-the-presentation" class="nav-link" data-scroll-target="#the-presentation">The presentation</a></li>
   <li><a href="#finding-a-dataset" id="toc-finding-a-dataset" class="nav-link" data-scroll-target="#finding-a-dataset">Finding a dataset</a>
@@ -448,19 +448,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>Over Days 8 and 9 your team builds one notebook. You take the dataset you chose on Wednesday afternoon, walk it through the ten steps, and end with a figure and a claim. Nobody outside your team has seen the data, so on Friday afternoon you introduce it to the class as well as report on it.</p>
-<p>This page is the description of the finished thing. The <a href="../course-materials/interactive-sessions/7d_project_kickoff.html">project kickoff</a> covers choosing a team, a dataset and a question. <a href="../course-materials/day8.html">Day 8</a> and <a href="../course-materials/day9.html">Day 9</a> carry the hour-by-hour plan.</p>
+<p>Over Days 8 and 9 you will work in a small team to build a notebook. On Wednesday afternoon you will choose a dataset and then on Thursday and Friday morning you will progress through the ten data science workflow steps. The final product will be a figure (or figures) and an evidence claim based on your analysis. On Friday, you will present your data and findings.</p>
+<p>This page is a general description of what you are aiming to create. The <a href="../course-materials/interactive-sessions/7d_project_kickoff.html">project kickoff</a> covers choosing a team, a dataset and a question. <a href="../course-materials/day8.html">Day 8</a> and <a href="../course-materials/day9.html">Day 9</a> contain the hour-by-hour plan.</p>
 <section id="what-you-are-building" class="level2">
 <h2 class="anchored" data-anchor-id="what-you-are-building">What you are building</h2>
 <p>One Jupyter notebook, per team, named <code>Project_&lt;team name&gt;.ipynb</code>.</p>
-<p>It is <strong>self-contained</strong>: somebody who has your notebook and nothing else can restart the kernel, run every cell from the top, and get your figures back. Self-containment matters more than anything else on this page.</p>
-<p>It is also the property most often lost, and it is lost in one particular way. You define a variable in a cell, you run the cell, and later you delete it. The variable stays alive in the kernel, so the notebook still works for you. It will not work for anybody else. Restarting and running from the top is the only way to find out.</p>
-<p>It is <strong>documented</strong>: markdown cells explain what each step was for and what it found, and code comments explain anything a reader could not work out from the code.</p>
-<p>The analysis uses <strong>pandas, numpy, matplotlib and seaborn</strong>. The only other import you may need is <code>requests</code>, and only if your file lives in Google Drive rather than at a public URL, which the recipe at the bottom of this page explains. Avoid analyses that need mapping.</p>
+<p>Your notebook should be <strong>self-contained</strong>: somebody who has your notebook and nothing else should be able to restart the kernel, run every cell from the top, and get your figures back.</p>
+<p>Repeatable, shareable, and consistent code is sometimes difficult in notebooks because they can be run asynchronously. You can define a variable in one cell, run the cell, and then later delete it. However, the variable stays alive in the kernel, and the notebook will still work in your session. However, it will not work again for anybody else or if you restart your session from scratch. Therefore, restarting and running notebooks from the top is the best way to ensure you have a consistent and well-structured set of analyses.</p>
+<p>Your code should be <strong>documented</strong>: markdown cells should explain what each step was for and what it found, and code comments should explain anything a reader needs to know to understand your code.</p>
+<p>The analysis uses <strong>pandas, numpy, matplotlib and seaborn</strong>. The only other import you may need is <code>requests</code>, and only if your file lives in Google Drive rather than at a public URL, which the code recipe at the bottom of this page explains. For this exercise, please avoid analyses that require mapping.</p>
 </section>
 <section id="the-ten-steps" class="level2">
 <h2 class="anchored" data-anchor-id="the-ten-steps">The ten steps</h2>
-<p>Every one of the ten steps appears in the notebook under its own markdown heading, in this order, even where the honest content of a step is one sentence.</p>
+<p>Every one of the ten steps should appear in your notebook under its own markdown heading, in this order, even if the content of a step is one sentence.</p>
 <ol type="1">
 <li>Import Data</li>
 <li>Explore Data</li>
@@ -474,11 +474,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Visualize Data</li>
 </ol>
 <p>These are the same ten steps described on <a href="../course-materials/the-data-science-workflow.html">The Data Science Workflow</a>.</p>
-<p>Step 9 is the one most likely to be short. If your project uses a single table and needs neither a join nor a reshape, write that under the heading and move on. Step 3 is the next most likely: a file that arrives clean has still been cleaned, and <em>“<code>.isnull().sum()</code> is zero in every column and there are no duplicate rows”</em> is that step done properly. A step that is skipped silently is different, because then nobody reading the notebook knows whether the work was unnecessary or merely undone.</p>
+<p>Step 9 is the one most likely to be short. If your project uses a single table and needs neither a join nor a reshape, write that under the heading and move on. Step 3 is the next most likely: a file that arrives clean has still been cleaned, and <em>“<code>.isnull().sum()</code> is zero in every column and there are no duplicate rows”</em> is that step done properly. Skipping steps silently is always a bad idea because then nobody reading the notebook knows whether the work was unnecessary or merely undone.</p>
 </section>
-<section id="what-done-looks-like" class="level2">
-<h2 class="anchored" data-anchor-id="what-done-looks-like">What “done” looks like</h2>
-<p>This is a checklist, not a grading scheme. Nothing here is scored. It is the list I would use if you asked me whether your notebook was finished, so you may as well have it.</p>
+<section id="when-am-i-done" class="level2">
+<h2 class="anchored" data-anchor-id="when-am-i-done">When am I “done”?</h2>
+<p>This is a checklist, not a grading scheme. As with the rest of the course, nothing you will turn in or present is scored. However, this is the list we would use if you asked me whether your notebook was finished:</p>
 <p><strong>The notebook runs.</strong></p>
 <ul class="task-list">
 <li><label><input type="checkbox">Restart the kernel, run all, no errors.</label></li>
@@ -491,33 +491,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><strong>The analysis answers a question you wrote down.</strong></p>
 <ul class="task-list">
-<li><label><input type="checkbox">The question appears near the top, in a complete sentence, with your column names in it.</label></li>
+<li><label><input type="checkbox">The question appears near the top, in a complete sentence.</label></li>
 <li><label><input type="checkbox">The two questions you set aside are named, with a sentence on why.</label></li>
 <li><label><input type="checkbox">One sentence says what one row of the dataset represents.</label></li>
 </ul>
-<p><strong>The figure carries the claim.</strong></p>
+<p><strong>The figure contains the evidence for your analysis.</strong></p>
 <ul class="task-list">
-<li><label><input type="checkbox">At least one figure made with seaborn or matplotlib. It is the figure you drafted on Thursday afternoon, refined on Friday morning, not a new one.</label></li>
+<li><label><input type="checkbox">At least one figure made with seaborn or matplotlib.</label></li>
 <li><label><input type="checkbox">Axis labels with units where units exist.</label></li>
 <li><label><input type="checkbox">A title that states the finding rather than naming the variables.</label></li>
-<li><label><input type="checkbox">A legend, if you used <code>hue=</code>.</label></li>
+<li><label><input type="checkbox">A legend, if you used multiple markers/colors.</label></li>
 </ul>
-<p><strong>The claim is stated and supported.</strong></p>
+<p><strong>The analysis conclusion is stated and supported.</strong></p>
 <ul class="task-list">
-<li><label><input type="checkbox">Two or three sentences near the top: what you asked, what you found, what it rests on.</label></li>
+<li><label><input type="checkbox">Again, this is usually found in two or three sentences near the top/bottom: what you asked, what you found, what it depends on or assumes.</label></li>
 <li><label><input type="checkbox">The counts behind any group comparison are visible somewhere in the notebook.</label></li>
-<li><label><input type="checkbox">The word <em>significant</em> does not appear, because you have not run a hypothesis test.</label></li>
+<li><label><input type="checkbox">The word <em>significant</em> does not appear, unless you have run an actual hypothesis test.</label></li>
 </ul>
 <p><strong>Somebody else can read it.</strong></p>
 <ul class="task-list">
 <li><label><input type="checkbox">No cells left over from an approach you abandoned.</label></li>
-<li><label><input type="checkbox">Markdown between the code, not just at the top.</label></li>
+<li><label><input type="checkbox">Consistent, well-formatted markdown between the code blocks, not just at the top.</label></li>
 <li><label><input type="checkbox">Every team member’s name in the first cell.</label></li>
 </ul>
 </section>
 <section id="handing-it-in" class="level2">
 <h2 class="anchored" data-anchor-id="handing-it-in">Handing it in</h2>
-<p>The notebook is due <strong>before lunch on Friday, September 11</strong>. The whole morning is available to finish in, and presentations are in the afternoon for that reason. There is nothing to submit after class.</p>
+<p>The notebook is due <strong>before lunch on Friday, September 11</strong>. The whole morning is available to finish and polish, and presentations are in the afternoon. There is nothing to submit after class.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="The submission form">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -528,34 +528,25 @@ The submission form
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSdfFOUGbZHfXONdrP1adl6D-8H90DSHgnMic4I2-YwQyLre8A/viewform">Submit here</a></strong>. One submission per team. Sign in with your UCSB Google account, since the form is restricted to UCSB and will turn a personal account away.</p>
-<p>It asks for four things:</p>
-<ol type="1">
-<li>Your team name and members</li>
-<li>The repository URL</li>
-<li>An export of the notebook, either the <code>.ipynb</code> or an HTML export</li>
-<li>Your slides, if your team made any. Most teams present from the notebook and upload nothing here.</li>
-</ol>
-<p>The form timestamp is the deadline, so submit before you go to lunch rather than after.</p>
+<p><strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSdfFOUGbZHfXONdrP1adl6D-8H90DSHgnMic4I2-YwQyLre8A/viewform">Submit here</a></strong>. One submission per team. You will need to sign in with your UCSB Google account because the form is restricted to UCSB emails.</p>
 </div>
 </div>
 <ol type="1">
 <li>Put the project notebook in its <strong>own repository</strong>, separate from your coursework repository.</li>
-<li><strong>Keep the outputs.</strong> The <a href="../course-materials/interactive-sessions/8a_github.html">GitHub session</a> has you configure <code>nbstripout</code>, which strips figures and printed output from every commit. Stripping output is right for coursework and wrong here, because your figures are the deliverable. Do not configure <code>nbstripout</code> on this repository.</li>
 <li>Add a short <code>README.md</code>: the team, the dataset, its source URL, and the question.</li>
-<li>Push, then open the repository in a browser. GitHub renders <code>.ipynb</code> directly, so you can confirm in ten seconds that the figures are showing.</li>
-<li>Send me the repository URL.</li>
+<li>Push, then open the repository in a browser. GitHub renders <code>.ipynb</code> directly, so you should be able to confirm in ten seconds that the figures are showing.</li>
+<li>Provide the repository URL in the Google Form.</li>
 </ol>
 </section>
 <section id="the-presentation" class="level2">
 <h2 class="anchored" data-anchor-id="the-presentation">The presentation</h2>
-<p><strong>Twelve minutes, then three for questions.</strong> Present from the notebook itself, and see <a href="../course-materials/day9.html">Day 9</a> for a walkthrough plan that fits the twelve minutes. Slides are allowed but not expected, and building them is not a good use of Friday morning.</p>
-<p>Additional figures are welcome, and you are encouraged to make the notebook engaging to read. Exploratory figures belong under Step 2, where they were actually made.</p>
+<p><strong>Ten minutes, then three for questions.</strong> You will probably present from the notebook itself, and see <a href="../course-materials/day9.html">Day 9</a> for a walkthrough plan that fits the twelve minutes. Slides are allowed but not expected, and building them could eat up time that you could be using for additional analyses and figure polish.</p>
+<p>Extra figures are welcome, and you are encouraged to make the notebook engaging to read. Place figures where they are most helpful; exploratory figures make sense in Step 2, for example.</p>
 </section>
 <section id="finding-a-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="finding-a-dataset">Finding a dataset</h2>
-<p>The five tests for a workable dataset are in the <a href="../course-materials/interactive-sessions/7d_project_kickoff.html">project kickoff</a>, and they are worth applying before you commit to anything: one CSV, more than a couple of hundred rows, at least two numeric columns, at least one categorical column, and you can say what one row represents.</p>
-<p>It does not need to be environmental data. Be curious.</p>
+<p>The five tests for a workable dataset are in the <a href="../course-materials/interactive-sessions/7d_project_kickoff.html">project kickoff</a>, so keep them in mind as you look for a suitable dataset: one CSV, more than a couple of hundred rows, at least two numeric columns, at least one categorical column, and you can say what one row represents.</p>
+<p>It does not need to be environmental data! Let your curiosity and creativity loose!!</p>
 <section id="general-collections" class="level3">
 <h3 class="anchored" data-anchor-id="general-collections">General collections</h3>
 <ul>
@@ -586,7 +577,7 @@ The submission form
 <li>Click <strong>Copy link</strong>, then <strong>Done</strong>.</li>
 <li>Put the code below in the Import Data section at the top of your notebook, with your own link in place of the example.</li>
 </ol>
-<div id="8c2df810" class="cell" data-execution_count="1">
+<div id="91156bb7" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -621,7 +612,7 @@ Check this on Thursday morning, not Friday
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A Drive link that has not been shared correctly fails silently for everybody except the person who uploaded it. Have a teammate run the loading cell on their own machine on Day 8, before you build anything on top of it.</p>
+<p>A Drive link that has not been shared correctly will look like it is working fine until someone else tries to access it. Have a teammate run the loading cell on their own machine so you know your file is available correctly.</p>
 </div>
 </div>
 </section>

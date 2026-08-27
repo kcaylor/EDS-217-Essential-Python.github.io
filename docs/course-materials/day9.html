@@ -398,7 +398,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-shape-of-the-day" id="toc-the-shape-of-the-day" class="nav-link active" data-scroll-target="#the-shape-of-the-day">The shape of the day</a></li>
+  <li><a href="#todays-agenda" id="toc-todays-agenda" class="nav-link active" data-scroll-target="#todays-agenda">Today’s agenda</a></li>
   <li><a href="#the-morning-what-finished-looks-like" id="toc-the-morning-what-finished-looks-like" class="nav-link" data-scroll-target="#the-morning-what-finished-looks-like">The morning: what “finished” looks like</a></li>
   <li><a href="#handing-it-in" id="toc-handing-it-in" class="nav-link" data-scroll-target="#handing-it-in">Handing it in</a></li>
   <li><a href="#the-presentations" id="toc-the-presentations" class="nav-link" data-scroll-target="#the-presentations">The presentations</a></li>
@@ -420,11 +420,10 @@ ul.task-list li input[type="checkbox"] {
 <div class="gray-text center-text">
 <p><em>A cartoon panda is presenting important data science findings to a group of colleagues.</em> <a href="https://www.midjourney.com/jobs/f9613559-9db7-4c36-bf8b-e34663ea7a3e?index=0">MidJourney 5</a></p>
 </div>
-<p>Yesterday you finished the analysis. Today you finish the notebook, and then you tell eleven other teams what you found.</p>
-<p>The whole morning is yours to finish in. Presentations are in the afternoon for that reason. The one thing the morning is not for is new analysis: if you find yourself computing something you have not computed before, you are adding scope on the last morning, and the answer is almost always to stop.</p>
-<p>The notebook is due when you push it, before you go to lunch.</p>
-<section id="the-shape-of-the-day" class="level2">
-<h2 class="anchored" data-anchor-id="the-shape-of-the-day">The shape of the day</h2>
+<p>Today we are finishing our notebooks and sharing our final results.</p>
+<p>Use the morning to finish your analysis and polish your figures and notebook. We will have presentations in the afternoon. You should avoid starting up new analyses in the morning: if you find yourself digging into new idea and analyses that you have not considered before today, you probably want to put a pause on that and go back to finishing up the stuff you have already started.</p>
+<section id="todays-agenda" class="level2">
+<h2 class="anchored" data-anchor-id="todays-agenda">Today’s agenda</h2>
 <table class="table-hover table-bordered caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -439,34 +438,34 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td>10:00 to 11:45</td>
-<td>Step 10 and the write-up. Make the figure readable and the notebook legible.</td>
+<td>Step 10 and the write-up. Polish your figures and notebook.</td>
 </tr>
 <tr class="even">
 <td>11:45 to 12:00</td>
 <td>Restart and run everything one last time, then push to GitHub.</td>
 </tr>
 <tr class="odd">
-<td>12:00 to 1:00</td>
-<td>Lunch. <strong>The notebook is done.</strong></td>
+<td>12:00 to 1:30</td>
+<td>Lunch. <strong>The notebook should be 100% done before lunch!</strong></td>
 </tr>
 <tr class="even">
-<td>1:00 to 1:10</td>
+<td>1:30 to 1:40</td>
 <td>Settle, and get the first notebook on the projector.</td>
 </tr>
 <tr class="odd">
-<td>1:10 to 2:40</td>
+<td>1:40 to 3:00</td>
 <td>Presentations, first half</td>
 </tr>
 <tr class="even">
-<td>2:40 to 2:55</td>
+<td>3:00 to 3:15</td>
 <td>Break</td>
 </tr>
 <tr class="odd">
-<td>2:55 to 4:25</td>
+<td>3:15 to 4:15</td>
 <td>Presentations, second half</td>
 </tr>
 <tr class="even">
-<td>4:25 to 4:30</td>
+<td>4:15 to 4:30</td>
 <td>Close</td>
 </tr>
 </tbody>
@@ -477,7 +476,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The list below is in order of value, and each item is worth more than the one after it. If you run out of morning, finishing the first three items properly beats starting all five items:</p>
 <ol type="1">
 <li><strong>Restart the kernel and run every cell from the top.</strong> Do this at the start of the morning, not only at 11:45. A notebook that runs only in the order you happened to write it is a notebook that will fail in front of the class, and you want to find that out at 10am.</li>
-<li><strong>Step 10, Visualize.</strong> Take yesterday’s figure and make it carry the claim. Axis labels with units, a title that states the finding rather than naming the variables, and a legend if you used <code>hue=</code>. Refining one figure beats starting a new one.</li>
+<li><strong>Step 10, Visualize.</strong> Take yesterday’s figure and make it show the claim. Axis labels with units, a title that states the finding rather than naming the variables, and a legend if you used <code>hue=</code>. Refining one figure beats starting a new one.</li>
 <li><strong>A markdown cell under every one of the ten workflow headings</strong>, which are listed on the <a href="../course-materials/final_project.html">final project page</a>. Where a step was genuinely not needed, the cell says so in a sentence. An empty heading is the only thing here that reads as unfinished.</li>
 <li><strong>The claim, near the top.</strong> Two or three sentences: what you asked, what you found, and what the finding rests on. Somebody who reads only that and looks at your figure should understand the project.</li>
 <li><strong>Delete the wreckage.</strong> Every project accumulates cells that were a good idea on Thursday. Remove them. Your notebook is easier to present when it contains only the path you took.</li>

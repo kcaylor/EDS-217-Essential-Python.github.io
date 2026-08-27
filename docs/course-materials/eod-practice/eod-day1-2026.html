@@ -427,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data">The data</a></li>
-  <li><a href="#when-youll-master-these-skills" id="toc-when-youll-master-these-skills" class="nav-link" data-scroll-target="#when-youll-master-these-skills">When you’ll master these skills</a></li>
+  <li><a href="#when-youll-learn-these-skills" id="toc-when-youll-learn-these-skills" class="nav-link" data-scroll-target="#when-youll-learn-these-skills">When you’ll learn these skills</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#rebuild-the-workflow" id="toc-rebuild-the-workflow" class="nav-link" data-scroll-target="#rebuild-the-workflow">Rebuild the workflow</a>
   <ul class="collapse">
@@ -461,7 +461,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>The boardwalk at Toolik Field Station, Alaska.</em> <a href="https://media.arcus.org">Arcus</a></p>
 </div>
-<p>This afternoon you ran the complete workflow in sessions 1c and 1d. Now you run it again on your own and change a few things to see what happens.</p>
+<p>This afternoon we ran the complete workflow together in sessions 1c and 1d. Tonight you will run the whole thing again on your own, changing a few things along the way to see what happens.</p>
 <section id="coming-attractions" class="level4">
 <h4 class="anchored" data-anchor-id="coming-attractions">🎬 “Coming Attractions”</h4>
 <ul>
@@ -479,7 +479,7 @@ Don’t panic 🚀
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You are not expected to understand every line today. You already used all of these tools this afternoon at a shallow level. Over the next six days you will learn each one properly.</p>
+<p>You are not expected to understand every line today! You already used all of these tools this afternoon, though only at a shallow level, and over the next six days we will cover each one properly. If a cell refuses to run and you cannot work out why, grab Cella or Kelly and show them what you saw.</p>
 </div>
 </div>
 </section>
@@ -487,8 +487,8 @@ Don’t panic 🚀
 <h2 class="anchored" data-anchor-id="the-data">The data</h2>
 <p>You will use the same Arctic weather data from the <a href="https://lternet.edu/site/arctic-lter/">Arctic LTER</a> station at Toolik Lake, Alaska: daily measurements from 1988 onward. The file lives in our course repository, so you can load it straight from its URL.</p>
 </section>
-<section id="when-youll-master-these-skills" class="level2">
-<h2 class="anchored" data-anchor-id="when-youll-master-these-skills">When you’ll master these skills</h2>
+<section id="when-youll-learn-these-skills" class="level2">
+<h2 class="anchored" data-anchor-id="when-youll-learn-these-skills">When you’ll learn these skills</h2>
 <p>Everything in this workflow gets a full teaching day later in the course:</p>
 <table class="caption-top table">
 <colgroup>
@@ -547,7 +547,7 @@ Don’t panic 🚀
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Date: 08/31/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="3" type="1">
-<li>Work through the rest of this page in that notebook. Copy each code cell, run it, then write a short markdown note under it saying what you saw.</li>
+<li>Work through the rest of this page in your new notebook. Copy each code cell, run it, then write a short markdown note under it saying what you saw.</li>
 </ol>
 </section>
 <section id="rebuild-the-workflow" class="level2">
@@ -598,7 +598,7 @@ R vs Python: grouping
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This is the pandas version of <code>df %&gt;% group_by(Month) %&gt;% summarize(mean(...))</code> in dplyr. The two-step form <code>df.groupby('Month')</code> then <code>['col'].mean()</code> splits the rows into monthly groups and averages one column within each.</p>
+<p>In dplyr you would write <code>df %&gt;% group_by(Month) %&gt;% summarize(mean(...))</code>, and grouping in pandas does the same job. The two-step form <code>df.groupby('Month')</code> then <code>['col'].mean()</code> splits the rows into monthly groups and averages one column within each.</p>
 </div>
 </div>
 </section>
@@ -623,13 +623,13 @@ R vs Python: plotting
 <p>In R you might draw this with <code>ggplot(...) + geom_line()</code>. Here <code>plt.plot(series)</code> takes your twelve monthly values and draws them in order, and the label lines set the title and axes.</p>
 </div>
 </div>
-<p>You now have <code>df</code>, <code>monthly</code>, and <code>monthly_means</code>, the same state you finished the sessions with. The three tasks below each make one change to this workflow.</p>
+<p>You now have <code>df</code>, <code>monthly</code>, and <code>monthly_means</code> in your notebook, which is exactly where we ended up this afternoon. Each of the three tasks below makes one change to this workflow.</p>
 </section>
 </section>
 <section id="task-1-monthly-means-for-a-different-variable" class="level2">
 <h2 class="anchored" data-anchor-id="task-1-monthly-means-for-a-different-variable">🔁 Task 1: monthly means for a different variable</h2>
 <p>The rebuild averaged <code>Daily_AirTemp_Mean_C</code>. Keep the same grouping and average a <strong>different column</strong> instead.</p>
-<p><strong>Canonical form (from the rebuild):</strong></p>
+<p><strong>What you wrote in the rebuild:</strong></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>monthly_means <span class="op">=</span> monthly[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Your change:</strong> swap the column for <strong>one</strong> from this menu, and store the result in a new variable so <code>monthly_means</code> stays put:</p>
 <ul>
@@ -637,7 +637,7 @@ R vs Python: plotting
 <li><code>Daily_Precip_Total_mm</code> (daily precipitation)</li>
 <li><code>Daily_windsp_mean_msec</code> (daily mean wind speed)</li>
 </ul>
-<p>For example, <code>monthly_radiation = monthly['Daily_globalrad_total_jcm2'].mean()</code>. This reads <code>monthly</code>, which was built from <code>df</code>, so it leaves both <code>df</code> and your <code>monthly_means</code> unchanged.</p>
+<p>For example, <code>monthly_radiation = monthly['Daily_globalrad_total_jcm2'].mean()</code>. The new line reads <code>monthly</code>, which was built from <code>df</code>, so it leaves both <code>df</code> and your <code>monthly_means</code> unchanged.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="✍️ Required: say it in a sentence">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -657,14 +657,14 @@ R vs Python: plotting
 <section id="task-2-yearly-means" class="level2">
 <h2 class="anchored" data-anchor-id="task-2-yearly-means">🔁 Task 2: yearly means</h2>
 <p>The rebuild grouped by <code>Month</code>. Now change the <strong>grouping key</strong> to <code>Year</code> to see the year-by-year trend across the whole record.</p>
-<p><strong>Canonical form (from the rebuild):</strong></p>
+<p><strong>What you wrote in the rebuild:</strong></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby(<span class="st">'Month'</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>monthly_means <span class="op">=</span> monthly[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Your change:</strong> group by a different key. Build a new grouping and average the same temperature column into new variables:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>by_year <span class="op">=</span> df.groupby(<span class="st">'Year'</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>yearly_means <span class="op">=</span> by_year[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>yearly_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This reads <code>df</code> without changing it, and it leaves <code>monthly</code> and <code>monthly_means</code> alone.</p>
+<p>The new grouping reads <code>df</code> without changing it, and it leaves <code>monthly</code> and <code>monthly_means</code> alone.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="✍️ Required: say it in a sentence">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -701,7 +701,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The month names line up with the bars only because <code>monthly_means</code> is in calendar order, from month 1 to month 12. <code>plt.bar</code> pairs the first name with the first bar, the second name with the second bar, and so on down the list. If you ever re-sorted <code>monthly_means</code>, for example by value, the names would no longer match the bars, so keep the data in month order when you use a fixed label list like this one.</p>
+<p>The month names line up with the bars only because <code>monthly_means</code> is in calendar order, from month 1 to month 12. <code>plt.bar</code> pairs the first name with the first bar, the second name with the second bar, and so on down the list. If you ever re-sorted <code>monthly_means</code>, for example by value, the names would no longer match the bars, so keep your data in month order whenever you use a fixed label list like this one.</p>
 </div>
 </div>
 <p><strong>Your change:</strong> give the chart a new title. Pick <strong>one</strong> and re-run:</p>
@@ -728,7 +728,7 @@ Note
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>
-<p>You reran a complete data science workflow and changed three things in it: the variable you averaged, the grouping key, and a chart label. Each time, you reported a result in your own words with an f-string. That is the whole shape of the course in miniature, and starting Day 2 you will learn how each step works.</p>
+<p>Nice work! You reran a complete data science workflow and changed three things in it: the variable you averaged, the grouping key, and a chart label. Each time, you reported a result in your own words with an f-string. The workflow you just reran is the plan for the whole course in miniature, and starting Day 2 we will cover how each step works, roughly one step per day.</p>
 <div class="center-text body-text-xl teal-text">
 <p>End Activity Session (Day 1)</p>
 </div>

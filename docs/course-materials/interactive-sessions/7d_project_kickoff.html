@@ -577,7 +577,7 @@ What makes a dataset workable in two days
 </ol>
 </div>
 </div>
-<p>It does not have to be environmental data. Be curious. A dataset you actually want to know the answer about will carry you through Friday morning better than a worthy one you find dull.</p>
+<p>It does not have to be environmental data. Be curious. A dataset you actually want to know the answer about will get you through Friday morning better than a worthy one you find dull.</p>
 <section id="where-to-look" class="level3">
 <h3 class="anchored" data-anchor-id="where-to-look">Where to look</h3>
 <p>General collections:</p>
@@ -611,8 +611,8 @@ What makes a dataset workable in two days
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Here is what that looks like on a file you already know, so you can see the shape of the thing:</p>
-<div id="06944dbe" class="cell" data-execution_count="1">
+<p>Here is what that looks like on a file you already know, so you can see how the method works on a real file:</p>
+<div id="bc0f5233" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -635,7 +635,7 @@ sex                   object
 dtype: object</code></pre>
 </div>
 </div>
-<div id="65f1e57c" class="cell" data-execution_count="2">
+<div id="94d44b55" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -655,13 +655,13 @@ dtype: int64</code></pre>
 </section>
 <section id="step-4-write-three-questions" class="level2">
 <h2 class="anchored" data-anchor-id="step-4-write-three-questions">Step 4: Write three questions</h2>
-<p>A good project question has a shape, and it is a shape you have been building all week:</p>
+<p>A good project question follows one of three patterns, and you have been building all three all week:</p>
 <blockquote class="blockquote">
 <p><strong>For each <code>&lt;category&gt;</code>, how does <code>&lt;measurement&gt;</code> compare?</strong></p>
 <p><strong>Does the relationship between <code>&lt;measurement&gt;</code> and <code>&lt;measurement&gt;</code> differ by <code>&lt;category&gt;</code>?</strong></p>
 <p><strong>Has <code>&lt;measurement&gt;</code> changed between <code>&lt;time&gt;</code> and <code>&lt;time&gt;</code>, and is the change the same everywhere?</strong></p>
 </blockquote>
-<p>Those are the three shapes the ten steps are built to answer. Write <strong>three</strong> questions about your dataset in those shapes, in complete sentences, with your actual column names in them.</p>
+<p>Those are the three patterns the ten steps are built to answer. Write <strong>three</strong> questions about your dataset following them, in complete sentences, with your actual column names in them.</p>
 <p>Three, not one, because the first question you write about a new dataset is usually the one the data cannot answer, and you will not find that out until Thursday afternoon.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -723,7 +723,7 @@ Note for the instructor: if Day 7 has run long
 <li>Teams of two or three, one shared notebook.</li>
 <li>A workable dataset is <strong>one CSV, a few hundred rows, two numeric columns, one categorical column</strong>, and you can say what one row is.</li>
 <li>Load it before you commit to it. The smoke test is four cells and it saves days.</li>
-<li>Write <strong>three</strong> questions, not one, in the shapes the workflow answers.</li>
+<li>Write <strong>three</strong> questions, not one, following the patterns the workflow answers.</li>
 <li>Make one figure today, however rough.</li>
 <li>Every one of the ten steps appears in the final notebook, under its own heading, even when the honest content of a step is a single sentence.</li>
 </ul>

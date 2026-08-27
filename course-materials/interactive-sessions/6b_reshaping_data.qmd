@@ -18,7 +18,7 @@ format:
 
 :::
 
-Last night's exercise opened with a block of code I asked you to copy rather than write, and a
+Yesterday's exercise opened with a block of code I asked you to copy rather than write, and a
 promise that you would write it yourself on Tuesday.
 
 It is Tuesday.
@@ -291,7 +291,7 @@ summary = pd.merge(flat, counts, on='site')
 summary
 ```
 
-One table, three rows, everything you know about the three monitors. Last night that was an
+One table, three rows, everything you know about the three monitors. Yesterday that was an
 afternoon of `.groupby()` calls.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -301,7 +301,7 @@ to `n_readings`. Then sort it so the best-measured parameter is first.
 
 ## The shape that answers yesterday's best question
 
-Last night you found the daily ozone cycle by grouping one station's readings by hour. You could
+Yesterday you found the daily ozone cycle by grouping one station's readings by hour. You could
 not easily do it for all three stations at once, because a grouped result is one column of numbers
 and you wanted three.
 

@@ -441,7 +441,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#handy-positron-features" id="toc-handy-positron-features" class="nav-link" data-scroll-target="#handy-positron-features">Handy Positron features</a></li>
   <li><a href="#saving-and-exporting" id="toc-saving-and-exporting" class="nav-link" data-scroll-target="#saving-and-exporting">Saving and exporting</a></li>
-  <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key Points</a></li>
+  <li><a href="#key-pointsreview" id="toc-key-pointsreview" class="nav-link" data-scroll-target="#key-pointsreview">Key Points/Review</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
 </nav>
@@ -454,7 +454,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><img src="images/Jupyter.png" class="img-fluid"></p>
-<p>Welcome to your first hands-on session. You have already met <strong>Positron</strong> in your R course, so the workspace itself will look familiar. Over the next hour you will learn what changes when the language is Python, and you will build the first of the <strong>Jupyter Notebooks</strong> you will write your code in for the rest of this course.</p>
+<p>Welcome to your first hands-on session. You have already met <strong>Positron</strong> in your R course, so the workspace itself will look familiar. Over the next hour you will learn what changes when the language is Python, and you will build the first of the <strong>Jupyter Notebooks</strong> you will write your code in for the rest of this course (and throughout MEDS and your data science career).</p>
 <div class="center-text body-text-m">
 <p>Always remember: <span class="teal-text"><strong>Python is the programming language. Positron is the IDE.</strong></span></p>
 </div>
@@ -469,7 +469,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Positron runs both R and Python. The panes you learned in your R course, the Console, the Variables pane, the Plots pane, and the file Explorer, all do the same jobs here. What changes is the interpreter Positron is talking to, and the file format we write in.</p>
+<p>Positron runs both R and Python. The panes you learned in your R course, the Console, the Variables pane, the Plots pane, and the file Explorer, all do the same jobs when coding in Python. The only things that change are the interpreter Positron is talking to (python instead of R) and the file format we write in (.ipynb).</p>
 </div>
 </div>
 <section id="meet-positron-on-posit-workbench" class="level2">
@@ -539,7 +539,7 @@ Switching interpreters clears your session
 <p>Positron can run your Python code in two places. It is worth seeing both once so you know the difference.</p>
 <section id="the-console-a-repl" class="level3">
 <h3 class="anchored" data-anchor-id="the-console-a-repl">The Console (a REPL)</h3>
-<p>The Console is a Python prompt. This is a <strong>REPL</strong>, which stands for Read-Eval-Print Loop, and it is the same idea as the R console you already use.</p>
+<p>The Console is a Python prompt. This is a <strong>REPL</strong>, which stands for Read-Eval-Print Loop, and it is the same idea as the R console you have already used.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -557,16 +557,16 @@ Note
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">21</span> <span class="op">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>42</code></pre>
 <p>That is the whole read-eval-print idea: you typed an expression, it evaluated it, it printed <code>42</code>. We are just watching the environment work here. You will learn Python’s syntax properly this afternoon, and its full set of operators on Day 3.</p>
-<p>The Console is useful for quick checks, but nothing you type there is saved. That is why we work in notebooks.</p>
+<p>The Console is useful for quick checks, but nothing you type there persists beyond the session. That is why we work in notebooks (and .py files).</p>
 </section>
 <section id="jupyter-notebooks-what-we-will-use" class="level3">
 <h3 class="anchored" data-anchor-id="jupyter-notebooks-what-we-will-use">Jupyter Notebooks (what we will use)</h3>
-<p>For the rest of this course you will write your code in <strong>Jupyter Notebooks</strong>, files ending in <code>.ipynb</code>. A notebook lets you combine <strong>code</strong>, its <strong>output</strong>, and <strong>narrative text</strong> in one document, so your analysis and the story of your analysis stay together. That is what we want for data science, so notebooks are our home base from here on.</p>
+<p>For the rest of this course you will write your code in <strong>Jupyter Notebooks</strong>, files ending in <code>.ipynb</code>. A notebook lets you combine <strong>code</strong>, its <strong>output</strong>, and <strong>narrative text</strong> in one document, so your analysis and the story of your analysis stay together. This is known as literate programming, and is exactly what we want for data science. So we will make notebooks our home base from here on.</p>
 </section>
 </section>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
-<p>Let’s make the notebook you will use for this session. <strong>We follow this same setup ritual at the start of every session</strong>, so it will quickly become second nature.</p>
+<p>Let’s make the notebook you will use for this session. <strong>We will follow this same setup ritual at the start of every session</strong>, so it will quickly become second nature.</p>
 <ol type="1">
 <li><strong>Create a new notebook:</strong>
 <ul>
@@ -639,7 +639,7 @@ Caution
 <section id="running-a-code-cell" class="level3">
 <h3 class="anchored" data-anchor-id="running-a-code-cell">Running a code cell</h3>
 <p>Click into your empty code cell, type the classic first line of code, and run it with <code>Shift + Enter</code>:</p>
-<div id="1c8b6ffc" class="cell" data-execution_count="1">
+<div id="659050e4" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello, Positron!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -666,7 +666,7 @@ Caution
 </section>
 <section id="adding-and-moving-cells" class="level3">
 <h3 class="anchored" data-anchor-id="adding-and-moving-cells">Adding and moving cells</h3>
-<p>Hover between two cells, or below the last one, and Positron offers buttons to insert a new <strong>Code</strong> cell or a new <strong>Markdown</strong> cell at that point. Each cell also carries its own small toolbar for running, moving, and deleting it.</p>
+<p>Hover between two cells, or below the last one, and Positron offers buttons to insert a new <strong>Code</strong> cell or a new <strong>Markdown</strong> cell at that point. Each cell also has its own small toolbar for running, moving, and deleting it.</p>
 </section>
 <section id="writing-a-markdown-cell" class="level3">
 <h3 class="anchored" data-anchor-id="writing-a-markdown-cell">Writing a Markdown cell</h3>
@@ -739,14 +739,14 @@ Limits of the Variables pane
 <li><strong>Export:</strong> Positron can render a notebook to other formats through Quarto. You will not need this until the final project, and we will cover it then.</li>
 </ul>
 </section>
-<section id="key-points" class="level2">
-<h2 class="anchored" data-anchor-id="key-points">Key Points</h2>
+<section id="key-pointsreview" class="level2">
+<h2 class="anchored" data-anchor-id="key-pointsreview">Key Points/Review</h2>
 <ul>
 <li><strong>Python is the language. Positron is the IDE</strong> you run it in, hosted on Posit Workbench, so it is all in your browser.</li>
-<li>Positron runs Python in a <strong>Console</strong> (a read-eval-print prompt) or in <strong>notebooks</strong>, and we use notebooks from here on, because notebooks are saved and the Console is not.</li>
-<li>Set the <strong>interpreter</strong> in the top right for the Console, and the <strong>kernel</strong> in the action bar for each notebook. Both should read <strong>eds217_2026</strong>.</li>
+<li>Positron runs Python in a <strong>Console</strong> (a read-eval-print prompt) or in <strong>notebooks</strong>, and we use notebooks because notebooks follow a literate programming model, and can be saved while the Console cannot.</li>
+<li>You should always set the <strong>interpreter</strong> in the top right for the Console, and the <strong>kernel</strong> in the action bar for each notebook. Both should read <strong>eds217_2026</strong>.</li>
 <li>A notebook combines <strong>code cells</strong>, their <strong>output</strong>, and <strong>Markdown</strong> narrative in one document.</li>
-<li>Run a cell with <code>Shift + Enter</code>. Use <code>Ctrl + Enter</code> to run without moving on.</li>
+<li>Run a cell with <code>Shift + Enter</code>. Use <code>Ctrl + Enter</code> to run without moving the cursor to the next cell.</li>
 <li>Start every session with the same ritual: <strong>create, save with a name, check the kernel, title cell, save often.</strong></li>
 </ul>
 </section>

@@ -29,7 +29,7 @@ undergraduates with nets.
 Nobody designed this dataset. It was assembled, one study at a time. Most of the environmental
 data you will ever be handed was put together the same way, which is why today mattered.
 
-You have already met this file twice today. Tonight you will take it the whole way: from the
+You have already met this file twice today. Today you will take it the whole way: from the
 raw download to an answer you could defend about whether the Atlantic and the Pacific are
 different.
 
@@ -92,7 +92,7 @@ samples['year'] = samples['Date'].dt.year
 ```
 
 **Dates get a full session on Day 6.** By the middle of next week you will be writing both of
-these yourself. Tonight, copy them.
+these yourself. Today, copy them.
 
 📖 [Cheatsheet: reading CSV files](../cheatsheets/read_csv.qmd) · [Cheatsheet: time series](../cheatsheets/timeseries.qmd)
 :::
@@ -243,7 +243,7 @@ plt.show()
 ```
 
 `plt.hist()` sorts the values into bins and draws a bar for each. **Plotting gets two full days
-next week**, where you will learn to control bins, axes, and everything else. Tonight you need
+next week**, where you will learn to control bins, axes, and everything else. Today you need
 it only to see a shape.
 
 📖 [Cheatsheet: matplotlib](../cheatsheets/matplotlib.qmd)
@@ -288,7 +288,7 @@ plt.show()
 ## Part 5: A classifier of your own
 
 The archive has a column called `Density Class` with values like `Low` and `Very High`.
-Somebody decided those cutoffs. Tonight you will decide your own, and then find out whether you
+Somebody decided those cutoffs. Today you will decide your own, and then find out whether you
 agree with theirs.
 
 20. Write a function called `density_class` that takes a measurement in pieces per cubic metre

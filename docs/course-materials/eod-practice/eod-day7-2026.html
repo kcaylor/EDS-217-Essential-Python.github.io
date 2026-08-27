@@ -475,7 +475,7 @@ Reference
 </div>
 <section id="todays-patterns" class="level2">
 <h2 class="anchored" data-anchor-id="todays-patterns">Today’s patterns</h2>
-<p>Everything you draw tonight is built from these five.</p>
+<p>Everything you draw here is built from these five.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(w, h))                             <span class="co"># the canvas</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(...) <span class="op">;</span> plt.ylabel(...) <span class="op">;</span> plt.title(...)     <span class="co"># always</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()                                     <span class="co"># last</span></span>
@@ -503,7 +503,7 @@ Reference
 <ol start="3" type="1">
 <li>Read the three files:</li>
 </ol>
-<div id="64771b98" class="cell" data-execution_count="1">
+<div id="c0f08981" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -527,7 +527,7 @@ Reference
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Two lines of setup tonight use string operations you have not been taught. Both are the same kind of move: taking a column of text and reshaping it into something you can join on or do arithmetic with. Copy them as given.</p>
+<p>Two lines of setup here use string operations you have not been taught. Both are the same kind of move: taking a column of text and reshaping it into something you can join on or do arithmetic with. Copy them as given.</p>
 <p><strong>Padding a zip code.</strong> All three files store zip codes as <strong>integers</strong>, so <code>01001</code> arrives as the number <code>1001</code> and the leading zero is gone. Two files that lost their zeros in the same way will still match each other, but the moment you print one or compare it to a real zip code you have a problem. <code>.str.zfill(5)</code> <strong>z</strong>ero-<strong>fill</strong>s a string out to five characters:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>zones_2023[<span class="st">'zipcode'</span>] <span class="op">=</span> zones_2023[<span class="st">'zipcode'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Splitting a range.</strong> The <code>trange</code> column holds text like <code>'-10 to -5'</code>. To do arithmetic on the cold end of that range you need the first piece of it, as a number:</p>
@@ -539,7 +539,7 @@ Reference
 <ol start="4" type="1">
 <li>Pad the zip codes in all three tables:</li>
 </ol>
-<div id="6091da56" class="cell" data-execution_count="2">
+<div id="ab38a6ae" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>zones_2023[<span class="st">'zipcode'</span>] <span class="op">=</span> zones_2023[<span class="st">'zipcode'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>
@@ -562,7 +562,7 @@ Reference
 <ol start="4" type="1">
 <li><p>Add a <code>year</code> column to each zone table, then stack the two of them into one table called <code>zones</code>, using the stacking pattern. How many rows?</p></li>
 <li><p>Add <code>trange_min</code> using the line from the Field Note, then confirm it has no nulls and look at its distinct values with <code>.value_counts().sort_index()</code>. In a markdown cell, say what you notice about the spacing of those values and what that means for the phrase “how much warmer”.</p></li>
-<li><p>Compute the mean <code>trange_min</code> for each year and report the difference. This is the headline number, and you are about to spend the rest of the evening finding out how much it is worth.</p></li>
+<li><p>Compute the mean <code>trange_min</code> for each year and report the difference. This is the headline number, and you are about to spend the rest of the practice finding out how much it is worth.</p></li>
 <li><p>Merge <code>zones</code> with <code>zipcodes</code> to attach a state, a latitude and a longitude to every row. The key columns are called different things in the two tables. <strong>Compare the row count before and after</strong>, then run the merge again with <code>how='left'</code> and find out how many rows failed to match and how many distinct zip codes that is.</p></li>
 <li><p>In a markdown cell: 103 rows out of 80,455 did not match, covering 63 zip codes. Is that a number you would fix, a number you would mention, or a number you would ignore? Say which and why. There is more than one defensible answer.</p></li>
 </ol>
@@ -622,7 +622,7 @@ Note
 <p>In a markdown cell, two or three sentences: a zip code that moved by 25 or 30 °F has moved five or six whole zones. Do you believe that is a change in the climate? What else could produce it? (Look at where they are.)</p></li>
 <li><p><code>temp_diff</code> has too many values to use as a <code>hue=</code> and too few to be interesting as a number. Write a named function called <code>classify_shift</code> that takes one difference and returns <code>'warmer'</code>, <code>'colder'</code> or <code>'unchanged'</code>, apply it to build a <code>shift</code> column, and count the three categories.</p></li>
 <li><p>Draw the change map: <code>longitude</code> and <code>latitude</code> again, this time with <code>hue='shift'</code>. Twelve by seven, labelled, titled.</p></li>
-<li><p>In a markdown cell, four or five sentences. This is the figure the whole evening was for, so describe it properly. Where is the country almost uniformly warmer? Where is it patchy? Where are the <code>'colder'</code> points, and does their location connect to your answer to question 19?</p>
+<li><p>In a markdown cell, four or five sentences. The figure you just made is what the whole practice was for, so describe it properly. Where is the country almost uniformly warmer? Where is it patchy? Where are the <code>'colder'</code> points, and does their location connect to your answer to question 19?</p>
 <p>Then compare this figure with the two maps from question 13, and say in one sentence why the difference had to be computed rather than looked at.</p></li>
 </ol>
 </section>
@@ -641,18 +641,18 @@ Note
 <blockquote class="blockquote">
 <p>A local newspaper is running a story headlined <strong>“Our State Is Now a Zone Warmer.”</strong> They have your two files and they want one figure and one number from you. <strong>What do you send them, and what do you tell them it does not mean?</strong></p>
 </blockquote>
-<p>Your answer must cite at least three specific numbers you computed tonight, must name at least two distinct reasons the comparison is harder than it sounds, and must end by naming the single figure you would send. Complete sentences, no bullet fragments.</p>
+<p>Your answer must cite at least three specific numbers you computed here, must name at least two distinct reasons the comparison is harder than it sounds, and must end by naming the single figure you would send. Complete sentences, no bullet fragments.</p>
 </section>
 <section id="the-figure-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-figure-minute">The figure minute</h2>
-<p>Look back through your notebook. You made six figures tonight, and they did four different jobs:</p>
+<p>Look back through your notebook. You made six figures today, and they did four different jobs:</p>
 <ul>
 <li>Question 9 found a <strong>data error</strong>, in a file that was not otherwise wrong.</li>
 <li>Question 13 drew a <strong>map</strong> out of two ordinary numeric columns.</li>
 <li>Question 18 showed you that your “temperature change” is <strong>eleven distinct values</strong>, which is the single most important thing to know about it and is invisible in any mean.</li>
 <li>Question 21 answered the <strong>question</strong>.</li>
 </ul>
-<p>Only one of the six was the figure the evening was about. The other five were how you found out what you had. That ratio is normal, and it is worth expecting: most of the plots you make in your career will never be shown to anybody, because their job is to tell <strong>you</strong> something before you say it out loud.</p>
+<p>Only one of the six was the figure the practice was about. The other five were how you found out what you had. That ratio is normal, and it is worth expecting: most of the plots you make in your career will never be shown to anybody, because their job is to tell <strong>you</strong> something before you say it out loud.</p>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>

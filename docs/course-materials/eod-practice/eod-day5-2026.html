@@ -429,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#todays-sentence-in-its-three-forms" id="toc-todays-sentence-in-its-three-forms" class="nav-link active" data-scroll-target="#todays-sentence-in-its-three-forms">Today’s sentence, in its three forms</a></li>
+  <li><a href="#todays-pattern-in-its-three-forms" id="toc-todays-pattern-in-its-three-forms" class="nav-link active" data-scroll-target="#todays-pattern-in-its-three-forms">Today’s pattern, in its three forms</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#part-1-what-is-in-each-pile" id="toc-part-1-what-is-in-each-pile" class="nav-link" data-scroll-target="#part-1-what-is-in-each-pile">Part 1: What is in each pile</a></li>
   <li><a href="#part-2-compare-the-stations" id="toc-part-2-compare-the-stations" class="nav-link" data-scroll-target="#part-2-compare-the-stations">Part 2: Compare the stations</a></li>
@@ -471,8 +471,8 @@ Reference
 <p>OpenAQ, an open global air quality data platform. Data supplied to OpenAQ by AirNow. <a href="https://openaq.org">https://openaq.org</a></p>
 </div>
 </div>
-<section id="todays-sentence-in-its-three-forms" class="level2">
-<h2 class="anchored" data-anchor-id="todays-sentence-in-its-three-forms">Today’s sentence, in its three forms</h2>
+<section id="todays-pattern-in-its-three-forms" class="level2">
+<h2 class="anchored" data-anchor-id="todays-pattern-in-its-three-forms">Today’s pattern, in its three forms</h2>
 <p>Everything below is built from these. You should not need to look them up more than once.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>grouped <span class="op">=</span> df.groupby(<span class="st">'key'</span>)                        <span class="co"># split</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>grouped[<span class="st">'col'</span>].mean()                              <span class="co"># apply and combine</span></span>
@@ -506,7 +506,7 @@ Reference
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Two lines tonight use tools you have not been taught. Both of them are <strong>setup</strong>. Everything after this block is Day 5 material, and you should recognize all of it.</p>
+<p>Two lines here use tools you have not been taught. Both of them are <strong>setup</strong>. Everything after this block is Day 5 material, and you should recognize all of it.</p>
 <p><strong>Stacking the files.</strong> The three stations are in three separate CSVs with identical columns. <code>pd.concat()</code> takes a list of DataFrames and stacks them into one, top to bottom. The <code>site</code> column does not exist in the files; you are adding it first, so that the stacked table still knows which rows came from where.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'site'</span>] <span class="op">=</span> <span class="st">'Goleta'</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>santa_barbara[<span class="st">'site'</span>] <span class="op">=</span> <span class="st">'Santa Barbara'</span></span>
@@ -584,19 +584,19 @@ Before you go any further
 <h2 class="anchored" data-anchor-id="part-5-write-it-up">Part 5: Write it up</h2>
 <p>In a single markdown cell of 200 to 300 words, answer this:</p>
 <blockquote class="blockquote">
-<p>The Santa Barbara County Air Pollution Control District is deciding whether to keep funding all three of these monitors. They ask you: <strong>does the third one tell us anything the other two do not?</strong> You have one month of data and one evening.</p>
+<p>The Santa Barbara County Air Pollution Control District is deciding whether to keep funding all three of these monitors. They ask you: <strong>does the third one tell us anything the other two do not?</strong> You have one month of data and one afternoon.</p>
 </blockquote>
-<p>Your answer must cite at least four specific numbers you computed tonight, must name at least one thing that is genuinely different about the CNSI station, and must include at least one thing this month of data cannot tell them. Complete sentences, no bullet fragments.</p>
+<p>Your answer must cite at least four specific numbers you computed here, must name at least one thing that is genuinely different about the CNSI station, and must include at least one thing this month of data cannot tell them. Complete sentences, no bullet fragments.</p>
 </section>
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
-<p>Look back through your notebook. Nearly every code cell tonight was the same pattern, wearing different clothes:</p>
+<p>Look back through your notebook. Nearly every code cell was the same pattern, wearing different clothes:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean()               <span class="co"># one number per group</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].agg([...])           <span class="co"># several numbers per group</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>).agg({...})                  <span class="co"># several columns, different summaries</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean().sort_values() <span class="co"># and then rank the groups</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>What changed from cell to cell was not the grammar. It was the <strong>key</strong>. You grouped by <code>site</code>, by <code>parameter</code>, by both at once, and by <code>hour</code>, and each of those choices asked a different question of the same 4,942 rows.</p>
-<p>That is worth stopping on. <code>site</code> was a column in the files. <code>parameter</code> was a column in the files. <code>hour</code> was not: you made it in the setup block, out of a string, and it turned out to hold the most interesting result of the evening. The best grouping key in a dataset is very often one that is not in it yet.</p>
+<p>That is worth stopping on. <code>site</code> was a column in the files. <code>parameter</code> was a column in the files. <code>hour</code> was not: you made it in the setup block, out of a string, and it turned out to hold the most interesting result of the practice. The best grouping key in a dataset is very often one that is not in it yet.</p>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>

@@ -465,7 +465,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="a6fa0b6c" class="cell" data-execution_count="1">
+<div id="4912aec8" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -484,7 +484,7 @@ How to use this key
 <section id="part-1-get-your-bearings" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-get-your-bearings">Part 1: Get your bearings</h2>
 <p><strong>1. How many rows and columns? Display the first few rows.</strong></p>
-<div id="544d7e01" class="cell" data-execution_count="2">
+<div id="3ec432cc" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.shape)</span>
@@ -667,7 +667,7 @@ How to use this key
 </div>
 </div>
 <p><strong>2. Run <code>.info()</code>. Which columns are <code>object</code>, and which of those <em>should</em> be something else?</strong></p>
-<div id="131e2a1a" class="cell" data-execution_count="3">
+<div id="a829babc" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -720,7 +720,7 @@ memory usage: 2.7+ MB</code></pre>
 </div>
 </div>
 <p><strong>3. Run <code>.isnull().sum()</code>. Five columns have gaps. Name them and their counts.</strong></p>
-<div id="5700afc2" class="cell" data-execution_count="4">
+<div id="a793d982" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -767,7 +767,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>4. <code>Oceans</code> is missing on 271 rows and <code>Measurement</code> on 5,792. Are those the same rows? Find out, and say how you know.</strong></p>
-<div id="58db51ab" class="cell" data-execution_count="5">
+<div id="8d1d6f5b" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The 271 rows missing an ocean are all rows that are also missing a measurement:</span></span>
@@ -799,8 +799,8 @@ dtype: int64</code></pre>
 </section>
 <section id="part-2-decide-what-to-keep" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-decide-what-to-keep">Part 2: Decide what to keep</h2>
-<p><strong>5. Use <code>.dropna()</code> with <code>subset=</code> to keep only the rows that carry a <code>Measurement</code>. How many rows are left, and what fraction of the file is that?</strong></p>
-<div id="89081c58" class="cell" data-execution_count="6">
+<p><strong>5. Use <code>.dropna()</code> with <code>subset=</code> to keep only the rows with a <code>Measurement</code>. How many rows are left, and what fraction of the file is that?</strong></p>
+<div id="b2e6e3ac" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'Measurement'</span>])</span>
@@ -826,8 +826,8 @@ dtype: int64</code></pre>
 <p>Now compare that with what a bare <code>.dropna()</code> would have done. Bare <code>.dropna()</code> removes any row with a null anywhere, and <code>SubRegions</code> is null on 15,657 rows, so it would have left you <strong>588 rows, 3.6 percent of the file</strong>. The <code>subset=</code> argument is the difference between keeping two-thirds of your data and keeping a twenty-eighth of it.</p>
 </div>
 </div>
-<p><strong>6. Compare <code>df['Unit'].value_counts()</code> now with what it was before task 5. What did that one line cost you, and which sampling programme did it belong to?</strong></p>
-<div id="d776ab19" class="cell" data-execution_count="7">
+<p><strong>6. Compare <code>df['Unit'].value_counts()</code> now with what it was before task 5. What did that one line cost you, and which sampling programme did the rows you lost belong to?</strong></p>
+<div id="e9d54e8d" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Unit'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -855,7 +855,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>7. Fill the gaps in <code>Regions</code> and <code>SubRegions</code> with <code>'Unspecified'</code>, one column at a time, assigning each result back. Confirm with <code>.isnull().sum()</code> that only <code>Keywords</code> is still missing anything.</strong></p>
-<div id="19881a91" class="cell" data-execution_count="8">
+<div id="d34c5191" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Regions'</span>] <span class="op">=</span> df[<span class="st">'Regions'</span>].fillna(<span class="st">'Unspecified'</span>)</span>
@@ -902,7 +902,7 @@ dtype: int64</code></pre>
 <p><code>'Unspecified'</code> is the right filler here for a reason worth stating. It is accurate. It does not claim the sample came from a region, it records that the region was not reported, and it will show up in a <code>.value_counts()</code> as its own category instead of hiding.</p>
 </div>
 </div>
-<p><strong>8. Task 5 removed rows and task 7 kept them. Both were the right call. Explain in two or three sentences what made them different.</strong></p>
+<p><strong>8. Task 5 removed rows and task 7 kept them. Both were the right decision. Explain in two or three sentences what made them different.</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -913,12 +913,12 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>The difference is whether the missing column is the one you are analysing.</strong> <code>Measurement</code> is the variable the whole exercise is about, and there is no defensible way to invent a concentration for a sample that was never measured on that scale, so those rows cannot contribute and have to go. <code>Regions</code> and <code>SubRegions</code> are descriptive labels that no calculation tonight depends on, so a row with a valid measurement and a blank region is still a perfectly good measurement.</p>
-<p>The rule to carry forward: <strong>drop on the column you are measuring, fill on the columns you are describing by.</strong> Applied here it kept 10,453 rows instead of 588, and the 9,865 rows that lacked a sub-region are most of the data you went on to analyse.</p>
+<p><strong>The difference is whether the missing column is the one you are analysing.</strong> <code>Measurement</code> is the variable the whole exercise is about, and there is no defensible way to invent a concentration for a sample that was never measured on that scale, so those rows cannot contribute and have to go. <code>Regions</code> and <code>SubRegions</code> are descriptive labels that no calculation the practice depends on, so a row with a valid measurement and a blank region is still a perfectly good measurement.</p>
+<p>The rule to remember: <strong>drop on the column you are measuring, fill on the columns you are describing by.</strong> Applied here it kept 10,453 rows instead of 588, and the 9,865 rows that lacked a sub-region are most of the data you went on to analyse.</p>
 </div>
 </div>
 <p><strong>9. Check for duplicated rows. Do it twice: once bare, and once with <code>subset=</code> naming the columns you think define a single observation. Report both numbers and say which one you believe.</strong></p>
-<div id="88c3d403" class="cell" data-execution_count="9">
+<div id="945fd567" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.duplicated().<span class="bu">sum</span>())</span>
@@ -941,7 +941,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Zero bare, 539 with the subset.</strong> The zero is not evidence of a clean file. <code>.duplicated()</code> with no arguments asks whether two rows match in all 22 columns, and this file carries <code>OBJECTID</code> and <code>GlobalID</code>, both of which hold 10,453 distinct values across 10,453 rows. Two rows can never be identical while they carry a unique key each, so bare <code>.duplicated()</code> on a table with an ID column is guaranteed to return zero and tells you nothing.</p>
+<p><strong>Zero bare, 539 with the subset.</strong> The zero is not evidence of a clean file. <code>.duplicated()</code> with no arguments asks whether two rows match in all 22 columns, and this file has <code>OBJECTID</code> and <code>GlobalID</code>, both of which hold 10,453 distinct values across 10,453 rows. Two rows can never be identical while they each have a unique key, so bare <code>.duplicated()</code> on a table with an ID column is guaranteed to return zero and tells you nothing.</p>
 <p>The subset asks the question you actually meant: did two rows record the same measurement, in the same unit, at the same coordinates, on the same day? 539 rows are flagged, and 360 of those 539 report a measurement of exactly zero.</p>
 <p><strong>Which do I believe? The 539, but as a list of candidates rather than a verdict.</strong> Two rows at the same place, on the same day, reporting the same number may be a copy, and 326 of the flagged rows come from a single organisation, which is where an ingestion error would show up. They may equally be two genuine replicate tows at one station, and the file has no column that distinguishes those two possibilities. The honest report is “539 rows are indistinguishable on the fields that define an observation, and I would ask the data provider before removing them”, not “the file has 539 duplicates”.</p>
 </div>
@@ -950,7 +950,7 @@ dtype: int64</code></pre>
 <section id="part-3-make-it-comparable" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-make-it-comparable">Part 3: Make it comparable</h2>
 <p><strong>10 and 11. Filter to <code>pieces/m3</code>, and make <code>Accession Number</code> a label.</strong></p>
-<div id="780e2bed" class="cell" data-execution_count="10">
+<div id="8da432b9" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> df[df[<span class="st">'Unit'</span>] <span class="op">==</span> <span class="st">'pieces/m3'</span>].copy()</span>
@@ -960,7 +960,7 @@ dtype: int64</code></pre>
 <pre><code>(10178, 22)</code></pre>
 </div>
 </div>
-<div id="341a9775" class="cell" data-execution_count="11">
+<div id="77ef7670" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'Accession Number'</span>] <span class="op">=</span> samples[<span class="st">'Accession Number'</span>].astype(<span class="bu">str</span>)</span>
@@ -985,7 +985,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>12. The <code>Oceans</code> values all end in the word “Ocean”. Use <code>.str.replace()</code> to make a new column called <code>ocean</code> holding the short name, and check it with <code>.value_counts()</code>.</strong></p>
-<div id="d6d74e46" class="cell" data-execution_count="12">
+<div id="c26ede62" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'ocean'</span>] <span class="op">=</span> samples[<span class="st">'Oceans'</span>].<span class="bu">str</span>.replace(<span class="st">' Ocean'</span>, <span class="st">''</span>)</span>
@@ -1015,7 +1015,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>13. Add a column called <code>year</code>. Which single year contributed the most samples? Is this archive spread evenly across its fifty years, and what does that mean for anyone who wants to use it to describe a trend?</strong></p>
-<div id="b66a3642" class="cell" data-execution_count="13">
+<div id="d40848d2" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'year'</span>] <span class="op">=</span> samples[<span class="st">'Date'</span>].dt.year</span>
@@ -1055,7 +1055,7 @@ Name: count, dtype: int64</code></pre>
 <section id="part-4-the-derived-columns" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-the-derived-columns">Part 4: The derived columns</h2>
 <p><strong>14. Run <code>.describe()</code> on <code>Measurement</code>. Write down the median and the maximum. How many orders of magnitude separate them?</strong></p>
-<div id="8dcd776e" class="cell" data-execution_count="14">
+<div id="871178ba" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'Measurement'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1088,7 +1088,7 @@ Name: Measurement, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>15 and 16. The histogram, and why it is useless.</strong></p>
-<div id="ebba9270" class="cell" data-execution_count="15">
+<div id="33fd0139" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>counts, edges, _ <span class="op">=</span> plt.hist(samples[<span class="st">'Measurement'</span>])</span>
@@ -1128,7 +1128,7 @@ counts per bin: [1.0147e+04 6.0000e+00 1.1000e+01 4.0000e+00 4.0000e+00 3.0000e+
 </div>
 </div>
 <p><strong>17. Filter <code>samples</code> to <code>Measurement</code> greater than zero and call it <code>positive</code>. How many samples reported exactly zero pieces? Is zero a measurement or a missing value?</strong></p>
-<div id="f4d7c495" class="cell" data-execution_count="16">
+<div id="979c8626" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>positive <span class="op">=</span> samples[samples[<span class="st">'Measurement'</span>] <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
@@ -1151,12 +1151,12 @@ counts per bin: [1.0147e+04 6.0000e+00 1.1000e+01 4.0000e+00 4.0000e+00 3.0000e+
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>7,091 positive samples, and 3,087 reported exactly zero, which is 30.3 percent of the file.</strong></p>
-<p><strong>Zero is a measurement.</strong> A net was towed, a known volume of water passed through it, and no plastic was found. That is a result, and it is a different kind of statement from the 5,792 rows you dropped in task 5, where no measurement of this kind was ever attempted. The file supports this reading: all 3,087 zeros carry a <code>Density Class</code> of <code>Very Low</code>, and 3,003 of them carry the <code>Density Range</code> <code>'0-0.0005'</code>, so NOAA recorded them as observed values rather than gaps.</p>
+<p><strong>Zero is a measurement.</strong> A net was towed, a known volume of water passed through it, and no plastic was found. That is a result, and it is a different kind of statement from the 5,792 rows you dropped in task 5, where no measurement of this kind was ever attempted. The file supports this reading: all 3,087 zeros have a <code>Density Class</code> of <code>Very Low</code>, and 3,003 of them have the <code>Density Range</code> <code>'0-0.0005'</code>, so NOAA recorded them as observed values rather than gaps.</p>
 <p>Which means the filter in this task is not a cleaning step, and you should not describe it as one. You are removing 30 percent of your real data for an arithmetic reason: <code>np.log10(0)</code> is negative infinity, and task 18 needs finite numbers. Any statement you make about <code>positive</code> from here on is a statement about samples that found plastic, conditional on finding any, and the 3,087 zeros belong in the write-up as their own finding.</p>
 </div>
 </div>
 <p><strong>18 and 19. The log column, its <code>.describe()</code>, the histogram again, and what the shape shows.</strong></p>
-<div id="9c6cc864" class="cell" data-execution_count="17">
+<div id="8b761e25" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>positive[<span class="st">'log10_measurement'</span>] <span class="op">=</span> np.log10(positive[<span class="st">'Measurement'</span>])</span>
@@ -1174,7 +1174,7 @@ max         5.043284
 Name: log10_measurement, dtype: float64</code></pre>
 </div>
 </div>
-<div id="707d323e" class="cell" data-execution_count="18">
+<div id="b2456060" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>plt.hist(positive[<span class="st">'log10_measurement'</span>])</span>
@@ -1203,7 +1203,7 @@ Name: log10_measurement, dtype: float64</code></pre>
 <p><strong>The one thing this plot shows and <code>.describe()</code> did not is that the distribution has two peaks.</strong> There is a large mode centred near log10 of -2, and then a second, clearly separated cluster between log10 of 3 and 4, holding 372 samples at roughly 1,000 to 10,000 pieces per cubic metre, with an almost empty gap in between. Every number <code>.describe()</code> gives you, the mean, the quartiles, the standard deviation, assumes there is one hump to describe, and quietly reports the average of two populations as though it were the centre of one.</p>
 </div>
 </div>
-<div id="ce8cc429" class="cell" data-execution_count="19">
+<div id="0ad8b212" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Going beyond what question 19 asks: where does the upper cluster come from?</span></span>
@@ -1235,14 +1235,14 @@ Name: count, dtype: int64</code></pre>
 <div class="callout-body-container callout-body">
 <p><strong>All 489 samples above 57 pieces per cubic metre were collected with a bottle, a bucket or a spoon</strong>: PVC cylinder 292, Van Dorn sampler 84, aluminium bucket 57, stainless steel spoon 50, seawater intake pump 5, CTD rosette sampler 1. <strong>Not one of them came from a net.</strong></p>
 <p>So the second mode is a method and not a place. A neuston net filters hundreds of cubic metres and retains particles above roughly a third of a millimetre; a two-litre bottle filters two thousandths of a cubic metre and its contents are examined under a microscope, so a single fibre in the bottle becomes 500 pieces per cubic metre. The two groups are both correctly reported and they are not measuring the same thing.</p>
-<p>You are not expected to have found this tonight. It is here because it is the reason the answer to Part 6 has to be hedged, and because a second mode in a histogram is almost always a second population, which means a second protocol, a second instrument, or a second study.</p>
+<p>You are not expected to have found this yourself. It is here because it is the reason the answer to Part 6 has to be hedged, and because a second mode in a histogram is almost always a second population, which means a second protocol, a second instrument, or a second study.</p>
 </div>
 </div>
 </section>
 <section id="part-5-a-classifier-of-your-own" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-a-classifier-of-your-own">Part 5: A classifier of your own</h2>
 <p><strong>20 and 21. Write <code>density_class</code>, test it, and apply it.</strong></p>
-<div id="3ec528e2" class="cell" data-execution_count="20">
+<div id="21403cda" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> density_class(measurement):</span>
@@ -1261,7 +1261,7 @@ Name: count, dtype: int64</code></pre>
 <pre><code>low medium high</code></pre>
 </div>
 </div>
-<div id="ab1ee355" class="cell" data-execution_count="21">
+<div id="23a42adc" class="cell" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>positive[<span class="st">'my_class'</span>] <span class="op">=</span> positive[<span class="st">'Measurement'</span>].<span class="bu">apply</span>(density_class)</span>
@@ -1290,7 +1290,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>22. Filter <code>positive</code> to the rows NOAA labelled <code>'Medium'</code>, and run <code>.value_counts()</code> on <code>my_class</code> for just those rows. Do the same for NOAA’s <code>'Very Low'</code>.</strong></p>
-<div id="b25e46cb" class="cell" data-execution_count="22">
+<div id="cdf9241e" class="cell" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>noaa_medium <span class="op">=</span> positive[positive[<span class="st">'Density Class'</span>] <span class="op">==</span> <span class="st">'Medium'</span>]</span>
@@ -1326,7 +1326,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>23. Something is wrong, and it is not your function. Explain what NOAA’s <code>Density Class</code> must actually mean, given that samples they called <code>Very Low</code> fall in your <code>high</code> bin. Then say whether you would use their column in an analysis, and why.</strong></p>
-<div id="6c094f00" class="cell" data-execution_count="23">
+<div id="e979ad2d" class="cell" data-execution_count="23">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>positive[[<span class="st">'Density Class'</span>, <span class="st">'Density Range'</span>]].drop_duplicates().sort_values(<span class="st">'Density Class'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1401,7 +1401,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Every class label is attached to more than one numeric range, so <code>Density Class</code> is relative to the study that contributed the row.</strong> The table says it plainly: <code>Medium</code> is both <code>'0.005-1'</code> and <code>'500-30000'</code>. <code>High</code> is both <code>'1-10'</code> and <code>'30000-40000'</code>. <code>Very High</code> is both <code>'&gt;=10'</code> and <code>'&gt;40000'</code>. <code>Very Low</code> here is <code>'0-100'</code>.</p>
-<p>The arithmetic matches exactly. Of the 5,034 NOAA <code>Medium</code> rows, 4,709 carry the range <code>'0.005-1'</code> and hold values from 0.005 to 0.996, while 325 carry the range <code>'500-30000'</code> and hold values from 705 to 28,320. Those 325 are precisely the 325 that my classifier called high. Nothing has gone wrong on either side: NOAA is answering “was this sample high or low <strong>for its own study</strong>”, and my function is answering “was this sample high or low <strong>in pieces per cubic metre</strong>”. Those are different questions, so they have different answers.</p>
+<p>The arithmetic matches exactly. Of the 5,034 NOAA <code>Medium</code> rows, 4,709 have the range <code>'0.005-1'</code> and hold values from 0.005 to 0.996, while 325 have the range <code>'500-30000'</code> and hold values from 705 to 28,320. Those 325 are precisely the 325 that my classifier called high. Nothing has gone wrong on either side: NOAA is answering “was this sample high or low <strong>for its own study</strong>”, and my function is answering “was this sample high or low <strong>in pieces per cubic metre</strong>”. Those are different questions, so they have different answers.</p>
 <p><strong>Would I use their column? Only within a single study, never across the archive.</strong> Inside one <code>Short Reference</code> it is a useful, expert-assigned relative label. Across the archive it cannot be counted, filtered or grouped, because a value of 80 is <code>Very Low</code> in one contributing paper and would be <code>Very High</code> in another, so “how many high-density samples are there” mixes incompatible scales and returns a number that means nothing. Where I need an absolute comparison, I would use the classifier I wrote, and publish its thresholds so a reader can disagree with them.</p>
 <p>The general lesson is that a categorical column inherits the definition of whoever created it, and that definition often does not travel with the file. Before you group by somebody else’s category, find the rule that produced it.</p>
 </div>
@@ -1410,7 +1410,7 @@ Name: count, dtype: int64</code></pre>
 <section id="part-6-the-question" class="level2">
 <h2 class="anchored" data-anchor-id="part-6-the-question">Part 6: The question</h2>
 <p><strong>24. Build two tables with the filter pattern: the Atlantic samples and the Pacific samples, from <code>positive</code>. Report the row count of each.</strong></p>
-<div id="6ff189d2" class="cell" data-execution_count="24">
+<div id="a71b8d59" class="cell" data-execution_count="24">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>atlantic <span class="op">=</span> positive[positive[<span class="st">'ocean'</span>] <span class="op">==</span> <span class="st">'Atlantic'</span>].copy()</span>
@@ -1437,8 +1437,8 @@ Name: count, dtype: int64</code></pre>
 <p><strong>Atlantic 6,216, Pacific 799</strong>, out of 7,091 positive samples. That is 87.7 percent Atlantic against 11.3 percent, so the Atlantic has close to eight times as many samples before either table has been looked at.</p>
 </div>
 </div>
-<p><strong>25. Run <code>.describe()</code> on <code>Measurement</code> for each. Compare the two medians, then the two means. They tell different stories. Which one would you put in a report, and why?</strong></p>
-<div id="8f2e0ed1" class="cell" data-execution_count="25">
+<p><strong>25. Run <code>.describe()</code> on <code>Measurement</code> for each. Compare the two medians, then the two means. They will probably tell you two different stories. Which one would you put in a report, and why?</strong></p>
+<div id="974c2ee9" class="cell" data-execution_count="25">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(atlantic[<span class="st">'Measurement'</span>].describe())</span>
@@ -1481,7 +1481,7 @@ Name: Measurement, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>26. Compare the mean of <code>log10_measurement</code> for each instead. Say what that comparison is doing that the comparison of raw means was not.</strong></p>
-<div id="291fb59c" class="cell" data-execution_count="26">
+<div id="9ad5d164" class="cell" data-execution_count="26">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(atlantic[<span class="st">'log10_measurement'</span>].mean())</span>
@@ -1508,7 +1508,7 @@ Name: Measurement, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>27. How many Pacific samples are there, out of how many total? Look back at task 12. What would you need to know about <em>how the samples were collected</em> before you would publish a comparison between these two oceans?</strong></p>
-<div id="05aed7be" class="cell" data-execution_count="27">
+<div id="3369302c" class="cell" data-execution_count="27">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(positive[<span class="st">'ocean'</span>].value_counts())</span>

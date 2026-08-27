@@ -20,7 +20,7 @@ format:
 
 Every question you have asked this week, you asked of one table.
 
-Last night you asked whether ozone and particulate matter follow the same daily cycle, and you
+Yesterday you asked whether ozone and particulate matter follow the same daily cycle, and you
 answered it the only way one table allows: you grouped ozone by hour, you grouped PM2.5 by hour,
 you printed both, and you compared them by eye. Two answers, side by side on the screen, but
 never side by side in the data.
@@ -236,7 +236,7 @@ shrug at 37 rows out of 1,445 and move on.
 
 Do not. Look at **which** rows.
 
-Last night I handed you a line that pulls the hour out of a timestamp. Here it is again, doing
+Yesterday we handed you a line that pulls the hour out of a timestamp. Here it is again, doing
 the same job on the rows the join could not match:
 
 ```{python}
@@ -276,7 +276,7 @@ accident?
 ## What a joined table is for
 
 Now that the two pollutants are in the same row, you can ask the question one table could not
-answer. Last night you learned that ozone peaks in the early afternoon and PM2.5 peaks around
+answer. Yesterday you learned that ozone peaks in the early afternoon and PM2.5 peaks around
 midday, from which it is tempting to conclude that the bad hours are the same hours.
 
 Test it. The top-N pattern from Wednesday, applied to the joined table:

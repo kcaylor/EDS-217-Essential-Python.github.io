@@ -429,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#todays-two-sentences" id="toc-todays-two-sentences" class="nav-link active" data-scroll-target="#todays-two-sentences">Today’s two sentences</a></li>
+  <li><a href="#todays-two-patterns" id="toc-todays-two-patterns" class="nav-link active" data-scroll-target="#todays-two-patterns">Today’s two patterns</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#part-1-get-your-bearings" id="toc-part-1-get-your-bearings" class="nav-link" data-scroll-target="#part-1-get-your-bearings">Part 1: Get your bearings</a></li>
   <li><a href="#part-2-three-rankings" id="toc-part-2-three-rankings" class="nav-link" data-scroll-target="#part-2-three-rankings">Part 2: Three rankings</a></li>
@@ -457,9 +457,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>A cartoon panda is eating a banana.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
 </div>
-<p>In 2023 <em>The Economist</em> published a way of talking about the climate cost of food that anyone can hold in their head. Instead of grams of CO₂, express everything as <strong>bananas</strong>: how many times more carbon does a kilogram of this food emit than a kilogram of bananas?</p>
-<p>They computed it three ways, because “a kilogram of lettuce” and “a kilogram of beef” are not the same amount of food. Per kilogram, per thousand calories, and per hundred grams of protein. The three rankings disagree, and the disagreement is the interesting part.</p>
-<p>Tonight you rank this dataset three ways and work out what the disagreement means.</p>
+<p>In 2023 <em>The Economist</em> published a way of talking about the climate cost of food that is easy to remember. Instead of reporting grams of CO₂, they express everything in <strong>bananas</strong>: how many times more carbon does a kilogram of this food emit than a kilogram of bananas?</p>
+<p>They computed the index three ways, because “a kilogram of lettuce” and “a kilogram of beef” are not the same amount of food at all. They ranked the foods per kilogram, per thousand calories, and per hundred grams of protein. The three rankings disagree with each other, and working out why they disagree is most of this practice.</p>
+<p>Tonight you will rank this dataset all three ways yourself, and then work out what the disagreements between your three rankings actually mean.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -473,9 +473,9 @@ Reference
 <p>The Economist and Solstad, S., 2023. The Economist’s Banana index. First published in the article “A different way to measure the climate impact of food”, <em>The Economist</em>, April 11, 2023. The data are <a href="https://github.com/TheEconomist/banana-index-data">posted on GitHub</a>.</p>
 </div>
 </div>
-<section id="todays-two-sentences" class="level2">
-<h2 class="anchored" data-anchor-id="todays-two-sentences">Today’s two sentences</h2>
-<p>Everything below is built from these. You should not need to look them up more than once.</p>
+<section id="todays-two-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="todays-two-patterns">Today’s two patterns</h2>
+<p>Every code cell in this practice is built from one of these two patterns, so you should not need to look them up more than once.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&gt;</span> value]                             <span class="co"># the filter pattern</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)    <span class="co"># the top-N pattern</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -490,7 +490,7 @@ Reference
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Date: 09/02/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="3" type="1">
 <li><p>Read the data, using <code>entity</code> as the index. The <code>entity</code> column holds the food names, and making it the index means every ranking you print will be labelled with food names instead of row numbers.</p></li>
-<li><p>The file carries five columns that are bookkeeping rather than data: <code>year</code>, <code>Banana values</code>, <code>type</code>, <code>Chart?</code>, and <code>Unnamed: 16</code>. Remove them.</p></li>
+<li><p>The file has five columns that are bookkeeping rather than data: <code>year</code>, <code>Banana values</code>, <code>type</code>, <code>Chart?</code>, and <code>Unnamed: 16</code>. Remove them.</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="🧭 Field Note: dropping columns you don't want">
 <div class="callout-header d-flex align-content-center">
@@ -504,30 +504,30 @@ Reference
 <div class="callout-body-container callout-body">
 <p><code>.drop()</code> takes a <strong>list</strong> of column names and <code>axis='columns'</code>, and returns a new DataFrame without them. Here is the whole line. Run it as written:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop([<span class="st">'year'</span>, <span class="st">'Banana values'</span>, <span class="st">'type'</span>, <span class="st">'Chart?'</span>, <span class="st">'Unnamed: 16'</span>], axis<span class="op">=</span><span class="st">'columns'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Two things to notice. The names go in a list, exactly like the lists you used to select columns yesterday. And <code>axis='columns'</code> is what tells pandas you mean columns and not rows, because <code>.drop()</code> can remove either.</p>
+<p>There are two things worth noticing here. The names go in a list, exactly like the lists you used to select columns yesterday. And <code>axis='columns'</code> tells pandas that you mean columns and not rows, because <code>.drop()</code> can remove either one.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/pandas_dataframes.html">Cheatsheet: pandas DataFrames</a></p>
 </div>
 </div>
 </section>
 <section id="part-1-get-your-bearings" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-get-your-bearings">Part 1: Get your bearings</h2>
-<p>Start the way you started yesterday. Answer each in a markdown cell underneath the code.</p>
+<p>Start the way you started yesterday. Answer each question in a markdown cell underneath the code that produced the answer.</p>
 <ol type="1">
 <li>How many foods are in the dataset, and how many columns are left after the drop?</li>
 <li>Display the first few rows. What do the three columns whose names begin with <code>Bananas    index</code> contain?</li>
 <li>Run <code>.info()</code>. Two columns have missing values. Which, and how many?</li>
-<li>What is the value of <code>Bananas index (kg)</code> for <code>Bananas</code> itself? Say why that number is what it is.</li>
+<li>What is the value of <code>Bananas index (kg)</code> for <code>Bananas</code> itself? Explain in a sentence why the number has to come out that way.</li>
 </ol>
 </section>
 <section id="part-2-three-rankings" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-three-rankings">Part 2: Three rankings</h2>
-<p>Each of the three <code>Bananas index</code> columns is a ranking waiting to happen.</p>
+<p>Each of the three <code>Bananas index</code> columns gives you a different ranking of the same foods.</p>
 <ol start="5" type="1">
 <li>Use the top-N pattern to display the 10 highest-scoring foods for <code>Bananas index (kg)</code>.</li>
 <li>Do the same for <code>Bananas index (1000 kcalories)</code>.</li>
 <li>Do the same for <code>Bananas index (100g protein)</code>.</li>
 </ol>
-<p>Write each one out in full. Yes, that is the same pattern three times with one word changed. Notice how that feels.</p>
+<p>Write each one out in full. Yes, you are writing out the same pattern three times with a single word changed each time. Notice how that feels.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Hold that thought">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -538,7 +538,7 @@ Hold that thought
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You just wrote the same six words three times. Tomorrow morning you’ll learn how to write it once, give it a name, and call it three times. Copying a line and changing one word in it is exactly the itch that <strong>functions</strong> exist to scratch, and it is worth having felt the itch before you get the cure.</p>
+<p>You just wrote the same six words three times. Tomorrow morning you will learn how to write them once, give them a name, and then call them three times. Copying a line and changing one word in it is exactly the itch that <strong>functions</strong> exist to scratch, and it helps a great deal to have felt the itch yourself before you get the cure.</p>
 </div>
 </div>
 <ol start="8" type="1">
@@ -561,28 +561,28 @@ Do this by reading, not by coding
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Comparing three short lists by eye is the right tool for three short lists. Print them, read them, write down what you see. Automating a comparison this small costs more than it saves.</p>
+<p>Your own eyes are the right tool for comparing three short lists. Print the lists, read them, and write down what you see. Automating a comparison this small would cost you more time than it saves.</p>
 </div>
 </div>
 </section>
 <section id="part-4-filtering-by-score" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-filtering-by-score">Part 4: Filtering by score</h2>
-<p>Now use the other sentence.</p>
+<p>Now use the other one, the filter pattern.</p>
 <ol start="11" type="1">
 <li><p>Use the filter pattern to find every food with a <code>Bananas index (kg)</code> above 10. How many are there?</p></li>
 <li><p>Use <code>~</code> to find the foods that are <strong>not</strong> above a score of 1 on <code>Bananas index (kg)</code>, that is, foods no worse than a banana by weight. How many are there?</p></li>
-<li><p>Now filter for <code>Bananas index (kg)</code> <strong>below</strong> 1 instead. You get a different number. Explain the difference in one sentence.</p></li>
-<li><p>Use a <strong>two-condition</strong> filter to find the foods that score above 5 per kilogram <strong>and</strong> below 1 per 100 g of protein. End the line with <code>.copy()</code>, since you’ll display it a couple of ways. Display the two banana index columns for those foods, ranked by <code>Bananas index (kg)</code>.</p></li>
+<li><p>Now filter for <code>Bananas index (kg)</code> <strong>below</strong> 1 instead. You should get a different number from the one you got in question 12. Explain the difference in one sentence.</p></li>
+<li><p>Use a <strong>two-condition</strong> filter to find the foods that score above 5 per kilogram <strong>and</strong> below 1 per 100 g of protein. End the line with <code>.copy()</code>, because you will display the result a couple of different ways. Display the two banana index columns for those foods, ranked by <code>Bananas index (kg)</code>.</p></li>
 <li><p>In a markdown cell: what do the foods in question 14 have in common? What is the argument this table makes about how we should compare foods?</p></li>
 </ol>
 </section>
 <section id="part-5-land-not-carbon" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-land-not-carbon">Part 5: Land, not carbon</h2>
-<p>The banana index columns are all about emissions. The dataset also carries land use, in <code>land_use_1000kcal</code>: square metres of land per thousand calories.</p>
+<p>The banana index columns are all about emissions. The dataset also has a land use column, <code>land_use_1000kcal</code>, which gives square metres of land per thousand calories.</p>
 <ol start="16" type="1">
 <li><p>Use <code>.loc[]</code> to look up the value of <code>land_use_1000kcal</code> for <code>Bananas</code>.</p></li>
 <li><p>Use the top-N pattern to display the 10 foods with the highest <code>land_use_1000kcal</code>.</p></li>
-<li><p>Use <code>.idxmax()</code> on <code>land_use_1000kcal</code> to get the name of the single most land-hungry food. Then use two <code>.loc[]</code> lookups and a division to report how many times the banana’s land use that food requires.</p></li>
+<li><p>Use <code>.idxmax()</code> on <code>land_use_1000kcal</code> to get the name of the single most land-hungry food. Then use two <code>.loc[]</code> lookups and a division to work out how many times more land that food needs than bananas do.</p></li>
 <li><p>Compare your land-use top 10 with your emissions top 10 from question 5. Are they the same foods? Answer in a markdown cell, and name one food that appears on one list and not the other.</p></li>
 </ol>
 </section>
@@ -602,14 +602,14 @@ Do this by reading, not by coding
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The food names are the <strong>index</strong> of your table, not a column, so the filter pattern cannot reach them. <code>.filter()</code> can. Given a substring, it keeps every row whose label contains it:</p>
+<p>The food names are the <strong>index</strong> of your table rather than a column, so the filter pattern will not work on them. <code>.filter()</code> will. Given a substring, it keeps every row whose label contains that substring:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cheese <span class="op">=</span> df.<span class="bu">filter</span>(like<span class="op">=</span><span class="st">'heese'</span>, axis<span class="op">=</span><span class="st">'rows'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>like='heese'</code> rather than <code>'cheese'</code> so that <code>Cheddar cheese</code> and <code>Cheesecake</code> are both caught, whatever their capitalisation. Run the line as written, then rank <code>cheese</code> with the top-N pattern exactly as you have been doing all evening.</p>
+<p>We use <code>like='heese'</code> rather than <code>'cheese'</code> so that both <code>Cheddar cheese</code> and <code>Cheesecake</code> match, whatever their capitalisation. Run the line as written, then rank <code>cheese</code> with the top-N pattern exactly as you have been doing all along.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/data_selection.html">Cheatsheet: data selection and filtering</a></p>
 </div>
 </div>
 <ol start="21" type="1">
-<li><p>How many rows did <code>.filter(like='heese')</code> give you? Look at the names carefully. Is every one of them a cheese? In a markdown cell, say what this tells you about matching on text.</p></li>
+<li><p>How many rows did <code>.filter(like='heese')</code> give you? Look at the names carefully. Is every one of them a cheese? In a markdown cell, say what the result tells you about matching rows on text.</p></li>
 <li><p>Where does the top cheese sit in the whole dataset’s calorie ranking? Check it against your answer to question 6.</p></li>
 </ol>
 </section>
@@ -619,15 +619,15 @@ Do this by reading, not by coding
 <blockquote class="blockquote">
 <p>A friend tells you they are cutting bananas out of their diet for environmental reasons. Using this dataset, what would you tell them?</p>
 </blockquote>
-<p>Your answer must cite at least three specific numbers you computed tonight, and must mention at least one place where the three rankings disagree with each other. Complete sentences, no bullet fragments.</p>
+<p>Your answer must cite at least three specific numbers you computed here, and it must mention at least one place where the three rankings disagree with each other. Write your answer in complete sentences rather than in bullet fragments.</p>
 </section>
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
-<p>Look back through your notebook. Almost every code cell you wrote tonight was one of two sentences:</p>
+<p>Look back through your notebook. Almost every code cell you wrote was one of two patterns:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&gt;</span> value]                             <span class="co"># filter: fewer rows</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)    <span class="co"># rank: same rows, new order, first few</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Everything else was a variation. <code>&amp;</code> and <code>|</code> joined two questions into one filter. <code>~</code> turned a question around. <code>.idxmax()</code> returned the label instead of the row. <code>.loc[]</code> looked up one value.</p>
-<p>Two sentences, one evening, and you answered every question in this document. That is what a sentence pattern is for, and you will be writing both of these every day for the rest of the course.</p>
+<p>Two patterns got you through every question in this document. You will be writing both of them nearly every day for the rest of the course.</p>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>
@@ -635,9 +635,10 @@ Do this by reading, not by coding
 <ul>
 <li>every claim in your Part 7 write-up has a code cell above it that produced the number</li>
 <li>you used the filter pattern and the top-N pattern at least three times each</li>
-<li>you can say out loud what <code>&amp;</code> needs that a single condition does not</li>
+<li>you can say out loud what a filter with <code>&amp;</code> needs that a filter with one condition does not</li>
 <li>your notebook reads top to bottom as a document, not as a pile of cells</li>
 </ul>
+<p>If one of these questions stumped you, or a cell would not run no matter what you tried, ask Cella or Kelly before you pack up. Getting stuck on a practice is normal and expected, and it is not a sign that you are behind!</p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>

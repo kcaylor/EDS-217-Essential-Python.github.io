@@ -481,7 +481,7 @@ Same idea as Part 1 🚀
 <h3 class="anchored" data-anchor-id="pick-up-where-part-1-left-off">Pick up where Part 1 left off</h3>
 <p>We are in a fresh notebook, so first re-run the workflow from Part 1 to rebuild <code>df</code> and <code>monthly_means</code>.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="65d5139a" class="cell" data-execution_count="1">
+<div id="16fe8224" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -500,7 +500,7 @@ Same idea as Part 1 🚀
 <h2 class="anchored" data-anchor-id="step-6-visualize">Step 6: Visualize 📊</h2>
 <p><strong>Visualize</strong> means turning numbers into a picture you can read quickly. The simplest plot is a line plot with <code>plt.plot()</code>.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="de07c44a" class="cell" data-execution_count="2">
+<div id="b65ded8a" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.plot(monthly_means)</span>
@@ -518,7 +518,7 @@ Same idea as Part 1 🚀
 </div>
 </div>
 <p>The same twelve numbers now show a clear seasonal cycle. We can also draw them as bars with <code>plt.bar()</code>. Copy the first line exactly. The month numbers for the x-axis come straight from your <code>monthly_means</code>.</p>
-<div id="ce822494" class="cell" data-execution_count="3">
+<div id="4bc0256d" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.bar(monthly_means.index, monthly_means)</span>
@@ -554,7 +554,7 @@ Same idea as Part 1 🚀
 <p>You could reword the <code>plt.ylabel(...)</code> text instead. Either way, change just one thing.</p>
 </div>
 </div>
-<div id="5eff2b83" class="cell" data-execution_count="4">
+<div id="fbdfac14" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: same plot, one new label. The data (monthly_means) stays the same.</span></span>
@@ -736,7 +736,7 @@ Same idea as Part 1 🚀
 </div>
 <div class="callout-body-container callout-body">
 <p>When time is up, run this to reload the data and rebuild your results from scratch:</p>
-<div id="829a1295" class="cell" data-execution_count="5">
+<div id="5d0ab587" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart: reload df and rebuild the canonical results</span></span>
@@ -754,7 +754,7 @@ Same idea as Part 1 🚀
 <li>Visualize with <code>plt.plot()</code> and <code>plt.bar()</code>. Label with <code>plt.title()</code>, <code>plt.xlabel()</code>, and <code>plt.ylabel()</code>. Today you change labels only.</li>
 <li>Export results with <code>.to_csv("filename.csv")</code> so your work is saved and reproducible.</li>
 <li>The complete ten-step workflow is Import, Explore, Clean, Filter, Sort, Transform, Group, Aggregate, Join/Reshape, and Visualize.</li>
-<li>You now know the shape of the whole course. Each of the next six days teaches a piece of this same workflow.</li>
+<li>You now know the plan for the whole course. Each of the next six days teaches a piece of this same workflow.</li>
 </ul>
 </section>
 <section id="resources" class="level2">

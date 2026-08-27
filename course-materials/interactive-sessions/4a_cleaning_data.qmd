@@ -28,7 +28,8 @@ years. Your job is not to be annoyed by it. Your job is to find it, decide what 
 it, and write down what you decided.
 
 Today's dataset is NOAA's marine microplastics archive, and you will be with it all day: this
-morning to clean it, this afternoon to transform it, and tonight to answer questions with it.
+morning to clean it, this afternoon to transform it, and the end-of-day practice to answer
+questions with it.
 
 By the end of this session you will be able to:
 
@@ -224,7 +225,7 @@ plastics[['OBJECTID', 'GlobalID', 'Latitude', 'Longitude', 'Date', 'Measurement'
 No two rows can ever share them, so no two rows can ever be identical, so `.duplicated()` can
 only ever return zero. The answer was never about the data.
 
-`subset=` fixes this the same way it fixed `.dropna()`. Point it at the columns that carry the
+`subset=` fixes this the same way it fixed `.dropna()`. Point it at the columns that hold the
 science:
 
 ```{python}

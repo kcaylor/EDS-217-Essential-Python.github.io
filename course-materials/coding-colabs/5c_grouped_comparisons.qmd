@@ -51,8 +51,8 @@ df.sort_values('column', ascending=False).head(n)
 ## Setup
 
 Create a notebook named `Colab_5C_Grouped_Comparisons.ipynb`, with both partners' names in the
-title cell, then rebuild last night's `positive` table. Every line below is one you wrote
-yesterday evening:
+title cell, then rebuild yesterday's `positive` table. Every line below is one you wrote
+yesterday afternoon:
 
 ```{python}
 import pandas as pd
@@ -190,7 +190,7 @@ neuston.groupby('ocean')['Measurement'].agg(['count', 'median', 'mean'])
 
 15. In a markdown cell, three or four sentences. Compare this table with your answer to question
     5. Does the Pacific still come out higher than the Atlantic? By how much, and is it the same
-    "how much" you reported last night? What happened to the number of Pacific samples you are
+    "how much" you reported yesterday? What happened to the number of Pacific samples you are
     now relying on?
 
 :::{.callout-tip title="If your two tables disagree about the size of the effect"}
@@ -205,7 +205,7 @@ sentences in a report. Say which one you have.
     that sentence in a markdown cell. It must contain a number, must name the sampling method
     you controlled for, and must not overstate what 158 samples can support.
 
-17. In a markdown cell of four or five sentences: **what changed between last night's answer and
+17. In a markdown cell of four or five sentences: **what changed between yesterday's answer and
     this one, and was it the data or the question?** Name the specific line of code that made
     the difference visible.
 

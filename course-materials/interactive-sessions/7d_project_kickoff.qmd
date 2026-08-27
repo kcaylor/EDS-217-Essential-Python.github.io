@@ -113,7 +113,7 @@ Check all five before you commit to it:
 :::
 
 It does not have to be environmental data. Be curious. A dataset you actually want to know the
-answer about will carry you through Friday morning better than a worthy one you find dull.
+answer about will get you through Friday morning better than a worthy one you find dull.
 
 ### Where to look
 
@@ -165,7 +165,7 @@ df.isnull().sum()
 df.describe()
 ```
 
-Here is what that looks like on a file you already know, so you can see the shape of the thing:
+Here is what that looks like on a file you already know, so you can see how the method works on a real file:
 
 ```{python}
 import pandas as pd
@@ -186,7 +186,7 @@ it now and find another one. Twenty minutes of looking beats two days of coping.
 
 ## Step 4: Write three questions
 
-A good project question has a shape, and it is a shape you have been building all week:
+A good project question follows one of three patterns, and you have been building all three all week:
 
 > **For each `<category>`, how does `<measurement>` compare?**
 >
@@ -195,8 +195,8 @@ A good project question has a shape, and it is a shape you have been building al
 > **Has `<measurement>` changed between `<time>` and `<time>`, and is the change the same
 > everywhere?**
 
-Those are the three shapes the ten steps are built to answer. Write **three** questions about your
-dataset in those shapes, in complete sentences, with your actual column names in them.
+Those are the three patterns the ten steps are built to answer. Write **three** questions about
+your dataset following them, in complete sentences, with your actual column names in them.
 
 Three, not one, because the first question you write about a new dataset is usually the one the
 data cannot answer, and you will not find that out until Thursday afternoon.
@@ -251,7 +251,7 @@ that cannot be compressed; dataset browsing and question drafting can.
 - A workable dataset is **one CSV, a few hundred rows, two numeric columns, one categorical
   column**, and you can say what one row is.
 - Load it before you commit to it. The smoke test is four cells and it saves days.
-- Write **three** questions, not one, in the shapes the workflow answers.
+- Write **three** questions, not one, following the patterns the workflow answers.
 - Make one figure today, however rough.
 - Every one of the ten steps appears in the final notebook, under its own heading, even when the
   honest content of a step is a single sentence.

@@ -86,7 +86,7 @@ aq.groupby(['site', 'parameter'])['value'].count()
 Santa Barbara each report all three.
 
 The consequence is that PM2.5 is the only parameter on which all three stations can be compared,
-and every ozone or PM10 result in the rest of the evening is a two-station result whether or not
+and every ozone or PM10 result in the rest of the practice is a two-station result whether or not
 you say so. Grouping by `site` will silently return two rows instead of three, and it is your job
 to notice which one is absent and why.
 
@@ -175,7 +175,7 @@ table told you? Would you describe the South Coast as having one air quality or 
 The three stations agree almost exactly on the average hour and disagree completely on the
 extreme hour. Goleta reaches 22.0 µg/m³, Santa Barbara 17.0 and CNSI only 12.0, and the standard
 deviations rank the same way, 3.651 against 3.041 against 1.745. The `max` and `std` columns
-carried all of the information here; the `mean` column carried none of it.
+held all of the information here; the `mean` column held none of it.
 
 The typical hour is a regional quantity, so on the mean the South Coast has **one** air quality
 and the stations are three measurements of it. The excursions are local, and CNSI never records
@@ -491,7 +491,7 @@ explain it is the clearest evidence that a source rather than a chemical reactio
 
 ## Part 5: Write it up
 
-A strong answer cites at least four numbers computed tonight, names something genuinely different
+A strong answer cites at least four numbers computed in the practice, names something genuinely different
 about CNSI, and states at least one thing a single month cannot settle. Here is one that would
 earn full marks.
 
@@ -538,6 +538,6 @@ anything else.
    `>=` instead, Goleta goes from 51 hours to 62 and Santa Barbara from 25 to 42.
 4. **Your interpretation answers say what the number means, not what it is.** "Goleta has the
    highest mean" restates the output. "Goleta is highest by 0.397 µg/m³, less than a tenth of the
-   standard deviation at any station, so the ranking carries no weight" reads it.
+   standard deviation at any station, so the ranking means nothing" reads it.
 
 ⬅️ Back to [the exercise](../eod-practice/eod-day5-2026.qmd)

@@ -29,9 +29,9 @@ of a timestamp. This session is the first of those; the second one is after lunc
 Then it goes one step further, because stacking three files gives you a table in the shape that
 is easiest to build and hardest to read. Four thousand nine hundred and forty-two rows, each one
 a single number, with the labels that explain it spread across three other columns. Every
-comparison you made last night needed a `.groupby()` to get at it.
+comparison you made yesterday needed a `.groupby()` to get at it.
 
-There is a second shape the same data can take, and in that shape most of last night's questions
+There is a second shape the same data can take, and in that shape most of yesterday's questions
 are answered by simply looking.
 
 By the end of this session you will be able to:
@@ -117,7 +117,7 @@ aq.shape
 ```
 
 Three derived-column patterns from Thursday, and now the stacked table knows where every row
-came from. That is the block you copied last night, written out.
+came from. That is the block you copied yesterday, written out.
 
 ### What `ignore_index=True` fixes
 
@@ -160,7 +160,7 @@ name: the table is **long**. It is what almost every instrument, database and AP
 because it is the shape you can keep appending to forever without changing the columns.
 
 It is also the shape in which nothing is directly comparable. To compare the mean PM2.5 across
-the three stations last night, you had to filter to one parameter and then group. To compare
+the three stations yesterday, you had to filter to one parameter and then group. To compare
 ozone and PM2.5 at Goleta this morning, you had to split the table in two and join it back
 together.
 
@@ -189,7 +189,7 @@ df.pivot_table(index='rows', columns='columns', values='numbers')
 - `columns=` is the column whose values become the **column headers**.
 - `values=` is the column whose numbers fill the **cells**.
 
-Three stations, three parameters, nine cells, and two of them empty. The whole of last night's
+Three stations, three parameters, nine cells, and two of them empty. The whole of yesterday's
 Part 1 and Part 2 is in that one small table, including the finding it took you four questions to
 reach: CNSI measures PM2.5 and nothing else.
 
@@ -292,20 +292,20 @@ summary
 ```
 
 One table, three rows, everything you know about the three monitors. Last night that was an
-evening of `.groupby()` calls.
+afternoon of `.groupby()` calls.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Build a count table of readings per `parameter` instead of per `site`, renaming the count column
 to `n_readings`. Then sort it so the best-measured parameter is first.
 :::
 
-## The shape that answers last night's best question
+## The shape that answers yesterday's best question
 
 Last night you found the daily ozone cycle by grouping one station's readings by hour. You could
 not easily do it for all three stations at once, because a grouped result is one column of numbers
 and you wanted three.
 
-Here it is, in one sentence, now that you can pivot. The `hour` column is last night's supplied
+Here it is, in one sentence, now that you can pivot. The `hour` column is yesterday's supplied
 line, which gets its proper explanation after lunch:
 
 ```{python}

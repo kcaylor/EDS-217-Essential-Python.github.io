@@ -57,7 +57,7 @@ print(zipcodes.shape)
 
 :::{.callout-note title="✅ Answer"}
 **2012 is 40,534 rows by 4 columns, 2023 is 39,921 by 4, and the zip code database is 42,522 by
-16.** The two zone tables carry exactly the same four column names, `zipcode`, `zone`, `trange`
+16.** The two zone tables have exactly the same four column names, `zipcode`, `zone`, `trange`
 and `zonetitle`, in the same order, which is what makes stacking them safe in question 4. The zip
 code database is a different kind of file: many more columns, and one row per zip code rather than
 one row per zip code per map.
@@ -76,7 +76,7 @@ print(zones_2023.head())
 **No nulls anywhere in either file**, in any of the four columns. `zone` is the short label
 (`6a`), `trange` is the five-degree temperature range that label stands for (`-10 to -5`), and
 `zonetitle` is the two of them pasted together with a colon (`6a: -10 to -5`), so `zonetitle`
-carries no information that is not already in the other two columns and is the redundant one.
+tells you nothing that is not already in the other two columns and is the redundant one.
 
 A file with zero nulls is worth a moment of suspicion rather than relief. It usually means every
 row was assigned a value by a model, which is exactly what happened here: PRISM interpolated a
@@ -155,7 +155,7 @@ degrees". Hold on to that sentence: it is what questions 18 and 22 are about.
 :::
 
 **6. Compute the mean `trange_min` for each year and report the difference. This is the headline
-number, and you are about to spend the rest of the evening finding out how much it is worth.**
+number, and you are about to spend the rest of the practice finding out how much it is worth.**
 
 ```{python}
 means = zones.groupby('year')['trange_min'].mean()
@@ -278,7 +278,7 @@ is an ordinary reading for the Washington DC suburbs.
 
 What those two rows did is set the scale. They added no visible information to the figure and they
 took away most of its resolution, because every other point had to share the remaining 40 percent
-of the axis. This is the general shape of the problem: a single bad value in a column you are
+of the axis. The general problem is this: a single bad value in a column you are
 plotting on damages every point in the figure, not just its own.
 
 Notice also what would **not** have caught it. The row is not null, not duplicated, not the wrong
@@ -331,7 +331,7 @@ looking at your own data on the way to an answer, that does not matter.
 **49 states, which is the 48 contiguous states plus the District of Columbia.** Alaska and Hawaii
 are absent, and so is Puerto Rico, along with the other territories. That matters more than it
 looks: the hardiness zones only run from `1a` to `13b` because of Alaska at one end and Puerto Rico
-at the other, and neither end of that scale is in these files. Anything you say tonight is a
+at the other, and neither end of that scale is in these files. Anything you say here is a
 statement about the lower 48.
 :::
 
@@ -596,7 +596,7 @@ by_state.sort_values('count', ascending=False).head(3).round(2)
 ```
 
 :::{.callout-note title="✅ Answer"}
-**California, 0.82 °F over 2,552 zip codes. Only Texas has more, at 2,566.** California carries
+**California, 0.82 °F over 2,552 zip codes. Only Texas has more, at 2,566.** California holds
 about 6 percent of the country's zip codes, so its 0.82 °F is the best-supported number in the
 whole ranking, and it is far more trustworthy than DC's 7.18 °F, not less. Small means are often
 noise, and this one is not: it is an average over 2,552 places, and it is small because 69.8
@@ -653,7 +653,7 @@ anything else.
 
 1. **You never called `temp_diff` a temperature change.** It is a count of five-degree boundary
    crossings, and eleven distinct values with 97.7 percent of the country at 0 or +5 is the
-   evidence. Every other conclusion tonight depends on getting this one right.
+   evidence. Every other conclusion in the practice depends on getting this one right.
 2. **Your question 12 answer says the coordinates are wrong, not the temperature.** Zip code 22350
    is Alexandria, Virginia, plotted in Brittany. If your answer stops at "there is an outlier", you
    have described the figure without diagnosing it.

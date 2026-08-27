@@ -296,10 +296,10 @@ print(paired.sort_values('pm25_ugm3', ascending=False).head(10)['o3_ppm'].mean()
 
 So the two pollutants are not two symptoms of one thing. Ozone is manufactured by sunlight and
 cannot happen at one in the morning; whatever is putting particulates into Goleta's air at 1 a.m.
-is a different process entirely, and the daily-cycle plots you made last night hid that by
+is a different process entirely, and the daily-cycle plots you made yesterday hid that by
 averaging over it.
 
-You could not have found this last night. Two tables of averages, however carefully compared, can
+You could not have found this yesterday. Two tables of averages, however carefully compared, can
 never tell you what happened in a particular hour. Only a joined table can.
 
 ## When the key columns have different names
@@ -350,7 +350,7 @@ That is the whole difference. `on=` is the shorthand for the case where the two 
 agree.
 
 :::{.callout-note}
-🐍 The result carries **both** key columns, `region` and `code`, holding identical values. That is
+🐍 The result has **both** key columns, `region` and `code`, holding identical values. That is
 not a bug; pandas does not know which one you want to keep. Drop one when it bothers you.
 :::
 

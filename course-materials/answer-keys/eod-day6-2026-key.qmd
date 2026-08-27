@@ -73,7 +73,7 @@ present are all from 2016 to 2019, which is when the contest began publishing th
 the jury vote as two separate scores instead of one combined number. The earlier scores were recorded as one combined
 number and never split into two.
 
-This is the distinction worth carrying forward: a null can mean "not recorded", but here it means
+The distinction worth remembering is this: a null can mean "not recorded", but here it means
 "not applicable", and neither one is a mistake. Dropping every row with a null in this file would
 leave you with almost nothing.
 :::
@@ -128,7 +128,7 @@ contests.shape
 cheapest way to know a filter did what you meant.
 
 Note that 1956 is still in `contests`. Its 12 rows have null `points_final`, so every mean and
-count in the rest of the evening quietly ignores them, and that is the correct behaviour: pandas
+count in the rest of the practice quietly ignores them, and that is the correct behaviour: pandas
 skips nulls in `.mean()` and `.count()` rather than treating them as zero.
 :::
 
@@ -313,7 +313,7 @@ The subtle part is what the null in the right merge means. It does not mean Moro
 is unknown, and it does not mean it is zero in general, since the 1980 entry is real. It means
 "this key had no match on the left", and only you can decide which of those three readings applies.
 Had you filled it with zero and kept it, the entries-per-million table in the next question would
-carry a country that stopped competing ten years before the window opens.
+include a country that stopped competing ten years before the window opens.
 :::
 
 **15. Add an `entries_per_million` column to `entries`: the entry count divided by the population
@@ -349,7 +349,7 @@ and here by rule it cannot.
 
 Before publishing it you would need to know what year each population figure is from, and the
 file does not say. Iceland is listed at 255,866 and the United Kingdom at 57,247,586, both of
-which are roughly late-1980s figures, and the file still carries rows for Yugoslavia (23,818,000)
+which are roughly late-1980s figures, and the file still has rows for Yugoslavia (23,818,000)
 and Serbia & Montenegro (9,791,475), states that ceased to exist in 1992 and 2006. So the
 denominators come from mixed and unstated years, and some of them describe countries that did not
 exist for most of the 1990 to 2019 window the numerator covers.

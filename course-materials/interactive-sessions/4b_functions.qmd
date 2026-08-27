@@ -149,7 +149,7 @@ Write one whenever the function's name does not fully explain itself.
 
 ## Default values
 
-A parameter can carry a default, which is used when the caller does not supply that argument:
+A parameter can have a default, which is used when the caller does not supply that argument:
 
 ```{python}
 def convert_depth(depth, units='meters'):
@@ -244,7 +244,7 @@ def classify_latitude(latitude):
 plastics['Latitude'].apply(classify_latitude).head()
 ```
 
-Read the call carefully, because the shape of it matters:
+Read the call carefully, because the order of the arguments matters:
 
 ```python
 df['column'].apply(function_name)
@@ -279,7 +279,7 @@ called `hemisphere`, and use `.value_counts()` to report the split.
 
 ## Writing a function for the work you keep repeating
 
-Here is last night's problem, solved. The top-N pattern, written once:
+Here is yesterday's problem, solved. The top-N pattern, written once:
 
 ```{python}
 def top_n(df, column, n=10):

@@ -131,7 +131,7 @@ contests.shape
 A very common first move on a file like this is `df.fillna(0)`, to make the nulls go away.
 
 Do it here and every one of that year's 41 entries acquires a real score of zero points. Those
-zeros then flow into every average you compute for the rest of the evening, and one decade in your
+zeros then flow into every average you compute for the rest of the practice, and one decade in your
 final table becomes an artifact of a contest that never took place.
 
 A null means *no value*. A zero means *the value is zero*. Filling one with the other is not
@@ -156,7 +156,7 @@ column here called `year`. It is tempting to reach for `pd.to_datetime()`.
 
 Leave it alone. `year` is a number that happens to name a year, and this file holds nothing below
 the year: no month, no day, no hour. Parsing it would produce a column whose only useful accessor,
-`.dt.year`, hands back the integer you started with. The parse earns its place in files that carry
+`.dt.year`, hands back the integer you started with. The parse earns its place in files that hold
 a real date, like the Toolik record from this morning, where `.dt.month` and `.dt.dayofyear` tell
 you something the raw column does not.
 
@@ -316,13 +316,13 @@ In a single markdown cell of 200 to 300 words, answer this:
 > A magazine editor has read that Ireland is the most successful country in Eurovision history and
 > wants you to confirm it with the data. **Can you?**
 
-Your answer must cite at least three specific numbers you computed tonight, must name at least two
+Your answer must cite at least three specific numbers you computed here, must name at least two
 distinct reasons the question is harder than it sounds, and must end with the single table or
 number you would actually send them. Complete sentences, no bullet fragments.
 
 ## The grammar minute
 
-Look back through your notebook. Three sentences did all of the structural work tonight, and none
+Look back through your notebook. Three patterns did all of the structural work today, and none
 of them calculated anything:
 
 ```python
@@ -332,12 +332,12 @@ df.pivot_table(index=, columns=, ...)  # one long table becomes one wide one
 ```
 
 Every other line in your notebook was something you already knew, operating on a table that one of
-those three sentences had put into the right shape.
+those three patterns had put into the right shape.
 
 That is the whole of today, and it is worth saying plainly. Most of the difficulty in real data
 analysis is not the analysis. It is that the numbers you need to compare are in two files, or in
 one file at right angles to each other. The three
-sentences above are how you fix that, and after tonight none of them should be mysterious.
+patterns above are how you fix that, and after today none of them should be mysterious.
 
 ## Wrap-up
 

@@ -190,7 +190,7 @@ a third of them, weigh at least that much. For flipper length the equivalent ove
 out of 214.
 
 Mass cannot separate Adelie from Chinstrap, as question 14 comes back to. Mass also
-carries variation that has nothing to do with species: a bird's sex and its condition on the day it
+includes variation that has nothing to do with species: a bird's sex and its condition on the day it
 was caught both move it, which is part of why the humps smear into each other. Any of the four
 columns is a defensible choice here; what matters is that you compared the overlap rather than
 comparing the peaks.
@@ -355,7 +355,7 @@ print(birds['island'].value_counts())
 68 Chinstrap against 146 Adelie, so the two means are not equally well determined.
 
 **The islands are sampled very unevenly: Biscoe 163 birds, Dream 123, Torgersen 47.** Torgersen
-contributes about one bird in seven. That imbalance is worth carrying into question 17, where the
+contributes about one bird in seven. The imbalance is worth remembering in question 17, where the
 islands are compared, because a difference between islands is partly a difference in which birds
 were caught there and how many.
 :::

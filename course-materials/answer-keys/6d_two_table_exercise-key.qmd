@@ -54,7 +54,7 @@ print(co2['Date'].min(), co2['Date'].max())
 **Temperature: 1736 rows, two columns (`Date`, `MonthlyAnomaly`), January 1880 to August 2024.
 CO₂: 796 rows, two columns (`Date`, `CO2Concentration`), April 1958 to July 2024.**
 
-Both tables carry one row per month, and both row counts are exactly what the date spans require:
+Both tables have one row per month, and both row counts are exactly what the date spans require:
 1880-01 through 2024-08 is 144 years and 8 months, which is 1736 months, and 1958-04 through
 2024-07 is 796 months. Neither record has an internal gap, so every difference you find between
 the two tables from here on is a difference at the ends and not a hole in the middle.

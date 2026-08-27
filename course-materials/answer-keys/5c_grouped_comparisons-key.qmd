@@ -54,7 +54,7 @@ positive.groupby('ocean')['Measurement'].mean().sort_values(ascending=False)
 
 :::{.callout-note title="✅ Answer"}
 **Pacific 595.2, Atlantic 282.7, Arctic 2.28, Southern 0.076 pieces/m3.** One line replaces the
-two filters, two subsets and two `.describe()` calls you wrote last night, and it also gives you
+two filters, two subsets and two `.describe()` calls you wrote yesterday, and it also gives you
 the two oceans you did not ask about. The spread is the first thing to notice: the Pacific mean is
 nearly eight thousand times the Southern mean, which is a larger difference than any plausible
 difference in ocean water, and should make you suspicious before you go any further.
@@ -260,7 +260,7 @@ of 799, or 20%.** The Atlantic is effectively one method with a few others attac
 four methods of comparable size, and its most common one, the Manta net at 226, is not the
 Atlantic's most common one.
 
-That is enough to explain the difference you reported last night without any reference to the amount of
+That is enough to explain the difference you reported yesterday without any reference to the amount of
 plastic in the water. The Neuston net has the second lowest median of any method in the file at 0.0151, so an
 ocean measured mostly by Neuston net will read low, and the Atlantic is that ocean.
 :::
@@ -279,24 +279,24 @@ neuston[neuston['ocean'] == 'Pacific']['Organization'].value_counts()
 
 **15. In a markdown cell, three or four sentences. Compare this table with your answer to question
 5. Does the Pacific still come out higher than the Atlantic? By how much, and is it the same "how
-much" you reported last night? What happened to the number of Pacific samples you are now relying
+much" you reported yesterday? What happened to the number of Pacific samples you are now relying
 on?**
 
 :::{.callout-note title="✅ Answer"}
 **Yes, the Pacific is still higher, but the claim shrinks from a factor of 6.0 to a factor of 2.0
 and the evidence for it shrinks from 799 samples to 158.** Within Neuston net samples only, the
 Pacific median is 0.0307 pieces/m3 against the Atlantic's 0.0151. That is a real difference, it
-points the same way it did last night, and it is now a comparison of like with like.
+points the same way it did yesterday, and it is now a comparison of like with like.
 
 The means change the most. They fall from 595.2 and 282.7 to **0.396 and
 0.0858**, a drop of three orders of magnitude in both oceans, because the extreme values behind
 the question 5 means came from the scoop methods and not from the nets. The 2.1-fold difference in
-means you reported last night did not describe seawater. It described 188 PVC cylinder samples in
+means you reported yesterday did not describe seawater. It described 188 PVC cylinder samples in
 the Pacific against 4,390 Neuston tows in the Atlantic.
 
 So the effect **survives the control and changes size**, which is a different claim from either
 "the Pacific is dirtier" or "the difference was an artefact". Both halves have to be said. And the
-158 Pacific samples that carry the surviving claim come from only three organizations, 82 of them
+158 Pacific samples that support the surviving claim come from only three organizations, 82 of them
 from one, so this is not 158 independent lines of evidence. It is a difference worth reporting with its sample size
 attached and worth checking against another single method, for example the Manta net, before
 anyone builds on it.
@@ -314,13 +314,13 @@ numbers, the median Pacific sample contains about twice as much floating plastic
 Atlantic sample, 0.031 against 0.015 pieces per cubic metre, though the Pacific figure rests on
 158 samples from three research groups and should be treated as provisional.
 
-Full marks for a sentence that carries all four things: the number, the method, the direction, and
+Full marks for a sentence that states all four things: the number, the method, the direction, and
 the limit. The common failure is dropping the last one, or quoting the mean because it sounds more
 impressive. The sentence must also survive the reader asking "compared with what?", which is why
 the method is named inside it rather than in a footnote.
 :::
 
-**17. In a markdown cell of four or five sentences: what changed between last night's answer and
+**17. In a markdown cell of four or five sentences: what changed between yesterday's answer and
 this one, and was it the data or the question? Name the specific line of code that made the
 difference visible.**
 

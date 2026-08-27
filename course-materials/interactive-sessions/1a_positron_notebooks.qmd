@@ -14,7 +14,7 @@ format:
 Welcome to your first hands-on session. You have already met **Positron** in your R course,
 so the workspace itself will look familiar. Over the next hour you will learn what changes
 when the language is Python, and you will build the first of the **Jupyter Notebooks** you
-will write your code in for the rest of this course.
+will write your code in for the rest of this course (and throughout MEDS and your data science career).
 
 ::: {.center-text .body-text-m}
 Always remember: [**Python is the programming language. Positron is the IDE.**]{.teal-text}
@@ -26,8 +26,8 @@ Python is the language we write in it.
 
 ::: {.callout-note}
 Positron runs both R and Python. The panes you learned in your R course, the Console, the
-Variables pane, the Plots pane, and the file Explorer, all do the same jobs here. What
-changes is the interpreter Positron is talking to, and the file format we write in.
+Variables pane, the Plots pane, and the file Explorer, all do the same jobs when coding in Python. The only things that 
+change are the interpreter Positron is talking to (python instead of R) and the file format we write in (.ipynb).
 :::
 
 ## Meet Positron on Posit Workbench
@@ -88,7 +88,7 @@ the difference.
 ### The Console (a REPL)
 
 The Console is a Python prompt. This is a **REPL**, which stands for Read-Eval-Print Loop,
-and it is the same idea as the R console you already use.
+and it is the same idea as the R console you have already used.
 
 ::: {.callout-note}
 A **REPL** **R**eads what you type, **E**valuates it, **P**rints the result, and **L**oops
@@ -109,19 +109,19 @@ That is the whole read-eval-print idea: you typed an expression, it evaluated it
 printed `42`. We are just watching the environment work here. You will learn Python's
 syntax properly this afternoon, and its full set of operators on Day 3.
 
-The Console is useful for quick checks, but nothing you type there is saved. That is why we
-work in notebooks.
+The Console is useful for quick checks, but nothing you type there persists beyond the session. That is why we
+work in notebooks (and .py files).
 
 ### Jupyter Notebooks (what we will use)
 
 For the rest of this course you will write your code in **Jupyter Notebooks**, files ending
 in `.ipynb`. A notebook lets you combine **code**, its **output**, and **narrative text** in
-one document, so your analysis and the story of your analysis stay together. That is what we
-want for data science, so notebooks are our home base from here on.
+one document, so your analysis and the story of your analysis stay together. This is known as literate programming, 
+and is exactly what we want for data science. So we will make notebooks our home base from here on.
 
 ## Getting Started
 
-Let's make the notebook you will use for this session. **We follow this same setup ritual at
+Let's make the notebook you will use for this session. **We will follow this same setup ritual at
 the start of every session**, so it will quickly become second nature.
 
 1. **Create a new notebook:**
@@ -196,7 +196,7 @@ Change the message inside the quotes to greet yourself by name, then re-run the 
 ### Adding and moving cells
 
 Hover between two cells, or below the last one, and Positron offers buttons to insert a new
-**Code** cell or a new **Markdown** cell at that point. Each cell also carries its own small
+**Code** cell or a new **Markdown** cell at that point. Each cell also has its own small
 toolbar for running, moving, and deleting it.
 
 ### Writing a Markdown cell
@@ -255,17 +255,17 @@ The Variables pane is not the right tool for very large DataFrames or arrays. Us
 - **Export:** Positron can render a notebook to other formats through Quarto. You will not
   need this until the final project, and we will cover it then.
 
-## Key Points
+## Key Points/Review
 
 - **Python is the language. Positron is the IDE** you run it in, hosted on Posit Workbench,
   so it is all in your browser.
 - Positron runs Python in a **Console** (a read-eval-print prompt) or in **notebooks**, and
-  we use notebooks from here on, because notebooks are saved and the Console is not.
-- Set the **interpreter** in the top right for the Console, and the **kernel** in the action
+  we use notebooks because notebooks follow a literate programming model, and can be saved while the Console cannot.
+- You should always set the **interpreter** in the top right for the Console, and the **kernel** in the action
   bar for each notebook. Both should read **eds217_2026**.
 - A notebook combines **code cells**, their **output**, and **Markdown** narrative in one
   document.
-- Run a cell with `Shift + Enter`. Use `Ctrl + Enter` to run without moving on.
+- Run a cell with `Shift + Enter`. Use `Ctrl + Enter` to run without moving the cursor to the next cell.
 - Start every session with the same ritual: **create, save with a name, check the kernel,
   title cell, save often.**
 

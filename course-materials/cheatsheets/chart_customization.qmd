@@ -62,7 +62,7 @@ Common values: colours by name (`'firebrick'`, `'steelblue'`) or single letter (
 
 ### Axis labels and title
 
-Axis labels should carry units. A title should say what the figure shows, not repeat the axis
+Axis labels should give units. A title should say what the figure shows, not repeat the axis
 names.
 
 ```{python}
@@ -233,7 +233,7 @@ plt.show()
 ## Key Points
 
 1. Size the figure first, plot second, label third, `tight_layout()` last.
-2. Axis labels carry units. A figure without them is not finished.
+2. Axis labels give units. A figure without them is not finished.
 3. Prefer horizontal bars to rotated labels when the categories are words.
 4. Sort a bar chart before you draw it.
 5. `savefig()` goes before `show()`, because showing a figure clears it.

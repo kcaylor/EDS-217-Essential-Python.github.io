@@ -191,7 +191,7 @@ goleta['parameter'].value_counts()
 Three pollutants: `pm25`, `o3`, and `pm10`. Now the `unit` result above makes sense, since
 ozone is reported in ppm and particulates in µg/m³.
 
-`.value_counts()` is also how you spot a column that carries no information:
+`.value_counts()` is also how you spot a column that tells you nothing:
 
 ```{python}
 goleta['location_name'].value_counts()

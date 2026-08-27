@@ -209,7 +209,7 @@ by_year = df.groupby('Year')
 ## Step 5: Aggregate 📈
 
 **Aggregate** means collapsing each bucket down to a single number. Here we take the mean
-temperature within each month. Notice the two-step shape: first group, then pick a column and
+temperature within each month. Notice the two-step pattern: first group, then pick a column and
 average it.
 
 ✅ **Canonical cell. Copy and run it exactly:**

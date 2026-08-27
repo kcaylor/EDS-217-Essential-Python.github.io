@@ -155,7 +155,7 @@ foods['my_banana_index'] = foods['emissions_kg'] / banana_emissions
 foods[['emissions_kg', 'Bananas index (kg)', 'my_banana_index']].head()
 ```
 
-Your column and theirs agree to seven decimal places. The thing you spent an evening ranking
+Your column and theirs agree to seven decimal places. The thing you spent an afternoon ranking
 was one derived column, and now you can make your own.
 
 So make one they did not:
@@ -224,7 +224,7 @@ and a `.copy()`, is the whole fix.
 if you go further into modelling or image work, but for tabular environmental data, pandas
 covers you.
 
-What matters here is not numpy. It is that **a function applied to a column returns a column**,
+**A function applied to a column returns a column**,
 so it goes on the right-hand side of the derived-column pattern like any other expression.
 :::
 
@@ -236,7 +236,7 @@ numerically to `log10_measurement`. (It differs by a constant. What constant, an
 
 ## Tidying text with `.str`
 
-Text columns need their own kind of transformation. Every pandas column of text carries a
+Text columns need their own kind of transformation. Every pandas column of text has a
 `.str` attribute, and through it you reach the string methods, applied to every row at once.
 
 ### `.str.strip()` removes stray whitespace
@@ -273,7 +273,7 @@ plastics[plastics['Keywords'] == 'R/V Tara'].shape
 :::{.callout-note}
 🐍 Strip text columns as a reflex, the way you check `.isnull().sum()` as a reflex. Trailing
 spaces are invisible, they survive every copy and export, and they break exact matches
-silently. Three values in this column carried them.
+silently. Three values in this column had them.
 :::
 
 ### `.str.lower()` makes matching predictable

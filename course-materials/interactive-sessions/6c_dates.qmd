@@ -19,7 +19,7 @@ format:
 
 You owe two lines of code an explanation.
 
-On Thursday evening, an exercise handed you `.dt.year` inside a boxed aside and told you not to
+On Thursday, an exercise handed you `.dt.year` inside a boxed aside and told you not to
 worry about it. Last night, another one handed you `aq['datetimeLocal'].str[11:13]` and told you
 the same thing. Both were doing the same job by different means: pulling a piece out of a date so
 you could group by it.
@@ -189,7 +189,7 @@ in this course:
 
 ### Proving it worked
 
-This file is unusually generous: it already carries its own `Year` and `Month` columns, written
+This file is unusually generous: it already has its own `Year` and `Month` columns, written
 by whoever prepared the data. So you can check your parse against theirs.
 
 ```{python}

@@ -39,7 +39,7 @@ Say something close to this:
 > right tool for almost every grouped question you will ever ask, and I want to be clear that
 > nothing this afternoon replaces it.
 >
-> But it has one shape. One number per group, arithmetic only. If what you want per group is a
+> But it does one thing. One number per group, arithmetic only. If what you want per group is a
 > line of text, or a file, or a plot, or a yes-or-no check, the pattern cannot help you and
 > you have to open the groups up and walk through them.
 >
@@ -110,7 +110,7 @@ site_c.shape
 
 ## 2. Looping over the groups (5 min)
 
-The loop shape. **Write the two-variable version first and name both variables out loud**, then
+The loop pattern. **Write the two-variable version first and name both variables out loud**, then
 run it:
 
 ```{python}
@@ -304,7 +304,7 @@ Expect `[6, 2, 1]`. If more than a couple of people miss it, do one more; if not
 
 ## 6. Comprehensions you will meet in the wild (5 min)
 
-Three shapes, read only, one prediction each.
+Three patterns, read only, one prediction each.
 
 **A dictionary comprehension.** Curly braces, and a `key: value` pair at the front:
 
@@ -385,11 +385,11 @@ them, and they cannot be the ones you drop.
 threshold, or to predict `{name: group['pH'].max() for name, group in grouped}` before you run
 it.
 
-## What tonight's practice needs from this session
+## What the end-of-day practice needs from this session
 
 Tonight's exercise is entirely `.groupby()` patterns. **No loop and no comprehension appears in
 it.** If a student asks whether they should be looping over the OpenAQ stations, the answer is
-no, and the reason is section 7: every answer they need tonight is a number, one per group.
+no, and the reason is section 7: every answer the practice needs is a number, one per group.
 
 ## Resources
 

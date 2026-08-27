@@ -76,7 +76,7 @@ print(by_year.shape)
 
 :::{.callout-note title="✅ Answer"}
 **386 `Total` rows, leaving 21,174 rows in `by_year`.** The number 386 is not arbitrary: it is
-exactly the number of distinct units in the file, so every unit carries one and only one `Total`
+exactly the number of distinct units in the file, so every unit has one and only one `Total`
 row.
 
 Those rows are sums of the other rows in the same table. Great Smoky Mountains has a `Total` of

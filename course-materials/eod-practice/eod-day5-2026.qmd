@@ -39,7 +39,7 @@ OpenAQ, an open global air quality data platform. Data supplied to OpenAQ by Air
 [https://openaq.org](https://openaq.org)
 :::
 
-## Today's sentence, in its three forms
+## Today's pattern, in its three forms
 
 Everything below is built from these. You should not need to look them up more than once.
 
@@ -75,7 +75,7 @@ Date: 09/04/2026
    supplied, for the reasons in the Field Note below.
 
 :::{.callout-tip title="🧭 Field Note: stacking three files, and pulling an hour out of a timestamp"}
-Two lines tonight use tools you have not been taught. Both of them are **setup**. Everything
+Two lines here use tools you have not been taught. Both of them are **setup**. Everything
 after this block is Day 5 material, and you should recognize all of it.
 
 **Stacking the files.** The three stations are in three separate CSVs with identical columns.
@@ -314,15 +314,15 @@ In a single markdown cell of 200 to 300 words, answer this:
 
 > The Santa Barbara County Air Pollution Control District is deciding whether to keep funding all
 > three of these monitors. They ask you: **does the third one tell us anything the other two do
-> not?** You have one month of data and one evening.
+> not?** You have one month of data and one afternoon.
 
-Your answer must cite at least four specific numbers you computed tonight, must name at least one
+Your answer must cite at least four specific numbers you computed here, must name at least one
 thing that is genuinely different about the CNSI station, and must include at least one thing
 this month of data cannot tell them. Complete sentences, no bullet fragments.
 
 ## The grammar minute
 
-Look back through your notebook. Nearly every code cell tonight was the same pattern, wearing
+Look back through your notebook. Nearly every code cell was the same pattern, wearing
 different clothes:
 
 ```python
@@ -338,7 +338,7 @@ question of the same 4,942 rows.
 
 That is worth stopping on. `site` was a column in the files. `parameter` was a column in the
 files. `hour` was not: you made it in the setup block, out of a string, and it turned out to hold
-the most interesting result of the evening. The best grouping key in a dataset is very often one
+the most interesting result of the practice. The best grouping key in a dataset is very often one
 that is not in it yet.
 
 ## Wrap-up

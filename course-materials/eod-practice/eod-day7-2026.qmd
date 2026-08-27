@@ -45,7 +45,7 @@ database.
 
 ## Today's patterns
 
-Everything you draw tonight is built from these five.
+Everything you draw here is built from these five.
 
 ```python
 plt.figure(figsize=(w, h))                             # the canvas
@@ -98,7 +98,7 @@ zipcodes = pd.read_csv(base + 'zip_code_database.csv')
 ```
 
 :::{.callout-tip title="🧭 Field Note: getting text into a shape you can use"}
-Two lines of setup tonight use string operations you have not been taught. Both are the same kind
+Two lines of setup here use string operations you have not been taught. Both are the same kind
 of move: taking a column of text and reshaping it into something you can join on or do arithmetic
 with. Copy them as given.
 
@@ -189,7 +189,7 @@ print(zones['trange_min'].value_counts().sort_index())
 ```
 
 6. Compute the mean `trange_min` for each year and report the difference. This is the headline
-   number, and you are about to spend the rest of the evening finding out how much it is worth.
+   number, and you are about to spend the rest of the practice finding out how much it is worth.
 
 ```{python}
 means = zones.groupby('year')['trange_min'].mean()
@@ -401,7 +401,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-22. In a markdown cell, four or five sentences. This is the figure the whole evening was for, so
+22. In a markdown cell, four or five sentences. The figure you just made is what the whole practice was for, so
     describe it properly. Where is the country almost uniformly warmer? Where is it patchy? Where
     are the `'colder'` points, and does their location connect to your answer to question 19?
 
@@ -455,13 +455,13 @@ In a single markdown cell of 250 to 350 words, answer this:
 > your two files and they want one figure and one number from you. **What do you send them, and
 > what do you tell them it does not mean?**
 
-Your answer must cite at least three specific numbers you computed tonight, must name at least two
+Your answer must cite at least three specific numbers you computed here, must name at least two
 distinct reasons the comparison is harder than it sounds, and must end by naming the single figure
 you would send. Complete sentences, no bullet fragments.
 
 ## The figure minute
 
-Look back through your notebook. You made six figures tonight, and they did four different jobs:
+Look back through your notebook. You made six figures today, and they did four different jobs:
 
 - Question 9 found a **data error**, in a file that was not otherwise wrong.
 - Question 13 drew a **map** out of two ordinary numeric columns.
@@ -469,7 +469,7 @@ Look back through your notebook. You made six figures tonight, and they did four
   the single most important thing to know about it and is invisible in any mean.
 - Question 21 answered the **question**.
 
-Only one of the six was the figure the evening was about. The other five were how you found out
+Only one of the six was the figure the practice was about. The other five were how you found out
 what you had. That ratio is normal, and it is worth expecting: most of the plots you make in your
 career will never be shown to anybody, because their job is to tell **you** something before you
 say it out loud.

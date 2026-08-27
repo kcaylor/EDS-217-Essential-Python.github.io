@@ -17,15 +17,30 @@ _to_delete/
 # quality gate, so they must never be committed again.
 .fuse_hidden*
 
-# The pre-launch punch list, the voice-pass ledger, the style guide and the
-# editor prompts. Editorial and course-prep material: it belongs on Kelly's
-# machine, not in the repository that serves the site. The live repo should hold
-# course content and the tooling needed to publish it, nothing else.
+# Editorial and course-prep material. It belongs on Kelly's machine, not in the
+# repository that serves the site: the live repo holds course content and the
+# tooling needed to publish it, nothing else.
 #
-# The tools still read these files locally. A fresh clone will not have them, so
-# prelaunch.py, voicepass.py and the c10/d-series checks only run where they
-# exist.
-tasks/2026-planning/prelaunch/
+# The punch list, the voice-pass ledger, the style guide and the editor prompts;
+# the flight-packet build briefs, the course audits, the endgame and work plans.
+tasks/
+
+# The prep tooling that reads them. Everything needed to build and publish the
+# site stays tracked: build_docs.py, publish.sh, fetch_data.py, warm_cache.py,
+# the offline cache, run_cells.py, preview.sh, unlock.sh and _env.sh.
+#
+# Known consequence, accepted 2026-08-27: publish.sh and render-check.sh call
+# prelaunch_checks.py, and several make targets call prelaunch.py, gates.sh and
+# key_check.py. All of that works on Kelly's machine, where these files exist,
+# and fails on a clean clone. Publishing is done from his machine.
+tools/prelaunch.py
+tools/prelaunch_checks.py
+tools/prelaunch_dashboard.py
+tools/voicepass.py
+tools/prose_guard.py
+tools/key_check.py
+tools/kelly_edits.py
+tools/gates.sh
 
 # Quarto writes these beside a .qmd while rendering and does not clean them up.
 # One was committed by accident and held 687 lines of build output in the

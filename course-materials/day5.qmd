@@ -13,16 +13,13 @@ description: "Friday September 4^th^, 2026"
 [MidJourney 5](https://www.midjourney.com)
 :::
 
-For four days you have been asking questions about a whole table. Today you learn to ask the
-same question of every part of it at once.
+The past four days we have been asking questions about a whole table. Today we will learn to manipulate datasets to allow us to examine slices and subsets.
 
-Day 5 owns one sentence, and you will meet it in two forms that you have to recognize as the
-same pattern. The **split-apply-combine pattern** breaks a table into groups, runs a
-calculation on each, and hands back one answer per group. Almost every real question about data
-turns out to be that shape: not "what is the average", but "what is the average **for each**".
+Day 5 is all about one pattern, and it is one that forms the basis for many, many data science analyses. It has a common name, [**split-apply-combine**](https://vita.had.co.nz/papers/plyr.pdf), which defines the steps necessary to break a table into groups, run a calculation on each group, and then summarize the results across each group. Almost every real question about data
+turns out to be that shape: not "what is the average", but "what is the average **for each**". This approach is similar to the even more general `map-reduce` pattern of data analysis, where the `map` step corresponds to `split-apply`, and `reduce` takes the place of `combine`. Generally, `reduce` encompasses a larger range of more sophisticated analyses than `combine`, and the `map` phase is implicitly structured around parallel processing workflows. 
 
-This afternoon you meet the questions the pattern cannot answer, and the older, slower tool
-that handles them.
+This afternoon you will address some questions the pattern cannot answer, and learn some older, slower tools
+that can handle them.
 
 ## Class materials
 
@@ -34,10 +31,10 @@ that handles them.
 
 ## End-of-day practice
 
-Tonight you take a month of hourly air quality readings from three monitoring stations on the
-South Coast and find the one pattern in them that no amount of filtering would have shown you.
+Tonight you will use a month of hourly air quality readings from three monitoring stations on the
+South Coast to explore patterns across the dataset and reveal a new result that depends on the split-apply-combine workflow we have learned today. 
 
-- [{{< fa pencil title="A pencil" >}} **Day 5 Practice:** Three Stations, One Air Shed](eod-practice/eod-day5-2026.qmd)
+- [{{< fa pencil title="A pencil" >}} **Day 5 Practice:** Three Stations, One Atmosphere](eod-practice/eod-day5-2026.qmd)
 
 <!-- Answer keys are held back so that the room tries, gets stuck and asks.
      Kelly posts these URLs in Slack or on the whiteboard once a session has
@@ -57,3 +54,5 @@ South Coast and find the one pattern in them that no amount of filtering would h
 - [{{< fa table title="A table" >}} pandas DataFrames cheatsheet](cheatsheets/pandas_dataframes.qmd)
 - [{{< fa table title="A table" >}} dictionaries cheatsheet](cheatsheets/dictionaries.qmd)
 - [{{< fa table title="A table" >}} control flows cheatsheet](cheatsheets/control_flows.qmd)
+- [{{< fa table title="A table" >}} The Split-Apply-Combine Strategy for Data Analysis](https://vita.had.co.nz/papers/plyr.pdf)
+

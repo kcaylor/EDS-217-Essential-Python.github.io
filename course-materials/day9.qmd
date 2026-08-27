@@ -12,28 +12,24 @@ description: "Friday September 11^th^, 2026"
 *A cartoon panda is presenting important data science findings to a group of colleagues.* [MidJourney 5](https://www.midjourney.com/jobs/f9613559-9db7-4c36-bf8b-e34663ea7a3e?index=0)
 :::
 
-Yesterday you finished the analysis. Today you finish the notebook, and then you tell eleven other
-teams what you found.
+Today we are finishing our notebooks and sharing our final results.
 
-The whole morning is yours to finish in. Presentations are in the afternoon for that reason. The
-one thing the morning is not for is new analysis: if you find yourself computing something you have
-not computed before, you are adding scope on the last morning, and the answer is almost always to
-stop.
+Use the morning to finish your analysis and polish your figures and notebook. We will have presentations in the afternoon.
+You should avoid starting up new analyses in the morning: if you find yourself digging into new idea and analyses that you have 
+not considered before today, you probably want to put a pause on that and go back to finishing up the stuff you have already started.
 
-The notebook is due when you push it, before you go to lunch.
-
-## The shape of the day
+## Today's agenda
 
 | {{< fa clock title="A clock" >}} When | {{< fa laptop-code title="A laptop with on-screen code" >}} What |
 |------------------|------------------------------------------------------------------|
-| 10:00 to 11:45   | Step 10 and the write-up. Make the figure readable and the notebook legible. |
+| 10:00 to 11:45   | Step 10 and the write-up. Polish your figures and notebook. |
 | 11:45 to 12:00   | Restart and run everything one last time, then push to GitHub. |
-| 12:00 to 1:00    | Lunch. **The notebook is done.** |
-| 1:00 to 1:10     | Settle, and get the first notebook on the projector. |
-| 1:10 to 2:40     | Presentations, first half |
-| 2:40 to 2:55     | Break |
-| 2:55 to 4:25     | Presentations, second half |
-| 4:25 to 4:30     | Close |
+| 12:00 to 1:30    | Lunch. **The notebook should be 100% done before lunch!** |
+| 1:30 to 1:40     | Settle, and get the first notebook on the projector. |
+| 1:40 to 3:00     | Presentations, first half |
+| 3:00 to 3:15     | Break |
+| 3:15 to 4:15     | Presentations, second half |
+| 4:15 to 4:30     | Close |
 : {.hover .bordered tbl-colwidths="[25,75]"}
 
 ## The morning: what "finished" looks like
@@ -44,7 +40,7 @@ out of morning, finishing the first three items properly beats starting all five
 1. **Restart the kernel and run every cell from the top.** Do this at the start of the morning,
    not only at 11:45. A notebook that runs only in the order you happened to write it is a notebook
    that will fail in front of the class, and you want to find that out at 10am.
-2. **Step 10, Visualize.** Take yesterday's figure and make it carry the claim. Axis labels with
+2. **Step 10, Visualize.** Take yesterday's figure and make it show the claim. Axis labels with
    units, a title that states the finding rather than naming the variables, and a legend if you
    used `hue=`. Refining one figure beats starting a new one.
 3. **A markdown cell under every one of the ten workflow headings**, which are listed on the

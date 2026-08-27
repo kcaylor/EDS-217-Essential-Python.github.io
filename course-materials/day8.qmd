@@ -12,19 +12,15 @@ description: "Thursday September 10^th^, 2026"
 *A cartoon panda is presenting important data science findings to a group of colleagues.* [MidJourney 5](https://www.midjourney.com/jobs/f9613559-9db7-4c36-bf8b-e34663ea7a3e?index=0)
 :::
 
-Yesterday afternoon you left with a team, a dataset, three questions and one rough figure.
+Yesterday afternoon you (hopefully!) ended up with a team, a dataset, three questions you're interested in asking, and one rough figure.
 
-Today you find out which of your three questions the data can actually answer. There is no new
-Python in the next two days, because every method this project needs is one you have already
-written. You wrote the split-apply-combine pattern in Session 5a on Friday morning, again in that
-afternoon's colab, and three more times in Friday's end-of-day practice. What is new is that nobody
-is going to tell you which method to reach for.
+Today you will keep working to determine which of your three questions the data can actually answer. We will cover no new python in the next two days, although it is likely that you will move into new areas as a team. However, at a fundamental level, every method your projects require has already been covered. The goal now is to put together the individual steps of our workflow, customize your analyses to the particular aspects of your project and data, and then put everything together into a notebook that you can present and share with your classmates. 
 
-## The shape of the day
+## Today's agenda (Note: your actual progress will go however it goes!)
 
 | {{< fa clock title="A clock" >}} When | {{< fa laptop-code title="A laptop with on-screen code" >}} What |
 |------------------|------------------------------------------------------------------|
-| 10:00 to 11:30   | Choose the question. Steps 1 and 2, import and explore.            |
+| 10:00 to 11:30   | Choose your question! Steps 1 and 2, import and explore.            |
 | **11:30**        | **Checkpoint 1** |
 | 11:30 to 12:00   | Begin Step 3, clean. |
 | 12:00 to 1:00    | Lunch |
@@ -34,19 +30,17 @@ is going to tell you which method to reach for.
 | **4:30**         | **Checkpoint 3** |
 : {.hover .bordered tbl-colwidths="[25,75]"}
 
-Nothing is handed in today. The checkpoints exist so that a team which is stuck finds out on
-Thursday, while there is still a day to spend, rather than on Friday at noon.
+The checkpoints exist so that we can make sure that you aren't getting too bogged down and/or identify any needs to rethink or rescope team plans. Better to find that out early than to be scrambling on Friday morning to read a dataset that is still not loading!
 
 ## The three checkpoints
 
-### Checkpoint 1, about 11:30. One question, and the data in front of you
+### Checkpoint 1, 11:30(ish). Do you have data in hand and a question in mind?
 
 By late morning your notebook should hold:
 
-- **One question**, chosen from the three questions you wrote yesterday, written near the top of
-  the notebook in a complete sentence, with your actual column names in it.
-- A sentence saying **why the other two questions were set aside**. Usually the data cannot answer
-  them, and writing down why is worth the minute it takes.
+- **One question**, chosen from the three questions you wrote yesterday (or a new contender!), written near the top of
+  the notebook in a complete sentence. Make sure you've mapped your question to specific columns in your dataset.
+- A sentence saying **why the other two (or three, etc...) questions were set aside**. Usually this is some combination of data or coding knowledge limitations. You don't need to use this project to teach yourself an entire new python course, so "we didn't know how to do that" is a legitimate answer. You can also track down Cella or Kelly to get some help on a question you are not sure about how to address.
 - **Step 1, Import**, under its own heading: the read, the URL, and one sentence on what one row
   represents.
 - **Step 2, Explore**, under its own heading: `.shape`, `.dtypes`, `.isnull().sum()`, `.describe()`,
@@ -55,23 +49,23 @@ By late morning your notebook should hold:
 If you are still choosing between datasets at 11:30, stop choosing and take whichever one loaded
 cleanly. A dull dataset you can open beats an exciting one you cannot.
 
-### Checkpoint 2, about 2:30. The data is in the shape the question needs
+### Checkpoint 2, about 2:30. Your dataframe is in the shape the question requires
 
-By mid afternoon, steps 3 to 6 should be done and written up:
+By mid afternoon, steps 3 to 6 should be done(ish) and written up:
 
 - **Step 3, Clean.** What was missing, what you did about it, and how many rows that cost you.
   If the file arrived clean, write that under the Clean heading and move on. Writing it down is how
-  Step 3 gets done when there is nothing to clean.
-- **Step 4, Filter.** Which rows the question is about, and which it is not.
+  Step 3 still gets done when there is nothing to clean (Remember: Absence of evidence is not evidence of absence!)
+- **Step 4, Filter.** Which rows your question is about, and which it is not.
 - **Step 5, Sort.** Even if sorting is only how you looked at the result.
 - **Step 6, Transform.** Any column you derived, with the reason you needed it.
 
 The test is whether you can point at one DataFrame and say, in a sentence, what question that
 table is about. The amount of code it took to get there does not matter.
 
-### Checkpoint 3, 4:30. The analysis is finished
+### Checkpoint 3, 4:30. The analysis is finished(ish)
 
-By the end of the day the answer should exist, even if it is ugly:
+By the end of the day an answer should exist, even if it is ugly:
 
 - **Steps 7 and 8, Group and Aggregate.** The split, apply and combine that produces the numbers
   your claim rests on, with the counts each group is built from.
@@ -79,27 +73,27 @@ By the end of the day the answer should exist, even if it is ugly:
   under the heading and move on.
 - **A first version of your figure**, with axis labels, showing the thing you are going to
   claim. Tomorrow morning we refine this same figure into Step 10. It does not have to be good
-  tonight, it has to exist.
-- **One sentence** in markdown saying what you found.
+  today, it has to exist.
+- **One sentence** in a markdown cell, saying what you found.
 
 The one-sentence finding is the point of the whole exercise. Tomorrow morning is for making it
-presentable, and there is nothing to make presentable until you have written it down.
+presentable, and there is nothing to make presentable until you have written it down!
 
 ## If you are behind at a checkpoint
 
-Being behind at a checkpoint is normal on a two-day project. The fix is almost never to work
-faster.
+Being behind at a checkpoint is normal and expected. The fix is almost never to work
+faster, but rather to ask for help and to try and de-escalate your plans to get to a place where you can move forward.
 
-- **Behind at Checkpoint 1.** The dataset is the problem. Change it. Go back to the checklist
+- **Behind at Checkpoint 1.** The dataset may be the problem. Change it! Go back to the checklist
   headed "What makes a dataset workable in two days" in the
   [project kickoff](interactive-sessions/7d_project_kickoff.qmd), and pick a file that passes all
-  five of its tests. You will lose an hour and save a day.
-- **Behind at Checkpoint 2.** The question is too big. Narrow it, usually by dropping a
+  five of the heuristic tests. You lose an hour, but you might save the day!
+- **Behind at Checkpoint 2.** Your question is probably too big. Narrow it, usually by dropping a
   comparison: two groups instead of six, one year instead of a decade.
 - **Behind at Checkpoint 3.** Stop adding and start writing. A finished small analysis presents
   well. An unfinished large one does not.
 
-Come and find me at any of the three checkpoints.
+Come and find Cella or Kelly at any time, but especially if you are nearing a checkpoint and find yourself behind.
 
 ## Class materials
 
@@ -112,11 +106,7 @@ Come and find me at any of the three checkpoints.
 
 ## End-of-day practice
 
-There is no end-of-day activity today. The project is the work.
-
-If you have twenty minutes tonight, read your own notebook from the top as though somebody else
-wrote it, and fix every place where you cannot tell what a cell was for. You will find more than you
-expect. I always do.
+There is no end-of-day activity today. The project is the only thing we are working on.
 
 ## Additional Resources
 

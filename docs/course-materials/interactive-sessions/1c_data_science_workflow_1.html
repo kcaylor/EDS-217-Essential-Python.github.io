@@ -296,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/coding-colabs/5c_grouped_comparisons.html">
- <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Last Night, Properly</span></a>
+ <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Yesterday, Properly</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/coding-colabs/6d_two_table_exercise.html">
@@ -509,7 +509,7 @@ Caution
 <h2 class="anchored" data-anchor-id="step-1-import">Step 1: Import 📂</h2>
 <p><strong>Import</strong> means loading your tools and then loading your data.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="3c505b8f" class="cell" data-execution_count="1">
+<div id="217cd021" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -552,7 +552,7 @@ Note
 <p>Your original <code>df</code> stays exactly as it was. You have simply made a second copy under a new name.</p>
 </div>
 </div>
-<div id="0f690951" class="cell" data-execution_count="2">
+<div id="a33a66c6" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: same data under a new name. Reads url again; leaves df alone.</span></span>
@@ -577,7 +577,7 @@ Note
 <h2 class="anchored" data-anchor-id="step-2-explore">Step 2: Explore 🔍</h2>
 <p><strong>Explore</strong> means getting to know the table before you analyze it.</p>
 <p>✅ <strong>Canonical cell. Preview the first rows:</strong></p>
-<div id="df5f9065" class="cell" data-execution_count="3">
+<div id="20c7a5a4" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -759,7 +759,7 @@ Note
 <p>Each one looks at <code>df</code> without changing it.</p>
 </div>
 </div>
-<div id="4260acd7" class="cell" data-execution_count="4">
+<div id="e0f13d28" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: a structural overview instead of a row preview. Reads df; leaves it alone.</span></span>
@@ -796,7 +796,7 @@ dtypes: float64(9), int64(3), object(9)
 memory usage: 1.8+ MB</code></pre>
 </div>
 </div>
-<div id="84dcbefd" class="cell" data-execution_count="5">
+<div id="0745e96d" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: summary statistics. Reads df; leaves it alone.</span></span>
@@ -954,7 +954,7 @@ memory usage: 1.8+ MB</code></pre>
 <section id="the-health-check" class="level3">
 <h3 class="anchored" data-anchor-id="the-health-check">The health check</h3>
 <p>Before you trust a dataset, run a quick <strong>health check</strong>. This is a fixed phrase you will reuse all course long. It counts the missing values in every column:</p>
-<div id="64f7d075" class="cell" data-execution_count="6">
+<div id="4b532625" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1036,7 +1036,7 @@ Note
 <h2 class="anchored" data-anchor-id="step-4-group">Step 4: Group 👥</h2>
 <p><strong>Group</strong> means splitting the rows into buckets by some key. Here we bucket every daily record by its <strong>Month</strong>, so all the Januaries sit together, all the Februaries, and so on.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="a50fe042" class="cell" data-execution_count="7">
+<div id="aea7798a" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby(<span class="st">'Month'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1060,7 +1060,7 @@ Note
 <p>Both read <code>df</code> without changing it, and neither touches your <code>monthly</code> grouping.</p>
 </div>
 </div>
-<div id="7373ccc2" class="cell" data-execution_count="8">
+<div id="81c71ac5" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: group by Year instead of Month. Reads df; leaves df and `monthly` alone.</span></span>
@@ -1072,7 +1072,7 @@ Note
 <h2 class="anchored" data-anchor-id="step-5-aggregate">Step 5: Aggregate 📈</h2>
 <p><strong>Aggregate</strong> means collapsing each bucket down to a single number. Here we take the mean temperature within each month. Notice the two-step pattern: first group, then pick a column and average it.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="78303ba8" class="cell" data-execution_count="9">
+<div id="a53395ec" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>monthly_means <span class="op">=</span> monthly[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span>
@@ -1114,7 +1114,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 <p>Store the result under a new name so your <code>monthly_means</code> stays put.</p>
 </div>
 </div>
-<div id="95e87659" class="cell" data-execution_count="10">
+<div id="17806e87" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: average a different column. Reads `monthly`; leaves monthly_means alone.</span></span>
@@ -1169,7 +1169,7 @@ Name: Daily_Precip_Total_mm, dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>When the five minutes are up, run this cell to reload the data and rebuild the canonical results. Everyone returns to the same state, ready for Part 2:</p>
-<div id="8fd4d2df" class="cell" data-execution_count="11">
+<div id="3b0632a0" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart: reload df and rebuild the canonical results</span></span>

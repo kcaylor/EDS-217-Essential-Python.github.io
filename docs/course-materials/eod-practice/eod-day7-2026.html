@@ -296,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/coding-colabs/5c_grouped_comparisons.html">
- <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Last Night, Properly</span></a>
+ <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Yesterday, Properly</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/coding-colabs/6d_two_table_exercise.html">
@@ -459,7 +459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The USDA Plant Hardiness Zone Map tells you which plants will survive the winter where you live. It is built from one number: the average annual <strong>minimum</strong> temperature at a location, in degrees Fahrenheit. Locations whose coldest night averages within the same five degrees get the same zone label, from <code>1a</code> in interior Alaska to <code>13b</code> in Puerto Rico.</p>
 <p>Gardeners have used it for decades. It is printed on the back of seed packets.</p>
 <p>In November 2023 the USDA released a new version, built by the PRISM group at Oregon State from thirty years of weather station records. It was the first update since 2012, and it moved about half the country half a zone warmer. That was reported widely, and mostly reported badly.</p>
-<p>Tonight you have both maps, one row per zip code, and every tool you have learned this week. The question is not whether the country got warmer. The question is what you can honestly say about it from these two files, and where each of the obvious answers goes wrong.</p>
+<p>Today you have both maps, one row per zip code, and every tool you have learned this week. The question is not whether the country got warmer. The question is what you can honestly say about it from these two files, and where each of the obvious answers goes wrong.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -503,7 +503,7 @@ Reference
 <ol start="3" type="1">
 <li>Read the three files:</li>
 </ol>
-<div id="c0f08981" class="cell" data-execution_count="1">
+<div id="81089ed4" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -539,7 +539,7 @@ Reference
 <ol start="4" type="1">
 <li>Pad the zip codes in all three tables:</li>
 </ol>
-<div id="ab38a6ae" class="cell" data-execution_count="2">
+<div id="c7a05d69" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>zones_2023[<span class="st">'zipcode'</span>] <span class="op">=</span> zones_2023[<span class="st">'zipcode'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>

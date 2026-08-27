@@ -296,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/coding-colabs/5c_grouped_comparisons.html">
- <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Last Night, Properly</span></a>
+ <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Yesterday, Properly</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/coding-colabs/6d_two_table_exercise.html">
@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data">The data</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#the-two-sentences" id="toc-the-two-sentences" class="nav-link" data-scroll-target="#the-two-sentences">The two sentences</a></li>
+  <li><a href="#the-two-patterns" id="toc-the-two-patterns" class="nav-link" data-scroll-target="#the-two-patterns">The two patterns</a></li>
   <li><a href="#part-1-filtering-about-15-minutes" id="toc-part-1-filtering-about-15-minutes" class="nav-link" data-scroll-target="#part-1-filtering-about-15-minutes">Part 1: Filtering (about 15 minutes)</a></li>
   <li><a href="#part-2-ranking-about-15-minutes" id="toc-part-2-ranking-about-15-minutes" class="nav-link" data-scroll-target="#part-2-ranking-about-15-minutes">Part 2: Ranking (about 15 minutes)</a></li>
   <li><a href="#part-3-put-them-together-about-10-minutes" id="toc-part-3-put-them-together-about-10-minutes" class="nav-link" data-scroll-target="#part-3-put-them-together-about-10-minutes">Part 3: Put them together (about 10 minutes)</a></li>
@@ -451,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="../images/panda.jpeg" class="img-fluid"></p>
 </div>
 <p>On Monday you and a partner worked out what was in the National Park Service visitor records and wrote five factual claims about them. You never got to ask the obvious question, because you did not yet have the tools.</p>
-<p>Today you do. Every question below is a “which one” or a “top ten” question, and every one of them is answered with the two sentences you learned this morning.</p>
+<p>Today you do. Every question below is a “which one” or a “top ten” question, and every one of them is answered with the two patterns you learned this morning.</p>
 <p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing says out loud what they expect the answer to look like <em>before</em> the cell is run.</p>
 <p>You have 45 minutes.</p>
 <section id="the-data" class="level2">
@@ -468,8 +468,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Create a notebook named <code>Colab_3D_Ranking_Questions.ipynb</code>, with both partners’ names in the title cell, then read the file in and check its shape.</p>
 </section>
-<section id="the-two-sentences" class="level2">
-<h2 class="anchored" data-anchor-id="the-two-sentences">The two sentences</h2>
+<section id="the-two-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="the-two-patterns">The two patterns</h2>
 <p>You have these on your session pages. You should not need to look them up more than once or twice today.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&gt;</span> value]                                <span class="co"># the filter pattern</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)       <span class="co"># the top-N pattern</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

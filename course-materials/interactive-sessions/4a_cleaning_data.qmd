@@ -356,7 +356,7 @@ clean['SubRegions'] = clean['SubRegions'].fillna('Unspecified')
 # Accession numbers are labels, not quantities.
 clean['Accession Number'] = clean['Accession Number'].astype(str)
 
-# Keep only samples that carry a measurement. This drops all 5,792 'pieces/10 mins'
+# Keep only samples that have a measurement. This drops all 5,792 'pieces/10 mins'
 # rows, which is acceptable here because we are about to average measurements.
 clean = clean.dropna(subset=['Measurement'])
 

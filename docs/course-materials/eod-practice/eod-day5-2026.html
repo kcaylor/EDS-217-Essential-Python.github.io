@@ -296,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/coding-colabs/5c_grouped_comparisons.html">
- <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Last Night, Properly</span></a>
+ <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Yesterday, Properly</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/coding-colabs/6d_two_table_exercise.html">
@@ -457,7 +457,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Three air quality monitors sit within about fifteen kilometres of each other on the South Coast: one in Goleta, one in Santa Barbara, and one on the roof of the CNSI building on the UCSB campus. Between the 10th of July and the 11th of August 2024 they recorded 4,942 hourly measurements of ozone and particulate matter.</p>
 <p>They are close enough together that they are breathing the same air. They are far enough apart, and different enough in what they measure, that comparing them is a real question rather than an exercise.</p>
-<p>You have met one of these files before. On Wednesday you filtered and ranked the Goleta station one parameter at a time. Tonight you have all three, and you have the pattern that lets you ask about all of them at once.</p>
+<p>You have met one of these files before. On Wednesday you filtered and ranked the Goleta station one parameter at a time. Today you have all three, and you have the pattern that lets you ask about all of them at once.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -517,7 +517,7 @@ Reference
 <p><strong>Pulling the hour out.</strong> <code>datetimeLocal</code> is text that looks like <code>2024-07-11T18:00:00-07:00</code>. Counting from zero, characters 11 and 12 are the hour. Square brackets on <code>.str</code> slice out a piece of every string in the column, the same way they slice a piece out of a list:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>aq[<span class="st">'hour'</span>] <span class="op">=</span> aq[<span class="st">'datetimeLocal'</span>].<span class="bu">str</span>[<span class="dv">11</span>:<span class="dv">13</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The result is <strong>text</strong>, not a number: <code>'06'</code>, <code>'14'</code>. That turns out to be convenient, because zero-padded text sorts into the same order as the numbers would.</p>
-<p><strong>Joining tables gets a full session on Tuesday, and dates get one the same day.</strong> By the middle of next week you will write both of these yourself. Tonight, copy them.</p>
+<p><strong>Joining tables gets a full session on Tuesday, and dates get one the same day.</strong> By the middle of next week you will write both of these yourself. Today, copy them.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/pandas_dataframes.html">Cheatsheet: pandas DataFrames</a> · <a href="../../course-materials/cheatsheets/timeseries.html">Cheatsheet: time series</a></p>
 </div>
 </div>

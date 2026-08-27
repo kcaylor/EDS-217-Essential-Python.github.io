@@ -296,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/coding-colabs/5c_grouped_comparisons.html">
- <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Last Night, Properly</span></a>
+ <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Yesterday, Properly</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/coding-colabs/6d_two_table_exercise.html">
@@ -486,7 +486,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="4" type="1">
 <li>Read in the Goleta air quality data you explored yesterday:</li>
 </ol>
-<div id="3509698f" class="cell" data-execution_count="1">
+<div id="24c499c6" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -516,7 +516,7 @@ Caution
 <section id="the-pattern" class="level2">
 <h2 class="anchored" data-anchor-id="the-pattern">The pattern</h2>
 <p>Here it is, whole:</p>
-<div id="3b26b0d0" class="cell" data-execution_count="2">
+<div id="202ac2c3" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">20</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -757,7 +757,7 @@ Caution
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&lt;</span>comparison<span class="op">&gt;</span> value]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>df</code> appears twice, and that trips people up at first. The inner one builds the question. The outer one applies the answer. They are the same table both times.</p>
 <p>Assign it a name if you want to use the result:</p>
-<div id="8857afcb" class="cell" data-execution_count="3">
+<div id="5e6f2ce4" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>high_readings <span class="op">=</span> goleta[goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">20</span>]</span>
@@ -768,7 +768,7 @@ Caution
 </div>
 </div>
 <p>115 rows out of 1,962. Compare the shapes and you can see the filter did something:</p>
-<div id="7ee56e0d" class="cell" data-execution_count="4">
+<div id="ec133d95" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'before:'</span>, goleta.shape)</span>
@@ -809,7 +809,7 @@ Note
 <section id="filtering-on-text" class="level2">
 <h2 class="anchored" data-anchor-id="filtering-on-text">Filtering on text</h2>
 <p>The same pattern works on text columns. Use <code>==</code> for an exact match:</p>
-<div id="00ff010f" class="cell" data-execution_count="5">
+<div id="82dca9a2" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ozone <span class="op">=</span> goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'o3'</span>]</span>
@@ -937,7 +937,7 @@ Note
 </div>
 </div>
 </div>
-<div id="3e4f7664" class="cell" data-execution_count="6">
+<div id="4a622540" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ozone.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -947,7 +947,7 @@ Note
 </div>
 </div>
 <p>711 ozone readings. Text comparisons are exact and case-sensitive, so <code>'O3'</code> would have matched nothing at all:</p>
-<div id="20efdf5c" class="cell" data-execution_count="7">
+<div id="4151adc2" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'O3'</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -975,7 +975,7 @@ Note
 <h2 class="anchored" data-anchor-id="why-this-matters-here">Why this matters here</h2>
 <p>Yesterday you found that <code>goleta['value']</code> stacks three different pollutants, in two different units, in one column. That made <code>.describe()</code> on the whole column meaningless.</p>
 <p>Filtering is the fix:</p>
-<div id="5707d7aa" class="cell" data-execution_count="8">
+<div id="e8da3604" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'value'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -992,7 +992,7 @@ max        40.000000
 Name: value, dtype: float64</code></pre>
 </div>
 </div>
-<div id="d507cebf" class="cell" data-execution_count="9">
+<div id="e629b253" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>][<span class="st">'value'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1014,7 +1014,7 @@ Name: value, dtype: float64</code></pre>
 <section id="two-conditions-at-once" class="level2">
 <h2 class="anchored" data-anchor-id="two-conditions-at-once">Two conditions at once</h2>
 <p><code>&amp;</code> means “and”. Every comparison gets its own parentheses:</p>
-<div id="a6bfa869" class="cell" data-execution_count="10">
+<div id="c86e4f02" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>goleta[(goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>) <span class="op">&amp;</span> (goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">12</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1971,7 +1971,7 @@ Name: value, dtype: float64</code></pre>
 </div>
 <p>51 hours where fine particulate matter was above 12 µg/m³, which is the level the US EPA uses as its annual air quality standard.</p>
 <p><code>|</code> means “or”:</p>
-<div id="967af993" class="cell" data-execution_count="11">
+<div id="be7881e8" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>particulates <span class="op">=</span> goleta[(goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>) <span class="op">|</span> (goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm10'</span>)]</span>
@@ -2013,7 +2013,7 @@ The parentheses are not optional
 <section id="turning-a-condition-around-with" class="level2">
 <h2 class="anchored" data-anchor-id="turning-a-condition-around-with">Turning a condition around with <code>~</code></h2>
 <p><code>~</code> inverts a mask: every <code>True</code> becomes <code>False</code> and every <code>False</code> becomes <code>True</code>.</p>
-<div id="d2a898b9" class="cell" data-execution_count="12">
+<div id="321066b2" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>not_ozone <span class="op">=</span> goleta[<span class="op">~</span>(goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'o3'</span>)]</span>
@@ -2024,7 +2024,7 @@ The parentheses are not optional
 </div>
 </div>
 <p>1,251 rows, which is 1,962 minus the 711 ozone readings. You could have written <code>!=</code> here and gotten the same answer:</p>
-<div id="522392d6" class="cell" data-execution_count="13">
+<div id="c1fb6252" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">!=</span> <span class="st">'o3'</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2038,7 +2038,7 @@ The parentheses are not optional
 <section id="matching-a-list-of-values-with-.isin" class="level2">
 <h2 class="anchored" data-anchor-id="matching-a-list-of-values-with-.isin">Matching a list of values with <code>.isin()</code></h2>
 <p>Writing <code>(col == 'a') | (col == 'b') | (col == 'c')</code> gets tedious fast. <code>.isin()</code> takes a <strong>list</strong> and matches any of its members:</p>
-<div id="81e408f4" class="cell" data-execution_count="14">
+<div id="fc8800ab" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>particulates <span class="op">=</span> goleta[goleta[<span class="st">'parameter'</span>].isin([<span class="st">'pm25'</span>, <span class="st">'pm10'</span>])]</span>
@@ -2050,7 +2050,7 @@ The parentheses are not optional
 </div>
 <p>Same 1,251 rows as the <code>|</code> version above, in a line that stays readable when the list grows.</p>
 <p>The argument is an ordinary Python list, so you can build it first and pass it by name:</p>
-<div id="4032c90e" class="cell" data-execution_count="15">
+<div id="c86b5e5f" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>of_interest <span class="op">=</span> [<span class="st">'pm25'</span>, <span class="st">'pm10'</span>]</span>
@@ -2091,7 +2091,7 @@ Note
 <h2 class="anchored" data-anchor-id="keeping-a-result-with-.copy">Keeping a result with <code>.copy()</code></h2>
 <p>Once you have a subset you like, you will usually want to keep working on it, and often that means adding a column to it later this week.</p>
 <p>When you plan to keep and modify a filtered result, say <code>.copy()</code>:</p>
-<div id="f2257aba" class="cell" data-execution_count="16">
+<div id="ba0fee66" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pm25 <span class="op">=</span> goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>].copy()</span>
@@ -2106,7 +2106,7 @@ Note
 <blockquote class="blockquote">
 <p>If the filtered result is going to be a <strong>thing you keep and change</strong>, end the line with <code>.copy()</code>. If you are just looking at it, don’t bother.</p>
 </blockquote>
-<div id="b89af1ca" class="cell" data-execution_count="17">
+<div id="597d99bd" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pm25.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2263,7 +2263,7 @@ A warning you will meet
 <section id="putting-it-together" class="level2">
 <h2 class="anchored" data-anchor-id="putting-it-together">Putting it together</h2>
 <p>A real filter is usually two or three of these ideas in one line:</p>
-<div id="f0ce26f4" class="cell" data-execution_count="18">
+<div id="0730a8ef" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>summer_particulates <span class="op">=</span> goleta[</span>
@@ -2276,7 +2276,7 @@ A warning you will meet
 <pre><code>(246, 15)</code></pre>
 </div>
 </div>
-<div id="bef856c8" class="cell" data-execution_count="19">
+<div id="ed5af37f" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>summer_particulates[[<span class="st">'parameter'</span>, <span class="st">'value'</span>, <span class="st">'unit'</span>, <span class="st">'datetimeLocal'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

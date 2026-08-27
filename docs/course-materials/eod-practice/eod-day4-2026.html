@@ -296,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/coding-colabs/5c_grouped_comparisons.html">
- <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Last Night, Properly</span></a>
+ <span class="dropdown-text">🙌 Session 5c - The Comparison You Made Yesterday, Properly</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../course-materials/coding-colabs/6d_two_table_exercise.html">
@@ -459,7 +459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>NOAA’s National Centers for Environmental Information maintain an archive of every marine microplastics measurement they can find: 16,245 water samples, pooled from thirty-seven separate studies, taken between 1972 and 2022 by research vessels, citizen scientists, and undergraduates with nets.</p>
 <p>Nobody designed this dataset. It was assembled, one study at a time. Most of the environmental data you will ever be handed was put together the same way, which is why today mattered.</p>
-<p>You have already met this file twice today. Tonight you will take it the whole way: from the raw download to an answer you could defend about whether the Atlantic and the Pacific are different.</p>
+<p>You have already met this file twice today. Today you will take it the whole way: from the raw download to an answer you could defend about whether the Atlantic and the Pacific are different.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -510,7 +510,7 @@ Reference
 <p>The format string is a small language of its own. <code>%m/%d/%Y</code> is month, day, four-digit year; <code>%I:%M:%S</code> is a twelve-hour clock; and <code>%p</code> is the AM or PM that goes with it. You are not expected to be able to write one of these yet.</p>
 <p>Once a column is a real date, you reach the pieces of it through <code>.dt</code>. You will need exactly one of these in task 13, and we are giving it to you here:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'year'</span>] <span class="op">=</span> samples[<span class="st">'Date'</span>].dt.year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Dates get a full session on Day 6.</strong> By the middle of next week you will be writing both of these yourself. Tonight, copy them.</p>
+<p><strong>Dates get a full session on Day 6.</strong> By the middle of next week you will be writing both of these yourself. Today, copy them.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/read_csv.html">Cheatsheet: reading CSV files</a> · <a href="../../course-materials/cheatsheets/timeseries.html">Cheatsheet: time series</a></p>
 </div>
 </div>
@@ -565,7 +565,7 @@ Reference
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.hist(samples[<span class="st">'Measurement'</span>])</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'pieces per cubic metre'</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>plt.hist()</code> sorts the values into bins and draws a bar for each. <strong>Plotting gets two full days next week</strong>, where you will learn to control bins, axes, and everything else. Tonight you need it only to see a shape.</p>
+<p><code>plt.hist()</code> sorts the values into bins and draws a bar for each. <strong>Plotting gets two full days next week</strong>, where you will learn to control bins, axes, and everything else. Today you need it only to see a shape.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/matplotlib.html">Cheatsheet: matplotlib</a></p>
 </div>
 </div>
@@ -578,7 +578,7 @@ Reference
 </section>
 <section id="part-5-a-classifier-of-your-own" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-a-classifier-of-your-own">Part 5: A classifier of your own</h2>
-<p>The archive has a column called <code>Density Class</code> with values like <code>Low</code> and <code>Very High</code>. Somebody decided those cutoffs. Tonight you will decide your own, and then find out whether you agree with theirs.</p>
+<p>The archive has a column called <code>Density Class</code> with values like <code>Low</code> and <code>Very High</code>. Somebody decided those cutoffs. Today you will decide your own, and then find out whether you agree with theirs.</p>
 <ol start="20" type="1">
 <li><p>Write a function called <code>density_class</code> that takes a measurement in pieces per cubic metre and returns:</p>
 <ul>

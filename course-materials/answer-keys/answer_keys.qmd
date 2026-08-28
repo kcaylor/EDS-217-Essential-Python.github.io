@@ -9,20 +9,16 @@ format:
         toc-depth: 2
 ---
 
-Every coding colab and every end-of-day practice exercise has a key. The keys are published from
-the start of the course, so you can check your work the same day you do it.
+This page contains the answer keys for every coding colab and every end-of-day practice. You can use this page to check your work, but it's always better to ask an instructor or classmate if you are simply stuck.
 
 :::{.callout-important title="How to get the most out of a key"}
-**Work the exercise first, then come here.** A key you read before you try the problem teaches you
-very little, because reading working code feels much easier than writing it.
+**Work the exercise first, then come here.** The goal of the coding colabs and EOD activities is to give you a chance to learn by doing. Reading the key before you struggle with the assignment is not a good use of your time. Reading working code is much easier than writing it!
 
-The code in a key is **one** correct answer, not the only one. If your code looks different but
-produces the same numbers, you were right.
+Also, the code in a key is **one** correct answer, not the only one. In python there are many ways to get things done, but some are more pythonic than others. If your code looks different but
+produces the same numbers, then it is functionally correct. However, you should strive to use the patterns, idioms, and language features of python to make your code both functional and elegant. All the answers we provide aren't necessarily the best or most elegant, but you should learn to notice the difference between **HOW** code is written and **WHAT** it does. How it is written often matters more, especially once performance and efficiency start to matter.
 
-**The written answers matter more than the code.** You can already tell whether your code ran. What
-you cannot check on your own is whether you read the result correctly, and that is what the green
-**Answer** boxes are for. Compare them against your own markdown cells, and pay attention to the
-difference between stating a number and reading it.
+**The written answers matter more than the code.** Running your code tells you if it works. What is harder to know is if you got the correct result. As with elegance, functional code is not the same as correct code. And interpreting results requires additional context and understanding that only you can provide. The **Answer** boxes are an attempt to supply that additional context regarding the expected results across the class activities. Compare them against your own markdown cells. 
+
 :::
 
 ## 🙌 Coding colabs
@@ -38,8 +34,7 @@ difference between stating a number and reading it.
 
 The Day 2 colab, [Five Claims About a Dataset You've Never
 Seen](../coding-colabs/2c_exploring_unfamiliar_data.qmd), has no key on purpose. You choose which
-five claims to make, so there is no fixed set of numbers to check yours against. Bring your claims
-to the Day 3 morning session instead.
+five claims to make, so there is no fixed set of numbers to check yours against. 
 
 ## 📝 End-of-day practice
 
@@ -54,16 +49,6 @@ to the Day 3 morning session instead.
 | 7 | [🌲 Forty Thousand Zip Codes 🌴](../eod-practice/eod-day7-2026.qmd) | [🔑 key](eod-day7-2026-key.qmd) |
 : {.hover .bordered tbl-colwidths="[10,60,30]"}
 
-Days 8 and 9 have no keys, because you build your own project rather than work a set exercise. See
+Days 8 and 9 have no keys, because you are doing group work on a project rather than working a set exercise. See
 [the final project](../final_project.qmd) for what is expected there.
 
-## What a good written answer looks like
-
-Each key closes with a short list called **Where the marks are**, naming the three or four things
-most worth checking in that exercise. One item appears in every list, so it is worth stating here
-as well.
-
-An answer should say what a number **means**, not what it is. "34 foods score above 10" repeats the
-output. "34 foods, a fifth of the dataset, and almost all of them meat or hard cheese" reads it.
-The second sentence is the one that shows you understood the result, and it is the habit the keys
-are trying to build.

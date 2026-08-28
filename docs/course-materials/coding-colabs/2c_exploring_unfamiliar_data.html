@@ -414,14 +414,14 @@ ul.task-list li input[type="checkbox"] {
 <div style="width: 80%; margin: auto;">
 <p><img src="../images/collections.jpeg" class="img-fluid"></p>
 </div>
-<p>This morning you learned the exploration ritual on a dataset we walked through together. Now you’ll use it on one nobody has explained to you.</p>
-<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing reads the output aloud and says what they think it means before you move on.</p>
+<p>This morning you learned the basics of exploring a new dataset. In this coding colab, we will try these new skills out on a new dataset to build familiarity with these important commands.</p>
+<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it.</p>
 <p>You have 45 minutes.</p>
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">The data</h2>
 <p>US National Park Service visitor records:</p>
 <pre><code>https://eds-217-essential-python.github.io/data/national_parks.csv</code></pre>
-<p>That’s all you’re getting. No data dictionary, no column descriptions. Figuring out what’s in there is the exercise.</p>
+<p>The link above is all this co-lab provides. Figuring out what’s in the data is the entire exercise.</p>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
@@ -433,20 +433,20 @@ ul.task-list li input[type="checkbox"] {
 <p>A claim is factual if a skeptical reader could check it against your output. Compare:</p>
 <blockquote class="blockquote">
 <p>❌ “The dataset has a lot of parks in it.”</p>
-<p>✅ “The dataset contains 4,743 rows describing units of type <code>National Park</code>, out of 21,560 rows total.”</p>
+<p>✅ “The dataset contains 5,243 rows describing units of type <code>National Park</code>, out of 11,742 rows total.”</p>
 </blockquote>
 <p>At least one of your five claims must be about a <strong>problem</strong> with the data.</p>
 </section>
 <section id="working-through-it" class="level2">
 <h2 class="anchored" data-anchor-id="working-through-it">Working through it</h2>
-<p>Don’t try to write claims immediately. Explore first, then decide what’s worth claiming.</p>
+<p>Don’t try to write claims immediately. Explore the data first, then decide what’s worth claiming.</p>
 <ol type="1">
 <li><p><strong>Size it up.</strong> How many rows and columns? What are the column names?</p></li>
-<li><p><strong>Check the types.</strong> Run <code>.dtypes</code>. At least one column has a type you would not predict from its name. Find it, and then work out <em>why</em> by looking at what’s actually in that column. This is the single most important thing in this dataset.</p></li>
+<li><p><strong>Check the types.</strong> Run <code>.dtypes</code>. At least one column has a type you would not predict from its name. Find it, and then work out <em>why</em> by looking at what’s actually in that column.</p></li>
 <li><p><strong>Run the health check.</strong> Which columns have missing values, and how many?</p></li>
-<li><p><strong>Count the categories.</strong> Use <code>.value_counts()</code> on at least three text columns. Which columns are informative? Is any of them close to a constant?</p></li>
-<li><p><strong>Summarize the numbers.</strong> Run <code>.describe()</code>. One of the numeric summaries is distorted. Say which, and connect it to what you found in step 2.</p></li>
-<li><p><strong>Make a working subset.</strong> Build a list of the columns you’d actually keep, select them into a smaller DataFrame, and rename at least one column with a dictionary.</p></li>
+<li><p><strong>Count the categories.</strong> Use <code>.value_counts()</code> on at least three text columns. Which columns are informative?</p></li>
+<li><p><strong>Summarize the numbers.</strong> Run <code>.describe()</code>. One of the numeric summaries may be distorted. Say which, and connect it to what you found in step 2.</p></li>
+<li><p><strong>Make a working subset.</strong> Build a list of the columns you’d actually want to keep, select them into a smaller DataFrame, and rename at least one column with a dictionary.</p></li>
 <li><p><strong>Write your five claims.</strong> Each one: a code cell, then a markdown cell stating the claim in a full sentence with the specific numbers in it.</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="If you get stuck on step 2">
@@ -459,7 +459,7 @@ If you get stuck on step 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Ask the question a different way. If a column of years isn’t stored as a number, then something in it isn’t a year. <code>.value_counts()</code> will show you what.</p>
+<p>Ask the question a different way. If a column of years isn’t stored as a number, then something in it isn’t a year. <code>.value_counts()</code> can help to reveal what is happening.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="If you finish early">

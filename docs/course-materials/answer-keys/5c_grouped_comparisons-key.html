@@ -463,7 +463,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="0aea5e56" class="cell" data-execution_count="1">
+<div id="3375152a" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -486,8 +486,8 @@ How to use this key
 </section>
 <section id="part-1-all-four-oceans-at-once" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-all-four-oceans-at-once">Part 1: All four oceans at once</h2>
-<p><strong>1. Yesterday you computed the mean <code>Measurement</code> for the Atlantic and the Pacific with two filters. Do all four oceans in one line, and rank the result from dirtiest to cleanest.</strong></p>
-<div id="297d0290" class="cell" data-execution_count="2">
+<p><strong>1. Yesterday you computed the mean <code>Measurement</code> for the Atlantic and the Pacific with two filters. Now do all four oceans in one line, and rank the result from dirtiest to cleanest.</strong></p>
+<div id="ec3c6144" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>positive.groupby(<span class="st">'ocean'</span>)[<span class="st">'Measurement'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -514,8 +514,8 @@ Name: Measurement, dtype: float64</code></pre>
 <p><strong>Pacific 595.2, Atlantic 282.7, Arctic 2.28, Southern 0.076 pieces/m3.</strong> One line replaces the two filters, two subsets and two <code>.describe()</code> calls you wrote yesterday, and it also gives you the two oceans you did not ask about. The spread is the first thing to notice: the Pacific mean is nearly eight thousand times the Southern mean, which is a larger difference than any plausible difference in ocean water, and should make you suspicious before you go any further.</p>
 </div>
 </div>
-<p><strong>2. Do the same with the median instead of the mean. The order changes. Which two oceans swap, and by how much does the Pacific-to-Atlantic ratio differ between the two versions?</strong></p>
-<div id="4406555f" class="cell" data-execution_count="3">
+<p><strong>2. Do the same with the median instead of the mean. Does the order change? If so, which two oceans swap?</strong></p>
+<div id="09bacc32" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>positive.groupby(<span class="st">'ocean'</span>)[<span class="st">'Measurement'</span>].median().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -529,7 +529,7 @@ Southern    0.011500
 Name: Measurement, dtype: float64</code></pre>
 </div>
 </div>
-<div id="968fdcf5" class="cell" data-execution_count="4">
+<div id="27d46d6d" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> positive.groupby(<span class="st">'ocean'</span>)[<span class="st">'Measurement'</span>].mean()</span>
@@ -557,8 +557,8 @@ median ratio: 6.001286008230453</code></pre>
 <p>The Pacific-to-Atlantic ratio is <strong>2.11 on the means and 6.00 on the medians</strong>, so the choice of average changes the size of the claim by a factor of about three. Note also how far the two averages are from each other within a single ocean: the Atlantic mean is 282.7 and the Atlantic median is 0.0194, roughly fifteen thousand times smaller. A gap that large between mean and median always means a few enormous values, and it is a warning that the mean is describing those values rather than the ocean.</p>
 </div>
 </div>
-<p><strong>3. How many samples went into each of those four numbers? One line.</strong></p>
-<div id="9cc4bbab" class="cell" data-execution_count="5">
+<p><strong>3. How many samples went into each of those four numbers? (can/should be a single line of code!)</strong></p>
+<div id="615fdd6f" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>positive.groupby(<span class="st">'ocean'</span>)[<span class="st">'Measurement'</span>].count().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -585,7 +585,7 @@ Name: Measurement, dtype: int64</code></pre>
 <p><strong>Atlantic 6,216, Pacific 799, Arctic 58, Southern 18.</strong> The four numbers you have been ranking rest on wildly different amounts of evidence: the Atlantic alone is 88% of the file, and the Arctic and Southern together are 76 rows, about 1% of the 7,091. <code>.count()</code> costs one line and tells you which rows of a grouped table you are allowed to take seriously.</p>
 </div>
 </div>
-<p><strong>4. In a markdown cell: two of the four oceans have numbers you should refuse to report. Name them and say why in one sentence.</strong></p>
+<p><strong>4. In a markdown cell: two of the four oceans have numbers you should refuse to report. Define these values and explain why in one sentence.</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -603,7 +603,7 @@ Name: Measurement, dtype: int64</code></pre>
 <section id="part-2-one-call-instead-of-four" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-one-call-instead-of-four">Part 2: One call instead of four</h2>
 <p><strong>5. Replace questions 1 through 3 with a single <code>.agg()</code> call that reports the count, median, mean and max of <code>Measurement</code> for each ocean.</strong></p>
-<div id="739d7162" class="cell" data-execution_count="6">
+<div id="d6e9957f" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>positive.groupby(<span class="st">'ocean'</span>)[<span class="st">'Measurement'</span>].agg([<span class="st">'count'</span>, <span class="st">'median'</span>, <span class="st">'mean'</span>, <span class="st">'max'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -664,7 +664,7 @@ Name: Measurement, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<p><strong>6. Look at the Atlantic row. Its median is 0.019 and its maximum is 110,480. In a markdown cell, say what a single number that large does to a mean computed from 6,216 values, and which of the two averages you would send to the journalist.</strong></p>
+<p><strong>6. Look at the Atlantic row’s median and maximum. In a markdown cell, explain what a single large number does to a mean computed from 6,216 values. Which of the two measures of central tendency (mean vs.&nbsp;median) would you send to the journalist?</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -680,7 +680,7 @@ Name: Measurement, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>7. Use the dictionary form of <code>.agg()</code>, grouped by <code>ocean</code>, to report the mean <code>Measurement</code>, the number of distinct <code>Sampling Method</code> values, and the number of distinct <code>Organization</code> values in each ocean.</strong></p>
-<div id="ff95391b" class="cell" data-execution_count="7">
+<div id="6472d878" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>positive.groupby(<span class="st">'ocean'</span>).agg({</span>
@@ -739,7 +739,7 @@ Name: Measurement, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<p><strong>8. In a markdown cell: the two columns you just counted are not measurements. Why did you ask for them? What would it mean if one ocean had been sampled by one organization using one method?</strong></p>
+<p><strong>8. In a markdown cell explain the value of asking for these non-measurement summary data. What might it mean if one ocean had been sampled by only one organization using a single method?</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -758,7 +758,7 @@ Name: Measurement, dtype: int64</code></pre>
 <section id="part-3-where-the-answer-falls-apart" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-where-the-answer-falls-apart">Part 3: Where the answer falls apart</h2>
 <p><strong>9. Group by <code>Sampling Method</code> instead of by ocean, and report the count and median of <code>Measurement</code> for each method. Rank by median, largest first.</strong></p>
-<div id="315321b2" class="cell" data-execution_count="8">
+<div id="326b76ec" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>by_method <span class="op">=</span> positive.groupby(<span class="st">'Sampling Method'</span>)[<span class="st">'Measurement'</span>].agg([<span class="st">'count'</span>, <span class="st">'median'</span>])</span>
@@ -849,7 +849,7 @@ Name: Measurement, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>10. Write down the largest and smallest medians in that table. How many orders of magnitude separate them?</strong></p>
-<div id="4a986e2f" class="cell" data-execution_count="9">
+<div id="0db64569" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>medians_by_method <span class="op">=</span> positive.groupby(<span class="st">'Sampling Method'</span>)[<span class="st">'Measurement'</span>].median()</span>
@@ -875,7 +875,7 @@ Name: Measurement, dtype: int64</code></pre>
 <p>The methods sort into two families, and the reason is physical. The spoon, the Van Dorn sampler (2,000), the aluminum bucket (1,710) and the PVC cylinder (1,410) all scoop a small, fixed volume of surface water and count everything in it, including fibres a few tenths of a millimetre long. The nets, Manta at 0.253, Neuston at 0.0151, AVANI at 0.0475, tow a mesh through hundreds of cubic metres and keep only what the mesh cannot pass. Both report pieces per cubic metre, and the unit column says they are comparable, but they are counting different objects. No difference between oceans in this file is anywhere near six orders of magnitude, so method is the largest single influence on <code>Measurement</code> in the dataset.</p>
 </div>
 </div>
-<p><strong>11. In a markdown cell, before you write any more code: if the oceans were not sampled with the same mix of methods, what does that do to your answer from question 1?</strong></p>
+<p><strong>11. In a markdown cell, before you write any more code: if the oceans were not sampled with the same mix of methods, what might that imply regarding your answer from question 1?</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ A model answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -890,8 +890,8 @@ Name: Measurement, dtype: int64</code></pre>
 <p>Full marks here are for writing the prediction <strong>before</strong> running question 12 and for naming the mechanism, not just the risk. Writing the prediction down and then testing it is how you find a confound, rather than only naming one.</p>
 </div>
 </div>
-<p><strong>12. Find out. Group by both <code>ocean</code> and <code>Sampling Method</code> at once and count the samples. Then call <code>.reset_index()</code> on the result and look at the Atlantic and Pacific rows.</strong></p>
-<div id="52ddb650" class="cell" data-execution_count="10">
+<p><strong>12. Let’s see if we can determine the impact of measurement method. Group by both <code>ocean</code> and <code>Sampling Method</code> at once and count the samples. Then call <code>.reset_index()</code> on the result and look at the Atlantic and Pacific rows.</strong></p>
+<div id="4aff0a3b" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ocean_method <span class="op">=</span> positive.groupby([<span class="st">'ocean'</span>, <span class="st">'Sampling Method'</span>])[<span class="st">'Measurement'</span>].count()</span>
@@ -1007,7 +1007,7 @@ Name: Measurement, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="dc0406a7" class="cell" data-execution_count="11">
+<div id="f95ddb73" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ocean_method.reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1185,8 +1185,8 @@ Name: Measurement, dtype: int64</code></pre>
 <p>Grouping by two keys is what made this visible. Either key on its own averages the other one away.</p>
 </div>
 </div>
-<p><strong>13. Simpler and more direct: run <code>.value_counts()</code> on <code>Sampling Method</code> for the Atlantic samples and again for the Pacific samples. Which method dominates the Atlantic? What fraction of the Pacific samples used it?</strong></p>
-<div id="155fd057" class="cell" data-execution_count="12">
+<p><strong>13. Here’s a simpler and more direct approach: run <code>.value_counts()</code> on <code>Sampling Method</code> for the Atlantic samples and again for the Pacific samples. Which method dominates the Atlantic? What fraction of the Pacific samples used it?</strong></p>
+<div id="2250abaa" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>atlantic <span class="op">=</span> positive[positive[<span class="st">'ocean'</span>] <span class="op">==</span> <span class="st">'Atlantic'</span>]</span>
@@ -1233,8 +1233,8 @@ Name: count, dtype: int64</code></pre>
 <p>That is enough to explain the difference you reported yesterday without any reference to the amount of plastic in the water. The Neuston net has the second lowest median of any method in the file at 0.0151, so an ocean measured mostly by Neuston net will read low, and the Atlantic is that ocean.</p>
 </div>
 </div>
-<p><strong>14. Now control for it. Filter <code>positive</code> to the rows collected with a <code>'Neuston net'</code>, end the line with <code>.copy()</code>, then group that by ocean and report count, median and mean.</strong></p>
-<div id="ca0d0c94" class="cell" data-execution_count="13">
+<p><strong>14. Now let’s control for these differences. Filter <code>positive</code> to the rows collected with a <code>'Neuston net'</code>, end the line with <code>.copy()</code>, then group that by ocean and report count, median and mean.</strong></p>
+<div id="f3c2d6ad" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>neuston <span class="op">=</span> positive[positive[<span class="st">'Sampling Method'</span>] <span class="op">==</span> <span class="st">'Neuston net'</span>].copy()</span>
@@ -1284,7 +1284,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="052a73ca" class="cell" data-execution_count="14">
+<div id="17a6bd49" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>neuston[neuston[<span class="st">'ocean'</span>] <span class="op">==</span> <span class="st">'Pacific'</span>][<span class="st">'Organization'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1297,7 +1297,7 @@ Scripps Institution of Oceanography-University of California San Diego     7
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<p><strong>15. In a markdown cell, three or four sentences. Compare this table with your answer to question 5. Does the Pacific still come out higher than the Atlantic? By how much, and is it the same “how much” you reported yesterday? What happened to the number of Pacific samples you are now relying on?</strong></p>
+<p><strong>15. In a markdown cell, write three or four sentences that compare this table with your answer to question 5. Does the Pacific still come out higher than the Atlantic? By how much, and is it the same “how much” you reported yesterday? What happened to the number of Pacific samples you are now relying on?</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1352,7 +1352,7 @@ Name: count, dtype: int64</code></pre>
 <section id="if-you-finish-early" class="level2">
 <h2 class="anchored" data-anchor-id="if-you-finish-early">If you finish early</h2>
 <p><strong>Group by <code>Regions</code>, report count and median, and rank by count to find the ten most-sampled regions. Look at which sampling methods were used in the extremes.</strong></p>
-<div id="c7f305e9" class="cell" data-execution_count="15">
+<div id="ed2f761f" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>by_region <span class="op">=</span> positive.groupby(<span class="st">'Regions'</span>)[<span class="st">'Measurement'</span>].agg([<span class="st">'count'</span>, <span class="st">'median'</span>])</span>
@@ -1432,7 +1432,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="1a0dedbb" class="cell" data-execution_count="16">
+<div id="5153cabb" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(positive[positive[<span class="st">'Regions'</span>] <span class="op">==</span> <span class="st">'Gulf of California'</span>][<span class="st">'Sampling Method'</span>].value_counts())</span>

@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data">The data</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#the-two-patterns" id="toc-the-two-patterns" class="nav-link" data-scroll-target="#the-two-patterns">The two patterns</a></li>
+  <li><a href="#our-two-new-patterns" id="toc-our-two-new-patterns" class="nav-link" data-scroll-target="#our-two-new-patterns">Our two new patterns</a></li>
   <li><a href="#part-1-filtering-about-15-minutes" id="toc-part-1-filtering-about-15-minutes" class="nav-link" data-scroll-target="#part-1-filtering-about-15-minutes">Part 1: Filtering (about 15 minutes)</a></li>
   <li><a href="#part-2-ranking-about-15-minutes" id="toc-part-2-ranking-about-15-minutes" class="nav-link" data-scroll-target="#part-2-ranking-about-15-minutes">Part 2: Ranking (about 15 minutes)</a></li>
   <li><a href="#part-3-put-them-together-about-10-minutes" id="toc-part-3-put-them-together-about-10-minutes" class="nav-link" data-scroll-target="#part-3-put-them-together-about-10-minutes">Part 3: Put them together (about 10 minutes)</a></li>
@@ -450,15 +450,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div style="width: 80%; margin: auto;">
 <p><img src="../images/panda.jpeg" class="img-fluid"></p>
 </div>
-<p>On Monday you and a partner worked out what was in the National Park Service visitor records and wrote five factual claims about them. You never got to ask the obvious question, because you did not yet have the tools.</p>
-<p>Today you do. Every question below is a “which one” or a “top ten” question, and every one of them is answered with the two patterns you learned this morning.</p>
-<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing says out loud what they expect the answer to look like <em>before</em> the cell is run.</p>
+<p>On Monday you and a partner worked out what was in the National Park Service visitor records and wrote five factual claims about those records. Now we will use our new tools and methods to dig deeper into the data. Specifically, we will now be able to ask “which one” and “top ten” questions. Every one of the tasks below uses these new patterns.</p>
+<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it.</p>
 <p>You have 45 minutes.</p>
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">The data</h2>
 <p>The same file you explored on Monday:</p>
 <pre><code>https://eds-217-essential-python.github.io/data/national_parks.csv</code></pre>
-<p>Two things you found on Monday that will matter today:</p>
+<p>There are two things you saw on Monday that will matter today:</p>
 <ul>
 <li>the <code>year</code> column is stored as <strong>text</strong>, not as numbers</li>
 <li>some rows have a <code>year</code> of <code>Total</code> rather than an actual year</li>
@@ -468,9 +467,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Create a notebook named <code>Colab_3D_Ranking_Questions.ipynb</code>, with both partners’ names in the title cell, then read the file in and check its shape.</p>
 </section>
-<section id="the-two-patterns" class="level2">
-<h2 class="anchored" data-anchor-id="the-two-patterns">The two patterns</h2>
-<p>You have these on your session pages. You should not need to look them up more than once or twice today.</p>
+<section id="our-two-new-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="our-two-new-patterns">Our two new patterns</h2>
+<p>You have these already on your session notebooks from earlier this morning, but as a reminder:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&gt;</span> value]                                <span class="co"># the filter pattern</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)       <span class="co"># the top-N pattern</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -525,13 +524,13 @@ If you finish early
 </div>
 <div class="callout-body-container callout-body">
 <p>Pick a year other than 2016 and produce the same top 10. Did the order change? Name one park that moved several places, and say what you would need in order to find out whether that movement is real or an artifact of how the data was recorded.</p>
-<p>Do not try to compare all the years at once. That needs grouping, and grouping is Friday.</p>
+<p>Do not try to compare all the years at once. That needs grouping, and we get to grouping later this week.</p>
 </div>
 </div>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>
-<p>We’ll hear two or three pairs on question 12. Be ready to say which filter you would insist on before answering, not just what your answer was.</p>
+<p>If there is time, we will hear from two or three pairs regarding their answers to question 12. Be ready to say which filter you would insist on before answering, not just what your answer was.</p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>

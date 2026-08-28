@@ -481,7 +481,7 @@ Scope discipline
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Rebuild the clean survey table. Students have this from 5A; paste it rather than retyping it line by line, and say so.</p>
-<div id="566578b0" class="cell" data-execution_count="1">
+<div id="f6a4cd56" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -511,20 +511,20 @@ Scope discipline
 <section id="what-groupby-is-holding-3-min" class="level2">
 <h2 class="anchored" data-anchor-id="what-groupby-is-holding-3-min">1. What groupby is holding (3 min)</h2>
 <p>Make the split object again and refuse to aggregate it, on purpose:</p>
-<div id="8597bdcd" class="cell" data-execution_count="2">
+<div id="f305a908" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>grouped <span class="op">=</span> survey.groupby(<span class="st">'site'</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>grouped</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x118467d50&gt;</code></pre>
+<pre><code>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x116da5d50&gt;</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
 <p>This morning we said this object is holding six piles of rows and waiting. Let us actually look at the piles.</p>
 </blockquote>
-<div id="8454c507" class="cell" data-execution_count="3">
+<div id="210a22a5" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>grouped.ngroups</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -533,7 +533,7 @@ Scope discipline
 <pre><code>6</code></pre>
 </div>
 </div>
-<div id="e8a22d51" class="cell" data-execution_count="4">
+<div id="0b22f97b" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(grouped.groups.keys())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -549,7 +549,7 @@ Scope discipline
 <li>Say out loud: the split has already been done. It is sitting there.</li>
 </ul>
 <p>Pull one pile out by name:</p>
-<div id="11f29c1c" class="cell" data-execution_count="5">
+<div id="a4de8b22" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>site_c <span class="op">=</span> grouped.get_group(<span class="st">'site_c'</span>)</span>
@@ -566,7 +566,7 @@ Scope discipline
 <section id="looping-over-the-groups-5-min" class="level2">
 <h2 class="anchored" data-anchor-id="looping-over-the-groups-5-min">2. Looping over the groups (5 min)</h2>
 <p>The loop pattern. <strong>Write the two-variable version first and name both variables out loud</strong>, then run it:</p>
-<div id="60c6fec2" class="cell" data-execution_count="6">
+<div id="39b044ac" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> grouped:</span>
@@ -589,7 +589,7 @@ site_f (43, 7)</code></pre>
 <li>the order is the sorted order of the keys, which is why <code>site_a</code> comes first</li>
 </ul>
 <p>Compare it directly to Tuesday’s loop over a list. Put both on the screen:</p>
-<div id="650e99a1" class="cell" data-execution_count="7">
+<div id="749352d3" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sites <span class="op">=</span> [<span class="st">'site_a'</span>, <span class="st">'site_b'</span>, <span class="st">'site_c'</span>]</span>
@@ -614,7 +614,7 @@ site_c</code></pre>
 </blockquote>
 <p>Ask them to guess why before you explain. With one variable, <code>group</code> catches the pair, not the DataFrame.</p>
 <p>Now something the pattern cannot do. A formatted report line per site:</p>
-<div id="1f9f8732" class="cell" data-execution_count="8">
+<div id="be09627a" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> grouped:</span>
@@ -649,7 +649,7 @@ f-strings, if they ask
 <section id="one-group-is-a-dataframe-4-min" class="level2">
 <h2 class="anchored" data-anchor-id="one-group-is-a-dataframe-4-min">3. One group is a DataFrame (4 min)</h2>
 <p>Hammer the point from section 1. Inside the loop, <code>group</code> is a real DataFrame and <strong>every method you know works on it</strong>:</p>
-<div id="129ff169" class="cell" data-execution_count="9">
+<div id="8b33e9fe" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> grouped:</span>
@@ -669,7 +669,7 @@ site_f 43 of 43 samples above 20 C</code></pre>
 <p>That is the filter pattern from Wednesday, running inside a loop, six times. Nothing new. The loop just handed you a smaller table each time round.</p>
 </blockquote>
 <p>One more, to show it is not only filtering:</p>
-<div id="bb05b86e" class="cell" data-execution_count="10">
+<div id="7384608b" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> grouped:</span>
@@ -708,7 +708,7 @@ If you are running behind
 <h2 class="anchored" data-anchor-id="building-something-up-as-you-go-4-min">4. Building something up as you go (4 min)</h2>
 <p>The other reason to loop: you want to <strong>collect</strong> results rather than print them.</p>
 <p>Start with the empty list from Tuesday and <code>.append()</code>:</p>
-<div id="16309f86" class="cell" data-execution_count="11">
+<div id="4e419f29" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>records <span class="op">=</span> []</span>
@@ -730,7 +730,7 @@ If you are running behind
 <p>A list of dictionaries. Both containers from Tuesday, in one place, doing the thing they are for.</p>
 </blockquote>
 <p>And then the payoff, which lands well:</p>
-<div id="76eb393e" class="cell" data-execution_count="12">
+<div id="e5671c4f" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(records)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -795,7 +795,7 @@ If you are running behind
 <p>That is a DataFrame you built yourself, row by row, out of Python containers. Day 2 you read one in from a file. Today you made one.</p>
 </blockquote>
 <p>Now the honest comparison. Put the one-liner underneath it:</p>
-<div id="02ea6ae9" class="cell" data-execution_count="13">
+<div id="8c6e0050" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -858,7 +858,7 @@ If you are running behind
 <p>Same table. Nine lines versus one. <strong>Use the one line.</strong> The loop is for when the thing you want in each row is not something <code>.agg()</code> can compute.</p>
 </blockquote>
 <p>A dictionary instead of a list, since they will see both:</p>
-<div id="0c101c2c" class="cell" data-execution_count="14">
+<div id="2aceb637" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> {}</span>
@@ -885,7 +885,7 @@ If you are running behind
 <p>On Tuesday somebody asked about the square-bracket thing and I said we would read some on Friday. It is Friday. <strong>You are not going to write these.</strong> You are going to be able to look at one and say what it does, because they are everywhere.</p>
 </blockquote>
 <p>Start from a loop that builds a list, written the long way:</p>
-<div id="2f75e43d" class="cell" data-execution_count="15">
+<div id="0df5ad4a" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>site_names <span class="op">=</span> []</span>
@@ -900,7 +900,7 @@ If you are running behind
 </div>
 </div>
 <p>Then the same thing, one line:</p>
-<div id="ef44c8b6" class="cell" data-execution_count="16">
+<div id="2735127f" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>site_names <span class="op">=</span> [name.upper() <span class="cf">for</span> name, group <span class="kw">in</span> grouped]</span>
@@ -914,7 +914,7 @@ If you are running behind
 <pre><code>[  what to keep     for  each thing  in  the collection  ]</code></pre>
 <p>Then read the line out loud in that order, pointing: <em>“<code>name.upper()</code>, for each name and group, in grouped.”</em> Say that the loop body moved to the <strong>front</strong>, and that is the only real difference.</p>
 <p>Do a plain one over a list so the groupby is not a distraction:</p>
-<div id="a5e0ff07" class="cell" data-execution_count="17">
+<div id="59b5aae2" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>temps_c <span class="op">=</span> [<span class="fl">12.1</span>, <span class="fl">18.4</span>, <span class="fl">21.9</span>, <span class="fl">7.2</span>]</span>
@@ -927,7 +927,7 @@ If you are running behind
 </div>
 </div>
 <p><strong>Prediction drill.</strong> Write this on the screen and get an answer from the room <em>before</em> running it:</p>
-<div id="d0c7112c" class="cell" data-execution_count="18">
+<div id="f28fa751" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>[<span class="bu">len</span>(s) <span class="cf">for</span> s <span class="kw">in</span> [<span class="st">'site_a'</span>, <span class="st">'bb'</span>, <span class="st">'c'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -942,7 +942,7 @@ If you are running behind
 <h2 class="anchored" data-anchor-id="comprehensions-you-will-meet-in-the-wild-5-min">6. Comprehensions you will meet in the wild (5 min)</h2>
 <p>Three patterns, read only, one prediction each.</p>
 <p><strong>A dictionary comprehension.</strong> Curly braces, and a <code>key: value</code> pair at the front:</p>
-<div id="df311343" class="cell" data-execution_count="19">
+<div id="c972ba76" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>{name: <span class="bu">len</span>(group) <span class="cf">for</span> name, group <span class="kw">in</span> grouped}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -960,7 +960,7 @@ If you are running behind
 <p>Same six numbers as <code>.value_counts()</code>. Ask them which they would rather read.</p>
 </blockquote>
 <p><strong>A comprehension with a filter.</strong> The <code>if</code> goes at the <strong>end</strong>:</p>
-<div id="32a52f1c" class="cell" data-execution_count="20">
+<div id="893aaa0d" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>[name <span class="cf">for</span> name, group <span class="kw">in</span> grouped <span class="cf">if</span> <span class="bu">len</span>(group) <span class="op">&gt;</span> <span class="dv">42</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -971,7 +971,7 @@ If you are running behind
 </div>
 <p>Predict first. Point at the counts from section 2 while they think.</p>
 <p><strong>A comprehension over a DataFrame column</strong>, which is the one they are most likely to meet in inherited code:</p>
-<div id="881fa1ab" class="cell" data-execution_count="21">
+<div id="6fdc7269" class="cell" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>[c.upper() <span class="cf">for</span> c <span class="kw">in</span> survey.columns]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -987,7 +987,7 @@ If you are running behind
 </div>
 </div>
 <p>Then, immediately, the pandas way to do the same job:</p>
-<div id="70894ae1" class="cell" data-execution_count="22">
+<div id="ecc0ccd3" class="cell" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>survey.columns.<span class="bu">str</span>.upper()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

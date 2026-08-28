@@ -430,7 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data">The data</a></li>
-  <li><a href="#the-patterns-you-need" id="toc-the-patterns-you-need" class="nav-link" data-scroll-target="#the-patterns-you-need">The patterns you need</a></li>
+  <li><a href="#the-code-patterns-you-will-need" id="toc-the-code-patterns-you-will-need" class="nav-link" data-scroll-target="#the-code-patterns-you-will-need">The code patterns you will need</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#part-1-find-out-what-is-wrong-about-10-minutes" id="toc-part-1-find-out-what-is-wrong-about-10-minutes" class="nav-link" data-scroll-target="#part-1-find-out-what-is-wrong-about-10-minutes">Part 1: Find out what is wrong (about 10 minutes)</a></li>
   <li><a href="#part-2-clean-it-about-20-minutes" id="toc-part-2-clean-it-about-20-minutes" class="nav-link" data-scroll-target="#part-2-clean-it-about-20-minutes">Part 2: Clean it (about 20 minutes)</a></li>
@@ -454,10 +454,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>Survey of data scientists, CrowdFlower, 2016.</em></p>
 </div>
-<p>Sixty percent. That is not a complaint about the profession, it is a description of the job. The hour you spend this afternoon is a scale model of your next two years.</p>
-<p>Today’s file is a season of stream chemistry from six monitoring sites, transcribed from paper field sheets by four different undergraduates. Nobody was careless. They just each made reasonable decisions, and the decisions were not the same.</p>
-<p>Your job is to turn it into a table you would let somebody publish from.</p>
-<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. <strong>Check <code>.shape</code> after every step that could remove rows</strong>, and say the new number out loud before you move on. That habit is most of what this exercise is teaching.</p>
+<p>Just as building a boat is 90% sanding, it often feels like doing data science is 90% cleaning (the survey data says it’s <em>just 60%</em>, so that’s good news!). The time we will spend cleaning data this afternoon is a taste of your data science future.</p>
+<p>Today’s file is a season of stream chemistry from six monitoring sites, transcribed from paper field sheets by four different undergraduates. They were all careful… and they made reasonable decisions about data entry. Unfortunately, their decisions were not the same (maybe the PI should have made a data dictionary to ensure consistency!).</p>
+<p>Your task is to turn their work into a table that you could use for rigorous data analysis.</p>
+<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it.</p>
 <p>You have 45 minutes.</p>
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">The data</h2>
@@ -501,9 +501,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="the-patterns-you-need" class="level2">
-<h2 class="anchored" data-anchor-id="the-patterns-you-need">The patterns you need</h2>
-<p>All of these are from today. You should not need anything else.</p>
+<section id="the-code-patterns-you-will-need" class="level2">
+<h2 class="anchored" data-anchor-id="the-code-patterns-you-will-need">The code patterns you will need</h2>
+<p>All of the code patterns below are from today. You should not need anything else to complete this colab.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.drop_duplicates()                    <span class="co"># and subset=[...]</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.dropna(subset<span class="op">=</span>[<span class="st">'col'</span>])               <span class="co"># remove rows missing a named column</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].fillna(value)     <span class="co"># fill the gaps instead</span></span>
@@ -524,7 +524,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Run <code>.isnull().sum()</code>. Which four columns have gaps, and how many each?</p></li>
 <li><p>Run <code>.duplicated().sum()</code>. How many rows are exact copies of an earlier row?</p></li>
 <li><p>Run <code>survey['site'].value_counts()</code>. There are six sites. How many distinct labels does the file contain? Look carefully at the quotation marks in the output of <code>survey['site'].unique()</code>.</p></li>
-<li><p>Run <code>.describe()</code> on <code>temperature_c</code>. The minimum is not a temperature any stream has ever had. What do you think it means?</p></li>
+<li><p>Run <code>.describe()</code> on <code>temperature_c</code>. The minimum is not a temperature any stream has ever had… What’s going on here??</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="What the minimum means">
 <div class="callout-header d-flex align-content-center">
@@ -536,7 +536,7 @@ What the minimum means
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Dataloggers that fail often write a value chosen to be obviously impossible rather than leaving the field blank. <code>-999</code>, <code>-9999</code> and <code>NA</code> are the usual ones. It is missing data wearing a costume, and <code>.isnull()</code> will never find it. <strong>Only <code>.describe()</code> and your own knowledge of the measurement will.</strong></p>
+<p>Dataloggers that fail often write a value chosen to be obviously impossible rather than leaving the field blank. <code>-999</code>, <code>-9999</code> and <code>NA</code> are the usual suspects. These entries are missing data wearing a costume… and <code>.isnull()</code> will never find them! They can also really mess up your averages and other statistics. <strong>Only <code>.describe()</code> and your domain knowledge of the measurement will help you avoid mis-interpreting numerical missing data as actual information.</strong></p>
 </div>
 </div>
 </section>
@@ -573,14 +573,14 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 Try <code>survey['pH'].astype(float)</code> <strong>before</strong> the replace, on purpose, and read the error. It names the exact value it could not parse. That message is the fastest debugging tool in pandas, and it is worth having seen once when nothing is at stake.</p>
+<p>🐍 Try <code>survey['pH'].astype(float)</code> <strong>before</strong> the replace, on purpose, and read the error. It provides the exact value it could not parse. That message is the fastest debugging tool in pandas; as is often the case, a little bit of “pre-flight” testing will make your data science journey much smoother.</p>
 </div>
 </div>
 <ol start="9" type="1">
 <li><p>Three measurement columns have blanks: <code>temperature_c</code>, <code>dissolved_oxygen_mg_L</code>, and <code>conductivity_uS_cm</code>. A row with no measurement is no use to you, so drop those rows in a single <code>.dropna()</code> call with a list in <code>subset=</code>. How many rows did that cost?</p></li>
 <li><p><code>n_replicates</code> also has blanks, but here a blank means the field sheet recorded a single bottle and nobody bothered to write “1”. Fill those with <code>1</code> instead of dropping the rows, then convert the column to <code>int</code>. Confirm with <code>.value_counts()</code>.</p></li>
-<li><p>Now deal with the impossible temperatures. Use the <strong>filter pattern</strong> from Day 3 to keep only the rows where <code>temperature_c</code> is above <code>-100</code>, and end the line with <code>.copy()</code>. How many rows did the loggers ruin?</p></li>
-<li><p>Re-run <code>.describe()</code> on <code>temperature_c</code>. Compare the mean to the one you got in task 5. In a markdown cell, write one sentence about what nine bad rows did to the average of three hundred good ones.</p></li>
+<li><p>Now let’s deal with the impossible temperatures. Use the <strong>filter pattern</strong> from Day 3 to keep only the rows where <code>temperature_c</code> is above <code>-100</code>, and end the line with <code>.copy()</code>. How many rows did the loggers ruin?</p></li>
+<li><p>Re-run <code>.describe()</code> on <code>temperature_c</code>. Compare the mean to the one you got in task 5. In a markdown cell, write one short statement about what nine bad rows did to the average of three hundred good ones.</p></li>
 <li><p>Rename <code>collection date</code> to <code>collection_date</code>, so you can reach it without quoting trouble later. <code>.rename()</code> is from Day 2; it takes <code>columns=</code> and a dictionary.</p></li>
 </ol>
 </section>
@@ -594,11 +594,11 @@ Note
 </section>
 <section id="part-4-ask-it-something-about-5-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-ask-it-something-about-5-minutes">Part 4: Ask it something (about 5 minutes)</h2>
-<p>You now have a table you can trust. Use it.</p>
+<p>You now have a table you can trust. Let’s put it to work!</p>
 <ol start="17" type="1">
 <li><p>Use the filter pattern to build a table of just the acidic samples. Which sites do they come from? Use <code>.value_counts()</code> on <code>site</code>.</p></li>
 <li><p>Two of the six sites account for nearly all the acidic samples. Filter to one of those sites and to <code>site_d</code>, and compare the mean of <code>dissolved_oxygen_mg_L</code> for each. (Two filters, two <code>.mean()</code> calls. Tomorrow you will learn to do all six at once.)</p></li>
-<li><p>In a markdown cell of three or four sentences: <strong>what would you tell the person who collected this data?</strong> Name the single change to their field sheet that would have saved you the most time this afternoon, and say what evidence in the file makes you pick that one.</p></li>
+<li><p>In a markdown cell of three or four sentences: <strong>what would you tell the PI whose project collected this data?</strong> Name the single change to their field sheet that would have saved you the most time this afternoon, and describe what evidence in the file makes you pick that one.</p></li>
 </ol>
 </section>
 <section id="wrap-up" class="level2">
@@ -609,7 +609,7 @@ Note
 <li>you can say how many rows the original file had, how many you finished with, and where the difference went</li>
 <li>every cleaning decision has a markdown sentence next to it saying <strong>why</strong>, not just what</li>
 </ul>
-<p>We will hear two or three pairs on question 19.</p>
+<p>If we have time, we will hear two or three pairs on question 19.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="If you finish early">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

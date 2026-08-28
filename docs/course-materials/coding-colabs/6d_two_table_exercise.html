@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#the-patterns-you-need" id="toc-the-patterns-you-need" class="nav-link active" data-scroll-target="#the-patterns-you-need">The patterns you need</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#part-1-one-table-out-of-two-about-12-minutes" id="toc-part-1-one-table-out-of-two-about-12-minutes" class="nav-link" data-scroll-target="#part-1-one-table-out-of-two-about-12-minutes">Part 1: One table out of two (about 12 minutes)</a></li>
+  <li><a href="#part-1-making-one-table-out-of-two-about-12-minutes" id="toc-part-1-making-one-table-out-of-two-about-12-minutes" class="nav-link" data-scroll-target="#part-1-making-one-table-out-of-two-about-12-minutes">Part 1: Making one table out of two (about 12 minutes)</a></li>
   <li><a href="#part-2-making-the-dates-real-about-12-minutes" id="toc-part-2-making-the-dates-real-about-12-minutes" class="nav-link" data-scroll-target="#part-2-making-the-dates-real-about-12-minutes">Part 2: Making the dates real (about 12 minutes)</a></li>
   <li><a href="#part-3-the-shape-that-shows-the-sawtooth-about-12-minutes" id="toc-part-3-the-shape-that-shows-the-sawtooth-about-12-minutes" class="nav-link" data-scroll-target="#part-3-the-shape-that-shows-the-sawtooth-about-12-minutes">Part 3: The shape that shows the sawtooth (about 12 minutes)</a></li>
   <li><a href="#part-4-the-claim-about-9-minutes" id="toc-part-4-the-claim-about-9-minutes" class="nav-link" data-scroll-target="#part-4-the-claim-about-9-minutes">Part 4: The claim (about 9 minutes)</a></li>
@@ -450,15 +450,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div style="width: 80%; margin: auto;">
 <p><img src="../images/towersensors.jpeg" class="img-fluid"></p>
 </div>
-<p>Two of the most important time series in environmental science are kept by different people, for different reasons, in different places.</p>
-<p>NASA’s GISTEMP record estimates how far each month’s global surface temperature sits from a twentieth-century baseline. It starts in <strong>1880</strong>, because that is roughly when enough thermometers existed to average.</p>
-<p>The Mauna Loa record measures the concentration of carbon dioxide in the atmosphere directly, in parts per million, from an observatory near the summit of a Hawaiian volcano. It starts in <strong>1958</strong>, because that is when Charles Keeling built the instrument.</p>
-<p>The most famous graph in climate science puts those two side by side. Doing that requires everything you learned today, and it requires you to make a decision in the first five minutes that changes what the rest of the analysis is about.</p>
-<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing says out loud what they expect the answer to look like <em>before</em> the cell is run.</p>
+<p>Two of the most important time series in environmental science are global surface temperature and atmospheric concentration of carbon dioxide. These two datasets are collected by different people/institutions, are used for different reasons, and are stored/maintained in different locations.</p>
+<p>NASA’s GISTEMP record estimates how far each month’s global surface temperature sits from a twentieth-century baseline. It starts in <strong>1880</strong>, which is the earliest that sufficient observations of temperature existed to estimate a global average.</p>
+<p>The concentration of carbon dioxide is measured in the atmosphere directly, in parts per million, from an observatory near the summit of Mauna Loa, a Hawaiian volcano. It starts in <strong>1958</strong>, because that is when Charles Keeling built the system that first started recording these concentrations (initially as air samples collected in flasks and then returned to his lab for analysis).</p>
+<p>The most famous graph in climate science puts those two time series together in a single plot, side by side. Making that figure requires everything you learned today and some good decisions about how to organize these datasets.</p>
+<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it.</p>
 <p>You have 45 minutes.</p>
 <section id="the-patterns-you-need" class="level2">
 <h2 class="anchored" data-anchor-id="the-patterns-you-need">The patterns you need</h2>
-<p>All four are from this morning and the session you just finished.</p>
+<p>All code patterns you will use are from this morning and the session you just finished.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, on<span class="op">=</span><span class="st">'key'</span>)                       <span class="co"># the join pattern</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, on<span class="op">=</span><span class="st">'key'</span>, how<span class="op">=</span><span class="st">'left'</span>)           <span class="co"># keep every row on the left</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -466,14 +466,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>column.dt.year                                        <span class="co"># and its accessors</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span>, columns<span class="op">=</span>, values<span class="op">=</span>)             <span class="co"># the pivot pattern</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Plus the two you have been using all week:</p>
+<p>Plus the two more code patterns you have been using all week:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'column'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>])</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Create a notebook named <code>Colab_6D_Two_Records.ipynb</code>, with both partners’ names in the title cell, then read the two files:</p>
-<div id="16e2353e" class="cell" data-execution_count="1">
+<div id="b7143eef" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -485,8 +485,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="part-1-one-table-out-of-two-about-12-minutes" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-one-table-out-of-two-about-12-minutes">Part 1: One table out of two (about 12 minutes)</h2>
+<section id="part-1-making-one-table-out-of-two-about-12-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-making-one-table-out-of-two-about-12-minutes">Part 1: Making one table out of two (about 12 minutes)</h2>
 <p>Answer each question with code, then write the answer in a markdown cell underneath, in a complete sentence with the numbers in it.</p>
 <ol type="1">
 <li><p>How many rows does each table have, and what columns? What is the earliest and latest <code>Date</code> in each? (<code>.min()</code> and <code>.max()</code> on the <code>Date</code> column will do it, since these dates are text in <code>%Y-%m-%d</code> form and text in that form sorts correctly.)</p></li>
@@ -532,10 +532,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="before-you-stop">Before you stop</h2>
 <p>Check that:</p>
 <ul>
-<li>you can say, without looking, what <code>how='inner'</code> did to your row count and why</li>
+<li>you can say, without peeking at your notes, what <code>how='inner'</code> did to your row count and why!</li>
 <li>every mean you reported has a count beside it, or a filter that guaranteed the count</li>
 <li>you supplied <code>format=</code> to every <code>pd.to_datetime()</code> call</li>
-<li>your notebook reads top to bottom as a document, not as a pile of cells</li>
+<li>your notebook reads top to bottom as a document, not as a mishmash of cells</li>
 </ul>
 </section>
 <section id="resources" class="level2">

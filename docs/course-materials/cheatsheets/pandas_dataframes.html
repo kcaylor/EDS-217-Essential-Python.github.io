@@ -467,7 +467,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="importing-pandas" class="level2">
 <h2 class="anchored" data-anchor-id="importing-pandas">Importing Pandas</h2>
 <p>Always start by importing pandas:</p>
-<div id="09a3361f" class="cell" data-execution_count="1">
+<div id="30a231c4" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -478,7 +478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="creating-a-dataframe">Creating a DataFrame</h2>
 <section id="from-a-dictionary" class="level3">
 <h3 class="anchored" data-anchor-id="from-a-dictionary">From a dictionary</h3>
-<div id="8d1b1b9b" class="cell" data-execution_count="2">
+<div id="b74a1774" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'Name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>],</span>
@@ -497,7 +497,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="from-a-csv-file" class="level3">
 <h3 class="anchored" data-anchor-id="from-a-csv-file">From a CSV file</h3>
-<div id="2d0641a0" class="cell" data-execution_count="3">
+<div id="f2bd5eb1" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here's an example csv file we can use for read_csv:</span></span>
@@ -528,7 +528,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="basic-dataframe-information" class="level2">
 <h2 class="anchored" data-anchor-id="basic-dataframe-information">Basic DataFrame Information</h2>
-<div id="3cf42724" class="cell" data-execution_count="4">
+<div id="6181f2e9" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows</span></span>
@@ -580,7 +580,7 @@ Index(['Name', 'Age', 'City'], dtype='object')
 <h2 class="anchored" data-anchor-id="selecting-data">Selecting Data</h2>
 <section id="selecting-columns" class="level3">
 <h3 class="anchored" data-anchor-id="selecting-columns">Selecting columns</h3>
-<div id="fa4bfb82" class="cell" data-execution_count="5">
+<div id="e1a83cf6" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select a single column</span></span>
@@ -593,7 +593,7 @@ Index(['Name', 'Age', 'City'], dtype='object')
 </section>
 <section id="selecting-rows" class="level3">
 <h3 class="anchored" data-anchor-id="selecting-rows">Selecting rows</h3>
-<div id="79f7fb3f" class="cell" data-execution_count="6">
+<div id="de69ca30" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select rows by index</span></span>
@@ -609,7 +609,7 @@ Index(['Name', 'Age', 'City'], dtype='object')
 <h2 class="anchored" data-anchor-id="basic-data-manipulation">Basic Data Manipulation</h2>
 <section id="adding-a-new-column" class="level3">
 <h3 class="anchored" data-anchor-id="adding-a-new-column">Adding a new column</h3>
-<div id="87270985" class="cell" data-execution_count="7">
+<div id="2cc84dd7" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Is Adult'</span>] <span class="op">=</span> df[<span class="st">'Age'</span>] <span class="op">&gt;=</span> <span class="dv">18</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -618,7 +618,7 @@ Index(['Name', 'Age', 'City'], dtype='object')
 </section>
 <section id="renaming-columns" class="level3">
 <h3 class="anchored" data-anchor-id="renaming-columns">Renaming columns</h3>
-<div id="4f4eace0" class="cell" data-execution_count="8">
+<div id="69c439da" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.rename(columns<span class="op">=</span>{<span class="st">'Name'</span>: <span class="st">'Full Name'</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -627,7 +627,7 @@ Index(['Name', 'Age', 'City'], dtype='object')
 </section>
 <section id="handling-missing-values" class="level3">
 <h3 class="anchored" data-anchor-id="handling-missing-values">Handling missing values</h3>
-<div id="14efaa21" class="cell" data-execution_count="9">
+<div id="4d001f1b" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows with any missing values</span></span>
@@ -641,7 +641,7 @@ Index(['Name', 'Age', 'City'], dtype='object')
 </section>
 <section id="basic-calculations" class="level2">
 <h2 class="anchored" data-anchor-id="basic-calculations">Basic Calculations</h2>
-<div id="5a1f6022" class="cell" data-execution_count="10">
+<div id="a844bc6e" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean age</span></span>
@@ -654,7 +654,7 @@ Index(['Name', 'Age', 'City'], dtype='object')
 </section>
 <section id="grouping-and-aggregation" class="level2">
 <h2 class="anchored" data-anchor-id="grouping-and-aggregation">Grouping and Aggregation</h2>
-<div id="b84b0019" class="cell" data-execution_count="11">
+<div id="080bba86" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by city and calculate mean age</span></span>
@@ -664,7 +664,7 @@ Index(['Name', 'Age', 'City'], dtype='object')
 </section>
 <section id="sorting" class="level2">
 <h2 class="anchored" data-anchor-id="sorting">Sorting</h2>
-<div id="d726e242" class="cell" data-execution_count="12">
+<div id="25e098af" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by Age in descending order</span></span>
@@ -674,7 +674,7 @@ Index(['Name', 'Age', 'City'], dtype='object')
 </section>
 <section id="saving-a-dataframe" class="level2">
 <h2 class="anchored" data-anchor-id="saving-a-dataframe">Saving a DataFrame</h2>
-<div id="9d72bf7d" class="cell" data-execution_count="13">
+<div id="ae577648" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save to CSV</span></span>

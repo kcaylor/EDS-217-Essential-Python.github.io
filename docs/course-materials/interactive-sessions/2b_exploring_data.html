@@ -473,7 +473,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="4" type="1">
 <li>Read in the same Goleta air quality data from the last session:</li>
 </ol>
-<div id="877bb43a" class="cell" data-execution_count="1">
+<div id="14184dda" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -486,7 +486,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="look-at-it" class="level2">
 <h2 class="anchored" data-anchor-id="look-at-it">Look at it</h2>
 <p>Always start by looking. <code>.head()</code> shows the first five rows, <code>.tail()</code> the last five:</p>
-<div id="b0ea60b2" class="cell" data-execution_count="2">
+<div id="739810a3" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>goleta.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -613,7 +613,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="019f9339" class="cell" data-execution_count="3">
+<div id="57ecea92" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>goleta.tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -741,7 +741,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Both take a number if you want more or fewer:</p>
-<div id="640ce91f" class="cell" data-execution_count="4">
+<div id="ee93825a" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>goleta.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -836,7 +836,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="how-big-is-it" class="level2">
 <h2 class="anchored" data-anchor-id="how-big-is-it">How big is it?</h2>
 <p><code>.shape</code> gives you <code>(rows, columns)</code>:</p>
-<div id="564a1ff8" class="cell" data-execution_count="5">
+<div id="73ae4bc4" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>goleta.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -846,7 +846,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>It’s a pair of numbers, so you can pull either one out by position, exactly like the lists you met in the last session:</p>
-<div id="3824cf45" class="cell" data-execution_count="6">
+<div id="a780b3fa" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"rows:"</span>, goleta.shape[<span class="dv">0</span>])</span>
@@ -860,7 +860,7 @@ columns: 15</code></pre>
 </section>
 <section id="what-are-the-columns-and-what-type-is-each" class="level2">
 <h2 class="anchored" data-anchor-id="what-are-the-columns-and-what-type-is-each">What are the columns, and what type is each?</h2>
-<div id="993fa6d6" class="cell" data-execution_count="7">
+<div id="4570d1cc" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>goleta.columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -883,7 +883,7 @@ columns: 15</code></pre>
  'provider']</code></pre>
 </div>
 </div>
-<div id="b4a2728f" class="cell" data-execution_count="8">
+<div id="0f8225b4" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>goleta.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -925,7 +925,7 @@ dtype: object</code></pre>
 <section id="the-health-check-.info" class="level2">
 <h2 class="anchored" data-anchor-id="the-health-check-.info">The health check: <code>.info()</code></h2>
 <p><code>.info()</code> is the single most useful line in this session. It combines the shape, the column names, the types, and, critically, <strong>how many non-null values each column has</strong>:</p>
-<div id="f1a306cf" class="cell" data-execution_count="9">
+<div id="777d67e2" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>goleta.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -971,7 +971,7 @@ Important
 </div>
 </div>
 <p>You can ask the same question directly. <code>.isnull()</code> marks every missing value, and <code>.sum()</code> counts them per column:</p>
-<div id="7e77fb16" class="cell" data-execution_count="10">
+<div id="4ae1cf0e" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>goleta.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1013,7 +1013,7 @@ dtype: int64</code></pre>
 <section id="summarizing-numbers-with-.describe" class="level2">
 <h2 class="anchored" data-anchor-id="summarizing-numbers-with-.describe">Summarizing numbers with <code>.describe()</code></h2>
 <p><code>.describe()</code> gives you count, mean, standard deviation, min, max, and quartiles for every numeric column:</p>
-<div id="21c6e80e" class="cell" data-execution_count="11">
+<div id="64544491" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>goleta.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1126,7 +1126,7 @@ dtype: int64</code></pre>
 <p>Two things should bother you.</p>
 <p><strong>First, a negative concentration.</strong> You cannot have less than zero of a pollutant. That’s either an instrument artifact or a sentinel value, and it’s the kind of thing you flag now and decide about later.</p>
 <p><strong>Second, and worse, that mean is meaningless.</strong> Look at what’s in the <code>unit</code> column:</p>
-<div id="ab04afe6" class="cell" data-execution_count="12">
+<div id="d65e9e7c" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'unit'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1156,7 +1156,7 @@ Name: count, dtype: int64</code></pre>
 <section id="counting-categories-with-.value_counts" class="level2">
 <h2 class="anchored" data-anchor-id="counting-categories-with-.value_counts">Counting categories with <code>.value_counts()</code></h2>
 <p><code>.describe()</code> is for numbers. For text columns, the question is usually “what values appear, and how often?” That’s <code>.value_counts()</code>:</p>
-<div id="8d0c42f1" class="cell" data-execution_count="13">
+<div id="b9773ae7" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'parameter'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1171,7 +1171,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>Three pollutants: <code>pm25</code>, <code>o3</code>, and <code>pm10</code>. Now the <code>unit</code> result above makes sense, since ozone is reported in ppm and particulates in µg/m³.</p>
 <p><code>.value_counts()</code> is also how you spot a column that tells you nothing:</p>
-<div id="1364d554" class="cell" data-execution_count="14">
+<div id="79588559" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'location_name'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1184,7 +1184,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>Every row says <code>Goleta</code>. That column is a constant. It’s not wrong, and it will matter later when we stack several stations together, but within this file it tells you nothing.</p>
 <p>Add <code>.head(n)</code> when a column has many distinct values:</p>
-<div id="ac12b251" class="cell" data-execution_count="15">
+<div id="bb79ca9e" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'datetimeLocal'</span>].value_counts().head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1218,7 +1218,7 @@ Name: count, dtype: int64</code></pre>
 <p><code>datetimeUtc</code> and <code>datetimeLocal</code> are in camelCase, while everything else uses lowercase with underscores. Mixed naming styles cause typos. Let’s fix them.</p>
 <p>To do that you need Python’s other essential container: the <strong>dictionary</strong>.</p>
 <p>A <strong>dictionary</strong> stores pairs. Each pair has a <strong>key</strong> and a <strong>value</strong>, written <code>key: value</code>, and the whole thing goes in curly braces:</p>
-<div id="634aa388" class="cell" data-execution_count="16">
+<div id="33ef56dc" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>new_names <span class="op">=</span> {</span>
@@ -1232,7 +1232,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>You look up a value by its key, using square brackets:</p>
-<div id="c18df5ee" class="cell" data-execution_count="17">
+<div id="d85b8a23" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>new_names[<span class="st">'datetimeUtc'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1242,7 +1242,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>Where a list is ordered and you index it by <em>position</em>, a dictionary is looked up by <em>name</em>. That makes it exactly the right shape for “rename this to that”:</p>
-<div id="962c755d" class="cell" data-execution_count="18">
+<div id="acd92626" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>goleta_renamed <span class="op">=</span> goleta.rename(columns<span class="op">=</span>new_names)</span>
@@ -1267,7 +1267,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>You can write the dictionary inline if it’s short:</p>
-<div id="85a40c78" class="cell" data-execution_count="19">
+<div id="5e3dd22f" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>goleta.rename(columns<span class="op">=</span>{<span class="st">'value'</span>: <span class="st">'concentration'</span>}).columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

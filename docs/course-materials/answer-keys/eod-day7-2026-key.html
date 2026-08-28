@@ -456,7 +456,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="68f0b46c" class="cell" data-execution_count="1">
+<div id="a04bcc12" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -470,7 +470,7 @@ How to use this key
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>zipcodes <span class="op">=</span> pd.read_csv(base <span class="op">+</span> <span class="st">'zip_code_database.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="d23de80f" class="cell" data-execution_count="2">
+<div id="ff9718ff" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>zones_2023[<span class="st">'zipcode'</span>] <span class="op">=</span> zones_2023[<span class="st">'zipcode'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>
@@ -482,7 +482,7 @@ How to use this key
 <section id="part-1-three-files" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-three-files">Part 1: Three files</h2>
 <p><strong>1. How many rows and columns does each of the three tables have? What are the column names of the two zone tables, and are they the same?</strong></p>
-<div id="ef359c88" class="cell" data-execution_count="3">
+<div id="7a889866" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zones_2012.shape, <span class="bu">list</span>(zones_2012.columns))</span>
@@ -509,7 +509,7 @@ How to use this key
 </div>
 </div>
 <p><strong>2. Run <code>.isnull().sum()</code> on both zone tables. Then look at <code>.head()</code> of either one and say, in one sentence, what <code>zone</code>, <code>trange</code> and <code>zonetitle</code> each hold and which of the three is redundant.</strong></p>
-<div id="701c85e2" class="cell" data-execution_count="4">
+<div id="63458128" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zones_2012.isnull().<span class="bu">sum</span>())</span>
@@ -544,7 +544,7 @@ dtype: int64
 </div>
 </div>
 <p><strong>3. The two files do not have the same number of rows. Before you do anything else, write down two different explanations for that which do not involve anybody making a mistake.</strong></p>
-<div id="b09f101a" class="cell" data-execution_count="5">
+<div id="b4ad0046" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>in_2012_only <span class="op">=</span> <span class="bu">set</span>(zones_2012[<span class="st">'zipcode'</span>]) <span class="op">-</span> <span class="bu">set</span>(zones_2023[<span class="st">'zipcode'</span>])</span>
@@ -578,7 +578,7 @@ dtype: int64
 <section id="part-2-one-table-out-of-three" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-one-table-out-of-three">Part 2: One table out of three</h2>
 <p><strong>4. Add a <code>year</code> column to each zone table, then stack the two of them into one table called <code>zones</code>, using the stacking pattern. How many rows?</strong></p>
-<div id="9db6fe50" class="cell" data-execution_count="6">
+<div id="f5aeaea9" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>zones_2023[<span class="st">'year'</span>] <span class="op">=</span> <span class="dv">2023</span></span>
@@ -606,7 +606,7 @@ dtype: int64
 </div>
 </div>
 <p><strong>5. Add <code>trange_min</code> using the line from the Field Note, then confirm it has no nulls and look at its distinct values with <code>.value_counts().sort_index()</code>. In a markdown cell, say what you notice about the spacing of those values and what that means for the phrase “how much warmer”.</strong></p>
-<div id="f5127bea" class="cell" data-execution_count="7">
+<div id="3ec803d7" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>zones[<span class="st">'trange_min'</span>] <span class="op">=</span> zones[<span class="st">'trange'</span>].<span class="bu">str</span>.split().<span class="bu">str</span>.get(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
@@ -653,7 +653,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>6. Compute the mean <code>trange_min</code> for each year and report the difference. This is the headline number, and you are about to spend the rest of the practice finding out how much it is worth.</strong></p>
-<div id="4f4caecc" class="cell" data-execution_count="8">
+<div id="e066272c" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> zones.groupby(<span class="st">'year'</span>)[<span class="st">'trange_min'</span>].mean()</span>
@@ -684,7 +684,7 @@ Name: trange_min, dtype: float64
 </div>
 </div>
 <p><strong>7. Merge <code>zones</code> with <code>zipcodes</code> to attach a state, a latitude and a longitude to every row. The key columns are called different things in the two tables. Compare the row count before and after, then run the merge again with <code>how='left'</code> and find out how many rows failed to match and how many distinct zip codes that is.</strong></p>
-<div id="434f834d" class="cell" data-execution_count="9">
+<div id="82b4c35b" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>located <span class="op">=</span> pd.merge(zones, zipcodes, left_on<span class="op">=</span><span class="st">'zipcode'</span>, right_on<span class="op">=</span><span class="st">'zip'</span>)</span>
@@ -720,7 +720,7 @@ Name: trange_min, dtype: float64
 </div>
 </div>
 <p><strong>8. In a markdown cell: 103 rows out of 80,455 did not match, covering 63 zip codes. Is that a number you would fix, a number you would mention, or a number you would ignore? Say which and why. There is more than one defensible answer.</strong></p>
-<div id="2b3d0ca1" class="cell" data-execution_count="10">
+<div id="3d69e26c" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sorted</span>(missing[<span class="st">'zipcode'</span>].unique()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -747,7 +747,7 @@ Name: trange_min, dtype: float64
 <section id="part-3-the-first-map" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-the-first-map">Part 3: The first map</h2>
 <p><strong>9. Filter <code>located</code> to the 2023 rows only, then draw a scatter plot with <code>longitude</code> across the bottom, <code>latitude</code> up the side, and <code>hue='trange_min'</code>. Make the figure twelve inches by seven. Label both axes and title it.</strong></p>
-<div id="3dadab68" class="cell" data-execution_count="11">
+<div id="437107d6" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>recent <span class="op">=</span> located[located[<span class="st">'year'</span>] <span class="op">==</span> <span class="dv">2023</span>]</span>
@@ -784,7 +784,7 @@ Name: trange_min, dtype: float64
 </div>
 </div>
 <p><strong>11. Find the culprit. Use the filter pattern on <code>located</code> to pull out every row with a <code>longitude</code> greater than −60, and print its zip code, state, city, latitude and longitude.</strong></p>
-<div id="6394db32" class="cell" data-execution_count="12">
+<div id="39504cc7" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>located[located[<span class="st">'longitude'</span>] <span class="op">&gt;</span> <span class="op">-</span><span class="dv">60</span>][[<span class="st">'zipcode'</span>, <span class="st">'state'</span>, <span class="st">'primary_city'</span>,</span>
@@ -848,7 +848,7 @@ Name: trange_min, dtype: float64
 </div>
 </div>
 <p><strong>13. Build a table called <code>usa</code> holding only the rows with <code>longitude</code> less than −60, and redraw the 2023 map from it. Then draw the same map for 2012.</strong></p>
-<div id="78e4b14e" class="cell" data-execution_count="13">
+<div id="36d25471" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>usa <span class="op">=</span> located[located[<span class="st">'longitude'</span>] <span class="op">&lt;</span> <span class="op">-</span><span class="dv">60</span>].copy()</span>
@@ -885,7 +885,7 @@ Name: trange_min, dtype: float64
 </div>
 </div>
 <p><strong>14. You have just drawn a recognizable map of the United States without a mapping library, a projection, or a shapefile. In a markdown cell, one sentence on why that worked here. Then one more: run <code>usa['state'].nunique()</code> and say which parts of the country are not in these files at all.</strong></p>
-<div id="825dbcaa" class="cell" data-execution_count="14">
+<div id="2995f8c0" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(usa[<span class="st">'state'</span>].nunique())</span>
@@ -928,7 +928,7 @@ Name: trange_min, dtype: float64
 <section id="part-4-what-actually-changed" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-what-actually-changed">Part 4: What actually changed</h2>
 <p><strong>16. Use the pivot pattern to build a table with one row per zip code and one column per year. Index it on <code>['zipcode', 'state', 'latitude', 'longitude']</code>, put <code>year</code> across the columns and <code>trange_min</code> in the cells, then <code>.reset_index()</code>. What shape is it, and why is that number smaller than 80,000?</strong></p>
-<div id="a0f720f6" class="cell" data-execution_count="15">
+<div id="4f483fee" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>change <span class="op">=</span> usa.pivot_table(index<span class="op">=</span>[<span class="st">'zipcode'</span>, <span class="st">'state'</span>, <span class="st">'latitude'</span>, <span class="st">'longitude'</span>],</span>
@@ -955,7 +955,7 @@ Name: trange_min, dtype: float64
 </div>
 </div>
 <p><strong>17. Add a <code>temp_diff</code> column: the 2023 value minus the 2012 value. Count its nulls and say what a null means here. Then drop those rows.</strong></p>
-<div id="61fc04a9" class="cell" data-execution_count="16">
+<div id="64377fa5" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>change[<span class="st">'temp_diff'</span>] <span class="op">=</span> change[<span class="dv">2023</span>] <span class="op">-</span> change[<span class="dv">2012</span>]</span>
@@ -988,7 +988,7 @@ Name: trange_min, dtype: float64
 </div>
 </div>
 <p><strong>18. Draw a histogram of <code>temp_diff</code>. Label it. Then print <code>change['temp_diff'].value_counts().sort_index()</code> and read the two together. In a markdown cell, three or four sentences: what is the most common value, what is the second most common, and how many distinct values are there in total? Given that, is <code>temp_diff</code> a measurement of how much a place warmed, or is it something else? Be precise.</strong></p>
-<div id="0f5a945c" class="cell" data-execution_count="17">
+<div id="76d4b009" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
@@ -1039,7 +1039,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>19. Use the top-N pattern twice to show the five zip codes with the largest increase and the five with the largest decrease, with their states and coordinates. In a markdown cell, two or three sentences: a zip code that moved by 25 or 30 °F has moved five or six whole zones. Do you believe that is a change in the climate? What else could produce it?</strong></p>
-<div id="5014fb91" class="cell" data-execution_count="18">
+<div id="948b16de" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> [<span class="st">'zipcode'</span>, <span class="st">'state'</span>, <span class="st">'latitude'</span>, <span class="st">'longitude'</span>, <span class="dv">2012</span>, <span class="dv">2023</span>, <span class="st">'temp_diff'</span>]</span>
@@ -1077,7 +1077,7 @@ year  zipcode state  latitude  longitude  2012  2023  temp_diff
 </div>
 </div>
 <p><strong>20. Write a named function called <code>classify_shift</code> that takes one difference and returns <code>'warmer'</code>, <code>'colder'</code> or <code>'unchanged'</code>, apply it to build a <code>shift</code> column, and count the three categories.</strong></p>
-<div id="a532228a" class="cell" data-execution_count="19">
+<div id="50f5cb89" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_shift(diff):</span>
@@ -1117,7 +1117,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>21. Draw the change map: <code>longitude</code> and <code>latitude</code> again, this time with <code>hue='shift'</code>. Twelve by seven, labelled, titled.</strong></p>
-<div id="82405b56" class="cell" data-execution_count="20">
+<div id="92fbf4e9" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">7</span>))</span>
@@ -1157,7 +1157,7 @@ Name: count, dtype: int64</code></pre>
 <section id="part-5-states-and-the-count-column" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-states-and-the-count-column">Part 5: States, and the count column</h2>
 <p><strong>23. Group <code>change</code> by <code>state</code> and use <code>.agg(['count', 'mean'])</code> on <code>temp_diff</code>. Show the ten states with the largest mean increase.</strong></p>
-<div id="6f687ebd" class="cell" data-execution_count="21">
+<div id="9fd27a7a" class="cell" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>by_state <span class="op">=</span> change.groupby(<span class="st">'state'</span>)[<span class="st">'temp_diff'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>])</span>
@@ -1255,7 +1255,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>25. Build a Series of the ten largest mean increases, sorted, and draw it as horizontal bars using the <code>.values</code> and <code>.index</code> idiom. Label both axes with units and title it.</strong></p>
-<div id="d760d621" class="cell" data-execution_count="22">
+<div id="29d1ec7c" class="cell" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>top_states <span class="op">=</span> change.groupby(<span class="st">'state'</span>)[<span class="st">'temp_diff'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
@@ -1277,7 +1277,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>26. Now the other end. Show the five states with the smallest mean increase, with their counts. In a markdown cell, one or two sentences: one of those states has more zip codes in it than all but one other state in the file. Does that make its small number more trustworthy or less, and does it make the ranking more interesting or less?</strong></p>
-<div id="e8549ada" class="cell" data-execution_count="23">
+<div id="d22edd5f" class="cell" data-execution_count="23">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>by_state.sort_values(<span class="st">'mean'</span>).head(<span class="dv">5</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1331,7 +1331,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="1a9041cf" class="cell" data-execution_count="24">
+<div id="e44bbeae" class="cell" data-execution_count="24">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The answer compares California's count with the largest in the table, so put</span></span>

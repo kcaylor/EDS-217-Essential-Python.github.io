@@ -128,14 +128,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">🏠 home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/the-data-science-workflow.html"> 
-<span class="menu-text">🔟 the workflow</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://docs.google.com/document/d/1yBKyJFT22bKynDn4TzrNwdeZ6lb9NELqCeewhifcugo/edit?usp=sharing" target="_blank"> 
-<span class="menu-text">📋 syllabus</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-daily-materials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">🗓️ daily materials</span>
@@ -472,7 +464,7 @@ Read these, do not write them in EDS 217
 <section id="basic-syntax" class="level3">
 <h3 class="anchored" data-anchor-id="basic-syntax">Basic Syntax</h3>
 <p>A list comprehension provides a concise way to create lists. The basic syntax is:</p>
-<div id="a3b8d036" class="cell" data-execution_count="1">
+<div id="489312d7" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [expression for item in iterable]</span></span>
@@ -487,7 +479,7 @@ Read these, do not write them in EDS 217
 <section id="with-conditional-logic" class="level3">
 <h3 class="anchored" data-anchor-id="with-conditional-logic">With Conditional Logic</h3>
 <p>You can add a condition to include only certain items in the new list:</p>
-<div id="d1ff02cb" class="cell" data-execution_count="2">
+<div id="75c3aafa" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [expression for item in iterable if condition]</span></span>
@@ -502,7 +494,7 @@ Read these, do not write them in EDS 217
 <section id="nested-list-comprehensions" class="level3">
 <h3 class="anchored" data-anchor-id="nested-list-comprehensions">Nested List Comprehensions</h3>
 <p>List comprehensions can be nested to handle more complex data structures:</p>
-<div id="c13f5d1c" class="cell" data-execution_count="3">
+<div id="4cd91f4b" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [(expression1, expression2) for item1 in iterable1 for item2 in iterable2]</span></span>
@@ -517,7 +509,7 @@ Read these, do not write them in EDS 217
 <section id="evaluating-functions-in-a-list-comprehension" class="level3">
 <h3 class="anchored" data-anchor-id="evaluating-functions-in-a-list-comprehension">Evaluating Functions in a List Comprehension</h3>
 <p>You can use list comprehensions to apply a function to each item in an iterable:</p>
-<div id="f022ff46" class="cell" data-execution_count="4">
+<div id="d75cb214" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to evaluate</span></span>
@@ -540,7 +532,7 @@ Read these, do not write them in EDS 217
 <section id="basic-syntax-1" class="level3">
 <h3 class="anchored" data-anchor-id="basic-syntax-1">Basic Syntax</h3>
 <p>Dictionary comprehensions provide a concise way to create dictionaries. The basic syntax is:</p>
-<div id="0454ea6d" class="cell" data-execution_count="5">
+<div id="f6b8fdb7" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># {key_expression: value_expression for item in iterable}</span></span>
@@ -557,7 +549,7 @@ Read these, do not write them in EDS 217
 <section id="without-zip" class="level3">
 <h3 class="anchored" data-anchor-id="without-zip">Without <code>zip</code></h3>
 <p>You can create a dictionary without using <code>zip</code> by leveraging the index:</p>
-<div id="b91a8696" class="cell" data-execution_count="6">
+<div id="3f24ee3b" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># {key_expression: value_expression for index in range(len(list))}</span></span>
@@ -575,7 +567,7 @@ Read these, do not write them in EDS 217
 <section id="with-conditional-logic-1" class="level3">
 <h3 class="anchored" data-anchor-id="with-conditional-logic-1">With Conditional Logic</h3>
 <p>You can include conditions to filter out key-value pairs:</p>
-<div id="654195b4" class="cell" data-execution_count="7">
+<div id="8883b56b" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># {key_expression: value_expression for item in iterable if condition}</span></span>
@@ -593,7 +585,7 @@ Read these, do not write them in EDS 217
 <section id="evaluating-functions-in-a-dictionary-comprehension" class="level3">
 <h3 class="anchored" data-anchor-id="evaluating-functions-in-a-dictionary-comprehension">Evaluating Functions in a Dictionary Comprehension</h3>
 <p>You can use dictionary comprehensions to apply a function to values in an iterable:</p>
-<div id="a60f84a4" class="cell" data-execution_count="8">
+<div id="47a29676" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to evaluate</span></span>

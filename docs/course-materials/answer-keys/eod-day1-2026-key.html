@@ -131,14 +131,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">🏠 home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/the-data-science-workflow.html"> 
-<span class="menu-text">🔟 the workflow</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://docs.google.com/document/d/1yBKyJFT22bKynDn4TzrNwdeZ6lb9NELqCeewhifcugo/edit?usp=sharing" target="_blank"> 
-<span class="menu-text">📋 syllabus</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-daily-materials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">🗓️ daily materials</span>
@@ -470,7 +462,7 @@ How to use this key
 <h2 class="anchored" data-anchor-id="rebuild-the-workflow">Rebuild the workflow</h2>
 <section id="import-and-load" class="level3">
 <h3 class="anchored" data-anchor-id="import-and-load">1. Import and load</h3>
-<div id="66f4da9d" class="cell" data-execution_count="1">
+<div id="17edaaae" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -480,7 +472,7 @@ How to use this key
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="def19d18" class="cell" data-execution_count="2">
+<div id="509c2a23" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -506,7 +498,7 @@ How to use this key
 <section id="look-at-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="look-at-the-data">2. Look at the data</h3>
 <p>Note that a notebook cell displays only its <strong>last</strong> expression. If you put <code>df.head()</code> and <code>df.isnull().sum()</code> in the same cell, you saw the null counts and not the head. Both are shown here, in separate cells.</p>
-<div id="bf920207" class="cell" data-execution_count="3">
+<div id="ce18ccc2" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -670,7 +662,7 @@ How to use this key
 </div>
 </div>
 </div>
-<div id="60452478" class="cell" data-execution_count="4">
+<div id="6be7626a" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -717,7 +709,7 @@ dtype: int64</code></pre>
 </section>
 <section id="monthly-average-temperature" class="level3">
 <h3 class="anchored" data-anchor-id="monthly-average-temperature">3. Monthly average temperature</h3>
-<div id="b0204b6b" class="cell" data-execution_count="5">
+<div id="59c9f811" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby(<span class="st">'Month'</span>)</span>
@@ -757,7 +749,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </section>
 <section id="plot-it" class="level3">
 <h3 class="anchored" data-anchor-id="plot-it">4. Plot it</h3>
-<div id="0559dc83" class="cell" data-execution_count="6">
+<div id="1a2d412d" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.plot(monthly_means)</span>
@@ -793,7 +785,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="task-1-monthly-means-for-a-different-variable">🔁 Task 1: monthly means for a different variable</h2>
 <p><strong>Your change:</strong> swap the column for <strong>one</strong> from this menu, and store the result in a new variable so <code>monthly_means</code> stays put.</p>
 <p>You only had to pick one. All three are shown here so you can check whichever you chose.</p>
-<div id="99bda26e" class="cell" data-execution_count="7">
+<div id="f44d98be" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>monthly_radiation <span class="op">=</span> monthly[<span class="st">'Daily_globalrad_total_jcm2'</span>].mean()</span>
@@ -816,7 +808,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 Name: Daily_globalrad_total_jcm2, dtype: float64</code></pre>
 </div>
 </div>
-<div id="bfd5f80b" class="cell" data-execution_count="8">
+<div id="6aee311c" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>monthly_precip <span class="op">=</span> monthly[<span class="st">'Daily_Precip_Total_mm'</span>].mean()</span>
@@ -839,7 +831,7 @@ Name: Daily_globalrad_total_jcm2, dtype: float64</code></pre>
 Name: Daily_Precip_Total_mm, dtype: float64</code></pre>
 </div>
 </div>
-<div id="19228428" class="cell" data-execution_count="9">
+<div id="f4ec3a23" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>monthly_wind <span class="op">=</span> monthly[<span class="st">'Daily_windsp_mean_msec'</span>].mean()</span>
@@ -878,7 +870,7 @@ Name: Daily_windsp_mean_msec, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>✍️ Required: read one month’s value from your new result and report it in an f-string.</strong></p>
-<div id="0fea7162" class="cell" data-execution_count="10">
+<div id="c376290e" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>june_radiation <span class="op">=</span> <span class="fl">2041.9</span>      <span class="co"># June's value, read from your output</span></span>
@@ -906,7 +898,7 @@ Name: Daily_windsp_mean_msec, dtype: float64</code></pre>
 <section id="task-2-yearly-means" class="level2">
 <h2 class="anchored" data-anchor-id="task-2-yearly-means">🔁 Task 2: yearly means</h2>
 <p><strong>Your change:</strong> group by a different key. Build a new grouping and average the same temperature column into new variables.</p>
-<div id="b2fcbbac" class="cell" data-execution_count="11">
+<div id="e51e8a39" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>by_year <span class="op">=</span> df.groupby(<span class="st">'Year'</span>)</span>
@@ -969,7 +961,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>✍️ Required: read one year’s value from <code>yearly_means</code> and report it in an f-string.</strong></p>
-<div id="077079ee" class="cell" data-execution_count="12">
+<div id="9032535e" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>temp_2000 <span class="op">=</span> <span class="op">-</span><span class="fl">8.97</span>      <span class="co"># the year 2000 value, read from your output</span></span>
@@ -996,7 +988,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </section>
 <section id="task-3-a-labeled-bar-chart" class="level2">
 <h2 class="anchored" data-anchor-id="task-3-a-labeled-bar-chart">🔁 Task 3: a labeled bar chart</h2>
-<div id="8e224a8f" class="cell" data-execution_count="13">
+<div id="5befcae6" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> [<span class="st">'Jan'</span>, <span class="st">'Feb'</span>, <span class="st">'Mar'</span>, <span class="st">'Apr'</span>, <span class="st">'May'</span>, <span class="st">'Jun'</span>, <span class="st">'Jul'</span>, <span class="st">'Aug'</span>, <span class="st">'Sep'</span>, <span class="st">'Oct'</span>, <span class="st">'Nov'</span>, <span class="st">'Dec'</span>]</span>
@@ -1015,7 +1007,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>Your change:</strong> give the chart a new title. Pick <strong>one</strong> and re-run.</p>
-<div id="d8091153" class="cell" data-execution_count="14">
+<div id="ace82863" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>plt.bar(months, monthly_means)</span>
@@ -1047,7 +1039,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>✍️ Required: read the coldest month’s value off your chart and report it in an f-string.</strong></p>
-<div id="a71b149a" class="cell" data-execution_count="15">
+<div id="6e81dc4e" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>coldest <span class="op">=</span> <span class="op">-</span><span class="fl">22.89</span>      <span class="co"># January's value, read from your chart</span></span>

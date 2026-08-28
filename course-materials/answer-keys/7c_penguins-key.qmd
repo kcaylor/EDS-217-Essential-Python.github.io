@@ -273,7 +273,7 @@ plt.title('Bill depth against bill length, by species')
 plt.show()
 ```
 
-**12. Read your answer to question 10 back, then look at question 11. Within each of the three
+**12. Read your answer to question 10 back, and then look at question 11. Within each of the three
 species, longer bills go with deeper bills. Across all three together, longer bills go with
 shallower ones.**
 
@@ -362,7 +362,7 @@ were caught there and how many.
 
 **16. Draw a bar chart of mean `body_mass_g` by species, split by sex.**
 
-**Then say in one sentence what the sex split adds to your answer to question 14.**
+**Then report in one sentence what the sex split adds to your answer to question 14.**
 
 ```{python}
 plt.figure(figsize=(7, 5))
@@ -386,10 +386,11 @@ males, the two bars in question 13 would have swapped places without a single pe
 That is the same problem as question 12 in a smaller frame.
 :::
 
-**17. Last one, and it is a trap worth walking into. Build a wide table with `species` down the
-rows, `island` across the columns, and a count of `body_mass_g` in the cells.**
+**17. This is the last task, and it is a bit of a trap (sorry!). Build a wide table with `species`
+down the rows, `island` across the columns, and a count of `body_mass_g` in the cells.**
 
-**In a markdown cell, two or three sentences: given that table, what would go wrong if somebody
+**In a markdown cell, using two or three sentences answer the following: given that table, what
+might go wrong if somebody
 used this dataset to compare Biscoe island with Dream island?**
 
 ```{python}

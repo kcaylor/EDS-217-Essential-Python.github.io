@@ -114,7 +114,7 @@ separately.
 :::
 
 **5. Run `.describe()` on `temperature_c`. The minimum is not a temperature any stream has ever
-had. What do you think it means?**
+had... What's going on here??**
 
 ```{python}
 survey['temperature_c'].describe()
@@ -255,8 +255,8 @@ prevents the `SettingWithCopyWarning` when you add columns in Part 3.
 :::
 
 **12. Re-run `.describe()` on `temperature_c`. Compare the mean to the one you got in task 5. In a
-markdown cell, write one sentence about what nine bad rows did to the average of three hundred
-good ones.**
+markdown cell, write one short statement about what nine bad rows did to the average of three
+hundred good ones.**
 
 ```{python}
 survey['temperature_c'].describe()
@@ -404,9 +404,9 @@ Before you cleaned the column, `site_f` was six separate groups, the largest of 
 no comparison between sites was possible at all.
 :::
 
-**19. In a markdown cell of three or four sentences: what would you tell the person who collected
-this data? Name the single change to their field sheet that would have saved you the most time
-this afternoon, and say what evidence in the file makes you pick that one.**
+**19. In a markdown cell of three or four sentences: what would you tell the PI whose project
+collected this data? Name the single change to their field sheet that would have saved you the
+most time this afternoon, and describe what evidence in the file makes you pick that one.**
 
 There is no single right answer here. A strong response names one change, cites a number from
 your own output as the evidence, and explains why that change beats the runners-up. Here is one

@@ -16,30 +16,25 @@ format:
 ![](../images/towersensors.jpeg)
 :::
 
-Two of the most important time series in environmental science are kept by different people, for
-different reasons, in different places.
+Two of the most important time series in environmental science are global surface temperature and atmospheric concentration of carbon dioxide. These two datasets are collected by different people/institutions, are used for different reasons, and are stored/maintained in different locations. 
 
 NASA's GISTEMP record estimates how far each month's global surface temperature sits from a
-twentieth-century baseline. It starts in **1880**, because that is roughly when enough
-thermometers existed to average.
+twentieth-century baseline. It starts in **1880**, which is the earliest that sufficient observations of temperature existed to estimate a global average. 
 
-The Mauna Loa record measures the concentration of carbon dioxide in the atmosphere directly, in
-parts per million, from an observatory near the summit of a Hawaiian volcano. It starts in
-**1958**, because that is when Charles Keeling built the instrument.
+The concentration of carbon dioxide is measured in the atmosphere directly, in
+parts per million, from an observatory near the summit of Mauna Loa, a Hawaiian volcano. It starts in
+**1958**, because that is when Charles Keeling built the system that first started recording these concentrations (initially as air samples collected in flasks and then returned to his lab for analysis).
 
-The most famous graph in climate science puts those two side by side. Doing that requires
-everything you learned today, and it requires you to make a decision in the first five minutes
-that changes what the rest of the analysis is about.
+The most famous graph in climate science puts those two time series together in a single plot, side by side. Making that figure requires everything you learned today and some good decisions about how to organize these datasets. 
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
-finish a numbered task. The person not typing says out loud what they expect the answer to look
-like *before* the cell is run.
+finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it. 
 
 You have 45 minutes.
 
 ## The patterns you need
 
-All four are from this morning and the session you just finished.
+All code patterns you will use are from this morning and the session you just finished.
 
 ```python
 pd.merge(left, right, on='key')                       # the join pattern
@@ -51,7 +46,7 @@ column.dt.year                                        # and its accessors
 df.pivot_table(index=, columns=, values=)             # the pivot pattern
 ```
 
-Plus the two you have been using all week:
+Plus the two more code patterns you have been using all week:
 
 ```python
 df.groupby('key')['column'].agg(['count', 'mean'])
@@ -75,7 +70,7 @@ temp = pd.read_csv(base + 'monthly_temperature_data.csv')
 co2 = pd.read_csv(base + 'monthly_co2_concentration.csv')
 ```
 
-## Part 1: One table out of two (about 12 minutes)
+## Part 1: Making one table out of two (about 12 minutes)
 
 Answer each question with code, then write the answer in a markdown cell underneath, in a
 complete sentence with the numbers in it.
@@ -223,10 +218,10 @@ print(tens[['MonthlyAnomaly', 'CO2Concentration']].mean())
 
 Check that:
 
-- you can say, without looking, what `how='inner'` did to your row count and why
+- you can say, without peeking at your notes, what `how='inner'` did to your row count and why!
 - every mean you reported has a count beside it, or a filter that guaranteed the count
 - you supplied `format=` to every `pd.to_datetime()` call
-- your notebook reads top to bottom as a document, not as a pile of cells
+- your notebook reads top to bottom as a document, not as a mishmash of cells
 
 ## Resources
 

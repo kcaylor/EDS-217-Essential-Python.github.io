@@ -16,25 +16,23 @@ format:
 ![](../images/panda.jpeg)
 :::
 
-Yesterday you were asked whether there is more plastic in the Pacific than the Atlantic. You
-built two tables with two filters, ran `.describe()` on each, and wrote a paragraph to an
+Yesterday you were asked to determine the varying distribution of plastic in the Pacific and the Atlantic. You
+built two tables with two filters, ran `.describe()` on each, and then wrote a paragraph to an
 imaginary journalist.
 
-You gave them an answer about two oceans because two was all you could afford. There are four
-oceans in that file, thirty-seven contributing studies, and ten different kinds of net.
+You gave them an answer about two oceans because two was all you were asked to examine. However, there are four
+oceans in that file, thirty-seven contributing studies, and ten different kinds of nets!
 
-This afternoon you go back and do it properly, and somewhere around question 9 the answer you
-sent the journalist starts to look shaky.
+This afternoon you will go back into this dataset and do a more comprehensive analysis. Somewhere around question 9, the answer you sent the journalist will start to look... shaky.
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
-finish a numbered task. The person not typing says out loud what they expect the answer to look
-like *before* the cell is run.
+finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it. 
 
 You have 45 minutes.
 
 ## The patterns you need
 
-Both from this morning. You should not need to look them up more than once.
+Both new patterns are from this morning. Hopefully, you will not need to look them up more than once!
 
 ```python
 df.groupby('key')['column'].mean()               # split, apply, combine
@@ -42,7 +40,7 @@ df.groupby('key')['column'].agg(['count', 'mean'])   # several summaries at once
 df.groupby('key').agg({'a': 'mean', 'b': 'count'})   # different summaries, different columns
 ```
 
-Plus the top-N pattern from Wednesday, which still works:
+In addition, you will also need the top-N pattern from Wednesday:
 
 ```python
 df.sort_values('column', ascending=False).head(n)
@@ -51,7 +49,7 @@ df.sort_values('column', ascending=False).head(n)
 ## Setup
 
 Create a notebook named `Colab_5C_Grouped_Comparisons.ipynb`, with both partners' names in the
-title cell, then rebuild yesterday's `positive` table. Every line below is one you wrote
+title cell, then rebuild yesterday's `positive` table. Every line below should be one you wrote
 yesterday afternoon:
 
 ```{python}
@@ -69,7 +67,7 @@ positive = samples[samples['Measurement'] > 0].copy()
 positive.shape
 ```
 
-7,091 rows. Every one of them is a water sample with a measured, non-zero concentration of
+7,091 water samples with a measured, non-zero concentration of
 plastic in pieces per cubic metre.
 
 ## Part 1: All four oceans at once (about 10 minutes)
@@ -78,14 +76,14 @@ Answer each question with code, then write the answer in a markdown cell underne
 complete sentence with the numbers in it.
 
 1. Yesterday you computed the mean `Measurement` for the Atlantic and the Pacific with two
-   filters. Do all four oceans in one line, and rank the result from dirtiest to cleanest.
+   filters. Now do all four oceans in one line, and rank the result from dirtiest to cleanest.
 
 ```{python}
 positive.groupby('ocean')['Measurement'].mean().sort_values(ascending=False)
 ```
 
-2. Do the same with the **median** instead of the mean. The order changes. Which two oceans
-   swap, and by how much does the Pacific-to-Atlantic ratio differ between the two versions?
+2. Do the same with the **median** instead of the mean. Does the order change? If so, which two oceans
+   swap?
 
 ```{python}
 positive.groupby('ocean')['Measurement'].median().sort_values(ascending=False)
@@ -94,19 +92,16 @@ positive.groupby('ocean')['Measurement'].median().sort_values(ascending=False)
 ```{python}
 means = positive.groupby('ocean')['Measurement'].mean()
 medians = positive.groupby('ocean')['Measurement'].median()
-
-print('mean ratio:  ', means['Pacific'] / means['Atlantic'])
-print('median ratio:', medians['Pacific'] / medians['Atlantic'])
 ```
 
-3. How many samples went into each of those four numbers? One line.
+3. How many samples went into each of those four numbers? (can/should be a single line of code!)
 
 ```{python}
 positive.groupby('ocean')['Measurement'].count().sort_values(ascending=False)
 ```
 
-4. In a markdown cell: two of the four oceans have numbers you should refuse to report. Name
-   them and say why in one sentence.
+4. In a markdown cell: two of the four oceans have numbers you should refuse to report. Define these values
+and explain why in one sentence.
 
 ## Part 2: One call instead of four (about 8 minutes)
 
@@ -117,9 +112,9 @@ positive.groupby('ocean')['Measurement'].count().sort_values(ascending=False)
 positive.groupby('ocean')['Measurement'].agg(['count', 'median', 'mean', 'max'])
 ```
 
-6. Look at the Atlantic row. Its median is 0.019 and its maximum is 110,480. In a markdown cell,
-   say what a single number that large does to a mean computed from 6,216 values, and which of
-   the two averages you would send to the journalist.
+6. Look at the Atlantic row's median and maximum. In a markdown cell,
+   explain what a single large number does to a mean computed from 6,216 values. Which of
+   the two measures of central tendency (mean vs. median) would you send to the journalist?
 
 7. Use the **dictionary** form of `.agg()`, grouped by `ocean`, to report the mean
    `Measurement`, the number of distinct `Sampling Method` values, and the number of distinct
@@ -133,11 +128,9 @@ positive.groupby('ocean').agg({
 })
 ```
 
-8. In a markdown cell: the two columns you just counted are not measurements. Why did you ask
-   for them? What would it mean if one ocean had been sampled by one organization using one
-   method?
+8. In a markdown cell explain the value of asking for these non-measurement summary data. What might it mean if one ocean had been sampled by only one organization using a single method?
 
-## Part 3: Where the answer falls apart (about 15 minutes)
+## Part 3: Where our answers fall apart (about 15 minutes)
 
 9. Group by `Sampling Method` instead of by ocean, and report the count and median of
    `Measurement` for each method. Rank by median, largest first.
@@ -157,18 +150,17 @@ print(np.log10(medians_by_method.max() / medians_by_method.min()))
 ```
 
 11. In a markdown cell, before you write any more code: **if the oceans were not sampled with
-    the same mix of methods, what does that do to your answer from question 1?** Two or three
+    the same mix of methods, what might that imply regarding your answer from question 1?** Two or three
     sentences.
 
-12. Find out. Group by both `ocean` and `Sampling Method` at once and count the samples. Then
-    call `.reset_index()` on the result and look at the Atlantic and Pacific rows.
+12. Let's see if we can determine the impact of measurement method. Group by both `ocean` and `Sampling Method` at once and count the samples. Then call `.reset_index()` on the result and look at the Atlantic and Pacific rows.
 
 ```{python}
 ocean_method = positive.groupby(['ocean', 'Sampling Method'])['Measurement'].count()
 ocean_method.reset_index().head(15)
 ```
 
-13. Simpler and more direct: run `.value_counts()` on `Sampling Method` for the Atlantic samples
+13. Here's a simpler and more direct approach: run `.value_counts()` on `Sampling Method` for the Atlantic samples
     and again for the Pacific samples. Which method dominates the Atlantic? What fraction of the
     Pacific samples used it?
 
@@ -180,7 +172,7 @@ print(atlantic['Sampling Method'].value_counts())
 print(pacific['Sampling Method'].value_counts())
 ```
 
-14. Now control for it. Filter `positive` to the rows collected with a `'Neuston net'`, end the
+14. Now let's control for these differences. Filter `positive` to the rows collected with a `'Neuston net'`, end the
     line with `.copy()`, then group **that** by ocean and report count, median and mean.
 
 ```{python}
@@ -188,15 +180,14 @@ neuston = positive[positive['Sampling Method'] == 'Neuston net'].copy()
 neuston.groupby('ocean')['Measurement'].agg(['count', 'median', 'mean'])
 ```
 
-15. In a markdown cell, three or four sentences. Compare this table with your answer to question
+15. In a markdown cell, write three or four sentences that compare this table with your answer to question
     5. Does the Pacific still come out higher than the Atlantic? By how much, and is it the same
     "how much" you reported yesterday? What happened to the number of Pacific samples you are
     now relying on?
 
 :::{.callout-tip title="If your two tables disagree about the size of the effect"}
-They should. That is the finding. A difference that survives a control but changes size is a
-different claim from a difference that does not survive at all, and the two need different
-sentences in a report. Say which one you have.
+They should; this is the finding we've been heading towards. A difference that persists across a control but changes size is a different claim from a difference that completely goes away. The two require different
+interpretation in a data analysis report. Which one do you have?
 :::
 
 ## Part 4: Write it again (about 10 minutes)
@@ -215,12 +206,12 @@ rank by count to find the ten most-sampled regions. One of them has a median a h
 times larger than another. Look at which sampling methods were used there before you conclude
 anything about the water.
 
-Do **not** try to compare regions across years. That needs dates, and dates are Tuesday.
+Do **not** try to compare regions across years. That needs dates... and we get to those soon!
 :::
 
 ## Wrap-up
 
-We will hear two or three pairs on question 17. Be ready to say which single grouped table
+If we have time, we will hear from two or three pairs on question 17. Be ready to say which single grouped table
 changed your mind, not just what your final answer was.
 
 ## Resources

@@ -17,15 +17,11 @@ format:
 :::
 
 On Monday you and a partner worked out what was in the National Park Service visitor records
-and wrote five factual claims about them. You never got to ask the obvious question, because
-you did not yet have the tools.
-
-Today you do. Every question below is a "which one" or a "top ten" question, and every one of
-them is answered with the two patterns you learned this morning.
+and wrote five factual claims about those records. Now we will use our new tools and methods to dig deeper into the data. Specifically, we will now be able to ask "which one" and "top ten" questions. Every one of
+the tasks below uses these new patterns. 
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
-finish a numbered task. The person not typing says out loud what they expect the answer to
-look like *before* the cell is run.
+finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it. 
 
 You have 45 minutes.
 
@@ -37,7 +33,7 @@ The same file you explored on Monday:
 https://eds-217-essential-python.github.io/data/national_parks.csv
 ```
 
-Two things you found on Monday that will matter today:
+There are two things you saw on Monday that will matter today:
 
 - the `year` column is stored as **text**, not as numbers
 - some rows have a `year` of `Total` rather than an actual year
@@ -59,10 +55,9 @@ parks.shape
 parks.columns.tolist()
 ```
 
-## The two patterns
+## Our two new patterns
 
-You have these on your session pages. You should not need to look them up more than once or
-twice today.
+You have these already on your session notebooks from earlier this morning, but as a reminder:
 
 ```python
 df[df['column'] > value]                                # the filter pattern
@@ -191,13 +186,12 @@ Pick a year other than 2016 and produce the same top 10. Did the order change? N
 that moved several places, and say what you would need in order to find out whether that
 movement is real or an artifact of how the data was recorded.
 
-Do not try to compare all the years at once. That needs grouping, and grouping is Friday.
+Do not try to compare all the years at once. That needs grouping, and we get to grouping later this week.
 :::
 
 ## Wrap-up
 
-We'll hear two or three pairs on question 12. Be ready to say which filter you would insist on
-before answering, not just what your answer was.
+If there is time, we will hear from two or three pairs regarding their answers to question 12. Be ready to say which filter you would insist on before answering, not just what your answer was.
 
 ## Resources
 

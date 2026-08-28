@@ -21,18 +21,16 @@ format:
 
 :::
 
-Sixty percent. That is not a complaint about the profession, it is a description of the job.
-The hour you spend this afternoon is a scale model of your next two years.
+Just as building a boat is 90% sanding, it often feels like doing data science is 90% cleaning (the survey data says it's _just 60%_, so that's good news!). The time we will spend cleaning data this afternoon is a taste of your data science future.
 
 Today's file is a season of stream chemistry from six monitoring sites, transcribed from paper
-field sheets by four different undergraduates. Nobody was careless. They just each made
-reasonable decisions, and the decisions were not the same.
+field sheets by four different undergraduates. They were all careful... and they made
+reasonable decisions about data entry. Unfortunately, their decisions were not the same (maybe the PI should have made a data dictionary to ensure consistency!).
 
-Your job is to turn it into a table you would let somebody publish from.
+Your task is to turn their work into a table that you could use for rigorous data analysis.
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
-finish a numbered task. **Check `.shape` after every step that could remove rows**, and say the
-new number out loud before you move on. That habit is most of what this exercise is teaching.
+finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it. 
 
 You have 45 minutes.
 
@@ -53,9 +51,9 @@ https://eds-217-essential-python.github.io/data/messy_field_survey.csv
 | `n_replicates` | how many bottles were filled, a whole number |
 : {.hover .bordered}
 
-## The patterns you need
+## The code patterns you will need
 
-All of these are from today. You should not need anything else.
+All of the code patterns below are from today. You should not need anything else to complete this colab.
 
 ```python
 df.drop_duplicates()                    # and subset=[...]
@@ -122,7 +120,7 @@ survey['site'].unique()
 ```
 
 5. Run `.describe()` on `temperature_c`. The minimum is not a temperature any stream has ever
-   had. What do you think it means?
+   had... What's going on here??
 
 ```{python}
 survey['temperature_c'].describe()
@@ -130,9 +128,10 @@ survey['temperature_c'].describe()
 
 :::{.callout-tip title="What the minimum means"}
 Dataloggers that fail often write a value chosen to be obviously impossible rather than leaving
-the field blank. `-999`, `-9999` and `NA` are the usual ones. It is missing data wearing a
-costume, and `.isnull()` will never find it. **Only `.describe()` and your own knowledge of the
-measurement will.**
+the field blank. `-999`, `-9999` and `NA` are the usual suspects. These entries are missing data wearing a
+costume... and `.isnull()` will never find them! They can also really mess up your averages and other statistics. 
+**Only `.describe()` and your domain knowledge of the
+measurement will help you avoid mis-interpreting numerical missing data as actual information.**
 :::
 
 ## Part 2: Clean it (about 20 minutes)
@@ -181,8 +180,8 @@ survey['pH'].describe()
 
 :::{.callout-note}
 🐍 Try `survey['pH'].astype(float)` **before** the replace, on purpose, and read the error. It
-names the exact value it could not parse. That message is the fastest debugging tool in pandas,
-and it is worth having seen once when nothing is at stake.
+provides the exact value it could not parse. That message is the fastest debugging tool in pandas; 
+as is often the case, a little bit of "pre-flight" testing will make your data science journey much smoother. 
 :::
 
 9. Three measurement columns have blanks: `temperature_c`, `dissolved_oxygen_mg_L`, and
@@ -204,7 +203,7 @@ survey['n_replicates'] = survey['n_replicates'].astype(int)
 survey['n_replicates'].value_counts()
 ```
 
-11. Now deal with the impossible temperatures. Use the **filter pattern** from Day 3 to keep
+11. Now let's deal with the impossible temperatures. Use the **filter pattern** from Day 3 to keep
     only the rows where `temperature_c` is above `-100`, and end the line with `.copy()`. How
     many rows did the loggers ruin?
 
@@ -214,7 +213,7 @@ survey.shape
 ```
 
 12. Re-run `.describe()` on `temperature_c`. Compare the mean to the one you got in task 5. In
-    a markdown cell, write one sentence about what nine bad rows did to the average of three
+    a markdown cell, write one short statement about what nine bad rows did to the average of three
     hundred good ones.
 
 ```{python}
@@ -277,7 +276,7 @@ survey['ph_class'].value_counts()
 
 ## Part 4: Ask it something (about 5 minutes)
 
-You now have a table you can trust. Use it.
+You now have a table you can trust. Let's put it to work!
 
 17. Use the filter pattern to build a table of just the acidic samples. Which sites do they
     come from? Use `.value_counts()` on `site`.
@@ -299,9 +298,9 @@ print('site_f mean DO:', site_f['dissolved_oxygen_mg_L'].mean())
 print('site_d mean DO:', site_d['dissolved_oxygen_mg_L'].mean())
 ```
 
-19. In a markdown cell of three or four sentences: **what would you tell the person who
+19. In a markdown cell of three or four sentences: **what would you tell the PI whose project
     collected this data?** Name the single change to their field sheet that would have saved
-    you the most time this afternoon, and say what evidence in the file makes you pick that
+    you the most time this afternoon, and describe what evidence in the file makes you pick that
     one.
 
 ## Wrap-up
@@ -313,7 +312,7 @@ Before you close the notebook, check that:
   difference went
 - every cleaning decision has a markdown sentence next to it saying **why**, not just what
 
-We will hear two or three pairs on question 19.
+If we have time, we will hear two or three pairs on question 19.
 
 :::{.callout-note title="If you finish early"}
 Go back to task 11. You filtered the sentinel temperatures out. Would you get the same final

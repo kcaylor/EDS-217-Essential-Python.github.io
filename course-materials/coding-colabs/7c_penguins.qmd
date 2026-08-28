@@ -23,23 +23,21 @@ format:
 
 Between 2007 and 2009, researchers at the Palmer Station on the Antarctic Peninsula measured 344
 penguins of three species: Adélie, Chinstrap and Gentoo. For each bird they recorded four numbers,
-the island it was caught on, and its sex.
+the island it was caught on, and its biological sex.
 
-The file is small, clean by the standards of anything you have opened this week, and it contains
-a result that you cannot get to without a figure. Not a result that is *easier* with a figure. One
-that a table of summary statistics will actively point you away from.
+The resulting file is small, relatively clean by the standards of anything you have opened this week, and it contains
+a key result that you cannot really express without a figure. This isn't a result that is *easier* to convey with a figure, but rather one that a table of summary statistics would likely steer you away from.
 
-Your job this afternoon is to find it.
+Your task this afternoon is to develop that figure and reveal the underlying pattern.
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
-finish a numbered task. The person not typing says out loud what they expect the figure to look
-like *before* the cell is run, and is allowed to be wrong.
+finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it. 
 
 You have 45 minutes.
 
 ## The patterns you need
 
-All from this morning.
+All the patterns we will use are from this morning.
 
 ```python
 sns.scatterplot(data=df, x='col', y='col')             # one measurement against another
@@ -49,7 +47,7 @@ sns.barplot(x=series.values, y=series.index)           # a grouped Series, as ba
 hue='col'                                              # works on all three
 ```
 
-Plus the matplotlib frame:
+In addition, we will need to work with the matplotlib figure frame:
 
 ```python
 plt.figure(figsize=(w, h))
@@ -57,7 +55,7 @@ plt.xlabel(...) ; plt.ylabel(...) ; plt.title(...)
 plt.tight_layout()
 ```
 
-And these, from earlier in the week:
+Finally, we will also need these cleaning, grouping, selection, and sorting patterns, all from earlier in the week:
 
 ```python
 df.dropna()
@@ -212,8 +210,8 @@ plt.title('Bill depth against bill length, by species')
 plt.show()
 ```
 
-12. Read your answer to question 10 back, then look at question 11. Within each of the three
-    species, longer bills go with **deeper** bills. Across all three together, longer bills go with
+12. Read your answer to question 10 back, and then look at question 11. **Within** each of the three
+    species, longer bills go with **deeper** bills. **Across all three together**, longer bills go with
     **shallower** ones.
 
     In a markdown cell of four or five sentences: explain how both of those can be true at once.
@@ -222,13 +220,13 @@ plt.show()
 
 :::{.callout-important title="This has a name"}
 A relationship that runs one way inside every group and the other way across the pooled data is
-called **Simpson's paradox**. It is not a curiosity. It is one of the most common ways that a
-perfectly correct summary of a dataset produces a conclusion that is the reverse of the truth, and
-it happens whenever the groups differ both in what you are measuring and in how many of them there
+called **Simpson's paradox**. It is not a curiosity, but rather one of the most common ways that a
+perfectly correct summary of a dataset produces a conclusion that is the reverse of the truth. 
+It happens whenever the groups differ both in what you are measuring and in how many of them there
 are.
 
-You found it here in one argument, `hue='species'`. Without the figure you would have needed to
-suspect it first.
+You found it here in one argument, `hue='species'`. Without the figure, you would have needed to
+suspect this pattern first!
 :::
 
 ## Part 4: Summaries, and what they hide (about 10 minutes)
@@ -271,7 +269,7 @@ plt.show()
     `data=` form, because you want two bars per species:
     `sns.barplot(data=birds, x='species', y='body_mass_g', hue='sex')`.
 
-    Then say in one sentence what the sex split adds to your answer to question 14.
+    Then report in one sentence what the sex split adds to your answer to question 14.
 
 ```{python}
 plt.figure(figsize=(7, 5))
@@ -282,12 +280,11 @@ plt.title('Mean body mass by species and sex')
 plt.show()
 ```
 
-17. Last one, and it is a trap worth walking into. Build a wide table with `species` down the rows,
+17. This is the last task, and it is a bit of a trap (sorry!). Build a wide table with `species` down the rows,
     `island` across the columns, and a **count** of `body_mass_g` in the cells. This is yesterday
     morning's pivot pattern with `aggfunc='count'`.
 
-    In a markdown cell, two or three sentences: given that table, what would go wrong if somebody
-    used this dataset to compare Biscoe island with Dream island?
+    In a markdown cell, using two or three sentences answer the following: given that table, what might go wrong if somebody used this dataset to compare Biscoe island with Dream island?
 
 ```{python}
 birds.pivot_table(index='species', columns='island', values='body_mass_g', aggfunc='count')

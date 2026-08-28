@@ -16,12 +16,10 @@ format:
 ![](../images/collections.jpeg)
 :::
 
-This morning you learned the exploration ritual on a dataset we walked through together.
-Now you'll use it on one nobody has explained to you.
+This morning you learned the basics of exploring a new dataset. In this coding colab, we will try these new skills out on a new dataset to build familiarity with these important commands.
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
-finish a numbered task. The person not typing reads the output aloud and says what they
-think it means before you move on.
+finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it. 
 
 You have 45 minutes.
 
@@ -33,8 +31,8 @@ US National Park Service visitor records:
 https://eds-217-essential-python.github.io/data/national_parks.csv
 ```
 
-That's all you're getting. No data dictionary, no column descriptions. Figuring out what's
-in there is the exercise.
+The link above is all this co-lab provides. Figuring out what's
+in the data is the entire exercise.
 
 ## Setup
 
@@ -50,30 +48,30 @@ A claim is factual if a skeptical reader could check it against your output. Com
 
 > ❌ "The dataset has a lot of parks in it."
 >
-> ✅ "The dataset contains 4,743 rows describing units of type `National Park`, out of 21,560
+> ✅ "The dataset contains 5,243 rows describing units of type `National Park`, out of 11,742
 > rows total."
 
 At least one of your five claims must be about a **problem** with the data.
 
 ## Working through it
 
-Don't try to write claims immediately. Explore first, then decide what's worth claiming.
+Don't try to write claims immediately. Explore the data first, then decide what's worth claiming.
 
 1. **Size it up.** How many rows and columns? What are the column names?
 
 2. **Check the types.** Run `.dtypes`. At least one column has a type you would not predict
    from its name. Find it, and then work out *why* by looking at what's actually in that
-   column. This is the single most important thing in this dataset.
+   column.
 
 3. **Run the health check.** Which columns have missing values, and how many?
 
 4. **Count the categories.** Use `.value_counts()` on at least three text columns. Which
-   columns are informative? Is any of them close to a constant?
+   columns are informative?
 
-5. **Summarize the numbers.** Run `.describe()`. One of the numeric summaries is distorted.
+5. **Summarize the numbers.** Run `.describe()`. One of the numeric summaries may be distorted.
    Say which, and connect it to what you found in step 2.
 
-6. **Make a working subset.** Build a list of the columns you'd actually keep, select them
+6. **Make a working subset.** Build a list of the columns you'd actually want to keep, select them
    into a smaller DataFrame, and rename at least one column with a dictionary.
 
 7. **Write your five claims.** Each one: a code cell, then a markdown cell stating the claim
@@ -136,7 +134,7 @@ parks_small.head()
 
 :::{.callout-tip title="If you get stuck on step 2"}
 Ask the question a different way. If a column of years isn't stored as a number, then
-something in it isn't a year. `.value_counts()` will show you what.
+something in it isn't a year. `.value_counts()` can help to reveal what is happening.
 :::
 
 :::{.callout-note title="If you finish early"}

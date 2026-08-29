@@ -107,22 +107,21 @@ print(left.shape)
 print(left.isnull().sum())
 ```
 
-4. In a markdown cell: the two merges differ by 940 rows. Say in one sentence what those 940 rows
-   are, without looking anything up, since your answer to question 1 already told you.
+4. In a markdown cell: the two merges differ by 940 rows. Provide a sentence explaining what those 940 rows
+   contain (your answer to question 1 should already have this).
 
-5. A decision, and there is no right answer that does not depend on the question. You are writing
-   one of the following two papers. For each one, say which merge you would use and why:
+5. Suppose you are writing one of the following two papers. For each one, say which merge you would use and why:
 
    - *"Atmospheric CO₂ and global temperature move together"*
    - *"The global surface temperature record, 1880 to the present"*
 
 ## Part 2: Making the dates real (about 12 minutes)
 
-Work from the **inner** merge for the rest of the exercise, and give it a name you will not
-confuse with anything else.
+Work from the **inner** merge for the rest of the exercise; make sure to give this new dataframe a name
+you will not confuse with anything else.
 
 6. Copy the inner merge into a table called `climate`, ending the line with `.copy()`. Then parse
-   its `Date` column into a new column called `date`, and prove the parse worked by printing the
+   its `Date` column into a new column called `date`. Demonstrate that the parse worked by printing the
    new column's dtype.
 
 ```{python}
@@ -139,8 +138,8 @@ climate['month'] = climate['date'].dt.month
 climate[['Date', 'date', 'year', 'month']].head()
 ```
 
-8. Build a table of annual means: group by `year` and report the **count** of months, the mean
-   `MonthlyAnomaly`, and the mean `CO2Concentration`. Show the first three rows and the last
+8. Build a table of annual means: group by `year` and report the **count** of months, the mean of
+   `MonthlyAnomaly`, and the mean of `CO2Concentration`. Show the first three rows and the last
    three.
 
 ```{python}
@@ -151,8 +150,8 @@ print(annual.head(3))
 print(annual.tail(3))
 ```
 
-9. Two of the sixty-seven years in that table are not twelve months long. Which two, and why?
-   Filter them out into a table called `full_years` and say how many years survive.
+9. Two of the sixty-seven years in the table are not twelve months long. Which two, and why?
+   Filter the data into a new table called `full_years`. How many years survive?
 
 ```{python}
 full_years = annual[annual['Date'] == 12]
@@ -160,12 +159,9 @@ print(annual[annual['Date'] != 12])
 print(full_years.shape)
 ```
 
-10. In a markdown cell: what would the 2024 row have done to a claim about the warmest year on
-    record, if you had not checked the count? Two sentences.
+## Part 3: A graph of annual amplitudes (about 12 minutes)
 
-## Part 3: The shape that shows the sawtooth (about 12 minutes)
-
-11. Build a wide table with `year` down the rows, `month` across the columns, and
+10. Build a wide table with `year` down the rows, `month` across the columns, and
     `CO2Concentration` in the cells. Show the first three rows and the last three.
 
 ```{python}
@@ -174,35 +170,31 @@ print(co2_grid.head(3).round(2))
 print(co2_grid.tail(3).round(2))
 ```
 
-12. That one table holds two different patterns at once. Read it **down** a single column, then
+11. This new table holds two different patterns at once. Read it **down** a single column, then
     read it **across** a single row. In a markdown cell, describe both in one sentence each.
 
-13. Use the wide table to measure the second pattern. For every year, the difference between its
-    largest monthly value and its smallest is the size of the annual cycle. Compute that
-    difference for 1959 and for 2023, and report both.
+12. For every year, the difference between its largest monthly value and its smallest is the size of the annual cycle. Compute that difference for two specific years: 1959 and for 2023, and report both. (You will need two lines of code; one for each year)
 
 ```{python}
 print(co2_grid.loc[1959].max() - co2_grid.loc[1959].min())
 print(co2_grid.loc[2023].max() - co2_grid.loc[2023].min())
 ```
 
-14. In a markdown cell: the annual cycle in CO₂ is caused by the northern hemisphere's plants,
-    which take carbon out of the air in the growing season and put it back in the autumn. Given
-    that, say what your two numbers from question 13 might mean, and say honestly how confident
-    you are in a comparison of two single years.
+13. In a markdown cell: the annual cycle in CO₂ is caused by vegetation (mainly in the northern hemisphere),
+    which removes carbon from the atmosphere during the growing season and releases it back in the autumn/winter. 
+    Given that context, explain what your two numbers from question 12 might indicate. Are two years sufficient to make that inference?
 
-15. Build the same wide table for `MonthlyAnomaly`. Does the temperature record have a comparable
-    seasonal cycle in it? Say why or why not in one sentence. (The answer is in what the word
-    *anomaly* means.)
+14. Build the same wide table for `MonthlyAnomaly`. Does the temperature record have a comparable
+    seasonal cycle in it? Say why or why not in one sentence. 
 
 ```{python}
 temp_grid = climate.pivot_table(index='year', columns='month', values='MonthlyAnomaly')
 print(temp_grid.tail(3).round(2))
 ```
 
-## Part 4: The claim (about 9 minutes)
+## Part 4: Making a statement about change (about 9 minutes)
 
-16. Using `full_years`, compare the 1960s with the 2010s. Compute the mean of each column for
+15. Using `full_years`, compare the 1960s with the 2010s. Compute the mean of each column for
     `year` between 1960 and 1969, and again for `year` between 2010 and 2019, and report the
     change in each.
 
@@ -214,10 +206,9 @@ print(sixties[['MonthlyAnomaly', 'CO2Concentration']].mean())
 print(tens[['MonthlyAnomaly', 'CO2Concentration']].mean())
 ```
 
-17. In a markdown cell of four or five sentences: state the two changes you measured, with units.
-    Then state clearly what this analysis does **not** show. You have put two curves in the same
-    table and found that both went up; name one thing a scientist would need before calling that
-    a causal claim.
+16. In a markdown cell of four or five sentences: state what these calculations indicate in terms 
+    of changes in the temperature and CO2 concentrations, with units. You have put two variables in the same
+    table and found that both varied together; explain what a data scientist would need before making a causal claim about this covariation.
 
 ## Before you stop
 

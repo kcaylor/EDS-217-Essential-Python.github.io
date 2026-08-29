@@ -455,7 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="efb9cc2a" class="cell" data-execution_count="1">
+<div id="4a2a970c" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -501,7 +501,7 @@ Note
 <section id="scatter-plots" class="level2">
 <h2 class="anchored" data-anchor-id="scatter-plots">1. Scatter Plots</h2>
 <p>Use a scatter plot to show the relationship between two numeric columns. Each row of the DataFrame becomes one point.</p>
-<div id="a7b90cbb" class="cell" data-execution_count="2">
+<div id="b7c6d66d" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -522,7 +522,7 @@ Note
 <section id="adding-a-third-variable-with-hue" class="level3">
 <h3 class="anchored" data-anchor-id="adding-a-third-variable-with-hue">Adding a third variable with <code>hue=</code></h3>
 <p><code>hue=</code> colours the points by a category column. It is the single most useful argument in seaborn, because it can reveal structure that the pooled figure hides.</p>
-<div id="df924903" class="cell" data-execution_count="3">
+<div id="46a72246" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -546,7 +546,7 @@ Note
 <section id="histograms" class="level2">
 <h2 class="anchored" data-anchor-id="histograms">2. Histograms</h2>
 <p>A histogram takes <strong>one</strong> numeric column and shows how its values are distributed. The bar heights are counts of rows, so there is no <code>y=</code> argument.</p>
-<div id="11fa949c" class="cell" data-execution_count="4">
+<div id="a1b0f146" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -565,7 +565,7 @@ Note
 </div>
 <section id="splitting-a-histogram-by-category" class="level3">
 <h3 class="anchored" data-anchor-id="splitting-a-histogram-by-category">Splitting a histogram by category</h3>
-<div id="3889cdf1" class="cell" data-execution_count="5">
+<div id="78ab62f8" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -590,7 +590,7 @@ Note
 <section id="form-1-from-a-dataframe-with-data" class="level3">
 <h3 class="anchored" data-anchor-id="form-1-from-a-dataframe-with-data">Form 1: from a DataFrame, with <code>data=</code></h3>
 <p>Given a category column and a numeric column, <code>barplot</code> <strong>computes the mean</strong> of the numeric column within each category, and draws a bar for each mean. The vertical line on each bar is a confidence interval.</p>
-<div id="aaebf0bc" class="cell" data-execution_count="6">
+<div id="6dad3dfa" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -625,7 +625,7 @@ Important
 <section id="form-2-from-a-series-with-.values-and-.index" class="level3">
 <h3 class="anchored" data-anchor-id="form-2-from-a-series-with-.values-and-.index">Form 2: from a Series, with <code>.values</code> and <code>.index</code></h3>
 <p>When you already have a result, such as a <code>value_counts()</code> or a grouped mean, you pass its two pieces separately. The values are the bar lengths and the index holds the labels.</p>
-<div id="d7e9c2ea" class="cell" data-execution_count="7">
+<div id="63951165" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> penguins[<span class="st">'species'</span>].value_counts()</span>
@@ -657,7 +657,7 @@ Name: count, dtype: int64</code></pre>
 </section>
 <section id="the-same-move-on-a-grouped-result" class="level3">
 <h3 class="anchored" data-anchor-id="the-same-move-on-a-grouped-result">The same move on a grouped result</h3>
-<div id="e8149497" class="cell" data-execution_count="8">
+<div id="21d2af16" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mean_mass <span class="op">=</span> penguins.groupby(<span class="st">'island'</span>)[<span class="st">'body_mass_g'</span>].mean().sort_values()</span>
@@ -690,7 +690,7 @@ Name: body_mass_g, dtype: float64</code></pre>
 <section id="labelling-seaborn-figures" class="level2">
 <h2 class="anchored" data-anchor-id="labelling-seaborn-figures">Labelling Seaborn Figures</h2>
 <p>Seaborn draws onto a matplotlib figure, so every matplotlib labelling command works on a seaborn plot. Call them after the seaborn call.</p>
-<div id="359348ad" class="cell" data-execution_count="9">
+<div id="1446533c" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>

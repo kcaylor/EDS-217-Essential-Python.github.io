@@ -454,7 +454,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="cd5920d7" class="cell" data-execution_count="1">
+<div id="4705b46c" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -469,7 +469,7 @@ How to use this key
 <section id="part-1-what-is-in-the-file" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-what-is-in-the-file">Part 1: What is in the file</h2>
 <p><strong>1. How many rows and columns? What are the column names, and which are numeric?</strong></p>
-<div id="f0629869" class="cell" data-execution_count="2">
+<div id="b5c8159b" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.shape)</span>
@@ -502,7 +502,7 @@ dtype: object</code></pre>
 </div>
 </div>
 <p><strong>2. Count the rows for each <code>species</code>, and separately for each <code>island</code>. Which species is rarest, and which island has the most birds?</strong></p>
-<div id="7a4147e9" class="cell" data-execution_count="3">
+<div id="1e3c072b" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins[<span class="st">'species'</span>].value_counts())</span>
@@ -536,7 +536,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>3. Run <code>.isnull().sum()</code>. Two different things are going on in that output. Say what each one probably is.</strong></p>
-<div id="20642a85" class="cell" data-execution_count="4">
+<div id="3492eca1" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>penguins.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -568,7 +568,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>4. Build a clean table called <code>birds</code> by dropping every row with any missing value, and report how many rows you lost. Then re-run the species counts on <code>birds</code> and say whether the losses fell evenly across the three species.</strong></p>
-<div id="20237cdb" class="cell" data-execution_count="5">
+<div id="6687c3b7" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>birds <span class="op">=</span> penguins.dropna().copy()</span>
@@ -603,7 +603,7 @@ Name: count, dtype: int64</code></pre>
 <section id="part-2-distributions" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-distributions">Part 2: Distributions</h2>
 <p><strong>5. Draw a histogram of <code>flipper_length_mm</code> for the whole table. Label the x-axis with units and give the figure a title. Describe the shape in one sentence.</strong></p>
-<div id="4d36b36b" class="cell" data-execution_count="6">
+<div id="a38ede86" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -635,7 +635,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>6. Draw it again, split by <code>species</code>. In a markdown cell, say what the two humps in question 5 turned out to be, and whether “the average penguin has a flipper of about 201 mm” is a useful sentence.</strong></p>
-<div id="c88f941f" class="cell" data-execution_count="7">
+<div id="9a18d40e" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -677,7 +677,7 @@ birds within 5 mm of the mean: 56</code></pre>
 </div>
 </div>
 <p><strong>7. Pick one of <code>bill_length_mm</code>, <code>bill_depth_mm</code> or <code>body_mass_g</code> and do the same pair of figures for it. Does that measurement separate the species as cleanly as flipper length does?</strong></p>
-<div id="731c82f6" class="cell" data-execution_count="8">
+<div id="a8de6b64" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -712,7 +712,7 @@ birds within 5 mm of the mean: 56</code></pre>
 <section id="part-3-relationships" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-relationships">Part 3: Relationships</h2>
 <p><strong>8. Draw a scatter plot of <code>body_mass_g</code> against <code>flipper_length_mm</code>, with flipper length across the bottom. Label both axes and title it. Describe the relationship in one sentence.</strong></p>
-<div id="03b2df66" class="cell" data-execution_count="9">
+<div id="360f532c" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -744,7 +744,7 @@ birds within 5 mm of the mean: 56</code></pre>
 </div>
 </div>
 <p><strong>9. Draw the same figure with <code>hue='species'</code>. Does adding the species change what you would say about the relationship, or just make it prettier? One sentence.</strong></p>
-<div id="2484b3fb" class="cell" data-execution_count="10">
+<div id="5713b29d" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -777,7 +777,7 @@ birds within 5 mm of the mean: 56</code></pre>
 </div>
 <p><strong>10. Now a different pair of columns. Draw a scatter plot of <code>bill_depth_mm</code> against <code>bill_length_mm</code>, with bill length across the bottom, and no <code>hue=</code>. Label it.</strong></p>
 <p><strong>Before you go on, write down in a markdown cell what this figure says: as a penguin’s bill gets longer, does it get deeper or shallower?</strong></p>
-<div id="77e49061" class="cell" data-execution_count="11">
+<div id="1efc7491" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -810,7 +810,7 @@ birds within 5 mm of the mean: 56</code></pre>
 </div>
 </div>
 <p><strong>11. Draw it once more with <code>hue='species'</code>.</strong></p>
-<div id="e3e8cbf7" class="cell" data-execution_count="12">
+<div id="58c3d066" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -848,7 +848,7 @@ birds within 5 mm of the mean: 56</code></pre>
 <section id="part-4-summaries-and-what-they-hide" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-summaries-and-what-they-hide">Part 4: Summaries, and what they hide</h2>
 <p><strong>13. Build a Series of mean <code>body_mass_g</code> by species, sorted from heaviest to lightest, and draw it as horizontal bars using the <code>.values</code> and <code>.index</code> idiom. Label both axes and title it.</strong></p>
-<div id="2f49be55" class="cell" data-execution_count="13">
+<div id="f9ff7367" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mean_mass <span class="op">=</span> birds.groupby(<span class="st">'species'</span>)[<span class="st">'body_mass_g'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
@@ -884,7 +884,7 @@ birds within 5 mm of the mean: 56</code></pre>
 </div>
 </div>
 <p><strong>15. Run <code>.agg(['count', 'mean'])</code> on the same grouping and print it. Then build a Series of the number of birds on each island with <code>.value_counts()</code>, and draw that as horizontal bars too.</strong></p>
-<div id="19790a5c" class="cell" data-execution_count="14">
+<div id="49eb614e" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(birds.groupby(<span class="st">'species'</span>)[<span class="st">'body_mass_g'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>]).<span class="bu">round</span>(<span class="dv">1</span>))</span>
@@ -939,7 +939,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p><strong>16. Draw a bar chart of mean <code>body_mass_g</code> by species, split by sex.</strong></p>
 <p><strong>Then report in one sentence what the sex split adds to your answer to question 14.</strong></p>
-<div id="b3834043" class="cell" data-execution_count="15">
+<div id="966dcde2" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -973,7 +973,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p><strong>17. This is the last task, and it is a bit of a trap (sorry!). Build a wide table with <code>species</code> down the rows, <code>island</code> across the columns, and a count of <code>body_mass_g</code> in the cells.</strong></p>
 <p><strong>In a markdown cell, using two or three sentences answer the following: given that table, what might go wrong if somebody used this dataset to compare Biscoe island with Dream island?</strong></p>
-<div id="1447feba" class="cell" data-execution_count="16">
+<div id="88be39f7" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>birds.pivot_table(index<span class="op">=</span><span class="st">'species'</span>, columns<span class="op">=</span><span class="st">'island'</span>, values<span class="op">=</span><span class="st">'body_mass_g'</span>, aggfunc<span class="op">=</span><span class="st">'count'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1023,7 +1023,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>An extra check, not asked for, that puts a number on the answer below.</p>
-<div id="90d6fec1" class="cell" data-execution_count="17">
+<div id="a19a4a8d" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>adelie <span class="op">=</span> birds[birds[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Adelie'</span>]</span>

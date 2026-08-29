@@ -443,7 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="grouping-data" class="level2">
 <h2 class="anchored" data-anchor-id="grouping-data">Grouping Data</h2>
 <p>Grouping data allows you to split your DataFrame into groups based on one or more columns.</p>
-<div id="7d78596f" class="cell" data-execution_count="1">
+<div id="ed924ef4" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -466,7 +466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="creating-a-groupby-object" class="level3">
 <h3 class="anchored" data-anchor-id="creating-a-groupby-object">Creating a groupby object:</h3>
-<div id="58e956b6" class="cell" data-execution_count="2">
+<div id="9e14c364" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by 'category'</span></span>
@@ -480,7 +480,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>After grouping, you can apply various aggregation functions to summarize the data within each group.</p>
 <section id="basic-aggregation" class="level4">
 <h4 class="anchored" data-anchor-id="basic-aggregation">Basic aggregation</h4>
-<div id="d7c4c70a" class="cell" data-execution_count="3">
+<div id="af47a58a" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic aggregations</span></span>
@@ -501,7 +501,7 @@ Name: value, dtype: int64</code></pre>
 </section>
 <section id="doing-multiple-aggregations-at-the-same-time-using-agg" class="level4">
 <h4 class="anchored" data-anchor-id="doing-multiple-aggregations-at-the-same-time-using-agg">Doing multiple aggregations at the same time using <code>agg()</code></h4>
-<div id="445b4acc" class="cell" data-execution_count="4">
+<div id="f40ad410" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple aggregations</span></span>
@@ -517,7 +517,7 @@ B          3.0    6      2</code></pre>
 </section>
 <section id="aggregation-using-a-custom-function" class="level4">
 <h4 class="anchored" data-anchor-id="aggregation-using-a-custom-function">Aggregation using a custom function</h4>
-<div id="96385f45" class="cell" data-execution_count="5">
+<div id="d9e9aa02" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Custom aggregation function</span></span>
@@ -552,7 +552,7 @@ Name: value, dtype: int64</code></pre>
 <p>You can apply operations to each group separately using <code>transform()</code> or <code>apply()</code>.</p>
 <section id="using-transform-to-alter-each-group-in-a-group-by-object" class="level4">
 <h4 class="anchored" data-anchor-id="using-transform-to-alter-each-group-in-a-group-by-object">Using <code>transform()</code> to alter each group in a group by object</h4>
-<div id="a36015dd" class="cell" data-execution_count="6">
+<div id="ff7ff0e6" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform: apply function to each group, return same-sized DataFrame</span></span>
@@ -565,7 +565,7 @@ Name: value, dtype: int64</code></pre>
 </section>
 <section id="using-apply-to-alter-each-group-in-a-group-by-object" class="level4">
 <h4 class="anchored" data-anchor-id="using-apply-to-alter-each-group-in-a-group-by-object">Using <code>apply()</code> to alter each group in a group by object</h4>
-<div id="fa92fcf4" class="cell" data-execution_count="7">
+<div id="0428702d" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply: apply function to each group, return a DataFrame or Series</span></span>
@@ -582,7 +582,7 @@ Name: value, dtype: int64</code></pre>
 <p>Pivot tables are a powerful tool for reorganizing and summarizing data. They allow you to transform your data from a <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html">long format to a wide</a> format, making it easier to analyze and visualize patterns.</p>
 <section id="working-with-pivot-tables" class="level3">
 <h3 class="anchored" data-anchor-id="working-with-pivot-tables">Working with Pivot Tables</h3>
-<div id="c2783b77" class="cell" data-execution_count="8">
+<div id="39d320ab" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample DataFrame</span></span>
@@ -603,7 +603,7 @@ Name: value, dtype: int64</code></pre>
 </div>
 <section id="pivot-tables-with-a-single-aggregation-function" class="level4">
 <h4 class="anchored" data-anchor-id="pivot-tables-with-a-single-aggregation-function">Pivot tables with a single aggregation function</h4>
-<div id="869ab96b" class="cell" data-execution_count="9">
+<div id="4c7a0939" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a pivot table</span></span>
@@ -620,7 +620,7 @@ date
 </section>
 <section id="pivot-tables-with-multiple-aggregation" class="level4">
 <h4 class="anchored" data-anchor-id="pivot-tables-with-multiple-aggregation">Pivot tables with multiple aggregation</h4>
-<div id="6e28b9f9" class="cell" data-execution_count="10">
+<div id="75584b12" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot table with multiple aggregation functions</span></span>

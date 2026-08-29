@@ -477,7 +477,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="4" type="1">
 <li>Read in the microplastics data you cleaned an hour ago:</li>
 </ol>
-<div id="d943a57b" class="cell" data-execution_count="1">
+<div id="91c6bf4a" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -507,7 +507,7 @@ Caution
 <section id="def-and-return" class="level2">
 <h2 class="anchored" data-anchor-id="def-and-return"><code>def</code> and <code>return</code></h2>
 <p>Here is a whole function:</p>
-<div id="3446d081" class="cell" data-execution_count="2">
+<div id="e687666f" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> celsius_to_fahrenheit(celsius):</span>
@@ -523,7 +523,7 @@ Caution
 <li>everything indented under the <code>def</code> line is the <strong>body</strong>, and <code>return</code> says what comes back.</li>
 </ul>
 <p>Running that cell does not convert anything. It teaches Python a new word. To use it, call it:</p>
-<div id="acde7c2a" class="cell" data-execution_count="3">
+<div id="38617d3e" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>celsius_to_fahrenheit(<span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -532,7 +532,7 @@ Caution
 <pre><code>77.0</code></pre>
 </div>
 </div>
-<div id="3f3093d0" class="cell" data-execution_count="4">
+<div id="c9ba309c" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>water_temp <span class="op">=</span> celsius_to_fahrenheit(<span class="fl">12.4</span>)</span>
@@ -554,7 +554,7 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>🐍 A function without <code>return</code> still runs, but it hands back <code>None</code>. If your function seems to “do nothing,” a missing <code>return</code> is the first thing to check.</p>
-<div id="c273e086" class="cell" data-execution_count="5">
+<div id="e8d784e2" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> broken(celsius):</span>
@@ -585,14 +585,14 @@ Note
 <section id="naming-things-well" class="level2">
 <h2 class="anchored" data-anchor-id="naming-things-well">Naming things well</h2>
 <p>The name is most of the value. Compare:</p>
-<div id="fc2660d2" class="cell" data-execution_count="6">
+<div id="0ba5dfd5" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">*</span> <span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="ea1ab420" class="cell" data-execution_count="7">
+<div id="5ab8fb64" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ppm_to_ppb(concentration_ppm):</span>
@@ -602,7 +602,7 @@ Note
 </div>
 <p>They compute the same thing. Only one of them will still make sense to you in November.</p>
 <p>The line in triple quotes is a <strong>docstring</strong>. It is optional, it goes on the first line of the body, and Python will show it back to you when you ask for help:</p>
-<div id="698085d2" class="cell" data-execution_count="8">
+<div id="852a232d" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(ppm_to_ppb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -620,7 +620,7 @@ ppm_to_ppb(concentration_ppm)
 <section id="default-values" class="level2">
 <h2 class="anchored" data-anchor-id="default-values">Default values</h2>
 <p>A parameter can have a default, which is used when the caller does not supply that argument:</p>
-<div id="dd170c2a" class="cell" data-execution_count="9">
+<div id="79d4909d" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> convert_depth(depth, units<span class="op">=</span><span class="st">'meters'</span>):</span>
@@ -635,7 +635,7 @@ ppm_to_ppb(concentration_ppm)
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="6db01c21" class="cell" data-execution_count="10">
+<div id="09ed869b" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>convert_depth(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -644,7 +644,7 @@ ppm_to_ppb(concentration_ppm)
 <pre><code>100</code></pre>
 </div>
 </div>
-<div id="3299219e" class="cell" data-execution_count="11">
+<div id="6ecf2000" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>convert_depth(<span class="dv">100</span>, <span class="st">'feet'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -672,7 +672,7 @@ Parameters with defaults go last
 <section id="keyword-arguments" class="level2">
 <h2 class="anchored" data-anchor-id="keyword-arguments">Keyword arguments</h2>
 <p>When you call a function, you can name the arguments instead of relying on their order:</p>
-<div id="57f734bf" class="cell" data-execution_count="12">
+<div id="f17840e6" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>convert_depth(depth<span class="op">=</span><span class="dv">100</span>, units<span class="op">=</span><span class="st">'fathoms'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -681,7 +681,7 @@ Parameters with defaults go last
 <pre><code>54.6807</code></pre>
 </div>
 </div>
-<div id="5adec0fa" class="cell" data-execution_count="13">
+<div id="05bef109" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>convert_depth(units<span class="op">=</span><span class="st">'fathoms'</span>, depth<span class="op">=</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -714,7 +714,7 @@ Parameters with defaults go last
 <h2 class="anchored" data-anchor-id="the-payoff-.apply">The payoff: <code>.apply()</code></h2>
 <p>You now have functions that work on one number. Your data has ten thousand numbers in a column.</p>
 <p><code>.apply()</code> runs a function once for every value in a column and gives you back a column of the results:</p>
-<div id="2536c6aa" class="cell" data-execution_count="14">
+<div id="5c6ae9a0" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Latitude'</span>].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -728,7 +728,7 @@ Parameters with defaults go last
 Name: Latitude, dtype: float64</code></pre>
 </div>
 </div>
-<div id="bd3d5d42" class="cell" data-execution_count="15">
+<div id="6da1835e" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_latitude(latitude):</span>
@@ -741,7 +741,7 @@ Name: Latitude, dtype: float64</code></pre>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'temperate'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="50025045" class="cell" data-execution_count="16">
+<div id="07686c4e" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Latitude'</span>].<span class="bu">apply</span>(classify_latitude).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -759,7 +759,7 @@ Name: Latitude, dtype: object</code></pre>
 <div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'column'</span>].<span class="bu">apply</span>(function_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The function’s <strong>name</strong> goes inside the parentheses, with no parentheses of its own. You are handing pandas the function itself, not the result of calling it. Add parentheses by mistake and Python tries to call your function with no arguments, and tells you so.</p>
 <p>Like everything else in pandas, <code>.apply()</code> returns a new column and changes nothing. Assign it to keep it:</p>
-<div id="9f361409" class="cell" data-execution_count="17">
+<div id="aaebe9ca" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'zone'</span>] <span class="op">=</span> plastics[<span class="st">'Latitude'</span>].<span class="bu">apply</span>(classify_latitude)</span>
@@ -804,7 +804,7 @@ Note
 <section id="writing-a-function-for-the-work-you-keep-repeating" class="level2">
 <h2 class="anchored" data-anchor-id="writing-a-function-for-the-work-you-keep-repeating">Writing a function for the work you keep repeating</h2>
 <p>Here is yesterday’s problem, solved. The top-N pattern, written once:</p>
-<div id="eb7607ac" class="cell" data-execution_count="18">
+<div id="1e40d6ee" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> top_n(df, column, n<span class="op">=</span><span class="dv">10</span>):</span>
@@ -812,7 +812,7 @@ Note
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df.sort_values(column, ascending<span class="op">=</span><span class="va">False</span>).head(n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="eba416ef" class="cell" data-execution_count="19">
+<div id="14c0ac26" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>top_n(plastics, <span class="st">'Measurement'</span>, <span class="dv">5</span>)[[<span class="st">'Measurement'</span>, <span class="st">'Unit'</span>, <span class="st">'Oceans'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -867,7 +867,7 @@ Note
 </div>
 </div>
 </div>
-<div id="14f870c4" class="cell" data-execution_count="20">
+<div id="69a415fc" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>top_n(plastics, <span class="st">'Latitude'</span>)[[<span class="st">'Latitude'</span>, <span class="st">'Oceans'</span>, <span class="st">'zone'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

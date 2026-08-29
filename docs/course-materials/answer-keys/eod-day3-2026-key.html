@@ -457,7 +457,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="593e1d15" class="cell" data-execution_count="1">
+<div id="913bc5fb" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -470,7 +470,7 @@ How to use this key
 <pre><code>(160, 16)</code></pre>
 </div>
 </div>
-<div id="06f6b30a" class="cell" data-execution_count="2">
+<div id="d56327df" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop([<span class="st">'year'</span>, <span class="st">'Banana values'</span>, <span class="st">'type'</span>, <span class="st">'Chart?'</span>, <span class="st">'Unnamed: 16'</span>], axis<span class="op">=</span><span class="st">'columns'</span>)</span>
@@ -494,7 +494,7 @@ How to use this key
 <section id="part-1-get-your-bearings" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-get-your-bearings">Part 1: Get your bearings</h2>
 <p><strong>1. How many foods are in the dataset, and how many columns are left after the drop?</strong></p>
-<div id="edeaeeb9" class="cell" data-execution_count="3">
+<div id="ea2a1192" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -517,7 +517,7 @@ How to use this key
 </div>
 </div>
 <p><strong>2. Display the first few rows. What do the three columns whose names begin with <code>Bananas index</code> contain?</strong></p>
-<div id="08f85366" class="cell" data-execution_count="4">
+<div id="5a9844f6" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -648,7 +648,7 @@ How to use this key
 </div>
 </div>
 <p><strong>3. Run <code>.info()</code>. Two columns have missing values. Which, and how many?</strong></p>
-<div id="7be74b49" class="cell" data-execution_count="5">
+<div id="24b270e0" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -674,7 +674,7 @@ dtypes: float64(11)
 memory usage: 15.0+ KB</code></pre>
 </div>
 </div>
-<div id="ebfba57f" class="cell" data-execution_count="6">
+<div id="30eb631b" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -709,7 +709,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>4. What is the value of <code>Bananas index (kg)</code> for <code>Bananas</code> itself? Explain in a sentence why the number has to come out that way.</strong></p>
-<div id="982088c6" class="cell" data-execution_count="7">
+<div id="1b7e5b1a" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="st">'Bananas'</span>, <span class="st">'Bananas index (kg)'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -735,7 +735,7 @@ dtype: int64</code></pre>
 <section id="part-2-three-rankings" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-three-rankings">Part 2: Three rankings</h2>
 <p><strong>5, 6 and 7. The three top-10 lists.</strong></p>
-<div id="7ee47974" class="cell" data-execution_count="8">
+<div id="9a41135f" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Bananas index (kg)'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -755,7 +755,7 @@ Prawns              23.943772
 Name: Bananas index (kg), dtype: float64</code></pre>
 </div>
 </div>
-<div id="b47948a3" class="cell" data-execution_count="9">
+<div id="f1c3931b" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Bananas index (1000 kcalories)'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -775,7 +775,7 @@ Coconut milk      14.670763
 Name: Bananas index (1000 kcalories), dtype: float64</code></pre>
 </div>
 </div>
-<div id="cc562adc" class="cell" data-execution_count="10">
+<div id="ff138b5d" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Bananas index (100g protein)'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -814,7 +814,7 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 <section id="part-3-which-foods-are-on-every-list" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-which-foods-are-on-every-list">Part 3: Which foods are on every list?</h2>
 <p><strong>9. Print the three lists and compare by eye. Which foods appear in all three?</strong></p>
-<div id="0bd5ed74" class="cell" data-execution_count="11">
+<div id="05eff2b4" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Top 10 for Bananas index (kg):'</span>)</span>
@@ -903,7 +903,7 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 <section id="part-4-filtering-by-score" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-filtering-by-score">Part 4: Filtering by score</h2>
 <p><strong>11. Every food with a <code>Bananas index (kg)</code> above 10. How many are there?</strong></p>
-<div id="c44d2287" class="cell" data-execution_count="12">
+<div id="3f0591b7" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>expensive_by_weight <span class="op">=</span> df[df[<span class="st">'Bananas index (kg)'</span>] <span class="op">&gt;</span> <span class="dv">10</span>]</span>
@@ -927,7 +927,7 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>12 and 13. The <code>~</code> version, the <code>&lt; 1</code> version, and why they differ.</strong></p>
-<div id="ed45ef4a" class="cell" data-execution_count="13">
+<div id="4098822d" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>no_worse_than_banana <span class="op">=</span> df[<span class="op">~</span>(df[<span class="st">'Bananas index (kg)'</span>] <span class="op">&gt;</span> <span class="dv">1</span>)]</span>
@@ -957,7 +957,7 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>14. Two-condition filter: above 5 per kilogram and below 1 per 100 g of protein.</strong></p>
-<div id="1d25c2e7" class="cell" data-execution_count="14">
+<div id="0769d82b" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>costly_but_protein_rich <span class="op">=</span> df[</span>
@@ -1096,7 +1096,7 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 <section id="part-5-land-not-carbon" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-land-not-carbon">Part 5: Land, not carbon</h2>
 <p><strong>16, 17 and 18.</strong></p>
-<div id="a45f0c10" class="cell" data-execution_count="15">
+<div id="42805552" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>banana_land_use <span class="op">=</span> df.loc[<span class="st">'Bananas'</span>, <span class="st">'land_use_1000kcal'</span>]</span>
@@ -1106,7 +1106,7 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 <pre><code>np.float64(2.71787661)</code></pre>
 </div>
 </div>
-<div id="d02c5636" class="cell" data-execution_count="16">
+<div id="2efec6d3" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'land_use_1000kcal'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1126,7 +1126,7 @@ Chilli con carne     16.398791
 Name: land_use_1000kcal, dtype: float64</code></pre>
 </div>
 </div>
-<div id="eb1f87e9" class="cell" data-execution_count="17">
+<div id="532ad219" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>hungriest <span class="op">=</span> df[<span class="st">'land_use_1000kcal'</span>].idxmax()</span>
@@ -1172,7 +1172,7 @@ Name: land_use_1000kcal, dtype: float64</code></pre>
 <section id="part-6-cheese" class="level2">
 <h2 class="anchored" data-anchor-id="part-6-cheese">Part 6: Cheese</h2>
 <p><strong>20. Build a table of just the cheeses, then find the cheese with the highest <code>Bananas index (1000 kcalories)</code>.</strong></p>
-<div id="3092f0ca" class="cell" data-execution_count="18">
+<div id="d90d36b9" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>cheese <span class="op">=</span> df.<span class="bu">filter</span>(like<span class="op">=</span><span class="st">'heese'</span>, axis<span class="op">=</span><span class="st">'rows'</span>)</span>
@@ -1214,7 +1214,7 @@ Name: Bananas index (1000 kcalories), dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>21. How many rows did <code>.filter(like='heese')</code> give you? Is every one of them a cheese? What does this tell you about matching on text?</strong></p>
-<div id="66a73530" class="cell" data-execution_count="19">
+<div id="9222533d" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>cheese.index.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1249,7 +1249,7 @@ Name: Bananas index (1000 kcalories), dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>22. Where does the top cheese sit in the whole dataset’s calorie ranking? Check it against your answer to question 6.</strong></p>
-<div id="3da705c8" class="cell" data-execution_count="20">
+<div id="5c1b9996" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Bananas index (1000 kcalories)'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

@@ -625,11 +625,11 @@ R vs Python: plotting
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>monthly_means <span class="op">=</span> monthly[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Your change:</strong> swap the column for <strong>one</strong> from this menu, and store the result in a new variable so <code>monthly_means</code> stays put:</p>
 <ul>
-<li><code>Daily_globalrad_total_jcm2</code> (daily global radiation)</li>
 <li><code>Daily_Precip_Total_mm</code> (daily precipitation)</li>
 <li><code>Daily_windsp_mean_msec</code> (daily mean wind speed)</li>
+<li><code>Daily_globalrad_total_jcm2</code> (daily global radiation), which the station only records reliably from May to September. Pick a summer month if you choose this one.</li>
 </ul>
-<p>For example, <code>monthly_radiation = monthly['Daily_globalrad_total_jcm2'].mean()</code>. The new line reads <code>monthly</code>, which was built from <code>df</code>, so it leaves both <code>df</code> and your <code>monthly_means</code> unchanged.</p>
+<p>For example, <code>monthly_precip = monthly['Daily_Precip_Total_mm'].mean()</code>. The new line reads <code>monthly</code>, which was built from <code>df</code>, so it leaves both <code>df</code> and your <code>monthly_means</code> unchanged.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="✍️ Required: say it in a sentence">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -640,9 +640,10 @@ R vs Python: plotting
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Read one month’s value from your new result and report it in an f-string. For example, after reading June’s value:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>june_radiation <span class="op">=</span> <span class="fl">2041.9</span>      <span class="co"># June's value, read from your output</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"At Toolik, June's average daily global radiation was </span><span class="sc">{</span>june_radiation<span class="sc">}</span><span class="ss"> J/cm2."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Read one month’s value from your new result and report it in an f-string. A mean usually comes out with a long tail of decimals, so add <code>:.2f</code> inside the braces to round it to two:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>june_precip <span class="op">=</span> <span class="fl">1.5397</span>   <span class="co"># June's value, read from your output</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"At Toolik, June's average daily precipitation was </span><span class="sc">{</span>june_precip<span class="sc">:.2f}</span><span class="ss"> mm."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>:.2f</code> changes only what is printed. <code>june_precip</code> still holds every decimal it had.</p>
 </div>
 </div>
 </section>

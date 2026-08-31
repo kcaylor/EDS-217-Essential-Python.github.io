@@ -425,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#pick-up-where-part-1-left-off" id="toc-pick-up-where-part-1-left-off" class="nav-link" data-scroll-target="#pick-up-where-part-1-left-off">Pick up where Part 1 left off</a></li>
   </ul></li>
-  <li><a href="#step-10-visualize" id="toc-step-10-visualize" class="nav-link" data-scroll-target="#step-10-visualize">Step 10: Visualize 📊</a></li>
+  <li><a href="#step-10-visualize" id="toc-step-10-visualize" class="nav-link" data-scroll-target="#step-10-visualize">Step 10: Visualize 🖼️</a></li>
   <li><a href="#export-part-of-step-10" id="toc-export-part-of-step-10" class="nav-link" data-scroll-target="#export-part-of-step-10">Export 💾, part of step 10</a></li>
   <li><a href="#naming-what-you-just-did-the-10-step-workflow" id="toc-naming-what-you-just-did-the-10-step-workflow" class="nav-link" data-scroll-target="#naming-what-you-just-did-the-10-step-workflow">Naming what you just did: the 10-step workflow</a></li>
   <li><a href="#coming-attractions" id="toc-coming-attractions" class="nav-link" data-scroll-target="#coming-attractions">🗓️ Coming Attractions</a></li>
@@ -476,7 +476,7 @@ Same idea as Part 1 🚀
 <h3 class="anchored" data-anchor-id="pick-up-where-part-1-left-off">Pick up where Part 1 left off</h3>
 <p>We are in a new notebook, which means a new kernel, so <code>df</code> and <code>monthly_means</code> from Part 1 are not in memory any more. Run the cell below to rebuild them before we go on. It also sets <code>url</code> again, which the sandbox at the end of the session needs.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="d9f3cbb8" class="cell" data-execution_count="1">
+<div id="0396e7df" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -492,10 +492,10 @@ Same idea as Part 1 🚀
 </section>
 </section>
 <section id="step-10-visualize" class="level2">
-<h2 class="anchored" data-anchor-id="step-10-visualize">Step 10: Visualize 📊</h2>
+<h2 class="anchored" data-anchor-id="step-10-visualize">Step 10: Visualize 🖼️</h2>
 <p><strong>Visualize</strong> means turning numbers into a picture you can read quickly. The simplest plot is a line plot with <code>plt.plot()</code>.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="873b32db" class="cell" data-execution_count="2">
+<div id="5d07fda1" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.plot(monthly_means)</span>
@@ -513,7 +513,7 @@ Same idea as Part 1 🚀
 </div>
 </div>
 <p>The same twelve numbers now show a clear seasonal cycle. We can also draw them as bars with <code>plt.bar()</code>, which takes two arguments rather than one: the month numbers for the x-axis, and the averages for the height of each bar. Both of those arguments come out of your <code>monthly_means</code>, the months from its index labels and the averages from its values. Copy the <code>plt.bar()</code> line below exactly.</p>
-<div id="991e9ac3" class="cell" data-execution_count="3">
+<div id="bd405e95" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.bar(monthly_means.index, monthly_means)</span>
@@ -549,7 +549,7 @@ Same idea as Part 1 🚀
 <p>You could reword the <code>plt.ylabel(...)</code> text instead. Either way, change just one thing.</p>
 </div>
 </div>
-<div id="7a8bda36" class="cell" data-execution_count="4">
+<div id="d8983fcb" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: same plot, one new label. The data (monthly_means) stays the same.</span></span>
@@ -588,7 +588,8 @@ Same idea as Part 1 🚀
 <h2 class="anchored" data-anchor-id="export-part-of-step-10">Export 💾, part of step 10</h2>
 <p><strong>Export</strong> means saving your results so that you, or a collaborator, can use them later without re-running everything that produced them. A summary that only exists inside a running notebook is gone the moment the kernel restarts. <code>monthly_means.to_csv(...)</code> writes your summary out to a file on disk.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly (in your notebook):</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>monthly_means.to_csv(<span class="st">"monthly_means.csv"</span>, header<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>monthly_means.to_csv(<span class="st">"monthly_means.csv"</span>, header<span class="op">=</span><span class="va">True</span>, float_format<span class="op">=</span><span class="st">"</span><span class="sc">%.2f</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>float_format="%.2f"</code> rounds every number to two decimals on its way into the file. Without it a mean is written with all fifteen of its decimal places, which is more precision than the thermometer ever had.</p>
 <p>Open the Explorer in Positron and you should find <code>monthly_means.csv</code> sitting next to your notebook. Its first few lines look like this:</p>
 <pre class="csv"><code>Month,Daily_AirTemp_Mean_C
 1,-22.89
@@ -609,9 +610,9 @@ Same idea as Part 1 🚀
 <div class="callout-body-container callout-body">
 <p>Change only the file name. Pick one and re-save:</p>
 <ul>
-<li><code>monthly_means.to_csv("monthly_temps.csv", header=True)</code></li>
-<li><code>monthly_means.to_csv("toolik_monthly.csv", header=True)</code></li>
-<li><code>monthly_means.to_csv("my_results.csv", header=True)</code></li>
+<li><code>monthly_means.to_csv("monthly_temps.csv", header=True, float_format="%.2f")</code></li>
+<li><code>monthly_means.to_csv("toolik_monthly.csv", header=True, float_format="%.2f")</code></li>
+<li><code>monthly_means.to_csv("my_results.csv", header=True, float_format="%.2f")</code></li>
 </ul>
 <p>Same data, new file. Your <code>monthly_means</code> in memory stays the same.</p>
 </div>
@@ -639,10 +640,10 @@ Same idea as Part 1 🚀
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-    A["1. Import 📂"] --&gt; B["2. Explore 🔍"] --&gt; C["3. Clean 🧹"]
-    C --&gt; D["4. Filter 🎯"] --&gt; E["5. Sort 📊"] --&gt; F["6. Transform 🔧"]
-    F --&gt; G["7. Group 👥"] --&gt; H["8. Aggregate 📈"] --&gt; I["9. Join / Reshape 🔗"]
-    I --&gt; J["10. Visualize 📊"]
+    A["1. Import 📂"] --&gt; B["2. Explore 🔎"] --&gt; C["3. Clean 🧼"]
+    C --&gt; D["4. Filter 🎯"] --&gt; E["5. Sort 🥇"] --&gt; F["6. Transform ➕"]
+    F --&gt; G["7. Group 🗂️"] --&gt; H["8. Aggregate 📊"] --&gt; I["9. Join / Reshape 🔗"]
+    I --&gt; J["10. Visualize 🖼️"]
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -731,7 +732,7 @@ Same idea as Part 1 🚀
 </div>
 <div class="callout-body-container callout-body">
 <p>When time is up, run this to reload the data and rebuild your results from scratch:</p>
-<div id="1fd7b88e" class="cell" data-execution_count="5">
+<div id="59225b17" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart: reload df and rebuild the canonical results</span></span>

@@ -123,7 +123,7 @@ Write an f-string that names what you loaded. For example, set `dataset = "Tooli
 then print `f"I loaded the {dataset} dataset."`
 :::
 
-## Step 2: Explore 🔍
+## Step 2: Explore 🔎
 
 **Explore** means getting to know the table before you analyze it.
 
@@ -180,7 +180,7 @@ print(f"The Toolik dataset has {n_rows} daily records.")
 Now write a second sentence of your own, maybe about how many columns there are.
 :::
 
-## Step 3: Clean 🧹, which we skip today
+## Step 3: Clean 🧼, which we skip today
 
 The next step in a normal workflow is **Clean**: fixing missing values, wrong types, and
 duplicate rows. Our health check already showed that `Daily_AirTemp_Mean_C` has no missing
@@ -192,7 +192,7 @@ Enjoy this while it lasts. Most real datasets need real cleaning, and it is ofte
 part of a project. We spend Day 4 on cleaning and transforming. Today the data came ready to use.
 :::
 
-## Step 7: Group 👥
+## Step 7: Group 🗂️
 
 **Group** means splitting the rows into buckets by some key. Here we bucket every daily record
 by its **Month**, so all the Januaries sit together, all the Februaries, and so on.
@@ -218,7 +218,7 @@ Both read `df` without changing it, and neither touches your `monthly` grouping.
 by_year = df.groupby('Year')
 ```
 
-## Step 8: Aggregate 📈
+## Step 8: Aggregate 📊
 
 **Aggregate** means collapsing each bucket down to a single number. Here we take the mean
 temperature within each month. Notice the two-step pattern: first group, then pick a column and

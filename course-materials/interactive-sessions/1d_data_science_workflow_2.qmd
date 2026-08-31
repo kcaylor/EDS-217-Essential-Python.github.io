@@ -65,7 +65,7 @@ monthly = df.groupby('Month')
 monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
 ```
 
-## Step 10: Visualize 📊
+## Step 10: Visualize 🖼️
 
 **Visualize** means turning numbers into a picture you can read quickly. The simplest
 plot is a line plot with `plt.plot()`.
@@ -135,8 +135,12 @@ a file on disk.
 ✅ **Canonical cell. Copy and run it exactly (in your notebook):**
 
 ```python
-monthly_means.to_csv("monthly_means.csv", header=True)
+monthly_means.to_csv("monthly_means.csv", header=True, float_format="%.2f")
 ```
+
+`float_format="%.2f"` rounds every number to two decimals on its way into the file. Without
+it a mean is written with all fifteen of its decimal places, which is more precision than the
+thermometer ever had.
 
 Open the Explorer in Positron and you should find `monthly_means.csv` sitting next to your
 notebook. Its first few lines look like this:
@@ -154,9 +158,9 @@ Month,Daily_AirTemp_Mean_C
 :::{.callout-tip title="🔁 Change one thing"}
 Change only the file name. Pick one and re-save:
 
-- `monthly_means.to_csv("monthly_temps.csv", header=True)`
-- `monthly_means.to_csv("toolik_monthly.csv", header=True)`
-- `monthly_means.to_csv("my_results.csv", header=True)`
+- `monthly_means.to_csv("monthly_temps.csv", header=True, float_format="%.2f")`
+- `monthly_means.to_csv("toolik_monthly.csv", header=True, float_format="%.2f")`
+- `monthly_means.to_csv("my_results.csv", header=True, float_format="%.2f")`
 
 Same data, new file. Your `monthly_means` in memory stays the same.
 :::
@@ -174,10 +178,10 @@ of the analyses you will do after it, is some path through these ten steps:
 
 ```{mermaid}
 flowchart LR
-    A["1. Import 📂"] --> B["2. Explore 🔍"] --> C["3. Clean 🧹"]
-    C --> D["4. Filter 🎯"] --> E["5. Sort 📊"] --> F["6. Transform 🔧"]
-    F --> G["7. Group 👥"] --> H["8. Aggregate 📈"] --> I["9. Join / Reshape 🔗"]
-    I --> J["10. Visualize 📊"]
+    A["1. Import 📂"] --> B["2. Explore 🔎"] --> C["3. Clean 🧼"]
+    C --> D["4. Filter 🎯"] --> E["5. Sort 🥇"] --> F["6. Transform ➕"]
+    F --> G["7. Group 🗂️"] --> H["8. Aggregate 📊"] --> I["9. Join / Reshape 🔗"]
+    I --> J["10. Visualize 🖼️"]
 ```
 
 Today we took the path Import → Explore → Group → Aggregate → Visualize, which is steps 1, 2,

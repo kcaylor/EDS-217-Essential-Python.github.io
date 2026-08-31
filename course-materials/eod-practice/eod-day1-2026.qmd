@@ -182,36 +182,39 @@ monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
 **Your change:** swap the column for **one** from this menu, and store the result in a new
 variable so `monthly_means` stays put:
 
-- `Daily_globalrad_total_jcm2` (daily global radiation)
 - `Daily_Precip_Total_mm` (daily precipitation)
 - `Daily_windsp_mean_msec` (daily mean wind speed)
+- `Daily_globalrad_total_jcm2` (daily global radiation), which the station only records
+  reliably from May to September. Pick a summer month if you choose this one.
 
-For example, `monthly_radiation = monthly['Daily_globalrad_total_jcm2'].mean()`. The new line
+For example, `monthly_precip = monthly['Daily_Precip_Total_mm'].mean()`. The new line
 reads `monthly`, which was built from `df`, so it leaves both `df` and your `monthly_means`
 unchanged.
 
 ```{python}
 #| echo: false
 #| include: false
-monthly_radiation = monthly['Daily_globalrad_total_jcm2'].mean()
-monthly_radiation
+monthly_precip = monthly['Daily_Precip_Total_mm'].mean()
+monthly_precip
 ```
 
 :::{.callout-important title="✍️ Required: say it in a sentence"}
-Read one month's value from your new result and report it in an f-string. For example, after
-reading June's value:
+Read one month's value from your new result and report it in an f-string. A mean usually comes
+out with a long tail of decimals, so add `:.2f` inside the braces to round it to two:
 
 ```python
-june_radiation = 2041.9      # June's value, read from your output
-print(f"At Toolik, June's average daily global radiation was {june_radiation} J/cm2.")
+june_precip = 1.5397   # June's value, read from your output
+print(f"At Toolik, June's average daily precipitation was {june_precip:.2f} mm.")
 ```
+
+The `:.2f` changes only what is printed. `june_precip` still holds every decimal it had.
 :::
 
 ```{python}
 #| echo: false
 #| include: false
-june_radiation = 2041.9
-print(f"At Toolik, June's average daily global radiation was {june_radiation} J/cm2.")
+june_precip = 1.5397
+print(f"At Toolik, June's average daily precipitation was {june_precip:.2f} mm.")
 ```
 
 ## 🔁 Task 2: yearly means

@@ -43,12 +43,16 @@ By the end of this session you will be able to:
 
 ## Getting Started
 
-1. **Create a new notebook** from the Command Palette (**Create: New Jupyter
-   Notebook**), and confirm its kernel reads **eds217**.
+1. **Create the file.** In the Explorer, hover over the **EDS217** heading and click
+   **New File...**, then type the name in full, extension included:
+   `Session_6A_Joining_Data.ipynb`
 
-2. **Save your notebook** (`Ctrl + S`, or `Cmd + S` on macOS) as: `Session_6A_Joining_Data.ipynb`
+2. **Check the kernel.** The Kernel Selector in the notebook's action bar should read
+   **Python 3.11.15 (Conda: eds217)**. If it reads anything else, click it, choose
+   **Change Kernel**, and pick the eds217 entry.
 
-3. **Add a title cell** (Markdown), updating the date to today:
+3. **Add a title cell.** Click **+ Markdown** in the action bar, and give it this
+   content, with today's date:
 
 ```markdown
 # Day 6: Session 6A - The Join Pattern
@@ -57,6 +61,8 @@ By the end of this session you will be able to:
 
 Date: 09/08/2026
 ```
+
+4. **Save** with `Ctrl + S` (`Cmd + S` on macOS), and keep saving as you go.
 
 4. Read in the Goleta air quality file, which you have now met twice:
 

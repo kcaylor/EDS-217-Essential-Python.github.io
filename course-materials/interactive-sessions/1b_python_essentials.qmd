@@ -17,11 +17,12 @@ format:
 *A cartoon depicting the idea of a variable.* [MidJourney 5](https://www.midjourney.com/jobs/7d8b78b4-61a1-49b2-9187-0bed8b4d8127?index=0)
 :::
 
-Now that you're comfortable moving around Positron, let's meet the handful of Python
-building blocks you'll use in every single notebook this week: **variables**, **strings**,
-the **`print()`** and **`type()`** functions, and the star of today, **f-strings**, for
-building readable output. We're keeping the vocabulary small on purpose so you can use it
-fluently.
+Now that you have Positron open and a notebook of your own, let's meet the handful of Python
+building blocks you'll use in just about every notebook this week: **variables**,
+**strings**, and the **`print()`** and **`type()`** functions. Then we'll get to the star of
+today, **f-strings**, which build readable output out of the values you have computed. We're keeping the vocabulary small on purpose,
+so that you leave today using all of it fluently rather than half-remembering a longer
+list.
 
 ## Getting Started
 
@@ -60,14 +61,14 @@ temperature = 21
 site_name = "Santa Barbara"
 ```
 
-Nothing prints when you assign a variable. Python just remembers it. Ask for the name
-again and you get the value back:
+Nothing prints when you assign a variable, because Python stores the value away instead
+of displaying it. Ask for the name again and you get the value back:
 
 ```{python}
 temperature
 ```
 
-Values come in different **types**. The two numeric types you'll see are **integers**
+Values come in different **types**. The two numeric types we use today are **integers**
 (whole numbers, `int`) and **floats** (decimal numbers, `float`):
 
 ```{python}
@@ -85,13 +86,13 @@ temp_range = high_temp - low_temp
 temp_range
 ```
 
-We'll cover Python's full set of operators on Day 3. Today, basic `+`, `-`, `*`, and `/`
-are all you need.
+We'll cover the comparison operators on Day 3. Today we only need basic `+`, `-`, `*`
+and `/`.
 
 :::{.callout-note}
 🐍 Choose variable names that say what the value *is* (`site_name`, not `s`). Python style
-favors lowercase names with underscores. Names can't start with a number, and a few words
-are reserved by Python itself, so your editor will warn you if you hit one.
+favors lowercase names with underscores. Names can't start with a number, and Python keeps 35 words
+for itself, so `class = 5` raises a `SyntaxError` when you run the cell.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -101,16 +102,16 @@ their difference into a new variable called `daily_swing`. Display `daily_swing`
 
 ## Strings
 
-A **string** is a piece of text. You write one by wrapping characters in single or double
-quotes, and the two are interchangeable:
+A **string** is a piece of text. You write one by wrapping characters in quotes, and
+single quotes and double quotes do the same job:
 
 ```{python}
 greeting = 'hello'
 place = "Bren Hall"
 ```
 
-The only practical difference is which quote is easier to include *inside* the text. Use
-double quotes when your text contains an apostrophe:
+The only practical difference is which quote character you can then use *inside* the text
+without ending the string early. Use double quotes when your text contains an apostrophe:
 
 ```{python}
 note = "It's a sunny day."
@@ -126,9 +127,9 @@ at three stations."""
 ```
 
 :::{.callout-note}
-🐍 A string is just data. The quotes tell Python to treat these characters as text. We'll
-learn ways to *transform* text (cleaning, splitting, reformatting) later in the course. For
-now we just need to create strings and print them.
+🐍 A string is just data. The quotes tell Python to treat the characters between them as
+text. We'll learn ways to *transform* text (cleaning, splitting, reformatting) later in the
+course. For now we just need to create strings and print them.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -154,12 +155,13 @@ type(rainfall)
 type(site_name)
 ```
 
-Those three, `int`, `float`, and `str`, are the types you'll work with today. Knowing a
-value's type tells you what you can do with it.
+`int`, `float`, and `str` are the three types we use today. Knowing a value's type
+tells you what you can do with it: you can subtract one number from another, but Python
+raises an error if you try to subtract one string from another.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Predict the type of each of these *before* you run it, then check with `type()`:
-`19`, `19.0`, and `"19"`. Were any surprising?
+Predict the type of each of these *before* you run it, then check by running
+`print(type(19))`, and the same for `19.0` and `"19"`. Were any surprising?
 :::
 
 ## Printing with `print()`
@@ -183,30 +185,30 @@ In a single cell, print two lines: one showing your `favorite_place`, and one sh
 `daily_swing` you computed earlier. Use a separate `print()` for each.
 :::
 
-## f-strings: readable output (today's main skill)
+## f-strings: readable output
 
 Stitching text and variables together with commas works, but it gets awkward fast. The
 modern, readable way to build a message from your data is the **f-string** (formatted
-string literal). This is the one construct we want you to be able to *write from scratch* by
-the end of the day, so we'll spend the most time here.
+string literal). We'll spend the most time here.
 
 ### The recipe
 
 An f-string is a string with the letter **`f`** right before the opening quote. Inside it,
-anything you put in **curly braces `{}`** is replaced by the value of that variable:
+anything you put in **curly braces `{}`** is replaced by the value of the variable you name
+there:
 
 ```{python}
 name = "Alice"
 print(f"Hello, {name}!")
 ```
 
-That's the whole idea: `f"text {variable} more text"`. The `f` turns it into an f-string,
+The recipe is `f"text {variable} more text"`. The `f` turns it into an f-string,
 and each `{variable}` becomes its value.
 
 ::: {.callout-important}
 The pattern to memorize is **`f"text {variable}"`**. The `f` must come *before* the quote,
 and the variable name goes *inside* the braces. Forget the `f` and you'll just print the
-braces literally.
+braces literally, with no error message to tell you what went wrong.
 :::
 
 You can drop in as many variables as you like:
@@ -216,6 +218,9 @@ site_name = "Goleta"
 count = 42
 print(f"We recorded {count} readings at {site_name}.")
 ```
+
+Assigning to a name that already exists replaces what was there, so `site_name` holds
+`Goleta` from here on rather than `Santa Barbara`.
 
 f-strings work anywhere a string does. You can build one and store it in a variable, then
 print it later:
@@ -240,7 +245,7 @@ readings = 30
 warmest = 27
 ```
 
-Write f-strings that produce sentences:
+Each f-string below turns one of the variables above into a sentence:
 
 ```{python}
 print(f"The station is {station}.")
@@ -249,8 +254,8 @@ print(f"The warmest reading was {warmest} degrees.")
 ```
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Change `warmest` to a new value and re-run the last f-string. The sentence should update
-automatically. Then write a **new** f-string that mentions both `station` and `readings` in
+Change `warmest` in the cell that defines it, run that cell, then run the cell of f-strings
+again. The last sentence should update on its own, without you touching the f-string itself! Then write a **new** f-string that mentions both `station` and `readings` in
 the same sentence.
 :::
 
@@ -262,7 +267,7 @@ You can also put a **computed value** in a variable and drop it into an f-string
 
 ### Putting it together: write your data summary
 
-Here's the kind of thing you'll do constantly: compute a few values, then describe them in
+Here is the pattern you will use all week: compute a few values, then describe them in
 plain language with f-strings.
 
 Rainfall is a good quantity to summarize because it **accumulates**. Three days of rain add
@@ -289,8 +294,8 @@ your output might read something like:
 - *"In total, Santa Barbara received 12 mm of rain."*
 - *"That's an average of 4.0 mm per day."*
 
-Write your own versions in a code cell. Each sentence should pull at least one variable in
-with `{ }`.
+Write your own versions in a code cell. Each sentence should include at least one variable inside
+`{ }`.
 :::
 
 ```{python}
@@ -310,7 +315,7 @@ print(f"That's an average of {average_rain_mm} mm per day.")
   (text). Check any value with **`type()`**.
 - **Strings** are text wrapped in single or double quotes. Use triple quotes for multi-line
   text.
-- **`print()`** displays values anywhere in a cell and accepts several at once.
+- **`print()`** displays values anywhere in a cell and accepts several values at once.
 - **f-strings**, written `f"text {variable}"`, are the readable way to combine text and
   values, and the one thing you should be able to write on your own after today.
 

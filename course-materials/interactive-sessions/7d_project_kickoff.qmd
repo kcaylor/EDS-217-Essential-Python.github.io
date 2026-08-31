@@ -41,12 +41,16 @@ By the end of this session your team will have:
 This session produces one notebook per **team**, not one per person, so wait until you have a team
 before you make it.
 
-1. **Create a new notebook** from the Command Palette (**Create: New Jupyter
-   Notebook**), and confirm its kernel reads **eds217**.
+1. **Create the file.** In the Explorer, hover over the **EDS217** heading and click
+   **New File...**, then type the name in full, extension included:
+   `Project_<your team name>.ipynb`
 
-2. **Rename it** to `Project_<your team name>.ipynb`.
+2. **Check the kernel.** The Kernel Selector in the notebook's action bar should read
+   **Python 3.11.15 (Conda: eds217)**. If it reads anything else, click it, choose
+   **Change Kernel**, and pick the eds217 entry.
 
-3. **Add a title cell** (Markdown), with every team member's name in it:
+3. **Add a title cell.** Click **+ Markdown** in the action bar, and give it this
+   content, with every team member's name in it:
 
 ```markdown
 # EDS 217 Final Project: <team name>
@@ -57,6 +61,8 @@ Members: <names>
 
 Date: 09/09/2026
 ```
+
+4. **Save** with `Ctrl + S` (`Cmd + S` on macOS), and keep saving as you go.
 
 This is the file you will still be working in on Friday afternoon. Decide now whose machine it
 lives on, and get it into a shared folder or a repository before you leave.

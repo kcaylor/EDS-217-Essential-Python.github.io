@@ -427,6 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#look-at-the-data" id="toc-look-at-the-data" class="nav-link" data-scroll-target="#look-at-the-data">2. Look at the data</a></li>
   <li><a href="#monthly-average-temperature" id="toc-monthly-average-temperature" class="nav-link" data-scroll-target="#monthly-average-temperature">3. Monthly average temperature</a></li>
   <li><a href="#plot-it" id="toc-plot-it" class="nav-link" data-scroll-target="#plot-it">4. Plot it</a></li>
+  <li><a href="#export-the-summary" id="toc-export-the-summary" class="nav-link" data-scroll-target="#export-the-summary">5. Export the summary</a></li>
   </ul></li>
   <li><a href="#task-1-monthly-means-for-a-different-variable" id="toc-task-1-monthly-means-for-a-different-variable" class="nav-link" data-scroll-target="#task-1-monthly-means-for-a-different-variable">🔁 Task 1: monthly means for a different variable</a></li>
   <li><a href="#task-2-yearly-means" id="toc-task-2-yearly-means" class="nav-link" data-scroll-target="#task-2-yearly-means">🔁 Task 2: yearly means</a></li>
@@ -526,6 +527,11 @@ Don’t panic 🚀
 <td><strong>Day 7</strong></td>
 <td>Visualize</td>
 </tr>
+<tr class="odd">
+<td><code>.to_csv()</code></td>
+<td><strong>Day 7</strong></td>
+<td>Visualize (saving counts as part of it)</td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -618,6 +624,13 @@ R vs Python: plotting
 <p>In R you might draw this with <code>ggplot(...) + geom_line()</code>. Here <code>plt.plot(series)</code> takes your twelve monthly values and draws them in order, and the label lines set the title and axes.</p>
 </div>
 </div>
+</section>
+<section id="export-the-summary" class="level3">
+<h3 class="anchored" data-anchor-id="export-the-summary">5. Export the summary</h3>
+<p>Your twelve monthly means only exist inside this notebook, and they are gone the moment the kernel restarts. Save them to a file, the way we did at the end of Part 2.</p>
+<p><strong>Copy and run this code:</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>monthly_means.to_csv(<span class="st">"monthly_means.csv"</span>, header<span class="op">=</span><span class="va">True</span>, float_format<span class="op">=</span><span class="st">"</span><span class="sc">%.2f</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Open the Explorer in Positron and you should see <code>monthly_means.csv</code> next to your notebook. <code>float_format="%.2f"</code> writes every number with two decimals, which is the same rounding you print with <code>:.2f</code> in the tasks below.</p>
 <p>You should now have <code>df</code>, <code>monthly</code>, and <code>monthly_means</code> in your notebook, which is where we ended up together this afternoon. Each of the three tasks below makes one change to the workflow you have just rebuilt.</p>
 </section>
 </section>
@@ -625,7 +638,7 @@ R vs Python: plotting
 <h2 class="anchored" data-anchor-id="task-1-monthly-means-for-a-different-variable">🔁 Task 1: monthly means for a different variable</h2>
 <p>The rebuild averaged <code>Daily_AirTemp_Mean_C</code>. Keep the same grouping and average a <strong>different column</strong> instead.</p>
 <p><strong>What you wrote in the rebuild:</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>monthly_means <span class="op">=</span> monthly[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>monthly_means <span class="op">=</span> monthly[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Your change:</strong> swap the column for <strong>one</strong> from this menu, and store the result in a new variable, because Task 3 still needs your original <code>monthly_means</code>:</p>
 <ul>
 <li><code>Daily_Precip_Total_mm</code> (daily precipitation)</li>
@@ -644,8 +657,8 @@ R vs Python: plotting
 </div>
 <div class="callout-body-container callout-body">
 <p>Read one month’s value from your new result and report it in an f-string. A mean usually comes out with a long tail of decimals, so add <code>:.2f</code> inside the braces to round it to two:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>june_precip <span class="op">=</span> <span class="fl">1.5372</span>   <span class="co"># June's value, read from your output</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"At Toolik, June's average daily precipitation was </span><span class="sc">{</span>june_precip<span class="sc">:.2f}</span><span class="ss"> mm."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>june_precip <span class="op">=</span> <span class="fl">1.5372</span>   <span class="co"># June's value, read from your output</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"At Toolik, June's average daily precipitation was </span><span class="sc">{</span>june_precip<span class="sc">:.2f}</span><span class="ss"> mm."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>:.2f</code> changes only what is printed. <code>june_precip</code> still holds every decimal it had.</p>
 </div>
 </div>
@@ -654,12 +667,12 @@ R vs Python: plotting
 <h2 class="anchored" data-anchor-id="task-2-yearly-means">🔁 Task 2: yearly means</h2>
 <p>The rebuild grouped by <code>Month</code>. Now change the <strong>grouping key</strong> to <code>Year</code> to see the year-by-year trend across the whole record.</p>
 <p><strong>What you wrote in the rebuild:</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby(<span class="st">'Month'</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>monthly_means <span class="op">=</span> monthly[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby(<span class="st">'Month'</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>monthly_means <span class="op">=</span> monthly[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Your change:</strong> group by a different key. Build a new grouping and average the same temperature column into new variables:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>by_year <span class="op">=</span> df.groupby(<span class="st">'Year'</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>yearly_means <span class="op">=</span> by_year[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>yearly_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>by_year <span class="op">=</span> df.groupby(<span class="st">'Year'</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>yearly_means <span class="op">=</span> by_year[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>yearly_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The new grouping reads <code>df</code> without changing it, and it leaves <code>monthly</code> and <code>monthly_means</code> alone.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="✍️ Required: say it in a sentence">
 <div class="callout-header d-flex align-content-center">
@@ -672,8 +685,8 @@ R vs Python: plotting
 </div>
 <div class="callout-body-container callout-body">
 <p>Read one year’s value from <code>yearly_means</code> and report it in an f-string. For example, after reading the value for the year 2000:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>temp_2000 <span class="op">=</span> <span class="op">-</span><span class="fl">8.9675</span>    <span class="co"># the year 2000 value, read from your output</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"In 2000, Toolik's average temperature was </span><span class="sc">{</span>temp_2000<span class="sc">:.2f}</span><span class="ss"> degrees Celsius."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>temp_2000 <span class="op">=</span> <span class="op">-</span><span class="fl">8.9675</span>    <span class="co"># the year 2000 value, read from your output</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"In 2000, Toolik's average temperature was </span><span class="sc">{</span>temp_2000<span class="sc">:.2f}</span><span class="ss"> degrees Celsius."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -681,12 +694,12 @@ R vs Python: plotting
 <h2 class="anchored" data-anchor-id="task-3-a-labeled-bar-chart">🔁 Task 3: a labeled bar chart</h2>
 <p>Draw the monthly temperatures as a bar chart with month-name labels, then change the title.</p>
 <p><strong>Copy and run this code:</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> [<span class="st">'Jan'</span>, <span class="st">'Feb'</span>, <span class="st">'Mar'</span>, <span class="st">'Apr'</span>, <span class="st">'May'</span>, <span class="st">'Jun'</span>, <span class="st">'Jul'</span>, <span class="st">'Aug'</span>, <span class="st">'Sep'</span>, <span class="st">'Oct'</span>, <span class="st">'Nov'</span>, <span class="st">'Dec'</span>]</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.bar(months, monthly_means)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Toolik Monthly Temperatures"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Month"</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Temperature (°C)"</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> [<span class="st">'Jan'</span>, <span class="st">'Feb'</span>, <span class="st">'Mar'</span>, <span class="st">'Apr'</span>, <span class="st">'May'</span>, <span class="st">'Jun'</span>, <span class="st">'Jul'</span>, <span class="st">'Aug'</span>, <span class="st">'Sep'</span>, <span class="st">'Oct'</span>, <span class="st">'Nov'</span>, <span class="st">'Dec'</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>plt.bar(months, monthly_means)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Toolik Monthly Temperatures"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Month"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Temperature (°C)"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -717,14 +730,14 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>Find the coldest month on your chart, then take its value from the <code>monthly_means</code> you printed in step 3 and report it in an f-string. For example, for January:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>coldest <span class="op">=</span> <span class="op">-</span><span class="fl">22.8890</span>    <span class="co"># January's value, from your step 3 output</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Toolik's coldest month averages about </span><span class="sc">{</span>coldest<span class="sc">:.2f}</span><span class="ss"> degrees Celsius."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>coldest <span class="op">=</span> <span class="op">-</span><span class="fl">22.8890</span>    <span class="co"># January's value, from your step 3 output</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Toolik's coldest month averages about </span><span class="sc">{</span>coldest<span class="sc">:.2f}</span><span class="ss"> degrees Celsius."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>
-<p>Nice work! You have now rerun a complete data science workflow and changed three things in it (hopefully!): the variable you averaged, the grouping key, and a chart label. Each time, you read a number off your own output and reported it in a sentence of your own with an f-string. The workflow you just reran is the whole course in miniature, and starting Day 2 we will cover how each step works, at one or two steps a day, until Days 8 and 9, when you and your team run the whole thing on a dataset of your own.</p>
+<p>Nice work! You have now rerun a complete data science workflow, from a file on the web to a chart and a saved summary, and changed three things in it (hopefully!): the variable you averaged, the grouping key, and a chart label. Each time, you read a number off your own output and reported it in a sentence of your own with an f-string. The workflow you just reran is the whole course in miniature, and starting Day 2 we will cover how each step works, at one or two steps a day, until Days 8 and 9, when you and your team run the whole thing on a dataset of your own.</p>
 <div class="center-text body-text-xl teal-text">
 <p>End Activity Session (Day 1)</p>
 </div>

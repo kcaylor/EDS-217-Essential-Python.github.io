@@ -34,7 +34,7 @@ half the country half a zone warmer. That was reported widely, and mostly report
 
 Today you have both maps, one row per zip code, and every tool you have learned this week.
 The question is not whether the country got warmer. The question is what you can honestly say
-about it from these two files, and where each of the obvious answers goes wrong.
+about it from these two files, and where each of the answers goes wrong.
 
 :::{.callout-note title="Reference"}
 USDA Plant Hardiness Zone Maps for 2012 and 2023, prepared by the
@@ -161,7 +161,7 @@ print(zones_2023.head())
 ```
 
 3. The two files do not have the same number of rows. Before you do anything else, write down two
-   different explanations for that which do not involve anybody making a mistake.
+   different explanations for that (not that someone made a mistake).
 
 ## Part 2: One table out of three
 
@@ -238,7 +238,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-10. Something is wrong with that figure, and it is not subtle. Describe it in a markdown cell.
+10. Describe what is wrong with that figure in a markdown cell.
 
 11. Find the culprit. Use the filter pattern on `located` to pull out every row with a
     `longitude` greater than −60, and print its zip code, state, city, latitude and longitude.
@@ -248,19 +248,19 @@ located[located['longitude'] > -60][['zipcode', 'state', 'primary_city',
                                       'latitude', 'longitude', 'year']]
 ```
 
-12. In a markdown cell, two or three sentences. That is **one** zip code, appearing once in each
+12. In a markdown cell:. That is **one** zip code, appearing once in each
     year: two rows out of eighty thousand. Look up roughly where latitude 48.3, longitude −2.1 is.
-    Is the temperature reading wrong, or is something else wrong? And say plainly what those two
-    rows did to your figure.
+    Is the temperature reading wrong, or is something else wrong? What did those
+    two rows do to your figure?
 
 :::{.callout-important title="Two rows in eighty thousand"}
 Nothing about those rows is unusual in a table. They are not null, not duplicated, not miscast,
-and they would survive every cleaning step you learned on Thursday untouched. `.describe()` on
+and they would survive every cleaning step you learned on Thursday. `.describe()` on
 `longitude` would have shown a maximum of −2.12 and you would have had no reason to look at it.
 
 A figure found them in one second, because a plot is the only summary of a dataset that gives an
 outlier as much room as it gives everything else. This is a large part of what visualization is
-*for*, and it happens before any of the storytelling.
+for. Remember the gorilla from EDS 212...
 :::
 
 13. Build a table called `usa` holding only the rows with `longitude` less than −60, and redraw the
@@ -287,22 +287,20 @@ plt.show()
 ```
 
 14. You have just drawn a recognizable map of the United States without a mapping library, a
-    projection, or a shapefile. In a markdown cell, one sentence on why that worked here. Then one
-    more: run `usa['state'].nunique()` and say which parts of the country are not in these files
-    at all.
+    projection, or a shapefile. Exaplin in a markdown cell how that worked here. Then, run `usa['state'].nunique()` 
+    and say which parts of the country are not in these files at all.
 
 ```{python}
 print(usa['state'].nunique())
 print(sorted(usa['state'].unique()))
 ```
 
-15. Put the two maps side by side on your screen and try to see the difference between them. In one
-    honest sentence: can you?
+15. Put the two maps side by side on your screen and try to see the difference between them. Can you?
 
 ## Part 4: What actually changed
 
-Comparing two maps by eye does not work. So compute the change and map **that** instead, which is
-the move you learned this morning.
+Comparing two maps by eye does not work. So, using the move you learned this morning,
+compute the change and map **that** instead.
 
 16. Use the pivot pattern to build a table with one row per zip code and one column per year.
     Index it on `['zipcode', 'state', 'latitude', 'longitude']` so those come along for the ride,
@@ -338,7 +336,7 @@ change.shape
 18. Draw a histogram of `temp_diff`. Label it. Then print
     `change['temp_diff'].value_counts().sort_index()` and read the two together.
 
-    In a markdown cell, three or four sentences: what is the most common value, what is the second
+    In a markdown cell: what is the most common value, what is the second
     most common, and how many distinct values are there in total? Given that, is `temp_diff` a
     measurement of how much a place warmed, or is it something else? Be precise.
 
@@ -357,9 +355,8 @@ change['temp_diff'].value_counts().sort_index()
     zip codes with the largest increase and the five with the largest decrease, with their states
     and coordinates.
 
-    In a markdown cell, two or three sentences: a zip code that moved by 25 or 30 °F has moved five
+    In a markdown cell: a zip code that moved by 25 or 30 °F has moved five
     or six whole zones. Do you believe that is a change in the climate? What else could produce it?
-    (Look at where they are.)
 
 ```{python}
 cols = ['zipcode', 'state', 'latitude', 'longitude', 2012, 2023, 'temp_diff']
@@ -401,8 +398,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-22. In a markdown cell, four or five sentences. The figure you just made is what the whole practice was for, so
-    describe it properly. Where is the country almost uniformly warmer? Where is it patchy? Where
+22. In a markdown cell: Where is the country almost uniformly warmer? Where is it patchy? Where
     are the `'colder'` points, and does their location connect to your answer to question 19?
 
     Then compare this figure with the two maps from question 13, and say in one sentence why the
@@ -419,9 +415,8 @@ by_state = change.groupby('state')['temp_diff'].agg(['count', 'mean'])
 by_state.sort_values('mean', ascending=False).head(10).round(2)
 ```
 
-24. Read the `count` column before you read the `mean` column, the way you have every day since
-    Friday. Two entries in that top ten should stop you. Name them and say why in one sentence
-    each.
+24. Read the `count` column before you read the `mean` column. Do any
+entries suprise you from the top ten? Why? 
 
 25. Build a Series of the ten largest mean increases, sorted, and draw it as horizontal bars using
     the `.values` and `.index` idiom. Label both axes with units and title it.
@@ -438,8 +433,8 @@ plt.tight_layout()
 plt.show()
 ```
 
-26. Now the other end. Show the five states with the smallest mean increase, with their counts.
-    In a markdown cell, one or two sentences: one of those states has more zip codes in it than
+26. Now, show the five states with the smallest mean increase instead, with their counts.
+    In a markdown cell: one of those states has more zip codes in it than
     all but one other state in the file. Does that make its small number more trustworthy or
     less, and does it make the ranking more interesting or less?
 
@@ -457,7 +452,7 @@ In a single markdown cell of 250 to 350 words, answer this:
 
 Your answer must cite at least three specific numbers you computed here, must name at least two
 distinct reasons the comparison is harder than it sounds, and must end by naming the single figure
-you would send. Complete sentences, no bullet fragments.
+you would send. Use complete sentences.
 
 ## The figure minute
 
@@ -471,8 +466,8 @@ Look back through your notebook. You made six figures today, and they did four d
 
 Only one of the six was the figure the practice was about. The other five were how you found out
 what you had. That ratio is normal, and it is worth expecting: most of the plots you make in your
-career will never be shown to anybody, because their job is to tell **you** something before you
-say it out loud.
+career will never be shown to anybody, because their job is to tell **you** something before you tell
+anyone else.
 
 ## Wrap-up
 

@@ -137,7 +137,7 @@ Each of the three `Bananas index` columns gives you a different ranking of the s
 7. Do the same for `Bananas index (100g protein)`.
 
 Write each one out in full. Yes, you are writing out the same pattern three times with a
-single word changed each time. Notice how that feels.
+single word changed each time. 
 
 ```{python}
 df['Bananas index (kg)'].sort_values(ascending=False).head(10)
@@ -153,9 +153,8 @@ df['Bananas index (100g protein)'].sort_values(ascending=False).head(10)
 
 :::{.callout-note title="Hold that thought"}
 You just wrote the same six words three times. Tomorrow morning you will learn how to write
-them once, give them a name, and then call them three times. Copying a line and changing one
-word in it is exactly the itch that **functions** exist to scratch, and it helps a great deal
-to have felt the itch yourself before you get the cure.
+them once, give them a name, and then call them three times. These **functions** make code 
+easier to edit.
 :::
 
 8. In a markdown cell, describe in two or three sentences how the three lists differ. Which
@@ -164,7 +163,7 @@ to have felt the itch yourself before you get the cure.
 ## Part 3: Which foods are on every list?
 
 9. Print the three top-10 lists again, one after another, and compare them by eye. Write down,
-   in a markdown cell, the foods that appear in **all three**. There are three of them.
+   in a markdown cell, the foods that appear in **all three**. 
 
 ```{python}
 print('Top 10 for Bananas index (kg):')
@@ -180,12 +179,6 @@ print(df['Bananas index (100g protein)'].sort_values(ascending=False).head(10))
 10. In a markdown cell: what does it mean for a food to be near the top of all three lists at
     once? What would it mean for a food to top one list and appear on neither of the others?
     Name one food of each kind.
-
-:::{.callout-tip title="Do this by reading, not by coding"}
-Your own eyes are the right tool for comparing three short lists. Print the lists, read them,
-and write down what you see. Automating a comparison this small would cost you more time than
-it saves.
-:::
 
 ## Part 4: Filtering by score
 

@@ -17,8 +17,7 @@ format:
 :::
 
 Yesterday we ran a complete workflow on the Toolik dataset using one column of it. Today you will
-write a **data biography** of the whole thing: where it came from, what it covers, what
-condition it is in, and what somebody needs to know before trusting a number computed from it.
+write a **data biography** of the whole thing.
 
 ## What is a data biography?
 
@@ -123,14 +122,12 @@ toolik.isnull().sum().head(20)
 :::{.callout-important title="Interpret, don't just report"}
 A column that is 99% empty is not necessarily broken. Think about what a "flag" column is
 for in an environmental dataset, and write a sentence explaining why it might be mostly
-empty by design. Reading a table tells you that the column is empty. Understanding the
-dataset tells you whether being empty is a problem.
+empty by design. 
 :::
 
 ## Part 3: What varies, and what doesn't
 
-8. Use `.value_counts()` on `LTER_Site` and on `Station`. What do you learn? Does either
-   column tell you anything?
+8. Use `.value_counts()` on `LTER_Site` and on `Station`. What do either columns tell you?
 9. Use `.value_counts()` on `Flag_Daily_AirTemp_Mean_C`. What values appear, and what do you
    think they mean?
 10. Use `.value_counts()` on the `Year` column and look at both ends of the result, with
@@ -209,16 +206,15 @@ In a single markdown cell, write 200 to 300 words covering:
 - **Cautions.** Two specific things a person using this data should know before computing
   anything from it.
 - **Fitness for purpose.** Could you use this dataset to describe how Arctic summer
-  temperatures have changed since 1988? Say yes or no, and say what would need checking
-  first.
+  temperatures have changed since 1988? 
 
-Write it for a colleague who has never opened the file. No bullet fragments; complete
+Write it for a colleague who has never opened the file. Use complete
 sentences.
 
 :::{.callout-tip title="🧭 Field Note: looping over your column list"}
 If you'd like to check several columns at once rather than one at a time, you can loop over
 a list. We cover loops properly in this afternoon's live-coding session, so here is the whole
-pattern. Adapt the list, don't write the loop from scratch:
+pattern. Just change the list and the print statement based on the information you're looking for.
 
 ```python
 for column_name in ['Daily_AirTemp_Mean_C', 'Daily_Precip_Total_mm']:

@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#task-1-monthly-means-for-a-different-variable" id="toc-task-1-monthly-means-for-a-different-variable" class="nav-link" data-scroll-target="#task-1-monthly-means-for-a-different-variable">🔁 Task 1: monthly means for a different variable</a></li>
   <li><a href="#task-2-yearly-means" id="toc-task-2-yearly-means" class="nav-link" data-scroll-target="#task-2-yearly-means">🔁 Task 2: yearly means</a></li>
   <li><a href="#task-3-a-labeled-bar-chart" id="toc-task-3-a-labeled-bar-chart" class="nav-link" data-scroll-target="#task-3-a-labeled-bar-chart">🔁 Task 3: a labeled bar chart</a></li>
-  <li><a href="#where-the-marks-are" id="toc-where-the-marks-are" class="nav-link" data-scroll-target="#where-the-marks-are">Where the marks are</a></li>
+  <li><a href="#what-to-check-first" id="toc-what-to-check-first" class="nav-link" data-scroll-target="#what-to-check-first">What to check first</a></li>
   </ul>
 </nav>
     </div>
@@ -453,8 +453,8 @@ How to use this key
 </div>
 <div class="callout-body-container callout-body">
 <p>Work the exercise first, then come here. The code below is <strong>one</strong> correct answer, not the only one. If your code looks different but produces the same numbers, you were right.</p>
-<p>This is the Day 1 exercise, so most of the code was given to you. What this key is for is the outputs: you can see that your cells ran, but you cannot check on your own whether the numbers you got are the numbers you should have got. Compare your output against the tables and figures below, and compare your three f-string sentences against the green <strong>Answer</strong> boxes.</p>
-<p>If something did not run, that is normal on the first afternoon of the course. Nothing here is assessed knowledge yet.</p>
+<p>This is the Day 1 exercise, so most of the code was given to you. This key is here for the outputs. You can see that your cells ran, but you cannot check on your own whether the numbers you got are the numbers you should have got. Compare your output against the tables and figures below, and compare your three f-string sentences against the green <strong>Answer</strong> boxes.</p>
+<p>If something did not run, that is normal on the first afternoon of the course. None of this is graded.</p>
 <p>⬅️ Back to <a href="../../course-materials/eod-practice/eod-day1-2026.html">the exercise</a></p>
 </div>
 </div>
@@ -462,7 +462,7 @@ How to use this key
 <h2 class="anchored" data-anchor-id="rebuild-the-workflow">Rebuild the workflow</h2>
 <section id="import-and-load" class="level3">
 <h3 class="anchored" data-anchor-id="import-and-load">1. Import and load</h3>
-<div id="59ac6350" class="cell" data-execution_count="1">
+<div id="853351fd" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -472,7 +472,7 @@ How to use this key
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="aedcf7a6" class="cell" data-execution_count="2">
+<div id="77e4183e" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -491,14 +491,14 @@ How to use this key
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>11,171 rows and 21 columns.</strong> One row per day at Toolik Lake, from 1 June 1988 through 31 December 2018. If <code>df.shape</code> gave you something else, you loaded a different file.</p>
+<p><strong>11,171 rows and 21 columns.</strong> One row per day at Toolik Lake, from 1 June 1988 through 31 December 2018. The practice does not ask for <code>df.shape</code>, but it is the quickest way to confirm you loaded the file everyone else did.</p>
 </div>
 </div>
 </section>
 <section id="look-at-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="look-at-the-data">2. Look at the data</h3>
-<p>Note that a notebook cell displays only its <strong>last</strong> expression. If you put <code>df.head()</code> and <code>df.isnull().sum()</code> in the same cell, you saw the null counts and not the head. Both are shown here, in separate cells.</p>
-<div id="d9442c39" class="cell" data-execution_count="3">
+<p>Note that a notebook cell displays only its <strong>last</strong> expression. The practice puts <code>df.head()</code> and <code>df.isnull().sum()</code> in one cell, so you saw the null counts and not the head. Both are shown here, in separate cells.</p>
+<div id="7203926b" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -662,7 +662,7 @@ How to use this key
 </div>
 </div>
 </div>
-<div id="2832d074" class="cell" data-execution_count="4">
+<div id="1973f353" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -702,14 +702,14 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong><code>Daily_AirTemp_Mean_C</code> shows 0.</strong> That is the column the rest of the exercise averages, so the temperature work needs no cleaning, which is the whole reason the health check comes first.</p>
-<p>Most other columns do have missing values. <code>Daily_globalrad_total_jcm2</code> is missing on 7,053 of the 11,171 days, <code>Daily_windsp_mean_msec</code> on 826, and <code>Daily_Precip_Total_mm</code> on 420. The <code>Flag_</code> columns are almost entirely empty by design: a flag is only filled in when there is something to flag. A missing value is not always a mistake, and Day 4 covers what to do about the ones that are.</p>
+<p><strong><code>Daily_AirTemp_Mean_C</code> shows 0.</strong> Temperature is the column the rest of the exercise averages, so the temperature work needs no cleaning, which is the whole reason the health check comes first.</p>
+<p>Most other columns do have missing values. <code>Daily_globalrad_total_jcm2</code> is missing on 7,053 of the 11,171 days, <code>Daily_windsp_mean_msec</code> on 826, and <code>Daily_Precip_Total_mm</code> on 420. The flag columns, four spelled <code>Flag_</code> and two <code>FLAG_</code>, are mostly empty by design: a flag is only filled in when there is something to flag. A missing value is not always a mistake, and Day 4 covers what to do about the ones that are.</p>
 </div>
 </div>
 </section>
 <section id="monthly-average-temperature" class="level3">
 <h3 class="anchored" data-anchor-id="monthly-average-temperature">3. Monthly average temperature</h3>
-<div id="1e274b5d" class="cell" data-execution_count="5">
+<div id="ce77f0f3" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby(<span class="st">'Month'</span>)</span>
@@ -743,13 +743,13 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Twelve numbers, one per month, running from <strong>-22.889032 in January to 11.222060 in July</strong>. This is a climatology: each value is the average of every January in the record, not any single January. Only three months average above freezing (June, July and August), and September at -0.110753 misses by a tenth of a degree.</p>
+<p>Twelve numbers, one per month, running from <strong>-22.889032 in January to 11.222060 in July</strong>. The twelve numbers are a climatology: each value is the average of every January in the record, not any single January. Only three months average above freezing (June, July and August), and September at -0.110753 misses by a tenth of a degree.</p>
 </div>
 </div>
 </section>
 <section id="plot-it" class="level3">
 <h3 class="anchored" data-anchor-id="plot-it">4. Plot it</h3>
-<div id="c39c9027" class="cell" data-execution_count="6">
+<div id="c5bc35c4" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.plot(monthly_means)</span>
@@ -785,36 +785,13 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="task-1-monthly-means-for-a-different-variable">🔁 Task 1: monthly means for a different variable</h2>
 <p><strong>Your change:</strong> swap the column for <strong>one</strong> from this menu, and store the result in a new variable so <code>monthly_means</code> stays put.</p>
 <p>You only had to pick one. All three are shown here so you can check whichever you chose.</p>
-<div id="f3891be4" class="cell" data-execution_count="7">
+<div id="d15098cb" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>monthly_radiation <span class="op">=</span> monthly[<span class="st">'Daily_globalrad_total_jcm2'</span>].mean()</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>monthly_radiation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>monthly_precip <span class="op">=</span> monthly[<span class="st">'Daily_Precip_Total_mm'</span>].mean()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>monthly_precip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>Month
-1       16.435484
-2      215.035714
-3      894.564516
-4     1793.317647
-5     2161.012480
-6     2041.905600
-7     1726.110947
-8     1183.694168
-9      715.104603
-10     286.236559
-11      36.646667
-12       4.425806
-Name: Daily_globalrad_total_jcm2, dtype: float64</code></pre>
-</div>
-</div>
-<div id="4e0bbbb5" class="cell" data-execution_count="8">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>monthly_precip <span class="op">=</span> monthly[<span class="st">'Daily_Precip_Total_mm'</span>].mean()</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>monthly_precip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>Month
 1     0.316590
 2     0.490909
@@ -831,13 +808,13 @@ Name: Daily_globalrad_total_jcm2, dtype: float64</code></pre>
 Name: Daily_Precip_Total_mm, dtype: float64</code></pre>
 </div>
 </div>
-<div id="61dcbd99" class="cell" data-execution_count="9">
+<div id="ce9d8619" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>monthly_wind <span class="op">=</span> monthly[<span class="st">'Daily_windsp_mean_msec'</span>].mean()</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>monthly_wind</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>monthly_wind <span class="op">=</span> monthly[<span class="st">'Daily_windsp_mean_msec'</span>].mean()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>monthly_wind</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>Month
 1     3.174017
 2     3.434877
@@ -854,6 +831,29 @@ Name: Daily_Precip_Total_mm, dtype: float64</code></pre>
 Name: Daily_windsp_mean_msec, dtype: float64</code></pre>
 </div>
 </div>
+<div id="89be5bd6" class="cell" data-execution_count="9">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>monthly_radiation <span class="op">=</span> monthly[<span class="st">'Daily_globalrad_total_jcm2'</span>].mean()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>monthly_radiation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>Month
+1       16.435484
+2      215.035714
+3      894.564516
+4     1793.317647
+5     2161.012480
+6     2041.905600
+7     1726.110947
+8     1183.694168
+9      715.104603
+10     286.236559
+11      36.646667
+12       4.425806
+Name: Daily_globalrad_total_jcm2, dtype: float64</code></pre>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -864,20 +864,20 @@ Name: Daily_windsp_mean_msec, dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>For <strong>June</strong>, the month the exercise uses in its example, the three menu options give <strong>2041.905600 J/cm2</strong> of daily global radiation, <strong>1.537217 mm</strong> of daily precipitation, and <strong>2.990603 m/s</strong> of mean wind speed. Check your output against the line for whichever column you picked.</p>
+<p>For <strong>June</strong>, the month the exercise uses in its example, the three menu options give <strong>1.537217 mm</strong> of daily precipitation, <strong>2.990603 m/s</strong> of mean wind speed, and <strong>2041.905600 J/cm2</strong> of daily global radiation. Check your output against the line for whichever column you picked.</p>
 <p>The three variables behave very differently across the year. Radiation swings by a factor of roughly 500, from 4.425806 J/cm2 in December to 2161.012480 J/cm2 in May, because at 68 degrees north the sun barely rises in winter. Precipitation peaks in July at 2.674922 mm per day. Wind speed hardly varies at all, staying between 2.7 and 3.5 m/s in every month, so it has no real season.</p>
-<p>One thing to notice: the radiation means are computed from only the days that have a radiation value. <code>.mean()</code> skips missing values rather than failing on them. January’s figure comes from just 62 days spread across 25 years, while September’s comes from 717. The number is still meaningful, but it is not based on the same amount of evidence in every month.</p>
+<p>One thing to notice: the radiation means are computed from only the days that have a radiation value. <code>.mean()</code> skips missing values rather than failing on them. January’s figure comes from just 62 days, and all of them fall in two years, 2011 and 2013, while September’s comes from 717 days spread across 24 years. The number is still meaningful, but it is not based on the same amount of evidence in every month.</p>
 </div>
 </div>
 <p><strong>✍️ Required: read one month’s value from your new result and report it in an f-string.</strong></p>
-<div id="9c36aa3c" class="cell" data-execution_count="10">
+<div id="15985420" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>june_radiation <span class="op">=</span> <span class="fl">2041.9</span>      <span class="co"># June's value, read from your output</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"At Toolik, June's average daily global radiation was </span><span class="sc">{</span>june_radiation<span class="sc">}</span><span class="ss"> J/cm2."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>june_precip <span class="op">=</span> <span class="fl">1.5372</span>   <span class="co"># June's value, read from your output</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"At Toolik, June's average daily precipitation was </span><span class="sc">{</span>june_precip<span class="sc">:.2f}</span><span class="ss"> mm."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>At Toolik, June's average daily global radiation was 2041.9 J/cm2.</code></pre>
+<pre><code>At Toolik, June's average daily precipitation was 1.54 mm.</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
@@ -890,15 +890,15 @@ Name: Daily_windsp_mean_msec, dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The sentence should print as <strong><code>At Toolik, June's average daily global radiation was 2041.9 J/cm2.</code></strong> The full value is 2041.905600, and rounding it to 2041.9 for a sentence is fine.</p>
-<p>If you chose precipitation or wind instead, your sentence needs its own units: mm per day, or metres per second. Full credit here is for the number matching your own output and the units matching your own column. A number with the wrong units attached is worse than no number.</p>
+<p>The sentence should print as <strong><code>At Toolik, June's average daily precipitation was 1.54 mm.</code></strong> The full value is 1.537217, and <code>:.2f</code> is what turns it into 1.54 for the sentence. The variable still holds every decimal.</p>
+<p>If you chose wind or radiation instead, your sentence needs its own units: metres per second, or J/cm2 per day. What matters here is that the number matches your own output and the units match your own column. A number with the wrong units attached is worse than no number.</p>
 </div>
 </div>
 </section>
 <section id="task-2-yearly-means" class="level2">
 <h2 class="anchored" data-anchor-id="task-2-yearly-means">🔁 Task 2: yearly means</h2>
 <p><strong>Your change:</strong> group by a different key. Build a new grouping and average the same temperature column into new variables.</p>
-<div id="66fe0567" class="cell" data-execution_count="11">
+<div id="b3ca0037" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>by_year <span class="op">=</span> df.groupby(<span class="st">'Year'</span>)</span>
@@ -961,11 +961,11 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>✍️ Required: read one year’s value from <code>yearly_means</code> and report it in an f-string.</strong></p>
-<div id="91fa90c0" class="cell" data-execution_count="12">
+<div id="96230db6" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>temp_2000 <span class="op">=</span> <span class="op">-</span><span class="fl">8.97</span>      <span class="co"># the year 2000 value, read from your output</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"In 2000, Toolik's average temperature was </span><span class="sc">{</span>temp_2000<span class="sc">}</span><span class="ss"> degrees Celsius."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>temp_2000 <span class="op">=</span> <span class="op">-</span><span class="fl">8.9675</span>    <span class="co"># the year 2000 value, read from your output</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"In 2000, Toolik's average temperature was </span><span class="sc">{</span>temp_2000<span class="sc">:.2f}</span><span class="ss"> degrees Celsius."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>In 2000, Toolik's average temperature was -8.97 degrees Celsius.</code></pre>
@@ -981,14 +981,14 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The sentence should print as <strong><code>In 2000, Toolik's average temperature was -8.97 degrees Celsius.</code></strong> The full value in your output is -8.967486, and -8.97 is that value rounded to two decimals.</p>
+<p>The sentence should print as <strong><code>In 2000, Toolik's average temperature was -8.97 degrees Celsius.</code></strong> The full value in your output is -8.967486, and <code>:.2f</code> prints that value rounded to two decimals.</p>
 <p>Any year is acceptable here, as long as the number in your sentence is the number on that year’s line in your own output. Do not copy the example if you read a different year.</p>
 </div>
 </div>
 </section>
 <section id="task-3-a-labeled-bar-chart" class="level2">
 <h2 class="anchored" data-anchor-id="task-3-a-labeled-bar-chart">🔁 Task 3: a labeled bar chart</h2>
-<div id="8d12efa4" class="cell" data-execution_count="13">
+<div id="7c868744" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> [<span class="st">'Jan'</span>, <span class="st">'Feb'</span>, <span class="st">'Mar'</span>, <span class="st">'Apr'</span>, <span class="st">'May'</span>, <span class="st">'Jun'</span>, <span class="st">'Jul'</span>, <span class="st">'Aug'</span>, <span class="st">'Sep'</span>, <span class="st">'Oct'</span>, <span class="st">'Nov'</span>, <span class="st">'Dec'</span>]</span>
@@ -1007,7 +1007,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>Your change:</strong> give the chart a new title. Pick <strong>one</strong> and re-run.</p>
-<div id="abaaef81" class="cell" data-execution_count="14">
+<div id="3777d1b8" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>plt.bar(months, monthly_means)</span>
@@ -1035,15 +1035,15 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>Any of the three titles is correct. The bars are unchanged, since a title is a label on the figure and not part of the data.</p>
-<p>The bar chart shows something the line plot did not make obvious: only three bars rise above zero, and the nine below it are much taller. September, at -0.110753, is so close to zero that its bar is almost invisible. The line plot and the bar chart show the same numbers, which is why it is worth drawing data more than one way.</p>
+<p>The bar chart shows something the line plot did not make obvious: only three bars rise above zero, and the nine below it are much taller. September, at -0.110753, is so close to zero that its bar is almost invisible. The line plot and the bar chart show the same twelve numbers and make different things obvious, which is why one figure is rarely enough.</p>
 </div>
 </div>
 <p><strong>✍️ Required: read the coldest month’s value off your chart and report it in an f-string.</strong></p>
-<div id="b1c28d2f" class="cell" data-execution_count="15">
+<div id="a484577b" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>coldest <span class="op">=</span> <span class="op">-</span><span class="fl">22.89</span>      <span class="co"># January's value, read from your chart</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Toolik's coldest month averages about </span><span class="sc">{</span>coldest<span class="sc">}</span><span class="ss"> degrees Celsius."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>coldest <span class="op">=</span> <span class="op">-</span><span class="fl">22.8890</span>    <span class="co"># January's value, read from your chart</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Toolik's coldest month averages about </span><span class="sc">{</span>coldest<span class="sc">:.2f}</span><span class="ss"> degrees Celsius."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Toolik's coldest month averages about -22.89 degrees Celsius.</code></pre>
@@ -1059,13 +1059,13 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The sentence should print as <strong><code>Toolik's coldest month averages about -22.89 degrees Celsius.</code></strong> The coldest month is <strong>January</strong>, at -22.889032 in your Task 3 output.</p>
+<p>The sentence should print as <strong><code>Toolik's coldest month averages about -22.89 degrees Celsius.</code></strong> The coldest month is <strong>January</strong>, at -22.889032 in the <code>monthly_means</code> you printed in step 3.</p>
 <p>December is the second coldest at -21.442560, so if you read the wrong bar you were only about 1.4 degrees off and would not have noticed from the picture alone. The check is to look back at the printed <code>monthly_means</code> from step 3 and confirm which month is actually lowest. Reading a value off a chart is a good way to get the general size of something and a poor way to get it exactly right.</p>
 </div>
 </div>
 </section>
-<section id="where-the-marks-are" class="level2">
-<h2 class="anchored" data-anchor-id="where-the-marks-are">Where the marks are</h2>
+<section id="what-to-check-first" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-check-first">What to check first</h2>
 <p>If you compare your notebook against this key, look for these three things.</p>
 <ol type="1">
 <li><strong>Your three f-string sentences print real numbers from your own output</strong>, with the right units, and not the example numbers copied across. That is the only part of this exercise that was genuinely yours.</li>

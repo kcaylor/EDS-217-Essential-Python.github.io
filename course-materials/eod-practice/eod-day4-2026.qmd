@@ -26,12 +26,11 @@ microplastics measurement they can find: 16,245 water samples, pooled from thirt
 separate studies, taken between 1972 and 2022 by research vessels, citizen scientists, and
 undergraduates with nets.
 
-Nobody designed this dataset. It was assembled, one study at a time. Most of the environmental
-data you will ever be handed was put together the same way, which is why today mattered.
+This dataset was assembled one study at a time. Nobody designed this dataset. Most of the environmental
+data you will ever be handed was put together the same way.
 
-You have already met this file twice today. Today you will take it the whole way: from the
-raw download to an answer you could defend about whether the Atlantic and the Pacific are
-different.
+You have already seen this file twice today. Now, you will use the raw data to answer
+the question: Is there more plastic in the Pacific than the Atlantic?
 
 :::{.callout-note title="Reference"}
 NOAA National Centers for Environmental Information, Marine Microplastics database.
@@ -40,8 +39,7 @@ NOAA National Centers for Environmental Information, Marine Microplastics databa
 
 ## Today's three patterns
 
-Everything below is built from these three patterns, plus two more you learned yesterday. You
-should not need to look any of them up more than once.
+Everything below is built from these three patterns, plus two more you learned yesterday.
 
 ```python
 df['new'] = expression                     # the derived-column pattern
@@ -50,7 +48,7 @@ df['col'] = df['col'].fillna(value)
 df['col'] = df['col'].str.strip()          # the string-cleaning pattern
 ```
 
-And the payoff from this morning:
+And from this morning:
 
 ```python
 df['new'] = df['col'].apply(my_function)   # your own verb, run down a column
@@ -71,7 +69,7 @@ Date: 09/03/2026
 3. Import what you need and read the data. The `Date` column is text, and pandas can convert it
    while it reads if you tell it exactly what the text looks like.
 
-:::{.callout-tip title="🧭 Field Note: reading dates, and asking one for its year"}
+:::{.callout-tip title="🧭 Field Note: reading dates"}
 `read_csv()` takes a `parse_dates=` argument naming the columns that hold dates, and a
 `date_format=` argument describing how they are written. Here is the whole line. **Run it as
 written:**
@@ -91,8 +89,7 @@ one of these in task 13, and we are giving it to you here:
 samples['year'] = samples['Date'].dt.year
 ```
 
-**Dates get a full session on Day 6.** By the middle of next week you will be writing both of
-these yourself. Today, copy them.
+The `.year` is the request for the year of that date string. **Dates get a full session on Day 6.**
 
 📖 [Cheatsheet: reading CSV files](../cheatsheets/read_csv.qmd) · [Cheatsheet: time series](../cheatsheets/timeseries.qmd)
 :::
@@ -113,9 +110,8 @@ Answer each of these questions in a markdown cell underneath the code that produ
 
 1. How many rows and columns? Display the first few rows.
 2. Run `.info()`. Which columns are `object`, and which of those *should* be something else?
-3. Run `.isnull().sum()`. Five columns have gaps. Name them and their counts.
-4. `Oceans` is missing on 271 rows and `Measurement` on 5,792. Are those the same rows? Find
-   out, and say how you know.
+3. Run `.isnull().sum()`. How many columns have gaps? Which are the columns, and how many gaps do they have?
+4. `Oceans` is missing on 271 rows and `Measurement` on 5,792. Are those the same rows? How do you know?
 
 ```{python}
 print(df.shape)
@@ -140,7 +136,7 @@ print(measured['Oceans'].isnull().sum())
 
 ## Part 2: Decide what to keep
 
-Part 2 takes judgement rather than syntax, and more than one answer here is defensible. Every
+Part 2 requires some judgement, so more than one answer here is defensible. Every
 task here removes rows, so **print `.shape` after every one of them** and record the number in
 a markdown cell.
 
@@ -255,12 +251,11 @@ plt.xlabel('pieces per cubic metre')
 plt.show()
 ```
 
-16. The histogram you just drew is useless, and it is useless for a reason you can state in one
-    sentence. State that reason in a markdown cell.
+16. The histogram you just drew is useless. State the reason why in a markdown cell.
 
 17. Filter `samples` to the rows where `Measurement` is greater than zero, end the line with
     `.copy()`, and call it `positive`. How many samples reported exactly zero pieces? Is zero a
-    measurement or a missing value? Defend your answer in one sentence.
+    measurement or a missing value?
 
 ```{python}
 positive = samples[samples['Measurement'] > 0].copy()
@@ -298,7 +293,7 @@ agree with theirs.
     - `'medium'` from 0.01 up to 1
     - `'high'` at 1 and above
 
-    Test it on `0.001`, `0.5`, and `50` before you go near the DataFrame.
+    Test it on `0.001`, `0.5`, and `50` before touching the DataFrame.
 
 ```{python}
 def density_class(measurement):
@@ -338,7 +333,7 @@ print(noaa_very_low['my_class'].value_counts())
     `Density Class` must actually mean, given that samples they called `Very Low` fall in your
     `high` bin. Then say whether you would use their column in an analysis, and why.
 
-:::{.callout-tip title="A hint, if you want one"}
+:::{.callout-tip title="A hint"}
 Look at `Density Range` alongside `Density Class`. Run
 `positive[['Density Class', 'Density Range']].drop_duplicates()` and read the result carefully.
 :::
@@ -390,7 +385,7 @@ In a single markdown cell of 200 to 300 words, answer this:
 
 Your answer must cite at least three specific numbers you computed here, must name at least
 one cleaning decision you made and what it cost, and must include at least one thing this
-dataset cannot tell them. Complete sentences, no bullet fragments.
+dataset cannot tell them. Use complete sentences.
 
 ## The grammar minute
 
@@ -409,9 +404,8 @@ df['new'] = df['col'].apply(my_function)   # add a column only you know how to c
 Six patterns, and two of them you also used yesterday and the day before.
 
 Notice which one did the most work today. It was `df['new'] = expression`, four times over:
-`ocean`, `year`, `log10_measurement`, and `my_class`, and none of the cleaning patterns comes
-close. The twenty-two columns you downloaded did not have the answer to the journalist's
-question in them, and the four columns you made yourself are where you found it!
+`ocean`, `year`, `log10_measurement`, and `my_class`. The twenty-two columns you downloaded
+did not have the answer to the journalist's question in them, and the four columns you made yourself are where you found it!
 
 ## Wrap-up
 

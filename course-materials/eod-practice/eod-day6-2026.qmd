@@ -25,14 +25,10 @@ The Eurovision Song Contest has been held almost every year since 1956. Fifty-tw
 entered at least once, the scoring system has been rebuilt four times, the number of entrants has
 nearly doubled, and the whole of it is in one file of 1,603 rows.
 
-It is not environmental data, and that is deliberate. Everything you learned today is about the
-**shape** of tables rather than what is in them, and a dataset you have opinions about is a good
-place to find out whether you have actually learned it. You will recognize half the country names
-and none of the songs.
+Everything you learned today is about the
+**shape** of tables rather than what is in them, so it's okay that this isn't environmental data.
 
-Today you will do all four of the day's moves on it, and along the way the file will hand you
-three separate reasons to distrust an answer you have just computed. Finding those is the real
-exercise.
+Today you will determine the most successful Eurovision country, and find three reasons to distrust the answer you have just computed.
 
 :::{.callout-note title="Reference"}
 Eurovision Song Contest contestant data, compiled from the contest's public results archive.
@@ -40,7 +36,7 @@ Eurovision Song Contest contestant data, compiled from the contest's public resu
 
 ## Today's patterns
 
-Everything below is built from these three, plus what you already had.
+Everything below is built from these three patterns:
 
 ```python
 pd.merge(left, right, on='key')                        # the join pattern
@@ -127,7 +123,7 @@ contests = eurovision[eurovision['year'] != 2020].copy()
 contests.shape
 ```
 
-:::{.callout-important title="Why this matters more than it looks"}
+:::{.callout-important title="Why this matters"}
 A very common first move on a file like this is `df.fillna(0)`, to make the nulls go away.
 
 Do it here and every one of that year's 41 entries acquires a real score of zero points. Those
@@ -135,7 +131,7 @@ zeros then flow into every average you compute for the rest of the practice, and
 final table becomes an artifact of a contest that never took place.
 
 A null means *no value*. A zero means *the value is zero*. Filling one with the other is not
-tidying, it is fabrication, and pandas will help you do it without a word of complaint.
+tidying, it is fabrication.
 :::
 
 ## Part 2: Decades
@@ -159,12 +155,9 @@ the year: no month, no day, no hour. Parsing it would produce a column whose onl
 `.dt.year`, hands back the integer you started with. The parse earns its place in files that hold
 a real date, like the Toolik record from this morning, where `.dt.month` and `.dt.dayofyear` tell
 you something the raw column does not.
-
-Recognizing which tool a file does not need is as much a part of the job as knowing which one it
-does.
 :::
 
-7. Count the entries in each year from 2000 to 2007. Something changes abruptly. What, and in
+7. Count the entries in each year from 2000 to 2007. What changes abruptly? In
    which year? In a markdown cell, say what a sudden jump in entries per contest would do to a
    comparison of average scores between the 1990s and the 2010s.
 
@@ -174,8 +167,8 @@ contests.groupby('year')['to_country'].count().loc[2000:2007]
 
 ## Part 3: The best country of each decade
 
-This is the question the file invites, and answering it well takes the loop from yesterday
-afternoon and the stacking pattern from this morning.
+You can answer the below questions using the loop from yesterday
+afternoon and the stacking pattern from this morning:
 
 8. Build a table with one row per decade, holding the country with the highest average
     `points_final` in that decade, how many entries that average came from, and the average
@@ -207,7 +200,7 @@ decade_winners[['decade', 'to_country', 'count', 'mean']]
 
 10. The `mean` column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown
     cell, two or three sentences: is Europe getting better at writing songs? What else changed
-    between 1956 and 2019 that would produce exactly this pattern, and what would you have to
+    between 1956 and 2019 that would produce this pattern? What would you have to
     divide by to remove it?
 
 ## Part 4: The second table
@@ -280,7 +273,7 @@ print(ranked[['country', 'entries', 'population', 'entries_per_million']].tail(5
 :::{.callout-tip title="Look at the population column before you answer"}
 Iceland is listed at 255,866 and the United Kingdom at 57,247,586. Neither of those is a current
 figure, and the file does not say what year any of them are from. That is a real limitation of a
-real dataset, and naming it is a better answer than working around it.
+real dataset.
 :::
 
 ## Part 5: The whole contest in one grid
@@ -318,12 +311,12 @@ In a single markdown cell of 200 to 300 words, answer this:
 
 Your answer must cite at least three specific numbers you computed here, must name at least two
 distinct reasons the question is harder than it sounds, and must end with the single table or
-number you would actually send them. Complete sentences, no bullet fragments.
+number you would actually send them. Use complete sentences.
 
 ## The grammar minute
 
-Look back through your notebook. Three patterns did all of the structural work today, and none
-of them calculated anything:
+Look back through your notebook. Three patterns did all of the structural work today without
+calculating anything:
 
 ```python
 pd.merge(a, b, left_on=, right_on=)    # two tables become one, side by side
@@ -334,10 +327,9 @@ df.pivot_table(index=, columns=, ...)  # one long table becomes one wide one
 Every other line in your notebook was something you already knew, operating on a table that one of
 those three patterns had put into the right shape.
 
-That is the whole of today, and it is worth saying plainly. Most of the difficulty in real data
-analysis is not the analysis. It is that the numbers you need to compare are in two files, or in
+Most of the difficulty in real data analysis is not the analysis. It is that the numbers you need to compare are in two files, or in
 one file at right angles to each other. The three
-patterns above are how you fix that, and after today none of them should be mysterious.
+patterns above are how you fix that.
 
 ## Wrap-up
 

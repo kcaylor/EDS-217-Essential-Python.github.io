@@ -14,10 +14,10 @@ format:
 :::
 
 Welcome to the first session of Day 1, and to your first hands-on session of the course. You
-have already met **Positron** in your R course, so the workspace itself will look familiar.
+have already met **Positron** in your R course, so the workspace itself should look familiar.
 This morning we will learn how Positron works with Python, and you will build your
-first **Jupyter Notebook**. Notebooks are where you will write your code for the rest of this
-course, and for most of your time in the MEDS program.
+first **Jupyter Notebook**. Notebooks are where we work for the rest of this course, and
+where you will write most of your code for the rest of your time in the MEDS program.
 
 ::: {.center-text .body-text-m}
 Always remember: [**Python is the programming language. Positron is the IDE.**]{.teal-text}
@@ -28,15 +28,15 @@ output, your notes, and your files together in one place. Positron is the IDE we
 Python is the language we write in it.
 
 ::: {.callout-note}
-Positron runs both R and Python. The panes you learned in your R course, the Console, the
-Variables pane, the Plots pane, and the file Explorer, all do the same jobs when coding in
+Positron runs both R and Python. The panes you learned in your R course (the Console, the
+Variables pane, the Plots pane, and the file Explorer) all do the same jobs when coding in
 Python. The only things that change are the interpreter Positron is running (python
 instead of R) and the file format we write in (.ipynb).
 :::
 
 Every step below is written for **workbench-1.bren.ucsb.edu**, which is the Bren server we
-run this course on. The screenshots were taken on that server, so what you see on your own
-screen should match them closely. The one difference you should expect is the username: the
+run this course on. The screenshots were taken on that server, so your own screen
+should match them closely. The one difference you should expect is the username: the
 screenshots say `caylor`, and yours will say your own Bren username.
 
 ## Meet Positron on Posit Workbench
@@ -55,15 +55,15 @@ Everything happens in your browser.
 
 ::: {.callout-note title="Workbench signs you out after an hour of inactivity"}
 The notice just above the Sign in button warns you that you will be signed out for inactivity; an hour away from the keyboard really is all it takes. However, if you come back from lunch to a sign-in page, your session itself is
-still running on the server. Sign in again and you should find your work right where you left it. That being said, you should always save your work when you are stepping away from your computer, just in case!
+still running on the server. Sign in again and you should find your work right where you left it. Even so, you should always save your work when you are stepping away from your computer, just in case!
 :::
 
 #### Step 2: Look at the Projects page
 
 Signing in brings you to the **Projects** page, which lists the sessions you already have
 running. On your first visit your own list should be empty, and the screenshot below shows a
-session already running only because it was taken on an account that had one from earlier in
-the day.
+session already running only because it was taken on an account with a session left over from
+earlier in the day.
 
 ![](images/workbench/02_projects_page.png)
 
@@ -117,7 +117,7 @@ scaffolding we do not need yet, so choose **Empty Project** and click **Next**.
 1. Replace the suggested name with `eds217`.
 2. Leave the **Location** as `/home/` followed by your username, which is your home
    directory on the server and where we want the folder to live.
-3. Check the line underneath. It should read **New folder will be created at
+3. Check the line underneath the **Location** box. It should read **New folder will be created at
    /home/your-username/eds217**.
 4. Leave **Initialize Git repository** unchecked. We will come to git on Day 8.
 5. Click **Create**.
@@ -134,7 +134,8 @@ quickly.
 ![](images/workbench/08_folder_created.png)
 
 Positron reloads, and the Explorer on the left should now show an **EDS217** heading with
-nothing under it yet. Everything you make this week should go in this folder.
+nothing under it yet. The Explorer puts folder names in capitals, so the folder you typed as
+`eds217` is the same one. Everything you make this week should go in this folder.
 
 ## Point the Console at the eds217 environment
 
@@ -157,7 +158,8 @@ have running and offers **New Console Session...** at the bottom. Click it.
 #### Step 2: Choose the eds217 environment
 
 Positron lists every interpreter it can find on the server, and there are a lot of them. The
-one we want is (hopefully!) at the top, marked **Suggested**:
+one we want is marked **Suggested**. The first time you open this list you will probably
+have to scroll to find it, and once you have used it, it should sit at the top:
 
 > **Python 3.11.15 (Conda: eds217)**
 > `/opt/miniforge3/envs/eds217/bin/python`
@@ -167,8 +169,7 @@ one we want is (hopefully!) at the top, marked **Suggested**:
 :::{.callout-caution title="Read the environment name, not just the Python version"}
 The Bren server hosts the environments for several MEDS courses, and their names all look
 alike: `eds220`, `eds231`, `eds232`, `eds296`. One of them, `eds231`, even runs the same
-Python 3.11.15 that ours does. The one you want says **eds217**. You may need to scroll to find
-this environment the first time you use it, but eventually it should show up at the top of the list.
+Python 3.11.15 that ours does. The one you want says **eds217**. Read the name rather than trusting the position in the list.
 :::
 
 Positron starts the Python session, and the Console prompt changes from `>` to `>>>`. The
@@ -180,8 +181,8 @@ to delete the R console to avoid any accidental confusion.
 
 ## Two ways to run Python
 
-Positron can run your Python code in two places. It is worth seeing both once so you know
-the difference.
+Positron can run your Python code in two places. We will try both once, so you know which
+one to reach for later.
 
 ### The Console (a REPL)
 
@@ -207,8 +208,8 @@ Click into the Console, type an expression, and press Enter:
 
 Read, evaluate, print, and then loop back around: you typed an expression, Python evaluated
 it, and the Console printed `42`. We are only checking that the environment works here. We
-cover Python's syntax properly in the next session this morning, and the full set of
-operators on Day 3.
+cover Python's syntax properly in the next session this morning, including the arithmetic
+operators, and the comparison operators on Day 3.
 
 Notice the folder name `~/eds217` above the Console output. The Console is working inside
 the folder you made, which is exactly what we wanted.
@@ -218,16 +219,15 @@ anything you want to keep should go in a notebook (or a .py file) instead.
 
 ### Jupyter Notebooks (what we will use)
 
-For the rest of this course you will write your code in **Jupyter Notebooks**, files ending
+For the rest of this course we write our code in **Jupyter Notebooks**, files ending
 in `.ipynb`. A notebook lets you combine **code**, its **output**, and **narrative text** in
 one document, so your analysis and the story of your analysis stay together. Combining them
-is known as literate programming, and it is exactly what we want for data science. Notebooks
-are where we will be working for the rest of the course.
+is known as literate programming, and it is exactly what we want for data science.
 
 ## Make your first notebook
 
 Let's make the notebook you will use for the rest of today. **We follow the same four steps
-at the start of every session**, so you should have them memorized by Wednesday.
+at the start of every session**, so you will get plenty of practice with them!
 
 #### Step 1: Create the file
 
@@ -243,8 +243,8 @@ and press Enter.
 ![](images/workbench/14_new_file_name.png)
 
 ::: {.callout-tip title="Name the file first, and get the extension right"}
-Naming a file at the moment you create it means you never lose work to a forgotten file
-name. The `.ipynb` extension tells Positron to open the file as a notebook rather than as a
+Naming a file at the moment you create it means you are far less likely to lose work to a
+file you never named. The `.ipynb` extension tells Positron to open the file as a notebook rather than as a
 page of text, so type it out in full.
 :::
 
@@ -254,11 +254,11 @@ Positron creates the file inside `~/eds217` and opens it as an empty notebook.
 
 #### Step 2: Check the kernel
 
-Look along the notebook's action bar, right of centre. It should already read **Python
-3.11.15 (Conda: eds217)** with a small green ring beside it.
+Look along the notebook's action bar, right of centre, for the name of the kernel. It should
+already read **Python 3.11.15 (Conda: eds217)** with a small green ring beside it.
 
 If it reads anything else, click it and choose **Change Kernel**. Positron opens a list titled
-**Select Positron Notebook Kernel**, which holds the same interpreters you saw for the
+**Select Positron Notebook Kernel**, which shows the same interpreters you saw for the
 Console. Pick the eds217 entry, and read the environment name rather than the Python version.
 
 ![](images/workbench/16_select_kernel.png)
@@ -269,7 +269,37 @@ the notebook's action bar controls this notebook. Each notebook keeps its own ke
 should check it every time you open a new one.
 :::
 
-#### Step 3: Write and run a cell
+#### Step 3: Add a title cell
+
+1. Click **+ Markdown** in the action bar. Your notebook is still empty, so the new Markdown
+   cell becomes the first cell in it. Once a notebook has cells in it, a **+ Code** and a
+   **+ Markdown** button also appear wherever you hover between two of them.
+2. Give it the following content:
+
+```markdown
+# Day 1: Session 1A - Positron & Jupyter Notebooks
+
+[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1a_positron_notebooks.html)
+
+Date: 08/31/2026
+```
+
+Change the date to the day you are working whenever you repeat this at the start of a later
+session. Run the Markdown cell (`Shift + Enter`) to **render** it into formatted text.
+Double-click a rendered Markdown cell to edit it again.
+
+#### Step 4: Save the notebook
+
+Click the save icon in the action bar, or press `Ctrl + S` (`Cmd + S` on macOS), and
+keep saving as you go. Saving is the last step of the ritual because it is the one
+you should repeat all morning rather than only once.
+
+## Your first cell
+
+The ritual is done, and the rest of this section is what we do inside a notebook once
+it is set up.
+
+### Write and run a cell
 
 Click **+ Code** in the action bar to add a code cell, type the classic first line of code,
 and run it with `Shift + Enter`:
@@ -294,29 +324,6 @@ worth having *after* you can write the code yourself, which is what these nine d
 :::{.callout-tip title="✏️ Test your knowledge"}
 Change the message inside the quotes to greet yourself by name, then re-run the cell with
 `Shift + Enter`. Did the output update? Did the number in the square brackets change?
-:::
-
-#### Step 4: Add a title cell
-
-1. Hover just above your first code cell. A **+ Code** and a **+ Markdown** button appear
-   between cells wherever you hover, so click **+ Markdown** there to put a Markdown cell at
-   the top of the notebook.
-2. Give it the following content:
-
-```markdown
-# Day 1: Session 1A - Positron & Jupyter Notebooks
-
-[Session Webpage](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1a_positron_notebooks.html)
-
-Date: 08/31/2026
-```
-
-Run the Markdown cell (`Shift + Enter`) to **render** it into formatted text. Double-click a
-rendered Markdown cell to edit it again.
-
-:::{.callout-caution}
-Save your work often. Click the save icon in the action bar, or press `Ctrl + S`
-(`Cmd + S` on macOS).
 :::
 
 Throughout the session: take notes in Markdown cells, write and run code in Code cells, and
@@ -374,7 +381,7 @@ Then run `help(print)` and skim the description.
 
 :::{.callout-warning title="Limits of the Variables pane"}
 The Variables pane is not the right tool for very large DataFrames or arrays. Use
-`df.head()`, `df.info()`, and `df.describe()` for those. You will meet all three this
+`df.head()`, `df.info()`, and `df.describe()` for those. You will meet all three methods this
 afternoon and learn them properly on Day 2.
 :::
 

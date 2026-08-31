@@ -46,30 +46,42 @@ against a different question.
 
 ## 2. A suite of files, voice or other revisions
 
-The extra work here is that a batch is where a stale page hides. `make render`
-is incremental and `make preview` leaves `docs/` holding pages rendered at
-different times, so a full pass needs a full render.
+You do not need a full rebuild for this. `make render` is incremental per page,
+not per session: for every source in the render set it compares the source
+mtime against its `docs/*.html` mtime and builds only the stale ones. Ten
+edited files means ten pages rebuilt.
 
 ```bash
 # after the edits are done
 python3 tools/prose_guard.py verify --all
 python3 tools/prose_guard.py desync --all
-make verify                     # full render, runs every cell, resolves every
-                                # data URL, runs the six gates
-```
-
-`make verify` never commits and never pushes. When it is clean:
-
-```bash
+make render                     # only the pages you changed
+python3 tools/run_cells.py course-materials/day4.qmd course-materials/day5.qmd
+make gates
 git add course-materials/ docs/
 git status                      # read it before committing
 git commit -m "voice(2026): pass over days 4-7"
 make publish
 ```
 
-If you changed a layout, `_quarto.yml`, or anything that touches every page,
-`make verify` already did a full render. If you skipped `make verify`, run
-`make render-full` instead of `make render`, or `make publish` will stop you.
+`make verify` is the same render plus every cell, every data URL and the gates,
+across the whole site. Use it when you have time and want certainty. Use the
+sequence above when you want to be back in the room in five minutes. Neither
+one commits or pushes, and `make publish` re-runs the render checks itself.
+
+Two cases where incremental is not enough:
+
+- **A site-wide file changed.** `build_docs.py` watches `_quarto.yml`,
+  `meds-website-styles.scss` and `course-materials/assets/css/exercises.css`,
+  and queues every page when one of them moves. `make render` still does the
+  right thing here, it just will not be quick.
+- **You previewed.** `make preview` writes into `docs/`, so a previewed page can
+  be newer than its source while its content came from a mid-edit state. The
+  timestamps look fine and `make render` will skip it. `touch` the sources you
+  previewed, or run `make render-full`.
+
+No page in `course-materials/` uses `{{< include >}}`, so there is no hidden
+dependency that incremental rendering would miss.
 
 ### If the batch is a voice pass
 

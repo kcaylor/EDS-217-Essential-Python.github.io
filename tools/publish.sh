@@ -23,6 +23,15 @@ if ! python tools/prelaunch_checks.py d5_render_complete; then
   bad "docs/ does not hold a complete render. Run 'make render' first."
   exit 1
 fi
+# d5 counts that ninety HTML files exist, not that any of them is current. With
+# incremental builds as the default that is the gap a stale page slips through,
+# which is what happened twice on 2026-08-27 and 28. d10 asks the other question.
+if ! python tools/prelaunch_checks.py d10_render_current; then
+  bad "A page in docs/ is older than its source. Rebuild before publishing:"
+  bad "  make render        the changed pages"
+  bad "  make render-full   everything, after a layout or _quarto.yml change"
+  exit 1
+fi
 if ! python tools/prelaunch_checks.py d6_docs_data_tracked; then
   bad "Datasets under docs/data are not committed."
   bad "Without them every read_csv in the course returns 404. Stage them:"

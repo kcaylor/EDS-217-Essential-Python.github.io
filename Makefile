@@ -6,7 +6,8 @@
 #   make board      rebuild the dashboard and open it
 #   make preview    live preview of the whole site
 #   make preview PAGE=day3     live preview of one page
-#   make render     full render into docs/
+#   make render     render the pages whose source changed
+#   make render-full  rebuild every page, for a layout or _quarto.yml change
 #   make verify     render, run every cell, resolve every URL, run the gates
 #   make publish    guarded push to both remotes
 #
@@ -21,7 +22,7 @@ PAGE ?=
 DAY ?=
 
 .DEFAULT_GOAL := help
-.PHONY: help status next show board dashboard preview render verify verify-live \
+.PHONY: help status next show board dashboard preview render render-full verify verify-live \
         gates cells cache check certify publish env clean-preview
 
 help:
@@ -47,7 +48,8 @@ help:
 	@echo "    make keys PAIR=eod-day3  check one handout and key pair"
 	@echo "    make keys-tasks          key structure only, no execution"
 	@echo "    make cache               confirm every data URL resolves"
-	@echo "    make render              full render into docs/"
+	@echo "    make render              render only the pages whose source changed"
+	@echo "    make render-full         rebuild every page (layout or _quarto.yml changes)"
 	@echo "    make verify              render plus all of the above"
 	@echo "    make verify-live         check the published site"
 	@echo ""
@@ -82,6 +84,9 @@ preview:
 	@bash tools/preview.sh $(PAGE)
 
 render:
+	@$(RUN) python build_docs.py
+
+render-full:
 	@$(RUN) python build_docs.py --full
 
 check:

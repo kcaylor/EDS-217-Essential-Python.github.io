@@ -47,7 +47,7 @@ aq.shape
 
 ## Part 1: What is in each pile
 
-**1. How many readings came from each site? One line.**
+**1. How many readings came from each site?**
 
 ```{python}
 aq.groupby('site')['value'].count()
@@ -75,7 +75,7 @@ dictionary form gives you: one call, two different summaries, applied to two dif
 :::
 
 **3. One of the three stations is not like the others. Name it, say what it does not do, and say
-in one sentence what that means for any comparison you are about to make across all three.**
+in one sentence what that means for any comparison you will make across all three.**
 
 ```{python}
 aq.groupby(['site', 'parameter'])['value'].count()
@@ -96,7 +96,7 @@ appearing as zero.
 :::
 
 **4. How many readings of each parameter are there across the whole table? Which parameter is the
-best measured, and which the worst?**
+best measured? Which is the worst?**
 
 ```{python}
 aq.groupby('parameter')['value'].count().sort_values(ascending=False)
@@ -167,9 +167,9 @@ list costs you nothing and is what turns a ranking into a judgement about whethe
 means anything.
 :::
 
-**8. In a markdown cell, three or four sentences. The means are nearly identical and the maxima
-are not. What is different about these three stations, and which of the five columns in your
-table told you? Would you describe the South Coast as having one air quality or three?**
+**8. In a markdown cell: The means are nearly identical and the maxima are not. What is different
+about these three stations, and which of the five columns in your table told you? Would you
+describe the South Coast as having one air quality or three?**
 
 :::{.callout-note title="✅ A model answer"}
 The three stations agree almost exactly on the average hour and disagree completely on the
@@ -238,8 +238,7 @@ would be the site means from question 6, and all three are close to 6.
 :::
 
 **11. In a markdown cell: your answer to question 10 has a site missing from it entirely. Is that
-because the air there was clean, or for another reason? Look back at your answer to question 7
-before you commit.**
+because the air there was clean, or for another reason? Look back at your answer to question 7.**
 
 :::{.callout-note title="✅ Answer"}
 **CNSI is missing, and not because its air was clean.** Its mean of 6.083 µg/m³ is within 0.4 of
@@ -285,10 +284,9 @@ zero, which is the signature of instrument noise around a small number rather th
 sensor.
 :::
 
-**14. In a markdown cell, two or three sentences: the site with no negative readings is also the
-site with the smallest standard deviation and the lowest maximum. Propose one explanation that
-accounts for all three of those facts at once. You cannot confirm it with this data; say what you
-would need.**
+**14. In a markdown cell: the site with no negative readings is also the site with the smallest
+standard deviation and the lowest maximum. Propose one explanation that accounts for all three
+of those facts at once. Say what you would need to confirm it with this data.**
 
 :::{.callout-note title="✅ A model answer"}
 One explanation covers all three facts: CNSI is a different instrument, sited differently, and
@@ -310,9 +308,8 @@ by side, would settle it directly. Full marks for one explanation that accounts 
 facts and a specific, obtainable piece of evidence that would test it.
 :::
 
-**15. A decision, and there is no single right answer. Would you drop the negative readings before
-computing site means? Compute both versions and report the difference, then say in one sentence
-which you would publish and why.**
+**15. Would you drop the negative readings before computing site means? Compute both versions and
+report the difference, then say in one sentence which you would publish and why.**
 
 ```{python}
 clean_pm25 = pm25[pm25['value'] >= 0]
@@ -471,9 +468,8 @@ amplitude. The gap between the two pollutants is real, but part of its size come
 stations are in each average.
 :::
 
-**22. In a markdown cell, two or three sentences: one of these two pollutants has a much sharper
-daily cycle than the other. Which, and what does the difference suggest about where each one comes
-from?**
+**22. In a markdown cell: Which one of these two pollutants has a sharper daily cycle than the
+other? What does the difference suggest about where each one comes from?**
 
 :::{.callout-note title="✅ Answer"}
 **Ozone has the sharper cycle**, a peak-to-trough ratio of 2.77 against 1.74 for PM2.5, and the

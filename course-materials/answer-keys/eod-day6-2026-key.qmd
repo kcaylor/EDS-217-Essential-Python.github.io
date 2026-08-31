@@ -152,9 +152,9 @@ ten. A per-decade total is not comparable across decades unless you also know ho
 each decade contains.
 :::
 
-**7. Count the entries in each year from 2000 to 2007. Something changes abruptly. What, and in
-which year? In a markdown cell, say what a sudden jump in entries per contest would do to a
-comparison of average scores between the 1990s and the 2010s.**
+**7. Count the entries in each year from 2000 to 2007. What changes abruptly? In which year? In a
+markdown cell, say what a sudden jump in entries per contest would do to a comparison of
+average scores between the 1990s and the 2010s.**
 
 ```{python}
 contests.groupby('year')['to_country'].count().loc[2000:2007]
@@ -211,8 +211,8 @@ selects for small counts.
 
 **10. The `mean` column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown
 cell, two or three sentences: is Europe getting better at writing songs? What else changed
-between 1956 and 2019 that would produce exactly this pattern, and what would you have to divide
-by to remove it?**
+between 1956 and 2019 that would produce this pattern? What would you have to divide by to
+remove it?**
 
 :::{.callout-note title="✅ Answer"}
 **No. What changed is the scale on which points are awarded.** Points come from the competing countries, and the field

@@ -154,8 +154,7 @@ different things: one is a note nobody needed to write, the other is a measureme
 
 ## Part 3: What varies, and what doesn't
 
-**8. Use `.value_counts()` on `LTER_Site` and on `Station`. What do you learn? Does either
-column tell you anything?**
+**8. Use `.value_counts()` on `LTER_Site` and on `Station`. What does either column tell you?**
 
 ```{python}
 toolik['LTER_Site'].value_counts()

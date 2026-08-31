@@ -78,7 +78,8 @@ would have been impossible. And the mis-typed column runs the other way: **`Acce
 `int64` but is a label, not a quantity**. That is what task 11 repairs.
 :::
 
-**3. Run `.isnull().sum()`. Five columns have gaps. Name them and their counts.**
+**3. Run `.isnull().sum()`. How many columns have gaps? Which are the columns, and how many gaps
+do they have?**
 
 ```{python}
 df.isnull().sum()
@@ -97,8 +98,8 @@ of rows and costs you nothing, because you were never going to analyse by sub-re
 `Measurement` is missing on 36 percent, and it is the column every later question uses.
 :::
 
-**4. `Oceans` is missing on 271 rows and `Measurement` on 5,792. Are those the same rows? Find
-out, and say how you know.**
+**4. `Oceans` is missing on 271 rows and `Measurement` on 5,792. Are those the same rows? How do
+you know?**
 
 ```{python}
 # The 271 rows missing an ocean are all rows that are also missing a measurement:

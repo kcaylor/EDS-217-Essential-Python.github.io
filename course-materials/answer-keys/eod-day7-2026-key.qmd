@@ -85,7 +85,7 @@ blank because nothing was measured at the zip code.
 :::
 
 **3. The two files do not have the same number of rows. Before you do anything else, write down
-two different explanations for that which do not involve anybody making a mistake.**
+two different explanations for that (not that someone made a mistake).**
 
 ```{python}
 in_2012_only = set(zones_2012['zipcode']) - set(zones_2023['zipcode'])
@@ -244,7 +244,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-**10. Something is wrong with that figure, and it is not subtle. Describe it in a markdown cell.**
+**10. Describe what is wrong with that figure in a markdown cell.**
 
 :::{.callout-note title="✅ Answer"}
 **The whole country is crushed into the left-hand 40 percent or so of the figure, and one lone
@@ -264,10 +264,9 @@ located[located['longitude'] > -60][['zipcode', 'state', 'primary_city',
                                       'latitude', 'longitude', 'year']]
 ```
 
-**12. In a markdown cell, two or three sentences. That is one zip code, appearing once in each
-year: two rows out of eighty thousand. Look up roughly where latitude 48.3, longitude −2.1 is. Is
-the temperature reading wrong, or is something else wrong? And say plainly what those two rows did
-to your figure.**
+**12. In a markdown cell: that is one zip code, appearing once in each year: two rows out of
+eighty thousand. Look up roughly where latitude 48.3, longitude −2.1 is. Is the temperature
+reading wrong, or is something else wrong? What did those two rows do to your figure?**
 
 :::{.callout-note title="✅ Answer"}
 **Zip code 22350, Alexandria, Virginia, recorded at 48.31 N and 2.12 W, which is in Brittany, in
@@ -311,9 +310,8 @@ plt.show()
 ```
 
 **14. You have just drawn a recognizable map of the United States without a mapping library, a
-projection, or a shapefile. In a markdown cell, one sentence on why that worked here. Then one
-more: run `usa['state'].nunique()` and say which parts of the country are not in these files at
-all.**
+projection, or a shapefile. Explain in a markdown cell how that worked here. Then, run
+`usa['state'].nunique()` and say which parts of the country are not in these files at all.**
 
 ```{python}
 print(usa['state'].nunique())
@@ -335,8 +333,8 @@ at the other, and neither end of that scale is in these files. Anything you say 
 statement about the lower 48.
 :::
 
-**15. Put the two maps side by side on your screen and try to see the difference between them. In
-one honest sentence: can you?**
+**15. Put the two maps side by side on your screen and try to see the difference between them.
+Can you?**
 
 :::{.callout-note title="✅ Answer"}
 **No.** The two figures are the same picture: the same colour gradient from the Canadian border to
@@ -397,8 +395,8 @@ why the paired mean change is 2.884 °F rather than 2.917 °F.
 :::
 
 **18. Draw a histogram of `temp_diff`. Label it. Then print
-`change['temp_diff'].value_counts().sort_index()` and read the two together. In a markdown cell,
-three or four sentences: what is the most common value, what is the second most common, and how
+`change['temp_diff'].value_counts().sort_index()` and read the two together. In a markdown cell:
+what is the most common value, what is the second most common, and how
 many distinct values are there in total? Given that, is `temp_diff` a measurement of how much a
 place warmed, or is it something else? Be precise.**
 
@@ -431,8 +429,8 @@ impossible to forget that you are counting boundary crossings.
 :::
 
 **19. Use the top-N pattern twice to show the five zip codes with the largest increase and the
-five with the largest decrease, with their states and coordinates. In a markdown cell, two or three
-sentences: a zip code that moved by 25 or 30 °F has moved five or six whole zones. Do you believe
+five with the largest decrease, with their states and coordinates. In a markdown cell: a zip code
+that moved by 25 or 30 °F has moved five or six whole zones. Do you believe
 that is a change in the climate? What else could produce it?**
 
 ```{python}
@@ -580,10 +578,10 @@ plt.tight_layout()
 plt.show()
 ```
 
-**26. Now the other end. Show the five states with the smallest mean increase, with their counts.
-In a markdown cell, one or two sentences: one of those states has more zip codes in it than all but
-one other state in the file. Does that make its small number more trustworthy or less, and does it
-make the ranking more interesting or less?**
+**26. Now, show the five states with the smallest mean increase instead, with their counts. In a
+markdown cell: one of those states has more zip codes in it than all but one other state in the
+file. Does that make its small number more trustworthy or less, and does it make the ranking
+more interesting or less?**
 
 ```{python}
 by_state.sort_values('mean').head(5).round(2)

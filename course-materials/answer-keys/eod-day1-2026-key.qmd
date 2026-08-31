@@ -105,6 +105,32 @@ A single curve with one peak in July and a long cold plateau from November throu
 to, which is why the axis is already labeled correctly.
 :::
 
+### 5. Export the summary
+
+```python
+monthly_means.to_csv("monthly_means.csv", header=True, float_format="%.2f")
+```
+
+:::{.callout-note title="✅ Answer"}
+Nothing prints, which is what a successful save looks like. The file appears in the Explorer
+beside your notebook, and its first lines read:
+
+```csv
+Month,Daily_AirTemp_Mean_C
+1,-22.89
+2,-20.70
+3,-20.69
+```
+
+`float_format="%.2f"` is what writes two decimals. Without it pandas writes the full stored
+value, `-22.889032258064518`, which is fifteen digits of precision the thermometer never had.
+Note that it also writes `-20.70` rather than `-20.7`, because it formats every number to the
+same width rather than dropping a trailing zero.
+
+If you saw a `NameError`, `monthly_means` was not defined yet, which means step 3 had not run in
+this notebook.
+:::
+
 ## 🔁 Task 1: monthly means for a different variable
 
 **Your change:** swap the column for **one** from this menu, and store the result in a new

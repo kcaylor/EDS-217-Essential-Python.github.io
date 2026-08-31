@@ -59,6 +59,7 @@ course goes on:
 | `df.groupby(...)['col'].mean()` | **Day 5** | Group + Aggregate |
 | `pd.merge()`, `pivot_table()` | **Day 6** | Join + Reshape + Dates |
 | `plt.plot()`, `plt.bar()` | **Day 7** | Visualize |
+| `.to_csv()` | **Day 7** | Visualize (saving counts as part of it) |
 
 ## Setup
 
@@ -177,6 +178,21 @@ plt.show()
 In R you might draw this with `ggplot(...) + geom_line()`. Here `plt.plot(series)` takes your
 twelve monthly values and draws them in order, and the label lines set the title and axes.
 :::
+
+### 5. Export the summary
+
+Your twelve monthly means only exist inside this notebook, and they are gone the moment the
+kernel restarts. Save them to a file, the way we did at the end of Part 2.
+
+**Copy and run this code:**
+
+```python
+monthly_means.to_csv("monthly_means.csv", header=True, float_format="%.2f")
+```
+
+Open the Explorer in Positron and you should see `monthly_means.csv` next to your notebook.
+`float_format="%.2f"` writes every number with two decimals, which is the same rounding you
+print with `:.2f` in the tasks below.
 
 You should now have `df`, `monthly`, and `monthly_means` in your notebook, which is where we
 ended up together this afternoon. Each of the three tasks below makes one change to the workflow
@@ -339,8 +355,9 @@ print(f"Toolik's coldest month averages about {coldest:.2f} degrees Celsius.")
 
 ## Wrap-up
 
-Nice work! You have now rerun a complete data science workflow and changed three things in it
-(hopefully!): the variable you averaged, the grouping key, and a chart label. Each time, you read
+Nice work! You have now rerun a complete data science workflow, from a file on the web to a
+chart and a saved summary, and changed three things in it (hopefully!): the variable you
+averaged, the grouping key, and a chart label. Each time, you read
 a number off your own output and reported it in a sentence of your own with an f-string. The
 workflow you just reran is the whole course in miniature, and starting Day 2 we will cover how
 each step works, at one or two steps a day, until Days 8 and 9, when you and your team run the

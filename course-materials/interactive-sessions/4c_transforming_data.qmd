@@ -38,14 +38,16 @@ By the end of this session you will be able to:
 
 ## Getting Started
 
-1. **Create a new notebook:**
-   - Open the Command Palette with `Ctrl + Shift + P` (`Cmd + Shift + P` on macOS)
-     and run **Create: New Jupyter Notebook**.
-   - Confirm the Kernel Selector in the notebook's action bar reads **eds217**.
+1. **Create the file.** In the Explorer, hover over the **EDS217** heading and click
+   **New File...**, then type the name in full, extension included:
+   `Session_4C_Transforming_Data.ipynb`
 
-2. **Save your notebook** (`Ctrl + S`, or `Cmd + S` on macOS) as: `Session_4C_Transforming_Data.ipynb`
+2. **Check the kernel.** The Kernel Selector in the notebook's action bar should read
+   **Python 3.11.15 (Conda: eds217)**. If it reads anything else, click it, choose
+   **Change Kernel**, and pick the eds217 entry.
 
-3. **Add a title cell** (Markdown), updating the date to today:
+3. **Add a title cell.** Click **+ Markdown** in the action bar, and give it this
+   content, with today's date:
 
 ```markdown
 # Day 4: Session 4C - The Derived-Column Pattern
@@ -54,6 +56,8 @@ By the end of this session you will be able to:
 
 Date: 09/03/2026
 ```
+
+4. **Save** with `Ctrl + S` (`Cmd + S` on macOS), and keep saving as you go.
 
 4. Read the microplastics data and keep only the samples reported in pieces per cubic metre,
    which is the unit you can actually do arithmetic with:
@@ -71,10 +75,6 @@ m3.shape
 
 10,178 samples, all in the same unit. Note the `.copy()`: you are about to change this table,
 which is exactly the case Day 3 told you to copy for.
-
-:::{.callout-caution}
-Save your work frequently with `Ctrl+S` (`Cmd+S` on macOS).
-:::
 
 ## The pattern
 

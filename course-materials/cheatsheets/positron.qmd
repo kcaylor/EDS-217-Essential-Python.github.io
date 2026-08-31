@@ -15,7 +15,7 @@ format:
 
 1. Go to `https://workbench-1.bren.ucsb.edu` and log in.
 2. Click **+ New Session** and choose **Positron Pro**.
-3. Allocate at least **2.5 GB** of memory if the dialog asks.
+3. Leave the **Resource Profile** on **Default**, which is what this class uses.
 4. Click **Launch**.
 
 ### Choosing where Python runs
@@ -27,8 +27,9 @@ Positron has two separate settings, and both need to read `eds217`:
 | Interpreter | Dropdown in the top right corner | The Console |
 | Kernel | Kernel Selector in a notebook's action bar | That one notebook |
 
-Switching the interpreter shuts down the running one and starts the new one, so every
-variable you had defined is cleared. Choose it before you start working.
+Starting a new Console session leaves the old one running, and both are listed beside the
+Console so you can click between them. Each session keeps its own variables, so a name you
+defined in one is not defined in the other.
 
 To change a notebook's kernel from the keyboard, open the Command Palette
 (`Ctrl + Shift + P` or `Cmd + Shift + P`) and run **Positron Notebook: Change Kernel**.

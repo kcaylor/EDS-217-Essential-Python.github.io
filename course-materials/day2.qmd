@@ -12,10 +12,23 @@ description: "Tuesday September 1^st^, 2026"
 *An illustration of collectible toys.* [MidJourney 5](https://www.midjourney.com/jobs/7c249ba1-5cc4-4a9b-92d9-78ca3134f623?index=0)
 :::
 
-Yesterday we ran a complete workflow to get a sense of what python syntax looks like and to meet the various libraries and commands that make up the python data science stack. Today we'll slow
-down and get to know the first two steps of that workflow, **Import** and **Explore**. You will learn to explore datasets and get basic information about their structure and contents.
+Yesterday we ran a complete workflow, from a file on the course website to a finished chart, to get a
+sense of what python syntax looks like and to meet the libraries and commands that make up the python
+data science stack. Today we will slow down and spend the whole day on the first two steps of
+yesterday's workflow, **Import** and **Explore**.
 
-We will also meet python's two essential containers, **lists** and **dictionaries**. While they are used across python to store structured data, we will need them for two specific purposes: creating a list of columns to select, and using a dictionary to rename them.
+**Import** is getting a file into pandas as a DataFrame, whether the file sits on your own computer or
+at a URL somewhere out on the internet. **Explore** is everything you should do next, before you
+compute a single number from it: how many rows and columns you have, what type pandas gave each column,
+where the gaps are, and which columns have the same value all the way down. Exploring costs you a few
+minutes at the start, and it is how you avoid finding a units problem after you have already built a
+whole analysis on top of it.
+
+We will also meet python's two essential containers, **lists** and **dictionaries**. We use both of
+them all over python to store structured data, and today each of them has one specific job: a list to
+name the columns you want to keep, and a dictionary to say what each of those columns should be renamed
+to. We will use them that way for most of the day, and then in the last session we will slow down and
+look at both containers on their own terms.
 
 ## Class materials
 
@@ -27,7 +40,11 @@ We will also meet python's two essential containers, **lists** and **dictionarie
 
 ## End-of-day practice
 
-Today's practice returns to the dataset you ran yesterday, and asks what was actually in it.
+Yesterday's analysis used one column out of the twenty-one in the Toolik weather file. Before you leave
+today you will go back to the rest of that file and write a **data biography** of it: what it covers,
+what condition it is in, and what a colleague should check before trusting a number computed from it.
+Every claim in your biography must be backed by a cell that produced it, which is what the morning
+sessions are practice for.
 
 - [{{< fa pencil title="A pencil" >}} **Day 2 Practice:** Creating a Data Biography](eod-practice/eod-day2-2026.qmd)
 

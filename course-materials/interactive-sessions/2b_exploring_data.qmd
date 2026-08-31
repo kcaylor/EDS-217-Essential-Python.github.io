@@ -17,13 +17,16 @@ format:
 *A panda, investigating.* [MidJourney 5](https://www.midjourney.com)
 :::
 
-You have a DataFrame. Before you compute anything with it, you need to know what you're
-holding: how big it is, what the columns are, what type each one is, what's missing, and
-what the values look like. That's this session.
+In the last session we read the Goleta air quality file into a DataFrame and pulled a few
+columns back out of it. This morning we will look at what we actually have: how big the table
+is, what the columns are called, what type pandas gave each one, where the missing values
+are, and what the numbers look like.
 
-This is the step people skip, and skipping it is how you end up confidently reporting an
-average of two different units. We're going to do it properly, and by the end of the hour
-you'll have found two real problems in a real dataset.
+Exploring is the easiest step in the whole workflow to skip, because skipping it costs you
+nothing right away. We are going to do it properly, on the same Goleta file, and along the way
+we will find three columns with nothing in them at all, a negative pollutant concentration,
+and a mean that was computed by averaging two different units together. Every one of those
+would have been a real problem for an analysis built on this file.
 
 By the end of this session you will be able to:
 
@@ -56,7 +59,8 @@ Date: 09/01/2026
 
 4. **Save** with `Ctrl + S` (`Cmd + S` on macOS), and keep saving as you go.
 
-4. Read in the same Goleta air quality data from the last session:
+5. **Read the data.** Add a code cell, and read in the same Goleta air quality file we used in
+   the last session:
 
 ```{python}
 import pandas as pd
@@ -67,7 +71,7 @@ goleta = pd.read_csv(url)
 
 ## Look at it
 
-Always start by looking. `.head()` shows the first five rows, `.tail()` the last five:
+Always start by looking. `.head()` shows the first five rows, `.tail()` the last five rows:
 
 ```{python}
 goleta.head()
@@ -91,8 +95,8 @@ goleta.head(3)
 goleta.shape
 ```
 
-It's a pair of numbers, so you can pull either one out by position, exactly like the lists
-you met in the last session:
+The result is a pair of numbers, so you can pull either one out by position, exactly like the
+lists we met in the last session:
 
 ```{python}
 print("rows:", goleta.shape[0])
@@ -110,17 +114,18 @@ goleta.dtypes
 ```
 
 `object` almost always means text. `float64` and `int64` are numbers. Types matter because
-they decide what you're allowed to do: you can average a `float64`, and you cannot average
-an `object`.
+they determine what you can do with a column: you can average a `float64`, and you cannot
+average an `object`.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-How many columns in `goleta` hold text? Use `.dtypes` to answer, and say how you counted.
+How many columns in `goleta` contain text? Use `.dtypes` to answer, and say how you counted.
 :::
 
 ## The health check: `.info()`
 
-`.info()` is the single most useful line in this session. It combines the shape, the column
-names, the types, and, critically, **how many non-null values each column has**:
+`.info()` is the most useful single line in this morning's lesson, because it combines the
+shape, the column names, the types, and, critically, **how many non-null values each column
+has**:
 
 ```{python}
 goleta.info()
@@ -130,11 +135,12 @@ Read the `Non-Null Count` column carefully. Most columns have 1962 non-null valu
 every row. Three of them have `0`.
 
 `country_iso`, `isMobile`, and `isMonitor` are **completely empty**. They exist as column
-headers in the file, and there is not one single value in any of them.
+headers in the file, and there is not one single value in any of them!
 
 :::{.callout-important}
-This is why we explore. Those three columns look perfectly real in `head()`, which shows
-`NaN`, and you might not think twice. `.info()` tells you they are empty from top to bottom.
+Empty columns like these three are exactly what exploring turns up. All three look perfectly
+ordinary in `head()`, where you see a few `NaN` values, which happens in almost every dataset.
+`.info()` is what tells you that they are empty from top to bottom.
 :::
 
 You can ask the same question directly. `.isnull()` marks every missing value, and `.sum()`
@@ -144,8 +150,8 @@ counts them per column:
 goleta.isnull().sum()
 ```
 
-We won't fix this today. Deciding what to *do* about missing data is Day 4's job. Today we
-only need to know it's there.
+We won't fix any of this today, because deciding what to *do* about missing data is a Day 4
+problem. This morning we only need to know that it is there.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Read the Santa Barbara file into `santa_barbara` and run `.info()` on it. Does it have the
@@ -161,41 +167,43 @@ numeric column:
 goleta.describe()
 ```
 
-Look at the `value` column. The mean is about 6.4 and the minimum is −4.
+Look at the `value` column. The mean is about 6.4 and the minimum is −4. Both of those numbers
+are a problem, for two different reasons.
 
-Two things should bother you.
+**First, a negative concentration.** You cannot have less than zero of a pollutant in the air.
+A negative reading is usually either an instrument artifact or a sentinel value standing in for
+something the instrument could not report, and it is the kind of thing you flag now and decide
+what to do about later.
 
-**First, a negative concentration.** You cannot have less than zero of a pollutant. That's
-either an instrument artifact or a sentinel value, and it's the kind of thing you flag now
-and decide about later.
-
-**Second, and worse, that mean is meaningless.** Look at what's in the `unit` column:
+**Second, the mean itself is meaningless.** Look at what is in the `unit` column:
 
 ```{python}
 goleta['unit'].value_counts()
 ```
 
-Some rows are in micrograms per cubic metre and some are in parts per million. The mean of
-6.4 was computed by averaging those together. It is a number, it is not a fact.
+Some rows are in micrograms per cubic metre and some are in parts per million. The mean of 6.4
+was computed by averaging those two units together, so it does not describe any real quantity
+that anyone measured in Goleta.
 
-:::{.callout-caution title="`.describe()` will happily lie to you"}
-`.describe()` averages whatever is in the column. It has no idea that this table stacks
-different pollutants, in different units, in a single `value` column. Data shaped like this,
-with one row per measurement and a column saying which kind, is extremely common in
-environmental data. Getting a real answer out of it means grouping first, which is Day 5.
+:::{.callout-caution title="`.describe()` will average anything you give it"}
+`.describe()` averages whatever numbers are in a column, with no check on whether they belong
+together, and this table stacks several different pollutants, in two different units, into a
+single `value` column. Data arranged like this, one row per measurement with a column naming
+which kind of measurement it is, is extremely common in environmental data. Getting a real
+answer out of it means grouping first, which is Day 5.
 :::
 
 ## Counting categories with `.value_counts()`
 
 `.describe()` is for numbers. For text columns, the question is usually "what values appear,
-and how often?" That's `.value_counts()`:
+and how often?", and `.value_counts()` answers it:
 
 ```{python}
 goleta['parameter'].value_counts()
 ```
 
-Three pollutants: `pm25`, `o3`, and `pm10`. Now the `unit` result above makes sense, since
-ozone is reported in ppm and particulates in µg/m³.
+Three pollutants, then: `pm25`, `o3`, and `pm10`. The `unit` result above makes sense now,
+because ozone is reported in ppm and particulates in µg/m³.
 
 `.value_counts()` is also how you spot a column that tells you nothing:
 
@@ -203,8 +211,9 @@ ozone is reported in ppm and particulates in µg/m³.
 goleta['location_name'].value_counts()
 ```
 
-Every row says `Goleta`. That column is a constant. It's not wrong, and it will matter later
-when we stack several stations together, but within this file it tells you nothing.
+Every row says `Goleta`, so the station name is a constant. A constant column is not wrong, and
+this one will matter on Day 6 when we stack several stations on top of each other, but within
+this one file it tells you nothing you did not already know.
 
 Add `.head(n)` when a column has many distinct values:
 
@@ -213,16 +222,17 @@ goleta['datetimeLocal'].value_counts().head()
 ```
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Use `.value_counts()` on the `provider` and `owner_name` columns. Are either of them
-constants, like `location_name`?
+Use `.value_counts()` on the `provider` and `owner_name` columns. Is either one a constant,
+like `location_name`?
 :::
 
 ## Renaming columns with a dictionary
 
 `datetimeUtc` and `datetimeLocal` are in camelCase, while everything else uses lowercase
-with underscores. Mixed naming styles cause typos. Let's fix them.
+with underscores. Mixed naming styles are an easy way to introduce typos, because you have to
+remember which style each column happens to use, so let's fix them.
 
-To do that you need Python's other essential container: the **dictionary**.
+Renaming columns needs Python's other essential container, the **dictionary**.
 
 A **dictionary** stores pairs. Each pair has a **key** and a **value**, written `key: value`,
 and the whole thing goes in curly braces:
@@ -241,8 +251,9 @@ You look up a value by its key, using square brackets:
 new_names['datetimeUtc']
 ```
 
-Where a list is ordered and you index it by *position*, a dictionary is looked up by *name*.
-That makes it exactly the right shape for "rename this to that":
+A list is ordered, and you get things out of it by *position*. A dictionary is a set of labelled
+pairs, and you get things out of it by *name*. Lookup by name is exactly what a rename needs, because a
+rename is a set of "this becomes that" pairs:
 
 ```{python}
 goleta_renamed = goleta.rename(columns=new_names)
@@ -258,8 +269,8 @@ goleta.rename(columns={'value': 'concentration'}).columns.tolist()
 :::{.callout-note}
 🐍 `.rename()` returns a **new** DataFrame and leaves the original alone. If you want to
 keep the change, assign it to a name, as we did with `goleta_renamed`. Almost every pandas
-method behaves this way, and forgetting it is the single most common source of "why didn't
-my change stick?"
+method behaves this way, and forgetting it is a very common source of "why didn't my change
+stick?" (It still catches Cella and Kelly out, so ask if a cell seems to do nothing!)
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -269,7 +280,8 @@ Build a dictionary that renames `value` to `concentration` **and** `parameter` t
 
 ## The exploration ritual
 
-Five lines, every time you open a new dataset:
+Here are the five lines to run every time you open a new dataset, in the order we ran them
+this morning:
 
 ```python
 df.shape          # how big
@@ -279,17 +291,22 @@ df.describe()     # what do the numbers look like
 df['col'].value_counts()   # what's in the text columns
 ```
 
-Run them before you compute anything. You will catch problems in ninety seconds that would
-otherwise surface in your final figure.
+Run them before you compute anything, because a problem you find here is quick to deal with,
+while the same problem found in your final figure means unpicking everything you built on top
+of it.
+
+Running the five lines is the easy half. Reading what comes back is the half that finds the
+empty column and the mixed units, so give the output a proper look before you move on!
 
 ## Key points
 
 - `.shape` is `(rows, columns)`. `.columns` and `.dtypes` say what's in the table.
-- `.info()` is the health check. Read the non-null counts; that's where empty columns hide.
+- `.info()` is the health check. Read the non-null counts, because a completely empty column
+  looks perfectly normal everywhere else.
 - `.isnull().sum()` counts missing values per column.
-- `.describe()` summarizes numeric columns, and will average across units without complaint.
-  Check what a column actually contains before you trust its mean.
-- `.value_counts()` counts categories, and reveals constants and unexpected values.
+- `.describe()` summarizes numeric columns, and it will average values in different units
+  together without any warning. Check what a column actually contains before you trust its mean.
+- `.value_counts()` counts categories, and shows you constants and unexpected values.
 - A **dictionary** maps keys to values, written `{key: value}`, looked up by name.
 - `.rename(columns={...})` returns a new DataFrame. Assign it to keep it.
 

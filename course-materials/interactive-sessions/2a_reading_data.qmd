@@ -17,10 +17,11 @@ format:
 *A panda, reading.* [MidJourney 5](https://www.midjourney.com)
 :::
 
-Yesterday you ran `pd.read_csv()` and a DataFrame appeared. Today you slow that line down
-and learn what it actually does, what it gives you back, and how to steer it. Everything
-this week starts with getting data into Python correctly, so this is the most load-bearing
-hour of the course.
+Yesterday we ran `pd.read_csv()` on the Toolik weather file and a DataFrame appeared. This
+morning we will slow that one line of code down and work out what it actually does, what it
+gives you back, and which of its settings you will want to change. Every workflow we write for
+the rest of the week starts by getting a file into python correctly, so it is worth spending an
+hour on the reading step by itself.
 
 By the end of this session you will be able to:
 
@@ -52,50 +53,54 @@ Date: 09/01/2026
 
 4. **Save** with `Ctrl + S` (`Cmd + S` on macOS), and keep saving as you go.
 
-4. **Add a code cell** below the title cell.
+5. **Add a code cell** below the title cell.
 
 ## Importing pandas
 
-Every notebook that touches data starts the same way:
+Every notebook we write with pandas starts the same way:
 
 ```{python}
 import pandas as pd
 ```
 
 `import pandas` makes the library available. `as pd` gives it a short nickname so you can
-write `pd.read_csv()` instead of `pandas.read_csv()`. Essentially every pandas user on
-earth writes `pd`, so we will too.
+write `pd.read_csv()` instead of `pandas.read_csv()`. `pd` is the nickname used
+throughout the pandas documentation and in most of the examples you will find online, so we
+will use it here too. Nothing breaks if you pick a different nickname, but everybody who reads
+your code afterwards (including you, in a week) will have to work out what it means.
 
 ## Our data for today
 
 We'll work with air quality measurements from an OpenAQ monitoring station in Goleta,
-just up the road from Bren.
+just up the road from Bren. We stay with the same file in the next session, so it is worth
+getting to know.
 
 ```{python}
 url = 'https://eds-217-essential-python.github.io/data/openaq_goleta_measurments.csv'
 ```
 
-Notice we put the address in a **variable** first. This is a habit worth forming: the URL
-is long, you'll use it more than once, and naming it keeps your `read_csv` line readable.
+Notice we put the address in a **variable** first. Naming the URL is a habit worth forming:
+the address is long, you will use it more than once, and a name keeps your `read_csv` line
+readable.
 
 ## `pd.read_csv()`
 
-Here is the whole sentence:
+Here is the whole line:
 
 ```{python}
 goleta = pd.read_csv(url)
 ```
 
-That's it. `pd.read_csv()` takes a location, goes and gets the file, parses the commas, and
-hands you back a **DataFrame**. Let's look at the first few rows:
+`pd.read_csv()` takes a location, fetches the file, parses the commas, and returns a
+**DataFrame**. Let's look at the first few rows:
 
 ```{python}
 goleta.head()
 ```
 
 :::{.callout-note}
-🐍 `read_csv` is happy with either a web address or a path to a file on disk. These two
-are the same idea:
+🐍 `read_csv` accepts either a web address or a path to a file on disk. Both of the lines
+below are valid, and the only difference between them is what sits inside the quotes:
 
 ```python
 df = pd.read_csv('https://example.org/data.csv')   # from the web
@@ -107,9 +112,9 @@ same file.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-The Santa Barbara station's data is at the same address, but with
-`openaq_santa_barbara_measurments.csv` on the end. Read it into a variable called
-`santa_barbara` and display its first few rows.
+The Santa Barbara station's file sits in the same folder on the course site, under the name
+`openaq_santa_barbara_measurments.csv`. Read it into a variable called `santa_barbara` and
+display its first few rows.
 :::
 
 ## DataFrames and Series
@@ -130,8 +135,9 @@ print(type(goleta))
 print(type(goleta['value']))
 ```
 
-This distinction matters more than it looks. Many pandas methods return a Series, and
-knowing you're holding one column rather than a table tells you what you can do next.
+Knowing whether you have a DataFrame or a Series matters more often than it sounds like it
+should. A lot of pandas methods return a Series rather than a DataFrame, and the methods
+available to you next depend on which of them you are looking at.
 
 ```{python}
 goleta['value'].head()
@@ -154,15 +160,15 @@ its first five values.
 
 ## Column names as a list
 
-You often want to know what's in a table before you do anything else. The `.columns`
-attribute tells you:
+Before we do anything else with a table, we usually want to know which columns are in it. The
+`.columns` attribute gives you the names:
 
 ```{python}
 goleta.columns
 ```
 
-That's a pandas object. To get a plain Python **list**, which is easier to read and to work
-with, use `.tolist()`:
+The result is a pandas object rather than a plain Python **list**. To get the list, which is
+easier to read and easier to work with, use `.tolist()`:
 
 ```{python}
 column_names = goleta.columns.tolist()
@@ -191,9 +197,9 @@ len(column_names)
 ```
 
 :::{.callout-note}
-🐍 Counting from zero trips up everyone at first. The first item is at position `0`, the
-second at `1`, and the last one is at `len(x) - 1`. You can also count backwards: `[-1]` is
-the last item.
+🐍 Python counts from zero, and if you are arriving from R (which counts from one) it takes
+some practice. The first item is at position `0`, the second at `1`, and the last one is at
+`len(x) - 1`. You can also count backwards: `[-1]` is the last item.
 :::
 
 ```{python}
@@ -202,16 +208,16 @@ column_names[-1]
 
 ## Selecting columns with a list
 
-Here's where the list pays off. Hand `read_csv`'s result a list of column names and you get
-a smaller DataFrame with just those columns:
+The job we need a list for today is selecting columns. Give a DataFrame a list of column names,
+and you get back a smaller DataFrame with just those columns in it:
 
 ```{python}
 keep = ['location_name', 'parameter', 'value', 'unit']
 goleta[keep].head()
 ```
 
-You'll see this written both ways. The inner brackets are the list, the outer brackets are
-the selection:
+You'll see the same selection written both ways. The inner brackets are the list, and the
+outer brackets are the selection:
 
 ```{python}
 goleta[['location_name', 'parameter', 'value', 'unit']].head()
@@ -248,19 +254,22 @@ pattern is always `name=value`, after the required arguments.
 :::
 
 :::{.callout-caution title="Choosing an index"}
-An index is most useful when its values are meaningful and unique. `location_name` would be
-a poor choice here, since every row has the same station name. A timestamp is a good choice,
-because it identifies the row.
+An index is most useful when its values are meaningful, and ideally when they are unique too.
+`location_name` would be a poor choice here, because every row has the same station name. A
+timestamp is a better choice, because it tells you when the measurement was taken. Be warned,
+though: a timestamp is only unique if the file records one measurement per moment, and plenty
+of files (this one included!) do not.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Read the Goleta file again, this time using `datetimeUtc` as the index, into a variable
-called `goleta_utc`. How many columns does it have compared to the original `goleta`?
+called `goleta_utc`. How many columns does it have, and how many does the original `goleta`
+have?
 :::
 
 ## Putting it together
 
-You now have the first sentence of every workflow you'll write:
+You now have the four lines that open just about every analysis you will write from here on:
 
 ```python
 import pandas as pd
@@ -269,6 +278,9 @@ url = 'https://eds-217-essential-python.github.io/data/some_file.csv'
 df = pd.read_csv(url)
 df.head()
 ```
+
+Getting the file in with `read_csv` is the easy half. In the next session we take the same
+Goleta table and explore it properly, before we compute a single number from it.
 
 ## Key points
 

@@ -9,14 +9,16 @@ format:
     code-fold: show
 ---
 
-In Part 1 you turned a raw file into a twelve-number monthly climate summary. Now you will
-finish the workflow. You will visualize those numbers, save your results, and put a name to the
-ten-step workflow you just worked through.
+In Part 1 we turned a raw file into a twelve-number monthly climate summary, taking steps 1,
+2, 7 and 8 of the ten. This afternoon we
+finish the job. You will turn those twelve numbers into a picture, save your summary to a file
+that a collaborator could open, and then we will give the ten-step workflow we have been
+running all afternoon its actual name.
 
 ::: {.callout-important title="Same idea as Part 1 🚀"}
-This is still a preview, so keep working the same way: copy a cell, run it, then change one
-thing. You will learn how visualization really works on Day 7. Today, just enjoy turning
-numbers into a picture.
+Part 2 is still a preview, so keep working the same way: copy a cell, run it, then change one
+thing. We will learn how visualization actually works on Day 7, and there is rather more to it
+than the two lines you are about to copy. Today, just enjoy turning numbers into a picture!
 :::
 
 ## Getting Started
@@ -46,8 +48,9 @@ Date: 08/31/2026
 
 ### Pick up where Part 1 left off
 
-We are in a fresh notebook, so first re-run the workflow from Part 1 to rebuild `df` and
-`monthly_means`.
+We are in a new notebook, which means a new kernel, so `df` and `monthly_means` from Part 1 are
+not in memory any more. Run the cell below to rebuild them before we go on. It also sets `url` again, which the
+sandbox at the end of the session needs.
 
 ✅ **Canonical cell. Copy and run it exactly:**
 
@@ -62,7 +65,7 @@ monthly = df.groupby('Month')
 monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
 ```
 
-## Step 6: Visualize 📊
+## Step 10: Visualize 📊
 
 **Visualize** means turning numbers into a picture you can read quickly. The simplest
 plot is a line plot with `plt.plot()`.
@@ -77,9 +80,10 @@ plt.ylabel("Temperature (°C)")
 plt.show()
 ```
 
-The same twelve numbers now show a clear seasonal cycle. We can also draw them as bars
-with `plt.bar()`. Copy the first line exactly. The month numbers for the x-axis come straight
-from your `monthly_means`.
+The same twelve numbers now show a clear seasonal cycle. We can also draw them as bars with
+`plt.bar()`, which takes two arguments rather than one: the month numbers for the x-axis, and
+the averages for the height of each bar. Both of those arguments come out of your `monthly_means`, the months from its index labels
+and the averages from its values. Copy the `plt.bar()` line below exactly.
 
 ```{python}
 plt.bar(monthly_means.index, monthly_means)
@@ -110,7 +114,8 @@ plt.show()
 ```
 
 :::{.callout-important title="✍️ Say it in a sentence (required)"}
-Read the coldest month's value off your chart, then report it in an f-string. For example:
+Read the coldest month's value off your chart, then report it in an f-string. You will not get
+an exact number off the y-axis, and close enough is fine here. For example:
 
 ```python
 coldest = -22.9         # January's value, read from the chart
@@ -120,10 +125,12 @@ print(f"Toolik's coldest month averages about {coldest} degrees Celsius.")
 Now write one more sentence comparing it to the warmest month.
 :::
 
-## Step 7: Export 💾
+## Export 💾, part of step 10
 
-**Export** means saving your results so you or a collaborator can use them later. This is the
-foundation of reproducible science. `monthly_means.to_csv(...)` writes your summary to a file.
+**Export** means saving your results so that you, or a collaborator, can use them later without
+re-running everything that produced them. A summary that only exists inside a running notebook
+is gone the moment the kernel restarts. `monthly_means.to_csv(...)` writes your summary out to
+a file on disk.
 
 ✅ **Canonical cell. Copy and run it exactly (in your notebook):**
 
@@ -131,7 +138,8 @@ foundation of reproducible science. `monthly_means.to_csv(...)` writes your summ
 monthly_means.to_csv("monthly_means.csv", header=True)
 ```
 
-Open the Explorer in Positron and you will find `monthly_means.csv`. It looks like this:
+Open the Explorer in Positron and you should find `monthly_means.csv` sitting next to your
+notebook. Its first few lines look like this:
 
 ```csv
 Month,Daily_AirTemp_Mean_C
@@ -160,8 +168,9 @@ Name what you saved. For example, set `filename = "monthly_means.csv"` and then 
 
 ## Naming what you just did: the 10-step workflow
 
-You just did it. Here is the workflow you worked through, named in full. Every analysis in this
-course, and in your career, is some path through these ten steps:
+You have now run a workflow, from a file on the internet all the way to a chart and a saved
+summary. Here is that workflow, named in full. Almost every analysis in this course, and most
+of the analyses you will do after it, is some path through these ten steps:
 
 ```{mermaid}
 flowchart LR
@@ -171,16 +180,18 @@ flowchart LR
     I --> J["10. Visualize 📊"]
 ```
 
-Today you traveled Import → Explore → Group → Aggregate → Visualize → Export, skipping the steps
-we have not taught yet. That is normal. Few analyses use every step, and they always happen in
-this order.
+Today we took the path Import → Explore → Group → Aggregate → Visualize, which is steps 1, 2,
+7, 8 and 10. We skipped Clean because this column needed none, and skipped the rest because
+this analysis does not need them. Saving the file counts as part of Visualize, which is why the map has ten
+steps rather than eleven. Skipping steps is normal, because few analyses need all ten of them.
+The steps an analysis does use always run in the numbered order.
 
 📖 **Read more:** [The Data Science Workflow](../the-data-science-workflow.qmd) gives a
 one-sentence description of each step and shows which day you will learn it.
 
 ## 🗓️ Coming Attractions
 
-Every "code stranger" you met today becomes a friend on a specific day:
+Every command you copied today without really reading it becomes a friend on a specific day:
 
 | Step | What it does | You'll learn it on |
 |------|--------------|--------------------|
@@ -197,8 +208,9 @@ Every "code stranger" you met today becomes a friend on a specific day:
 
 ## 🧪 Sandbox (5 minutes)
 
-Play. Re-title a plot, swap `plt.plot` for `plt.bar`, save under a silly file name, or break
-something on purpose. Errors are expected and welcome today. They are how you find the edges.
+Play! Re-title a plot, swap `plt.plot` for `plt.bar`, save under a silly file name, or break
+something on purpose. Errors are expected and welcome today, and breaking a cell costs you
+nothing here, because the restart cell below rebuilds everything from the original file.
 
 :::{.callout-caution title="↩️ Canonical restart. Run this to rejoin the group"}
 When time is up, run this to reload the data and rebuild your results from scratch:
@@ -214,12 +226,13 @@ monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
 ## Key Points
 
 - Visualize with `plt.plot()` and `plt.bar()`. Label with `plt.title()`, `plt.xlabel()`, and
-  `plt.ylabel()`. Today you change labels only.
-- Export results with `.to_csv("filename.csv")` so your work is saved and reproducible.
+  `plt.ylabel()`. Today we change labels only.
+- Export your results with `.to_csv("filename.csv")`, so that your summary survives a kernel
+  restart and somebody else can open it.
 - The complete ten-step workflow is Import, Explore, Clean, Filter, Sort, Transform, Group,
   Aggregate, Join/Reshape, and Visualize.
-- You now know the plan for the whole course. Each of the next six days teaches a piece of this
-  same workflow.
+- You now know the plan for the whole course. Each of the next six days teaches one or two steps
+  of this same workflow, and Days 8 and 9 are your own project.
 
 ## Resources
 
@@ -228,8 +241,8 @@ monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
 - [Course Cheatsheet: Bar Plots](../cheatsheets/bar_plots.qmd)
 - [Course Cheatsheet: Chart Customization](../cheatsheets/chart_customization.qmd)
 
-🎉 **That is the complete workflow.** You ran it end to end today, from a data file on the
-course website to a finished chart.
+🎉 **You have now seen the complete workflow.** We ran it end to end this afternoon, from a data
+file on the course website to a finished chart and a summary saved to disk.
 
 ::: {.center-text .body-text-xl .teal-text}
 End interactive session 1D

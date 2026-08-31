@@ -9,22 +9,23 @@ format:
     code-fold: show
 ---
 
-You are about to run a complete data science workflow. You will start with a raw file on the
-internet and finish with a monthly climate summary, all before you know how any single piece
-works. Today you run through all of it once. Over the next six days you will learn how each
-part was built.
+This afternoon we run a complete data science workflow, from a raw file sitting on the internet
+to a monthly climate summary of Arctic air temperature. We run through all of it once today, and
+over the next six days (Days 2 through 7) we will learn how each part of it was built.
 
 ::: {.callout-important title="Don't panic 🚀"}
 You are not expected to understand every line today. Your job is to copy code, run it, and
-change one thing at a time. Our job is to show you what a workflow looks like. By next Friday
-you will know how all of it works.
+change one thing at a time. Our job (that's Cella and Kelly) is to show you what a whole
+workflow looks like from one end to the other. By the end of Day 7 you should know how all of
+it works.
 :::
 
 We will use real Arctic weather data from the [Arctic LTER](https://lternet.edu/site/arctic-lter/)
-station at Toolik Lake, Alaska: daily measurements from 1988 onward. This session covers the
-first half of the workflow: Import, Explore, Group, and Aggregate. We skip Clean along the way,
-because this particular file has nothing wrong with it. Session 1d finishes the job with
-Visualize and Export, and gives the whole workflow its name.
+station at Toolik Lake, Alaska: daily measurements from 1988 onward. Part 1 takes one path through
+the ten steps: Import, Explore, Group and Aggregate, which are steps 1, 2, 7 and 8. We skip
+Clean, step 3, because the one column we work with today has no missing values, though other
+columns in the file do have gaps. Session 1D picks up with Visualize and
+Export, and names all ten steps of the workflow we are working through.
 
 ## Getting Started
 
@@ -57,7 +58,7 @@ Save often (`Ctrl+S` / `Cmd+S`).
 
 ## How today's steps work
 
-You are going to run code you cannot fully read yet. To make that manageable, every step of
+This afternoon we run code you cannot fully read yet. To make that manageable, every step of
 the workflow follows the same small pattern. We chose this pattern for Day 1 to help you build
 confidence before you build understanding.
 
@@ -66,16 +67,17 @@ Each step has up to three parts:
 1. **Run it.** Copy the canonical cell and run it exactly. Everyone gets the same result, so we
    all begin each step from the same place.
 2. **Change one thing.** Swap a single item from a short menu, then run it again to see what
-   moves. These cells always rebuild their result from `df`, so they leave your data alone. The
+   moves. Each of these cells rebuilds its result from `df`, so they leave your data alone. The
    next canonical cell brings everyone back together.
 3. **Say it in a sentence.** After some steps you will write one f-string that reports a number
-   you just produced. f-strings are the thing you learned to write this morning, so this is
-   where you practice writing for yourself.
+   you just produced. We learned f-strings this morning, so these are the places where you get
+   to practice them on numbers you produced yourself.
 
-The goal on Day 1 is to see the whole workflow and get a feel for each step. Mastering the
-syntax comes later. Running working code shows you where each step lands. Changing one thing
-gives you a safe way to experiment. Writing a sentence keeps you using the one skill you
-already own.
+Our goal on Day 1 is to see the whole workflow and get a feel for what each step is for, and
+mastering the syntax comes later. Running working code shows you what each step does before you
+have to write it yourself, changing one thing gives you a safe way to experiment without
+breaking your data, and writing a sentence about the result gives you some practice with the one
+skill you already have.
 
 ## Step 1: Import 📂
 
@@ -91,14 +93,13 @@ url = "https://eds-217-essential-python.github.io/data/toolik_weather.csv"
 df = pd.read_csv(url)
 ```
 
-The `import ... as ...` lines load Python toolkits under short nicknames. You will see three of
-them all course long: `pd` for pandas (data), `plt` for matplotlib (plots), and `np` for numpy
-(math). `pd.read_csv(url)` reads a CSV straight from the web into a **DataFrame**, a table,
+The `import ... as ...` lines load Python toolkits under short nicknames. Two of them run today: `pd` for pandas (data) and `plt` for matplotlib
+(plots). A third, `np` for numpy (math), turns up later in the course. `pd.read_csv(url)` reads a CSV straight from the web into a **DataFrame**, a table,
 which we store in `df`.
 
 :::{.callout-note}
-Today `read_csv()` needs only one thing: the `url` of a CSV file. It can do much more, and you
-will learn that on Day 2.
+Today `read_csv()` needs only one thing: the `url` of a CSV file. It can do a great deal more,
+and we will get to the rest of it on Day 2.
 :::
 
 :::{.callout-tip title="🔁 Change one thing"}
@@ -133,7 +134,8 @@ df.head()
 ```
 
 :::{.callout-tip title="🔁 Change one thing"}
-Swap `.head()` for one other no-argument view of the same table:
+Run `df.info()`, which the required sentence below needs, then try one other no-argument
+view of the same table:
 
 - `df.info()` shows the column names, types, and how many values are present.
 - `df.describe()` shows summary statistics for the number columns.
@@ -153,8 +155,8 @@ df.describe()
 
 ### The health check
 
-Before you trust a dataset, run a quick **health check**. This is a fixed phrase you will reuse
-all course long. It counts the missing values in every column:
+Before you trust a dataset, run a quick **health check**. The health check is one line of code
+that you will reuse all course long, and it counts the missing values in every column:
 
 ```{python}
 df.isnull().sum()
@@ -182,14 +184,15 @@ Now write a second sentence of your own, maybe about how many columns there are.
 
 The next step in a normal workflow is **Clean**: fixing missing values, wrong types, and
 duplicate rows. Our health check already showed that `Daily_AirTemp_Mean_C` has no missing
-values, so we have nothing to clean today and can go straight on.
+values, so we have nothing to clean today. Today's path now jumps to step 7, because steps 4,
+5 and 6, Filter, Sort and Transform, are not ones this analysis needs.
 
 :::{.callout-note}
 Enjoy this while it lasts. Most real datasets need real cleaning, and it is often the biggest
-part of a project. We spend all of Day 4 on it. Today the data came ready to use.
+part of a project. We spend Day 4 on cleaning and transforming. Today the data came ready to use.
 :::
 
-## Step 4: Group 👥
+## Step 7: Group 👥
 
 **Group** means splitting the rows into buckets by some key. Here we bucket every daily record
 by its **Month**, so all the Januaries sit together, all the Februaries, and so on.
@@ -215,7 +218,7 @@ Both read `df` without changing it, and neither touches your `monthly` grouping.
 by_year = df.groupby('Year')
 ```
 
-## Step 5: Aggregate 📈
+## Step 8: Aggregate 📈
 
 **Aggregate** means collapsing each bucket down to a single number. Here we take the mean
 temperature within each month. Notice the two-step pattern: first group, then pick a column and
@@ -228,8 +231,8 @@ monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
 monthly_means
 ```
 
-That gives twelve numbers, one average temperature per month, summarizing thousands of daily
-records into a clear seasonal pattern.
+The result is twelve numbers, one average temperature per month, which summarizes thousands of
+daily records into a clear seasonal pattern.
 
 :::{.callout-tip title="🔁 Change one thing"}
 Keep the grouping and change only the column you average. Pick one from this menu:
@@ -261,8 +264,9 @@ Now write one more sentence for the month you find most surprising.
 ## 🧪 Sandbox (5 minutes)
 
 Now poke at it yourself. Try a different column, a different grouping key, or a deliberate typo.
-Errors are expected today, and they are welcome. A red error message is Python telling you
-something. See what you can make happen.
+Errors are expected today, and they are welcome: a red error message reports which line Python
+could not run and what went wrong with it, so read the message before you change anything. See what you
+can make happen!
 
 :::{.callout-caution title="↩️ Canonical restart. Run this to rejoin the group"}
 When the five minutes are up, run this cell to reload the data and rebuild the canonical
@@ -278,15 +282,17 @@ monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
 
 ## Key Points
 
-- You ran a real workflow from start to finish: Import, Explore, Group, and Aggregate. You
-  skipped Clean only because the health check proved our column was complete.
+- We ran the first four steps of a real path through the workflow: Import, Explore, Group and
+  Aggregate, which are steps 1, 2, 7 and 8. We skipped Clean because the health check showed
+  that our temperature column was complete, and skipped Filter, Sort and Transform because this
+  analysis does not need them.
 - `pd.read_csv(url)` loads a CSV from the web into a DataFrame. `.head()`, `.info()`, and
   `.describe()` are your no-argument ways to look at it.
 - `df.isnull().sum()` is the health check for counting missing values.
-- Grouping and then averaging turns thousands of rows into a short summary. You did it in two
+- Grouping and then averaging turns thousands of rows into a short summary. We did it in two
   steps: first `monthly = df.groupby('Month')`, then `monthly['Daily_AirTemp_Mean_C'].mean()`.
-- The change-one-thing cells always re-read `df`, so your data stays put and the group can
-  always reconverge.
+- The change-one-thing cells rebuild their result from a table that already exists rather than
+  editing one, so your data stays put and we can all get back to the same results.
 
 ## Resources
 
@@ -295,8 +301,8 @@ monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
 - [Course Cheatsheet: Data Grouping](../cheatsheets/data_grouping.qmd)
 
 ➡️ **Next:** In [The Python Data Science Workflow, Part 2](1d_data_science_workflow_2.qmd) you will
-visualize these monthly
-means, save your results, and see the full ten-step workflow named.
+visualize these monthly means, save your results to a file, and see all ten steps of the
+workflow laid out in order.
 
 ::: {.center-text .body-text-xl .teal-text}
 End interactive session 1C

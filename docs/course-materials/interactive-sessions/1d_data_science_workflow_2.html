@@ -425,8 +425,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#pick-up-where-part-1-left-off" id="toc-pick-up-where-part-1-left-off" class="nav-link" data-scroll-target="#pick-up-where-part-1-left-off">Pick up where Part 1 left off</a></li>
   </ul></li>
-  <li><a href="#step-6-visualize" id="toc-step-6-visualize" class="nav-link" data-scroll-target="#step-6-visualize">Step 6: Visualize 📊</a></li>
-  <li><a href="#step-7-export" id="toc-step-7-export" class="nav-link" data-scroll-target="#step-7-export">Step 7: Export 💾</a></li>
+  <li><a href="#step-10-visualize" id="toc-step-10-visualize" class="nav-link" data-scroll-target="#step-10-visualize">Step 10: Visualize 📊</a></li>
+  <li><a href="#export-part-of-step-10" id="toc-export-part-of-step-10" class="nav-link" data-scroll-target="#export-part-of-step-10">Export 💾, part of step 10</a></li>
   <li><a href="#naming-what-you-just-did-the-10-step-workflow" id="toc-naming-what-you-just-did-the-10-step-workflow" class="nav-link" data-scroll-target="#naming-what-you-just-did-the-10-step-workflow">Naming what you just did: the 10-step workflow</a></li>
   <li><a href="#coming-attractions" id="toc-coming-attractions" class="nav-link" data-scroll-target="#coming-attractions">🗓️ Coming Attractions</a></li>
   <li><a href="#sandbox-5-minutes" id="toc-sandbox-5-minutes" class="nav-link" data-scroll-target="#sandbox-5-minutes">🧪 Sandbox (5 minutes)</a></li>
@@ -442,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>In Part 1 you turned a raw file into a twelve-number monthly climate summary. Now you will finish the workflow. You will visualize those numbers, save your results, and put a name to the ten-step workflow you just worked through.</p>
+<p>In Part 1 we turned a raw file into a twelve-number monthly climate summary, taking steps 1, 2, 7 and 8 of the ten. This afternoon we finish the job. You will turn those twelve numbers into a picture, save your summary to a file that a collaborator could open, and then we will give the ten-step workflow we have been running all afternoon its actual name.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Same idea as Part 1 🚀">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -453,27 +453,30 @@ Same idea as Part 1 🚀
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This is still a preview, so keep working the same way: copy a cell, run it, then change one thing. You will learn how visualization really works on Day 7. Today, just enjoy turning numbers into a picture.</p>
+<p>Part 2 is still a preview, so keep working the same way: copy a cell, run it, then change one thing. We will learn how visualization actually works on Day 7, and there is rather more to it than the two lines you are about to copy. Today, just enjoy turning numbers into a picture!</p>
 </div>
 </div>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
 <p>Set up your notebook with the usual ritual:</p>
 <ol type="1">
-<li><strong>Create a new notebook</strong> (<code>+</code> → <strong>Notebook</strong> → <strong>eds217</strong>).</li>
-<li><strong>Rename it</strong> to <code>Session_1D_Workflow_2.ipynb</code>.</li>
-<li><strong>Add a title cell</strong> (Markdown), updating the date:</li>
+<li><p><strong>Create the file.</strong> In the Explorer, hover over the <strong>EDS217</strong> heading and click <strong>New File…</strong>, then type the name in full, extension included: <code>Session_1D_Workflow_2.ipynb</code></p></li>
+<li><p><strong>Check the kernel.</strong> The Kernel Selector in the notebook’s action bar should read <strong>Python 3.11.15 (Conda: eds217)</strong>. If it reads anything else, click it, choose <strong>Change Kernel</strong>, and pick the eds217 entry.</p></li>
+<li><p><strong>Add a title cell.</strong> Click <strong>+ Markdown</strong> in the action bar, and give it this content, with today’s date:</p></li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Day 1: Session 1D - The Python Data Science Workflow, Part 2</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Session Webpage</span><span class="co">](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1d_data_science_workflow_2.html)</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Date: 08/31/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li><strong>Save</strong> with <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), and keep saving as you go.</li>
+</ol>
 <section id="pick-up-where-part-1-left-off" class="level3">
 <h3 class="anchored" data-anchor-id="pick-up-where-part-1-left-off">Pick up where Part 1 left off</h3>
-<p>We are in a fresh notebook, so first re-run the workflow from Part 1 to rebuild <code>df</code> and <code>monthly_means</code>.</p>
+<p>We are in a new notebook, which means a new kernel, so <code>df</code> and <code>monthly_means</code> from Part 1 are not in memory any more. Run the cell below to rebuild them before we go on. It also sets <code>url</code> again, which the sandbox at the end of the session needs.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="2c9c6807" class="cell" data-execution_count="1">
+<div id="d9f3cbb8" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -488,11 +491,11 @@ Same idea as Part 1 🚀
 </div>
 </section>
 </section>
-<section id="step-6-visualize" class="level2">
-<h2 class="anchored" data-anchor-id="step-6-visualize">Step 6: Visualize 📊</h2>
+<section id="step-10-visualize" class="level2">
+<h2 class="anchored" data-anchor-id="step-10-visualize">Step 10: Visualize 📊</h2>
 <p><strong>Visualize</strong> means turning numbers into a picture you can read quickly. The simplest plot is a line plot with <code>plt.plot()</code>.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="e9e851b9" class="cell" data-execution_count="2">
+<div id="873b32db" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.plot(monthly_means)</span>
@@ -509,8 +512,8 @@ Same idea as Part 1 🚀
 </div>
 </div>
 </div>
-<p>The same twelve numbers now show a clear seasonal cycle. We can also draw them as bars with <code>plt.bar()</code>. Copy the first line exactly. The month numbers for the x-axis come straight from your <code>monthly_means</code>.</p>
-<div id="958f4001" class="cell" data-execution_count="3">
+<p>The same twelve numbers now show a clear seasonal cycle. We can also draw them as bars with <code>plt.bar()</code>, which takes two arguments rather than one: the month numbers for the x-axis, and the averages for the height of each bar. Both of those arguments come out of your <code>monthly_means</code>, the months from its index labels and the averages from its values. Copy the <code>plt.bar()</code> line below exactly.</p>
+<div id="991e9ac3" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.bar(monthly_means.index, monthly_means)</span>
@@ -546,7 +549,7 @@ Same idea as Part 1 🚀
 <p>You could reword the <code>plt.ylabel(...)</code> text instead. Either way, change just one thing.</p>
 </div>
 </div>
-<div id="1320bbc5" class="cell" data-execution_count="4">
+<div id="7a8bda36" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: same plot, one new label. The data (monthly_means) stays the same.</span></span>
@@ -574,19 +577,19 @@ Same idea as Part 1 🚀
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Read the coldest month’s value off your chart, then report it in an f-string. For example:</p>
+<p>Read the coldest month’s value off your chart, then report it in an f-string. You will not get an exact number off the y-axis, and close enough is fine here. For example:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>coldest <span class="op">=</span> <span class="op">-</span><span class="fl">22.9</span>         <span class="co"># January's value, read from the chart</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Toolik's coldest month averages about </span><span class="sc">{</span>coldest<span class="sc">}</span><span class="ss"> degrees Celsius."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now write one more sentence comparing it to the warmest month.</p>
 </div>
 </div>
 </section>
-<section id="step-7-export" class="level2">
-<h2 class="anchored" data-anchor-id="step-7-export">Step 7: Export 💾</h2>
-<p><strong>Export</strong> means saving your results so you or a collaborator can use them later. This is the foundation of reproducible science. <code>monthly_means.to_csv(...)</code> writes your summary to a file.</p>
+<section id="export-part-of-step-10" class="level2">
+<h2 class="anchored" data-anchor-id="export-part-of-step-10">Export 💾, part of step 10</h2>
+<p><strong>Export</strong> means saving your results so that you, or a collaborator, can use them later without re-running everything that produced them. A summary that only exists inside a running notebook is gone the moment the kernel restarts. <code>monthly_means.to_csv(...)</code> writes your summary out to a file on disk.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly (in your notebook):</strong></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>monthly_means.to_csv(<span class="st">"monthly_means.csv"</span>, header<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Open the Explorer in Positron and you will find <code>monthly_means.csv</code>. It looks like this:</p>
+<p>Open the Explorer in Positron and you should find <code>monthly_means.csv</code> sitting next to your notebook. Its first few lines look like this:</p>
 <pre class="csv"><code>Month,Daily_AirTemp_Mean_C
 1,-22.89
 2,-20.70
@@ -629,7 +632,7 @@ Same idea as Part 1 🚀
 </section>
 <section id="naming-what-you-just-did-the-10-step-workflow" class="level2">
 <h2 class="anchored" data-anchor-id="naming-what-you-just-did-the-10-step-workflow">Naming what you just did: the 10-step workflow</h2>
-<p>You just did it. Here is the workflow you worked through, named in full. Every analysis in this course, and in your career, is some path through these ten steps:</p>
+<p>You have now run a workflow, from a file on the internet all the way to a chart and a saved summary. Here is that workflow, named in full. Almost every analysis in this course, and most of the analyses you will do after it, is some path through these ten steps:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -646,12 +649,12 @@ Same idea as Part 1 🚀
 </div>
 </div>
 </div>
-<p>Today you traveled Import → Explore → Group → Aggregate → Visualize → Export, skipping the steps we have not taught yet. That is normal. Few analyses use every step, and they always happen in this order.</p>
+<p>Today we took the path Import → Explore → Group → Aggregate → Visualize, which is steps 1, 2, 7, 8 and 10. We skipped Clean because this column needed none, and skipped the rest because this analysis does not need them. Saving the file counts as part of Visualize, which is why the map has ten steps rather than eleven. Skipping steps is normal, because few analyses need all ten of them. The steps an analysis does use always run in the numbered order.</p>
 <p>📖 <strong>Read more:</strong> <a href="../../course-materials/the-data-science-workflow.html">The Data Science Workflow</a> gives a one-sentence description of each step and shows which day you will learn it.</p>
 </section>
 <section id="coming-attractions" class="level2">
 <h2 class="anchored" data-anchor-id="coming-attractions">🗓️ Coming Attractions</h2>
-<p>Every “code stranger” you met today becomes a friend on a specific day:</p>
+<p>Every command you copied today without really reading it becomes a friend on a specific day:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -716,7 +719,7 @@ Same idea as Part 1 🚀
 </section>
 <section id="sandbox-5-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="sandbox-5-minutes">🧪 Sandbox (5 minutes)</h2>
-<p>Play. Re-title a plot, swap <code>plt.plot</code> for <code>plt.bar</code>, save under a silly file name, or break something on purpose. Errors are expected and welcome today. They are how you find the edges.</p>
+<p>Play! Re-title a plot, swap <code>plt.plot</code> for <code>plt.bar</code>, save under a silly file name, or break something on purpose. Errors are expected and welcome today, and breaking a cell costs you nothing here, because the restart cell below rebuilds everything from the original file.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="↩️ Canonical restart. Run this to rejoin the group">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -728,7 +731,7 @@ Same idea as Part 1 🚀
 </div>
 <div class="callout-body-container callout-body">
 <p>When time is up, run this to reload the data and rebuild your results from scratch:</p>
-<div id="794b51f0" class="cell" data-execution_count="5">
+<div id="1fd7b88e" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart: reload df and rebuild the canonical results</span></span>
@@ -743,10 +746,10 @@ Same idea as Part 1 🚀
 <section id="key-points" class="level2">
 <h2 class="anchored" data-anchor-id="key-points">Key Points</h2>
 <ul>
-<li>Visualize with <code>plt.plot()</code> and <code>plt.bar()</code>. Label with <code>plt.title()</code>, <code>plt.xlabel()</code>, and <code>plt.ylabel()</code>. Today you change labels only.</li>
-<li>Export results with <code>.to_csv("filename.csv")</code> so your work is saved and reproducible.</li>
+<li>Visualize with <code>plt.plot()</code> and <code>plt.bar()</code>. Label with <code>plt.title()</code>, <code>plt.xlabel()</code>, and <code>plt.ylabel()</code>. Today we change labels only.</li>
+<li>Export your results with <code>.to_csv("filename.csv")</code>, so that your summary survives a kernel restart and somebody else can open it.</li>
 <li>The complete ten-step workflow is Import, Explore, Clean, Filter, Sort, Transform, Group, Aggregate, Join/Reshape, and Visualize.</li>
-<li>You now know the plan for the whole course. Each of the next six days teaches a piece of this same workflow.</li>
+<li>You now know the plan for the whole course. Each of the next six days teaches one or two steps of this same workflow, and Days 8 and 9 are your own project.</li>
 </ul>
 </section>
 <section id="resources" class="level2">
@@ -757,7 +760,7 @@ Same idea as Part 1 🚀
 <li><a href="../../course-materials/cheatsheets/bar_plots.html">Course Cheatsheet: Bar Plots</a></li>
 <li><a href="../../course-materials/cheatsheets/chart_customization.html">Course Cheatsheet: Chart Customization</a></li>
 </ul>
-<p>🎉 <strong>That is the complete workflow.</strong> You ran it end to end today, from a data file on the course website to a finished chart.</p>
+<p>🎉 <strong>You have now seen the complete workflow.</strong> We ran it end to end this afternoon, from a data file on the course website to a finished chart and a summary saved to disk.</p>
 <div class="center-text body-text-xl teal-text">
 <p>End interactive session 1D</p>
 </div>

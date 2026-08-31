@@ -462,9 +462,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
 <p>This session produces one notebook per <strong>team</strong>, not one per person, so wait until you have a team before you make it.</p>
 <ol type="1">
-<li><p><strong>Create a new notebook</strong> from the Command Palette (<strong>Create: New Jupyter Notebook</strong>), and confirm its kernel reads <strong>eds217</strong>.</p></li>
-<li><p><strong>Rename it</strong> to <code>Project_&lt;your team name&gt;.ipynb</code>.</p></li>
-<li><p><strong>Add a title cell</strong> (Markdown), with every team member’s name in it:</p></li>
+<li><p><strong>Create the file.</strong> In the Explorer, hover over the <strong>EDS217</strong> heading and click <strong>New File…</strong>, then type the name in full, extension included: <code>Project_&lt;your team name&gt;.ipynb</code></p></li>
+<li><p><strong>Check the kernel.</strong> The Kernel Selector in the notebook’s action bar should read <strong>Python 3.11.15 (Conda: eds217)</strong>. If it reads anything else, click it, choose <strong>Change Kernel</strong>, and pick the eds217 entry.</p></li>
+<li><p><strong>Add a title cell.</strong> Click <strong>+ Markdown</strong> in the action bar, and give it this content, with every team member’s name in it:</p></li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># EDS 217 Final Project: &lt;team name&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -473,6 +473,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Session Webpage</span><span class="co">](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/7d_project_kickoff.html)</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Date: 09/09/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li><strong>Save</strong> with <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), and keep saving as you go.</li>
+</ol>
 <p>This is the file you will still be working in on Friday afternoon. Decide now whose machine it lives on, and get it into a shared folder or a repository before you leave.</p>
 </section>
 <section id="the-ten-steps-one-last-time" class="level2">
@@ -604,7 +607,7 @@ What makes a dataset workable in two days
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here is what that looks like on a file you already know, so you can see how the method works on a real file:</p>
-<div id="bb1afc5e" class="cell" data-execution_count="1">
+<div id="f943ce0d" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -627,7 +630,7 @@ sex                   object
 dtype: object</code></pre>
 </div>
 </div>
-<div id="65d84bb5" class="cell" data-execution_count="2">
+<div id="b0b2e51c" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

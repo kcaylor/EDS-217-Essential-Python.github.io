@@ -449,7 +449,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<p>Yesterday we ran a complete workflow on the Toolik dataset using one column of it. Today you will write a <strong>data biography</strong> of the whole thing: where it came from, what it covers, what condition it is in, and what somebody needs to know before trusting a number computed from it.</p>
+<p>Yesterday we ran a complete workflow on the Toolik dataset using one column of it. Today you will write a <strong>data biography</strong> of the whole thing.</p>
 <section id="what-is-a-data-biography" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-a-data-biography">What is a data biography?</h2>
 <p>A <strong>data biography</strong> is a short written account of a dataset: where it came from, what it covers, what condition it’s in, and what a reader needs to know before trusting anything computed from it. Working data scientists write them constantly, usually in the first cells of a notebook, because the alternative is finding the problem after you’ve built a whole analysis on top of it (which is a much worse day!).</p>
@@ -524,14 +524,14 @@ Interpret, don’t just report
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A column that is 99% empty is not necessarily broken. Think about what a “flag” column is for in an environmental dataset, and write a sentence explaining why it might be mostly empty by design. Reading a table tells you that the column is empty. Understanding the dataset tells you whether being empty is a problem.</p>
+<p>A column that is 99% empty is not necessarily broken. Think about what a “flag” column is for in an environmental dataset, and write a sentence explaining why it might be mostly empty by design.</p>
 </div>
 </div>
 </section>
 <section id="part-3-what-varies-and-what-doesnt" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-what-varies-and-what-doesnt">Part 3: What varies, and what doesn’t</h2>
 <ol start="8" type="1">
-<li>Use <code>.value_counts()</code> on <code>LTER_Site</code> and on <code>Station</code>. What do you learn? Does either column tell you anything?</li>
+<li>Use <code>.value_counts()</code> on <code>LTER_Site</code> and on <code>Station</code>. What does either column tell you?</li>
 <li>Use <code>.value_counts()</code> on <code>Flag_Daily_AirTemp_Mean_C</code>. What values appear, and what do you think they mean?</li>
 <li>Use <code>.value_counts()</code> on the <code>Year</code> column and look at both ends of the result, with <code>.head()</code> and then with <code>.tail()</code>. Do all years have the same number of observations? What would explain a year with fewer?</li>
 </ol>
@@ -572,9 +572,9 @@ Remember Session 2B
 <li><strong>Coverage.</strong> How many rows, what time span, how many variables.</li>
 <li><strong>Condition.</strong> What’s missing and where. Which columns you would and would not trust.</li>
 <li><strong>Cautions.</strong> Two specific things a person using this data should know before computing anything from it.</li>
-<li><strong>Fitness for purpose.</strong> Could you use this dataset to describe how Arctic summer temperatures have changed since 1988? Say yes or no, and say what would need checking first.</li>
+<li><strong>Fitness for purpose.</strong> Could you use this dataset to describe how Arctic summer temperatures have changed since 1988?</li>
 </ul>
-<p>Write it for a colleague who has never opened the file. No bullet fragments; complete sentences.</p>
+<p>Write it for a colleague who has never opened the file. Use complete sentences.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="🧭 Field Note: looping over your column list">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -585,7 +585,7 @@ Remember Session 2B
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you’d like to check several columns at once rather than one at a time, you can loop over a list. We cover loops properly in this afternoon’s live-coding session, so here is the whole pattern. Adapt the list, don’t write the loop from scratch:</p>
+<p>If you’d like to check several columns at once rather than one at a time, you can loop over a list. We cover loops properly in this afternoon’s live-coding session, so here is the whole pattern. Just change the list and the print statement based on the information you’re looking for.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column_name <span class="kw">in</span> [<span class="st">'Daily_AirTemp_Mean_C'</span>, <span class="st">'Daily_Precip_Total_mm'</span>]:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(column_name, toolik[column_name].isnull().<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The loop is optional! Everything above can be done one column at a time.</p>

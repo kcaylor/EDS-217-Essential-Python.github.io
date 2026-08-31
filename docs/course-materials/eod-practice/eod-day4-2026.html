@@ -450,8 +450,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>A panda, sorting the plastic from the plankton.</em> <a href="https://www.midjourney.com/jobs/108b1a95-bb7b-4bd1-a9e5-4c99c222f9a0?index=3">MidJourney 5</a></p>
 </div>
 <p>NOAA’s National Centers for Environmental Information maintain an archive of every marine microplastics measurement they can find: 16,245 water samples, pooled from thirty-seven separate studies, taken between 1972 and 2022 by research vessels, citizen scientists, and undergraduates with nets.</p>
-<p>Nobody designed this dataset. It was assembled, one study at a time. Most of the environmental data you will ever be handed was put together the same way, which is why today mattered.</p>
-<p>You have already met this file twice today. Today you will take it the whole way: from the raw download to an answer you could defend about whether the Atlantic and the Pacific are different.</p>
+<p>This dataset was assembled one study at a time. Nobody designed this dataset. Most of the environmental data you will ever be handed was put together the same way.</p>
+<p>You have already seen this file twice today. Now, you will use the raw data to answer the question: Is there more plastic in the Pacific than the Atlantic?</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -467,12 +467,12 @@ Reference
 </div>
 <section id="todays-three-patterns" class="level2">
 <h2 class="anchored" data-anchor-id="todays-three-patterns">Today’s three patterns</h2>
-<p>Everything below is built from these three patterns, plus two more you learned yesterday. You should not need to look any of them up more than once.</p>
+<p>Everything below is built from these three patterns, plus two more you learned yesterday.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> expression                     <span class="co"># the derived-column pattern</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df.dropna(subset<span class="op">=</span>[<span class="st">'col'</span>])                  <span class="co"># the missing-data pattern, treat half</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].fillna(value)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">str</span>.strip()          <span class="co"># the string-cleaning pattern</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>And the payoff from this morning:</p>
+<p>And from this morning:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">apply</span>(my_function)   <span class="co"># your own verb, run down a column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="setup" class="level2">
@@ -487,13 +487,13 @@ Reference
 <ol start="3" type="1">
 <li>Import what you need and read the data. The <code>Date</code> column is text, and pandas can convert it while it reads if you tell it exactly what the text looks like.</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled" title="🧭 Field Note: reading dates, and asking one for its year">
+<div class="callout callout-style-default callout-tip callout-titled" title="🧭 Field Note: reading dates">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🧭 Field Note: reading dates, and asking one for its year
+🧭 Field Note: reading dates
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -502,7 +502,7 @@ Reference
 <p>The format string is a small language of its own. <code>%m/%d/%Y</code> is month, day, four-digit year; <code>%I:%M:%S</code> is a twelve-hour clock; and <code>%p</code> is the AM or PM that goes with it. You are not expected to be able to write one of these yet.</p>
 <p>Once a column is a real date, you reach the pieces of it through <code>.dt</code>. You will need exactly one of these in task 13, and we are giving it to you here:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'year'</span>] <span class="op">=</span> samples[<span class="st">'Date'</span>].dt.year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Dates get a full session on Day 6.</strong> By the middle of next week you will be writing both of these yourself. Today, copy them.</p>
+<p>The <code>.year</code> is the request for the year of that date string. <strong>Dates get a full session on Day 6.</strong></p>
 <p>📖 <a href="../../course-materials/cheatsheets/read_csv.html">Cheatsheet: reading CSV files</a> · <a href="../../course-materials/cheatsheets/timeseries.html">Cheatsheet: time series</a></p>
 </div>
 </div>
@@ -513,13 +513,13 @@ Reference
 <ol type="1">
 <li>How many rows and columns? Display the first few rows.</li>
 <li>Run <code>.info()</code>. Which columns are <code>object</code>, and which of those <em>should</em> be something else?</li>
-<li>Run <code>.isnull().sum()</code>. Five columns have gaps. Name them and their counts.</li>
-<li><code>Oceans</code> is missing on 271 rows and <code>Measurement</code> on 5,792. Are those the same rows? Find out, and say how you know.</li>
+<li>Run <code>.isnull().sum()</code>. How many columns have gaps? Which are the columns, and how many gaps do they have?</li>
+<li><code>Oceans</code> is missing on 271 rows and <code>Measurement</code> on 5,792. Are those the same rows? How do you know?</li>
 </ol>
 </section>
 <section id="part-2-decide-what-to-keep" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-decide-what-to-keep">Part 2: Decide what to keep</h2>
-<p>Part 2 takes judgement rather than syntax, and more than one answer here is defensible. Every task here removes rows, so <strong>print <code>.shape</code> after every one of them</strong> and record the number in a markdown cell.</p>
+<p>Part 2 requires some judgement, so more than one answer here is defensible. Every task here removes rows, so <strong>print <code>.shape</code> after every one of them</strong> and record the number in a markdown cell.</p>
 <ol start="5" type="1">
 <li><p>Use <code>.dropna()</code> with <code>subset=</code> to keep only the rows with a <code>Measurement</code>. How many rows are left, and what fraction of the file is that?</p></li>
 <li><p>Compare <code>df['Unit'].value_counts()</code> now with what it was before task 5. What did that one line cost you, and which sampling programme did the rows you lost belong to? (Check <code>Sampling Method</code> and <code>Organization</code> on the rows you removed, if you want to be sure.)</p></li>
@@ -562,8 +562,8 @@ Reference
 </div>
 </div>
 <ol start="16" type="1">
-<li><p>The histogram you just drew is useless, and it is useless for a reason you can state in one sentence. State that reason in a markdown cell.</p></li>
-<li><p>Filter <code>samples</code> to the rows where <code>Measurement</code> is greater than zero, end the line with <code>.copy()</code>, and call it <code>positive</code>. How many samples reported exactly zero pieces? Is zero a measurement or a missing value? Defend your answer in one sentence.</p></li>
+<li><p>The histogram you just drew is useless. State the reason why in a markdown cell.</p></li>
+<li><p>Filter <code>samples</code> to the rows where <code>Measurement</code> is greater than zero, end the line with <code>.copy()</code>, and call it <code>positive</code>. How many samples reported exactly zero pieces? Is zero a measurement or a missing value?</p></li>
 <li><p>Add a column to <code>positive</code> called <code>log10_measurement</code> holding <code>np.log10()</code> of the measurement. Run <code>.describe()</code> on it, then draw the histogram again.</p></li>
 <li><p>In a markdown cell, describe the shape you can now see and could not see before. Name one thing about the data that this plot tells you and <code>.describe()</code> did not.</p></li>
 </ol>
@@ -578,18 +578,18 @@ Reference
 <li><code>'medium'</code> from 0.01 up to 1</li>
 <li><code>'high'</code> at 1 and above</li>
 </ul>
-<p>Test it on <code>0.001</code>, <code>0.5</code>, and <code>50</code> before you go near the DataFrame.</p></li>
+<p>Test it on <code>0.001</code>, <code>0.5</code>, and <code>50</code> before touching the DataFrame.</p></li>
 <li><p>Use <code>.apply()</code> to run your function down <code>positive['Measurement']</code>, store the result in a column called <code>my_class</code>, and report the counts.</p></li>
 <li><p>Now compare your labels with NOAA’s. Filter <code>positive</code> to the rows NOAA labelled <code>'Medium'</code>, and run <code>.value_counts()</code> on <code>my_class</code> for just those rows. Do the same for NOAA’s <code>'Very Low'</code>.</p></li>
 <li><p>Something is wrong, and it is not your function. In a markdown cell, explain what NOAA’s <code>Density Class</code> must actually mean, given that samples they called <code>Very Low</code> fall in your <code>high</code> bin. Then say whether you would use their column in an analysis, and why.</p></li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled" title="A hint, if you want one">
+<div class="callout callout-style-default callout-tip callout-titled" title="A hint">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-A hint, if you want one
+A hint
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -612,7 +612,7 @@ A hint, if you want one
 <blockquote class="blockquote">
 <p>A journalist emails you: “Is there more plastic in the Pacific than the Atlantic? I heard about the garbage patch.” You have this dataset and one afternoon. What do you tell them?</p>
 </blockquote>
-<p>Your answer must cite at least three specific numbers you computed here, must name at least one cleaning decision you made and what it cost, and must include at least one thing this dataset cannot tell them. Complete sentences, no bullet fragments.</p>
+<p>Your answer must cite at least three specific numbers you computed here, must name at least one cleaning decision you made and what it cost, and must include at least one thing this dataset cannot tell them. Use complete sentences.</p>
 </section>
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
@@ -624,7 +624,7 @@ A hint, if you want one
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> expression                     <span class="co"># add a column that was not in the file</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">apply</span>(my_function)   <span class="co"># add a column only you know how to compute</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Six patterns, and two of them you also used yesterday and the day before.</p>
-<p>Notice which one did the most work today. It was <code>df['new'] = expression</code>, four times over: <code>ocean</code>, <code>year</code>, <code>log10_measurement</code>, and <code>my_class</code>, and none of the cleaning patterns comes close. The twenty-two columns you downloaded did not have the answer to the journalist’s question in them, and the four columns you made yourself are where you found it!</p>
+<p>Notice which one did the most work today. It was <code>df['new'] = expression</code>, four times over: <code>ocean</code>, <code>year</code>, <code>log10_measurement</code>, and <code>my_class</code>. The twenty-two columns you downloaded did not have the answer to the journalist’s question in them, and the four columns you made yourself are where you found it!</p>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>

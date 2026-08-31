@@ -451,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The USDA Plant Hardiness Zone Map tells you which plants will survive the winter where you live. It is built from one number: the average annual <strong>minimum</strong> temperature at a location, in degrees Fahrenheit. Locations whose coldest night averages within the same five degrees get the same zone label, from <code>1a</code> in interior Alaska to <code>13b</code> in Puerto Rico.</p>
 <p>Gardeners have used it for decades. It is printed on the back of seed packets.</p>
 <p>In November 2023 the USDA released a new version, built by the PRISM group at Oregon State from thirty years of weather station records. It was the first update since 2012, and it moved about half the country half a zone warmer. That was reported widely, and mostly reported badly.</p>
-<p>Today you have both maps, one row per zip code, and every tool you have learned this week. The question is not whether the country got warmer. The question is what you can honestly say about it from these two files, and where each of the obvious answers goes wrong.</p>
+<p>Today you have both maps, one row per zip code, and every tool you have learned this week. The question is not whether the country got warmer. The question is what you can honestly say about it from these two files, and where each of the answers goes wrong.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -495,7 +495,7 @@ Reference
 <ol start="3" type="1">
 <li>Read the three files:</li>
 </ol>
-<div id="4fd32bea" class="cell" data-execution_count="1">
+<div id="4c11bf1c" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -531,7 +531,7 @@ Reference
 <ol start="4" type="1">
 <li>Pad the zip codes in all three tables:</li>
 </ol>
-<div id="4fd3f8df" class="cell" data-execution_count="2">
+<div id="d50a8f23" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>zones_2023[<span class="st">'zipcode'</span>] <span class="op">=</span> zones_2023[<span class="st">'zipcode'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>
@@ -546,7 +546,7 @@ Reference
 <ol type="1">
 <li><p>How many rows and columns does each of the three tables have? What are the column names of the two zone tables, and are they the same?</p></li>
 <li><p>Run <code>.isnull().sum()</code> on both zone tables. Then look at <code>.head()</code> of either one and say, in one sentence, what <code>zone</code>, <code>trange</code> and <code>zonetitle</code> each hold and which of the three is redundant.</p></li>
-<li><p>The two files do not have the same number of rows. Before you do anything else, write down two different explanations for that which do not involve anybody making a mistake.</p></li>
+<li><p>The two files do not have the same number of rows. Before you do anything else, write down two different explanations for that (not that someone made a mistake).</p></li>
 </ol>
 </section>
 <section id="part-2-one-table-out-of-three" class="level2">
@@ -563,9 +563,9 @@ Reference
 <h2 class="anchored" data-anchor-id="part-3-the-first-map">Part 3: The first map</h2>
 <ol start="9" type="1">
 <li><p>Filter <code>located</code> to the 2023 rows only, then draw a scatter plot with <code>longitude</code> across the bottom, <code>latitude</code> up the side, and <code>hue='trange_min'</code>. Make the figure twelve inches by seven. Label both axes and title it.</p></li>
-<li><p>Something is wrong with that figure, and it is not subtle. Describe it in a markdown cell.</p></li>
+<li><p>Describe what is wrong with that figure in a markdown cell.</p></li>
 <li><p>Find the culprit. Use the filter pattern on <code>located</code> to pull out every row with a <code>longitude</code> greater than −60, and print its zip code, state, city, latitude and longitude.</p></li>
-<li><p>In a markdown cell, two or three sentences. That is <strong>one</strong> zip code, appearing once in each year: two rows out of eighty thousand. Look up roughly where latitude 48.3, longitude −2.1 is. Is the temperature reading wrong, or is something else wrong? And say plainly what those two rows did to your figure.</p></li>
+<li><p>In a markdown cell: that is <strong>one</strong> zip code, appearing once in each year: two rows out of eighty thousand. Look up roughly where latitude 48.3, longitude −2.1 is. Is the temperature reading wrong, or is something else wrong? What did those two rows do to your figure?</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Two rows in eighty thousand">
 <div class="callout-header d-flex align-content-center">
@@ -577,19 +577,19 @@ Two rows in eighty thousand
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Nothing about those rows is unusual in a table. They are not null, not duplicated, not miscast, and they would survive every cleaning step you learned on Thursday untouched. <code>.describe()</code> on <code>longitude</code> would have shown a maximum of −2.12 and you would have had no reason to look at it.</p>
-<p>A figure found them in one second, because a plot is the only summary of a dataset that gives an outlier as much room as it gives everything else. This is a large part of what visualization is <em>for</em>, and it happens before any of the storytelling.</p>
+<p>Nothing about those rows is unusual in a table. They are not null, not duplicated, not miscast, and they would survive every cleaning step you learned on Thursday. <code>.describe()</code> on <code>longitude</code> would have shown a maximum of −2.12 and you would have had no reason to look at it.</p>
+<p>A figure found them in one second, because a plot is the only summary of a dataset that gives an outlier as much room as it gives everything else. This is a large part of what visualization is for. Remember the gorilla from EDS 212…</p>
 </div>
 </div>
 <ol start="13" type="1">
 <li><p>Build a table called <code>usa</code> holding only the rows with <code>longitude</code> less than −60, and redraw the 2023 map from it. Then draw the same map for 2012.</p></li>
-<li><p>You have just drawn a recognizable map of the United States without a mapping library, a projection, or a shapefile. In a markdown cell, one sentence on why that worked here. Then one more: run <code>usa['state'].nunique()</code> and say which parts of the country are not in these files at all.</p></li>
-<li><p>Put the two maps side by side on your screen and try to see the difference between them. In one honest sentence: can you?</p></li>
+<li><p>You have just drawn a recognizable map of the United States without a mapping library, a projection, or a shapefile. Explain in a markdown cell how that worked here. Then, run <code>usa['state'].nunique()</code> and say which parts of the country are not in these files at all.</p></li>
+<li><p>Put the two maps side by side on your screen and try to see the difference between them. Can you?</p></li>
 </ol>
 </section>
 <section id="part-4-what-actually-changed" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-what-actually-changed">Part 4: What actually changed</h2>
-<p>Comparing two maps by eye does not work. So compute the change and map <strong>that</strong> instead, which is the move you learned this morning.</p>
+<p>Comparing two maps by eye does not work. So, using the move you learned this morning, compute the change and map <strong>that</strong> instead.</p>
 <ol start="16" type="1">
 <li><p>Use the pivot pattern to build a table with one row per zip code and one column per year. Index it on <code>['zipcode', 'state', 'latitude', 'longitude']</code> so those come along for the ride, put <code>year</code> across the columns and <code>trange_min</code> in the cells, then <code>.reset_index()</code>. What shape is it, and why is that number smaller than 80,000?</p></li>
 <li><p>Add a <code>temp_diff</code> column: the 2023 value minus the 2012 value. Count its nulls and say what a null means here. Then drop those rows.</p></li>
@@ -609,12 +609,12 @@ Note
 </div>
 <ol start="18" type="1">
 <li><p>Draw a histogram of <code>temp_diff</code>. Label it. Then print <code>change['temp_diff'].value_counts().sort_index()</code> and read the two together.</p>
-<p>In a markdown cell, three or four sentences: what is the most common value, what is the second most common, and how many distinct values are there in total? Given that, is <code>temp_diff</code> a measurement of how much a place warmed, or is it something else? Be precise.</p></li>
+<p>In a markdown cell: what is the most common value, what is the second most common, and how many distinct values are there in total? Given that, is <code>temp_diff</code> a measurement of how much a place warmed, or is it something else? Be precise.</p></li>
 <li><p>The tails of that histogram are worth a minute. Use the top-N pattern twice to show the five zip codes with the largest increase and the five with the largest decrease, with their states and coordinates.</p>
-<p>In a markdown cell, two or three sentences: a zip code that moved by 25 or 30 °F has moved five or six whole zones. Do you believe that is a change in the climate? What else could produce it? (Look at where they are.)</p></li>
+<p>In a markdown cell: a zip code that moved by 25 or 30 °F has moved five or six whole zones. Do you believe that is a change in the climate? What else could produce it?</p></li>
 <li><p><code>temp_diff</code> has too many values to use as a <code>hue=</code> and too few to be interesting as a number. Write a named function called <code>classify_shift</code> that takes one difference and returns <code>'warmer'</code>, <code>'colder'</code> or <code>'unchanged'</code>, apply it to build a <code>shift</code> column, and count the three categories.</p></li>
 <li><p>Draw the change map: <code>longitude</code> and <code>latitude</code> again, this time with <code>hue='shift'</code>. Twelve by seven, labelled, titled.</p></li>
-<li><p>In a markdown cell, four or five sentences. The figure you just made is what the whole practice was for, so describe it properly. Where is the country almost uniformly warmer? Where is it patchy? Where are the <code>'colder'</code> points, and does their location connect to your answer to question 19?</p>
+<li><p>In a markdown cell: Where is the country almost uniformly warmer? Where is it patchy? Where are the <code>'colder'</code> points, and does their location connect to your answer to question 19?</p>
 <p>Then compare this figure with the two maps from question 13, and say in one sentence why the difference had to be computed rather than looked at.</p></li>
 </ol>
 </section>
@@ -622,9 +622,9 @@ Note
 <h2 class="anchored" data-anchor-id="part-5-states-and-the-count-column">Part 5: States, and the count column</h2>
 <ol start="23" type="1">
 <li><p>Group <code>change</code> by <code>state</code> and use <code>.agg(['count', 'mean'])</code> on <code>temp_diff</code>. Show the ten states with the largest mean increase.</p></li>
-<li><p>Read the <code>count</code> column before you read the <code>mean</code> column, the way you have every day since Friday. Two entries in that top ten should stop you. Name them and say why in one sentence each.</p></li>
+<li><p>Read the <code>count</code> column before you read the <code>mean</code> column. Do any entries surprise you from the top ten? Why?</p></li>
 <li><p>Build a Series of the ten largest mean increases, sorted, and draw it as horizontal bars using the <code>.values</code> and <code>.index</code> idiom. Label both axes with units and title it.</p></li>
-<li><p>Now the other end. Show the five states with the smallest mean increase, with their counts. In a markdown cell, one or two sentences: one of those states has more zip codes in it than all but one other state in the file. Does that make its small number more trustworthy or less, and does it make the ranking more interesting or less?</p></li>
+<li><p>Now, show the five states with the smallest mean increase instead, with their counts. In a markdown cell: one of those states has more zip codes in it than all but one other state in the file. Does that make its small number more trustworthy or less, and does it make the ranking more interesting or less?</p></li>
 </ol>
 </section>
 <section id="part-6-write-it-up" class="level2">
@@ -633,7 +633,7 @@ Note
 <blockquote class="blockquote">
 <p>A local newspaper is running a story headlined <strong>“Our State Is Now a Zone Warmer.”</strong> They have your two files and they want one figure and one number from you. <strong>What do you send them, and what do you tell them it does not mean?</strong></p>
 </blockquote>
-<p>Your answer must cite at least three specific numbers you computed here, must name at least two distinct reasons the comparison is harder than it sounds, and must end by naming the single figure you would send. Complete sentences, no bullet fragments.</p>
+<p>Your answer must cite at least three specific numbers you computed here, must name at least two distinct reasons the comparison is harder than it sounds, and must end by naming the single figure you would send. Use complete sentences.</p>
 </section>
 <section id="the-figure-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-figure-minute">The figure minute</h2>
@@ -644,7 +644,7 @@ Note
 <li>Question 18 showed you that your “temperature change” is <strong>eleven distinct values</strong>, which is the single most important thing to know about it and is invisible in any mean.</li>
 <li>Question 21 answered the <strong>question</strong>.</li>
 </ul>
-<p>Only one of the six was the figure the practice was about. The other five were how you found out what you had. That ratio is normal, and it is worth expecting: most of the plots you make in your career will never be shown to anybody, because their job is to tell <strong>you</strong> something before you say it out loud.</p>
+<p>Only one of the six was the figure the practice was about. The other five were how you found out what you had. That ratio is normal, and it is worth expecting: most of the plots you make in your career will never be shown to anybody, because their job is to tell <strong>you</strong> something before you tell anyone else.</p>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>

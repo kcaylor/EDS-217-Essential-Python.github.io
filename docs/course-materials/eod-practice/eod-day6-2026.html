@@ -449,8 +449,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>A panda, waiting for the votes from the national jury.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
 </div>
 <p>The Eurovision Song Contest has been held almost every year since 1956. Fifty-two countries have entered at least once, the scoring system has been rebuilt four times, the number of entrants has nearly doubled, and the whole of it is in one file of 1,603 rows.</p>
-<p>It is not environmental data, and that is deliberate. Everything you learned today is about the <strong>shape</strong> of tables rather than what is in them, and a dataset you have opinions about is a good place to find out whether you have actually learned it. You will recognize half the country names and none of the songs.</p>
-<p>Today you will do all four of the day’s moves on it, and along the way the file will hand you three separate reasons to distrust an answer you have just computed. Finding those is the real exercise.</p>
+<p>Everything you learned today is about the <strong>shape</strong> of tables rather than what is in them, so it’s okay that this isn’t environmental data.</p>
+<p>Today you will determine the most successful Eurovision country, and find three reasons to distrust the answer you have just computed.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -466,7 +466,7 @@ Reference
 </div>
 <section id="todays-patterns" class="level2">
 <h2 class="anchored" data-anchor-id="todays-patterns">Today’s patterns</h2>
-<p>Everything below is built from these three, plus what you already had.</p>
+<p>Everything below is built from these three patterns:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, on<span class="op">=</span><span class="st">'key'</span>)                        <span class="co"># the join pattern</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, left_on<span class="op">=</span><span class="st">'a'</span>, right_on<span class="op">=</span><span class="st">'b'</span>)       <span class="co"># when the key names differ</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, on<span class="op">=</span><span class="st">'key'</span>, how<span class="op">=</span><span class="st">'left'</span>)            <span class="co"># keep every row on the left</span></span>
@@ -494,7 +494,7 @@ Reference
 <ol start="3" type="1">
 <li>Read the file:</li>
 </ol>
-<div id="856cbb45" class="cell" data-execution_count="1">
+<div id="edaf2aaa" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -514,19 +514,19 @@ Reference
 <li><p>One year has a count of zero. Which one, and what happened? (You may look this up. It is the only fact in this exercise that is not in the file.)</p></li>
 <li><p>Build a table called <code>contests</code> that excludes that year, using the filter pattern and ending the line with <code>.copy()</code>. How many rows does it have?</p></li>
 </ol>
-<div class="callout callout-style-default callout-important callout-titled" title="Why this matters more than it looks">
+<div class="callout callout-style-default callout-important callout-titled" title="Why this matters">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Why this matters more than it looks
+Why this matters
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>A very common first move on a file like this is <code>df.fillna(0)</code>, to make the nulls go away.</p>
 <p>Do it here and every one of that year’s 41 entries acquires a real score of zero points. Those zeros then flow into every average you compute for the rest of the practice, and one decade in your final table becomes an artifact of a contest that never took place.</p>
-<p>A null means <em>no value</em>. A zero means <em>the value is zero</em>. Filling one with the other is not tidying, it is fabrication, and pandas will help you do it without a word of complaint.</p>
+<p>A null means <em>no value</em>. A zero means <em>the value is zero</em>. Filling one with the other is not tidying, it is fabrication.</p>
 </div>
 </div>
 </section>
@@ -547,21 +547,20 @@ Note
 <div class="callout-body-container callout-body">
 <p>🐍 Notice what this part does not do. You spent an hour this morning parsing dates, and there is a column here called <code>year</code>. It is tempting to reach for <code>pd.to_datetime()</code>.</p>
 <p>Leave it alone. <code>year</code> is a number that happens to name a year, and this file holds nothing below the year: no month, no day, no hour. Parsing it would produce a column whose only useful accessor, <code>.dt.year</code>, hands back the integer you started with. The parse earns its place in files that hold a real date, like the Toolik record from this morning, where <code>.dt.month</code> and <code>.dt.dayofyear</code> tell you something the raw column does not.</p>
-<p>Recognizing which tool a file does not need is as much a part of the job as knowing which one it does.</p>
 </div>
 </div>
 <ol start="7" type="1">
-<li>Count the entries in each year from 2000 to 2007. Something changes abruptly. What, and in which year? In a markdown cell, say what a sudden jump in entries per contest would do to a comparison of average scores between the 1990s and the 2010s.</li>
+<li>Count the entries in each year from 2000 to 2007. What changes abruptly? In which year? In a markdown cell, say what a sudden jump in entries per contest would do to a comparison of average scores between the 1990s and the 2010s.</li>
 </ol>
 </section>
 <section id="part-3-the-best-country-of-each-decade" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-the-best-country-of-each-decade">Part 3: The best country of each decade</h2>
-<p>This is the question the file invites, and answering it well takes the loop from yesterday afternoon and the stacking pattern from this morning.</p>
+<p>You can answer the below questions using the loop from yesterday afternoon and the stacking pattern from this morning:</p>
 <ol start="8" type="1">
 <li><p>Build a table with one row per decade, holding the country with the highest average <code>points_final</code> in that decade, how many entries that average came from, and the average itself.</p>
 <p>Do it with a loop over decade groups. For each decade: group by <code>to_country</code>, <code>.agg()</code> for the count and mean of <code>points_final</code>, <code>.reset_index()</code>, take the top row with the top-N pattern, add a <code>decade</code> column, and append the one-row table to a list. Then stack the list with <code>pd.concat()</code>.</p></li>
 <li><p>Read the <code>count</code> column before you read the <code>mean</code> column. Three of the seven winners won on fewer than four entries. Name them, and say in one sentence why you would not put any of them in a headline.</p></li>
-<li><p>The <code>mean</code> column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown cell, two or three sentences: is Europe getting better at writing songs? What else changed between 1956 and 2019 that would produce exactly this pattern, and what would you have to divide by to remove it?</p></li>
+<li><p>The <code>mean</code> column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown cell, two or three sentences: is Europe getting better at writing songs? What else changed between 1956 and 2019 that would produce this pattern? What would you have to divide by to remove it?</p></li>
 </ol>
 </section>
 <section id="part-4-the-second-table" class="level2">
@@ -584,7 +583,7 @@ Look at the population column before you answer
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Iceland is listed at 255,866 and the United Kingdom at 57,247,586. Neither of those is a current figure, and the file does not say what year any of them are from. That is a real limitation of a real dataset, and naming it is a better answer than working around it.</p>
+<p>Iceland is listed at 255,866 and the United Kingdom at 57,247,586. Neither of those is a current figure, and the file does not say what year any of them are from. That is a real limitation of a real dataset.</p>
 </div>
 </div>
 </section>
@@ -602,16 +601,16 @@ Look at the population column before you answer
 <blockquote class="blockquote">
 <p>A magazine editor has read that Ireland is the most successful country in Eurovision history and wants you to confirm it with the data. <strong>Can you?</strong></p>
 </blockquote>
-<p>Your answer must cite at least three specific numbers you computed here, must name at least two distinct reasons the question is harder than it sounds, and must end with the single table or number you would actually send them. Complete sentences, no bullet fragments.</p>
+<p>Your answer must cite at least three specific numbers you computed here, must name at least two distinct reasons the question is harder than it sounds, and must end with the single table or number you would actually send them. Use complete sentences.</p>
 </section>
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
-<p>Look back through your notebook. Three patterns did all of the structural work today, and none of them calculated anything:</p>
+<p>Look back through your notebook. Three patterns did all of the structural work today without calculating anything:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pd.merge(a, b, left_on<span class="op">=</span>, right_on<span class="op">=</span>)    <span class="co"># two tables become one, side by side</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pd.concat([...], ignore_index<span class="op">=</span><span class="va">True</span>)    <span class="co"># many tables become one, top to bottom</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span>, columns<span class="op">=</span>, ...)  <span class="co"># one long table becomes one wide one</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Every other line in your notebook was something you already knew, operating on a table that one of those three patterns had put into the right shape.</p>
-<p>That is the whole of today, and it is worth saying plainly. Most of the difficulty in real data analysis is not the analysis. It is that the numbers you need to compare are in two files, or in one file at right angles to each other. The three patterns above are how you fix that, and after today none of them should be mysterious.</p>
+<p>Most of the difficulty in real data analysis is not the analysis. It is that the numbers you need to compare are in two files, or in one file at right angles to each other. The three patterns above are how you fix that.</p>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>

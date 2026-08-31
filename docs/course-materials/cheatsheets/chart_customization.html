@@ -451,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This page covers the adjustments you make <strong>after</strong> a figure exists: sizing it, colouring it, labelling it, and making the labels readable. For the plotting commands themselves, see the <a href="../../course-materials/cheatsheets/matplotlib.html">matplotlib</a> and <a href="../../course-materials/cheatsheets/seaborn.html">seaborn</a> cheatsheets.</p>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="c353b817" class="cell" data-execution_count="1">
+<div id="1f6e0c9f" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -469,7 +469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="figure-size" class="level3">
 <h3 class="anchored" data-anchor-id="figure-size">Figure size</h3>
 <p><code>figsize</code> is in inches, width then height. A wide, short figure suits a long time axis. A square one suits a scatter.</p>
-<div id="e1d5608b" class="cell" data-execution_count="2">
+<div id="409c2bab" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
@@ -489,7 +489,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="colour-line-style-and-markers" class="level3">
 <h3 class="anchored" data-anchor-id="colour-line-style-and-markers">Colour, line style and markers</h3>
-<div id="47951056" class="cell" data-execution_count="3">
+<div id="99041704" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
@@ -512,7 +512,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="axis-labels-and-title" class="level3">
 <h3 class="anchored" data-anchor-id="axis-labels-and-title">Axis labels and title</h3>
 <p>Axis labels should give units. A title should say what the figure shows, not repeat the axis names.</p>
-<div id="4e18fcea" class="cell" data-execution_count="4">
+<div id="12d258d2" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
@@ -535,7 +535,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="rotating-tick-labels" class="level3">
 <h3 class="anchored" data-anchor-id="rotating-tick-labels">Rotating tick labels</h3>
 <p>When category names collide, rotate them. <code>ha='right'</code> aligns each rotated label under its own tick rather than beside it.</p>
-<div id="63bcbcdb" class="cell" data-execution_count="5">
+<div id="857af4b8" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>long_labels <span class="op">=</span> [<span class="st">'Great Smoky Mountains'</span>, <span class="st">'Grand Canyon'</span>, <span class="st">'Cuyahoga Valley'</span>,</span>
@@ -558,7 +558,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Before you rotate, ask whether a horizontal bar chart would read better. It usually does.</p>
-<div id="d062028a" class="cell" data-execution_count="6">
+<div id="f22d1471" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
@@ -579,7 +579,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="legends" class="level3">
 <h3 class="anchored" data-anchor-id="legends">Legends</h3>
 <p>Label each series as you draw it, then call <code>legend()</code> once.</p>
-<div id="2550be92" class="cell" data-execution_count="7">
+<div id="8b55feb3" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>early <span class="op">=</span> [<span class="op">-</span><span class="fl">24.1</span>, <span class="op">-</span><span class="fl">22.0</span>, <span class="op">-</span><span class="fl">21.5</span>, <span class="op">-</span><span class="fl">12.4</span>, <span class="op">-</span><span class="fl">1.2</span>, <span class="fl">8.1</span>, <span class="fl">11.6</span>, <span class="fl">7.0</span>, <span class="op">-</span><span class="fl">1.3</span>, <span class="op">-</span><span class="fl">12.0</span>, <span class="op">-</span><span class="fl">19.5</span>, <span class="op">-</span><span class="fl">22.0</span>]</span>
@@ -603,7 +603,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="grid-lines" class="level3">
 <h3 class="anchored" data-anchor-id="grid-lines">Grid lines</h3>
-<div id="e93ed70e" class="cell" data-execution_count="8">
+<div id="bcc56d6f" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
@@ -624,7 +624,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="fixing-crowded-layouts-and-saving" class="level3">
 <h3 class="anchored" data-anchor-id="fixing-crowded-layouts-and-saving">Fixing crowded layouts, and saving</h3>
-<div id="86407db3" class="cell" data-execution_count="9">
+<div id="eef34e9d" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
@@ -647,7 +647,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="seaborn-customization" class="level2">
 <h2 class="anchored" data-anchor-id="seaborn-customization">Seaborn Customization</h2>
 <p>Seaborn draws onto a matplotlib figure, so everything above still applies. Size the figure with <code>plt.figure()</code> first, then call seaborn, then label with <code>plt.xlabel()</code> and friends.</p>
-<div id="84a4acd9" class="cell" data-execution_count="10">
+<div id="e998bce8" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> pd.read_csv(<span class="st">'https://eds-217-essential-python.github.io/data/penguins.csv'</span>)</span>
@@ -656,7 +656,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="colouring-by-a-category-with-hue" class="level3">
 <h3 class="anchored" data-anchor-id="colouring-by-a-category-with-hue">Colouring by a category with <code>hue=</code></h3>
-<div id="9120ddd0" class="cell" data-execution_count="11">
+<div id="c9cbe7e4" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -678,7 +678,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="point-size-and-transparency" class="level3">
 <h3 class="anchored" data-anchor-id="point-size-and-transparency">Point size and transparency</h3>
 <p><code>s=</code> sets the marker size and <code>alpha=</code> sets transparency. Lower the transparency when points overlap heavily.</p>
-<div id="a675df6a" class="cell" data-execution_count="12">
+<div id="03e4d008" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -701,7 +701,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="histogram-bin-count" class="level3">
 <h3 class="anchored" data-anchor-id="histogram-bin-count">Histogram bin count</h3>
 <p><code>bins=</code> controls how finely the range is divided. Too few bins hides structure and too many turns the figure into noise. Try a few.</p>
-<div id="0ddc55f8" class="cell" data-execution_count="13">
+<div id="70b7d0f7" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
@@ -722,7 +722,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="ordering-bars" class="level3">
 <h3 class="anchored" data-anchor-id="ordering-bars">Ordering bars</h3>
 <p>A bar chart of unordered categories is easier to read when you sort it first.</p>
-<div id="2ed6c530" class="cell" data-execution_count="14">
+<div id="06c924e3" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mean_mass <span class="op">=</span> penguins.groupby(<span class="st">'species'</span>)[<span class="st">'body_mass_g'</span>].mean().sort_values()</span>

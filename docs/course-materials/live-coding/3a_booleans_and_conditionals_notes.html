@@ -465,7 +465,7 @@ Scope discipline
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="87b93c07" class="cell" data-execution_count="1">
+<div id="2c47720c" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -482,7 +482,7 @@ Scope discipline
 <section id="a-yes-or-no-question-3-min" class="level2">
 <h2 class="anchored" data-anchor-id="a-yes-or-no-question-3-min">1. A yes-or-no question (3 min)</h2>
 <p>Start with a bare value so the boolean is the subject, not the DataFrame:</p>
-<div id="4db3d27b" class="cell" data-execution_count="2">
+<div id="b1aa513f" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="op">=</span> <span class="fl">8.4</span></span>
@@ -492,7 +492,7 @@ Scope discipline
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="80b5b513" class="cell" data-execution_count="3">
+<div id="2afdbe90" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(temperature <span class="op">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -507,7 +507,7 @@ Scope discipline
 <li><code>bool</code> has exactly two members, <code>True</code> and <code>False</code>, capitalized</li>
 <li>you can store the answer in a variable</li>
 </ul>
-<div id="386cb446" class="cell" data-execution_count="4">
+<div id="1ce38230" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>above_freezing <span class="op">=</span> temperature <span class="op">&gt;</span> <span class="dv">0</span></span>
@@ -518,7 +518,7 @@ Scope discipline
 </div>
 </div>
 <p>Now show where the <code>8.4</code> came from. This is the first time they see <code>.loc[]</code>:</p>
-<div id="5c294cfa" class="cell" data-execution_count="5">
+<div id="be3c2737" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>toolik.loc[<span class="dv">0</span>, <span class="st">'Daily_AirTemp_Mean_C'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -530,7 +530,7 @@ Scope discipline
 <blockquote class="blockquote">
 <p><code>.loc[]</code> takes a row label, then a column label, and hands back the one value sitting at that intersection. Row <code>0</code> is the first day of the record. We’ll use this again this afternoon.</p>
 </blockquote>
-<div id="f13e6ded" class="cell" data-execution_count="6">
+<div id="0980e9bf" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>toolik.loc[<span class="dv">0</span>, <span class="st">'Daily_AirTemp_Mean_C'</span>] <span class="op">&gt;</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -543,7 +543,7 @@ Scope discipline
 <section id="the-comparison-operators-3-min" class="level2">
 <h2 class="anchored" data-anchor-id="the-comparison-operators-3-min">2. The comparison operators (3 min)</h2>
 <p>Write all six on the board and demonstrate quickly:</p>
-<div id="28f4cfb1" class="cell" data-execution_count="7">
+<div id="287a4f17" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temperature <span class="op">&gt;</span> <span class="dv">0</span>)</span>
@@ -568,14 +568,14 @@ False</code></pre>
 <p>That did not ask a question. It answered one, destructively. <code>=</code> assigns, <code>==</code> compares. This is the most common bug in the room for the next three days, and it is silent, because assignment does not raise an error.</p>
 </blockquote>
 <p>Reset and move on:</p>
-<div id="9d20718c" class="cell" data-execution_count="8">
+<div id="f69c6cbb" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="op">=</span> <span class="fl">8.4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Equality on text, since they’ll need it in an hour:</p>
-<div id="07e1d435" class="cell" data-execution_count="9">
+<div id="162a76c4" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>toolik.loc[<span class="dv">0</span>, <span class="st">'Station'</span>] <span class="op">==</span> <span class="st">'TLKMAIN'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -588,7 +588,7 @@ False</code></pre>
 </section>
 <section id="asking-two-questions-at-once-3-min" class="level2">
 <h2 class="anchored" data-anchor-id="asking-two-questions-at-once-3-min">3. Asking two questions at once (3 min)</h2>
-<div id="d134e1a3" class="cell" data-execution_count="10">
+<div id="dae2b4fb" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="op">=</span> <span class="fl">8.4</span></span>
@@ -628,7 +628,7 @@ Flag this now, pay it off in section 5
 <section id="if-elif-else-5-min" class="level2">
 <h2 class="anchored" data-anchor-id="if-elif-else-5-min">4. if / elif / else (5 min)</h2>
 <p>Build it in three steps, running after each.</p>
-<div id="5b321943" class="cell" data-execution_count="11">
+<div id="88f84e32" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="op">=</span> <span class="fl">8.4</span></span>
@@ -653,7 +653,7 @@ Flag this now, pay it off in section 5
 <p><code>IndentationError</code>. Same rule as yesterday’s <code>for</code> loop: the indented block is the body.</p>
 </blockquote>
 <p>Add <code>else</code>:</p>
-<div id="2e632ce6" class="cell" data-execution_count="12">
+<div id="90f45b4d" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="op">=</span> <span class="op">-</span><span class="fl">12.0</span></span>
@@ -668,7 +668,7 @@ Flag this now, pay it off in section 5
 </div>
 </div>
 <p>Then <code>elif</code>, which is the point of the section, because categorization is what they’ll do in the end-of-day practice:</p>
-<div id="661e78de" class="cell" data-execution_count="13">
+<div id="a4823500" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="op">=</span> <span class="op">-</span><span class="fl">12.0</span></span>
@@ -693,7 +693,7 @@ Flag this now, pay it off in section 5
 <li><code>else</code> catches everything left over; it takes no condition</li>
 </ul>
 <p>Test the classifier on three real values so they see it work rather than take it on faith:</p>
-<div id="b40a53e0" class="cell" data-execution_count="14">
+<div id="7e615807" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> value <span class="kw">in</span> [toolik.loc[<span class="dv">0</span>, <span class="st">'Daily_AirTemp_Mean_C'</span>],</span>
@@ -729,7 +729,7 @@ If you are running long
 <section id="asking-a-whole-column-5-min" class="level2">
 <h2 class="anchored" data-anchor-id="asking-a-whole-column-5-min">5. Asking a whole column (5 min)</h2>
 <p>This is the section the day depends on. Slow down.</p>
-<div id="5cc1a3f6" class="cell" data-execution_count="15">
+<div id="bed3d64c" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Daily_AirTemp_Mean_C'</span>] <span class="op">&gt;</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -756,7 +756,7 @@ Name: Daily_AirTemp_Mean_C, Length: 11171, dtype: bool</code></pre>
 <li>what comes back is a <strong>Series</strong> of <code>True</code> and <code>False</code>, with the same row labels</li>
 <li>it is exactly as long as the column you asked about</li>
 </ul>
-<div id="0b89a3d3" class="cell" data-execution_count="16">
+<div id="b580ae58" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> toolik[<span class="st">'Daily_AirTemp_Mean_C'</span>] <span class="op">&gt;</span> <span class="dv">0</span></span>
@@ -771,7 +771,7 @@ Name: Daily_AirTemp_Mean_C, Length: 11171, dtype: bool</code></pre>
 Name: Daily_AirTemp_Mean_C, dtype: bool</code></pre>
 </div>
 </div>
-<div id="110d224c" class="cell" data-execution_count="17">
+<div id="b1c848f2" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(mask), <span class="bu">len</span>(toolik)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -788,7 +788,7 @@ Name: Daily_AirTemp_Mean_C, dtype: bool</code></pre>
 </blockquote>
 <p>Say why: <code>and</code> wants one <code>True</code> or <code>False</code> on each side, and you handed it eleven thousand of each. pandas cannot guess whether you meant “all of them” or “any of them”, so it refuses.</p>
 <p>The pandas version:</p>
-<div id="8a3b7536" class="cell" data-execution_count="18">
+<div id="d87c81ed" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>warm_and_dry <span class="op">=</span> (toolik[<span class="st">'Daily_AirTemp_Mean_C'</span>] <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">&amp;</span> (toolik[<span class="st">'Daily_Precip_Total_mm'</span>] <span class="op">==</span> <span class="dv">0</span>)</span>
@@ -803,7 +803,7 @@ Name: Daily_AirTemp_Mean_C, dtype: bool</code></pre>
 dtype: bool</code></pre>
 </div>
 </div>
-<div id="42f3710b" class="cell" data-execution_count="19">
+<div id="1a6421ef" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>either_one <span class="op">=</span> (toolik[<span class="st">'Daily_AirTemp_Mean_C'</span>] <span class="op">&gt;</span> <span class="dv">10</span>) <span class="op">|</span> (toolik[<span class="st">'Daily_Precip_Total_mm'</span>] <span class="op">&gt;</span> <span class="dv">10</span>)</span>
@@ -818,7 +818,7 @@ dtype: bool</code></pre>
 dtype: bool</code></pre>
 </div>
 </div>
-<div id="bc032070" class="cell" data-execution_count="20">
+<div id="383f698d" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>not_freezing <span class="op">=</span> <span class="op">~</span>(toolik[<span class="st">'Daily_AirTemp_Mean_C'</span>] <span class="op">&lt;=</span> <span class="dv">0</span>)</span>
@@ -846,7 +846,7 @@ Name: Daily_AirTemp_Mean_C, dtype: bool</code></pre>
 </section>
 <section id="counting-the-trues-3-min" class="level2">
 <h2 class="anchored" data-anchor-id="counting-the-trues-3-min">6. Counting the Trues (3 min)</h2>
-<div id="4f45de87" class="cell" data-execution_count="21">
+<div id="c26a98c0" class="cell" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>mask.<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -855,7 +855,7 @@ Name: Daily_AirTemp_Mean_C, dtype: bool</code></pre>
 <pre><code>np.int64(3817)</code></pre>
 </div>
 </div>
-<div id="f1b644c7" class="cell" data-execution_count="22">
+<div id="ed3ec15e" class="cell" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -869,7 +869,7 @@ Name: Daily_AirTemp_Mean_C, dtype: bool</code></pre>
 <li><code>True</code> counts as 1 and <code>False</code> as 0, so <code>.sum()</code> on a mask is a count of the <code>True</code>s</li>
 <li>that is 3,817 days above freezing out of 11,171 days on record</li>
 </ul>
-<div id="af9df276" class="cell" data-execution_count="23">
+<div id="fc04047c" class="cell" data-execution_count="23">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>warm_and_dry.<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -883,7 +883,7 @@ Name: Daily_AirTemp_Mean_C, dtype: bool</code></pre>
 <section id="where-this-goes-next-2-min" class="level2">
 <h2 class="anchored" data-anchor-id="where-this-goes-next-2-min">7. Where this goes next (2 min)</h2>
 <p>One line, no explanation:</p>
-<div id="711d9913" class="cell" data-execution_count="24">
+<div id="f4946b42" class="cell" data-execution_count="24">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>toolik[mask].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

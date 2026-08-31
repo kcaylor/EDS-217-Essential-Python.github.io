@@ -468,7 +468,7 @@ Scope discipline
 <section id="making-lists-2-min" class="level2">
 <h2 class="anchored" data-anchor-id="making-lists-2-min">1. Making lists (2 min)</h2>
 <p>Start with something not about data, so the container is the subject:</p>
-<div id="db8316be" class="cell" data-execution_count="1">
+<div id="c12c7d94" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sites <span class="op">=</span> [<span class="st">'Toolik'</span>, <span class="st">'Goleta'</span>, <span class="st">'Santa Barbara'</span>]</span>
@@ -484,7 +484,7 @@ Scope discipline
 <li>items stay in the order you wrote them</li>
 <li>a list can hold anything, including mixed types</li>
 </ul>
-<div id="317f6400" class="cell" data-execution_count="2">
+<div id="b0fe4d0a" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mixed <span class="op">=</span> [<span class="st">'Toolik'</span>, <span class="dv">1988</span>, <span class="op">-</span><span class="fl">8.2</span>, <span class="va">True</span>]</span>
@@ -495,7 +495,7 @@ Scope discipline
 </div>
 </div>
 <p>Empty list, since they’ll need it in a moment:</p>
-<div id="941ebd64" class="cell" data-execution_count="3">
+<div id="302c9331" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>readings <span class="op">=</span> []</span>
@@ -509,7 +509,7 @@ Scope discipline
 <section id="getting-things-out-of-a-list-3-min" class="level2">
 <h2 class="anchored" data-anchor-id="getting-things-out-of-a-list-3-min">2. Getting things out of a list (3 min)</h2>
 <p>The zero-indexing conversation. Expect this to be the sticking point.</p>
-<div id="b4593448" class="cell" data-execution_count="4">
+<div id="4d6ae299" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sites[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -518,7 +518,7 @@ Scope discipline
 <pre><code>'Toolik'</code></pre>
 </div>
 </div>
-<div id="ea5bdf40" class="cell" data-execution_count="5">
+<div id="cd589965" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sites[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -534,7 +534,7 @@ Scope discipline
 </blockquote>
 <p>Ask them to say why before you explain. Three items, positions 0, 1, 2.</p>
 <p>Counting backwards:</p>
-<div id="29f98680" class="cell" data-execution_count="6">
+<div id="9fdc1b28" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sites[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -544,7 +544,7 @@ Scope discipline
 </div>
 </div>
 <p>Slicing, kept deliberately light:</p>
-<div id="44c3c076" class="cell" data-execution_count="7">
+<div id="ef3afd2b" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sites[<span class="dv">0</span>:<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -554,7 +554,7 @@ Scope discipline
 </div>
 </div>
 <p>Say: the end is exclusive, you’ll get this wrong sometimes, everyone does, check with <code>len</code>.</p>
-<div id="3dd8f23f" class="cell" data-execution_count="8">
+<div id="d7fb2282" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(sites)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -566,7 +566,7 @@ Scope discipline
 </section>
 <section id="changing-a-list-3-min" class="level2">
 <h2 class="anchored" data-anchor-id="changing-a-list-3-min">3. Changing a list (3 min)</h2>
-<div id="fc300a59" class="cell" data-execution_count="9">
+<div id="6d2c5cbd" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>readings <span class="op">=</span> []</span>
@@ -585,7 +585,7 @@ Scope discipline
 <li>it changes the list <strong>in place</strong> and returns nothing</li>
 </ul>
 <p>Run this to make the point stick, because it’s the mirror image of the pandas behavior from this morning:</p>
-<div id="9af2dfb3" class="cell" data-execution_count="10">
+<div id="9fba56b4" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> readings.append(<span class="fl">9.9</span>)</span>
@@ -602,7 +602,7 @@ Scope discipline
 </blockquote>
 <p>That contrast is the most valuable thirty seconds in this session. Don’t rush it.</p>
 <p>You can also replace by position:</p>
-<div id="531e9a4f" class="cell" data-execution_count="11">
+<div id="732f5c35" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sites[<span class="dv">1</span>] <span class="op">=</span> <span class="st">'Goleta Station'</span></span>
@@ -615,7 +615,7 @@ Scope discipline
 </section>
 <section id="looping-over-a-list-3-min" class="level2">
 <h2 class="anchored" data-anchor-id="looping-over-a-list-3-min">4. Looping over a list (3 min)</h2>
-<div id="011d414b" class="cell" data-execution_count="12">
+<div id="9d5b8677" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> site <span class="kw">in</span> sites:</span>
@@ -640,7 +640,7 @@ Santa Barbara</code></pre>
 <p><code>IndexError</code>? No: <code>IndentationError</code>. Say that Python uses indentation the way other languages use braces.</p>
 </blockquote>
 <p>Something slightly more useful:</p>
-<div id="a4d444fd" class="cell" data-execution_count="13">
+<div id="e2f5e1db" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> site <span class="kw">in</span> sites:</span>
@@ -655,7 +655,7 @@ Santa Barbara 13</code></pre>
 </section>
 <section id="making-dictionaries-3-min" class="level2">
 <h2 class="anchored" data-anchor-id="making-dictionaries-3-min">5. Making dictionaries (3 min)</h2>
-<div id="60f03485" class="cell" data-execution_count="14">
+<div id="e6fd43e7" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>station_elevations <span class="op">=</span> {</span>
@@ -682,7 +682,7 @@ Santa Barbara 13</code></pre>
 </section>
 <section id="getting-things-out-of-a-dictionary-4-min" class="level2">
 <h2 class="anchored" data-anchor-id="getting-things-out-of-a-dictionary-4-min">6. Getting things out of a dictionary (4 min)</h2>
-<div id="1c10fb0e" class="cell" data-execution_count="15">
+<div id="60d277e8" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>station_elevations[<span class="st">'Toolik'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -697,13 +697,13 @@ Santa Barbara 13</code></pre>
 <p><code>KeyError: 'Bren Hall'</code></p>
 </blockquote>
 <p>Then the safe version:</p>
-<div id="d73a1915" class="cell" data-execution_count="16">
+<div id="d3a85bdd" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>station_elevations.get(<span class="st">'Bren Hall'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="4ce4ec20" class="cell" data-execution_count="17">
+<div id="c874c29b" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>station_elevations.get(<span class="st">'Bren Hall'</span>, <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -713,7 +713,7 @@ Santa Barbara 13</code></pre>
 </div>
 </div>
 <p>Adding and updating:</p>
-<div id="7f65d82e" class="cell" data-execution_count="18">
+<div id="e0aa2741" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>station_elevations[<span class="st">'Bren Hall'</span>] <span class="op">=</span> <span class="dv">12</span></span>
@@ -723,7 +723,7 @@ Santa Barbara 13</code></pre>
 <pre><code>{'Toolik': 719, 'Goleta': 30, 'Santa Barbara': 15, 'Bren Hall': 12}</code></pre>
 </div>
 </div>
-<div id="5a4c0df0" class="cell" data-execution_count="19">
+<div id="5d949d38" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>station_elevations[<span class="st">'Goleta'</span>] <span class="op">=</span> <span class="dv">31</span></span>
@@ -734,7 +734,7 @@ Santa Barbara 13</code></pre>
 </div>
 </div>
 <p>Point to make: same square-bracket syntax adds a new key or overwrites an existing one. There’s no warning either way.</p>
-<div id="508a1503" class="cell" data-execution_count="20">
+<div id="9b30c60f" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(station_elevations.keys())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -743,7 +743,7 @@ Santa Barbara 13</code></pre>
 <pre><code>['Toolik', 'Goleta', 'Santa Barbara', 'Bren Hall']</code></pre>
 </div>
 </div>
-<div id="c9b00cf4" class="cell" data-execution_count="21">
+<div id="b523d5c0" class="cell" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(station_elevations.values())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -756,7 +756,7 @@ Santa Barbara 13</code></pre>
 <section id="looping-over-a-dictionary-3-min" class="level2">
 <h2 class="anchored" data-anchor-id="looping-over-a-dictionary-3-min">7. Looping over a dictionary (3 min)</h2>
 <p>The default surprises people:</p>
-<div id="d5fb73da" class="cell" data-execution_count="22">
+<div id="95e48393" class="cell" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key <span class="kw">in</span> station_elevations:</span>
@@ -773,7 +773,7 @@ Bren Hall</code></pre>
 <p>Looping over a dictionary gives you the <strong>keys</strong>, not the values.</p>
 </blockquote>
 <p>Then both at once:</p>
-<div id="bc6fd7cf" class="cell" data-execution_count="23">
+<div id="9249125d" class="cell" data-execution_count="23">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> station, elevation <span class="kw">in</span> station_elevations.items():</span>
@@ -791,7 +791,7 @@ Bren Hall is at 12 meters</code></pre>
 <section id="why-this-mattered-today-3-min" class="level2">
 <h2 class="anchored" data-anchor-id="why-this-mattered-today-3-min">8. Why this mattered today (3 min)</h2>
 <p>Bring it back to the morning. Write these two cells and let them sit side by side:</p>
-<div id="fcec1eae" class="cell" data-execution_count="24">
+<div id="844e4b2b" class="cell" data-execution_count="24">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -858,7 +858,7 @@ Bren Hall is at 12 meters</code></pre>
 </div>
 </div>
 </div>
-<div id="1a1d2010" class="cell" data-execution_count="25">
+<div id="4e06794f" class="cell" data-execution_count="25">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>goleta.rename(columns<span class="op">=</span>{<span class="st">'datetimeUtc'</span>: <span class="st">'datetime_utc'</span>}).columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -886,7 +886,7 @@ Bren Hall is at 12 meters</code></pre>
 <p><code>keep</code> is a list, and that’s the inner set of brackets in <code>df[['a', 'b']]</code>. The thing inside <code>rename</code> is a dictionary. You were already writing both of these. Now you know what they are.</p>
 </blockquote>
 <p>Finish with the loop that pays off in the end-of-day practice:</p>
-<div id="a6caf780" class="cell" data-execution_count="26">
+<div id="867b188b" class="cell" data-execution_count="26">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column_name <span class="kw">in</span> [<span class="st">'Daily_AirTemp_Mean_C'</span>, <span class="st">'Daily_Precip_Total_mm'</span>]:</span>

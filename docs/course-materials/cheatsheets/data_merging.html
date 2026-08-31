@@ -478,7 +478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Let’s start by importing pandas and creating sample datasets to work with:</p>
-<div id="86d3d0c9" class="cell" data-execution_count="1">
+<div id="2af388fe" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -526,7 +526,7 @@ Grades DataFrame:
 <section id="inner-join-default" class="level3">
 <h3 class="anchored" data-anchor-id="inner-join-default">Inner Join (Default)</h3>
 <p>Returns only rows that have matching keys in both DataFrames.</p>
-<div id="ac499738" class="cell" data-execution_count="2">
+<div id="c3c120c5" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inner join - only students with grades</span></span>
@@ -546,7 +546,7 @@ Grades DataFrame:
 <section id="left-join" class="level3">
 <h3 class="anchored" data-anchor-id="left-join">Left Join</h3>
 <p>Returns all rows from the left DataFrame and matched rows from the right DataFrame.</p>
-<div id="daf78867" class="cell" data-execution_count="3">
+<div id="345a78a9" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Left join - all students, with grades where available</span></span>
@@ -568,7 +568,7 @@ Grades DataFrame:
 <section id="right-join" class="level3">
 <h3 class="anchored" data-anchor-id="right-join">Right Join</h3>
 <p>Returns all rows from the right DataFrame and matched rows from the left DataFrame.</p>
-<div id="8e89365f" class="cell" data-execution_count="4">
+<div id="bb17d062" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Right join - all grades, with student info where available</span></span>
@@ -590,7 +590,7 @@ Grades DataFrame:
 <section id="outer-join" class="level3">
 <h3 class="anchored" data-anchor-id="outer-join">Outer Join</h3>
 <p>Returns all rows from both DataFrames, filling missing values with NaN.</p>
-<div id="88918ac9" class="cell" data-execution_count="5">
+<div id="bbf340b1" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Outer join - all students and all grades</span></span>
@@ -615,7 +615,7 @@ Grades DataFrame:
 <section id="merging-with-different-column-names" class="level2">
 <h2 class="anchored" data-anchor-id="merging-with-different-column-names">Merging with Different Column Names</h2>
 <p>When the key columns have different names in each DataFrame:</p>
-<div id="5f3bd0ca" class="cell" data-execution_count="6">
+<div id="c1c40cfa" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame with different column name</span></span>
@@ -647,7 +647,7 @@ Grades DataFrame:
 <section id="joining-on-index" class="level2">
 <h2 class="anchored" data-anchor-id="joining-on-index">Joining on Index</h2>
 <p>When you want to combine DataFrames based on their index (row labels), use the <code>.join()</code> method - it’s much simpler than merging:</p>
-<div id="c0439432" class="cell" data-execution_count="7">
+<div id="33f75a86" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrames with datetime indices (common in time series data)</span></span>
@@ -700,7 +700,7 @@ Joined weather data:
 <p>Use <code>pd.concat()</code> to stack DataFrames vertically or horizontally:</p>
 <section id="vertical-concatenation-stacking-rows" class="level3">
 <h3 class="anchored" data-anchor-id="vertical-concatenation-stacking-rows">Vertical Concatenation (Stacking Rows)</h3>
-<div id="f024f9a5" class="cell" data-execution_count="8">
+<div id="46d7ebde" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create additional data for different years</span></span>
@@ -735,7 +735,7 @@ Joined weather data:
 </section>
 <section id="horizontal-concatenation-adding-columns" class="level3">
 <h3 class="anchored" data-anchor-id="horizontal-concatenation-adding-columns">Horizontal Concatenation (Adding Columns)</h3>
-<div id="5377e790" class="cell" data-execution_count="9">
+<div id="af94f354" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create separate DataFrames with same index</span></span>
@@ -761,7 +761,7 @@ Joined weather data:
 <h2 class="anchored" data-anchor-id="real-world-examples">Real-World Examples</h2>
 <section id="example-1-eurovision-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="example-1-eurovision-analysis">Example 1: Eurovision Analysis</h3>
-<div id="24907324" class="cell" data-execution_count="10">
+<div id="68d89029" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate the Eurovision data merging scenario</span></span>
@@ -793,7 +793,7 @@ Joined weather data:
 </section>
 <section id="example-2-climate-data-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="example-2-climate-data-analysis">Example 2: Climate Data Analysis</h3>
-<div id="9f7b28e7" class="cell" data-execution_count="11">
+<div id="8cf6c6c6" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create simple temperature and CO2 data</span></span>
@@ -827,7 +827,7 @@ Joined weather data:
 <h2 class="anchored" data-anchor-id="handling-common-issues">Handling Common Issues</h2>
 <section id="missing-values-after-merge" class="level3">
 <h3 class="anchored" data-anchor-id="missing-values-after-merge">Missing Values After Merge</h3>
-<div id="5a9faf66" class="cell" data-execution_count="12">
+<div id="216685d9" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrames with some non-matching records</span></span>
@@ -873,7 +873,7 @@ After dropping rows with NaN:
 </section>
 <section id="duplicate-column-names" class="level3">
 <h3 class="anchored" data-anchor-id="duplicate-column-names">Duplicate Column Names</h3>
-<div id="fd890e63" class="cell" data-execution_count="13">
+<div id="f69a046a" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DataFrames with overlapping column names  </span></span>

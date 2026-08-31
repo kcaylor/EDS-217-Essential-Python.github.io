@@ -463,7 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="fe5c9c64" class="cell" data-execution_count="1">
+<div id="e0daa776" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -497,7 +497,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="loading-time-series-data">Loading Time Series Data</h2>
 <section id="reading-csv-with-date-parsing" class="level3">
 <h3 class="anchored" data-anchor-id="reading-csv-with-date-parsing">Reading CSV with Date Parsing</h3>
-<div id="975bc3ed" class="cell" data-execution_count="2">
+<div id="b4b2940a" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse dates while reading a CSV (the way you will do it on real data)</span></span>
@@ -519,7 +519,7 @@ Data shape: (48, 3)</code></pre>
 </section>
 <section id="converting-strings-to-datetime" class="level3">
 <h3 class="anchored" data-anchor-id="converting-strings-to-datetime">Converting Strings to Datetime</h3>
-<div id="f7688eb5" class="cell" data-execution_count="3">
+<div id="05dcdbb6" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert year-only data to datetime (common in environmental datasets)</span></span>
@@ -543,7 +543,7 @@ Data shape: (48, 3)</code></pre>
 </section>
 <section id="setting-datetime-index" class="level2">
 <h2 class="anchored" data-anchor-id="setting-datetime-index">Setting DateTime Index</h2>
-<div id="5093357d" class="cell" data-execution_count="4">
+<div id="2896f0f6" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set date column as index for time series operations</span></span>
@@ -565,7 +565,7 @@ date
 </section>
 <section id="extracting-date-components" class="level2">
 <h2 class="anchored" data-anchor-id="extracting-date-components">Extracting Date Components</h2>
-<div id="fe7f0818" class="cell" data-execution_count="5">
+<div id="db397afa" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract date components using .dt accessor</span></span>
@@ -589,7 +589,7 @@ date
 </div>
 <section id="creating-seasonal-groupings" class="level3">
 <h3 class="anchored" data-anchor-id="creating-seasonal-groupings">Creating Seasonal Groupings</h3>
-<div id="862caf03" class="cell" data-execution_count="6">
+<div id="d4aea770" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define seasonal groupings as constants</span></span>
@@ -624,7 +624,7 @@ date
 <h2 class="anchored" data-anchor-id="time-series-resampling">Time Series Resampling</h2>
 <section id="basic-resampling" class="level3">
 <h3 class="anchored" data-anchor-id="basic-resampling">Basic Resampling</h3>
-<div id="f03d605b" class="cell" data-execution_count="7">
+<div id="f0ea7454" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Resample monthly data to annual averages</span></span>
@@ -708,7 +708,7 @@ Handling Mixed Data Types
 <h2 class="anchored" data-anchor-id="time-series-calculations">Time Series Calculations</h2>
 <section id="year-over-year-changes" class="level3">
 <h3 class="anchored" data-anchor-id="year-over-year-changes">Year-over-Year Changes</h3>
-<div id="7c5aea97" class="cell" data-execution_count="8">
+<div id="9ce0a8f9" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate year-over-year changes</span></span>
@@ -732,7 +732,7 @@ date
 </section>
 <section id="rolling-averages" class="level3">
 <h3 class="anchored" data-anchor-id="rolling-averages">Rolling Averages</h3>
-<div id="8c839661" class="cell" data-execution_count="9">
+<div id="0aaf0d13" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 12-month rolling average</span></span>
@@ -768,7 +768,7 @@ date
 <h2 class="anchored" data-anchor-id="time-series-filtering">Time Series Filtering</h2>
 <section id="selecting-date-ranges" class="level3">
 <h3 class="anchored" data-anchor-id="selecting-date-ranges">Selecting Date Ranges</h3>
-<div id="d1be0e6c" class="cell" data-execution_count="10">
+<div id="7b9f4e1c" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select data from specific year</span></span>
@@ -792,7 +792,7 @@ Modern data (2022+): 24 records</code></pre>
 </section>
 <section id="filtering-by-date-components" class="level3">
 <h3 class="anchored" data-anchor-id="filtering-by-date-components">Filtering by Date Components</h3>
-<div id="e61f6cec" class="cell" data-execution_count="11">
+<div id="496b3431" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter by month (e.g., all January data)</span></span>
@@ -818,7 +818,7 @@ Winter records: 12
 </section>
 <section id="merging-time-series-data" class="level2">
 <h2 class="anchored" data-anchor-id="merging-time-series-data">Merging Time Series Data</h2>
-<div id="9d61075a" class="cell" data-execution_count="12">
+<div id="433fdd70" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create second dataset with different frequency</span></span>

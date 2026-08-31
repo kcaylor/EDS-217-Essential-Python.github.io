@@ -397,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
       <h1 class="title">Interactive Session</h1>
-            <p class="subtitle lead">⚒️ Positron &amp; Jupyter Notebooks</p>
+            <p class="subtitle lead">⚒️ Positron &amp; Jupyter Notebooks on the Bren Server</p>
                       </div>
   </div>
     
@@ -419,20 +419,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#meet-positron-on-posit-workbench" id="toc-meet-positron-on-posit-workbench" class="nav-link active" data-scroll-target="#meet-positron-on-posit-workbench">Meet Positron on Posit Workbench</a></li>
+  <li><a href="#make-a-folder-for-this-course" id="toc-make-a-folder-for-this-course" class="nav-link" data-scroll-target="#make-a-folder-for-this-course">Make a folder for this course</a></li>
+  <li><a href="#point-the-console-at-the-eds217-environment" id="toc-point-the-console-at-the-eds217-environment" class="nav-link" data-scroll-target="#point-the-console-at-the-eds217-environment">Point the Console at the eds217 environment</a></li>
   <li><a href="#two-ways-to-run-python" id="toc-two-ways-to-run-python" class="nav-link" data-scroll-target="#two-ways-to-run-python">Two ways to run Python</a>
   <ul class="collapse">
   <li><a href="#the-console-a-repl" id="toc-the-console-a-repl" class="nav-link" data-scroll-target="#the-console-a-repl">The Console (a REPL)</a></li>
   <li><a href="#jupyter-notebooks-what-we-will-use" id="toc-jupyter-notebooks-what-we-will-use" class="nav-link" data-scroll-target="#jupyter-notebooks-what-we-will-use">Jupyter Notebooks (what we will use)</a></li>
   </ul></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
-  <li><a href="#working-with-cells" id="toc-working-with-cells" class="nav-link" data-scroll-target="#working-with-cells">Working with cells</a>
-  <ul class="collapse">
-  <li><a href="#running-a-code-cell" id="toc-running-a-code-cell" class="nav-link" data-scroll-target="#running-a-code-cell">Running a code cell</a></li>
-  <li><a href="#adding-and-moving-cells" id="toc-adding-and-moving-cells" class="nav-link" data-scroll-target="#adding-and-moving-cells">Adding and moving cells</a></li>
-  <li><a href="#writing-a-markdown-cell" id="toc-writing-a-markdown-cell" class="nav-link" data-scroll-target="#writing-a-markdown-cell">Writing a Markdown cell</a></li>
-  </ul></li>
+  <li><a href="#make-your-first-notebook" id="toc-make-your-first-notebook" class="nav-link" data-scroll-target="#make-your-first-notebook">Make your first notebook</a></li>
+  <li><a href="#working-with-cells" id="toc-working-with-cells" class="nav-link" data-scroll-target="#working-with-cells">Working with cells</a></li>
   <li><a href="#handy-positron-features" id="toc-handy-positron-features" class="nav-link" data-scroll-target="#handy-positron-features">Handy Positron features</a></li>
-  <li><a href="#saving-and-exporting" id="toc-saving-and-exporting" class="nav-link" data-scroll-target="#saving-and-exporting">Saving and exporting</a></li>
+  <li><a href="#saving-restarting-and-coming-back-tomorrow" id="toc-saving-restarting-and-coming-back-tomorrow" class="nav-link" data-scroll-target="#saving-restarting-and-coming-back-tomorrow">Saving, restarting and coming back tomorrow</a></li>
   <li><a href="#key-pointsreview" id="toc-key-pointsreview" class="nav-link" data-scroll-target="#key-pointsreview">Key Points/Review</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
@@ -445,12 +442,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p><img src="images/Jupyter.png" class="img-fluid"></p>
-<p>Welcome to your first hands-on session. You have already met <strong>Positron</strong> in your R course, so the workspace itself will look familiar. Over the next hour you will learn what changes when the language is Python, and you will build the first of the <strong>Jupyter Notebooks</strong> you will write your code in for the rest of this course (and throughout MEDS and your data science career).</p>
+<div style="width: 60%; margin: auto;">
+<p><img src="images/Positron.png" class="img-fluid"></p>
+</div>
+<p>Welcome to the first session of Day 1, and to your first hands-on session of the course. You have already met <strong>Positron</strong> in your R course, so the workspace itself will look familiar. This morning we will learn how Positron works with Python, and you will build your first <strong>Jupyter Notebook</strong>. Notebooks are where you will write your code for the rest of this course, and for most of your time in the MEDS program.</p>
 <div class="center-text body-text-m">
 <p>Always remember: <span class="teal-text"><strong>Python is the programming language. Positron is the IDE.</strong></span></p>
 </div>
-<p>An <em>IDE</em> (integrated development environment) is a workspace that puts your code, its output, your notes, and your files together in one place. Positron is the IDE we use. Python is the language we write in it.</p>
+<p>An <em>IDE</em> (integrated development environment) is a workspace that puts your code, its output, your notes, and your files together in one place. Positron is the IDE we use in this class. Python is the language we write in it.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -461,69 +460,129 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Positron runs both R and Python. The panes you learned in your R course, the Console, the Variables pane, the Plots pane, and the file Explorer, all do the same jobs when coding in Python. The only things that change are the interpreter Positron is talking to (python instead of R) and the file format we write in (.ipynb).</p>
+<p>Positron runs both R and Python. The panes you learned in your R course, the Console, the Variables pane, the Plots pane, and the file Explorer, all do the same jobs when coding in Python. The only things that change are the interpreter Positron is running (python instead of R) and the file format we write in (.ipynb).</p>
 </div>
 </div>
+<p>Every step below is written for <strong>workbench-1.bren.ucsb.edu</strong>, which is the Bren server we run this course on. The screenshots were taken on that server, so what you see on your own screen should match them closely. The one difference you should expect is the username: the screenshots say <code>caylor</code>, and yours will say your own Bren username.</p>
 <section id="meet-positron-on-posit-workbench" class="level2">
 <h2 class="anchored" data-anchor-id="meet-positron-on-posit-workbench">Meet Positron on Posit Workbench</h2>
 <p>We run Positron on a shared <strong>Posit Workbench</strong> server, so there is nothing to install. Everything happens in your browser.</p>
-<section id="step-1-log-in-to-posit-workbench" class="level4">
-<h4 class="anchored" data-anchor-id="step-1-log-in-to-posit-workbench">Step 1: Log in to Posit Workbench</h4>
+<section id="step-1-sign-in-to-posit-workbench" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-sign-in-to-posit-workbench">Step 1: Sign in to Posit Workbench</h4>
 <ol type="1">
 <li>Open a browser and go to <a href="https://workbench-1.bren.ucsb.edu">workbench-1.bren.ucsb.edu</a>.</li>
-<li>Enter your login credentials to access the server.</li>
+<li>Enter your Bren username and password. Leave <strong>Stay signed in when browser closes</strong> unchecked, because we are on lab machines this week.</li>
+<li>Click <strong>Sign in</strong>.</li>
 </ol>
+<p><img src="images/workbench/01_login.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Workbench signs you out after an hour of inactivity">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Workbench signs you out after an hour of inactivity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The notice just above the Sign in button warns you that you will be signed out for inactivity; an hour away from the keyboard really is all it takes. However, if you come back from lunch to a sign-in page, your session itself is still running on the server. Sign in again and you should find your work right where you left it. That being said, you should always save your work when you are stepping away from your computer, just in case!</p>
+</div>
+</div>
 </section>
-<section id="step-2-launch-a-positron-session" class="level4">
-<h4 class="anchored" data-anchor-id="step-2-launch-a-positron-session">Step 2: Launch a Positron session</h4>
+<section id="step-2-look-at-the-projects-page" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-look-at-the-projects-page">Step 2: Look at the Projects page</h4>
+<p>Signing in brings you to the <strong>Projects</strong> page, which lists the sessions you already have running. On your first visit your own list should be empty, and the screenshot below shows a session already running only because it was taken on an account that had one from earlier in the day.</p>
+<p><img src="images/workbench/02_projects_page.png" class="img-fluid"></p>
+<p>Each row gives you the project, the session name, when it was last used, when it was created, which runtime it is using, whether it is Active or Suspended, whose account it belongs to, and a Details link.</p>
+</section>
+<section id="step-3-launch-a-positron-session" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-launch-a-positron-session">Step 3: Launch a Positron session</h4>
 <ol type="1">
-<li>Click <strong>+ New Session</strong> and select <strong>Positron Pro</strong> from the list of session types.</li>
-<li>If the dialog asks you to allocate resources, give the session at least <strong>2.5 GB</strong> of memory.</li>
-<li>Click <strong>Launch</strong>. Workbench opens the session in your current browser window once the server has started it.</li>
+<li>Click <strong>+ New Session</strong>.</li>
+<li>Leave <strong>Positron Pro</strong> selected. Workbench also offers RStudio Pro, JupyterLab, and VS Code, and we will not be using any of those in this course.</li>
+<li>Leave the <strong>Session Name</strong> as it is, or give it a name you will recognize later.</li>
+<li>Leave the <strong>Resource Profile</strong> on <strong>Default (1 CPU, 4GB RAM)</strong>, which is plenty for everything we do this week. The Small, Medium and Large profiles are there for jobs that need more memory than we will ever ask for.</li>
+<li>Click <strong>Launch</strong>.</li>
 </ol>
-<!-- ![](images/positron_launch.png) -->
-</section>
-<section id="step-3-get-your-bearings" class="level4">
-<h4 class="anchored" data-anchor-id="step-3-get-your-bearings">Step 3: Get your bearings</h4>
-<p>The Positron layout is the same one you used for R:</p>
-<ul>
-<li>The <strong>Editor</strong> in the center, where your notebooks and files open as tabs.</li>
-<li>The <strong>Console</strong> below or beside it, where Python evaluates code you type directly.</li>
-<li>The <strong>Sidebar</strong> on the left, holding the file <strong>Explorer</strong>.</li>
-<li>The <strong>Session panes</strong> on the right: <strong>Variables</strong>, <strong>Plots</strong>, and <strong>Help</strong>.</li>
-<li>The <strong>interpreter dropdown</strong> in the top right corner, showing which Python or R is currently running.</li>
-</ul>
-<!-- ![](images/interface-positron.png) -->
-<div class="callout callout-style-default callout-note callout-titled">
+<p><img src="images/workbench/03_new_session_dialog.png" class="img-fluid"></p>
+<p>Workbench starts the session and opens Positron in the same browser tab. Starting a session for the first time takes a few seconds, so give it a moment.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Positron in Python is still Positron">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Positron in Python is still Positron
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>An IDE like Positron supports <strong>interactive computing</strong>: you run your code a piece at a time and see each result immediately. That fast feedback loop is what makes it useful for exploring data.</p>
+<p>Everything you learned about the Positron layout in your R course applies here: the <strong>Editor</strong> in the middle, the <strong>Console</strong> below it, the <strong>Explorer</strong> in the left sidebar, and the <strong>Session</strong> panes (Variables, Plots, Help) on the right.</p>
 </div>
 </div>
 </section>
-<section id="step-4-point-positron-at-the-course-environment" class="level4">
-<h4 class="anchored" data-anchor-id="step-4-point-positron-at-the-course-environment">Step 4: Point Positron at the course environment</h4>
-<p>Look at the interpreter dropdown in the top right. If it shows R, or shows a Python that is not ours, click the ellipsis (<code>...</code>) next to it and choose <strong>eds217_2026</strong> from the list of available interpreters.</p>
-<div class="callout callout-style-default callout-caution callout-titled" title="Switching interpreters clears your session">
+</section>
+<section id="make-a-folder-for-this-course" class="level2">
+<h2 class="anchored" data-anchor-id="make-a-folder-for-this-course">Make a folder for this course</h2>
+<p>Positron works best when it has a folder open, because the Explorer, the Console working directory, and every relative file path you write all start from that folder. So the first thing we will do is make a new folder for EDS 217, which will keep everything for this course.</p>
+<section id="step-1-open-the-new-folder-wizard" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-open-the-new-folder-wizard">Step 1: Open the New Folder wizard</h4>
+<p>From the <strong>New</strong> menu in the top left, choose <strong>New Folder from Template…</strong>. (The Welcome page offers the same wizard under the <strong>New Folder…</strong> icon, if that is where you happen to be.)</p>
+</section>
+<section id="step-2-choose-the-empty-project-template" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-choose-the-empty-project-template">Step 2: Choose the Empty Project template</h4>
+<p>Positron offers four templates. Python Project, R Project and Jupyter Notebook all add scaffolding we do not need yet, so choose <strong>Empty Project</strong> and click <strong>Next</strong>.</p>
+<p><img src="images/workbench/06_new_folder_template.png" class="img-fluid"></p>
+</section>
+<section id="step-3-name-the-folder-and-put-it-in-your-home-directory" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-name-the-folder-and-put-it-in-your-home-directory">Step 3: Name the folder and put it in your home directory</h4>
+<ol type="1">
+<li>Replace the suggested name with <code>eds217</code>.</li>
+<li>Leave the <strong>Location</strong> as <code>/home/</code> followed by your username, which is your home directory on the server and where we want the folder to live.</li>
+<li>Check the line underneath. It should read <strong>New folder will be created at /home/your-username/eds217</strong>.</li>
+<li>Leave <strong>Initialize Git repository</strong> unchecked. We will come to git on Day 8.</li>
+<li>Click <strong>Create</strong>.</li>
+</ol>
+<p><img src="images/workbench/07_folder_name_location.png" class="img-fluid"></p>
+</section>
+<section id="step-4-open-the-folder-in-the-current-window" class="level4">
+<h4 class="anchored" data-anchor-id="step-4-open-the-folder-in-the-current-window">Step 4: Open the folder in the current window</h4>
+<p>Positron confirms the folder and asks where to open it. Click <strong>Current Window</strong>, so that Positron reloads with <code>eds217</code> as its open folder. <strong>New Window</strong> is the blue button and the one you do not want, because it opens a second browser tab and multiple tabs get confusing quickly.</p>
+<p><img src="images/workbench/08_folder_created.png" class="img-fluid"></p>
+<p>Positron reloads, and the Explorer on the left should now show an <strong>EDS217</strong> heading with nothing under it yet. Everything you make this week should go in this folder.</p>
+</section>
+</section>
+<section id="point-the-console-at-the-eds217-environment" class="level2">
+<h2 class="anchored" data-anchor-id="point-the-console-at-the-eds217-environment">Point the Console at the eds217 environment</h2>
+<p>Positron opens the folder with an <strong>R</strong> console, because R is the first interpreter it finds on the Bren server. The name in the top right corner will read <strong>R 4.4.2</strong>, and the Console will show you the R startup banner.</p>
+<p><img src="images/workbench/10_console_starts_in_R.png" class="img-fluid"></p>
+<p>R is not the interpreter we want this morning, and switching over to Python takes three clicks.</p>
+<section id="step-1-open-the-session-picker" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-open-the-session-picker">Step 1: Open the session picker</h4>
+<p>Click the interpreter name in the top right corner. Positron lists the sessions you already have running and offers <strong>New Console Session…</strong> at the bottom. Click it.</p>
+<p><img src="images/workbench/11_running_sessions.png" class="img-fluid"></p>
+</section>
+<section id="step-2-choose-the-eds217-environment" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-choose-the-eds217-environment">Step 2: Choose the eds217 environment</h4>
+<p>Positron lists every interpreter it can find on the server, and there are a lot of them. The one we want is (hopefully!) at the top, marked <strong>Suggested</strong>:</p>
+<blockquote class="blockquote">
+<p><strong>Python 3.11.15 (Conda: eds217)</strong> <code>/opt/miniforge3/envs/eds217/bin/python</code></p>
+</blockquote>
+<p><img src="images/workbench/12_choose_eds217.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Read the environment name, not just the Python version">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Switching interpreters clears your session
+Read the environment name, not just the Python version
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Changing the interpreter shuts down the old one and starts the new one, so any variables you had defined are lost. Choose the right interpreter first, then start working.</p>
+<p>The Bren server hosts the environments for several MEDS courses, and their names all look alike: <code>eds220</code>, <code>eds231</code>, <code>eds232</code>, <code>eds296</code>. One of them, <code>eds231</code>, even runs the same Python 3.11.15 that ours does. The one you want says <strong>eds217</strong>. You may need to scroll to find this environment the first time you use it, but eventually it should show up at the top of the list.</p>
 </div>
 </div>
+<p>Positron starts the Python session, and the Console prompt changes from <code>&gt;</code> to <code>&gt;&gt;&gt;</code>. The name in the top right should now read <strong>Python 3.11.15 (Conda: eds217)</strong>.</p>
+<p>Both sessions are still running, listed one above the other in the column to the right of the Console, and you can click between them at any time. Generally, for this course, it’s best just to delete the R console to avoid any accidental confusion.</p>
 </section>
 </section>
 <section id="two-ways-to-run-python" class="level2">
@@ -531,7 +590,7 @@ Switching interpreters clears your session
 <p>Positron can run your Python code in two places. It is worth seeing both once so you know the difference.</p>
 <section id="the-console-a-repl" class="level3">
 <h3 class="anchored" data-anchor-id="the-console-a-repl">The Console (a REPL)</h3>
-<p>The Console is a Python prompt. This is a <strong>REPL</strong>, which stands for Read-Eval-Print Loop, and it is the same idea as the R console you have already used.</p>
+<p>The Console is a Python prompt, and a prompt of that kind is called a <strong>REPL</strong>, which stands for Read-Eval-Print Loop. It is the same idea as the R console you have already used.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -548,36 +607,46 @@ Note
 <p>Click into the Console, type an expression, and press Enter:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">21</span> <span class="op">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>42</code></pre>
-<p>That is the whole read-eval-print idea: you typed an expression, it evaluated it, it printed <code>42</code>. We are just watching the environment work here. You will learn Python’s syntax properly this afternoon, and its full set of operators on Day 3.</p>
-<p>The Console is useful for quick checks, but nothing you type there persists beyond the session. That is why we work in notebooks (and .py files).</p>
+<p><img src="images/workbench/13_python_console.png" class="img-fluid"></p>
+<p>Read, evaluate, print, and then loop back around: you typed an expression, Python evaluated it, and the Console printed <code>42</code>. We are only checking that the environment works here. We cover Python’s syntax properly in the next session this morning, and the full set of operators on Day 3.</p>
+<p>Notice the folder name <code>~/eds217</code> above the Console output. The Console is working inside the folder you made, which is exactly what we wanted.</p>
+<p>The Console is useful for quick checks, but nothing you type in it survives the session, so anything you want to keep should go in a notebook (or a .py file) instead.</p>
 </section>
 <section id="jupyter-notebooks-what-we-will-use" class="level3">
 <h3 class="anchored" data-anchor-id="jupyter-notebooks-what-we-will-use">Jupyter Notebooks (what we will use)</h3>
-<p>For the rest of this course you will write your code in <strong>Jupyter Notebooks</strong>, files ending in <code>.ipynb</code>. A notebook lets you combine <strong>code</strong>, its <strong>output</strong>, and <strong>narrative text</strong> in one document, so your analysis and the story of your analysis stay together. This is known as literate programming, and is exactly what we want for data science. So we will make notebooks our home base from here on.</p>
+<p>For the rest of this course you will write your code in <strong>Jupyter Notebooks</strong>, files ending in <code>.ipynb</code>. A notebook lets you combine <strong>code</strong>, its <strong>output</strong>, and <strong>narrative text</strong> in one document, so your analysis and the story of your analysis stay together. Combining them is known as literate programming, and it is exactly what we want for data science. Notebooks are where we will be working for the rest of the course.</p>
 </section>
 </section>
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
-<p>Let’s make the notebook you will use for this session. <strong>We will follow this same setup ritual at the start of every session</strong>, so it will quickly become second nature.</p>
-<ol type="1">
-<li><strong>Create a new notebook:</strong>
-<ul>
-<li>Open the Command Palette with <code>Ctrl + Shift + P</code> (<code>Cmd + Shift + P</code> on macOS).</li>
-<li>Type <code>New Jupyter Notebook</code> and select <strong>Create: New Jupyter Notebook</strong>.</li>
-<li>A new, untitled notebook opens in the Editor.</li>
-</ul></li>
-<li><strong>Save and name your notebook:</strong>
-<ul>
-<li>Press <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS) right away.</li>
-<li>Name it with the format: <code>Session_1A_Positron.ipynb</code></li>
-<li>Saving immediately means you never lose work to a forgotten file name.</li>
-</ul></li>
-<li><strong>Check the kernel:</strong>
-<ul>
-<li>Look at the <strong>Kernel Selector</strong> in the notebook’s action bar, along the top of the notebook.</li>
-<li>It should read <strong>eds217_2026</strong>. If it does not, click it and choose that kernel.</li>
-</ul></li>
-</ol>
+<section id="make-your-first-notebook" class="level2">
+<h2 class="anchored" data-anchor-id="make-your-first-notebook">Make your first notebook</h2>
+<p>Let’s make the notebook you will use for the rest of today. <strong>We follow the same four steps at the start of every session</strong>, so you should have them memorized by Wednesday.</p>
+<section id="step-1-create-the-file" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-create-the-file">Step 1: Create the file</h4>
+<p>In the Explorer, hover over the <strong>EDS217</strong> heading. Four small icons appear. Click the first one, whose tooltip reads <strong>New File…</strong>, then type the name</p>
+<pre><code>hello_world.ipynb</code></pre>
+<p>and press Enter.</p>
+<p><img src="images/workbench/14_new_file_name.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Name the file first, and get the extension right">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Name the file first, and get the extension right
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Naming a file at the moment you create it means you never lose work to a forgotten file name. The <code>.ipynb</code> extension tells Positron to open the file as a notebook rather than as a page of text, so type it out in full.</p>
+</div>
+</div>
+<p>Positron creates the file inside <code>~/eds217</code> and opens it as an empty notebook.</p>
+<p><img src="images/workbench/15_notebook_created.png" class="img-fluid"></p>
+</section>
+<section id="step-2-check-the-kernel" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-check-the-kernel">Step 2: Check the kernel</h4>
+<p>Look along the notebook’s action bar, right of centre. It should already read <strong>Python 3.11.15 (Conda: eds217)</strong> with a small green ring beside it.</p>
+<p>If it reads anything else, click it and choose <strong>Change Kernel</strong>. Positron opens a list titled <strong>Select Positron Notebook Kernel</strong>, which holds the same interpreters you saw for the Console. Pick the eds217 entry, and read the environment name rather than the Python version.</p>
+<p><img src="images/workbench/16_select_kernel.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Interpreter and kernel are two separate settings">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -588,24 +657,63 @@ Interpreter and kernel are two separate settings
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The dropdown in the top right controls the Console. The Kernel Selector in the action bar controls the notebook. Each notebook keeps its own kernel, so check it every time you open a new one.</p>
+<p>The name in the top right corner of the window controls the Console. The kernel selector in the notebook’s action bar controls this notebook. Each notebook keeps its own kernel, so you should check it every time you open a new one.</p>
 </div>
 </div>
-<ol start="4" type="1">
-<li><strong>Add a title cell:</strong>
-<ul>
-<li>Click the first cell and change its type to <strong>Markdown</strong>.</li>
-<li>Add the following content (update the date to today):</li>
-</ul></li>
+</section>
+<section id="step-3-write-and-run-a-cell" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-write-and-run-a-cell">Step 3: Write and run a cell</h4>
+<p>Click <strong>+ Code</strong> in the action bar to add a code cell, type the classic first line of code, and run it with <code>Shift + Enter</code>:</p>
+<div id="3133e603" class="cell" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello, Positron!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hello, Positron!</code></pre>
+</div>
+</div>
+<p><img src="images/workbench/17_hello_world_run.png" class="img-fluid"></p>
+<p>The output appears directly below the cell, along with the execution count in square brackets and how long the cell took to run. <code>Shift + Enter</code> runs the cell and moves to the next cell, and creates a new one if there is nothing below. <code>Ctrl + Enter</code> (<code>Cmd + Enter</code>) runs the cell and stays put.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Positron will offer to write your code for you">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Positron will offer to write your code for you
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The first time you run a cell, Positron asks whether it should suggest code as you work. Choose <strong>Not now</strong>. Getting a machine to write your code is a skill worth having, and it is worth having <em>after</em> you can write the code yourself, which is what these nine days are for.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✏️ Test your knowledge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Change the message inside the quotes to greet yourself by name, then re-run the cell with <code>Shift + Enter</code>. Did the output update? Did the number in the square brackets change?</p>
+</div>
+</div>
+</section>
+<section id="step-4-add-a-title-cell" class="level4">
+<h4 class="anchored" data-anchor-id="step-4-add-a-title-cell">Step 4: Add a title cell</h4>
+<ol type="1">
+<li>Hover just above your first code cell. A <strong>+ Code</strong> and a <strong>+ Markdown</strong> button appear between cells wherever you hover, so click <strong>+ Markdown</strong> there to put a Markdown cell at the top of the notebook.</li>
+<li>Give it the following content:</li>
 </ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Day 1: Session 1A - Positron &amp; Jupyter Notebooks</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Session Webpage</span><span class="co">](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1a_positron_notebooks.html)</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Date: 08/31/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="5" type="1">
-<li><strong>Add a code cell</strong> below the title cell. This is where you will start writing Python.</li>
-</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Day 1: Session 1A - Positron &amp; Jupyter Notebooks</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Session Webpage</span><span class="co">](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/1a_positron_notebooks.html)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Date: 08/31/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run the Markdown cell (<code>Shift + Enter</code>) to <strong>render</strong> it into formatted text. Double-click a rendered Markdown cell to edit it again.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -616,10 +724,11 @@ Caution
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Save your work frequently. Click the save icon or press <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS).</p>
+<p>Save your work often. Click the save icon in the action bar, or press <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS).</p>
 </div>
 </div>
-<p>Throughout the session: take notes in Markdown cells, write and run code in Code cells, and ask questions whenever you need to.</p>
+<p>Throughout the session: take notes in Markdown cells, write and run code in Code cells, and ask Cella or Kelly whenever something does not behave the way you expected.</p>
+</section>
 </section>
 <section id="working-with-cells" class="level2">
 <h2 class="anchored" data-anchor-id="working-with-cells">Working with cells</h2>
@@ -628,49 +737,15 @@ Caution
 <li><strong>Code cells</strong> for writing and running Python.</li>
 <li><strong>Markdown cells</strong> for writing formatted text (notes, headings, links).</li>
 </ul>
-<section id="running-a-code-cell" class="level3">
-<h3 class="anchored" data-anchor-id="running-a-code-cell">Running a code cell</h3>
-<p>Click into your empty code cell, type the classic first line of code, and run it with <code>Shift + Enter</code>:</p>
-<div id="1b9e31a1" class="cell" data-execution_count="1">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello, Positron!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Hello, Positron!</code></pre>
-</div>
-</div>
-<p>The output appears directly below the cell. <code>Shift + Enter</code> runs the cell and moves to the next one. <code>Ctrl + Enter</code> (<code>Cmd + Enter</code>) runs it and stays put.</p>
-<p>Watch the Console while you do this. Positron shows notebook execution there too, so the Console and your notebook are working with the same Python session.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-✏️ Test your knowledge
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Change the message inside the quotes to greet yourself by name, then re-run the cell with <code>Shift + Enter</code>. Did the output update?</p>
-</div>
-</div>
-</section>
-<section id="adding-and-moving-cells" class="level3">
-<h3 class="anchored" data-anchor-id="adding-and-moving-cells">Adding and moving cells</h3>
 <p>Hover between two cells, or below the last one, and Positron offers buttons to insert a new <strong>Code</strong> cell or a new <strong>Markdown</strong> cell at that point. Each cell also has its own small toolbar for running, moving, and deleting it.</p>
-</section>
-<section id="writing-a-markdown-cell" class="level3">
-<h3 class="anchored" data-anchor-id="writing-a-markdown-cell">Writing a Markdown cell</h3>
-<p>Add a new Markdown cell and try some formatting:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## My notes</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>This is a **Markdown** cell. I can write:</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Bold** with `**text**`</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*Italic* with `*text*`</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Links</span><span class="co">](https://positron.posit.co/)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Run the Markdown cell (<code>Shift + Enter</code>) to <strong>render</strong> it into formatted text.</p>
+<p>Try some Markdown formatting in a new cell:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## My notes</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>This is a **Markdown** cell. I can write:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Bold** with `**text**`</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*Italic* with `*text*`</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Links</span><span class="co">](https://positron.posit.co/)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -681,20 +756,19 @@ Caution
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Add one more bullet to your Markdown cell, a link to the course website, then re-render it. Try double-clicking the rendered cell to edit it again.</p>
+<p>Add one more bullet to your Markdown cell, a link to the course website, then re-render it.</p>
 </div>
 </div>
-</section>
 </section>
 <section id="handy-positron-features" class="level2">
 <h2 class="anchored" data-anchor-id="handy-positron-features">Handy Positron features</h2>
-<p>A few features that will save you time all week:</p>
+<p>A few features that should save you time all week:</p>
 <ul>
-<li><strong>The Variables pane:</strong> shows the names, types, and values of everything you have defined, and it updates as you run cells. This is the same pane you used to watch your R objects. It works for notebooks and the Console alike, with no extension to install.</li>
-<li><strong>The Data Explorer:</strong> click a DataFrame in the Variables pane to open it as a sortable, filterable table. You will use this constantly from Day 4 onward.</li>
+<li><strong>The Variables pane:</strong> shows the names, types, and values of everything you have defined, and it updates as you run cells. The Variables pane is the same one you used to watch your R objects, and it works for notebooks and the Console alike, with no extension to install.</li>
+<li><strong>The Data Explorer:</strong> click a DataFrame in the Variables pane to open it as a sortable, filterable table. You will use the Data Explorer constantly once we meet our first DataFrame this afternoon.</li>
 <li><strong>Tab completion:</strong> start typing a name and press <code>Tab</code> to auto-complete it or see suggestions.</li>
 <li><strong>Built-in help:</strong> type <code>help(print)</code> in a code cell to read a function’s documentation, or add a <code>?</code> after a name (<code>print?</code>) for a quick description. Pressing <code>F1</code> with your cursor on a name opens the same documentation in the <strong>Help</strong> pane.</li>
-<li><strong>Magic commands:</strong> IPython adds special commands prefixed with <code>%</code>, like <code>%whos</code> to list your variables. You will meet these as needed.</li>
+<li><strong>Magic commands:</strong> IPython adds special commands prefixed with <code>%</code>, like <code>%whos</code> to list your variables. We will use a few of them later in the week.</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
 <div class="callout-header d-flex align-content-center">
@@ -719,38 +793,41 @@ Limits of the Variables pane
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The Variables pane is not the right tool for very large DataFrames or arrays. Use <code>df.head()</code>, <code>df.info()</code>, and <code>df.describe()</code> for those, which you will learn on Day 4.</p>
+<p>The Variables pane is not the right tool for very large DataFrames or arrays. Use <code>df.head()</code>, <code>df.info()</code>, and <code>df.describe()</code> for those. You will meet all three this afternoon and learn them properly on Day 2.</p>
 </div>
 </div>
 </section>
-<section id="saving-and-exporting" class="level2">
-<h2 class="anchored" data-anchor-id="saving-and-exporting">Saving and exporting</h2>
+<section id="saving-restarting-and-coming-back-tomorrow" class="level2">
+<h2 class="anchored" data-anchor-id="saving-restarting-and-coming-back-tomorrow">Saving, restarting and coming back tomorrow</h2>
 <ul>
 <li><strong>Save:</strong> the save icon, or <code>Ctrl + S</code> / <code>Cmd + S</code>. Do this often.</li>
-<li><strong>Restart:</strong> if your notebook stops behaving, use the restart icon in the action bar. This clears every variable, so re-run your cells from the top afterward.</li>
-<li><strong>Export:</strong> Positron can render a notebook to other formats through Quarto. You will not need this until the final project, and we will cover it then.</li>
+<li><strong>Restart:</strong> if your notebook stops behaving, use the restart icon in the action bar. A restart clears every variable, so re-run your cells from the top afterward.</li>
+<li><strong>Coming back:</strong> your session keeps running on the server even after you close the browser. Go back to <a href="https://workbench-1.bren.ucsb.edu">workbench-1.bren.ucsb.edu</a>, sign in, and click your Positron session in the list to pick up where you left off.</li>
+<li><strong>Export:</strong> Positron can render a notebook to other formats through Quarto. You will not need to export anything until the final project, and we will cover it then.</li>
 </ul>
 </section>
 <section id="key-pointsreview" class="level2">
 <h2 class="anchored" data-anchor-id="key-pointsreview">Key Points/Review</h2>
 <ul>
-<li><strong>Python is the language. Positron is the IDE</strong> you run it in, hosted on Posit Workbench, so it is all in your browser.</li>
-<li>Positron runs Python in a <strong>Console</strong> (a read-eval-print prompt) or in <strong>notebooks</strong>, and we use notebooks because notebooks follow a literate programming model, and can be saved while the Console cannot.</li>
-<li>You should always set the <strong>interpreter</strong> in the top right for the Console, and the <strong>kernel</strong> in the action bar for each notebook. Both should read <strong>eds217_2026</strong>.</li>
+<li><strong>Python is the language. Positron is the IDE</strong> you run it in, hosted on Posit Workbench at <a href="https://workbench-1.bren.ucsb.edu">workbench-1.bren.ucsb.edu</a>, so it is all in your browser and there is nothing to install.</li>
+<li>Everything you make this week should live in <strong><code>~/eds217</code></strong>, the folder you made this morning.</li>
+<li>Positron opens a folder with an <strong>R</strong> console, so switching to Python is a step you should expect to take yourself. The environment you want is <strong>Python 3.11.15 (Conda: eds217)</strong>, and its name matters more than its version number.</li>
+<li>Positron runs Python in a <strong>Console</strong> (a read-eval-print prompt) or in <strong>notebooks</strong>, and we use notebooks because they follow a literate programming model, and because a notebook can be saved and the Console cannot.</li>
+<li>You should set the <strong>interpreter</strong> in the top right for the Console, and the <strong>kernel</strong> in the action bar for each notebook. Both should read <strong>eds217</strong>.</li>
 <li>A notebook combines <strong>code cells</strong>, their <strong>output</strong>, and <strong>Markdown</strong> narrative in one document.</li>
-<li>Run a cell with <code>Shift + Enter</code>. Use <code>Ctrl + Enter</code> to run without moving the cursor to the next cell.</li>
-<li>Start every session with the same ritual: <strong>create, save with a name, check the kernel, title cell, save often.</strong></li>
+<li>Run a cell with <code>Shift + Enter</code>. Use <code>Ctrl + Enter</code> to run it without moving to the next cell.</li>
+<li>Start every session with the same ritual: <strong>create the file with its name, check the kernel, add a title cell, save often.</strong></li>
 </ul>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
 <li><a href="../../course-materials/cheatsheets/positron.html">Course Cheatsheet: Positron Basics</a> covers the Variables pane, magic commands, and keyboard shortcuts.</li>
-<li><a href="../../course-materials/cheatsheets/setting_up_python.html">Course Cheatsheet: Setting up Python</a></li>
+<li><a href="../../course-materials/cheatsheets/setting_up_python.html">Course Cheatsheet: Setting up Python</a>, only if you want Python on your own laptop as well.</li>
 <li><a href="../../course-materials/cheatsheets/first_steps.html">Course Cheatsheet: First Steps</a></li>
 <li><a href="https://positron.posit.co/">Positron User Guide</a> is the official documentation.</li>
 <li><a href="https://positron.posit.co/jupyter-notebooks.html">Jupyter Notebooks in Positron</a> covers the notebook editor in more detail.</li>
-<li>A <a href="https://gist.github.com/kcaylor/79d9b9304764b825e0fe365df17d09fb">curated gallery of Jupyter Notebooks</a> showing textbooks, articles, and analyses written as notebooks. Worth a browse to see where this can go.</li>
+<li>A <a href="https://gist.github.com/kcaylor/79d9b9304764b825e0fe365df17d09fb">curated gallery of Jupyter Notebooks</a> showing textbooks, articles, and analyses written as notebooks. Worth a browse to see what a notebook can become.</li>
 </ul>
 <div class="center-text body-text-xl teal-text">
 <p>End interactive session 1A</p>

@@ -14,6 +14,12 @@ BASE = "https://eds-217-essential-python.github.io/data/"
 # --- Day 1: The Python Data Science Workflow -------------------------------------------------
 toolik_weather = BASE + "toolik_weather.csv"
 
+# Stack Overflow Developer Survey 2025, language question only, three respondent groups.
+# Rebuild with `python tools/make_so_language_usage.py`. Used by the Day 1 lecture, which
+# used to plot Anaconda's State of Data Science survey; Anaconda's last public data file is
+# from 2023 and it no longer asks which languages people use.
+so_2025_language_usage = BASE + "so_2025_language_usage.csv"
+
 # --- Days 2-3: import, explore, filter, sort -------------------------------
 world_cities = BASE + "world_cities.csv"
 ocean_temperatures = BASE + "ocean_temperatures.csv"

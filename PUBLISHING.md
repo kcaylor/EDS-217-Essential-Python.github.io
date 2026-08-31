@@ -99,6 +99,81 @@ finding.
 
 ---
 
+## 3. Showing a lecture
+
+The lecture notebooks in `course-materials/lectures/` are instructor material.
+`_quarto.yml` excludes `course-materials/lectures/**` from the render set, so
+they are not part of the site and nothing in this section publishes anything.
+
+Each notebook sets its reveal.js options in the raw cell at the top:
+
+```yaml
+---
+format:
+  revealjs:
+    slide-level: 3
+jupyter: eds217_2026
+---
+```
+
+To show one:
+
+```bash
+bash tools/run.sh quarto preview \
+  course-materials/lectures/01_the_zen_of_python.ipynb --port 4218 --no-browser
+```
+
+`tools/run.sh` activates `eds217_2026`, which the `jupyter:` key needs in order
+to execute the code cells. Port 4218 keeps a lecture off 4217, so a site preview
+can stay open in another terminal. In Positron you can open the notebook and use
+the Quarto extension's Preview button instead, as long as that window is already
+running in the course environment.
+
+`make preview` will not find these. `tools/preview.sh` searches for `.qmd` only.
+
+In the deck, `s` opens presenter view with the next slide and a clock, `o` shows
+the slide overview, `f` goes fullscreen and `Esc` returns to the slide.
+
+`slide-level` sets which heading level starts a new slide. It differs by notebook
+because the headings do:
+
+| notebook | slide-level | what makes a slide |
+| --- | --- | --- |
+| `00_intro_to_python` | 3 | `##` sections, `###` slides |
+| `01_the_zen_of_python` | 3 | one `##`, then `###` per aphorism |
+| `02_helpGPT` | 3 | `###` per topic |
+| `03-debugging` | 2 | only `#` and `##` are present |
+| `04-next_steps` | 2 | the ten tips are `##` |
+| `99_dry_vs_wet` | 3 | `##` sections, `###` slides |
+
+Check the level against this table before adding headings to a lecture, or the
+deck will split somewhere you did not intend.
+
+Preview renders into `docs/`, the same as every other preview. Run `git status`
+afterwards. Lecture output does not belong in the published site, so do not
+commit it, and `make publish` refuses on a dirty working tree.
+
+### The nbconvert path
+
+Each notebook also still has the older per-cell `slideshow` metadata, which RISE
+and nbconvert read and Quarto ignores.
+
+```bash
+bash tools/run.sh jupyter nbconvert --to slides --post serve \
+  course-materials/lectures/01_the_zen_of_python.ipynb
+```
+
+That honors the slide, subslide and fragment tag on each cell, and it leaves
+`docs/` alone. It does not use the site theme, and it writes
+`01_the_zen_of_python.slides.html` beside the notebook, which you should delete
+rather than commit. The YAML cell at the top of each notebook is tagged
+`slide_type: skip`, so neither exporter prints it as text on the title slide.
+
+RISE itself will not run in Positron, which has no classic Jupyter notebook
+interface.
+
+---
+
 ## What `make publish` refuses to do
 
 It exits before pushing, with the reason, when:
@@ -141,6 +216,9 @@ make keys PAIR=eod-day3    one handout and key pair
 make publish               guarded push to origin and live
 make unlock                clear stale git locks
 make verify-live           check what the published site is serving
+
+bash tools/run.sh quarto preview course-materials/lectures/<nb>.ipynb --port 4218 --no-browser
+                           show a lecture as reveal.js slides
 
 python3 tools/prose_guard.py verify --all    nothing outside prose moved
 python3 tools/prose_guard.py desync --all    exercise reworded, key not

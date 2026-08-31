@@ -16,7 +16,7 @@ The goal of EDS 217 (Essentials of Python for Environmental Data Science) is to 
 - Collaborate with peers on coding projects and communicate results effectively
 - Understand best practices in Python programming and project organization
 
-## 🐍 Python Environment (2025)
+## 🐍 Python Environment (2026)
 
 This course uses **Python 3.11** with carefully selected data science libraries:
 
@@ -42,26 +42,15 @@ Visit the [course page](https://bren.ucsb.edu/courses/eds-217) on the Bren Websi
 
 ## 🚀 Getting Started
 
-### Environment Setup
-
-Before working with the course materials, you'll need to set up your Python environment:
-
-- **📋 [Standard Setup](CONDA_ENVIRONMENT_SETUP.md)** - Complete guide for setting up the conda environment
-- **⚡ [Fast Setup](FAST_SETUP.md)** - Quick setup using mamba for faster installation
-- **🔄 [Environment Migration](ENVIRONMENT_MIGRATION.md)** - Guide for migrating from older environments
-
-### Contributing to the Website
-
-If you're contributing to the course website or need to build the documentation:
-
-- **🔨 [Building Documentation](BUILD_DOCS.md)** - Complete guide for building and deploying the website
-  - Scripts automatically activate the `eds217_2026` environment
-  - Includes progress indicators and local serving options
-- **⚙️ [Kernel Fix Guide](KERNEL_FIX.md)** - Fix Jupyter kernel issues if packages aren't importing
+Everything you need for the course is on the
+[course website](https://eds-217-essential-python.github.io), starting with
+[Day 1](https://eds-217-essential-python.github.io/course-materials/day1.html).
+We run Positron on a shared Posit Workbench server, so you should not need to
+install Python or clone this repository to take part in the class.
 
 ## Report a bug / issue
 
-Found something that doesn't look quite right? Feel free to file an [issue](https://github.com/EDS-217-Essential-Python/EDS-217-python-essentials/issues) and include a concise, clear description, along with a link to the location on the website. Screenshots are always appreciated as well!
+Found something that doesn't look quite right? Feel free to file an [issue](https://github.com/EDS-217-Essential-Python/EDS-217-Essential-Python.github.io/issues) and include a concise, clear description, along with a link to the location on the website. Screenshots are always appreciated as well!
 
 ## Acknowledgements
 

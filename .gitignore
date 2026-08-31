@@ -46,3 +46,27 @@ tools/gates.sh
 # One was committed by accident and held 687 lines of build output in the
 # repository until 2026-08-25.
 *.quarto_ipynb
+
+# The agentic workflow. A student who opens the repository should find the
+# course and nothing else, and these files describe how the course gets made:
+# the three-stage prose pipeline, the house style, and the editor subagent that
+# enforces it. They stay on Kelly's machine.
+CLAUDE.md
+.claude/
+
+# Superseded material from 2025 and earlier. Quarto already excludes all of it
+# from the render, and no page on the site links to any of it, so it has been
+# invisible to students on the website while sitting at the top of the
+# repository. The notebook names are the problem: 00_intro_to_python and
+# 1-1_variables read as current course material and are not.
+#
+# Only course-materials/lectures/lectures.qmd still references these notebooks.
+# That page is itself off the site and kept as instructor reference.
+nbs/
+extra_files/
+
+# Left over from the fork of the EDS 212 course-site template.
+EDS-212-essential-math.Rproj
+
+# A working copy saved beside the file it was copied from.
+course-materials/interactive-sessions/4c_dataframe_workflows copy.backup

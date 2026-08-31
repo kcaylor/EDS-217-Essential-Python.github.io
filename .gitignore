@@ -72,6 +72,15 @@ FAST_SETUP.md
 ENVIRONMENT_MIGRATION.md
 KERNEL_FIX.md
 
+# The two older environment files, orphaned once those three guides left. The
+# build uses environment-2026.yml: tools/_env.sh names it and build_docs.py
+# activates eds217_2026 from it. Nothing reads these two.
+environment.yml
+environment-fast.yml
+
+# Referenced by nothing in the repository.
+configure_slides.py
+
 # Left over from the fork of the EDS 212 course-site template.
 EDS-212-essential-math.Rproj
 

@@ -27,62 +27,86 @@ def run_command(command, description):
         print(f"   Error: {e.stderr}")
         sys.exit(1)
 
+# Files that shape every page. A change to the navbar, the theme or the shared
+# CSS is not visible in any single .qmd, so a page whose own source is untouched
+# is still out of date once one of these moves.
+SITE_WIDE = ["_quarto.yml", "meds-website-styles.scss",
+             "course-materials/assets/css/exercises.css"]
+
+
+def _output_for(src):
+    """The rendered HTML that a source file produces, under docs/."""
+    if src.endswith(".qmd"):
+        return Path("docs") / (src[:-4] + ".html")
+    if src.endswith(".ipynb"):
+        return Path("docs") / (src[:-6] + ".html")
+    return None
+
+
 def get_changed_files():
-    """Get list of .qmd and .ipynb files that have changed since the last commit."""
+    """Every source whose rendered output is missing or older than the source.
+
+    This used to ask git which files differed from HEAD, which is a different
+    question and the wrong one. Committing before rendering leaves a clean
+    working tree, so `git diff HEAD` returned nothing and the build reported
+    success having built nothing. It happened twice on 2026-08-27 and 28: once
+    leaving twenty pages stale, once leaving one. Both reported success, and
+    publish.sh could not see it because d5_render_complete counts that ninety
+    HTML files exist rather than that they are current.
+
+    Staleness is a property of the pair (source, output), so compare the two.
+    The one-second tolerance matches d10_render_current, which asks the same
+    question from the other side and is what caught the bug.
+    """
     try:
-        # Check if we're in a git repository
-        result = subprocess.run(
-            ["git", "rev-parse", "--git-dir"], 
-            check=True, capture_output=True, text=True
-        )
-        
-        # Get files changed since the last commit
-        result = subprocess.run(
-            ["git", "diff", "--name-only", "HEAD"], 
-            check=True, capture_output=True, text=True
-        )
-        
-        changed_files = []
-        for file_path in result.stdout.strip().split('\n'):
-            if file_path and (file_path.endswith('.qmd') or file_path.endswith('.ipynb')):
-                # Check if file still exists (wasn't deleted)
-                if Path(file_path).exists():
-                    changed_files.append(file_path)
-        
-        # Also check for staged changes
-        result = subprocess.run(
-            ["git", "diff", "--name-only", "--cached"], 
-            check=True, capture_output=True, text=True
-        )
-        
-        for file_path in result.stdout.strip().split('\n'):
-            if file_path and (file_path.endswith('.qmd') or file_path.endswith('.ipynb')):
-                if Path(file_path).exists() and file_path not in changed_files:
-                    changed_files.append(file_path)
-        
-        # If no changes since last commit, check untracked files
-        if not changed_files:
-            result = subprocess.run(
-                ["git", "ls-files", "--others", "--exclude-standard"], 
-                check=True, capture_output=True, text=True
-            )
-            
-            for file_path in result.stdout.strip().split('\n'):
-                if file_path and (file_path.endswith('.qmd') or file_path.endswith('.ipynb')):
-                    if Path(file_path).exists():
-                        changed_files.append(file_path)
-        
-        return changed_files
-        
-    except subprocess.CalledProcessError:
-        # Not a git repository or no commits yet - return all files
-        print("⚠️  Not in a git repository or no previous commits found")
-        print("   Falling back to full build")
-        return None
+        sources = get_all_buildable_files()
     except Exception as e:
-        print(f"⚠️  Error detecting changed files: {e}")
+        print(f"⚠️  Error listing buildable files: {e}")
         print("   Falling back to full build")
         return None
+
+    docs = Path("docs")
+    if not docs.exists():
+        print("📁 docs/ does not exist yet, so every page needs building")
+        return None
+
+    # A site-wide input newer than any output invalidates the whole site.
+    newest_site_wide = 0.0
+    which = None
+    for f in SITE_WIDE:
+        p = Path(f)
+        if p.exists() and p.stat().st_mtime > newest_site_wide:
+            newest_site_wide, which = p.stat().st_mtime, f
+
+    changed, missing = [], 0
+    site_wide_hits = 0
+    for src in sources:
+        out = _output_for(src)
+        if out is None:
+            continue
+        if not out.exists():
+            changed.append(src)
+            missing += 1
+            continue
+        out_mtime = out.stat().st_mtime
+        if Path(src).stat().st_mtime > out_mtime + 1:
+            changed.append(src)
+        elif newest_site_wide > out_mtime + 1:
+            changed.append(src)
+            site_wide_hits += 1
+
+    if changed:
+        print(f"🔍 {len(changed)} page(s) need building:")
+        if missing:
+            print(f"   {missing} never rendered")
+        if site_wide_hits:
+            print(f"   {site_wide_hits} older than {which}, which is on every page")
+        for s in changed[:10]:
+            print(f"   {s}")
+        if len(changed) > 10:
+            print(f"   ... and {len(changed) - 10} more")
+    return changed
+
 
 def _render_exclusions():
     """The paths _quarto.yml tells quarto not to render.
@@ -488,7 +512,7 @@ def main():
             if changed_files is not None:
                 files_to_build = changed_files
                 if not files_to_build:
-                    print("✅ No files have changed since last commit - skipping build")
+                    print("✅ Every page in docs/ is newer than its source - skipping build")
                     print("   Use --full flag to force a complete rebuild")
                     if args.clean:
                         clean_intermediate_files()

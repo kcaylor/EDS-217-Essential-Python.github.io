@@ -131,14 +131,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">🏠 home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/the-data-science-workflow.html"> 
-<span class="menu-text">🔟 the workflow</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://docs.google.com/document/d/1yBKyJFT22bKynDn4TzrNwdeZ6lb9NELqCeewhifcugo/edit?usp=sharing" target="_blank"> 
-<span class="menu-text">📋 syllabus</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-daily-materials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">🗓️ daily materials</span>
@@ -433,8 +425,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#part-1-making-one-table-out-of-two-about-12-minutes" id="toc-part-1-making-one-table-out-of-two-about-12-minutes" class="nav-link" data-scroll-target="#part-1-making-one-table-out-of-two-about-12-minutes">Part 1: Making one table out of two (about 12 minutes)</a></li>
   <li><a href="#part-2-making-the-dates-real-about-12-minutes" id="toc-part-2-making-the-dates-real-about-12-minutes" class="nav-link" data-scroll-target="#part-2-making-the-dates-real-about-12-minutes">Part 2: Making the dates real (about 12 minutes)</a></li>
-  <li><a href="#part-3-the-shape-that-shows-the-sawtooth-about-12-minutes" id="toc-part-3-the-shape-that-shows-the-sawtooth-about-12-minutes" class="nav-link" data-scroll-target="#part-3-the-shape-that-shows-the-sawtooth-about-12-minutes">Part 3: The shape that shows the sawtooth (about 12 minutes)</a></li>
-  <li><a href="#part-4-the-claim-about-9-minutes" id="toc-part-4-the-claim-about-9-minutes" class="nav-link" data-scroll-target="#part-4-the-claim-about-9-minutes">Part 4: The claim (about 9 minutes)</a></li>
+  <li><a href="#part-3-a-graph-of-annual-amplitudes-about-12-minutes" id="toc-part-3-a-graph-of-annual-amplitudes-about-12-minutes" class="nav-link" data-scroll-target="#part-3-a-graph-of-annual-amplitudes-about-12-minutes">Part 3: A graph of annual amplitudes (about 12 minutes)</a></li>
+  <li><a href="#part-4-making-a-statement-about-change-about-9-minutes" id="toc-part-4-making-a-statement-about-change-about-9-minutes" class="nav-link" data-scroll-target="#part-4-making-a-statement-about-change-about-9-minutes">Part 4: Making a statement about change (about 9 minutes)</a></li>
   <li><a href="#before-you-stop" id="toc-before-you-stop" class="nav-link" data-scroll-target="#before-you-stop">Before you stop</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
@@ -448,7 +440,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div style="width: 80%; margin: auto;">
-<p><img src="../images/towersensors.jpeg" class="img-fluid"></p>
+<p><img src="../images/two_records_panda.jpeg" class="img-fluid"></p>
+</div>
+<div class="gray-text center-text">
+<p><em>Two pandas, collaborating to combine their datasets.</em> <a href="https://www.midjourney.com/jobs/f141d496-9a61-45ce-ad36-a8e41a067e39?index=3">MidJourney 5</a></p>
 </div>
 <p>Two of the most important time series in environmental science are global surface temperature and atmospheric concentration of carbon dioxide. These two datasets are collected by different people/institutions, are used for different reasons, and are stored/maintained in different locations.</p>
 <p>NASA’s GISTEMP record estimates how far each month’s global surface temperature sits from a twentieth-century baseline. It starts in <strong>1880</strong>, which is the earliest that sufficient observations of temperature existed to estimate a global average.</p>
@@ -473,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Create a notebook named <code>Colab_6D_Two_Records.ipynb</code>, with both partners’ names in the title cell, then read the two files:</p>
-<div id="b7143eef" class="cell" data-execution_count="1">
+<div id="056f8941" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -492,8 +487,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>How many rows does each table have, and what columns? What is the earliest and latest <code>Date</code> in each? (<code>.min()</code> and <code>.max()</code> on the <code>Date</code> column will do it, since these dates are text in <code>%Y-%m-%d</code> form and text in that form sorts correctly.)</p></li>
 <li><p>Merge the two tables on <code>Date</code>, with the default <code>how=</code>. How many rows come back?</p></li>
 <li><p>Merge them again with <code>how='left'</code>, putting <code>temp</code> on the left. How many rows now, and how many nulls, in which column?</p></li>
-<li><p>In a markdown cell: the two merges differ by 940 rows. Say in one sentence what those 940 rows are, without looking anything up, since your answer to question 1 already told you.</p></li>
-<li><p>A decision, and there is no right answer that does not depend on the question. You are writing one of the following two papers. For each one, say which merge you would use and why:</p>
+<li><p>In a markdown cell: the two merges differ by 940 rows. Provide a sentence explaining what those 940 rows contain (your answer to question 1 should already have this).</p></li>
+<li><p>Suppose you are writing one of the following two papers. For each one, say which merge you would use and why:</p>
 <ul>
 <li><em>“Atmospheric CO₂ and global temperature move together”</em></li>
 <li><em>“The global surface temperature record, 1880 to the present”</em></li>
@@ -502,30 +497,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="part-2-making-the-dates-real-about-12-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-making-the-dates-real-about-12-minutes">Part 2: Making the dates real (about 12 minutes)</h2>
-<p>Work from the <strong>inner</strong> merge for the rest of the exercise, and give it a name you will not confuse with anything else.</p>
+<p>Work from the <strong>inner</strong> merge for the rest of the exercise; make sure to give this new dataframe a name you will not confuse with anything else.</p>
 <ol start="6" type="1">
-<li><p>Copy the inner merge into a table called <code>climate</code>, ending the line with <code>.copy()</code>. Then parse its <code>Date</code> column into a new column called <code>date</code>, and prove the parse worked by printing the new column’s dtype.</p></li>
+<li><p>Copy the inner merge into a table called <code>climate</code>, ending the line with <code>.copy()</code>. Then parse its <code>Date</code> column into a new column called <code>date</code>. Demonstrate that the parse worked by printing the new column’s dtype.</p></li>
 <li><p>Add <code>year</code> and <code>month</code> columns using the <code>.dt</code> accessors.</p></li>
-<li><p>Build a table of annual means: group by <code>year</code> and report the <strong>count</strong> of months, the mean <code>MonthlyAnomaly</code>, and the mean <code>CO2Concentration</code>. Show the first three rows and the last three.</p></li>
-<li><p>Two of the sixty-seven years in that table are not twelve months long. Which two, and why? Filter them out into a table called <code>full_years</code> and say how many years survive.</p></li>
-<li><p>In a markdown cell: what would the 2024 row have done to a claim about the warmest year on record, if you had not checked the count? Two sentences.</p></li>
+<li><p>Build a table of annual means: group by <code>year</code> and report the <strong>count</strong> of months, the mean of <code>MonthlyAnomaly</code>, and the mean of <code>CO2Concentration</code>. Show the first three rows and the last three.</p></li>
+<li><p>Two of the sixty-seven years in the table are not twelve months long. Which two, and why? Filter the data into a new table called <code>full_years</code>. How many years survive?</p></li>
 </ol>
 </section>
-<section id="part-3-the-shape-that-shows-the-sawtooth-about-12-minutes" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-the-shape-that-shows-the-sawtooth-about-12-minutes">Part 3: The shape that shows the sawtooth (about 12 minutes)</h2>
-<ol start="11" type="1">
+<section id="part-3-a-graph-of-annual-amplitudes-about-12-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-a-graph-of-annual-amplitudes-about-12-minutes">Part 3: A graph of annual amplitudes (about 12 minutes)</h2>
+<ol start="10" type="1">
 <li><p>Build a wide table with <code>year</code> down the rows, <code>month</code> across the columns, and <code>CO2Concentration</code> in the cells. Show the first three rows and the last three.</p></li>
-<li><p>That one table holds two different patterns at once. Read it <strong>down</strong> a single column, then read it <strong>across</strong> a single row. In a markdown cell, describe both in one sentence each.</p></li>
-<li><p>Use the wide table to measure the second pattern. For every year, the difference between its largest monthly value and its smallest is the size of the annual cycle. Compute that difference for 1959 and for 2023, and report both.</p></li>
-<li><p>In a markdown cell: the annual cycle in CO₂ is caused by the northern hemisphere’s plants, which take carbon out of the air in the growing season and put it back in the autumn. Given that, say what your two numbers from question 13 might mean, and say honestly how confident you are in a comparison of two single years.</p></li>
-<li><p>Build the same wide table for <code>MonthlyAnomaly</code>. Does the temperature record have a comparable seasonal cycle in it? Say why or why not in one sentence. (The answer is in what the word <em>anomaly</em> means.)</p></li>
+<li><p>This new table holds two different patterns at once. Read it <strong>down</strong> a single column, then read it <strong>across</strong> a single row. In a markdown cell, describe both in one sentence each.</p></li>
+<li><p>For every year, the difference between its largest monthly value and its smallest is the size of the annual cycle. Compute that difference for two specific years: 1959 and for 2023, and report both. (You will need two lines of code; one for each year)</p></li>
+<li><p>In a markdown cell: the annual cycle in CO₂ is caused by vegetation (mainly in the northern hemisphere), which removes carbon from the atmosphere during the growing season and releases it back in the autumn/winter. Given that context, explain what your two numbers from question 12 might indicate. Are two years sufficient to make that inference?</p></li>
+<li><p>Build the same wide table for <code>MonthlyAnomaly</code>. Does the temperature record have a comparable seasonal cycle in it? Say why or why not in one sentence.</p></li>
 </ol>
 </section>
-<section id="part-4-the-claim-about-9-minutes" class="level2">
-<h2 class="anchored" data-anchor-id="part-4-the-claim-about-9-minutes">Part 4: The claim (about 9 minutes)</h2>
-<ol start="16" type="1">
+<section id="part-4-making-a-statement-about-change-about-9-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-making-a-statement-about-change-about-9-minutes">Part 4: Making a statement about change (about 9 minutes)</h2>
+<ol start="15" type="1">
 <li><p>Using <code>full_years</code>, compare the 1960s with the 2010s. Compute the mean of each column for <code>year</code> between 1960 and 1969, and again for <code>year</code> between 2010 and 2019, and report the change in each.</p></li>
-<li><p>In a markdown cell of four or five sentences: state the two changes you measured, with units. Then state clearly what this analysis does <strong>not</strong> show. You have put two curves in the same table and found that both went up; name one thing a scientist would need before calling that a causal claim.</p></li>
+<li><p>In a markdown cell of four or five sentences: state what these calculations indicate in terms of changes in the temperature and CO2 concentrations, with units. You have put two variables in the same table and found that both varied together; explain what a data scientist would need before making a causal claim about this covariation.</p></li>
 </ol>
 </section>
 <section id="before-you-stop" class="level2">

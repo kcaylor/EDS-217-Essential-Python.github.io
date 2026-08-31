@@ -131,14 +131,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">🏠 home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../course-materials/the-data-science-workflow.html"> 
-<span class="menu-text">🔟 the workflow</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://docs.google.com/document/d/1yBKyJFT22bKynDn4TzrNwdeZ6lb9NELqCeewhifcugo/edit?usp=sharing" target="_blank"> 
-<span class="menu-text">📋 syllabus</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-daily-materials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">🗓️ daily materials</span>
@@ -489,7 +481,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="4" type="1">
 <li>Rebuild yesterday afternoon’s Toolik table. Every line below is one you wrote in 6C:</li>
 </ol>
-<div id="c93dbeb6" class="cell" data-execution_count="1">
+<div id="a10442b8" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -513,7 +505,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-picture-you-already-made" class="level2">
 <h2 class="anchored" data-anchor-id="the-picture-you-already-made">The picture you already made</h2>
 <p>Rebuild the twelve numbers from Day 1, and draw them the same way you drew them then:</p>
-<div id="8b9e6bb7" class="cell" data-execution_count="2">
+<div id="ddf80ca9" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>monthly_means <span class="op">=</span> toolik.groupby(<span class="st">'month'</span>)[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span>
@@ -544,7 +536,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>You did not create either object in the cell above. <code>plt.plot()</code> noticed that no figure existed, made one with default settings, and drew on it. Every <code>plt</code> command after that went to the same place, which is why <code>plt.title()</code> on line two knew which picture to title.</p>
 <p>That convenience is also matplotlib’s biggest trap. If you run two plotting cells without saying where one figure ends and the next begins, both sets of data land on the same axes:</p>
-<div id="5f2ec976" class="cell" data-execution_count="3">
+<div id="8b5c8f0f" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.plot(monthly_means)</span>
@@ -577,7 +569,7 @@ Note
 <section id="size-and-shape-plt.figurefigsize" class="level2">
 <h2 class="anchored" data-anchor-id="size-and-shape-plt.figurefigsize">Size and shape: <code>plt.figure(figsize=)</code></h2>
 <p>Here is a figure the defaults get wrong. Thirty-one annual mean temperatures, drawn as bars:</p>
-<div id="a7273e81" class="cell" data-execution_count="4">
+<div id="13766b71" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>annual_means <span class="op">=</span> toolik.groupby(<span class="st">'year'</span>)[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span>
@@ -600,7 +592,7 @@ Note
 <div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(width, height))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                    ↑       ↑</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                  inches  inches</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="003c9c55" class="cell" data-execution_count="5">
+<div id="ce37027f" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
@@ -638,7 +630,7 @@ Note
 <h2 class="anchored" data-anchor-id="tick-labels-that-do-not-fit">Tick labels that do not fit</h2>
 <p>Widening the figure bought you room. Often there is no room to buy, because the labels themselves are long: dates, station names, species names, states.</p>
 <p>The fix is to turn them. <code>plt.xticks(rotation=45, ha='right')</code> rotates every tick label on the x-axis by 45 degrees and anchors its <strong>h</strong>orizontal <strong>a</strong>lignment at its right-hand end, so the label ends underneath the tick it belongs to instead of drifting off to the side.</p>
-<div id="e449c530" class="cell" data-execution_count="6">
+<div id="ff28e0e3" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
@@ -700,7 +692,7 @@ Note
 <section id="two-series-one-axes-and-a-legend" class="level2">
 <h2 class="anchored" data-anchor-id="two-series-one-axes-and-a-legend">Two series, one axes, and a legend</h2>
 <p>Yesterday you split the Toolik record into its first eleven years and its last ten, and compared them month by month. Rebuild that table:</p>
-<div id="a62f60a6" class="cell" data-execution_count="7">
+<div id="e42b0cc0" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>early <span class="op">=</span> toolik[toolik[<span class="st">'year'</span>] <span class="op">&lt;=</span> <span class="dv">1998</span>]</span>
@@ -814,7 +806,7 @@ Note
 </div>
 </div>
 <p>Now plot both eras on one axes. Two <code>plt.plot()</code> calls with no <code>plt.figure()</code> between them land on the same axes, which is the behaviour you were warned about earlier and is exactly what you want here. Give each line a <code>label=</code>, then call <code>plt.legend()</code> once to draw the key:</p>
-<div id="f9521934" class="cell" data-execution_count="8">
+<div id="36578884" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
@@ -847,7 +839,7 @@ Note
 <p>Now look back at the <code>change</code> column in the table. January is <strong>3.5 °C</strong> warmer, October is <strong>4.3 °C</strong> warmer, and July is <strong>0.8 °C</strong> cooler. That is a real and striking result, and the figure has hidden it.</p>
 <p>Nothing is wrong with the figure. The problem is that the quantity you care about is a difference of a few degrees, and you have drawn it on an axis that has to span thirty-five degrees to fit the seasonal cycle. The signal is 10% of the axis.</p>
 <p><strong>So plot the thing you actually care about.</strong> The difference is already a column:</p>
-<div id="5b76a6c7" class="cell" data-execution_count="9">
+<div id="b4c195b6" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
@@ -901,7 +893,7 @@ This is the whole job
 <section id="points-instead-of-lines" class="level2">
 <h2 class="anchored" data-anchor-id="points-instead-of-lines">Points instead of lines</h2>
 <p><code>plt.plot()</code> draws a line through your points in the order they appear, which is right when the x-axis is time or anything else with an order, and wrong otherwise. When you are plotting one measurement against another, use <code>plt.scatter()</code>:</p>
-<div id="fe0667fb" class="cell" data-execution_count="10">
+<div id="9201f3eb" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>wet_days <span class="op">=</span> toolik.dropna(subset<span class="op">=</span>[<span class="st">'Daily_Precip_Total_mm'</span>])</span>

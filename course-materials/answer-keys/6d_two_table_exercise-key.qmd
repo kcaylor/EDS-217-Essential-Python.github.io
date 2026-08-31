@@ -37,7 +37,7 @@ temp = pd.read_csv(base + 'monthly_temperature_data.csv')
 co2 = pd.read_csv(base + 'monthly_co2_concentration.csv')
 ```
 
-## Part 1: One table out of two
+## Part 1: Making one table out of two
 
 **1. How many rows does each table have, and what columns? What is the earliest and latest `Date`
 in each? (`.min()` and `.max()` on the `Date` column will do it, since these dates are text in
@@ -100,8 +100,8 @@ empty. 1736 minus 940 is 796, the inner merge's answer, which is a useful arithm
 you merged what you thought you merged.
 :::
 
-**4. In a markdown cell: the two merges differ by 940 rows. Say in one sentence what those 940
-rows are, without looking anything up, since your answer to question 1 already told you.**
+**4. In a markdown cell: the two merges differ by 940 rows. Provide a sentence explaining what
+those 940 rows contain (your answer to question 1 should already have this).**
 
 ```{python}
 missing = left[left['CO2Concentration'].isnull()]
@@ -120,8 +120,8 @@ so the unmatched months are at both ends. Your question 1 output said so: `2024-
 one of the two date pairs.
 :::
 
-**5. A decision, and there is no right answer that does not depend on the question. You are
-writing one of the following two papers. For each one, say which merge you would use and why:**
+**5. Suppose you are writing one of the following two papers. For each one, say which merge you
+would use and why:**
 
 - *"Atmospheric CO₂ and global temperature move together"*
 - *"The global surface temperature record, 1880 to the present"*
@@ -169,8 +169,9 @@ when printed side by side, which is exactly why the dtype check is worth doing r
 eyeballing the head of the table.
 :::
 
-**8. Build a table of annual means: group by `year` and report the *count* of months, the mean
-`MonthlyAnomaly`, and the mean `CO2Concentration`. Show the first three rows and the last three.**
+**8. Build a table of annual means: group by `year` and report the *count* of months, the mean of
+`MonthlyAnomaly`, and the mean of `CO2Concentration`. Show the first three rows and the last
+three.**
 
 ```{python}
 annual = climate.groupby('year').agg({'Date': 'count',
@@ -180,8 +181,8 @@ print(annual.head(3))
 print(annual.tail(3))
 ```
 
-**9. Two of the sixty-seven years in that table are not twelve months long. Which two, and why?
-Filter them out into a table called `full_years` and say how many years survive.**
+**9. Two of the sixty-seven years in the table are not twelve months long. Which two, and why?
+Filter the data into a new table called `full_years`. How many years survive?**
 
 ```{python}
 full_years = annual[annual['Date'] == 12]
@@ -202,24 +203,9 @@ decimal places, and look equally trustworthy. Asking for `count` alongside every
 habit that catches this, and it costs one extra line.
 :::
 
-**10. In a markdown cell: what would the 2024 row have done to a claim about the warmest year on
-record, if you had not checked the count? Two sentences.**
+## Part 3: A graph of annual amplitudes
 
-:::{.callout-note title="✅ Answer"}
-**2024 would have taken first place, at a mean anomaly of 1.287 °C against 2023's 1.169 °C**, and
-the claim would have been built on seven months of data compared against sixty-five twelve-month
-averages.
-
-The comparison is not sound even though 2024 really was warm, because a partial year is not the
-same quantity as a full year. 2023 makes the point on its own: its January to July mean is
-1.036 °C and its August to December mean is 1.356 °C, so which months you happen to have changes
-the answer by more than the gap between the top two years. `full_years` exists so that every
-number you compare is built from the same twelve slots.
-:::
-
-## Part 3: The shape that shows the sawtooth
-
-**11. Build a wide table with `year` down the rows, `month` across the columns, and
+**10. Build a wide table with `year` down the rows, `month` across the columns, and
 `CO2Concentration` in the cells. Show the first three rows and the last three.**
 
 ```{python}
@@ -228,7 +214,7 @@ print(co2_grid.head(3).round(2))
 print(co2_grid.tail(3).round(2))
 ```
 
-**12. That one table holds two different patterns at once. Read it *down* a single column, then
+**11. This new table holds two different patterns at once. Read it *down* a single column, then
 read it *across* a single row. In a markdown cell, describe both in one sentence each.**
 
 :::{.callout-note title="✅ Answer"}
@@ -244,9 +230,9 @@ data is often what makes a comparison possible, and the `NaN` values
 in the 1958 and 2024 rows are the same two part years from question 9 showing up in a new shape.
 :::
 
-**13. Use the wide table to measure the second pattern. For every year, the difference between its
-largest monthly value and its smallest is the size of the annual cycle. Compute that difference
-for 1959 and for 2023, and report both.**
+**12. For every year, the difference between its largest monthly value and its smallest is the
+size of the annual cycle. Compute that difference for two specific years: 1959 and for 2023, and
+report both. (You will need two lines of code; one for each year)**
 
 ```{python}
 print(co2_grid.loc[1959].max() - co2_grid.loc[1959].min())
@@ -263,10 +249,10 @@ floating-point arithmetic showing through and not a real precision claim: the un
 measurements have two decimals, so their difference has two decimals.
 :::
 
-**14. In a markdown cell: the annual cycle in CO₂ is caused by the northern hemisphere's plants,
-which take carbon out of the air in the growing season and put it back in the autumn. Given that,
-say what your two numbers from question 13 might mean, and say honestly how confident you are in
-a comparison of two single years.**
+**13. In a markdown cell: the annual cycle in CO₂ is caused by vegetation (mainly in the northern
+hemisphere), which removes carbon from the atmosphere during the growing season and releases it
+back in the autumn/winter. Given that context, explain what your two numbers from question 12
+might indicate. Are two years sufficient to make that inference?**
 
 ```{python}
 for y in [1959, 1960, 1965, 1991, 2000, 2016, 2023]:
@@ -284,14 +270,13 @@ growing season, a warmer high-latitude spring, or simply more vegetation taking 
 The evidence does not support it. Run the same subtraction on a few more years and the year to
 year scatter is larger than the change you are trying to see: 1960 is 6.20 ppm, larger than 2023's
 5.50, and 2000 is 4.83, smaller than 1959's 4.96. 1959 is the third smallest cycle in all 65 full
-years, so question 13 compared a year with an unusually small cycle against an ordinary one. The honest
+years, so question 12 compared a year with an unusually small cycle against an ordinary one. The honest
 statement is that two years cannot separate a trend from noise, and that measuring this properly
 means averaging the cycle over a decade at each end, or fitting a line through all 65 values.
 :::
 
-**15. Build the same wide table for `MonthlyAnomaly`. Does the temperature record have a
-comparable seasonal cycle in it? Say why or why not in one sentence. (The answer is in what the
-word *anomaly* means.)**
+**14. Build the same wide table for `MonthlyAnomaly`. Does the temperature record have a
+comparable seasonal cycle in it? Say why or why not in one sentence.**
 
 ```{python}
 temp_grid = climate.pivot_table(index='year', columns='month', values='MonthlyAnomaly')
@@ -318,9 +303,9 @@ Individual rows do vary. 2023 runs from 0.87 °C in January to 1.48 °C in Septe
 seasonal shape, and it does not line up with the same months from one year to the next.
 :::
 
-## Part 4: The claim
+## Part 4: Making a statement about change
 
-**16. Using `full_years`, compare the 1960s with the 2010s. Compute the mean of each column for
+**15. Using `full_years`, compare the 1960s with the 2010s. Compute the mean of each column for
 `year` between 1960 and 1969, and again for `year` between 2010 and 2019, and report the change in
 each.**
 
@@ -343,10 +328,10 @@ rather than a rise from something already elevated. In relative terms the CO₂ 
 percent of the 1960s level.
 :::
 
-**17. In a markdown cell of four or five sentences: state the two changes you measured, with
-units. Then state clearly what this analysis does *not* show. You have put two curves in the
-same table and found that both went up; name one thing a scientist would need before calling that
-a causal claim.**
+**16. In a markdown cell of four or five sentences: state what these calculations indicate in
+terms of changes in the temperature and CO2 concentrations, with units. You have put two variables
+in the same table and found that both varied together; explain what a data scientist would need
+before making a causal claim about this covariation.**
 
 There is no single right answer here. A strong response quotes both changes with their units,
 says plainly that the analysis is a comparison of two rising series, and names something concrete
@@ -387,7 +372,7 @@ anything else.
 3. **Every mean you reported came with a count, or from `full_years`.** The 2024 row is the
    cautionary case: a seven-month mean that would have topped the warmest-year ranking, with
    nothing in the output to show that it came from seven months.
-4. **Your question 14 answer is honest about two years.** Naming the mechanism is the easy half.
+4. **Your question 13 answer is honest about two years.** Naming the mechanism is the easy half.
    Saying that 1959 against 2023 cannot separate a trend from year to year scatter is the half
    that earns the marks, and the extra years above are how you check it.
 

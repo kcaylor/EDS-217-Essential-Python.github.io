@@ -17,13 +17,13 @@ format:
 Work the exercise first, then come here. The code below is **one** correct answer, not the only
 one. If your code looks different but produces the same numbers, you were right.
 
-This is the Day 1 exercise, so most of the code was given to you. What this key is for is the
-outputs: you can see that your cells ran, but you cannot check on your own whether the numbers
+This is the Day 1 exercise, so most of the code was given to you. This key is here for the
+outputs. You can see that your cells ran, but you cannot check on your own whether the numbers
 you got are the numbers you should have got. Compare your output against the tables and figures
 below, and compare your three f-string sentences against the green **Answer** boxes.
 
-If something did not run, that is normal on the first afternoon of the course. Nothing here is
-assessed knowledge yet.
+If something did not run, that is normal on the first afternoon of the course. None of this is
+graded.
 
 ⬅️ Back to [the exercise](../eod-practice/eod-day1-2026.qmd)
 :::
@@ -46,13 +46,14 @@ df.shape
 
 :::{.callout-note title="✅ Answer"}
 **11,171 rows and 21 columns.** One row per day at Toolik Lake, from 1 June 1988 through 31
-December 2018. If `df.shape` gave you something else, you loaded a different file.
+December 2018. The practice does not ask for `df.shape`, but it is the quickest way to confirm
+you loaded the file everyone else did.
 :::
 
 ### 2. Look at the data
 
-Note that a notebook cell displays only its **last** expression. If you put `df.head()` and
-`df.isnull().sum()` in the same cell, you saw the null counts and not the head. Both are shown
+Note that a notebook cell displays only its **last** expression. The practice puts `df.head()`
+and `df.isnull().sum()` in one cell, so you saw the null counts and not the head. Both are shown
 here, in separate cells.
 
 ```{python}
@@ -64,12 +65,12 @@ df.isnull().sum()
 ```
 
 :::{.callout-note title="✅ Answer"}
-**`Daily_AirTemp_Mean_C` shows 0.** That is the column the rest of the exercise averages, so the
+**`Daily_AirTemp_Mean_C` shows 0.** Temperature is the column the rest of the exercise averages, so the
 temperature work needs no cleaning, which is the whole reason the health check comes first.
 
 Most other columns do have missing values. `Daily_globalrad_total_jcm2` is missing on 7,053 of the
-11,171 days, `Daily_windsp_mean_msec` on 826, and `Daily_Precip_Total_mm` on 420. The `Flag_`
-columns are almost entirely empty by design: a flag is only filled in when there is something to
+11,171 days, `Daily_windsp_mean_msec` on 826, and `Daily_Precip_Total_mm` on 420. The flag columns, four
+spelled `Flag_` and two `FLAG_`, are mostly empty by design: a flag is only filled in when there is something to
 flag. A missing value is not always a mistake, and Day 4 covers what to do about the ones that
 are.
 :::
@@ -83,8 +84,7 @@ monthly_means
 ```
 
 :::{.callout-note title="✅ Answer"}
-Twelve numbers, one per month, running from **-22.889032 in January to 11.222060 in July**. This
-is a climatology: each value is the average of every January in the record, not any single
+Twelve numbers, one per month, running from **-22.889032 in January to 11.222060 in July**. The twelve numbers are a climatology: each value is the average of every January in the record, not any single
 January. Only three months average above freezing (June, July and August), and September at
 -0.110753 misses by a tenth of a degree.
 :::
@@ -113,11 +113,6 @@ variable so `monthly_means` stays put.
 You only had to pick one. All three are shown here so you can check whichever you chose.
 
 ```{python}
-monthly_radiation = monthly['Daily_globalrad_total_jcm2'].mean()
-monthly_radiation
-```
-
-```{python}
 monthly_precip = monthly['Daily_Precip_Total_mm'].mean()
 monthly_precip
 ```
@@ -127,10 +122,15 @@ monthly_wind = monthly['Daily_windsp_mean_msec'].mean()
 monthly_wind
 ```
 
+```{python}
+monthly_radiation = monthly['Daily_globalrad_total_jcm2'].mean()
+monthly_radiation
+```
+
 :::{.callout-note title="✅ Answer"}
 For **June**, the month the exercise uses in its example, the three menu options give
-**2041.905600 J/cm2** of daily global radiation, **1.537217 mm** of daily precipitation, and
-**2.990603 m/s** of mean wind speed. Check your output against the line for whichever column you
+**1.537217 mm** of daily precipitation, **2.990603 m/s** of mean wind speed, and
+**2041.905600 J/cm2** of daily global radiation. Check your output against the line for whichever column you
 picked.
 
 The three variables behave very differently across the year. Radiation swings by a factor of
@@ -141,24 +141,26 @@ real season.
 
 One thing to notice: the radiation means are computed from only the days that have a radiation
 value. `.mean()` skips missing values rather than failing on them. January's figure comes from
-just 62 days spread across 25 years, while September's comes from 717. The number is still
+just 62 days, and all of them fall in two years, 2011 and 2013, while September's comes from
+717 days spread across 24 years. The number is still
 meaningful, but it is not based on the same amount of evidence in every month.
 :::
 
 **✍️ Required: read one month's value from your new result and report it in an f-string.**
 
 ```{python}
-june_radiation = 2041.9      # June's value, read from your output
-print(f"At Toolik, June's average daily global radiation was {june_radiation} J/cm2.")
+june_precip = 1.5372   # June's value, read from your output
+print(f"At Toolik, June's average daily precipitation was {june_precip:.2f} mm.")
 ```
 
 :::{.callout-note title="✅ Answer"}
-The sentence should print as **`At Toolik, June's average daily global radiation was 2041.9
-J/cm2.`** The full value is 2041.905600, and rounding it to 2041.9 for a sentence is fine.
+The sentence should print as **`At Toolik, June's average daily precipitation was 1.54 mm.`**
+The full value is 1.537217, and `:.2f` is what turns it into 1.54 for the sentence. The
+variable still holds every decimal.
 
-If you chose precipitation or wind instead, your sentence needs its own units: mm per day, or
-metres per second. Full credit here is for the number matching your own output and the units
-matching your own column. A number with the wrong units attached is worse than no number.
+If you chose wind or radiation instead, your sentence needs its own units: metres per second,
+or J/cm2 per day. What matters here is that the number matches your own output and the units match your own
+column. A number with the wrong units attached is worse than no number.
 :::
 
 ## 🔁 Task 2: yearly means
@@ -191,13 +193,13 @@ one is one of the most common mistakes in real data work, and you can catch it i
 **✍️ Required: read one year's value from `yearly_means` and report it in an f-string.**
 
 ```{python}
-temp_2000 = -8.97      # the year 2000 value, read from your output
-print(f"In 2000, Toolik's average temperature was {temp_2000} degrees Celsius.")
+temp_2000 = -8.9675    # the year 2000 value, read from your output
+print(f"In 2000, Toolik's average temperature was {temp_2000:.2f} degrees Celsius.")
 ```
 
 :::{.callout-note title="✅ Answer"}
 The sentence should print as **`In 2000, Toolik's average temperature was -8.97 degrees
-Celsius.`** The full value in your output is -8.967486, and -8.97 is that value rounded to two
+Celsius.`** The full value in your output is -8.967486, and `:.2f` prints that value rounded to two
 decimals.
 
 Any year is acceptable here, as long as the number in your sentence is the number on that year's
@@ -231,20 +233,20 @@ figure and not part of the data.
 
 The bar chart shows something the line plot did not make obvious: only three bars rise above zero,
 and the nine below it are much taller. September, at -0.110753, is so close to zero that its bar
-is almost invisible. The line plot and the bar chart show the same numbers, which is why it is
-worth drawing data more than one way.
+is almost invisible. The line plot and the bar chart show the same twelve numbers and make different things
+obvious, which is why one figure is rarely enough.
 :::
 
 **✍️ Required: read the coldest month's value off your chart and report it in an f-string.**
 
 ```{python}
-coldest = -22.89      # January's value, read from your chart
-print(f"Toolik's coldest month averages about {coldest} degrees Celsius.")
+coldest = -22.8890    # January's value, read from your chart
+print(f"Toolik's coldest month averages about {coldest:.2f} degrees Celsius.")
 ```
 
 :::{.callout-note title="✅ Answer"}
 The sentence should print as **`Toolik's coldest month averages about -22.89 degrees Celsius.`**
-The coldest month is **January**, at -22.889032 in your Task 3 output.
+The coldest month is **January**, at -22.889032 in the `monthly_means` you printed in step 3.
 
 December is the second coldest at -21.442560, so if you read the wrong bar you were only about
 1.4 degrees off and would not have noticed from the picture alone. The check is to look back at
@@ -253,7 +255,7 @@ value off a chart is a good way to get the general size of something and a poor 
 exactly right.
 :::
 
-## Where the marks are
+## What to check first
 
 If you compare your notebook against this key, look for these three things.
 

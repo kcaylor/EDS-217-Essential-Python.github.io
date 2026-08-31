@@ -21,8 +21,10 @@ format:
 
 :::
 
-This afternoon we ran the complete workflow together in sessions 1c and 1d. Today you will run
-the whole thing again on your own, changing a few things along the way to see what happens.
+This afternoon we ran a complete data science workflow together, in Parts 1 and 2, on 11,171
+days of Arctic weather from Toolik Lake, Alaska. Before you leave today, you will build that same
+workflow again in a notebook of your own, and then make one change to it in each of three short
+tasks to see what happens.
 
 #### 🎬 "Coming Attractions"
 
@@ -31,23 +33,25 @@ the whole thing again on your own, changing a few things along the way to see wh
 - **The goal:** get comfortable running and modifying a real analysis.
 
 :::{.callout-important title="Don't panic 🚀"}
-You are not expected to understand every line today! You already used all of these tools this
-afternoon, though only at a shallow level, and over the next six days we will cover each one
-properly. If a cell refuses to run and you cannot work out why, grab Cella or Kelly and show
-them what you saw.
+You are not expected to understand every line today! You have already used every tool on this
+page once this afternoon, though only at a shallow level, and over the next six days we will
+cover each one properly. If a cell throws an error and you cannot work out why, grab Cella or
+Kelly and show them what you saw.
 :::
 
 ## The data
 
-You will use the same Arctic weather data from the [Arctic LTER](https://lternet.edu/site/arctic-lter/)
-station at Toolik Lake, Alaska: daily measurements from 1988 onward. The file lives in our
+We are using the same Arctic weather data from the [Arctic LTER](https://lternet.edu/site/arctic-lter/)
+station at Toolik Lake, Alaska: one row per day, from June 1988 to December 2018. The file lives in our
 course repository, so you can load it straight from its URL.
 
 ## When you'll learn these skills
 
-Everything in this workflow gets a full teaching day later in the course:
+Every tool in this workflow gets taught properly later in the course, across Days 2 through 7, at
+one or two workflow steps a day. We use some of them this afternoon and meet the rest as the
+course goes on:
 
-| What you use today | When you'll learn it | Workflow step |
+| The tool | When you'll learn it | Workflow step |
 |--------------------|----------------------|---------------|
 | `pd.read_csv()`, `.head()`, `.info()` | **Day 2** | Import + Explore |
 | `df[df['col'] > value]`, `.sort_values()` | **Day 3** | Filter + Sort |
@@ -58,9 +62,16 @@ Everything in this workflow gets a full teaching day later in the course:
 
 ## Setup
 
-1. Create a new notebook named `EOD_Day1_Workflow.ipynb`.
+Set up your notebook with the same four steps we used in today's sessions.
 
-2. Add a title cell:
+1. **Create the file.** In the Explorer, hover over the **EDS217** heading and click
+   **New File...**, then type the name in full, extension included:
+   `EOD_Day1_Workflow.ipynb`
+
+2. **Check the kernel.** The Kernel Selector in the notebook's action bar should read
+   **Python 3.11.15 (Conda: eds217)**.
+
+3. **Add a title cell.**
 
 ```markdown
 # Day 1 EOD: Rerun the Workflow
@@ -68,8 +79,10 @@ Everything in this workflow gets a full teaching day later in the course:
 Date: 08/31/2026
 ```
 
-3. Work through the rest of this page in your new notebook. Copy each code cell, run it, then
-   write a short markdown note under it saying what you saw.
+4. **Save** with `Ctrl + S` (`Cmd + S` on macOS), and keep saving as you go.
+
+Then work through the rest of this page in your new notebook. Copy each code cell, run it, then
+write a short markdown note under it saying what you saw.
 
 ## Rebuild the workflow
 
@@ -165,8 +178,9 @@ In R you might draw this with `ggplot(...) + geom_line()`. Here `plt.plot(series
 twelve monthly values and draws them in order, and the label lines set the title and axes.
 :::
 
-You now have `df`, `monthly`, and `monthly_means` in your notebook, which is exactly where we
-ended up this afternoon. Each of the three tasks below makes one change to this workflow.
+You should now have `df`, `monthly`, and `monthly_means` in your notebook, which is where we
+ended up together this afternoon. Each of the three tasks below makes one change to the workflow
+you have just rebuilt.
 
 ## 🔁 Task 1: monthly means for a different variable
 
@@ -180,7 +194,7 @@ monthly_means = monthly['Daily_AirTemp_Mean_C'].mean()
 ```
 
 **Your change:** swap the column for **one** from this menu, and store the result in a new
-variable so `monthly_means` stays put:
+variable, because Task 3 still needs your original `monthly_means`:
 
 - `Daily_Precip_Total_mm` (daily precipitation)
 - `Daily_windsp_mean_msec` (daily mean wind speed)
@@ -203,7 +217,7 @@ Read one month's value from your new result and report it in an f-string. A mean
 out with a long tail of decimals, so add `:.2f` inside the braces to round it to two:
 
 ```python
-june_precip = 1.5397   # June's value, read from your output
+june_precip = 1.5372   # June's value, read from your output
 print(f"At Toolik, June's average daily precipitation was {june_precip:.2f} mm.")
 ```
 
@@ -213,7 +227,7 @@ The `:.2f` changes only what is printed. `june_precip` still holds every decimal
 ```{python}
 #| echo: false
 #| include: false
-june_precip = 1.5397
+june_precip = 1.5372
 print(f"At Toolik, June's average daily precipitation was {june_precip:.2f} mm.")
 ```
 
@@ -254,16 +268,16 @@ Read one year's value from `yearly_means` and report it in an f-string. For exam
 reading the value for the year 2000:
 
 ```python
-temp_2000 = -8.97      # the year 2000 value, read from your output
-print(f"In 2000, Toolik's average temperature was {temp_2000} degrees Celsius.")
+temp_2000 = -8.9675    # the year 2000 value, read from your output
+print(f"In 2000, Toolik's average temperature was {temp_2000:.2f} degrees Celsius.")
 ```
 :::
 
 ```{python}
 #| echo: false
 #| include: false
-temp_2000 = -8.97
-print(f"In 2000, Toolik's average temperature was {temp_2000} degrees Celsius.")
+temp_2000 = -8.9675
+print(f"In 2000, Toolik's average temperature was {temp_2000:.2f} degrees Celsius.")
 ```
 
 ## 🔁 Task 3: a labeled bar chart
@@ -307,28 +321,30 @@ fixed label list like this one.
 - `plt.title("Monthly Mean Air Temperature, 1988 to 2018")`
 
 :::{.callout-important title="✍️ Required: say it in a sentence"}
-Read the coldest month's value off your chart and report it in an f-string. For example, after
-reading January's value:
+Find the coldest month on your chart, then take its value from the `monthly_means` you printed
+in step 3 and report it in an f-string. For example, for January:
 
 ```python
-coldest = -22.89      # January's value, read from your chart
-print(f"Toolik's coldest month averages about {coldest} degrees Celsius.")
+coldest = -22.8890    # January's value, from your step 3 output
+print(f"Toolik's coldest month averages about {coldest:.2f} degrees Celsius.")
 ```
 :::
 
 ```{python}
 #| echo: false
 #| include: false
-coldest = -22.89
-print(f"Toolik's coldest month averages about {coldest} degrees Celsius.")
+coldest = -22.8890
+print(f"Toolik's coldest month averages about {coldest:.2f} degrees Celsius.")
 ```
 
 ## Wrap-up
 
-Nice work! You reran a complete data science workflow and changed three things in it: the
-variable you averaged, the grouping key, and a chart label. Each time, you reported a result in
-your own words with an f-string. The workflow you just reran is the plan for the whole course in
-miniature, and starting Day 2 we will cover how each step works, roughly one step per day.
+Nice work! You have now rerun a complete data science workflow and changed three things in it
+(hopefully!): the variable you averaged, the grouping key, and a chart label. Each time, you read
+a number off your own output and reported it in a sentence of your own with an f-string. The
+workflow you just reran is the whole course in miniature, and starting Day 2 we will cover how
+each step works, at one or two steps a day, until Days 8 and 9, when you and your team run the
+whole thing on a dataset of your own.
 
 ::: {.center-text .body-text-xl .teal-text}
 End Activity Session (Day 1)

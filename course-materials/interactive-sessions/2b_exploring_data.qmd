@@ -95,8 +95,9 @@ goleta.head(3)
 goleta.shape
 ```
 
-The result is a pair of numbers, so you can pull either one out by position, exactly like the
-lists we met in the last session:
+The result is a pair of numbers, and you pull either one out by position the same way you would
+from a list. It is not a list, though: the round brackets mean it is a **tuple**, which is a
+list you are not allowed to change. Indexing works, `.append()` does not:
 
 ```{python}
 print("rows:", goleta.shape[0])
@@ -118,7 +119,9 @@ they determine what you can do with a column: you can average a `float64`, and y
 average an `object`.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-How many columns in `goleta` contain text? Use `.dtypes` to answer, and say how you counted.
+How many columns in `goleta` are stored as `object`? Use `.dtypes` to answer, and say how you
+counted. Then check the three empty columns against your answer: what type did pandas give a
+column it never found a single value in, and is that what you expected?
 :::
 
 ## The health check: `.info()`
@@ -138,9 +141,10 @@ every row. Three of them have `0`.
 headers in the file, and there is not one single value in any of them!
 
 :::{.callout-important}
-Empty columns like these three are exactly what exploring turns up. All three look perfectly
-ordinary in `head()`, where you see a few `NaN` values, which happens in almost every dataset.
-`.info()` is what tells you that they are empty from top to bottom.
+Empty columns are exactly what exploring turns up. The three columns are blank in every row
+`head()` shows you, but five blank rows out of 1,962 is not evidence of much, and plenty of
+perfectly good columns have gaps near the top. `.info()` is what tells you these three are
+empty all the way down.
 :::
 
 You can ask the same question directly. `.isnull()` marks every missing value, and `.sum()`
@@ -154,8 +158,10 @@ We won't fix any of this today, because deciding what to *do* about missing data
 problem. This morning we only need to know that it is there.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Read the Santa Barbara file into `santa_barbara` and run `.info()` on it. Does it have the
-same three empty columns?
+The Santa Barbara station's file sits beside the Goleta one, at
+`https://eds-217-essential-python.github.io/data/openaq_santa_barbara_measurments.csv`
+(the spelling of `measurments` is the file's, not a mistake here). Read it into
+`santa_barbara` and run `.info()` on it. Does it have the same three empty columns?
 :::
 
 ## Summarizing numbers with `.describe()`
@@ -230,7 +236,8 @@ like `location_name`?
 
 `datetimeUtc` and `datetimeLocal` are in camelCase, while everything else uses lowercase
 with underscores. Mixed naming styles are an easy way to introduce typos, because you have to
-remember which style each column happens to use, so let's fix them.
+remember which style each column happens to use, so let's rename those two columns to match
+the rest.
 
 Renaming columns needs Python's other essential container, the **dictionary**.
 
@@ -280,15 +287,16 @@ Build a dictionary that renames `value` to `concentration` **and** `parameter` t
 
 ## The exploration ritual
 
-Here are the five lines to run every time you open a new dataset, in the order we ran them
-this morning:
+Here are the six lines to run every time you open a new dataset, in the order we ran them this
+morning:
 
 ```python
-df.shape          # how big
-df.info()         # types and what's missing
-df.head()         # what does a row look like
-df.describe()     # what do the numbers look like
-df['col'].value_counts()   # what's in the text columns
+df.head()                  # what does a row look like
+df.shape                   # how big
+df.info()                  # types, and how much of each column is filled in
+df.isnull().sum()          # how many values are missing, column by column
+df.describe()              # what do the numbers look like
+df['col'].value_counts()   # what is in the text columns
 ```
 
 Run them before you compute anything, because a problem you find here is quick to deal with,

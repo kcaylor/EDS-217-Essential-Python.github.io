@@ -295,8 +295,17 @@ top_n(plastics, 'Measurement', 5)[['Measurement', 'Unit', 'Oceans']]
 top_n(plastics, 'Latitude')[['Latitude', 'Oceans', 'zone']]
 ```
 
-Two parameters without defaults, one with. Change your mind about how ranking should work and
-there is exactly one line to edit.
+```{python}
+top_n(plastics, 'Longitude', 3)[['Longitude', 'Oceans', 'zone']]
+```
+
+Two parameters without defaults, one with, and three calls to a single definition. The three
+rankings you wrote out longhand at the end of yesterday are three lines like these now, and
+changing your mind about how ranking should work means editing one line rather than three.
+
+Note that `top_n` hands back a whole table rather than a single labelled column, which is the
+first of the two top-N forms you met yesterday. Writing the one-column version as a function
+instead is a matter of putting the `[column]` inside the `return` rather than after it.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Write a function `count_missing(df, column)` that returns the number of missing values in a

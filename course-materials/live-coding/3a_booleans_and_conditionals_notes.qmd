@@ -14,11 +14,16 @@ format:
 [3a_booleans_and_conditionals.qmd](3a_booleans_and_conditionals.qmd). Headings below match the
 markdown scaffold students set up, so everyone stays in the same place.*
 
-**Total: 25 minutes of coding, 20 minutes of buffer and questions.**
+**Total: 28 minutes of coding, 17 minutes of buffer and questions.**
+
+The three blocks on the
+student page are these sections added up: booleans and comparisons is sections 1 to 3 at 8
+minutes, conditionals is section 4 at 8, and asking a whole column is sections 5 and 6 at 9.
+The framing minute and section 7 are on top of the student page's 25.
 
 :::{.callout-important title="Scope discipline"}
 This session teaches booleans, comparison operators, `if`/`elif`/`else`, and the boolean mask.
-It does **not** teach filtering. The filter pattern belongs to Session 3B, and section 7 is
+It does **not** teach filtering. Session 3B teaches the filter pattern, and section 7 here is
 deliberately a one-line preview with no explanation.
 
 No loops are taught today. Students met `for` yesterday afternoon, and section 4 uses one as a
@@ -34,7 +39,8 @@ Say something close to this:
 
 > Yesterday you described a dataset. Today you start interrogating one. Every question worth
 > asking of data starts as a yes-or-no question about a single value, and Python has a type
-> for that answer. Learn to write those questions well and the rest of the week is bookkeeping.
+> for that answer. Once you can write those questions, you will find them inside almost
+> everything else we do this week.
 
 ## Setup
 
@@ -70,15 +76,15 @@ above_freezing = temperature > 0
 above_freezing
 ```
 
-Now show where the `8.4` came from. This is the first time they see `.loc[]`:
+Now show where the `8.4` came from, which is the first time they see `.loc[]`:
 
 ```{python}
 toolik.loc[0, 'Daily_AirTemp_Mean_C']
 ```
 
-> `.loc[]` takes a row label, then a column label, and hands back the one value sitting at
-> that intersection. Row `0` is the first day of the record. We'll use this again this
-> afternoon.
+> `.loc[]` takes a row label, then a column label, and gives back the one value sitting at
+> that intersection. Row `0` is the first day of the record. We will use it again later
+> today.
 
 ```{python}
 toolik.loc[0, 'Daily_AirTemp_Mean_C'] > 0
@@ -103,8 +109,8 @@ Then the error that matters, **run it on purpose**:
 temperature = 0
 ```
 
-> That did not ask a question. It answered one, destructively. `=` assigns, `==` compares.
-> This is the most common bug in the room for the next three days, and it is silent, because
+> The line above did not ask a question. It answered one, destructively. `=` assigns, `==`
+> compares. Mixing up assignment and comparison is a common bug, and a silent one, because
 > assignment does not raise an error.
 
 Reset and move on:
@@ -113,7 +119,7 @@ Reset and move on:
 temperature = 8.4
 ```
 
-Equality on text, since they'll need it in an hour:
+Equality on text, because they will need it in the next session:
 
 ```{python}
 toolik.loc[0, 'Station'] == 'TLKMAIN'
@@ -121,7 +127,7 @@ toolik.loc[0, 'Station'] == 'TLKMAIN'
 
 Point to make: strings compare with `==` too, and they are case-sensitive.
 
-## 3. Asking two questions at once (3 min)
+## 3. Asking two questions at once (2 min)
 
 ```{python}
 temperature = 8.4
@@ -144,11 +150,11 @@ formal topic; two minutes of examples is enough.
 :::{.callout-note title="Flag this now, pay it off in section 5"}
 Tell them these three words work on **single values**. When we ask the same question of a
 whole column, we will need three different symbols. Say that you are flagging it deliberately
-and that you will come back to it. It arrives in section 5 and it is much less confusing if
-they were warned.
+and that you will come back to it. It arrives in section 5, and it is much less confusing for
+them if they have been warned.
 :::
 
-## 4. if / elif / else (5 min)
+## 4. if / elif / else (8 min)
 
 Build it in three steps, running after each.
 
@@ -226,12 +232,12 @@ for value in [toolik.loc[0, 'Daily_AirTemp_Mean_C'],
 
 :::{.callout-tip title="If you are running long"}
 The loop above is a convenience, not a lesson. If you are behind, run the classifier on one
-value and move on. Loops are not in today's scope table.
+value and move on. Loops are not in today's scope.
 :::
 
-## 5. Asking a whole column (5 min)
+## 5. Asking a whole column (6 min)
 
-This is the section the day depends on. Slow down.
+Section 5 is the one the rest of the day depends on. Slow down.
 
 ```{python}
 toolik['Daily_AirTemp_Mean_C'] > 0
@@ -264,8 +270,9 @@ Now the promised payoff from section 3. Try `and` on purpose:
 
 > `ValueError: The truth value of a Series is ambiguous.`
 
-Say why: `and` wants one `True` or `False` on each side, and you handed it eleven thousand of
-each. pandas cannot guess whether you meant "all of them" or "any of them", so it refuses.
+Say why: `and` needs one `True` or `False` on each side, and each side here has eleven
+thousand of them. "All of them" and "any of them" are both reasonable readings of a column of
+answers, and pandas has no rule for choosing between them, so it raises an error instead.
 
 The pandas version:
 
@@ -332,23 +339,23 @@ toolik[mask].shape
 
 Say:
 
-> A mask in square brackets gives you back only the rows where the answer was `True`. That is
-> the filter pattern, and it is the whole of the next session. You have just written the hard
-> part of it.
+> A mask in square brackets gives you back only the rows where the answer was `True`. Putting
+> a mask inside the brackets is the filter pattern, and the filter pattern is the whole of the
+> next session. You have just written the hard part of it.
 
 Stop there. Do not explain `.copy()`, do not explain chained conditions on a filtered frame.
-That is 3B's material and it lands better with a clean start.
+Session 3B covers both, and it works better with a clean start.
 
 ## Timing checkpoints
 
 | Elapsed | Should be at |
 |---|---|
-| 6 min | end of section 2, `=` versus `==` demonstrated |
-| 12 min | end of section 4, `elif` classifier running |
-| 20 min | end of section 5, the `&` parentheses rule on the board |
-| 25 min | section 7 previewed, session closed |
+| 7 min | end of section 2, `=` versus `==` demonstrated |
+| 17 min | end of section 4, `elif` classifier running |
+| 23 min | end of section 5, the `&` parentheses rule on the board |
+| 28 min | section 7 previewed, session closed |
 
-If you're behind at 12 minutes, cut the `or`/`not` examples in section 3 and the loop at the
+If you're behind at 17 minutes, cut the `or`/`not` examples in section 3 and the loop at the
 end of section 4. Do not cut section 5; everything else today assumes it.
 
 ## Common problems

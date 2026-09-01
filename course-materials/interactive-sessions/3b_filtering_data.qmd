@@ -18,12 +18,12 @@ format:
 
 :::
 
-An hour ago you wrote a question and asked it of an entire column. What came back was a
-**boolean mask**: a `True` or a `False` for every row.
+Earlier this morning you wrote a question and asked it of an entire column. The answer came
+back as a **boolean mask**: a `True` or a `False` for every one of the 1,962 rows.
 
-A mask by itself is not very interesting. What you actually want is the rows it says `True`
-about. Getting them takes one line, and that line is the most useful thing you will learn this
-week.
+A mask on its own does not do much for us. The rows it says `True` about are what you are
+after, and getting them takes one line of code, which we will write in nearly every session
+from here on.
 
 By the end of this session you will be able to:
 
@@ -57,7 +57,7 @@ Date: 09/02/2026
 
 4. **Save** with `Ctrl + S` (`Cmd + S` on macOS), and keep saving as you go.
 
-4. Read in the Goleta air quality data you explored yesterday:
+5. Read in the Goleta air quality data you explored yesterday:
 
 ```{python}
 import pandas as pd
@@ -79,23 +79,25 @@ Read it from the inside out. `goleta['value'] > 20` is the mask you learned to w
 morning: `True` on every row where the value is above 20, `False` everywhere else. Wrapping it
 in `goleta[ ... ]` says "give me the rows where that was `True`."
 
-That is the **filter pattern**. The general form is:
+The line we just ran is the **filter pattern**. The general form is:
 
 ```python
 df[df['column'] <comparison> value]
 ```
 
-The `df` appears twice, and that trips people up at first. The inner one builds the question.
-The outer one applies the answer. They are the same table both times.
+The `df` appears twice, which looks redundant until you see what each one is doing. The inner
+one builds the question, the outer one applies the answer, and they are the same table both
+times.
 
-Assign it a name if you want to use the result:
+Give the result a name if you want to use it later:
 
 ```{python}
 high_readings = goleta[goleta['value'] > 20]
 high_readings.shape
 ```
 
-115 rows out of 1,962. Compare the shapes and you can see the filter did something:
+115 rows out of 1,962. Compare the shapes before and after, and you can see exactly how many
+rows the filter kept:
 
 ```{python}
 print('before:', goleta.shape)
@@ -103,9 +105,9 @@ print('after: ', high_readings.shape)
 ```
 
 :::{.callout-note}
-🐍 Filtering never changes the original. `goleta` still has all 1,962 rows. What you get back
-is a new, smaller table, and if you don't give it a name it is displayed and then discarded.
-This is the same rule you met with `.rename()` yesterday.
+🐍 Filtering never changes the original. `goleta` still has all 1,962 rows. You get back a
+new, smaller table, and if you don't give it a name it is displayed once and then discarded.
+`.rename()` followed the same rule yesterday.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -134,17 +136,19 @@ matched nothing at all:
 goleta[goleta['parameter'] == 'O3'].shape
 ```
 
-An empty result is not an error. It is an answer, and it is usually a spelling problem.
+An empty result is not an error. Zero rows is a real answer, and it usually means a spelling or
+capitalization problem rather than a fact about the data.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Filter `goleta` to the `pm25` readings and store them in a variable called `pm25`. How many
 rows? Check your number against `goleta['parameter'].value_counts()` from yesterday.
 :::
 
-## Why this matters here
+## Why filtering matters for the Goleta data
 
 Yesterday you found that `goleta['value']` stacks three different pollutants, in two different
-units, in one column. That made `.describe()` on the whole column meaningless.
+units, in one column. Mixing three pollutants together made `.describe()` on the whole column
+meaningless.
 
 Filtering is the fix:
 
@@ -156,19 +160,20 @@ goleta['value'].describe()
 goleta[goleta['parameter'] == 'pm25']['value'].describe()
 ```
 
-The first summary averages micrograms per cubic metre together with parts per million. The
-second one describes 734 particulate readings, all in µg/m³. Only the second one is a fact.
+The first summary averages micrograms per cubic metre together with parts per million, which
+gives a mean that describes no substance at all. The second one describes 734 particulate
+readings, all in µg/m³, and only the second one tells you anything about the air in Goleta.
 
 ## Two conditions at once
 
 `&` means "and". Every comparison gets its own parentheses:
 
 ```{python}
-goleta[(goleta['parameter'] == 'pm25') & (goleta['value'] > 12)]
+goleta[(goleta['parameter'] == 'pm25') & (goleta['value'] > 9)]
 ```
 
-51 hours where fine particulate matter was above 12 µg/m³, which is the level the US EPA uses
-as its annual air quality standard.
+128 hours where fine particulate matter was above 9 µg/m³, which is the annual air quality
+standard the US EPA set in 2024, tightened from the 12 µg/m³ that had stood since 2012.
 
 `|` means "or":
 
@@ -181,12 +186,12 @@ particulates.shape
 Leave them out and you get an error that has nothing to do with what you meant:
 
 ```python
-goleta[goleta['parameter'] == 'pm25' & goleta['value'] > 12]
+goleta[goleta['parameter'] == 'pm25' & goleta['value'] > 9]
 ```
 
-`&` binds more tightly than `==` and `>`, so Python tries to combine the wrong pieces. The
-rule is absolute: **wrap every comparison in its own parentheses.** Do it even when there is
-only one condition if it helps you build the habit.
+`&` binds more tightly than `==` and `>`, so Python combines the wrong pieces before it ever
+gets to your comparison. The rule here is absolute: **wrap every comparison in its own
+parentheses.** Do it even when there is only one condition, if that helps you build the habit.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -210,8 +215,8 @@ not_ozone.shape
 goleta[goleta['parameter'] != 'o3'].shape
 ```
 
-`~` earns its keep when the condition is more complicated than a single comparison, and you
-would rather say "not that" than rewrite the whole thing backwards.
+`~` is most useful when the condition is more complicated than a single comparison, and you
+would rather say "not that" than rewrite the whole condition backwards.
 
 ## Matching a list of values with `.isin()`
 
@@ -233,9 +238,8 @@ goleta[goleta['parameter'].isin(of_interest)].shape
 ```
 
 :::{.callout-note}
-🐍 `.isin()` hangs off the **column**, not off the DataFrame: `df['col'].isin([...])`. It
-returns a mask, exactly like a comparison does, so it goes in the same place inside the
-brackets.
+🐍 Call `.isin()` on the **column**, not on the DataFrame: `df['col'].isin([...])`. It returns
+a mask, exactly like a comparison does, so it goes in the same place inside the brackets.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -257,9 +261,9 @@ pm25.shape
 ```
 
 `.copy()` gives you a table of your own, with no remaining connection to `goleta`. Without it,
-pandas may hand you back something that is still tied to the original table. When you then try
-to change it, you get either a warning you don't understand or a change that quietly does not
-stick.
+the subset you get back may still be tied to the original table. When you then try to change
+the subset, you get either a warning that is hard to interpret or a change that silently never
+happens.
 
 The habit is easy to state:
 
@@ -271,9 +275,10 @@ pm25.head()
 ```
 
 :::{.callout-caution title="A warning you will meet"}
-`SettingWithCopyWarning` is pandas telling you it isn't sure whether you meant to change the
-subset or the original. It is not always a real problem, but it is always worth reading. Adding
-`.copy()` at the point where you made the subset is the fix nine times out of ten.
+`SettingWithCopyWarning` shows up when a change you have written could apply either to the
+subset or to the original table, and the code as written does not say which one you meant. It
+is not always a real problem, but it is always worth reading! Adding `.copy()` at the point
+where you made the subset is usually the fix.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -298,8 +303,9 @@ summer_particulates.shape
 summer_particulates[['parameter', 'value', 'unit', 'datetimeLocal']].head()
 ```
 
-Notice that the line is broken across several lines inside the square brackets. Python doesn't
-mind, and a long filter is much easier to read that way.
+Notice that the filter is broken across several lines inside the square brackets. Python allows
+a line break anywhere inside a pair of brackets, and a long filter is much easier to read that
+way.
 
 ## Key points
 

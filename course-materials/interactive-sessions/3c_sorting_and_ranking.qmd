@@ -77,9 +77,9 @@ pm25.shape
 pm25.sort_values('value').head()
 ```
 
-Sorting puts the smallest values at the top, which is what happens by default. The negative
-readings you flagged yesterday sit at the bottom of the ranking, which is where you would
-expect them to be.
+Sorting puts the smallest values first, which is what happens by default. The negative readings
+you flagged yesterday are the smallest of all, so they come out at the head of the table, which
+is where you would expect them once the order runs upward.
 
 To go the other way, pass `ascending=False`:
 
@@ -177,14 +177,15 @@ different things next to each other and treating them as one set.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Filter `goleta` to ozone, then rank it to find the five highest ozone readings. What are the
-values, and what unit are they in?
+Filter `goleta` to ozone, whose `parameter` value is `o3`, then rank it to find the five highest
+ozone readings. What are the values, and what unit are they in? Keep the result, because the
+next exercise uses it.
 :::
 
 ## Finding the label instead of the row
 
-Sometimes you don't want the row. You want to know *which one* it was: which day, which
-station, which food.
+Sometimes you don't want the row. You want to know *which one* it was: which hour, which
+station, which pollutant.
 
 `.idxmax()` gives you the **index label** of the largest value in a column:
 
@@ -225,8 +226,8 @@ pm25.sort_values('value', ascending=False).head(3)[['datetimeLocal', 'value']]
 ```
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Use `.idxmax()` and `.loc[]` on the ozone subset to find the timestamp of the highest ozone
-reading. Then check your answer with the top-N pattern.
+Use `.idxmax()` and `.loc[]` on the ozone subset you just made to find the timestamp of the
+highest ozone reading. Then check your answer with the top-N pattern.
 :::
 
 ## Putting it together

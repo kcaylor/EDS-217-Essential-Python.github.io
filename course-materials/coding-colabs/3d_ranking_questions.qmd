@@ -21,10 +21,12 @@ and wrote five factual claims about those records. Now we will use our new tools
 the tasks below uses these new patterns. 
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
-finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it. 
+finish a numbered task. The person not typing should read the code through (quietly) and say what they expect it to
+produce before you run it. 
 
-We have about 45 minutes for this activity. Please tell Cella or Kelly if you get stuck,
-rather than spending ten of those minutes on one line!
+We have about 45 minutes for this activity: roughly 40 on the three parts below, and the rest
+on setting up and on the wrap-up. Please tell Cella or Kelly if you get stuck, rather than
+spending ten of those minutes on one line!
 
 ## The data
 
@@ -99,8 +101,10 @@ western = by_year[by_year['region'].isin(western_regions)]
 western.shape
 ```
 
-4. Using two conditions in one filter, find the rows that are National Parks **and** recorded
-   more than 5 million visitors. How many are there, and what does each row represent?
+4. Using two conditions in one filter on `by_year`, find the rows that are National Parks
+   **and** recorded more than 5 million visitors. How many are there, and what does each row
+   represent? Use `by_year` rather than `parks`, because the `Total` rows you removed in
+   question 2 would otherwise be counted alongside the single years.
 
 ```{python}
 big = by_year[(by_year['unit_type'] == 'National Park') & (by_year['visitors'] > 5_000_000)]
@@ -144,10 +148,13 @@ print(np_2016.shape)
 np_2016.sort_values('visitors', ascending=False).head(10)[['unit_name', 'state', 'visitors']]
 ```
 
-8. How many of the 61 National Parks recorded more than a million visitors in 2016?
+8. Your `np_2016` table has one row per National Park that reported a 2016 figure. Print its
+   shape to see how many parks that is, then find how many of them recorded more than a million
+   visitors.
 
 ```{python}
-(np_2016['visitors'] > 1_000_000).sum()
+print(np_2016.shape)
+print((np_2016['visitors'] > 1_000_000).sum())
 ```
 
 9. Use `.idxmax()` and `.loc[]` on `np_2016` to print the name of the most-visited National

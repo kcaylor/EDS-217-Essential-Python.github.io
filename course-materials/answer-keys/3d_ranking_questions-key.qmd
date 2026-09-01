@@ -15,8 +15,8 @@ format:
 
 :::{.callout-important title="How to use this key"}
 Work the colab through with your partner first, then come here. The code below is **one** correct
-answer, not the only one. This was a 45 minute pair exercise with very little scaffolding, so
-there are several reasonable ways to write almost every cell. If your code looks different but
+answer, not the only one. The colab you just worked is a 45 minute pair exercise with very
+little scaffolding, so there are several reasonable ways to write almost every cell. If your code looks different but
 produces the same numbers, you were right.
 
 The written answers matter more than the code. You can already tell whether your code ran. What
@@ -54,8 +54,10 @@ national_parks['unit_name'].nunique()
 ```
 
 :::{.callout-note title="✅ Answer"}
-**4,743 rows, but only 61 National Parks.** A row is one park in one year, not one park, and the
-file covers 113 years of records. If you wrote "there are 4,743 National Parks" you read the row
+**4,743 rows, but only 61 National Parks.** Almost every row is one park in one year rather than
+one park, and the file spans 113 years, from 1904 to 2016. The exception is worth noticing now
+because question 2 is about it: 61 of those 4,743 rows are `Total` rows, one per park, and a
+`Total` row is not a year at all. If you wrote "there are 4,743 National Parks" you read the row
 count as a count of things in the world, which it is not.
 
 `National Park` is also only one of 30 values in `unit_type`. Most of the file is National
@@ -80,7 +82,10 @@ exactly the number of distinct units in the file, so every unit has one and only
 row.
 
 Those rows are sums of the other rows in the same table. Great Smoky Mountains has a `Total` of
-521,947,058, and adding up its 113 yearly values gives 521,947,058 as well. Leaving them in means
+521,947,058, and adding up its 86 yearly values, which run from 1931 to 2016, gives 521,947,058
+as well. Note that 86 is this park's own span and not the file's: the file covers 113 years, but
+a park only has rows for the years after it was established, and the spans run from one year to
+113. Leaving them in means
 counting every visitor twice, once in the year they visited and once in the lifetime sum. Every
 ranking in Parts 2 and 3 depends on having removed them first.
 :::
@@ -107,8 +112,10 @@ Park Service has units, not about where people go.
 part you edit later, which is why building it as a named variable is worth the extra line.
 :::
 
-**4. Using two conditions in one filter, find the rows that are National Parks and recorded more
-than 5 million visitors. How many are there, and what does each row represent?**
+**4. Using two conditions in one filter on `by_year`, find the rows that are National Parks and
+recorded more than 5 million visitors. How many are there, and what does each row represent? Use
+`by_year` rather than `parks`, because the `Total` rows you removed in question 2 would otherwise
+be counted alongside the single years.**
 
 ```{python}
 big = by_year[(by_year['unit_type'] == 'National Park') & (by_year['visitors'] > 5_000_000)]
@@ -125,11 +132,12 @@ big['unit_name'].value_counts()
 were 59 park-years above 5 million visitors", not "59 parks passed 5 million".
 
 The distinction matters because only **four** parks ever did it. Great Smoky Mountains accounts
-for 55 of the 59 rows, Grand Canyon for two (2015 and 2016), Yosemite for one (2016) and Acadia
-for one (1989). A row count of 59 sounds like a broad group and is in fact one park repeated.
+for 55 of the 59 rows, Grand Canyon for two rows (2015 and 2016), Yosemite for one row (2016) and
+Acadia for one row (1989). A row count of 59 sounds like a broad group and is in fact one park
+repeated.
 
-Acadia's single appearance is worth a second look. It recorded 5,440,952 visitors in 1989,
-4,502,283 in 1988, and then 2,339,591 in 1990. A 57% drop in one year almost certainly reflects a
+Acadia's single appearance is worth a second look. It recorded 4,502,283 visitors in 1988, then
+5,440,952 in 1989, then 2,339,591 in 1990. A 57% drop in one year almost certainly reflects a
 change in how the Park Service counted visitors rather than a real change in visits. Keep that in mind
 before treating any single year as a fact about the world.
 :::
@@ -146,7 +154,7 @@ parks.sort_values('visitors', ascending=False).head(10)[
 ```
 
 :::{.callout-note title="✅ Answer"}
-**Every one of the top 10 is a `Total` row.** Sorting the unfiltered table compares 113-year lifetime
+**Every one of the top 10 is a `Total` row.** Sorting the unfiltered table compares whole-lifetime
 sums against single years, and a lifetime sum is always the larger number. The largest value,
 Blue Ridge Parkway at 871,922,828, is not a number of visitors in any year at all.
 
@@ -198,10 +206,13 @@ top and has a long thin tail. Note also that this is a different table from ques
 National Park appeared at all.
 :::
 
-**8. How many of the 61 National Parks recorded more than a million visitors in 2016?**
+**8. Your `np_2016` table has one row per National Park that reported a 2016 figure. Print its
+shape to see how many parks that is, then find how many of them recorded more than a million
+visitors.**
 
 ```{python}
-(np_2016['visitors'] > 1_000_000).sum()
+print(np_2016.shape)
+print((np_2016['visitors'] > 1_000_000).sum())
 ```
 
 ```{python}
@@ -211,7 +222,7 @@ print(np_2016['visitors'].median())
 ```
 
 :::{.callout-note title="✅ Answer"}
-**22 of the 61, so just over a third.** Those 22 parks account for 81.4% of the 83,920,334 visits
+**61 parks reported a 2016 figure, and 22 of them passed a million, so just over a third.** Those 22 parks account for 81.4% of the 83,920,334 visits
 recorded to National Parks in 2016, which is the more useful way to say it: a third of the parks
 receive four fifths of the visits.
 
@@ -255,6 +266,16 @@ southwest = np_2016[np_2016['state'].isin(southwest_states)].copy()
 southwest.sort_values('visitors', ascending=False)[['unit_name', 'state', 'visitors']]
 ```
 
+:::{.callout-note title="✅ Answer"}
+**17 rows**, ranked from Grand Canyon at 5,969,811 down. `.isin()` is doing the work a chain of
+`|` would otherwise do, and because you built `southwest` from `np_2016` rather than from
+`by_year`, the National Park and 2016 conditions are already applied and you do not have to
+repeat them.
+
+The `.copy()` matters here for the same reason it did in the practice: you display this table
+more than once, and question 11 counts from it.
+:::
+
 **11. Which of those three states has the park at the top of your list, and which has the most
 parks in it? Answer both in a markdown cell. You can count the parks per state by eye from your
 ranked table.**
@@ -270,7 +291,8 @@ southwest['state'].value_counts()
 :::{.callout-note title="✅ Answer"}
 **Arizona has the top park; California has the most parks.** Grand Canyon leads the list with
 5,969,811 visitors, and Arizona has only three National Parks in total. California has nine, more
-than Utah's five and Arizona's three, and its best park, Yosemite at 5,028,868, is second.
+than Utah's five and Arizona's three, and its best park, Yosemite at 5,028,868, is second within
+these three states, behind Grand Canyon.
 
 The two questions have different answers, and that is the reason both were asked. Arizona reaches
 7,433,511 visits in 2016 with three parks, four fifths of them at one park. California reaches
@@ -278,7 +300,9 @@ The two questions have different answers, and that is the reason both were asked
 park" and "which state has the most park visiting" and "which state has the most parks" are three
 different questions, and a single ranked table answers none of them by itself.
 
-These 17 parks are 28% of the 61 National Parks and 35.6% of 2016 National Park visits.
+Those three states hold 17 National Parks between them, which is 9 in California, 5 in Utah and
+3 in Arizona. So 28% of the 61 National Parks account for 35.6% of all 2016 National Park visits,
+which is worth remembering the next time somebody talks about the parks as a single system.
 :::
 
 **12. In one markdown cell of three or four sentences, answer this: a colleague asks you which
@@ -292,8 +316,10 @@ y2016.sort_values('visitors', ascending=False).head(5)[
 ]
 ```
 
-There is no single right answer here. A strong response names at least two of the three choices
-that have to be settled before the question means anything, quotes at least two numbers it
+There is no single right answer here. Three things have to be settled before "the busiest park"
+means anything: which year you are asking about, whether you mean National Parks or every unit
+the Park Service runs, and whether "busiest" means total visits or visits per acre or visits per
+open day. A strong response names at least two of those three, quotes at least two numbers it
 actually computed, and gives the colleague a usable answer rather than only an objection. Here is
 one that would earn full marks.
 

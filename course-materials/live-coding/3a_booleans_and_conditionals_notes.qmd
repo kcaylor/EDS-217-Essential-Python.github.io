@@ -11,18 +11,27 @@ format:
 ---
 
 *Instructor run-through for Session 3A. Student-facing page:
-[3a_booleans_and_conditionals.qmd](3a_booleans_and_conditionals.qmd). Headings below match the
-markdown scaffold students set up, so everyone stays in the same place.*
+[3a_booleans_and_conditionals.qmd](3a_booleans_and_conditionals.qmd). Sections 1 to 7 below match the seven
+markdown headings students set up, so everyone stays in the same place. Framing and Setup come
+before heading 1 and are not in their scaffold, so tell the room to put the import in a cell
+above heading 1.*
 
 **Total: 28 minutes of coding, 17 minutes of buffer and questions.**
 
-The three blocks on the
-student page are these sections added up: booleans and comparisons is sections 1 to 3 at 8
-minutes, conditionals is section 4 at 8, and asking a whole column is sections 5 and 6 at 9.
-The framing minute and section 7 are on top of the student page's 25.
+Each block on the student page is a run of these sections added up:
+
+| Student page block | Sections | Minutes |
+|---|---|---|
+| Booleans and comparisons | 1, 2, 3 | 8 |
+| Conditionals | 4 | 8 |
+| Asking a whole column | 5, 6 | 9 |
+
+Those 25 minutes are what the student page lists. The framing minute and section 7's two
+minutes sit on top of them, which is why the coding total here is 28 rather than 25.
 
 :::{.callout-important title="Scope discipline"}
-This session teaches booleans, comparison operators, `if`/`elif`/`else`, and the boolean mask.
+Today's first session teaches booleans, comparison operators, `if`/`elif`/`else`, and the
+boolean mask.
 It does **not** teach filtering. Session 3B teaches the filter pattern, and section 7 here is
 deliberately a one-line preview with no explanation.
 
@@ -103,7 +112,8 @@ print(temperature == 8.4)
 print(temperature != 8.4)
 ```
 
-Then the error that matters, **run it on purpose**:
+Then the mistake that matters, **run it on purpose**. Nothing will go red, which is the
+point:
 
 ```python
 temperature = 0
@@ -144,8 +154,9 @@ Points to make:
 - `or` is `True` when at least one side is
 - `not` flips the answer
 
-Draw the two-by-two on the board if they look uncertain. Do not go near truth tables as a
-formal topic; two minutes of examples is enough.
+Draw a two-by-two grid of `True` and `False` on the board if they look uncertain, showing what
+`and` and `or` return for each pair. Keep it to that grid rather than naming it a truth table or
+working through the formal topic; two minutes of examples is enough.
 
 :::{.callout-note title="Flag this now, pay it off in section 5"}
 Tell them these three words work on **single values**. When we ask the same question of a
@@ -194,8 +205,10 @@ else:
     print('Below freezing')
 ```
 
-Then `elif`, which is the point of the section, because categorization is what they'll do in
-the end-of-day practice:
+Then `elif`, which is the point of the section. Categorization is what they will write
+tomorrow morning in 4B, where `classify_latitude` is an `if`/`elif`/`else` inside a function,
+and again in the Day 4 practice. Today's practice is ranking only, so do not tell the room they
+will need `elif` this afternoon:
 
 ```{python}
 temperature = -12.0

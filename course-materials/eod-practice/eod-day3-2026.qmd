@@ -164,13 +164,16 @@ once, give it a name, and then call it three times, which means you get to edit 
 of three times. Repeating yourself is exactly the itch that **functions** exist to scratch!
 :::
 
-8. In a markdown cell, describe in two or three sentences how the three lists differ. Which
-   foods are near the top of all three? Which appear on only one, and can you say why?
+8. In a markdown cell, describe in two or three sentences how the three lists differ from one
+   another. What kind of food rises to the top when the denominator changes from a kilogram to a
+   thousand calories, and what kind rises again when it changes to a hundred grams of protein?
 
 ## Part 3: Which foods are on every list?
 
-9. Print the three top-10 lists again, one after another, and compare them by eye. Write down,
-   in a markdown cell, the foods that appear in **all three**.
+9. Question 8 was about how the lists differ. Now find what they agree on. Print the three
+   top-10 lists again, one after another, and compare them by eye. In a markdown cell, write down
+   the exact set of foods that appear in **all three**, and say how many foods appear on one list
+   only.
 
 ```{python}
 print('Top 10 for Bananas index (kg):')
@@ -183,9 +186,11 @@ print('\nTop 10 for Bananas index (100g protein):')
 print(df['Bananas index (100g protein)'].sort_values(ascending=False).head(10))
 ```
 
-10. In a markdown cell: what does it mean for a food to be near the top of all three lists at
-    once? What would it mean for a food to top one list and appear on neither of the others?
-    Name one food of each kind.
+10. Questions 8 and 9 asked what the lists say. Now say what it means. In a markdown cell,
+    explain what you learn about a food from the fact that it sits near the top of all three
+    lists at once, and what you learn about a food that tops one list and appears on neither of
+    the others. Name one food of each kind from your answer to question 9, and say which of the
+    two tells you more about the food itself rather than about the denominator.
 
 ## Part 4: Filtering by score
 

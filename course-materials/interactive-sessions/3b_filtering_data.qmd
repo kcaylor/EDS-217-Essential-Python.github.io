@@ -18,8 +18,9 @@ format:
 
 :::
 
-Earlier this morning you wrote a question and asked it of an entire column. The answer came
-back as a **boolean mask**: a `True` or a `False` for every one of the 1,962 rows.
+Earlier this morning you wrote a question and asked it of an entire column of the Toolik
+weather table. The answer came back as a **boolean mask**: a `True` or a `False` for every one
+of its 11,171 rows.
 
 A mask on its own does not do much for us. The rows it says `True` about are what you are
 after, and getting them takes one line of code, which we will write in nearly every session
@@ -75,8 +76,9 @@ Here it is, whole:
 goleta[goleta['value'] > 20]
 ```
 
-Read it from the inside out. `goleta['value'] > 20` is the mask you learned to write this
-morning: `True` on every row where the value is above 20, `False` everywhere else. Wrapping it
+Read it from the inside out. `goleta['value'] > 20` is the same kind of mask you wrote this
+morning, on a different table: `True` on every row where the value is above 20, `False`
+everywhere else. Wrapping it
 in `goleta[ ... ]` says "give me the rows where that was `True`."
 
 The line we just ran is the **filter pattern**. The general form is:

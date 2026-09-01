@@ -86,7 +86,7 @@ pm25.sort_values('value', ascending=False).head()
 ```
 
 Now the largest values are on top. `ascending=` is a keyword argument, the same kind of
-argument as `index_col=` from Monday: you pass it by name, after the column.
+argument as `index_col=` from yesterday: you pass it by name, after the column.
 
 Sorting works on text columns too, alphabetically:
 

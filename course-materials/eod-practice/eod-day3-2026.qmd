@@ -24,14 +24,15 @@ format:
 In 2023 *The Economist* published a way of talking about the climate cost of food that is
 easy to remember. Instead of reporting grams of CO₂, they express everything in **bananas**:
 how many times more carbon does a kilogram of this food emit than a kilogram of bananas?
+Today's practice uses their published table of 160 foods.
 
 They computed the index three ways, because "a kilogram of lettuce" and "a kilogram of beef"
 are not the same amount of food at all. They ranked the foods per kilogram, per thousand
-calories, and per hundred grams of protein. The three rankings disagree with each other, and
-working out why they disagree is most of this practice.
+calories, and per hundred grams of protein. The three rankings disagree with each other.
 
-Today you will rank this dataset all three ways yourself, and then work out what the
-disagreements between your three rankings actually mean.
+This afternoon we will build all three rankings, compare them, and work out what it should
+mean to you when a food sits near the top of one list and nowhere near the top of the other
+two lists.
 
 :::{.callout-note title="Reference"}
 The Economist and Solstad, S., 2023. The Economist's Banana index. First published in the
@@ -41,8 +42,9 @@ article "A different way to measure the climate impact of food", *The Economist*
 
 ## Today's two patterns
 
-Every code cell in this practice is built from one of these two patterns, so you should not
-need to look them up more than once.
+Almost every code cell in today's practice is built from one of these two patterns, so you
+should only need to look them up once. After that, copy an earlier cell of your own and change
+the column name in it.
 
 ```python
 df[df['column'] > value]                             # the filter pattern
@@ -84,7 +86,7 @@ without them. Here is the whole line. Run it as written:
 df = df.drop(['year', 'Banana values', 'type', 'Chart?', 'Unnamed: 16'], axis='columns')
 ```
 
-There are two things worth noticing here. The names go in a list, exactly like the lists you
+Two things in that line are worth noticing. The names go in a list, exactly like the lists you
 used to select columns yesterday. And `axis='columns'` tells pandas that you mean columns and
 not rows, because `.drop()` can remove either one.
 
@@ -137,7 +139,7 @@ Each of the three `Bananas index` columns gives you a different ranking of the s
 7. Do the same for `Bananas index (100g protein)`.
 
 Write each one out in full. Yes, you are writing out the same pattern three times with a
-single word changed each time.
+single column name changed each time!
 
 ```{python}
 df['Bananas index (kg)'].sort_values(ascending=False).head(10)
@@ -152,9 +154,9 @@ df['Bananas index (100g protein)'].sort_values(ascending=False).head(10)
 ```
 
 :::{.callout-note title="Hold that thought"}
-You just wrote the same six words three times. Tomorrow morning you will learn how to write
-them once, give them a name, and then call them three times. These **functions** make code
-easier to edit.
+You just wrote the same line three times. Tomorrow morning we will learn how to write that line
+once, give it a name, and then call it three times, which means you get to edit it once instead
+of three times. Repeating yourself is exactly the itch that **functions** exist to scratch!
 :::
 
 8. In a markdown cell, describe in two or three sentences how the three lists differ. Which
@@ -182,7 +184,7 @@ print(df['Bananas index (100g protein)'].sort_values(ascending=False).head(10))
 
 ## Part 4: Filtering by score
 
-Now use the other one, the filter pattern.
+Now we switch to the other pattern, the filter.
 
 11. Use the filter pattern to find every food with a `Bananas index (kg)` above 10. How many
     are there?
@@ -258,8 +260,9 @@ print(df.loc[hungriest, 'land_use_1000kcal'] / df.loc['Bananas', 'land_use_1000k
 
 ## Part 6: Cheese
 
-The dataset has a lot of cheese in it. Cheese is worth a section of its own, because it is the
-one dairy product that shows up alongside meat at the top of the emissions rankings.
+The dataset has a lot of cheese in it. Cheese is worth a section of its own, because several
+cheeses show up alongside the beef and the lamb at the top of the emissions rankings, which
+is not where most people expect to find a dairy product.
 
 20. Build a table of just the cheeses, then find the cheese with the highest
     `Bananas index (1000 kcalories)`.
@@ -274,8 +277,8 @@ cheese = df.filter(like='heese', axis='rows')
 ```
 
 We use `like='heese'` rather than `'cheese'` so that both `Cheddar cheese` and `Cheesecake`
-match, whatever their capitalisation. Run the line as written, then rank `cheese` with the
-top-N pattern exactly as you have been doing all along.
+match, whether the C is capitalised or not. Run the line as written, then rank `cheese` with
+the top-N pattern exactly as you have been doing all along.
 
 📖 [Cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
 :::
@@ -319,8 +322,8 @@ Everything else was a variation. `&` and `|` joined two questions into one filte
 a question around. `.idxmax()` returned the label instead of the row. `.loc[]` looked up one
 value.
 
-Two patterns got you through every question in this document. You will be writing both of
-them nearly every day for the rest of the course.
+Two patterns got you through every question in today's practice, and you will be writing both
+of them nearly every day for the rest of this course.
 
 ## Wrap-up
 

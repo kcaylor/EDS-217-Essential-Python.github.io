@@ -115,8 +115,8 @@ df['Bananas index (1000 kcalories)'].sort_values(ascending=False).head(10)
 df['Bananas index (100g protein)'].sort_values(ascending=False).head(10)
 ```
 
-**8. Describe in two or three sentences how the three lists differ. Which foods are near the top
-of all three? Which appear on only one, and can you say why?**
+**8. In a markdown cell, describe in two or three sentences how the three lists differ. Which
+foods are near the top of all three? Which appear on only one, and can you say why?**
 
 :::{.callout-note title="✅ Answer"}
 Ranked **per kilogram**, the list is meat: four beef products, three lamb, two cheeses and
@@ -133,7 +133,8 @@ approaching zero, not the numerator being large.
 
 ## Part 3: Which foods are on every list?
 
-**9. Print the three lists and compare by eye. Which foods appear in all three?**
+**9. Print the three top-10 lists again, one after another, and compare them by eye. Write down,
+in a markdown cell, the foods that appear in all three.**
 
 ```{python}
 print('Top 10 for Bananas index (kg):')
@@ -151,9 +152,9 @@ print(df['Bananas index (100g protein)'].sort_values(ascending=False).head(10))
 ways of asking the question.
 :::
 
-**10. What does it mean for a food to be near the top of all three lists at once? What would it
-mean for a food to top one list and appear on neither of the others? Name one food of each
-kind.**
+**10. In a markdown cell: what does it mean for a food to be near the top of all three lists at
+once? What would it mean for a food to top one list and appear on neither of the others? Name
+one food of each kind.**
 
 :::{.callout-note title="✅ Answer"}
 A food at the top of all three is expensive **however you measure it**. Its ranking does not
@@ -173,7 +174,8 @@ and staples per calorie.
 
 ## Part 4: Filtering by score
 
-**11. Every food with a `Bananas index (kg)` above 10. How many are there?**
+**11. Use the filter pattern to find every food with a `Bananas index (kg)` above 10. How many
+are there?**
 
 ```{python}
 expensive_by_weight = df[df['Bananas index (kg)'] > 10]
@@ -206,7 +208,10 @@ gives you a non-strict one, and the boundary value moves from one side to the ot
 filter returns one row more or fewer than you expected, check the boundary first.
 :::
 
-**14. Two-condition filter: above 5 per kilogram and below 1 per 100 g of protein.**
+**14. Use a two-condition filter to find the foods that score above 5 per kilogram and below 1
+per 100 g of protein. End the line with `.copy()`, because you will display the result a couple
+of different ways. Display the two banana index columns for those foods, ranked by `Bananas
+index (kg)`.**
 
 ```{python}
 costly_but_protein_rich = df[
@@ -220,8 +225,8 @@ costly_but_protein_rich[
 ].sort_values('Bananas index (kg)', ascending=False)
 ```
 
-**15. What do these foods have in common? What is the argument this table makes about how we
-should compare foods?**
+**15. In a markdown cell: what do the foods in question 14 have in common? What is the argument
+this table makes about how we should compare foods?**
 
 :::{.callout-note title="✅ Answer"}
 **16 foods, and almost all of them are animal protein**: fish (tuna, cod, salmon, mackerel),
@@ -266,8 +271,9 @@ exists: paired with `.loc[]`, it lets you ask "which one?" and then "how much?" 
 readable steps.
 :::
 
-**19. Compare the land-use top 10 with the emissions top 10 from question 5. Are they the same
-foods? Name one that appears on one list and not the other.**
+**19. Compare your land-use top 10 with your emissions top 10 from question 5. Are they the same
+foods? Answer in a markdown cell, and name one food that appears on one list and not the
+other.**
 
 :::{.callout-note title="✅ Answer"}
 **Seven of the ten are the same**: beef steak, beef mince, beef meatballs, beef burger, cottage
@@ -302,8 +308,9 @@ so cottage cheese is more than four times the second-place figure. Cottage chees
 water, so a thousand calories of it is a great deal of cheese.
 :::
 
-**21. How many rows did `.filter(like='heese')` give you? Is every one of them a cheese? What
-does this tell you about matching on text?**
+**21. How many rows did `.filter(like='heese')` give you? Look at the names carefully. Is every
+one of them a cheese? In a markdown cell, say what the result tells you about matching rows on
+text.**
 
 ```{python}
 cheese.index.tolist()

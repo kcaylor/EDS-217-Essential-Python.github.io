@@ -18,18 +18,18 @@ format:
 
 :::
 
-"Which one is the worst?" is probably the most common question anyone asks of a dataset. So is
-"what are the top ten?" Both are the same operation: put the rows in order, then take the ones
-at the front.
+"Which one is the worst?" is probably the most common question anyone asks of a dataset, and
+"what are the top ten?" is close behind it. Both are the same operation: put the rows in order,
+then take the ones at the front.
 
-This session gives you that operation as a named pattern, and gives you two small companions
-for the case where you want the *label* of the winner rather than the row.
+This afternoon we give that operation a name, and add two small companions for the case where
+you want the *label* of the winner rather than the whole row.
 
 By the end of this session you will be able to:
 
 - reorder a table with `.sort_values()`, in either direction
 - write the **top-N pattern**, `df.sort_values('col', ascending=False).head(n)`
-- explain why a ranking is meaningless until you have filtered first
+- explain why a ranking can be meaningless if you have not filtered first
 - find the label of the largest or smallest value with `.idxmax()` and `.idxmin()`
 - look up a single value with `.loc[row_label, column_label]`
 
@@ -56,7 +56,8 @@ Date: 09/02/2026
 
 4. **Save** with `Ctrl + S` (`Cmd + S` on macOS), and keep saving as you go.
 
-4. Read in the Goleta air quality data and rebuild the `pm25` subset from the last session:
+5. Read in the Goleta air quality data and rebuild the `pm25` subset you made in this
+   morning's session:
 
 ```{python}
 import pandas as pd
@@ -76,8 +77,9 @@ pm25.shape
 pm25.sort_values('value').head()
 ```
 
-Smallest first, which is the default. Those negative readings are the ones you flagged
-yesterday, and here they are at the bottom of the ranking where you would expect them.
+Sorting puts the smallest values at the top, which is what happens by default. The negative
+readings you flagged yesterday sit at the bottom of the ranking, which is where you would
+expect them to be.
 
 To go the other way, pass `ascending=False`:
 
@@ -96,7 +98,7 @@ goleta.sort_values('parameter').head(3)
 
 :::{.callout-note}
 🐍 `.sort_values()` returns a **new** DataFrame in the new order and leaves the original
-alone. Look at `pm25.head()` after all that sorting and the rows are exactly where they were.
+alone. Look at `pm25.head()` after all that sorting and the rows are exactly where they were!
 :::
 
 ```{python}
@@ -117,7 +119,7 @@ the sort with `.head()`:
 pm25.sort_values('value', ascending=False).head(10)
 ```
 
-That is the **top-N pattern**:
+The line you just wrote is the **top-N pattern**:
 
 ```python
 df.sort_values('column', ascending=False).head(n)
@@ -126,9 +128,8 @@ df.sort_values('column', ascending=False).head(n)
 Read it left to right as three instructions: sort by this column, biggest first, and give me
 the first `n`. Drop `ascending=False` and the same pattern gives you the bottom N instead.
 
-You will write this line more often than any other line this week. Learn it as one unit
-rather than as three separate methods, because you will almost never want one without the
-others.
+Learn the whole line as one unit rather than as separate pieces, because you will almost never
+want to sort a table without immediately taking the front of the result.
 
 Often you only care about a couple of columns, so select them after ranking:
 
@@ -138,23 +139,25 @@ pm25.sort_values('value', ascending=False).head(10)[['datetimeLocal', 'value', '
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Write the top-N pattern to find the **five cleanest** hours in `pm25`, that is, the five
-lowest values. Then say why the answer you get is not very useful, and what you would have to
-do about it first.
+lowest values. Then say why the answer you get may not be very useful, and what you would have
+to fix in the data first.
 :::
 
 ## Filter first, then rank
 
-Here is what happens if you rank without filtering:
+Ranking the whole table, without filtering it first, gives you this:
 
 ```{python}
 goleta.sort_values('value', ascending=False).head(5)[['parameter', 'value', 'unit']]
 ```
 
 Every row at the top is `pm10`, because particulates are reported in micrograms per cubic
-metre and ozone is reported in parts per million. A number in µg/m³ will beat a number in ppm
-every time, and the ranking tells you nothing except which column has the bigger units.
+metre and ozone is reported in parts per million. A number in µg/m³ will almost always beat a
+number in ppm, so the ranking tells you nothing except which pollutant is reported in the
+bigger units.
 
-The two patterns you learned today are meant to be used in that order:
+The filter pattern and the top-N pattern are meant to be used together, and in one particular
+order:
 
 ```{python}
 goleta[goleta['parameter'] == 'pm10'].sort_values('value', ascending=False).head(5)[
@@ -162,14 +165,15 @@ goleta[goleta['parameter'] == 'pm10'].sort_values('value', ascending=False).head
 ]
 ```
 
-**Filter to one comparable thing, then rank it.** That sequence is most of practical data
-analysis, and forgetting the first half is one of the most common ways to publish a wrong
-number.
+**Filter to one comparable thing, then rank it.** Running the two patterns in that order
+covers a great deal of practical data analysis, and skipping the filter is how you end up
+reporting a number that answers a different question from the one you asked.
 
 :::{.callout-important title="A ranking is only as good as the group it ranks"}
-Before you report a "top ten", ask yourself what the ten are being compared against, and
-whether every row in the table belongs in that comparison. Yesterday's units problem and
-today's ranking problem are the same problem, arriving twice.
+Before you report a "top ten", ask yourself what those ten rows are being compared against,
+and whether every row in the table belongs in that comparison. Yesterday's units problem and
+today's ranking problem come from the same mistake, which is putting numbers that measure
+different things next to each other and treating them as one set.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -188,8 +192,8 @@ station, which food.
 pm25['value'].idxmax()
 ```
 
-That number is a row label, not a value and not a position. Hand it to `.loc[]` with a column
-name and you get the one thing you were after:
+The number you get back is a row label, not a value and not a position. Hand it to `.loc[]`
+with a column name and you get the one thing you were after:
 
 ```{python}
 worst_hour = pm25['value'].idxmax()
@@ -210,7 +214,7 @@ print(pm25.loc[cleanest_hour, 'value'])
 
 :::{.callout-caution title="`.idxmax()` reports one winner, even when there are two"}
 Two hours in this dataset are tied at the maximum of 22 µg/m³, and `.idxmax()` names only one
-of them. It does not warn you that the other exists.
+of them. Nothing in the output tells you that the second one is there.
 
 Whenever the answer to your question would change if there were a tie, use the top-N pattern
 and read the result, rather than trusting a single label:
@@ -248,8 +252,8 @@ print('Value:', pm10.loc[worst, 'value'], pm10.loc[worst, 'unit'])
 - The **top-N pattern** is `df.sort_values('col', ascending=False).head(n)`. Learn it as one
   unit.
 - Sorting returns a new DataFrame. Assign it to a name to keep it.
-- **Filter first, then rank.** A ranking across categories that are not comparable is not an
-  answer.
+- **Filter first, then rank.** A ranking across categories that are not comparable does not
+  answer the question you asked.
 - `.idxmax()` and `.idxmin()` give the index **label** of the extreme value, not the value.
 - `.loc[row_label, column_label]` looks up a single value.
 

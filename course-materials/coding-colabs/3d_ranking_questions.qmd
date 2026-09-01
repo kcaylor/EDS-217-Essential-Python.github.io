@@ -23,7 +23,8 @@ the tasks below uses these new patterns.
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
 finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it. 
 
-You have 45 minutes.
+We have about 45 minutes for this activity. Please tell Cella or Kelly if you get stuck,
+rather than spending ten of those minutes on one line!
 
 ## The data
 
@@ -57,7 +58,8 @@ parks.columns.tolist()
 
 ## Our two new patterns
 
-You have these already on your session notebooks from earlier this morning, but as a reminder:
+You have both of these in your session notebooks already, the filter pattern from this morning
+and the top-N pattern from earlier this afternoon, but here they are as a reminder:
 
 ```python
 df[df['column'] > value]                                # the filter pattern
@@ -107,9 +109,9 @@ big[['year', 'unit_name', 'state', 'visitors']].sort_values('visitors', ascendin
 ```
 
 :::{.callout-tip title="Stuck on the parentheses?"}
-Every comparison inside a combined filter needs its own set: `(a == b) & (c > d)`. If you get
-a `TypeError` that mentions something you did not write, missing parentheses are almost always
-the reason.
+Every comparison inside a combined filter needs its own set of parentheses:
+`(a == b) & (c > d)`. If you get a `TypeError` that mentions something you did not write,
+missing parentheses are almost always the reason.
 :::
 
 ## Part 2: Ranking (about 15 minutes)
@@ -183,8 +185,8 @@ southwest['state'].value_counts()
 
 :::{.callout-note title="If you finish early"}
 Pick a year other than 2016 and produce the same top 10. Did the order change? Name one park
-that moved several places, and say what you would need in order to find out whether that
-movement is real or an artifact of how the data was recorded.
+that moved several places, if any of them did, and say what you would need in order to find
+out whether that movement is real or an artifact of how the data was recorded.
 
 Do not try to compare all the years at once. That needs grouping, and we get to grouping later this week.
 :::

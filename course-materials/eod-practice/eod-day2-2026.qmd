@@ -16,21 +16,19 @@ format:
 ![Toolik Field Station from the boardwalk](images/toolik_boardwalk.jpg)
 :::
 
-Yesterday we ran a complete workflow on `toolik_weather.csv`, and the whole analysis used one
-column of it: `Daily_AirTemp_Mean_C`. The same file also holds precipitation, wind speed,
+Yesterday we ran a complete workflow on `toolik_weather.csv`. Most of our analysis used a single
+column: `Daily_AirTemp_Mean_C`. However, the same file also holds precipitation, wind speed,
 radiation, and a set of flag columns that we never looked at.
 
-Today you will write a **data biography** of the whole file, an account of what it is, what
-condition it is in, and what a colleague should check before trusting any number computed
-from it.
+Today you will write a **data biography** of the entire file. 
 
 ## What is a data biography?
 
 A **data biography** is a short written account of a dataset: where it came from, what it
 covers, what condition it's in, and what a reader needs to know before trusting anything
 computed from it. Working data scientists write them all the time, usually in the first few cells
-of a notebook, because the alternative is finding the problem after you've built a whole
-analysis on top of the data (which is a much worse day!).
+of a notebook. These notes provide context for a dataset and help avoid common problems when using 
+a new or unfamiliar file.
 
 By the time you leave today, your notebook should hold a biography of the Toolik weather data,
 written as markdown, with code cells showing the evidence for every claim you make.
@@ -83,7 +81,7 @@ the cell that produced it.
 3. What is the data type of each column?
 4. Yesterday's practice told you this record runs from June 1988 to December 2018. Do not take
    that on trust. Use `.min()` and `.max()` on the `Date` column to find the exact first and last
-   day, and say which cell is your evidence.
+   day and report those in a new cell.
 
 ```{python}
 toolik.shape

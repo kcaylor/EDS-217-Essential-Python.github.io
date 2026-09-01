@@ -18,17 +18,15 @@ data science stack. Today we will slow down and spend the whole day on the first
 yesterday's workflow, **Import** and **Explore**.
 
 **Import** is getting a file into pandas as a DataFrame, whether the file sits on your own computer or
-at a URL somewhere out on the internet. **Explore** is everything you should do next, before you
+at a URL somewhere out on the internet. **Explore** is the what you should do with any new dataset before you
 compute a single number from it: how many rows and columns you have, what type pandas gave each column,
 where the gaps are, and which columns have the same value all the way down. Exploring costs you a few
-minutes at the start, and it is how you avoid finding a units problem after you have already built a
-whole analysis on top of the data.
+minutes at the start, but the time is well-spent to avoid problems later in your data science workflow.
 
 We will also meet python's two essential containers, **lists** and **dictionaries**. We use both of
-them all over python to store structured data, and today each of them has one specific job: a list to
-name the columns you want to keep, and a dictionary to say what each of those columns should be renamed
-to. We will use them that way for most of the day, and then in the last session we will slow down and
-look at both containers on their own terms.
+them all over python to store structured data. Today each of them has one specific job: we will use a list to
+name the columns of a data set you want to keep, and a dictionary to say what each of those columns should be renamed to. We will use them that way for most of the day, and then in the last session we will slow down and
+look at both containers on their own terms. Lists and dictionaries, **like all python objects**, have a lot of cool features we can put to use!
 
 ## Class materials
 

@@ -18,15 +18,12 @@ format:
 
 This morning we learned the commands for looking at a table for the first time. This afternoon we
 will point those same commands at a National Park Service file that we have not opened together
-in class, and you and your partner will work out what is in it. There is no new python in the
-next 45 minutes, so all of your effort can go into reading what the output is telling you.
+in class. You and your partner will work out what is in the file using the commands from this morning's session. 
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
-finish one of the seven steps under "Working through it" below. The partner who is not typing should read the output (quietly!) and say
-what the next cell will produce before you run it. Getting a prediction wrong is useful, and a wrong
-prediction is much easier to spot once you have said it out loud.
+finish one of the seven steps under "Working through it" below. The partner who is not typing should read the output (quietly!) and say what the next cell will produce before you run it. Getting a prediction wrong is useful, and a wrong prediction is much easier to spot once you have said it out loud.
 
-We have 45 minutes.
+We have 45-60 minutes for this activity, so please let Kelly or Cella know if you are getting stuck!
 
 ## The data
 
@@ -36,9 +33,10 @@ US National Park Service visitor records:
 https://eds-217-essential-python.github.io/data/national_parks.csv
 ```
 
-A link is all we are giving you, and that is on purpose. Working out what is in the file is the
-exercise, so Cella and Kelly will happily help with code that will not run, but we are not going
-to tell you what any of the columns mean!
+A link is all we are giving you, since we also reviewed opening files into dataframes this morning. 
+Working out what is in the file is the exercise, so Cella and Kelly will happily help with any code 
+that will not run or generates an error (but try to read any errors closely and see if you can determine
+what Python is trying to tell you is going wrong)
 
 ## Setup
 
@@ -90,9 +88,9 @@ found are worth writing down.
    of them would help you tell one row from another, and which would not?
 
 5. **Summarize the numbers.** Run `.describe()`. In one column the mean sits a long way from
-   the median, and something in the data is doing it. Name the column, say which of its
-   statistics you would refuse to report, and connect it back to what you found in step 2. While
-   you are there, check whether any numeric column holds the same value in every row.
+   the median, which can be (but isn't always!) a sign of an issue in the data. Specify the column, 
+   say which of its statistics you would refuse to report, and connect it back to what you found in step 2. 
+   While you are there, check whether any numeric column holds the same value in every row.
 
 6. **Make a working subset.** Build a list of the columns you would actually want to keep, select
    them into a smaller DataFrame, and rename at least one of those columns using a dictionary.
@@ -171,8 +169,8 @@ have to be true about the data first.
 
 ## Wrap-up
 
-At the end of the session we will hear two or three pairs read out the problem they found in
-the data. Be ready to say how you found it, and not just what it was!
+At the end of the session, if we have time, we will hear two or three pairs read out the 
+problem they found in the data. Be ready to say how you found it, and not just what it was!
 
 ## Resources
 

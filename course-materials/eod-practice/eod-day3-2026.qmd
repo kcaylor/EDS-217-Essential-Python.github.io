@@ -47,9 +47,14 @@ should only need to look them up once. After that, copy an earlier cell of your 
 the column name in it.
 
 ```python
-df[df['column'] > value]                             # the filter pattern
-df.sort_values('column', ascending=False).head(n)    # the top-N pattern
+df[df['column'] > value]                                  # the filter pattern
+df.sort_values('column', ascending=False).head(n)         # the top-N pattern, whole table
+df['column'].sort_values(ascending=False).head(n)         # the top-N pattern, one column
 ```
+
+The two top-N lines differ only in what you get back. The first keeps every column and reorders
+the rows, and the second gives you one column with its labels, which is easier to read when you
+only want to see the ranking. Use the second one for the ranking questions below.
 
 ## Setup
 
@@ -194,6 +199,31 @@ expensive_by_weight = df[df['Bananas index (kg)'] > 10]
 expensive_by_weight.shape
 ```
 
+:::{.callout-tip title="🧭 Field Note: `~` and `&`, from this morning"}
+The next three questions need the two operators we met in the filter session this morning, so
+here they are again in one place.
+
+`~` goes in front of a whole condition and turns it around. Every row the condition kept is
+dropped, and every row it dropped is kept:
+
+```python
+df[~(df['column'] > value)]
+```
+
+`&` joins two conditions, and each condition **must** have its own pair of parentheses around
+it. Leave them out and Python combines the wrong pieces and reports an error that has nothing
+to do with what you meant:
+
+```python
+df[(df['column_a'] > value) & (df['column_b'] < other_value)]
+```
+
+The difference between `~(x > 1)` and `x < 1` is the point of questions 12 and 13, so run both
+and look at the two numbers before you explain them.
+
+📖 [Cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
+:::
+
 12. Use `~` to find the foods that are **not** above a score of 1 on `Bananas index (kg)`,
     that is, foods no worse than a banana by weight. How many are there?
 
@@ -230,14 +260,15 @@ costly_but_protein_rich[
 
 ## Part 5: Land, not carbon
 
-The banana index columns are all about emissions. The dataset also has a land use column,
-`land_use_1000kcal`, which gives square metres of land per thousand calories.
+The banana index columns are all about emissions. The dataset also has four land use columns,
+and the one we want is `land_use_1000kcal`, which gives square metres of land per thousand
+calories.
 
 16. Use `.loc[]` to look up the value of `land_use_1000kcal` for `Bananas`.
 17. Use the top-N pattern to display the 10 foods with the highest `land_use_1000kcal`.
 18. Use `.idxmax()` on `land_use_1000kcal` to get the name of the single most land-hungry food.
-    Then use two `.loc[]` lookups and a division to work out how many times more land that
-    food needs than bananas do.
+    Then use two `.loc[]` lookups and a division to work out how many times as much land that
+    food needs as a banana does.
 
 ```{python}
 banana_land_use = df.loc['Bananas', 'land_use_1000kcal']
@@ -254,9 +285,9 @@ print(hungriest)
 print(df.loc[hungriest, 'land_use_1000kcal'] / df.loc['Bananas', 'land_use_1000kcal'])
 ```
 
-19. Compare your land-use top 10 with your emissions top 10 from question 5. Are they the same
-    foods? Answer in a markdown cell, and name one food that appears on one list and not the
-    other.
+19. Compare your land-use top 10 with your emissions top 10 from question 6. Both are measured
+    per thousand calories, so they are the fair comparison. Are they the same foods? Answer in a
+    markdown cell, and name one food that appears on one list and not the other.
 
 ## Part 6: Cheese
 
@@ -276,9 +307,11 @@ contains that substring:
 cheese = df.filter(like='heese', axis='rows')
 ```
 
-We use `like='heese'` rather than `'cheese'` so that both `Cheddar cheese` and `Cheesecake`
-match, whether the C is capitalised or not. Run the line as written, then rank `cheese` with
-the top-N pattern exactly as you have been doing all along.
+We use `like='heese'` rather than `'cheese'` because matching is case-sensitive, and
+`Cheesecake` begins with a capital C that `'cheese'` would miss. Run the line as written, then
+rank `cheese` with the top-N pattern exactly as you have been doing all along. Read the row
+labels you get back before you trust the table, because question 21 asks you what the match
+actually caught.
 
 📖 [Cheatsheet: data selection and filtering](../cheatsheets/data_selection.qmd)
 :::
@@ -322,7 +355,7 @@ Everything else was a variation. `&` and `|` joined two questions into one filte
 a question around. `.idxmax()` returned the label instead of the row. `.loc[]` looked up one
 value.
 
-Two patterns got you through every question in today's practice, and you will be writing both
+Two patterns got you through every question in today's practice, and we will be writing both
 of them nearly every day for the rest of this course.
 
 ## Wrap-up
@@ -334,7 +367,7 @@ Before you close your notebook, check that:
 - you can say out loud what a filter with `&` needs that a filter with one condition does not
 - your notebook reads top to bottom as a document, not as a pile of cells
 
-If one of these questions stumped you, or a cell would not run no matter what you tried, ask
+If one of the 22 questions stumped you, or a cell would not run no matter what you tried, ask
 Cella or Kelly before you pack up. Getting stuck on a practice is normal and expected, and it
 is not a sign that you are behind!
 

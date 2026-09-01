@@ -60,9 +60,9 @@ df.head()
 ```
 
 :::{.callout-note title="✅ Answer"}
-Each one is a **ratio**, not a measurement. It says how many times the banana's climate cost a
-food has, and the three columns differ only in what is being held constant: a kilogram of
-food, a thousand calories of food, or a hundred grams of protein. So a score of 20 means twenty
+Each one is a **ratio**, not a measurement. Each column divides a food's climate cost by the
+climate cost of the same amount of banana, and the three columns differ only in what "the same
+amount" means: a kilogram of food, a thousand calories of food, or a hundred grams of protein. So a score of 20 means twenty
 bananas' worth, on whichever basis that column uses. The raw emissions columns those ratios were
 built from are still in the table, which is what lets you check the arithmetic yourself.
 :::
@@ -83,7 +83,7 @@ df.isnull().sum()
 Both are per-protein measures, and that is not a coincidence. A food with no protein at all
 cannot have a per-protein figure, because the division has nothing to divide by. The missing
 values are telling you something true about the food rather than something careless about the
-data collection. This is worth pausing on: a null is sometimes a fact.
+data collection. A null is sometimes a fact, and this one is worth pausing on.
 :::
 
 **4. What is the value of `Bananas index (kg)` for `Bananas` itself? Explain in a sentence why
@@ -115,6 +115,18 @@ df['Bananas index (1000 kcalories)'].sort_values(ascending=False).head(10)
 df['Bananas index (100g protein)'].sort_values(ascending=False).head(10)
 ```
 
+:::{.callout-note title="✅ Answer"}
+Three lists of ten foods each, and the only thing that changed between them is the column name.
+By kilogram the top ten is four beef products, three lamb, two cheeses and prawns. Per thousand
+calories the beef stays at the top and lettuce, raspberries and coconut milk join it. Per
+hundred grams of protein coconut milk, sugar and grapes take the first three places while beef
+steak, beef mince and beef meatballs hold fourth, sixth and tenth.
+
+If your numbers match but your row order differs, check that you passed `ascending=False`. If
+you got a table with eleven columns rather than a single labelled column, you used the
+whole-table form of the top-N pattern, which is not wrong but is harder to read here.
+:::
+
 **8. In a markdown cell, describe in two or three sentences how the three lists differ. Which
 foods are near the top of all three? Which appear on only one, and can you say why?**
 
@@ -122,11 +134,13 @@ foods are near the top of all three? Which appear on only one, and can you say w
 Ranked **per kilogram**, the list is meat: four beef products, three lamb, two cheeses and
 prawns. Ranked **per thousand calories**, the beef stays but lamb largely drops out and lettuce
 and raspberries appear, because they are mostly water and you have to eat a great deal of either
-to obtain a thousand calories. Ranked **per hundred grams of protein**, the list stops being
-about meat at all: coconut milk, sugar, grapes and marmalade take the top places, because they
-contain almost no protein and so the division blows the ratio up.
+to obtain a thousand calories. Ranked **per hundred grams of protein**, three foods with almost no
+protein in them take the top places: coconut milk, sugar and grapes, because dividing by a
+number close to zero blows the ratio up. The beef does not leave, though. Beef steak is still
+fourth, beef mince sixth and beef meatballs tenth, so the protein ranking mixes the genuinely
+costly foods together with the arithmetic artefacts.
 
-Beef is near the top of all three, which is the one robust finding. Sugar appears only in the
+Beef is near the top of all three lists, which is the one robust finding. Sugar appears only in the
 protein ranking, and the reason is arithmetic rather than agriculture: it is the denominator
 approaching zero, not the numerator being large.
 :::
@@ -134,7 +148,7 @@ approaching zero, not the numerator being large.
 ## Part 3: Which foods are on every list?
 
 **9. Print the three top-10 lists again, one after another, and compare them by eye. Write down,
-in a markdown cell, the foods that appear in all three.**
+in a markdown cell, the foods that appear in **all three**.**
 
 ```{python}
 print('Top 10 for Bananas index (kg):')
@@ -157,7 +171,7 @@ once? What would it mean for a food to top one list and appear on neither of the
 one food of each kind.**
 
 :::{.callout-note title="✅ Answer"}
-A food at the top of all three is expensive **however you measure it**. Its ranking does not
+A food at the top of all three lists is expensive **however you measure it**. Its ranking does not
 depend on the choice of denominator, so no reasonable objection about the basis of comparison
 rescues it. **Beef steak** is the clearest case: first by weight, first by calorie, fourth by
 protein.
@@ -165,7 +179,8 @@ protein.
 A food that tops one list only is telling you about the **denominator**, not about the food.
 **Sugar** is second per hundred grams of protein and appears nowhere else, because sugar has
 essentially no protein, and a small number divided by a number close to zero is large. The
-ranking is real arithmetic and a misleading claim about sugar's climate cost.
+arithmetic behind the ranking is correct, but the claim it seems to make about sugar's climate
+cost is misleading.
 
 The practical lesson is that the choice of denominator is an argument, not a technicality. Pick
 the one that matches what the food is actually for. Compare protein sources per gram of protein
@@ -225,14 +240,29 @@ costly_but_protein_rich[
 ].sort_values('Bananas index (kg)', ascending=False)
 ```
 
+:::{.callout-note title="✅ Answer"}
+**16 foods.** The `.copy()` matters because you display the result twice, once as a count and
+once as a two-column ranking, and pandas warns you about editing a slice of another table if you
+skip it.
+
+Note the parentheses. Each condition is wrapped in its own pair before `&` joins them, and
+leaving them out gives you an error about ambiguous truth values rather than the answer.
+Question 15 asks what these 16 foods have in common, so read the row labels before you go on.
+:::
+
 **15. In a markdown cell: what do the foods in question 14 have in common? What is the argument
 this table makes about how we should compare foods?**
 
 :::{.callout-note title="✅ Answer"}
-**16 foods, and almost all of them are animal protein**: fish (tuna, cod, salmon, mackerel),
-poultry (chicken breast, thighs, wings, sausages, burger), pork, eggs, and halloumi. Olive oil is
-the one that does not fit the pattern, and it is here because its protein figure is essentially
-zero in the other direction, which is worth noticing rather than glossing over.
+**16 foods, and almost all of them are animal protein**: fish (tuna, cod, cod fish fingers,
+cod fishcakes, salmon, mackerel), poultry (chicken breast, thighs, wings, sausages, burger),
+pork chops, pork sausages, eggs, and halloumi. Olive oil is the one that does not fit, and the
+reason is worth chasing down. Its `Bananas index (100g protein)` is exactly `0.0`, and its
+`emissions_100g_protein` is one of the two missing values you found in question 3. The zero is
+standing in for a number nobody could compute, because olive oil has essentially no protein to
+divide by, so olive oil met your `< 1` condition without ever being measured. Sunflower oil is
+the other `0.0` in that column. A filter cannot tell a real zero from a missing one, and this is
+the first time in the course that the difference has changed an answer.
 
 The argument is this: these foods look costly when you weigh them and cheap when you weigh what
 you eat them **for**. Nobody eats 100 g of chicken as a substitute for 100 g of lettuce; they eat
@@ -266,25 +296,30 @@ A banana uses **2.72 square metres** of land per thousand calories. The most lan
 **beef steak**, at 223.7 square metres per thousand calories, which is **82.3 times** the
 banana's land use.
 
-Note that `.idxmax()` gave you the **label** and not the number. That is the whole reason it
-exists: paired with `.loc[]`, it lets you ask "which one?" and then "how much?" as two separate,
-readable steps.
+Note that `.idxmax()` gave you the **label** and not the number. Returning the label is the
+whole reason `.idxmax()` exists: paired with `.loc[]`, it lets you ask "which one?" and then
+"how much?" as two separate, readable steps.
 :::
 
-**19. Compare your land-use top 10 with your emissions top 10 from question 5. Are they the same
-foods? Answer in a markdown cell, and name one food that appears on one list and not the
-other.**
+**19. Compare your land-use top 10 with your emissions top 10 from question 6. Both are measured
+per thousand calories, so they are the fair comparison. Are they the same foods? Answer in a
+markdown cell, and name one food that appears on one list and not the other.**
 
 :::{.callout-note title="✅ Answer"}
-**Seven of the ten are the same**: beef steak, beef mince, beef meatballs, beef burger, cottage
-cheese, lamb (leg) and lamb chops. So the two measures agree far more than they disagree, and
-beef sits at the top of both.
+**Seven of the ten foods are the same**: beef steak, beef mince, beef meatballs, beef burger,
+cottage cheese, lamb (leg) and lettuce. So the two measures agree far more than they disagree,
+and beef sits at the top of both.
 
-Three appear only in the land-use list: **lentils**, lettuce and chilli con carne. Lentils are
-the interesting one. They take a lot of land per calorie and emit comparatively little, so a
-ranking built on carbon alone would tell you nothing about them. Three appear only in the
-emissions list: prawns, parmesan cheese and lamb burgers. Prawns are the mirror image, since
-much of their footprint comes from fuel and refrigeration rather than from land.
+Three foods appear only in the land-use list: **lentils**, lamb chops and chilli con carne.
+Lentils are the interesting one. They take a lot of land per calorie and emit comparatively
+little, so a ranking built on carbon alone would tell you nothing about them. Three foods appear
+only in the emissions list: prawns, raspberries and coconut milk. Prawns are the mirror image,
+because much of their footprint comes from fuel and refrigeration rather than from land.
+
+Both lists here are per thousand calories, which is what makes the comparison fair. Had you
+compared the land-use list against your question 5 ranking, which is per kilogram, some of the
+difference you found would have been the change of denominator rather than a difference between
+land and carbon.
 
 Land and carbon are correlated but not interchangeable. A food can be costly in one and
 unremarkable in the other, and which you measure determines which foods you notice.
@@ -322,7 +357,7 @@ desserts, and `Macaroni cheese` is a cooked dish rather than a cheese. Only nine
 are cheese in the sense you meant.
 
 Matching on a substring matches **strings, not meanings**. `.filter(like='heese')` did exactly
-what you asked and had no way to know what you intended. This is why you print the labels and
+what you asked and had no way to know what you intended. Printing the labels and reading them is why you
 read them after any text-based selection, rather than trusting the row count. The habit of
 looking at what a filter caught, and not just how much it caught, will save you repeatedly.
 :::
@@ -351,23 +386,21 @@ numbers support. Here is one that would earn full marks.
 
 :::{.callout-note title="✅ A model answer"}
 Cutting bananas is not where the gains are. A banana scores 1.0 on the kilogram index by
-definition, and it sits near the bottom of every ranking we computed. Beef steak scores 148.6 on
-the same scale, so a kilogram of steak emits roughly 149 times a kilogram of bananas'
-emissions, and 82.3 times the land use per thousand calories. Bananas are also unusually
-efficient per calorie, which matters because we eat them for calories rather than for protein.
-Removing them from a diet changes a very small number and creates a gap that has to be filled by
-something else.
+definition, and it sits at 135th of 160 foods on that ranking. Beef steak scores 148.6 on the
+same scale, so a kilogram of steak emits roughly 149 times what a kilogram of bananas emits, and
+per thousand calories beef steak needs 82.3 times the land a banana needs. Removing bananas from
+a diet changes a very small number and creates a gap that has to be filled by something else.
 
 The dataset does make bananas look worse under one measure. Per hundred grams of protein they
-score above several meats, since a banana has almost no protein and the division inflates the
-ratio. That disagreement between the rankings is the point rather than a flaw. Coconut milk,
+rise to 63rd of 160, above eggs, chicken breast, salmon, tuna, cod and pork chops, because a
+banana has almost no protein and the division inflates the ratio. The disagreement between the rankings is the point rather than a flaw. Coconut milk,
 sugar and grapes top the protein ranking for the same arithmetic reason, and nobody would argue
 that sugar is a worse climate choice than beef. The comparison is only meaningful when the
 denominator matches what the food is for, and bananas are not a protein source.
 
 If my friend wants a change that shows up in the numbers, the place to look is the 34 foods
 scoring above 10 per kilogram, which is a little over a fifth of this dataset and is dominated by
-beef, lamb and hard cheeses. Substituting one of those a week would move more carbon than
+beef, lamb and cheese. Substituting one of those a week would move more carbon than
 eliminating bananas entirely.
 :::
 
@@ -383,6 +416,6 @@ anything else.
 3. **You looked at the cheese labels** rather than trusting the count.
 4. **Your interpretation answers say what the number means**, not what the number is. "34 foods
    score above 10" restates the output. "34 foods, a fifth of the dataset, and almost all of them
-   are meat or hard cheese" reads it.
+   are meat or cheese" reads it.
 
 ⬅️ Back to [the exercise](../eod-practice/eod-day3-2026.qmd)

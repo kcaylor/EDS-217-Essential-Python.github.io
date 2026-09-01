@@ -16,12 +16,17 @@ format:
 ![](../images/collections.jpeg)
 :::
 
-This morning you learned the basics of exploring a new dataset. In this coding colab, we will try these new skills out on a new dataset to build familiarity with these important commands.
+This morning we learned the commands for looking at a table for the first time. This afternoon we
+will point those same commands at a National Park Service file that we have not opened together
+in class, and you and your partner will work out what is in it. There is no new python in the
+next 45 minutes, so all of your effort can go into reading what the output is telling you.
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
-finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it. 
+finish one of the seven steps under "Working through it" below. The partner who is not typing should read the output (quietly!) and say
+what the next cell will produce before you run it. Getting a prediction wrong is useful, and a wrong
+prediction is much easier to spot once you have said it out loud.
 
-You have 45 minutes.
+We have 45 minutes.
 
 ## The data
 
@@ -31,51 +36,69 @@ US National Park Service visitor records:
 https://eds-217-essential-python.github.io/data/national_parks.csv
 ```
 
-The link above is all this co-lab provides. Figuring out what's
-in the data is the entire exercise.
+A link is all we are giving you, and that is on purpose. Working out what is in the file is the
+exercise, so Cella and Kelly will happily help with code that will not run, but we are not going
+to tell you what any of the columns mean!
 
 ## Setup
 
-Create a notebook named `Colab_2C_Unfamiliar_Data.ipynb`, with both partners' names in the
-title cell, then read the file in.
+Create a notebook named `Colab_2C_Unfamiliar_Data.ipynb`, and give it a markdown cell at the
+top:
+
+```markdown
+# Day 2: Colab 2C - Five Claims About a Dataset You've Never Seen
+
+Names:
+
+Date: 09/01/2026
+```
+
+Put both of your names in it, then read the file in with `pd.read_csv()`.
 
 ## Your goal
 
-By the end of the session, produce **five factual claims** about this dataset, each written
-in a markdown cell, each immediately preceded by the code cell that proves it.
+By the end of the session, your notebook should hold **five factual claims** about this dataset,
+each written in a markdown cell, and each one immediately preceded by the code cell that produced
+the numbers in it.
 
-A claim is factual if a skeptical reader could check it against your output. Compare:
+A claim is factual if a skeptical reader could check it against your output. Here is a vague
+claim and a factual one, both about the Toolik weather file we used yesterday:
 
-> ❌ "The dataset has a lot of parks in it."
+> ❌ "The Toolik file has a lot of missing data."
 >
-> ✅ "The dataset contains 5,243 rows describing units of type `National Park`, out of 11,742
-> rows total."
+> ✅ "`Daily_globalrad_total_jcm2` is missing on 7,053 of the 11,171 days, and
+> `Daily_AirTemp_Mean_C` is missing on none of them."
 
-At least one of your five claims must be about a **problem** with the data.
+At least one of your five claims must be about a **problem** with the data (there is more than
+one problem in this file to find!).
 
 ## Working through it
 
-Don't try to write claims immediately. Explore the data first, then decide what's worth claiming.
+Don't start by writing claims. Explore the file first, and then decide which of the things you
+found are worth writing down.
 
-1. **Size it up.** How many rows and columns? What are the column names?
+1. **Size it up.** Start with `.shape` and `.columns`. How many rows and columns are there, and
+   what are the columns called?
 
-2. **Check the types.** Run `.dtypes`. At least one column has a type you would not predict
-   from its name. Find it, and then work out *why* by looking at what's actually in that
-   column.
+2. **Check the types.** Run `.dtypes`. At least one column is not the type its name suggests.
+   Find it, and then work out *why* by looking at what is actually in that column.
 
-3. **Run the health check.** Which columns have missing values, and how many?
+3. **Run the health check.** Use `.info()` and `.isnull().sum()`. Which columns have missing
+   values, and how many rows are missing in each one?
 
-4. **Count the categories.** Use `.value_counts()` on at least three text columns. Which
-   columns are informative?
+4. **Count the categories.** Run `.value_counts()` on at least three of the text columns. Which
+   of them would help you tell one row from another, and which would not?
 
-5. **Summarize the numbers.** Run `.describe()`. One of the numeric summaries may be distorted.
-   Say which, and connect it to what you found in step 2.
+5. **Summarize the numbers.** Run `.describe()`. In one column the mean sits a long way from
+   the median, and something in the data is doing it. Name the column, say which of its
+   statistics you would refuse to report, and connect it back to what you found in step 2. While
+   you are there, check whether any numeric column holds the same value in every row.
 
-6. **Make a working subset.** Build a list of the columns you'd actually want to keep, select them
-   into a smaller DataFrame, and rename at least one column with a dictionary.
+6. **Make a working subset.** Build a list of the columns you would actually want to keep, select
+   them into a smaller DataFrame, and rename at least one of those columns using a dictionary.
 
-7. **Write your five claims.** Each one: a code cell, then a markdown cell stating the claim
-   in a full sentence with the specific numbers in it.
+7. **Write your five claims.** For each one, put the code cell first, and then a markdown cell
+   stating the claim in a full sentence with the actual numbers in it.
 
 ```{python}
 import pandas as pd
@@ -133,20 +156,23 @@ parks_small.head()
 ```
 
 :::{.callout-tip title="If you get stuck on step 2"}
-Ask the question a different way. If a column of years isn't stored as a number, then
-something in it isn't a year. `.value_counts()` can help to reveal what is happening.
+If a column of years is not stored as a number, then something in that column is not a year.
+Run `.value_counts()` on it, look down the list for the values that are not years, and count
+how many rows they account for. Come and find Cella or Kelly if the result still doesn't make
+sense!
 :::
 
 :::{.callout-note title="If you finish early"}
-Write a sixth claim about something you'd need to know before using this data to answer
-"which national park is the most visited?" You do not need to answer that question. We build
-the tools for it over the next three days. Just say what would have to be true first.
+Write a sixth claim about something you would need to know before you could use this file to
+answer "which national park is the most visited?" You do not need to answer that question
+today, because we will build the tools for it over the next three days. Just say what would
+have to be true about the data first.
 :::
 
 ## Wrap-up
 
-We'll hear two or three pairs read out their problem claim. Be ready to say how you found it,
-not just what it was.
+At the end of the session we will hear two or three pairs read out the problem they found in
+the data. Be ready to say how you found it, and not just what it was!
 
 ## Resources
 

@@ -169,11 +169,11 @@ something about the reading was worth writing down, so a nearly-empty one is a c
 exactly its job.
 :::
 
-**7. One of the flag columns has a value in only a handful of rows, and is empty everywhere
-else. Which one, and how many values does it actually have?**
+**7. One of the flag columns is empty in all but a very small number of rows. Which one, and how
+many values does it actually have?**
 
 ```{python}
-toolik.isnull().sum().head(20)
+toolik.notnull().sum().sort_values()
 ```
 
 :::{.callout-note title="✅ Answer"}

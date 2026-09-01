@@ -17,7 +17,7 @@ students set up, so everyone stays in the same place.*
 **Total: 25 minutes of coding, 20 minutes of buffer and questions.**
 
 :::{.callout-important title="Scope discipline"}
-This session teaches lists and dictionaries as *objects*. It does not teach comprehensions.
+Session 2D teaches lists and dictionaries as *objects*, and it does not teach comprehensions.
 Comprehensions appear on Day 5, at reading level only. If a student asks, the answer is
 "that's a shortcut for exactly this loop, and we'll read some on Friday."
 
@@ -29,9 +29,9 @@ Do not use `lambda` anywhere. It is not in this course.
 Say something close to this:
 
 > Every time today that you wrote square brackets with column names inside, you wrote a list.
-> Every time you renamed a column, you wrote a dictionary. You already know how to use these.
-> What you don't have yet is a clear picture of what they *are*, and that picture is what
-> makes Day 3 onward feel easy instead of arbitrary.
+> Every time you renamed a column, you wrote a dictionary. You already know how to use both of
+> them! We are spending this session on what they actually *are*, because the code we write
+> from tomorrow onwards assumes you have a picture of both in your head.
 
 ## 1. Making lists (2 min)
 
@@ -53,7 +53,7 @@ mixed = ['Toolik', 1988, -8.2, True]
 mixed
 ```
 
-Empty list, since they'll need it in a moment:
+Empty list, because they'll need it in a moment:
 
 ```{python}
 readings = []
@@ -62,7 +62,7 @@ readings
 
 ## 2. Getting things out of a list (3 min)
 
-The zero-indexing conversation. Expect this to be the sticking point.
+The zero-indexing conversation, which is where the room is most likely to get stuck.
 
 ```{python}
 sites[0]
@@ -95,7 +95,8 @@ Slicing, kept deliberately light:
 sites[0:2]
 ```
 
-Say: the end is exclusive, you'll get this wrong sometimes, everyone does, check with `len`.
+Say: the end of a slice is exclusive, you will get it wrong sometimes (everyone does!), and
+`len` is how you check.
 
 ```{python}
 len(sites)
@@ -116,8 +117,7 @@ Points to make:
 - `.append()` adds to the end
 - it changes the list **in place** and returns nothing
 
-Run this to make the point stick, because it's the mirror image of the pandas behavior from
-this morning:
+Run this one slowly, because it is the mirror image of the pandas behavior from this morning:
 
 ```{python}
 result = readings.append(9.9)
@@ -129,7 +129,9 @@ print(readings)
 > morning, which gave you a **new** DataFrame and left the original alone. Two opposite
 > conventions, and you have to know which one you're dealing with.
 
-That contrast is the most valuable thirty seconds in this session. Don't rush it.
+The in-place-against-copy contrast is the one to dwell on, because a student who has not
+noticed it can spend all of Day 4 wondering why their cleaned DataFrame keeps reverting. Don't
+rush it.
 
 You can also replace by position:
 
@@ -158,8 +160,8 @@ for site in sites:
 print(site)
 ```
 
-> `IndexError`? No: `IndentationError`. Say that Python uses indentation the way other
-> languages use braces.
+> The error here is an `IndentationError`, and not the `IndexError` from section 2. Say that
+> Python uses indentation to mark a block where other languages use braces.
 
 Something slightly more useful:
 
@@ -226,8 +228,8 @@ station_elevations['Goleta'] = 31
 station_elevations
 ```
 
-Point to make: same square-bracket syntax adds a new key or overwrites an existing one.
-There's no warning either way.
+Point to make: the same square-bracket syntax adds a new key or overwrites an existing one, and
+you get no warning either way.
 
 ```{python}
 list(station_elevations.keys())
@@ -239,7 +241,7 @@ list(station_elevations.values())
 
 ## 7. Looping over a dictionary (3 min)
 
-The default surprises people:
+A plain loop over a dictionary rarely gives people what they expect, so run it slowly:
 
 ```{python}
 for key in station_elevations:
@@ -255,12 +257,13 @@ for station, elevation in station_elevations.items():
     print(station, 'is at', elevation, 'meters')
 ```
 
-Two loop variables, because `.items()` hands back a pair each time. Don't go deeper than
-this; they only need to read it fluently.
+Two loop variables, because `.items()` gives you a key and a value together on each pass. Don't
+go deeper than that today, because they only need to read this fluently, not write it.
 
 ## 8. Why this mattered today (3 min)
 
-Bring it back to the morning. Write these two cells and let them sit side by side:
+Bring the session back to this morning's pandas code. Write these two cells and leave them on
+screen side by side:
 
 ```{python}
 import pandas as pd
@@ -278,19 +281,24 @@ goleta.rename(columns={'datetimeUtc': 'datetime_utc'}).columns.tolist()
 
 Say:
 
-> `keep` is a list, and that's the inner set of brackets in `df[['a', 'b']]`. The thing
-> inside `rename` is a dictionary. You were already writing both of these. Now you know what
-> they are.
+> `keep` is a list, and it is the inner set of brackets in `df[['a', 'b']]`. The thing inside
+> `rename` is a dictionary. You were already writing both of these this morning. Now you know
+> what they are.
 
-Finish with the loop that pays off in the end-of-day practice:
+Finish with the loop pattern they will meet again in the end-of-day practice. Keep it on
+`goleta`, so it reads against the DataFrame already on screen:
 
 ```{python}
-for column_name in ['Daily_AirTemp_Mean_C', 'Daily_Precip_Total_mm']:
-    print(column_name)
+for column_name in ['value', 'country_iso']:
+    print(column_name, goleta[column_name].isnull().sum())
 ```
 
-> There's an optional Field Note in the practice that uses exactly this. You now have
-> everything you need for it.
+> A list of column names, and one line of work done to each of them in turn. `value` is complete
+> and `country_iso` is empty in all 1,962 rows, which is the same empty column we found this
+> morning.
+
+> The end-of-day practice has an optional Field Note that uses this same pattern on the Toolik
+> file, with its own column names, so you have already seen everything it does.
 
 ## Timing checkpoints
 
@@ -302,13 +310,15 @@ for column_name in ['Daily_AirTemp_Mean_C', 'Daily_Precip_Total_mm']:
 | 25 min | section 8, tied back to pandas |
 
 If you're behind at 12 minutes, cut slicing (section 2) and `.keys()`/`.values()`
-(section 6). Do not cut section 8; the payoff is the point.
+(section 6). Do not cut section 8, because tying both containers back to this morning's pandas
+code is the thing the session is for.
 
 ## Common problems
 
 - **Zero-indexing.** Draw positions under the items on the board. Come back to it in section 4.
 - **Indentation.** Trigger the error deliberately rather than warning about it.
-- **`.append()` returning `None`.** Some student will write `readings = readings.append(x)`
-  and lose their list. Show it before it happens.
+- **`.append()` returning `None`.** Somebody will probably write
+  `readings = readings.append(x)` and lose their list, so show the failure before it happens
+  to them.
 - **Curly versus square brackets.** If a student writes `{}` for a list, ask what question
   they want to ask of it.

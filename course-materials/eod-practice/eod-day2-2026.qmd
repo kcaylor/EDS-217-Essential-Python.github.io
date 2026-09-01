@@ -30,7 +30,7 @@ A **data biography** is a short written account of a dataset: where it came from
 covers, what condition it's in, and what a reader needs to know before trusting anything
 computed from it. Working data scientists write them all the time, usually in the first few cells
 of a notebook, because the alternative is finding the problem after you've built a whole
-analysis on top of it (which is a much worse day!).
+analysis on top of the data (which is a much worse day!).
 
 By the time you leave today, your notebook should hold a biography of the Toolik weather data,
 written as markdown, with code cells showing the evidence for every claim you make.
@@ -120,8 +120,8 @@ dates properly on Day 6.
 5. Run `.info()`. How many columns have fewer non-null values than there are rows?
 6. Use `.isnull().sum()` to count missing values per column. Which three columns are the
    emptiest?
-7. One of the flag columns has a value in only a handful of rows, and is empty everywhere
-   else. Which one, and how many values does it actually have?
+7. One of the flag columns is empty in all but a very small number of rows. Which one, and how
+   many values does it actually have?
 
 ```{python}
 toolik.info()
@@ -132,7 +132,7 @@ toolik.isnull().sum()
 ```
 
 ```{python}
-toolik.isnull().sum().head(20)
+toolik.notnull().sum().sort_values()
 ```
 
 :::{.callout-important title="Interpret, don't just report"}

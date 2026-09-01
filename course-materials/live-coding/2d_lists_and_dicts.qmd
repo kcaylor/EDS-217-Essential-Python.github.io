@@ -13,24 +13,28 @@ format:
 ![](../images/collections.jpg)
 :::
 
-All day you've used lists and dictionaries in service of something else: a list of column
-names to select, a dictionary to rename columns. That's the right way to meet them, because
-that's how you'll actually use them.
+All day we have used lists and dictionaries in service of something else: a list of column
+names to select with, and a dictionary of old names and new ones to rename with. Using them
+before defining them was deliberate, because reaching for a container to get a job done is how
+you will meet both of them again in nearly every session from here on.
 
-Now we slow down and look at them directly, because these two containers are the backbone of
-Python, and twenty minutes of deliberate practice here will save you a great deal of
-confusion on Days 3 through 7.
+This afternoon we slow down and look at both containers on their own, with no DataFrame in the
+way. A great deal of the python we write from Day 3 onwards is built out of lists and
+dictionaries, so it is worth one session on what they are, and not only on what they do.
 
 ## How a live coding session works
 
-We both start from an empty notebook and write everything together, live. There is no code
-on this page to copy, on purpose.
+We all start from an empty notebook and write everything together, live. There is no **python**
+on this page to copy, because typing a line out yourself is what makes it stick. The markdown
+headings below are the one exception, and you should copy those.
 
-- I write a line, explain it, and run it. You write the same line and run it.
-- When something breaks, we fix it together. Things will break. That's the useful part.
-- If you fall behind, say so. Someone else is behind too, and I would much rather slow down
-  than lose you.
-- Type the code. Do not copy it from a neighbor's screen. The typing is the point.
+- Cella or Kelly writes a line, explains it, and runs it. You write the same line and run it.
+- When something breaks, we fix it together. Things will break (they always do!), and working
+  out what went wrong is usually where the useful learning happens.
+- If you fall behind, say so! Wave at Cella or Kelly and we will slow down, which we would
+  much rather do than leave anybody behind.
+- Type the code yourself rather than copying it off a neighbor's screen. Typing it is how you
+  find out which parts you have not understood yet, and it is how you meet your own typos.
 
 ## Set up your notebook
 
@@ -68,7 +72,9 @@ Date: 09/01/2026
 
 4. Under each heading, add an empty code cell.
 
-That's your scaffold. Now close this page and switch to your notebook.
+The eight headings and their empty code cells are the scaffold for the whole session. Read the
+two short sections below before we start, and then switch to your notebook, because the coding
+itself happens there rather than on this page.
 
 ## What we'll cover
 
@@ -92,14 +98,14 @@ That's your scaffold. Now close this page and switch to your notebook.
 
 **Tying it back** (about 5 minutes)
 
-- the list of column names you used in Session 2A
-- the rename dictionary you used in Session 2B
+- the list of column names you selected with in this morning's Session 2A
+- the rename dictionary you built in this morning's Session 2B
 - one small loop that checks several columns at once
 
 ## What you should be able to do afterwards
 
-- write a list and a dictionary from scratch, without looking anything up
-- get an item out of either one, and say which container you'd choose for a given job
+- write a list and a dictionary from scratch, without having to look up the syntax
+- get an item out of either one, and say which container you would choose for a given job
 - read a `for` loop and predict what it prints
 - explain why `df[['a', 'b']]` has two sets of brackets
 

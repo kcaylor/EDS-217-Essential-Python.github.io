@@ -448,8 +448,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>A panda, investigating.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
 </div>
-<p>In the last session we read the Goleta air quality file into a DataFrame and pulled a few columns back out of it. This morning we will look at what we actually have: how big the table is, what the columns are called, what type pandas gave each one, where the missing values are, and what the numbers look like.</p>
-<p>Exploring is the easiest step in the whole workflow to skip, because skipping it costs you nothing right away. We are going to do it properly, on the same Goleta file, and along the way we will find three columns with nothing in them at all, a negative pollutant concentration, and a mean that was computed by averaging two different units together. Every one of those would have been a real problem for an analysis built on this file.</p>
+<p>In the last session we read the Goleta air quality file into a DataFrame and pulled a few columns back out of it. This morning we will look at what is actually in the DataFrame: how big the table is, what the columns are called, what data type pandas assigned to each column, where the missing values are, and what the numbers look like.</p>
+<p>Exploring is the easiest step in the whole workflow to skip, because skipping it costs you nothing right away. We are going to do it properly, on the same Goleta file, and along the way we will find three columns with nothing in them at all, a negative pollutant concentration, and a mean that was computed by averaging two different units together.</p>
+<p>Every one of those would have been a real problem for an analysis built on this file, so the lesson here is that you should always spend time at the beginning of a data science workflow exploring your datasets and examining them closely. This will make all subsequent analyses easier!</p>
 <p>By the end of this session you will be able to:</p>
 <ul>
 <li>size up a DataFrame with <code>.shape</code>, <code>.columns</code>, and <code>.dtypes</code></li>
@@ -474,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Save</strong> with <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), and keep saving as you go.</p></li>
 <li><p><strong>Read the data.</strong> Add a code cell, and read in the same Goleta air quality file we used in the last session:</p></li>
 </ol>
-<div id="d0e21434" class="cell" data-execution_count="1">
+<div id="81117aba" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -487,7 +488,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="look-at-it" class="level2">
 <h2 class="anchored" data-anchor-id="look-at-it">Look at it</h2>
 <p>Always start by looking. <code>.head()</code> shows the first five rows, <code>.tail()</code> the last five rows:</p>
-<div id="03cf498f" class="cell" data-execution_count="2">
+<div id="3de262b7" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>goleta.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -614,7 +615,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="8a846b11" class="cell" data-execution_count="3">
+<div id="026d29c2" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>goleta.tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -742,7 +743,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Both take a number if you want more or fewer:</p>
-<div id="9b925a39" class="cell" data-execution_count="4">
+<div id="71efcb36" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>goleta.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -837,7 +838,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="how-big-is-it" class="level2">
 <h2 class="anchored" data-anchor-id="how-big-is-it">How big is it?</h2>
 <p><code>.shape</code> gives you <code>(rows, columns)</code>:</p>
-<div id="243d8f4f" class="cell" data-execution_count="5">
+<div id="751d830d" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>goleta.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -846,8 +847,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>(1962, 15)</code></pre>
 </div>
 </div>
-<p>The result is a pair of numbers, so you can pull either one out by position, exactly like the lists we met in the last session:</p>
-<div id="7aaaad57" class="cell" data-execution_count="6">
+<p>The result is a pair of numbers, and you pull either one out by position the same way you would from a list. It is not a list, though: the round brackets mean it is a <strong>tuple</strong>, which is a list you are not allowed to change. Indexing works, <code>.append()</code> does not:</p>
+<div id="6f486fa0" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"rows:"</span>, goleta.shape[<span class="dv">0</span>])</span>
@@ -861,7 +862,7 @@ columns: 15</code></pre>
 </section>
 <section id="what-are-the-columns-and-what-type-is-each" class="level2">
 <h2 class="anchored" data-anchor-id="what-are-the-columns-and-what-type-is-each">What are the columns, and what type is each?</h2>
-<div id="40f33f8c" class="cell" data-execution_count="7">
+<div id="8987cc53" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>goleta.columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -884,7 +885,7 @@ columns: 15</code></pre>
  'provider']</code></pre>
 </div>
 </div>
-<div id="66b7a881" class="cell" data-execution_count="8">
+<div id="4447dfe4" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>goleta.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -919,14 +920,14 @@ dtype: object</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>How many columns in <code>goleta</code> contain text? Use <code>.dtypes</code> to answer, and say how you counted.</p>
+<p>How many columns in <code>goleta</code> are stored as <code>object</code>? Use <code>.dtypes</code> to answer, and say how you counted. Then check the three empty columns against your answer: what type did pandas give a column it never found a single value in, and is that what you expected?</p>
 </div>
 </div>
 </section>
 <section id="the-health-check-.info" class="level2">
 <h2 class="anchored" data-anchor-id="the-health-check-.info">The health check: <code>.info()</code></h2>
 <p><code>.info()</code> is the most useful single line in this morning’s lesson, because it combines the shape, the column names, the types, and, critically, <strong>how many non-null values each column has</strong>:</p>
-<div id="62a4d321" class="cell" data-execution_count="9">
+<div id="2fe8ce51" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>goleta.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -968,11 +969,11 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Empty columns like these three are exactly what exploring turns up. All three look perfectly ordinary in <code>head()</code>, where you see a few <code>NaN</code> values, which happens in almost every dataset. <code>.info()</code> is what tells you that they are empty from top to bottom.</p>
+<p>Empty columns are exactly what exploring turns up. The three columns are blank in every row <code>head()</code> shows you, but five blank rows out of 1,962 is not evidence of much, and plenty of perfectly good columns have gaps near the top. <code>.info()</code> is what tells you these three are empty all the way down.</p>
 </div>
 </div>
 <p>You can ask the same question directly. <code>.isnull()</code> marks every missing value, and <code>.sum()</code> counts them per column:</p>
-<div id="e27c2d98" class="cell" data-execution_count="10">
+<div id="fa58827a" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>goleta.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1007,14 +1008,14 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Read the Santa Barbara file into <code>santa_barbara</code> and run <code>.info()</code> on it. Does it have the same three empty columns?</p>
+<p>The Santa Barbara station’s file sits beside the Goleta one, at <code>https://eds-217-essential-python.github.io/data/openaq_santa_barbara_measurments.csv</code> (the spelling of <code>measurments</code> is the file’s, not a mistake here). Read it into <code>santa_barbara</code> and run <code>.info()</code> on it. Does it have the same three empty columns?</p>
 </div>
 </div>
 </section>
 <section id="summarizing-numbers-with-.describe" class="level2">
 <h2 class="anchored" data-anchor-id="summarizing-numbers-with-.describe">Summarizing numbers with <code>.describe()</code></h2>
 <p><code>.describe()</code> gives you count, mean, standard deviation, min, max, and quartiles for every numeric column:</p>
-<div id="e3d3b98e" class="cell" data-execution_count="11">
+<div id="5c4140cb" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>goleta.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1126,7 +1127,7 @@ dtype: int64</code></pre>
 <p>Look at the <code>value</code> column. The mean is about 6.4 and the minimum is −4. Both of those numbers are a problem, for two different reasons.</p>
 <p><strong>First, a negative concentration.</strong> You cannot have less than zero of a pollutant in the air. A negative reading is usually either an instrument artifact or a sentinel value standing in for something the instrument could not report, and it is the kind of thing you flag now and decide what to do about later.</p>
 <p><strong>Second, the mean itself is meaningless.</strong> Look at what is in the <code>unit</code> column:</p>
-<div id="3128a3b0" class="cell" data-execution_count="12">
+<div id="b26c5fe0" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'unit'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1156,7 +1157,7 @@ Name: count, dtype: int64</code></pre>
 <section id="counting-categories-with-.value_counts" class="level2">
 <h2 class="anchored" data-anchor-id="counting-categories-with-.value_counts">Counting categories with <code>.value_counts()</code></h2>
 <p><code>.describe()</code> is for numbers. For text columns, the question is usually “what values appear, and how often?”, and <code>.value_counts()</code> answers it:</p>
-<div id="ad7ba087" class="cell" data-execution_count="13">
+<div id="842b489e" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'parameter'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1171,7 +1172,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>Three pollutants, then: <code>pm25</code>, <code>o3</code>, and <code>pm10</code>. The <code>unit</code> result above makes sense now, because ozone is reported in ppm and particulates in µg/m³.</p>
 <p><code>.value_counts()</code> is also how you spot a column that tells you nothing:</p>
-<div id="1846ebff" class="cell" data-execution_count="14">
+<div id="1e88fde4" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'location_name'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1184,7 +1185,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>Every row says <code>Goleta</code>, so the station name is a constant. A constant column is not wrong, and this one will matter on Day 6 when we stack several stations on top of each other, but within this one file it tells you nothing you did not already know.</p>
 <p>Add <code>.head(n)</code> when a column has many distinct values:</p>
-<div id="927cba79" class="cell" data-execution_count="15">
+<div id="e0e8b42e" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'datetimeLocal'</span>].value_counts().head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1215,10 +1216,10 @@ Name: count, dtype: int64</code></pre>
 </section>
 <section id="renaming-columns-with-a-dictionary" class="level2">
 <h2 class="anchored" data-anchor-id="renaming-columns-with-a-dictionary">Renaming columns with a dictionary</h2>
-<p><code>datetimeUtc</code> and <code>datetimeLocal</code> are in camelCase, while everything else uses lowercase with underscores. Mixed naming styles are an easy way to introduce typos, because you have to remember which style each column happens to use, so let’s fix them.</p>
+<p><code>datetimeUtc</code> and <code>datetimeLocal</code> are in camelCase, while everything else uses lowercase with underscores. Mixed naming styles are an easy way to introduce typos, because you have to remember which style each column happens to use, so let’s rename those two columns to match the rest.</p>
 <p>Renaming columns needs Python’s other essential container, the <strong>dictionary</strong>.</p>
 <p>A <strong>dictionary</strong> stores pairs. Each pair has a <strong>key</strong> and a <strong>value</strong>, written <code>key: value</code>, and the whole thing goes in curly braces:</p>
-<div id="ba434b3d" class="cell" data-execution_count="16">
+<div id="efa4f2a8" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>new_names <span class="op">=</span> {</span>
@@ -1232,7 +1233,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>You look up a value by its key, using square brackets:</p>
-<div id="d010f7ba" class="cell" data-execution_count="17">
+<div id="81904a59" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>new_names[<span class="st">'datetimeUtc'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1242,7 +1243,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>A list is ordered, and you get things out of it by <em>position</em>. A dictionary is a set of labelled pairs, and you get things out of it by <em>name</em>. Lookup by name is exactly what a rename needs, because a rename is a set of “this becomes that” pairs:</p>
-<div id="b1b004a5" class="cell" data-execution_count="18">
+<div id="ec30ef4d" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>goleta_renamed <span class="op">=</span> goleta.rename(columns<span class="op">=</span>new_names)</span>
@@ -1267,7 +1268,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>You can write the dictionary inline if it’s short:</p>
-<div id="723c334a" class="cell" data-execution_count="19">
+<div id="4e62b70e" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>goleta.rename(columns<span class="op">=</span>{<span class="st">'value'</span>: <span class="st">'concentration'</span>}).columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1319,12 +1320,13 @@ Note
 </section>
 <section id="the-exploration-ritual" class="level2">
 <h2 class="anchored" data-anchor-id="the-exploration-ritual">The exploration ritual</h2>
-<p>Here are the five lines to run every time you open a new dataset, in the order we ran them this morning:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df.shape          <span class="co"># how big</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>df.info()         <span class="co"># types and what's missing</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>df.head()         <span class="co"># what does a row look like</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>df.describe()     <span class="co"># what do the numbers look like</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>].value_counts()   <span class="co"># what's in the text columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here are the six lines to run every time you open a new dataset, in the order we ran them this morning:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df.head()                  <span class="co"># what does a row look like</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>df.shape                   <span class="co"># how big</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>df.info()                  <span class="co"># types, and how much of each column is filled in</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()          <span class="co"># how many values are missing, column by column</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>df.describe()              <span class="co"># what do the numbers look like</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>].value_counts()   <span class="co"># what is in the text columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Run them before you compute anything, because a problem you find here is quick to deal with, while the same problem found in your final figure means unpicking everything you built on top of it.</p>
 <p>Running the five lines is the easy half. Reading what comes back is the half that finds the empty column and the mixed units, so give the output a proper look before you move on!</p>
 </section>

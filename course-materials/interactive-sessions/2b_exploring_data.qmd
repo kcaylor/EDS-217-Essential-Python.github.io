@@ -18,15 +18,19 @@ format:
 :::
 
 In the last session we read the Goleta air quality file into a DataFrame and pulled a few
-columns back out of it. This morning we will look at what we actually have: how big the table
-is, what the columns are called, what type pandas gave each one, where the missing values
+columns back out of it. This morning we will look at what is actually in the DataFrame: how big the table
+is, what the columns are called, what data type pandas assigned to each column, where the missing values
 are, and what the numbers look like.
 
 Exploring is the easiest step in the whole workflow to skip, because skipping it costs you
 nothing right away. We are going to do it properly, on the same Goleta file, and along the way
 we will find three columns with nothing in them at all, a negative pollutant concentration,
-and a mean that was computed by averaging two different units together. Every one of those
-would have been a real problem for an analysis built on this file.
+and a mean that was computed by averaging two different units together. 
+
+Every one of those would have been a real problem for an analysis built on this file, so the
+lesson here is that you should always spend time at the beginning of a data science workflow
+exploring your datasets and examining them closely. This will make all subsequent analyses
+easier!
 
 By the end of this session you will be able to:
 

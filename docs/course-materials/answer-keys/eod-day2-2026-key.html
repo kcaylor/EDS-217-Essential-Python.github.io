@@ -427,7 +427,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#part-3-what-varies-and-what-doesnt" id="toc-part-3-what-varies-and-what-doesnt" class="nav-link" data-scroll-target="#part-3-what-varies-and-what-doesnt">Part 3: What varies, and what doesn’t</a></li>
   <li><a href="#part-4-the-numbers" id="toc-part-4-the-numbers" class="nav-link" data-scroll-target="#part-4-the-numbers">Part 4: The numbers</a></li>
   <li><a href="#part-5-a-tidier-table" id="toc-part-5-a-tidier-table" class="nav-link" data-scroll-target="#part-5-a-tidier-table">Part 5: A tidier table</a></li>
-  <li><a href="#part-6-write-the-biography" id="toc-part-6-write-the-biography" class="nav-link" data-scroll-target="#part-6-write-the-biography">Part 6: Write the biography</a></li>
+  <li><a href="#part-6-write-the-biography" id="toc-part-6-write-the-biography" class="nav-link" data-scroll-target="#part-6-write-the-biography">Part 6: Write the biography</a>
+  <ul class="collapse">
+  <li><a href="#the-optional-loop" id="toc-the-optional-loop" class="nav-link" data-scroll-target="#the-optional-loop">The optional loop</a></li>
+  </ul></li>
   <li><a href="#where-the-marks-are" id="toc-where-the-marks-are" class="nav-link" data-scroll-target="#where-the-marks-are">Where the marks are</a></li>
   </ul>
 </nav>
@@ -449,14 +452,14 @@ How to use this key
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Work the exercise first, then come here. The code below is <strong>one</strong> correct answer, not the only one. If your code looks different but produces the same numbers, you were right.</p>
-<p>The written answers matter more than the code. You can already tell whether your code ran. What you cannot check on your own is whether you read the result correctly, and that is what the green <strong>Answer</strong> boxes are for. Compare your markdown cells against them.</p>
+<p>Work the exercise first, then come here. The code below is <strong>one</strong> correct answer, not the only one. If your code looks different but produces the same numbers, you were right!</p>
+<p>The written answers matter more than the code. You can already tell whether your code ran, but you cannot tell on your own whether you read the result correctly, and reading the result correctly is what the green <strong>Answer</strong> boxes are for. Compare your markdown cells against them.</p>
 <p>⬅️ Back to <a href="../../course-materials/eod-practice/eod-day2-2026.html">the exercise</a></p>
 </div>
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="913922ca" class="cell" data-execution_count="1">
+<div id="473b5fcb" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -469,7 +472,7 @@ How to use this key
 <section id="part-1-vital-statistics" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-vital-statistics">Part 1: Vital statistics</h2>
 <p><strong>1. How many rows and how many columns does the dataset have?</strong></p>
-<div id="34e354cb" class="cell" data-execution_count="2">
+<div id="05a3b89f" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>toolik.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -488,11 +491,11 @@ How to use this key
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>11,171 rows and 21 columns.</strong> One row per day. That row count is worth holding on to, because almost every later question compares some column’s count against it: 11,171 is what “complete” looks like in this file.</p>
+<p><strong>11,171 rows and 21 columns.</strong> One row per day. Hold on to the row count, because several of the later questions compare a column’s count against it: 11,171 is what “complete” looks like in this file, and any count below it is a gap somewhere.</p>
 </div>
 </div>
 <p><strong>2. What are the column names? Get them as a Python list.</strong></p>
-<div id="a33fe61d" class="cell" data-execution_count="3">
+<div id="d505d584" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>toolik.columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -531,11 +534,12 @@ How to use this key
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Twenty-one names, and they fall into three groups. Three are time labels (<code>Year</code>, <code>Month</code>, <code>Date</code>), two identify the site (<code>LTER_Site</code>, <code>Station</code>), and the rest alternate between a measurement and a <code>Flag_</code> column belonging to it. Notice that the flag prefix is spelled <code>Flag_</code> on some columns and <code>FLAG_</code> on others. Python string matching is case sensitive, so any attempt to select “all the flag columns” by name has to account for both spellings.</p>
+<p>Twenty-one names, and they fall into three groups. Three columns are time labels (<code>Year</code>, <code>Month</code>, <code>Date</code>), two more identify the site (<code>LTER_Site</code>, <code>Station</code>), and the remaining sixteen are nine measurements, six <code>Flag_</code> columns and <code>Comments</code>. Each flag column sits immediately after the measurement it annotates, which makes the list look at a glance like a neat alternation of measurement, flag, measurement, flag. Nine and six do not pair up, though, and three of the measurements have no flag column at all: <code>Daily_Windspeed_AbsMax_m_s</code>, <code>Moss</code> and <code>Soil20cm</code>.</p>
+<p>Two details in the spelling are worth writing down while the list is on screen. First, the flag prefix is <code>Flag_</code> on four columns and <code>FLAG_</code> on two, and Python string matching is case sensitive, so any attempt to select “all the flag columns” by name has to account for both spellings. Second, <code>FLAG_Daily_globalrad_total_mjm2</code> sits directly after a measurement column named <code>Daily_globalrad_total_jcm2</code>, which is megajoules per square metre against joules per square centimetre. No column in this file is called <code>Daily_globalrad_total_mjm2</code>, and the radiation values run into the low thousands, which is an ordinary daily total in J/cm² and an impossible one in MJ/m², so the flag name is probably the one nobody updated. Noticing a mismatch like that from the column names alone is most of what today’s practice is for!</p>
 </div>
 </div>
 <p><strong>3. What is the data type of each column?</strong></p>
-<div id="ab9050dd" class="cell" data-execution_count="4">
+<div id="59cf5037" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>toolik.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -576,11 +580,11 @@ dtype: object</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Three <code>int64</code> columns, nine <code>float64</code>, and nine <code>object</code>.</strong> The nine object columns are the site and station labels, the six flag columns and <code>Comments</code>, all of which hold text.</p>
-<p>The important one is <strong><code>Date</code>, which pandas has stored as <code>int64</code>, not as a date.</strong> The file writes 1 June 1988 as <code>19880601</code>, which is a valid integer, so <code>read_csv</code> took it as a number. That means you can add 1 to it and get <code>19880602</code> by luck, and add 31 to <code>19880601</code> and get <code>19880632</code>, which is not a day. Nothing here is broken, but until this column is converted, on Day 6, treat it as a label rather than as a date.</p>
+<p>The column to look at twice is <strong><code>Date</code>, which pandas has stored as <code>int64</code>, not as a date.</strong> The file writes 1 June 1988 as <code>19880601</code>, which is a perfectly valid integer, so <code>read_csv</code> took it as a number. Storing a date that way means you can add 1 to it and get <code>19880602</code> by luck, then add 31 to <code>19880601</code> and get <code>19880632</code>, which is not a day at all. Nothing here is broken, but until we convert the column properly on Day 6, treat it as a label rather than as a date.</p>
 </div>
 </div>
-<p><strong>4. What years does the record cover? (You can read the earliest and latest year off <code>.describe()</code>.)</strong></p>
-<div id="e4f23399" class="cell" data-execution_count="5">
+<p><strong>4. Yesterday’s practice told you this record runs from June 1988 to December 2018. Do not take that on trust. Use <code>.min()</code> and <code>.max()</code> on the <code>Date</code> column to find the exact first and last day, and say which cell is your evidence.</strong></p>
+<div id="b4d658a5" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>toolik.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -734,6 +738,24 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
+<div id="97ec4319" class="cell" data-execution_count="6">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Date'</span>].<span class="bu">min</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>np.int64(19880601)</code></pre>
+</div>
+</div>
+<div id="5501be76" class="cell" data-execution_count="7">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Date'</span>].<span class="bu">max</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>np.int64(20181231)</code></pre>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -744,19 +766,21 @@ dtype: object</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>1988 to 2018</strong>, read off the <code>min</code> and <code>max</code> of <code>Year</code>: 31 calendar years.</p>
-<p>The <code>Date</code> column tells you more. Its minimum prints as <code>1.988060e+07</code>, which is <code>19880601</code>, and its maximum is <code>20181231</code>. So the record does not begin on 1 January 1988. It begins on <strong>1 June 1988</strong> and ends on 31 December 2018. That is the explanation for a detail you meet again in question 10.</p>
-<p><code>.describe()</code> also quietly reports on completeness. Read the <code>count</code> row across the columns: <code>Daily_AirTemp_Mean_C</code> has all 11,171 values, but <code>Daily_globalrad_total_jcm2</code> has only 4,118.</p>
+<p><strong>The record runs from 1 June 1988 to 31 December 2018.</strong> The two cells above are the evidence: they print <code>19880601</code> and <code>20181231</code>.</p>
+<p>Yesterday’s page was right, and checking it was still worth doing. “June 1988” and “1 June 1988” are different claims, and only one of them is in the file. Repeating what another page told you is not evidence, which is why today’s practice asks for a cell underneath every sentence you write.</p>
+<p>Read the two numbers rather than the <code>min</code> and <code>max</code> rows of <code>.describe()</code>. <code>Date</code> is stored as an integer, so <code>.describe()</code> also reports a mean and a standard deviation for it, and neither of those means anything: the average of <code>19880601</code> and <code>20181231</code> is not a day.</p>
+<p>Beginning on 1 June rather than 1 January leaves 1988 a partial year in this file, which question 10 takes up in more detail.</p>
+<p>The <code>count</code> row of the <code>.describe()</code> you ran back in Part 1 is worth a second look while you are here, read across the columns rather than down one: <code>Daily_AirTemp_Mean_C</code> has all 11,171 values, but <code>Daily_globalrad_total_jcm2</code> has only 4,118.</p>
 </div>
 </div>
 </section>
 <section id="part-2-the-health-check" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-the-health-check">Part 2: The health check</h2>
 <p><strong>5. Run <code>.info()</code>. How many columns have fewer non-null values than there are rows?</strong></p>
-<div id="ffa4977f" class="cell" data-execution_count="6">
+<div id="5b9d1fe8" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>toolik.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>toolik.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -799,17 +823,17 @@ memory usage: 1.8+ MB</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>15 of the 21 columns.</strong> Only six are complete at 11,171 values: <code>Year</code>, <code>Month</code>, <code>Date</code>, <code>LTER_Site</code>, <code>Station</code> and <code>Daily_AirTemp_Mean_C</code>. Every other column, including every measurement other than the mean air temperature, has gaps somewhere.</p>
-<p>The one genuinely good piece of news is that the column yesterday’s workflow was built on, <code>Daily_AirTemp_Mean_C</code>, is the one measurement with no missing values at all.</p>
+<p><strong>15 of the 21 columns.</strong> Only six columns are complete at 11,171 values: <code>Year</code>, <code>Month</code>, <code>Date</code>, <code>LTER_Site</code>, <code>Station</code> and <code>Daily_AirTemp_Mean_C</code>. Every other column, including every measurement other than the mean air temperature, has gaps somewhere.</p>
+<p>One piece of good news: <code>Daily_AirTemp_Mean_C</code>, the column yesterday’s whole workflow was built on, is the only measurement in the file with no missing values at all.</p>
 </div>
 </div>
 <p><strong>6. Use <code>.isnull().sum()</code> to count missing values per column. Which three columns are the emptiest?</strong></p>
-<div id="6c3062fb" class="cell" data-execution_count="7">
+<div id="204a4fd2" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>toolik.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>toolik.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>Year                                   0
 Month                                  0
 Date                                   0
@@ -844,37 +868,39 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong><code>FLAG_Daily_windsp_mean_msec</code> (11,170 missing), <code>FLAG_Daily_globalrad_total_mjm2</code> (11,156) and <code>Flag_Daily_AirTemp_AbsMax_C</code> (10,151).</strong> All three are flag columns, and in fact all six flag columns sit at the top of the list, followed by <code>Daily_globalrad_total_jcm2</code> with 7,053 missing and <code>Comments</code> with 2,247.</p>
-<p>Ranking columns by emptiness sorts this file into flags first and measurements second, which is the first hint that the flag columns are working as designed. See question 7.</p>
+<p><strong><code>FLAG_Daily_windsp_mean_msec</code> (11,170 missing), <code>FLAG_Daily_globalrad_total_mjm2</code> (11,156) and <code>Flag_Daily_AirTemp_AbsMax_C</code> (10,151).</strong> The three emptiest columns are all flag columns, and so are the next three: every one of the six flag columns is missing more than 8,000 of its 11,171 values. The emptiest two columns that are not flags are <code>Daily_globalrad_total_jcm2</code>, with 7,053 missing, and <code>Comments</code>, with 2,247.</p>
+<p>Finding those three takes a little reading, because <code>.isnull().sum()</code> prints the columns in the order they appear in the file rather than in order of emptiness, so the six flag columns are scattered down the list next to the measurements they annotate. Chaining <code>.sort_values(ascending=False)</code> on the end will rank them for you, which is worth doing on a wider file than this one.</p>
+<p>However you get there, all six flag columns come out emptier than any measurement in the file, and the gap is a hint rather than an alarm: a flag column is only filled in on the days when something about the reading was worth writing down, so a nearly-empty one is a column doing exactly its job.</p>
 </div>
 </div>
-<p><strong>7. One of the flag columns has a value in only a handful of rows, and is empty everywhere else. Which one, and how many values does it actually have?</strong></p>
-<div id="2ca1f2e7" class="cell" data-execution_count="8">
+<p><strong>7. One of the flag columns is empty in all but a very small number of rows. Which one, and how many values does it actually have?</strong></p>
+<div id="9ba7e43b" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>toolik.isnull().<span class="bu">sum</span>().head(<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>toolik.notnull().<span class="bu">sum</span>().sort_values()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>Year                                   0
-Month                                  0
-Date                                   0
-LTER_Site                              0
-Station                                0
-Daily_AirTemp_Mean_C                   0
-Flag_Daily_AirTemp_Mean_C           9861
-Daily_AirTemp_AbsMax_C               170
-Flag_Daily_AirTemp_AbsMax_C        10151
-Daily_AirTemp_AbsMin_C               204
-Flag_Daily_AirTemp_AbsMin_C         9935
-Daily_Precip_Total_mm                420
-Flag_Daily_Precip_Total_mm          8002
-Daily_windsp_mean_msec               826
-FLAG_Daily_windsp_mean_msec        11170
-Daily_Windspeed_AbsMax_m_s           846
-Daily_globalrad_total_jcm2          7053
-FLAG_Daily_globalrad_total_mjm2    11156
-Moss                                 838
-Soil20cm                             820
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>FLAG_Daily_windsp_mean_msec            1
+FLAG_Daily_globalrad_total_mjm2       15
+Flag_Daily_AirTemp_AbsMax_C         1020
+Flag_Daily_AirTemp_AbsMin_C         1236
+Flag_Daily_AirTemp_Mean_C           1310
+Flag_Daily_Precip_Total_mm          3169
+Daily_globalrad_total_jcm2          4118
+Comments                            8924
+Daily_Windspeed_AbsMax_m_s         10325
+Moss                               10333
+Daily_windsp_mean_msec             10345
+Soil20cm                           10351
+Daily_Precip_Total_mm              10751
+Daily_AirTemp_AbsMin_C             10967
+Daily_AirTemp_AbsMax_C             11001
+Daily_AirTemp_Mean_C               11171
+Station                            11171
+LTER_Site                          11171
+Date                               11171
+Month                              11171
+Year                               11171
 dtype: int64</code></pre>
 </div>
 </div>
@@ -888,32 +914,32 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong><code>FLAG_Daily_windsp_mean_msec</code>, which is missing in 11,170 of 11,171 rows and therefore holds exactly one value.</strong> The runner-up, <code>FLAG_Daily_globalrad_total_mjm2</code>, holds 15.</p>
-<p>A flag column is an annotation, not a measurement. It is there to mark the days on which something was unusual about the reading, and on an ordinary day there is nothing to say, so the cell is left empty. An almost-empty flag column means almost every wind speed reading was routine. If a flag column were full, that would be the alarming result.</p>
+<p><strong><code>FLAG_Daily_windsp_mean_msec</code>, which is missing in 11,170 of 11,171 rows and therefore holds exactly one value.</strong> The next emptiest column, <code>FLAG_Daily_globalrad_total_mjm2</code>, holds 15.</p>
+<p>A flag column is an annotation, not a measurement. It is there to mark the days on which something was unusual about the reading, and on an ordinary day there is nothing to say, so the cell is left empty. An almost-empty flag column means almost every wind speed reading was routine. A full flag column would be the alarming result!</p>
 <p>The practical consequence is that emptiness alone is not a quality score. <code>Comments</code> is 20% empty and <code>Daily_globalrad_total_jcm2</code> is 63% empty, and those two nulls mean completely different things: one is a note nobody needed to write, the other is a measurement nobody made.</p>
 </div>
 </div>
 </section>
 <section id="part-3-what-varies-and-what-doesnt" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-what-varies-and-what-doesnt">Part 3: What varies, and what doesn’t</h2>
-<p><strong>8. Use <code>.value_counts()</code> on <code>LTER_Site</code> and on <code>Station</code>. What does either column tell you?</strong></p>
-<div id="abaedd92" class="cell" data-execution_count="9">
+<p><strong>8. Use <code>.value_counts()</code> on <code>LTER_Site</code> and on <code>Station</code>. What does each column tell you?</strong></p>
+<div id="af29d9c4" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'LTER_Site'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'LTER_Site'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>LTER_Site
 ARC    11171
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="f1a41b77" class="cell" data-execution_count="10">
+<div id="a4d05cb3" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Station'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Station'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>Station
 TLKMAIN    11171
 Name: count, dtype: int64</code></pre>
@@ -929,17 +955,17 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Neither column tells you anything.</strong> <code>LTER_Site</code> is <code>ARC</code> in all 11,171 rows and <code>Station</code> is <code>TLKMAIN</code> in all 11,171 rows. A column with one distinct value cannot distinguish one row from another, so it can never explain anything, and grouping by it would return a single group.</p>
-<p>They still have a use. They record <strong>provenance</strong>: they record that every row came from the main meteorological station at the Arctic LTER site, so this file is one instrument at one place. That matters for the biography. It means nothing here needs to be averaged across stations, and it also means these data describe one point on the North Slope rather than the Arctic in general.</p>
+<p><strong>Neither column varies, so neither one can tell you anything about the differences between rows.</strong> <code>LTER_Site</code> is <code>ARC</code> in all 11,171 rows and <code>Station</code> is <code>TLKMAIN</code> in all 11,171 rows. A column with one distinct value cannot distinguish one row from another, so it can never explain anything, and grouping by it would return a single group.</p>
+<p>They still have a use, though. They record <strong>provenance</strong>: every row came from the main meteorological station at the Arctic LTER site, so this whole file is one instrument at one place. Provenance is worth a sentence in your biography, because it settles two questions at once. Nothing here needs to be averaged across stations, and these data describe one point on the North Slope rather than the Arctic in general.</p>
 </div>
 </div>
 <p><strong>9. Use <code>.value_counts()</code> on <code>Flag_Daily_AirTemp_Mean_C</code>. What values appear, and what do you think they mean?</strong></p>
-<div id="d0464e3b" class="cell" data-execution_count="11">
+<div id="9aa465e9" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Flag_Daily_AirTemp_Mean_C'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Flag_Daily_AirTemp_Mean_C'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>Flag_Daily_AirTemp_Mean_C
 E    1310
 Name: count, dtype: int64</code></pre>
@@ -956,17 +982,17 @@ Name: count, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>One value appears, <code>E</code>, on 1,310 days.</strong> In the Arctic LTER flag convention, <code>E</code> marks a value that was <strong>estimated</strong> rather than measured directly, usually filled in from a nearby sensor by regression when the main logger failed. The <code>Comments</code> column says so in words on those rows, with entries such as “Air temp 1 &amp; 5 meter estimated from regression”.</p>
-<p>Now combine this with question 5. <code>Daily_AirTemp_Mean_C</code> has no missing values, which made it look like the most trustworthy column in the file, but 1,310 of its 11,171 values, or 11.7%, are flagged as estimated. The column is complete because somebody filled the gaps, not because the instrument never stopped. A completeness check alone would never have shown you this, and it is the single most useful thing in this dataset to know before you compute a trend from it.</p>
+<p>Question 5 found <code>Daily_AirTemp_Mean_C</code> to be the one measurement with no missing values, which made it look like the most trustworthy column in the file. Put the two results together and the picture changes: 1,310 of those 11,171 values, or 11.7%, are flagged as estimated. The column is complete because somebody filled the gaps, not because the instrument never stopped. Counting nulls would never have shown you this, and it is worth knowing before you compute a temperature trend from the column.</p>
 <p>Note also that <code>.value_counts()</code> drops nulls by default, which is why the 9,861 unflagged days do not appear. Use <code>.value_counts(dropna=False)</code> when you want to see them.</p>
 </div>
 </div>
 <p><strong>10. Use <code>.value_counts()</code> on the <code>Year</code> column and look at both ends of the result, with <code>.head()</code> and then with <code>.tail()</code>. Do all years have the same number of observations? What would explain a year with fewer?</strong></p>
-<div id="d87d4ebd" class="cell" data-execution_count="12">
+<div id="e39856b1" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Year'</span>].value_counts().head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Year'</span>].value_counts().head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>Year
 1996    366
 2012    366
@@ -976,12 +1002,12 @@ Name: count, dtype: int64</code></pre>
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="94914d4b" class="cell" data-execution_count="13">
+<div id="eec45cc3" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Year'</span>].value_counts().tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Year'</span>].value_counts().tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>Year
 1994    365
 1993    365
@@ -1001,22 +1027,22 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>No, and the two ends of the result show you two different things.</strong> <code>.value_counts()</code> sorts by count from largest to smallest, so <code>.head()</code> returns the five years with the <em>most</em> rows: 1992, 1996, 2000, 2012 and 2016, all with 366. Those are the leap years, and every other full year has 365. <code>.tail()</code> returns the other end of the same list, and that is where the short year sits: <strong>1988 has 214 rows.</strong></p>
-<p>That is why the question asks for both. A list sorted by count puts each year wherever its count happens to fall, so a year with fewer observations than its neighbours sorts to the bottom and is invisible from the top. Whenever you use <code>.value_counts()</code> to check whether groups are the same size, read both ends of it.</p>
-<p>Those 214 days are the start of the record rather than a gap in the middle of a year. Counting back 214 days from 31 December 1988 reaches 1 June, which agrees with the <code>Date</code> minimum of <code>19880601</code> you saw in question 4. Toolik began recording in mid-year.</p>
-<p>The consequence is a real one. Any per-year summary you compute for 1988 covers June to December only, so it will exclude the coldest five months and will not be comparable with any other year in the file. Whenever a group has fewer rows than its neighbours, find out which rows are missing before you compare the groups.</p>
+<p><strong>No, and the two ends of the result show you two different things.</strong> <code>.value_counts()</code> sorts by count from largest to smallest, so <code>.head()</code> returns five years with 366 rows each. Seven years in this file have 366 rows, because seven of them are leap years, and every other full year has 365. Five of those seven tie for the top of the list, so which five you see, and in what order, depends on how pandas breaks the tie. Your list may not match the one printed above, which is fine and expected! <code>.tail()</code> returns the other end of the same list, and the short year sits down there: <strong>1988 has 214 rows.</strong></p>
+<p>The question asks for both ends because a list sorted by count puts each year wherever its count happens to fall, so a year with fewer observations than its neighbours sorts to the bottom and is invisible from the top. Whenever you use <code>.value_counts()</code> to check whether groups are the same size, read both ends of it.</p>
+<p>The 214 days are the start of the record rather than a gap in the middle of a year. Counting back 214 days from 31 December 1988 reaches 1 June, which agrees with the <code>Date</code> minimum of <code>19880601</code> you saw in question 4. Toolik began recording in mid-year.</p>
+<p>The consequence is a real one. Any per-year summary you compute for 1988 covers June to December only, so it leaves out the coldest five months and will not be comparable with any other year in the file. Whenever a group has fewer rows than its neighbours, find out which rows are missing before you compare the groups.</p>
 </div>
 </div>
 </section>
 <section id="part-4-the-numbers" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-the-numbers">Part 4: The numbers</h2>
 <p><strong>11. What is the mean daily air temperature across the whole record? The minimum? The maximum?</strong></p>
-<div id="0d388900" class="cell" data-execution_count="14">
+<div id="ee615ce5" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Daily_AirTemp_Mean_C'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Daily_AirTemp_Mean_C'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>count    11171.000000
 mean        -8.196437
 std         14.831314
@@ -1040,17 +1066,17 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Mean -8.20 °C, minimum -55.60 °C, maximum 20.70 °C, over all 11,171 days</strong>, with a standard deviation of 14.83 °C and a median of -7.10 °C.</p>
-<p>All three are plausible for the North Slope of Alaska. A mean well below freezing is what makes this a permafrost site. The extremes are extremes of a <em>daily mean</em>, not of an instantaneous reading, so -55.6 °C is a day that averaged -55.6 °C, which is more remarkable than a brief cold spike. The quartiles are the useful check on plausibility: 25% of days average below -19.7 °C and 75% are below 4.4 °C, so this is a place that spends most of the year frozen and thaws briefly.</p>
-<p>One caution about that mean. It is the average of every day in the file, and the file starts on 1 June 1988, so the first year contributes a summer and no winter. The effect is small here, -8.26 °C if you exclude 1988 entirely against -8.20 °C with it, but the direction is predictable: an unbalanced record pulls the average toward whatever season is over-represented.</p>
+<p>All three numbers are plausible for the North Slope of Alaska. A mean well below freezing is what makes this a permafrost site. The extremes are extremes of a <em>daily mean</em>, not of an instantaneous reading, so -55.6 °C is a day that averaged -55.6 °C, which is a good deal more remarkable than a brief cold spike. The quartiles are the useful check on plausibility: 25% of days average below -19.7 °C and 75% are below 4.4 °C, so this is a place that spends most of the year frozen and thaws briefly.</p>
+<p>One caution about the mean. It is the average of every day in the file, and the file starts on 1 June 1988, so the first year contributes a summer and no winter. The effect is small here, -8.26 °C if you exclude 1988 entirely against -8.20 °C with it, but the direction is predictable: an unbalanced record pulls the average toward whatever season is over-represented.</p>
 </div>
 </div>
 <p><strong>13. Pick one other numeric column and report its range. Does anything about it look wrong?</strong></p>
-<div id="33c765d4" class="cell" data-execution_count="15">
+<div id="40b3da90" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>toolik[[<span class="st">'Daily_AirTemp_Mean_C'</span>, <span class="st">'Daily_Precip_Total_mm'</span>, <span class="st">'Daily_windsp_mean_msec'</span>]].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>toolik[[<span class="st">'Daily_AirTemp_Mean_C'</span>, <span class="st">'Daily_Precip_Total_mm'</span>, <span class="st">'Daily_windsp_mean_msec'</span>]].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 
 
@@ -1128,23 +1154,23 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong><code>Daily_Precip_Total_mm</code> runs from 0 to 64.5 mm, with a mean of 0.95 mm.</strong> Nothing in that range is physically impossible. What is wrong is the <code>count</code>: <strong>10,751</strong>, which is 420 days short of the 11,171 in the file, and those absences are not spread evenly. They fall in 1995 (183 missing days), 1994 (92), 1990 (88) and 2004 (52). So 1995 reports precipitation on 182 days out of 365, and any annual rainfall total for that year would be roughly half a year of rain presented as a whole one.</p>
-<p>The trap is that a missing day and a dry day look the same once they are summed. The median precipitation is 0.0 mm, because 7,278 of the recorded days had no rain at all, so a missing day silently resembles the most common real value. Reporting the mean of 0.95 mm is safe, since pandas divides by the days it actually has, but any <code>.sum()</code> over this column will undercount without warning.</p>
-<p><code>Daily_windsp_mean_msec</code> shows the same pattern more mildly: 0 to 12.5 m/s over 10,345 days, so 826 days have no wind reading. If you looked at <code>Daily_globalrad_total_jcm2</code> instead, its minimum of -2.0 J/cm² is genuinely impossible, since a day cannot receive negative sunlight, and that single value is a good example of an error that only a physical sanity check will catch.</p>
+<p><strong><code>Daily_Precip_Total_mm</code> runs from 0 to 64.5 mm, with a mean of 0.95 mm.</strong> Nothing in that range is physically impossible. The <code>count</code> is the problem: <strong>10,751</strong>, which is 420 days short of the 11,171 in the file, and those absences are not spread evenly. They fall in six years, mostly in 1995 (183 missing days), 1994 (92), 1990 (88) and 2004 (52), with the last five days split between 1989 and 1993. So 1995 reports precipitation on 182 days out of 365, and any annual rainfall total for that year would be roughly half a year of rain presented as a whole one.</p>
+<p>The trap is that a missing day and a dry day look the same once they are summed. The median precipitation is 0.0 mm, because 7,278 of the recorded days had no rain at all, so a missing day quietly resembles the most common real value. Reporting the mean of 0.95 mm is safe, because pandas divides by the days it actually has, but any <code>.sum()</code> over this column will undercount without warning you.</p>
+<p><code>Daily_windsp_mean_msec</code> shows the same pattern more mildly: 0 to 12.5 m/s over 10,345 days, so 826 days have no wind reading. If you looked at <code>Daily_globalrad_total_jcm2</code> instead, its minimum of -2.0 J/cm² is genuinely impossible, because a day cannot receive negative sunlight, and that single value is a good example of an error that only a physical sanity check will catch.</p>
 </div>
 </div>
 </section>
 <section id="part-5-a-tidier-table" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-a-tidier-table">Part 5: A tidier table</h2>
 <p><strong>14. Build a list of the five columns you’d keep if you had to hand this dataset to a colleague who only cared about temperature. Use it to make a smaller DataFrame.</strong></p>
-<div id="473dd061" class="cell" data-execution_count="16">
+<div id="78a589a0" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>temp_columns <span class="op">=</span> [<span class="st">'Year'</span>, <span class="st">'Month'</span>, <span class="st">'Date'</span>, <span class="st">'Daily_AirTemp_Mean_C'</span>, <span class="st">'Daily_AirTemp_AbsMin_C'</span>]</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>toolik_temps <span class="op">=</span> toolik[temp_columns]</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>toolik_temps.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>temp_columns <span class="op">=</span> [<span class="st">'Year'</span>, <span class="st">'Month'</span>, <span class="st">'Date'</span>, <span class="st">'Daily_AirTemp_Mean_C'</span>, <span class="st">'Daily_AirTemp_AbsMin_C'</span>]</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>toolik_temps <span class="op">=</span> toolik[temp_columns]</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>toolik_temps.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="18">
 <div>
 
 
@@ -1207,17 +1233,17 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>15. Build a dictionary that renames at least two of those columns to something shorter and clearer. Apply it with <code>.rename(columns=...)</code> and confirm the new names.</strong></p>
-<div id="c5121b68" class="cell" data-execution_count="17">
+<div id="edc01573" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>shorter <span class="op">=</span> {</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Daily_AirTemp_Mean_C'</span>: <span class="st">'temp_mean_c'</span>,</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Daily_AirTemp_AbsMin_C'</span>: <span class="st">'temp_min_c'</span>,</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>toolik_temps <span class="op">=</span> toolik_temps.rename(columns<span class="op">=</span>shorter)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>toolik_temps.columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>shorter <span class="op">=</span> {</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Daily_AirTemp_Mean_C'</span>: <span class="st">'temp_mean_c'</span>,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Daily_AirTemp_AbsMin_C'</span>: <span class="st">'temp_min_c'</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>toolik_temps <span class="op">=</span> toolik_temps.rename(columns<span class="op">=</span>shorter)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>toolik_temps.columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>['Year', 'Month', 'Date', 'temp_mean_c', 'temp_min_c']</code></pre>
 </div>
 </div>
@@ -1249,13 +1275,29 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This file holds daily weather from the main meteorological station (<code>TLKMAIN</code>) at Toolik Field Station, part of the Arctic LTER site (<code>ARC</code>) on the North Slope of Alaska. Both identifier columns hold a single value in all rows, so every observation comes from one instrument cluster at one place. The 21 columns cover air temperature (daily mean, absolute maximum, absolute minimum), precipitation, mean and maximum wind speed, global radiation, and moss and 20 cm soil temperature, each measurement accompanied by a flag column.</p>
-<p>Coverage is 11,171 daily rows from 1 June 1988 to 31 December 2018. Every calendar day in that span is present. 1988 holds only 214 rows because the record starts in June, so 1988 is a partial year and not a lost one.</p>
-<p>Fifteen of the 21 columns have missing values. Daily mean air temperature is complete at 11,171 values and is the column I would trust most. I would not trust global radiation, which has 4,118 values and includes an impossible -2.0 J/cm², or annual precipitation totals, since 420 days are absent and 183 of them fall in 1995 alone.</p>
-<p>Two cautions. First, <code>Date</code> is stored as the integer 19880601, not as a date, so it cannot be sorted or differenced as a date until it is converted. Second, the complete temperature column is not fully measured: 1,310 days, 11.7% of the record, have an <code>E</code> flag meaning the value was estimated from a nearby sensor.</p>
-<p>Could this describe change in Arctic summer temperatures since 1988? Yes, with one check first. All 31 years have complete June to August coverage and no missing means, but 85 of the 92 summer days in 1988 are flagged estimated, and no summer day after 2006 has a flag. Since 1988 is the first year of any trend, I would confirm the result holds when the estimated days are excluded.</p>
+<p>This file holds daily weather from the main meteorological station (<code>TLKMAIN</code>) at Toolik Field Station, part of the Arctic LTER site (<code>ARC</code>) on the North Slope of Alaska. Both identifier columns hold a single value throughout, so every observation comes from one instrument cluster at one place. The 21 columns cover nine measurements: air temperature (daily mean, absolute maximum, absolute minimum), precipitation, mean and maximum wind speed, global radiation, and moss and 20 cm soil temperature. Six of the nine have a flag column.</p>
+<p>Coverage is 11,171 daily rows from 1 June 1988 to 31 December 2018, with every calendar day present. 1988 holds only 214 rows because the record starts in June, so it is a partial year, not a lost one.</p>
+<p>Fifteen of the 21 columns have missing values. Daily mean air temperature, complete at 11,171 values, is the column I would trust most. I would not trust global radiation, which has 4,118 values and includes an impossible -2.0 J/cm², or annual precipitation totals, because 420 days are absent and 183 of them fall in 1995 alone.</p>
+<p>Two cautions. First, <code>Date</code> is stored as the integer 19880601, not as a date, so it cannot be sorted or differenced as a date until converted. Second, the complete temperature column is not fully measured: 1,310 days, 11.7% of the record, have an <code>E</code> flag meaning the value was estimated from a nearby sensor.</p>
+<p>Could this describe change in Arctic summer temperatures since 1988? Yes, with one check first. All 31 years have complete June to August coverage and no missing means, but 85 of the 92 summer days in 1988 are flagged estimated, and no summer day after 2006 has a flag. Because 1988 anchors any trend, I would confirm the result holds with those days excluded.</p>
 </div>
 </div>
+<section id="the-optional-loop" class="level3">
+<h3 class="anchored" data-anchor-id="the-optional-loop">The optional loop</h3>
+<p>The Field Note offered a loop as a shortcut for checking several columns at once. Running it on the two columns in the example prints the missing-value count for each, which is the same pair of numbers you would get from two separate calls:</p>
+<div id="4d305586" class="cell" data-execution_count="20">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column_name <span class="kw">in</span> [<span class="st">'Daily_AirTemp_Mean_C'</span>, <span class="st">'Daily_Precip_Total_mm'</span>]:</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(column_name, toolik[column_name].isnull().<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Daily_AirTemp_Mean_C 0
+Daily_Precip_Total_mm 420</code></pre>
+</div>
+</div>
+<p>Anyone who worked one column at a time has lost nothing. The loop saves typing, not insight.</p>
+</section>
 </section>
 <section id="where-the-marks-are" class="level2">
 <h2 class="anchored" data-anchor-id="where-the-marks-are">Where the marks are</h2>
@@ -1263,7 +1305,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 <ol type="1">
 <li><strong>Every factual claim in your biography has a code cell above it that produced it.</strong> A sentence such as “the record covers about thirty years” is the failure mode this exercise is built to catch. “1 June 1988 to 31 December 2018, 11,171 daily rows” is the pass.</li>
 <li><strong>You found 1988 and explained it.</strong> Reporting that 1988 has 214 rows is half the answer. The mark is for saying why: the record begins on 1 June 1988, so 1988 is a partial year rather than a year with days missing from it, and no per-year figure for 1988 is comparable with any other year in the file.</li>
-<li><strong>You read the flag columns as part of the file’s design rather than as errors,</strong> and you connected them back to <code>Daily_AirTemp_Mean_C</code>. The column with no missing values contains 1,310 estimated ones, and that is the finding on which the value of the whole biography depends.</li>
+<li><strong>You read the flag columns as part of the file’s design rather than as errors,</strong> and you connected them back to <code>Daily_AirTemp_Mean_C</code>. The column with no missing values contains 1,310 estimated ones, and a biography that reports it as complete without mentioning the flags sends its reader off with the wrong idea of how solid the temperature record is.</li>
 <li><strong>Your answers say what a number means rather than what it is.</strong> “420 values are missing from precipitation” restates the output. “420 missing days, 183 of them in 1995, so an annual total for that year covers half a year of rain” reads it.</li>
 </ol>
 <p>⬅️ Back to <a href="../../course-materials/eod-practice/eod-day2-2026.html">the exercise</a></p>

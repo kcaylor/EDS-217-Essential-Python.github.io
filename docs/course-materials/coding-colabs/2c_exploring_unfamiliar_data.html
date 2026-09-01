@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -406,40 +440,46 @@ ul.task-list li input[type="checkbox"] {
 <div style="width: 80%; margin: auto;">
 <p><img src="../images/collections.jpeg" class="img-fluid"></p>
 </div>
-<p>This morning you learned the basics of exploring a new dataset. In this coding colab, we will try these new skills out on a new dataset to build familiarity with these important commands.</p>
-<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it.</p>
-<p>You have 45 minutes.</p>
+<p>This morning we learned the commands for looking at a table for the first time. This afternoon we will point those same commands at a National Park Service file that we have not opened together in class. You and your partner will work out what is in the file using the commands from this morning’s session.</p>
+<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish one of the seven steps under “Working through it” below. The partner who is not typing should read the output (quietly!) and say what the next cell will produce before you run it. Getting a prediction wrong is useful, and a wrong prediction is much easier to spot once you have said it out loud.</p>
+<p>We have 45-60 minutes for this activity, so please let Kelly or Cella know if you are getting stuck!</p>
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">The data</h2>
 <p>US National Park Service visitor records:</p>
 <pre><code>https://eds-217-essential-python.github.io/data/national_parks.csv</code></pre>
-<p>The link above is all this co-lab provides. Figuring out what’s in the data is the entire exercise.</p>
+<p>A link is all we are giving you, since we also reviewed opening files into dataframes this morning. Working out what is in the file is the exercise, so Cella and Kelly will happily help with any code that will not run or generates an error (but try to read any errors closely and see if you can determine what Python is trying to tell you is going wrong)</p>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>Create a notebook named <code>Colab_2C_Unfamiliar_Data.ipynb</code>, with both partners’ names in the title cell, then read the file in.</p>
+<p>Create a notebook named <code>Colab_2C_Unfamiliar_Data.ipynb</code>, and give it a markdown cell at the top:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Day 2: Colab 2C - Five Claims About a Dataset You've Never Seen</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Names:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Date: 09/01/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Put both of your names in it, then read the file in with <code>pd.read_csv()</code>.</p>
 </section>
 <section id="your-goal" class="level2">
 <h2 class="anchored" data-anchor-id="your-goal">Your goal</h2>
-<p>By the end of the session, produce <strong>five factual claims</strong> about this dataset, each written in a markdown cell, each immediately preceded by the code cell that proves it.</p>
-<p>A claim is factual if a skeptical reader could check it against your output. Compare:</p>
+<p>By the end of the session, your notebook should hold <strong>five factual claims</strong> about this dataset, each written in a markdown cell, and each one immediately preceded by the code cell that produced the numbers in it.</p>
+<p>A claim is factual if a skeptical reader could check it against your output. Here is a vague claim and a factual one, both about the Toolik weather file we used yesterday:</p>
 <blockquote class="blockquote">
-<p>❌ “The dataset has a lot of parks in it.”</p>
-<p>✅ “The dataset contains 5,243 rows describing units of type <code>National Park</code>, out of 11,742 rows total.”</p>
+<p>❌ “The Toolik file has a lot of missing data.”</p>
+<p>✅ “<code>Daily_globalrad_total_jcm2</code> is missing on 7,053 of the 11,171 days, and <code>Daily_AirTemp_Mean_C</code> is missing on none of them.”</p>
 </blockquote>
-<p>At least one of your five claims must be about a <strong>problem</strong> with the data.</p>
+<p>At least one of your five claims must be about a <strong>problem</strong> with the data (there is more than one problem in this file to find!).</p>
 </section>
 <section id="working-through-it" class="level2">
 <h2 class="anchored" data-anchor-id="working-through-it">Working through it</h2>
-<p>Don’t try to write claims immediately. Explore the data first, then decide what’s worth claiming.</p>
+<p>Don’t start by writing claims. Explore the file first, and then decide which of the things you found are worth writing down.</p>
 <ol type="1">
-<li><p><strong>Size it up.</strong> How many rows and columns? What are the column names?</p></li>
-<li><p><strong>Check the types.</strong> Run <code>.dtypes</code>. At least one column has a type you would not predict from its name. Find it, and then work out <em>why</em> by looking at what’s actually in that column.</p></li>
-<li><p><strong>Run the health check.</strong> Which columns have missing values, and how many?</p></li>
-<li><p><strong>Count the categories.</strong> Use <code>.value_counts()</code> on at least three text columns. Which columns are informative?</p></li>
-<li><p><strong>Summarize the numbers.</strong> Run <code>.describe()</code>. One of the numeric summaries may be distorted. Say which, and connect it to what you found in step 2.</p></li>
-<li><p><strong>Make a working subset.</strong> Build a list of the columns you’d actually want to keep, select them into a smaller DataFrame, and rename at least one column with a dictionary.</p></li>
-<li><p><strong>Write your five claims.</strong> Each one: a code cell, then a markdown cell stating the claim in a full sentence with the specific numbers in it.</p></li>
+<li><p><strong>Size it up.</strong> Start with <code>.shape</code> and <code>.columns</code>. How many rows and columns are there, and what are the columns called?</p></li>
+<li><p><strong>Check the types.</strong> Run <code>.dtypes</code>. At least one column is not the type its name suggests. Find it, and then work out <em>why</em> by looking at what is actually in that column.</p></li>
+<li><p><strong>Run the health check.</strong> Use <code>.info()</code> and <code>.isnull().sum()</code>. Which columns have missing values, and how many rows are missing in each one?</p></li>
+<li><p><strong>Count the categories.</strong> Run <code>.value_counts()</code> on at least three of the text columns. Which of them would help you tell one row from another, and which would not?</p></li>
+<li><p><strong>Summarize the numbers.</strong> Run <code>.describe()</code>. In one column the mean sits a long way from the median, which can be (but isn’t always!) a sign of an issue in the data. Specify the column, say which of its statistics you would refuse to report, and connect it back to what you found in step 2. While you are there, check whether any numeric column holds the same value in every row.</p></li>
+<li><p><strong>Make a working subset.</strong> Build a list of the columns you would actually want to keep, select them into a smaller DataFrame, and rename at least one of those columns using a dictionary.</p></li>
+<li><p><strong>Write your five claims.</strong> For each one, put the code cell first, and then a markdown cell stating the claim in a full sentence with the actual numbers in it.</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="If you get stuck on step 2">
 <div class="callout-header d-flex align-content-center">
@@ -451,7 +491,7 @@ If you get stuck on step 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Ask the question a different way. If a column of years isn’t stored as a number, then something in it isn’t a year. <code>.value_counts()</code> can help to reveal what is happening.</p>
+<p>If a column of years is not stored as a number, then something in that column is not a year. Run <code>.value_counts()</code> on it, look down the list for the values that are not years, and count how many rows they account for. Come and find Cella or Kelly if the result still doesn’t make sense!</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="If you finish early">
@@ -464,13 +504,13 @@ If you finish early
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Write a sixth claim about something you’d need to know before using this data to answer “which national park is the most visited?” You do not need to answer that question. We build the tools for it over the next three days. Just say what would have to be true first.</p>
+<p>Write a sixth claim about something you would need to know before you could use this file to answer “which national park is the most visited?” You do not need to answer that question today, because we will build the tools for it over the next three days. Just say what would have to be true about the data first.</p>
 </div>
 </div>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>
-<p>We’ll hear two or three pairs read out their problem claim. Be ready to say how you found it, not just what it was.</p>
+<p>At the end of the session, if we have time, we will hear two or three pairs read out the problem they found in the data. Be ready to say how you found it, and not just what it was!</p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>

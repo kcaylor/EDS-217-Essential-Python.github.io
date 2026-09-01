@@ -409,8 +409,9 @@ ul.task-list li input[type="checkbox"] {
 <div class="gray-text center-text">
 <p><em>An illustration of collectible toys.</em> <a href="https://www.midjourney.com/jobs/7c249ba1-5cc4-4a9b-92d9-78ca3134f623?index=0">MidJourney 5</a></p>
 </div>
-<p>Yesterday we ran a complete workflow to get a sense of what python syntax looks like and to meet the various libraries and commands that make up the python data science stack. Today we’ll slow down and get to know the first two steps of that workflow, <strong>Import</strong> and <strong>Explore</strong>. You will learn to explore datasets and get basic information about their structure and contents.</p>
-<p>We will also meet python’s two essential containers, <strong>lists</strong> and <strong>dictionaries</strong>. While they are used across python to store structured data, we will need them for two specific purposes: creating a list of columns to select, and using a dictionary to rename them.</p>
+<p>Yesterday we ran a complete workflow, from a file on the course website to a finished chart, to get a sense of what python syntax looks like and to meet the libraries and commands that make up the python data science stack. Today we will slow down and spend the whole day on the first two steps of yesterday’s workflow, <strong>Import</strong> and <strong>Explore</strong>.</p>
+<p><strong>Import</strong> is getting a file into pandas as a DataFrame, whether the file sits on your own computer or at a URL somewhere out on the internet. <strong>Explore</strong> is the what you should do with any new dataset before you compute a single number from it: how many rows and columns you have, what type pandas gave each column, where the gaps are, and which columns have the same value all the way down. Exploring costs you a few minutes at the start, but the time is well-spent to avoid problems later in your data science workflow.</p>
+<p>We will also meet python’s two essential containers, <strong>lists</strong> and <strong>dictionaries</strong>. We use both of them all over python to store structured data. Today each of them has one specific job: we will use a list to name the columns of a data set you want to keep, and a dictionary to say what each of those columns should be renamed to. We will use them that way for most of the day, and then in the last session we will slow down and look at both containers on their own terms. Lists and dictionaries, <strong>like all python objects</strong>, have a lot of cool features we can put to use!</p>
 <section id="class-materials" class="level2">
 <h2 class="anchored" data-anchor-id="class-materials">Class materials</h2>
 <table class="table-hover table-bordered caption-top table">
@@ -435,14 +436,14 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td>day 2 / afternoon</td>
 <td><a href="../course-materials/coding-colabs/2c_exploring_unfamiliar_data.html">🙌 Five Claims About a Dataset You’ve Never Seen</a></td>
-<td><a href="../course-materials/live-coding/2d_lists_and_dicts.html">📝 Lists &amp; Dictionaries usage in Data Science</a></td>
+<td><a href="../course-materials/live-coding/2d_lists_and_dicts.html">🐍 Lists &amp; Dictionaries, On Their Own Terms</a></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="end-of-day-practice" class="level2">
 <h2 class="anchored" data-anchor-id="end-of-day-practice">End-of-day practice</h2>
-<p>Today’s practice returns to the dataset you ran yesterday, and asks what was actually in it.</p>
+<p>Yesterday’s analysis used one column out of the twenty-one in the Toolik weather file. Before you leave today you will go back to the rest of that file and write a <strong>data biography</strong> of it: what it covers, what condition it is in, and what a colleague should check before trusting a number computed from it. Every claim in your biography must be backed by a cell that produced it, which is what the morning sessions are practice for.</p>
 <ul>
 <li><a href="../course-materials/eod-practice/eod-day2-2026.html"><i class="fa-solid fa-pencil" title="A pencil" aria-label="pencil"></i> <strong>Day 2 Practice:</strong> Creating a Data Biography</a></li>
 </ul>

@@ -20,8 +20,8 @@ format:
 Yesterday we ran `pd.read_csv()` on the Toolik weather file and a DataFrame appeared. This
 morning we will slow that one line of code down and work out what it actually does, what it
 gives you back, and which of its settings you will want to change. Every workflow we write for
-the rest of the week starts by getting a file into python correctly, so it is worth spending an
-hour on the reading step by itself.
+the rest of the week starts by getting a file into python correctly, so we give the reading step
+a session of its own.
 
 By the end of this session you will be able to:
 
@@ -266,7 +266,9 @@ of files (this one included!) do not.
 :::{.callout-tip title="✏️ Test your knowledge"}
 Read the Goleta file again, this time using `datetimeUtc` as the index, into a variable
 called `goleta_utc`. How many columns does it have, and how many does the original `goleta`
-have?
+have? Then run `goleta_utc.index.nunique()` and compare it with the number of rows. The caution
+above said this file records more than one measurement per moment, so check what that did to
+your index.
 :::
 
 ## Putting it together

@@ -95,13 +95,15 @@ The `.year` is the request for the year of that date string. **Dates get a full 
 :::
 
 ```{python}
+#| echo: true
+#| include: true
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
 url = 'https://eds-217-essential-python.github.io/data/marine_microplastics.csv'
 df = pd.read_csv(url, parse_dates=['Date'], date_format='%m/%d/%Y %I:%M:%S %p')
-df.shape
 ```
 
 ## Part 1: Get your bearings

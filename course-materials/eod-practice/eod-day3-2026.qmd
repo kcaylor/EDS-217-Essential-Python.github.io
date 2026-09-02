@@ -77,11 +77,13 @@ Date: 09/02/2026
    of row numbers.
 
 ```{python}
+#| echo: true
+#| include: true
+
 import pandas as pd
 
 url = 'https://eds-217-essential-python.github.io/data/banana_index.csv'
 df = pd.read_csv(url, index_col='entity')
-df.shape
 ```
 
 4. The file has five columns that are bookkeeping rather than data: `year`,

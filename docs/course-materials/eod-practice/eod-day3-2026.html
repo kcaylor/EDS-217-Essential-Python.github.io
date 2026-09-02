@@ -483,8 +483,19 @@ Reference
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Date: 09/02/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="3" type="1">
-<li><p>Read the data, using <code>entity</code> as the index. The <code>entity</code> column holds the food names, and making it the index means every ranking you print will be labelled with food names instead of row numbers.</p></li>
-<li><p>The file has five columns that are bookkeeping rather than data: <code>year</code>, <code>Banana values</code>, <code>type</code>, <code>Chart?</code>, and <code>Unnamed: 16</code>. Remove them.</p></li>
+<li>Read the data, using <code>entity</code> as the index. The <code>entity</code> column holds the food names, and making it the index means every ranking you print will be labelled with food names instead of row numbers.</li>
+</ol>
+<div id="b59add1d" class="cell" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/banana_index.csv'</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url, index_col<span class="op">=</span><span class="st">'entity'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="4" type="1">
+<li>The file has five columns that are bookkeeping rather than data: <code>year</code>, <code>Banana values</code>, <code>type</code>, <code>Chart?</code>, and <code>Unnamed: 16</code>. Remove them.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="🧭 Field Note: dropping columns you don't want">
 <div class="callout-header d-flex align-content-center">
@@ -497,7 +508,7 @@ Reference
 </div>
 <div class="callout-body-container callout-body">
 <p><code>.drop()</code> takes a <strong>list</strong> of column names and <code>axis='columns'</code>, and returns a new DataFrame without them. Here is the whole line. Run it as written:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop([<span class="st">'year'</span>, <span class="st">'Banana values'</span>, <span class="st">'type'</span>, <span class="st">'Chart?'</span>, <span class="st">'Unnamed: 16'</span>], axis<span class="op">=</span><span class="st">'columns'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop([<span class="st">'year'</span>, <span class="st">'Banana values'</span>, <span class="st">'type'</span>, <span class="st">'Chart?'</span>, <span class="st">'Unnamed: 16'</span>], axis<span class="op">=</span><span class="st">'columns'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Two things in that line are worth noticing. The names go in a list, exactly like the lists you used to select columns yesterday. And <code>axis='columns'</code> tells pandas that you mean columns and not rows, because <code>.drop()</code> can remove either one.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/pandas_dataframes.html">Cheatsheet: pandas DataFrames</a></p>
 </div>
@@ -564,9 +575,9 @@ Hold that thought
 <div class="callout-body-container callout-body">
 <p>The next three questions need the two operators we met in the filter session this morning, so here they are again in one place.</p>
 <p><code>~</code> goes in front of a whole condition and turns it around. Every row the condition kept is dropped, and every row it dropped is kept:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df[<span class="op">~</span>(df[<span class="st">'column'</span>] <span class="op">&gt;</span> value)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[<span class="op">~</span>(df[<span class="st">'column'</span>] <span class="op">&gt;</span> value)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>&amp;</code> joins two conditions, and each condition <strong>must</strong> have its own pair of parentheses around it. Leave them out and Python combines the wrong pieces and reports an error that has nothing to do with what you meant:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[(df[<span class="st">'column_a'</span>] <span class="op">&gt;</span> value) <span class="op">&amp;</span> (df[<span class="st">'column_b'</span>] <span class="op">&lt;</span> other_value)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df[(df[<span class="st">'column_a'</span>] <span class="op">&gt;</span> value) <span class="op">&amp;</span> (df[<span class="st">'column_b'</span>] <span class="op">&lt;</span> other_value)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The difference between <code>~(x &gt; 1)</code> and <code>x &lt; 1</code> is the point of questions 12 and 13, so run both and look at the two numbers before you explain them.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/data_selection.html">Cheatsheet: data selection and filtering</a></p>
 </div>
@@ -605,7 +616,7 @@ Hold that thought
 </div>
 <div class="callout-body-container callout-body">
 <p>The food names are the <strong>index</strong> of your table rather than a column, so the filter pattern will not work on them. <code>.filter()</code> will. Given a substring, it keeps every row whose label contains that substring:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cheese <span class="op">=</span> df.<span class="bu">filter</span>(like<span class="op">=</span><span class="st">'heese'</span>, axis<span class="op">=</span><span class="st">'rows'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cheese <span class="op">=</span> df.<span class="bu">filter</span>(like<span class="op">=</span><span class="st">'heese'</span>, axis<span class="op">=</span><span class="st">'rows'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We use <code>like='heese'</code> rather than <code>'cheese'</code> because matching is case-sensitive, and <code>Cheesecake</code> begins with a capital C that <code>'cheese'</code> would miss. Run the line as written, then rank <code>cheese</code> with the top-N pattern exactly as you have been doing all along. Read the row labels you get back before you trust the table, because question 21 asks you what the match actually caught.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/data_selection.html">Cheatsheet: data selection and filtering</a></p>
 </div>
@@ -626,8 +637,8 @@ Hold that thought
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
 <p>Look back through your notebook. Almost every code cell you wrote was one of two patterns:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&gt;</span> value]                             <span class="co"># filter: fewer rows</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)    <span class="co"># rank: same rows, new order, first few</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&gt;</span> value]                             <span class="co"># filter: fewer rows</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)    <span class="co"># rank: same rows, new order, first few</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Everything else was a variation. <code>&amp;</code> and <code>|</code> joined two questions into one filter. <code>~</code> turned a question around. <code>.idxmax()</code> returned the label instead of the row. <code>.loc[]</code> looked up one value.</p>
 <p>Two patterns got you through every question in today’s practice, and we will be writing both of them nearly every day for the rest of this course.</p>
 </section>

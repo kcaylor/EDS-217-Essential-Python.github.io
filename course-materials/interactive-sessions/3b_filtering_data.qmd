@@ -184,6 +184,21 @@ particulates = goleta[(goleta['parameter'] == 'pm25') | (goleta['parameter'] == 
 particulates.shape
 ```
 
+Each side of an `&` or a `|` can itself be a two-part condition. When it is, wrap that whole
+side in a further pair of parentheses so the two questions stay separate:
+
+```{python}
+either_pollutant_high = goleta[
+    ((goleta['parameter'] == 'pm25') & (goleta['value'] > 9))
+    | ((goleta['parameter'] == 'pm10') & (goleta['value'] > 20))
+]
+either_pollutant_high.shape
+```
+
+240 rows: 128 hours of pm25 above 9, plus 112 hours of pm10 above 20. Read the line from the
+inside out. Each innermost pair is one comparison, each middle pair is one complete question
+about one pollutant, and the `|` joins the two questions.
+
 :::{.callout-important title="The parentheses are not optional"}
 Leave them out and you get an error that has nothing to do with what you meant:
 
@@ -192,13 +207,18 @@ goleta[goleta['parameter'] == 'pm25' & goleta['value'] > 9]
 ```
 
 `&` binds more tightly than `==` and `>`, so Python combines the wrong pieces before it ever
-gets to your comparison. The rule here is absolute: **wrap every comparison in its own
-parentheses.** Do it even when there is only one condition, if that helps you build the habit.
+gets to your comparison.
+
+The rule that avoids all of this: **put parentheses around each comparison you join with `&` or
+`|`.** A comparison is something with `==`, `>`, `<`, `>=`, `<=` or `!=` in it. A method call
+like `.isin([...])` is not a comparison and does not need its own pair, though adding them does
+no harm if you would rather not think about which is which.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Find the ozone readings above 0.04 ppm. Then find the readings that are **either** ozone above
-0.04 ppm **or** pm25 above 20 µg/m³. How many rows does each give you?
+Find the ozone readings above 0.04 ppm. Then, using the two-level shape above, find the readings
+that are **either** ozone above 0.04 ppm **or** pm25 above 20 µg/m³. How many rows does each
+give you?
 :::
 
 ## Turning a condition around with `~`

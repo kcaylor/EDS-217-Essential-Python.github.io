@@ -442,14 +442,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div style="width: 80%; margin: auto;">
 <p><img src="../images/panda.jpeg" class="img-fluid"></p>
 </div>
-<p>On Monday you and a partner worked out what was in the National Park Service visitor records and wrote five factual claims about those records. Now we will use our new tools and methods to dig deeper into the data. Specifically, we will now be able to ask “which one” and “top ten” questions. Every one of the tasks below uses these new patterns.</p>
-<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it.</p>
-<p>You have 45 minutes.</p>
+<p>Yesterday you and a partner worked out what was in the National Park Service visitor records and wrote five factual claims about those records. Now we will use our new tools and methods to dig deeper into the data. Specifically, we will now be able to ask “which one” and “top ten” questions. Every one of the code questions below uses these new patterns.</p>
+<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read the code through (quietly) and say what they expect it to produce before you run it.</p>
+<p>We have about 45 minutes for this activity: roughly 40 on the three parts below, and the rest on setting up and on the wrap-up. Please tell Cella or Kelly if you get stuck, rather than spending ten of those minutes on one line!</p>
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">The data</h2>
-<p>The same file you explored on Monday:</p>
+<p>The same file you explored yesterday:</p>
 <pre><code>https://eds-217-essential-python.github.io/data/national_parks.csv</code></pre>
-<p>There are two things you saw on Monday that will matter today:</p>
+<p>Two things you saw yesterday will matter today:</p>
 <ul>
 <li>the <code>year</code> column is stored as <strong>text</strong>, not as numbers</li>
 <li>some rows have a <code>year</code> of <code>Total</code> rather than an actual year</li>
@@ -461,7 +461,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="our-two-new-patterns" class="level2">
 <h2 class="anchored" data-anchor-id="our-two-new-patterns">Our two new patterns</h2>
-<p>You have these already on your session notebooks from earlier this morning, but as a reminder:</p>
+<p>You have both of these in your session notebooks already, the filter pattern from this morning and the top-N pattern from earlier this afternoon, but here they are as a reminder:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&gt;</span> value]                                <span class="co"># the filter pattern</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)       <span class="co"># the top-N pattern</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -472,7 +472,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>How many rows describe units whose <code>unit_type</code> is exactly <code>National Park</code>?</p></li>
 <li><p>How many rows have a <code>year</code> of <code>Total</code>? Use <code>~</code> or <code>!=</code> to build a table called <code>by_year</code> that has none of them in it. How many rows does <code>by_year</code> have?</p></li>
 <li><p>The <code>region</code> column uses two-letter codes. Build a <strong>list</strong> of the codes <code>PW</code>, <code>IM</code>, and <code>AK</code>, and use <code>.isin()</code> to filter <code>by_year</code> down to units in those three regions. How many rows?</p></li>
-<li><p>Using two conditions in one filter, find the rows that are National Parks <strong>and</strong> recorded more than 5 million visitors. How many are there, and what does each row represent?</p></li>
+<li><p>Using two conditions in one filter on <code>by_year</code>, find the rows that are National Parks <strong>and</strong> recorded more than 5 million visitors. How many are there, and what does each row represent? Use <code>by_year</code> rather than <code>parks</code>, because the <code>Total</code> rows you removed in question 2 would otherwise be counted alongside the single years.</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="Stuck on the parentheses?">
 <div class="callout-header d-flex align-content-center">
@@ -484,7 +484,7 @@ Stuck on the parentheses?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Every comparison inside a combined filter needs its own set: <code>(a == b) &amp; (c &gt; d)</code>. If you get a <code>TypeError</code> that mentions something you did not write, missing parentheses are almost always the reason.</p>
+<p>Every comparison inside a combined filter needs its own set of parentheses: <code>(a == b) &amp; (c &gt; d)</code>. If you get a <code>TypeError</code> that mentions something you did not write, missing parentheses are almost always the reason.</p>
 </div>
 </div>
 </section>
@@ -494,7 +494,7 @@ Stuck on the parentheses?
 <li><p>Rank <strong>all</strong> of <code>parks</code> by <code>visitors</code>, largest first, and look at the top 10. Something is wrong with this answer. Say what, and say why in one sentence.</p></li>
 <li><p>Fix it, and rank <code>by_year</code> instead. Which single park unit had the highest visitor count in any one year, and in what year?</p></li>
 <li><p>Filter to National Parks in the year <code>2016</code>, then find the top 10 by visitors. Show only the <code>unit_name</code>, <code>state</code>, and <code>visitors</code> columns.</p></li>
-<li><p>How many of the 61 National Parks recorded more than a million visitors in 2016?</p></li>
+<li><p>Your <code>np_2016</code> table has one row per National Park that reported a 2016 figure. Print its shape to see how many parks that is, then find how many of them recorded more than a million visitors.</p></li>
 <li><p>Use <code>.idxmax()</code> and <code>.loc[]</code> on <code>np_2016</code> to print the name of the most-visited National Park of 2016 on its own, without displaying the whole row.</p></li>
 </ol>
 </section>
@@ -515,7 +515,7 @@ If you finish early
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Pick a year other than 2016 and produce the same top 10. Did the order change? Name one park that moved several places, and say what you would need in order to find out whether that movement is real or an artifact of how the data was recorded.</p>
+<p>Pick a year other than 2016 and produce the same top 10. Did the order change? Name one park that moved several places, if any of them did, and say what you would need in order to find out whether that movement is real or an artifact of how the data was recorded.</p>
 <p>Do not try to compare all the years at once. That needs grouping, and we get to grouping later this week.</p>
 </div>
 </div>

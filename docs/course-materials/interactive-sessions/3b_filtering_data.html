@@ -424,7 +424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a></li>
   <li><a href="#the-pattern" id="toc-the-pattern" class="nav-link" data-scroll-target="#the-pattern">The pattern</a></li>
   <li><a href="#filtering-on-text" id="toc-filtering-on-text" class="nav-link" data-scroll-target="#filtering-on-text">Filtering on text</a></li>
-  <li><a href="#why-this-matters-here" id="toc-why-this-matters-here" class="nav-link" data-scroll-target="#why-this-matters-here">Why this matters here</a></li>
+  <li><a href="#why-filtering-matters-for-the-goleta-data" id="toc-why-filtering-matters-for-the-goleta-data" class="nav-link" data-scroll-target="#why-filtering-matters-for-the-goleta-data">Why filtering matters for the Goleta data</a></li>
   <li><a href="#two-conditions-at-once" id="toc-two-conditions-at-once" class="nav-link" data-scroll-target="#two-conditions-at-once">Two conditions at once</a></li>
   <li><a href="#turning-a-condition-around-with" id="toc-turning-a-condition-around-with" class="nav-link" data-scroll-target="#turning-a-condition-around-with">Turning a condition around with <code>~</code></a></li>
   <li><a href="#matching-a-list-of-values-with-.isin" id="toc-matching-a-list-of-values-with-.isin" class="nav-link" data-scroll-target="#matching-a-list-of-values-with-.isin">Matching a list of values with <code>.isin()</code></a></li>
@@ -448,8 +448,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>A panda, sorting the wheat from the chaff.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
 </div>
-<p>An hour ago you wrote a question and asked it of an entire column. What came back was a <strong>boolean mask</strong>: a <code>True</code> or a <code>False</code> for every row.</p>
-<p>A mask by itself is not very interesting. What you actually want is the rows it says <code>True</code> about. Getting them takes one line, and that line is the most useful thing you will learn this week.</p>
+<p>Earlier this morning you wrote a question and asked it of an entire column of the Toolik weather table. The answer came back as a <strong>boolean mask</strong>: a <code>True</code> or a <code>False</code> for every one of its 11,171 rows.</p>
+<p>A mask on its own does not do much for us. The rows it says <code>True</code> about are what you are after, and getting them takes one line of code, which we will write in nearly every session from here on.</p>
 <p>By the end of this session you will be able to:</p>
 <ul>
 <li>write the <strong>filter pattern</strong>, <code>df[df['col'] &gt; value]</code>, without looking it up</li>
@@ -475,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Save</strong> with <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), and keep saving as you go.</p></li>
 <li><p>Read in the Goleta air quality data you explored yesterday:</p></li>
 </ol>
-<div id="0cf7219c" class="cell" data-execution_count="1">
+<div id="99922592" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -492,7 +492,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-pattern" class="level2">
 <h2 class="anchored" data-anchor-id="the-pattern">The pattern</h2>
 <p>Here it is, whole:</p>
-<div id="e792c8c5" class="cell" data-execution_count="2">
+<div id="14c3c6e9" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">20</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -728,12 +728,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Read it from the inside out. <code>goleta['value'] &gt; 20</code> is the mask you learned to write this morning: <code>True</code> on every row where the value is above 20, <code>False</code> everywhere else. Wrapping it in <code>goleta[ ... ]</code> says “give me the rows where that was <code>True</code>.”</p>
-<p>That is the <strong>filter pattern</strong>. The general form is:</p>
+<p>Read it from the inside out. <code>goleta['value'] &gt; 20</code> is the same kind of mask you wrote this morning, on a different table: <code>True</code> on every row where the value is above 20, <code>False</code> everywhere else. Wrapping it in <code>goleta[ ... ]</code> says “give me the rows where that was <code>True</code>.”</p>
+<p>The line we just ran is the <strong>filter pattern</strong>. The general form is:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&lt;</span>comparison<span class="op">&gt;</span> value]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <code>df</code> appears twice, and that trips people up at first. The inner one builds the question. The outer one applies the answer. They are the same table both times.</p>
-<p>Assign it a name if you want to use the result:</p>
-<div id="ca17f6fd" class="cell" data-execution_count="3">
+<p>The <code>df</code> appears twice, which looks redundant until you see what each one is doing. The inner one builds the question, the outer one applies the answer, and they are the same table both times.</p>
+<p>Give the result a name if you want to use it later:</p>
+<div id="807b7497" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>high_readings <span class="op">=</span> goleta[goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">20</span>]</span>
@@ -743,8 +743,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>(115, 15)</code></pre>
 </div>
 </div>
-<p>115 rows out of 1,962. Compare the shapes and you can see the filter did something:</p>
-<div id="70680bc8" class="cell" data-execution_count="4">
+<p>115 rows out of 1,962. Compare the shapes before and after, and you can see exactly how many rows the filter kept:</p>
+<div id="20c60379" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'before:'</span>, goleta.shape)</span>
@@ -765,7 +765,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 Filtering never changes the original. <code>goleta</code> still has all 1,962 rows. What you get back is a new, smaller table, and if you don’t give it a name it is displayed and then discarded. This is the same rule you met with <code>.rename()</code> yesterday.</p>
+<p>🐍 Filtering never changes the original. <code>goleta</code> still has all 1,962 rows. You get back a new, smaller table, and if you don’t give it a name it is displayed once and then discarded. <code>.rename()</code> followed the same rule yesterday.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
@@ -785,7 +785,7 @@ Note
 <section id="filtering-on-text" class="level2">
 <h2 class="anchored" data-anchor-id="filtering-on-text">Filtering on text</h2>
 <p>The same pattern works on text columns. Use <code>==</code> for an exact match:</p>
-<div id="bd53532b" class="cell" data-execution_count="5">
+<div id="6870cb1d" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ozone <span class="op">=</span> goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'o3'</span>]</span>
@@ -913,7 +913,7 @@ Note
 </div>
 </div>
 </div>
-<div id="8596621e" class="cell" data-execution_count="6">
+<div id="bd3c725a" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ozone.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -923,7 +923,7 @@ Note
 </div>
 </div>
 <p>711 ozone readings. Text comparisons are exact and case-sensitive, so <code>'O3'</code> would have matched nothing at all:</p>
-<div id="c0186832" class="cell" data-execution_count="7">
+<div id="c1a1f0d2" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'O3'</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -932,7 +932,7 @@ Note
 <pre><code>(0, 15)</code></pre>
 </div>
 </div>
-<p>An empty result is not an error. It is an answer, and it is usually a spelling problem.</p>
+<p>An empty result is not an error. Zero rows is a real answer, and it usually means a spelling or capitalization problem rather than a fact about the data.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -947,11 +947,11 @@ Note
 </div>
 </div>
 </section>
-<section id="why-this-matters-here" class="level2">
-<h2 class="anchored" data-anchor-id="why-this-matters-here">Why this matters here</h2>
-<p>Yesterday you found that <code>goleta['value']</code> stacks three different pollutants, in two different units, in one column. That made <code>.describe()</code> on the whole column meaningless.</p>
+<section id="why-filtering-matters-for-the-goleta-data" class="level2">
+<h2 class="anchored" data-anchor-id="why-filtering-matters-for-the-goleta-data">Why filtering matters for the Goleta data</h2>
+<p>Yesterday you found that <code>goleta['value']</code> stacks three different pollutants, in two different units, in one column. Mixing three pollutants together made <code>.describe()</code> on the whole column meaningless.</p>
 <p>Filtering is the fix:</p>
-<div id="8ad78c52" class="cell" data-execution_count="8">
+<div id="90794b94" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'value'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -968,7 +968,7 @@ max        40.000000
 Name: value, dtype: float64</code></pre>
 </div>
 </div>
-<div id="55ece138" class="cell" data-execution_count="9">
+<div id="3e4e6682" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>][<span class="st">'value'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -985,15 +985,15 @@ max       22.000000
 Name: value, dtype: float64</code></pre>
 </div>
 </div>
-<p>The first summary averages micrograms per cubic metre together with parts per million. The second one describes 734 particulate readings, all in µg/m³. Only the second one is a fact.</p>
+<p>The first summary averages micrograms per cubic metre together with parts per million, which gives a mean that describes no substance at all. The second one describes 734 particulate readings, all in µg/m³, and only the second one tells you anything about the air in Goleta.</p>
 </section>
 <section id="two-conditions-at-once" class="level2">
 <h2 class="anchored" data-anchor-id="two-conditions-at-once">Two conditions at once</h2>
 <p><code>&amp;</code> means “and”. Every comparison gets its own parentheses:</p>
-<div id="5c54217f" class="cell" data-execution_count="10">
+<div id="c7c2603a" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>goleta[(goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>) <span class="op">&amp;</span> (goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">12</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>goleta[(goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>) <span class="op">&amp;</span> (goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">9</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
@@ -1040,14 +1040,14 @@ Name: value, dtype: float64</code></pre>
 <td>AirNow</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1331</td>
+<td data-quarto-table-cell-role="th">1265</td>
 <td>1186</td>
 <td>Goleta</td>
 <td>pm25</td>
-<td>13.0</td>
+<td>10.0</td>
 <td>µg/m³</td>
-<td>2024-07-16T08:00:00+00:00</td>
-<td>2024-07-16T01:00:00-07:00</td>
+<td>2024-07-13T14:00:00+00:00</td>
+<td>2024-07-13T07:00:00-07:00</td>
 <td>America/Los_Angeles</td>
 <td>34.445301</td>
 <td>-119.827797</td>
@@ -1058,14 +1058,14 @@ Name: value, dtype: float64</code></pre>
 <td>AirNow</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">1376</td>
+<td data-quarto-table-cell-role="th">1270</td>
 <td>1186</td>
 <td>Goleta</td>
 <td>pm25</td>
-<td>22.0</td>
+<td>10.0</td>
 <td>µg/m³</td>
-<td>2024-07-18T08:00:00+00:00</td>
-<td>2024-07-18T01:00:00-07:00</td>
+<td>2024-07-13T19:00:00+00:00</td>
+<td>2024-07-13T12:00:00-07:00</td>
 <td>America/Los_Angeles</td>
 <td>34.445301</td>
 <td>-119.827797</td>
@@ -1076,14 +1076,14 @@ Name: value, dtype: float64</code></pre>
 <td>AirNow</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1460</td>
+<td data-quarto-table-cell-role="th">1313</td>
 <td>1186</td>
 <td>Goleta</td>
 <td>pm25</td>
-<td>13.0</td>
+<td>12.0</td>
 <td>µg/m³</td>
-<td>2024-07-21T20:00:00+00:00</td>
-<td>2024-07-21T13:00:00-07:00</td>
+<td>2024-07-15T14:00:00+00:00</td>
+<td>2024-07-15T07:00:00-07:00</td>
 <td>America/Los_Angeles</td>
 <td>34.445301</td>
 <td>-119.827797</td>
@@ -1094,14 +1094,14 @@ Name: value, dtype: float64</code></pre>
 <td>AirNow</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">1465</td>
+<td data-quarto-table-cell-role="th">1314</td>
 <td>1186</td>
 <td>Goleta</td>
 <td>pm25</td>
-<td>15.0</td>
+<td>11.0</td>
 <td>µg/m³</td>
-<td>2024-07-22T01:00:00+00:00</td>
-<td>2024-07-21T18:00:00-07:00</td>
+<td>2024-07-15T15:00:00+00:00</td>
+<td>2024-07-15T08:00:00-07:00</td>
 <td>America/Los_Angeles</td>
 <td>34.445301</td>
 <td>-119.827797</td>
@@ -1112,762 +1112,24 @@ Name: value, dtype: float64</code></pre>
 <td>AirNow</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1496</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>14.0</td>
-<td>µg/m³</td>
-<td>2024-07-23T08:00:00+00:00</td>
-<td>2024-07-23T01:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">1520</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>15.0</td>
-<td>µg/m³</td>
-<td>2024-07-24T08:00:00+00:00</td>
-<td>2024-07-24T01:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1529</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>14.0</td>
-<td>µg/m³</td>
-<td>2024-07-24T17:00:00+00:00</td>
-<td>2024-07-24T10:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1533</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>15.0</td>
-<td>µg/m³</td>
-<td>2024-07-24T21:00:00+00:00</td>
-<td>2024-07-24T14:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1534</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>17.0</td>
-<td>µg/m³</td>
-<td>2024-07-24T22:00:00+00:00</td>
-<td>2024-07-24T15:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1536</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>16.0</td>
-<td>µg/m³</td>
-<td>2024-07-25T00:00:00+00:00</td>
-<td>2024-07-24T17:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1537</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>13.0</td>
-<td>µg/m³</td>
-<td>2024-07-25T01:00:00+00:00</td>
-<td>2024-07-24T18:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1556</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>13.0</td>
-<td>µg/m³</td>
-<td>2024-07-25T20:00:00+00:00</td>
-<td>2024-07-25T13:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1586</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>15.0</td>
-<td>µg/m³</td>
-<td>2024-07-27T02:00:00+00:00</td>
-<td>2024-07-26T19:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1587</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>13.0</td>
-<td>µg/m³</td>
-<td>2024-07-27T03:00:00+00:00</td>
-<td>2024-07-26T20:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1592</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>17.0</td>
-<td>µg/m³</td>
-<td>2024-07-27T08:00:00+00:00</td>
-<td>2024-07-27T01:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1600</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>14.0</td>
-<td>µg/m³</td>
-<td>2024-07-27T16:00:00+00:00</td>
-<td>2024-07-27T09:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1601</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>13.0</td>
-<td>µg/m³</td>
-<td>2024-07-27T17:00:00+00:00</td>
-<td>2024-07-27T10:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1602</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>14.0</td>
-<td>µg/m³</td>
-<td>2024-07-27T18:00:00+00:00</td>
-<td>2024-07-27T11:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1603</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>15.0</td>
-<td>µg/m³</td>
-<td>2024-07-27T19:00:00+00:00</td>
-<td>2024-07-27T12:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1608</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>13.0</td>
-<td>µg/m³</td>
-<td>2024-07-28T00:00:00+00:00</td>
-<td>2024-07-27T17:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1609</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>15.0</td>
-<td>µg/m³</td>
-<td>2024-07-28T01:00:00+00:00</td>
-<td>2024-07-27T18:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1610</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>14.0</td>
-<td>µg/m³</td>
-<td>2024-07-28T02:00:00+00:00</td>
-<td>2024-07-27T19:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1630</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>13.0</td>
-<td>µg/m³</td>
-<td>2024-07-28T22:00:00+00:00</td>
-<td>2024-07-28T15:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1640</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>14.0</td>
-<td>µg/m³</td>
-<td>2024-07-29T08:00:00+00:00</td>
-<td>2024-07-29T01:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1651</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>13.0</td>
-<td>µg/m³</td>
-<td>2024-07-29T19:00:00+00:00</td>
-<td>2024-07-29T12:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1712</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>22.0</td>
-<td>µg/m³</td>
-<td>2024-08-01T08:00:00+00:00</td>
-<td>2024-08-01T01:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1802</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>15.0</td>
-<td>µg/m³</td>
-<td>2024-08-05T02:00:00+00:00</td>
-<td>2024-08-04T19:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1803</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>14.0</td>
-<td>µg/m³</td>
-<td>2024-08-05T03:00:00+00:00</td>
-<td>2024-08-04T20:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1837</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>13.0</td>
-<td>µg/m³</td>
-<td>2024-08-06T19:00:00+00:00</td>
-<td>2024-08-06T12:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1838</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>19.0</td>
-<td>µg/m³</td>
-<td>2024-08-06T20:00:00+00:00</td>
-<td>2024-08-06T13:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1839</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>16.0</td>
-<td>µg/m³</td>
-<td>2024-08-06T21:00:00+00:00</td>
-<td>2024-08-06T14:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1840</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>16.0</td>
-<td>µg/m³</td>
-<td>2024-08-06T23:00:00+00:00</td>
-<td>2024-08-06T16:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1842</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>14.0</td>
-<td>µg/m³</td>
-<td>2024-08-07T01:00:00+00:00</td>
-<td>2024-08-06T18:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1844</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>13.0</td>
-<td>µg/m³</td>
-<td>2024-08-07T03:00:00+00:00</td>
-<td>2024-08-06T20:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1859</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>15.0</td>
-<td>µg/m³</td>
-<td>2024-08-07T18:00:00+00:00</td>
-<td>2024-08-07T11:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1860</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>13.0</td>
-<td>µg/m³</td>
-<td>2024-08-07T19:00:00+00:00</td>
-<td>2024-08-07T12:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1861</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>14.0</td>
-<td>µg/m³</td>
-<td>2024-08-07T20:00:00+00:00</td>
-<td>2024-08-07T13:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1862</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>14.0</td>
-<td>µg/m³</td>
-<td>2024-08-07T21:00:00+00:00</td>
-<td>2024-08-07T14:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1863</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>19.0</td>
-<td>µg/m³</td>
-<td>2024-08-07T22:00:00+00:00</td>
-<td>2024-08-07T15:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1873</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>21.0</td>
-<td>µg/m³</td>
-<td>2024-08-08T08:00:00+00:00</td>
-<td>2024-08-08T01:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1928</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>13.0</td>
-<td>µg/m³</td>
-<td>2024-08-10T15:00:00+00:00</td>
-<td>2024-08-10T08:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1929</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>14.0</td>
-<td>µg/m³</td>
-<td>2024-08-10T16:00:00+00:00</td>
-<td>2024-08-10T09:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1930</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>20.0</td>
-<td>µg/m³</td>
-<td>2024-08-10T17:00:00+00:00</td>
-<td>2024-08-10T10:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1932</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>15.0</td>
-<td>µg/m³</td>
-<td>2024-08-10T19:00:00+00:00</td>
-<td>2024-08-10T12:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1934</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>13.0</td>
-<td>µg/m³</td>
-<td>2024-08-10T21:00:00+00:00</td>
-<td>2024-08-10T14:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1940</td>
-<td>1186</td>
-<td>Goleta</td>
-<td>pm25</td>
-<td>13.0</td>
-<td>µg/m³</td>
-<td>2024-08-11T03:00:00+00:00</td>
-<td>2024-08-10T20:00:00-07:00</td>
-<td>America/Los_Angeles</td>
-<td>34.445301</td>
-<td>-119.827797</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unknown Governmental Organization</td>
-<td>AirNow</td>
-</tr>
-<tr class="even">
 <td data-quarto-table-cell-role="th">1953</td>
 <td>1186</td>
 <td>Goleta</td>
@@ -1885,7 +1147,7 @@ Name: value, dtype: float64</code></pre>
 <td>Unknown Governmental Organization</td>
 <td>AirNow</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td data-quarto-table-cell-role="th">1954</td>
 <td>1186</td>
 <td>Goleta</td>
@@ -1903,7 +1165,7 @@ Name: value, dtype: float64</code></pre>
 <td>Unknown Governmental Organization</td>
 <td>AirNow</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td data-quarto-table-cell-role="th">1955</td>
 <td>1186</td>
 <td>Goleta</td>
@@ -1921,7 +1183,7 @@ Name: value, dtype: float64</code></pre>
 <td>Unknown Governmental Organization</td>
 <td>AirNow</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td data-quarto-table-cell-role="th">1956</td>
 <td>1186</td>
 <td>Goleta</td>
@@ -1939,15 +1201,34 @@ Name: value, dtype: float64</code></pre>
 <td>Unknown Governmental Organization</td>
 <td>AirNow</td>
 </tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1957</td>
+<td>1186</td>
+<td>Goleta</td>
+<td>pm25</td>
+<td>10.0</td>
+<td>µg/m³</td>
+<td>2024-08-11T20:00:00+00:00</td>
+<td>2024-08-11T13:00:00-07:00</td>
+<td>America/Los_Angeles</td>
+<td>34.445301</td>
+<td>-119.827797</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Unknown Governmental Organization</td>
+<td>AirNow</td>
+</tr>
 </tbody>
 </table>
 
+<p>128 rows × 15 columns</p>
 </div>
 </div>
 </div>
-<p>51 hours where fine particulate matter was above 12 µg/m³, which is the level the US EPA uses as its annual air quality standard.</p>
+<p>128 hours where fine particulate matter was above 9 µg/m³, which is the annual air quality standard the US EPA set in 2024, tightened from the 12 µg/m³ that had stood since 2012.</p>
 <p><code>|</code> means “or”:</p>
-<div id="aca24031" class="cell" data-execution_count="11">
+<div id="0d4055a6" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>particulates <span class="op">=</span> goleta[(goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>) <span class="op">|</span> (goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm10'</span>)]</span>
@@ -1957,6 +1238,21 @@ Name: value, dtype: float64</code></pre>
 <pre><code>(1251, 15)</code></pre>
 </div>
 </div>
+<p>Each side of an <code>&amp;</code> or a <code>|</code> can itself be a two-part condition. When it is, wrap that whole side in a further pair of parentheses so the two questions stay separate:</p>
+<div id="d5282134" class="cell" data-execution_count="12">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>either_pollutant_high <span class="op">=</span> goleta[</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    ((goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>) <span class="op">&amp;</span> (goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">9</span>))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> ((goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm10'</span>) <span class="op">&amp;</span> (goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">20</span>))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>either_pollutant_high.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>(240, 15)</code></pre>
+</div>
+</div>
+<p>240 rows: 128 hours of pm25 above 9, plus 112 hours of pm10 above 20. Read the line from the inside out. Each innermost pair is one comparison, each middle pair is one complete question about one pollutant, and the <code>|</code> joins the two questions.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="The parentheses are not optional">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1968,8 +1264,9 @@ The parentheses are not optional
 </div>
 <div class="callout-body-container callout-body">
 <p>Leave them out and you get an error that has nothing to do with what you meant:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span> <span class="op">&amp;</span> goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">12</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>&amp;</code> binds more tightly than <code>==</code> and <code>&gt;</code>, so Python tries to combine the wrong pieces. The rule is absolute: <strong>wrap every comparison in its own parentheses.</strong> Do it even when there is only one condition if it helps you build the habit.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span> <span class="op">&amp;</span> goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">9</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>&amp;</code> binds more tightly than <code>==</code> and <code>&gt;</code>, so Python combines the wrong pieces before it ever gets to your comparison.</p>
+<p>The rule that avoids all of this: <strong>put parentheses around each comparison you join with <code>&amp;</code> or <code>|</code>.</strong> A comparison is something with <code>==</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code> or <code>!=</code> in it. A method call like <code>.isin([...])</code> is not a comparison and does not need its own pair, though adding them does no harm if you would rather not think about which is which.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
@@ -1982,57 +1279,57 @@ The parentheses are not optional
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Find the ozone readings above 0.04 ppm. Then find the readings that are <strong>either</strong> ozone above 0.04 ppm <strong>or</strong> pm25 above 20 µg/m³. How many rows does each give you?</p>
+<p>Find the ozone readings above 0.04 ppm. Then, using the two-level shape above, find the readings that are <strong>either</strong> ozone above 0.04 ppm <strong>or</strong> pm25 above 20 µg/m³. How many rows does each give you?</p>
 </div>
 </div>
 </section>
 <section id="turning-a-condition-around-with" class="level2">
 <h2 class="anchored" data-anchor-id="turning-a-condition-around-with">Turning a condition around with <code>~</code></h2>
 <p><code>~</code> inverts a mask: every <code>True</code> becomes <code>False</code> and every <code>False</code> becomes <code>True</code>.</p>
-<div id="ed5adf36" class="cell" data-execution_count="12">
+<div id="e0a025f9" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>not_ozone <span class="op">=</span> goleta[<span class="op">~</span>(goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'o3'</span>)]</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>not_ozone.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="12">
-<pre><code>(1251, 15)</code></pre>
-</div>
-</div>
-<p>1,251 rows, which is 1,962 minus the 711 ozone readings. You could have written <code>!=</code> here and gotten the same answer:</p>
-<div id="02789d46" class="cell" data-execution_count="13">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">!=</span> <span class="st">'o3'</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>not_ozone <span class="op">=</span> goleta[<span class="op">~</span>(goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'o3'</span>)]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>not_ozone.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>(1251, 15)</code></pre>
 </div>
 </div>
-<p><code>~</code> earns its keep when the condition is more complicated than a single comparison, and you would rather say “not that” than rewrite the whole thing backwards.</p>
-</section>
-<section id="matching-a-list-of-values-with-.isin" class="level2">
-<h2 class="anchored" data-anchor-id="matching-a-list-of-values-with-.isin">Matching a list of values with <code>.isin()</code></h2>
-<p>Writing <code>(col == 'a') | (col == 'b') | (col == 'c')</code> gets tedious fast. <code>.isin()</code> takes a <strong>list</strong> and matches any of its members:</p>
-<div id="8c5d1987" class="cell" data-execution_count="14">
+<p>1,251 rows, which is 1,962 minus the 711 ozone readings. You could have written <code>!=</code> here and gotten the same answer:</p>
+<div id="5c85021a" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>particulates <span class="op">=</span> goleta[goleta[<span class="st">'parameter'</span>].isin([<span class="st">'pm25'</span>, <span class="st">'pm10'</span>])]</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>particulates.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">!=</span> <span class="st">'o3'</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>(1251, 15)</code></pre>
 </div>
 </div>
-<p>Same 1,251 rows as the <code>|</code> version above, in a line that stays readable when the list grows.</p>
-<p>The argument is an ordinary Python list, so you can build it first and pass it by name:</p>
-<div id="c931f194" class="cell" data-execution_count="15">
+<p><code>~</code> is most useful when the condition is more complicated than a single comparison, and you would rather say “not that” than rewrite the whole condition backwards.</p>
+</section>
+<section id="matching-a-list-of-values-with-.isin" class="level2">
+<h2 class="anchored" data-anchor-id="matching-a-list-of-values-with-.isin">Matching a list of values with <code>.isin()</code></h2>
+<p>Writing <code>(col == 'a') | (col == 'b') | (col == 'c')</code> gets tedious fast. <code>.isin()</code> takes a <strong>list</strong> and matches any of its members:</p>
+<div id="d26a531b" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>of_interest <span class="op">=</span> [<span class="st">'pm25'</span>, <span class="st">'pm10'</span>]</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>].isin(of_interest)].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>particulates <span class="op">=</span> goleta[goleta[<span class="st">'parameter'</span>].isin([<span class="st">'pm25'</span>, <span class="st">'pm10'</span>])]</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>particulates.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>(1251, 15)</code></pre>
+</div>
+</div>
+<p>Same 1,251 rows as the <code>|</code> version above, in a line that stays readable when the list grows.</p>
+<p>The argument is an ordinary Python list, so you can build it first and pass it by name:</p>
+<div id="ee78c68a" class="cell" data-execution_count="16">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>of_interest <span class="op">=</span> [<span class="st">'pm25'</span>, <span class="st">'pm10'</span>]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>].isin(of_interest)].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>(1251, 15)</code></pre>
 </div>
 </div>
@@ -2046,7 +1343,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 <code>.isin()</code> hangs off the <strong>column</strong>, not off the DataFrame: <code>df['col'].isin([...])</code>. It returns a mask, exactly like a comparison does, so it goes in the same place inside the brackets.</p>
+<p>🐍 Call <code>.isin()</code> on the <strong>column</strong>, not on the DataFrame: <code>df['col'].isin([...])</code>. It returns a mask, exactly like a comparison does, so it goes in the same place inside the brackets.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
@@ -2067,27 +1364,27 @@ Note
 <h2 class="anchored" data-anchor-id="keeping-a-result-with-.copy">Keeping a result with <code>.copy()</code></h2>
 <p>Once you have a subset you like, you will usually want to keep working on it, and often that means adding a column to it later this week.</p>
 <p>When you plan to keep and modify a filtered result, say <code>.copy()</code>:</p>
-<div id="bac080e8" class="cell" data-execution_count="16">
+<div id="f720b450" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pm25 <span class="op">=</span> goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>].copy()</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>pm25.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pm25 <span class="op">=</span> goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>].copy()</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>pm25.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>(734, 15)</code></pre>
 </div>
 </div>
-<p><code>.copy()</code> gives you a table of your own, with no remaining connection to <code>goleta</code>. Without it, pandas may hand you back something that is still tied to the original table. When you then try to change it, you get either a warning you don’t understand or a change that quietly does not stick.</p>
+<p><code>.copy()</code> gives you a table of your own, with no remaining connection to <code>goleta</code>. Without it, the subset you get back may still be tied to the original table. When you then try to change the subset, you get either a warning that is hard to interpret or a change that silently never happens.</p>
 <p>The habit is easy to state:</p>
 <blockquote class="blockquote">
 <p>If the filtered result is going to be a <strong>thing you keep and change</strong>, end the line with <code>.copy()</code>. If you are just looking at it, don’t bother.</p>
 </blockquote>
-<div id="8992567f" class="cell" data-execution_count="17">
+<div id="c14325a4" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pm25.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>pm25.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="18">
 <div>
 
 
@@ -2219,7 +1516,7 @@ A warning you will meet
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>SettingWithCopyWarning</code> is pandas telling you it isn’t sure whether you meant to change the subset or the original. It is not always a real problem, but it is always worth reading. Adding <code>.copy()</code> at the point where you made the subset is the fix nine times out of ten.</p>
+<p><code>SettingWithCopyWarning</code> shows up when a change you have written could apply either to the subset or to the original table, and the code as written does not say which one you meant. It is not always a real problem, but it is always worth reading! Adding <code>.copy()</code> at the point where you made the subset is usually the fix.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
@@ -2239,25 +1536,25 @@ A warning you will meet
 <section id="putting-it-together" class="level2">
 <h2 class="anchored" data-anchor-id="putting-it-together">Putting it together</h2>
 <p>A real filter is usually two or three of these ideas in one line:</p>
-<div id="99d7a821" class="cell" data-execution_count="18">
+<div id="31f06e6b" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>summer_particulates <span class="op">=</span> goleta[</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    goleta[<span class="st">'parameter'</span>].isin([<span class="st">'pm25'</span>, <span class="st">'pm10'</span>]) <span class="op">&amp;</span> (goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">15</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>].copy()</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>summer_particulates.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>summer_particulates <span class="op">=</span> goleta[</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    goleta[<span class="st">'parameter'</span>].isin([<span class="st">'pm25'</span>, <span class="st">'pm10'</span>]) <span class="op">&amp;</span> (goleta[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">15</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>].copy()</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>summer_particulates.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>(246, 15)</code></pre>
 </div>
 </div>
-<div id="74bd88b7" class="cell" data-execution_count="19">
+<div id="f430f284" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>summer_particulates[[<span class="st">'parameter'</span>, <span class="st">'value'</span>, <span class="st">'unit'</span>, <span class="st">'datetimeLocal'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>summer_particulates[[<span class="st">'parameter'</span>, <span class="st">'value'</span>, <span class="st">'unit'</span>, <span class="st">'datetimeLocal'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="20">
 <div>
 
 
@@ -2313,7 +1610,7 @@ A warning you will meet
 </div>
 </div>
 </div>
-<p>Notice that the line is broken across several lines inside the square brackets. Python doesn’t mind, and a long filter is much easier to read that way.</p>
+<p>Notice that the filter is broken across several lines inside the square brackets. Python allows a line break anywhere inside a pair of brackets, and a long filter is much easier to read that way.</p>
 </section>
 <section id="key-points" class="level2">
 <h2 class="anchored" data-anchor-id="key-points">Key points</h2>

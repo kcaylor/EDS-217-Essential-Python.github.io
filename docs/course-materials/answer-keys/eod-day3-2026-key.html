@@ -457,7 +457,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="b04f9ec8" class="cell" data-execution_count="1">
+<div id="35b7781d" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -470,7 +470,7 @@ How to use this key
 <pre><code>(160, 16)</code></pre>
 </div>
 </div>
-<div id="ae79b0ca" class="cell" data-execution_count="2">
+<div id="14f8bb39" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop([<span class="st">'year'</span>, <span class="st">'Banana values'</span>, <span class="st">'type'</span>, <span class="st">'Chart?'</span>, <span class="st">'Unnamed: 16'</span>], axis<span class="op">=</span><span class="st">'columns'</span>)</span>
@@ -494,7 +494,7 @@ How to use this key
 <section id="part-1-get-your-bearings" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-get-your-bearings">Part 1: Get your bearings</h2>
 <p><strong>1. How many foods are in the dataset, and how many columns are left after the drop?</strong></p>
-<div id="177d7017" class="cell" data-execution_count="3">
+<div id="6a4092b3" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -517,7 +517,7 @@ How to use this key
 </div>
 </div>
 <p><strong>2. Display the first few rows. What do the three columns whose names begin with <code>Bananas index</code> contain?</strong></p>
-<div id="c2ef8ff4" class="cell" data-execution_count="4">
+<div id="0835b01d" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -644,11 +644,11 @@ How to use this key
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Each one is a <strong>ratio</strong>, not a measurement. It says how many times the banana’s climate cost a food has, and the three columns differ only in what is being held constant: a kilogram of food, a thousand calories of food, or a hundred grams of protein. So a score of 20 means twenty bananas’ worth, on whichever basis that column uses. The raw emissions columns those ratios were built from are still in the table, which is what lets you check the arithmetic yourself.</p>
+<p>Each one is a <strong>ratio</strong>, not a measurement. Each column divides a food’s climate cost by the climate cost of the same amount of banana, and the three columns differ only in what “the same amount” means: a kilogram of food, a thousand calories of food, or a hundred grams of protein. So a score of 20 means twenty bananas’ worth, on whichever basis that column uses. The raw emissions columns those ratios were built from are still in the table, which is what lets you check the arithmetic yourself.</p>
 </div>
 </div>
 <p><strong>3. Run <code>.info()</code>. Two columns have missing values. Which, and how many?</strong></p>
-<div id="e2203355" class="cell" data-execution_count="5">
+<div id="bff1cfdc" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -674,7 +674,7 @@ dtypes: float64(11)
 memory usage: 15.0+ KB</code></pre>
 </div>
 </div>
-<div id="7307fad6" class="cell" data-execution_count="6">
+<div id="c4e0c0a1" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -705,11 +705,11 @@ dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong><code>emissions_100g_protein</code> and <code>Land use per 100 grams of protein</code>, two missing values each.</strong></p>
-<p>Both are per-protein measures, and that is not a coincidence. A food with no protein at all cannot have a per-protein figure, because the division has nothing to divide by. The missing values are telling you something true about the food rather than something careless about the data collection. This is worth pausing on: a null is sometimes a fact.</p>
+<p>Both are per-protein measures, and that is not a coincidence. A food with no protein at all cannot have a per-protein figure, because the division has nothing to divide by. The missing values are telling you something true about the food rather than something careless about the data collection. A null is sometimes a fact, and this one is worth pausing on.</p>
 </div>
 </div>
 <p><strong>4. What is the value of <code>Bananas index (kg)</code> for <code>Bananas</code> itself? Explain in a sentence why the number has to come out that way.</strong></p>
-<div id="0f7f9105" class="cell" data-execution_count="7">
+<div id="454b7a3c" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="st">'Bananas'</span>, <span class="st">'Bananas index (kg)'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -735,7 +735,7 @@ dtype: int64</code></pre>
 <section id="part-2-three-rankings" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-three-rankings">Part 2: Three rankings</h2>
 <p><strong>5, 6 and 7. The three top-10 lists.</strong></p>
-<div id="7b37b8ed" class="cell" data-execution_count="8">
+<div id="e8070b09" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Bananas index (kg)'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -755,7 +755,7 @@ Prawns              23.943772
 Name: Bananas index (kg), dtype: float64</code></pre>
 </div>
 </div>
-<div id="2f5e317b" class="cell" data-execution_count="9">
+<div id="475c5d07" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Bananas index (1000 kcalories)'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -775,7 +775,7 @@ Coconut milk      14.670763
 Name: Bananas index (1000 kcalories), dtype: float64</code></pre>
 </div>
 </div>
-<div id="c4ff1b40" class="cell" data-execution_count="10">
+<div id="1f429e0e" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Bananas index (100g protein)'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -795,7 +795,6 @@ Beef meatballs     4.612929
 Name: Bananas index (100g protein), dtype: float64</code></pre>
 </div>
 </div>
-<p><strong>8. Describe in two or three sentences how the three lists differ. Which foods are near the top of all three? Which appear on only one, and can you say why?</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -806,15 +805,30 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Ranked <strong>per kilogram</strong>, the list is meat: four beef products, three lamb, two cheeses and prawns. Ranked <strong>per thousand calories</strong>, the beef stays but lamb largely drops out and lettuce and raspberries appear, because they are mostly water and you have to eat a great deal of either to obtain a thousand calories. Ranked <strong>per hundred grams of protein</strong>, the list stops being about meat at all: coconut milk, sugar, grapes and marmalade take the top places, because they contain almost no protein and so the division blows the ratio up.</p>
-<p>Beef is near the top of all three, which is the one robust finding. Sugar appears only in the protein ranking, and the reason is arithmetic rather than agriculture: it is the denominator approaching zero, not the numerator being large.</p>
+<p>Three lists of ten foods each, and the only thing that changed between them is the column name. By kilogram the top ten is four beef products, three lamb, two cheeses and prawns. Per thousand calories the beef stays at the top and lettuce, raspberries and coconut milk join it. Per hundred grams of protein coconut milk, sugar and grapes take the first three places while beef steak, beef mince and beef meatballs hold fourth, sixth and tenth.</p>
+<p>If your numbers match but your row order differs, check that you passed <code>ascending=False</code>. If you got a table with eleven columns rather than a single labelled column, you used the whole-table form of the top-N pattern, which is not wrong but is harder to read here.</p>
+</div>
+</div>
+<p><strong>8. In a markdown cell, describe in two or three sentences how the three lists differ from one another. What kind of food rises to the top when the denominator changes from a kilogram to a thousand calories, and what kind rises again when it changes to a hundred grams of protein?</strong></p>
+<div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✅ Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ranked <strong>per kilogram</strong>, the list is meat: four beef products, three lamb, two cheeses and prawns. Ranked <strong>per thousand calories</strong>, the beef stays but lamb largely drops out and lettuce and raspberries appear, because they are mostly water and you have to eat a great deal of either to obtain a thousand calories. Ranked <strong>per hundred grams of protein</strong>, three foods with almost no protein in them take the top places: coconut milk, sugar and grapes, because dividing by a number close to zero blows the ratio up. The beef does not leave, though. Beef steak is still fourth, beef mince sixth and beef meatballs tenth, so the protein ranking mixes the genuinely costly foods together with the arithmetic artefacts.</p>
+<p>So the answer to the question as asked: moving from a kilogram to a thousand calories promotes <strong>bulky, watery foods</strong>, because it takes a lot of lettuce or raspberries to reach a thousand calories. Moving again to a hundred grams of protein promotes <strong>foods with almost no protein</strong>, because the denominator gets very small. Neither move is telling you those foods became worse. Both are telling you the question changed.</p>
 </div>
 </div>
 </section>
 <section id="part-3-which-foods-are-on-every-list" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-which-foods-are-on-every-list">Part 3: Which foods are on every list?</h2>
-<p><strong>9. Print the three lists and compare by eye. Which foods appear in all three?</strong></p>
-<div id="049128c0" class="cell" data-execution_count="11">
+<p><strong>9. Question 8 was about how the lists differ. Now find what they agree on. Print the three top-10 lists again, one after another, and compare them by eye. In a markdown cell, write down the exact set of foods that appear in </strong>all three<strong>, and say how many foods appear on one list only.</strong></p>
+<div id="cd8c1f42" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Top 10 for Bananas index (kg):'</span>)</span>
@@ -880,10 +894,11 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Beef steak, Beef mince and Beef meatballs.</strong> Those three, and nothing else, survive all three ways of asking the question.</p>
+<p><strong>Beef steak, Beef mince and Beef meatballs</strong>, and nothing else, survive all three ways of asking the question.</p>
+<p><strong>Seven foods appear on one list only:</strong> lamb chops, lamb burgers and parmesan cheese from the kilogram ranking, and butter, grapes, marmalade and sugar from the protein ranking. Seven more appear on exactly two. Thirty ranking places are shared out among only seventeen different foods, so the three lists overlap a great deal more than reading them one after another suggests.</p>
 </div>
 </div>
-<p><strong>10. What does it mean for a food to be near the top of all three lists at once? What would it mean for a food to top one list and appear on neither of the others? Name one food of each kind.</strong></p>
+<p><strong>10. Questions 8 and 9 asked what the lists say. Now say what it means. In a markdown cell, explain what you learn about a food from the fact that it sits near the top of all three lists at once, and what you learn about a food that tops one list and appears on neither of the others. Name one food of each kind from your answer to question 9, and say which of the two tells you more about the food itself rather than about the denominator.</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -894,16 +909,17 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A food at the top of all three is expensive <strong>however you measure it</strong>. Its ranking does not depend on the choice of denominator, so no reasonable objection about the basis of comparison rescues it. <strong>Beef steak</strong> is the clearest case: first by weight, first by calorie, fourth by protein.</p>
-<p>A food that tops one list only is telling you about the <strong>denominator</strong>, not about the food. <strong>Sugar</strong> is second per hundred grams of protein and appears nowhere else, because sugar has essentially no protein, and a small number divided by a number close to zero is large. The ranking is real arithmetic and a misleading claim about sugar’s climate cost.</p>
+<p>A food at the top of all three lists is expensive <strong>however you measure it</strong>. Its ranking does not depend on the choice of denominator, so no reasonable objection about the basis of comparison rescues it. <strong>Beef steak</strong> is the clearest case: first by weight, first by calorie, fourth by protein.</p>
+<p>A food that tops one list only is telling you about the <strong>denominator</strong>, not about the food. <strong>Sugar</strong> is second per hundred grams of protein and appears nowhere else, because sugar has essentially no protein, and a small number divided by a number close to zero is large. The arithmetic behind the ranking is correct, but the claim it seems to make about sugar’s climate cost is misleading.</p>
+<p>To answer the last part directly: the food on all three lists tells you more about the food. Beef steak is costly on every basis anyone has proposed, so there is no denominator you could switch to that would rescue it. Sugar’s position tells you about the denominator instead, and it would move the moment you picked a different one.</p>
 <p>The practical lesson is that the choice of denominator is an argument, not a technicality. Pick the one that matches what the food is actually for. Compare protein sources per gram of protein and staples per calorie.</p>
 </div>
 </div>
 </section>
 <section id="part-4-filtering-by-score" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-filtering-by-score">Part 4: Filtering by score</h2>
-<p><strong>11. Every food with a <code>Bananas index (kg)</code> above 10. How many are there?</strong></p>
-<div id="8199a9cb" class="cell" data-execution_count="12">
+<p><strong>11. Use the filter pattern to find every food with a <code>Bananas index (kg)</code> above 10. How many are there?</strong></p>
+<div id="3b354c75" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>expensive_by_weight <span class="op">=</span> df[df[<span class="st">'Bananas index (kg)'</span>] <span class="op">&gt;</span> <span class="dv">10</span>]</span>
@@ -927,7 +943,7 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>12 and 13. The <code>~</code> version, the <code>&lt; 1</code> version, and why they differ.</strong></p>
-<div id="fffca3d0" class="cell" data-execution_count="13">
+<div id="7bf58807" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>no_worse_than_banana <span class="op">=</span> df[<span class="op">~</span>(df[<span class="st">'Bananas index (kg)'</span>] <span class="op">&gt;</span> <span class="dv">1</span>)]</span>
@@ -956,8 +972,8 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 <p>The general point is that <code>~(x &gt; 1)</code> means <code>x &lt;= 1</code>, not <code>x &lt; 1</code>. Negating a strict comparison gives you a non-strict one, and the boundary value moves from one side to the other. Whenever a filter returns one row more or fewer than you expected, check the boundary first.</p>
 </div>
 </div>
-<p><strong>14. Two-condition filter: above 5 per kilogram and below 1 per 100 g of protein.</strong></p>
-<div id="566527a8" class="cell" data-execution_count="14">
+<p><strong>14. Use a two-condition filter to find the foods that score above 5 per kilogram and below 1 per 100 g of protein. End the line with <code>.copy()</code>, because you will display the result a couple of different ways. Display the two banana index columns for those foods, ranked by <code>Bananas index (kg)</code>.</strong></p>
+<div id="038020d1" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>costly_but_protein_rich <span class="op">=</span> df[</span>
@@ -1077,7 +1093,6 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p><strong>15. What do these foods have in common? What is the argument this table makes about how we should compare foods?</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1088,7 +1103,22 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>16 foods, and almost all of them are animal protein</strong>: fish (tuna, cod, salmon, mackerel), poultry (chicken breast, thighs, wings, sausages, burger), pork, eggs, and halloumi. Olive oil is the one that does not fit the pattern, and it is here because its protein figure is essentially zero in the other direction, which is worth noticing rather than glossing over.</p>
+<p><strong>16 foods.</strong> The <code>.copy()</code> matters because you display the result twice, once as a count and once as a two-column ranking, and pandas warns you about editing a slice of another table if you skip it.</p>
+<p>Note the parentheses. Each condition is wrapped in its own pair before <code>&amp;</code> joins them, and leaving them out gives you an error about ambiguous truth values rather than the answer. Question 15 asks what these 16 foods have in common, so read the row labels before you go on.</p>
+</div>
+</div>
+<p><strong>15. In a markdown cell: what do the foods in question 14 have in common? What is the argument this table makes about how we should compare foods?</strong></p>
+<div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✅ Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>16 foods, and almost all of them are animal protein</strong>: fish (tuna, cod, cod fish fingers, cod fishcakes, salmon, mackerel), poultry (chicken breast, thighs, wings, sausages, burger), pork chops, pork sausages, eggs, and halloumi. Olive oil is the one that does not fit, and the reason is worth chasing down. Its <code>Bananas index (100g protein)</code> is exactly <code>0.0</code>, and its <code>emissions_100g_protein</code> is one of the two missing values you found in question 3. The zero is standing in for a number nobody could compute, because olive oil has essentially no protein to divide by, so olive oil met your <code>&lt; 1</code> condition without ever being measured. Sunflower oil is the other <code>0.0</code> in that column. A filter cannot tell a real zero from a missing one, and this is the first time in the course that the difference has changed an answer.</p>
 <p>The argument is this: these foods look costly when you weigh them and cheap when you weigh what you eat them <strong>for</strong>. Nobody eats 100 g of chicken as a substitute for 100 g of lettuce; they eat it as a source of protein. Comparing per kilogram flatters foods that are mostly water and penalises foods that are dense in the thing you actually want. Choosing a denominator is choosing what question you are asking, and this table is what that choice looks like when it changes the answer.</p>
 </div>
 </div>
@@ -1096,7 +1126,7 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 <section id="part-5-land-not-carbon" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-land-not-carbon">Part 5: Land, not carbon</h2>
 <p><strong>16, 17 and 18.</strong></p>
-<div id="979eb4f9" class="cell" data-execution_count="15">
+<div id="30e7fa18" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>banana_land_use <span class="op">=</span> df.loc[<span class="st">'Bananas'</span>, <span class="st">'land_use_1000kcal'</span>]</span>
@@ -1106,7 +1136,7 @@ Name: Bananas index (100g protein), dtype: float64</code></pre>
 <pre><code>np.float64(2.71787661)</code></pre>
 </div>
 </div>
-<div id="504e1910" class="cell" data-execution_count="16">
+<div id="6c17a586" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'land_use_1000kcal'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1126,7 +1156,7 @@ Chilli con carne     16.398791
 Name: land_use_1000kcal, dtype: float64</code></pre>
 </div>
 </div>
-<div id="1bc54607" class="cell" data-execution_count="17">
+<div id="f149e344" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>hungriest <span class="op">=</span> df[<span class="st">'land_use_1000kcal'</span>].idxmax()</span>
@@ -1149,10 +1179,10 @@ Name: land_use_1000kcal, dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>A banana uses <strong>2.72 square metres</strong> of land per thousand calories. The most land-hungry food is <strong>beef steak</strong>, at 223.7 square metres per thousand calories, which is <strong>82.3 times</strong> the banana’s land use.</p>
-<p>Note that <code>.idxmax()</code> gave you the <strong>label</strong> and not the number. That is the whole reason it exists: paired with <code>.loc[]</code>, it lets you ask “which one?” and then “how much?” as two separate, readable steps.</p>
+<p>Note that <code>.idxmax()</code> gave you the <strong>label</strong> and not the number. Returning the label is the whole reason <code>.idxmax()</code> exists: paired with <code>.loc[]</code>, it lets you ask “which one?” and then “how much?” as two separate, readable steps.</p>
 </div>
 </div>
-<p><strong>19. Compare the land-use top 10 with the emissions top 10 from question 5. Are they the same foods? Name one that appears on one list and not the other.</strong></p>
+<p><strong>19. Compare your land-use top 10 with your emissions top 10 from question 6. Both are measured per thousand calories, so they are the fair comparison. Are they the same foods? Answer in a markdown cell, and name one food that appears on one list and not the other.</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1163,8 +1193,9 @@ Name: land_use_1000kcal, dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Seven of the ten are the same</strong>: beef steak, beef mince, beef meatballs, beef burger, cottage cheese, lamb (leg) and lamb chops. So the two measures agree far more than they disagree, and beef sits at the top of both.</p>
-<p>Three appear only in the land-use list: <strong>lentils</strong>, lettuce and chilli con carne. Lentils are the interesting one. They take a lot of land per calorie and emit comparatively little, so a ranking built on carbon alone would tell you nothing about them. Three appear only in the emissions list: prawns, parmesan cheese and lamb burgers. Prawns are the mirror image, since much of their footprint comes from fuel and refrigeration rather than from land.</p>
+<p><strong>Seven of the ten foods are the same</strong>: beef steak, beef mince, beef meatballs, beef burger, cottage cheese, lamb (leg) and lettuce. So the two measures agree far more than they disagree, and beef sits at the top of both.</p>
+<p>Three foods appear only in the land-use list: <strong>lentils</strong>, lamb chops and chilli con carne. Lentils are the interesting one. They take a lot of land per calorie and emit comparatively little, so a ranking built on carbon alone would tell you nothing about them. Three foods appear only in the emissions list: prawns, raspberries and coconut milk. Prawns are the mirror image, because much of their footprint comes from fuel and refrigeration rather than from land.</p>
+<p>Both lists here are per thousand calories, which is what makes the comparison fair. Had you compared the land-use list against your question 5 ranking, which is per kilogram, some of the difference you found would have been the change of denominator rather than a difference between land and carbon.</p>
 <p>Land and carbon are correlated but not interchangeable. A food can be costly in one and unremarkable in the other, and which you measure determines which foods you notice.</p>
 </div>
 </div>
@@ -1172,7 +1203,7 @@ Name: land_use_1000kcal, dtype: float64</code></pre>
 <section id="part-6-cheese" class="level2">
 <h2 class="anchored" data-anchor-id="part-6-cheese">Part 6: Cheese</h2>
 <p><strong>20. Build a table of just the cheeses, then find the cheese with the highest <code>Bananas index (1000 kcalories)</code>.</strong></p>
-<div id="0d1d4f10" class="cell" data-execution_count="18">
+<div id="9eb728bc" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>cheese <span class="op">=</span> df.<span class="bu">filter</span>(like<span class="op">=</span><span class="st">'heese'</span>, axis<span class="op">=</span><span class="st">'rows'</span>)</span>
@@ -1213,8 +1244,8 @@ Name: Bananas index (1000 kcalories), dtype: float64</code></pre>
 <p><strong>Cottage cheese, at 33.51.</strong> It is far above the rest: the next cheese, mozzarella, is 7.72, so cottage cheese is more than four times the second-place figure. Cottage cheese is largely water, so a thousand calories of it is a great deal of cheese.</p>
 </div>
 </div>
-<p><strong>21. How many rows did <code>.filter(like='heese')</code> give you? Is every one of them a cheese? What does this tell you about matching on text?</strong></p>
-<div id="c18c70e7" class="cell" data-execution_count="19">
+<p><strong>21. How many rows did <code>.filter(like='heese')</code> give you? Look at the names carefully. Is every one of them a cheese? In a markdown cell, say what the result tells you about matching rows on text.</strong></p>
+<div id="25bbaa9d" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>cheese.index.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1245,11 +1276,11 @@ Name: Bananas index (1000 kcalories), dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>12 rows, and no, they are not all cheeses.</strong> <code>Cheesecake</code> and <code>Chocolate cheesecake</code> are desserts, and <code>Macaroni cheese</code> is a cooked dish rather than a cheese. Only nine of the twelve are cheese in the sense you meant.</p>
-<p>Matching on a substring matches <strong>strings, not meanings</strong>. <code>.filter(like='heese')</code> did exactly what you asked and had no way to know what you intended. This is why you print the labels and read them after any text-based selection, rather than trusting the row count. The habit of looking at what a filter caught, and not just how much it caught, will save you repeatedly.</p>
+<p>Matching on a substring matches <strong>strings, not meanings</strong>. <code>.filter(like='heese')</code> did exactly what you asked and had no way to know what you intended. Printing the labels and reading them is why you read them after any text-based selection, rather than trusting the row count. The habit of looking at what a filter caught, and not just how much it caught, will save you repeatedly.</p>
 </div>
 </div>
 <p><strong>22. Where does the top cheese sit in the whole dataset’s calorie ranking? Check it against your answer to question 6.</strong></p>
-<div id="674277f4" class="cell" data-execution_count="20">
+<div id="a3c89e82" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Bananas index (1000 kcalories)'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1297,9 +1328,9 @@ Name: Bananas index (1000 kcalories), dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Cutting bananas is not where the gains are. A banana scores 1.0 on the kilogram index by definition, and it sits near the bottom of every ranking we computed. Beef steak scores 148.6 on the same scale, so a kilogram of steak emits roughly 149 times a kilogram of bananas’ emissions, and 82.3 times the land use per thousand calories. Bananas are also unusually efficient per calorie, which matters because we eat them for calories rather than for protein. Removing them from a diet changes a very small number and creates a gap that has to be filled by something else.</p>
-<p>The dataset does make bananas look worse under one measure. Per hundred grams of protein they score above several meats, since a banana has almost no protein and the division inflates the ratio. That disagreement between the rankings is the point rather than a flaw. Coconut milk, sugar and grapes top the protein ranking for the same arithmetic reason, and nobody would argue that sugar is a worse climate choice than beef. The comparison is only meaningful when the denominator matches what the food is for, and bananas are not a protein source.</p>
-<p>If my friend wants a change that shows up in the numbers, the place to look is the 34 foods scoring above 10 per kilogram, which is a little over a fifth of this dataset and is dominated by beef, lamb and hard cheeses. Substituting one of those a week would move more carbon than eliminating bananas entirely.</p>
+<p>Cutting bananas is not where the gains are. A banana scores 1.0 on the kilogram index by definition, and it sits at 135th of 160 foods on that ranking. Beef steak scores 148.6 on the same scale, so a kilogram of steak emits roughly 149 times what a kilogram of bananas emits, and per thousand calories beef steak needs 82.3 times the land a banana needs. Removing bananas from a diet changes a very small number and creates a gap that has to be filled by something else.</p>
+<p>The dataset does make bananas look worse under one measure. Per hundred grams of protein they rise to 63rd of 160, above eggs, chicken breast, salmon, tuna, cod and pork chops, because a banana has almost no protein and the division inflates the ratio. The disagreement between the rankings is the point rather than a flaw. Coconut milk, sugar and grapes top the protein ranking for the same arithmetic reason, and nobody would argue that sugar is a worse climate choice than beef. The comparison is only meaningful when the denominator matches what the food is for, and bananas are not a protein source.</p>
+<p>If my friend wants a change that shows up in the numbers, the place to look is the 34 foods scoring above 10 per kilogram, which is a little over a fifth of this dataset and is dominated by beef, lamb and cheese. Substituting one of those a week would move more carbon than eliminating bananas entirely.</p>
 </div>
 </div>
 </section>
@@ -1310,7 +1341,7 @@ Name: Bananas index (1000 kcalories), dtype: float64</code></pre>
 <li><strong>Every number in your Part 7 write-up has a code cell above it that produced it.</strong> Quoting a number you did not compute is the single most common way to lose marks on this exercise.</li>
 <li><strong>Your Part 4 boundary answer is right.</strong> Questions 12 and 13 differ by one row, and knowing which row and why is the point of asking both.</li>
 <li><strong>You looked at the cheese labels</strong> rather than trusting the count.</li>
-<li><strong>Your interpretation answers say what the number means</strong>, not what the number is. “34 foods score above 10” restates the output. “34 foods, a fifth of the dataset, and almost all of them are meat or hard cheese” reads it.</li>
+<li><strong>Your interpretation answers say what the number means</strong>, not what the number is. “34 foods score above 10” restates the output. “34 foods, a fifth of the dataset, and almost all of them are meat or cheese” reads it.</li>
 </ol>
 <p>⬅️ Back to <a href="../../course-materials/eod-practice/eod-day3-2026.html">the exercise</a></p>
 

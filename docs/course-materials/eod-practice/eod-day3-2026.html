@@ -449,9 +449,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>A cartoon panda is eating a banana.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
 </div>
-<p>In 2023 <em>The Economist</em> published a way of talking about the climate cost of food that is easy to remember. Instead of reporting grams of CO₂, they express everything in <strong>bananas</strong>: how many times more carbon does a kilogram of this food emit than a kilogram of bananas?</p>
-<p>They computed the index three ways, because “a kilogram of lettuce” and “a kilogram of beef” are not the same amount of food at all. They ranked the foods per kilogram, per thousand calories, and per hundred grams of protein. The three rankings disagree with each other, and working out why they disagree is most of this practice.</p>
-<p>Today you will rank this dataset all three ways yourself, and then work out what the disagreements between your three rankings actually mean.</p>
+<p>In 2023 <em>The Economist</em> published a way of talking about the climate cost of food that is easy to remember. Instead of reporting grams of CO₂, they express everything in <strong>bananas</strong>: how many times more carbon does a kilogram of this food emit than a kilogram of bananas? Today’s practice uses their published table of 160 foods.</p>
+<p>They computed the index three ways, because “a kilogram of lettuce” and “a kilogram of beef” are not the same amount of food at all. They ranked the foods per kilogram, per thousand calories, and per hundred grams of protein. The three rankings disagree with each other.</p>
+<p>This afternoon we will build all three rankings, compare them, and work out what it should mean to you when a food sits near the top of one list and nowhere near the top of the other two lists.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -467,9 +467,11 @@ Reference
 </div>
 <section id="todays-two-patterns" class="level2">
 <h2 class="anchored" data-anchor-id="todays-two-patterns">Today’s two patterns</h2>
-<p>Every code cell in this practice is built from one of these two patterns, so you should not need to look them up more than once.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&gt;</span> value]                             <span class="co"># the filter pattern</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)    <span class="co"># the top-N pattern</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Almost every code cell in today’s practice is built from one of these two patterns, so you should only need to look them up once. After that, copy an earlier cell of your own and change the column name in it.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&gt;</span> value]                                  <span class="co"># the filter pattern</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)         <span class="co"># the top-N pattern, whole table</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'column'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(n)         <span class="co"># the top-N pattern, one column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The two top-N lines differ only in what you get back. The first keeps every column and reorders the rows, and the second gives you one column with its labels, which is easier to read when you only want to see the ranking. Use the second one for the ranking questions below.</p>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
@@ -496,7 +498,7 @@ Reference
 <div class="callout-body-container callout-body">
 <p><code>.drop()</code> takes a <strong>list</strong> of column names and <code>axis='columns'</code>, and returns a new DataFrame without them. Here is the whole line. Run it as written:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop([<span class="st">'year'</span>, <span class="st">'Banana values'</span>, <span class="st">'type'</span>, <span class="st">'Chart?'</span>, <span class="st">'Unnamed: 16'</span>], axis<span class="op">=</span><span class="st">'columns'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>There are two things worth noticing here. The names go in a list, exactly like the lists you used to select columns yesterday. And <code>axis='columns'</code> tells pandas that you mean columns and not rows, because <code>.drop()</code> can remove either one.</p>
+<p>Two things in that line are worth noticing. The names go in a list, exactly like the lists you used to select columns yesterday. And <code>axis='columns'</code> tells pandas that you mean columns and not rows, because <code>.drop()</code> can remove either one.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/pandas_dataframes.html">Cheatsheet: pandas DataFrames</a></p>
 </div>
 </div>
@@ -519,7 +521,7 @@ Reference
 <li>Do the same for <code>Bananas index (1000 kcalories)</code>.</li>
 <li>Do the same for <code>Bananas index (100g protein)</code>.</li>
 </ol>
-<p>Write each one out in full. Yes, you are writing out the same pattern three times with a single word changed each time.</p>
+<p>Write each one out in full. Yes, you are writing out the same pattern three times with a single column name changed each time!</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Hold that thought">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -530,25 +532,46 @@ Hold that thought
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You just wrote the same six words three times. Tomorrow morning you will learn how to write them once, give them a name, and then call them three times. These <strong>functions</strong> make code easier to edit.</p>
+<p>You just wrote the same line three times. Tomorrow morning we will learn how to write that line once, give it a name, and then call it three times, which means you get to edit it once instead of three times. Repeating yourself is exactly the itch that <strong>functions</strong> exist to scratch!</p>
 </div>
 </div>
 <ol start="8" type="1">
-<li>In a markdown cell, describe in two or three sentences how the three lists differ. Which foods are near the top of all three? Which appear on only one, and can you say why?</li>
+<li>In a markdown cell, describe in two or three sentences how the three lists differ from one another. What kind of food rises to the top when the denominator changes from a kilogram to a thousand calories, and what kind rises again when it changes to a hundred grams of protein?</li>
 </ol>
 </section>
 <section id="part-3-which-foods-are-on-every-list" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-which-foods-are-on-every-list">Part 3: Which foods are on every list?</h2>
 <ol start="9" type="1">
-<li><p>Print the three top-10 lists again, one after another, and compare them by eye. Write down, in a markdown cell, the foods that appear in <strong>all three</strong>.</p></li>
-<li><p>In a markdown cell: what does it mean for a food to be near the top of all three lists at once? What would it mean for a food to top one list and appear on neither of the others? Name one food of each kind.</p></li>
+<li><p>Question 8 was about how the lists differ. Now find what they agree on. Print the three top-10 lists again, one after another, and compare them by eye. In a markdown cell, write down the exact set of foods that appear in <strong>all three</strong>, and say how many foods appear on one list only.</p></li>
+<li><p>Questions 8 and 9 asked what the lists say. Now say what it means. In a markdown cell, explain what you learn about a food from the fact that it sits near the top of all three lists at once, and what you learn about a food that tops one list and appears on neither of the others. Name one food of each kind from your answer to question 9, and say which of the two tells you more about the food itself rather than about the denominator.</p></li>
 </ol>
 </section>
 <section id="part-4-filtering-by-score" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-filtering-by-score">Part 4: Filtering by score</h2>
-<p>Now use the other one, the filter pattern.</p>
+<p>Now we switch to the other pattern, the filter.</p>
 <ol start="11" type="1">
-<li><p>Use the filter pattern to find every food with a <code>Bananas index (kg)</code> above 10. How many are there?</p></li>
+<li>Use the filter pattern to find every food with a <code>Bananas index (kg)</code> above 10. How many are there?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="🧭 Field Note: `~` and `&amp;`, from this morning">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+🧭 Field Note: <code>~</code> and <code>&amp;</code>, from this morning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The next three questions need the two operators we met in the filter session this morning, so here they are again in one place.</p>
+<p><code>~</code> goes in front of a whole condition and turns it around. Every row the condition kept is dropped, and every row it dropped is kept:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df[<span class="op">~</span>(df[<span class="st">'column'</span>] <span class="op">&gt;</span> value)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>&amp;</code> joins two conditions, and each condition <strong>must</strong> have its own pair of parentheses around it. Leave them out and Python combines the wrong pieces and reports an error that has nothing to do with what you meant:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[(df[<span class="st">'column_a'</span>] <span class="op">&gt;</span> value) <span class="op">&amp;</span> (df[<span class="st">'column_b'</span>] <span class="op">&lt;</span> other_value)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The difference between <code>~(x &gt; 1)</code> and <code>x &lt; 1</code> is the point of questions 12 and 13, so run both and look at the two numbers before you explain them.</p>
+<p>📖 <a href="../../course-materials/cheatsheets/data_selection.html">Cheatsheet: data selection and filtering</a></p>
+</div>
+</div>
+<ol start="12" type="1">
 <li><p>Use <code>~</code> to find the foods that are <strong>not</strong> above a score of 1 on <code>Bananas index (kg)</code>, that is, foods no worse than a banana by weight. How many are there?</p></li>
 <li><p>Now filter for <code>Bananas index (kg)</code> <strong>below</strong> 1 instead. You should get a different number from the one you got in question 12. Explain the difference in one sentence.</p></li>
 <li><p>Use a <strong>two-condition</strong> filter to find the foods that score above 5 per kilogram <strong>and</strong> below 1 per 100 g of protein. End the line with <code>.copy()</code>, because you will display the result a couple of different ways. Display the two banana index columns for those foods, ranked by <code>Bananas index (kg)</code>.</p></li>
@@ -557,17 +580,17 @@ Hold that thought
 </section>
 <section id="part-5-land-not-carbon" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-land-not-carbon">Part 5: Land, not carbon</h2>
-<p>The banana index columns are all about emissions. The dataset also has a land use column, <code>land_use_1000kcal</code>, which gives square metres of land per thousand calories.</p>
+<p>The banana index columns are all about emissions. The dataset also has four land use columns, and the one we want is <code>land_use_1000kcal</code>, which gives square metres of land per thousand calories.</p>
 <ol start="16" type="1">
 <li><p>Use <code>.loc[]</code> to look up the value of <code>land_use_1000kcal</code> for <code>Bananas</code>.</p></li>
 <li><p>Use the top-N pattern to display the 10 foods with the highest <code>land_use_1000kcal</code>.</p></li>
-<li><p>Use <code>.idxmax()</code> on <code>land_use_1000kcal</code> to get the name of the single most land-hungry food. Then use two <code>.loc[]</code> lookups and a division to work out how many times more land that food needs than bananas do.</p></li>
-<li><p>Compare your land-use top 10 with your emissions top 10 from question 5. Are they the same foods? Answer in a markdown cell, and name one food that appears on one list and not the other.</p></li>
+<li><p>Use <code>.idxmax()</code> on <code>land_use_1000kcal</code> to get the name of the single most land-hungry food. Then use two <code>.loc[]</code> lookups and a division to work out how many times as much land that food needs as a banana does.</p></li>
+<li><p>Compare your land-use top 10 with your emissions top 10 from question 6. Both are measured per thousand calories, so they are the fair comparison. Are they the same foods? Answer in a markdown cell, and name one food that appears on one list and not the other.</p></li>
 </ol>
 </section>
 <section id="part-6-cheese" class="level2">
 <h2 class="anchored" data-anchor-id="part-6-cheese">Part 6: Cheese</h2>
-<p>The dataset has a lot of cheese in it. Cheese is worth a section of its own, because it is the one dairy product that shows up alongside meat at the top of the emissions rankings.</p>
+<p>The dataset has a lot of cheese in it. Cheese is worth a section of its own, because several cheeses show up alongside the beef and the lamb at the top of the emissions rankings, which is not where most people expect to find a dairy product.</p>
 <ol start="20" type="1">
 <li>Build a table of just the cheeses, then find the cheese with the highest <code>Bananas index (1000 kcalories)</code>.</li>
 </ol>
@@ -582,8 +605,8 @@ Hold that thought
 </div>
 <div class="callout-body-container callout-body">
 <p>The food names are the <strong>index</strong> of your table rather than a column, so the filter pattern will not work on them. <code>.filter()</code> will. Given a substring, it keeps every row whose label contains that substring:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cheese <span class="op">=</span> df.<span class="bu">filter</span>(like<span class="op">=</span><span class="st">'heese'</span>, axis<span class="op">=</span><span class="st">'rows'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>We use <code>like='heese'</code> rather than <code>'cheese'</code> so that both <code>Cheddar cheese</code> and <code>Cheesecake</code> match, whatever their capitalisation. Run the line as written, then rank <code>cheese</code> with the top-N pattern exactly as you have been doing all along.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cheese <span class="op">=</span> df.<span class="bu">filter</span>(like<span class="op">=</span><span class="st">'heese'</span>, axis<span class="op">=</span><span class="st">'rows'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We use <code>like='heese'</code> rather than <code>'cheese'</code> because matching is case-sensitive, and <code>Cheesecake</code> begins with a capital C that <code>'cheese'</code> would miss. Run the line as written, then rank <code>cheese</code> with the top-N pattern exactly as you have been doing all along. Read the row labels you get back before you trust the table, because question 21 asks you what the match actually caught.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/data_selection.html">Cheatsheet: data selection and filtering</a></p>
 </div>
 </div>
@@ -603,10 +626,10 @@ Hold that thought
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
 <p>Look back through your notebook. Almost every code cell you wrote was one of two patterns:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&gt;</span> value]                             <span class="co"># filter: fewer rows</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)    <span class="co"># rank: same rows, new order, first few</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">&gt;</span> value]                             <span class="co"># filter: fewer rows</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)    <span class="co"># rank: same rows, new order, first few</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Everything else was a variation. <code>&amp;</code> and <code>|</code> joined two questions into one filter. <code>~</code> turned a question around. <code>.idxmax()</code> returned the label instead of the row. <code>.loc[]</code> looked up one value.</p>
-<p>Two patterns got you through every question in this document. You will be writing both of them nearly every day for the rest of the course.</p>
+<p>Two patterns got you through every question in today’s practice, and we will be writing both of them nearly every day for the rest of this course.</p>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>
@@ -617,7 +640,7 @@ Hold that thought
 <li>you can say out loud what a filter with <code>&amp;</code> needs that a filter with one condition does not</li>
 <li>your notebook reads top to bottom as a document, not as a pile of cells</li>
 </ul>
-<p>If one of these questions stumped you, or a cell would not run no matter what you tried, ask Cella or Kelly before you pack up. Getting stuck on a practice is normal and expected, and it is not a sign that you are behind!</p>
+<p>If one of the 22 questions stumped you, or a cell would not run no matter what you tried, ask Cella or Kelly before you pack up. Getting stuck on a practice is normal and expected, and it is not a sign that you are behind!</p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>

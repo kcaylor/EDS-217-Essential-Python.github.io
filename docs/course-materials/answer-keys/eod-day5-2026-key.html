@@ -400,7 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
       <h1 class="title">Answer Key</h1>
-            <p class="subtitle lead">🌬️ Three Stations, One Air Shed</p>
+            <p class="subtitle lead">🌬️ Three Stations, One Atmosphere</p>
                       </div>
   </div>
     
@@ -455,7 +455,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="5bdebd0f" class="cell" data-execution_count="1">
+<div id="736f5a7d" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -483,7 +483,7 @@ How to use this key
 <section id="part-1-what-is-in-each-pile" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-what-is-in-each-pile">Part 1: What is in each pile</h2>
 <p><strong>1. How many readings came from each site?</strong></p>
-<div id="44445636" class="cell" data-execution_count="2">
+<div id="9826aa1d" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>aq.groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -510,7 +510,7 @@ Name: value, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>2. How many distinct parameters does each site measure? Use the dictionary form of <code>.agg()</code> to report the reading count and the parameter count side by side.</strong></p>
-<div id="5cd4a82f" class="cell" data-execution_count="3">
+<div id="496e40eb" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>aq.groupby(<span class="st">'site'</span>).agg({<span class="st">'value'</span>: <span class="st">'count'</span>, <span class="st">'parameter'</span>: <span class="st">'nunique'</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -568,7 +568,7 @@ Name: value, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>3. One of the three stations is not like the others. Name it, say what it does not do, and say in one sentence what that means for any comparison you will make across all three.</strong></p>
-<div id="3571ba9f" class="cell" data-execution_count="4">
+<div id="f72de888" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>aq.groupby([<span class="st">'site'</span>, <span class="st">'parameter'</span>])[<span class="st">'value'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -601,7 +601,7 @@ Name: value, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>4. How many readings of each parameter are there across the whole table? Which parameter is the best measured? Which is the worst?</strong></p>
-<div id="ec8e7525" class="cell" data-execution_count="5">
+<div id="ab7fcb62" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>aq.groupby(<span class="st">'parameter'</span>)[<span class="st">'value'</span>].count().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -629,7 +629,7 @@ Name: value, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>The units check.</strong></p>
-<div id="6d7392a9" class="cell" data-execution_count="6">
+<div id="3bbfa60f" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>aq.groupby(<span class="st">'parameter'</span>)[<span class="st">'unit'</span>].nunique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -659,7 +659,7 @@ Name: unit, dtype: int64</code></pre>
 <section id="part-2-compare-the-stations" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-compare-the-stations">Part 2: Compare the stations</h2>
 <p><strong>5. Build a table of just the PM2.5 readings, ending the line with <code>.copy()</code>, and call it <code>pm25</code>. How many rows?</strong></p>
-<div id="89c2c237" class="cell" data-execution_count="7">
+<div id="6724bff0" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pm25 <span class="op">=</span> aq[aq[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm25'</span>].copy()</span>
@@ -683,7 +683,7 @@ Name: unit, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>6 and 7. Rank the site means, then report count, mean, min, max and standard deviation of PM2.5 at each site.</strong></p>
-<div id="b5f5acad" class="cell" data-execution_count="8">
+<div id="71384ecc" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pm25.groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -696,7 +696,7 @@ CNSI             6.083473
 Name: value, dtype: float64</code></pre>
 </div>
 </div>
-<div id="024d023a" class="cell" data-execution_count="9">
+<div id="3e7e30e2" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pm25.groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>, <span class="st">'std'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -786,7 +786,7 @@ Name: value, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>9. Now do the same for PM10. Which site is higher, and by how much? Note which site is missing from your answer and why.</strong></p>
-<div id="e2f28688" class="cell" data-execution_count="10">
+<div id="88979124" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pm10 <span class="op">=</span> aq[aq[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm10'</span>].copy()</span>
@@ -846,7 +846,7 @@ Name: value, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>10. Use the filter pattern and the split-apply-combine pattern together: how many hours did each site record a PM2.5 value above 12 µg/m³, the US annual standard?</strong></p>
-<div id="79aeb1fc" class="cell" data-execution_count="11">
+<div id="e9d7bd77" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pm25[pm25[<span class="st">'value'</span>] <span class="op">&gt;</span> <span class="dv">12</span>].groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -858,7 +858,7 @@ Santa Barbara    25
 Name: value, dtype: int64</code></pre>
 </div>
 </div>
-<div id="b398bacd" class="cell" data-execution_count="12">
+<div id="328cc43e" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pm25[pm25[<span class="st">'value'</span>] <span class="op">==</span> <span class="dv">12</span>].groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -906,7 +906,7 @@ Name: value, dtype: int64</code></pre>
 <section id="part-3-the-data-still-has-problems" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-the-data-still-has-problems">Part 3: The data still has problems</h2>
 <p><strong>12 and 13. The minimum PM2.5 at each site, and a count of the negative readings.</strong></p>
-<div id="b23847c4" class="cell" data-execution_count="13">
+<div id="5e980c12" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pm25.groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].<span class="bu">min</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -919,7 +919,7 @@ Santa Barbara   -1.0
 Name: value, dtype: float64</code></pre>
 </div>
 </div>
-<div id="b1b31aec" class="cell" data-execution_count="14">
+<div id="2b53c6af" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pm25[pm25[<span class="st">'value'</span>] <span class="op">&lt;</span> <span class="dv">0</span>].groupby(<span class="st">'site'</span>)[<span class="st">'value'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -931,7 +931,7 @@ Santa Barbara     3
 Name: value, dtype: int64</code></pre>
 </div>
 </div>
-<div id="4c3887cf" class="cell" data-execution_count="15">
+<div id="5147bd6b" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pm25[pm25[<span class="st">'value'</span>] <span class="op">&lt;</span> <span class="dv">0</span>].groupby(<span class="st">'hour'</span>)[<span class="st">'value'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -978,7 +978,7 @@ Name: value, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>15. Would you drop the negative readings before computing site means? Compute both versions and report the difference, then say in one sentence which you would publish and why.</strong></p>
-<div id="505e0f13" class="cell" data-execution_count="16">
+<div id="40e74728" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>clean_pm25 <span class="op">=</span> pm25[pm25[<span class="st">'value'</span>] <span class="op">&gt;=</span> <span class="dv">0</span>]</span>
@@ -1018,7 +1018,7 @@ Name: value, dtype: float64</code></pre>
 <section id="part-4-the-question-the-day-was-for" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-the-question-the-day-was-for">Part 4: The question the day was for</h2>
 <p><strong>16. Build a table of just the ozone readings, ending the line with <code>.copy()</code>, and call it <code>o3</code>. Then group it by <code>hour</code> and report the count and mean of <code>value</code>, in hour order.</strong></p>
-<div id="0d22ceeb" class="cell" data-execution_count="17">
+<div id="f8bbab66" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>o3 <span class="op">=</span> aq[aq[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'o3'</span>].copy()</span>
@@ -1169,7 +1169,7 @@ Name: value, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>17. Read the <code>count</code> column first. Twenty-two of the twenty-four hours have about the same number of readings and two do not. Which two, and what does that tell you about how much weight to put on their means?</strong></p>
-<div id="06e809b8" class="cell" data-execution_count="18">
+<div id="9b5efd9a" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>o3.groupby([<span class="st">'hour'</span>, <span class="st">'site'</span>])[<span class="st">'value'</span>].count().head(<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1203,7 +1203,7 @@ Name: value, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>18. Now rank the means. Which hour of the day has the highest average ozone, and which the lowest? What is the ratio between them?</strong></p>
-<div id="0cec565d" class="cell" data-execution_count="19">
+<div id="f3da12a8" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>hourly_o3 <span class="op">=</span> o3.groupby(<span class="st">'hour'</span>)[<span class="st">'value'</span>].mean()</span>
@@ -1282,7 +1282,7 @@ ratio:       2.7746077032810277</code></pre>
 </div>
 </div>
 <p><strong>21. Do the same grouping for PM2.5 and compare. Does particulate matter follow the same daily pattern as ozone?</strong></p>
-<div id="02d5e83e" class="cell" data-execution_count="20">
+<div id="fed8ebc9" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>hourly_pm25 <span class="op">=</span> pm25.groupby(<span class="st">'hour'</span>)[<span class="st">'value'</span>].mean()</span>

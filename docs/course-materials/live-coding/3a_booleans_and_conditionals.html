@@ -441,16 +441,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>An enormously complex tangle of piping and valves with numerous loops and on/off spigots that control the flow.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
 </div>
-<p>Every question you will ask of a dataset this week starts as a yes-or-no question about one value. Was this day above freezing? Is this reading from the ozone monitor? Did this park get more than a million visitors?</p>
-<p>Python has a type for the answer to a question like that, and it is called a <strong>boolean</strong>: a value that is either <code>True</code> or <code>False</code>. This morning we learn to write those questions, to combine them, and to act on the answers. By the end of the hour you will have asked a question of an entire column at once, which is the idea the rest of today is built on.</p>
+<p>Almost every question we ask of a dataset this week starts as a yes-or-no question about a single value. Was this day above freezing? Is this reading from the ozone monitor? Did this park get more than a million visitors?</p>
+<p>Python has a type for the answer to a question like that, and it is called a <strong>boolean</strong>: a value that is either <code>True</code> or <code>False</code>. This morning we will learn how to write those questions, how to combine them, and what to do with the answers. By the end of the session you will have asked a question of an entire column at once, which is the idea the rest of today is built on.</p>
 <section id="how-a-live-coding-session-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-a-live-coding-session-works">How a live coding session works</h2>
-<p>We both start from an empty notebook and write everything together, live. There is no code on this page to copy, on purpose.</p>
+<p>We all start from an empty notebook and write everything together, live. There is no code on this page to copy, on purpose.</p>
 <ul>
-<li>I write a line, explain it, and run it. You write the same line and run it.</li>
-<li>When something breaks, we fix it together. Things will break. That’s the useful part.</li>
-<li>If you fall behind, say so. Someone else is behind too, and I would much rather slow down than lose you.</li>
-<li>Type the code. Do not copy it from a neighbor’s screen. The typing is the point.</li>
+<li>Kelly writes a line, explains it, and runs it. You write the same line and run it.</li>
+<li>When something breaks, we fix it together. Things will break, and the fixing is the useful part.</li>
+<li>If you fall behind, say so. Cella and Kelly would both much rather slow down than lose you.</li>
+<li>Type the code yourself rather than copying it from a neighbor’s screen. Typing a line out, and then fixing it when it does not run, is how the syntax gets into your fingers.</li>
 </ul>
 </section>
 <section id="set-up-your-notebook" class="level2">
@@ -463,7 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Date: 09/02/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="3" type="1">
-<li>Add the following <strong>markdown cells</strong> now, in this order, leaving space under each. We’ll fill in the code as we go, and having the structure in place means your notes stay organized instead of becoming one long scroll.</li>
+<li>Add the following <strong>markdown cells</strong> now, in this order, leaving space under each. We will fill in the code as we go, and having the structure in place should keep your notes organized instead of turning them into one long scroll.</li>
 </ol>
 <div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. A yes-or-no question</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -481,13 +481,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="4" type="1">
 <li>Under each heading, add an empty code cell.</li>
 </ol>
-<p>That’s your scaffold. Now close this page and switch to your notebook.</p>
+<p>Your seven headings are the scaffold for the session. Read the next two sections before you switch to your notebook, because the file we use is named there.</p>
 </section>
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">The data</h2>
 <p>We’ll use the Toolik Field Station weather record, the same file you wrote a biography of yesterday:</p>
 <pre><code>https://eds-217-essential-python.github.io/data/toolik_weather.csv</code></pre>
-<p>You already know what’s in it, so nothing today will be a surprise about the <em>data</em>. That leaves your attention free for the <em>questions</em>.</p>
+<p>You explored the file yesterday, so nothing this morning should be a surprise about the <em>data</em>, which leaves your attention free for the <em>questions</em>.</p>
 </section>
 <section id="what-well-cover" class="level2">
 <h2 class="anchored" data-anchor-id="what-well-cover">What we’ll cover</h2>
@@ -526,7 +526,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="where-this-goes-next" class="level2">
 <h2 class="anchored" data-anchor-id="where-this-goes-next">Where this goes next</h2>
-<p>In the very next session you’ll put a mask inside square brackets and get back a smaller table. That line is the <strong>filter pattern</strong>, and it is the single most useful thing you will learn this week. Everything in this session exists to make that line make sense.</p>
+<p>In the very next session you’ll put a mask inside square brackets and get back a smaller table. The line you write there is the <strong>filter pattern</strong>, and the booleans, the operators and the masks we practice this morning are the pieces it is made of.</p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>

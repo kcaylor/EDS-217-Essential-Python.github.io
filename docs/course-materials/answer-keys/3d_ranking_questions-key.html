@@ -446,14 +446,14 @@ How to use this key
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Work the colab through with your partner first, then come here. The code below is <strong>one</strong> correct answer, not the only one. This was a 45 minute pair exercise with very little scaffolding, so there are several reasonable ways to write almost every cell. If your code looks different but produces the same numbers, you were right.</p>
+<p>Work the colab through with your partner first, then come here. The code below is <strong>one</strong> correct answer, not the only one. The colab you just worked is a 45 minute pair exercise with very little scaffolding, so there are several reasonable ways to write almost every cell. If your code looks different but produces the same numbers, you were right.</p>
 <p>The written answers matter more than the code. You can already tell whether your code ran. What you cannot check on your own is whether you read the result correctly, and that is what the green <strong>Answer</strong> boxes are for. Compare your markdown cells against them.</p>
 <p>⬅️ Back to <a href="../../course-materials/coding-colabs/3d_ranking_questions.html">the colab</a></p>
 </div>
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="93bb3a33" class="cell" data-execution_count="1">
+<div id="0a41013c" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -466,7 +466,7 @@ How to use this key
 <pre><code>(21560, 12)</code></pre>
 </div>
 </div>
-<div id="05a09df5" class="cell" data-execution_count="2">
+<div id="a6ad8f06" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>parks.columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -490,7 +490,7 @@ How to use this key
 <section id="part-1-filtering" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-filtering">Part 1: Filtering</h2>
 <p><strong>1. How many rows describe units whose <code>unit_type</code> is exactly <code>National Park</code>?</strong></p>
-<div id="7088eb75" class="cell" data-execution_count="3">
+<div id="559316a8" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>national_parks <span class="op">=</span> parks[parks[<span class="st">'unit_type'</span>] <span class="op">==</span> <span class="st">'National Park'</span>]</span>
@@ -500,7 +500,7 @@ How to use this key
 <pre><code>(4743, 12)</code></pre>
 </div>
 </div>
-<div id="8df98aee" class="cell" data-execution_count="4">
+<div id="939c4a56" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>national_parks[<span class="st">'unit_name'</span>].nunique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -519,12 +519,12 @@ How to use this key
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>4,743 rows, but only 61 National Parks.</strong> A row is one park in one year, not one park, and the file covers 113 years of records. If you wrote “there are 4,743 National Parks” you read the row count as a count of things in the world, which it is not.</p>
+<p><strong>4,743 rows, but only 61 National Parks.</strong> Almost every row is one park in one year rather than one park, and the file spans 113 years, from 1904 to 2016. The exception is worth noticing now because question 2 is about it: 61 of those 4,743 rows are <code>Total</code> rows, one per park, and a <code>Total</code> row is not a year at all. If you wrote “there are 4,743 National Parks” you read the row count as a count of things in the world, which it is not.</p>
 <p><code>National Park</code> is also only one of 30 values in <code>unit_type</code>. Most of the file is National Monuments, Historic Sites and the rest of the National Park Service, so this filter throws away about four fifths of the table.</p>
 </div>
 </div>
 <p><strong>2. How many rows have a <code>year</code> of <code>Total</code>? Use <code>~</code> or <code>!=</code> to build a table called <code>by_year</code> that has none of them in it. How many rows does <code>by_year</code> have?</strong></p>
-<div id="b6a596fd" class="cell" data-execution_count="5">
+<div id="2c3abd7f" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>totals <span class="op">=</span> parks[parks[<span class="st">'year'</span>] <span class="op">==</span> <span class="st">'Total'</span>]</span>
@@ -549,11 +549,11 @@ How to use this key
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>386 <code>Total</code> rows, leaving 21,174 rows in <code>by_year</code>.</strong> The number 386 is not arbitrary: it is exactly the number of distinct units in the file, so every unit has one and only one <code>Total</code> row.</p>
-<p>Those rows are sums of the other rows in the same table. Great Smoky Mountains has a <code>Total</code> of 521,947,058, and adding up its 113 yearly values gives 521,947,058 as well. Leaving them in means counting every visitor twice, once in the year they visited and once in the lifetime sum. Every ranking in Parts 2 and 3 depends on having removed them first.</p>
+<p>Those rows are sums of the other rows in the same table. Great Smoky Mountains has a <code>Total</code> of 521,947,058, and adding up its 86 yearly values, which run from 1931 to 2016, gives 521,947,058 as well. Note that 86 is this park’s own span and not the file’s: the file covers 113 years, but a park only has rows for the years after it was established, and the spans run from one year to 113. Leaving them in means counting every visitor twice, once in the year they visited and once in the lifetime sum. Every ranking in Parts 2 and 3 depends on having removed them first.</p>
 </div>
 </div>
 <p><strong>3. The <code>region</code> column uses two-letter codes. Build a list of the codes <code>PW</code>, <code>IM</code>, and <code>AK</code>, and use <code>.isin()</code> to filter <code>by_year</code> down to units in those three regions. How many rows?</strong></p>
-<div id="e3469ad4" class="cell" data-execution_count="6">
+<div id="857d1e15" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>western_regions <span class="op">=</span> [<span class="st">'PW'</span>, <span class="st">'IM'</span>, <span class="st">'AK'</span>]</span>
@@ -564,7 +564,7 @@ How to use this key
 <pre><code>(9894, 12)</code></pre>
 </div>
 </div>
-<div id="b2c91f90" class="cell" data-execution_count="7">
+<div id="94e8781d" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>by_year[<span class="st">'region'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -596,8 +596,8 @@ Name: count, dtype: int64</code></pre>
 <p><code>.isin()</code> with a list does the work of three separate comparisons joined by <code>|</code>. The list is the part you edit later, which is why building it as a named variable is worth the extra line.</p>
 </div>
 </div>
-<p><strong>4. Using two conditions in one filter, find the rows that are National Parks and recorded more than 5 million visitors. How many are there, and what does each row represent?</strong></p>
-<div id="d9c1f68e" class="cell" data-execution_count="8">
+<p><strong>4. Using two conditions in one filter on <code>by_year</code>, find the rows that are National Parks and recorded more than 5 million visitors. How many are there, and what does each row represent? Use <code>by_year</code> rather than <code>parks</code>, because the <code>Total</code> rows you removed in question 2 would otherwise be counted alongside the single years.</strong></p>
+<div id="d13148a9" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>big <span class="op">=</span> by_year[(by_year[<span class="st">'unit_type'</span>] <span class="op">==</span> <span class="st">'National Park'</span>) <span class="op">&amp;</span> (by_year[<span class="st">'visitors'</span>] <span class="op">&gt;</span> <span class="dv">5_000_000</span>)]</span>
@@ -663,7 +663,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="3e05211f" class="cell" data-execution_count="9">
+<div id="cfbed12d" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>big[<span class="st">'unit_name'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -688,15 +688,15 @@ Name: count, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>59 rows, and each one is a single park in a single year.</strong> So the honest sentence is “there were 59 park-years above 5 million visitors”, not “59 parks passed 5 million”.</p>
-<p>The distinction matters because only <strong>four</strong> parks ever did it. Great Smoky Mountains accounts for 55 of the 59 rows, Grand Canyon for two (2015 and 2016), Yosemite for one (2016) and Acadia for one (1989). A row count of 59 sounds like a broad group and is in fact one park repeated.</p>
-<p>Acadia’s single appearance is worth a second look. It recorded 5,440,952 visitors in 1989, 4,502,283 in 1988, and then 2,339,591 in 1990. A 57% drop in one year almost certainly reflects a change in how the Park Service counted visitors rather than a real change in visits. Keep that in mind before treating any single year as a fact about the world.</p>
+<p>The distinction matters because only <strong>four</strong> parks ever did it. Great Smoky Mountains accounts for 55 of the 59 rows, Grand Canyon for two rows (2015 and 2016), Yosemite for one row (2016) and Acadia for one row (1989). A row count of 59 sounds like a broad group and is in fact one park repeated.</p>
+<p>Acadia’s single appearance is worth a second look. It recorded 4,502,283 visitors in 1988, then 5,440,952 in 1989, then 2,339,591 in 1990. A 57% drop in one year almost certainly reflects a change in how the Park Service counted visitors rather than a real change in visits. Keep that in mind before treating any single year as a fact about the world.</p>
 </div>
 </div>
 </section>
 <section id="part-2-ranking" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-ranking">Part 2: Ranking</h2>
 <p><strong>5. Rank all of <code>parks</code> by <code>visitors</code>, largest first, and look at the top 10. Something is wrong with this answer. Say what, and say why in one sentence.</strong></p>
-<div id="8ee87a11" class="cell" data-execution_count="10">
+<div id="06fd9805" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>parks.sort_values(<span class="st">'visitors'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)[</span>
@@ -804,12 +804,12 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Every one of the top 10 is a <code>Total</code> row.</strong> Sorting the unfiltered table compares 113-year lifetime sums against single years, and a lifetime sum is always the larger number. The largest value, Blue Ridge Parkway at 871,922,828, is not a number of visitors in any year at all.</p>
+<p><strong>Every one of the top 10 is a <code>Total</code> row.</strong> Sorting the unfiltered table compares whole-lifetime sums against single years, and a lifetime sum is always the larger number. The largest value, Blue Ridge Parkway at 871,922,828, is not a number of visitors in any year at all.</p>
 <p>Notice what the wrong answer looks like. There is no error message. The output is a clean, well-formatted table built from the wrong rows. Nothing in the output tells you the rows are not comparable. You have to know that from having looked at the <code>year</code> column.</p>
 </div>
 </div>
 <p><strong>6. Fix it, and rank <code>by_year</code> instead. Which single park unit had the highest visitor count in any one year, and in what year?</strong></p>
-<div id="7fb068a8" class="cell" data-execution_count="11">
+<div id="3b78c791" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>by_year.sort_values(<span class="st">'visitors'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)[</span>
@@ -934,7 +934,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>7. Filter to National Parks in the year <code>2016</code>, then find the top 10 by visitors. Show only the <code>unit_name</code>, <code>state</code>, and <code>visitors</code> columns.</strong></p>
-<div id="119b2d84" class="cell" data-execution_count="12">
+<div id="df7717ff" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>np_2016 <span class="op">=</span> by_year[(by_year[<span class="st">'unit_type'</span>] <span class="op">==</span> <span class="st">'National Park'</span>) <span class="op">&amp;</span> (by_year[<span class="st">'year'</span>] <span class="op">==</span> <span class="st">'2016'</span>)].copy()</span>
@@ -1039,17 +1039,19 @@ Name: count, dtype: int64</code></pre>
 <p>The shape of the ranking matters more than its order. These ten parks account for 57.5 percent of all 83,920,334 National Park visits in 2016, so the distribution is heavily concentrated at the top and has a long thin tail. Note also that this is a different table from question 6, where no National Park appeared at all.</p>
 </div>
 </div>
-<p><strong>8. How many of the 61 National Parks recorded more than a million visitors in 2016?</strong></p>
-<div id="d80bd3e6" class="cell" data-execution_count="13">
+<p><strong>8. Your <code>np_2016</code> table has one row per National Park that reported a 2016 figure. Print its shape to see how many parks that is, then find how many of them recorded more than a million visitors.</strong></p>
+<div id="9481925d" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(np_2016[<span class="st">'visitors'</span>] <span class="op">&gt;</span> <span class="dv">1_000_000</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np_2016.shape)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((np_2016[<span class="st">'visitors'</span>] <span class="op">&gt;</span> <span class="dv">1_000_000</span>).<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>np.int64(22)</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>(61, 12)
+22</code></pre>
 </div>
 </div>
-<div id="fa3de4d7" class="cell" data-execution_count="14">
+<div id="e5d1ef40" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np_2016[<span class="st">'visitors'</span>].<span class="bu">sum</span>())</span>
@@ -1072,13 +1074,13 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>22 of the 61, so just over a third.</strong> Those 22 parks account for 81.4% of the 83,920,334 visits recorded to National Parks in 2016, which is the more useful way to say it: a third of the parks receive four fifths of the visits.</p>
+<p><strong>61 parks reported a 2016 figure, and 22 of them passed a million, so just over a third.</strong> Those 22 parks account for 81.4% of the 83,920,334 visits recorded to National Parks in 2016, which is the more useful way to say it: a third of the parks receive four fifths of the visits.</p>
 <p>The other 39 are much smaller than the top 10 table suggests. The median park recorded 607,479 visitors, and the smallest, Gates of the Arctic in Alaska, recorded 10,047. Any sentence that begins “national parks are crowded” is really a sentence about roughly twenty of them.</p>
 <p>Note that <code>(np_2016['visitors'] &gt; 1_000_000).sum()</code> counts <code>True</code> values rather than adding visitors. Summing a boolean Series is the standard way to count matches without building a second table.</p>
 </div>
 </div>
 <p><strong>9. Use <code>.idxmax()</code> and <code>.loc[]</code> on <code>np_2016</code> to print the name of the most-visited National Park of 2016 on its own, without displaying the whole row.</strong></p>
-<div id="9343d4a0" class="cell" data-execution_count="15">
+<div id="fd7cf906" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>busiest <span class="op">=</span> np_2016[<span class="st">'visitors'</span>].idxmax()</span>
@@ -1108,7 +1110,7 @@ Name: count, dtype: int64</code></pre>
 <section id="part-3-put-them-together" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-put-them-together">Part 3: Put them together</h2>
 <p><strong>10. Build a list of the state codes <code>CA</code>, <code>UT</code>, and <code>AZ</code>. Filter <code>np_2016</code> to National Parks in those three states, rank them by visitors, and display the whole ranked list.</strong></p>
-<div id="79295ef6" class="cell" data-execution_count="16">
+<div id="9749115e" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>southwest_states <span class="op">=</span> [<span class="st">'CA'</span>, <span class="st">'UT'</span>, <span class="st">'AZ'</span>]</span>
@@ -1238,8 +1240,22 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✅ Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>17 rows</strong>, ranked from Grand Canyon at 5,969,811 down. <code>.isin()</code> is doing the work a chain of <code>|</code> would otherwise do, and because you built <code>southwest</code> from <code>np_2016</code> rather than from <code>by_year</code>, the National Park and 2016 conditions are already applied and you do not have to repeat them.</p>
+<p>The <code>.copy()</code> matters here for the same reason it did in the practice: you display this table more than once, and question 11 counts from it.</p>
+</div>
+</div>
 <p><strong>11. Which of those three states has the park at the top of your list, and which has the most parks in it? Answer both in a markdown cell. You can count the parks per state by eye from your ranked table.</strong></p>
-<div id="b4467f95" class="cell" data-execution_count="17">
+<div id="81b3b060" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>southwest[<span class="st">'state'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1252,7 +1268,7 @@ AZ    3
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="c30dd521" class="cell" data-execution_count="18">
+<div id="49f5cad9" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>{state: southwest[southwest[<span class="st">'state'</span>] <span class="op">==</span> state][<span class="st">'visitors'</span>].<span class="bu">sum</span>() <span class="cf">for</span> state <span class="kw">in</span> southwest_states}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1273,13 +1289,13 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Arizona has the top park; California has the most parks.</strong> Grand Canyon leads the list with 5,969,811 visitors, and Arizona has only three National Parks in total. California has nine, more than Utah’s five and Arizona’s three, and its best park, Yosemite at 5,028,868, is second.</p>
+<p><strong>Arizona has the top park; California has the most parks.</strong> Grand Canyon leads the list with 5,969,811 visitors, and Arizona has only three National Parks in total. California has nine, more than Utah’s five and Arizona’s three, and its best park, Yosemite at 5,028,868, is second within these three states, behind Grand Canyon.</p>
 <p>The two questions have different answers, and that is the reason both were asked. Arizona reaches 7,433,511 visits in 2016 with three parks, four fifths of them at one park. California reaches 12,345,331 with nine, of which five recorded under 610,000 apiece. “Which state has the busiest park” and “which state has the most park visiting” and “which state has the most parks” are three different questions, and a single ranked table answers none of them by itself.</p>
-<p>These 17 parks are 28% of the 61 National Parks and 35.6% of 2016 National Park visits.</p>
+<p>Those three states hold 17 National Parks between them, which is 9 in California, 5 in Utah and 3 in Arizona. So 28% of the 61 National Parks account for 35.6% of all 2016 National Park visits, which is worth remembering the next time somebody talks about the parks as a single system.</p>
 </div>
 </div>
 <p><strong>12. In one markdown cell of three or four sentences, answer this: a colleague asks you which national park is “the busiest”. What do you need to know before you can answer, and what would you tell them? Use at least two numbers from today’s work.</strong></p>
-<div id="72593354" class="cell" data-execution_count="19">
+<div id="485c0096" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>y2016 <span class="op">=</span> by_year[by_year[<span class="st">'year'</span>] <span class="op">==</span> <span class="st">'2016'</span>]</span>
@@ -1343,7 +1359,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<p>There is no single right answer here. A strong response names at least two of the three choices that have to be settled before the question means anything, quotes at least two numbers it actually computed, and gives the colleague a usable answer rather than only an objection. Here is one that would earn full marks.</p>
+<p>There is no single right answer here. Three things have to be settled before “the busiest park” means anything: which year you are asking about, whether you mean National Parks or every unit the Park Service runs, and whether “busiest” means total visits or visits per acre or visits per open day. A strong response names at least two of those three, quotes at least two numbers it actually computed, and gives the colleague a usable answer rather than only an objection. Here is one that would earn full marks.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ A model answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

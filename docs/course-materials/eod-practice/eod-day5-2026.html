@@ -513,6 +513,30 @@ Reference
 <p>📖 <a href="../../course-materials/cheatsheets/pandas_dataframes.html">Cheatsheet: pandas DataFrames</a> · <a href="../../course-materials/cheatsheets/timeseries.html">Cheatsheet: time series</a></p>
 </div>
 </div>
+<div id="aa5e6246" class="cell" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/'</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>goleta <span class="op">=</span> pd.read_csv(base <span class="op">+</span> <span class="st">'openaq_goleta_measurments.csv'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>santa_barbara <span class="op">=</span> pd.read_csv(base <span class="op">+</span> <span class="st">'openaq_santa_barbara_measurments.csv'</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>cnsi <span class="op">=</span> pd.read_csv(base <span class="op">+</span> <span class="st">'openaq_CNSI_measurments.csv'</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'site'</span>] <span class="op">=</span> <span class="st">'Goleta'</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>santa_barbara[<span class="st">'site'</span>] <span class="op">=</span> <span class="st">'Santa Barbara'</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>cnsi[<span class="st">'site'</span>] <span class="op">=</span> <span class="st">'CNSI'</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>aq <span class="op">=</span> pd.concat([goleta, santa_barbara, cnsi], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>aq[<span class="st">'hour'</span>] <span class="op">=</span> aq[<span class="st">'datetimeLocal'</span>].<span class="bu">str</span>[<span class="dv">11</span>:<span class="dv">13</span>]</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>aq.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>(4942, 17)</code></pre>
+</div>
+</div>
 </section>
 <section id="part-1-what-is-in-each-pile" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-what-is-in-each-pile">Part 1: What is in each pile</h2>
@@ -586,10 +610,10 @@ Before you go any further
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
 <p>Look back through your notebook. Nearly every code cell was the same pattern, wearing different clothes:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean()               <span class="co"># one number per group</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].agg([...])           <span class="co"># several numbers per group</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>).agg({...})                  <span class="co"># several columns, different summaries</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean().sort_values() <span class="co"># and then rank the groups</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean()               <span class="co"># one number per group</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].agg([...])           <span class="co"># several numbers per group</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>).agg({...})                  <span class="co"># several columns, different summaries</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean().sort_values() <span class="co"># and then rank the groups</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>What changed from cell to cell was not the grammar. It was the <strong>key</strong>. You grouped by <code>site</code>, by <code>parameter</code>, by both at once, and by <code>hour</code>, and each of those choices asked a different question of the same 4,942 rows.</p>
 <p>That is worth stopping on. <code>site</code> was a column in the files. <code>parameter</code> was a column in the files. <code>hour</code> was not: you made it in the setup block, out of a string, and it turned out to hold the most interesting result of the practice. The best grouping key in a dataset is very often one that is not in it yet.</p>
 </section>

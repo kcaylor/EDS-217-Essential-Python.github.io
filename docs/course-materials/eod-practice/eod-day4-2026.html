@@ -506,6 +506,17 @@ Reference
 <p>📖 <a href="../../course-materials/cheatsheets/read_csv.html">Cheatsheet: reading CSV files</a> · <a href="../../course-materials/cheatsheets/timeseries.html">Cheatsheet: time series</a></p>
 </div>
 </div>
+<div id="1ebc9613" class="cell" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/marine_microplastics.csv'</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>], date_format<span class="op">=</span><span class="st">'%m/</span><span class="sc">%d</span><span class="st">/%Y %I:%M:%S %p'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 <section id="part-1-get-your-bearings" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-get-your-bearings">Part 1: Get your bearings</h2>
@@ -554,9 +565,9 @@ Reference
 </div>
 <div class="callout-body-container callout-body">
 <p>On Day 1 you drew a line with <code>plt.plot(series)</code>. A histogram is the same kind of call:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.hist(samples[<span class="st">'Measurement'</span>])</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'pieces per cubic metre'</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.hist(samples[<span class="st">'Measurement'</span>])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'pieces per cubic metre'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>plt.hist()</code> sorts the values into bins and draws a bar for each. <strong>Plotting gets two full days next week</strong>, where you will learn to control bins, axes, and everything else. Today you need it only to see a shape.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/matplotlib.html">Cheatsheet: matplotlib</a></p>
 </div>
@@ -617,12 +628,12 @@ A hint
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
 <p>Look back through your notebook. Every code cell you wrote was one of a handful of patterns:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.dropna(subset<span class="op">=</span>[<span class="st">'col'</span>])                  <span class="co"># keep rows that have what you need</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].fillna(value)        <span class="co"># or keep the row and fill the hole</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].astype(<span class="bu">str</span>)          <span class="co"># tell pandas what a column is</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">str</span>.replace(a, b)    <span class="co"># tidy text</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> expression                     <span class="co"># add a column that was not in the file</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">apply</span>(my_function)   <span class="co"># add a column only you know how to compute</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.dropna(subset<span class="op">=</span>[<span class="st">'col'</span>])                  <span class="co"># keep rows that have what you need</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].fillna(value)        <span class="co"># or keep the row and fill the hole</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].astype(<span class="bu">str</span>)          <span class="co"># tell pandas what a column is</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">str</span>.replace(a, b)    <span class="co"># tidy text</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> expression                     <span class="co"># add a column that was not in the file</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">apply</span>(my_function)   <span class="co"># add a column only you know how to compute</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Six patterns, and two of them you also used yesterday and the day before.</p>
 <p>Notice which one did the most work today. It was <code>df['new'] = expression</code>, four times over: <code>ocean</code>, <code>year</code>, <code>log10_measurement</code>, and <code>my_class</code>. The twenty-two columns you downloaded did not have the answer to the journalist’s question in them, and the four columns you made yourself are where you found it!</p>
 </section>

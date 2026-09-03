@@ -23,16 +23,20 @@ format:
 
 Just as building a boat is 90% sanding, it often feels like doing data science is 90% cleaning (the survey data says it's _just 60%_, so that's good news!). The time we will spend cleaning data this afternoon is a taste of your data science future.
 
-Today's file is a season of stream chemistry from six monitoring sites, transcribed from paper
-field sheets by four different undergraduates. They were all careful... and they made
-reasonable decisions about data entry. Unfortunately, their decisions were not the same (maybe the PI should have made a data dictionary to ensure consistency!).
+Today's file is a season of stream chemistry, 320 rows from six monitoring sites, transcribed
+from paper field sheets by several people over the course of a season. They were all careful...
+and they all made reasonable decisions about data entry. Unfortunately, their decisions were not
+the same as each other's (maybe the PI should have made a data dictionary to ensure
+consistency!).
 
 Your task is to turn their work into a table that you could use for rigorous data analysis.
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
-finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it. 
+finish a numbered task. The person not typing should read the code through (quietly) and say what they expect it to
+produce, before you run it. 
 
-You have 45 minutes.
+We have about 45 minutes for this colab, so please let Cella or Kelly know if you and your
+partner are getting stuck!
 
 ## The data
 
@@ -53,7 +57,8 @@ https://eds-217-essential-python.github.io/data/messy_field_survey.csv
 
 ## The code patterns you will need
 
-All of the code patterns below are from today. You should not need anything else to complete this colab.
+Most of what you need is from today. The last two lines are older, and they are here because
+you will need them too.
 
 ```python
 df.drop_duplicates()                    # and subset=[...]
@@ -62,13 +67,27 @@ df['col'] = df['col'].fillna(value)     # fill the gaps instead
 df['col'] = df['col'].astype(float)     # int, float, str
 df['col'] = df['col'].str.strip()       # .lower(), .replace(old, new)
 df['new'] = expression                  # the derived-column pattern
+def my_func(x):  ...                    # write it once, from this morning
 df['new'] = df['col'].apply(my_func)    # run your own function down a column
+
+df[df['col'] > value].copy()            # the filter pattern, from Day 3
+df.rename(columns={'old': 'new'})       # renaming, from Day 2
 ```
 
 ## Setup
 
-Create a notebook named `Colab_4D_Cleaning_Messy_Data.ipynb`, with both partners' names in the
-title cell, then read the file in.
+Create a notebook named `Colab_4D_Cleaning_Messy_Data.ipynb`, and give it a title cell with
+both partners' names in it:
+
+```markdown
+# Day 4: Colab 4D - From Field Sheet to DataFrame
+
+Partners: your names here
+
+Date: 09/03/2026
+```
+
+Then read the file in.
 
 ```{python}
 import pandas as pd
@@ -128,10 +147,11 @@ survey['temperature_c'].describe()
 
 :::{.callout-tip title="What the minimum means"}
 Dataloggers that fail often write a value chosen to be obviously impossible rather than leaving
-the field blank. `-999`, `-9999` and `NA` are the usual suspects. These entries are missing data wearing a
-costume... and `.isnull()` will never find them! They can also really mess up your averages and other statistics. 
-**Only `.describe()` and your domain knowledge of the
-measurement will help you avoid mis-interpreting numerical missing data as actual information.**
+the field blank. `-999`, `-9999` and `NA` are the usual suspects. A sentinel value like one of
+those is missing data wearing a costume... and `.isnull()` will never find it! It can also
+really mess up your averages and other statistics.
+**Reading `.describe()`, and knowing what the measurement can plausibly be, are what keep you
+from mis-interpreting numerical missing data as actual information.**
 :::
 
 ## Part 2: Clean it (about 20 minutes)
@@ -148,7 +168,8 @@ survey.shape
 7. Fix the `site` column so that all six sites have one label each. You will need three
    separate statements, one per method, each assigned back to `survey['site']`: strip the
    whitespace, lower-case the text, and replace the hyphens with underscores. Confirm with
-   `.value_counts()` that you have exactly six.
+   `.value_counts()` that you have exactly six distinct site labels, reading `site_a` through
+   `site_f`.
 
 ```{python}
 survey['site'] = survey['site'].str.strip()
@@ -158,9 +179,9 @@ survey['site'].value_counts()
 ```
 
 :::{.callout-important title="Do not chain these"}
-Write one method per line. There is a version of this that runs them all together on one line,
-and there is a version of that version which contains a silent bug, and telling them apart is
-harder than typing three lines.
+Write one method per line. A single chained line does the same three things, but if one of the
+methods in the chain quietly does nothing, the chain gives you no way to see which one it was.
+Three separate lines cost you a few seconds and let you look at the column after each step.
 :::
 
 8. `pH` came in as text. Find out why by looking at
@@ -179,9 +200,10 @@ survey['pH'].describe()
 ```
 
 :::{.callout-note}
-🐍 Try `survey['pH'].astype(float)` **before** the replace, on purpose, and read the error. It
-provides the exact value it could not parse. That message is the fastest debugging tool in pandas; 
-as is often the case, a little bit of "pre-flight" testing will make your data science journey much smoother. 
+🐍 Try `survey['pH'].astype(float)` **before** the replace, on purpose, and read the error. The
+message gives you the exact value that could not be converted, which usually tells you what to
+fix faster than scrolling through the column would. As is often the case, a little bit of
+"pre-flight" testing will make your data science journey much smoother.
 :::
 
 9. Three measurement columns have blanks: `temperature_c`, `dissolved_oxygen_mg_L`, and
@@ -213,8 +235,8 @@ survey.shape
 ```
 
 12. Re-run `.describe()` on `temperature_c`. Compare the mean to the one you got in task 5. In
-    a markdown cell, write one short statement about what nine bad rows did to the average of three
-    hundred good ones.
+    a markdown cell, write one short statement about what the sentinel rows did to the average
+    you saw in task 5.
 
 ```{python}
 survey['temperature_c'].describe()
@@ -276,7 +298,7 @@ survey['ph_class'].value_counts()
 
 ## Part 4: Ask it something (about 5 minutes)
 
-You now have a table you can trust. Let's put it to work!
+You should now have a table you can trust. Let's put it to work!
 
 17. Use the filter pattern to build a table of just the acidic samples. Which sites do they
     come from? Use `.value_counts()` on `site`.
@@ -286,9 +308,10 @@ acidic = survey[survey['ph_class'] == 'acidic']
 acidic['site'].value_counts()
 ```
 
-18. Two of the six sites account for nearly all the acidic samples. Filter to one of those
-    sites and to `site_d`, and compare the mean of `dissolved_oxygen_mg_L` for each. (Two
-    filters, two `.mean()` calls. Tomorrow you will learn to do all six at once.)
+18. Two of the six sites account for nearly all the acidic samples. Take either one of those
+    two, and compare it against `site_d`, which is not one of them: filter to each in turn and
+    compare the mean of `dissolved_oxygen_mg_L`. (Two filters, two `.mean()` calls. Tomorrow you
+    will learn to do all six at once.)
 
 ```{python}
 site_f = survey[survey['site'] == 'site_f']

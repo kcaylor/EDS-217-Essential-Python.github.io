@@ -18,16 +18,16 @@ format:
 
 :::
 
-Everything you have done so far this week takes a table and gives you back a smaller piece of
+Everything we have done so far this week takes a table and gives you back a smaller piece of
 it. Filtering gives you fewer rows. Sorting gives you the same rows in a different order.
 Cleaning gives you fewer rows and tidier ones.
 
-This session is the first one that makes the table **bigger**. You are going to add columns
-that were not in the file: a unit somebody should have recorded, a comparison somebody should
-have computed, a label somebody should have written down.
+This afternoon we go the other way and make the table **bigger**. You will add columns that
+were not in the file: a unit somebody should have recorded, a comparison somebody should have
+computed, a label somebody should have written down.
 
-That is most of what data science is. The number you need is almost never the number in the
-file.
+Building new columns is a lot of what data science actually is, because the number your
+question needs is almost never a number that anybody put in the file.
 
 By the end of this session you will be able to:
 
@@ -74,7 +74,7 @@ m3.shape
 ```
 
 10,178 samples, all in the same unit. Note the `.copy()`: you are about to change this table,
-which is exactly the case Day 3 told you to copy for.
+which is exactly the case we learned to copy for on Day 3.
 
 ## The pattern
 
@@ -88,7 +88,7 @@ m3['pieces_per_liter'] = m3['Measurement'] / 1000
 m3[['Measurement', 'Unit', 'pieces_per_liter']].head()
 ```
 
-That is the **derived-column pattern**. The general form is:
+You have just written the **derived-column pattern**. The general form is:
 
 ```python
 df['new_column'] = expression
@@ -98,8 +98,6 @@ The left side is a column name that does not exist yet, in square brackets, exac
 would ask for a column that does. The right side is any expression that produces one value per
 row. Assignment creates the column.
 
-Two things are worth stopping on.
-
 First, the arithmetic happened on the whole column at once. You did not write a loop. You said
 "divide this column by a thousand" and pandas did it 10,178 times.
 
@@ -107,8 +105,9 @@ First, the arithmetic happened on the whole column at once. You did not write a 
 m3['pieces_per_liter'].describe()
 ```
 
-Second, unlike almost everything else you have learned this week, this one **does** change the
-table in place. There is nothing to assign back, because the assignment is the whole sentence.
+Second, unlike almost everything else we have learned this week, the derived-column pattern
+**does** change the table in place. There is nothing to assign back, because the assignment is
+the whole statement.
 
 ```{python}
 m3.shape
@@ -117,14 +116,14 @@ m3.shape
 23 columns now, up from 22.
 
 :::{.callout-note}
-🐍 If the name on the left already exists, pandas overwrites it without a word of warning. That
-is occasionally what you want, and is more often how you lose the original values. Use a new
-name unless you are certain.
+🐍 If the name on the left already exists, pandas replaces the old column with the new one and
+prints no warning at all. Overwriting is occasionally what you want, and it is more often how
+the original values get lost, so use a new name unless you are certain.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Latitude is in degrees. Add a column called `latitude_radians` holding the same values in
-radians, by multiplying by `3.141592653589793 / 180`. Display `Latitude` and
+Latitude is in degrees. Add a column to `m3` called `latitude_radians` holding the same values
+in radians, by multiplying by `3.141592653589793 / 180`. Display `Latitude` and
 `latitude_radians` side by side for the first few rows, and check that 90 degrees would give
 about 1.57.
 :::
@@ -134,7 +133,8 @@ about 1.57.
 The right side can name more than one column. When it does, pandas lines the columns up row by
 row and computes each row's answer from that row's values.
 
-Yesterday you ranked foods by the Economist's banana index. Today you can build it yourself.
+Yesterday we ranked foods by the Economist's banana index. Today you can build the index
+yourself.
 
 ```{python}
 url = 'https://eds-217-essential-python.github.io/data/banana_index.csv'
@@ -155,8 +155,8 @@ foods['my_banana_index'] = foods['emissions_kg'] / banana_emissions
 foods[['emissions_kg', 'Bananas index (kg)', 'my_banana_index']].head()
 ```
 
-Your column and theirs agree to seven decimal places. The thing you spent an afternoon ranking
-was one derived column, and now you can make your own.
+Your column and theirs agree to seven decimal places. The banana index we ranked foods with
+yesterday is a single derived column, and now you can build your own.
 
 So make one they did not:
 
@@ -165,22 +165,22 @@ foods['land_per_emission'] = foods['land_use_kg'] / foods['emissions_kg']
 foods['land_per_emission'].sort_values(ascending=False).head(5)
 ```
 
-Square metres of land per kilogram of CO₂. Almonds and beans sit at the top: foods that ask for
-a lot of ground and very little atmosphere. That question was not answerable from any column in
-the file, and it took one line.
+Square metres of land per kilogram of CO₂. Almond butter, almonds and beans sit at the top:
+foods that ask for a lot of ground and very little atmosphere. No column in the file answers
+that question, and building the column that does took one line.
 
 :::{.callout-important title="Row alignment is the whole point"}
 `foods['land_use_kg'] / foods['emissions_kg']` divides each food's land use by **that same
 food's** emissions. Pandas matches the two columns up by row label before it computes anything.
 
-This is why you can write column arithmetic as if it were ordinary algebra, and why a
-misaligned index is one of the few ways it can go wrong. Day 6 will show you that failure mode
-on purpose.
+Row alignment is why you can write column arithmetic as if it were ordinary algebra, and why a
+misaligned index is one of the few ways column arithmetic goes wrong. On Day 6 we will build
+that failure on purpose, so that you have seen it once.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Add a column called `emissions_per_calorie_ratio` holding `emissions_1000kcal` divided by
-`emissions_kg`. Then use the top-N pattern from yesterday to display the five foods with the
+Add a column to `foods` called `emissions_per_calorie_ratio` holding `emissions_1000kcal`
+divided by `emissions_kg`. Then use the top-N pattern from yesterday to display the five foods with the
 largest values. In a markdown cell, say what a large value of that ratio means about a food.
 :::
 
@@ -192,8 +192,9 @@ Back to the plastics. Look at the range of measurements:
 m3['Measurement'].describe()
 ```
 
-The median is 0.0072 pieces per cubic metre and the maximum is 110,480. That is seven orders of
-magnitude in one column, and no histogram, no mean and no eye can cope with it.
+The median is 0.0072 pieces per cubic metre and the maximum is 110,480, so the maximum is about
+seven orders of magnitude above the median. A spread that wide is very hard to summarise with a mean or to
+read off a histogram, because the largest few samples dominate both.
 
 The fix is to work with the logarithm. Vectorised mathematics in Python comes from **numpy**,
 which you imported at the top of the notebook as `np`:
@@ -212,8 +213,8 @@ positive[['Measurement', 'log10_measurement']].head()
 positive['log10_measurement'].describe()
 ```
 
-A range from -3.2 to 5.0, which is a number of orders of magnitude, and now the column is
-something you can average and plot.
+A range from -3.2 to 5.0. Taking the logarithm turned a spread of many orders of magnitude into
+a range of single digits, and the column is now something you can average and plot.
 
 Notice the filter on the line before. 3,087 of these samples recorded exactly zero pieces, and
 the logarithm of zero is undefined. Filtering them out first, with yesterday's filter pattern
@@ -221,8 +222,8 @@ and a `.copy()`, is the whole fix.
 
 :::{.callout-important title="This is your entire numpy budget"}
 `np.log10()` is the one numpy function this course asks you to know. You will meet numpy again
-if you go further into modelling or image work, but for tabular environmental data, pandas
-covers you.
+if you go further into modelling or image work, but for tabular environmental data, pandas has
+almost everything you need.
 
 **A function applied to a column returns a column**,
 so it goes on the right-hand side of the derived-column pattern like any other expression.
@@ -247,10 +248,10 @@ Ask this table for every sample tagged with the research vessel Tara:
 plastics[plastics['Keywords'] == 'R/V Tara'].shape
 ```
 
-Zero rows. On Day 3 you learned that an empty result is an answer, and that it is usually a
-spelling problem. It is one here too, but it is a spelling problem you cannot see. Ask pandas
-for the distinct values and it prints them with quotation marks around each one, which is the
-only way to spot the difference:
+Zero rows. On Day 3 we learned that an empty result is an answer, and that it is usually a
+spelling problem. It is one here too, but it is a spelling problem you cannot see. Asking for the distinct values prints them with quotation marks around each one, which is the
+easiest way to see the difference. `Keywords` has hundreds of distinct values, so we take a slice
+of four of them here rather than printing the lot:
 
 ```{python}
 plastics['Keywords'].unique()[10:14]
@@ -287,8 +288,10 @@ plastics['density_class'] = plastics['Density Class'].str.lower()
 plastics['density_class'].value_counts()
 ```
 
-Lower-casing a label column before you compare or count means `'Medium'`, `'medium'` and
-`'MEDIUM'` stop being three different categories.
+The two outputs are the same five categories with the same five counts, because `Density Class`
+happens to be consistent already. Run it anyway on a column you have not checked: lower-casing a
+label column before you compare or count means `'Medium'`, `'medium'` and `'MEDIUM'` stop being
+three different categories, and you usually find out that they were only after you look.
 
 ### `.str.replace()` swaps one piece of text for another
 
@@ -296,9 +299,9 @@ Lower-casing a label column before you compare or count means `'Medium'`, `'medi
 plastics['Oceans'].value_counts()
 ```
 
-Every value ends in the word "Ocean", which is four wasted characters on every axis label you
-will ever draw from this column. `.str.replace()` takes the text to find and the text to put in
-its place:
+Every value ends in the word "Ocean", which is a wasted word on every axis label you will ever
+draw from this column. `.str.replace()` takes the text to find and the text to put in its
+place:
 
 ```{python}
 plastics['ocean'] = plastics['Oceans'].str.replace(' Ocean', '')
@@ -312,16 +315,17 @@ You will see code online that runs several of these together:
 df['site'] = df['site'].str.strip().str.lower().str.replace('-', '_')
 ```
 
-That works, and it is not what we are doing this week. Write one method per line, assign it
-back, and look at the result before you write the next one. Chained cleaning is exactly where a
-step that silently does nothing hides.
+Chaining works, and we are not doing it this week. Write one method per line, assign it back,
+and look at the result before you write the next one. When a step in a chain silently does
+nothing, the chain gives you no way to tell which of the three methods it was.
 
-You will see one of those silent failures in the colab, in a moment.
+The colab this afternoon asks you to write those three cleaning steps as three separate
+statements for exactly that reason.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-The `Sampling Method` column contains values like `'Neuston net'` and `'Grab sample'`. Make a
-new column called `sampling_method_clean` that is the same text in lower case. Then use
+The `Sampling Method` column of `plastics` contains values like `'Neuston net'` and
+`'Grab sample'`. Make a new column called `sampling_method_clean` that is the same text in lower case. Then use
 `.value_counts()` on it and say how many distinct methods this archive used.
 :::
 
@@ -333,9 +337,10 @@ Cleaning and transforming are the same pass. Here is Day 4 so far, as a workflow
 url = 'https://eds-217-essential-python.github.io/data/marine_microplastics.csv'
 plastics = pd.read_csv(url)
 
-# Clean (session 4A)
-plastics['Keywords'] = plastics['Keywords'].str.strip()
+# Clean: drop the rows with no measurement (session 4A), then strip the stray
+# whitespace out of Keywords (this session)
 plastics = plastics.dropna(subset=['Measurement'])
+plastics['Keywords'] = plastics['Keywords'].str.strip()
 
 # Select one unit, so arithmetic means something (session 3B)
 samples = plastics[plastics['Unit'] == 'pieces/m3'].copy()
@@ -354,8 +359,8 @@ samples.shape
 ```
 
 Read it as a paragraph. Nine lines took a 16,245-row archive with three incompatible units and
-seven orders of magnitude to 7,091 comparable samples with three columns that were not in the
-file. Every line is a pattern you learned this week.
+a measurement column spanning eight orders of magnitude to 7,091 comparable samples, with three
+columns that were not in the file. Every line is a pattern we have learned this week.
 
 ## Key points
 
@@ -364,8 +369,8 @@ file. Every line is a pattern you learned this week.
 - Arithmetic on a column applies to every row at once. No loop.
 - Naming two columns on the right side computes row by row, matched up by row label.
 - Reusing an existing name overwrites it with no warning.
-- `np.log10()` rescales a column that spans orders of magnitude. Filter out zeros first, since
-  the logarithm of zero is undefined.
+- `np.log10()` rescales a column that spans orders of magnitude. Filter out zeros first,
+  because the logarithm of zero is undefined.
 - Text columns are cleaned through `.str`: `.strip()` for invisible whitespace, `.lower()` for
   predictable matching, `.replace(old, new)` for everything else. **One method per line.**
 

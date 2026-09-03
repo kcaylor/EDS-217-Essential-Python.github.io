@@ -18,18 +18,19 @@ format:
 
 :::
 
-For three days you have asked questions of tables that behaved themselves. Today you meet one
+For three days we have asked questions of tables that behaved themselves. Today we meet one
 that does not.
 
 Real environmental data arrives with holes in it, with the same sample entered twice, and with
 numbers stored as text. None of that is a mistake anyone made. It is what happens when
-sixteen thousand measurements are pooled from thirty-seven separate studies over thirty-five
-years. Your job is not to be annoyed by it. Your job is to find it, decide what to do about
-it, and write down what you decided.
+sixteen thousand measurements are pooled from thirty-seven separate studies over fifty
+years. Our job this morning is to find those problems, decide what to do about each one, and
+write down what we decided (and why!).
 
-Today's dataset is NOAA's marine microplastics archive, and you will be with it all day: this
-morning to clean it, this afternoon to transform it, and the end-of-day practice to answer
-questions with it.
+Today's dataset is NOAA's marine microplastics archive, and it runs through most of the day:
+this morning to clean it, the first session of the afternoon to transform it, and then the
+end-of-day practice to answer questions with it. Only the afternoon colab uses a different
+file.
 
 By the end of this session you will be able to:
 
@@ -72,8 +73,10 @@ plastics = pd.read_csv(url)
 plastics.shape
 ```
 
-16,245 rows and 22 columns. Every row is one water sample, somewhere in an ocean, on some day
-between 1972 and 2022.
+16,245 rows and 22 columns. Every row is one sample taken somewhere in an ocean, on some day
+between 1972 and 2022. Most are water samples, but not all: about six thousand of them are
+sediment grabs or timed shoreline counts, and the sampling method turns out to matter a great
+deal for what is missing.
 
 ```{python}
 plastics.columns.tolist()
@@ -81,13 +84,14 @@ plastics.columns.tolist()
 
 ## What is missing
 
-You met this sentence on Day 2. It is the first thing to run on a table you did not create:
+We met this pattern on Day 2, and it should be the first thing you run on any table you did
+not build yourself:
 
 ```{python}
 plastics.isnull().sum()
 ```
 
-Five columns have holes in them. Two of the holes are enormous:
+Five columns have holes in them, and the three worst are worth looking at one at a time:
 
 ```{python}
 plastics.isnull().sum().sort_values(ascending=False).head(5)
@@ -98,8 +102,8 @@ which is the actual number this whole archive exists to record, is missing on 5,
 
 :::{.callout-note}
 🐍 `.isnull()` returns a `True`/`False` for every cell, and `.sum()` counts the `True`s, one
-column at a time. It is the same "add up a mask" trick you used on Day 3 when you counted rows
-that passed a filter.
+column at a time. It is the same "add up a mask" trick we used on Day 3 when we counted the
+rows that passed a filter.
 :::
 
 ## Dropping rows: `.dropna()`
@@ -110,10 +114,10 @@ The obvious move is to throw away the incomplete rows. `.dropna()` does that:
 plastics.dropna().shape
 ```
 
-**588 rows.** You started with 16,245 and kept 3.6% of them.
+**588 rows.** We started with 16,245 and kept 3.6% of them.
 
-That is not a cleaning step. That is destroying the dataset. And notice how quietly it
-happened: one method, no arguments, no warning, no error message.
+Throwing away 96% of the rows is not a cleaning step, it is destroying the dataset. Notice how
+quietly it happened, too: one method, no arguments, no warning, and no error message.
 
 :::{.callout-important title="Bare `.dropna()` is almost always the wrong tool"}
 With no arguments, `.dropna()` removes every row that has a missing value **in any column at
@@ -125,17 +129,17 @@ The fix is to say which columns you actually care about.
 
 ## Dropping on purpose: `.dropna(subset=[...])`
 
-`subset=` takes a **list** of column names, and only those columns can get a row deleted:
+`subset=` takes a **list** of column names, and only a gap in one of those columns can delete a
+row:
 
 ```{python}
 measured = plastics.dropna(subset=['Measurement'])
 measured.shape
 ```
 
-10,453 rows. That is a defensible cleaning step and a terrible one, and which it is depends
-entirely on a question you have not asked yet.
-
-Ask it now. Compare the units before and after:
+10,453 rows. Dropping on `Measurement` is either a defensible cleaning step or a terrible one,
+depending entirely on what the rows we just deleted have in common. Compare the units before
+and after to find out:
 
 ```{python}
 plastics['Unit'].value_counts()
@@ -150,17 +154,17 @@ dropping on `Measurement` deleted every one of them, and with them every sample 
 one study that used that method.
 
 :::{.callout-important title="Missing values are rarely scattered at random"}
-On Day 2 you learned that `value` columns stack incompatible units. This is the other half of
-that lesson: **missingness is itself a variable**. Here it lines up exactly with sampling
-method, so a filter that looks like it removes bad rows actually removes one team's entire
-field campaign.
+On Day 2 we learned that a `value` column can stack incompatible units. The other half of that
+lesson is here: **missingness is itself a variable**. In this file it lines up exactly with
+sampling method, so a filter that looks like it removes bad rows actually removes one team's
+entire field campaign.
 
 Before you drop anything, count what you are dropping and look at what it has in common.
 :::
 
-That does not mean you should keep them. If you are about to average measurements, rows with no
-measurement are useless to you. It means you should be able to say, out loud, *what* you
-removed, and record it in your notebook.
+Knowing why the 5,792 rows are missing a measurement does not mean you should keep them. If
+you are about to average measurements, rows with no measurement are useless to you. Dropping them is fine, as long as you can say out loud
+*what* you removed and you write that decision down in your notebook.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 `Oceans` is missing on 271 rows. Use `.dropna()` with `subset=` to build a table called
@@ -181,16 +185,18 @@ plastics['Regions'] = plastics['Regions'].fillna('Unspecified')
 plastics['Regions'].value_counts().head(5)
 ```
 
-Two things worth noticing in that one line. `.fillna()` hangs off a **column**, not the whole
-table. And it returns a new column, so you have to assign it back to `plastics['Regions']` for
-the change to stick. That is the same rule you have met every day this week: pandas hands you a
-result, and it is yours to keep or to discard.
+Two things are worth noticing in that one line. `.fillna()` hangs off a **column**, not the
+whole table. And it returns a new column, so you have to assign it back to
+`plastics['Regions']` for the change to stick. The assign-it-back rule is the same one we have
+met every day this week: pandas gives you back a result, and keeping it or discarding it is up
+to you.
 
 ```{python}
 plastics.isnull().sum().sort_values(ascending=False).head(3)
 ```
 
-`Regions` is now at zero.
+`Regions` has dropped out of the top three entirely, which is what going to zero looks like
+here.
 
 :::{.callout-note}
 🐍 Choose your fill value on purpose. `'Unspecified'` is honest: it says "we know this is
@@ -237,8 +243,8 @@ plastics.duplicated(subset=sample_columns).sum()
 day, as some earlier row.
 
 :::{.callout-important title="`.duplicated()` is only as good as the columns you point it at"}
-This is the single most common way people convince themselves a dataset is clean. Any table
-with an auto-generated ID column will report zero duplicates forever.
+A bare `.duplicated()` is an easy way to convince yourself that a dataset is clean when it is
+not. Any table with an auto-generated ID column will report zero duplicates forever.
 
 Decide what "the same observation" means for *your* data, put those column names in a list, and
 pass the list to `subset=`.
@@ -252,9 +258,9 @@ deduplicated = plastics.drop_duplicates(subset=sample_columns)
 deduplicated.shape
 ```
 
-Now the hard part, which pandas cannot do for you. Are those 856 rows really duplicates? Two
-tows through the same patch of water on the same day, both finding zero pieces per cubic metre,
-would look exactly like this and would both be real:
+The hard part comes next, and pandas cannot do it for you. Are those 856 rows really
+duplicates? Two tows through the same patch of water on the same day, both finding zero pieces
+per cubic metre, would look exactly like this and would both be real:
 
 ```{python}
 repeats = plastics[plastics.duplicated(subset=sample_columns, keep=False)]
@@ -265,9 +271,9 @@ repeats[['Measurement', 'Unit', 'Sampling Method', 'Short Reference']].head(6)
 (repeats['Measurement'] == 0).sum()
 ```
 
-Of the 1,465 rows involved, 652 report a measurement of zero. That is a strong hint that many
-of these are genuine repeat samples which happened to agree, rather than double entries, so we
-will **keep** them and say so in the notebook.
+Of the 1,465 rows involved, 652 report a measurement of zero. All those zeros are a strong hint
+that many of these may be genuine repeat samples that happened to agree, rather than double
+entries, so we will **keep** them and say so in our notebooks.
 
 :::{.callout-note}
 🐍 `keep=False` marks *every* member of a duplicated group, not just the later ones. Use it
@@ -283,14 +289,15 @@ defend to a reviewer.
 
 ## Types: reading them and changing them
 
-Every column has a **dtype**, which is what pandas believes the column contains:
+Every column has a **dtype**, which is the type of data pandas has assigned to that column:
 
 ```{python}
 plastics.dtypes
 ```
 
-`float64` is a decimal number, `int64` a whole number, and `object` is pandas saying "text, or
-something I could not identify." Three of these are wrong for what the column means.
+`float64` is a decimal number, `int64` a whole number, and `object` is the catch-all for text,
+or for anything pandas could not identify. Three of these dtypes are wrong for what the
+column actually means, and we deal with each of them below.
 
 `Accession Number` is stored as an integer:
 
@@ -299,8 +306,9 @@ plastics['Accession Number'].head(3)
 ```
 
 It is not a quantity. Nobody will ever add two accession numbers together or take their mean.
-It is a label that happens to be spelled with digits, and leaving it numeric invites pandas to
-average it for you in some later summary. `.astype()` converts a column to the type you name:
+It is a label that happens to be spelled with digits, and leaving it numeric means it can end
+up averaged into some later summary without anyone noticing. `.astype()` converts a column to
+the type you name:
 
 ```{python}
 plastics['Accession Number'] = plastics['Accession Number'].astype(str)
@@ -321,25 +329,26 @@ The three conversions you will use all week are `.astype(float)`, `.astype(int)`
 plastics['Latitude'].astype(int).head(3)
 ```
 
-That one is a demonstration, not a suggestion. `.astype(int)` truncates toward zero, so
--58.4283 becomes -58, and nearly half a degree of latitude, about 47 kilometres, is gone.
-Converting to a narrower type throws information away, silently.
+Casting latitude to `int` is a demonstration, not a suggestion. `.astype(int)` truncates toward
+zero, so -58.4283 becomes -58, and nearly half a degree of latitude, about 47 kilometres, is
+gone. Converting to a narrower type throws information away, and it does it silently.
 
 :::{.callout-caution title="`.astype()` fails loudly on text it cannot parse"}
 If a numeric column has even one entry like `'not recorded'`, `.astype(float)` raises a
-`ValueError` naming the offending value. That is pandas doing you a favour. Read the value it
-names, fix that, and convert again.
+`ValueError` naming the offending value. A loud failure is much better than a silent one here,
+because the error message tells you exactly which entry to go and look at. Read the value it
+names, fix that entry, and convert again.
 
-You will meet exactly this in the colab this afternoon.
+You will meet exactly this problem in the colab this afternoon.
 :::
 
 `Date` is an `object` too, because it is text like `2/3/2017 12:00:00 AM`. Dates are their own
-subject and they get a whole session on Day 6, so leave that one alone for now.
+subject and they get a whole session on Day 6, so we will leave that one alone for now.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Convert `OBJECTID` to text with `.astype(str)`, assign it back, and confirm the change with
-`.dtype`. Then, in a markdown cell, name one other column in this table whose dtype does not
-match what the column means, and say what it should be.
+`.dtype`. Then, in a markdown cell, name the one miscast column we have not converted, say what
+its dtype should be, and say why we are leaving it alone until Day 6.
 :::
 
 ## Putting it together
@@ -350,7 +359,7 @@ saying why:
 ```{python}
 clean = plastics.copy()
 
-# Open-ocean samples have no named region; that is information, not a gap.
+# Open-ocean samples have no named subregion; that is information, not a gap.
 clean['SubRegions'] = clean['SubRegions'].fillna('Unspecified')
 
 # Accession numbers are labels, not quantities.
@@ -374,8 +383,8 @@ there.
 ## Key points
 
 - Run `df.isnull().sum()` first, every time, on any table you did not build yourself.
-- Bare `.dropna()` deletes a row for a gap in **any** column. Here that cost 96% of the data.
-  Use `.dropna(subset=['col'])` and name the columns you actually need.
+- Bare `.dropna()` deletes a row for a gap in **any** column. In this file that cost 96% of the
+  data. Use `.dropna(subset=['col'])` and name the columns you actually need.
 - Before you drop, **count what you are dropping and look at what it has in common.**
   Missingness usually lines up with something.
 - `.fillna(value)` replaces gaps with a value you choose. Choose one that cannot be mistaken

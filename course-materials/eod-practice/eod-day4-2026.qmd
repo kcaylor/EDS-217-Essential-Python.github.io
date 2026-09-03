@@ -22,15 +22,16 @@ format:
 :::
 
 NOAA's National Centers for Environmental Information maintain an archive of every marine
-microplastics measurement they can find: 16,245 water samples, pooled from thirty-seven
+microplastics measurement they can find: 16,245 samples, pooled from thirty-seven
 separate studies, taken between 1972 and 2022 by research vessels, citizen scientists, and
 undergraduates with nets.
 
-This dataset was assembled one study at a time. Nobody designed this dataset. Most of the environmental
-data you will ever be handed was put together the same way.
+NOAA assembled the archive one study at a time, rather than designing it as a single experiment, so the
+columns are a mixture of measurements, provenance, and somebody else's classification scheme. Most of the
+environmental data you will ever be handed was put together the same way.
 
-You have already seen this file twice today. Now, you will use the raw data to answer
-the question: Is there more plastic in the Pacific than the Atlantic?
+We have already worked with this file three times today. This afternoon you will start again from the raw
+download and use it to answer one question: Is there more plastic in the Pacific than the Atlantic?
 
 :::{.callout-note title="Reference"}
 NOAA National Centers for Environmental Information, Marine Microplastics database.
@@ -39,7 +40,7 @@ NOAA National Centers for Environmental Information, Marine Microplastics databa
 
 ## Today's three patterns
 
-Everything below is built from these three patterns, plus two more you learned yesterday.
+Everything below is built from these three patterns, plus one more from this morning.
 
 ```python
 df['new'] = expression                     # the derived-column pattern
@@ -56,9 +57,9 @@ df['new'] = df['col'].apply(my_function)   # your own verb, run down a column
 
 ## Setup
 
-1. Create a new notebook named `EOD_Day4_Microplastics.ipynb`.
+i. Create a new notebook named `EOD_Day4_Microplastics.ipynb`.
 
-2. Add a title cell:
+ii. Add a title cell:
 
 ```markdown
 # Day 4 EOD: Microplastics, From Raw File to Real Numbers
@@ -66,8 +67,8 @@ df['new'] = df['col'].apply(my_function)   # your own verb, run down a column
 Date: 09/03/2026
 ```
 
-3. Import what you need and read the data. The `Date` column is text, and pandas can convert it
-   while it reads if you tell it exactly what the text looks like.
+iii. Import what you need and read the data. The `Date` column is text, and pandas can convert
+   it while it reads if you tell it exactly what the text looks like.
 
 :::{.callout-tip title="🧭 Field Note: reading dates"}
 `read_csv()` takes a `parse_dates=` argument naming the columns that hold dates, and a
@@ -80,7 +81,7 @@ df = pd.read_csv(url, parse_dates=['Date'], date_format='%m/%d/%Y %I:%M:%S %p')
 
 The format string is a small language of its own. `%m/%d/%Y` is month, day, four-digit year;
 `%I:%M:%S` is a twelve-hour clock; and `%p` is the AM or PM that goes with it. You are not
-expected to be able to write one of these yet.
+expected to be able to write one of these yet, so copy the line above exactly as it is and keep going.
 
 Once a column is a real date, you reach the pieces of it through `.dt`. You will need exactly
 one of these in task 13, and we are giving it to you here:
@@ -89,7 +90,8 @@ one of these in task 13, and we are giving it to you here:
 samples['year'] = samples['Date'].dt.year
 ```
 
-The `.year` is the request for the year of that date string. **Dates get a full session on Day 6.**
+The `.year` on the end asks for the year of each date, and the month, the day and the rest of the
+pieces are available in the same way. **Dates get a full session on Day 6.**
 
 📖 [Cheatsheet: reading CSV files](../cheatsheets/read_csv.qmd) · [Cheatsheet: time series](../cheatsheets/timeseries.qmd)
 :::
@@ -138,8 +140,8 @@ print(measured['Oceans'].isnull().sum())
 
 ## Part 2: Decide what to keep
 
-Part 2 requires some judgement, so more than one answer here is defensible. Every
-task here removes rows, so **print `.shape` after every one of them** and record the number in
+Part 2 requires some judgement, so more than one answer here is defensible. Several of these tasks
+change how many rows you have, so **print `.shape` after each one** and record the number in
 a markdown cell.
 
 5. Use `.dropna()` with `subset=` to keep only the rows with a `Measurement`. How many
@@ -151,7 +153,9 @@ print(df.shape)
 print(df.shape[0] / 16245)
 ```
 
-6. Compare `df['Unit'].value_counts()` now with what it was before task 5. What did that one
+6. Run `df['Unit'].value_counts()` now and compare it with the counts below, which are what the
+   same line gave before task 5: `pieces/m3` 10,178, `pieces/10 mins` 5,792, `pieces kg-1 d.w.`
+   275. What did that one
    line cost you, and which sampling programme did the rows you lost belong to? (Check
    `Sampling Method` and `Organization` on the rows you removed, if you want to be sure.)
 
@@ -212,7 +216,8 @@ samples['ocean'].value_counts()
 13. Add a column called `year` holding the year each sample was taken, using the supplied line
     from the setup Field Note. Then run `.value_counts()` on `year`. Which single year
     contributed the most samples? In a markdown cell, say whether the archive is spread evenly
-    across its fifty years, and what an uneven spread would mean for anyone who wants to use it
+    across its fifty-one calendar years, and what an uneven spread would mean for anyone who wants
+    to use it
     to describe a trend.
 
 ```{python}
@@ -232,7 +237,7 @@ samples['Measurement'].describe()
 15. Draw a histogram of `Measurement`.
 
 :::{.callout-tip title="🧭 Field Note: a histogram in one line"}
-On Day 1 you drew a line with `plt.plot(series)`. A histogram is the same kind of call:
+On Day 1 we drew a line with `plt.plot(series)`. A histogram is the same kind of call:
 
 ```python
 plt.hist(samples['Measurement'])
@@ -240,9 +245,9 @@ plt.xlabel('pieces per cubic metre')
 plt.show()
 ```
 
-`plt.hist()` sorts the values into bins and draws a bar for each. **Plotting gets two full days
+`plt.hist()` sorts the values into bins and draws a bar for each. **Plotting gets a full day
 next week**, where you will learn to control bins, axes, and everything else. Today you need
-it only to see a shape.
+it only to see the shape of the distribution.
 
 📖 [Cheatsheet: matplotlib](../cheatsheets/matplotlib.qmd)
 :::
@@ -285,8 +290,8 @@ plt.show()
 ## Part 5: A classifier of your own
 
 The archive has a column called `Density Class` with values like `Low` and `Very High`.
-Somebody decided those cutoffs. Today you will decide your own, and then find out whether you
-agree with theirs.
+Somebody decided those cutoffs. You will write your own classifier first, and then compare your
+labels against theirs.
 
 20. Write a function called `density_class` that takes a measurement in pieces per cubic metre
     and returns:
@@ -375,7 +380,8 @@ print(pacific['log10_measurement'].mean())
 ```
 
 27. Before you conclude anything: how many Pacific samples are there, out of how many total?
-    Look back at task 12. In one sentence, say what you would need to know about *how the
+    Task 12 counted the oceans in `samples`, before the zeros came out, so expect a different
+    pair of numbers here. In one sentence, say what you would need to know about *how the
     samples were collected* before you would publish a comparison between these two oceans.
 
 ## Part 7: Write it up
@@ -403,11 +409,13 @@ df['new'] = expression                     # add a column that was not in the fi
 df['new'] = df['col'].apply(my_function)   # add a column only you know how to compute
 ```
 
-Six patterns, and two of them you also used yesterday and the day before.
+Six patterns, and every one of them is new today.
 
-Notice which one did the most work today. It was `df['new'] = expression`, four times over:
-`ocean`, `year`, `log10_measurement`, and `my_class`. The twenty-two columns you downloaded
-did not have the answer to the journalist's question in them, and the four columns you made yourself are where you found it!
+The pattern that did the most work today was `df['new'] = ...`, the derived column, which you
+built four times over:
+`ocean`, `year`, `log10_measurement`, and `my_class`. The twenty-two columns you downloaded did not have
+an answer to the journalist's question in them, and the four columns you made yourself are where you
+found one!
 
 ## Wrap-up
 

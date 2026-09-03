@@ -448,14 +448,14 @@ How to use this key
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Work the colab first, then come here. The code below is <strong>one</strong> correct answer, not the only one. This is a colab, so you wrote every line yourself and there are more reasonable ways to write it than there are on a guided exercise. If your code looks different but produces the same numbers, you were right.</p>
+<p>Work the colab first, then come here. The code below is <strong>one</strong> correct answer, not the only one. Today’s activity is a colab, so you wrote every line yourself and there are more reasonable ways to write it than there are on a guided exercise. If your code looks different but produces the same numbers, you were right.</p>
 <p>The written answers matter more than the code. You can already tell whether your code ran. What you cannot check on your own is whether you read the result correctly, and that is what the green <strong>Answer</strong> boxes are for. Compare your markdown cells against them.</p>
 <p>⬅️ Back to <a href="../../course-materials/coding-colabs/4d_cleaning_messy_data.html">the colab</a></p>
 </div>
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="47fd6df4" class="cell" data-execution_count="1">
+<div id="1ad385b5" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -472,7 +472,7 @@ How to use this key
 <section id="part-1-find-out-what-is-wrong" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-find-out-what-is-wrong">Part 1: Find out what is wrong</h2>
 <p><strong>1. How many rows and columns? Run <code>.head()</code> and <code>.info()</code>. Which columns came in as <code>object</code> when you expected a number, and which came in as <code>float64</code> when you expected a whole number?</strong></p>
-<div id="01622992" class="cell" data-execution_count="2">
+<div id="7b0c31fc" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(survey.shape)</span>
@@ -555,7 +555,7 @@ How to use this key
 </div>
 </div>
 </div>
-<div id="b344352c" class="cell" data-execution_count="3">
+<div id="bac25623" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>survey.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -592,7 +592,7 @@ memory usage: 17.6+ KB</code></pre>
 </div>
 </div>
 <p><strong>2. Run <code>.isnull().sum()</code>. Which four columns have gaps, and how many each?</strong></p>
-<div id="4a6c65f7" class="cell" data-execution_count="4">
+<div id="f9a6ca4a" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>survey.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -618,12 +618,12 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong><code>temperature_c</code> 18, <code>dissolved_oxygen_mg_L</code> 11, <code>conductivity_uS_cm</code> 7, and <code>n_replicates</code> 5.</strong> That is 41 blanks in total, but they are not 41 blank rows, and you cannot tell yet how many rows they occupy.</p>
-<p>Note what is not in this list. <code>temperature_c</code> also contains nine impossible values that <code>.isnull()</code> counts as present, because <code>-999</code> is a number. This count is a lower bound on your missing data, not the whole of it.</p>
+<p><strong><code>temperature_c</code> 18, <code>dissolved_oxygen_mg_L</code> 11, <code>conductivity_uS_cm</code> 7, and <code>n_replicates</code> 5.</strong> The four columns come to 41 blanks in total, but 41 blanks are not 41 blank rows, and you cannot tell yet how many rows they occupy.</p>
+<p>Note what is not in this list. <code>temperature_c</code> also contains nine impossible values that <code>.isnull()</code> counts as present, because <code>-999</code> is a number. The null count is a lower bound on your missing data, not the whole of it.</p>
 </div>
 </div>
 <p><strong>3. Run <code>.duplicated().sum()</code>. How many rows are exact copies of an earlier row?</strong></p>
-<div id="0f124075" class="cell" data-execution_count="5">
+<div id="2d7ff329" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>survey.duplicated().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -642,11 +642,11 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>20 rows.</strong> <code>.duplicated()</code> flags the second and later copies only, so 20 flagged rows means 40 rows of the file are involved, each record appearing exactly twice. That is the usual signature of a transcriber entering a page, losing their place, and entering it again.</p>
+<p><strong>20 rows.</strong> <code>.duplicated()</code> flags the second and later copies only, so 20 flagged rows means 40 rows of the file are involved, each record appearing exactly twice. A record that appears exactly twice is the usual signature of a transcriber entering a page, losing their place, and entering it again.</p>
 </div>
 </div>
 <p><strong>4. Run <code>survey['site'].value_counts()</code>. There are six sites. How many distinct labels does the file contain? Look carefully at the quotation marks in the output of <code>survey['site'].unique()</code>.</strong></p>
-<div id="1e86ac97" class="cell" data-execution_count="6">
+<div id="9d59a8a5" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(survey[<span class="st">'site'</span>].nunique())</span>
@@ -696,7 +696,7 @@ site-f      3
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="b3be6d4f" class="cell" data-execution_count="7">
+<div id="98b609df" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'site'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -726,7 +726,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>5. Run <code>.describe()</code> on <code>temperature_c</code>. The minimum is not a temperature any stream has ever had… What’s going on here??</strong></p>
-<div id="ae325112" class="cell" data-execution_count="8">
+<div id="dd5d8892" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'temperature_c'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -761,7 +761,7 @@ Name: temperature_c, dtype: float64</code></pre>
 <section id="part-2-clean-it" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-clean-it">Part 2: Clean it</h2>
 <p><strong>6. Remove the exact duplicate rows. How many rows are left?</strong></p>
-<div id="c5c8e45f" class="cell" data-execution_count="9">
+<div id="74bc84ae" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> survey.drop_duplicates()</span>
@@ -784,8 +784,8 @@ Name: temperature_c, dtype: float64</code></pre>
 <p><strong>300 rows</strong>, down from 320. The 20 duplicated rows were complete records, which you can confirm later: the null counts you found in question 2 are unchanged after this step, so no blanks were removed along with the copies.</p>
 </div>
 </div>
-<p><strong>7. Fix the <code>site</code> column so that all six sites have one label each. You will need three separate statements, one per method, each assigned back to <code>survey['site']</code>: strip the whitespace, lower-case the text, and replace the hyphens with underscores. Confirm with <code>.value_counts()</code> that you have exactly six.</strong></p>
-<div id="ad74abd2" class="cell" data-execution_count="10">
+<p><strong>7. Fix the <code>site</code> column so that all six sites have one label each. You will need three separate statements, one per method, each assigned back to <code>survey['site']</code>: strip the whitespace, lower-case the text, and replace the hyphens with underscores. Confirm with <code>.value_counts()</code> that you have exactly six distinct site labels, reading <code>site_a</code> through <code>site_f</code>.</strong></p>
+<div id="d8146f40" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'site'</span>] <span class="op">=</span> survey[<span class="st">'site'</span>].<span class="bu">str</span>.strip()</span>
@@ -819,7 +819,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>8. <code>pH</code> came in as text. Find out why by looking at <code>survey['pH'].unique()</code>, then fix it with one <code>.str.replace()</code> and one <code>.astype()</code>, in that order. Confirm the dtype is <code>float64</code> and that <code>.describe()</code> gives a plausible pH range.</strong></p>
-<div id="877993e0" class="cell" data-execution_count="11">
+<div id="8972e44f" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'pH'</span>].unique()[:<span class="dv">12</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -829,7 +829,7 @@ Name: count, dtype: int64</code></pre>
        '6.68', '7.35', '7.62', '7.63'], dtype=object)</code></pre>
 </div>
 </div>
-<div id="6610a0e8" class="cell" data-execution_count="12">
+<div id="678491f3" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'pH'</span>] <span class="op">=</span> survey[<span class="st">'pH'</span>].<span class="bu">str</span>.replace(<span class="st">','</span>, <span class="st">'.'</span>)</span>
@@ -862,12 +862,12 @@ Name: pH, dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>One of the four transcribers used a comma as the decimal separator</strong>, so values like <code>'7,64'</code> sit alongside <code>'5.89'</code>. Twenty-four of the 300 values are written that way, and pandas reads the whole column as text, because a single unparseable entry forces the dtype for all of them.</p>
+<p><strong>Somebody entering these sheets used a comma as the decimal separator</strong>, so values like <code>'7,64'</code> sit alongside <code>'5.89'</code>. Twenty-four of the 300 values are written that way, and pandas reads the whole column as text, because a single unparseable entry forces the dtype for all of them.</p>
 <p>After the fix the column is <code>float64</code> and runs from <strong>5.78 to 8.33 with a mean of 7.02</strong>, which is a sensible range for stream water. The order matters: <code>.astype(float)</code> before the replace raises a <code>ValueError</code>, and the message names the exact string it could not convert.</p>
 </div>
 </div>
 <p><strong>9. Three measurement columns have blanks: <code>temperature_c</code>, <code>dissolved_oxygen_mg_L</code>, and <code>conductivity_uS_cm</code>. A row with no measurement is no use to you, so drop those rows in a single <code>.dropna()</code> call with a list in <code>subset=</code>. How many rows did that cost?</strong></p>
-<div id="8fbe70fb" class="cell" data-execution_count="13">
+<div id="fda8dfd5" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> survey.dropna(subset<span class="op">=</span>[<span class="st">'temperature_c'</span>, <span class="st">'dissolved_oxygen_mg_L'</span>, <span class="st">'conductivity_uS_cm'</span>])</span>
@@ -887,12 +887,12 @@ Name: pH, dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>36 rows, leaving 264.</strong> That is 18 + 11 + 7 exactly, which tells you something you did not know before: no row was missing two of the three measurements. Every blank sits in a row that is otherwise complete.</p>
+<p><strong>36 rows, leaving 264.</strong> The 36 is 18 + 11 + 7 exactly, which tells you something you did not know before: no row was missing two of the three measurements. Every blank sits in a row that is otherwise complete.</p>
 <p>Had any row been missing two, the drop would have cost fewer than 36, because <code>.dropna()</code> removes rows and not blanks. Comparing the rows lost against the sum of the column counts is a cheap check on whether your missing data is scattered or concentrated.</p>
 </div>
 </div>
 <p><strong>10. <code>n_replicates</code> also has blanks, but here a blank means the field sheet recorded a single bottle and nobody bothered to write “1”. Fill those with <code>1</code> instead of dropping the rows, then convert the column to <code>int</code>. Confirm with <code>.value_counts()</code>.</strong></p>
-<div id="c869c7cf" class="cell" data-execution_count="14">
+<div id="0568525f" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'n_replicates'</span>] <span class="op">=</span> survey[<span class="st">'n_replicates'</span>].fillna(<span class="dv">1</span>)</span>
@@ -918,12 +918,12 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>3 is the usual number of bottles (158 rows), then 2 (55) and 4 (46), and there are exactly 5 ones.</strong> Five is also the number of blanks you filled, so the column contained no explicit <code>1</code> before you started. That is the evidence for the assumption you were handed: if some sheets wrote <code>1</code> and others left it blank, you would expect to see both, and you do not.</p>
+<p><strong>3 is the usual number of bottles (158 rows), then 2 (55) and 4 (46), and there are exactly 5 ones.</strong> Five is also the number of blanks you filled, so the column contained no explicit <code>1</code> before you started. The absence of an explicit <code>1</code> is the evidence for the assumption you were handed: if some sheets wrote <code>1</code> and others left it blank, you would expect to see both, and you do not.</p>
 <p>The two lines have to run in this order. <code>.astype(int)</code> on a column containing <code>NaN</code> raises an error, because a missing value cannot be an integer. Filling first is what makes the conversion legal, and the conversion is what turns <code>3.0</code> back into <code>3</code>.</p>
 </div>
 </div>
-<p><strong>11. Now deal with the impossible temperatures. Use the filter pattern from Day 3 to keep only the rows where <code>temperature_c</code> is above <code>-100</code>, and end the line with <code>.copy()</code>. How many rows did the loggers ruin?</strong></p>
-<div id="c03ef732" class="cell" data-execution_count="15">
+<p><strong>11. Now let’s deal with the impossible temperatures. Use the filter pattern from Day 3 to keep only the rows where <code>temperature_c</code> is above <code>-100</code>, and end the line with <code>.copy()</code>. How many rows did the loggers ruin?</strong></p>
+<div id="69edff35" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> survey[survey[<span class="st">'temperature_c'</span>] <span class="op">&gt;</span> <span class="op">-</span><span class="dv">100</span>].copy()</span>
@@ -943,12 +943,12 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Nine rows, leaving 255.</strong> All nine are <code>-999</code>, and all nine were otherwise complete records with good dissolved oxygen and conductivity, which is why question 9 did not remove them and why they were still here to catch.</p>
+<p><strong>Nine rows, leaving 255.</strong> All nine of those rows read <code>-999</code>, and each one was otherwise a complete record with good dissolved oxygen and conductivity, which is why question 9 did not remove them and why they were still here to catch.</p>
 <p>The threshold is <code>-100</code> and not <code>-999</code> on purpose. You are excluding a physically impossible range, not one specific number, so the filter still works if a second logger writes <code>-9999</code>. The <code>.copy()</code> tells pandas you want a new table rather than a view of the old one, which is what prevents the <code>SettingWithCopyWarning</code> when you add columns in Part 3.</p>
 </div>
 </div>
-<p><strong>12. Re-run <code>.describe()</code> on <code>temperature_c</code>. Compare the mean to the one you got in task 5. In a markdown cell, write one short statement about what nine bad rows did to the average of three hundred good ones.</strong></p>
-<div id="3bd884bb" class="cell" data-execution_count="16">
+<p><strong>12. Re-run <code>.describe()</code> on <code>temperature_c</code>. Compare the mean to the one you got in task 5. In a markdown cell, write one short statement about what the sentinel rows did to the average you saw in task 5.</strong></p>
+<div id="e5aefed4" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'temperature_c'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -976,11 +976,11 @@ Name: temperature_c, dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>The mean moved from -11.21 °C to 19.22 °C, and the standard deviation from 173.44 to 3.18.</strong> Nine rows out of 302 moved the average by more than 30 degrees, and you can check that directly: each <code>-999</code> sits about 1018 below the true mean, and 9 × 1018 / 302 is about 30.3, which is the whole of the shift. The other rows you removed changed the mean by less than a tenth of a degree.</p>
-<p>The standard deviation is the more reliable warning sign. A stream survey with a standard deviation of 173 °C should have stopped you at question 5. Means can be argued about, but a spread fifty times larger than the plausible range of the measurement indicates a broken column rather than a real result.</p>
+<p>The standard deviation is the more reliable warning sign. A stream survey with a standard deviation of 173 °C should have stopped you at question 5. Means can be argued about, but a spread of 173 °C across readings that in reality span about 14 °C, from 12.3 to 26.5, indicates a broken column rather than a real result.</p>
 </div>
 </div>
 <p><strong>13. Rename <code>collection date</code> to <code>collection_date</code>, so you can reach it without quoting trouble later. <code>.rename()</code> is from Day 2; it takes <code>columns=</code> and a dictionary.</strong></p>
-<div id="62af1f64" class="cell" data-execution_count="17">
+<div id="0c02affb" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> survey.rename(columns<span class="op">=</span>{<span class="st">'collection date'</span>: <span class="st">'collection_date'</span>})</span>
@@ -996,11 +996,25 @@ Name: temperature_c, dtype: float64</code></pre>
  'n_replicates']</code></pre>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✅ Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Seven columns, with <code>collection date</code> now <code>collection_date</code>.</strong> The space in the original name is the whole problem: <code>survey.collection date</code> is not valid Python, so every reference to it has to go through <code>survey['collection date']</code>. Renaming it once buys you the shorter form everywhere after.</p>
+<p><code>.rename()</code> returns a new table rather than changing this one, which is why the result is assigned back to <code>survey</code>. Leave the assignment off and nothing happens, silently.</p>
+</div>
+</div>
 </section>
 <section id="part-3-transform-it" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-transform-it">Part 3: Transform it</h2>
 <p><strong>14. Add a column called <code>conductivity_mS_cm</code> holding conductivity in millisiemens per centimetre, which is the microsiemens value divided by 1000.</strong></p>
-<div id="bdd76162" class="cell" data-execution_count="18">
+<div id="94b2be58" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'conductivity_mS_cm'</span>] <span class="op">=</span> survey[<span class="st">'conductivity_uS_cm'</span>] <span class="op">/</span> <span class="dv">1000</span></span>
@@ -1050,8 +1064,22 @@ Name: temperature_c, dtype: float64</code></pre>
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✅ Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>A new column whose values are the microsiemens ones divided by 1,000.</strong> Dividing a column by a number divides every value in it, which is the derived-column pattern doing arithmetic on a whole column at once rather than a row at a time.</p>
+<p>Keeping both columns side by side is the check: read the two numbers across a row and confirm the decimal point moved three places and nothing else changed.</p>
+</div>
+</div>
 <p><strong>15. Add a column called <code>temperature_f</code> holding the temperature in Fahrenheit. Do it twice: once with the derived-column pattern and plain arithmetic, and once by writing a function <code>celsius_to_fahrenheit</code> and using <code>.apply()</code>. Check that the two columns agree.</strong></p>
-<div id="83dfc2b4" class="cell" data-execution_count="19">
+<div id="54383835" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'temperature_f'</span>] <span class="op">=</span> survey[<span class="st">'temperature_c'</span>] <span class="op">*</span> <span class="dv">9</span> <span class="op">/</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span>
@@ -1130,7 +1158,7 @@ Name: temperature_c, dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>16. Write a function called <code>classify_ph</code> that takes a pH value and returns <code>'acidic'</code> below 6.5, <code>'alkaline'</code> above 7.5, and <code>'neutral'</code> in between. Apply it to the <code>pH</code> column, store the result in a column called <code>ph_class</code>, and report the counts.</strong></p>
-<div id="4ebdbbaa" class="cell" data-execution_count="20">
+<div id="3131e99f" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_ph(value):</span>
@@ -1172,7 +1200,7 @@ Name: count, dtype: int64</code></pre>
 <section id="part-4-ask-it-something" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-ask-it-something">Part 4: Ask it something</h2>
 <p><strong>17. Use the filter pattern to build a table of just the acidic samples. Which sites do they come from? Use <code>.value_counts()</code> on <code>site</code>.</strong></p>
-<div id="f8b985c7" class="cell" data-execution_count="21">
+<div id="79b37f2a" class="cell" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>acidic <span class="op">=</span> survey[survey[<span class="st">'ph_class'</span>] <span class="op">==</span> <span class="st">'acidic'</span>]</span>
@@ -1197,11 +1225,11 @@ Name: count, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Almost all of them come from two sites: <code>site_f</code> with 27 and <code>site_c</code> with 14, plus a single sample from <code>site_e</code>.</strong> That is 41 of the 42 acidic samples in two of the six sites, and three sites contribute none at all.</p>
-<p>This is a real spatial pattern rather than noise. Acidity is a property of these two streams, not something scattered evenly across the survey, and it is the first result in this exercise that you could not have obtained from the file as it arrived. With 36 site labels, <code>site_f</code> alone was split across six spellings.</p>
+<p>The clustering looks like a real spatial pattern rather than noise. Acidity is a property of these two streams, not something scattered evenly across the survey, and it is the first result in this exercise that you could not have obtained from the file as it arrived. With 36 site labels, <code>site_f</code> alone was split across six spellings.</p>
 </div>
 </div>
-<p><strong>18. Two of the six sites account for nearly all the acidic samples. Filter to one of those sites and to <code>site_d</code>, and compare the mean of <code>dissolved_oxygen_mg_L</code> for each. (Two filters, two <code>.mean()</code> calls. Tomorrow you will learn to do all six at once.)</strong></p>
-<div id="fb540101" class="cell" data-execution_count="22">
+<p><strong>18. Two of the six sites account for nearly all the acidic samples. Take either one of those two, and compare it against <code>site_d</code>, which is not one of them: filter to each in turn and compare the mean of <code>dissolved_oxygen_mg_L</code>. (Two filters, two <code>.mean()</code> calls. Tomorrow you will learn to do all six at once.)</strong></p>
+<div id="6979e9d6" class="cell" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>site_f <span class="op">=</span> survey[survey[<span class="st">'site'</span>] <span class="op">==</span> <span class="st">'site_f'</span>]</span>
@@ -1215,7 +1243,7 @@ Name: count, dtype: int64</code></pre>
 site_d mean DO: 10.053333333333333</code></pre>
 </div>
 </div>
-<div id="c077a5ca" class="cell" data-execution_count="23">
+<div id="90fa3701" class="cell" data-execution_count="23">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'site_f mean temperature:'</span>, site_f[<span class="st">'temperature_c'</span>].mean())</span>
@@ -1237,8 +1265,9 @@ site_d mean temperature: 15.179487179487179</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong><code>site_d</code> averages 10.05 mg/L of dissolved oxygen and <code>site_f</code> averages 6.18 mg/L</strong>, a difference of 3.87 mg/L. <code>site_d</code> holds roughly 1.6 times as much oxygen as <code>site_f</code>, and 6 mg/L is around the level below which cold-water fish are stressed, so the gap is biologically meaningful and not merely a number.</p>
-<p>The second cell gives the reason. <code>site_f</code> averages 23.30 °C and <code>site_d</code> averages 15.18 °C, a difference of 8.1 degrees, and the two rankings run in opposite directions. Warm water holds less dissolved gas, so the site with the highest temperature has the lowest oxygen. When you rank all six sites with <code>.groupby()</code> tomorrow, you will find the two orderings are exact mirrors of each other with no exceptions.</p>
-<p>That result is what the afternoon of cleaning made possible. It is only visible because 36 site labels became six. Before you cleaned the column, <code>site_f</code> was six separate groups, the largest of them 12 rows, and no comparison between sites was possible at all.</p>
+<p>The second cell gives the reason. <code>site_f</code> averages 23.30 °C and <code>site_d</code> averages 15.18 °C, a difference of 8.1 degrees, and the two rankings run in opposite directions. Warm water holds less dissolved gas, so the site with the highest temperature has the lowest oxygen. When you rank all six sites with <code>.groupby()</code> tomorrow, you will find the two orderings are exact mirrors of each other, with the coolest site the most oxygenated and the warmest the least, and no site out of place.</p>
+<p>If you picked <code>site_c</code> rather than <code>site_f</code>, the argument is the same and the numbers are smaller: <code>site_c</code> averages 6.87 mg/L against <code>site_d</code>’s 10.05, a difference of 3.18 mg/L, and it runs 21.91 °C against 15.18 °C. Either choice shows the same relationship.</p>
+<p>The comparison between sites is what the afternoon of cleaning made possible, and it is only visible because 36 site labels became six. Before you cleaned the column, <code>site_f</code> was six separate groups, the largest of them 12 rows, and no comparison between sites was possible at all.</p>
 </div>
 </div>
 <p><strong>19. In a markdown cell of three or four sentences: what would you tell the PI whose project collected this data? Name the single change to their field sheet that would have saved you the most time this afternoon, and describe what evidence in the file makes you pick that one.</strong></p>
@@ -1262,7 +1291,7 @@ site_d mean temperature: 15.179487179487179</code></pre>
 <section id="if-you-finish-early" class="level2">
 <h2 class="anchored" data-anchor-id="if-you-finish-early">If you finish early</h2>
 <p><strong>Would you get the same final table if you had filtered out the sentinel temperatures first, before the <code>.dropna()</code> in task 9? Does the order of cleaning steps matter here, and would you expect that to be true in general?</strong></p>
-<div id="0c60d2ce" class="cell" data-execution_count="24">
+<div id="f5583ddb" class="cell" data-execution_count="24">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>check <span class="op">=</span> pd.read_csv(url).drop_duplicates()</span>
@@ -1291,7 +1320,7 @@ after dropna second:  (255, 7)</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>The same 255 rows, in the same order.</strong> Both steps are row selections that read the table without changing any value in it, so the surviving rows are the intersection of the two conditions, and an intersection does not care which condition you apply first.</p>
-<p>The intermediate number does change: filtering first leaves 273 rows rather than 264. That is because <code>-999 &gt; -100</code> is <code>False</code> and <code>NaN &gt; -100</code> is also <code>False</code>, so the comparison quietly removes the 18 rows with a missing temperature as well as the 9 sentinels. Reversing the order moves 18 rows from one step’s tally to the other’s, which is worth knowing if you are reporting how many rows each step cost.</p>
+<p>The intermediate number does change: filtering first leaves 273 rows rather than 264. The reason is that <code>-999 &gt; -100</code> is <code>False</code> and <code>NaN &gt; -100</code> is also <code>False</code>, so the comparison removes the 18 rows with a missing temperature as well as the 9 sentinels, without saying so. Reversing the order moves 18 rows from one step’s tally to the other’s, which is worth knowing if you are reporting how many rows each step cost.</p>
 <p>In general order does matter, and the safe rule is that it is only free when every step is a pure selection. As soon as a step fills a value, derives a column or converts a dtype, the steps stop commuting. Task 10 is the clear case in this exercise: <code>.fillna(1)</code> then <code>.astype(int)</code> works, and the same two lines in the other order raises an error.</p>
 </div>
 </div>
@@ -1300,10 +1329,10 @@ after dropna second:  (255, 7)</code></pre>
 <h2 class="anchored" data-anchor-id="where-the-marks-are">Where the marks are</h2>
 <p>If you compare your notebook against this key, look for these four things before you look at anything else.</p>
 <ol type="1">
-<li><strong>Your notebook records the row count after every step that removed rows</strong>, and you can say where the 65 lost rows went: 320 to 300 to 264 to 255, which is 20 duplicates, 36 rows with no measurement, and 9 broken loggers.</li>
+<li><strong>Your notebook records the row count after every step that removed rows</strong>, and you can say where the 65 lost rows went: 320 to 300 to 264 to 255, which is 20 duplicates, 36 rows with no measurement, and 9 rows with a broken logger reading.</li>
 <li><strong>You found all three kinds of damage in the <code>site</code> column</strong>, including the whitespace that <code>.value_counts()</code> cannot show you. Six labels at 50 rows each is the check.</li>
 <li><strong>You recognised <code>-999</code> as missing data rather than as an outlier</strong>, and your task 12 sentence says what it did to the mean and to the standard deviation.</li>
-<li><strong>Your interpretation answers say what the number means</strong>, not what the number is. “site_f averages 6.18 mg/L” restates the output. “site_f averages 6.18 mg/L, the lowest of the six, and it is also the warmest at 23.30 °C” reads it.</li>
+<li><strong>Your interpretation answers say what the number means</strong>, not what the number is. “site_f averages 6.18 mg/L” restates the output. “site_f averages 6.18 mg/L, the lowest of the six sites, and it is also the warmest at 23.30 °C” reads it.</li>
 </ol>
 <p>⬅️ Back to <a href="../../course-materials/coding-colabs/4d_cleaning_messy_data.html">the colab</a></p>
 

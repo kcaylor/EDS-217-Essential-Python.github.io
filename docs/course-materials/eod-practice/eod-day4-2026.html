@@ -449,9 +449,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>A panda, sorting the plastic from the plankton.</em> <a href="https://www.midjourney.com/jobs/108b1a95-bb7b-4bd1-a9e5-4c99c222f9a0?index=3">MidJourney 5</a></p>
 </div>
-<p>NOAA’s National Centers for Environmental Information maintain an archive of every marine microplastics measurement they can find: 16,245 water samples, pooled from thirty-seven separate studies, taken between 1972 and 2022 by research vessels, citizen scientists, and undergraduates with nets.</p>
-<p>This dataset was assembled one study at a time. Nobody designed this dataset. Most of the environmental data you will ever be handed was put together the same way.</p>
-<p>You have already seen this file twice today. Now, you will use the raw data to answer the question: Is there more plastic in the Pacific than the Atlantic?</p>
+<p>NOAA’s National Centers for Environmental Information maintain an archive of every marine microplastics measurement they can find: 16,245 samples, pooled from thirty-seven separate studies, taken between 1972 and 2022 by research vessels, citizen scientists, and undergraduates with nets.</p>
+<p>NOAA assembled the archive one study at a time, rather than designing it as a single experiment, so the columns are a mixture of measurements, provenance, and somebody else’s classification scheme. Most of the environmental data you will ever be handed was put together the same way.</p>
+<p>We have already worked with this file three times today. This afternoon you will start again from the raw download and use it to answer one question: Is there more plastic in the Pacific than the Atlantic?</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -467,7 +467,7 @@ Reference
 </div>
 <section id="todays-three-patterns" class="level2">
 <h2 class="anchored" data-anchor-id="todays-three-patterns">Today’s three patterns</h2>
-<p>Everything below is built from these three patterns, plus two more you learned yesterday.</p>
+<p>Everything below is built from these three patterns, plus one more from this morning.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> expression                     <span class="co"># the derived-column pattern</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df.dropna(subset<span class="op">=</span>[<span class="st">'col'</span>])                  <span class="co"># the missing-data pattern, treat half</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].fillna(value)</span>
@@ -477,14 +477,14 @@ Reference
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<ol type="1">
+<ol type="i">
 <li><p>Create a new notebook named <code>EOD_Day4_Microplastics.ipynb</code>.</p></li>
 <li><p>Add a title cell:</p></li>
 </ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Day 4 EOD: Microplastics, From Raw File to Real Numbers</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Date: 09/03/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="3" type="1">
+<ol start="3" type="i">
 <li>Import what you need and read the data. The <code>Date</code> column is text, and pandas can convert it while it reads if you tell it exactly what the text looks like.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="🧭 Field Note: reading dates">
@@ -499,14 +499,14 @@ Reference
 <div class="callout-body-container callout-body">
 <p><code>read_csv()</code> takes a <code>parse_dates=</code> argument naming the columns that hold dates, and a <code>date_format=</code> argument describing how they are written. Here is the whole line. <strong>Run it as written:</strong></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>], date_format<span class="op">=</span><span class="st">'%m/</span><span class="sc">%d</span><span class="st">/%Y %I:%M:%S %p'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The format string is a small language of its own. <code>%m/%d/%Y</code> is month, day, four-digit year; <code>%I:%M:%S</code> is a twelve-hour clock; and <code>%p</code> is the AM or PM that goes with it. You are not expected to be able to write one of these yet.</p>
+<p>The format string is a small language of its own. <code>%m/%d/%Y</code> is month, day, four-digit year; <code>%I:%M:%S</code> is a twelve-hour clock; and <code>%p</code> is the AM or PM that goes with it. You are not expected to be able to write one of these yet, so copy the line above exactly as it is and keep going.</p>
 <p>Once a column is a real date, you reach the pieces of it through <code>.dt</code>. You will need exactly one of these in task 13, and we are giving it to you here:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'year'</span>] <span class="op">=</span> samples[<span class="st">'Date'</span>].dt.year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <code>.year</code> is the request for the year of that date string. <strong>Dates get a full session on Day 6.</strong></p>
+<p>The <code>.year</code> on the end asks for the year of each date, and the month, the day and the rest of the pieces are available in the same way. <strong>Dates get a full session on Day 6.</strong></p>
 <p>📖 <a href="../../course-materials/cheatsheets/read_csv.html">Cheatsheet: reading CSV files</a> · <a href="../../course-materials/cheatsheets/timeseries.html">Cheatsheet: time series</a></p>
 </div>
 </div>
-<div id="1ebc9613" class="cell" data-execution_count="1">
+<div id="d6b84fbc" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -530,10 +530,13 @@ Reference
 </section>
 <section id="part-2-decide-what-to-keep" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-decide-what-to-keep">Part 2: Decide what to keep</h2>
-<p>Part 2 requires some judgement, so more than one answer here is defensible. Every task here removes rows, so <strong>print <code>.shape</code> after every one of them</strong> and record the number in a markdown cell.</p>
+<p>Part 2 requires some judgement, so more than one answer here is defensible. Several of these tasks change how many rows you have, so <strong>print <code>.shape</code> after each one</strong> and record the number in a markdown cell.</p>
 <ol start="5" type="1">
 <li><p>Use <code>.dropna()</code> with <code>subset=</code> to keep only the rows with a <code>Measurement</code>. How many rows are left, and what fraction of the file is that?</p></li>
-<li><p>Compare <code>df['Unit'].value_counts()</code> now with what it was before task 5. What did that one line cost you, and which sampling programme did the rows you lost belong to? (Check <code>Sampling Method</code> and <code>Organization</code> on the rows you removed, if you want to be sure.)</p></li>
+<li><p>Run <code>df['Unit'].value_counts()</code> now and compare it with the counts below, which are what the same line gave before task 5: <code>pieces/m3</code> 10,178, <code>pieces/10 mins</code> 5,792, <code>pieces kg-1 d.w.</code></p>
+<ol start="275" type="1">
+<li>What did that one line cost you, and which sampling programme did the rows you lost belong to? (Check <code>Sampling Method</code> and <code>Organization</code> on the rows you removed, if you want to be sure.)</li>
+</ol></li>
 <li><p>Fill the gaps in <code>Regions</code> and <code>SubRegions</code> with <code>'Unspecified'</code>, one column at a time, assigning each result back. Confirm with <code>.isnull().sum()</code> that only <code>Keywords</code> is still missing anything.</p></li>
 <li><p>In a markdown cell: task 5 removed rows and task 7 kept them. Both were the right decision. Explain in two or three sentences what made them different.</p></li>
 <li><p>Check for duplicated rows. Do it twice: once bare, and once with <code>subset=</code> naming the columns you think define a single observation. Report both numbers and say which one you believe.</p></li>
@@ -545,7 +548,7 @@ Reference
 <li><p>Filter to the samples reported in <code>pieces/m3</code>, end the line with <code>.copy()</code>, and call the result <code>samples</code>. How many rows?</p></li>
 <li><p><code>Accession Number</code> is a label, not a quantity. Convert it to text with <code>.astype(str)</code> and assign it back. Confirm with <code>.dtype</code>.</p></li>
 <li><p>The <code>Oceans</code> values all end in the word “Ocean”. Use <code>.str.replace()</code> to make a new column called <code>ocean</code> holding the short name, and check it with <code>.value_counts()</code>.</p></li>
-<li><p>Add a column called <code>year</code> holding the year each sample was taken, using the supplied line from the setup Field Note. Then run <code>.value_counts()</code> on <code>year</code>. Which single year contributed the most samples? In a markdown cell, say whether the archive is spread evenly across its fifty years, and what an uneven spread would mean for anyone who wants to use it to describe a trend.</p></li>
+<li><p>Add a column called <code>year</code> holding the year each sample was taken, using the supplied line from the setup Field Note. Then run <code>.value_counts()</code> on <code>year</code>. Which single year contributed the most samples? In a markdown cell, say whether the archive is spread evenly across its fifty-one calendar years, and what an uneven spread would mean for anyone who wants to use it to describe a trend.</p></li>
 </ol>
 </section>
 <section id="part-4-the-derived-columns" class="level2">
@@ -564,11 +567,11 @@ Reference
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>On Day 1 you drew a line with <code>plt.plot(series)</code>. A histogram is the same kind of call:</p>
+<p>On Day 1 we drew a line with <code>plt.plot(series)</code>. A histogram is the same kind of call:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.hist(samples[<span class="st">'Measurement'</span>])</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'pieces per cubic metre'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>plt.hist()</code> sorts the values into bins and draws a bar for each. <strong>Plotting gets two full days next week</strong>, where you will learn to control bins, axes, and everything else. Today you need it only to see a shape.</p>
+<p><code>plt.hist()</code> sorts the values into bins and draws a bar for each. <strong>Plotting gets a full day next week</strong>, where you will learn to control bins, axes, and everything else. Today you need it only to see the shape of the distribution.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/matplotlib.html">Cheatsheet: matplotlib</a></p>
 </div>
 </div>
@@ -581,7 +584,7 @@ Reference
 </section>
 <section id="part-5-a-classifier-of-your-own" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-a-classifier-of-your-own">Part 5: A classifier of your own</h2>
-<p>The archive has a column called <code>Density Class</code> with values like <code>Low</code> and <code>Very High</code>. Somebody decided those cutoffs. Today you will decide your own, and then find out whether you agree with theirs.</p>
+<p>The archive has a column called <code>Density Class</code> with values like <code>Low</code> and <code>Very High</code>. Somebody decided those cutoffs. You will write your own classifier first, and then compare your labels against theirs.</p>
 <ol start="20" type="1">
 <li><p>Write a function called <code>density_class</code> that takes a measurement in pieces per cubic metre and returns:</p>
 <ul>
@@ -614,7 +617,7 @@ A hint
 <li><p>Build two tables with the filter pattern: the Atlantic samples and the Pacific samples, from <code>positive</code>. Report the row count of each.</p></li>
 <li><p>Run <code>.describe()</code> on <code>Measurement</code> for each. Compare the two medians (the <code>50%</code> row), and then compare the two means. They will probably tell you two different stories. Which one would you put in a report, and why?</p></li>
 <li><p>Compare the mean of <code>log10_measurement</code> for each instead. In a markdown cell, say what that comparison is doing that the comparison of raw means was not.</p></li>
-<li><p>Before you conclude anything: how many Pacific samples are there, out of how many total? Look back at task 12. In one sentence, say what you would need to know about <em>how the samples were collected</em> before you would publish a comparison between these two oceans.</p></li>
+<li><p>Before you conclude anything: how many Pacific samples are there, out of how many total? Task 12 counted the oceans in <code>samples</code>, before the zeros came out, so expect a different pair of numbers here. In one sentence, say what you would need to know about <em>how the samples were collected</em> before you would publish a comparison between these two oceans.</p></li>
 </ol>
 </section>
 <section id="part-7-write-it-up" class="level2">
@@ -634,8 +637,8 @@ A hint
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">str</span>.replace(a, b)    <span class="co"># tidy text</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> expression                     <span class="co"># add a column that was not in the file</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">apply</span>(my_function)   <span class="co"># add a column only you know how to compute</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Six patterns, and two of them you also used yesterday and the day before.</p>
-<p>Notice which one did the most work today. It was <code>df['new'] = expression</code>, four times over: <code>ocean</code>, <code>year</code>, <code>log10_measurement</code>, and <code>my_class</code>. The twenty-two columns you downloaded did not have the answer to the journalist’s question in them, and the four columns you made yourself are where you found it!</p>
+<p>Six patterns, and every one of them is new today.</p>
+<p>The pattern that did the most work today was <code>df['new'] = ...</code>, the derived column, which you built four times over: <code>ocean</code>, <code>year</code>, <code>log10_measurement</code>, and <code>my_class</code>. The twenty-two columns you downloaded did not have an answer to the journalist’s question in them, and the four columns you made yourself are where you found one!</p>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>

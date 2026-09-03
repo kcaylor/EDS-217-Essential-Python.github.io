@@ -447,10 +447,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>Survey of data scientists, CrowdFlower, 2016.</em></p>
 </div>
 <p>Just as building a boat is 90% sanding, it often feels like doing data science is 90% cleaning (the survey data says it’s <em>just 60%</em>, so that’s good news!). The time we will spend cleaning data this afternoon is a taste of your data science future.</p>
-<p>Today’s file is a season of stream chemistry from six monitoring sites, transcribed from paper field sheets by four different undergraduates. They were all careful… and they made reasonable decisions about data entry. Unfortunately, their decisions were not the same (maybe the PI should have made a data dictionary to ensure consistency!).</p>
+<p>Today’s file is a season of stream chemistry, 320 rows from six monitoring sites, transcribed from paper field sheets by several people over the course of a season. They were all careful… and they all made reasonable decisions about data entry. Unfortunately, their decisions were not the same as each other’s (maybe the PI should have made a data dictionary to ensure consistency!).</p>
 <p>Your task is to turn their work into a table that you could use for rigorous data analysis.</p>
-<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it.</p>
-<p>You have 45 minutes.</p>
+<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read the code through (quietly) and say what they expect it to produce, before you run it.</p>
+<p>We have about 45 minutes for this colab, so please let Cella or Kelly know if you and your partner are getting stuck!</p>
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">The data</h2>
 <pre><code>https://eds-217-essential-python.github.io/data/messy_field_survey.csv</code></pre>
@@ -495,18 +495,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-code-patterns-you-will-need" class="level2">
 <h2 class="anchored" data-anchor-id="the-code-patterns-you-will-need">The code patterns you will need</h2>
-<p>All of the code patterns below are from today. You should not need anything else to complete this colab.</p>
+<p>Most of what you need is from today. The last two lines are older, and they are here because you will need them too.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.drop_duplicates()                    <span class="co"># and subset=[...]</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.dropna(subset<span class="op">=</span>[<span class="st">'col'</span>])               <span class="co"># remove rows missing a named column</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].fillna(value)     <span class="co"># fill the gaps instead</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].astype(<span class="bu">float</span>)     <span class="co"># int, float, str</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">str</span>.strip()       <span class="co"># .lower(), .replace(old, new)</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> expression                  <span class="co"># the derived-column pattern</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">apply</span>(my_func)    <span class="co"># run your own function down a column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_func(x):  ...                    <span class="co"># write it once, from this morning</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new'</span>] <span class="op">=</span> df[<span class="st">'col'</span>].<span class="bu">apply</span>(my_func)    <span class="co"># run your own function down a column</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'col'</span>] <span class="op">&gt;</span> value].copy()            <span class="co"># the filter pattern, from Day 3</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>df.rename(columns<span class="op">=</span>{<span class="st">'old'</span>: <span class="st">'new'</span>})       <span class="co"># renaming, from Day 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>Create a notebook named <code>Colab_4D_Cleaning_Messy_Data.ipynb</code>, with both partners’ names in the title cell, then read the file in.</p>
+<p>Create a notebook named <code>Colab_4D_Cleaning_Messy_Data.ipynb</code>, and give it a title cell with both partners’ names in it:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Day 4: Colab 4D - From Field Sheet to DataFrame</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Partners: your names here</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Date: 09/03/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then read the file in.</p>
 </section>
 <section id="part-1-find-out-what-is-wrong-about-10-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-find-out-what-is-wrong-about-10-minutes">Part 1: Find out what is wrong (about 10 minutes)</h2>
@@ -528,7 +538,7 @@ What the minimum means
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Dataloggers that fail often write a value chosen to be obviously impossible rather than leaving the field blank. <code>-999</code>, <code>-9999</code> and <code>NA</code> are the usual suspects. These entries are missing data wearing a costume… and <code>.isnull()</code> will never find them! They can also really mess up your averages and other statistics. <strong>Only <code>.describe()</code> and your domain knowledge of the measurement will help you avoid mis-interpreting numerical missing data as actual information.</strong></p>
+<p>Dataloggers that fail often write a value chosen to be obviously impossible rather than leaving the field blank. <code>-999</code>, <code>-9999</code> and <code>NA</code> are the usual suspects. A sentinel value like one of those is missing data wearing a costume… and <code>.isnull()</code> will never find it! It can also really mess up your averages and other statistics. <strong>Reading <code>.describe()</code>, and knowing what the measurement can plausibly be, are what keep you from mis-interpreting numerical missing data as actual information.</strong></p>
 </div>
 </div>
 </section>
@@ -537,7 +547,7 @@ What the minimum means
 <p>Work in the order below and check <code>.shape</code> after each step.</p>
 <ol start="6" type="1">
 <li><p>Remove the exact duplicate rows. How many rows are left?</p></li>
-<li><p>Fix the <code>site</code> column so that all six sites have one label each. You will need three separate statements, one per method, each assigned back to <code>survey['site']</code>: strip the whitespace, lower-case the text, and replace the hyphens with underscores. Confirm with <code>.value_counts()</code> that you have exactly six.</p></li>
+<li><p>Fix the <code>site</code> column so that all six sites have one label each. You will need three separate statements, one per method, each assigned back to <code>survey['site']</code>: strip the whitespace, lower-case the text, and replace the hyphens with underscores. Confirm with <code>.value_counts()</code> that you have exactly six distinct site labels, reading <code>site_a</code> through <code>site_f</code>.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Do not chain these">
 <div class="callout-header d-flex align-content-center">
@@ -549,7 +559,7 @@ Do not chain these
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Write one method per line. There is a version of this that runs them all together on one line, and there is a version of that version which contains a silent bug, and telling them apart is harder than typing three lines.</p>
+<p>Write one method per line. A single chained line does the same three things, but if one of the methods in the chain quietly does nothing, the chain gives you no way to see which one it was. Three separate lines cost you a few seconds and let you look at the column after each step.</p>
 </div>
 </div>
 <ol start="8" type="1">
@@ -565,14 +575,14 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 Try <code>survey['pH'].astype(float)</code> <strong>before</strong> the replace, on purpose, and read the error. It provides the exact value it could not parse. That message is the fastest debugging tool in pandas; as is often the case, a little bit of “pre-flight” testing will make your data science journey much smoother.</p>
+<p>🐍 Try <code>survey['pH'].astype(float)</code> <strong>before</strong> the replace, on purpose, and read the error. The message gives you the exact value that could not be converted, which usually tells you what to fix faster than scrolling through the column would. As is often the case, a little bit of “pre-flight” testing will make your data science journey much smoother.</p>
 </div>
 </div>
 <ol start="9" type="1">
 <li><p>Three measurement columns have blanks: <code>temperature_c</code>, <code>dissolved_oxygen_mg_L</code>, and <code>conductivity_uS_cm</code>. A row with no measurement is no use to you, so drop those rows in a single <code>.dropna()</code> call with a list in <code>subset=</code>. How many rows did that cost?</p></li>
 <li><p><code>n_replicates</code> also has blanks, but here a blank means the field sheet recorded a single bottle and nobody bothered to write “1”. Fill those with <code>1</code> instead of dropping the rows, then convert the column to <code>int</code>. Confirm with <code>.value_counts()</code>.</p></li>
 <li><p>Now let’s deal with the impossible temperatures. Use the <strong>filter pattern</strong> from Day 3 to keep only the rows where <code>temperature_c</code> is above <code>-100</code>, and end the line with <code>.copy()</code>. How many rows did the loggers ruin?</p></li>
-<li><p>Re-run <code>.describe()</code> on <code>temperature_c</code>. Compare the mean to the one you got in task 5. In a markdown cell, write one short statement about what nine bad rows did to the average of three hundred good ones.</p></li>
+<li><p>Re-run <code>.describe()</code> on <code>temperature_c</code>. Compare the mean to the one you got in task 5. In a markdown cell, write one short statement about what the sentinel rows did to the average you saw in task 5.</p></li>
 <li><p>Rename <code>collection date</code> to <code>collection_date</code>, so you can reach it without quoting trouble later. <code>.rename()</code> is from Day 2; it takes <code>columns=</code> and a dictionary.</p></li>
 </ol>
 </section>
@@ -586,10 +596,10 @@ Note
 </section>
 <section id="part-4-ask-it-something-about-5-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-ask-it-something-about-5-minutes">Part 4: Ask it something (about 5 minutes)</h2>
-<p>You now have a table you can trust. Let’s put it to work!</p>
+<p>You should now have a table you can trust. Let’s put it to work!</p>
 <ol start="17" type="1">
 <li><p>Use the filter pattern to build a table of just the acidic samples. Which sites do they come from? Use <code>.value_counts()</code> on <code>site</code>.</p></li>
-<li><p>Two of the six sites account for nearly all the acidic samples. Filter to one of those sites and to <code>site_d</code>, and compare the mean of <code>dissolved_oxygen_mg_L</code> for each. (Two filters, two <code>.mean()</code> calls. Tomorrow you will learn to do all six at once.)</p></li>
+<li><p>Two of the six sites account for nearly all the acidic samples. Take either one of those two, and compare it against <code>site_d</code>, which is not one of them: filter to each in turn and compare the mean of <code>dissolved_oxygen_mg_L</code>. (Two filters, two <code>.mean()</code> calls. Tomorrow you will learn to do all six at once.)</p></li>
 <li><p>In a markdown cell of three or four sentences: <strong>what would you tell the PI whose project collected this data?</strong> Name the single change to their field sheet that would have saved you the most time this afternoon, and describe what evidence in the file makes you pick that one.</p></li>
 </ol>
 </section>

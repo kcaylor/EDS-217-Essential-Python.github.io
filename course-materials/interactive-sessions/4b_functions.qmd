@@ -18,15 +18,15 @@ format:
 
 :::
 
-Yesterday you wrote this three times, changing one word each time:
+Yesterday we wrote this line three times, changing one word each time:
 
 ```python
 df['Bananas index (kg)'].sort_values(ascending=False).head(10)
 ```
 
 and we told you to notice how that felt. Copying a line and editing one word in the copy is how
-almost every data-analysis bug gets written. You fix the original, forget the copies, and now
-your notebook contains two answers to the same question.
+a good number of data-analysis bugs get written: you fix the original, forget the copies, and
+now your notebook contains two answers to the same question.
 
 A **function** is the cure. You write the work once, give it a name, and then you have a new
 verb that you and pandas can both use.
@@ -62,7 +62,9 @@ Date: 09/03/2026
 
 4. **Save** with `Ctrl + S` (`Cmd + S` on macOS), and keep saving as you go.
 
-5. Read in the microplastics data you cleaned an hour ago:
+5. Read in the microplastics data again, raw. We want the file in the state it arrives in,
+   because the exercise at the end of this session checks your answers against the missing-value
+   counts you ran in 4A, and cleaning it first would turn all of those into zero:
 
 ```{python}
 import pandas as pd
@@ -100,8 +102,8 @@ water_temp = celsius_to_fahrenheit(12.4)
 water_temp
 ```
 
-The indentation is not decoration. Python uses it to decide where the body ends, exactly the
-way it decided which lines belonged to an `if` block yesterday.
+The indentation is not decoration. Python uses it to mark where the body ends, exactly the way
+it marked which lines belonged to an `if` block yesterday.
 
 :::{.callout-note}
 🐍 A function without `return` still runs, but it hands back `None`. If your function seems to
@@ -172,9 +174,9 @@ convert_depth(100)
 convert_depth(100, 'feet')
 ```
 
-Notice what is inside that function: the `if`/`elif`/`else` you learned yesterday, doing exactly
-what it did yesterday. Functions are not a new kind of code. They are a wrapper that lets you
-name code you already know how to write.
+Notice what is inside that function: the `if`/`elif`/`else` we learned yesterday, doing exactly
+what it did yesterday. Functions are not a new kind of code, just a wrapper that lets you name
+code you already know how to write.
 
 :::{.callout-important title="Parameters with defaults go last"}
 ```python
@@ -183,7 +185,7 @@ def convert_depth(units='meters', depth):   # SyntaxError
 
 Python needs to match the values you pass to the parameters in order, so every parameter with a
 default has to come after every parameter without one. The error message says
-`non-default argument follows default argument`, which is worth recognising on sight.
+`non-default argument follows default argument`, which is worth recognizing on sight.
 :::
 
 ## Keyword arguments
@@ -198,8 +200,8 @@ convert_depth(depth=100, units='fathoms')
 convert_depth(units='fathoms', depth=100)
 ```
 
-Both give the same answer, because naming the arguments makes their order irrelevant. This is
-the same thing you have been doing all week without thinking about it:
+Both give the same answer, because naming the arguments makes their order irrelevant. Keyword
+arguments are something we have been using all week without stopping to name them:
 
 ```python
 pd.read_csv(url, index_col='entity')
@@ -215,12 +217,13 @@ Write a function `classify_latitude` that takes a latitude and returns `'tropica
 between -23.5 and 23.5, `'polar'` if it is below -66.5 or above 66.5, and `'temperate'`
 otherwise. Test it on `0`, `45`, and `-70`.
 
-Keep this function. You will use it in the next section.
+Write your own version before you read on. The next section defines the same function, so
+compare the two rather than letting ours replace yours.
 :::
 
 ## The payoff: `.apply()`
 
-You now have functions that work on one number. Your data has ten thousand numbers in a column.
+You now have functions that work on one number. Your data has 16,245 numbers in a column.
 
 `.apply()` runs a function once for every value in a column and gives you back a column of the
 results:
@@ -244,7 +247,7 @@ def classify_latitude(latitude):
 plastics['Latitude'].apply(classify_latitude).head()
 ```
 
-Read the call carefully, because the order of the arguments matters:
+Read the call carefully, because what goes inside the parentheses is easy to get wrong:
 
 ```python
 df['column'].apply(function_name)
@@ -252,19 +255,20 @@ df['column'].apply(function_name)
 
 The function's **name** goes inside the parentheses, with no parentheses of its own. You are
 handing pandas the function itself, not the result of calling it. Add parentheses by mistake
-and Python tries to call your function with no arguments, and tells you so.
+and Python will try to call your function with no arguments, and raise a `TypeError` about a
+missing argument.
 
-Like everything else in pandas, `.apply()` returns a new column and changes nothing. Assign it
-to keep it:
+`.apply()` follows the same rule as almost everything else in pandas: it hands back a new
+column and leaves the original table alone. Assign it to keep it:
 
 ```{python}
 plastics['zone'] = plastics['Latitude'].apply(classify_latitude)
 plastics['zone'].value_counts()
 ```
 
-That last line is a real result. Three quarters of this archive was sampled in temperate water,
-and 56 samples out of 16,245 came from the poles, which tells you something about where the
-ships were and nothing at all about where the plastic is.
+The zone counts are a real result. Three quarters of this archive was sampled in temperate
+water, and 56 samples out of 16,245 came from the poles, which probably tells you more about
+where the research ships went than about where the plastic is.
 
 :::{.callout-note}
 🐍 `.apply()` hangs off a **column**, like `.isin()` and `.fillna()` do. The function you hand
@@ -300,8 +304,8 @@ top_n(plastics, 'Longitude', 3)[['Longitude', 'Oceans', 'zone']]
 ```
 
 Two parameters without defaults, one with, and three calls to a single definition. The three
-rankings you wrote out longhand at the end of yesterday are three lines like these now, and
-changing your mind about how ranking should work means editing one line rather than three.
+rankings you wrote out longhand in yesterday's practice are three lines like these now, and
+changing your mind about how ranking should work means editing one line instead of three.
 
 Note that `top_n` hands back a whole table rather than a single labelled column, which is the
 first of the two top-N forms you met yesterday. Writing the one-column version as a function
@@ -310,7 +314,8 @@ instead is a matter of putting the `[column]` inside the `return` rather than af
 :::{.callout-tip title="✏️ Test your knowledge"}
 Write a function `count_missing(df, column)` that returns the number of missing values in a
 named column. Use `.isnull().sum()` inside it. Call it on `'Measurement'`, `'Oceans'`, and
-`'SubRegions'`, and check your three answers against the `.isnull().sum()` you ran in 4A.
+`'SubRegions'`, and check your three answers against the **first** `.isnull().sum()` you ran in
+4A, the one on the raw file, before any cleaning. You should get 5,792, 271 and 15,657.
 :::
 
 ## Key points

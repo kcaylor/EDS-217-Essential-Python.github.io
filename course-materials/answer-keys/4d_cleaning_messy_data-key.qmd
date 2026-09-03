@@ -15,9 +15,9 @@ format:
 
 :::{.callout-important title="How to use this key"}
 Work the colab first, then come here. The code below is **one** correct answer, not the only one.
-This is a colab, so you wrote every line yourself and there are more reasonable ways to write it
-than there are on a guided exercise. If your code looks different but produces the same numbers,
-you were right.
+Today's activity is a colab, so you wrote every line yourself and there are more reasonable ways
+to write it than there are on a guided exercise. If your code looks different but produces the
+same numbers, you were right.
 
 The written answers matter more than the code. You can already tell whether your code ran. What
 you cannot check on your own is whether you read the result correctly, and that is what the
@@ -69,11 +69,11 @@ survey.isnull().sum()
 
 :::{.callout-note title="✅ Answer"}
 **`temperature_c` 18, `dissolved_oxygen_mg_L` 11, `conductivity_uS_cm` 7, and `n_replicates` 5.**
-That is 41 blanks in total, but they are not 41 blank rows, and you cannot tell yet how many rows
-they occupy.
+The four columns come to 41 blanks in total, but 41 blanks are not 41 blank rows, and you cannot
+tell yet how many rows they occupy.
 
 Note what is not in this list. `temperature_c` also contains nine impossible values that
-`.isnull()` counts as present, because `-999` is a number. This count is a lower bound on your
+`.isnull()` counts as present, because `-999` is a number. The null count is a lower bound on your
 missing data, not the whole of it.
 :::
 
@@ -85,8 +85,9 @@ survey.duplicated().sum()
 
 :::{.callout-note title="✅ Answer"}
 **20 rows.** `.duplicated()` flags the second and later copies only, so 20 flagged rows means 40
-rows of the file are involved, each record appearing exactly twice. That is the usual signature of
-a transcriber entering a page, losing their place, and entering it again.
+rows of the file are involved, each record appearing exactly twice. A record that appears exactly
+twice is the usual signature of a transcriber entering a page, losing their place, and entering it
+again.
 :::
 
 **4. Run `survey['site'].value_counts()`. There are six sites. How many distinct labels does the
@@ -149,7 +150,7 @@ removed along with the copies.
 **7. Fix the `site` column so that all six sites have one label each. You will need three separate
 statements, one per method, each assigned back to `survey['site']`: strip the whitespace,
 lower-case the text, and replace the hyphens with underscores. Confirm with `.value_counts()` that
-you have exactly six.**
+you have exactly six distinct site labels, reading `site_a` through `site_f`.**
 
 ```{python}
 survey['site'] = survey['site'].str.strip()
@@ -184,7 +185,7 @@ survey['pH'].describe()
 ```
 
 :::{.callout-note title="✅ Answer"}
-**One of the four transcribers used a comma as the decimal separator**, so values like `'7,64'`
+**Somebody entering these sheets used a comma as the decimal separator**, so values like `'7,64'`
 sit alongside `'5.89'`. Twenty-four of the 300 values are written that way, and pandas reads the whole
 column as text, because a single unparseable entry forces the dtype
 for all of them.
@@ -204,7 +205,7 @@ survey.shape
 ```
 
 :::{.callout-note title="✅ Answer"}
-**36 rows, leaving 264.** That is 18 + 11 + 7 exactly, which tells you something you did not know
+**36 rows, leaving 264.** The 36 is 18 + 11 + 7 exactly, which tells you something you did not know
 before: no row was missing two of the three measurements. Every blank sits in a row that is
 otherwise complete.
 
@@ -226,15 +227,16 @@ survey['n_replicates'].value_counts()
 :::{.callout-note title="✅ Answer"}
 **3 is the usual number of bottles (158 rows), then 2 (55) and 4 (46), and there are exactly 5
 ones.** Five is also the number of blanks you filled, so the column contained no explicit `1`
-before you started. That is the evidence for the assumption you were handed: if some sheets wrote
-`1` and others left it blank, you would expect to see both, and you do not.
+before you started. The absence of an explicit `1` is the evidence for the assumption you were
+handed: if some sheets wrote `1` and others left it blank, you would expect to see both, and you
+do not.
 
 The two lines have to run in this order. `.astype(int)` on a column containing `NaN` raises an
 error, because a missing value cannot be an integer. Filling first is what makes the conversion
 legal, and the conversion is what turns `3.0` back into `3`.
 :::
 
-**11. Now deal with the impossible temperatures. Use the filter pattern from Day 3 to keep only
+**11. Now let's deal with the impossible temperatures. Use the filter pattern from Day 3 to keep only
 the rows where `temperature_c` is above `-100`, and end the line with `.copy()`. How many rows did
 the loggers ruin?**
 
@@ -244,9 +246,9 @@ survey.shape
 ```
 
 :::{.callout-note title="✅ Answer"}
-**Nine rows, leaving 255.** All nine are `-999`, and all nine were otherwise complete records with
-good dissolved oxygen and conductivity, which is why question 9 did not remove them and why they
-were still here to catch.
+**Nine rows, leaving 255.** All nine of those rows read `-999`, and each one was otherwise a
+complete record with good dissolved oxygen and conductivity, which is why question 9 did not
+remove them and why they were still here to catch.
 
 The threshold is `-100` and not `-999` on purpose. You are excluding a physically impossible
 range, not one specific number, so the filter still works if a second logger writes `-9999`. The
@@ -255,8 +257,8 @@ prevents the `SettingWithCopyWarning` when you add columns in Part 3.
 :::
 
 **12. Re-run `.describe()` on `temperature_c`. Compare the mean to the one you got in task 5. In a
-markdown cell, write one short statement about what nine bad rows did to the average of three
-hundred good ones.**
+markdown cell, write one short statement about what the sentinel rows did to the average you saw
+in task 5.**
 
 ```{python}
 survey['temperature_c'].describe()
@@ -269,8 +271,9 @@ each `-999` sits about 1018 below the true mean, and 9 × 1018 / 302 is about 30
 whole of the shift. The other rows you removed changed the mean by less than a tenth of a degree.
 
 The standard deviation is the more reliable warning sign. A stream survey with a standard deviation of 173 °C
-should have stopped you at question 5. Means can be argued about, but a spread fifty times larger
-than the plausible range of the measurement indicates a broken column rather than a real result.
+should have stopped you at question 5. Means can be argued about, but a spread of 173 °C across
+readings that in reality span about 14 °C, from 12.3 to 26.5, indicates a broken column rather
+than a real result.
 :::
 
 **13. Rename `collection date` to `collection_date`, so you can reach it without quoting trouble
@@ -281,6 +284,16 @@ survey = survey.rename(columns={'collection date': 'collection_date'})
 survey.columns.tolist()
 ```
 
+:::{.callout-note title="✅ Answer"}
+**Seven columns, with `collection date` now `collection_date`.** The space in the original name
+is the whole problem: `survey.collection date` is not valid Python, so every reference to it has
+to go through `survey['collection date']`. Renaming it once buys you the shorter form everywhere
+after.
+
+`.rename()` returns a new table rather than changing this one, which is why the result is
+assigned back to `survey`. Leave the assignment off and nothing happens, silently.
+:::
+
 ## Part 3: Transform it
 
 **14. Add a column called `conductivity_mS_cm` holding conductivity in millisiemens per
@@ -290,6 +303,15 @@ centimetre, which is the microsiemens value divided by 1000.**
 survey['conductivity_mS_cm'] = survey['conductivity_uS_cm'] / 1000
 survey[['conductivity_uS_cm', 'conductivity_mS_cm']].head()
 ```
+
+:::{.callout-note title="✅ Answer"}
+**A new column whose values are the microsiemens ones divided by 1,000.** Dividing a column by a
+number divides every value in it, which is the derived-column pattern doing arithmetic on a whole
+column at once rather than a row at a time.
+
+Keeping both columns side by side is the check: read the two numbers across a row and confirm the
+decimal point moved three places and nothing else changed.
+:::
 
 **15. Add a column called `temperature_f` holding the temperature in Fahrenheit. Do it twice: once
 with the derived-column pattern and plain arithmetic, and once by writing a function
@@ -364,15 +386,16 @@ acidic['site'].value_counts()
 sample from `site_e`.** That is 41 of the 42 acidic samples in two of the six sites, and three
 sites contribute none at all.
 
-This is a real spatial pattern rather than noise. Acidity is a property of these two streams, not
-something scattered evenly across the survey, and it is the first result in this exercise that you
-could not have obtained from the file as it arrived. With 36 site labels, `site_f` alone was split
+The clustering looks like a real spatial pattern rather than noise. Acidity is a property of
+these two streams, not something scattered evenly across the survey, and it is the first result
+in this exercise that you could not have obtained from the file as it arrived. With 36 site labels, `site_f` alone was split
 across six spellings.
 :::
 
-**18. Two of the six sites account for nearly all the acidic samples. Filter to one of those sites
-and to `site_d`, and compare the mean of `dissolved_oxygen_mg_L` for each. (Two filters, two
-`.mean()` calls. Tomorrow you will learn to do all six at once.)**
+**18. Two of the six sites account for nearly all the acidic samples. Take either one of those
+two, and compare it against `site_d`, which is not one of them: filter to each in turn and compare
+the mean of `dissolved_oxygen_mg_L`. (Two filters, two `.mean()` calls. Tomorrow you will learn to
+do all six at once.)**
 
 ```{python}
 site_f = survey[survey['site'] == 'site_f']
@@ -397,9 +420,15 @@ The second cell gives the reason. `site_f` averages 23.30 °C and `site_d` avera
 difference of 8.1 degrees, and the two rankings run in opposite directions. Warm water holds less
 dissolved gas, so the site with the highest temperature has the lowest oxygen. When you rank all
 six sites with `.groupby()` tomorrow, you will find the two orderings are exact mirrors of each
-other with no exceptions.
+other, with the coolest site the most oxygenated and the warmest the least, and no site out of
+place.
 
-That result is what the afternoon of cleaning made possible. It is only visible because 36 site labels became six.
+If you picked `site_c` rather than `site_f`, the argument is the same and the numbers are
+smaller: `site_c` averages 6.87 mg/L against `site_d`'s 10.05, a difference of 3.18 mg/L, and it
+runs 21.91 °C against 15.18 °C. Either choice shows the same relationship.
+
+The comparison between sites is what the afternoon of cleaning made possible, and it is only
+visible because 36 site labels became six.
 Before you cleaned the column, `site_f` was six separate groups, the largest of them 12 rows, and
 no comparison between sites was possible at all.
 :::
@@ -453,10 +482,10 @@ print('after dropna second: ', check.shape)
 changing any value in it, so the surviving rows are the intersection of the two conditions, and an
 intersection does not care which condition you apply first.
 
-The intermediate number does change: filtering first leaves 273 rows rather than 264. That is
-because `-999 > -100` is `False` and `NaN > -100` is also `False`, so the comparison quietly
-removes the 18 rows with a missing temperature as well as the 9 sentinels. Reversing the order
-moves 18 rows from one step's tally to the other's, which is worth knowing if you are reporting
+The intermediate number does change: filtering first leaves 273 rows rather than 264. The reason
+is that `-999 > -100` is `False` and `NaN > -100` is also `False`, so the comparison removes the
+18 rows with a missing temperature as well as the 9 sentinels, without saying so. Reversing the
+order moves 18 rows from one step's tally to the other's, which is worth knowing if you are reporting
 how many rows each step cost.
 
 In general order does matter, and the safe rule is that it is only free when every step is a pure
@@ -472,13 +501,13 @@ anything else.
 
 1. **Your notebook records the row count after every step that removed rows**, and you can say
    where the 65 lost rows went: 320 to 300 to 264 to 255, which is 20 duplicates, 36 rows with no
-   measurement, and 9 broken loggers.
+   measurement, and 9 rows with a broken logger reading.
 2. **You found all three kinds of damage in the `site` column**, including the whitespace that
    `.value_counts()` cannot show you. Six labels at 50 rows each is the check.
 3. **You recognised `-999` as missing data rather than as an outlier**, and your task 12 sentence
    says what it did to the mean and to the standard deviation.
 4. **Your interpretation answers say what the number means**, not what the number is. "site_f
-   averages 6.18 mg/L" restates the output. "site_f averages 6.18 mg/L, the lowest of the six, and
-   it is also the warmest at 23.30 °C" reads it.
+   averages 6.18 mg/L" restates the output. "site_f averages 6.18 mg/L, the lowest of the six
+   sites, and it is also the warmest at 23.30 °C" reads it.
 
 ⬅️ Back to [the colab](../coding-colabs/4d_cleaning_messy_data.qmd)

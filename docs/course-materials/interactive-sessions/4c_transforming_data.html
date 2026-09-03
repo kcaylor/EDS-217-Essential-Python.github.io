@@ -450,9 +450,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>A cartoon panda, mid-transformation.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
 </div>
-<p>Everything you have done so far this week takes a table and gives you back a smaller piece of it. Filtering gives you fewer rows. Sorting gives you the same rows in a different order. Cleaning gives you fewer rows and tidier ones.</p>
-<p>This session is the first one that makes the table <strong>bigger</strong>. You are going to add columns that were not in the file: a unit somebody should have recorded, a comparison somebody should have computed, a label somebody should have written down.</p>
-<p>That is most of what data science is. The number you need is almost never the number in the file.</p>
+<p>Everything we have done so far this week takes a table and gives you back a smaller piece of it. Filtering gives you fewer rows. Sorting gives you the same rows in a different order. Cleaning gives you fewer rows and tidier ones.</p>
+<p>This afternoon we go the other way and make the table <strong>bigger</strong>. You will add columns that were not in the file: a unit somebody should have recorded, a comparison somebody should have computed, a label somebody should have written down.</p>
+<p>Building new columns is a lot of what data science actually is, because the number your question needs is almost never a number that anybody put in the file.</p>
 <p>By the end of this session you will be able to:</p>
 <ul>
 <li>write the <strong>derived-column pattern</strong>, <code>df['new'] = expression</code></li>
@@ -476,7 +476,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Save</strong> with <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), and keep saving as you go.</p></li>
 <li><p>Read the microplastics data and keep only the samples reported in pieces per cubic metre, which is the unit you can actually do arithmetic with:</p></li>
 </ol>
-<div id="8c0893e5" class="cell" data-execution_count="1">
+<div id="716ca763" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -492,18 +492,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>(10178, 22)</code></pre>
 </div>
 </div>
-<p>10,178 samples, all in the same unit. Note the <code>.copy()</code>: you are about to change this table, which is exactly the case Day 3 told you to copy for.</p>
+<p>10,178 samples, all in the same unit. Note the <code>.copy()</code>: you are about to change this table, which is exactly the case we learned to copy for on Day 3.</p>
 </section>
 <section id="the-pattern" class="level2">
 <h2 class="anchored" data-anchor-id="the-pattern">The pattern</h2>
 <p>Here it is, whole:</p>
-<div id="95cee186" class="cell" data-execution_count="2">
+<div id="f982fefc" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m3[<span class="st">'pieces_per_liter'</span>] <span class="op">=</span> m3[<span class="st">'Measurement'</span>] <span class="op">/</span> <span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="57bc28ea" class="cell" data-execution_count="3">
+<div id="2c134334" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>m3[[<span class="st">'Measurement'</span>, <span class="st">'Unit'</span>, <span class="st">'pieces_per_liter'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -558,12 +558,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>That is the <strong>derived-column pattern</strong>. The general form is:</p>
+<p>You have just written the <strong>derived-column pattern</strong>. The general form is:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new_column'</span>] <span class="op">=</span> expression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The left side is a column name that does not exist yet, in square brackets, exactly the way you would ask for a column that does. The right side is any expression that produces one value per row. Assignment creates the column.</p>
-<p>Two things are worth stopping on.</p>
 <p>First, the arithmetic happened on the whole column at once. You did not write a loop. You said “divide this column by a thousand” and pandas did it 10,178 times.</p>
-<div id="725dbbf4" class="cell" data-execution_count="4">
+<div id="97c1a78f" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>m3[<span class="st">'pieces_per_liter'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -580,8 +579,8 @@ max        110.480000
 Name: pieces_per_liter, dtype: float64</code></pre>
 </div>
 </div>
-<p>Second, unlike almost everything else you have learned this week, this one <strong>does</strong> change the table in place. There is nothing to assign back, because the assignment is the whole sentence.</p>
-<div id="337a40ce" class="cell" data-execution_count="5">
+<p>Second, unlike almost everything else we have learned this week, the derived-column pattern <strong>does</strong> change the table in place. There is nothing to assign back, because the assignment is the whole statement.</p>
+<div id="95ad0f37" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m3.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -601,7 +600,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 If the name on the left already exists, pandas overwrites it without a word of warning. That is occasionally what you want, and is more often how you lose the original values. Use a new name unless you are certain.</p>
+<p>🐍 If the name on the left already exists, pandas replaces the old column with the new one and prints no warning at all. Overwriting is occasionally what you want, and it is more often how the original values get lost, so use a new name unless you are certain.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
@@ -614,15 +613,15 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Latitude is in degrees. Add a column called <code>latitude_radians</code> holding the same values in radians, by multiplying by <code>3.141592653589793 / 180</code>. Display <code>Latitude</code> and <code>latitude_radians</code> side by side for the first few rows, and check that 90 degrees would give about 1.57.</p>
+<p>Latitude is in degrees. Add a column to <code>m3</code> called <code>latitude_radians</code> holding the same values in radians, by multiplying by <code>3.141592653589793 / 180</code>. Display <code>Latitude</code> and <code>latitude_radians</code> side by side for the first few rows, and check that 90 degrees would give about 1.57.</p>
 </div>
 </div>
 </section>
 <section id="a-column-and-a-column" class="level2">
 <h2 class="anchored" data-anchor-id="a-column-and-a-column">A column and a column</h2>
 <p>The right side can name more than one column. When it does, pandas lines the columns up row by row and computes each row’s answer from that row’s values.</p>
-<p>Yesterday you ranked foods by the Economist’s banana index. Today you can build it yourself.</p>
-<div id="8807c122" class="cell" data-execution_count="6">
+<p>Yesterday we ranked foods by the Economist’s banana index. Today you can build the index yourself.</p>
+<div id="1796e47a" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/banana_index.csv'</span></span>
@@ -686,7 +685,7 @@ Note
 </div>
 </div>
 <p><code>emissions_kg</code> is kilograms of CO₂ per kilogram of food. The banana index is just that number divided by the same number for bananas:</p>
-<div id="68f09e31" class="cell" data-execution_count="7">
+<div id="3b8bb0d5" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>banana_emissions <span class="op">=</span> foods.loc[<span class="st">'Bananas'</span>, <span class="st">'emissions_kg'</span>]</span>
@@ -696,7 +695,7 @@ Note
 <pre><code>np.float64(0.87334957)</code></pre>
 </div>
 </div>
-<div id="5da3cc22" class="cell" data-execution_count="8">
+<div id="dd01fdc7" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>foods[<span class="st">'my_banana_index'</span>] <span class="op">=</span> foods[<span class="st">'emissions_kg'</span>] <span class="op">/</span> banana_emissions</span>
@@ -758,9 +757,9 @@ Note
 </div>
 </div>
 </div>
-<p>Your column and theirs agree to seven decimal places. The thing you spent an afternoon ranking was one derived column, and now you can make your own.</p>
+<p>Your column and theirs agree to seven decimal places. The banana index we ranked foods with yesterday is a single derived column, and now you can build your own.</p>
 <p>So make one they did not:</p>
-<div id="90000003" class="cell" data-execution_count="9">
+<div id="a0e9bc52" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>foods[<span class="st">'land_per_emission'</span>] <span class="op">=</span> foods[<span class="st">'land_use_kg'</span>] <span class="op">/</span> foods[<span class="st">'emissions_kg'</span>]</span>
@@ -776,7 +775,7 @@ Lentils          10.831714
 Name: land_per_emission, dtype: float64</code></pre>
 </div>
 </div>
-<p>Square metres of land per kilogram of CO₂. Almonds and beans sit at the top: foods that ask for a lot of ground and very little atmosphere. That question was not answerable from any column in the file, and it took one line.</p>
+<p>Square metres of land per kilogram of CO₂. Almond butter, almonds and beans sit at the top: foods that ask for a lot of ground and very little atmosphere. No column in the file answers that question, and building the column that does took one line.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Row alignment is the whole point">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -788,7 +787,7 @@ Row alignment is the whole point
 </div>
 <div class="callout-body-container callout-body">
 <p><code>foods['land_use_kg'] / foods['emissions_kg']</code> divides each food’s land use by <strong>that same food’s</strong> emissions. Pandas matches the two columns up by row label before it computes anything.</p>
-<p>This is why you can write column arithmetic as if it were ordinary algebra, and why a misaligned index is one of the few ways it can go wrong. Day 6 will show you that failure mode on purpose.</p>
+<p>Row alignment is why you can write column arithmetic as if it were ordinary algebra, and why a misaligned index is one of the few ways column arithmetic goes wrong. On Day 6 we will build that failure on purpose, so that you have seen it once.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
@@ -801,14 +800,14 @@ Row alignment is the whole point
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Add a column called <code>emissions_per_calorie_ratio</code> holding <code>emissions_1000kcal</code> divided by <code>emissions_kg</code>. Then use the top-N pattern from yesterday to display the five foods with the largest values. In a markdown cell, say what a large value of that ratio means about a food.</p>
+<p>Add a column to <code>foods</code> called <code>emissions_per_calorie_ratio</code> holding <code>emissions_1000kcal</code> divided by <code>emissions_kg</code>. Then use the top-N pattern from yesterday to display the five foods with the largest values. In a markdown cell, say what a large value of that ratio means about a food.</p>
 </div>
 </div>
 </section>
 <section id="when-a-column-spans-orders-of-magnitude" class="level2">
 <h2 class="anchored" data-anchor-id="when-a-column-spans-orders-of-magnitude">When a column spans orders of magnitude</h2>
 <p>Back to the plastics. Look at the range of measurements:</p>
-<div id="bc974b26" class="cell" data-execution_count="10">
+<div id="8afef4ff" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>m3[<span class="st">'Measurement'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -825,9 +824,9 @@ max      110480.000000
 Name: Measurement, dtype: float64</code></pre>
 </div>
 </div>
-<p>The median is 0.0072 pieces per cubic metre and the maximum is 110,480. That is seven orders of magnitude in one column, and no histogram, no mean and no eye can cope with it.</p>
+<p>The median is 0.0072 pieces per cubic metre and the maximum is 110,480, so the maximum is about seven orders of magnitude above the median. A spread that wide is very hard to summarise with a mean or to read off a histogram, because the largest few samples dominate both.</p>
 <p>The fix is to work with the logarithm. Vectorised mathematics in Python comes from <strong>numpy</strong>, which you imported at the top of the notebook as <code>np</code>:</p>
-<div id="66dd3019" class="cell" data-execution_count="11">
+<div id="00017ce1" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>positive <span class="op">=</span> m3[m3[<span class="st">'Measurement'</span>] <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
@@ -837,7 +836,7 @@ Name: Measurement, dtype: float64</code></pre>
 <pre><code>(7091, 23)</code></pre>
 </div>
 </div>
-<div id="81b9bec2" class="cell" data-execution_count="12">
+<div id="72723a8c" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>positive[<span class="st">'log10_measurement'</span>] <span class="op">=</span> np.log10(positive[<span class="st">'Measurement'</span>])</span>
@@ -887,7 +886,7 @@ Name: Measurement, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="847fad8e" class="cell" data-execution_count="13">
+<div id="3afd61ee" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>positive[<span class="st">'log10_measurement'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -904,7 +903,7 @@ max         5.043284
 Name: log10_measurement, dtype: float64</code></pre>
 </div>
 </div>
-<p>A range from -3.2 to 5.0, which is a number of orders of magnitude, and now the column is something you can average and plot.</p>
+<p>A range from -3.2 to 5.0. Taking the logarithm turned a spread of many orders of magnitude into a range of single digits, and the column is now something you can average and plot.</p>
 <p>Notice the filter on the line before. 3,087 of these samples recorded exactly zero pieces, and the logarithm of zero is undefined. Filtering them out first, with yesterday’s filter pattern and a <code>.copy()</code>, is the whole fix.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="This is your entire numpy budget">
 <div class="callout-header d-flex align-content-center">
@@ -916,7 +915,7 @@ This is your entire numpy budget
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>np.log10()</code> is the one numpy function this course asks you to know. You will meet numpy again if you go further into modelling or image work, but for tabular environmental data, pandas covers you.</p>
+<p><code>np.log10()</code> is the one numpy function this course asks you to know. You will meet numpy again if you go further into modelling or image work, but for tabular environmental data, pandas has almost everything you need.</p>
 <p><strong>A function applied to a column returns a column</strong>, so it goes on the right-hand side of the derived-column pattern like any other expression.</p>
 </div>
 </div>
@@ -940,7 +939,7 @@ This is your entire numpy budget
 <section id="str.strip-removes-stray-whitespace" class="level3">
 <h3 class="anchored" data-anchor-id="str.strip-removes-stray-whitespace"><code>.str.strip()</code> removes stray whitespace</h3>
 <p>Ask this table for every sample tagged with the research vessel Tara:</p>
-<div id="d65b8446" class="cell" data-execution_count="14">
+<div id="828f0550" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>plastics[plastics[<span class="st">'Keywords'</span>] <span class="op">==</span> <span class="st">'R/V Tara'</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -949,8 +948,8 @@ This is your entire numpy budget
 <pre><code>(0, 22)</code></pre>
 </div>
 </div>
-<p>Zero rows. On Day 3 you learned that an empty result is an answer, and that it is usually a spelling problem. It is one here too, but it is a spelling problem you cannot see. Ask pandas for the distinct values and it prints them with quotation marks around each one, which is the only way to spot the difference:</p>
-<div id="ec8015be" class="cell" data-execution_count="15">
+<p>Zero rows. On Day 3 we learned that an empty result is an answer, and that it is usually a spelling problem. It is one here too, but it is a spelling problem you cannot see. Asking for the distinct values prints them with quotation marks around each one, which is the easiest way to see the difference. <code>Keywords</code> has hundreds of distinct values, so we take a slice of four of them here rather than printing the lot:</p>
+<div id="b4584654" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Keywords'</span>].unique()[<span class="dv">10</span>:<span class="dv">14</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -962,7 +961,7 @@ This is your entire numpy budget
       dtype=object)</code></pre>
 </div>
 </div>
-<div id="5f01f3dd" class="cell" data-execution_count="16">
+<div id="ee171f5e" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plastics[plastics[<span class="st">'Keywords'</span>] <span class="op">==</span> <span class="st">'R/V Tara '</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -973,7 +972,7 @@ This is your entire numpy budget
 </div>
 <p>The stored value is <code>'R/V Tara '</code>, with a trailing space that nobody can see in a table. 23 rows were invisible to a filter that looked correct.</p>
 <p><code>.str.strip()</code> removes whitespace from both ends of every value:</p>
-<div id="3e687225" class="cell" data-execution_count="17">
+<div id="1437f012" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Keywords'</span>] <span class="op">=</span> plastics[<span class="st">'Keywords'</span>].<span class="bu">str</span>.strip()</span>
@@ -999,7 +998,7 @@ Note
 </section>
 <section id="str.lower-makes-matching-predictable" class="level3">
 <h3 class="anchored" data-anchor-id="str.lower-makes-matching-predictable"><code>.str.lower()</code> makes matching predictable</h3>
-<div id="6d7eb33c" class="cell" data-execution_count="18">
+<div id="c8d960b8" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Density Class'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1014,7 +1013,7 @@ Very High     446
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="86eb9b2d" class="cell" data-execution_count="19">
+<div id="17971a65" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'density_class'</span>] <span class="op">=</span> plastics[<span class="st">'Density Class'</span>].<span class="bu">str</span>.lower()</span>
@@ -1030,11 +1029,11 @@ very high     446
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<p>Lower-casing a label column before you compare or count means <code>'Medium'</code>, <code>'medium'</code> and <code>'MEDIUM'</code> stop being three different categories.</p>
+<p>The two outputs are the same five categories with the same five counts, because <code>Density Class</code> happens to be consistent already. Run it anyway on a column you have not checked: lower-casing a label column before you compare or count means <code>'Medium'</code>, <code>'medium'</code> and <code>'MEDIUM'</code> stop being three different categories, and you usually find out that they were only after you look.</p>
 </section>
 <section id="str.replace-swaps-one-piece-of-text-for-another" class="level3">
 <h3 class="anchored" data-anchor-id="str.replace-swaps-one-piece-of-text-for-another"><code>.str.replace()</code> swaps one piece of text for another</h3>
-<div id="039f2f27" class="cell" data-execution_count="20">
+<div id="19e50ad9" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Oceans'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1048,8 +1047,8 @@ Southern Ocean       20
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<p>Every value ends in the word “Ocean”, which is four wasted characters on every axis label you will ever draw from this column. <code>.str.replace()</code> takes the text to find and the text to put in its place:</p>
-<div id="3c6fc2a5" class="cell" data-execution_count="21">
+<p>Every value ends in the word “Ocean”, which is a wasted word on every axis label you will ever draw from this column. <code>.str.replace()</code> takes the text to find and the text to put in its place:</p>
+<div id="b0983b4f" class="cell" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'ocean'</span>] <span class="op">=</span> plastics[<span class="st">'Oceans'</span>].<span class="bu">str</span>.replace(<span class="st">' Ocean'</span>, <span class="st">''</span>)</span>
@@ -1076,8 +1075,8 @@ One method at a time
 <div class="callout-body-container callout-body">
 <p>You will see code online that runs several of these together:</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'site'</span>] <span class="op">=</span> df[<span class="st">'site'</span>].<span class="bu">str</span>.strip().<span class="bu">str</span>.lower().<span class="bu">str</span>.replace(<span class="st">'-'</span>, <span class="st">'_'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>That works, and it is not what we are doing this week. Write one method per line, assign it back, and look at the result before you write the next one. Chained cleaning is exactly where a step that silently does nothing hides.</p>
-<p>You will see one of those silent failures in the colab, in a moment.</p>
+<p>Chaining works, and we are not doing it this week. Write one method per line, assign it back, and look at the result before you write the next one. When a step in a chain silently does nothing, the chain gives you no way to tell which of the three methods it was.</p>
+<p>The colab this afternoon asks you to write those three cleaning steps as three separate statements for exactly that reason.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
@@ -1090,7 +1089,7 @@ One method at a time
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The <code>Sampling Method</code> column contains values like <code>'Neuston net'</code> and <code>'Grab sample'</code>. Make a new column called <code>sampling_method_clean</code> that is the same text in lower case. Then use <code>.value_counts()</code> on it and say how many distinct methods this archive used.</p>
+<p>The <code>Sampling Method</code> column of <code>plastics</code> contains values like <code>'Neuston net'</code> and <code>'Grab sample'</code>. Make a new column called <code>sampling_method_clean</code> that is the same text in lower case. Then use <code>.value_counts()</code> on it and say how many distinct methods this archive used.</p>
 </div>
 </div>
 </section>
@@ -1098,26 +1097,27 @@ One method at a time
 <section id="putting-it-together" class="level2">
 <h2 class="anchored" data-anchor-id="putting-it-together">Putting it together</h2>
 <p>Cleaning and transforming are the same pass. Here is Day 4 so far, as a workflow:</p>
-<div id="82ab0a67" class="cell" data-execution_count="22">
+<div id="5c7dec94" class="cell" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/marine_microplastics.csv'</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>plastics <span class="op">=</span> pd.read_csv(url)</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean (session 4A)</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Keywords'</span>] <span class="op">=</span> plastics[<span class="st">'Keywords'</span>].<span class="bu">str</span>.strip()</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean: drop the rows with no measurement (session 4A), then strip the stray</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co"># whitespace out of Keywords (this session)</span></span>
 <span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>plastics <span class="op">=</span> plastics.dropna(subset<span class="op">=</span>[<span class="st">'Measurement'</span>])</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Select one unit, so arithmetic means something (session 3B)</span></span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> plastics[plastics[<span class="st">'Unit'</span>] <span class="op">==</span> <span class="st">'pieces/m3'</span>].copy()</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> samples[samples[<span class="st">'Measurement'</span>] <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform (this session)</span></span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'ocean'</span>] <span class="op">=</span> samples[<span class="st">'Oceans'</span>].<span class="bu">str</span>.replace(<span class="st">' Ocean'</span>, <span class="st">''</span>)</span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'pieces_per_liter'</span>] <span class="op">=</span> samples[<span class="st">'Measurement'</span>] <span class="op">/</span> <span class="dv">1000</span></span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'log10_measurement'</span>] <span class="op">=</span> np.log10(samples[<span class="st">'Measurement'</span>])</span>
-<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>samples[[<span class="st">'ocean'</span>, <span class="st">'Measurement'</span>, <span class="st">'pieces_per_liter'</span>, <span class="st">'log10_measurement'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Keywords'</span>] <span class="op">=</span> plastics[<span class="st">'Keywords'</span>].<span class="bu">str</span>.strip()</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Select one unit, so arithmetic means something (session 3B)</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> plastics[plastics[<span class="st">'Unit'</span>] <span class="op">==</span> <span class="st">'pieces/m3'</span>].copy()</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> samples[samples[<span class="st">'Measurement'</span>] <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform (this session)</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'ocean'</span>] <span class="op">=</span> samples[<span class="st">'Oceans'</span>].<span class="bu">str</span>.replace(<span class="st">' Ocean'</span>, <span class="st">''</span>)</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'pieces_per_liter'</span>] <span class="op">=</span> samples[<span class="st">'Measurement'</span>] <span class="op">/</span> <span class="dv">1000</span></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">'log10_measurement'</span>] <span class="op">=</span> np.log10(samples[<span class="st">'Measurement'</span>])</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>samples[[<span class="st">'ocean'</span>, <span class="st">'Measurement'</span>, <span class="st">'pieces_per_liter'</span>, <span class="st">'log10_measurement'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <div>
@@ -1175,7 +1175,7 @@ One method at a time
 </div>
 </div>
 </div>
-<div id="d90c7588" class="cell" data-execution_count="23">
+<div id="5006c7aa" class="cell" data-execution_count="23">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>samples.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1184,7 +1184,7 @@ One method at a time
 <pre><code>(7091, 25)</code></pre>
 </div>
 </div>
-<p>Read it as a paragraph. Nine lines took a 16,245-row archive with three incompatible units and seven orders of magnitude to 7,091 comparable samples with three columns that were not in the file. Every line is a pattern you learned this week.</p>
+<p>Read it as a paragraph. Nine lines took a 16,245-row archive with three incompatible units and a measurement column spanning eight orders of magnitude to 7,091 comparable samples, with three columns that were not in the file. Every line is a pattern we have learned this week.</p>
 </section>
 <section id="key-points" class="level2">
 <h2 class="anchored" data-anchor-id="key-points">Key points</h2>
@@ -1193,7 +1193,7 @@ One method at a time
 <li>Arithmetic on a column applies to every row at once. No loop.</li>
 <li>Naming two columns on the right side computes row by row, matched up by row label.</li>
 <li>Reusing an existing name overwrites it with no warning.</li>
-<li><code>np.log10()</code> rescales a column that spans orders of magnitude. Filter out zeros first, since the logarithm of zero is undefined.</li>
+<li><code>np.log10()</code> rescales a column that spans orders of magnitude. Filter out zeros first, because the logarithm of zero is undefined.</li>
 <li>Text columns are cleaned through <code>.str</code>: <code>.strip()</code> for invisible whitespace, <code>.lower()</code> for predictable matching, <code>.replace(old, new)</code> for everything else. <strong>One method per line.</strong></li>
 </ul>
 </section>

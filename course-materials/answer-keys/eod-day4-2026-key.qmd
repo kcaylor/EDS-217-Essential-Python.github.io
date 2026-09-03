@@ -47,13 +47,16 @@ df.head()
 
 :::{.callout-note title="✅ Answer"}
 **16,245 rows and 22 columns**, one row per water sample. Look at what the 22 columns are made
-of: only `Measurement`, `Unit`, `Latitude`, `Longitude` and `Date` describe the sample itself.
-The rest is provenance, meaning who took it, under what accession, from which paper, with which
-DOI. Two columns, `x` and `y`, simply repeat `Longitude` and `Latitude`.
+of: `Measurement`, `Unit`, `Latitude`, `Longitude` and `Date` describe the measurement itself,
+and `Sampling Method`, `Density Range` and `Density Class` describe how it was taken and how the
+contributing study classified it. Most of the rest is provenance, meaning who took it, under
+what accession, from which paper, with which DOI. Two columns, `x` and `y`, simply repeat
+`Longitude` and `Latitude`.
 
-That ratio is the signature of an assembled archive rather than a designed experiment. NOAA
-pooled 37 separate studies here, and most of the width of this file exists so that any one row
-can be traced back to the study it came from. You will use that provenance in Part 5.
+A file with more provenance columns than measurement columns is the signature of an assembled
+archive rather than a designed experiment. NOAA pooled 37 separate studies here, and most of the
+width of this file exists so that any one row can be traced back to the study it came from. You
+will use those provenance columns in task 6 and again in Part 6.
 :::
 
 **2. Run `.info()`. Which columns are `object`, and which of those *should* be something else?**
@@ -75,7 +78,7 @@ Part 5 is about what happens when you try to read them.
 Two more are worth naming. `Date` is `datetime64` here only because you passed `parse_dates=`;
 without that line it would have been a fifteenth `object` column, and everything in task 13
 would have been impossible. And the mis-typed column runs the other way: **`Accession Number` is
-`int64` but is a label, not a quantity**. That is what task 11 repairs.
+`int64` but is a label, not a quantity**. Task 11 is where you repair it.
 :::
 
 **3. Run `.isnull().sum()`. How many columns have gaps? Which are the columns, and how many gaps
@@ -114,9 +117,9 @@ print(measured['Oceans'].isnull().sum())
 no `Measurement` leaves 10,453 rows, and in those 10,453 rows `Oceans` is missing zero times.
 Every row that lacks an ocean also lacks a measurement.
 
-That is how you know, and it is worth being precise about the logic. The test is one-directional:
-it proves the `Oceans` gaps are a subset of the `Measurement` gaps, and it says nothing about
-the other 5,521 rows that have no measurement but do have an ocean.
+The zero count is how you know, and the logic is worth being precise about. The test is
+one-directional: it proves the `Oceans` gaps are a subset of the `Measurement` gaps, and it says
+nothing about the other 5,521 rows that have no measurement but do have an ocean.
 
 The practical consequence is that you get the `Oceans` column cleaned for free. Once you handle
 `Measurement` in task 5 you will never need to think about missing oceans again.
@@ -143,8 +146,10 @@ rows, 3.6 percent of the file**. The `subset=` argument is the difference betwee
 two-thirds of your data and keeping a twenty-eighth of it.
 :::
 
-**6. Compare `df['Unit'].value_counts()` now with what it was before task 5. What did that one
-line cost you, and which sampling programme did the rows you lost belong to?**
+**6. Run `df['Unit'].value_counts()` now and compare it with the counts below, which are what the
+same line gave before task 5: `pieces/m3` 10,178, `pieces/10 mins` 5,792, `pieces kg-1 d.w.` 275.
+What did that one line cost you, and which sampling programme did the rows you lost belong to?
+(Check `Sampling Method` and `Organization` on the rows you removed, if you want to be sure.)**
 
 ```{python}
 df['Unit'].value_counts()
@@ -156,9 +161,9 @@ df['Unit'].value_counts()
 and the 5,792 rows it lost are exactly the 5,792 nulls. Every single row reported in
 `pieces/10 mins` had a blank measurement, and no row in the other two units did.
 
-Those rows are one programme: `Sampling Method` is `Hand picking` on all 5,792, `Organization`
-is `University of Texas Marine Science Institute` on all 5,792, and the keyword is Nurdle
-Patrol, a citizen-science beach survey where volunteers count plastic pellets found in ten
+The dropped rows are all one programme: `Sampling Method` is `Hand picking` on all 5,792,
+`Organization` is `University of Texas Marine Science Institute` on all 5,792, and the keyword is
+Nurdle Patrol, a citizen-science beach survey where volunteers count plastic pellets found in ten
 minutes of walking.
 
 So the null is a fact about a protocol, not sloppy data entry. A count per ten minutes of
@@ -182,7 +187,7 @@ df.isnull().sum()
 :::{.callout-note title="✅ Answer"}
 **`Keywords` and its 18 nulls, and nothing else.** Going into this step `Regions` was null on
 6,904 rows and `SubRegions` on 9,865; both are now zero, and every other column reads zero as
-well. The 18 do no harm, since nothing downstream uses `Keywords`, but run the confirmation
+well. The 18 do no harm, because nothing downstream uses `Keywords`, but run the confirmation
 anyway. It is how you know the two `.fillna()` calls did what you meant, and it is how you would
 catch it if one of them had been assigned to the wrong column.
 
@@ -191,16 +196,16 @@ claim the sample came from a region, it records that the region was not reported
 show up in a `.value_counts()` as its own category instead of hiding.
 :::
 
-**8. Task 5 removed rows and task 7 kept them. Both were the right decision. Explain in two or three
-sentences what made them different.**
+**8. In a markdown cell: task 5 removed rows and task 7 kept them. Both were the right decision.
+Explain in two or three sentences what made them different.**
 
 :::{.callout-note title="✅ Answer"}
 **The difference is whether the missing column is the one you are analysing.** `Measurement` is
 the variable the whole exercise is about, and there is no defensible way to invent a
 concentration for a sample that was never measured on that scale, so those rows cannot
-contribute and have to go. `Regions` and `SubRegions` are descriptive labels that no calculation
-the practice depends on, so a row with a valid measurement and a blank region is still a perfectly
-good measurement.
+contribute and have to go. `Regions` and `SubRegions` are descriptive labels that none of the
+calculations in this practice depend on, so a row with a valid measurement and a blank region is
+still a perfectly good measurement.
 
 The rule to remember: **drop on the column you are measuring, fill on the columns you are
 describing by.** Applied here it kept 10,453 rows instead of 588, and the 9,865 rows that lacked
@@ -278,13 +283,16 @@ the full row count, so nothing was lost in the replacement and no ocean is missi
 
 Read the imbalance now, because it is the fact that Part 6 turns on. The Atlantic contributes
 **89 percent** of the samples and the Pacific **10 percent**, and there is no Indian Ocean in
-this table at all. That is a statement about where research vessels sail out of, not about where
-plastic is.
+this table at all. The imbalance is a statement about where research vessels sail out of, not
+about where plastic is.
 :::
 
-**13. Add a column called `year`. Which single year contributed the most samples? Is this
-archive spread evenly across its fifty years, and what does that mean for anyone who wants to
-use it to describe a trend?**
+**13. Add a column called `year` holding the year each sample was taken, using the supplied line
+from the setup Field Note. Then run `.value_counts()` on `year`. Which single year contributed
+the most samples? In a markdown cell, say whether the archive is spread evenly across its
+fifty-one calendar
+years, and what an uneven spread would mean for anyone who wants to use it to describe a
+trend.**
 
 ```{python}
 samples['year'] = samples['Date'].dt.year
@@ -299,13 +307,14 @@ only 38 distinct years appear, so **13 years contain no samples at all**. The me
 contributes 235 samples; 2014 contributes more than three times that. The top five years hold 30
 percent of everything.
 
-For anyone wanting a trend, this is disqualifying on its own. A plot of mean concentration
-against year would move whenever the mix of contributing studies changed, and the mix changes
-every year. 2014 is mostly Adventure Scientist tows and is 780 Atlantic out of 836; 2018 is led
-by a Mexican study on the Pacific coast. So a rise from 2014 to 2018 would partly be a rise from
+For anyone wanting a trend, the uneven coverage is disqualifying on its own. A plot of mean
+concentration against year would move whenever the mix of contributing studies changed, and the
+mix changes every year. 2014 is mostly Adventure Scientist tows and is 780 Atlantic out of 836; 2018 is led
+by a single Mexican study that sampled both coasts: of its 370 rows, 220 are Pacific and 150
+Atlantic. So a rise from 2014 to 2018 would partly be a rise from
 the Atlantic to the Pacific and from one net to another. **Sampling effort is confounded with
-year, with ocean, and with method simultaneously.** This archive can tell you what has been
-measured. It cannot tell you what has changed.
+year, with ocean, and with method simultaneously.** The archive can tell you what has been
+measured, but it cannot tell you what has changed.
 :::
 
 ## Part 4: The derived columns
@@ -327,7 +336,7 @@ average away from every actual sample. And the **25th percentile is exactly 0.0*
 quarter of the samples found no plastic at all.
 
 A column whose middle value is seven-thousandths and whose largest value is six figures is not
-going to behave on a linear axis. Task 15 is about to show you that.
+going to behave on a linear axis, which is what the histogram in task 15 puts on screen.
 :::
 
 **15 and 16. The histogram, and why it is useless.**
@@ -345,16 +354,17 @@ print('counts per bin:', counts)
 
 :::{.callout-note title="✅ Answer"}
 **Ten equal-width bins across a range of 110,480 makes each bin 11,048 wide, and 10,147 of the
-10,178 values fall in the first one.** That is 99.7 percent of the data in a single bar, and the
-other nine bars hold 31 samples between them and are too short to see.
+10,178 values fall in the first one.** The first bar therefore holds 99.7 percent of the data,
+and the other nine bars hold 31 samples between them and are too short to see.
 
 The plot is a faithful picture of a linear axis applied to a quantity that
 varies over seven orders of magnitude, and the single sentence the question wants is that the
 bins are set by the maximum while nearly every value sits near the minimum.
 :::
 
-**17. Filter `samples` to `Measurement` greater than zero and call it `positive`. How many
-samples reported exactly zero pieces? Is zero a measurement or a missing value?**
+**17. Filter `samples` to the rows where `Measurement` is greater than zero, end the line with
+`.copy()`, and call it `positive`. How many samples reported exactly zero pieces? Is zero a
+measurement or a missing value?**
 
 ```{python}
 positive = samples[samples['Measurement'] > 0].copy()
@@ -366,12 +376,12 @@ print(samples.shape[0] - positive.shape[0])
 **7,091 positive samples, and 3,087 reported exactly zero, which is 30.3 percent of the file.**
 
 **Zero is a measurement.** A net was towed, a known volume of water passed through it, and no
-plastic was found. That is a result, and it is a different kind of statement from the 5,792 rows
+plastic was found. A zero is a result, and it is a different kind of statement from the 5,792 rows
 you dropped in task 5, where no measurement of this kind was ever attempted. The file supports
 this reading: all 3,087 zeros have a `Density Class` of `Very Low`, and 3,003 of them have the
 `Density Range` `'0-0.0005'`, so NOAA recorded them as observed values rather than gaps.
 
-Which means the filter in this task is not a cleaning step, and you should not describe it as
+The filter in this task is therefore not a cleaning step, and you should not describe it as
 one. You are removing 30 percent of your real data for an arithmetic reason: `np.log10(0)` is
 negative infinity, and task 18 needs finite numbers. Any statement you make about `positive`
 from here on is a statement about samples that found plastic, conditional on finding any, and
@@ -397,12 +407,12 @@ and the whole range is visible at once. Reading those back into the original uni
 sample holds about 0.02 pieces per cubic metre, the smallest about 0.0007, the largest about
 110,000.
 
-**The one thing this plot shows and `.describe()` did not is that the distribution has two
-peaks.** There is a large mode centred near log10 of -2, and then a second, clearly separated
-cluster between log10 of 3 and 4, holding 372 samples at roughly 1,000 to 10,000 pieces per
+**The plot shows one thing `.describe()` did not: the distribution has two peaks.** There is a
+large mode centred near log10 of -2, and then a second, clearly separated cluster between log10
+of 3 and 4, holding 372 samples at roughly 1,000 to 10,000 pieces per
 cubic metre, with an almost empty gap in between. Every number `.describe()` gives you, the
-mean, the quartiles, the standard deviation, assumes there is one hump to describe, and quietly
-reports the average of two populations as though it were the centre of one.
+mean, the quartiles, the standard deviation, assumes there is one hump to describe, and reports
+the average of two populations as though it were the centre of one.
 :::
 
 ```{python}
@@ -462,8 +472,9 @@ not need to write `0.01 <= measurement < 1`. Each boundary appears exactly once,
 why the classifier cannot leave a value unlabelled.
 :::
 
-**22. Filter `positive` to the rows NOAA labelled `'Medium'`, and run `.value_counts()` on
-`my_class` for just those rows. Do the same for NOAA's `'Very Low'`.**
+**22. Now compare your labels with NOAA's. Filter `positive` to the rows NOAA labelled
+`'Medium'`, and run `.value_counts()` on `my_class` for just those rows. Do the same for NOAA's
+`'Very Low'`.**
 
 ```{python}
 noaa_medium = positive[positive['Density Class'] == 'Medium']
@@ -478,30 +489,35 @@ NOAA's 5,034 `Medium` rows split into **3,774 of my medium, 935 of my low, and 3
 NOAA's 13 `Very Low` rows split into **8 medium and 5 high**, with nothing at all in low.
 
 The second result is the one that cannot be explained away. The actual measurements NOAA called
-`Very Low` run from 0.111 to 80 pieces per cubic metre. A sample of 80 pieces per cubic metre is
-in the top 3 percent of this entire dataset, and their column calls it very low.
+`Very Low` run from 0.111 to 80 pieces per cubic metre. A sample of 80 pieces per cubic metre sits
+above 93 percent of the positive samples in this archive, in the top 7 percent, and their column
+calls it very low.
 :::
 
-**23. Something is wrong, and it is not your function. Explain what NOAA's `Density Class` must
-actually mean, given that samples they called `Very Low` fall in your `high` bin. Then say
-whether you would use their column in an analysis, and why.**
+**23. Something is wrong, and it is not your function. In a markdown cell, explain what NOAA's
+`Density Class` must actually mean, given that samples they called `Very Low` fall in your
+`high` bin. Then say whether you would use their column in an analysis, and why.**
 
 ```{python}
 positive[['Density Class', 'Density Range']].drop_duplicates().sort_values('Density Class')
 ```
 
 :::{.callout-note title="✅ Answer"}
-**Every class label is attached to more than one numeric range, so `Density Class` is relative
-to the study that contributed the row.** The table says it plainly: `Medium` is both `'0.005-1'`
-and `'500-30000'`. `High` is both `'1-10'` and `'30000-40000'`. `Very High` is both `'>=10'` and
+**In `positive`, three of the five class labels are attached to more than one numeric range, so
+`Density Class` is relative to the study that contributed the row.** Note which table that is:
+with the zeros filtered out, `Very Low` keeps only `'0-100'`. In the full `samples` table it has
+two ranges as well, which is what you saw in task 17, and there it is four of five. The table
+says the rest plainly:
+`Medium` is both `'0.005-1'` and `'500-30000'`. `High` is both `'1-10'` and `'30000-40000'`. `Very High` is both `'>=10'` and
 `'>40000'`. `Very Low` here is `'0-100'`.
 
 The arithmetic matches exactly. Of the 5,034 NOAA `Medium` rows, 4,709 have the range
 `'0.005-1'` and hold values from 0.005 to 0.996, while 325 have the range `'500-30000'` and
-hold values from 705 to 28,320. Those 325 are precisely the 325 that my classifier called high.
+hold values from 705 to 28,320. The 325 rows with the wider range are precisely the ones my
+classifier called high.
 Nothing has gone wrong on either side: NOAA is answering "was this sample high or low **for its
 own study**", and my function is answering "was this sample high or low **in pieces per cubic
-metre**". Those are different questions, so they have different answers.
+metre**". The two questions are different, so they have different answers.
 
 **Would I use their column? Only within a single study, never across the archive.** Inside one
 `Short Reference` it is a useful, expert-assigned relative label. Across the archive it cannot
@@ -530,13 +546,14 @@ print(pacific.shape)
 ```
 
 :::{.callout-note title="✅ Answer"}
-**Atlantic 6,216, Pacific 799**, out of 7,091 positive samples. That is 87.7 percent Atlantic
-against 11.3 percent, so the Atlantic has close to eight times as many samples before either
-table has been looked at.
+**Atlantic 6,216, Pacific 799**, out of 7,091 positive samples. The split is 87.7 percent Atlantic
+against 11.3 percent Pacific, so the Atlantic has close to eight times as many samples before
+either table has been looked at.
 :::
 
-**25. Run `.describe()` on `Measurement` for each. Compare the two medians, then the two means.
-They will probably tell you two different stories. Which one would you put in a report, and why?**
+**25. Run `.describe()` on `Measurement` for each. Compare the two medians (the `50%` row), and
+then compare the two means. They will probably tell you two different stories. Which one would
+you put in a report, and why?**
 
 ```{python}
 print(atlantic['Measurement'].describe())
@@ -551,8 +568,9 @@ Same data, same direction, a factor of three difference in how big the effect is
 **I would report the median, and say that I am doing so.** The mean is not describing a typical
 sample in either ocean. Only 294 of the 6,216 Atlantic samples, 4.7 percent, are above the
 Atlantic mean of 282.7, and that mean is roughly 2,900 times the Atlantic 75th percentile of
-0.0988. It is an average of five extreme values with six thousand near-zeros attached, and the
-Atlantic standard deviation of 3,267 is larger than the mean, which is the arithmetic saying so.
+0.0988. It is an average that fewer than five samples in a hundred reach, with six thousand
+near-zeros underneath it, and the Atlantic standard deviation of 3,267 is larger than the mean,
+which is the arithmetic saying so.
 
 The medians are also not the whole story, and the quartiles say why. The Pacific 75th percentile
 is 2.61 against the Atlantic's 0.0988, a factor of 26, far larger than the factor of 6 at the
@@ -560,8 +578,8 @@ median. The two distributions differ more in their upper halves than in their mi
 19 already told you what lives in those upper halves.
 :::
 
-**26. Compare the mean of `log10_measurement` for each instead. Say what that comparison is
-doing that the comparison of raw means was not.**
+**26. Compare the mean of `log10_measurement` for each instead. In a markdown cell, say what
+that comparison is doing that the comparison of raw means was not.**
 
 ```{python}
 print(atlantic['log10_measurement'].mean())
@@ -576,9 +594,9 @@ the power -1.376 is 0.042 and 10 to the power -0.303 is 0.498 pieces per cubic m
 **Averaging the logs gives every sample equal weight regardless of its size.** On the raw scale,
 one sample of 110,480 counts as much as five and a half million samples of 0.02, so the raw mean
 is decided by a few rows. On the log scale, a sample ten times above the typical value pulls the
-average by exactly as much as a sample ten times below it pulls it back. That is the right
-weighting for a quantity that varies multiplicatively, which is what the task 18 histogram
-showed this one does.
+average by exactly as much as a sample ten times below it pulls it back. Equal weighting on the
+log scale is the right weighting for a quantity that varies multiplicatively, which is what the
+task 18 histogram showed this one does.
 
 The name for 10 raised to the mean of the logs is the **geometric mean**, and the three
 comparisons you now have are worth writing down together: means 2.1 times, medians 6.0 times,
@@ -586,9 +604,10 @@ geometric means 11.8 times. All three say Pacific is higher. **Any one of them q
 choice you owe the reader an explanation for.**
 :::
 
-**27. How many Pacific samples are there, out of how many total? Look back at task 12. What
-would you need to know about *how the samples were collected* before you would publish a
-comparison between these two oceans?**
+**27. Before you conclude anything: how many Pacific samples are there, out of how many total?
+Task 12 counted the oceans in `samples`, before the zeros came out, so expect a different pair of
+numbers here. In one sentence, say what you would need to know about *how the samples were
+collected* before you would publish a comparison between these two oceans.**
 
 ```{python}
 print(positive['ocean'].value_counts())
@@ -646,8 +665,8 @@ at the first step.
 What this cannot tell you is whether the difference is the ocean or the instrument. The Atlantic
 has 6,216 samples to the Pacific's 799, 61 percent of the Atlantic rows come from one
 organisation, and every one of the 489 highest readings in the file was taken with a bottle or a
-bucket rather than a net. There is no Indian Ocean here at all. This is an archive of where
-people have sampled, and the garbage patch is not in it as a measurement.
+bucket rather than a net. There is no Indian Ocean here at all. The file is an archive of
+where people have sampled, and the garbage patch is not in it as a measurement.
 :::
 
 ## Where the marks are
@@ -656,15 +675,16 @@ If you compare your notebook against this key, look for these four things before
 anything else.
 
 1. **Your task 6 answer names the protocol.** The 5,792 nulls are one citizen-science programme
-   reporting pieces per ten minutes, and every row of that programme is null. If your markdown
-   cell says "dropped the missing values" without saying what they were, that is the mark.
+   reporting pieces per ten minutes, and every row of that programme is null. A markdown cell
+   that says "dropped the missing values" without saying what they were is where the mark is
+   lost.
 2. **Your task 23 answer says NOAA is not wrong.** The two classifiers disagree because
    `Density Class` is relative to each contributing study and yours is absolute. An answer that
    concludes NOAA made a mistake has read the `Density Range` table but not understood it.
 3. **You treated the 3,087 zeros as data.** Filtering them was necessary for `np.log10`, not for
    cleanliness, and everything after task 17 describes samples that found plastic.
 4. **Your Part 7 answer hedges the ocean comparison on how the samples were collected**, and
-   every number in it has a code cell above it that produced it. Quoting a number you did not
-   compute is the single most common way to lose marks on this exercise.
+   every number in it has a code cell above it that produced it. Quoting a number without the
+   cell that produced it is an easy way to lose marks on this exercise.
 
 ⬅️ Back to [the exercise](../eod-practice/eod-day4-2026.qmd)

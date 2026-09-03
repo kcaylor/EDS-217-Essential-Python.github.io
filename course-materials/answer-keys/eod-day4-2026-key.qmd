@@ -89,7 +89,8 @@ df.isnull().sum()
 ```
 
 :::{.callout-note title="✅ Answer"}
-**In descending order: `SubRegions` 15,657, `Regions` 8,249, `Measurement` 5,792, `Oceans` 271,
+**Five columns have gaps. In descending order: `SubRegions` 15,657, `Regions` 8,249,
+`Measurement` 5,792, `Oceans` 271,
 and `Keywords` 18.**
 
 `Keywords` is the one to watch for. It is missing on only 18 rows out of 16,245, so it is easy to
@@ -113,7 +114,7 @@ print(measured['Oceans'].isnull().sum())
 ```
 
 :::{.callout-note title="✅ Answer"}
-**Not the same rows, but the 271 are entirely contained in the 5,792.** Dropping the rows with
+**Not the same rows, but the 271 rows missing an ocean are entirely contained in the 5,792 missing a measurement.** Dropping the rows with
 no `Measurement` leaves 10,453 rows, and in those 10,453 rows `Oceans` is missing zero times.
 Every row that lacks an ocean also lacks a measurement.
 
@@ -187,7 +188,7 @@ df.isnull().sum()
 :::{.callout-note title="✅ Answer"}
 **`Keywords` and its 18 nulls, and nothing else.** Going into this step `Regions` was null on
 6,904 rows and `SubRegions` on 9,865; both are now zero, and every other column reads zero as
-well. The 18 do no harm, because nothing downstream uses `Keywords`, but run the confirmation
+well. The 18 remaining gaps do no harm, because nothing downstream uses `Keywords`, but run the confirmation
 anyway. It is how you know the two `.fillna()` calls did what you meant, and it is how you would
 catch it if one of them had been assigned to the wrong column.
 
@@ -213,8 +214,9 @@ a sub-region are most of the data you went on to analyse.
 :::
 
 **9. Check for duplicated rows. Do it twice: once bare, and once with `subset=` naming the
-columns you think define a single observation. Report both numbers and say which one you
-believe.**
+columns that define a single observation, which here are `Latitude`, `Longitude`, `Date`,
+`Measurement` and `Unit`. Report both numbers and say which one you believe, and why the two
+differ so much.**
 
 ```{python}
 print(df.duplicated().sum())
@@ -234,7 +236,7 @@ The subset asks the question you actually meant: did two rows record the same me
 the same unit, at the same coordinates, on the same day? 539 rows are flagged, and 360 of those
 539 report a measurement of exactly zero.
 
-**Which do I believe? The 539, but as a list of candidates rather than a verdict.** Two rows at the same place, on
+**Which do I believe? The 539 flagged rows, but as a list of candidates rather than a verdict.** Two rows at the same place, on
 the same day, reporting the same number may be a copy, and 326 of the flagged rows come from a
 single organisation, which is where an ingestion error would show up. They may equally be two
 genuine replicate tows at one station, and the file has no column that distinguishes those two
@@ -625,9 +627,11 @@ for name in ['Atlantic', 'Pacific']:
 imbalance before the zeros were removed: 9,039 Atlantic against 1,050 Pacific.
 
 The one sentence: **you would need to know whether the two oceans were sampled with the same
-gear, because 4,390 of the Atlantic samples are neuston net tows while 188 of the 799 Pacific
-samples come from a single study using a PVC cylinder, and a bottle and a net do not count the
-same particles.**
+gear, because a net and a bottle do not count the same particles.**
+
+That is short enough to write in the time you have. The numbers behind it: 4,390 of the Atlantic
+samples are neuston net tows, while 188 of the 799 Pacific samples, nearly a quarter of them,
+come from a single study using a PVC cylinder.
 
 Two further things make it worse rather than better. 61 percent of the Atlantic rows come from
 one organisation, the Sea Education Association, so "the Atlantic" here is largely one

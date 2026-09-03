@@ -358,7 +358,8 @@ samples[['ocean', 'Measurement', 'pieces_per_liter', 'log10_measurement']].head(
 samples.shape
 ```
 
-Read it as a paragraph. Nine lines took a 16,245-row archive with three incompatible units and
+Read it as a paragraph. Nine lines took a 16,245-row archive with three incompatible units
+(`pieces/m3`, `pieces/10 mins` and `pieces kg-1 d.w.`) and
 a measurement column spanning eight orders of magnitude to 7,091 comparable samples, with three
 columns that were not in the file. Every line is a pattern we have learned this week.
 

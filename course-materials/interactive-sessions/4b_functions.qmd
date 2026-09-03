@@ -308,8 +308,9 @@ rankings you wrote out longhand in yesterday's practice are three lines like the
 changing your mind about how ranking should work means editing one line instead of three.
 
 Note that `top_n` hands back a whole table rather than a single labelled column, which is the
-first of the two top-N forms you met yesterday. Writing the one-column version as a function
-instead is a matter of putting the `[column]` inside the `return` rather than after it.
+whole-table form of the two you met yesterday, the one written `df.sort_values(...)`. To get the
+single-column form back instead, put the column selection inside the function:
+`return df.sort_values(column, ascending=False).head(n)[column]`.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Write a function `count_missing(df, column)` that returns the number of missing values in a

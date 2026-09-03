@@ -264,6 +264,7 @@ per cubic metre, would look exactly like this and would both be real:
 
 ```{python}
 repeats = plastics[plastics.duplicated(subset=sample_columns, keep=False)]
+print(repeats.shape)
 repeats[['Measurement', 'Unit', 'Sampling Method', 'Short Reference']].head(6)
 ```
 
@@ -271,9 +272,12 @@ repeats[['Measurement', 'Unit', 'Sampling Method', 'Short Reference']].head(6)
 (repeats['Measurement'] == 0).sum()
 ```
 
-Of the 1,465 rows involved, 652 report a measurement of zero. All those zeros are a strong hint
-that many of these may be genuine repeat samples that happened to agree, rather than double
-entries, so we will **keep** them and say so in our notebooks.
+The 856 duplicates sit inside 1,465 rows, because `keep=False` marks every member of a group
+rather than only the extras. Of those 1,465 rows, 652 report a measurement of zero. All those
+zeros are a strong hint that many of these may be genuine repeat samples that happened to agree,
+rather than double entries, so we will **keep** them and say so in our notebooks. We built
+`deduplicated` to look at rather than to use, so set it aside: everything below works from
+`plastics`.
 
 :::{.callout-note}
 🐍 `keep=False` marks *every* member of a duplicated group, not just the later ones. Use it
@@ -357,9 +361,10 @@ A cleaning pass is a short, ordered list of decisions, each one a line of code w
 saying why:
 
 ```{python}
-clean = plastics.copy()
+clean = pd.read_csv(url)
 
-# Open-ocean samples have no named subregion; that is information, not a gap.
+# Open-ocean samples have no named region or subregion; that is information, not a gap.
+clean['Regions'] = clean['Regions'].fillna('Unspecified')
 clean['SubRegions'] = clean['SubRegions'].fillna('Unspecified')
 
 # Accession numbers are labels, not quantities.
@@ -376,9 +381,11 @@ clean.shape
 clean.isnull().sum().sort_values(ascending=False).head(3)
 ```
 
-Four lines, three decisions, and a note in the code saying what the third one cost. If a
-colleague asks you next month why your row count is 10,453 and not 16,245, the answer is right
-there.
+Five lines, three decisions, and a note in the code saying what the third one cost. Notice that
+the block starts from `read_csv` rather than from the table we have been editing all morning, so
+it is the whole record and not the last part of it. If a colleague asks you next month why your
+row count is 10,453 and not 16,245, the answer is right there, and it will still be right after
+you restart the kernel.
 
 ## Key points
 

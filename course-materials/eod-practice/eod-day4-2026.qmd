@@ -44,8 +44,8 @@ Everything below is built from these three patterns, plus one more from this mor
 
 ```python
 df['new'] = expression                     # the derived-column pattern
-df.dropna(subset=['col'])                  # the missing-data pattern, treat half
-df['col'] = df['col'].fillna(value)
+df.dropna(subset=['col'])                  # the missing-data pattern: drop the row...
+df['col'] = df['col'].fillna(value)        # ...or keep the row and fill the hole
 df['col'] = df['col'].str.strip()          # the string-cleaning pattern
 ```
 
@@ -177,8 +177,9 @@ df.isnull().sum()
    Explain in two or three sentences what made them different.
 
 9. Check for duplicated rows. Do it twice: once bare, and once with `subset=` naming the
-   columns you think define a single observation. Report both numbers and say which one you
-   believe.
+   columns that define a single observation, which here are `Latitude`, `Longitude`, `Date`,
+   `Measurement` and `Unit`. Report both numbers and say which one you believe, and why the two
+   differ so much.
 
 ```{python}
 print(df.duplicated().sum())

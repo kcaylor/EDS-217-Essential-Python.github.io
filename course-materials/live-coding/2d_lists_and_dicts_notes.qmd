@@ -14,7 +14,18 @@ format:
 [2d_lists_and_dicts.qmd](2d_lists_and_dicts.qmd). Headings below match the markdown scaffold
 students set up, so everyone stays in the same place.*
 
-**Total: 25 minutes of coding, 20 minutes of buffer and questions.**
+**Total: 26 minutes of coding, 19 minutes of buffer and questions.**
+
+The three blocks on the student page are runs of these sections added up:
+
+| Student page block | Sections | Minutes |
+|---|---|---|
+| Lists | 1, 2, 3, 4 | 10 |
+| Dictionaries | 5, 6, 7 | 10 |
+| Tying it back | 8 | 5 |
+
+Those 25 minutes are what the student page lists. The framing minute sits on top of them, which
+is why the coding total here is 26 rather than 25.
 
 :::{.callout-important title="Scope discipline"}
 Session 2D teaches lists and dictionaries as *objects*, and it does not teach comprehensions.
@@ -102,7 +113,7 @@ Say: the end of a slice is exclusive, you will get it wrong sometimes (everyone 
 len(sites)
 ```
 
-## 3. Changing a list (3 min)
+## 3. Changing a list (2 min)
 
 ```{python}
 readings = []
@@ -260,7 +271,7 @@ for station, elevation in station_elevations.items():
 Two loop variables, because `.items()` gives you a key and a value together on each pass. Don't
 go deeper than that today, because they only need to read this fluently, not write it.
 
-## 8. Why this mattered today (3 min)
+## 8. Why this mattered today (5 min)
 
 Bring the session back to this morning's pandas code. Write these two cells and leave them on
 screen side by side:
@@ -276,7 +287,10 @@ goleta[keep].head()
 ```
 
 ```{python}
-goleta.rename(columns={'datetimeUtc': 'datetime_utc'}).columns.tolist()
+goleta.rename(columns={
+    'datetimeUtc': 'datetime_utc',
+    'datetimeLocal': 'datetime_local',
+}).columns.tolist()
 ```
 
 Say:
@@ -304,13 +318,16 @@ for column_name in ['value', 'country_iso']:
 
 | Elapsed | Should be at |
 |---|---|
-| 5 min | end of section 2, indexing done |
-| 12 min | end of section 4, loops over lists working |
-| 20 min | end of section 6, dictionary lookup and `KeyError` seen |
-| 25 min | section 8, tied back to pandas |
+| 6 min | end of section 2, indexing done |
+| 11 min | end of section 4, loops over lists working |
+| 18 min | end of section 6, dictionary lookup and `KeyError` seen |
+| 26 min | section 8, tied back to pandas |
 
-If you're behind at 12 minutes, cut slicing (section 2) and `.keys()`/`.values()`
-(section 6). Do not cut section 8, because tying both containers back to this morning's pandas
+If you're behind at 11 minutes, compress rather than cut. The student page promises slicing
+(section 2) and `.keys()`/`.values()` (section 6), so show each once and move on instead of
+dropping them; replacement by position in section 3 is the one thing the student page does not
+promise, and it is the safest thing to lose. Do not cut section 8, because tying both containers
+back to this morning's pandas
 code is the thing the session is for.
 
 ## Common problems

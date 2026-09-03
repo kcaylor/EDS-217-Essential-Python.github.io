@@ -205,7 +205,7 @@ survey.shape
 ```
 
 :::{.callout-note title="✅ Answer"}
-**36 rows, leaving 264.** The 36 is 18 + 11 + 7 exactly, which tells you something you did not know
+**36 rows, leaving 264.** The 36 dropped rows are 18 + 11 + 7 exactly, which tells you something you did not know
 before: no row was missing two of the three measurements. Every blank sits in a row that is
 otherwise complete.
 
@@ -225,8 +225,8 @@ survey['n_replicates'].value_counts()
 ```
 
 :::{.callout-note title="✅ Answer"}
-**3 is the usual number of bottles (158 rows), then 2 (55) and 4 (46), and there are exactly 5
-ones.** Five is also the number of blanks you filled, so the column contained no explicit `1`
+**3 is the usual number of bottles (158 rows), then 2 (55) and 4 (46), and exactly 5 rows hold a
+1.** Five is also the number of blanks you filled, so the column contained no explicit `1`
 before you started. The absence of an explicit `1` is the evidence for the assumption you were
 handed: if some sheets wrote `1` and others left it blank, you would expect to see both, and you
 do not.
@@ -266,7 +266,7 @@ survey['temperature_c'].describe()
 
 :::{.callout-note title="✅ Answer"}
 **The mean moved from -11.21 °C to 19.22 °C, and the standard deviation from 173.44 to 3.18.**
-Nine rows out of 302 moved the average by more than 30 degrees, and you can check that directly:
+Nine rows out of the 302 non-null temperature readings moved the average by more than 30 degrees, and you can check that directly:
 each `-999` sits about 1018 below the true mean, and 9 × 1018 / 302 is about 30.3, which is the
 whole of the shift. The other rows you removed changed the mean by less than a tenth of a degree.
 

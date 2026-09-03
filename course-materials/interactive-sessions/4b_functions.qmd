@@ -18,18 +18,15 @@ format:
 
 :::
 
-Yesterday we wrote this line three times, changing one word each time:
+In yesterday's end-of-day activity, you wrote this line (or something similar!) three times, changing just a single word each time:
 
 ```python
 df['Bananas index (kg)'].sort_values(ascending=False).head(10)
 ```
 
-and we told you to notice how that felt. Copying a line and editing one word in the copy is how
-a good number of data-analysis bugs get written: you fix the original, forget the copies, and
-now your notebook contains two answers to the same question.
+Three is something of a magic number in programming: the third time you write something very similar (e.g. that differs by only a single variable), you probably want to start thinking about how to refactor your code to make it more efficient. In addition, repetition of code invites more typos and errors. Copying a line and editing one word is how a good number of data-analysis bugs get written: you change the original, forget to update some of the copies, and now your notebook contains two different answers to the same basic question.
 
-A **function** is the cure. You write the work once, give it a name, and then you have a new
-verb that you and pandas can both use.
+A **function** is the cure to the tedium and risk of a copy-and-paste lifestyle. You write the work once, give it a name, and then you have a new tool that you and pandas can both use.
 
 By the end of this session you will be able to:
 

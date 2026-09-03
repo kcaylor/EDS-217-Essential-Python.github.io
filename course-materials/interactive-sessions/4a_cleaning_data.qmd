@@ -1,6 +1,6 @@
 ---
 title: "Interactive Session"
-subtitle: "🧼 Missing, Duplicated, Miscast"
+subtitle: "🧼 Cleaning Missing, Duplicated, and Miscast Data"
 jupyter: eds217_2026
 format:
   html:
@@ -18,25 +18,18 @@ format:
 
 :::
 
-For three days we have asked questions of tables that behaved themselves. Today we meet one
-that does not.
+For three days we have asked questions of tables that (modtly) behaved themselves. Today we will learn what to do with tables full of data that are less consistent and that need cleaning up.
 
-Real environmental data arrives with holes in it, with the same sample entered twice, and with
-numbers stored as text. None of that is a mistake anyone made. It is what happens when
-sixteen thousand measurements are pooled from thirty-seven separate studies over fifty
-years. Our job this morning is to find those problems, decide what to do about each one, and
-write down what we decided (and why!).
+Real environmental data arrives with gaps, duplications, and formatting errors. This morning we will learn to use pandas commands to find those problems, decide what to do about each one, and practice writing down what we decided (and why!).
 
-Today's dataset is NOAA's marine microplastics archive, and it runs through most of the day:
-this morning to clean it, the first session of the afternoon to transform it, and then the
-end-of-day practice to answer questions with it. Only the afternoon colab uses a different
-file.
+Our dataset is NOAA's marine microplastics archive, and we will use it throughout most of the day. This morning we will clean it and we will use the first session of the afternoon to transform it. Finally, the
+end-of-day practice will use the data to answer questions about the distribution of marine plastics. Only the afternoon colab uses a different file.
 
 By the end of this session you will be able to:
 
-- count what is missing, and say which columns are missing it
-- remove rows with `.dropna()`, and say why the bare version is almost always wrong
-- fill gaps with `.fillna(value)` when removal would cost too much
+- find gaps in a dataset, and specify which columns are missing values
+- remove rows with `.dropna()`, and explain why using this command with percision is so important
+- fill gaps with `.fillna(value)` when removal isn't practical
 - find duplicated rows with `.duplicated()`, and drop them with `.drop_duplicates()`
 - read a column's dtype and change it with `.astype()`
 

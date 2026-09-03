@@ -12,17 +12,11 @@ description: "Thursday September 3^rd^, 2026"
 *Cleaning and organising data takes 60% of a data scientist's time. Survey of data scientists, CrowdFlower, 2016.*
 :::
 
-Yesterday we interrogated a table that behaved itself. Today we will meet one that does not, and
-will spend the whole day learning how to wrangle it into something useful.
+So far this week, we've been working with tables that behave themselves. Today we will learn what to do with messy data (i.e. most data!). 
 
-Day 4 has three new code patterns, and we meet them in the order the day runs. This morning
-we'll learn a **missing-data pattern** that decides what to do about gaps, and then we get
-formally introduced to functions, after feeling the lack of them during yesterday's EOD
-activity.
-This afternoon's first session covers the two remaining patterns together. First the
-**derived-column pattern**, which adds a new column to hold your answer, because what you
-actually need is almost never what is contained in the raw data! Then the **string-cleaning
-pattern**, which tidies up messy text so that comparisons can work.
+Day 4 has three new code patterns, and we meet them in the order the day runs. This morning we'll learn a **missing-data pattern** that helps you address data gaps. In addition, we get formally introduced to functions, which provide a tool for reusing code.
+
+This afternoon's first session covers the two remaining patterns together. First the **derived-column pattern**, which creates a new column in a DataFrame, because what you actually need is almost never what is contained in the raw data! Then the **string-cleaning pattern**, which tidies up messy text so that comparisons can work.
 
 ## Class materials
 
@@ -34,8 +28,7 @@ pattern**, which tidies up messy text so that comparisons can work.
 
 ## End-of-day practice
 
-Later today we will analyze NOAA's marine microplastics archive, going from the raw download to a defensible
-answer about whether the patterns of microplastics in the Atlantic Ocean and the Pacific Ocean are different.
+At the end of the day today we will analyze NOAA's marine microplastics archive, going from the raw download to a defensible answer about whether the patterns of microplastics in the Atlantic Ocean and the Pacific Ocean are different.
 
 - [{{< fa pencil title="A pencil" >}} **Day 4 Practice:** 🌊 Microplastics: From Raw File to Real Numbers](eod-practice/eod-day4-2026.qmd)
 

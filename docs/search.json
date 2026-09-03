@@ -1831,7 +1831,7 @@
     "href": "course-materials/day4.html",
     "title": "Clean & Transform",
     "section": "",
-    "text": "Yesterday we interrogated a table that behaved itself. Today we will meet one that does not, and will spend the whole day learning how to wrangle it into something useful.\nDay 4 has three new code patterns, and we meet them in the order the day runs. This morning we’ll learn a missing-data pattern that decides what to do about gaps, and then we get formally introduced to functions, after feeling the lack of them during yesterday’s EOD activity. This afternoon’s first session covers the two remaining patterns together. First the derived-column pattern, which adds a new column to hold your answer, because what you actually need is almost never what is contained in the raw data! Then the string-cleaning pattern, which tidies up messy text so that comparisons can work."
+    "text": "So far this week, we’ve been working with tables that behave themselves. Today we will learn what to do with messy data (i.e. most data!).\nDay 4 has three new code patterns, and we meet them in the order the day runs. This morning we’ll learn a missing-data pattern that helps you address data gaps. In addition, we get formally introduced to functions, which provide a tool for reusing code.\nThis afternoon’s first session covers the two remaining patterns together. First the derived-column pattern, which creates a new column in a DataFrame, because what you actually need is almost never what is contained in the raw data! Then the string-cleaning pattern, which tidies up messy text so that comparisons can work."
   },
   {
     "objectID": "course-materials/day4.html#class-materials",
@@ -1845,7 +1845,7 @@
     "href": "course-materials/day4.html#end-of-day-practice",
     "title": "Clean & Transform",
     "section": "End-of-day practice",
-    "text": "End-of-day practice\nLater today we will analyze NOAA’s marine microplastics archive, going from the raw download to a defensible answer about whether the patterns of microplastics in the Atlantic Ocean and the Pacific Ocean are different.\n\n Day 4 Practice: 🌊 Microplastics: From Raw File to Real Numbers"
+    "text": "End-of-day practice\nAt the end of the day today we will analyze NOAA’s marine microplastics archive, going from the raw download to a defensible answer about whether the patterns of microplastics in the Atlantic Ocean and the Pacific Ocean are different.\n\n Day 4 Practice: 🌊 Microplastics: From Raw File to Real Numbers"
   },
   {
     "objectID": "course-materials/day4.html#additional-resources",
@@ -3336,7 +3336,7 @@
     "href": "course-materials/interactive-sessions/4a_cleaning_data.html",
     "title": "Interactive Session",
     "section": "",
-    "text": "For three days we have asked questions of tables that behaved themselves. Today we meet one that does not.\nReal environmental data arrives with holes in it, with the same sample entered twice, and with numbers stored as text. None of that is a mistake anyone made. It is what happens when sixteen thousand measurements are pooled from thirty-seven separate studies over fifty years. Our job this morning is to find those problems, decide what to do about each one, and write down what we decided (and why!).\nToday’s dataset is NOAA’s marine microplastics archive, and it runs through most of the day: this morning to clean it, the first session of the afternoon to transform it, and then the end-of-day practice to answer questions with it. Only the afternoon colab uses a different file.\nBy the end of this session you will be able to:"
+    "text": "For three days we have asked questions of tables that (modtly) behaved themselves. Today we will learn what to do with tables full of data that are less consistent and that need cleaning up.\nReal environmental data arrives with gaps, duplications, and formatting errors. This morning we will learn to use pandas commands to find those problems, decide what to do about each one, and practice writing down what we decided (and why!).\nOur dataset is NOAA’s marine microplastics archive, and we will use it throughout most of the day. This morning we will clean it and we will use the first session of the afternoon to transform it. Finally, the end-of-day practice will use the data to answer questions about the distribution of marine plastics. Only the afternoon colab uses a different file.\nBy the end of this session you will be able to:"
   },
   {
     "objectID": "course-materials/interactive-sessions/4a_cleaning_data.html#getting-started",
@@ -3413,7 +3413,7 @@
     "href": "course-materials/interactive-sessions/4b_functions.html",
     "title": "Interactive Session",
     "section": "",
-    "text": "Yesterday we wrote this line three times, changing one word each time:\nand we told you to notice how that felt. Copying a line and editing one word in the copy is how a good number of data-analysis bugs get written: you fix the original, forget the copies, and now your notebook contains two answers to the same question.\nA function is the cure. You write the work once, give it a name, and then you have a new verb that you and pandas can both use.\nBy the end of this session you will be able to:"
+    "text": "In yesterday’s end-of-day activity, you wrote this line (or something similar!) three times, changing just a single word each time:\nThree is something of a magic number in programming: the third time you write something very similar (e.g. that differs by only a single variable), you probably want to start thinking about how to refactor your code to make it more efficient. In addition, repetition of code invites more typos and errors. Copying a line and editing one word is how a good number of data-analysis bugs get written: you change the original, forget to update some of the copies, and now your notebook contains two different answers to the same basic question.\nA function is the cure to the tedium and risk of a copy-and-paste lifestyle. You write the work once, give it a name, and then you have a new tool that you and pandas can both use.\nBy the end of this session you will be able to:"
   },
   {
     "objectID": "course-materials/interactive-sessions/4b_functions.html#getting-started",

@@ -513,7 +513,7 @@ Reference
 <p>📖 <a href="../../course-materials/cheatsheets/pandas_dataframes.html">Cheatsheet: pandas DataFrames</a> · <a href="../../course-materials/cheatsheets/timeseries.html">Cheatsheet: time series</a></p>
 </div>
 </div>
-<div id="1d7ac1de" class="cell" data-execution_count="1">
+<div id="f5ce472f" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -558,7 +558,20 @@ Before you go any further
 </div>
 <div class="callout-body-container callout-body">
 <p>Run the line below and read the output:</p>
-<p>Ozone is reported in parts per million and the two particulate measurements in micrograms per cubic metre. <strong>Never group across the <code>parameter</code> column without filtering to one parameter first.</strong> A mean of ozone and PM10 together does not mean anything (Tuesday’s units problem).</p>
+<div id="63aa5e55" class="cell" data-execution_count="6">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>aq.groupby(<span class="st">'parameter'</span>)[<span class="st">'unit'</span>].nunique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>parameter
+o3      1
+pm10    1
+pm25    1
+Name: unit, dtype: int64</code></pre>
+</div>
+</div>
+<p>Ozone is reported in parts per million and the two particulate measurements in micrograms per cubic metre. <strong>Never group across the <code>parameter</code> column without filtering to one parameter first.</strong> A mean of ozone and PM10 together does not mean anything (last Tuesday’s units problem).</p>
 </div>
 </div>
 </section>
@@ -571,10 +584,7 @@ Before you go any further
 <li><p>In a markdown cell: The means are nearly identical and the maxima are not. What is different about these three stations, and which of the five columns in your table told you? Would you describe the South Coast as having one air quality or three?</p></li>
 <li><p>Now do the same for PM10. Which site is higher, and by how much? Note which site is missing from your answer and why.</p></li>
 <li><p>Use the filter pattern and the split-apply-combine pattern together: how many hours did each site record a PM2.5 value above 12 µg/m³, which was the US annual standard until it was tightened to 9 in 2024?</p></li>
-<li><p>In a markdown cell: your answer to question 10 has a site missing from it entirely. Is that because the air there was clean, or for another reason? Look back at your answer to question</p>
-<ol start="7" type="1">
-<li></li>
-</ol></li>
+<li><p>In a markdown cell: your answer to question 10 has a site missing from it entirely. Is that because the air there was clean, or for another reason? Look back at your answer to question 7.</p></li>
 </ol>
 </section>
 <section id="part-3-the-data-still-has-problems" class="level2">
@@ -610,10 +620,10 @@ Before you go any further
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
 <p>Look back through your notebook. Nearly every code cell was the same pattern, wearing different clothes:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean()               <span class="co"># one number per group</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].agg([...])           <span class="co"># several numbers per group</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>).agg({...})                  <span class="co"># several columns, different summaries</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean().sort_values() <span class="co"># and then rank the groups</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean()               <span class="co"># one number per group</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].agg([...])           <span class="co"># several numbers per group</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>).agg({...})                  <span class="co"># several columns, different summaries</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean().sort_values() <span class="co"># and then rank the groups</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The grammar stayed the same from cell to cell, and only the <strong>key</strong> changed. You grouped by <code>site</code>, by <code>parameter</code>, by both at once, and by <code>hour</code>, and each of those choices asked a different question of the same 4,942 rows.</p>
 <p>The last column you grouped by is worth stopping on. <code>site</code> and <code>parameter</code> were both columns in the files. <code>hour</code> was not: you made it in the setup block, out of a string, and grouping by it is what gave you the daily ozone cycle in Part 4. A useful grouping key is very often one you have to build first.</p>
 </section>

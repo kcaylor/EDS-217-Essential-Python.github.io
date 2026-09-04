@@ -169,12 +169,15 @@ aq.groupby('parameter')['value'].count().sort_values(ascending=False)
 Run the line below and read the output:
 
 ```{python}
+#| echo: true
+#| include: true
+
 aq.groupby('parameter')['unit'].nunique()
 ```
 
 Ozone is reported in parts per million and the two particulate measurements in micrograms per
 cubic metre. **Never group across the `parameter` column without filtering to one parameter
-first.** A mean of ozone and PM10 together does not mean anything (Tuesday's units problem).
+first.** A mean of ozone and PM10 together does not mean anything (last Tuesday's units problem).
 :::
 
 ## Part 2: Compare the stations
@@ -223,8 +226,8 @@ pm25[pm25['value'] > 12].groupby('site')['value'].count()
 ```
 
 11. In a markdown cell: your answer to question 10 has a site missing from it entirely. Is that
-    because the air there was clean, or for another reason? Look back at your answer to question
-    7.
+    because the air there was clean, or for another reason? Look back at your answer to
+    question 7.
 
 ## Part 3: The data still has problems
 

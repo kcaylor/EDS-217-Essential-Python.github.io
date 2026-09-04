@@ -101,8 +101,8 @@ Arctic and Southern together are 76 rows, about 1% of the 7,091. `.count()` cost
 tells you which rows of a grouped table you are allowed to take seriously.
 :::
 
-**4. In a markdown cell: two of the four oceans have numbers you should refuse to report. Define
-these values**
+**4. In a markdown cell: two of the four oceans have numbers you should refuse to report. Name
+those two oceans and explain why in one sentence.**
 
 :::{.callout-note title="✅ Answer"}
 **The Arctic (58 samples) and the Southern Ocean (18 samples).** Both are too thin to describe an
@@ -127,10 +127,10 @@ large number does to a mean computed from 6,216 values. Which of the two measure
 tendency (mean vs. median) would you send to the journalist?**
 
 :::{.callout-note title="✅ Answer"}
-**That one value contributes about 17.8 to the Atlantic mean of 282.7, which is 6% of it, and the
-ten largest values together contribute 38%.** A mean adds every value and divides by the count, so
-dividing a value 5.7 million times the median by 6,216 reduces it only a little, so most of it
-remains in the mean. The result is a mean that only 294 of the 6,216 Atlantic samples, under
+**The single largest Atlantic sample, 110,480, contributes about 17.8 to the mean of 282.7, which is 6% of it, and the
+ten largest values together contribute 38%.** A mean adds every value and divides by the count. Dividing 110,480 by 6,216 leaves 17.8, which
+is a tiny fraction of where it started and still nine hundred times the median of 0.0194. One
+sample survives the averaging as a large number because it began so far from everything else. The result is a mean that only 294 of the 6,216 Atlantic samples, under
 5%, actually exceed. An average that is larger than 95% of the data is not describing a typical
 sample.
 
@@ -281,13 +281,16 @@ neuston[neuston['ocean'] == 'Pacific']['Organization'].value_counts()
 ```
 
 **15. In a markdown cell, write three or four sentences that compare this table with your answer
-to question 5. Does the Pacific still come out higher than the Atlantic? By how much, and is it the same "how
-much" you reported yesterday? What happened to the number of Pacific samples you are now relying
-on?**
+to question 5. Does the Pacific still come out higher than the Atlantic? By how much, measured
+against the median ratio in your question 5 answer rather than against the mean ratio you sent the
+journalist yesterday? What happened to the number of Pacific samples you are now relying on?**
 
-:::{.callout-note title="✅ Answer"}
-**Yes, the Pacific is still higher, but the claim shrinks from a factor of 6.0 to a factor of 2.0
-and the evidence for it shrinks from 799 samples to 158.** Within Neuston net samples only, the
+:::{.callout-note title="✅ A model answer"}
+**Yes, the Pacific is still higher than the Atlantic, but the claim shrinks from a factor of 6.0
+to a factor of 2.0 and the evidence for it shrinks from 799 samples to 158.** Look at the third
+row before you go on: the Southern Ocean has the highest Neuston median of the three, 0.306, and
+it rests on four samples. Restricting to one method has not stopped small groups producing large
+numbers; it has only made the comparison between the two big oceans a fair one. Within Neuston net samples only, the
 Pacific median is 0.0307 pieces/m3 against the Atlantic's 0.0151. The gap is a real difference, it
 points the same way it did yesterday, and it is now a comparison of like with like.
 

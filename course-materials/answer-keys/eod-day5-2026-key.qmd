@@ -421,13 +421,14 @@ where does it stop falling?**
 The curve is a single broad hump with one minimum and one maximum, and no second peak.
 
 It **stops falling at hour `'06'`** (0.01113 ppm), which is the bottom of an overnight decline
-that has been running since midnight. It **starts rising at `'07'`** and climbs for seven hours,
-fastest early at about 0.003 ppm per hour and slowing to under 0.001 as it approaches the peak,
-through 0.02018 at `'09'` and 0.02625 at `'11'`. It
+that has been running since midnight. It **starts rising at `'07'`** and climbs for the next
+seven hours, slowly at first, fastest around `'09'` at about 0.004 ppm per hour, then easing to
+under 0.001 as it approaches the peak, through 0.02018 at `'09'` and 0.02625 at `'11'`. It
 **turns over at `'14'`** (0.03087), holds nearly flat across `'13'` to `'16'`, then declines for
 the rest of the day and through the night at a gentler rate than it rose.
 
-The asymmetry is worth naming: the rise takes about eight hours and the fall takes about sixteen.
+The asymmetry is worth naming: counting from the `'06'` minimum, the rise takes eight hours and
+the fall takes the remaining sixteen.
 The curve is not symmetric about noon: it climbs steeply through the morning and declines slowly
 through the evening.
 :::
@@ -444,8 +445,8 @@ oxides and volatile organic compounds, and it falls whenever removal outpaces pr
 why the minimum at hour `'06'` sits at the end of the night, when there has been no sunlight for
 hours and the overnight chemistry has consumed what was left.
 
-The peak at `'14'`, two hours after solar noon, is later than the sun and that is the expected
-result. Ozone accumulates: each hour of sunlight adds to what the previous hours already made, so
+The peak at `'14'`, about an hour after solar noon, is later than the sun and that is the
+expected result. Ozone accumulates: each hour of sunlight adds to what the previous hours already made, so
 the concentration keeps climbing as long as production exceeds loss, and it turns over when those
 two balance rather than when sunlight is strongest. The morning traffic peak also loads the air
 with precursors several hours before the reactions have finished converting them.

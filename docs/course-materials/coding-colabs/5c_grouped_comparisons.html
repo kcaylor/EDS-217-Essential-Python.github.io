@@ -443,10 +443,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="../images/panda.jpeg" class="img-fluid"></p>
 </div>
 <p>Yesterday we asked you to determine the varying distribution of plastic in the Pacific and the Atlantic. You built two tables with two filters, ran <code>.describe()</code> on each, and then wrote a paragraph to an imaginary journalist.</p>
-<p>You gave them an answer about two oceans because two oceans were all we asked about. However, there are four oceans in the file, thirty-seven contributing studies, and a dozen different ways of taking a sample, only four of which are nets!</p>
+<p>You gave them an answer about two oceans because two oceans were all we asked about. However, the raw file has four oceans, thirty-seven contributing studies and nineteen different ways of taking a sample. By the time we filter it down this afternoon, twelve of those methods are left, and only four of them are nets!</p>
 <p>This afternoon you will go back into the microplastics data and do a more comprehensive analysis: all four oceans in one line instead of two filters, and then a look at whether the sampling methods behind those four numbers are comparable enough to put them side by side.</p>
 <p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read the code through (quietly!) and explain what it should produce or calculate before you run it.</p>
-<p>We have about 45 minutes for this activity, so please let Cella or Kelly know if you are getting stuck!</p>
+<p>We have about 45 minutes for this activity: roughly 40 on the four parts, and the rest on setting up and on the wrap-up. Please let Cella or Kelly know if you get stuck, rather than spending your time on one line!</p>
 <section id="the-patterns-you-need" class="level2">
 <h2 class="anchored" data-anchor-id="the-patterns-you-need">The patterns you need</h2>
 <p>Both new patterns are from this morning. Hopefully, you will not need to look them up more than once!</p>
@@ -459,7 +459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Create a notebook named <code>Colab_5C_Grouped_Comparisons.ipynb</code>, with both partners’ names in the title cell, then rebuild yesterday’s <code>positive</code> table. Every line below should be one you wrote yesterday afternoon:</p>
-<div id="1fdad494" class="cell" data-execution_count="1">
+<div id="a8a61b0c" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -488,7 +488,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Yesterday you computed the mean <code>Measurement</code> for the Atlantic and the Pacific with two filters. Now do all four oceans in one line, and rank the result from dirtiest to cleanest.</p></li>
 <li><p>Do the same with the <strong>median</strong> instead of the mean. Does the order change? If so, which two oceans swap?</p></li>
 <li><p>How many samples went into each of those four numbers? (can/should be a single line of code!)</p></li>
-<li><p>In a markdown cell: two of the four oceans have numbers you should refuse to report. Define these values and explain why in one sentence.</p></li>
+<li><p>In a markdown cell: two of the four oceans have numbers you should refuse to report. Name those two oceans and explain why in one sentence.</p></li>
 </ol>
 </section>
 <section id="part-2-one-call-instead-of-four-about-8-minutes" class="level2">
@@ -511,7 +511,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Now let’s control for these differences. Filter <code>positive</code> to the rows collected with a <code>'Neuston net'</code>, end the line with <code>.copy()</code>, then group <strong>that</strong> by ocean and report count, median and mean.</p></li>
 <li><p>In a markdown cell, write three or four sentences that compare this table with your answer to question</p>
 <ol start="5" type="1">
-<li>Does the Pacific still come out higher than the Atlantic? By how much, and is it the same “how much” you reported yesterday? What happened to the number of Pacific samples you are now relying on?</li>
+<li>Does the Pacific still come out higher than the Atlantic? By how much, measured against the median ratio in your question 5 answer rather than against the mean ratio you sent the journalist yesterday? What happened to the number of Pacific samples you are now relying on?</li>
 </ol></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="If your two tables disagree about the size of the effect">

@@ -20,9 +20,10 @@ Yesterday we asked you to determine the varying distribution of plastic in the P
 built two tables with two filters, ran `.describe()` on each, and then wrote a paragraph to an
 imaginary journalist.
 
-You gave them an answer about two oceans because two oceans were all we asked about. However, there are four
-oceans in the file, thirty-seven contributing studies, and a dozen different ways of taking a
-sample, only four of which are nets!
+You gave them an answer about two oceans because two oceans were all we asked about. However, the raw file has four
+oceans, thirty-seven contributing studies and nineteen different ways of taking a sample. By the
+time we filter it down this afternoon, twelve of those methods are left, and only four of them
+are nets!
 
 This afternoon you will go back into the microplastics data and do a more comprehensive analysis: all four
 oceans in one line instead of two filters, and then a look at whether the sampling methods behind
@@ -31,7 +32,9 @@ those four numbers are comparable enough to put them side by side.
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
 finish a numbered task. The person not typing should read the code through (quietly!) and explain what it should produce or calculate before you run it.
 
-We have about 45 minutes for this activity, so please let Cella or Kelly know if you are getting stuck!
+We have about 45 minutes for this activity: roughly 40 on the four parts, and the rest on
+setting up and on the wrap-up. Please let Cella or Kelly know if you get stuck, rather than
+spending your time on one line!
 
 ## The patterns you need
 
@@ -106,8 +109,8 @@ medians = positive.groupby('ocean')['Measurement'].median()
 positive.groupby('ocean')['Measurement'].count().sort_values(ascending=False)
 ```
 
-4. In a markdown cell: two of the four oceans have numbers you should refuse to report. Define these values
-and explain why in one sentence.
+4. In a markdown cell: two of the four oceans have numbers you should refuse to report. Name
+   those two oceans and explain why in one sentence.
 
 ## Part 2: One call instead of four (about 8 minutes)
 
@@ -187,8 +190,9 @@ neuston.groupby('ocean')['Measurement'].agg(['count', 'median', 'mean'])
 ```
 
 15. In a markdown cell, write three or four sentences that compare this table with your answer to question
-    5. Does the Pacific still come out higher than the Atlantic? By how much, and is it the same
-    "how much" you reported yesterday? What happened to the number of Pacific samples you are
+    5. Does the Pacific still come out higher than the Atlantic? By how much, measured against the
+    median ratio in your question 5 answer rather than against the mean ratio you sent the
+    journalist yesterday? What happened to the number of Pacific samples you are
     now relying on?
 
 :::{.callout-tip title="If your two tables disagree about the size of the effect"}

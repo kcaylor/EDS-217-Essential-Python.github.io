@@ -442,24 +442,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div style="width: 80%; margin: auto;">
 <p><img src="../images/panda.jpeg" class="img-fluid"></p>
 </div>
-<p>Yesterday you were asked to determine the varying distribution of plastic in the Pacific and the Atlantic. You built two tables with two filters, ran <code>.describe()</code> on each, and then wrote a paragraph to an imaginary journalist.</p>
-<p>You gave them an answer about two oceans because two was all you were asked to examine. However, there are four oceans in that file, thirty-seven contributing studies, and ten different kinds of nets!</p>
-<p>This afternoon you will go back into this dataset and do a more comprehensive analysis. Somewhere around question 9, the answer you sent the journalist will start to look… shaky.</p>
-<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it.</p>
-<p>You have 45 minutes.</p>
+<p>Yesterday we asked you to determine the varying distribution of plastic in the Pacific and the Atlantic. You built two tables with two filters, ran <code>.describe()</code> on each, and then wrote a paragraph to an imaginary journalist.</p>
+<p>You gave them an answer about two oceans because two oceans were all we asked about. However, there are four oceans in the file, thirty-seven contributing studies, and a dozen different ways of taking a sample, only four of which are nets!</p>
+<p>This afternoon you will go back into the microplastics data and do a more comprehensive analysis: all four oceans in one line instead of two filters, and then a look at whether the sampling methods behind those four numbers are comparable enough to put them side by side.</p>
+<p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read the code through (quietly!) and explain what it should produce or calculate before you run it.</p>
+<p>We have about 45 minutes for this activity, so please let Cella or Kelly know if you are getting stuck!</p>
 <section id="the-patterns-you-need" class="level2">
 <h2 class="anchored" data-anchor-id="the-patterns-you-need">The patterns you need</h2>
 <p>Both new patterns are from this morning. Hopefully, you will not need to look them up more than once!</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'column'</span>].mean()               <span class="co"># split, apply, combine</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'column'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>])   <span class="co"># several summaries at once</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>).agg({<span class="st">'a'</span>: <span class="st">'mean'</span>, <span class="st">'b'</span>: <span class="st">'count'</span>})   <span class="co"># different summaries, different columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In addition, you will also need the top-N pattern from Wednesday:</p>
+<p>You will also need the top-N pattern from Wednesday:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Create a notebook named <code>Colab_5C_Grouped_Comparisons.ipynb</code>, with both partners’ names in the title cell, then rebuild yesterday’s <code>positive</code> table. Every line below should be one you wrote yesterday afternoon:</p>
-<div id="79c1af3b" class="cell" data-execution_count="1">
+<div id="1fdad494" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -479,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>(7091, 23)</code></pre>
 </div>
 </div>
-<p>7,091 water samples with a measured, non-zero concentration of plastic in pieces per cubic metre.</p>
+<p>You should end up with 7,091 water samples, each with a measured, non-zero concentration of plastic in pieces per cubic metre.</p>
 </section>
 <section id="part-1-all-four-oceans-at-once-about-10-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-all-four-oceans-at-once-about-10-minutes">Part 1: All four oceans at once (about 10 minutes)</h2>
@@ -524,7 +524,7 @@ If your two tables disagree about the size of the effect
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>They should; this is the finding we’ve been heading towards. A difference that persists across a control but changes size is a different claim from a difference that completely goes away. The two require different interpretation in a data analysis report. Which one do you have?</p>
+<p>They should! A difference that survives the control but changes size is a different claim from a difference that goes away completely, and the two need different interpretations in a data analysis report. Which one do you have?</p>
 </div>
 </div>
 </section>
@@ -544,14 +544,14 @@ If you finish early
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The <code>Regions</code> column is finer-grained than <code>Oceans</code>. Group by it, report count and median, and rank by count to find the ten most-sampled regions. One of them has a median a hundred thousand times larger than another. Look at which sampling methods were used there before you conclude anything about the water.</p>
-<p>Do <strong>not</strong> try to compare regions across years. That needs dates… and we get to those soon!</p>
+<p>The <code>Regions</code> column is finer-grained than <code>Oceans</code>. Group by it, report count and median, and rank by count to find the ten most-sampled regions. One of them has a median four hundred thousand times larger than another. Look at which sampling methods were used there before you conclude anything about the water.</p>
+<p>Do <strong>not</strong> try to compare regions across years. Comparing across years needs dates… and we get to those on Tuesday!</p>
 </div>
 </div>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>
-<p>If we have time, we will hear from two or three pairs on question 17. Be ready to say which single grouped table changed your mind, not just what your final answer was.</p>
+<p>If we have time, we will hear from two or three pairs on question 17. Be ready to say which grouped table changed your mind (if one of them did!), and not just what your final answer was.</p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>

@@ -18,7 +18,7 @@ format:
 
 :::
 
-For three days we have asked questions of tables that (modtly) behaved themselves. Today we will learn what to do with tables full of data that are less consistent and that need cleaning up.
+For three days we have asked questions of tables that (mostly) behaved themselves. Today we will learn what to do with tables full of data that are less consistent and that need cleaning up.
 
 Real environmental data arrives with gaps, duplications, and formatting errors. This morning we will learn to use pandas commands to find those problems, decide what to do about each one, and practice writing down what we decided (and why!).
 
@@ -28,7 +28,7 @@ end-of-day practice will use the data to answer questions about the distribution
 By the end of this session you will be able to:
 
 - find gaps in a dataset, and specify which columns are missing values
-- remove rows with `.dropna()`, and explain why using this command with percision is so important
+- remove rows with `.dropna()`, and explain why using this command with precision is so important
 - fill gaps with `.fillna(value)` when removal isn't practical
 - find duplicated rows with `.duplicated()`, and drop them with `.drop_duplicates()`
 - read a column's dtype and change it with `.astype()`

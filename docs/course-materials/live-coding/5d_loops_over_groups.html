@@ -436,17 +436,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div style="width: 80%; margin: auto;">
 <p><img src="assets/panda_list.jpeg" class="img-fluid"></p>
 </div>
-<p>This morning you learned a pattern that answers most grouped questions in one line. This afternoon we look at the questions it does not answer, and at the older, slower tool that does.</p>
-<p><code>.groupby()</code> gives you back <strong>one number per group</strong>. That covers a great deal of what you want. It does not cover printing a paragraph about each site, saving a separate file for each species, running a check that either passes or fails per group, or doing anything at all where the answer is not a number.</p>
-<p>For those, you take the groups apart and walk through them with a <code>for</code> loop. You met <code>for</code> on Tuesday afternoon over a list. Today the thing you loop over is a set of DataFrames.</p>
-<p>We will also spend the last ten minutes reading code you are <strong>not</strong> expected to write. List comprehensions are everywhere in real Python, including in code you will inherit from a colleague on your first day of work, and you should be able to look at one and say what it does.</p>
+<p>This morning you learned a pattern that answers most grouped questions in one line. This afternoon we will look at the questions it does not answer, and at the loop, which is the older and slower tool that handles them.</p>
+<p><code>.groupby()</code> gives you back <strong>one number per group</strong>, which covers a great deal of what you want. It does not cover printing a paragraph about each site, saving a separate file for each species, running a check that either passes or fails per group, or doing anything at all where the answer is not a number.</p>
+<p>For any of those jobs, you take the groups apart and walk through them with a <code>for</code> loop. You met <code>for</code> on Tuesday afternoon over a list. Today the thing you loop over is a set of DataFrames.</p>
+<p>We will also spend about ten minutes reading code you are <strong>not</strong> expected to write. List comprehensions are everywhere in real Python, including in code you may inherit from a colleague later on, and you should be able to look at one and say what it does.</p>
 <section id="how-a-live-coding-session-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-a-live-coding-session-works">How a live coding session works</h2>
-<p>We both start from an empty notebook and write everything together, live. There is no code on this page to copy, on purpose.</p>
+<p>We all start from an empty notebook and write everything together, live. There is no code on this page to copy, on purpose.</p>
 <ul>
-<li>I write a line, explain it, and run it. You write the same line and run it.</li>
-<li>When something breaks, we fix it together. Things will break. That is the useful part.</li>
-<li>If you fall behind, say so. Someone else is behind too, and I would much rather slow down than lose you.</li>
+<li>Cella or Kelly writes a line, explains it, and runs it. You type the same line and run it.</li>
+<li>When something breaks, we fix it together. Things will break, and fixing them is the useful part.</li>
+<li>If you fall behind, say so! Cella and Kelly would much rather slow down than lose you.</li>
 <li>Type the code. Do not copy it from a neighbor’s screen. The typing is the point.</li>
 </ul>
 </section>
@@ -478,7 +478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="4" type="1">
 <li>Under each heading, add an empty code cell.</li>
 </ol>
-<p>That is your scaffold. Now close this page and switch to your notebook.</p>
+<p>Your seven headings are the scaffold for the session. Read the next section before you switch to your notebook, so you know what the afternoon covers.</p>
 </section>
 <section id="what-we-will-cover" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-will-cover">What we will cover</h2>
@@ -501,17 +501,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Choosing</strong> (about 5 minutes)</p>
 <ul>
 <li>the three questions that tell you whether you need a loop at all</li>
-<li>why <code>.groupby(...).mean()</code> is almost always the right answer, and when it is not</li>
+<li>why <code>.groupby(...).mean()</code> is almost always the right answer, and when a loop is the better one</li>
 </ul>
 </section>
 <section id="what-you-should-be-able-to-do-afterwards" class="level2">
 <h2 class="anchored" data-anchor-id="what-you-should-be-able-to-do-afterwards">What you should be able to do afterwards</h2>
 <ul>
 <li>explain what <code>.groupby()</code> is holding before you call an aggregation on it</li>
-<li>write a <code>for name, group in grouped:</code> loop and say what each of the two variables is</li>
-<li>do something per group that is not a summary number</li>
+<li>write a <code>for name, group in grouped:</code> loop and explain what each of the two variables holds</li>
+<li>produce something for each group other than a summary number</li>
 <li><strong>read</strong> a list comprehension and predict what it produces</li>
-<li>say, for a given task, whether it wants the pattern or the loop</li>
+<li>decide, for a given task, whether it wants the grouped pattern or a loop</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="You are not being asked to write comprehensions">
 <div class="callout-header d-flex align-content-center">
@@ -523,7 +523,7 @@ You are not being asked to write comprehensions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Sections 5 and 6 are a reading exercise. Nothing this week, including the end-of-day practice and next week’s project, requires you to write a comprehension. They are here so that the first time you meet one in somebody else’s notebook is not the first time you meet one.</p>
+<p>Sections 5 and 6 are a reading exercise. Nothing this week, including the end-of-day practice and next week’s project, requires you to write a comprehension. We read a few today so that meeting one in somebody else’s notebook later is not the first time you have seen the syntax.</p>
 </div>
 </div>
 </section>

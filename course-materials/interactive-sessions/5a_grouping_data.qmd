@@ -18,26 +18,26 @@ format:
 
 :::
 
-Yesterday afternoon, at the very end of the colab, you were asked to compare the mean dissolved
-oxygen at two of the six sites. It took two filters and two `.mean()` calls, and the
-instructions ended with a promise: *tomorrow you will learn to do all six at once.*
+Yesterday afternoon, in the last coding task of the colab, you were asked to compare the mean
+dissolved oxygen at one of the acidic sites against `site_d`, which is not one of them. It took
+two filters and two `.mean()` calls, and the instructions ended by saying that today you would
+learn how to do all six at once.
 
-This is that. One line, six answers, and the line is the same length as the one that gave you
-two.
+This morning we will learn how. One line of code, six answers.
 
-Almost every real question about data is a per-group question. Not "what is the average", but "what
-is the average **for each**": for each site, for each species, for each year, for each ocean.
-Today you learn the pattern that answers all of those, and you learn it in the two forms you
-will see it written.
+Most of the real questions you will ask about data are per-group questions. Not "what is the
+average", but "what is the average **for each**": for each site, for each species, for each year,
+for each ocean. This morning we will learn the pattern that answers all of those, and we will
+write it in both of the forms you will meet in other people's code.
 
 By the end of this session you will be able to:
 
 - describe what `.groupby()` does in terms of **split, apply, combine**
 - write the split-apply-combine pattern in its **two-step** form and its **one-line** form,
-  and say why they are the same pattern
+  and explain why they are the same pattern
 - choose the aggregation that answers the question you actually asked
-- read the result of a grouped calculation and say what its index means
-- explain why a grouped answer is more honest than a whole-column answer
+- read the result of a grouped calculation and explain what its index means
+- explain why a grouped answer is usually more honest than a whole-column answer
 
 ## Getting Started
 
@@ -90,8 +90,11 @@ survey = survey.rename(columns={'collection date': 'collection_date'})
 survey.shape
 ```
 
-255 rows out of the 320 you started with, which is the number you finished on yesterday. If you
-get something else, check the order of your steps against the block above.
+255 rows out of the 320 in the raw file, which should be the row count you finished on
+yesterday. The column count will be lower than yesterday's, because this block rebuilds the
+measurements and leaves out the columns you derived in the afternoon; we add the one we need
+back further down. If the row count is not 255, check the order of your steps against the block
+above, and grab Cella or Kelly if you cannot find the difference.
 
 ## The question you could not answer yesterday
 
@@ -101,11 +104,13 @@ Here is the whole-table average dissolved oxygen:
 survey['dissolved_oxygen_mg_L'].mean()
 ```
 
-That number is true and almost useless. It describes no site. It is the average of six streams
-that are not the same stream, and the moment anybody asks "is that good?" you have to admit you
-cannot tell them.
+The whole-table mean is true and almost useless. It describes no site. It is the average of six
+streams that are not the same stream, and the moment anybody asks "is that good?" you have to
+admit that you cannot tell them.
 
-Yesterday you got at two of the six the only way you could:
+Yesterday you got two of the six answers the only way you could. Your two were `site_d` and
+whichever acidic site you picked, so the second number below is `site_f` if you chose that one
+and 6.873 if you chose `site_c`:
 
 ```{python}
 site_d = survey[survey['site'] == 'site_d']
@@ -121,22 +126,22 @@ lines would silently keep reporting six.
 
 ## Split, apply, combine
 
-The pattern in those twelve lines has a name, and pandas has one verb for the whole of it.
+The pattern in those twelve lines has a name, and pandas has a single method that does all of it.
 
 **Split** the table into one group per site. **Apply** the same calculation to each group.
 **Combine** the answers into a single result, labelled by group.
 
-That is `.groupby()`. In its first form you do it in two steps, because doing it in two steps
-makes both halves visible:
+Split, apply and combine are what `.groupby()` does. We will write it in two steps first,
+because splitting the code up keeps the split and the apply visible separately:
 
 ```{python}
 grouped = survey.groupby('site')
 grouped
 ```
 
-Look carefully at what that printed. It is not a table. `.groupby()` on its own does the
-**split** and then stops, holding six piles of rows and waiting to be told what to do with
-them. Nothing has been calculated yet.
+Look carefully at the output. The grouped object is not a table. `.groupby()` on its own does the
+**split** and stops there, holding six piles of rows. No arithmetic has happened yet, and none
+will happen until you name a calculation.
 
 The second step picks a column and names the calculation:
 
@@ -144,12 +149,12 @@ The second step picks a column and names the calculation:
 grouped['dissolved_oxygen_mg_L'].mean()
 ```
 
-Six sites, six means, one line of arithmetic. `site_d` and `site_f` are the two numbers you
-computed yesterday, and the other four came along for free.
+Six sites, six means, one line of arithmetic. Two of these are the numbers you computed
+yesterday, whichever pair you did, and the other four came along for free.
 
 :::{.callout-note}
-🐍 The object `.groupby()` returns is a real thing you can keep in a variable and use more than
-once. Ask it for a different column and it splits nothing again, because the split has already
+🐍 The object `.groupby()` returns is a real object that you can keep in a variable and reuse.
+Ask it for a different column and the table is not split again, because the split has already
 happened:
 
 ```{python}
@@ -159,15 +164,15 @@ grouped['temperature_c'].mean()
 
 ## The same pattern, on one line
 
-You will rarely need the grouped object for its own sake, so almost all of the pandas code you
-read will run the two steps together:
+You will rarely need the grouped object for its own sake, so most of the pandas code you read
+runs the two steps together:
 
 ```{python}
 survey.groupby('site')['dissolved_oxygen_mg_L'].mean()
 ```
 
-**These are the same pattern.** The two-step version stores the middle of it in a variable;
-the one-line version does not. Same split, same apply, same combine, same answer.
+**Both forms are the same pattern.** The two-step version stores the middle of it in a variable
+and the one-line version does not. Same split, same apply, same combine, same answer.
 
 Read the one-line form left to right as three instructions:
 
@@ -181,8 +186,8 @@ df.groupby('key')['column'].aggregation()
 - `['column']` says **which column to do arithmetic on**.
 - `.mean()` says **what arithmetic**.
 
-Learn it as one unit, the way you learned the top-N pattern on Wednesday. You will type it
-more often this quarter than you will type your own name.
+Learn it as one unit, the way you learned the top-N pattern on Wednesday, because you will be
+writing it for the rest of this course (and for most of your time in MEDS!).
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Write the one-line form to find the mean `pH` at each site. Then write the same question in the
@@ -202,15 +207,15 @@ print(type(mean_do))
 print(mean_do.index)
 ```
 
-That matters because the index is now something you can look things up by. The site labels have
+The index matters, because it is now something you can look values up by. The site labels have
 stopped being data inside a column and have become the labels of rows:
 
 ```{python}
 mean_do['site_c']
 ```
 
-It also means everything you already know about a Series still works here. `.idxmax()`, from
-Wednesday afternoon, gives you the label of the largest value, and the label is now a site name:
+Everything you already know about a Series still works here. `.idxmax()`, from Wednesday
+afternoon, gives you the label of the largest value, and the label is now a site name:
 
 ```{python}
 mean_do.idxmax()
@@ -244,16 +249,17 @@ survey.groupby('site')['dissolved_oxygen_mg_L'].min()
 survey.groupby('site')['n_replicates'].sum()
 ```
 
-`.count()` is the one worth pausing on, because it answers a different kind of question. It does
-not summarise the measurement, it tells you **how many rows are in each pile**:
+`.count()` is the one worth pausing on, because it answers a different kind of question. Instead
+of summarising the measurement, it tells you **how many rows are in each pile**:
 
 ```{python}
 survey.groupby('site')['dissolved_oxygen_mg_L'].count()
 ```
 
 Forty-five samples at `site_c` and thirty-nine at `site_d`, which is close enough to even that
-you can trust the comparison of their means. When it is *not* even, `.count()` is the line that
-tells you before you embarrass yourself. Get in the habit of asking for it.
+comparing their means is reasonable. When the counts are lopsided, `.count()` is the line that
+tells you so, before you have written the comparison into a report. Get in the habit of asking
+for it.
 
 | Aggregation | Answers |
 |---|---|
@@ -285,10 +291,12 @@ Then say, in a markdown cell, why question 2 needs `.sum()` and not `.count()`.
 Any column whose values repeat can be a grouping key. The values do not have to be text, and
 they do not have to be tidy, but they do have to mean something.
 
-`site` works because six labels describe two hundred and fifty-five rows. `pH` would not work,
-because almost every value is unique and you would get two hundred groups of one.
+`site` works because six labels describe all 255 rows. `pH` would not work, because its 255
+readings take 138 different values, and grouping on it would give you 138 groups of which 67
+hold a single row. A group of one tells you nothing you did not already have.
 
-Yesterday you built a column of your own that groups beautifully:
+Yesterday you built a column of your own that groups beautifully. The setup block above leaves it
+out, so here it is again:
 
 ```{python}
 def classify_ph(value):
@@ -309,14 +317,14 @@ survey['ph_class'].value_counts()
 survey.groupby('ph_class')['dissolved_oxygen_mg_L'].mean()
 ```
 
-That is the derived-column pattern and the split-apply-combine pattern working together, and
-it is worth naming what just happened. **`ph_class` was not in the file.** You invented the
-categories yesterday, and today they are a grouping key. Most of the interesting groupings in
-your career will be ones you made rather than ones you were handed.
+The derived-column pattern and the split-apply-combine pattern are working together here, and
+one part of it is easy to miss. **`ph_class` was not in the file.** You invented the categories
+yesterday with a function of your own, and this morning they are a grouping key. Many of the
+most useful groupings you will make are ones you build rather than ones the file hands you.
 
 :::{.callout-note}
-🐍 `.value_counts()`, which you have used since Day 2, is a grouped count in disguise. These two
-lines produce the same numbers:
+🐍 `.value_counts()`, which you have used since Day 2, is a grouped count in disguise. The two
+lines below produce the same numbers:
 
 ```{python}
 print(survey['site'].value_counts())
@@ -345,13 +353,13 @@ print(survey.groupby('site')['dissolved_oxygen_mg_L'].mean())
 print(survey.groupby('site')['temperature_c'].mean())
 ```
 
-Read those three outputs together and there is a story in them. The sites with the warmest water
-have the least oxygen in it, in order, without an exception. Warm water holds less dissolved
-oxygen than cold water, which is a fact about gases, and here it is, falling out of a file four
-undergraduates transcribed off paper.
+Read the three outputs together and there is a result in them. The sites with the warmest water
+have the least oxygen in it, in order, without a single exception. Warm water holds less
+dissolved oxygen than cold water, which is a fact about gases, and here it is, falling out of a
+file transcribed off paper by several different people.
 
-You could not see that yesterday, with the same file open. Split-apply-combine is what makes it
-visible.
+The file was the same yesterday, and so was the ordering. Splitting by site puts all six answers
+next to each other, and the ordering only shows up once they are side by side.
 
 ## Key points
 
@@ -360,7 +368,8 @@ visible.
 - The **split-apply-combine pattern** is `df.groupby('key')['column'].aggregation()`.
 - The **two-step form** and the **one-line form** are the same pattern. The two-step version
   keeps the split in a variable so you can reuse it.
-- `.groupby()` on its own calculates nothing. It waits.
+- `.groupby()` on its own calculates nothing. The arithmetic happens when you name an
+  aggregation.
 - The result is a **Series indexed by the group labels**, so `.idxmax()`, `.idxmin()` and label
   lookup all still work.
 - Any aggregation you can run on a column can run on a group: `.mean()`, `.sum()`, `.count()`,

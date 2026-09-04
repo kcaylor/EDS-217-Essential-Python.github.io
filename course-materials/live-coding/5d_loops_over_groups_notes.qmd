@@ -14,10 +14,21 @@ format:
 [5d_loops_over_groups.qmd](5d_loops_over_groups.qmd). Headings below match the markdown scaffold
 students set up, so everyone stays in the same place.*
 
-**Total: 28 minutes of coding, 17 minutes of buffer and questions.**
+**Total: 32 minutes of coding, 13 minutes of buffer and questions.**
+
+The three blocks on the student page are these sections added up:
+
+| Student page block | Sections | Minutes |
+|---|---|---|
+| Looping over groups | 1, 2, 3, 4 | 15 |
+| Reading comprehensions | 5, 6 | 10 |
+| Choosing | 7 | 5 |
+
+The student page lists those 30 minutes. The two framing minutes sit on top of them, which is why
+the coding total here is 32 rather than 30.
 
 :::{.callout-important title="Scope discipline"}
-This session teaches **iteration over a groupby object** at adapt level: students should be able
+Session 5D teaches **iteration over a groupby object** at adapt level: students should be able
 to modify a `for name, group in grouped:` loop, not design one from nothing. The end-of-day practice
 does not require a loop.
 
@@ -26,7 +37,7 @@ exercise that asks a student to write one, do not use one in an answer key, and 
 writes one unprompted, say it is correct and move on rather than teaching the syntax to the
 room.
 
-This session teaches **no new aggregation**. Everything numeric here was taught this morning.
+There is **no new aggregation** in this session. Everything numeric here was taught this morning.
 
 Do not use `lambda` anywhere. It is not in this course.
 :::
@@ -36,7 +47,7 @@ Do not use `lambda` anywhere. It is not in this course.
 Say something close to this:
 
 > This morning you learned a pattern that turns six piles of rows into six numbers. It is the
-> right tool for almost every grouped question you will ever ask, and I want to be clear that
+> right tool for almost every grouped question you will ask, and I want to be clear that
 > nothing this afternoon replaces it.
 >
 > But it does one thing. One number per group, arithmetic only. If what you want per group is a
@@ -47,8 +58,8 @@ Say something close to this:
 
 ## Setup
 
-Rebuild the clean survey table. Students have this from 5A; paste it rather than retyping it
-line by line, and say so.
+Rebuild the clean survey table. Students have the cleaning code from 5A, so paste it rather than
+retyping it line by line, and say so.
 
 ```{python}
 import pandas as pd
@@ -71,7 +82,7 @@ survey = survey.rename(columns={'collection date': 'collection_date'})
 survey.shape
 ```
 
-## 1. What groupby is holding (3 min)
+## 1. What groupby is holding (2 min)
 
 Make the split object again and refuse to aggregate it, on purpose:
 
@@ -106,7 +117,7 @@ site_c.shape
 ```
 
 > That is a DataFrame. Forty-five rows, seven columns, all the same columns as `survey`. Hold on
-> to that, because it is the whole idea of the next section.
+> to the idea that one group is a whole DataFrame, because it is what the next section is built on.
 
 ## 2. Looping over the groups (5 min)
 
@@ -190,8 +201,7 @@ for name, group in grouped:
 Points to make:
 
 - `.idxmax()` and `.loc[]` are Wednesday's tools, unchanged
-- the answer here is a **date**, not a number, which is exactly what a grouped aggregation
-  cannot return you
+- the answer here is a **date**, not a number, and a grouped aggregation cannot return a date
 
 :::{.callout-tip title="If you are running behind"}
 Cut this second example. Section 4 matters more.
@@ -237,7 +247,7 @@ survey.groupby('site')['dissolved_oxygen_mg_L'].agg(['count', 'mean'])
 > Same table. Nine lines versus one. **Use the one line.** The loop is for when the thing you
 > want in each row is not something `.agg()` can compute.
 
-A dictionary instead of a list, since they will see both:
+A dictionary instead of a list, because they will see both:
 
 ```{python}
 means = {}
@@ -344,7 +354,7 @@ out of scope. If a student raises one, confirm it exists, point at the cheatshee
 The goal of these ten minutes is recognition, not fluency.
 :::
 
-## 7. Which one should I reach for? (3 min)
+## 7. Which one should I reach for? (5 min)
 
 Build this table on the board with the room, rather than showing it finished:
 
@@ -371,17 +381,17 @@ Close with the three questions:
 | Elapsed | You should be at |
 |---|---|
 | 0:02 | framing done, setup cell running |
-| 0:10 | end of section 2, the two-variable loop is on everyone's screen |
-| 0:18 | end of section 4, the `pd.DataFrame(records)` payoff |
-| 0:23 | end of section 5, first prediction drill done |
-| 0:28 | end of section 7 |
-| 0:28+ | questions, and the trailing exercise below if there is appetite |
+| 0:09 | end of section 2, the two-variable loop is on everyone's screen |
+| 0:17 | end of section 4, the `pd.DataFrame(records)` payoff |
+| 0:22 | end of section 5, first prediction drill done |
+| 0:32 | end of section 7 |
+| 0:32+ | questions, and the trailing exercise below if there is appetite |
 
 **If you are at 0:20 and not yet at section 5**, cut section 3's second example and the
-dictionary at the end of section 4. Sections 5 and 6 are the ones with a promise attached to
-them, and they cannot be the ones you drop.
+dictionary at the end of section 4. Sections 5 and 6 are the ones we promised the room on
+Tuesday, so they cannot be the ones you drop.
 
-**If you finish at 0:22**, ask the room to write the loop from section 3 for a different
+**If you finish before 0:32**, ask the room to write the loop from section 3 for a different
 threshold, or to predict `{name: group['pH'].max() for name, group in grouped}` before you run
 it.
 

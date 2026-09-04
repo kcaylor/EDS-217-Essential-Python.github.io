@@ -446,16 +446,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>A book far too large to read by eye.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
 </div>
-<p>Six sites and six means is a table you can read by eye. Most groupings are not six.</p>
-<p>This session takes the pattern you just learned and puts it under load. You will ask for several summaries in one call instead of one, ask for different summaries of different columns, rank a grouped result the way you ranked a raw table on Wednesday, and meet what happens when you group by two things at once.</p>
-<p>The data is one you have already interrogated: the National Park Service visitor records from Wednesday’s colab. You ranked individual park-years then. Today you rank parks.</p>
+<p>Six sites and six means is a table you can read by eye. Most groupings are much bigger than six, and most questions want more than one summary of each group.</p>
+<p>This morning we take the pattern you just learned and put it under load. You will ask for several summaries in one call instead of one, ask for different summaries of different columns, rank a grouped result the way you ranked a raw table on Wednesday, and meet what happens when you group by two things at once.</p>
+<p>The data should look familiar: the National Park Service visitor records from Wednesday’s colab. On Wednesday you ranked individual park-years. This morning we will rank whole parks.</p>
 <p>By the end of this session you will be able to:</p>
 <ul>
 <li>pass a <strong>list</strong> to <code>.agg()</code> to get several summaries of one column</li>
 <li>pass a <strong>dictionary</strong> to <code>.agg()</code> to summarise several columns differently</li>
 <li>apply the <strong>top-N pattern</strong> to a grouped result</li>
 <li>recognize a <strong>MultiIndex</strong> produced by grouping on two keys, and flatten it with <code>.reset_index()</code></li>
-<li>say why a grouped mean without a count next to it is a number you should not publish</li>
+<li>explain why a grouped mean should always be reported with the count it was computed from</li>
 </ul>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
@@ -471,9 +471,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Date: 09/04/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="4" type="1">
 <li><p><strong>Save</strong> with <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), and keep saving as you go.</p></li>
-<li><p>Read the visitor records and rebuild the two subsets you made on Wednesday: the rows that describe a real year, and the rows that describe a National Park.</p></li>
+<li><p>Read the visitor records and rebuild two subsets from Wednesday, this time applied one after the other: keep the rows that describe a real year, and from those keep the rows that describe a National Park. Note the order: Wednesday’s <code>national_parks</code> was taken from the whole file, so it still had the <code>Total</code> rows in it, while chaining the two filters here gives a smaller table under the same name.</p></li>
 </ol>
-<div id="37551f29" class="cell" data-execution_count="1">
+<div id="7c67314e" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -490,12 +490,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>(4682, 12)</code></pre>
 </div>
 </div>
-<p>4,682 rows. Each one is a single park in a single year, running from 1904 to 2016, and there are 61 distinct parks in there.</p>
+<p>4,682 rows. Each one is a single park in a single year, running from 1904 to 2016, and there are 61 distinct parks in there. If you get a different number, check that both filters ran, and ask Cella or Kelly if you cannot find the difference.</p>
 </section>
 <section id="one-column-several-summaries" class="level2">
 <h2 class="anchored" data-anchor-id="one-column-several-summaries">One column, several summaries</h2>
 <p>Start with what you already know how to write:</p>
-<div id="3c655713" class="cell" data-execution_count="2">
+<div id="5556d280" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>national_parks.groupby(<span class="st">'region'</span>)[<span class="st">'visitors'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -513,7 +513,7 @@ Name: visitors, dtype: float64</code></pre>
 </div>
 </div>
 <p>Seven regions, seven means. And now the question that should be a reflex by the end of today: how many rows went into each of those?</p>
-<div id="e8f9b333" class="cell" data-execution_count="3">
+<div id="9cd980b5" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>national_parks.groupby(<span class="st">'region'</span>)[<span class="st">'visitors'</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -530,8 +530,8 @@ SE     453
 Name: visitors, dtype: int64</code></pre>
 </div>
 </div>
-<p>Two calls, two Series, and you are already reading across them by eye and hoping you have lined them up correctly. <code>.agg()</code> fixes that. Give it a <strong>list</strong> of aggregation names and it runs all of them on the same grouping and puts the answers side by side:</p>
-<div id="66f42ba9" class="cell" data-execution_count="4">
+<p>Two calls, two Series, and you are already reading across them by eye and hoping you have lined them up correctly. <code>.agg()</code> removes the eye-matching. Give it a <strong>list</strong> of aggregation names and it runs all of them on the same grouping and puts the answers side by side:</p>
+<div id="b80f06da" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>national_parks.groupby(<span class="st">'region'</span>)[<span class="st">'visitors'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>, <span class="st">'max'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -604,7 +604,7 @@ Name: visitors, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<p>That is a DataFrame, not a Series. One row per group, one column per thing you asked for, and the group labels are the index.</p>
+<p>The result is a DataFrame rather than a Series: one row per group, one column per thing you asked for, and the group labels as the index.</p>
 <p>The names in the list are strings, and they are the same names you would have called as methods: <code>'count'</code>, <code>'mean'</code>, <code>'sum'</code>, <code>'min'</code>, <code>'max'</code>, <code>'median'</code>, <code>'std'</code>, <code>'nunique'</code>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -616,15 +616,15 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 <code>.agg(['mean'])</code> with one name in the list gives you a DataFrame with one column. <code>.mean()</code> gives you a Series. Same numbers, different shape. Ask for the shape you want to work with next.</p>
+<p>🐍 <code>.agg(['mean'])</code> with one name in the list gives you a DataFrame with one column. <code>.mean()</code> gives you a Series. Same numbers, in a different kind of object. Ask for the one you want to work with next.</p>
 </div>
 </div>
 </section>
 <section id="the-reason-count-goes-first" class="level2">
 <h2 class="anchored" data-anchor-id="the-reason-count-goes-first">The reason <code>count</code> goes first</h2>
-<p>Look at that table again. <code>NE</code> has the highest mean of any region by a wide margin, more than 1.6 million visitors. If you were writing a report about which region of the park system draws the crowds, <code>NE</code> is your headline.</p>
+<p>Look again at the table of counts and means. <code>NE</code> has the highest mean of any region, a little over 1.6 million visitors, though <code>SE</code> is within three per cent of it. If you were writing a report about which region of the park system draws the crowds, <code>NE</code> is your headline.</p>
 <p>Now read the <code>count</code> column. <code>NE</code> has 179 rows out of 4,682. Ask how many <em>parks</em> that is:</p>
-<div id="a87ae287" class="cell" data-execution_count="5">
+<div id="c4f9d367" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>national_parks.groupby(<span class="st">'region'</span>)[<span class="st">'unit_name'</span>].nunique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -641,8 +641,8 @@ SE     7
 Name: unit_name, dtype: int64</code></pre>
 </div>
 </div>
-<p>Two. The entire Northeast region contains two national parks, Acadia and Shenandoah, and both of them are unusually busy. The mean is not wrong. It is just not a statement about a region, it is a statement about two parks that happen to share a region code.</p>
-<p><code>NC</code> is worse: one park, 46 rows, and a mean printed to the same number of decimal places as a mean computed from 1,590.</p>
+<p>Two. The entire Northeast region contains two national parks, Acadia and Shenandoah, and both of them are busy ones. The mean is not wrong, but it is a statement about two parks that happen to share a region code rather than a statement about a region.</p>
+<p><code>NC</code> is worse: one park and 46 rows, and its mean prints in exactly the same format as <code>IM</code>’s, whose mean is computed from 1,590 rows.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="A mean is a summary of a count you did not print">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -653,7 +653,7 @@ A mean is a summary of a count you did not print
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Every grouped mean is really two numbers, and pandas shows you one of them. The habit that will save you the most public embarrassment in your career is small: <strong>put <code>'count'</code> first in every <code>.agg()</code> list you write</strong>, and read it before you read anything else.</p>
+<p>Every grouped mean is really two numbers, and pandas prints only one of them. The habit that fixes it is a small one: <strong>put <code>'count'</code> first in every <code>.agg()</code> list you write</strong>, and read it before you read anything else.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
@@ -674,7 +674,7 @@ A mean is a summary of a count you did not print
 <h2 class="anchored" data-anchor-id="several-columns-summarised-differently">Several columns, summarised differently</h2>
 <p>The list form runs the same summaries on one column. Often you want something else: the mean of this column, the sum of that one, the number of distinct values in a third.</p>
 <p>For that, <code>.agg()</code> takes a <strong>dictionary</strong>. The keys are column names and the values are what to do with each:</p>
-<div id="52f1930a" class="cell" data-execution_count="6">
+<div id="2e9037c9" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>national_parks.groupby(<span class="st">'region'</span>).agg({</span>
@@ -751,13 +751,13 @@ A mean is a summary of a count you did not print
 </div>
 </div>
 </div>
-<p>Read that as three separate instructions applied to the same split: average the visitors, count the distinct park names, and find the earliest year of record.</p>
+<p>Read the dictionary as three instructions applied to the same split: average the visitors, count the distinct park names, and find the earliest year of record.</p>
 <p>Two things changed from the list form, and both follow from what a dictionary is:</p>
 <ul>
 <li>there is <strong>no <code>['column']</code></strong> before <code>.agg()</code>. The keys of the dictionary say which columns, so naming a column beforehand would be saying it twice.</li>
 <li>the result has <strong>one column per key</strong>, named after the key.</li>
 </ul>
-<p>This is the same dictionary you have been writing since Day 2. You used one to rename columns in <code>.rename(columns={...})</code>. Same syntax, same idea: a mapping from a name to what should happen to it.</p>
+<p>The dictionary here is the same kind you have been writing since Day 2. You used one to rename columns in <code>.rename(columns={...})</code>. Same syntax, same idea: a mapping from a name to what should happen to it.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -769,7 +769,7 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>🐍 A dictionary value can also be a <strong>list</strong>, which combines both forms:</p>
-<div id="f74298fb" class="cell" data-execution_count="7">
+<div id="cbd8a17e" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>national_parks.groupby(<span class="st">'region'</span>).agg({</span>
@@ -850,7 +850,7 @@ Note
 </div>
 </div>
 </div>
-<p>The column headings stack into two rows when you do this, which is a shape that gets awkward fast. It is worth being able to read. Reach for it sparingly.</p>
+<p>The column headings stack into two rows when you do this, which gets awkward fast. It is worth being able to read one when you meet it. Reach for it sparingly.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
@@ -872,8 +872,8 @@ Note
 <p>On Wednesday afternoon you learned the top-N pattern:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You wrote it against raw tables. A grouped result is a table too, so the pattern works there without modification, and the combination answers a question the raw table could not.</p>
-<p>Wednesday’s ranking found the single busiest <strong>park-year</strong>. This finds the busiest <strong>park</strong>:</p>
-<div id="5571851d" class="cell" data-execution_count="8">
+<p>Wednesday’s ranking found the single busiest <strong>park-year</strong>. Grouping first finds the busiest <strong>park</strong>:</p>
+<div id="17a12143" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>national_parks.groupby(<span class="st">'unit_name'</span>)[<span class="st">'visitors'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -893,10 +893,10 @@ Yellowstone National Park              1.549028e+06
 Name: visitors, dtype: float64</code></pre>
 </div>
 </div>
-<p>Read that left to right and it is four instructions, two from today and two from Wednesday: group by park, average the visitors, put the averages in order, take the front.</p>
-<p>Great Smoky Mountains averages nearly three times the Grand Canyon over its record, which is not what most people would guess. It is free to enter and it straddles a major road, and it has been the busiest unit in the system for most of a century.</p>
+<p>Read the line left to right and it is four instructions, two from this morning and two from Wednesday: group by park, average the visitors, put the averages in order, and keep the top ten.</p>
+<p>Great Smoky Mountains averages nearly three times the Grand Canyon over its record. It is free to enter and it straddles a major road, and it has been the busiest <strong>national park</strong> in most years since its record began in 1931. The busiest unit of any kind is usually the Blue Ridge Parkway, which is a road.</p>
 <p>The same pattern run the other way gives the quietest parks:</p>
-<div id="639dc56b" class="cell" data-execution_count="9">
+<div id="a1304010" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>national_parks.groupby(<span class="st">'unit_name'</span>)[<span class="st">'visitors'</span>].mean().sort_values().head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -912,7 +912,7 @@ Name: visitors, dtype: float64</code></pre>
 </div>
 </div>
 <p>When the grouped result is a DataFrame rather than a Series, <code>.sort_values()</code> needs to be told which column to sort on, exactly as it does on a raw table:</p>
-<div id="dc49c336" class="cell" data-execution_count="10">
+<div id="13051927" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>park_stats <span class="op">=</span> national_parks.groupby(<span class="st">'unit_name'</span>)[<span class="st">'visitors'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>, <span class="st">'max'</span>])</span>
@@ -1005,7 +1005,7 @@ Name: visitors, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p>Now the count is right there next to the mean while you read the ranking, which is the whole argument of the previous section arriving as a habit instead of a warning.</p>
+<p>Now the count sits next to the mean while you read the ranking, so you can see how much record each average is built on without running a second call.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Averaging across unequal records">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1016,8 +1016,8 @@ Averaging across unequal records
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>count</code> in that table is the number of <strong>years</strong> each park has been reporting, and it ranges from 13 to over 100. Cuyahoga Valley’s average is computed from 39 years, all of them recent. Yellowstone’s is computed from 113, most of them before mass car ownership.</p>
-<p>Ranking parks by their all-time average is therefore partly a ranking of <em>when each park existed</em>. This is not a flaw in your code. It is a question you have to answer before your ranking means anything, and the honest fix is usually to filter to a common set of years first, then group.</p>
+<p><code>count</code> in that table is the number of <strong>years</strong> each park has been reporting, and it ranges from 13 to 113. Cuyahoga Valley’s average is computed from 39 years, all of them recent. Yellowstone’s is computed from 113 years, reaching back to 1904, so about two decades of its record come from before mass car ownership. Cuyahoga Valley’s record does not reach back that far at all.</p>
+<p>Ranking parks by their all-time average is therefore partly a ranking of <em>when each park existed</em>. The imbalance is not a flaw in your code. It is a question you have to answer before your ranking means anything, and the usual fix is to filter to a common set of years first, and then group.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
@@ -1030,14 +1030,14 @@ Averaging across unequal records
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Filter <code>national_parks</code> to the single year <code>'2016'</code>, then group by <code>state</code> and use <code>.agg()</code> to report the count and mean of <code>visitors</code>. Rank the result by mean. Compare your top three with the all-time ranking above. Did anything move? Say in one sentence which of the two rankings you would put in front of a park superintendent, and why.</p>
+<p>Filter <code>national_parks</code> to the single year <code>'2016'</code>, then group by <code>state</code> and use <code>.agg()</code> to report the count and mean of <code>visitors</code>. Rank the result by mean. Compare your top three states with the all-time ranking by state you built in the earlier exercise, the one that asked for count, mean and max. Did anything move? Say in one sentence which of the two rankings you would put in front of a park superintendent, and why.</p>
 </div>
 </div>
 </section>
 <section id="grouping-by-two-keys" class="level2">
 <h2 class="anchored" data-anchor-id="grouping-by-two-keys">Grouping by two keys</h2>
 <p>Everything so far has split the table by one column. <code>.groupby()</code> will take a <strong>list</strong> of columns and split by all of them together, making one group per combination that actually occurs:</p>
-<div id="aa64225e" class="cell" data-execution_count="11">
+<div id="d7ab6eda" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>national_parks.groupby([<span class="st">'region'</span>, <span class="st">'state'</span>])[<span class="st">'visitors'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1075,9 +1075,9 @@ SE      FL       3.961249e+05
 Name: visitors, dtype: float64</code></pre>
 </div>
 </div>
-<p>Twenty-eight groups, because most states hold parks in only one region. Look at the left-hand side of that output: there are two levels of labels, and the outer one is not repeated on every row. That is a <strong>MultiIndex</strong>, an index made of more than one column.</p>
-<p>A MultiIndex is genuinely useful and it is also the single most common reason a beginner’s pandas code stops working, because everything you know about selecting from an index now needs a tuple:</p>
-<div id="ee77b70d" class="cell" data-execution_count="12">
+<p>Twenty-eight groups, because most states have parks in only one region. Look at the left-hand side of the output: there are two levels of labels, and the outer one is not repeated on every row. The two-level index is a <strong>MultiIndex</strong>, an index made of more than one column.</p>
+<p>A MultiIndex is genuinely useful, and it is also a common reason that pandas code stops working, because everything you know about selecting from an index now needs a tuple:</p>
+<div id="215b38c5" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>two_key <span class="op">=</span> national_parks.groupby([<span class="st">'region'</span>, <span class="st">'state'</span>])[<span class="st">'visitors'</span>].mean()</span>
@@ -1088,8 +1088,8 @@ Name: visitors, dtype: float64</code></pre>
 <pre><code>np.float64(1606659.343283582)</code></pre>
 </div>
 </div>
-<p>You are not expected to become fluent in this. You are expected to <strong>recognize it and get out of it</strong>, and the way out is one method:</p>
-<div id="a9668c08" class="cell" data-execution_count="13">
+<p>You are not expected to become fluent with a MultiIndex this week. You should be able to <strong>recognize one and get out of it</strong>, and the way out is a single method:</p>
+<div id="1e0573c9" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>flat <span class="op">=</span> two_key.reset_index()</span>
@@ -1145,8 +1145,8 @@ Name: visitors, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p><code>.reset_index()</code> takes the index levels and turns them back into ordinary columns. What comes back is a plain DataFrame with three columns, and every single thing you have learned this week works on it again:</p>
-<div id="89ea7594" class="cell" data-execution_count="14">
+<p><code>.reset_index()</code> takes the index levels and turns them back into ordinary columns. The result is a plain DataFrame with three columns, and everything you have learned this week works on it again:</p>
+<div id="a2a7bab6" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>flat.sort_values(<span class="st">'visitors'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1201,7 +1201,7 @@ Name: visitors, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="89ca8244" class="cell" data-execution_count="15">
+<div id="44fc4733" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>flat[flat[<span class="st">'region'</span>] <span class="op">==</span> <span class="st">'PW'</span>].sort_values(<span class="st">'visitors'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1273,7 +1273,7 @@ Name: visitors, dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>Whenever a grouped result is going to be <strong>used</strong> rather than <strong>read</strong>. If you are filtering it, merging it, plotting it, or writing it to a file, flatten it first. If you are looking at it in a notebook cell and moving on, leave it alone.</p>
-<p><code>.reset_index()</code> also works on a single-key grouped result, and turns the Series into a two-column DataFrame. That is often exactly what you want before plotting.</p>
+<p><code>.reset_index()</code> also works on a single-key grouped result, and turns the Series into a two-column DataFrame, which is often exactly what you want before plotting.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
@@ -1286,17 +1286,17 @@ Name: visitors, dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Run <code>national_parks.groupby(['region', 'unit_name'])['visitors'].agg(['count', 'mean'])</code> and look at the shape of what comes back. Then call <code>.reset_index()</code> on it and use the top-N pattern to find the five busiest parks. Say in one sentence what <code>.reset_index()</code> changed.</p>
+<p>Run <code>national_parks.groupby(['region', 'unit_name'])['visitors'].agg(['count', 'mean'])</code> and look at what comes back. Then call <code>.reset_index()</code> on it and use the top-N pattern to find the five busiest parks. Say in one sentence what <code>.reset_index()</code> changed.</p>
 </div>
 </div>
 </section>
 <section id="putting-it-together" class="level2">
 <h2 class="anchored" data-anchor-id="putting-it-together">Putting it together</h2>
-<p>One question, answered properly, using every piece of today so far:</p>
+<p>One question, answered properly, using every piece of this morning so far:</p>
 <blockquote class="blockquote">
 <p>Which national parks in the Pacific West region have drawn the most visitors, and how much record is each average built on?</p>
 </blockquote>
-<div id="7f099649" class="cell" data-execution_count="16">
+<div id="225b3b48" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pacific_west <span class="op">=</span> national_parks[national_parks[<span class="st">'region'</span>] <span class="op">==</span> <span class="st">'PW'</span>]</span>
@@ -1391,7 +1391,7 @@ Name: visitors, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p>Filter, group, aggregate, rank. Four sentences, three of them learned earlier this week, and the answer is a table you would be willing to defend.</p>
+<p>Filter, group, aggregate, rank. Four steps, and only two of them are new this morning. The answer is a table you would be willing to defend.</p>
 </section>
 <section id="key-points" class="level2">
 <h2 class="anchored" data-anchor-id="key-points">Key points</h2>

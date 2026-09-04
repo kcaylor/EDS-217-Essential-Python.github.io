@@ -423,13 +423,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#framing-2-min" id="toc-framing-2-min" class="nav-link active" data-scroll-target="#framing-2-min">Framing (2 min)</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#what-groupby-is-holding-3-min" id="toc-what-groupby-is-holding-3-min" class="nav-link" data-scroll-target="#what-groupby-is-holding-3-min">1. What groupby is holding (3 min)</a></li>
+  <li><a href="#what-groupby-is-holding-2-min" id="toc-what-groupby-is-holding-2-min" class="nav-link" data-scroll-target="#what-groupby-is-holding-2-min">1. What groupby is holding (2 min)</a></li>
   <li><a href="#looping-over-the-groups-5-min" id="toc-looping-over-the-groups-5-min" class="nav-link" data-scroll-target="#looping-over-the-groups-5-min">2. Looping over the groups (5 min)</a></li>
   <li><a href="#one-group-is-a-dataframe-4-min" id="toc-one-group-is-a-dataframe-4-min" class="nav-link" data-scroll-target="#one-group-is-a-dataframe-4-min">3. One group is a DataFrame (4 min)</a></li>
   <li><a href="#building-something-up-as-you-go-4-min" id="toc-building-something-up-as-you-go-4-min" class="nav-link" data-scroll-target="#building-something-up-as-you-go-4-min">4. Building something up as you go (4 min)</a></li>
   <li><a href="#reading-a-list-comprehension-5-min" id="toc-reading-a-list-comprehension-5-min" class="nav-link" data-scroll-target="#reading-a-list-comprehension-5-min">5. Reading a list comprehension (5 min)</a></li>
   <li><a href="#comprehensions-you-will-meet-in-the-wild-5-min" id="toc-comprehensions-you-will-meet-in-the-wild-5-min" class="nav-link" data-scroll-target="#comprehensions-you-will-meet-in-the-wild-5-min">6. Comprehensions you will meet in the wild (5 min)</a></li>
-  <li><a href="#which-one-should-i-reach-for-3-min" id="toc-which-one-should-i-reach-for-3-min" class="nav-link" data-scroll-target="#which-one-should-i-reach-for-3-min">7. Which one should I reach for? (3 min)</a></li>
+  <li><a href="#which-one-should-i-reach-for-5-min" id="toc-which-one-should-i-reach-for-5-min" class="nav-link" data-scroll-target="#which-one-should-i-reach-for-5-min">7. Which one should I reach for? (5 min)</a></li>
   <li><a href="#timing-checkpoints" id="toc-timing-checkpoints" class="nav-link" data-scroll-target="#timing-checkpoints">Timing checkpoints</a></li>
   <li><a href="#what-the-end-of-day-practice-needs-from-this-session" id="toc-what-the-end-of-day-practice-needs-from-this-session" class="nav-link" data-scroll-target="#what-the-end-of-day-practice-needs-from-this-session">What the end-of-day practice needs from this session</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
@@ -444,7 +444,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><em>Instructor run-through for Session 5D. Student-facing page: <a href="../../course-materials/live-coding/5d_loops_over_groups.html">5d_loops_over_groups.qmd</a>. Headings below match the markdown scaffold students set up, so everyone stays in the same place.</em></p>
-<p><strong>Total: 28 minutes of coding, 17 minutes of buffer and questions.</strong></p>
+<p><strong>Total: 32 minutes of coding, 13 minutes of buffer and questions.</strong></p>
+<p>The three blocks on the student page are these sections added up:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Student page block</th>
+<th>Sections</th>
+<th>Minutes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Looping over groups</td>
+<td>1, 2, 3, 4</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>Reading comprehensions</td>
+<td>5, 6</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>Choosing</td>
+<td>7</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>The student page lists those 30 minutes. The two framing minutes sit on top of them, which is why the coding total here is 32 rather than 30.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Scope discipline">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -455,9 +483,9 @@ Scope discipline
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This session teaches <strong>iteration over a groupby object</strong> at adapt level: students should be able to modify a <code>for name, group in grouped:</code> loop, not design one from nothing. The end-of-day practice does not require a loop.</p>
+<p>Session 5D teaches <strong>iteration over a groupby object</strong> at adapt level: students should be able to modify a <code>for name, group in grouped:</code> loop, not design one from nothing. The end-of-day practice does not require a loop.</p>
 <p>Comprehensions are <strong>read only</strong>. Sections 5 and 6 are a prediction exercise. Do not set an exercise that asks a student to write one, do not use one in an answer key, and if a student writes one unprompted, say it is correct and move on rather than teaching the syntax to the room.</p>
-<p>This session teaches <strong>no new aggregation</strong>. Everything numeric here was taught this morning.</p>
+<p>There is <strong>no new aggregation</strong> in this session. Everything numeric here was taught this morning.</p>
 <p>Do not use <code>lambda</code> anywhere. It is not in this course.</p>
 </div>
 </div>
@@ -465,15 +493,15 @@ Scope discipline
 <h2 class="anchored" data-anchor-id="framing-2-min">Framing (2 min)</h2>
 <p>Say something close to this:</p>
 <blockquote class="blockquote">
-<p>This morning you learned a pattern that turns six piles of rows into six numbers. It is the right tool for almost every grouped question you will ever ask, and I want to be clear that nothing this afternoon replaces it.</p>
+<p>This morning you learned a pattern that turns six piles of rows into six numbers. It is the right tool for almost every grouped question you will ask, and I want to be clear that nothing this afternoon replaces it.</p>
 <p>But it does one thing. One number per group, arithmetic only. If what you want per group is a line of text, or a file, or a plot, or a yes-or-no check, the pattern cannot help you and you have to open the groups up and walk through them.</p>
 <p>The good news is that you already know how. You wrote your first <code>for</code> loop on Tuesday.</p>
 </blockquote>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>Rebuild the clean survey table. Students have this from 5A; paste it rather than retyping it line by line, and say so.</p>
-<div id="1239b882" class="cell" data-execution_count="1">
+<p>Rebuild the clean survey table. Students have the cleaning code from 5A, so paste it rather than retyping it line by line, and say so.</p>
+<div id="d939b9f2" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -500,23 +528,23 @@ Scope discipline
 </div>
 </div>
 </section>
-<section id="what-groupby-is-holding-3-min" class="level2">
-<h2 class="anchored" data-anchor-id="what-groupby-is-holding-3-min">1. What groupby is holding (3 min)</h2>
+<section id="what-groupby-is-holding-2-min" class="level2">
+<h2 class="anchored" data-anchor-id="what-groupby-is-holding-2-min">1. What groupby is holding (2 min)</h2>
 <p>Make the split object again and refuse to aggregate it, on purpose:</p>
-<div id="961223d2" class="cell" data-execution_count="2">
+<div id="e3172507" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>grouped <span class="op">=</span> survey.groupby(<span class="st">'site'</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>grouped</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x11a8a0490&gt;</code></pre>
+<pre><code>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x1166b7490&gt;</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
 <p>This morning we said this object is holding six piles of rows and waiting. Let us actually look at the piles.</p>
 </blockquote>
-<div id="7ca05036" class="cell" data-execution_count="3">
+<div id="a4b9e78e" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>grouped.ngroups</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -525,7 +553,7 @@ Scope discipline
 <pre><code>6</code></pre>
 </div>
 </div>
-<div id="e8c8ab7f" class="cell" data-execution_count="4">
+<div id="582dac4f" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(grouped.groups.keys())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -541,7 +569,7 @@ Scope discipline
 <li>Say out loud: the split has already been done. It is sitting there.</li>
 </ul>
 <p>Pull one pile out by name:</p>
-<div id="27141dc7" class="cell" data-execution_count="5">
+<div id="5a981eec" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>site_c <span class="op">=</span> grouped.get_group(<span class="st">'site_c'</span>)</span>
@@ -552,13 +580,13 @@ Scope discipline
 </div>
 </div>
 <blockquote class="blockquote">
-<p>That is a DataFrame. Forty-five rows, seven columns, all the same columns as <code>survey</code>. Hold on to that, because it is the whole idea of the next section.</p>
+<p>That is a DataFrame. Forty-five rows, seven columns, all the same columns as <code>survey</code>. Hold on to the idea that one group is a whole DataFrame, because it is what the next section is built on.</p>
 </blockquote>
 </section>
 <section id="looping-over-the-groups-5-min" class="level2">
 <h2 class="anchored" data-anchor-id="looping-over-the-groups-5-min">2. Looping over the groups (5 min)</h2>
 <p>The loop pattern. <strong>Write the two-variable version first and name both variables out loud</strong>, then run it:</p>
-<div id="d69b8518" class="cell" data-execution_count="6">
+<div id="c1c58634" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> grouped:</span>
@@ -581,7 +609,7 @@ site_f (43, 7)</code></pre>
 <li>the order is the sorted order of the keys, which is why <code>site_a</code> comes first</li>
 </ul>
 <p>Compare it directly to Tuesday’s loop over a list. Put both on the screen:</p>
-<div id="b91e2281" class="cell" data-execution_count="7">
+<div id="76b3aacf" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sites <span class="op">=</span> [<span class="st">'site_a'</span>, <span class="st">'site_b'</span>, <span class="st">'site_c'</span>]</span>
@@ -606,7 +634,7 @@ site_c</code></pre>
 </blockquote>
 <p>Ask them to guess why before you explain. With one variable, <code>group</code> catches the pair, not the DataFrame.</p>
 <p>Now something the pattern cannot do. A formatted report line per site:</p>
-<div id="211d995b" class="cell" data-execution_count="8">
+<div id="be349845" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> grouped:</span>
@@ -641,7 +669,7 @@ f-strings, if they ask
 <section id="one-group-is-a-dataframe-4-min" class="level2">
 <h2 class="anchored" data-anchor-id="one-group-is-a-dataframe-4-min">3. One group is a DataFrame (4 min)</h2>
 <p>Hammer the point from section 1. Inside the loop, <code>group</code> is a real DataFrame and <strong>every method you know works on it</strong>:</p>
-<div id="81871e21" class="cell" data-execution_count="9">
+<div id="6b07789e" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> grouped:</span>
@@ -661,7 +689,7 @@ site_f 43 of 43 samples above 20 C</code></pre>
 <p>That is the filter pattern from Wednesday, running inside a loop, six times. Nothing new. The loop just handed you a smaller table each time round.</p>
 </blockquote>
 <p>One more, to show it is not only filtering:</p>
-<div id="eb5012f5" class="cell" data-execution_count="10">
+<div id="2c7dd2a7" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> grouped:</span>
@@ -680,7 +708,7 @@ site_f warmest on 2025-09-02</code></pre>
 <p>Points to make:</p>
 <ul>
 <li><code>.idxmax()</code> and <code>.loc[]</code> are Wednesday’s tools, unchanged</li>
-<li>the answer here is a <strong>date</strong>, not a number, which is exactly what a grouped aggregation cannot return you</li>
+<li>the answer here is a <strong>date</strong>, not a number, and a grouped aggregation cannot return a date</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="If you are running behind">
 <div class="callout-header d-flex align-content-center">
@@ -700,7 +728,7 @@ If you are running behind
 <h2 class="anchored" data-anchor-id="building-something-up-as-you-go-4-min">4. Building something up as you go (4 min)</h2>
 <p>The other reason to loop: you want to <strong>collect</strong> results rather than print them.</p>
 <p>Start with the empty list from Tuesday and <code>.append()</code>:</p>
-<div id="fac5a1ed" class="cell" data-execution_count="11">
+<div id="8d94942c" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>records <span class="op">=</span> []</span>
@@ -722,7 +750,7 @@ If you are running behind
 <p>A list of dictionaries. Both containers from Tuesday, in one place, doing the thing they are for.</p>
 </blockquote>
 <p>And then the payoff, which lands well:</p>
-<div id="ab5170e9" class="cell" data-execution_count="12">
+<div id="e3521dc4" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(records)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -787,7 +815,7 @@ If you are running behind
 <p>That is a DataFrame you built yourself, row by row, out of Python containers. Day 2 you read one in from a file. Today you made one.</p>
 </blockquote>
 <p>Now the honest comparison. Put the one-liner underneath it:</p>
-<div id="1447bdd7" class="cell" data-execution_count="13">
+<div id="603ee0f5" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -849,8 +877,8 @@ If you are running behind
 <blockquote class="blockquote">
 <p>Same table. Nine lines versus one. <strong>Use the one line.</strong> The loop is for when the thing you want in each row is not something <code>.agg()</code> can compute.</p>
 </blockquote>
-<p>A dictionary instead of a list, since they will see both:</p>
-<div id="840364c0" class="cell" data-execution_count="14">
+<p>A dictionary instead of a list, because they will see both:</p>
+<div id="425cca85" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> {}</span>
@@ -877,7 +905,7 @@ If you are running behind
 <p>On Tuesday somebody asked about the square-bracket thing and I said we would read some on Friday. It is Friday. <strong>You are not going to write these.</strong> You are going to be able to look at one and say what it does, because they are everywhere.</p>
 </blockquote>
 <p>Start from a loop that builds a list, written the long way:</p>
-<div id="6643525f" class="cell" data-execution_count="15">
+<div id="7e93d30b" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>site_names <span class="op">=</span> []</span>
@@ -892,7 +920,7 @@ If you are running behind
 </div>
 </div>
 <p>Then the same thing, one line:</p>
-<div id="30bab994" class="cell" data-execution_count="16">
+<div id="9d4b85fb" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>site_names <span class="op">=</span> [name.upper() <span class="cf">for</span> name, group <span class="kw">in</span> grouped]</span>
@@ -906,7 +934,7 @@ If you are running behind
 <pre><code>[  what to keep     for  each thing  in  the collection  ]</code></pre>
 <p>Then read the line out loud in that order, pointing: <em>“<code>name.upper()</code>, for each name and group, in grouped.”</em> Say that the loop body moved to the <strong>front</strong>, and that is the only real difference.</p>
 <p>Do a plain one over a list so the groupby is not a distraction:</p>
-<div id="7fad40e9" class="cell" data-execution_count="17">
+<div id="45a72f87" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>temps_c <span class="op">=</span> [<span class="fl">12.1</span>, <span class="fl">18.4</span>, <span class="fl">21.9</span>, <span class="fl">7.2</span>]</span>
@@ -919,7 +947,7 @@ If you are running behind
 </div>
 </div>
 <p><strong>Prediction drill.</strong> Write this on the screen and get an answer from the room <em>before</em> running it:</p>
-<div id="7f4f5358" class="cell" data-execution_count="18">
+<div id="0eb78984" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>[<span class="bu">len</span>(s) <span class="cf">for</span> s <span class="kw">in</span> [<span class="st">'site_a'</span>, <span class="st">'bb'</span>, <span class="st">'c'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -934,7 +962,7 @@ If you are running behind
 <h2 class="anchored" data-anchor-id="comprehensions-you-will-meet-in-the-wild-5-min">6. Comprehensions you will meet in the wild (5 min)</h2>
 <p>Three patterns, read only, one prediction each.</p>
 <p><strong>A dictionary comprehension.</strong> Curly braces, and a <code>key: value</code> pair at the front:</p>
-<div id="7bd8ef52" class="cell" data-execution_count="19">
+<div id="5d1a4402" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>{name: <span class="bu">len</span>(group) <span class="cf">for</span> name, group <span class="kw">in</span> grouped}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -952,7 +980,7 @@ If you are running behind
 <p>Same six numbers as <code>.value_counts()</code>. Ask them which they would rather read.</p>
 </blockquote>
 <p><strong>A comprehension with a filter.</strong> The <code>if</code> goes at the <strong>end</strong>:</p>
-<div id="6f638e78" class="cell" data-execution_count="20">
+<div id="2d35fad6" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>[name <span class="cf">for</span> name, group <span class="kw">in</span> grouped <span class="cf">if</span> <span class="bu">len</span>(group) <span class="op">&gt;</span> <span class="dv">42</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -963,7 +991,7 @@ If you are running behind
 </div>
 <p>Predict first. Point at the counts from section 2 while they think.</p>
 <p><strong>A comprehension over a DataFrame column</strong>, which is the one they are most likely to meet in inherited code:</p>
-<div id="c61ec8f6" class="cell" data-execution_count="21">
+<div id="e026d1f7" class="cell" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>[c.upper() <span class="cf">for</span> c <span class="kw">in</span> survey.columns]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -979,7 +1007,7 @@ If you are running behind
 </div>
 </div>
 <p>Then, immediately, the pandas way to do the same job:</p>
-<div id="75e29ae4" class="cell" data-execution_count="22">
+<div id="ed967b48" class="cell" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>survey.columns.<span class="bu">str</span>.upper()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1007,8 +1035,8 @@ Do not go further than this
 </div>
 </div>
 </section>
-<section id="which-one-should-i-reach-for-3-min" class="level2">
-<h2 class="anchored" data-anchor-id="which-one-should-i-reach-for-3-min">7. Which one should I reach for? (3 min)</h2>
+<section id="which-one-should-i-reach-for-5-min" class="level2">
+<h2 class="anchored" data-anchor-id="which-one-should-i-reach-for-5-min">7. Which one should I reach for? (5 min)</h2>
 <p>Build this table on the board with the room, rather than showing it finished:</p>
 <table class="table-hover table-bordered caption-top table">
 <colgroup>
@@ -1069,29 +1097,29 @@ Do not go further than this
 <td>framing done, setup cell running</td>
 </tr>
 <tr class="even">
-<td>0:10</td>
+<td>0:09</td>
 <td>end of section 2, the two-variable loop is on everyone’s screen</td>
 </tr>
 <tr class="odd">
-<td>0:18</td>
+<td>0:17</td>
 <td>end of section 4, the <code>pd.DataFrame(records)</code> payoff</td>
 </tr>
 <tr class="even">
-<td>0:23</td>
+<td>0:22</td>
 <td>end of section 5, first prediction drill done</td>
 </tr>
 <tr class="odd">
-<td>0:28</td>
+<td>0:32</td>
 <td>end of section 7</td>
 </tr>
 <tr class="even">
-<td>0:28+</td>
+<td>0:32+</td>
 <td>questions, and the trailing exercise below if there is appetite</td>
 </tr>
 </tbody>
 </table>
-<p><strong>If you are at 0:20 and not yet at section 5</strong>, cut section 3’s second example and the dictionary at the end of section 4. Sections 5 and 6 are the ones with a promise attached to them, and they cannot be the ones you drop.</p>
-<p><strong>If you finish at 0:22</strong>, ask the room to write the loop from section 3 for a different threshold, or to predict <code>{name: group['pH'].max() for name, group in grouped}</code> before you run it.</p>
+<p><strong>If you are at 0:20 and not yet at section 5</strong>, cut section 3’s second example and the dictionary at the end of section 4. Sections 5 and 6 are the ones we promised the room on Tuesday, so they cannot be the ones you drop.</p>
+<p><strong>If you finish before 0:32</strong>, ask the room to write the loop from section 3 for a different threshold, or to predict <code>{name: group['pH'].max() for name, group in grouped}</code> before you run it.</p>
 </section>
 <section id="what-the-end-of-day-practice-needs-from-this-session" class="level2">
 <h2 class="anchored" data-anchor-id="what-the-end-of-day-practice-needs-from-this-session">What the end-of-day practice needs from this session</h2>

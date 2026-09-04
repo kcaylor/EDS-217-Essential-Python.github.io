@@ -308,9 +308,7 @@ acidic = survey[survey['ph_class'] == 'acidic']
 acidic['site'].value_counts()
 ```
 
-18. Two of the six sites account for nearly all the acidic samples. Take either one of those
-    two, and compare it against `site_d`, which is not one of them: filter to each in turn and
-    compare the mean of `dissolved_oxygen_mg_L`. (Two filters, two `.mean()` calls. Tomorrow you
+18. Two of the six sites account for nearly all the acidic samples. Take either one of those two, and compare it against `site_d`, which is not one of them: filter to each in turn and  compare the mean of `dissolved_oxygen_mg_L`. (Two filters, two `.mean()` calls. Tomorrow you
     will learn to do all six at once.)
 
 ```{python}
@@ -321,10 +319,7 @@ print('site_f mean DO:', site_f['dissolved_oxygen_mg_L'].mean())
 print('site_d mean DO:', site_d['dissolved_oxygen_mg_L'].mean())
 ```
 
-19. In a markdown cell of three or four sentences: **what would you tell the PI whose project
-    collected this data?** Name the single change to their field sheet that would have saved
-    you the most time this afternoon, and describe what evidence in the file makes you pick that
-    one.
+19. In a markdown cell of three or four sentences: **what would you tell the PI whose project collected this data?** Describe the single change to their field sheet that would have saved you the most time this afternoon, and describe what evidence in the file makes you pick that one.
 
 ## Wrap-up
 

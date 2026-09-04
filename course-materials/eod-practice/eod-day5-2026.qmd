@@ -26,12 +26,12 @@ one in Goleta, one in Santa Barbara, and one on the roof of the CNSI building on
 campus. Between the 10th of July and the 11th of August 2024 they recorded 4,942 hourly
 measurements of ozone and particulate matter.
 
-They are close enough together that they are breathing the same air. They are far enough apart,
-and different enough in what they measure, that comparing them is useful.
+The three stations are close enough together to be breathing the same air. They are far enough
+apart, and different enough in what they measure, that comparing them is useful.
 
 You have seen one of these files before. On Wednesday you filtered and ranked the Goleta station
-one parameter at a time. Today you have all three, and you have the pattern that lets you ask
-about all of them at once.
+one parameter at a time. Today you have all three stations, and you have the pattern that lets
+you ask about all of them at once.
 
 :::{.callout-note title="Reference"}
 OpenAQ, an open global air quality data platform. Data supplied to OpenAQ by AirNow.
@@ -52,7 +52,7 @@ df.groupby('key')['col'].agg(['count', 'mean'])    # several summaries at once
 df.groupby('key').agg({'a': 'mean', 'b': 'count'}) # different summaries, different columns
 ```
 
-And the one from Wednesday that does most of the work:
+And the pattern from Wednesday that does most of the work:
 
 ```python
 df.sort_values('column', ascending=False).head(n)  # the top-N pattern
@@ -80,7 +80,7 @@ after this block is Day 5 material, and you should recognize all of it.
 **Stacking the files.** The three stations are in three separate CSVs with identical columns.
 `pd.concat()` takes a list of DataFrames and stacks them into one, top to bottom. The `site`
 column does not exist in the files; you are adding it first, so that the stacked table still
-knows which rows came from where.
+records which rows came from where.
 
 ```python
 goleta['site'] = 'Goleta'
@@ -101,11 +101,11 @@ piece out of a list:
 aq['hour'] = aq['datetimeLocal'].str[11:13]
 ```
 
-The result is **text**, not a number: `'06'`, `'14'`. That turns out to be convenient, because
-zero-padded text sorts into the same order as the numbers would.
+The result is **text**, not a number: `'06'`, `'14'`. Text turns out to be convenient here,
+because zero-padded hours sort into the same order as the numbers would.
 
-**We cover joining tables and dates on Tuesday.** By the middle
-of next week you will write both of these yourself.
+**We cover joining tables and dates on Tuesday.** Next week you will write both the stacking and
+the hour extraction yourself.
 
 📖 [Cheatsheet: pandas DataFrames](../cheatsheets/pandas_dataframes.qmd) ·
 [Cheatsheet: time series](../cheatsheets/timeseries.qmd)
@@ -152,7 +152,7 @@ aq.groupby('site').agg({'value': 'count', 'parameter': 'nunique'})
 ```
 
 3. One of the three stations is not like the others. Name it, say what it does not do, and say
-   in one sentence what that means for any comparison you will make across all three.
+   in one sentence what that means for any comparison you will make across all three stations.
 
 ```{python}
 aq.groupby(['site', 'parameter'])['value'].count()
@@ -166,7 +166,7 @@ aq.groupby('parameter')['value'].count().sort_values(ascending=False)
 ```
 
 :::{.callout-important title="Before you go any further"}
-Run this and read it:
+Run the line below and read the output:
 
 ```{python}
 aq.groupby('parameter')['unit'].nunique()
@@ -174,7 +174,7 @@ aq.groupby('parameter')['unit'].nunique()
 
 Ozone is reported in parts per million and the two particulate measurements in micrograms per
 cubic metre. **Never group across the `parameter` column without filtering to one parameter
-first.** A mean of ozone and PM10 together is not a number (Wednesday's units problem).
+first.** A mean of ozone and PM10 together does not mean anything (Tuesday's units problem).
 :::
 
 ## Part 2: Compare the stations
@@ -194,7 +194,7 @@ pm25.shape
 pm25.groupby('site')['value'].mean().sort_values(ascending=False)
 ```
 
-7. Those three means are within half a microgram of each other. Before you decide that means
+7. The three site means are within half a microgram of each other. Before you decide that means
    anything, use `.agg()` with a list to report the **count, mean, min, max and standard
    deviation** of PM2.5 at each site in one call.
 
@@ -215,7 +215,8 @@ pm10.groupby('site')['value'].agg(['count', 'mean', 'max'])
 ```
 
 10. Use the filter pattern and the split-apply-combine pattern together: how many hours did
-    each site record a PM2.5 value above 12 µg/m³, the US annual standard?
+    each site record a PM2.5 value above 12 µg/m³, which was the US annual standard until it was
+    tightened to 9 in 2024?
 
 ```{python}
 pm25[pm25['value'] > 12].groupby('site')['value'].count()
@@ -258,8 +259,8 @@ print(clean_pm25.groupby('site')['value'].mean())
 
 ## Part 4: The question the day was for
 
-Everything so far has grouped by station. The interesting axis in this dataset is not where, it
-is **when**.
+Everything so far has grouped by station, which is a question about **where**. The rest of the
+practice groups by hour instead, which is a question about **when**.
 
 16. Build a table of just the ozone readings, ending the line with `.copy()`, and call it `o3`.
     Then group it by `hour` and report the count and mean of `value`, in hour order.
@@ -314,8 +315,8 @@ print(hourly_pm25.sort_values().head(5))
 In a single markdown cell of 200 to 300 words, answer:
 
 > The Santa Barbara County Air Pollution Control District is deciding whether to keep funding all
-> three of these monitors. They ask you: **does the third one tell us anything the other two do
-> not?** You have one month of data and one afternoon.
+> three of these monitors. They ask you: **does the third monitor tell us anything the other two
+> do not?** You have one month of data and one afternoon.
 
 Your answer must cite at least four specific numbers you computed here, must name at least one
 thing that is genuinely different about the CNSI station, and must include at least one thing
@@ -333,14 +334,14 @@ df.groupby('key').agg({...})                  # several columns, different summa
 df.groupby('key')['col'].mean().sort_values() # and then rank the groups
 ```
 
-What changed from cell to cell was not the grammar. It was the **key**. You grouped by `site`,
-by `parameter`, by both at once, and by `hour`, and each of those choices asked a different
-question of the same 4,942 rows.
+The grammar stayed the same from cell to cell, and only the **key** changed. You grouped by
+`site`, by `parameter`, by both at once, and by `hour`, and each of those choices asked a
+different question of the same 4,942 rows.
 
-That is worth stopping on. `site` was a column in the files. `parameter` was a column in the
-files. `hour` was not: you made it in the setup block, out of a string, and it turned out to hold
-the most interesting result of the practice. The best grouping key in a dataset is very often one
-that is not in it yet.
+The last column you grouped by is worth stopping on. `site` and `parameter` were both columns in
+the files. `hour` was not: you made it in the setup block, out of a string, and grouping by it is
+what gave you the daily ozone cycle in Part 4. A useful grouping key is very often one you have
+to build first.
 
 ## Wrap-up
 

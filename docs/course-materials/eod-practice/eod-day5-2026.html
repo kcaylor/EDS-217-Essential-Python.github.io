@@ -448,8 +448,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>A panda, counting things by the hour.</em> <a href="https://www.midjourney.com/jobs/d85ddded-9622-49fd-af6f-85fd9c726971?index=1">MidJourney 5</a></p>
 </div>
 <p>Three air quality monitors sit within about fifteen kilometres of each other on the South Coast: one in Goleta, one in Santa Barbara, and one on the roof of the CNSI building on the UCSB campus. Between the 10th of July and the 11th of August 2024 they recorded 4,942 hourly measurements of ozone and particulate matter.</p>
-<p>They are close enough together that they are breathing the same air. They are far enough apart, and different enough in what they measure, that comparing them is useful.</p>
-<p>You have seen one of these files before. On Wednesday you filtered and ranked the Goleta station one parameter at a time. Today you have all three, and you have the pattern that lets you ask about all of them at once.</p>
+<p>The three stations are close enough together to be breathing the same air. They are far enough apart, and different enough in what they measure, that comparing them is useful.</p>
+<p>You have seen one of these files before. On Wednesday you filtered and ranked the Goleta station one parameter at a time. Today you have all three stations, and you have the pattern that lets you ask about all of them at once.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -473,7 +473,7 @@ Reference
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>])    <span class="co"># several summaries at once</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>).agg({<span class="st">'a'</span>: <span class="st">'mean'</span>, <span class="st">'b'</span>: <span class="st">'count'</span>}) <span class="co"># different summaries, different columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>And the one from Wednesday that does most of the work:</p>
+<p>And the pattern from Wednesday that does most of the work:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)  <span class="co"># the top-N pattern</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="setup" class="level2">
@@ -499,7 +499,7 @@ Reference
 </div>
 <div class="callout-body-container callout-body">
 <p>Two lines here use tools you have not been taught. Both of them are <strong>setup</strong>. Everything after this block is Day 5 material, and you should recognize all of it.</p>
-<p><strong>Stacking the files.</strong> The three stations are in three separate CSVs with identical columns. <code>pd.concat()</code> takes a list of DataFrames and stacks them into one, top to bottom. The <code>site</code> column does not exist in the files; you are adding it first, so that the stacked table still knows which rows came from where.</p>
+<p><strong>Stacking the files.</strong> The three stations are in three separate CSVs with identical columns. <code>pd.concat()</code> takes a list of DataFrames and stacks them into one, top to bottom. The <code>site</code> column does not exist in the files; you are adding it first, so that the stacked table still records which rows came from where.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>goleta[<span class="st">'site'</span>] <span class="op">=</span> <span class="st">'Goleta'</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>santa_barbara[<span class="st">'site'</span>] <span class="op">=</span> <span class="st">'Santa Barbara'</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>cnsi[<span class="st">'site'</span>] <span class="op">=</span> <span class="st">'CNSI'</span></span>
@@ -508,12 +508,12 @@ Reference
 <p><code>ignore_index=True</code> renumbers the rows 0 to 4,941 instead of restarting at 0 three times.</p>
 <p><strong>Pulling the hour out.</strong> <code>datetimeLocal</code> is text that looks like <code>2024-07-11T18:00:00-07:00</code>. Counting from zero, characters 11 and 12 are the hour. Square brackets on <code>.str</code> slice out a piece of every string in the column, the same way they slice a piece out of a list:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>aq[<span class="st">'hour'</span>] <span class="op">=</span> aq[<span class="st">'datetimeLocal'</span>].<span class="bu">str</span>[<span class="dv">11</span>:<span class="dv">13</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The result is <strong>text</strong>, not a number: <code>'06'</code>, <code>'14'</code>. That turns out to be convenient, because zero-padded text sorts into the same order as the numbers would.</p>
-<p><strong>We cover joining tables and dates on Tuesday.</strong> By the middle of next week you will write both of these yourself.</p>
+<p>The result is <strong>text</strong>, not a number: <code>'06'</code>, <code>'14'</code>. Text turns out to be convenient here, because zero-padded hours sort into the same order as the numbers would.</p>
+<p><strong>We cover joining tables and dates on Tuesday.</strong> Next week you will write both the stacking and the hour extraction yourself.</p>
 <p>📖 <a href="../../course-materials/cheatsheets/pandas_dataframes.html">Cheatsheet: pandas DataFrames</a> · <a href="../../course-materials/cheatsheets/timeseries.html">Cheatsheet: time series</a></p>
 </div>
 </div>
-<div id="aa5e6246" class="cell" data-execution_count="1">
+<div id="1d7ac1de" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -544,7 +544,7 @@ Reference
 <ol type="1">
 <li><p>How many readings came from each site?</p></li>
 <li><p>How many distinct parameters does each site measure? Use the <strong>dictionary</strong> form of <code>.agg()</code> to report the reading count and the parameter count side by side.</p></li>
-<li><p>One of the three stations is not like the others. Name it, say what it does not do, and say in one sentence what that means for any comparison you will make across all three.</p></li>
+<li><p>One of the three stations is not like the others. Name it, say what it does not do, and say in one sentence what that means for any comparison you will make across all three stations.</p></li>
 <li><p>How many readings of each parameter are there across the whole table? Which parameter is the best measured? Which is the worst?</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Before you go any further">
@@ -557,8 +557,8 @@ Before you go any further
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Run this and read it:</p>
-<p>Ozone is reported in parts per million and the two particulate measurements in micrograms per cubic metre. <strong>Never group across the <code>parameter</code> column without filtering to one parameter first.</strong> A mean of ozone and PM10 together is not a number (Wednesday’s units problem).</p>
+<p>Run the line below and read the output:</p>
+<p>Ozone is reported in parts per million and the two particulate measurements in micrograms per cubic metre. <strong>Never group across the <code>parameter</code> column without filtering to one parameter first.</strong> A mean of ozone and PM10 together does not mean anything (Tuesday’s units problem).</p>
 </div>
 </div>
 </section>
@@ -567,10 +567,10 @@ Before you go any further
 <ol start="5" type="1">
 <li><p>Build a table of just the PM2.5 readings, ending the line with <code>.copy()</code>, and call it <code>pm25</code>. How many rows?</p></li>
 <li><p>Which site has the highest mean PM2.5? Write the split-apply-combine pattern, then rank the result.</p></li>
-<li><p>Those three means are within half a microgram of each other. Before you decide that means anything, use <code>.agg()</code> with a list to report the <strong>count, mean, min, max and standard deviation</strong> of PM2.5 at each site in one call.</p></li>
+<li><p>The three site means are within half a microgram of each other. Before you decide that means anything, use <code>.agg()</code> with a list to report the <strong>count, mean, min, max and standard deviation</strong> of PM2.5 at each site in one call.</p></li>
 <li><p>In a markdown cell: The means are nearly identical and the maxima are not. What is different about these three stations, and which of the five columns in your table told you? Would you describe the South Coast as having one air quality or three?</p></li>
 <li><p>Now do the same for PM10. Which site is higher, and by how much? Note which site is missing from your answer and why.</p></li>
-<li><p>Use the filter pattern and the split-apply-combine pattern together: how many hours did each site record a PM2.5 value above 12 µg/m³, the US annual standard?</p></li>
+<li><p>Use the filter pattern and the split-apply-combine pattern together: how many hours did each site record a PM2.5 value above 12 µg/m³, which was the US annual standard until it was tightened to 9 in 2024?</p></li>
 <li><p>In a markdown cell: your answer to question 10 has a site missing from it entirely. Is that because the air there was clean, or for another reason? Look back at your answer to question</p>
 <ol start="7" type="1">
 <li></li>
@@ -588,7 +588,7 @@ Before you go any further
 </section>
 <section id="part-4-the-question-the-day-was-for" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-the-question-the-day-was-for">Part 4: The question the day was for</h2>
-<p>Everything so far has grouped by station. The interesting axis in this dataset is not where, it is <strong>when</strong>.</p>
+<p>Everything so far has grouped by station, which is a question about <strong>where</strong>. The rest of the practice groups by hour instead, which is a question about <strong>when</strong>.</p>
 <ol start="16" type="1">
 <li><p>Build a table of just the ozone readings, ending the line with <code>.copy()</code>, and call it <code>o3</code>. Then group it by <code>hour</code> and report the count and mean of <code>value</code>, in hour order.</p></li>
 <li><p>Read the <code>count</code> column first. Twenty-two of the twenty-four hours have about the same number of readings and two do not. Which two, and what does that tell you about how much weight to put on their means?</p></li>
@@ -603,7 +603,7 @@ Before you go any further
 <h2 class="anchored" data-anchor-id="part-5-write-it-up">Part 5: Write it up</h2>
 <p>In a single markdown cell of 200 to 300 words, answer:</p>
 <blockquote class="blockquote">
-<p>The Santa Barbara County Air Pollution Control District is deciding whether to keep funding all three of these monitors. They ask you: <strong>does the third one tell us anything the other two do not?</strong> You have one month of data and one afternoon.</p>
+<p>The Santa Barbara County Air Pollution Control District is deciding whether to keep funding all three of these monitors. They ask you: <strong>does the third monitor tell us anything the other two do not?</strong> You have one month of data and one afternoon.</p>
 </blockquote>
 <p>Your answer must cite at least four specific numbers you computed here, must name at least one thing that is genuinely different about the CNSI station, and must include at least one thing this month of data cannot tell them. Use complete sentences.</p>
 </section>
@@ -614,8 +614,8 @@ Before you go any further
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].agg([...])           <span class="co"># several numbers per group</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>).agg({...})                  <span class="co"># several columns, different summaries</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].mean().sort_values() <span class="co"># and then rank the groups</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>What changed from cell to cell was not the grammar. It was the <strong>key</strong>. You grouped by <code>site</code>, by <code>parameter</code>, by both at once, and by <code>hour</code>, and each of those choices asked a different question of the same 4,942 rows.</p>
-<p>That is worth stopping on. <code>site</code> was a column in the files. <code>parameter</code> was a column in the files. <code>hour</code> was not: you made it in the setup block, out of a string, and it turned out to hold the most interesting result of the practice. The best grouping key in a dataset is very often one that is not in it yet.</p>
+<p>The grammar stayed the same from cell to cell, and only the <strong>key</strong> changed. You grouped by <code>site</code>, by <code>parameter</code>, by both at once, and by <code>hour</code>, and each of those choices asked a different question of the same 4,942 rows.</p>
+<p>The last column you grouped by is worth stopping on. <code>site</code> and <code>parameter</code> were both columns in the files. <code>hour</code> was not: you made it in the setup block, out of a string, and grouping by it is what gave you the daily ozone cycle in Part 4. A useful grouping key is very often one you have to build first.</p>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>

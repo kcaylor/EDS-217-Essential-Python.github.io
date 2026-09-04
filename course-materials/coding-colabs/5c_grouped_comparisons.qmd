@@ -16,19 +16,22 @@ format:
 ![](../images/panda.jpeg)
 :::
 
-Yesterday you were asked to determine the varying distribution of plastic in the Pacific and the Atlantic. You
+Yesterday we asked you to determine the varying distribution of plastic in the Pacific and the Atlantic. You
 built two tables with two filters, ran `.describe()` on each, and then wrote a paragraph to an
 imaginary journalist.
 
-You gave them an answer about two oceans because two was all you were asked to examine. However, there are four
-oceans in that file, thirty-seven contributing studies, and ten different kinds of nets!
+You gave them an answer about two oceans because two oceans were all we asked about. However, there are four
+oceans in the file, thirty-seven contributing studies, and a dozen different ways of taking a
+sample, only four of which are nets!
 
-This afternoon you will go back into this dataset and do a more comprehensive analysis. Somewhere around question 9, the answer you sent the journalist will start to look... shaky.
+This afternoon you will go back into the microplastics data and do a more comprehensive analysis: all four
+oceans in one line instead of two filters, and then a look at whether the sampling methods behind
+those four numbers are comparable enough to put them side by side.
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
-finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it. 
+finish a numbered task. The person not typing should read the code through (quietly!) and explain what it should produce or calculate before you run it.
 
-You have 45 minutes.
+We have about 45 minutes for this activity, so please let Cella or Kelly know if you are getting stuck!
 
 ## The patterns you need
 
@@ -40,7 +43,7 @@ df.groupby('key')['column'].agg(['count', 'mean'])   # several summaries at once
 df.groupby('key').agg({'a': 'mean', 'b': 'count'})   # different summaries, different columns
 ```
 
-In addition, you will also need the top-N pattern from Wednesday:
+You will also need the top-N pattern from Wednesday:
 
 ```python
 df.sort_values('column', ascending=False).head(n)
@@ -70,7 +73,7 @@ positive = samples[samples['Measurement'] > 0].copy()
 positive.shape
 ```
 
-7,091 water samples with a measured, non-zero concentration of
+You should end up with 7,091 water samples, each with a measured, non-zero concentration of
 plastic in pieces per cubic metre.
 
 ## Part 1: All four oceans at once (about 10 minutes)
@@ -189,8 +192,9 @@ neuston.groupby('ocean')['Measurement'].agg(['count', 'median', 'mean'])
     now relying on?
 
 :::{.callout-tip title="If your two tables disagree about the size of the effect"}
-They should; this is the finding we've been heading towards. A difference that persists across a control but changes size is a different claim from a difference that completely goes away. The two require different
-interpretation in a data analysis report. Which one do you have?
+They should! A difference that survives the control but changes size is a different claim from a
+difference that goes away completely, and the two need different interpretations in a data
+analysis report. Which one do you have?
 :::
 
 ## Part 4: Write it again (about 10 minutes)
@@ -205,17 +209,17 @@ interpretation in a data analysis report. Which one do you have?
 
 :::{.callout-note title="If you finish early"}
 The `Regions` column is finer-grained than `Oceans`. Group by it, report count and median, and
-rank by count to find the ten most-sampled regions. One of them has a median a hundred thousand
+rank by count to find the ten most-sampled regions. One of them has a median four hundred thousand
 times larger than another. Look at which sampling methods were used there before you conclude
 anything about the water.
 
-Do **not** try to compare regions across years. That needs dates... and we get to those soon!
+Do **not** try to compare regions across years. Comparing across years needs dates... and we get to those on Tuesday!
 :::
 
 ## Wrap-up
 
-If we have time, we will hear from two or three pairs on question 17. Be ready to say which single grouped table
-changed your mind, not just what your final answer was.
+If we have time, we will hear from two or three pairs on question 17. Be ready to say which grouped table
+changed your mind (if one of them did!), and not just what your final answer was.
 
 ## Resources
 

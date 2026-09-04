@@ -16,23 +16,17 @@ format:
 ![](../images/panda.jpeg)
 :::
 
-Yesterday we asked you to determine the varying distribution of plastic in the Pacific and the Atlantic. You
-built two tables with two filters, ran `.describe()` on each, and then wrote a paragraph to an
-imaginary journalist.
+Yesterday we asked you to determine the varying distribution of plastic in the Pacific and the Atlantic. You built two tables with two filters, ran `.describe()` on each, and then wrote a paragraph to an imaginary journalist.
 
-You gave them an answer about two oceans because two oceans were all we asked about. However, the raw file has four
-oceans, thirty-seven contributing studies and nineteen different ways of taking a sample. By the
-time we filter it down this afternoon, twelve of those methods are left, and only four of them
-are nets!
+You gave them an answer about two oceans because two oceans were all we asked about. However, the raw file has four oceans, thirty-seven contributing studies and nineteen different ways of taking a sample. 
 
-This afternoon you will go back into the microplastics data and do a more comprehensive analysis: all four
-oceans in one line instead of two filters, and then a look at whether the sampling methods behind
+This afternoon you will go back into the microplastics data and do a more comprehensive analysis: all four oceans in one line instead of two filters, and then a look at whether the sampling methods behind
 those four numbers are comparable enough to put them side by side.
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
 finish a numbered task. The person not typing should read the code through (quietly!) and explain what it should produce or calculate before you run it.
 
-We have about 45 minutes for this activity: roughly 40 on the four parts, and the rest on
+We have about an hour for this activity: roughly 45 minutes on the four parts, and the rest on
 setting up and on the wrap-up. Please let Cella or Kelly know if you get stuck, rather than
 spending your time on one line!
 
@@ -41,7 +35,7 @@ spending your time on one line!
 Both new patterns are from this morning. Hopefully, you will not need to look them up more than once!
 
 ```python
-df.groupby('key')['column'].mean()               # split, apply, combine
+df.groupby('key')['column'].mean()              # split, apply, combine
 df.groupby('key')['column'].agg(['count', 'mean'])   # several summaries at once
 df.groupby('key').agg({'a': 'mean', 'b': 'count'})   # different summaries, different columns
 ```

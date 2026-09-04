@@ -66,15 +66,14 @@ import pandas as pd
 url = 'https://eds-217-essential-python.github.io/data/national_parks.csv'
 parks = pd.read_csv(url)
 
-by_year = parks[~(parks['year'] == 'Total')].copy()
+# Remove the rows that have park Totals in them and make a new dataframe:
+by_year = parks[~(parks['year'] == 'Total')]
 national_parks = by_year[by_year['unit_type'] == 'National Park'].copy()
 
 national_parks.shape
 ```
 
-4,682 rows. Each one is a single park in a single year, running from 1904 to 2016, and there are
-61 distinct parks in there. If you get a different number, check that both filters ran, and ask
-Cella or Kelly if you cannot find the difference.
+4,682 rows. Each one is a single park in a single year, running from 1904 to 2016, and there are 61 distinct parks in the dataset.
 
 ## One column, several summaries
 
@@ -84,38 +83,34 @@ Start with what you already know how to write:
 national_parks.groupby('region')['visitors'].mean()
 ```
 
-Seven regions, seven means. And now the question that should be a reflex by the end of today:
-how many rows went into each of those?
+Seven regions, seven means. And now the question that should be a reflex by the end of today: how many rows went into each of those?
 
 ```{python}
 national_parks.groupby('region')['visitors'].count()
 ```
 
-Two calls, two Series, and you are already reading across them by eye and hoping you have lined
-them up correctly. `.agg()` removes the eye-matching. Give it a **list** of aggregation names and
+Two calls, two Series, and you are already reading across them by eye and hoping you have lined them up correctly. `.agg()` removes the eye-matching by allowing you to do more than one calculation at a time. 
+
+Give it a **list** of aggregation names and
 it runs all of them on the same grouping and puts the answers side by side:
 
 ```{python}
 national_parks.groupby('region')['visitors'].agg(['count', 'mean', 'max'])
 ```
 
-The result is a DataFrame rather than a Series: one row per group, one column per thing you
-asked for, and the group labels as the index.
+The result is a DataFrame rather than a Series: one row per group, one column per thing you asked for, and the group labels as the index.
 
-The names in the list are strings, and they are the same names you would have called as methods:
+**The names in the list are strings**, and they are the same names you would have called as methods:
+
 `'count'`, `'mean'`, `'sum'`, `'min'`, `'max'`, `'median'`, `'std'`, `'nunique'`.
 
 :::{.callout-note}
-🐍 `.agg(['mean'])` with one name in the list gives you a DataFrame with one column. `.mean()`
-gives you a Series. Same numbers, in a different kind of object. Ask for the one you want to
-work with next.
+🐍 `.agg(['mean'])` with one name in the list gives you a DataFrame with one column. `.mean()` gives you a Series. Same numbers, in a different kind of object. Ask for the one you want to work with next.
 :::
 
 ## The reason `count` goes first
 
-Look again at the table of counts and means. `NE` has the highest mean of any region, a little
-over 1.6 million visitors, though `SE` is within three per cent of it. If you were writing a
-report about which region of the park system draws the crowds, `NE` is your headline.
+Look again at the table of counts and means. `NE` has the highest mean of any region, a little over 1.6 million visitors, though `SE` is within three per cent of it. If you were writing a report about which region of the park system draws the crowds, `NE` is your headline.
 
 Now read the `count` column. `NE` has 179 rows out of 4,682. Ask how many *parks* that is:
 
@@ -123,32 +118,23 @@ Now read the `count` column. `NE` has 179 rows out of 4,682. Ask how many *parks
 national_parks.groupby('region')['unit_name'].nunique()
 ```
 
-Two. The entire Northeast region contains two national parks, Acadia and Shenandoah, and both of
-them are busy ones. The mean is not wrong, but it is a statement about two parks that happen to
-share a region code rather than a statement about a region.
+Two. The entire Northeast region contains two national parks, Acadia and Shenandoah, and both of them are busy ones. The mean is not wrong, but it is a statement about two parks that happen to share a region code rather than a statement about a region.
 
-`NC` is worse: one park and 46 rows, and its mean prints in exactly the same format as `IM`'s, whose
-mean is computed from 1,590 rows.
+`NC` is worse: one park and 46 rows, and its mean prints in exactly the same format as `IM`'s, whose mean is computed from 1,590 rows.
 
 :::{.callout-important title="A mean is a summary of a count you did not print"}
-Every grouped mean is really two numbers, and pandas prints only one of them. The habit that
-fixes it is a small one: **put `'count'` first in every `.agg()` list you write**, and read it
-before you read anything else.
+Every grouped mean is really two numbers, and pandas prints only one of them. The habit that fixes it is a small one: **put `'count'` first in every `.agg()` list you write**, and read it before you read anything else.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Group `national_parks` by `state` and use `.agg()` with a list to get the count, mean and max of
-`visitors`. Find a state whose mean looks impressive and whose count says you should not be
-impressed. Name it, and say in one sentence what you would report instead.
+Group `national_parks` by `state` and use `.agg()` with a list to get the count, mean and max of `visitors`. Find a state whose mean looks impressive, but which is based on a limited sample number.
 :::
 
 ## Several columns, summarised differently
 
-The list form runs the same summaries on one column. Often you want something else: the mean of
-this column, the sum of that one, the number of distinct values in a third.
+The list form runs the same summaries on one column. Often you want something else: the mean of this column, the sum of that one, the number of distinct values in a third.
 
-For that, `.agg()` takes a **dictionary**. The keys are column names and the values are what to
-do with each:
+For that, `.agg()` takes a **dictionary**. The keys are column names and the values are what to do with each:
 
 ```{python}
 national_parks.groupby('region').agg({
@@ -163,16 +149,14 @@ the distinct park names, and find the earliest year of record.
 
 Two things changed from the list form, and both follow from what a dictionary is:
 
-- there is **no `['column']`** before `.agg()`. The keys of the dictionary say which columns, so
-  naming a column beforehand would be saying it twice.
+- there is **no `['column']`** before `.agg()`. The keys of the dictionary say which columns, so naming a column beforehand would be saying it twice.
+
 - the result has **one column per key**, named after the key.
 
-The dictionary here is the same kind you have been writing since Day 2. You used one to rename
-columns in `.rename(columns={...})`. Same syntax, same idea: a mapping from a name to what
-should happen to it.
+**NOTE:** The dictionary here is the same kind you have been writing since Day 2. You used one to rename columns in `.rename(columns={...})`. Same syntax, same idea: a mapping from a name to what should happen to it.
 
 :::{.callout-note}
-🐍 A dictionary value can also be a **list**, which combines both forms:
+🐍 A dictionary value can also be a **list**, which combines both forms 🤯:
 
 ```{python}
 national_parks.groupby('region').agg({
@@ -250,8 +234,7 @@ then group.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Filter `national_parks` to the single year `'2016'`, then group by `state` and use `.agg()` to
-report the count and mean of `visitors`. Rank the result by mean. Compare your top three states with the
-all-time ranking by state you built in the earlier exercise, the one that asked for count, mean
+report the count and mean of `visitors`. Rank the result by mean. Compare your top three states with the all-time ranking by state you built in the earlier exercise, the one that asked for count, mean
 and max. Did anything move? Say in one sentence which of the two rankings you
 would put in front of a park superintendent, and why.
 :::
@@ -279,7 +262,7 @@ two_key = national_parks.groupby(['region', 'state'])['visitors'].mean()
 two_key['IM', 'WY']
 ```
 
-You are not expected to become fluent with a MultiIndex this week. You should be able to
+**You are not expected to become fluent with a MultiIndex this week!** You should be able to
 **recognize one and get out of it**, and the way out is a single method:
 
 ```{python}
@@ -316,7 +299,7 @@ five busiest parks. Say in one sentence what `.reset_index()` changed.
 
 ## Putting it together
 
-One question, answered properly, using every piece of this morning so far:
+Let's do one final question using every piece of this morning so far:
 
 > Which national parks in the Pacific West region have drawn the most visitors, and how much
 > record is each average built on?
@@ -329,8 +312,8 @@ pw_stats = pacific_west.groupby('unit_name')['visitors'].agg(['count', 'mean', '
 pw_stats.sort_values('mean', ascending=False).head(10)
 ```
 
-Filter, group, aggregate, rank. Four steps, and only two of them are new this morning. The
-answer is a table you would be willing to defend.
+Filter, group, aggregate, rank. Four steps, and only two of them are new this morning! The
+answer is a table that captures all the relevant information necessary to answer the question.
 
 ## Key points
 

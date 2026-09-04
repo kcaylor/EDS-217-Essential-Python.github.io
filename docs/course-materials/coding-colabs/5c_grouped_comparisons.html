@@ -443,14 +443,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="../images/panda.jpeg" class="img-fluid"></p>
 </div>
 <p>Yesterday we asked you to determine the varying distribution of plastic in the Pacific and the Atlantic. You built two tables with two filters, ran <code>.describe()</code> on each, and then wrote a paragraph to an imaginary journalist.</p>
-<p>You gave them an answer about two oceans because two oceans were all we asked about. However, the raw file has four oceans, thirty-seven contributing studies and nineteen different ways of taking a sample. By the time we filter it down this afternoon, twelve of those methods are left, and only four of them are nets!</p>
+<p>You gave them an answer about two oceans because two oceans were all we asked about. However, the raw file has four oceans, thirty-seven contributing studies and nineteen different ways of taking a sample.</p>
 <p>This afternoon you will go back into the microplastics data and do a more comprehensive analysis: all four oceans in one line instead of two filters, and then a look at whether the sampling methods behind those four numbers are comparable enough to put them side by side.</p>
 <p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read the code through (quietly!) and explain what it should produce or calculate before you run it.</p>
-<p>We have about 45 minutes for this activity: roughly 40 on the four parts, and the rest on setting up and on the wrap-up. Please let Cella or Kelly know if you get stuck, rather than spending your time on one line!</p>
+<p>We have about an hour for this activity: roughly 45 minutes on the four parts, and the rest on setting up and on the wrap-up. Please let Cella or Kelly know if you get stuck, rather than spending your time on one line!</p>
 <section id="the-patterns-you-need" class="level2">
 <h2 class="anchored" data-anchor-id="the-patterns-you-need">The patterns you need</h2>
 <p>Both new patterns are from this morning. Hopefully, you will not need to look them up more than once!</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'column'</span>].mean()               <span class="co"># split, apply, combine</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'column'</span>].mean()              <span class="co"># split, apply, combine</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'column'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>])   <span class="co"># several summaries at once</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>).agg({<span class="st">'a'</span>: <span class="st">'mean'</span>, <span class="st">'b'</span>: <span class="st">'count'</span>})   <span class="co"># different summaries, different columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You will also need the top-N pattern from Wednesday:</p>
@@ -459,7 +459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Create a notebook named <code>Colab_5C_Grouped_Comparisons.ipynb</code>, with both partners’ names in the title cell, then rebuild yesterday’s <code>positive</code> table. Every line below should be one you wrote yesterday afternoon:</p>
-<div id="a8a61b0c" class="cell" data-execution_count="1">
+<div id="0970834b" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>

@@ -18,26 +18,24 @@ format:
 
 :::
 
-Yesterday afternoon, in the last coding task of the colab, you were asked to compare the mean
-dissolved oxygen at one of the acidic sites against `site_d`, which is not one of them. It took
-two filters and two `.mean()` calls, and the instructions ended by saying that today you would
-learn how to do all six at once.
+Yesterday afternoon, in the last coding task of the colab, you were asked to compare the mean dissolved oxygen at two different sites. That took coding up two different filters and two `.mean()` calls. At the time, the instructions mentioned that today you would
+learn how to do analyze all six sites at once.
 
-This morning we will learn how. One line of code, six answers.
+This morning we will learn how. We will write one line of code that produces analysis across all six sites simultaneously.
 
 Most of the real questions you will ask about data are per-group questions. Not "what is the
-average", but "what is the average **for each**": for each site, for each species, for each year,
-for each ocean. This morning we will learn the pattern that answers all of those, and we will
-write it in both of the forms you will meet in other people's code.
+average", but "what is the average **for each X**": for each site, for each species, for each year,
+for each ocean. This morning we will learn the code pattern that answers all of those, and we will
+write it in both of the forms you will meet in other people's code. In doing so, we will revisit commands and tools we haven't seen since the first day of class when we were doing our data science workflow demo.
 
 By the end of this session you will be able to:
 
 - describe what `.groupby()` does in terms of **split, apply, combine**
 - write the split-apply-combine pattern in its **two-step** form and its **one-line** form,
   and explain why they are the same pattern
-- choose the aggregation that answers the question you actually asked
+- learn to choose aggregations based on the question you need to answer
 - read the result of a grouped calculation and explain what its index means
-- explain why a grouped answer is usually more honest than a whole-column answer
+- explain why a grouped answer is often more useful than a whole-column answer
 
 ## Getting Started
 
@@ -62,39 +60,36 @@ Date: 09/04/2026
 
 4. **Save** with `Ctrl + S` (`Cmd + S` on macOS), and keep saving as you go.
 
-5. Rebuild yesterday's clean stream-chemistry table. Every line below is one you wrote in the
-   colab, collected here so you can start from a table you trust:
+5. Rebuild yesterday's clean stream-chemistry table. Every line below is one you wrote in yesterday afternoon's colab, collected here so you can start from a table that is clean and well-organized:
 
 ```{python}
 import pandas as pd
 
-url = 'https://eds-217-essential-python.github.io/data/messy_field_survey.csv'
+url = "https://eds-217-essential-python.github.io/data/messy_field_survey.csv"
 survey = pd.read_csv(url)
 
 survey = survey.drop_duplicates()
 
-survey['site'] = survey['site'].str.strip()
-survey['site'] = survey['site'].str.lower()
-survey['site'] = survey['site'].str.replace('-', '_')
+survey["site"] = survey["site"].str.strip().str.lower().str.replace("-", "_")
+# survey['site'] = survey['site'].str.lower()
+# survey['site'] = survey['site'].str.replace('-', '_')
 
-survey['pH'] = survey['pH'].str.replace(',', '.')
-survey['pH'] = survey['pH'].astype(float)
+survey["pH"] = survey["pH"].str.replace(",", ".").astype(float)
+# survey['pH'] = survey['pH'].astype(float)
 
-survey = survey.dropna(subset=['temperature_c', 'dissolved_oxygen_mg_L', 'conductivity_uS_cm'])
-survey['n_replicates'] = survey['n_replicates'].fillna(1)
-survey['n_replicates'] = survey['n_replicates'].astype(int)
+survey = survey.dropna(
+    subset=["temperature_c", "dissolved_oxygen_mg_L", "conductivity_uS_cm"]
+)
+survey["n_replicates"] = survey["n_replicates"].fillna(1).astype(int)
+#survey["n_replicates"] = survey["n_replicates"].astype(int)
 
-survey = survey[survey['temperature_c'] > -100].copy()
-survey = survey.rename(columns={'collection date': 'collection_date'})
+survey = survey[survey["temperature_c"] > -100].copy()
+survey = survey.rename(columns={"collection date": "collection_date"})
 
 survey.shape
 ```
 
-255 rows out of the 320 in the raw file, which should be the row count you finished on
-yesterday. The column count will be lower than yesterday's, because this block rebuilds the
-measurements and leaves out the columns you derived in the afternoon; we add the one we need
-back further down. If the row count is not 255, check the order of your steps against the block
-above, and grab Cella or Kelly if you cannot find the difference.
+255 rows out of the 320 in the raw file, which should be the number you finished on yesterday. 
 
 ## The question you could not answer yesterday
 
@@ -104,13 +99,9 @@ Here is the whole-table average dissolved oxygen:
 survey['dissolved_oxygen_mg_L'].mean()
 ```
 
-The whole-table mean is true and almost useless. It describes no site. It is the average of six
-streams that are not the same stream, and the moment anybody asks "is that good?" you have to
-admit that you cannot tell them.
+The whole-table mean is accurate, but it is also mostly useless. It is the average of six streams that are not the same stream.
 
-Yesterday you got two of the six answers the only way you could. Your two were `site_d` and
-whichever acidic site you picked, so the second number below is `site_f` if you chose that one
-and 6.873 if you chose `site_c`:
+Yesterday you got two of the six answers the only way you could:
 
 ```{python}
 site_d = survey[survey['site'] == 'site_d']
@@ -120,9 +111,7 @@ print(site_d['dissolved_oxygen_mg_L'].mean())
 print(site_f['dissolved_oxygen_mg_L'].mean())
 ```
 
-Two filters, two means, two answers. Six sites would be six filters and six means, twelve lines
-to get one small table. And if a seventh site were added to the file next season, your twelve
-lines would silently keep reporting six.
+Two filters, two means, two answers. Six sites would be six filters and six means, twelve lines to get one small table. And if a seventh site were added to the file next season, your twelve lines would silently keep reporting six.
 
 ## Split, apply, combine
 
@@ -131,17 +120,15 @@ The pattern in those twelve lines has a name, and pandas has a single method tha
 **Split** the table into one group per site. **Apply** the same calculation to each group.
 **Combine** the answers into a single result, labelled by group.
 
-Split, apply and combine are what `.groupby()` does. We will write it in two steps first,
-because splitting the code up keeps the split and the apply visible separately:
+Split, apply and combine are what `.groupby()` does. We will write it in two steps first, because splitting the code up keeps the split and the apply visible separately:
 
 ```{python}
 grouped = survey.groupby('site')
 grouped
 ```
 
-Look carefully at the output. The grouped object is not a table. `.groupby()` on its own does the
-**split** and stops there, holding six piles of rows. No arithmetic has happened yet, and none
-will happen until you name a calculation.
+Look carefully at the output. The grouped object is not a table. 
+`.groupby()` on its own does the **split** and stops there, holding pointers to six different piles of rows. No arithmetic has happened yet, and none will happen until you name a calculation.
 
 The second step picks a column and names the calculation:
 
@@ -149,12 +136,10 @@ The second step picks a column and names the calculation:
 grouped['dissolved_oxygen_mg_L'].mean()
 ```
 
-Six sites, six means, one line of arithmetic. Two of these are the numbers you computed
-yesterday, whichever pair you did, and the other four came along for free.
+Six sites, six means, one line of arithmetic. `site_d` and `site_f` are the two numbers you computed yesterday, and the other four came along for free.
 
 :::{.callout-note}
-🐍 The object `.groupby()` returns is a real object that you can keep in a variable and reuse.
-Ask it for a different column and the table is not split again, because the split has already
+🐍 The object `.groupby()` returns is a real object that you can keep in a variable and reuse. Ask it for a different column and the table is not split again, because the split has already
 happened:
 
 ```{python}
@@ -164,15 +149,15 @@ grouped['temperature_c'].mean()
 
 ## The same pattern, on one line
 
-You will rarely need the grouped object for its own sake, so most of the pandas code you read
-runs the two steps together:
+You will rarely need the grouped object for its own sake, so most of the pandas code you read runs the two steps together:
 
 ```{python}
 survey.groupby('site')['dissolved_oxygen_mg_L'].mean()
 ```
 
-**Both forms are the same pattern.** The two-step version stores the middle of it in a variable
-and the one-line version does not. Same split, same apply, same combine, same answer.
+**Both forms are the same pattern.** The two-step version stores the middle of it in a variable and the one-line version does not. 
+
+Same split, same apply, same combine, same answer.
 
 Read the one-line form left to right as three instructions:
 
@@ -181,24 +166,19 @@ df.groupby('key')['column'].aggregation()
 #          split      pick        apply
 ```
 
-- `groupby('key')` says **which piles to make**. The key is the column whose values name the
-  groups.
-- `['column']` says **which column to do arithmetic on**.
+- `groupby('key')` says **which piles to make**. The key is the column whose values name the groups.
+- `['column']` says **which column to do analysis on**.
 - `.mean()` says **what arithmetic**.
 
-Learn it as one unit, the way you learned the top-N pattern on Wednesday, because you will be
-writing it for the rest of this course (and for most of your time in MEDS!).
+Learn it as one unit, the way you learned the top-N pattern on Wednesday, because you will be writing it for the rest of this course (and for most of your time in MEDS!).
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Write the one-line form to find the mean `pH` at each site. Then write the same question in the
-two-step form, using the `grouped` object that already exists. Confirm you get identical
-output.
+Write the two-line form to find the mean `pH` at each site (you can use the `grouped` object that already exists, or create a new variable if you want). Then write the same question in the one-step form. Confirm you get identical output.
 :::
 
 ## Reading the result
 
-The result is a **Series**, which is the one-column object you met on Day 2. It has an index,
-and the index is made of the group labels:
+The result is a **Series**, which is the one-column object we met on Day 2 and have been using all week. It has an index, just like all Series. However, this time, the index is made of the group labels:
 
 ```{python}
 mean_do = survey.groupby('site')['dissolved_oxygen_mg_L'].mean()
@@ -207,15 +187,13 @@ print(type(mean_do))
 print(mean_do.index)
 ```
 
-The index matters, because it is now something you can look values up by. The site labels have
-stopped being data inside a column and have become the labels of rows:
+The index matters, because it is now something you can look values up by. The site labels have stopped being data inside a column and have become the labels of rows:
 
 ```{python}
 mean_do['site_c']
 ```
 
-Everything you already know about a Series still works here. `.idxmax()`, from Wednesday
-afternoon, gives you the label of the largest value, and the label is now a site name:
+Everything you already know about a Series still works here: All Series objects will always share the same methods and attributes! For example, `.idxmax()`, from Wednesday afternoon, gives you the label of the largest value, and the label is now a site name:
 
 ```{python}
 mean_do.idxmax()
@@ -227,15 +205,12 @@ print('Worst site:', mean_do.idxmin())
 ```
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Group `survey` by `site` and take the mean of `temperature_c`, then use `.idxmax()` on the
-result to name the warmest site. Compare it with the worst site for dissolved oxygen above. Are
-they the same site? Write one sentence saying whether you would expect them to be.
+Group `survey` by `site` and take the mean of `temperature_c`, then use `.idxmax()` on the result to name the warmest site. Compare it with the worst site for dissolved oxygen above. Are they the same site? Write one sentence saying whether you would expect them to be.
 :::
 
 ## Choosing the aggregation
 
-`.mean()` is not special. Any of the summaries you have been running on whole columns since
-Tuesday will run on each group instead:
+`.mean()` is not special. Any of the summaries you have been running on Series (whole DataFrame columns) since Tuesday will run on each group instead:
 
 ```{python}
 survey.groupby('site')['dissolved_oxygen_mg_L'].max()
@@ -249,16 +224,13 @@ survey.groupby('site')['dissolved_oxygen_mg_L'].min()
 survey.groupby('site')['n_replicates'].sum()
 ```
 
-`.count()` is the one worth pausing on, because it answers a different kind of question. Instead
-of summarising the measurement, it tells you **how many rows are in each pile**:
+`.count()` is the one worth pausing on, because it answers a different kind of question. Instead of summarising the measurement, it tells you **how many rows are in each pile**:
 
 ```{python}
 survey.groupby('site')['dissolved_oxygen_mg_L'].count()
 ```
 
-Forty-five samples at `site_c` and thirty-nine at `site_d`, which is close enough to even that
-comparing their means is reasonable. When the counts are lopsided, `.count()` is the line that
-tells you so, before you have written the comparison into a report. Get in the habit of asking
+Forty-five samples at `site_c` and thirty-nine at `site_d`, which is close enough to even that comparing their means is reasonable. When the counts are lopsided, `.count()` is the line that tells you so, before you have written the comparison into a report. Get in the habit of asking
 for it.
 
 | Aggregation | Answers |
@@ -272,9 +244,7 @@ for it.
 : {.hover .bordered}
 
 :::{.callout-important title="`.count()` is not an afterthought"}
-A group mean computed from four rows and a group mean computed from four hundred are printed in
-exactly the same font. Nothing in the output warns you. Whenever you report a grouped mean, run
-`.count()` on the same grouping and look at it, even if it never reaches your report.
+A group mean computed from four rows and a group mean computed from four hundred are printed in exactly the same font. Nothing in the output warns you. Whenever you report a grouped mean, run `.count()` on the same grouping and look at it, even if it never reaches your report.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -288,15 +258,11 @@ Then say, in a markdown cell, why question 2 needs `.sum()` and not `.count()`.
 
 ## What can be a key
 
-Any column whose values repeat can be a grouping key. The values do not have to be text, and
-they do not have to be tidy, but they do have to mean something.
+Any column whose values repeat can be a grouping key. The values do not have to be text, and they do not have to be tidy, but they do have to mean something.
 
-`site` works because six labels describe all 255 rows. `pH` would not work, because its 255
-readings take 138 different values, and grouping on it would give you 138 groups of which 67
-hold a single row. A group of one tells you nothing you did not already have.
+`site` works because six labels describe all 255 rows. `pH` would not work, because its 255 readings take 138 different values, and grouping on it would give you 138 groups of which 67 hold a single row. A group of one tells you nothing you did not already have.
 
-Yesterday you built a column of your own that groups beautifully. The setup block above leaves it
-out, so here it is again:
+Yesterday you built a column of your own that groups beautifully:
 
 ```{python}
 def classify_ph(value):
@@ -317,30 +283,17 @@ survey['ph_class'].value_counts()
 survey.groupby('ph_class')['dissolved_oxygen_mg_L'].mean()
 ```
 
-The derived-column pattern and the split-apply-combine pattern are working together here, and
-one part of it is easy to miss. **`ph_class` was not in the file.** You invented the categories
-yesterday with a function of your own, and this morning they are a grouping key. Many of the
-most useful groupings you will make are ones you build rather than ones the file hands you.
+The derived-column pattern and the split-apply-combine pattern are working together here, and one part of it is easy to miss. **`ph_class` was not in the file.** You invented the categories yesterday with a function of your own, and this morning they are a grouping key. **Many of the most useful groupings you will make are ones you build** rather than ones the file hands you.
 
 :::{.callout-note}
-🐍 `.value_counts()`, which you have used since Day 2, is a grouped count in disguise. The two
-lines below produce the same numbers:
+🐍 `.value_counts()`, which you have used since Day 2, is a grouped count in disguise. The two lines below produce the same numbers:
 
 ```{python}
 print(survey['site'].value_counts())
 print(survey.groupby('site')['site'].count())
 ```
 
-`.value_counts()` is the convenient special case. `.groupby()` is the general tool that also
-lets you ask for a mean.
-:::
-
-:::{.callout-tip title="✏️ Test your knowledge"}
-Group by `ph_class` and take the mean of `temperature_c`. Then look back at the mean
-temperature per site from earlier in this session. In two or three sentences, say what you think
-is going on: are the acidic samples acidic *because* of something about temperature, or are both
-of these telling you the same thing about which sites they came from? You cannot settle it with
-what you have; say what you would need.
+`.value_counts()` is the convenient special case. `.groupby()` is the general tool that also lets you ask for a mean.
 :::
 
 ## Putting it together
@@ -353,13 +306,9 @@ print(survey.groupby('site')['dissolved_oxygen_mg_L'].mean())
 print(survey.groupby('site')['temperature_c'].mean())
 ```
 
-Read the three outputs together and there is a result in them. The sites with the warmest water
-have the least oxygen in it, in order, without a single exception. Warm water holds less
-dissolved oxygen than cold water, which is a fact about gases, and here it is, falling out of a
-file transcribed off paper by several different people.
+Read the three outputs together and there is a result in them. The sites with the warmest water have the least oxygen in it, in order, without a single exception. Warm water holds less dissolved oxygen than cold water, which is a fact about gases, so we should expect to see this pattern. But it's nice to confirm that our data are showing us a pattern we expect!
 
-The file was the same yesterday, and so was the ordering. Splitting by site puts all six answers
-next to each other, and the ordering only shows up once they are side by side.
+The file was the same yesterday, and so was the ordering. Splitting by site and using aggregation turns data into information; the ordering only shows up once we have used our split-apply-combine workflow to put these results side by side.
 
 ## Key points
 

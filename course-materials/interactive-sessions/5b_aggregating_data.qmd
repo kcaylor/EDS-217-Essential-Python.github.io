@@ -18,16 +18,13 @@ format:
 
 :::
 
-Six sites and six means is a table you can read by eye. Most groupings are much bigger than six,
-and most questions want more than one summary of each group.
+Six sites and six means is a table you can read by eye. However, many groupings are much bigger than six, and most questions want more than one summary of each group.
 
-This morning we take the pattern you just learned and put it under load. You will ask for
-several summaries in one call instead of one, ask for different summaries of different columns,
-rank a grouped result the way you ranked a raw table on Wednesday, and meet what happens when
-you group by two things at once.
+This morning we take the pattern you just learned and increase the load. You will ask for several summaries in one call instead of one, ask for different summaries of different columns, and rank a grouped result the way you ranked a raw table on Wednesday. In addition, we will see what happens when you group by two things at once.
 
-The data should look familiar: the National Park Service visitor records from Wednesday's colab.
-On Wednesday you ranked individual park-years. This morning we will rank whole parks.
+The data should look familiar: the National Park Service visitor records from Wednesday's colab. On Wednesday you ranked individual park-years. 
+
+This morning we will rank whole parks.
 
 By the end of this session you will be able to:
 
@@ -61,11 +58,7 @@ Date: 09/04/2026
 
 4. **Save** with `Ctrl + S` (`Cmd + S` on macOS), and keep saving as you go.
 
-5. Read the visitor records and rebuild two subsets from Wednesday, this time applied one after
-   the other: keep the rows that describe a real year, and from those keep the rows that describe
-   a National Park. Note the order: Wednesday's `national_parks` was taken from the whole file, so
-   it still had the `Total` rows in it, while chaining the two filters here gives a smaller table
-   under the same name.
+5. Read the visitor records and rebuild two subsets from Wednesday, this time applied one after  the other: keep the rows that describe a real year, and from those keep the rows that describe a National Park. Note the order: Wednesday's `national_parks` was taken from the whole file, so it still had the `Total` rows in it, while chaining the two filters here gives a smaller table under the same name.
 
 ```{python}
 import pandas as pd

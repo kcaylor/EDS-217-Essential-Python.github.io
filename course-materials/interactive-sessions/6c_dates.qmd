@@ -17,24 +17,25 @@ format:
 *A cartoon panda is visiting Stonehenge.* [MidJourney 5](https://www.midjourney.com/jobs/68f2f16e-29bc-4981-ae9b-9c1edb669684?index=0)
 :::
 
-You owe two lines of code an explanation.
+This afternoon's lesson is dates. We will start by addressing two lines of code we have given you to use without
+ever explaining what they are actually doing!
 
-On Thursday, an exercise handed you `.dt.year` inside a boxed aside and told you not to
-worry about it. Yesterday, another one handed you `aq['datetimeLocal'].str[11:13]` and told you
-the same thing. Both were doing the same job by different means: pulling a piece out of a date so
-you could group by it.
+On Thursday, an exercise gave you `.dt.year` inside a boxed aside and told you not to worry about
+it. Then, on Friday (and just now before lunch!), another one gave you `aq['datetimeLocal'].str[11:13]` and said the same thing.
 
-This session is where that stops being a borrowed line.
+Both of these code patterns were doing the same job by different means: pulling one piece out of a date so you could group by it. 
 
-The reason dates get their own hour is not that the syntax is hard. It is that a date is one of
-the few things in a data file that is almost never stored as what it is. It arrives as text, or as
-an integer, or as five separate columns, and every one of those disguises works well enough to
-fool you until the moment it doesn't.
+This afternoon we will learn how both of them work, and write them ourselves.
+
+Dates get a session of their own because a date is one of the few things in a data file that is
+almost never stored as what it is. It shows up as text, or as an integer, or as five separate
+columns... Each of those disguises often works well enough that nothing looks wrong... until
+something breaks!
 
 By the end of this session you will be able to:
 
 - explain why a date stored as text or as a number is not a date
-- write the **parsing sentence**, `pd.to_datetime(column, format=...)`, and build a format string
+- write the **parsing pattern**, `pd.to_datetime(column, format=...)`, and build a format string
   out of `%Y`, `%m` and `%d`
 - pull the year, month and day out of a parsed date with the **`.dt` accessors**
 - use a date component as a grouping key, and answer a question that needs one
@@ -62,7 +63,7 @@ Date: 09/08/2026
 
 4. **Save** with `Ctrl + S` (`Cmd + S` on macOS), and keep saving as you go.
 
-5. Read in a file you first met on the very first afternoon of this course:
+5. Read in a file you first met (datetime.forever_ago) on the very first afternoon of this course:
 
 ```{python}
 import pandas as pd
@@ -73,12 +74,11 @@ toolik = pd.read_csv(url)
 toolik[['Year', 'Month', 'Date', 'Daily_AirTemp_Mean_C']].head()
 ```
 
-Daily weather from the Toolik Field Station on the North Slope of Alaska. One row per day, 11,171
-of them.
+Daily weather from the Toolik Field Station on the North Slope of Alaska. We've seen this!
 
 ## The disguise
 
-Look at the `Date` column, and then at what pandas thinks it is:
+Look at the `Date` column, and then at the dtype pandas gives it:
 
 ```{python}
 toolik['Date'].dtype
@@ -87,28 +87,30 @@ toolik['Date'].dtype
 `int64`. The first row's date is not the first of June 1988; it is the integer nineteen million,
 eight hundred and eighty thousand, six hundred and one.
 
-That works better than it has any right to. Sorting by it gives the right order, because
-`%Y%m%d` happens to sort the same way as text does. Filtering to a year works, because
-`19880000 < Date < 19890000` catches exactly 1988. You could get quite a long way like this.
+An integer works better here than you might expect. Sorting by it gives the right order, because
+a date written year first, then month, then day, counts upward as the calendar does. Filtering to
+a year works, because `19880000 < Date < 19890000` catches exactly 1988. You could get quite a
+long way like this!
 
-Then you subtract two of them:
+Then we subtract two of them:
 
 ```{python}
 19880701 - 19880630
 ```
 
-Seventy-one. The thirtieth of June and the first of July are one day apart, and the integer says
-seventy-one, because integers do not know that months end.
+Oops. The thirtieth of June and the first of July are one day apart, and the integer says
+seventy-one, because integer arithmetic has no concept of a month ending.
 
 Everything else that makes a date useful fails the same way. Which day of the week was it? How
 many days between sampling visits? Is this row in the growing season? None of those questions can
-be answered by arithmetic on `19880601`, and none of them will raise an error when you try. They
-will just be wrong.
+be answered by arithmetic on `19880601`, and none of them will raise an error when you try. 
 
-## The parsing sentence
+Curse you, integer dates!!
 
-`pd.to_datetime()` takes a column of dates-in-disguise and hands back a column of real dates. You
-tell it the disguise with `format=`:
+## The parsing pattern
+
+`pd.to_datetime()` takes a column of dates in disguise and returns a column of **real dates**. You
+describe the disguise with `format=`:
 
 ```{python}
 toolik['date'] = pd.to_datetime(toolik['Date'], format='%Y%m%d')
@@ -134,19 +136,22 @@ in between is typed literally.
 | `01/06/1988` | `'%d/%m/%Y'` |
 : {.hover .bordered}
 
-Look at the last two rows for as long as it takes to be alarmed. The same eight characters mean
-the first of June in most of the world and the sixth of January in the United States, and the
-only thing standing between those two readings is the format string you typed. Half of all
-date bugs in data science live in that one row of the table.
+Look carefully at the last two rows. `01/06/1988` means the first of June in most of the world
+and the sixth of January in the United States, and the format string you type decides which of
+the two readings you get. A great many date bugs start right there, and they are hard to find
+later, because both readings produce a perfectly ordinary looking date column.
 
 :::{.callout-important title="`format=` is not optional, it is a safety net"}
-`pd.to_datetime()` will usually guess correctly if you leave `format=` out. Supply it anyway.
+`pd.to_datetime()` will usually guess correctly if you leave `format=` out. **Supply it anyway**.
 
 A format string is an **assertion about your data**. If one row of your file is malformed, or the
-first five hundred rows are ISO dates and the rest are American ones, a supplied format raises an
-error and a guessed format silently produces a column of confidently wrong dates.
+first few hundred rows are ISO dates and the rest are American ones, a supplied format raises an
+error and a guessed format will naively produce a column of wrong dates.
 
-Loud failure now beats quiet nonsense later. Type the format.
+Type the format string every time, even when you are fairly sure pandas would have guessed it
+correctly. 
+
+_An error you can generate today is much better than a wrong number you find next week._
 :::
 
 Check what you got:
@@ -158,19 +163,19 @@ print(toolik['date'].max())
 ```
 
 `datetime64[ns]`, running from 1 June 1988 to 31 December 2018. Thirty years of Arctic weather,
-and now pandas knows it.
+stored now as dates rather than as digits.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 The `date_data.csv` file at
 `https://eds-217-essential-python.github.io/data/date_data.csv` has a `Date` column stored as
-text in the form `2023-11-02`. Read it in, write the parsing sentence for it with the correct
+text in the form `2023-11-02`. Read it in, write the parsing pattern for it with the correct
 format string, and print the dtype of the result to prove it worked.
 :::
 
 ## The `.dt` accessors
 
-A parsed date column knows what year, month and day each of its values belongs to, and `.dt`
-is how you ask:
+Every value in a parsed date column has a year, a month and a day inside it, and `.dt` is how you
+get at them:
 
 ```{python}
 toolik['year'] = toolik['date'].dt.year
@@ -182,12 +187,19 @@ toolik[['date', 'year', 'month', 'day']].head()
 
 `.dt` works the same way `.str` does. Both are doorways: `.str` gives you the string operations
 for a column of text, and `.dt` gives you the date operations for a column of dates. Neither one
-works on the wrong kind of column, which is a feature. If `.dt.year` raises an
-`AttributeError`, your column is not parsed yet.
+works on the wrong kind of column, which turns out to be useful. If `.dt.year` raises an
+`AttributeError`, the error is telling you that your column has not been parsed yet.
+
+The pair of doorways is what Friday's supplied line was about.
+`aq['datetimeLocal'].str[11:13]` went through the `.str` door and cut characters 11 and 12 out of
+every timestamp, which works only because every timestamp in that file was written to the same
+width, and it hands back the text `'06'` rather than the number 6. Parse the column first and the
+same job goes through the `.dt` door as `aq['datetimeLocal'].dt.hour`, which returns a number, and
+which keeps working when one row is written differently from the rest.
 
 :::{.callout-note}
-🐍 Other things `.dt` knows, for when you need them. You are only responsible for the first three
-in this course:
+🐍 Other things `.dt` will give you, for when you need them. Of the eight accessors below, you are
+only responsible for the first three, `.dt.year`, `.dt.month` and `.dt.day`:
 
 `.dt.year` · `.dt.month` · `.dt.day` · `.dt.hour` · `.dt.dayofyear` · `.dt.dayofweek` ·
 `.dt.quarter` · `.dt.date`
@@ -195,8 +207,8 @@ in this course:
 
 ### Proving it worked
 
-This file is unusually generous: it already has its own `Year` and `Month` columns, written
-by whoever prepared the data. So you can check your parse against theirs.
+The Toolik file gives us something to check against, because it already has `Year` and `Month`
+columns, written by whoever prepared the data. So we can compare our parse against theirs.
 
 ```{python}
 print((toolik['year'] == toolik['Year']).all())
@@ -206,10 +218,12 @@ print((toolik['month'] == toolik['Month']).all())
 Two `True`s. Every one of the 11,171 dates you parsed agrees with the year and month the station
 recorded independently.
 
-That check took two lines and it is worth doing every time you have anything to check against,
+The check took two lines, and it is worth doing every time you have something to check against,
 because a wrong format string produces a column that looks completely normal. `'%d%m%Y'` on this
-file would have failed loudly, but on a file of American dates it would have quietly given you a
-year of 2019 for every row and never said a word.
+file would have failed spectacularly, because it would have tried to read `88` as a month. On a file of
+American dates it would not have failed at all: every date whose day is twelve or less parses
+cleanly with the month and the day swapped, so `03/07/2019` becomes the seventh of March instead
+of the third of July, and nothing in the printed column would have told you that the swap happened.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Add a `dayofyear` column to `toolik` using the `.dt` accessor for it. Then use the filter
@@ -219,25 +233,24 @@ in common.
 
 ## Dates as grouping keys
 
-Here is what all of this was for. A date component is an ordinary column, so it is an ordinary
-grouping key, and Friday's sentence works on it unchanged:
+A date component is an ordinary column of integers, so it is an ordinary grouping key, and
+Friday's split-apply-combine pattern works on it unchanged:
 
 ```{python}
 toolik.groupby('month')['Daily_AirTemp_Mean_C'].mean().round(2)
 ```
 
-Thirty years of daily temperatures reduced to the twelve numbers that describe the Arctic year.
-January at −22.9 °C, July at +11.2 °C, and a thirty-four degree swing between them.
 
-Ask for the count alongside it, the way you now always do:
+Ask for the count alongside the mean, the way we have been doing since Friday:
 
 ```{python}
 toolik.groupby('year')['Daily_AirTemp_Mean_C'].agg(['count', 'mean']).head(3).round(2)
 ```
 
 1988 has 214 rows because the station opened on the first of June. Its annual mean is warmer than
-every year that follows it, not because 1988 was warm but because 1988 has no January in it. That
-is the `.count()` lesson from Friday, arriving in a new costume.
+every year that follows it, not because 1988 was warm but because 1988 has no January in it.
+Friday's rule about always reading `.count()` alongside a grouped mean is helpful here,
+because it puts the 214 in front of you before you read the mean beside it!
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Group `toolik` by `month` and take the mean of `Daily_Precip_Total_mm` instead of temperature.
@@ -247,10 +260,11 @@ say whether it changes how much you trust the answer.
 
 ## The question that needs a month column
 
-Toolik has thirty years of data, and the obvious question to ask of thirty years of Arctic
-weather is whether it is getting warmer.
+Toolik has thirty years of data, and the obvious question to ask is _whether_ the _weather_ is getting warmer.
 
-Split the record into its first eleven years and its last ten, using Wednesday's filter pattern:
+Split the record into its first eleven years and its last ten years, using Wednesday's filter
+pattern (we are leaving 1999 to 2008 out of both halves, so the two ends of the record are well
+separated):
 
 ```{python}
 early = toolik[toolik['year'] <= 1998]
@@ -273,41 +287,39 @@ comparison['change'] = comparison['late'] - comparison['early']
 comparison.round(2)
 ```
 
-Read the `change` column top to bottom.
+Read the `change` column top to bottom, all twelve rows of it.
 
-January is 3.5 °C warmer. October is 4.3 °C warmer. February, November and December are all up by
-one to two and a half degrees. And July, the month everybody thinks of when they think about
-warming, is 0.8 °C **cooler**, as are June, August and May.
+October is 4.3 °C warmer and January is 3.5 °C warmer. February, November and December are up by
+one to two and a half degrees, and September by nearly a degree. July, the month people usually
+think of when they think about warming, is 0.8 °C **cooler**. May, June and August are cooler
+too, by between 0.2 and 0.9 °C.
 
-If you had computed a single annual mean for each half of the record you would have got a small
-positive number and concluded, correctly but uselessly, that Toolik has warmed a little. The
-month column is what turns that into the actual finding: **this site's warming is almost entirely
-a cold-season phenomenon.** That is a well-documented Arctic pattern, and it has physical causes
-you can reason about: snow arriving later, sea ice forming later, and both of them changing how
-much heat the land loses in the dark half of the year.
+March and April are the two rows that spoil a tidy story: both are in the cold half of the year
+and both are **cooler**, March by 2.0 °C and April by 1.5 °C.
 
-You could not have seen it without a month, you did not have a month until you parsed the date,
-and the file had been sitting there the whole time with `19880601` in it.
+If you had computed a single annual mean for each half of the record you would have got 0.5 °C
+and concluded, correctly but uselessly, that Toolik has warmed a little. The month column turns
+half a degree into something you can describe: the warming at Toolik (like most of the northern latitudes) 
+has occurred in the early winter and in autumn, the summer is flat or slightly cooler, and the spring has gone the other way. The autumn and early winter warming is a well-documented Arctic pattern with physical causes you can reason about, snow arriving later and sea ice forming later, both of them changing how much heat the
+land loses in the dark half of the year. Our comparison table raises the question of why March
+and April have cooled, and it cannot answer it.
 
-:::{.callout-note}
-🐍 Two honest caveats, because this is a real result and real results have them. Eleven years and
-ten years are short records for a climate claim, and one station is one station. What you have
-found is a pattern in this dataset, which is the correct thing to say about it.
-:::
+The bottom line is that none of these patterns are visible without a month column, and there is no month column until you parse the date! The parsing code pattern at the top of this page turns `19880601` into a value you
+can group by.
 
 ## Key points
 
 - A date stored as **text or as an integer is not a date**. It will sort correctly and then fail
-  at arithmetic, without complaining.
-- The **parsing sentence** is `pd.to_datetime(column, format='...')`.
+  at arithmetic, and it will not raise an error when it fails.
+- The **parsing pattern** is `pd.to_datetime(column, format='...')`.
 - A format string is a **picture of your data**: `%Y` for a four-digit year, `%m` for a two-digit
   month, `%d` for a two-digit day, punctuation typed literally.
 - **Always supply `format=`.** It converts a silent wrong answer into a loud error.
 - `.dt` is to dates what `.str` is to text. `.dt.year`, `.dt.month`, `.dt.day`.
-- If `.dt` raises an `AttributeError`, the column has not been parsed.
+- If `.dt` raises an `AttributeError`, your column has not been parsed yet.
 - **Check your parse** against anything you can: another column, a known date range, a row count.
-- Date components are ordinary columns, so they are ordinary **grouping keys**, and that is
-  usually the point of extracting them.
+- Date components are ordinary columns, so they are ordinary **grouping keys**, which is usually
+  the point of extracting them.
 
 ## Resources
 

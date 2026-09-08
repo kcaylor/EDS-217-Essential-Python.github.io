@@ -448,9 +448,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>A panda, waiting for the votes from the national jury.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
 </div>
-<p>The Eurovision Song Contest has been held almost every year since 1956. Fifty-two countries have entered at least once, the scoring system has been rebuilt four times, the number of entrants has nearly doubled, and the whole of it is in one file of 1,603 rows.</p>
-<p>Everything you learned today is about the <strong>shape</strong> of tables rather than what is in them, so it’s okay that this isn’t environmental data.</p>
-<p>Today you will determine the most successful Eurovision country, and find three reasons to distrust the answer you have just computed.</p>
+<p>The Eurovision Song Contest has been held almost every year since 1956. Fifty-two countries have entered at least once, the scoring system has been rebuilt more than once, the number of entrants has grown from twelve in the first contest to more than forty in recent ones, and the whole of it is in one file of 1,603 rows.</p>
+<p>Most of what we learned today is about the <strong>shape</strong> of tables rather than what is in them, so it’s okay that the Eurovision results are not environmental data.</p>
+<p>Today we will try to work out the most successful Eurovision country, and find a number of reasons to be wary of easy answers.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -466,7 +466,7 @@ Reference
 </div>
 <section id="todays-patterns" class="level2">
 <h2 class="anchored" data-anchor-id="todays-patterns">Today’s patterns</h2>
-<p>Everything below is built from these three patterns:</p>
+<p>Every question below is built from the patterns we learned this morning:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, on<span class="op">=</span><span class="st">'key'</span>)                        <span class="co"># the join pattern</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, left_on<span class="op">=</span><span class="st">'a'</span>, right_on<span class="op">=</span><span class="st">'b'</span>)       <span class="co"># when the key names differ</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, on<span class="op">=</span><span class="st">'key'</span>, how<span class="op">=</span><span class="st">'left'</span>)            <span class="co"># keep every row on the left</span></span>
@@ -476,7 +476,7 @@ Reference
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span>, columns<span class="op">=</span>, values<span class="op">=</span>)              <span class="co"># the pivot pattern</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> df[<span class="st">'col'</span>].value_counts().reset_index()        <span class="co"># Series to table</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>And these, from earlier in the week:</p>
+<p>And from these, which we have been using since earlier in the week:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'column'</span>] <span class="op">!=</span> value].copy()                       <span class="co"># the filter pattern</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'column'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(n)      <span class="co"># the top-N pattern</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'key'</span>)[<span class="st">'col'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>])        <span class="co"># split, apply, combine</span></span>
@@ -494,7 +494,7 @@ Reference
 <ol start="3" type="1">
 <li>Read the file:</li>
 </ol>
-<div id="edaf2aaa" class="cell" data-execution_count="1">
+<div id="e2b9bc06" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -506,12 +506,12 @@ Reference
 </section>
 <section id="part-1-what-is-in-this-file-and-what-is-missing-from-it" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-what-is-in-this-file-and-what-is-missing-from-it">Part 1: What is in this file, and what is missing from it</h2>
-<p>Answer each question with code, then write the answer in a markdown cell underneath, in a complete sentence with the numbers in it.</p>
+<p>Answer each question with code, then write your answer in a markdown cell underneath it, in a complete sentence with the numbers in it.</p>
 <ol type="1">
 <li><p>How many rows and columns? What are the column names, and what is the range of <code>year</code>?</p></li>
 <li><p>Run <code>.isnull().sum()</code>. Several columns are null on well over a thousand of the 1,603 rows. Pick two of them and, in a markdown cell, propose an explanation for each that has nothing to do with anybody making a mistake.</p></li>
 <li><p><code>points_final</code> is the column the rest of this exercise depends on, and it is null on 295 rows. Group by <code>year</code> and <strong>count</strong> the non-null <code>points_final</code> values in each. Look at the last few years.</p></li>
-<li><p>One year has a count of zero. Which one, and what happened? (You may look this up. It is the only fact in this exercise that is not in the file.)</p></li>
+<li><p>One of the years you just printed has a count of zero. Which one, and what happened? (You may look this up. It is the only thing you are asked to look up in this exercise.)</p></li>
 <li><p>Build a table called <code>contests</code> that excludes that year, using the filter pattern and ending the line with <code>.copy()</code>. How many rows does it have?</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Why this matters">
@@ -524,9 +524,9 @@ Why this matters
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A very common first move on a file like this is <code>df.fillna(0)</code>, to make the nulls go away.</p>
-<p>Do it here and every one of that year’s 41 entries acquires a real score of zero points. Those zeros then flow into every average you compute for the rest of the practice, and one decade in your final table becomes an artifact of a contest that never took place.</p>
-<p>A null means <em>no value</em>. A zero means <em>the value is zero</em>. Filling one with the other is not tidying, it is fabrication.</p>
+<p>A very common first move on a file full of nulls is <code>df.fillna(0)</code>, to make the nulls go away.</p>
+<p>Do it here and every one of that year’s 41 entries acquires a real score of zero points. The fabricated zeros would then be included in every average you compute for the rest of the practice, and one decade in your final table would become an artifact of a contest that never took place.</p>
+<p>A null means <em>no value</em>. A zero means <em>the value is zero</em>. Replacing one with the other invents 41 results that nobody ever voted on.</p>
 </div>
 </div>
 </section>
@@ -545,8 +545,8 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 Notice what this part does not do. You spent an hour this morning parsing dates, and there is a column here called <code>year</code>. It is tempting to reach for <code>pd.to_datetime()</code>.</p>
-<p>Leave it alone. <code>year</code> is a number that happens to name a year, and this file holds nothing below the year: no month, no day, no hour. Parsing it would produce a column whose only useful accessor, <code>.dt.year</code>, hands back the integer you started with. The parse earns its place in files that hold a real date, like the Toolik record from this morning, where <code>.dt.month</code> and <code>.dt.dayofyear</code> tell you something the raw column does not.</p>
+<p>🐍 Notice what this part of the practice does not do. We spent an hour this afternoon parsing dates, and there is a column here called <code>year</code>, so it is tempting to reach for <code>pd.to_datetime()</code>.</p>
+<p>Leave it alone. <code>year</code> is a number that happens to name a year, and the Eurovision file has nothing finer than the year in it: no month, no day, no hour. Parsing it would produce a column whose only useful accessor, <code>.dt.year</code>, returns the integer you started with. Parsing earns its place in a file that holds a real date, like the Toolik weather record from this afternoon, where <code>.dt.month</code> and <code>.dt.dayofyear</code> tell you something the raw column does not.</p>
 </div>
 </div>
 <ol start="7" type="1">
@@ -555,11 +555,11 @@ Note
 </section>
 <section id="part-3-the-best-country-of-each-decade" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-the-best-country-of-each-decade">Part 3: The best country of each decade</h2>
-<p>You can answer the below questions using the loop from yesterday afternoon and the stacking pattern from this morning:</p>
+<p>You can answer the questions below with the loop over groups from Friday afternoon and the stacking pattern from this morning:</p>
 <ol start="8" type="1">
-<li><p>Build a table with one row per decade, holding the country with the highest average <code>points_final</code> in that decade, how many entries that average came from, and the average itself.</p>
+<li><p>Build a table with one row per decade, holding the country with the highest average <code>points_final</code> in that decade, how many scored finals that average came from, and the average itself.</p>
 <p>Do it with a loop over decade groups. For each decade: group by <code>to_country</code>, <code>.agg()</code> for the count and mean of <code>points_final</code>, <code>.reset_index()</code>, take the top row with the top-N pattern, add a <code>decade</code> column, and append the one-row table to a list. Then stack the list with <code>pd.concat()</code>.</p></li>
-<li><p>Read the <code>count</code> column before you read the <code>mean</code> column. Three of the seven winners won on fewer than four entries. Name them, and say in one sentence why you would not put any of them in a headline.</p></li>
+<li><p>Read the <code>count</code> column before you read the <code>mean</code> column. Remember what <code>.count()</code> counts: the non-null <code>points_final</code> values, which is finals a country was scored in, not contests it entered. Three of the seven winners were scored in fewer than four finals. Name them, and say in one sentence why you would not put any of them in a headline.</p></li>
 <li><p>The <code>mean</code> column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown cell, two or three sentences: is Europe getting better at writing songs? What else changed between 1956 and 2019 that would produce this pattern? What would you have to divide by to remove it?</p></li>
 </ol>
 </section>
@@ -571,7 +571,7 @@ Note
 <li><p>Merge <code>counts</code> with <code>populations</code>. The key columns have different names, so you will need <code>left_on=</code> and <code>right_on=</code>. Do it twice, once with the default <code>how=</code> and once with <code>how='right'</code>, and report both shapes.</p></li>
 <li><p>One country is in the population file and not in your counts. Find it, name it, and then find every row for it in the <strong>full</strong> <code>eurovision</code> table. In a markdown cell, say what you learned and why the inner merge was right to drop it.</p></li>
 <li><p>Add an <code>entries_per_million</code> column to <code>entries</code>: the entry count divided by the population in millions. (<code>1_000_000</code> is a perfectly good way to write a million in Python; the underscores are ignored.) Rank it and show the top eight and the bottom five.</p></li>
-<li><p>The top of that ranking is San Marino, Andorra, Iceland, Monaco and Malta, and the bottom is Russia, Italy and Ukraine. In a markdown cell, three or four sentences: is <em>entries per million people</em> a meaningful quantity? What is it actually measuring, and what would you have to know about how the file’s population numbers were collected before you would publish this table?</p></li>
+<li><p>The top of that ranking is San Marino, Andorra, Iceland, Monaco and Malta, and the bottom is Yugoslavia, Russia and Serbia &amp; Montenegro. In a markdown cell, three or four sentences: is <em>entries per million people</em> a meaningful quantity? What is it actually measuring, and what would you have to know about how the file’s population numbers were collected before you would publish this table?</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="Look at the population column before you answer">
 <div class="callout-header d-flex align-content-center">
@@ -583,7 +583,7 @@ Look at the population column before you answer
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Iceland is listed at 255,866 and the United Kingdom at 57,247,586. Neither of those is a current figure, and the file does not say what year any of them are from. That is a real limitation of a real dataset.</p>
+<p>Iceland is listed at 255,866 and the United Kingdom at 57,247,586. Neither of those is a current figure, and the file does not say what year any of them are from. A population column with no stated year is a real limitation of a real dataset, and you should say so in your answer rather than quietly work around it.</p>
 </div>
 </div>
 </section>
@@ -605,12 +605,12 @@ Look at the population column before you answer
 </section>
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
-<p>Look back through your notebook. Three patterns did all of the structural work today without calculating anything:</p>
+<p>Look back through your notebook. Three patterns did all of today’s structural work without calculating a single number:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pd.merge(a, b, left_on<span class="op">=</span>, right_on<span class="op">=</span>)    <span class="co"># two tables become one, side by side</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pd.concat([...], ignore_index<span class="op">=</span><span class="va">True</span>)    <span class="co"># many tables become one, top to bottom</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span>, columns<span class="op">=</span>, ...)  <span class="co"># one long table becomes one wide one</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Every other line in your notebook was something you already knew, operating on a table that one of those three patterns had put into the right shape.</p>
-<p>Most of the difficulty in real data analysis is not the analysis. It is that the numbers you need to compare are in two files, or in one file at right angles to each other. The three patterns above are how you fix that.</p>
+<p>Every other line in your notebook was something you already knew how to do, applied to a table that one of the three patterns above had already put into the right shape.</p>
+<p>Much of the difficulty in real data analysis has nothing to do with the analysis itself. The numbers you want to compare often sit in two different files, or sit in one file at right angles to each other, and merging, stacking and pivoting are how you get them side by side before the analysis starts.</p>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>
@@ -622,6 +622,7 @@ Look at the population column before you answer
 <li>your Part 6 answer names something the data cannot tell the editor</li>
 <li>your notebook reads top to bottom as a document, not as a pile of cells</li>
 </ul>
+<p>If one of these is not true and you are not sure how to fix it, grab Cella or Kelly before you leave today!</p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
@@ -642,7 +643,7 @@ Looking ahead to Day 7
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Tomorrow every table you have built this week becomes a picture. You have spent six days getting data into the right shape; tomorrow is what that shape was for.</p>
+<p>Tomorrow every table you have built this week can become a figure. We have spent six days getting data into the right shape, and tomorrow we start making pictures that other people can read.</p>
 </div>
 </div>
 

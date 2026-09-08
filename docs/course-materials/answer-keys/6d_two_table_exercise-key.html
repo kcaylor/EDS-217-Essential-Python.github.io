@@ -400,7 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
       <h1 class="title">Answer Key</h1>
-            <p class="subtitle lead">🌍 Two Records, Sixty-Six Years Apart</p>
+            <p class="subtitle lead">🌍 Two Records, Seventy-Eight Years Apart</p>
                       </div>
   </div>
     
@@ -424,7 +424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#part-1-making-one-table-out-of-two" id="toc-part-1-making-one-table-out-of-two" class="nav-link" data-scroll-target="#part-1-making-one-table-out-of-two">Part 1: Making one table out of two</a></li>
   <li><a href="#part-2-making-the-dates-real" id="toc-part-2-making-the-dates-real" class="nav-link" data-scroll-target="#part-2-making-the-dates-real">Part 2: Making the dates real</a></li>
-  <li><a href="#part-3-a-graph-of-annual-amplitudes" id="toc-part-3-a-graph-of-annual-amplitudes" class="nav-link" data-scroll-target="#part-3-a-graph-of-annual-amplitudes">Part 3: A graph of annual amplitudes</a></li>
+  <li><a href="#part-3-the-size-of-the-annual-cycle" id="toc-part-3-the-size-of-the-annual-cycle" class="nav-link" data-scroll-target="#part-3-the-size-of-the-annual-cycle">Part 3: The size of the annual cycle</a></li>
   <li><a href="#part-4-making-a-statement-about-change" id="toc-part-4-making-a-statement-about-change" class="nav-link" data-scroll-target="#part-4-making-a-statement-about-change">Part 4: Making a statement about change</a></li>
   <li><a href="#where-the-marks-are" id="toc-where-the-marks-are" class="nav-link" data-scroll-target="#where-the-marks-are">Where the marks are</a></li>
   </ul>
@@ -447,14 +447,14 @@ How to use this key
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Work the colab first, then come here. The code below is <strong>one</strong> correct answer, not the only one. This exercise gives you less scaffolding than an end-of-day activity does, so there are more ways to reach each number than usual. If your code looks different but produces the same numbers, you were right.</p>
-<p>The written answers matter more than the code. You can already tell whether your code ran. What you cannot check on your own is whether you read the result correctly, and that is what the green <strong>Answer</strong> boxes are for. Compare your markdown cells against them.</p>
+<p>Work the colab first, then come here. The code below is <strong>one</strong> correct answer, not the only one. Today’s colab gives you less scaffolding than an end-of-day practice does, so there are more ways to reach each number than usual. If your code looks different but produces the same numbers, you were right!</p>
+<p>The written answers matter more than the code. You can already tell whether your code ran. Whether you read the result correctly is the part you cannot check on your own, and the green <strong>Answer</strong> boxes are there for exactly that. Compare your markdown cells against them.</p>
 <p>⬅️ Back to <a href="../../course-materials/coding-colabs/6d_two_table_exercise.html">the colab</a></p>
 </div>
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="c0b9ad2b" class="cell" data-execution_count="1">
+<div id="a4796cd7" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -468,8 +468,8 @@ How to use this key
 </section>
 <section id="part-1-making-one-table-out-of-two" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-making-one-table-out-of-two">Part 1: Making one table out of two</h2>
-<p><strong>1. How many rows does each table have, and what columns? What is the earliest and latest <code>Date</code> in each? (<code>.min()</code> and <code>.max()</code> on the <code>Date</code> column will do it, since these dates are text in <code>%Y-%m-%d</code> form and text in that form sorts correctly.)</strong></p>
-<div id="2b6140b2" class="cell" data-execution_count="2">
+<p><strong>1. How many rows does each table have, and what columns? What is the earliest and latest <code>Date</code> in each? (<code>.min()</code> and <code>.max()</code> on the <code>Date</code> column will do it, because these dates are text in <code>%Y-%m-%d</code> form and text in that form sorts correctly.)</strong></p>
+<div id="924b3f9f" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temp.shape, <span class="bu">list</span>(temp.columns))</span>
@@ -496,11 +496,11 @@ How to use this key
 <div class="callout-body-container callout-body">
 <p><strong>Temperature: 1736 rows, two columns (<code>Date</code>, <code>MonthlyAnomaly</code>), January 1880 to August 2024. CO₂: 796 rows, two columns (<code>Date</code>, <code>CO2Concentration</code>), April 1958 to July 2024.</strong></p>
 <p>Both tables have one row per month, and both row counts are exactly what the date spans require: 1880-01 through 2024-08 is 144 years and 8 months, which is 1736 months, and 1958-04 through 2024-07 is 796 months. Neither record has an internal gap, so every difference you find between the two tables from here on is a difference at the ends and not a hole in the middle.</p>
-<p>Note the second date pair as well as the first. The records start 78 years apart, but they also <strong>stop one month apart</strong>, and that second fact matters in question 4.</p>
+<p>Note the second date pair as well as the first. The records start 78 years apart, but they also <strong>stop one month apart</strong>, and the one-month gap at the end is what question 4 asks about.</p>
 </div>
 </div>
 <p><strong>2. Merge the two tables on <code>Date</code>, with the default <code>how=</code>. How many rows come back?</strong></p>
-<div id="92c3df3f" class="cell" data-execution_count="3">
+<div id="39940602" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>inner <span class="op">=</span> pd.merge(temp, co2, on<span class="op">=</span><span class="st">'Date'</span>)</span>
@@ -521,11 +521,11 @@ How to use this key
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>796 rows</strong>, which is exactly the CO₂ table’s row count. The default is <code>how='inner'</code>, so a row survives only when the same <code>Date</code> appears in both tables.</p>
-<p>That the answer equals 796 and not something smaller tells you every CO₂ month has a matching temperature row. The temperature record fully contains the CO₂ record in time, so the inner merge is limited entirely by the shorter of the two series. The 66 years of overlap are the CO₂ record, and nothing else.</p>
+<p>The answer comes back as 796 rather than something smaller, which tells you that every CO₂ month has a matching temperature row. The temperature record fully contains the CO₂ record in time, so the inner merge is limited entirely by the shorter of the two series. The 66 years of overlap are the CO₂ record, and nothing else.</p>
 </div>
 </div>
 <p><strong>3. Merge them again with <code>how='left'</code>, putting <code>temp</code> on the left. How many rows now, and how many nulls, in which column?</strong></p>
-<div id="8e95a31e" class="cell" data-execution_count="4">
+<div id="ca016603" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> pd.merge(temp, co2, on<span class="op">=</span><span class="st">'Date'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
@@ -551,11 +551,11 @@ dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>1736 rows, with 940 nulls, all of them in <code>CO2Concentration</code>.</strong> A left merge keeps every row of the left table whether or not a match exists, so the row count is the temperature table’s row count unchanged.</p>
-<p>The nulls are all in one column, and that is the signature of a left merge: the left table’s columns are complete by construction, and only the columns brought in from the right can be empty. 1736 minus 940 is 796, the inner merge’s answer, which is a useful arithmetic check that you merged what you thought you merged.</p>
+<p>A left merge leaves nulls in one place only, because the left table’s columns are complete by construction and only the columns brought in from the right can be empty. 1736 minus 940 is 796, the inner merge’s answer, which is a useful arithmetic check that you merged what you thought you merged.</p>
 </div>
 </div>
 <p><strong>4. In a markdown cell: the two merges differ by 940 rows. Provide a sentence explaining what those 940 rows contain (your answer to question 1 should already have this).</strong></p>
-<div id="434d8ee4" class="cell" data-execution_count="5">
+<div id="c20f9401" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>missing <span class="op">=</span> left[left[<span class="st">'CO2Concentration'</span>].isnull()]</span>
@@ -576,7 +576,7 @@ dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>They are the months when a temperature reading exists and a CO₂ reading does not</strong>, which is the 939 months from January 1880 through March 1958, before Keeling’s instrument was running, <strong>plus one more at the far end: August 2024</strong>.</p>
-<p>That last row is the part most pairs miss. It is easy to picture the gap as a single block at the start of the record, but the temperature series runs one month further than the CO₂ series does, so the unmatched months are at both ends. Your question 1 output said so: <code>2024-08-01</code> against <code>2024-07-01</code>. 939 plus 1 is 940, and if you predicted 939 you had the right idea and read only one of the two date pairs.</p>
+<p>The August 2024 row is an easy one to miss, because it is natural to picture the gap as a single block at the start of the record. The temperature series runs one month further than the CO₂ series does, so the unmatched months are at both ends, and your question 1 output said so already: <code>2024-08-01</code> against <code>2024-07-01</code>. 939 plus 1 is 940, so if you predicted 939 you had the right idea and read only one of the two date pairs!</p>
 </div>
 </div>
 <p><strong>5. Suppose you are writing one of the following two papers. For each one, say which merge you would use and why:</strong></p>
@@ -597,14 +597,14 @@ dtype: int64</code></pre>
 <p><strong>The first paper takes the inner merge, the second takes the left merge.</strong></p>
 <p>The first paper’s claim is about the two variables <strong>together</strong>. A month with no CO₂ value cannot contribute anything to a statement about how the two move in relation to each other, so those 940 rows are not data for this question. The inner merge’s 796 rows are the honest sample, and the paper’s title should really say 1958 to 2024, not 1880.</p>
 <p>The second paper is about temperature and mentions CO₂ nowhere. Throwing away 939 months of perfectly good thermometer readings because a different instrument had not been built yet would be a serious error, so the left merge is right. Better still, this paper does not need a merge at all; <code>temp</code> on its own is the dataset, and the CO₂ column is only there if you want it for context.</p>
-<p>The general point is that the <code>how=</code> argument is a decision about <strong>which question you are asking</strong>, not a technical detail of pandas. Choose it after you know what the analysis is for.</p>
+<p>The <code>how=</code> argument is a decision about <strong>which question you are asking</strong> rather than a technical detail of pandas, so choose it after you know what the analysis is for.</p>
 </div>
 </div>
 </section>
 <section id="part-2-making-the-dates-real" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-making-the-dates-real">Part 2: Making the dates real</h2>
 <p><strong>6 and 7. Build <code>climate</code>, parse the dates, add <code>year</code> and <code>month</code>.</strong></p>
-<div id="f854ccdb" class="cell" data-execution_count="6">
+<div id="bff9bc6b" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>climate <span class="op">=</span> pd.merge(temp, co2, on<span class="op">=</span><span class="st">'Date'</span>).copy()</span>
@@ -615,7 +615,7 @@ dtype: int64</code></pre>
 <pre><code>dtype('&lt;M8[ns]')</code></pre>
 </div>
 </div>
-<div id="7136e3a0" class="cell" data-execution_count="7">
+<div id="4bf06978" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>climate[<span class="st">'year'</span>] <span class="op">=</span> climate[<span class="st">'date'</span>].dt.year</span>
@@ -692,8 +692,8 @@ dtype: int64</code></pre>
 <p>Keep both columns for now. <code>Date</code> is text and <code>date</code> is a real timestamp, and they look identical when printed side by side, which is exactly why the dtype check is worth doing rather than eyeballing the head of the table.</p>
 </div>
 </div>
-<p><strong>8. Build a table of annual means: group by <code>year</code> and report the <em>count</em> of months, the mean of <code>MonthlyAnomaly</code>, and the mean of <code>CO2Concentration</code>. Show the first three rows and the last three.</strong></p>
-<div id="e64c4277" class="cell" data-execution_count="8">
+<p><strong>8. Build a table of annual means: group by <code>year</code> and report the count of months, the mean of <code>MonthlyAnomaly</code>, and the mean of <code>CO2Concentration</code>. Show the first three rows and the last three rows.</strong></p>
+<div id="d7cb2774" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>annual <span class="op">=</span> climate.groupby(<span class="st">'year'</span>).agg({<span class="st">'Date'</span>: <span class="st">'count'</span>,</span>
@@ -716,7 +716,7 @@ year
 </div>
 </div>
 <p><strong>9. Two of the sixty-seven years in the table are not twelve months long. Which two, and why? Filter the data into a new table called <code>full_years</code>. How many years survive?</strong></p>
-<div id="53612b31" class="cell" data-execution_count="9">
+<div id="262102fa" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>full_years <span class="op">=</span> annual[annual[<span class="st">'Date'</span>] <span class="op">==</span> <span class="dv">12</span>]</span>
@@ -747,10 +747,10 @@ year
 </div>
 </div>
 </section>
-<section id="part-3-a-graph-of-annual-amplitudes" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-a-graph-of-annual-amplitudes">Part 3: A graph of annual amplitudes</h2>
-<p><strong>10. Build a wide table with <code>year</code> down the rows, <code>month</code> across the columns, and <code>CO2Concentration</code> in the cells. Show the first three rows and the last three.</strong></p>
-<div id="f059b478" class="cell" data-execution_count="10">
+<section id="part-3-the-size-of-the-annual-cycle" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-the-size-of-the-annual-cycle">Part 3: The size of the annual cycle</h2>
+<p><strong>10. Build a wide table with <code>year</code> down the rows, <code>month</code> across the columns, and <code>CO2Concentration</code> in the cells. Show the first three rows and the last three rows.</strong></p>
+<div id="23bfa816" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>co2_grid <span class="op">=</span> climate.pivot_table(index<span class="op">=</span><span class="st">'year'</span>, columns<span class="op">=</span><span class="st">'month'</span>, values<span class="op">=</span><span class="st">'CO2Concentration'</span>)</span>
@@ -782,7 +782,7 @@ year
 2024      NaN     NaN     NaN  </code></pre>
 </div>
 </div>
-<p><strong>11. This new table holds two different patterns at once. Read it <em>down</em> a single column, then read it <em>across</em> a single row. In a markdown cell, describe both in one sentence each.</strong></p>
+<p><strong>11. The wide table holds two different patterns at once. Read it down a single column, then read it across a single row. In a markdown cell, describe both in one sentence each.</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -793,13 +793,13 @@ year
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Down a column is the trend:</strong> May goes from 318.29 ppm in 1959 to 424.00 ppm in 2023, a rise of 105.71 ppm over 64 years, and the same rise appears in whichever month you pick.</p>
-<p><strong>Across a row is the seasonal cycle:</strong> within 2023 the value climbs to a peak of 424.00 ppm in May and falls to a trough of 418.50 ppm in September before starting to climb again.</p>
-<p>The pivot separates the two patterns because it puts one on each axis. In the raw monthly column they are added together and you see a jagged rising line, which is harder to measure. Reshaping data is often what makes a comparison possible, and the <code>NaN</code> values in the 1958 and 2024 rows are the same two part years from question 9 showing up in a new shape.</p>
+<p><strong>Reading down a column shows the trend:</strong> May goes from 318.29 ppm in 1959 to 424.00 ppm in 2023, a rise of 105.71 ppm over 64 years, and the same rise appears in whichever month you pick.</p>
+<p><strong>Reading across a row shows the seasonal cycle:</strong> within 2023 the value climbs to a peak of 424.00 ppm in May and falls to a trough of 418.50 ppm in September before starting to climb again.</p>
+<p>The pivot separates the two patterns because it puts one on each axis. In the raw monthly column they are added together and you see a jagged rising line, which is harder to measure. Reshaping the data is often what makes a comparison possible. The <code>NaN</code> values in the 1958 and 2024 rows are the same two part years from question 9, turning up again in the wide table.</p>
 </div>
 </div>
-<p><strong>12. For every year, the difference between its largest monthly value and its smallest is the size of the annual cycle. Compute that difference for two specific years: 1959 and for 2023, and report both. (You will need two lines of code; one for each year)</strong></p>
-<div id="34f04e82" class="cell" data-execution_count="11">
+<p><strong>12. For every year, the difference between its largest monthly value and its smallest is the size of the annual cycle. Compute that difference for two specific years, 1959 and 2023, and report both. (You will need two lines of code; one for each year)</strong></p>
+<div id="c9a1563e" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(co2_grid.loc[<span class="dv">1959</span>].<span class="bu">max</span>() <span class="op">-</span> co2_grid.loc[<span class="dv">1959</span>].<span class="bu">min</span>())</span>
@@ -820,12 +820,12 @@ year
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>4.96 ppm in 1959 and 5.50 ppm in 2023</strong>, an increase of 0.54 ppm in the size of the annual cycle across 64 years. That is about 11 percent larger, on a cycle that was already the most regular feature of the record.</p>
+<p><strong>4.96 ppm in 1959 and 5.50 ppm in 2023</strong>, an increase of 0.54 ppm in the size of the annual cycle across 64 years. The 2023 cycle is about 11 percent larger than the 1959 one, which may or may not mean the annual cycle itself has changed (question 13 comes back to this).</p>
 <p>Report these to two decimal places. The 1959 figure prints as <code>4.960000000000036</code>, which is floating-point arithmetic showing through and not a real precision claim: the underlying measurements have two decimals, so their difference has two decimals.</p>
 </div>
 </div>
 <p><strong>13. In a markdown cell: the annual cycle in CO₂ is caused by vegetation (mainly in the northern hemisphere), which removes carbon from the atmosphere during the growing season and releases it back in the autumn/winter. Given that context, explain what your two numbers from question 12 might indicate. Are two years sufficient to make that inference?</strong></p>
-<div id="d77cf36e" class="cell" data-execution_count="12">
+<div id="7b0dd480" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="dv">1959</span>, <span class="dv">1960</span>, <span class="dv">1965</span>, <span class="dv">1991</span>, <span class="dv">2000</span>, <span class="dv">2016</span>, <span class="dv">2023</span>]:</span>
@@ -853,11 +853,11 @@ year
 <div class="callout-body-container callout-body">
 <p><strong>The reading is that the northern hemisphere’s growing season now moves more carbon each year than it did in 1959, and the confidence you should have in it, from two years, is very low.</strong></p>
 <p>The mechanism supports the reading. A larger swing means plants drew down more carbon between spring and autumn and released more of it again, which is what you would expect from a longer growing season, a warmer high-latitude spring, or simply more vegetation taking part.</p>
-<p>The evidence does not support it. Run the same subtraction on a few more years and the year to year scatter is larger than the change you are trying to see: 1960 is 6.20 ppm, larger than 2023’s 5.50, and 2000 is 4.83, smaller than 1959’s 4.96. 1959 is the third smallest cycle in all 65 full years, so question 12 compared a year with an unusually small cycle against an ordinary one. The honest statement is that two years cannot separate a trend from noise, and that measuring this properly means averaging the cycle over a decade at each end, or fitting a line through all 65 values.</p>
+<p>The evidence does not support it. Run the same subtraction on a few more years and the year to year scatter is larger than the change you are trying to see: 1960 is 6.20 ppm, larger than 2023’s 5.50, and 2000 is 4.83, smaller than 1959’s 4.96. 1959 is the third smallest cycle in all 65 full years, so question 12 compared a year with an unusually small cycle against an ordinary one. Two years cannot separate a trend from year to year scatter, and measuring this properly would mean averaging the cycle over a decade at each end, or fitting a line through all 65 values.</p>
 </div>
 </div>
 <p><strong>14. Build the same wide table for <code>MonthlyAnomaly</code>. Does the temperature record have a comparable seasonal cycle in it? Say why or why not in one sentence.</strong></p>
-<div id="9c91a26a" class="cell" data-execution_count="13">
+<div id="e01a449d" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>temp_grid <span class="op">=</span> climate.pivot_table(index<span class="op">=</span><span class="st">'year'</span>, columns<span class="op">=</span><span class="st">'month'</span>, values<span class="op">=</span><span class="st">'MonthlyAnomaly'</span>)</span>
@@ -871,7 +871,7 @@ year
 2024   1.24  1.43  1.40  1.32  1.16  1.25  1.21   NaN   NaN   NaN   NaN   NaN</code></pre>
 </div>
 </div>
-<div id="5303b18f" class="cell" data-execution_count="14">
+<div id="a4b4b3ff" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>temp_grid.mean().<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -904,15 +904,15 @@ dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>No, and it is missing by construction.</strong> An anomaly is already a difference: each month’s temperature minus that same month’s long-term average. January is compared against Januaries and July against Julys, so the seasonal cycle has been subtracted out before the number reaches your table.</p>
-<p>The column means show it. Averaged over the whole table the twelve months span 0.350 °C in August to 0.446 °C in March, a spread of about 0.10 °C, and some of even that comes from the two incomplete years contributing to some columns and not others. Compare that with CO₂, where a single year swings 5 ppm out of a total range of about 110 ppm.</p>
-<p>Individual rows do vary. 2023 runs from 0.87 °C in January to 1.48 °C in September, a spread of 0.61 °C. That is real variation in how far each month sat above its own baseline, not a repeating seasonal shape, and it does not line up with the same months from one year to the next.</p>
+<p>The column means show it. Averaged over the whole table the twelve months span 0.350 °C, in August and again in September, to 0.446 °C in March, a spread of about 0.10 °C, and some of even that comes from the two incomplete years contributing to some columns and not others. Compare that with CO₂, where a single year swings 5 ppm out of a total range of about 115 ppm.</p>
+<p>Individual rows do vary. 2023 runs from 0.87 °C in January to 1.48 °C in September, a spread of 0.61 °C. The spread is real variation in how far each month sat above its own baseline rather than a repeating seasonal cycle, and it does not line up with the same months from one year to the next.</p>
 </div>
 </div>
 </section>
 <section id="part-4-making-a-statement-about-change" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-making-a-statement-about-change">Part 4: Making a statement about change</h2>
 <p><strong>15. Using <code>full_years</code>, compare the 1960s with the 2010s. Compute the mean of each column for <code>year</code> between 1960 and 1969, and again for <code>year</code> between 2010 and 2019, and report the change in each.</strong></p>
-<div id="646086be" class="cell" data-execution_count="15">
+<div id="7f47be24" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sixties <span class="op">=</span> full_years[(full_years.index <span class="op">&gt;=</span> <span class="dv">1960</span>) <span class="op">&amp;</span> (full_years.index <span class="op">&lt;=</span> <span class="dv">1969</span>)]</span>
@@ -941,7 +941,7 @@ dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>CO₂ rose from 320.29 ppm to 400.41 ppm, an increase of 80.12 ppm, and the temperature anomaly rose from -0.030 °C to 0.805 °C, an increase of 0.835 °C.</strong></p>
-<p>Both decades are ten complete years drawn from <code>full_years</code>, which is what makes the two means comparable. The 1960s anomaly is very slightly negative, meaning that decade sat a hundredth of a degree below the twentieth-century baseline, so the 2010s figure is a rise from roughly zero rather than a rise from something already elevated. In relative terms the CO₂ increase is 25.0 percent of the 1960s level.</p>
+<p>Both decades are ten complete years drawn from <code>full_years</code>, which is what makes the two means comparable. The 1960s anomaly is very slightly negative, meaning that decade sat a few hundredths of a degree below the twentieth-century baseline, so the 2010s figure is a rise from roughly zero rather than a rise from something already elevated. In relative terms the CO₂ increase is 25.0 percent of the 1960s level.</p>
 </div>
 </div>
 <p><strong>16. In a markdown cell of four or five sentences: state what these calculations indicate in terms of changes in the temperature and CO2 concentrations, with units. You have put two variables in the same table and found that both varied together; explain what a data scientist would need before making a causal claim about this covariation.</strong></p>
@@ -957,8 +957,8 @@ dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>Between the 1960s and the 2010s, atmospheric CO₂ measured at Mauna Loa rose by 80.12 ppm, from a decadal mean of 320.29 ppm to 400.41 ppm, and the global temperature anomaly rose by 0.835 °C, from -0.030 °C to 0.805 °C. Both decades are built from ten complete twelve-month years, so the two means are comparable and neither is distorted by a partial year.</p>
-<p>What this analysis shows is that two quantities both increased over the same 66 years. It does not show that one caused the other. Any pair of series that both rise steadily will agree in this test, including many with no physical connection at all, and this comparison has no way to tell them apart. The 796-row overlap is also a single sample of a single planet, so there is no control case in which CO₂ stayed flat and we could see what temperature did.</p>
-<p>Before calling this causal, a scientist would need a physical mechanism that predicts the size of the effect in advance, and here that mechanism exists: the radiative absorption properties of CO₂ were measured in the laboratory in the nineteenth century, and they predict roughly this much warming for roughly this much CO₂. The prediction came first and the observation matched it, and that is what makes the argument strong. It would also help to rule out the alternatives, showing that solar output and volcanic aerosols over the same period do not account for the trend. My two columns are consistent with the accepted explanation, and consistency is not evidence of cause on its own.</p>
+<p>The analysis shows that two quantities both increased over the same 66 years. It does not show that one caused the other. Any pair of series that both rise steadily will agree in this test, including many with no physical connection at all, and this comparison has no way to tell them apart. The 796-row overlap is also a single sample of a single planet, so there is no control case in which CO₂ stayed flat and we could see what temperature did.</p>
+<p>Before calling this causal, a scientist would need a physical mechanism that predicts the size of the effect in advance, and here that mechanism exists: the radiative absorption properties of CO₂ were measured in the laboratory in the nineteenth century, and they predict roughly this much warming for roughly this much CO₂. The prediction came first and the observation matched it, which is what makes the argument strong. It would also help to rule out the alternatives, showing that solar output and volcanic aerosols over the same period do not account for the trend. My two columns are consistent with the accepted explanation, and consistency is not evidence of cause on its own.</p>
 </div>
 </div>
 </section>
@@ -966,10 +966,10 @@ dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="where-the-marks-are">Where the marks are</h2>
 <p>If you compare your notebook against this key, look for these four things before you look at anything else.</p>
 <ol type="1">
-<li><strong>You know why the inner merge returned exactly 796 rows.</strong> Not “because inner keeps matches”, but because 796 is the CO₂ table’s own row count, which means the shorter record set the limit and nothing was lost from it.</li>
-<li><strong>Your question 4 answer counts both ends.</strong> 939 months at the start and one month, August 2024, at the finish. Question 1 printed the evidence for both.</li>
-<li><strong>Every mean you reported came with a count, or from <code>full_years</code>.</strong> The 2024 row is the cautionary case: a seven-month mean that would have topped the warmest-year ranking, with nothing in the output to show that it came from seven months.</li>
-<li><strong>Your question 13 answer is honest about two years.</strong> Naming the mechanism is the easy half. Saying that 1959 against 2023 cannot separate a trend from year to year scatter is the half that earns the marks, and the extra years above are how you check it.</li>
+<li><strong>You should be able to say why the inner merge returned exactly 796 rows.</strong> Not “because inner keeps matches”, but because 796 is the CO₂ table’s own row count, which means the shorter record set the limit and nothing was lost from it.</li>
+<li><strong>Your question 4 answer should count both ends.</strong> 939 months at the start and one month, August 2024, at the finish. Question 1 printed the evidence for both.</li>
+<li><strong>Every mean you reported should have come with a count, or come from <code>full_years</code>.</strong> The 2024 row is the cautionary case: a seven-month mean that would have topped the warmest-year ranking, with nothing in the output to show that it came from seven months.</li>
+<li><strong>Your question 13 answer should be candid about two years.</strong> Naming the mechanism is the easy half. Saying that 1959 against 2023 cannot separate a trend from year to year scatter is the half that earns the marks, and the extra years above are how you check it.</li>
 </ol>
 <p>⬅️ Back to <a href="../../course-materials/coding-colabs/6d_two_table_exercise.html">the colab</a></p>
 

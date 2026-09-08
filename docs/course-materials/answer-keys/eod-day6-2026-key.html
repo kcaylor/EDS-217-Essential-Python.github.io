@@ -450,13 +450,13 @@ How to use this key
 </div>
 <div class="callout-body-container callout-body">
 <p>Work the exercise first, then come here. The code below is <strong>one</strong> correct answer, not the only one. If your code looks different but produces the same numbers, you were right.</p>
-<p>The written answers matter more than the code. You can already tell whether your code ran. What you cannot check on your own is whether you read the result correctly, and that is what the green <strong>Answer</strong> boxes are for. Compare your markdown cells against them.</p>
+<p>The written answers matter more than the code. You can already tell whether your code ran, but you cannot easily tell on your own whether you read the result correctly, and the green <strong>Answer</strong> boxes are there for exactly that. Compare your markdown cells against them.</p>
 <p>⬅️ Back to <a href="../../course-materials/eod-practice/eod-day6-2026.html">the exercise</a></p>
 </div>
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="8ebf27d8" class="cell" data-execution_count="1">
+<div id="cc761ded" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -469,7 +469,7 @@ How to use this key
 <section id="part-1-what-is-in-this-file-and-what-is-missing-from-it" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-what-is-in-this-file-and-what-is-missing-from-it">Part 1: What is in this file, and what is missing from it</h2>
 <p><strong>1. How many rows and columns? What are the column names, and what is the range of <code>year</code>?</strong></p>
-<div id="94e5614f" class="cell" data-execution_count="2">
+<div id="e549b9f4" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eurovision.shape)</span>
@@ -493,11 +493,11 @@ How to use this key
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>1,603 rows and 21 columns, covering 1956 to 2020.</strong> The unit of a row is one country’s entry in one contest, not one contest, which is why there are 1,603 rows for 65 years.</p>
-<p>That span of 65 years contains 65 distinct values of <code>year</code>, so every year in the range is represented in the file, including the one that did not happen. Of the 21 columns, most describe a result rather than a song: place and points in the final, place and points in the semi-final, and since 2016 the jury and televote components of each.</p>
+<p>The span of 65 years contains 65 distinct values of <code>year</code>, so every year in the range is represented in the file, including the one that did not happen. Of the 21 columns, most describe a result rather than a song: place and points in the final, place and points in the semi-final, and since 2016 the jury and televote components of each.</p>
 </div>
 </div>
 <p><strong>2. Run <code>.isnull().sum()</code>. Several columns are null on well over a thousand of the 1,603 rows. Pick two of them and, in a markdown cell, propose an explanation for each that has nothing to do with anybody making a mistake.</strong></p>
-<div id="90b1f4a6" class="cell" data-execution_count="3">
+<div id="c0b1676d" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>eurovision.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -539,12 +539,12 @@ dtype: int64</code></pre>
 <div class="callout-body-container callout-body">
 <p><strong>Both of the worst columns are null because the thing they measure did not exist yet.</strong></p>
 <p><code>sf_num</code> is null on 1,046 rows. The 557 rows where it is present all fall in 2004 or later, which is when the contest introduced a semi-final. Before 2004 there was no semi-final to number, so <code>place_sf</code>, <code>points_sf</code> and <code>running_sf</code> are null on 1,081 rows for the same reason.</p>
-<p><code>points_tele_final</code> and <code>points_jury_final</code> are null on 1,499 rows. The 104 rows where they are present are all from 2016 to 2019, which is when the contest began publishing the televote and the jury vote as two separate scores instead of one combined number. The earlier scores were recorded as one combined number and never split into two.</p>
-<p>The distinction worth remembering is this: a null can mean “not recorded”, but here it means “not applicable”, and neither one is a mistake. Dropping every row with a null in this file would leave you with almost nothing.</p>
+<p><code>points_tele_final</code> and <code>points_jury_final</code> are null on 1,499 rows. The 104 rows where they are present are all from 2016 to 2019, which is when the contest began publishing the televote and the jury vote as two separate scores. Every earlier contest recorded a single combined score, and nobody went back afterwards to split the old results in two.</p>
+<p>A null can mean “not recorded”, but in this file it usually means “not applicable”, and neither one is anybody’s mistake. Dropping every row with a null here would leave you with almost nothing.</p>
 </div>
 </div>
 <p><strong>3. <code>points_final</code> is the column the rest of this exercise depends on, and it is null on 295 rows. Group by <code>year</code> and count the non-null <code>points_final</code> values in each. Look at the last few years.</strong></p>
-<div id="16036085" class="cell" data-execution_count="4">
+<div id="518e5399" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>eurovision.groupby(<span class="st">'year'</span>)[<span class="st">'points_final'</span>].count().tail(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -570,10 +570,10 @@ Name: points_final, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>The recent years sit at 26 or 27 finalists each, and then 2020 reports 0.</strong> Note that <code>.count()</code> counts non-null values, which is exactly why it is the right verb here: 26 is the number of countries that reached the final and were scored, not the number that entered.</p>
+<p><strong>The recent years sit at 26 or 27 finalists each, and then 2020 reports 0.</strong> Note that <code>.count()</code> counts non-null values, which is why it is the right method here: 26 is the number of countries that reached the final and were scored, not the number that entered.</p>
 </div>
 </div>
-<p><strong>4. One year has a count of zero. Which one, and what happened? (You may look this up. It is the only fact in this exercise that is not in the file.)</strong></p>
+<p><strong>4. One of the years you just printed has a count of zero. Which one, and what happened? (You may look this up. It is the only thing you are asked to look up in this exercise.)</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -585,8 +585,8 @@ Name: points_final, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>2020.</strong> The contest was cancelled in March 2020 because of the COVID-19 pandemic, the first cancellation in its history. The 41 entries are in the file with their performers and songs because they had been selected before the cancellation, but no country ever performed and no points were ever awarded, so <code>points_final</code> and <code>place_contest</code> are null on all 41 rows.</p>
-<p>There is a second year at zero, and the <code>.tail(6)</code> hides it. Print the head of the same series:</p>
-<div id="14fbfdbc" class="cell" data-execution_count="5">
+<p>A second year also has a count of zero, and <code>.tail(6)</code> hides it. Print the head of the same series:</p>
+<div id="7132cd43" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>eurovision.groupby(<span class="st">'year'</span>)[<span class="st">'points_final'</span>].count().head(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -602,11 +602,11 @@ Name: points_final, dtype: int64</code></pre>
 Name: points_final, dtype: int64</code></pre>
 </div>
 </div>
-<p><strong>1956 also has a count of zero</strong>, on 12 entries, and for a completely different reason: the scores of the first contest were never published. Only the winner was announced. The two zeros look identical and have different causes: in 2020 no contest took place, and in 1956 the contest took place and the numbers were not released. A count is a useful diagnostic, but it tells you the size of a hole and not its cause.</p>
+<p><strong>1956 also has a count of zero</strong>, on 12 entries, and for a completely different reason: the scores of the first contest were never published. Only the winner was announced. The two zeros look identical in the output and have completely different causes: in 2020 no contest took place, and in 1956 the contest took place and the numbers were never released.</p>
 </div>
 </div>
 <p><strong>5. Build a table called <code>contests</code> that excludes that year, using the filter pattern and ending the line with <code>.copy()</code>. How many rows does it have?</strong></p>
-<div id="8f4ba02a" class="cell" data-execution_count="6">
+<div id="8e7a6ac2" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>contests <span class="op">=</span> eurovision[eurovision[<span class="st">'year'</span>] <span class="op">!=</span> <span class="dv">2020</span>].copy()</span>
@@ -626,15 +626,15 @@ Name: points_final, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>1,562 rows</strong>, exactly 41 fewer than the 1,603 you started with, which confirms you removed the 2020 entries and nothing else. Checking the row count against a number you can predict is the cheapest way to know a filter did what you meant.</p>
-<p>Note that 1956 is still in <code>contests</code>. Its 12 rows have null <code>points_final</code>, so every mean and count in the rest of the practice quietly ignores them, and that is the correct behaviour: pandas skips nulls in <code>.mean()</code> and <code>.count()</code> rather than treating them as zero.</p>
+<p><strong>1,562 rows</strong>, exactly 41 fewer than the 1,603 you started with, which confirms you removed the 2020 entries and nothing else. Whenever you filter, work out the row count you expect before you run the line and then check it, because a filter that quietly matched more or less than you meant usually shows up first as a number you did not predict.</p>
+<p>Note that 1956 is still in <code>contests</code>. Its 12 rows have null <code>points_final</code>, so every mean and count in the rest of the practice ignores them without saying so, which is the behaviour you want here: pandas skips nulls in <code>.mean()</code> and <code>.count()</code> rather than treating them as zero.</p>
 </div>
 </div>
 </section>
 <section id="part-2-decades" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-decades">Part 2: Decades</h2>
 <p><strong>6. Add a <code>decade</code> column. Divide <code>year</code> by ten, convert the result to an integer, and multiply by ten. <code>.astype(int)</code> truncates toward zero, which is exactly what you want here. Then count the entries in each decade.</strong></p>
-<div id="2ed78732" class="cell" data-execution_count="7">
+<div id="84b3e657" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>contests[<span class="st">'decade'</span>] <span class="op">=</span> (contests[<span class="st">'year'</span>] <span class="op">/</span> <span class="dv">10</span>).astype(<span class="bu">int</span>) <span class="op">*</span> <span class="dv">10</span></span>
@@ -663,11 +663,11 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>The count rises from 43 entries in the 1950s to 408 in the 2010s, roughly a tenfold increase.</strong> Some of that is real growth in the number of competing countries, but part of it is an artifact of the bin: the 1950s decade holds only four contests, 1956 to 1959, while every later decade holds ten. A per-decade total is not comparable across decades unless you also know how many contests each decade contains.</p>
+<p><strong>The count rises from 43 entries in the 1950s to 408 in the 2010s, roughly a tenfold increase.</strong> Some of the rise is real growth in the number of competing countries, but part of it is an artifact of the bin: the 1950s decade holds only four contests, 1956 to 1959, while every later decade holds ten. A per-decade total is not comparable across decades unless you also know how many contests each decade contains.</p>
 </div>
 </div>
 <p><strong>7. Count the entries in each year from 2000 to 2007. What changes abruptly? In which year? In a markdown cell, say what a sudden jump in entries per contest would do to a comparison of average scores between the 1990s and the 2010s.</strong></p>
-<div id="e54c339e" class="cell" data-execution_count="8">
+<div id="7aebb789" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>contests.groupby(<span class="st">'year'</span>)[<span class="st">'to_country'</span>].count().loc[<span class="dv">2000</span>:<span class="dv">2007</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -695,15 +695,15 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>The field jumps from 26 entries in 2003 to 36 in 2004, and keeps growing to 42 by 2007.</strong> That is the year the semi-final was introduced, which is the same 2004 that first fills in <code>sf_num</code>. Once countries no longer all had to fit into one evening, many more could enter.</p>
-<p>For a comparison of average scores this is a serious problem. Points are awarded by the competing countries, so a larger field means more voters, which means more points in circulation, which raises every score whether or not any song improved. A 2010s average and a 1990s average are measured on scales that differ by roughly a factor of two in the number of voters, so comparing them directly measures the size of the contest rather than the quality of the entries.</p>
+<p><strong>The field jumps from 26 entries in 2003 to 36 in 2004, and keeps growing to 42 by 2007.</strong> 2004 is the year the semi-final was introduced, the same 2004 that first fills in <code>sf_num</code>. Once countries no longer all had to fit into one evening, many more of them could enter.</p>
+<p>The jump is a serious problem for any comparison of average scores. Points are awarded by the competing countries, so a larger field means more voters, which means more points in circulation, which raises every score whether or not any song improved. A 2010s average and a 1990s average are measured on scales that differ by roughly a factor of two in the number of voters, so comparing them directly measures the size of the contest rather than the quality of the entries.</p>
 </div>
 </div>
 </section>
 <section id="part-3-the-best-country-of-each-decade" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-the-best-country-of-each-decade">Part 3: The best country of each decade</h2>
-<p><strong>8. Build a table with one row per decade, holding the country with the highest average <code>points_final</code> in that decade, how many entries that average came from, and the average itself.</strong></p>
-<div id="cb982563" class="cell" data-execution_count="9">
+<p><strong>8. Build a table with one row per decade, holding the country with the highest average <code>points_final</code> in that decade, how many scored finals that average came from, and the average itself.</strong></p>
+<div id="e3733ceb" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>decade_winners_list <span class="op">=</span> []</span>
@@ -789,7 +789,6 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<p><strong>9. Read the <code>count</code> column before you read the <code>mean</code> column. Three of the seven winners won on fewer than four entries. Name them, and say in one sentence why you would not put any of them in a headline.</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -800,8 +799,26 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>France, which tops the 1950s at 19.7 points from 3 entries; Serbia, which tops the 2000s at 214.0 from 2 finals; and Bulgaria, which tops the 2010s at 362.7 from 3.</strong> A mean of two or three numbers moves by tens of points if a single entry is different, so none of the three is stable enough to call a country the best of its decade.</p>
-<p>The other four winners are the ones with enough behind them to report: the United Kingdom in the 1960s and 1970s, on 10 entries each, and Ireland in the 1980s and 1990s, on 9 and 10. Three of seven decade winners resting on three entries or fewer is itself a result about the method rather than about the countries, since taking the highest mean in a group is exactly the operation that selects for small counts.</p>
+<p><strong>Seven rows and four columns: France takes the 1950s, the United Kingdom the 1960s and 1970s, Ireland the 1980s and 1990s, Serbia the 2000s and Bulgaria the 2010s.</strong> The <code>count</code> column should read 3, 10, 10, 9, 10, 2 and 3 down the page, and the <code>mean</code> column 19.7, 23.1, 93.2, 99.2, 119.2, 214.0 and 362.7. If your table names the same seven countries against the same seven decades, you built it correctly, even if your columns arrived in a different order or under different names.</p>
+<p>The pattern is the one we used this morning: build the pieces, collect them in a list, and stack the list once at the end. Each pass through the loop builds a one-row DataFrame, the list collects them, and the single <code>pd.concat()</code> after the loop stacks all seven rows into one table. <code>ignore_index=True</code> matters more here than it did this morning, because each of those rows kept whatever row label it happened to have inside its own decade’s sorted table, so without it the finished table is numbered 3, 16, 20, 9, 13, 37, 8 rather than 0 through 6, and nothing stops two decades landing on the same label.</p>
+<p>Two things can go wrong here and still leave you with a table that looks perfectly reasonable. Leaving <code>ascending=False</code> out of <code>.sort_values()</code> sorts the other way, because ascending is the default, and <code>.head(1)</code> then hands you the worst country of each decade in a table that is otherwise the right size. Reaching for <code>.max()</code> on the <code>mean</code> column instead of <code>.head(1)</code> on the sorted table gives you the number without the name, 362.7 for the 2010s with no Bulgaria attached to it, and the name is half of what the question asked for.</p>
+<p><code>.reset_index()</code> is the line that turns <code>to_country</code> from the index into a column, which is what lets the last line select it by name. A version of the loop that leaves the reset out stops with a <code>KeyError</code> on <code>to_country</code> rather than returning a wrong table, so you will know about it right away.</p>
+</div>
+</div>
+<p><strong>9. Read the <code>count</code> column before you read the <code>mean</code> column. Remember what <code>.count()</code> counts: the non-null <code>points_final</code> values, which is finals a country was scored in, not contests it entered. Three of the seven winners were scored in fewer than four finals. Name them, and say in one sentence why you would not put any of them in a headline.</strong></p>
+<div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+✅ Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>France, which tops the 1950s at 19.7 points from 3 scored finals; Serbia, which tops the 2000s at 214.0 from 2; and Bulgaria, which tops the 2010s at 362.7 from 3.</strong> A mean of two or three numbers moves by tens of points if a single result is different, so none of the three winners is stable enough to call a country the best of its decade.</p>
+<p>Read the gap between finals and entries while you are here, because it is larger than it looks. France entered five times in the 1950s and was scored in three, Serbia entered three times in the 2000s and was scored in two, and Bulgaria entered seven times in the 2010s and was scored in three. Bulgaria’s 362.7 is an average of its three best years, and the four years it failed to qualify contribute nothing to it.</p>
+<p>The other four winners are the ones with enough behind them to report: the United Kingdom in the 1960s and 1970s, on 10 finals each, and Ireland in the 1980s and 1990s, on 9 and 10. Three of the seven decade winners resting on three finals or fewer tells you something about the method rather than about the countries, because taking the highest mean within a group is exactly the operation that selects for small counts.</p>
 </div>
 </div>
 <p><strong>10. The <code>mean</code> column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown cell, two or three sentences: is Europe getting better at writing songs? What else changed between 1956 and 2019 that would produce this pattern? What would you have to divide by to remove it?</strong></p>
@@ -815,15 +832,15 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>No.&nbsp;What changed is the scale on which points are awarded.</strong> Points come from the competing countries, and the field grew from about ten entrants in the 1950s to 42 in 2007, so the total number of points available grew with it. On top of that, the contest split the jury vote and the televote into two separate awards in 2016, which roughly doubled the points available again: the winning score was 152 in 1975 and 148 in 1995, but 365 in 2015 and 498 in 2019.</p>
-<p>To remove the effect you would divide each score by the total points available in that year, or by the year’s winning score, turning an absolute total into a share. A mean of shares is comparable across decades. A mean of raw points measures how many countries were competing.</p>
+<p><strong>No.&nbsp;The change is in the scale on which points are awarded.</strong> Points come from the competing countries, and the field grew from about ten entrants in the 1950s to 42 in 2007, so the total number of points available grew with it. The contest also split the jury vote and the televote into two separate awards in 2016, which raised the ceiling again: the winning score was 152 in 1975 and 148 in 1995, then 365 in 2015, the last year before the split, and 534 in 2016, the first year after it. It has stayed in that range since, at 498 in 2019.</p>
+<p>To remove the effect you would divide each score by the total points available in that year, or by the year’s winning score, turning an absolute total into a share. A mean of shares can be compared across decades, while a mean of raw points mostly measures how many countries were competing.</p>
 </div>
 </div>
 </section>
 <section id="part-4-the-second-table" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-the-second-table">Part 4: The second table</h2>
 <p><strong>11. Read the population file at <code>https://eds-217-essential-python.github.io/data/eurovision_country_populations.csv</code>. How many rows, and what are its columns?</strong></p>
-<div id="d98825fb" class="cell" data-execution_count="10">
+<div id="2a3785c4" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pop_url <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/eurovision_country_populations.csv'</span></span>
@@ -847,11 +864,11 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>52 rows and two columns, <code>country_name</code> and <code>population</code>.</strong> 52 is the number of countries that have ever entered, so this file has one row per country over the whole history of the contest, while <code>contests</code> has one row per country per year. The two tables are at different grains, and that is exactly why a merge is needed rather than a concatenation.</p>
+<p><strong>52 rows and two columns, <code>country_name</code> and <code>population</code>.</strong> The 52 rows are the 52 countries that have ever entered, so the population file holds one row per country over the whole history of the contest, while <code>contests</code> holds one row per country per year. The two tables are at different grains, which is why they need a merge rather than a concatenation.</p>
 </div>
 </div>
 <p><strong>12. Build a table called <code>modern</code> holding only contests from 1990 onwards, then count the entries per country and turn that count into a two-column table using the Series-to-table move. Rename the columns to <code>country</code> and <code>entries</code>.</strong></p>
-<div id="8314b08e" class="cell" data-execution_count="11">
+<div id="6a189c3c" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>modern <span class="op">=</span> contests[contests[<span class="st">'year'</span>] <span class="op">&gt;=</span> <span class="dv">1990</span>].copy()</span>
@@ -915,11 +932,11 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>51 countries, and four of them are at the ceiling of 30: France, the United Kingdom, Spain and Sweden.</strong> The window 1990 to 2019 holds exactly 30 contests, and no country can enter a contest twice, so 30 means “entered every single year” and no number in this column can ever exceed it. Knowing the maximum a count is allowed to reach is worth as much as knowing the count.</p>
+<p><strong>51 countries, and four of them are at the ceiling of 30: France, the United Kingdom, Spain and Sweden.</strong> The window 1990 to 2019 holds exactly 30 contests, and no country can enter a contest twice, so 30 means “entered every single year” and no number in this column can ever exceed it. Before you read a column of counts, work out the largest value it is allowed to take, because a 30 here means “every year since 1990” rather than just a big number, and a 31 would mean something had gone wrong in the count.</p>
 </div>
 </div>
 <p><strong>13. Merge <code>counts</code> with <code>populations</code>. The key columns have different names, so you will need <code>left_on=</code> and <code>right_on=</code>. Do it twice, once with the default <code>how=</code> and once with <code>how='right'</code>, and report both shapes.</strong></p>
-<div id="b730e41e" class="cell" data-execution_count="12">
+<div id="c2000be4" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>entries <span class="op">=</span> pd.merge(counts, populations, left_on<span class="op">=</span><span class="st">'country'</span>, right_on<span class="op">=</span><span class="st">'country_name'</span>)</span>
@@ -944,11 +961,11 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>51 rows from the default inner merge and 52 from the right merge, a difference of exactly one row.</strong> The default <code>how='inner'</code> keeps only keys present in both tables, so it returns the 51 countries that have both a modern entry count and a population. <code>how='right'</code> keeps every row of the population file whether or not the left table matched, so the 52nd country arrives with nulls in its <code>country</code> and <code>entries</code> columns.</p>
-<p>Running the merge twice is the diagnostic. The inner merge alone would have told you 51 and given you no way to know that anything was dropped.</p>
+<p>Running the merge a second time, with the right join, is the diagnostic here, because the inner merge on its own would have told you 51 and given you no way to know that anything had been dropped.</p>
 </div>
 </div>
 <p><strong>14. One country is in the population file and not in your counts. Find it, name it, and then find every row for it in the full <code>eurovision</code> table. In a markdown cell, say what you learned and why the inner merge was right to drop it.</strong></p>
-<div id="0352bf0b" class="cell" data-execution_count="13">
+<div id="cb32ff3a" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(check[check[<span class="st">'entries'</span>].isnull()][[<span class="st">'country_name'</span>, <span class="st">'population'</span>]])</span>
@@ -972,12 +989,12 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Morocco, population 24,807,462, with exactly one row in the whole file: Samira Bensaïd singing “Bitakat Hob” in 1980, finishing 18th with 7 points.</strong> Morocco has never returned.</p>
-<p>The inner merge was right because <code>counts</code> is a table of entries since 1990, and Morocco has none. It is absent from <code>value_counts()</code> output for the plain reason that <code>value_counts()</code> can only count values that appear, and a country with no rows in <code>modern</code> has no value to count. Dropping it keeps the table honest about what it contains: countries that compete in the modern contest.</p>
-<p>The subtle part is what the null in the right merge means. It does not mean Morocco’s entry count is unknown, and it does not mean it is zero in general, since the 1980 entry is real. It means “this key had no match on the left”, and only you can decide which of those three readings applies. Had you filled it with zero and kept it, the entries-per-million table in the next question would include a country that stopped competing ten years before the window opens.</p>
+<p>The inner merge was right because <code>counts</code> is a table of entries since 1990, and Morocco has none. Morocco is absent from the <code>value_counts()</code> output because <code>value_counts()</code> can only count values that appear, and a country with no rows in <code>modern</code> has no value to count. Dropping it keeps the table honest about what it contains: countries that compete in the modern contest.</p>
+<p>The null in the right merge is the subtle part, because it can be read three ways. It does not mean Morocco’s entry count is unknown, and it does not mean the count is zero in general, because the 1980 entry is real. It means “this key had no match on the left”, and you have to decide which of the three readings applies before you fill anything in. If you had filled it with zero and kept the row, the entries-per-million table in the next question would include a country that stopped competing ten years before the window opens.</p>
 </div>
 </div>
 <p><strong>15. Add an <code>entries_per_million</code> column to <code>entries</code>: the entry count divided by the population in millions. (<code>1_000_000</code> is a perfectly good way to write a million in Python; the underscores are ignored.) Rank it and show the top eight and the bottom five.</strong></p>
-<div id="00ea7889" class="cell" data-execution_count="14">
+<div id="dc74b17c" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>entries[<span class="st">'entries_per_million'</span>] <span class="op">=</span> entries[<span class="st">'entries'</span>] <span class="op">/</span> (entries[<span class="st">'population'</span>] <span class="op">/</span> <span class="dv">1_000_000</span>)</span>
@@ -1005,7 +1022,7 @@ Name: to_country, dtype: int64</code></pre>
 49           Yugoslavia        3    23818000             0.125955</code></pre>
 </div>
 </div>
-<p><strong>16. The top of that ranking is San Marino, Andorra, Iceland, Monaco and Malta, and the bottom is Russia, Italy and Ukraine. In a markdown cell, three or four sentences: is <em>entries per million people</em> a meaningful quantity? What is it actually measuring, and what would you have to know about how the file’s population numbers were collected before you would publish this table?</strong></p>
+<p><strong>16. The top of that ranking is San Marino, Andorra, Iceland, Monaco and Malta, and the bottom is Yugoslavia, Russia and Serbia &amp; Montenegro. In a markdown cell, three or four sentences: is <em>entries per million people</em> a meaningful quantity? What is it actually measuring, and what would you have to know about how the file’s population numbers were collected before you would publish this table?</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1016,8 +1033,9 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>It is arithmetically correct and close to meaningless, because it is almost entirely a ranking of small populations.</strong> The numerator cannot exceed 30, so it varies by a factor of about ten across the table, while the denominator varies by a factor of more than six thousand, from San Marino at 23,186 to Russia at 148,005,704. Whichever country is smallest will top this ranking almost regardless of how often it competes: San Marino reaches 431.3 entries per million on only 10 entries, while Russia’s 22 entries give 0.149.</p>
-<p>What it actually measures is roughly one divided by population, presented as a rate. It says nothing about enthusiasm per person, because a country sends one entry no matter how many people live in it. The quantity would be meaningful only if the numerator could scale with population, and here by rule it cannot.</p>
+<p><strong>It is arithmetically correct and close to meaningless, because it is almost entirely a ranking of small populations.</strong> The numerator cannot exceed 30 and falls as low as 2, so it varies by a factor of fifteen across the table, while the denominator varies by a factor of more than six thousand, from San Marino at 23,186 to Russia at 148,005,704. Whichever country is smallest will top this ranking almost regardless of how often it competes: San Marino reaches 431.3 entries per million on only 10 entries, while Russia’s 22 entries give 0.149.</p>
+<p>The bottom three make the same point from the other end. Yugoslavia sits last at 0.126 on three entries and Serbia &amp; Montenegro third from last at 0.204 on two, and neither is a country that competed rarely so much as a country that stopped existing partway through the window. A large population divided into a tiny entry count puts them at the bottom for a reason that has nothing to do with Eurovision.</p>
+<p>The column is really one divided by population, presented as a rate. It says nothing about enthusiasm per person, because a country sends one entry no matter how many people live in it. The quantity would be meaningful only if the numerator could scale with population, and here by rule it cannot.</p>
 <p>Before publishing it you would need to know what year each population figure is from, and the file does not say. Iceland is listed at 255,866 and the United Kingdom at 57,247,586, both of which are roughly late-1980s figures, and the file still has rows for Yugoslavia (23,818,000) and Serbia &amp; Montenegro (9,791,475), states that ceased to exist in 1992 and 2006. So the denominators come from mixed and unstated years, and some of them describe countries that did not exist for most of the 1990 to 2019 window the numerator covers.</p>
 </div>
 </div>
@@ -1025,7 +1043,7 @@ Name: to_country, dtype: int64</code></pre>
 <section id="part-5-the-whole-contest-in-one-grid" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-the-whole-contest-in-one-grid">Part 5: The whole contest in one grid</h2>
 <p><strong>17. Build a wide table with <code>to_country</code> down the rows, <code>decade</code> across the columns, and the mean <code>points_final</code> in the cells. What shape is it?</strong></p>
-<div id="a0e63e5e" class="cell" data-execution_count="15">
+<div id="7af4872c" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> contests.pivot_table(index<span class="op">=</span><span class="st">'to_country'</span>, columns<span class="op">=</span><span class="st">'decade'</span>, values<span class="op">=</span><span class="st">'points_final'</span>)</span>
@@ -1047,11 +1065,11 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>51 rows by 7 columns, one row per country and one column per decade.</strong> The seven columns are the seven decades, which you already know from question 6.</p>
-<p>The 51 is worth a second look. There are 52 distinct countries in <code>contests</code>, so one is absent from this grid entirely. It is Andorra, whose six entries between 2004 and 2009 never reached a final, so <code>points_final</code> is null on every one of them. <code>pivot_table</code> drops an all-null row by default, and it does so silently. A pivot table with fewer rows than your data has groups is reporting that some group had nothing to aggregate.</p>
+<p>The 51 is worth a second look, because <code>contests</code> holds 52 distinct countries, so one of them is missing from the grid entirely. Andorra is the missing country: its six entries between 2004 and 2009 never reached a final, so <code>points_final</code> is null on every one of them. <code>pivot_table</code> drops an all-null row by default and gives you no warning when it does, so compare the number of rows in a grid against the number of groups in the data behind it. A grid with fewer rows than that means some group had nothing to aggregate.</p>
 </div>
 </div>
 <p><strong>18. Build the same table again with <code>aggfunc='count'</code>, and look at both for four countries that have competed throughout: Ireland, Sweden, the United Kingdom and Norway.</strong></p>
-<div id="45f108f4" class="cell" data-execution_count="16">
+<div id="e6bf90ea" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>grid_n <span class="op">=</span> contests.pivot_table(index<span class="op">=</span><span class="st">'to_country'</span>, columns<span class="op">=</span><span class="st">'decade'</span>,</span>
@@ -1086,7 +1104,7 @@ Norway           NaN  10.0   9.0  10.0  10.0   8.0   8.0</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>The counts grid counts finals reached, not entries submitted, and the difference shows up after 2004.</strong> Ireland’s counts run 5, 10, 9, 10 through the 1990s and then fall to 6 and 5, but Ireland entered nine times in the 2000s and ten times in the 2010s. The missing entries were eliminated in the semi-final and so have a null <code>points_final</code>. The United Kingdom shows 10 in every full decade, because the largest financial contributors are seeded straight into the final, a rule that is not in the file.</p>
-<p>That changes how you read the means beside them. Ireland’s 2000s mean of 42.7 is an average over the six years it qualified, so it excludes its three worst years by construction, and it is still the country’s weakest decade. Sweden’s 2010s mean of 268.3 comes from 9 finals out of 10 entries. An average computed only over the occasions when a country did well enough to be scored is biased upward, and the counts grid is how you see that it is happening.</p>
+<p>The gap between the two grids changes how you read the means. Ireland’s 2000s mean of 42.7 is an average over the six years it qualified, so it leaves out its three worst years by construction, and it is still the country’s weakest decade. Sweden’s 2010s mean of 268.3 comes from 9 finals out of 10 entries. An average computed only over the occasions when a country did well enough to be scored is biased upward, and the counts grid is where you can see it happening.</p>
 </div>
 </div>
 <p><strong>19. In a markdown cell: the empty cells in the means grid are not all the same kind of empty. Name two different reasons a country might have no number in a given decade, and say how you would tell them apart using the counts grid.</strong></p>
@@ -1100,16 +1118,16 @@ Norway           NaN  10.0   9.0  10.0  10.0   8.0   8.0</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Reason one: the country did not compete in that decade at all.</strong> Ireland in the 1950s and Norway in the 1950s are examples. There are no rows to aggregate, so both grids are empty in that cell.</p>
+<p><strong>Reason one: the country did not compete in that decade at all.</strong> Ireland in the 1950s and Norway in the 1950s are examples. Neither country has any rows to aggregate, so both grids are empty in that cell.</p>
 <p><strong>Reason two: the country competed and never reached a final.</strong> Slovakia in the 2000s and again in the 2010s, and the Czech Republic, Monaco, Montenegro and San Marino in the 2000s, all entered and were all eliminated in every semi-final of the decade. Every <code>points_final</code> is null, so the mean is empty, but there were rows to count.</p>
-<p>The counts grid separates the two: an empty cell there means no entries, while a <code>0.0</code> means entries but no finals. Six cells in the counts grid hold <code>0.0</code> while the means grid is empty, and they are the second kind of empty. Andorra is the third and most easily missed case, since it has <code>0.0</code> in the counts grid for the 2000s but no row at all in the means grid.</p>
+<p>The counts grid separates the two cases: an empty cell there means no entries, while a <code>0.0</code> means entries but no finals. Six cells in the counts grid hold <code>0.0</code> where the means grid is empty, and they are all the second kind of empty. Andorra is a third case, and the one most easily missed, because it has <code>0.0</code> in the counts grid for the 2000s and no row at all in the means grid.</p>
 <p>The reading matters because the two look identical in a plot or a report. One says a country was not there. The other says it was there and never got far enough to be scored, which is a result, not an absence.</p>
 </div>
 </div>
 </section>
 <section id="part-6-write-it-up" class="level2">
 <h2 class="anchored" data-anchor-id="part-6-write-it-up">Part 6: Write it up</h2>
-<p>There is no single right answer. A strong response cites at least three numbers you computed, names at least two distinct reasons the question is harder than it sounds, and ends with a specific table or number you would actually send. Here is one that would earn full marks.</p>
+<p>There is no single right answer here, but your write-up must cite at least three numbers you computed, must name at least two distinct reasons the question is harder than it sounds, and must end with the table or number you would actually send. Here is one answer that would earn full marks.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ A model answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1120,20 +1138,20 @@ Norway           NaN  10.0   9.0  10.0  10.0   8.0   8.0</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Partly, and only for a period that ended twenty years ago. Ireland has the highest average <code>points_final</code> of any country in both the 1980s and the 1990s, at 99.2 points from 9 finals and 119.2 from 10, and those are the two most trustworthy rows in the decade-winners table because every other winner rests on ten entries or fewer than four. On that evidence Ireland was the strongest country of two consecutive decades, which no other country in the file achieved.</p>
-<p>The claim stops being supportable as soon as it is extended to “in history”, for two reasons. The first is that points are not comparable across eras. The field grew from 26 entries in 2003 to 36 in 2004 when the semi-final was introduced, and the winning score rose from 148 in 1995 to 498 in 2019, so a raw mean rewards recency rather than quality. The second is that the counts grid shows Ireland reaching only 6 finals in the 2000s and 5 in the 2010s, and its mean in those decades, 42.7 and 66.2, is an average over its better years alone, since the years it failed to qualify contribute nothing. Sweden’s 268.3 in the 2010s is on the same inflated scale and cannot be set against Ireland’s 119.2 from the 1990s.</p>
-<p>What the data cannot tell the editor is who is best overall, because no common scale exists. I would send the two pivot tables together, means beside counts, for the countries that competed throughout, and the sentence that goes with them: Ireland dominated the 1980s and 1990s, and the question of the best country in history is not answerable from points.</p>
+<p>Partly, and only for a period that ended twenty years ago. Ireland has the highest average <code>points_final</code> of any country in both the 1980s and the 1990s, at 99.2 points from 9 finals and 119.2 from 10, and both of those rows rest on enough entries to mean something, which is more than three of the seven decade winners can say. On that evidence Ireland was the strongest country of two consecutive decades, a run only the United Kingdom matches, in the 1960s and 1970s.</p>
+<p>The claim stops being supportable as soon as it is extended to “in history”, for two reasons. The first is that points are not comparable across eras. The field grew from 26 entries in 2003 to 36 in 2004 when the semi-final was introduced, and the winning score rose from 148 in 1995 to 498 in 2019, so a raw mean rewards recency rather than quality. The second is that the counts grid shows Ireland reaching only 6 finals in the 2000s and 5 in the 2010s, and its mean in those decades, 42.7 and 66.2, is an average over its better years alone, because the years it failed to qualify contribute nothing. Sweden’s 268.3 in the 2010s is on the same inflated scale and cannot be set against Ireland’s 119.2 from the 1990s.</p>
+<p>The data cannot tell the editor who is best overall, because no common scale exists. I would send the two pivot tables together, means beside counts, for the countries that competed throughout, and the sentence that goes with them: Ireland dominated the 1980s and 1990s, and the question of the best country in history is not answerable from points.</p>
 </div>
 </div>
 </section>
 <section id="where-the-marks-are" class="level2">
 <h2 class="anchored" data-anchor-id="where-the-marks-are">Where the marks are</h2>
-<p>If you compare your notebook against this key, look for these four things before anything else.</p>
+<p>When you compare your notebook against this key, check these four things before anything else.</p>
 <ol type="1">
-<li><strong>You ran both merges and compared 51 to 52.</strong> The single dropped row was the whole point of question 13, and an inner merge on its own gives you no signal that anything went missing.</li>
-<li><strong>You read the <code>count</code> column before the <code>mean</code> column, every time.</strong> Three of the seven decade winners rest on fewer than four entries, and in Part 5 the counts grid is what tells you that Ireland’s later means were computed over qualifying years only.</li>
-<li><strong>You can distinguish the two kinds of empty cell.</strong> A null in the means grid with <code>0.0</code> beside it in the counts grid is a country that competed and never made a final. A null in both is a country that was not there.</li>
-<li><strong>You never called <code>.fillna(0)</code>.</strong> Doing it to 2020 would have given 41 real scores of zero, and doing it to the merge would have put a country that last competed in 1980 into a table about the modern contest.</li>
+<li><strong>Did you run both merges and compare 51 to 52?</strong> The single dropped row was the whole point of question 13, and an inner merge on its own gives you no signal that anything went missing.</li>
+<li><strong>Did you read the <code>count</code> column before the <code>mean</code> column, every time?</strong> Three of the seven decade winners rest on fewer than four scored finals, and in Part 5 the counts grid is what tells you that Ireland’s later means were computed over qualifying years only.</li>
+<li><strong>Can you tell the two kinds of empty cell apart?</strong> A null in the means grid with <code>0.0</code> beside it in the counts grid is a country that competed and never made a final. A null in both is a country that was not there.</li>
+<li><strong>Did you keep away from <code>.fillna(0)</code>?</strong> Using it on 2020 would have given you 41 real scores of zero, and using it on the merge would have put a country that last competed in 1980 into a table about the modern contest.</li>
 </ol>
 <p>⬅️ Back to <a href="../../course-materials/eod-practice/eod-day6-2026.html">the exercise</a></p>
 

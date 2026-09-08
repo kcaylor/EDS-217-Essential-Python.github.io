@@ -18,28 +18,26 @@ format:
 
 :::
 
-Every question you have asked this week, you asked of one table.
-
-Yesterday you asked whether ozone and particulate matter follow the same daily cycle, and you
-answered it the only way one table allows: you grouped ozone by hour, you grouped PM2.5 by hour,
-you printed both, and you compared them by eye. Two answers, side by side on the screen, but
+On Friday we asked whether ozone and particulate matter follow the same daily cycle, and we
+answered it the only way one table allows: we grouped ozone by hour, we grouped PM2.5 by hour,
+we printed both, and we compared them by eye. Two answers, side by side on the screen, but
 never side by side in the data.
 
-That is fine for two columns of twenty-four numbers. It stops working the moment you want to ask
-anything that needs both measurements **in the same row**: was the smoky hour also the ozone
-hour? Does high PM2.5 predict high ozone three hours later? What is the correlation between
-them?
+Comparing by eye is fine for two columns of twenty-four numbers. It stops working the moment you
+want to ask anything that needs both measurements **in the same row**: was the smoky hour also
+the ozone hour? Does high PM2.5 predict high ozone three hours later? What is the correlation
+between them?
 
-To ask those, the two measurements have to be in one table. Today you learn the pattern that
-puts them there.
+To ask any of those questions, the two measurements have to sit in the same table. This morning
+we will learn the pandas code patterns that allow you to join data together.
 
 By the end of this session you will be able to:
 
-- write the **join pattern**, `pd.merge(left, right, on='key')`, and say what the key does
-- choose between `how='inner'` and `how='left'` and say what each one does to your row count
-- check a merge afterwards, and know which two numbers to look at first
+- write the **join pattern**, `pd.merge(left, right, on='key')`, and explain what the **key** does
+- choose between `how='inner'` and `how='left'`, and explain what each one does to your row count
+- check a merge after you run it, and know which numbers to compare to ensure things have gone according to plan
 - join two tables whose key columns have **different names**, using `left_on=` and `right_on=`
-- explain why the rows a join drops are almost never a random sample of your data
+- explain why the rows a join drops are rarely a random sample of your data
 
 ## Getting Started
 
@@ -75,13 +73,13 @@ goleta = pd.read_csv(url)
 goleta['parameter'].value_counts()
 ```
 
-One file, three parameters, 1,962 rows. Every row is one measurement of one pollutant at one
-hour.
+Here is our Goleta air quality file, which we now know contains three parameters and 1,962 rows. 
+Every row is one measurement of one pollutant at one hour.
 
 ## Two tables out of one
 
-Before you can join two tables you need two tables, so start by making them. Both lines below are
-Wednesday's filter pattern, and nothing else:
+Before we can join two tables we need two tables, so we will start by making them. Both lines
+below are Wednesday's filter pattern, and nothing else:
 
 ```{python}
 o3 = goleta[goleta['parameter'] == 'o3'].copy()
@@ -91,12 +89,12 @@ print(o3.shape)
 print(pm25.shape)
 ```
 
-711 hours of ozone and 734 hours of PM2.5. Already interesting: the two instruments did not
-record the same number of hours, and you do not yet know why.
+Now we have 711 hours of ozone and 734 hours of PM2.5. The two instruments did not record the same number of
+hours, which is important! A gap like that usually says something about how the data was (or was not) collected.
 
-Each table has fifteen columns, and thirteen of them are the same in every row. Keep only the two
-that matter, and give the measurement column a name that says what it is. One method per line,
-the way you learned on Thursday:
+Each new table has fifteen columns, and twelve of them hold the same value in every row. Keep only the two
+columns that matter, and give the measurement column a name that says what it is. One method per line,
+the way we learned last Thursday:
 
 ```{python}
 o3 = o3[['datetimeLocal', 'value']]
@@ -109,16 +107,90 @@ o3.head()
 ```
 
 :::{.callout-note}
-🐍 Renaming before a join is not cosmetic. If both tables arrive at the join with a column called
-`value`, pandas cannot keep them both under that name, so it silently renames them `value_x` and
-`value_y` and leaves you to work out which is which. Naming your columns first is the cheapest bug
-you will ever prevent.
+🐍 Renaming before a join is not just cosmetic. If both tables arrive at the join with a column called
+`value`, pandas cannot keep them both under that name, so it renames them `value_x` and
+`value_y` and leaves you to work out which is which. Naming your columns first costs you two
+lines now, but saves a lot of headache later...
 :::
 
 ## The join pattern
 
-Two tables. One column in common: `datetimeLocal`, the hour the reading was taken. That shared
-column is the **key**, and a join is the operation that lines the two tables up by it.
+We have two tables (DataFrames) with one column in common: `datetimeLocal`, the hour the reading was taken. This shared
+column is the **key**, and a merge (or join) is the operation that lines the two tables up by it.
+
+
+The way we "join" these two DataFrames is using the `pd.merge()` function. 
+
+
+:::{.callout-note}
+🐍 Are we joining or merging?
+
+We use `pd.merge()` as the general-purpose command for combining two
+datasets on a shared key. The name comes from the statistical
+computing tradition: base R has a `merge()` function, and SAS uses
+`MERGE` in its data steps, so `merge` was the familiar verb for the
+audience pandas was written for. There is also a `DataFrame.join()`
+method in pandas, which combines two datasets on their _index_ and
+which is now essentially a convenience wrapper around the same
+machinery as `merge` (we've seen that happen before in things like `.value_counts()`). 
+But while the name follows R and SAS, the semantics follow SQL: the `how=` argument
+takes `inner`, `outer`, `left`, and `right`, which are the SQL join types. 
+So the command we use to join datasets is itself a merged version of syntax from
+different languages... 🤖 🤯 Computers 🤯 🤖!!
+
+:::
+
+## Merging as an application of set theory:
+
+::: {style="width: 95%; margin: auto;"}
+![](../images/join_types_venn.svg)
+:::
+
+:::{.gray-text .center-text}
+*The same two tables, joined four ways.*
+:::
+
+The `left` table has the keys k0, k1 and k2, plus a column `A`. The `right` table has k1, k2 and
+k3, plus a column `B`. The two tables agree in the middle and disagree at each end, which is the
+situation most real joins are in. Each panel shades the part of the two key sets that one `how=`
+keeps, and prints the table we get back.
+
+Read the four results against each other. `inner` returns two rows and drops k0 and k3, because
+neither of those keys is in both tables. `left` returns three rows: every key from the left table,
+with `NaN` in column `B` at k0, where the right table has no matching row. `right` is the mirror
+of it, with `NaN` in column `A` at k3. `outer` returns all four keys and fills in `NaN` on both
+sides. The same two tables give us two, three, three and four rows, and the only thing we changed
+between the four panels is the value of `how=`!
+
+## Practical merging of DataFrames:
+
+::: {style="width: 95%; margin: auto;"}
+![](../images/join_types_keyaxis.svg)
+:::
+
+:::{.gray-text .center-text}
+*The same four joins, on tables long enough to have gaps in them.*
+:::
+
+A three-row table keeps the arithmetic easy to follow, but the files we merge in practice are
+longer than that and their keys line up much less tidily. In the second figure, `df1` and `df2`
+are drawn against a shared key axis running down the page, so every row sits at the position of
+its own key, and a missing key shows up as a gap in the column rather than as a number you would
+have to go and count. Neither table covers the whole axis, and the stretches they are missing are
+not the same stretches.
+
+The colours show where each part of a row came from: blue marks a key that is present in the
+result, green a value taken from `df1`, orange a value taken from `df2`, and a pale outlined box
+a `NaN`, where the key matched on one side only. `inner` keeps only the keys that both tables
+cover, so its column is the shortest one in the figure. `outer` keeps every key that either table
+covers, so its column is the longest, and the price of those extra rows is a gap wherever only one
+of the two tables had a value. `left` and `right` each keep one table's keys intact and fill in
+from the other table wherever a key matches.
+
+Compare the two figures before you go on. The first figure tells us what each `how=` keeps, and
+the second tells us what each one costs in rows and in `NaN` values, which is worth checking on
+your own data before you trust a merged table.
+
 
 ```{python}
 paired = pd.merge(o3, pm25, on='datetimeLocal')
@@ -135,12 +207,13 @@ pd.merge(left, right, on='key')
 ```
 
 - the **first two arguments** are the tables, in order. The first is the *left* table and the
-  second is the *right* one, and those words matter in a moment.
+  second is the *right* one, and those two labels decide which rows survive when the two tables
+  do not line up exactly.
 - `on=` names the column that both tables share. Pandas looks up every value of the left table's
   key in the right table's key, and glues the matching rows together end to end.
 
 The result has one row for every hour that appears in **both** tables, and the columns of both.
-For the first time this week, one row of your data holds two different measurements.
+For the first time in this course, one row of your data holds two different measurements!
 
 ```{python}
 paired.shape
@@ -148,16 +221,15 @@ paired.shape
 
 ## The first question to ask a merge
 
-704 rows. You started with 711 hours of ozone and 734 hours of PM2.5.
+We now have 704 rows. We started with 711 hours of ozone and 734 hours of PM2.5.
 
 **Where did the other rows go?**
 
-This is the question to ask every single time you merge two tables, and the reason to ask it is
-that pandas will not ask it for you. A merge that silently discards a third of your data looks
-exactly like a merge that discards nothing.
+You will want to ask that question every single time you merge two tables, because nothing in pandas checks the
+row count for you. A merge that discards a third of your data looks exactly like a merge that discards nothing.
 
-By default, `pd.merge()` keeps only the rows whose key appears in **both** tables. That default
-has a name, and you can write it out:
+By default, `pd.merge()` keeps only the rows whose key appears in **both** tables. The default
+has a name, and you should write it out:
 
 ```{python}
 inner = pd.merge(o3, pm25, on='datetimeLocal', how='inner')
@@ -165,7 +237,7 @@ inner = pd.merge(o3, pm25, on='datetimeLocal', how='inner')
 inner.shape
 ```
 
-Same 704 rows. `how='inner'` is what you already had.
+Same 704 rows: `how='inner'` is the merge we already ran, written out in full.
 
 :::{.callout-note}
 🐍 An **inner** join keeps the intersection of the two key sets. If you have seen a Venn diagram,
@@ -183,8 +255,8 @@ Very often you do not want the intersection. You have a table you care about, an
 of extra information you would like to attach **where it exists**, without losing rows where it
 does not.
 
-That is `how='left'`: keep every row of the left table, attach the right table where the key
-matches, and fill in nulls where it does not.
+`how='left'` does exactly that: keep every row of the left table, attach the right table where
+the key matches, and fill in nulls where it does not.
 
 ```{python}
 left = pd.merge(o3, pm25, on='datetimeLocal', how='left')
@@ -192,8 +264,8 @@ left = pd.merge(o3, pm25, on='datetimeLocal', how='left')
 left.shape
 ```
 
-All 711 ozone hours survive. Seven of them have no PM2.5 reading to attach, and the way to find
-out is Tuesday's null count:
+All 711 ozone hours survive. Seven of them have no PM2.5 reading to attach, and we find those
+seven with the help of our good friend `isnull()`:
 
 ```{python}
 left.isnull().sum()
@@ -225,24 +297,25 @@ print(outer.isnull().sum())
 | `'outer'` | every row of **either** table | 741 |
 : {.hover .bordered}
 
-Four numbers from the same two tables. Which one is correct depends entirely on the question, and
-nothing in pandas will tell you which question you are asking.
+Four different row counts, out of the same two tables. Which one is correct depends entirely on
+the question you are asking, and choosing that question is your job rather than the software's.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
-Build a third table, `pm10`, the same way you built the other two: filter `goleta` to
+Build a third table, `pm10`, the same way you built the other two tables: filter `goleta` to
 `parameter == 'pm10'`, keep `datetimeLocal` and `value`, and rename `value` to `pm10_ugm3`. Then
-merge it with `pm25` two ways, once with `how='inner'` and once with `how='left'`, and print both
-shapes. How many PM2.5 hours have no PM10 reading beside them?
+merge your PM2.5 table with it two ways, keeping `pm25` on the left both times, once using
+`how='inner'` and once using `how='left'`, and print both shapes. How many PM2.5 hours have no
+PM10 reading beside them?
 :::
 
 ## The rows you lose are not a random sample
 
-You now know that an inner join threw away 30 PM2.5 hours and 7 ozone hours. It is tempting to
-shrug at 37 rows out of 1,445 and move on.
+The inner join threw away 30 PM2.5 hours and 7 ozone hours, and it is tempting to shrug at 37
+rows out of 1,445 and move on.
 
-Do not. Look at **which** rows.
+Please don't! Look at **which** rows went missing before you decide they do not matter.
 
-Yesterday we handed you a line that pulls the hour out of a timestamp. Here it is again, doing
+On Friday we handed you a line that pulls the hour out of a timestamp. Here it is again, doing
 the same job on the rows the join could not match:
 
 ```{python}
@@ -258,31 +331,32 @@ across the day: all of them, all thirty, at three in the morning, on thirty diff
 o3['datetimeLocal'].str[11:13].value_counts().sort_index()
 ```
 
-There it is in the ozone table itself. Twenty-three hours of the day have thirty or thirty-one
-readings. Hour `'03'` does not appear at all. The Goleta ozone analyser takes itself offline for
-an hour every night, almost certainly to run a calibration, and nothing in the file says so.
+The ozone table shows the same thing directly. Twenty-three hours of the day have thirty or
+thirty-one readings, and hour `'03'` does not appear at all. The Goleta ozone analyser looks like
+it goes offline for an hour every night, quite possibly to run a calibration, and nothing in the
+file says so.
 
-The join found that for you. Not because it was looking, but because a missing key cannot match,
-and you asked which keys failed to match.
+The merge surfaced that gap for us. A missing key cannot match anything, so the unmatched rows
+collect exactly the hours one instrument never recorded.
 
 :::{.callout-important title="This is the habit"}
 A join is one of the best data quality instruments you have. Whenever you merge two tables, look
 at the rows that did **not** match, and ask whether they have anything in common. If they do, you
-have learned something about how your data was collected, and it is usually something nobody
-wrote down.
+have learned something about how your data was collected, and it is often something nobody
+bothered to write down.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Do the mirror version. Pull the seven ozone hours that have no PM2.5 beside them out of `left`,
-and look at what hours they fall on. Then, in a markdown cell, say in two or three sentences why
-this second gap tells a different story from the 3 a.m. one. Is it a schedule, or is it an
-accident?
+and look at what hours they fall on. Then, in a markdown cell, say in two or three sentences
+whether this second gap tells a different story from the 3 a.m. one, and why. Does it look like a
+schedule, or does it look like an accident?
 :::
 
 ## What a joined table is for
 
-Now that the two pollutants are in the same row, you can ask the question one table could not
-answer. Yesterday you learned that ozone peaks in the early afternoon and PM2.5 peaks around
+Now that the two pollutants are in the same row, we can ask the question one table could not
+answer. On Friday we found that ozone peaks in the early afternoon and PM2.5 peaks around
 midday, from which it is tempting to conclude that the bad hours are the same hours.
 
 Test it. The top-N pattern from Wednesday, applied to the joined table:
@@ -291,30 +365,42 @@ Test it. The top-N pattern from Wednesday, applied to the joined table:
 paired.sort_values('pm25_ugm3', ascending=False).head(10)
 ```
 
-Read the timestamps. Four of the ten smokiest hours in the month are at **01:00**, and the ozone
-readings beside them are among the lowest in the file. The afternoon hours in that list do have
-high ozone, but they are not the top of it.
+Read the timestamps and the ozone column together. The ten smokiest hours of the month are not
+one group but two. Four of them are at **01:00**, and three of those four sit in the bottom half
+of the month's ozone readings, one of them in the bottom six percent. The other six hours are
+daylight hours, and four of those six are in the top two percent of the month's ozone
+readings.
+
+Now average the ten together, and compare that average with the file as a whole:
 
 ```{python}
 print(paired['o3_ppm'].mean())
 print(paired.sort_values('pm25_ugm3', ascending=False).head(10)['o3_ppm'].mean())
 ```
 
-So the two pollutants are not two symptoms of one thing. Ozone is manufactured by sunlight and
-cannot happen at one in the morning; whatever is putting particulates into Goleta's air at 1 a.m.
-is a different process entirely, and the daily-cycle plots you made yesterday hid that by
-averaging over it.
+The mean of the ten smokiest hours is **higher** than the mean of every hour, 0.029 ppm against
+0.022. Read on its own, that number says the smoky hours are also the ozone hours, which is the
+conclusion the row by row table just argued against. A single average cannot show the split at
+all, because it is the mean of four low readings and six high ones taken together.
 
-You could not have found this yesterday. Two tables of averages, however carefully compared, can
-never tell you what happened in a particular hour. Only a joined table can.
+The individual rows give the reading that makes physical sense. Ozone is manufactured by sunlight
+and cannot be produced at one in the morning, so whatever is putting particulates into Goleta's
+air at 1 a.m. is a different process from the one that fouls its afternoons. A mean computed
+across two processes describes neither one of them well.
+
+Two tables of hourly averages, however carefully we compare them, cannot show us that split,
+because the comparison we need is between two measurements taken in the same hour. A joined table
+puts those two measurements in the same row.
 
 ## When the key columns have different names
 
-The join pattern so far assumes both tables call the key by the same name. Real tables rarely
-cooperate, so pandas gives you a way to say *this column here, that column there*.
+The join pattern so far assumes both tables call the key by the same name. Real files rarely line
+up that neatly, so pandas lets you name the two key columns separately: *this column here, that
+column there*.
 
-Here is a case you have already met. On Friday you grouped the national parks visitor records by
-`region` and got seven two-letter codes back, with no idea what they meant:
+Here is a case you have already met. On Friday we grouped the national parks visitor records by
+`region` and got a handful of two-letter codes back, with no idea what they meant. Count the
+codes in the output below, because you will want the number in a moment:
 
 ```{python}
 url = 'https://eds-217-essential-python.github.io/data/national_parks.csv'
@@ -325,9 +411,15 @@ parks = parks[parks['year'] != 'Total'].copy()
 parks['region'].value_counts()
 ```
 
+Eight codes. Note that this table is not quite Friday's: Friday's also kept only the rows whose
+`unit_type` is `National Park`, and the file you have just read in keeps every unit, so it has one
+code in it that Friday's did not.
+
 Codes like these are extremely common, because whoever built the file was saving space and
 already knew what they meant. The fix is a **lookup table**: a small table, often one you write
 yourself, that translates codes into something a reader can use.
+
+Here is one for the seven geographic regions, which are the ones you met on Friday:
 
 ```{python}
 regions = pd.DataFrame({
@@ -352,25 +444,26 @@ labelled[['unit_name', 'region', 'region_name', 'year', 'visitors']].head()
 pd.merge(left, right, left_on='column_in_left', right_on='column_in_right')
 ```
 
-That is the whole difference. `on=` is the shorthand for the case where the two names happen to
-agree.
+Naming the two columns separately is the whole difference. `on=` is the shorthand for the case
+where the two names happen to agree.
 
 :::{.callout-note}
-🐍 The result has **both** key columns, `region` and `code`, holding identical values. That is
-not a bug; pandas does not know which one you want to keep. Drop one when it bothers you.
+🐍 The result has **both** key columns, `region` and `code`, holding identical values. Keeping both
+is not a bug: pandas has no way to choose between them, so it returns both and leaves the choice
+to you. Drop one whenever it bothers you.
 :::
 
 ## The merge that quietly lost something
 
-Check the row count, the way you now always do:
+Check the row count, the way we now do after every merge:
 
 ```{python}
 print(parks.shape)
 print(labelled.shape)
 ```
 
-21,174 rows went in and 21,098 came out. Seventy-six rows did not survive, because that was an
-inner join and their region code is not in your lookup table.
+21,174 rows went in and 21,098 came out. Seventy-six rows did not survive, because the default is
+an inner join and their region code is missing from your lookup table.
 
 Find them the way you found the 3 a.m. gap:
 
@@ -387,8 +480,9 @@ print(missing['unit_name'].unique())
 the file has eight, because the Parkway is administered as a National Trail rather than by one of
 the seven geographic regions.
 
-Nothing warned you. The inner join returned a perfectly reasonable-looking table with a real
-American landmark missing from it, and the only reason you know is that you compared two numbers.
+No error appeared and no warning printed. The inner join returned a perfectly reasonable-looking
+table with a real American landmark missing from it, and we only know about it because we
+compared two row counts.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
 Add a row to `regions` for the `NT` code with a `region_name` of your choosing, rebuild the merge,
@@ -399,20 +493,20 @@ would use in a script that runs every month on a file somebody else maintains, a
 ## Key points
 
 - The **join pattern** is `pd.merge(left, right, on='key')`. The key is the column the two tables
-  have in common, and its values are how rows find each other.
+  have in common, and its values are what pandas matches the rows on.
 - Use `left_on=` and `right_on=` when the key columns have **different names** in the two tables.
 - `how=` decides which rows survive: `'inner'` keeps keys present in both (the default),
   `'left'` keeps every row of the left table, `'right'` the mirror, and `'outer'` keeps everything.
-- **Always compare the row count before and after a merge.** Nothing else in pandas will tell you
-  that a join threw data away.
-- **Always run `.isnull().sum()` after a left, right or outer join.** The nulls are the whole point
-  of choosing one.
-- The rows a join fails to match are usually not random. Look at them; they tell you how the data
-  was collected.
+- **Always compare the row count before and after a merge.** No error appears and no warning
+  prints when a join throws data away.
+- **Always run `.isnull().sum()` after a left, right or outer join.** Those three joins exist in
+  order to produce nulls, and counting the nulls tells you how many rows found no match.
+- The rows a join fails to match are usually not random. Look at them, because they often tell you
+  something about how the data was collected.
 - Rename your measurement columns **before** you merge, so you never have to work out what
   `value_x` was.
 - A **lookup table** you write yourself is a legitimate second table, and often the most useful one
-  you will have.
+  you have (all seven rows of it!).
 
 ## Resources
 

@@ -17,9 +17,9 @@ format:
 Work the exercise first, then come here. The code below is **one** correct answer, not the only
 one. If your code looks different but produces the same numbers, you were right.
 
-The written answers matter more than the code. You can already tell whether your code ran. What
-you cannot check on your own is whether you read the result correctly, and that is what the
-green **Answer** boxes are for. Compare your markdown cells against them.
+The written answers matter more than the code. You can already tell whether your code ran, but you
+cannot easily tell on your own whether you read the result correctly, and the green **Answer**
+boxes are there for exactly that. Compare your markdown cells against them.
 
 ⬅️ Back to [the exercise](../eod-practice/eod-day6-2026.qmd)
 :::
@@ -47,7 +47,7 @@ print(eurovision['year'].min(), eurovision['year'].max())
 **1,603 rows and 21 columns, covering 1956 to 2020.** The unit of a row is one country's entry in
 one contest, not one contest, which is why there are 1,603 rows for 65 years.
 
-That span of 65 years contains 65 distinct values of `year`, so every year in the range is
+The span of 65 years contains 65 distinct values of `year`, so every year in the range is
 represented in the file, including the one that did not happen. Of the 21 columns, most describe
 a result rather than a song: place and points in the final, place and points in the semi-final,
 and since 2016 the jury and televote components of each.
@@ -70,12 +70,11 @@ is when the contest introduced a semi-final. Before 2004 there was no semi-final
 
 `points_tele_final` and `points_jury_final` are null on 1,499 rows. The 104 rows where they are
 present are all from 2016 to 2019, which is when the contest began publishing the televote and
-the jury vote as two separate scores instead of one combined number. The earlier scores were recorded as one combined
-number and never split into two.
+the jury vote as two separate scores. Every earlier contest recorded a single combined score, and
+nobody went back afterwards to split the old results in two.
 
-The distinction worth remembering is this: a null can mean "not recorded", but here it means
-"not applicable", and neither one is a mistake. Dropping every row with a null in this file would
-leave you with almost nothing.
+A null can mean "not recorded", but in this file it usually means "not applicable", and neither
+one is anybody's mistake. Dropping every row with a null here would leave you with almost nothing.
 :::
 
 **3. `points_final` is the column the rest of this exercise depends on, and it is null on 295
@@ -88,12 +87,12 @@ eurovision.groupby('year')['points_final'].count().tail(6)
 
 :::{.callout-note title="✅ Answer"}
 **The recent years sit at 26 or 27 finalists each, and then 2020 reports 0.** Note that `.count()`
-counts non-null values, which is exactly why it is the right verb here: 26 is the number of
-countries that reached the final and were scored, not the number that entered.
+counts non-null values, which is why it is the right method here: 26 is the number of countries
+that reached the final and were scored, not the number that entered.
 :::
 
-**4. One year has a count of zero. Which one, and what happened? (You may look this up. It is the
-only fact in this exercise that is not in the file.)**
+**4. One of the years you just printed has a count of zero. Which one, and what happened? (You
+may look this up. It is the only thing you are asked to look up in this exercise.)**
 
 :::{.callout-note title="✅ Answer"}
 **2020.** The contest was cancelled in March 2020 because of the COVID-19 pandemic, the first
@@ -101,17 +100,16 @@ cancellation in its history. The 41 entries are in the file with their performer
 because they had been selected before the cancellation, but no country ever performed and no
 points were ever awarded, so `points_final` and `place_contest` are null on all 41 rows.
 
-There is a second year at zero, and the `.tail(6)` hides it. Print the head of the same series:
+A second year also has a count of zero, and `.tail(6)` hides it. Print the head of the same series:
 
 ```{python}
 eurovision.groupby('year')['points_final'].count().head(6)
 ```
 
 **1956 also has a count of zero**, on 12 entries, and for a completely different reason: the
-scores of the first contest were never published. Only the winner was announced. The two zeros look
-identical and have different causes: in 2020 no contest took place, and in 1956 the contest took
-place and the numbers were not released. A count is a useful diagnostic, but it tells you the size of a hole
-and not its cause.
+scores of the first contest were never published. Only the winner was announced. The two zeros
+look identical in the output and have completely different causes: in 2020 no contest took place,
+and in 1956 the contest took place and the numbers were never released.
 :::
 
 **5. Build a table called `contests` that excludes that year, using the filter pattern and
@@ -124,12 +122,13 @@ contests.shape
 
 :::{.callout-note title="✅ Answer"}
 **1,562 rows**, exactly 41 fewer than the 1,603 you started with, which confirms you removed the
-2020 entries and nothing else. Checking the row count against a number you can predict is the
-cheapest way to know a filter did what you meant.
+2020 entries and nothing else. Whenever you filter, work out the row count you expect before you
+run the line and then check it, because a filter that quietly matched more or less than you meant
+usually shows up first as a number you did not predict.
 
 Note that 1956 is still in `contests`. Its 12 rows have null `points_final`, so every mean and
-count in the rest of the practice quietly ignores them, and that is the correct behaviour: pandas
-skips nulls in `.mean()` and `.count()` rather than treating them as zero.
+count in the rest of the practice ignores them without saying so, which is the behaviour you want
+here: pandas skips nulls in `.mean()` and `.count()` rather than treating them as zero.
 :::
 
 ## Part 2: Decades
@@ -146,8 +145,8 @@ contests['decade'].value_counts().sort_index()
 
 :::{.callout-note title="✅ Answer"}
 **The count rises from 43 entries in the 1950s to 408 in the 2010s, roughly a tenfold increase.**
-Some of that is real growth in the number of competing countries, but part of it is an artifact of
-the bin: the 1950s decade holds only four contests, 1956 to 1959, while every later decade holds
+Some of the rise is real growth in the number of competing countries, but part of it is an artifact
+of the bin: the 1950s decade holds only four contests, 1956 to 1959, while every later decade holds
 ten. A per-decade total is not comparable across decades unless you also know how many contests
 each decade contains.
 :::
@@ -161,13 +160,13 @@ contests.groupby('year')['to_country'].count().loc[2000:2007]
 ```
 
 :::{.callout-note title="✅ Answer"}
-**The field jumps from 26 entries in 2003 to 36 in 2004, and keeps growing to 42 by 2007.** That
-is the year the semi-final was introduced, which is the same 2004 that first fills in `sf_num`.
-Once countries no longer all had to fit into one evening, many more could enter.
+**The field jumps from 26 entries in 2003 to 36 in 2004, and keeps growing to 42 by 2007.**
+2004 is the year the semi-final was introduced, the same 2004 that first fills in `sf_num`.
+Once countries no longer all had to fit into one evening, many more of them could enter.
 
-For a comparison of average scores this is a serious problem. Points are awarded by the competing
-countries, so a larger field means more voters, which means more points in circulation, which
-raises every score whether or not any song improved. A 2010s average and a 1990s average are
+The jump is a serious problem for any comparison of average scores. Points are awarded by the
+competing countries, so a larger field means more voters, which means more points in circulation,
+which raises every score whether or not any song improved. A 2010s average and a 1990s average are
 measured on scales that differ by roughly a factor of two in the number of voters, so comparing
 them directly measures the size of the contest rather than the quality of the entries.
 :::
@@ -175,7 +174,8 @@ them directly measures the size of the contest rather than the quality of the en
 ## Part 3: The best country of each decade
 
 **8. Build a table with one row per decade, holding the country with the highest average
-`points_final` in that decade, how many entries that average came from, and the average itself.**
+`points_final` in that decade, how many scored finals that average came from, and the average
+itself.**
 
 ```{python}
 decade_winners_list = []
@@ -192,21 +192,57 @@ decade_winners = pd.concat(decade_winners_list, ignore_index=True)
 decade_winners[['decade', 'to_country', 'count', 'mean']]
 ```
 
-**9. Read the `count` column before you read the `mean` column. Three of the seven winners won on
-fewer than four entries. Name them, and say in one sentence why you would not put any of them in a
-headline.**
+:::{.callout-note title="✅ Answer"}
+**Seven rows and four columns: France takes the 1950s, the United Kingdom the 1960s and 1970s,
+Ireland the 1980s and 1990s, Serbia the 2000s and Bulgaria the 2010s.** The `count` column should
+read 3, 10, 10, 9, 10, 2 and 3 down the page, and the `mean` column 19.7, 23.1, 93.2, 99.2,
+119.2, 214.0 and 362.7. If your table names the same seven countries against the same seven
+decades, you built it correctly, even if your columns arrived in a different order or under
+different names.
+
+The pattern is the one we used this morning: build the pieces, collect them in a list, and stack
+the list once at the end. Each pass through the loop builds a one-row DataFrame, the list collects
+them, and the single `pd.concat()` after the loop stacks all seven rows into one table.
+`ignore_index=True` matters more here than it did this morning, because each of those rows kept
+whatever row label it happened to have inside its own decade's sorted table, so without it the
+finished table is numbered 3, 16, 20, 9, 13, 37, 8 rather than 0 through 6, and nothing stops two
+decades landing on the same label.
+
+Two things can go wrong here and still leave you with a table that looks perfectly reasonable.
+Leaving `ascending=False` out of `.sort_values()` sorts the other way, because ascending is the
+default, and `.head(1)` then hands you the worst country of each decade in a table that is
+otherwise the right size. Reaching for `.max()` on the `mean` column instead of `.head(1)` on the
+sorted table gives you the number without the name, 362.7 for the 2010s with no Bulgaria attached
+to it, and the name is half of what the question asked for.
+
+`.reset_index()` is the line that turns `to_country` from the index into a column, which is what
+lets the last line select it by name. A version of the loop that leaves the reset out stops with a
+`KeyError` on `to_country` rather than returning a wrong table, so you will know about it right
+away.
+:::
+
+**9. Read the `count` column before you read the `mean` column. Remember what `.count()` counts:
+the non-null `points_final` values, which is finals a country was scored in, not contests it
+entered. Three of the seven winners were scored in fewer than four finals. Name them, and say in
+one sentence why you would not put any of them in a headline.**
 
 :::{.callout-note title="✅ Answer"}
-**France, which tops the 1950s at 19.7 points from 3 entries; Serbia, which tops the 2000s at
-214.0 from 2 finals; and Bulgaria, which tops the 2010s at 362.7 from 3.** A mean of two or three
-numbers moves by tens of points if a single entry is different, so none of the three is stable
-enough to call a country the best of its decade.
+**France, which tops the 1950s at 19.7 points from 3 scored finals; Serbia, which tops the 2000s
+at 214.0 from 2; and Bulgaria, which tops the 2010s at 362.7 from 3.** A mean of two or three
+numbers moves by tens of points if a single result is different, so none of the three winners is
+stable enough to call a country the best of its decade.
+
+Read the gap between finals and entries while you are here, because it is larger than it looks.
+France entered five times in the 1950s and was scored in three, Serbia entered three times in the
+2000s and was scored in two, and Bulgaria entered seven times in the 2010s and was scored in
+three. Bulgaria's 362.7 is an average of its three best years, and the four years it failed to
+qualify contribute nothing to it.
 
 The other four winners are the ones with enough behind them to report: the United Kingdom in the
-1960s and 1970s, on 10 entries each, and Ireland in the 1980s and 1990s, on 9 and 10. Three of
-seven decade winners resting on three entries or fewer is itself a result about the method rather
-than about the countries, since taking the highest mean in a group is exactly the operation that
-selects for small counts.
+1960s and 1970s, on 10 finals each, and Ireland in the 1980s and 1990s, on 9 and 10. Three of
+the seven decade winners resting on three finals or fewer tells you something about the method
+rather than about the countries, because taking the highest mean within a group is exactly the
+operation that selects for small counts.
 :::
 
 **10. The `mean` column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown
@@ -215,15 +251,16 @@ between 1956 and 2019 that would produce this pattern? What would you have to di
 remove it?**
 
 :::{.callout-note title="✅ Answer"}
-**No. What changed is the scale on which points are awarded.** Points come from the competing countries, and the field
-grew from about ten entrants in the 1950s to 42 in 2007, so the total number of points available
-grew with it. On top of that, the contest split the jury vote and the televote into two separate
-awards in 2016, which roughly doubled the points available again: the winning score was 152 in
-1975 and 148 in 1995, but 365 in 2015 and 498 in 2019.
+**No. The change is in the scale on which points are awarded.** Points come from the competing
+countries, and the field grew from about ten entrants in the 1950s to 42 in 2007, so the total
+number of points available grew with it. The contest also split the jury vote and the televote
+into two separate awards in 2016, which raised the ceiling again: the winning score was 152 in
+1975 and 148 in 1995, then 365 in 2015, the last year before the split, and 534 in 2016, the
+first year after it. It has stayed in that range since, at 498 in 2019.
 
 To remove the effect you would divide each score by the total points available in that year, or
-by the year's winning score, turning an absolute total into a share. A mean of shares is
-comparable across decades. A mean of raw points measures how many countries were
+by the year's winning score, turning an absolute total into a share. A mean of shares can be
+compared across decades, while a mean of raw points mostly measures how many countries were
 competing.
 :::
 
@@ -242,10 +279,10 @@ print(list(populations.columns))
 ```
 
 :::{.callout-note title="✅ Answer"}
-**52 rows and two columns, `country_name` and `population`.** 52 is the number of countries that
-have ever entered, so this file has one row per country over the whole history of the contest,
-while `contests` has one row per country per year. The two tables are at different grains, and
-that is exactly why a merge is needed rather than a concatenation.
+**52 rows and two columns, `country_name` and `population`.** The 52 rows are the 52 countries that
+have ever entered, so the population file holds one row per country over the whole history of the
+contest, while `contests` holds one row per country per year. The two tables are at different
+grains, which is why they need a merge rather than a concatenation.
 :::
 
 **12. Build a table called `modern` holding only contests from 1990 onwards, then count the
@@ -265,7 +302,9 @@ counts.head()
 **51 countries, and four of them are at the ceiling of 30: France, the United Kingdom, Spain and
 Sweden.** The window 1990 to 2019 holds exactly 30 contests, and no country can enter a contest
 twice, so 30 means "entered every single year" and no number in this column can ever exceed it.
-Knowing the maximum a count is allowed to reach is worth as much as knowing the count.
+Before you read a column of counts, work out the largest value it is allowed to take, because a 30
+here means "every year since 1990" rather than just a big number, and a 31 would mean something
+had gone wrong in the count.
 :::
 
 **13. Merge `counts` with `populations`. The key columns have different names, so you will need
@@ -287,8 +326,9 @@ countries that have both a modern entry count and a population. `how='right'` ke
 the population file whether or not the left table matched, so the 52nd country arrives with nulls
 in its `country` and `entries` columns.
 
-Running the merge twice is the diagnostic. The inner merge alone would have told you 51 and given
-you no way to know that anything was dropped.
+Running the merge a second time, with the right join, is the diagnostic here, because the inner
+merge on its own would have told you 51 and given you no way to know that anything had been
+dropped.
 :::
 
 **14. One country is in the population file and not in your counts. Find it, name it, and then
@@ -305,15 +345,16 @@ print(eurovision[eurovision['to_country'] == 'Morocco'][['year', 'performer', 's
 "Bitakat Hob" in 1980, finishing 18th with 7 points.** Morocco has never returned.
 
 The inner merge was right because `counts` is a table of entries since 1990, and Morocco has none.
-It is absent from `value_counts()` output for the plain reason that `value_counts()` can only
-count values that appear, and a country with no rows in `modern` has no value to count. Dropping
-it keeps the table honest about what it contains: countries that compete in the modern contest.
+Morocco is absent from the `value_counts()` output because `value_counts()` can only count values
+that appear, and a country with no rows in `modern` has no value to count. Dropping it keeps the
+table honest about what it contains: countries that compete in the modern contest.
 
-The subtle part is what the null in the right merge means. It does not mean Morocco's entry count
-is unknown, and it does not mean it is zero in general, since the 1980 entry is real. It means
-"this key had no match on the left", and only you can decide which of those three readings applies.
-Had you filled it with zero and kept it, the entries-per-million table in the next question would
-include a country that stopped competing ten years before the window opens.
+The null in the right merge is the subtle part, because it can be read three ways. It does not
+mean Morocco's entry count is unknown, and it does not mean the count is zero in general, because
+the 1980 entry is real. It means "this key had no match on the left", and you have to decide which
+of the three readings applies before you fill anything in. If you had filled it with zero and kept
+the row, the entries-per-million table in the next question would include a country that stopped
+competing ten years before the window opens.
 :::
 
 **15. Add an `entries_per_million` column to `entries`: the entry count divided by the population
@@ -329,22 +370,27 @@ print(ranked[['country', 'entries', 'population', 'entries_per_million']].head(8
 print(ranked[['country', 'entries', 'population', 'entries_per_million']].tail(5))
 ```
 
-**16. The top of that ranking is San Marino, Andorra, Iceland, Monaco and Malta, and the bottom is
-Russia, Italy and Ukraine. In a markdown cell, three or four sentences: is *entries per million
-people* a meaningful quantity? What is it actually measuring, and what would you have to know
-about how the file's population numbers were collected before you would publish this table?**
+**16. The top of that ranking is San Marino, Andorra, Iceland, Monaco and Malta, and the bottom
+is Yugoslavia, Russia and Serbia & Montenegro. In a markdown cell, three or four sentences: is
+*entries per million people* a meaningful quantity? What is it actually measuring, and what
+would you have to know about how the file's population numbers were collected before you would
+publish this table?**
 
 :::{.callout-note title="✅ Answer"}
 **It is arithmetically correct and close to meaningless, because it is almost entirely a ranking
-of small populations.** The numerator cannot exceed 30, so it varies by a factor of about ten
+of small populations.** The numerator cannot exceed 30 and falls as low as 2, so it varies by a factor of fifteen
 across the table, while the denominator varies by a factor of more than six thousand, from San
 Marino at 23,186 to Russia at 148,005,704. Whichever country is smallest will top this ranking
 almost regardless of how often it competes: San Marino reaches 431.3 entries per million on only
 10 entries, while Russia's 22 entries give 0.149.
 
-What it actually measures is roughly one divided by population, presented as a rate. It says
-nothing about enthusiasm per person, because a country sends one entry no matter how many people
-live in it. The quantity would be meaningful only if the numerator could scale with population,
+The bottom three make the same point from the other end. Yugoslavia sits last at 0.126 on three
+entries and Serbia & Montenegro third from last at 0.204 on two, and neither is a country that
+competed rarely so much as a country that stopped existing partway through the window. A large population divided into a tiny entry count puts them at the bottom
+for a reason that has nothing to do with Eurovision.
+
+The column is really one divided by population, presented as a rate. It says nothing about
+enthusiasm per person, because a country sends one entry no matter how many people live in it. The quantity would be meaningful only if the numerator could scale with population,
 and here by rule it cannot.
 
 Before publishing it you would need to know what year each population figure is from, and the
@@ -370,11 +416,12 @@ grid.shape
 **51 rows by 7 columns, one row per country and one column per decade.** The seven columns are the
 seven decades, which you already know from question 6.
 
-The 51 is worth a second look. There are 52 distinct countries in `contests`, so one is absent
-from this grid entirely. It is Andorra, whose six entries between 2004 and 2009 never reached a
-final, so `points_final` is null on every one of them. `pivot_table` drops an all-null row by
-default, and it does so silently. A pivot table with fewer rows than your data has groups is
-reporting that some group had nothing to aggregate.
+The 51 is worth a second look, because `contests` holds 52 distinct countries, so one of them is
+missing from the grid entirely. Andorra is the missing country: its six entries between 2004 and
+2009 never reached a final, so `points_final` is null on every one of them. `pivot_table` drops an
+all-null row by default and gives you no warning when it does, so compare the number of rows in a
+grid against the number of groups in the data behind it. A grid with fewer rows than that means
+some group had nothing to aggregate.
 :::
 
 **18. Build the same table again with `aggfunc='count'`, and look at both for four countries that
@@ -396,11 +443,11 @@ the semi-final and so have a null `points_final`. The United Kingdom shows 10 in
 decade, because the largest financial contributors are seeded straight into the final, a rule that
 is not in the file.
 
-That changes how you read the means beside them. Ireland's 2000s mean of 42.7 is an average over
-the six years it qualified, so it excludes its three worst years by construction, and it is still
-the country's weakest decade. Sweden's 2010s mean of 268.3 comes from 9 finals out of 10 entries.
-An average computed only over the occasions when a country did well enough to be scored is biased
-upward, and the counts grid is how you see that it is happening.
+The gap between the two grids changes how you read the means. Ireland's 2000s mean of 42.7 is an
+average over the six years it qualified, so it leaves out its three worst years by construction,
+and it is still the country's weakest decade. Sweden's 2010s mean of 268.3 comes from 9 finals out
+of 10 entries. An average computed only over the occasions when a country did well enough to be
+scored is biased upward, and the counts grid is where you can see it happening.
 :::
 
 **19. In a markdown cell: the empty cells in the means grid are not all the same kind of empty.
@@ -409,17 +456,18 @@ would tell them apart using the counts grid.**
 
 :::{.callout-note title="✅ Answer"}
 **Reason one: the country did not compete in that decade at all.** Ireland in the 1950s and Norway
-in the 1950s are examples. There are no rows to aggregate, so both grids are empty in that cell.
+in the 1950s are examples. Neither country has any rows to aggregate, so both grids are empty in
+that cell.
 
 **Reason two: the country competed and never reached a final.** Slovakia in the 2000s and again in
 the 2010s, and the Czech Republic, Monaco, Montenegro and San Marino in the 2000s, all entered and
 were all eliminated in every semi-final of the decade. Every `points_final` is null, so the mean
 is empty, but there were rows to count.
 
-The counts grid separates the two: an empty cell there means no entries, while a `0.0` means
-entries but no finals. Six cells in the counts grid hold `0.0` while the means grid is empty, and
-they are the second kind of empty. Andorra is the third and most easily missed case, since it has
-`0.0` in the counts grid for the 2000s but no row at all in the means grid.
+The counts grid separates the two cases: an empty cell there means no entries, while a `0.0` means
+entries but no finals. Six cells in the counts grid hold `0.0` where the means grid is empty, and
+they are all the second kind of empty. Andorra is a third case, and the one most easily missed,
+because it has `0.0` in the counts grid for the 2000s and no row at all in the means grid.
 
 The reading matters because the two look identical in a plot or a report. One says a country was
 not there. The other says it was there and never got far enough to be scored, which is a result,
@@ -428,46 +476,47 @@ not an absence.
 
 ## Part 6: Write it up
 
-There is no single right answer. A strong response cites at least three numbers you computed,
-names at least two distinct reasons the question is harder than it sounds, and ends with a
-specific table or number you would actually send. Here is one that would earn full marks.
+There is no single right answer here, but your write-up must cite at least three numbers you
+computed, must name at least two distinct reasons the question is harder than it sounds, and must
+end with the table or number you would actually send. Here is one answer that would earn full
+marks.
 
 :::{.callout-note title="✅ A model answer"}
 Partly, and only for a period that ended twenty years ago. Ireland has the highest average
 `points_final` of any country in both the 1980s and the 1990s, at 99.2 points from 9 finals and
-119.2 from 10, and those are the two most trustworthy rows in the decade-winners table because
-every other winner rests on ten entries or fewer than four. On that evidence Ireland was the
-strongest country of two consecutive decades, which no other country in the file achieved.
+119.2 from 10, and both of those rows rest on enough entries to mean something, which is more than
+three of the seven decade winners can say. On that evidence Ireland was the strongest country of
+two consecutive decades, a run only the United Kingdom matches, in the 1960s and 1970s.
 
 The claim stops being supportable as soon as it is extended to "in history", for two reasons. The
 first is that points are not comparable across eras. The field grew from 26 entries in 2003 to 36
 in 2004 when the semi-final was introduced, and the winning score rose from 148 in 1995 to 498 in
 2019, so a raw mean rewards recency rather than quality. The second is that the counts grid shows
 Ireland reaching only 6 finals in the 2000s and 5 in the 2010s, and its mean in those decades,
-42.7 and 66.2, is an average over its better years alone, since the years it failed to qualify
+42.7 and 66.2, is an average over its better years alone, because the years it failed to qualify
 contribute nothing. Sweden's 268.3 in the 2010s is on the same inflated scale and cannot be set
 against Ireland's 119.2 from the 1990s.
 
-What the data cannot tell the editor is who is best overall, because no common scale exists. I
-would send the two pivot tables together, means beside counts, for the countries that competed
-throughout, and the sentence that goes with them: Ireland dominated the 1980s and 1990s, and the
+The data cannot tell the editor who is best overall, because no common scale exists. I would send
+the two pivot tables together, means beside counts, for the countries that competed throughout,
+and the sentence that goes with them: Ireland dominated the 1980s and 1990s, and the
 question of the best country in history is not answerable from points.
 :::
 
 ## Where the marks are
 
-If you compare your notebook against this key, look for these four things before anything else.
+When you compare your notebook against this key, check these four things before anything else.
 
-1. **You ran both merges and compared 51 to 52.** The single dropped row was the whole point of
+1. **Did you run both merges and compare 51 to 52?** The single dropped row was the whole point of
    question 13, and an inner merge on its own gives you no signal that anything went missing.
-2. **You read the `count` column before the `mean` column, every time.** Three of the seven decade
-   winners rest on fewer than four entries, and in Part 5 the counts grid is what tells you that
-   Ireland's later means were computed over qualifying years only.
-3. **You can distinguish the two kinds of empty cell.** A null in the means grid with `0.0` beside
+2. **Did you read the `count` column before the `mean` column, every time?** Three of the seven
+   decade winners rest on fewer than four scored finals, and in Part 5 the counts grid is what
+   tells you that Ireland's later means were computed over qualifying years only.
+3. **Can you tell the two kinds of empty cell apart?** A null in the means grid with `0.0` beside
    it in the counts grid is a country that competed and never made a final. A null in both is a
    country that was not there.
-4. **You never called `.fillna(0)`.** Doing it to 2020 would have given 41 real scores of zero, and
-   doing it to the merge would have put a country that last competed in 1980 into a table about
-   the modern contest.
+4. **Did you keep away from `.fillna(0)`?** Using it on 2020 would have given you 41 real scores of
+   zero, and using it on the merge would have put a country that last competed in 1980 into a
+   table about the modern contest.
 
 ⬅️ Back to [the exercise](../eod-practice/eod-day6-2026.qmd)

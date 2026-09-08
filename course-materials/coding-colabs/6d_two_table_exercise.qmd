@@ -1,6 +1,6 @@
 ---
 title: "Coding Colab"
-subtitle: "🌍 Two Records, Sixty-Six Years Apart"
+subtitle: "🌍 Two Records, Seventy-Eight Years Apart"
 execute:
   echo: false
   include: false
@@ -21,37 +21,38 @@ format:
 
 :::
 
-Two of the most important time series in environmental science are global surface temperature and atmospheric concentration of carbon dioxide. These two datasets are collected by different people/institutions, are used for different reasons, and are stored/maintained in different locations. 
+Two of the most important time series in environmental science are global surface temperature and atmospheric concentration of carbon dioxide. The two datasets are collected by different people/institutions, are used for different reasons, and are stored/maintained in different locations. 
 
-NASA's GISTEMP record estimates how far each month's global surface temperature sits from a
-twentieth-century baseline. It starts in **1880**, which is the earliest that sufficient observations of temperature existed to estimate a global average. 
+NASA's GISTEMP record estimates how much warmer or cooler each month's global surface
+temperature was than a twentieth-century baseline. It starts in **1880**, which is the earliest that sufficient observations of temperature existed to estimate a global average. 
 
 The concentration of carbon dioxide is measured in the atmosphere directly, in
 parts per million, from an observatory near the summit of Mauna Loa, a Hawaiian volcano. It starts in
 **1958**, because that is when Charles Keeling built the system that first started recording these concentrations (initially as air samples collected in flasks and then returned to his lab for analysis).
 
-The most famous graph in climate science puts those two time series together in a single plot, side by side. Making that figure requires everything you learned today and some good decisions about how to organize these datasets. 
+The most famous graph in climate science puts those two time series on one pair of axes. We do not draw it today, because plotting is tomorrow's work, but everything that has to happen to the data before anybody can draw it is today's, and it takes every pattern we have learned along with some good decisions about how to organize these datasets. 
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
 finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it. 
 
-You have 45 minutes.
+We have about 45 minutes for this activity, so please let Cella or Kelly know if you and your
+partner are getting stuck on any of the tasks!
 
 ## The patterns you need
 
-All code patterns you will use are from this morning and the session you just finished.
+The patterns that are new today came from this morning and from the session you just finished.
 
 ```python
 pd.merge(left, right, on='key')                       # the join pattern
 pd.merge(left, right, on='key', how='left')           # keep every row on the left
 
-pd.to_datetime(column, format='%Y-%m-%d')             # the parsing sentence
+pd.to_datetime(column, format='%Y-%m-%d')             # the parsing pattern
 column.dt.year                                        # and its accessors
 
 df.pivot_table(index=, columns=, values=)             # the pivot pattern
 ```
 
-Plus the two more code patterns you have been using all week:
+Plus two more code patterns you have been using all week:
 
 ```python
 df.groupby('key')['column'].agg(['count', 'mean'])
@@ -81,7 +82,7 @@ Answer each question with code, then write the answer in a markdown cell underne
 complete sentence with the numbers in it.
 
 1. How many rows does each table have, and what columns? What is the earliest and latest `Date`
-   in each? (`.min()` and `.max()` on the `Date` column will do it, since these dates are text in
+   in each? (`.min()` and `.max()` on the `Date` column will do it, because these dates are text in
    `%Y-%m-%d` form and text in that form sorts correctly.)
 
 ```{python}
@@ -140,7 +141,7 @@ climate[['Date', 'date', 'year', 'month']].head()
 
 8. Build a table of annual means: group by `year` and report the **count** of months, the mean of
    `MonthlyAnomaly`, and the mean of `CO2Concentration`. Show the first three rows and the last
-   three.
+   three rows.
 
 ```{python}
 annual = climate.groupby('year').agg({'Date': 'count',
@@ -159,10 +160,10 @@ print(annual[annual['Date'] != 12])
 print(full_years.shape)
 ```
 
-## Part 3: A graph of annual amplitudes (about 12 minutes)
+## Part 3: The size of the annual cycle (about 12 minutes)
 
 10. Build a wide table with `year` down the rows, `month` across the columns, and
-    `CO2Concentration` in the cells. Show the first three rows and the last three.
+    `CO2Concentration` in the cells. Show the first three rows and the last three rows.
 
 ```{python}
 co2_grid = climate.pivot_table(index='year', columns='month', values='CO2Concentration')
@@ -170,10 +171,10 @@ print(co2_grid.head(3).round(2))
 print(co2_grid.tail(3).round(2))
 ```
 
-11. This new table holds two different patterns at once. Read it **down** a single column, then
+11. The wide table holds two different patterns at once. Read it **down** a single column, then
     read it **across** a single row. In a markdown cell, describe both in one sentence each.
 
-12. For every year, the difference between its largest monthly value and its smallest is the size of the annual cycle. Compute that difference for two specific years: 1959 and for 2023, and report both. (You will need two lines of code; one for each year)
+12. For every year, the difference between its largest monthly value and its smallest is the size of the annual cycle. Compute that difference for two specific years, 1959 and 2023, and report both. (You will need two lines of code; one for each year)
 
 ```{python}
 print(co2_grid.loc[1959].max() - co2_grid.loc[1959].min())

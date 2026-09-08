@@ -423,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a></li>
   <li><a href="#the-disguise" id="toc-the-disguise" class="nav-link" data-scroll-target="#the-disguise">The disguise</a></li>
-  <li><a href="#the-parsing-sentence" id="toc-the-parsing-sentence" class="nav-link" data-scroll-target="#the-parsing-sentence">The parsing sentence</a></li>
+  <li><a href="#the-parsing-pattern" id="toc-the-parsing-pattern" class="nav-link" data-scroll-target="#the-parsing-pattern">The parsing pattern</a></li>
   <li><a href="#the-.dt-accessors" id="toc-the-.dt-accessors" class="nav-link" data-scroll-target="#the-.dt-accessors">The <code>.dt</code> accessors</a>
   <ul class="collapse">
   <li><a href="#proving-it-worked" id="toc-proving-it-worked" class="nav-link" data-scroll-target="#proving-it-worked">Proving it worked</a></li>
@@ -448,14 +448,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>A cartoon panda is visiting Stonehenge.</em> <a href="https://www.midjourney.com/jobs/68f2f16e-29bc-4981-ae9b-9c1edb669684?index=0">MidJourney 5</a></p>
 </div>
-<p>You owe two lines of code an explanation.</p>
-<p>On Thursday, an exercise handed you <code>.dt.year</code> inside a boxed aside and told you not to worry about it. Yesterday, another one handed you <code>aq['datetimeLocal'].str[11:13]</code> and told you the same thing. Both were doing the same job by different means: pulling a piece out of a date so you could group by it.</p>
-<p>This session is where that stops being a borrowed line.</p>
-<p>The reason dates get their own hour is not that the syntax is hard. It is that a date is one of the few things in a data file that is almost never stored as what it is. It arrives as text, or as an integer, or as five separate columns, and every one of those disguises works well enough to fool you until the moment it doesn’t.</p>
+<p>This afternoon’s lesson is dates. We will start by addressing two lines of code we have given you to use without ever explaining what they are actually doing!</p>
+<p>On Thursday, an exercise gave you <code>.dt.year</code> inside a boxed aside and told you not to worry about it. Then, on Friday (and just now before lunch!), another one gave you <code>aq['datetimeLocal'].str[11:13]</code> and said the same thing.</p>
+<p>Both of these code patterns were doing the same job by different means: pulling one piece out of a date so you could group by it.</p>
+<p>This afternoon we will learn how both of them work, and write them ourselves.</p>
+<p>Dates get a session of their own because a date is one of the few things in a data file that is almost never stored as what it is. It shows up as text, or as an integer, or as five separate columns… Each of those disguises often works well enough that nothing looks wrong… until something breaks!</p>
 <p>By the end of this session you will be able to:</p>
 <ul>
 <li>explain why a date stored as text or as a number is not a date</li>
-<li>write the <strong>parsing sentence</strong>, <code>pd.to_datetime(column, format=...)</code>, and build a format string out of <code>%Y</code>, <code>%m</code> and <code>%d</code></li>
+<li>write the <strong>parsing pattern</strong>, <code>pd.to_datetime(column, format=...)</code>, and build a format string out of <code>%Y</code>, <code>%m</code> and <code>%d</code></li>
 <li>pull the year, month and day out of a parsed date with the <strong><code>.dt</code> accessors</strong></li>
 <li>use a date component as a grouping key, and answer a question that needs one</li>
 </ul>
@@ -473,9 +474,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Date: 09/08/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="4" type="1">
 <li><p><strong>Save</strong> with <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), and keep saving as you go.</p></li>
-<li><p>Read in a file you first met on the very first afternoon of this course:</p></li>
+<li><p>Read in a file you first met (datetime.forever_ago) on the very first afternoon of this course:</p></li>
 </ol>
-<div id="e617e5f6" class="cell" data-execution_count="1">
+<div id="b8307ca5" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -541,12 +542,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Daily weather from the Toolik Field Station on the North Slope of Alaska. One row per day, 11,171 of them.</p>
+<p>Daily weather from the Toolik Field Station on the North Slope of Alaska. We’ve seen this!</p>
 </section>
 <section id="the-disguise" class="level2">
 <h2 class="anchored" data-anchor-id="the-disguise">The disguise</h2>
-<p>Look at the <code>Date</code> column, and then at what pandas thinks it is:</p>
-<div id="c30dbb00" class="cell" data-execution_count="2">
+<p>Look at the <code>Date</code> column, and then at the dtype pandas gives it:</p>
+<div id="7a8fa49b" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Date'</span>].dtype</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -556,9 +557,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><code>int64</code>. The first row’s date is not the first of June 1988; it is the integer nineteen million, eight hundred and eighty thousand, six hundred and one.</p>
-<p>That works better than it has any right to. Sorting by it gives the right order, because <code>%Y%m%d</code> happens to sort the same way as text does. Filtering to a year works, because <code>19880000 &lt; Date &lt; 19890000</code> catches exactly 1988. You could get quite a long way like this.</p>
-<p>Then you subtract two of them:</p>
-<div id="ee74c453" class="cell" data-execution_count="3">
+<p>An integer works better here than you might expect. Sorting by it gives the right order, because a date written year first, then month, then day, counts upward as the calendar does. Filtering to a year works, because <code>19880000 &lt; Date &lt; 19890000</code> catches exactly 1988. You could get quite a long way like this!</p>
+<p>Then we subtract two of them:</p>
+<div id="be93c067" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">19880701</span> <span class="op">-</span> <span class="dv">19880630</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -567,13 +568,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>71</code></pre>
 </div>
 </div>
-<p>Seventy-one. The thirtieth of June and the first of July are one day apart, and the integer says seventy-one, because integers do not know that months end.</p>
-<p>Everything else that makes a date useful fails the same way. Which day of the week was it? How many days between sampling visits? Is this row in the growing season? None of those questions can be answered by arithmetic on <code>19880601</code>, and none of them will raise an error when you try. They will just be wrong.</p>
+<p>Oops. The thirtieth of June and the first of July are one day apart, and the integer says seventy-one, because integer arithmetic has no concept of a month ending.</p>
+<p>Everything else that makes a date useful fails the same way. Which day of the week was it? How many days between sampling visits? Is this row in the growing season? None of those questions can be answered by arithmetic on <code>19880601</code>, and none of them will raise an error when you try.</p>
+<p>Curse you, integer dates!!</p>
 </section>
-<section id="the-parsing-sentence" class="level2">
-<h2 class="anchored" data-anchor-id="the-parsing-sentence">The parsing sentence</h2>
-<p><code>pd.to_datetime()</code> takes a column of dates-in-disguise and hands back a column of real dates. You tell it the disguise with <code>format=</code>:</p>
-<div id="9b7eef38" class="cell" data-execution_count="4">
+<section id="the-parsing-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="the-parsing-pattern">The parsing pattern</h2>
+<p><code>pd.to_datetime()</code> takes a column of dates in disguise and returns a column of <strong>real dates</strong>. You describe the disguise with <code>format=</code>:</p>
+<div id="dd6a8813" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(toolik[<span class="st">'Date'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>)</span>
@@ -654,7 +656,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>Look at the last two rows for as long as it takes to be alarmed. The same eight characters mean the first of June in most of the world and the sixth of January in the United States, and the only thing standing between those two readings is the format string you typed. Half of all date bugs in data science live in that one row of the table.</p>
+<p>Look carefully at the last two rows. <code>01/06/1988</code> means the first of June in most of the world and the sixth of January in the United States, and the format string you type decides which of the two readings you get. A great many date bugs start right there, and they are hard to find later, because both readings produce a perfectly ordinary looking date column.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="`format=` is not optional, it is a safety net">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -665,13 +667,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>pd.to_datetime()</code> will usually guess correctly if you leave <code>format=</code> out. Supply it anyway.</p>
-<p>A format string is an <strong>assertion about your data</strong>. If one row of your file is malformed, or the first five hundred rows are ISO dates and the rest are American ones, a supplied format raises an error and a guessed format silently produces a column of confidently wrong dates.</p>
-<p>Loud failure now beats quiet nonsense later. Type the format.</p>
+<p><code>pd.to_datetime()</code> will usually guess correctly if you leave <code>format=</code> out. <strong>Supply it anyway</strong>.</p>
+<p>A format string is an <strong>assertion about your data</strong>. If one row of your file is malformed, or the first few hundred rows are ISO dates and the rest are American ones, a supplied format raises an error and a guessed format will naively produce a column of wrong dates.</p>
+<p>Type the format string every time, even when you are fairly sure pandas would have guessed it correctly.</p>
+<p><em>An error you can generate today is much better than a wrong number you find next week.</em></p>
 </div>
 </div>
 <p>Check what you got:</p>
-<div id="c9f35425" class="cell" data-execution_count="5">
+<div id="f1505390" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(toolik[<span class="st">'date'</span>].dtype)</span>
@@ -684,7 +687,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 2018-12-31 00:00:00</code></pre>
 </div>
 </div>
-<p><code>datetime64[ns]</code>, running from 1 June 1988 to 31 December 2018. Thirty years of Arctic weather, and now pandas knows it.</p>
+<p><code>datetime64[ns]</code>, running from 1 June 1988 to 31 December 2018. Thirty years of Arctic weather, stored now as dates rather than as digits.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -695,14 +698,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The <code>date_data.csv</code> file at <code>https://eds-217-essential-python.github.io/data/date_data.csv</code> has a <code>Date</code> column stored as text in the form <code>2023-11-02</code>. Read it in, write the parsing sentence for it with the correct format string, and print the dtype of the result to prove it worked.</p>
+<p>The <code>date_data.csv</code> file at <code>https://eds-217-essential-python.github.io/data/date_data.csv</code> has a <code>Date</code> column stored as text in the form <code>2023-11-02</code>. Read it in, write the parsing pattern for it with the correct format string, and print the dtype of the result to prove it worked.</p>
 </div>
 </div>
 </section>
 <section id="the-.dt-accessors" class="level2">
 <h2 class="anchored" data-anchor-id="the-.dt-accessors">The <code>.dt</code> accessors</h2>
-<p>A parsed date column knows what year, month and day each of its values belongs to, and <code>.dt</code> is how you ask:</p>
-<div id="7dd2170d" class="cell" data-execution_count="6">
+<p>Every value in a parsed date column has a year, a month and a day inside it, and <code>.dt</code> is how you get at them:</p>
+<div id="5711c246" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'year'</span>] <span class="op">=</span> toolik[<span class="st">'date'</span>].dt.year</span>
@@ -767,7 +770,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p><code>.dt</code> works the same way <code>.str</code> does. Both are doorways: <code>.str</code> gives you the string operations for a column of text, and <code>.dt</code> gives you the date operations for a column of dates. Neither one works on the wrong kind of column, which is a feature. If <code>.dt.year</code> raises an <code>AttributeError</code>, your column is not parsed yet.</p>
+<p><code>.dt</code> works the same way <code>.str</code> does. Both are doorways: <code>.str</code> gives you the string operations for a column of text, and <code>.dt</code> gives you the date operations for a column of dates. Neither one works on the wrong kind of column, which turns out to be useful. If <code>.dt.year</code> raises an <code>AttributeError</code>, the error is telling you that your column has not been parsed yet.</p>
+<p>The pair of doorways is what Friday’s supplied line was about. <code>aq['datetimeLocal'].str[11:13]</code> went through the <code>.str</code> door and cut characters 11 and 12 out of every timestamp, which works only because every timestamp in that file was written to the same width, and it hands back the text <code>'06'</code> rather than the number 6. Parse the column first and the same job goes through the <code>.dt</code> door as <code>aq['datetimeLocal'].dt.hour</code>, which returns a number, and which keeps working when one row is written differently from the rest.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -778,14 +782,14 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 Other things <code>.dt</code> knows, for when you need them. You are only responsible for the first three in this course:</p>
+<p>🐍 Other things <code>.dt</code> will give you, for when you need them. Of the eight accessors below, you are only responsible for the first three, <code>.dt.year</code>, <code>.dt.month</code> and <code>.dt.day</code>:</p>
 <p><code>.dt.year</code> · <code>.dt.month</code> · <code>.dt.day</code> · <code>.dt.hour</code> · <code>.dt.dayofyear</code> · <code>.dt.dayofweek</code> · <code>.dt.quarter</code> · <code>.dt.date</code></p>
 </div>
 </div>
 <section id="proving-it-worked" class="level3">
 <h3 class="anchored" data-anchor-id="proving-it-worked">Proving it worked</h3>
-<p>This file is unusually generous: it already has its own <code>Year</code> and <code>Month</code> columns, written by whoever prepared the data. So you can check your parse against theirs.</p>
-<div id="e95e5f7f" class="cell" data-execution_count="7">
+<p>The Toolik file gives us something to check against, because it already has <code>Year</code> and <code>Month</code> columns, written by whoever prepared the data. So we can compare our parse against theirs.</p>
+<div id="511c4c03" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((toolik[<span class="st">'year'</span>] <span class="op">==</span> toolik[<span class="st">'Year'</span>]).<span class="bu">all</span>())</span>
@@ -797,7 +801,7 @@ True</code></pre>
 </div>
 </div>
 <p>Two <code>True</code>s. Every one of the 11,171 dates you parsed agrees with the year and month the station recorded independently.</p>
-<p>That check took two lines and it is worth doing every time you have anything to check against, because a wrong format string produces a column that looks completely normal. <code>'%d%m%Y'</code> on this file would have failed loudly, but on a file of American dates it would have quietly given you a year of 2019 for every row and never said a word.</p>
+<p>The check took two lines, and it is worth doing every time you have something to check against, because a wrong format string produces a column that looks completely normal. <code>'%d%m%Y'</code> on this file would have failed spectacularly, because it would have tried to read <code>88</code> as a month. On a file of American dates it would not have failed at all: every date whose day is twelve or less parses cleanly with the month and the day swapped, so <code>03/07/2019</code> becomes the seventh of March instead of the third of July, and nothing in the printed column would have told you that the swap happened.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -815,8 +819,8 @@ True</code></pre>
 </section>
 <section id="dates-as-grouping-keys" class="level2">
 <h2 class="anchored" data-anchor-id="dates-as-grouping-keys">Dates as grouping keys</h2>
-<p>Here is what all of this was for. A date component is an ordinary column, so it is an ordinary grouping key, and Friday’s sentence works on it unchanged:</p>
-<div id="20b985f1" class="cell" data-execution_count="8">
+<p>A date component is an ordinary column of integers, so it is an ordinary grouping key, and Friday’s split-apply-combine pattern works on it unchanged:</p>
+<div id="46400f83" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>toolik.groupby(<span class="st">'month'</span>)[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean().<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -838,9 +842,8 @@ True</code></pre>
 Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
-<p>Thirty years of daily temperatures reduced to the twelve numbers that describe the Arctic year. January at −22.9 °C, July at +11.2 °C, and a thirty-four degree swing between them.</p>
-<p>Ask for the count alongside it, the way you now always do:</p>
-<div id="fd8644b6" class="cell" data-execution_count="9">
+<p>Ask for the count alongside the mean, the way we have been doing since Friday:</p>
+<div id="dae70f61" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>toolik.groupby(<span class="st">'year'</span>)[<span class="st">'Daily_AirTemp_Mean_C'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>]).head(<span class="dv">3</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -884,7 +887,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p>1988 has 214 rows because the station opened on the first of June. Its annual mean is warmer than every year that follows it, not because 1988 was warm but because 1988 has no January in it. That is the <code>.count()</code> lesson from Friday, arriving in a new costume.</p>
+<p>1988 has 214 rows because the station opened on the first of June. Its annual mean is warmer than every year that follows it, not because 1988 was warm but because 1988 has no January in it. Friday’s rule about always reading <code>.count()</code> alongside a grouped mean is helpful here, because it puts the 214 in front of you before you read the mean beside it!</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -901,9 +904,9 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </section>
 <section id="the-question-that-needs-a-month-column" class="level2">
 <h2 class="anchored" data-anchor-id="the-question-that-needs-a-month-column">The question that needs a month column</h2>
-<p>Toolik has thirty years of data, and the obvious question to ask of thirty years of Arctic weather is whether it is getting warmer.</p>
-<p>Split the record into its first eleven years and its last ten, using Wednesday’s filter pattern:</p>
-<div id="c2572555" class="cell" data-execution_count="10">
+<p>Toolik has thirty years of data, and the obvious question to ask is <em>whether</em> the <em>weather</em> is getting warmer.</p>
+<p>Split the record into its first eleven years and its last ten years, using Wednesday’s filter pattern (we are leaving 1999 to 2008 out of both halves, so the two ends of the record are well separated):</p>
+<div id="67183381" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>early <span class="op">=</span> toolik[toolik[<span class="st">'year'</span>] <span class="op">&lt;=</span> <span class="dv">1998</span>]</span>
@@ -918,7 +921,7 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 <p>Then ask each half the same question, and put the two answers side by side:</p>
-<div id="63673b72" class="cell" data-execution_count="11">
+<div id="c2df05d1" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> pd.DataFrame({</span>
@@ -1028,35 +1031,23 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p>Read the <code>change</code> column top to bottom.</p>
-<p>January is 3.5 °C warmer. October is 4.3 °C warmer. February, November and December are all up by one to two and a half degrees. And July, the month everybody thinks of when they think about warming, is 0.8 °C <strong>cooler</strong>, as are June, August and May.</p>
-<p>If you had computed a single annual mean for each half of the record you would have got a small positive number and concluded, correctly but uselessly, that Toolik has warmed a little. The month column is what turns that into the actual finding: <strong>this site’s warming is almost entirely a cold-season phenomenon.</strong> That is a well-documented Arctic pattern, and it has physical causes you can reason about: snow arriving later, sea ice forming later, and both of them changing how much heat the land loses in the dark half of the year.</p>
-<p>You could not have seen it without a month, you did not have a month until you parsed the date, and the file had been sitting there the whole time with <code>19880601</code> in it.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>🐍 Two honest caveats, because this is a real result and real results have them. Eleven years and ten years are short records for a climate claim, and one station is one station. What you have found is a pattern in this dataset, which is the correct thing to say about it.</p>
-</div>
-</div>
+<p>Read the <code>change</code> column top to bottom, all twelve rows of it.</p>
+<p>October is 4.3 °C warmer and January is 3.5 °C warmer. February, November and December are up by one to two and a half degrees, and September by nearly a degree. July, the month people usually think of when they think about warming, is 0.8 °C <strong>cooler</strong>. May, June and August are cooler too, by between 0.2 and 0.9 °C.</p>
+<p>March and April are the two rows that spoil a tidy story: both are in the cold half of the year and both are <strong>cooler</strong>, March by 2.0 °C and April by 1.5 °C.</p>
+<p>If you had computed a single annual mean for each half of the record you would have got 0.5 °C and concluded, correctly but uselessly, that Toolik has warmed a little. The month column turns half a degree into something you can describe: the warming at Toolik (like most of the northern latitudes) has occurred in the early winter and in autumn, the summer is flat or slightly cooler, and the spring has gone the other way. The autumn and early winter warming is a well-documented Arctic pattern with physical causes you can reason about, snow arriving later and sea ice forming later, both of them changing how much heat the land loses in the dark half of the year. Our comparison table raises the question of why March and April have cooled, and it cannot answer it.</p>
+<p>The bottom line is that none of these patterns are visible without a month column, and there is no month column until you parse the date! The parsing code pattern at the top of this page turns <code>19880601</code> into a value you can group by.</p>
 </section>
 <section id="key-points" class="level2">
 <h2 class="anchored" data-anchor-id="key-points">Key points</h2>
 <ul>
-<li>A date stored as <strong>text or as an integer is not a date</strong>. It will sort correctly and then fail at arithmetic, without complaining.</li>
-<li>The <strong>parsing sentence</strong> is <code>pd.to_datetime(column, format='...')</code>.</li>
+<li>A date stored as <strong>text or as an integer is not a date</strong>. It will sort correctly and then fail at arithmetic, and it will not raise an error when it fails.</li>
+<li>The <strong>parsing pattern</strong> is <code>pd.to_datetime(column, format='...')</code>.</li>
 <li>A format string is a <strong>picture of your data</strong>: <code>%Y</code> for a four-digit year, <code>%m</code> for a two-digit month, <code>%d</code> for a two-digit day, punctuation typed literally.</li>
 <li><strong>Always supply <code>format=</code>.</strong> It converts a silent wrong answer into a loud error.</li>
 <li><code>.dt</code> is to dates what <code>.str</code> is to text. <code>.dt.year</code>, <code>.dt.month</code>, <code>.dt.day</code>.</li>
-<li>If <code>.dt</code> raises an <code>AttributeError</code>, the column has not been parsed.</li>
+<li>If <code>.dt</code> raises an <code>AttributeError</code>, your column has not been parsed yet.</li>
 <li><strong>Check your parse</strong> against anything you can: another column, a known date range, a row count.</li>
-<li>Date components are ordinary columns, so they are ordinary <strong>grouping keys</strong>, and that is usually the point of extracting them.</li>
+<li>Date components are ordinary columns, so they are ordinary <strong>grouping keys</strong>, which is usually the point of extracting them.</li>
 </ul>
 </section>
 <section id="resources" class="level2">

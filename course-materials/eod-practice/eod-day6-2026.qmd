@@ -22,13 +22,14 @@ format:
 :::
 
 The Eurovision Song Contest has been held almost every year since 1956. Fifty-two countries have
-entered at least once, the scoring system has been rebuilt four times, the number of entrants has
-nearly doubled, and the whole of it is in one file of 1,603 rows.
+entered at least once, the scoring system has been rebuilt more than once, the number of entrants
+has grown from twelve in the first contest to more than forty in recent ones, and the whole of it
+is in one file of 1,603 rows.
 
-Everything you learned today is about the
-**shape** of tables rather than what is in them, so it's okay that this isn't environmental data.
+Most of what we learned today is about the **shape** of tables rather than what is in them, so
+it's okay that the Eurovision results are not environmental data.
 
-Today you will determine the most successful Eurovision country, and find three reasons to distrust the answer you have just computed.
+Today we will try to work out the most successful Eurovision country, and find a number of reasons to be wary of easy answers.
 
 :::{.callout-note title="Reference"}
 Eurovision Song Contest contestant data, compiled from the contest's public results archive.
@@ -36,7 +37,7 @@ Eurovision Song Contest contestant data, compiled from the contest's public resu
 
 ## Today's patterns
 
-Everything below is built from these three patterns:
+Every question below is built from the patterns we learned this morning:
 
 ```python
 pd.merge(left, right, on='key')                        # the join pattern
@@ -50,7 +51,7 @@ df.pivot_table(index=, columns=, values=)              # the pivot pattern
 counts = df['col'].value_counts().reset_index()        # Series to table
 ```
 
-And these, from earlier in the week:
+And from these, which we have been using since earlier in the week:
 
 ```python
 df[df['column'] != value].copy()                       # the filter pattern
@@ -85,7 +86,7 @@ eurovision = pd.read_csv(url)
 
 ## Part 1: What is in this file, and what is missing from it
 
-Answer each question with code, then write the answer in a markdown cell underneath, in a
+Answer each question with code, then write your answer in a markdown cell underneath it, in a
 complete sentence with the numbers in it.
 
 1. How many rows and columns? What are the column names, and what is the range of `year`?
@@ -112,8 +113,8 @@ eurovision.isnull().sum()
 eurovision.groupby('year')['points_final'].count().tail(6)
 ```
 
-4. One year has a count of zero. Which one, and what happened? (You may look this up. It is the
-   only fact in this exercise that is not in the file.)
+4. One of the years you just printed has a count of zero. Which one, and what happened? (You may
+   look this up. It is the only thing you are asked to look up in this exercise.)
 
 5. Build a table called `contests` that excludes that year, using the filter pattern and ending
    the line with `.copy()`. How many rows does it have?
@@ -124,14 +125,14 @@ contests.shape
 ```
 
 :::{.callout-important title="Why this matters"}
-A very common first move on a file like this is `df.fillna(0)`, to make the nulls go away.
+A very common first move on a file full of nulls is `df.fillna(0)`, to make the nulls go away.
 
-Do it here and every one of that year's 41 entries acquires a real score of zero points. Those
-zeros then flow into every average you compute for the rest of the practice, and one decade in your
-final table becomes an artifact of a contest that never took place.
+Do it here and every one of that year's 41 entries acquires a real score of zero points. The
+fabricated zeros would then be included in every average you compute for the rest of the practice,
+and one decade in your final table would become an artifact of a contest that never took place.
 
-A null means *no value*. A zero means *the value is zero*. Filling one with the other is not
-tidying, it is fabrication.
+A null means *no value*. A zero means *the value is zero*. Replacing one with the other invents
+41 results that nobody ever voted on.
 :::
 
 ## Part 2: Decades
@@ -147,14 +148,14 @@ contests['decade'].value_counts().sort_index()
 ```
 
 :::{.callout-note}
-🐍 Notice what this part does not do. You spent an hour this morning parsing dates, and there is a
-column here called `year`. It is tempting to reach for `pd.to_datetime()`.
+🐍 Notice what this part of the practice does not do. We spent an hour this afternoon parsing
+dates, and there is a column here called `year`, so it is tempting to reach for `pd.to_datetime()`.
 
-Leave it alone. `year` is a number that happens to name a year, and this file holds nothing below
-the year: no month, no day, no hour. Parsing it would produce a column whose only useful accessor,
-`.dt.year`, hands back the integer you started with. The parse earns its place in files that hold
-a real date, like the Toolik record from this morning, where `.dt.month` and `.dt.dayofyear` tell
-you something the raw column does not.
+Leave it alone. `year` is a number that happens to name a year, and the Eurovision file has
+nothing finer than the year in it: no month, no day, no hour. Parsing it would produce a column
+whose only useful accessor, `.dt.year`, returns the integer you started with. Parsing earns its
+place in a file that holds a real date, like the Toolik weather record from this afternoon, where
+`.dt.month` and `.dt.dayofyear` tell you something the raw column does not.
 :::
 
 7. Count the entries in each year from 2000 to 2007. What changes abruptly? In
@@ -167,11 +168,11 @@ contests.groupby('year')['to_country'].count().loc[2000:2007]
 
 ## Part 3: The best country of each decade
 
-You can answer the below questions using the loop from yesterday
-afternoon and the stacking pattern from this morning:
+You can answer the questions below with the loop over groups from Friday afternoon and the
+stacking pattern from this morning:
 
 8. Build a table with one row per decade, holding the country with the highest average
-    `points_final` in that decade, how many entries that average came from, and the average
+    `points_final` in that decade, how many scored finals that average came from, and the average
     itself.
 
     Do it with a loop over decade groups. For each decade: group by `to_country`, `.agg()` for the
@@ -194,9 +195,10 @@ decade_winners = pd.concat(decade_winners_list, ignore_index=True)
 decade_winners[['decade', 'to_country', 'count', 'mean']]
 ```
 
-9. Read the `count` column before you read the `mean` column. Three of the seven winners won on
-    fewer than four entries. Name them, and say in one sentence why you would not put any of them
-    in a headline.
+9. Read the `count` column before you read the `mean` column. Remember what `.count()` counts: the
+    non-null `points_final` values, which is finals a country was scored in, not contests it
+    entered. Three of the seven winners were scored in fewer than four finals. Name them, and say
+    in one sentence why you would not put any of them in a headline.
 
 10. The `mean` column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown
     cell, two or three sentences: is Europe getting better at writing songs? What else changed
@@ -265,15 +267,16 @@ print(ranked[['country', 'entries', 'population', 'entries_per_million']].tail(5
 ```
 
 16. The top of that ranking is San Marino, Andorra, Iceland, Monaco and Malta, and the bottom is
-    Russia, Italy and Ukraine. In a markdown cell, three or four sentences: is *entries per
-    million people* a meaningful quantity? What is it actually measuring, and what would you have
-    to know about how the file's population numbers were collected before you would publish this
-    table?
+    Yugoslavia, Russia and Serbia & Montenegro. In a markdown cell, three or four sentences: is
+    *entries per million people* a meaningful quantity? What is it actually measuring, and what
+    would you have to know about how the file's population numbers were collected before you would
+    publish this table?
 
 :::{.callout-tip title="Look at the population column before you answer"}
 Iceland is listed at 255,866 and the United Kingdom at 57,247,586. Neither of those is a current
-figure, and the file does not say what year any of them are from. That is a real limitation of a
-real dataset.
+figure, and the file does not say what year any of them are from. A population column with no
+stated year is a real limitation of a real dataset, and you should say so in your answer rather
+than quietly work around it.
 :::
 
 ## Part 5: The whole contest in one grid
@@ -315,8 +318,8 @@ number you would actually send them. Use complete sentences.
 
 ## The grammar minute
 
-Look back through your notebook. Three patterns did all of the structural work today without
-calculating anything:
+Look back through your notebook. Three patterns did all of today's structural work without
+calculating a single number:
 
 ```python
 pd.merge(a, b, left_on=, right_on=)    # two tables become one, side by side
@@ -324,12 +327,13 @@ pd.concat([...], ignore_index=True)    # many tables become one, top to bottom
 df.pivot_table(index=, columns=, ...)  # one long table becomes one wide one
 ```
 
-Every other line in your notebook was something you already knew, operating on a table that one of
-those three patterns had put into the right shape.
+Every other line in your notebook was something you already knew how to do, applied to a table
+that one of the three patterns above had already put into the right shape.
 
-Most of the difficulty in real data analysis is not the analysis. It is that the numbers you need to compare are in two files, or in
-one file at right angles to each other. The three
-patterns above are how you fix that.
+Much of the difficulty in real data analysis has nothing to do with the analysis itself. The
+numbers you want to compare often sit in two different files, or sit in one file at right angles
+to each other, and merging, stacking and pivoting are how you get them side by side before the
+analysis starts.
 
 ## Wrap-up
 
@@ -341,6 +345,9 @@ Before you close your notebook, check that:
 - your Part 6 answer names something the data cannot tell the editor
 - your notebook reads top to bottom as a document, not as a pile of cells
 
+If one of these is not true and you are not sure how to fix it, grab Cella or Kelly before you
+leave today!
+
 ## Resources
 
 - [📖 EDS 217 cheatsheet: merging and joining data](../cheatsheets/data_merging.qmd)
@@ -351,6 +358,6 @@ Before you close your notebook, check that:
 
 ::: {.callout-tip}
 ## Looking ahead to Day 7
-Tomorrow every table you have built this week becomes a picture. You have spent six days getting
-data into the right shape; tomorrow is what that shape was for.
+Tomorrow every table you have built this week can become a figure. We have spent six days getting
+data into the right shape, and tomorrow we start making pictures that other people can read.
 :::

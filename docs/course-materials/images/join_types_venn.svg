@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 410" width="940" height="410" role="img" aria-label="The four pandas merge types. Two input tables share a key column. Inner returns only keys present in both; left keeps every key from the left table and fills B with NaN; right keeps every key from the right table and fills A with NaN; outer keeps every key from either table.">
+<style>
+@media (prefers-color-scheme: dark) {
+  .c-ink{fill:#e5e7eb} .c-muted{fill:#9ca3af} .c-head{fill:#1f2937}
+  .c-cell{fill:#111827} .c-nan{fill:#161e2b} .c-accent{fill:#60a5fa}
+  .s-line{stroke:#3f4756} .s-line2{stroke:#6b7280} .s-rule{stroke:#2b3444}
+}
+</style>
+<text x="354.0" y="26" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">left</text>
+<text x="498.0" y="26" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">right</text>
+<rect x="354.0" y="34" width="88" height="22" fill="#eef2f7" class="c-head"/>
+<text x="376.0" y="49" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">key</text>
+<text x="420.0" y="49" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">A</text>
+<rect x="354.0" y="56" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="376.0" y="71" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k0</text>
+<rect x="398.0" y="56" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="420.0" y="71" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">a0</text>
+<rect x="354.0" y="78" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="376.0" y="93" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k1</text>
+<rect x="398.0" y="78" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="420.0" y="93" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">a1</text>
+<rect x="354.0" y="100" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="376.0" y="115" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k2</text>
+<rect x="398.0" y="100" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="420.0" y="115" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">a2</text>
+<line x1="354.0" y1="34" x2="354.0" y2="122" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="398.0" y1="34" x2="398.0" y2="122" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="442.0" y1="34" x2="442.0" y2="122" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="354.0" y1="34" x2="442.0" y2="34" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="354.0" y1="56" x2="442.0" y2="56" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="354.0" y1="78" x2="442.0" y2="78" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="354.0" y1="100" x2="442.0" y2="100" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="354.0" y1="122" x2="442.0" y2="122" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<rect x="498.0" y="34" width="88" height="22" fill="#eef2f7" class="c-head"/>
+<text x="520.0" y="49" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">key</text>
+<text x="564.0" y="49" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">B</text>
+<rect x="498.0" y="56" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="520.0" y="71" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k1</text>
+<rect x="542.0" y="56" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="564.0" y="71" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">b1</text>
+<rect x="498.0" y="78" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="520.0" y="93" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k2</text>
+<rect x="542.0" y="78" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="564.0" y="93" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">b2</text>
+<rect x="498.0" y="100" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="520.0" y="115" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k3</text>
+<rect x="542.0" y="100" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="564.0" y="115" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">b3</text>
+<line x1="498.0" y1="34" x2="498.0" y2="122" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="542.0" y1="34" x2="542.0" y2="122" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="586.0" y1="34" x2="586.0" y2="122" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="498.0" y1="34" x2="586.0" y2="34" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="498.0" y1="56" x2="586.0" y2="56" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="498.0" y1="78" x2="586.0" y2="78" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="498.0" y1="100" x2="586.0" y2="100" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="498.0" y1="122" x2="586.0" y2="122" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<text x="470.0" y="84" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#6b7280" class="c-muted">+</text>
+<text x="470.0" y="104" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" fill="#6b7280" class="c-muted">on="key"</text>
+<line x1="30" y1="146" x2="910" y2="146" stroke="#e2e8f0" stroke-width="1" class="s-rule"/>
+<text x="140.0" y="176" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="600" fill="#111827" class="c-ink">how="inner"</text>
+<text x="140.0" y="193" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" class="c-muted">keys in both</text>
+<clipPath id="clip140"><circle cx="155.0" cy="230" r="23"/></clipPath>
+<circle cx="125.0" cy="230" r="23" fill="#3b82f6" fill-opacity="0.55" clip-path="url(#clip140)" class="c-accent"/>
+<circle cx="125.0" cy="230" r="23" fill="none" stroke="#94a3b8" stroke-width="1.4" class="s-line2"/>
+<circle cx="155.0" cy="230" r="23" fill="none" stroke="#94a3b8" stroke-width="1.4" class="s-line2"/>
+<text x="114.0" y="234" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" class="c-muted">L</text>
+<text x="166.0" y="234" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" class="c-muted">R</text>
+<rect x="74.0" y="268" width="132" height="22" fill="#eef2f7" class="c-head"/>
+<text x="96.0" y="283" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">key</text>
+<text x="140.0" y="283" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">A</text>
+<text x="184.0" y="283" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">B</text>
+<rect x="74.0" y="290" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="96.0" y="305" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k1</text>
+<rect x="118.0" y="290" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="140.0" y="305" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">a1</text>
+<rect x="162.0" y="290" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="184.0" y="305" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">b1</text>
+<rect x="74.0" y="312" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="96.0" y="327" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k2</text>
+<rect x="118.0" y="312" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="140.0" y="327" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">a2</text>
+<rect x="162.0" y="312" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="184.0" y="327" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">b2</text>
+<line x1="74.0" y1="268" x2="74.0" y2="334" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="118.0" y1="268" x2="118.0" y2="334" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="162.0" y1="268" x2="162.0" y2="334" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="206.0" y1="268" x2="206.0" y2="334" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="74.0" y1="268" x2="206.0" y2="268" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="74.0" y1="290" x2="206.0" y2="290" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="74.0" y1="312" x2="206.0" y2="312" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="74.0" y1="334" x2="206.0" y2="334" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<text x="360.0" y="176" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="600" fill="#111827" class="c-ink">how="left"</text>
+<text x="360.0" y="193" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" class="c-muted">all keys from left</text>
+<circle cx="345.0" cy="230" r="23" fill="#3b82f6" fill-opacity="0.38" class="c-accent"/>
+<circle cx="345.0" cy="230" r="23" fill="none" stroke="#94a3b8" stroke-width="1.4" class="s-line2"/>
+<circle cx="375.0" cy="230" r="23" fill="none" stroke="#94a3b8" stroke-width="1.4" class="s-line2"/>
+<text x="334.0" y="234" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" class="c-muted">L</text>
+<text x="386.0" y="234" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" class="c-muted">R</text>
+<rect x="294.0" y="268" width="132" height="22" fill="#eef2f7" class="c-head"/>
+<text x="316.0" y="283" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">key</text>
+<text x="360.0" y="283" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">A</text>
+<text x="404.0" y="283" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">B</text>
+<rect x="294.0" y="290" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="316.0" y="305" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k0</text>
+<rect x="338.0" y="290" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="360.0" y="305" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">a0</text>
+<rect x="382.0" y="290" width="44" height="22" fill="#f6f8fb" class="c-nan"/>
+<text x="404.0" y="305" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6b7280" class="c-muted" font-style="italic">NaN</text>
+<rect x="294.0" y="312" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="316.0" y="327" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k1</text>
+<rect x="338.0" y="312" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="360.0" y="327" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">a1</text>
+<rect x="382.0" y="312" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="404.0" y="327" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">b1</text>
+<rect x="294.0" y="334" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="316.0" y="349" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k2</text>
+<rect x="338.0" y="334" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="360.0" y="349" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">a2</text>
+<rect x="382.0" y="334" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="404.0" y="349" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">b2</text>
+<line x1="294.0" y1="268" x2="294.0" y2="356" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="338.0" y1="268" x2="338.0" y2="356" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="382.0" y1="268" x2="382.0" y2="356" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="426.0" y1="268" x2="426.0" y2="356" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="294.0" y1="268" x2="426.0" y2="268" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="294.0" y1="290" x2="426.0" y2="290" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="294.0" y1="312" x2="426.0" y2="312" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="294.0" y1="334" x2="426.0" y2="334" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="294.0" y1="356" x2="426.0" y2="356" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<text x="580.0" y="176" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="600" fill="#111827" class="c-ink">how="right"</text>
+<text x="580.0" y="193" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" class="c-muted">all keys from right</text>
+<circle cx="595.0" cy="230" r="23" fill="#3b82f6" fill-opacity="0.38" class="c-accent"/>
+<circle cx="565.0" cy="230" r="23" fill="none" stroke="#94a3b8" stroke-width="1.4" class="s-line2"/>
+<circle cx="595.0" cy="230" r="23" fill="none" stroke="#94a3b8" stroke-width="1.4" class="s-line2"/>
+<text x="554.0" y="234" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" class="c-muted">L</text>
+<text x="606.0" y="234" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" class="c-muted">R</text>
+<rect x="514.0" y="268" width="132" height="22" fill="#eef2f7" class="c-head"/>
+<text x="536.0" y="283" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">key</text>
+<text x="580.0" y="283" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">A</text>
+<text x="624.0" y="283" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">B</text>
+<rect x="514.0" y="290" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="536.0" y="305" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k1</text>
+<rect x="558.0" y="290" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="580.0" y="305" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">a1</text>
+<rect x="602.0" y="290" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="624.0" y="305" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">b1</text>
+<rect x="514.0" y="312" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="536.0" y="327" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k2</text>
+<rect x="558.0" y="312" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="580.0" y="327" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">a2</text>
+<rect x="602.0" y="312" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="624.0" y="327" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">b2</text>
+<rect x="514.0" y="334" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="536.0" y="349" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k3</text>
+<rect x="558.0" y="334" width="44" height="22" fill="#f6f8fb" class="c-nan"/>
+<text x="580.0" y="349" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6b7280" class="c-muted" font-style="italic">NaN</text>
+<rect x="602.0" y="334" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="624.0" y="349" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">b3</text>
+<line x1="514.0" y1="268" x2="514.0" y2="356" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="558.0" y1="268" x2="558.0" y2="356" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="602.0" y1="268" x2="602.0" y2="356" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="646.0" y1="268" x2="646.0" y2="356" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="514.0" y1="268" x2="646.0" y2="268" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="514.0" y1="290" x2="646.0" y2="290" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="514.0" y1="312" x2="646.0" y2="312" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="514.0" y1="334" x2="646.0" y2="334" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="514.0" y1="356" x2="646.0" y2="356" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<text x="800.0" y="176" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="600" fill="#111827" class="c-ink">how="outer"</text>
+<text x="800.0" y="193" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7280" class="c-muted">all keys from either</text>
+<circle cx="785.0" cy="230" r="23" fill="#3b82f6" fill-opacity="0.38" class="c-accent"/>
+<circle cx="815.0" cy="230" r="23" fill="#3b82f6" fill-opacity="0.38" class="c-accent"/>
+<circle cx="785.0" cy="230" r="23" fill="none" stroke="#94a3b8" stroke-width="1.4" class="s-line2"/>
+<circle cx="815.0" cy="230" r="23" fill="none" stroke="#94a3b8" stroke-width="1.4" class="s-line2"/>
+<text x="774.0" y="234" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" class="c-muted">L</text>
+<text x="826.0" y="234" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#6b7280" class="c-muted">R</text>
+<rect x="734.0" y="268" width="132" height="22" fill="#eef2f7" class="c-head"/>
+<text x="756.0" y="283" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">key</text>
+<text x="800.0" y="283" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">A</text>
+<text x="844.0" y="283" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#111827" class="c-ink">B</text>
+<rect x="734.0" y="290" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="756.0" y="305" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k0</text>
+<rect x="778.0" y="290" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="800.0" y="305" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">a0</text>
+<rect x="822.0" y="290" width="44" height="22" fill="#f6f8fb" class="c-nan"/>
+<text x="844.0" y="305" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6b7280" class="c-muted" font-style="italic">NaN</text>
+<rect x="734.0" y="312" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="756.0" y="327" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k1</text>
+<rect x="778.0" y="312" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="800.0" y="327" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">a1</text>
+<rect x="822.0" y="312" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="844.0" y="327" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">b1</text>
+<rect x="734.0" y="334" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="756.0" y="349" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k2</text>
+<rect x="778.0" y="334" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="800.0" y="349" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">a2</text>
+<rect x="822.0" y="334" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="844.0" y="349" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">b2</text>
+<rect x="734.0" y="356" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="756.0" y="371" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">k3</text>
+<rect x="778.0" y="356" width="44" height="22" fill="#f6f8fb" class="c-nan"/>
+<text x="800.0" y="371" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6b7280" class="c-muted" font-style="italic">NaN</text>
+<rect x="822.0" y="356" width="44" height="22" fill="#ffffff" class="c-cell"/>
+<text x="844.0" y="371" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#111827" class="c-ink">b3</text>
+<line x1="734.0" y1="268" x2="734.0" y2="378" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="778.0" y1="268" x2="778.0" y2="378" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="822.0" y1="268" x2="822.0" y2="378" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="866.0" y1="268" x2="866.0" y2="378" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="734.0" y1="268" x2="866.0" y2="268" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="734.0" y1="290" x2="866.0" y2="290" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="734.0" y1="312" x2="866.0" y2="312" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="734.0" y1="334" x2="866.0" y2="334" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="734.0" y1="356" x2="866.0" y2="356" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+<line x1="734.0" y1="378" x2="866.0" y2="378" stroke="#cbd5e1" stroke-width="1" class="s-line"/>
+</svg>

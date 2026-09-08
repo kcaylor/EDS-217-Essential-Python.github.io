@@ -1,6 +1,6 @@
 ---
 title: "Answer Key"
-subtitle: "🌍 Two Records, Sixty-Six Years Apart"
+subtitle: "🌍 Two Records, Seventy-Eight Years Apart"
 search: false
 execute:
   echo: true
@@ -15,13 +15,13 @@ format:
 
 :::{.callout-important title="How to use this key"}
 Work the colab first, then come here. The code below is **one** correct answer, not the only one.
-This exercise gives you less scaffolding than an end-of-day activity does, so there are more ways
+Today's colab gives you less scaffolding than an end-of-day practice does, so there are more ways
 to reach each number than usual. If your code looks different but produces the same numbers, you
-were right.
+were right!
 
-The written answers matter more than the code. You can already tell whether your code ran. What
-you cannot check on your own is whether you read the result correctly, and that is what the
-green **Answer** boxes are for. Compare your markdown cells against them.
+The written answers matter more than the code. You can already tell whether your code ran. Whether
+you read the result correctly is the part you cannot check on your own, and the green **Answer**
+boxes are there for exactly that. Compare your markdown cells against them.
 
 ⬅️ Back to [the colab](../coding-colabs/6d_two_table_exercise.qmd)
 :::
@@ -39,9 +39,9 @@ co2 = pd.read_csv(base + 'monthly_co2_concentration.csv')
 
 ## Part 1: Making one table out of two
 
-**1. How many rows does each table have, and what columns? What is the earliest and latest `Date`
-in each? (`.min()` and `.max()` on the `Date` column will do it, since these dates are text in
-`%Y-%m-%d` form and text in that form sorts correctly.)**
+**1. How many rows does each table have, and what columns? What is the earliest and latest
+`Date` in each? (`.min()` and `.max()` on the `Date` column will do it, because these dates are
+text in `%Y-%m-%d` form and text in that form sorts correctly.)**
 
 ```{python}
 print(temp.shape, list(temp.columns))
@@ -60,7 +60,7 @@ Both tables have one row per month, and both row counts are exactly what the dat
 the two tables from here on is a difference at the ends and not a hole in the middle.
 
 Note the second date pair as well as the first. The records start 78 years apart, but they also
-**stop one month apart**, and that second fact matters in question 4.
+**stop one month apart**, and the one-month gap at the end is what question 4 asks about.
 :::
 
 **2. Merge the two tables on `Date`, with the default `how=`. How many rows come back?**
@@ -74,10 +74,10 @@ inner.shape
 **796 rows**, which is exactly the CO₂ table's row count. The default is `how='inner'`, so a row
 survives only when the same `Date` appears in both tables.
 
-That the answer equals 796 and not something smaller tells you every CO₂ month has a matching
-temperature row. The temperature record fully contains the CO₂ record in time, so the inner
-merge is limited entirely by the shorter of the two series. The 66 years of overlap are the CO₂
-record, and nothing else.
+The answer comes back as 796 rather than something smaller, which tells you that every CO₂ month
+has a matching temperature row. The temperature record fully contains the CO₂ record in time, so
+the inner merge is limited entirely by the shorter of the two series. The 66 years of overlap are
+the CO₂ record, and nothing else.
 :::
 
 **3. Merge them again with `how='left'`, putting `temp` on the left. How many rows now, and how
@@ -94,10 +94,10 @@ print(left.isnull().sum())
 the left table whether or not a match exists, so the row count is the temperature table's row
 count unchanged.
 
-The nulls are all in one column, and that is the signature of a left merge: the left table's
-columns are complete by construction, and only the columns brought in from the right can be
-empty. 1736 minus 940 is 796, the inner merge's answer, which is a useful arithmetic check that
-you merged what you thought you merged.
+A left merge leaves nulls in one place only, because the left table's columns are complete by
+construction and only the columns brought in from the right can be empty. 1736 minus 940 is 796,
+the inner merge's answer, which is a useful arithmetic check that you merged what you thought you
+merged.
 :::
 
 **4. In a markdown cell: the two merges differ by 940 rows. Provide a sentence explaining what
@@ -113,11 +113,11 @@ print(missing['Date'].min(), missing['Date'].max())
 the 939 months from January 1880 through March 1958, before Keeling's instrument was running,
 **plus one more at the far end: August 2024**.
 
-That last row is the part most pairs miss. It is easy to picture the gap as a single block at the
-start of the record, but the temperature series runs one month further than the CO₂ series does,
-so the unmatched months are at both ends. Your question 1 output said so: `2024-08-01` against
-`2024-07-01`. 939 plus 1 is 940, and if you predicted 939 you had the right idea and read only
-one of the two date pairs.
+The August 2024 row is an easy one to miss, because it is natural to picture the gap as a single
+block at the start of the record. The temperature series runs one month further than the CO₂ series
+does, so the unmatched months are at both ends, and your question 1 output said so already:
+`2024-08-01` against `2024-07-01`. 939 plus 1 is 940, so if you predicted 939 you had the right
+idea and read only one of the two date pairs!
 :::
 
 **5. Suppose you are writing one of the following two papers. For each one, say which merge you
@@ -140,8 +140,8 @@ be a serious error, so the left merge is right. Better still, this paper does no
 all; `temp` on its own is the dataset, and the CO₂ column is only there if you want it for
 context.
 
-The general point is that the `how=` argument is a decision about **which question you are
-asking**, not a technical detail of pandas. Choose it after you know what the analysis is for.
+The `how=` argument is a decision about **which question you are asking** rather than a technical
+detail of pandas, so choose it after you know what the analysis is for.
 :::
 
 ## Part 2: Making the dates real
@@ -169,9 +169,9 @@ when printed side by side, which is exactly why the dtype check is worth doing r
 eyeballing the head of the table.
 :::
 
-**8. Build a table of annual means: group by `year` and report the *count* of months, the mean of
+**8. Build a table of annual means: group by `year` and report the count of months, the mean of
 `MonthlyAnomaly`, and the mean of `CO2Concentration`. Show the first three rows and the last
-three.**
+three rows.**
 
 ```{python}
 annual = climate.groupby('year').agg({'Date': 'count',
@@ -203,10 +203,10 @@ decimal places, and look equally trustworthy. Asking for `count` alongside every
 habit that catches this, and it costs one extra line.
 :::
 
-## Part 3: A graph of annual amplitudes
+## Part 3: The size of the annual cycle
 
 **10. Build a wide table with `year` down the rows, `month` across the columns, and
-`CO2Concentration` in the cells. Show the first three rows and the last three.**
+`CO2Concentration` in the cells. Show the first three rows and the last three rows.**
 
 ```{python}
 co2_grid = climate.pivot_table(index='year', columns='month', values='CO2Concentration')
@@ -214,24 +214,24 @@ print(co2_grid.head(3).round(2))
 print(co2_grid.tail(3).round(2))
 ```
 
-**11. This new table holds two different patterns at once. Read it *down* a single column, then
-read it *across* a single row. In a markdown cell, describe both in one sentence each.**
+**11. The wide table holds two different patterns at once. Read it down a single column, then
+read it across a single row. In a markdown cell, describe both in one sentence each.**
 
 :::{.callout-note title="✅ Answer"}
-**Down a column is the trend:** May goes from 318.29 ppm in 1959 to 424.00 ppm in 2023, a rise of
-105.71 ppm over 64 years, and the same rise appears in whichever month you pick.
+**Reading down a column shows the trend:** May goes from 318.29 ppm in 1959 to 424.00 ppm in 2023,
+a rise of 105.71 ppm over 64 years, and the same rise appears in whichever month you pick.
 
-**Across a row is the seasonal cycle:** within 2023 the value climbs to a peak of 424.00 ppm in
-May and falls to a trough of 418.50 ppm in September before starting to climb again.
+**Reading across a row shows the seasonal cycle:** within 2023 the value climbs to a peak of 424.00
+ppm in May and falls to a trough of 418.50 ppm in September before starting to climb again.
 
 The pivot separates the two patterns because it puts one on each axis. In the raw monthly column
-they are added together and you see a jagged rising line, which is harder to measure. Reshaping
-data is often what makes a comparison possible, and the `NaN` values
-in the 1958 and 2024 rows are the same two part years from question 9 showing up in a new shape.
+they are added together and you see a jagged rising line, which is harder to measure. Reshaping the
+data is often what makes a comparison possible. The `NaN` values in the 1958 and 2024 rows are the
+same two part years from question 9, turning up again in the wide table.
 :::
 
 **12. For every year, the difference between its largest monthly value and its smallest is the
-size of the annual cycle. Compute that difference for two specific years: 1959 and for 2023, and
+size of the annual cycle. Compute that difference for two specific years, 1959 and 2023, and
 report both. (You will need two lines of code; one for each year)**
 
 ```{python}
@@ -241,8 +241,8 @@ print(co2_grid.loc[2023].max() - co2_grid.loc[2023].min())
 
 :::{.callout-note title="✅ Answer"}
 **4.96 ppm in 1959 and 5.50 ppm in 2023**, an increase of 0.54 ppm in the size of the annual
-cycle across 64 years. That is about 11 percent larger, on a cycle that was already the most
-regular feature of the record.
+cycle across 64 years. The 2023 cycle is about 11 percent larger than the 1959 one, which may or
+may not mean the annual cycle itself has changed (question 13 comes back to this).
 
 Report these to two decimal places. The 1959 figure prints as `4.960000000000036`, which is
 floating-point arithmetic showing through and not a real precision claim: the underlying
@@ -270,9 +270,9 @@ growing season, a warmer high-latitude spring, or simply more vegetation taking 
 The evidence does not support it. Run the same subtraction on a few more years and the year to
 year scatter is larger than the change you are trying to see: 1960 is 6.20 ppm, larger than 2023's
 5.50, and 2000 is 4.83, smaller than 1959's 4.96. 1959 is the third smallest cycle in all 65 full
-years, so question 12 compared a year with an unusually small cycle against an ordinary one. The honest
-statement is that two years cannot separate a trend from noise, and that measuring this properly
-means averaging the cycle over a decade at each end, or fitting a line through all 65 values.
+years, so question 12 compared a year with an unusually small cycle against an ordinary one. Two
+years cannot separate a trend from year to year scatter, and measuring this properly would mean
+averaging the cycle over a decade at each end, or fitting a line through all 65 values.
 :::
 
 **14. Build the same wide table for `MonthlyAnomaly`. Does the temperature record have a
@@ -293,14 +293,15 @@ temperature minus that same month's long-term average. January is compared again
 July against Julys, so the seasonal cycle has been subtracted out before the number reaches your
 table.
 
-The column means show it. Averaged over the whole table the twelve months span 0.350 °C in August
-to 0.446 °C in March, a spread of about 0.10 °C, and some of even that comes from the two
+The column means show it. Averaged over the whole table the twelve months span 0.350 °C, in August
+and again in September, to 0.446 °C in March, a spread of about 0.10 °C, and some of even that comes from the two
 incomplete years contributing to some columns and not others. Compare that with CO₂, where a
-single year swings 5 ppm out of a total range of about 110 ppm.
+single year swings 5 ppm out of a total range of about 115 ppm.
 
 Individual rows do vary. 2023 runs from 0.87 °C in January to 1.48 °C in September, a spread of
-0.61 °C. That is real variation in how far each month sat above its own baseline, not a repeating
-seasonal shape, and it does not line up with the same months from one year to the next.
+0.61 °C. The spread is real variation in how far each month sat above its own baseline rather
+than a repeating seasonal cycle, and it does not line up with the same months from one year to
+the next.
 :::
 
 ## Part 4: Making a statement about change
@@ -322,8 +323,8 @@ print(tens[['MonthlyAnomaly', 'CO2Concentration']].mean())
 rose from -0.030 °C to 0.805 °C, an increase of 0.835 °C.**
 
 Both decades are ten complete years drawn from `full_years`, which is what makes the two means
-comparable. The 1960s anomaly is very slightly negative, meaning that decade sat a hundredth of a
-degree below the twentieth-century baseline, so the 2010s figure is a rise from roughly zero
+comparable. The 1960s anomaly is very slightly negative, meaning that decade sat a few hundredths
+of a degree below the twentieth-century baseline, so the 2010s figure is a rise from roughly zero
 rather than a rise from something already elevated. In relative terms the CO₂ increase is 25.0
 percent of the 1960s level.
 :::
@@ -343,8 +344,8 @@ decadal mean of 320.29 ppm to 400.41 ppm, and the global temperature anomaly ros
 from -0.030 °C to 0.805 °C. Both decades are built from ten complete twelve-month years, so the
 two means are comparable and neither is distorted by a partial year.
 
-What this analysis shows is that two quantities both increased over the same 66 years. It does
-not show that one caused the other. Any pair of series that both rise steadily will agree in this
+The analysis shows that two quantities both increased over the same 66 years. It does not show
+that one caused the other. Any pair of series that both rise steadily will agree in this
 test, including many with no physical connection at all, and this comparison has no way to tell
 them apart. The 796-row overlap is also a single sample of a single planet, so there is no control
 case in which CO₂ stayed flat and we could see what temperature did.
@@ -352,8 +353,8 @@ case in which CO₂ stayed flat and we could see what temperature did.
 Before calling this causal, a scientist would need a physical mechanism that predicts the size of
 the effect in advance, and here that mechanism exists: the radiative absorption properties of CO₂
 were measured in the laboratory in the nineteenth century, and they predict roughly this much
-warming for roughly this much CO₂. The prediction came first and the observation matched it, and that is
-what makes the argument strong. It would also help to rule out the alternatives, showing that
+warming for roughly this much CO₂. The prediction came first and the observation matched it, which
+is what makes the argument strong. It would also help to rule out the alternatives, showing that
 solar output and volcanic aerosols over the same period do not account for the trend. My two
 columns are consistent with the accepted explanation, and consistency is not evidence of cause on
 its own.
@@ -364,16 +365,16 @@ its own.
 If you compare your notebook against this key, look for these four things before you look at
 anything else.
 
-1. **You know why the inner merge returned exactly 796 rows.** Not "because inner keeps matches",
-   but because 796 is the CO₂ table's own row count, which means the shorter record set the limit
-   and nothing was lost from it.
-2. **Your question 4 answer counts both ends.** 939 months at the start and one month, August
-   2024, at the finish. Question 1 printed the evidence for both.
-3. **Every mean you reported came with a count, or from `full_years`.** The 2024 row is the
-   cautionary case: a seven-month mean that would have topped the warmest-year ranking, with
-   nothing in the output to show that it came from seven months.
-4. **Your question 13 answer is honest about two years.** Naming the mechanism is the easy half.
-   Saying that 1959 against 2023 cannot separate a trend from year to year scatter is the half
-   that earns the marks, and the extra years above are how you check it.
+1. **You should be able to say why the inner merge returned exactly 796 rows.** Not "because
+   inner keeps matches", but because 796 is the CO₂ table's own row count, which means the shorter
+   record set the limit and nothing was lost from it.
+2. **Your question 4 answer should count both ends.** 939 months at the start and one month,
+   August 2024, at the finish. Question 1 printed the evidence for both.
+3. **Every mean you reported should have come with a count, or come from `full_years`.** The 2024
+   row is the cautionary case: a seven-month mean that would have topped the warmest-year ranking,
+   with nothing in the output to show that it came from seven months.
+4. **Your question 13 answer should be candid about two years.** Naming the mechanism is the easy
+   half. Saying that 1959 against 2023 cannot separate a trend from year to year scatter is the
+   half that earns the marks, and the extra years above are how you check it.
 
 ⬅️ Back to [the colab](../coding-colabs/6d_two_table_exercise.qmd)

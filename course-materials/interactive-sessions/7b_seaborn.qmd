@@ -18,27 +18,27 @@ format:
 
 :::
 
-Everything you drew an hour ago, you drew by handing matplotlib two sequences of numbers and then
-describing, one command at a time, what you wanted done to them.
+In our first session this morning we drew every figure by handing matplotlib two sequences of
+numbers and then describing, one command at a time, what we wanted done to them.
 
-That works, and it is worth knowing, because underneath every Python figure you will ever make
-there is a matplotlib figure and a matplotlib axes. But it means that a plot of your data has
-nothing to do with your data. `plt.scatter(wet_days['Daily_AirTemp_Mean_C'],
-wet_days['Daily_Precip_Total_mm'])` does not know it is looking at a DataFrame, does not know
-what those columns are called, and cannot use anything else in the table.
+Naming each command works, and it is worth knowing, because underneath every Python figure you
+will ever make there is a matplotlib figure and a matplotlib axes. But a call written that way
+only ever receives the numbers. `plt.scatter(wet_days['Daily_AirTemp_Mean_C'],
+wet_days['Daily_Precip_Total_mm'])` gets two sequences and nothing else: no DataFrame, no column
+names, and no way to reach the rest of the table.
 
-**seaborn** takes the other approach. You give it the table and the names of the columns, and it
-works out the drawing. In exchange for that one change of framing you get, almost for free, the
-single most useful thing a figure can do: show you that your data is made of groups.
+**seaborn** takes the other approach. You hand over the whole table plus the names of the columns
+you want plotted, and seaborn does the drawing. Because the whole table went in, seaborn can also
+use the columns you did not plot, including the one that says which group each row belongs to.
 
-By the end of this session you will be able to:
+By the end of this morning's session you will be able to:
 
 - write the three seaborn calls this course uses: `sns.scatterplot`, `sns.histplot` and
   `sns.barplot`
 - pass a whole table with `data=` and name the columns with `x=` and `y=`
 - split any of those three plots by a categorical column with `hue=`, and read the result
 - feed a **grouped Series** to `sns.barplot` using its `.values` and its `.index`
-- keep using every matplotlib command from the last session on a seaborn figure
+- keep using every matplotlib command from our first session on a seaborn figure
 
 ## Getting Started
 
@@ -63,8 +63,8 @@ Date: 09/09/2026
 
 4. **Save** with `Ctrl + S` (`Cmd + S` on macOS), and keep saving as you go.
 
-5. Rebuild Friday's clean stream-chemistry table. Every line below is one you have run before, in
-   the Thursday colab and again in 5A:
+5. **Rebuild the clean stream-chemistry table.** Every line below is one we have run before, in
+   Thursday's colab and again in 5A:
 
 ```{python}
 import pandas as pd
@@ -93,15 +93,16 @@ survey = survey.rename(columns={'collection date': 'collection_date'})
 survey.shape
 ```
 
-255 rows, six sites, four measurements each.
+255 rows from six sites, collected over the 2025 field season. Each row is one sample, with
+four measurements on it: temperature, pH, dissolved oxygen and conductivity.
 
 The standard import line is `import seaborn as sns`, and `sns` is as fixed a convention as `pd`
-and `plt`. Nobody remembers why.
+and `plt`, though nobody seems to remember why!
 
 ## The same figure, said two ways
 
-Here is a scatter of water temperature against dissolved oxygen, drawn the way you drew things an
-hour ago:
+Here is a scatter of water temperature against dissolved oxygen, drawn the way we drew things in
+our first session this morning:
 
 ```{python}
 plt.figure(figsize=(7, 5))
@@ -130,22 +131,21 @@ sns.scatterplot(data=df, x='column_name', y='column_name')
 #               table    across           up
 ```
 
-Three differences, and the third is the one that matters.
+Three differences between the two calls:
 
 - `data=` takes the **whole table**, once.
 - `x=` and `y=` take **column names as strings**, not the columns themselves.
-- The axes came out **labelled**, because seaborn knew what the columns were called and matplotlib
-  never did.
+- The axes came out **labelled**, because the column names went in with the table. Nothing in the
+  matplotlib version ever mentioned a column name.
 
-That last one is a small convenience and a large hint. seaborn is not a drawing library that
-happens to accept DataFrames. It is a library built on the assumption that your data is a tidy
-table, and it uses everything it knows about that table to make decisions you would otherwise make
-by hand.
+The free labels are a small convenience and a large hint. seaborn is built on the assumption that
+your data arrives as a tidy table, and it uses everything in that table, column names included, to
+make decisions you would otherwise have to make by hand.
 
 :::{.callout-note}
 🐍 Column names are not automatically good axis labels. `temperature_c` is a variable name;
-*Water temperature (°C)* is a label. Everything from the last session still works, so override
-them whenever you would show the figure to somebody:
+*Water temperature (°C)* is a label. Every labelling command from our first session still works,
+so override the defaults whenever you would show the figure to somebody:
 
 ```python
 sns.scatterplot(data=survey, x='temperature_c', y='dissolved_oxygen_mg_L')
@@ -156,16 +156,16 @@ plt.ylabel('Dissolved oxygen (mg/L)')
 
 ## `hue=`, and what a table cannot show you
 
-On Friday morning you computed two small tables from this file and read them side by side:
+On Friday morning we computed two small tables from this file and read them side by side:
 
 ```{python}
 print(survey.groupby('site')['dissolved_oxygen_mg_L'].mean().sort_values())
 print(survey.groupby('site')['temperature_c'].mean().sort_values())
 ```
 
-Two orderings of six sites, and one is the exact reverse of the other. You concluded, correctly,
-that the warm sites are the low-oxygen sites. You believed it because the two lists happened to
-line up.
+Two orderings of six sites, and one is the exact reverse of the other. We concluded, correctly,
+that the warm sites are the low-oxygen sites, and the whole of the evidence was two short lists
+that read in opposite directions.
 
 Now add one argument to the scatter you already made:
 
@@ -185,17 +185,17 @@ legend built for free.
 
 Read what came back. The six sites are not scattered through the cloud; they are laid out **along
 it**, in order, from `site_d` in the cool oxygen-rich corner to `site_f` in the warm oxygen-poor
-one, with `site_a`, `site_b`, `site_e` and `site_c` strung between them in exactly the order your
+one, with `site_a`, `site_b`, `site_e` and `site_c` strung between them in exactly the order the
 two tables gave.
 
-The tables told you six sites have six means. The figure tells you that all 255 samples, from all
+The tables told us that six sites have six means. The figure shows that all 255 samples, from all
 six sites, lie along one relationship, and that the sites differ because they sit at different
-places on it. That is a stronger claim and a different one, and no table you built this week could
-have made it.
+places on it. The second claim is both stronger and different in kind, and it is the sort of claim
+a picture of every sample can support and a table of six group means cannot.
 
 :::{.callout-important title="`hue=` is the argument you came for"}
-Almost every serious question in environmental data science is *does this relationship differ
-between groups*. Sites, species, seasons, treatments, oceans, decades.
+A great many questions in environmental data science come down to *does this relationship differ
+between groups?* Sites, species, seasons, treatments, oceans, decades.
 
 `hue=` is how you ask it, and it works the same way on all three of the functions below. When you
 have a figure and a categorical column, try `hue=` before you try anything else.
@@ -211,8 +211,9 @@ one thing this figure tells you about the six streams that the temperature figur
 
 ## `sns.histplot`: the shape of one column
 
-A scatter needs two variables. When you have one and want to know how its values are distributed,
-you want a histogram: the values sorted into bins, with a bar showing how many landed in each.
+A scatter needs two variables. When you have one variable and want to know how its values are
+distributed, you want a histogram: the values sorted into bins, with a bar showing how many values
+are in each bin.
 
 ```{python}
 plt.figure(figsize=(7, 5))
@@ -224,9 +225,9 @@ plt.title('Distribution of water temperature across all sites')
 plt.show()
 ```
 
-`data=` and `x=`, and no `y=`, because the height of each bar is a count that seaborn works out.
-The picture is the same one `plt.hist()` drew for you behind a boxed note on Thursday, now
-with a name and an argument you can use.
+`data=` and `x=`, and no `y=`, because the height of each bar is a count that seaborn computes for
+you. The picture is the same kind `plt.hist()` drew in a boxed note on Thursday, now with a name
+and an argument you can use.
 
 And `hue=` works here too:
 
@@ -240,9 +241,9 @@ plt.title('Water temperature by site')
 plt.show()
 ```
 
-One broad hump has become six narrow ones, mostly side by side. That is worth pausing on: the
-overall distribution looked like one population with a wide spread, and it is nothing of the sort.
-It is six streams, each fairly consistent, at six different temperatures.
+One broad hump has become six narrow ones, mostly side by side. The undivided histogram looked
+like one population with a wide spread, and the split version shows six streams instead, each
+fairly consistent, and each sitting at a different temperature.
 
 A histogram of a column that mixes groups almost always looks wider and vaguer than any of the
 groups in it. Splitting by `hue=` is how you find out whether the width is variability or
@@ -259,7 +260,7 @@ labelling which stream the bottle came from?
 ## `sns.barplot`, and the Series idiom
 
 A bar chart compares one number per category, which makes it the natural picture for the output of
-a `.groupby()`. seaborn will do the whole thing in one line if you let it:
+a `.groupby()`. seaborn will do the whole thing in a single line:
 
 ```{python}
 plt.figure(figsize=(7, 5))
@@ -271,19 +272,20 @@ plt.ylabel('Mean dissolved oxygen (mg/L)')
 plt.show()
 ```
 
-Six bars, and you never called `.groupby()`. Given a categorical `x=` and a numeric `y=`,
+Six bars, and we never called `.groupby()`. Given a categorical `x=` and a numeric `y=`,
 `sns.barplot` groups the table by `x` and draws the **mean** of `y` for each group.
 
-That convenience comes with two things you did not ask for.
+The convenience comes with two things you did not ask for.
 
 The little black line on each bar is a measure of how uncertain that mean is, computed by
-resampling the data hundreds of times. It is a reasonable thing to want and this course has not
-taught you what it means, which is a poor reason to have it in your figure.
+resampling the data hundreds of times. Showing uncertainty is a reasonable thing to want to do,
+but we have not covered what the interval means, and a figure with something in it that you cannot
+explain to a reader is a habit worth avoiding.
 
 And the bars are in whatever order the sites appear in the file, which is no order at all.
 
-The alternative is to compute the number yourself, with Friday's sentence, and hand seaborn the
-answer:
+The alternative is to compute the number yourself, with Friday's split-apply-combine pattern, and
+hand seaborn the answer:
 
 ```{python}
 mean_do = survey.groupby('site')['dissolved_oxygen_mg_L'].mean().sort_values(ascending=False)
@@ -291,8 +293,8 @@ mean_do = survey.groupby('site')['dissolved_oxygen_mg_L'].mean().sort_values(asc
 mean_do.round(2)
 ```
 
-That is a **Series**: six values, indexed by site name. A Series holds its numbers in `.values`
-and its labels in `.index`, and those are exactly the two things a bar chart needs.
+The result is a **Series**: six values, indexed by site name. A Series holds its numbers in
+`.values` and its labels in `.index`, which are exactly the two things a bar chart needs.
 
 ```{python}
 plt.figure(figsize=(7, 5))
@@ -310,21 +312,22 @@ sns.barplot(x=series.values, y=series.index)   # horizontal bars, sorted as you 
 sns.barplot(y=series.values, x=series.index)   # vertical bars, same data
 ```
 
-Learn this as one unit. It is the pattern that connects the six days of table-shaping you have
-just done to the pictures you make of the results, and you will type it constantly:
+Learn the two-argument call as one unit. The pattern connects a week of table-shaping to the
+pictures we make of the results, and you will type it constantly:
 
 **group, aggregate, sort, then plot the `.values` against the `.index`.**
 
 Three things came out of doing it the long way. The bars are in the order you sorted them, so the
 figure ranks the sites. There is no uncertainty interval, because you drew a mean and only a mean.
-And putting the values on `x=` and the labels on `y=` makes the bars horizontal, which means the
-site labels read left to right instead of needing rotation. With longer labels, that last one stops
-being cosmetic.
+And putting the values on `x=` and the labels on `y=` makes the bars horizontal, so the site
+labels read left to right instead of needing rotation. With site labels longer than the six short
+ones here, the horizontal layout stops being cosmetic.
 
 :::{.callout-note}
 🐍 Note what this cell did **not** need. No `data=`, because there is no table: a Series is not a
-DataFrame, and `.values` and `.index` are two plain sequences. This is the one place in seaborn
-where you go back to handing over raw numbers, and it is worth knowing that the option exists.
+DataFrame, and `.values` and `.index` are two plain sequences. Passing them directly is the one
+place in today's lesson where we go back to handing seaborn raw numbers, and the option is worth
+knowing about.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -338,11 +341,11 @@ neither? Answer in one sentence with the site names in it.
 
 ## seaborn draws on matplotlib
 
-Every seaborn call in this session sat inside a `plt.figure()` and was followed by `plt.xlabel()`
+Every seaborn call so far today sat inside a `plt.figure()` and was followed by `plt.xlabel()`
 and friends, and all of it worked.
 
 seaborn draws onto a matplotlib axes. If none exists it makes one, exactly the way `plt.plot()`
-does. So the whole of the last session applies unchanged:
+does. So everything from our first session this morning applies unchanged:
 
 ```{python}
 plt.figure(figsize=(9, 5))
@@ -366,9 +369,9 @@ change a seaborn argument. When you want to change something about the figure, u
 
 :::{.callout-note}
 🐍 seaborn has far more than three functions, and a `sns.set_theme()` call that restyles every
-figure in your notebook at once. Explore both when you have time. Three functions and `hue=` will
-get you through this course and most of a first job, and they are worth knowing cold before you
-collect any more.
+figure in your notebook at once. Explore both when you have time! Three functions and `hue=` will
+get you through this course and a good deal of what comes after it, and they are worth knowing
+well before you collect any more.
 :::
 
 ## Key points
@@ -376,7 +379,7 @@ collect any more.
 - A seaborn call looks like `sns.function(data=df, x='col', y='col')`. The table goes in whole and
   the columns are named as **strings**.
 - **`hue='col'`** splits any of these plots by a categorical column and builds the legend for you.
-  It is the argument that makes seaborn worth learning.
+  It is the argument that answers *does this relationship differ between groups?*
 - `sns.scatterplot` for one measurement against another.
 - `sns.histplot(data=, x=)` for the distribution of a single column. No `y=`; the heights are
   counts.

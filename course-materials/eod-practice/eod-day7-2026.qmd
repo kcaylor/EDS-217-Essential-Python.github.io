@@ -30,11 +30,12 @@ Gardeners have used it for decades. It is printed on the back of seed packets.
 
 In November 2023 the USDA released a new version, built by the PRISM group at Oregon State from
 thirty years of weather station records. It was the first update since 2012, and it moved about
-half the country half a zone warmer. That was reported widely, and mostly reported badly.
+half the country half a zone warmer. The update was reported widely, and a lot of that reporting
+was not careful about what the two maps actually measure.
 
-Today you have both maps, one row per zip code, and every tool you have learned this week.
-The question is not whether the country got warmer. The question is what you can honestly say
-about it from these two files, and where each of the answers goes wrong.
+Today you have both maps, one row per zip code, and every tool we have learned this week. We will
+compare them (without a mapping library!) to work out what you can say about the difference between
+the two files, and where a comparison built this way can mislead you.
 
 :::{.callout-note title="Reference"}
 USDA Plant Hardiness Zone Maps for 2012 and 2023, prepared by the
@@ -45,7 +46,7 @@ database.
 
 ## Today's patterns
 
-Everything you draw here is built from these five.
+Everything you draw today is built from these patterns.
 
 ```python
 plt.figure(figsize=(w, h))                             # the canvas
@@ -57,7 +58,7 @@ sns.histplot(data=df, x='col')                         # the shape of one column
 sns.barplot(x=series.values, y=series.index)           # a grouped Series, as bars
 ```
 
-And these, from earlier in the week:
+We will also use these patterns from earlier in the week:
 
 ```python
 pd.concat([a, b], ignore_index=True)                   # the stacking pattern
@@ -98,9 +99,9 @@ zipcodes = pd.read_csv(base + 'zip_code_database.csv')
 ```
 
 :::{.callout-tip title="🧭 Field Note: getting text into a shape you can use"}
-Two lines of setup here use string operations you have not been taught. Both are the same kind
-of move: taking a column of text and reshaping it into something you can join on or do arithmetic
-with. Copy them as given.
+Two lines of setup here use string operations we have not covered yet. Both do the same kind of
+job: they take a column of text and turn it into something you can join on or do arithmetic with.
+Copy them as given, and ask Cella or Kelly if you want the longer version!
 
 **Padding a zip code.** All three files store zip codes as **integers**, so `01001` arrives as the
 number `1001` and the leading zero is gone. Two files that lost their zeros in the same way will
@@ -121,10 +122,10 @@ zones['trange_min'] = zones['trange'].str.split().str.get(0).astype(int)
 `.str.split()` cuts the text at every space, giving `['-10', 'to', '-5']`. `.str.get(0)` takes the
 first piece from each row. `.astype(int)` turns `'-10'` into `-10`.
 
-On Thursday, 4C told you that `.str` methods chained together were a Day 7 problem. This is Day 7,
-and this is the chain. Three methods, in a row, each one operating on what the last one handed it,
-which is exactly the pattern you have been reading all week in
-`.sort_values(...).head(10)`, because a chain is two patterns run one after the other.
+On Thursday, in 4C, we said that chaining `.str` methods together was a Day 7 problem, and here is
+the chain. Three methods in a row, each one working on whatever the last one returned, which is the
+same pattern you have been reading all week in `.sort_values(...).head(10)`. A chain is two
+patterns run one after the other.
 :::
 
 4. Pad the zip codes in all three tables:
@@ -153,10 +154,12 @@ print(zipcodes.shape)
 ```
 
 2. Run `.isnull().sum()` on both zone tables. Then look at `.head()` of either one and say, in one
-   sentence, what `zone`, `trange` and `zonetitle` each hold and which of the three is redundant.
+   sentence, what `zone`, `trange` and `zonetitle` each hold and which of the three columns is
+   redundant.
 
 ```{python}
 print(zones_2012.isnull().sum())
+print(zones_2023.isnull().sum())
 print(zones_2023.head())
 ```
 
@@ -188,8 +191,8 @@ print(zones['trange_min'].isnull().sum())
 print(zones['trange_min'].value_counts().sort_index())
 ```
 
-6. Compute the mean `trange_min` for each year and report the difference. This is the headline
-   number, and you are about to spend the rest of the practice finding out how much it is worth.
+6. Compute the mean `trange_min` for each year and report the difference. The difference is the
+   headline number, and the rest of the practice is about how much it is worth.
 
 ```{python}
 means = zones.groupby('year')['trange_min'].mean()
@@ -241,7 +244,8 @@ plt.show()
 10. Describe what is wrong with that figure in a markdown cell.
 
 11. Find the culprit. Use the filter pattern on `located` to pull out every row with a
-    `longitude` greater than −60, and print its zip code, state, city, latitude and longitude.
+    `longitude` greater than −60, and print its `zipcode`, `state`, `primary_city`, `latitude`
+    and `longitude`.
 
 ```{python}
 located[located['longitude'] > -60][['zipcode', 'state', 'primary_city',
@@ -255,12 +259,12 @@ located[located['longitude'] > -60][['zipcode', 'state', 'primary_city',
 
 :::{.callout-important title="Two rows in eighty thousand"}
 Nothing about those rows is unusual in a table. They are not null, not duplicated, not miscast,
-and they would survive every cleaning step you learned on Thursday. `.describe()` on
+and they would survive every cleaning step we learned on Thursday. `.describe()` on
 `longitude` would have shown a maximum of −2.12 and you would have had no reason to look at it.
 
-A figure found them in one second, because a plot is the only summary of a dataset that gives an
-outlier as much room as it gives everything else. This is a large part of what visualization is
-for. Remember the gorilla from EDS 212...
+A figure found them immediately, because a plot gives an outlier as much room on the page as it
+gives everything else, which is a large part of what visualization is for. Remember the gorilla
+from EDS 212...
 :::
 
 13. Build a table called `usa` holding only the rows with `longitude` less than −60, and redraw the
@@ -299,8 +303,8 @@ print(sorted(usa['state'].unique()))
 
 ## Part 4: What actually changed
 
-Comparing two maps by eye does not work. So, using the move you learned this morning,
-compute the change and map **that** instead.
+Comparing two maps by eye is hard, and for a change this small it mostly does not work. Instead,
+we will compute the change for every zip code and map **that**.
 
 16. Use the pivot pattern to build a table with one row per zip code and one column per year.
     Index it on `['zipcode', 'state', 'latitude', 'longitude']` so those come along for the ride,
@@ -319,7 +323,7 @@ change.shape
 
 :::{.callout-note}
 🐍 The two year columns are named with the **integers** `2012` and `2023`, not with strings,
-because that is what was in the `year` column you pivoted on. So it is `change[2023]`, with no
+because the `year` column you pivoted on held integers. So it is `change[2023]`, with no
 quotes. Everything else about column-to-column arithmetic is the same as it was on Thursday.
 :::
 
@@ -456,18 +460,19 @@ you would send. Use complete sentences.
 
 ## The figure minute
 
-Look back through your notebook. You made six figures today, and they did four different jobs:
+Look back through your notebook. You made six figures in this practice, and they did four
+different jobs:
 
 - Question 9 found a **data error**, in a file that was not otherwise wrong.
-- Question 13 drew a **map** out of two ordinary numeric columns.
-- Question 18 showed you that your "temperature change" is **eleven distinct values**, which is
-  the single most important thing to know about it and is invisible in any mean.
-- Question 21 answered the **question**.
+- Question 13 drew two **maps** out of two ordinary numeric columns.
+- Question 18 showed you how few distinct values your "temperature change" really has, which is
+  the most important thing to know about it and is invisible in any mean.
+- Questions 21 and 25 answered the **question**.
 
-Only one of the six was the figure the practice was about. The other five were how you found out
-what you had. That ratio is normal, and it is worth expecting: most of the plots you make in your
-career will never be shown to anybody, because their job is to tell **you** something before you tell
-anyone else.
+Four of those six figures were how you found out what you had, and two of them were the figures
+the practice was about. The ratio is normal and worth expecting, because a lot of the plots you make
+will never be shown to anybody: their job is to tell **you** something before you tell anyone
+else.
 
 ## Wrap-up
 
@@ -480,6 +485,9 @@ Before you close your notebook, check that:
 - your Part 6 answer names something these files cannot tell the newspaper
 - your notebook reads top to bottom as a document, not as a pile of cells
 
+If one of those checks fails, fix it before you leave today, and grab Cella or Kelly if the fix is
+not obvious!
+
 ## Resources
 
 - [📖 EDS 217 cheatsheet: seaborn](../cheatsheets/seaborn.qmd)
@@ -491,6 +499,6 @@ Before you close your notebook, check that:
 
 ::: {.callout-tip}
 ## Looking ahead to Day 8
-Tomorrow you stop being handed datasets. You and your team pick your own, and walk it through all
-ten steps yourselves. Bring the notebook you started this afternoon.
+Tomorrow we start the two-day final project. You and your team will pick your own dataset and walk
+it through all ten steps yourselves. Bring the notebook you started this afternoon.
 :::

@@ -1,6 +1,6 @@
 ---
 title: "Coding Colab"
-subtitle: "🐧 One Cloud of Points, Three Species"
+subtitle: "🙌 A Cloud of Points, Three flocks of 🐧"
 execute:
   echo: false
   include: false
@@ -25,19 +25,24 @@ Between 2007 and 2009, researchers at the Palmer Station on the Antarctic Penins
 penguins of three species: Adélie, Chinstrap and Gentoo. For each bird they recorded four numbers,
 the island it was caught on, and its biological sex.
 
-The resulting file is small, relatively clean by the standards of anything you have opened this week, and it contains
-a key result that you cannot really express without a figure. A table of summary statistics would steer you away from it.
+The resulting file is small, and relatively clean by the standards of anything you have opened this week. It also
+holds a relationship between two of the bill measurements that runs one way within each species and the other way
+across all three at once, and a table of means of those same columns points at the wrong one of
+those two directions.
 
-Your task this afternoon is to develop that figure and reveal the underlying pattern.
+This afternoon we will build the figure that separates them, one plot at a time, using the plotting patterns from
+this morning.
 
 Work in **pairs**, in one shared notebook, taking turns at the keyboard. Swap every time you
 finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it. 
 
-You have 45 minutes.
+We have about 45 minutes for this activity: roughly 40 on the four parts below, and the rest on setting up and on
+the wrap-up. The times in the headings are rough guides, so please let Cella or Kelly know if you and your partner are
+getting stuck on any of the tasks!
 
 ## The patterns you need
 
-All the patterns we will use are from this morning.
+Every plotting pattern we need this afternoon comes from this morning's session.
 
 ```python
 sns.scatterplot(data=df, x='col', y='col')             # one measurement against another
@@ -157,8 +162,7 @@ plt.show()
 
 ## Part 3: Relationships (about 15 minutes)
 
-This is the part with the result in it. Do not skip ahead to the answer key, and do not skip
-question 9.
+Part 3 is where the afternoon's result shows up, so please work through it in order, and do not skip question 9!
 
 8. Draw a scatter plot of `body_mass_g` against `flipper_length_mm`, with flipper length across
    the bottom. Label both axes and title it. Describe the relationship in one sentence.
@@ -221,12 +225,12 @@ plt.show()
 :::{.callout-important title="This has a name"}
 A relationship that runs one way inside every group and the other way across the pooled data is
 called **Simpson's paradox**. It is one of the most common ways that a perfectly correct summary of
-a dataset produces a conclusion that is the reverse of the truth. 
-It happens whenever the groups differ both in what you are measuring and in how many of them there
-are.
+a dataset can produce a conclusion that is the reverse of the truth. 
+It can show up whenever the groups differ both in what you are measuring and in how many of them
+there are.
 
-You found it here in one argument, `hue='species'`. Without the figure, you would have needed to
-suspect this pattern first!
+One argument, `hue='species'`, is what makes it visible here. Without the figure, you would have had
+to suspect the pattern before you could go looking for it!
 :::
 
 ## Part 4: Summaries, and what they hide (about 10 minutes)
@@ -265,8 +269,8 @@ plt.title('Sampling effort by island')
 plt.show()
 ```
 
-16. Draw a bar chart of mean `body_mass_g` by species, split by sex. This one is easier with the
-    `data=` form, because you want two bars per species:
+16. Draw a bar chart of mean `body_mass_g` by species, split by sex. The `data=` form is easier
+    here, because you want two bars per species:
     `sns.barplot(data=birds, x='species', y='body_mass_g', hue='sex')`.
 
     Then report in one sentence what the sex split adds to your answer to question 14.
@@ -281,8 +285,8 @@ plt.show()
 ```
 
 17. This is the last task, and it is a bit of a trap (sorry!). Build a wide table with `species` down the rows,
-    `island` across the columns, and a **count** of `body_mass_g` in the cells. This is yesterday
-    morning's pivot pattern with `aggfunc='count'`.
+    `island` across the columns, and a **count** of `body_mass_g` in the cells. You built the
+    pivot pattern yesterday morning; add `aggfunc='count'` to it.
 
     In a markdown cell, using two or three sentences answer the following: given that table, what might go wrong if somebody used this dataset to compare Biscoe island with Dream island?
 
@@ -295,7 +299,7 @@ birds.pivot_table(index='species', columns='island', values='body_mass_g', aggfu
 Check that:
 
 - every figure you made has an x-label, a y-label and a title, and the labels give units
-- you can say out loud what `hue=` did in each of the three kinds of plot in which it was invoked
+- you can say out loud what `hue=` did in each of the three kinds of plot we used it in
 - your answer to question 12 does not describe either figure as incorrect
 - your notebook reads top to bottom as a document, not as a mishmash of cells
 

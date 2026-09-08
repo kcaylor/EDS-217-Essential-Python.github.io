@@ -1,6 +1,6 @@
 ---
 title: "Answer Key"
-subtitle: "🐧 One Cloud of Points, Three Species"
+subtitle: "🙌 A Cloud of Points, Three flocks of 🐧"
 search: false
 execute:
   echo: true
@@ -15,13 +15,16 @@ format:
 
 :::{.callout-important title="How to use this key"}
 Work the colab through with your partner first, then come here. The code below is **one** correct
-answer, not the only one. This was a 45 minute pair exercise with very little scaffolding, so
+answer, not the only one. The colab was a 45 minute pair exercise with very little scaffolding, so
 there are several reasonable ways to write almost every cell. If your figure looks different but
-shows the same thing, you were right.
+shows the same thing, you were right!
 
-The written answers matter more than the code. You can already tell whether your code ran. What
-you cannot check on your own is whether you read the figure correctly, and that is what the
-green **Answer** boxes are for. Compare your markdown cells against them.
+The written answers matter more than the code. You can already tell whether your code ran, because
+either it drew the figure or it raised an error. Reading a figure correctly is the half you cannot
+check on your own, and the green **Answer** boxes are there for exactly that. Compare your markdown
+cells against them.
+
+If your answer and the key disagree and you cannot work out why, come find Cella or Kelly.
 
 ⬅️ Back to [the colab](../coding-colabs/7c_penguins.qmd)
 :::
@@ -48,11 +51,12 @@ print(penguins.dtypes)
 
 :::{.callout-note title="✅ Answer"}
 **344 rows and 7 columns.** Four are numeric: `bill_length_mm`, `bill_depth_mm`,
-`flipper_length_mm` and `body_mass_g`. The other three, `species`, `island` and `sex`, are text.
+`flipper_length_mm` and `body_mass_g`. The other three columns, `species`, `island` and `sex`, are
+text.
 
 Notice that `body_mass_g` is `float64` even though every mass in the file is a whole number of
-grams. That is not a decision anybody made about penguins. A column with a missing value cannot be
-an integer column in pandas, because `NaN` is a float, so the missing values you are about to find
+grams. The dtype is not a decision anybody made about penguins. A column with a missing value
+cannot be an integer column in pandas, because `NaN` is a float, so the missing values that turn up
 in question 3 have already changed the dtype of the column.
 :::
 
@@ -68,7 +72,7 @@ print(penguins['island'].value_counts())
 **Chinstrap is the rarest species at 68 birds**, fewer than half the 152 Adelie, and **Biscoe has
 the most birds at 168**, ahead of Dream at 124 and Torgersen at 52.
 
-Read those as counts of sampling effort rather than counts of penguins in Antarctica. The
+Read the counts as a record of sampling effort rather than as counts of penguins in Antarctica. The
 researchers caught what they could reach from Palmer Station over three seasons. Nothing in this
 file says Chinstrap are the rarest bird on the peninsula; it says the field teams handled the
 fewest of them.
@@ -82,18 +86,19 @@ penguins.isnull().sum()
 ```
 
 :::{.callout-note title="✅ Answer"}
-**Two missing measurements and nine undetermined sexes, which the output shows as 2 and 11.**
+**Two birds were never measured, and nine more were measured but never sexed. The output shows
+those as 2 and 11, because the 11 sex nulls include the 2 unmeasured birds.**
 
-Each of the four measurement columns has exactly 2 nulls, and it is the same two rows in all four:
-two birds that were logged as caught but never measured. The `sex` column has 11 nulls, and 2 of
-those are the same two blank rows, so the remaining 9 are fully measured birds whose sex was left
-blank on its own.
+Each of the four measurement columns has exactly 2 nulls, and the same two rows account for them in
+all four columns: two birds that were logged as caught but never measured. The `sex` column has 11
+nulls, and 2 of those are the same two blank rows, so the remaining 9 are fully measured birds whose
+sex was left blank on its own.
 
-That second group is the interesting one. Adult penguins of the same species look alike, so sex is
-determined from a blood sample rather than by looking at the bird. Those 9 rows are birds that were
-weighed and measured successfully while the laboratory result for sex was never returned. A null in `sex` and a null
-in `body_mass_g` are two different kinds of event, and only one of them is a gap in the
-measurements you are about to plot.
+The 9 sex-only nulls are the interesting group. Adult penguins of the same species look alike, so
+sex is determined from a blood sample rather than by looking at the bird. Each of those birds was
+weighed and measured successfully, but the laboratory result for its sex never came back. A null in `sex`
+and a null in `body_mass_g` are two different kinds of event, and only the missing mass is a gap in
+the measurements you go on to plot.
 :::
 
 **4. Build a clean table called `birds` by dropping every row with any missing value, and report
@@ -112,11 +117,13 @@ print(birds['species'].value_counts())
 and Gentoo from 124 to 119, while Chinstrap stayed at 68. Every bird dropped was an Adelie or a
 Gentoo.
 
-Two things follow. First, 11 is not 13, even though the null counts in question 3 add up to 19:
-`dropna()` removes rows, and the two unmeasured birds were counted once in each of five columns.
-Second, dropping 3.2 percent of a file is cheap, but a drop that is uneven across the groups you
-plan to compare is worth stating explicitly. Here it is small enough not to change any conclusion
-below, and you only know that because you checked.
+Two things follow. First, 11 is not the 13 you get by adding the 2 to the 11, and it is not the
+19 you get by adding up every null in
+question 3, because `dropna()` removes whole rows rather than nulls: the two unmeasured birds were
+counted once in each of five columns, and between them they cost you two rows. Second, dropping
+3.2 percent of a file is cheap, but a drop that is uneven across the groups you plan to compare is
+worth stating explicitly. Here the drop is small enough not to change any conclusion below, and you
+only know that because you checked.
 :::
 
 ## Part 2: Distributions
@@ -136,7 +143,7 @@ plt.show()
 **The distribution has two humps, not one**: a tall one centred near 190 mm and a lower, broader
 one near 215 mm, separated by a dip around 200 to 205 mm.
 
-A single hump would let you talk about a typical flipper and a spread around it. Two humps say the
+A single hump would let you talk about a typical flipper and a spread around it. Two humps mean the
 333 birds are a mixture of at least two kinds of thing, and until you know what the kinds are, the
 overall mean is describing the gap between them.
 :::
@@ -161,12 +168,11 @@ print('birds within 5 mm of the mean:',
 
 :::{.callout-note title="✅ Answer"}
 **The right hump is Gentoo on its own; the left hump is Adelie and Chinstrap piled on top of each
-other.** There are three species but only two humps, because flipper length separates Gentoo from the
-other two and
-does almost nothing to separate Adelie from Chinstrap.
+other.** There are three species but only two humps, because flipper length separates Gentoo from
+the other two species and does almost nothing to separate Adelie from Chinstrap.
 
 The sentence about 201 mm is arithmetically correct, but it is not a useful sentence. The mean flipper
-length is 200.97 mm, and that value sits in the dip between the humps: only 57 of the 333 birds
+length is 200.97 mm, and that value sits in the dip between the humps: only 56 of the 333 birds
 are within 5 mm of it. The average penguin, described that way, is a bird that hardly exists in
 the file. A mean of a mixture falls between the parts of the mixture, so when the
 parts are far apart, few individual birds are close to the mean.
@@ -184,16 +190,16 @@ plt.show()
 ```
 
 :::{.callout-note title="✅ Answer"}
-**No. Body mass separates Gentoo from the other two, but far less cleanly than flipper length
-does.** The lightest Gentoo weighs 3950 g, and 64 of the 214 Adelie and Chinstrap birds, close to
+**No. Body mass separates Gentoo from the other two species, but far less cleanly than flipper
+length does.** The lightest Gentoo weighs 3950 g, and 64 of the 214 Adelie and Chinstrap birds, close to
 a third of them, weigh at least that much. For flipper length the equivalent overlap is 15 birds
 out of 214.
 
 Mass cannot separate Adelie from Chinstrap, as question 14 comes back to. Mass also
 includes variation that has nothing to do with species: a bird's sex and its condition on the day it
 was caught both move it, which is part of why the humps smear into each other. Any of the four
-columns is a defensible choice here; what matters is that you compared the overlap rather than
-comparing the peaks.
+columns is a defensible choice here, as long as you compared the overlap between the groups rather
+than the distance between the peaks.
 :::
 
 ## Part 3: Relationships
@@ -258,8 +264,9 @@ plt.show()
 50 mm, have depths near 15 mm, while the birds with bills near 35 mm are the deepest, up near 20 mm.
 Read straight, this figure says that long bills are shallow bills.
 
-Write that down before you draw question 11, and do not go back and soften it afterwards. The point
-of the next two questions is what happens to a conclusion you have already committed to.
+Write it down before you draw question 11, and do not go back and soften it afterwards. Questions 11
+and 12 ask what happens to a conclusion you have already committed to, and they only work if you
+committed to one.
 :::
 
 **11. Draw it once more with `hue='species'`.**
@@ -296,7 +303,7 @@ penguins rather than about the composition of the sample.
 that the pooled trend is a comparison between groups, and describing both figures as correct
 answers to different questions. Answers that stop at "the species are different" have described the
 figure without explaining the reversal. Answers that call the pooled figure misleading are fine;
-answers that call it wrong are not, since it is an accurate summary of a sample that happens to
+answers that call it wrong are not, because it is an accurate summary of a sample that happens to
 contain three species in these proportions.
 :::
 
@@ -360,7 +367,9 @@ islands are compared, because a difference between islands is partly a differenc
 were caught there and how many.
 :::
 
-**16. Draw a bar chart of mean `body_mass_g` by species, split by sex.**
+**16. Draw a bar chart of mean `body_mass_g` by species, split by sex. The `data=` form is
+easier here, because you want two bars per species: `sns.barplot(data=birds, x='species',
+y='body_mass_g', hue='sex')`.**
 
 **Then report in one sentence what the sex split adds to your answer to question 14.**
 
@@ -383,11 +392,13 @@ differences against each other and produces the 27 g gap.
 The sex gap inside a species is also far larger than the gap between these two species: roughly
 680 g for Adelie and 410 g for Chinstrap, against 27 g. If the sample had held slightly more Adelie
 males, the two bars in question 13 would have swapped places without a single penguin changing.
-That is the same problem as question 12 in a smaller frame.
+A ranking that depends on which birds happened to be caught is the same problem as question 12, in
+a smaller frame.
 :::
 
-**17. This is the last task, and it is a bit of a trap (sorry!). Build a wide table with `species`
-down the rows, `island` across the columns, and a count of `body_mass_g` in the cells.**
+**17. This is the last task, and it is a bit of a trap (sorry!). Build a wide table with
+`species` down the rows, `island` across the columns, and a count of `body_mass_g` in the cells.
+You built the pivot pattern yesterday morning; add `aggfunc='count'` to it.**
 
 **In a markdown cell, using two or three sentences answer the following: given that table, what
 might go wrong if somebody
@@ -411,14 +422,14 @@ with 119. Biscoe is 73 percent Gentoo and Dream is 0 percent Gentoo, so a mean b
 is mostly a mean for the heaviest species in the file, and a mean for Dream is not.
 
 The `NaN` cells are not missing data. A count of an empty group is zero birds observed, and pandas
-prints `NaN` because `pivot_table` found no rows to count. Read those blanks as the shape of the
-sampling design.
+prints `NaN` because `pivot_table` found no rows to count. Read the blanks as part of the sampling
+design rather than as data that went missing.
 
 Adelie is the only species caught on all three islands, so it is the only honest island comparison
 available, and it comes out flat: 3709.7 g on Biscoe over 44 birds, 3701.4 g on Dream over 55, and
 3708.5 g on Torgersen over 47, a spread of 8 g. The islands are indistinguishable once you hold
-species constant. No amount of extra data would fix the Biscoe against Dream comparison, because
-the problem is in which birds live where and not in how many were caught.
+species constant. Catching more birds would not fix the Biscoe against Dream comparison, because
+the problem is in which species live where rather than in how many birds were caught.
 :::
 
 ## Where the marks are
@@ -426,17 +437,17 @@ the problem is in which birds live where and not in how many were caught.
 If you compare your notebook against this key, look for these four things before you look at
 anything else.
 
-1. **Your question 12 answer names where the species sit and calls both figures correct.** The
+1. **Your question 12 answer should name where the species sit and call both figures correct.** The
    pooled trend runs from the Adelie corner to the Gentoo corner, so it compares species; the
    within-species slopes describe bills. An answer that says only "the species are different" has
    described the figure without explaining the reversal.
-2. **You said the mean flipper length is not a useful summary, and said why.** 200.97 mm sits in
-   the dip between the humps, and only 57 of 333 birds are within 5 mm of it. Reporting the mean as
-   the typical penguin is the mistake this whole colab is built around.
-3. **You did not call Adelie and Chinstrap similar birds** on the strength of means 27 g apart,
-   when their bills differ by about 10 mm and their sexes rank in opposite orders.
-4. **Every figure has an x-label, a y-label, a title, and units on the measurement axes.** Four of
-   your figures differ from another figure only by `hue=`, so the titles are what stops a reader,
-   including you next week, from confusing them.
+2. **You should have said that the mean flipper length is not a useful summary, and said why.**
+   200.97 mm sits in the dip between the humps, and only 56 of 333 birds are within 5 mm of it, so
+   reporting it as the typical penguin describes a bird that hardly exists in the file.
+3. **You should not have called Adelie and Chinstrap similar birds** on the strength of means 27 g
+   apart, when their bills differ by about 10 mm and their sexes rank in opposite orders.
+4. **Every figure should have an x-label, a y-label, a title, and units on the measurement axes.**
+   Four of your figures differ from another figure only by `hue=`, so the titles are the only thing
+   stopping a reader, including you next week, from confusing them.
 
 ⬅️ Back to [the colab](../coding-colabs/7c_penguins.qmd)

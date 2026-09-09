@@ -96,7 +96,7 @@ four measurements on it: temperature, pH, dissolved oxygen and conductivity.
 The standard import line is `import seaborn as sns`, and `sns` is as fixed a convention as `pd`
 and `plt`. Most people (and even many bots!) assume there is no reason for this, but [true West Wing fans know the truth](https://pbs.twimg.com/media/C3C6q1ZUYAALXX0.jpg).
 
-## The same figure, said two ways
+## The same figure, made two ways
 
 Here is a scatter of water temperature against dissolved oxygen, drawn the way we drew things in
 our first session this morning:
@@ -133,7 +133,7 @@ Three differences between the two calls:
 - `data=` takes the **whole table**, once.
 - `x=` and `y=` take **column names as strings**, not the columns themselves.
 - The axes came out **labelled**, because the column names went in with the table. Nothing in the
-  matplotlib version ever mentioned a column name.
+  matplotlib version ever mentioned a column name
 
 The free labels are a small convenience and a large hint. seaborn is built on the assumption that
 your data arrives as a tidy table, and it uses everything in that table, column names included, to
@@ -141,15 +141,17 @@ make decisions you would otherwise have to make by hand.
 
 :::{.callout-note}
 🐍 Column names are not automatically good axis labels. `temperature_c` is a variable name;
-*Water temperature (°C)* is a label. Every labelling command from our first session still works,
-so override the defaults whenever you would show the figure to somebody:
+*Water temperature (°C)* is a label. Every labelling command from our first session still works, so override the defaults whenever you would show the figure to somebody:
 
 ```python
 sns.scatterplot(data=survey, x='temperature_c', y='dissolved_oxygen_mg_L')
 plt.xlabel('Water temperature (°C)')
 plt.ylabel('Dissolved oxygen (mg/L)')
 ```
+Or... give your columns expressive names! With auto-complete in most IDEs, it isn't _that_ much of a pain to use a well-formatted column in your workflows. 
+
 :::
+
 
 ## `hue=`, and what a table cannot show you
 

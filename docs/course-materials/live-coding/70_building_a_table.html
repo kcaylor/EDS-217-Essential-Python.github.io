@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Interactive Session</title>
+<title>Live Coding Session</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -403,8 +403,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Interactive Session</h1>
-            <p class="subtitle lead">📆 A Date Is Not a Number</p>
+      <h1 class="title">Live Coding Session</h1>
+            <p class="subtitle lead">🧱 Building a Table Row by Row</p>
                       </div>
   </div>
     
@@ -425,16 +425,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a></li>
-  <li><a href="#the-disguise" id="toc-the-disguise" class="nav-link" data-scroll-target="#the-disguise">The disguise</a></li>
-  <li><a href="#the-parsing-pattern" id="toc-the-parsing-pattern" class="nav-link" data-scroll-target="#the-parsing-pattern">The parsing pattern</a></li>
-  <li><a href="#the-.dt-accessors" id="toc-the-.dt-accessors" class="nav-link" data-scroll-target="#the-.dt-accessors">The <code>.dt</code> accessors</a>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#making-dataframes-from-lists-and-dictionaries" id="toc-making-dataframes-from-lists-and-dictionaries" class="nav-link" data-scroll-target="#making-dataframes-from-lists-and-dictionaries">1. Making DataFrames from lists and dictionaries</a>
   <ul class="collapse">
-  <li><a href="#proving-it-worked" id="toc-proving-it-worked" class="nav-link" data-scroll-target="#proving-it-worked">Proving it worked</a></li>
+  <li><a href="#a-dictionary-of-lists-can-become-a-table" id="toc-a-dictionary-of-lists-can-become-a-table" class="nav-link" data-scroll-target="#a-dictionary-of-lists-can-become-a-table">A dictionary of lists can become a table!</a></li>
+  <li><a href="#a-list-of-dictionaries-can-also-become-a-table" id="toc-a-list-of-dictionaries-can-also-become-a-table" class="nav-link" data-scroll-target="#a-list-of-dictionaries-can-also-become-a-table">A list of dictionaries can also become a table!</a></li>
   </ul></li>
-  <li><a href="#dates-as-grouping-keys" id="toc-dates-as-grouping-keys" class="nav-link" data-scroll-target="#dates-as-grouping-keys">Dates as grouping keys</a></li>
-  <li><a href="#the-question-that-needs-a-month-column" id="toc-the-question-that-needs-a-month-column" class="nav-link" data-scroll-target="#the-question-that-needs-a-month-column">The question that needs a month column</a></li>
-  <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key points</a></li>
+  <li><a href="#a-list-of-dictionaries-built-in-a-loop" id="toc-a-list-of-dictionaries-built-in-a-loop" class="nav-link" data-scroll-target="#a-list-of-dictionaries-built-in-a-loop">2. A list of dictionaries, built in a loop</a></li>
+  <li><a href="#finally-question-8-using-the-same-code-pattern" id="toc-finally-question-8-using-the-same-code-pattern" class="nav-link" data-scroll-target="#finally-question-8-using-the-same-code-pattern">3. Finally, Question 8, using the same code pattern</a></li>
+  <li><a href="#the-one-idea" id="toc-the-one-idea" class="nav-link" data-scroll-target="#the-one-idea">The one idea</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
 </nav>
@@ -446,51 +445,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div style="width: 60%; margin: auto;">
-<p><img src="images/dates.jpeg" class="img-fluid"></p>
-</div>
-<div class="gray-text center-text">
-<p><em>A cartoon panda is visiting Stonehenge.</em> <a href="https://www.midjourney.com/jobs/68f2f16e-29bc-4981-ae9b-9c1edb669684?index=0">MidJourney 5</a></p>
-</div>
-<p>This afternoon’s lesson is dates. We will start by addressing two lines of code we have given you to use without ever explaining what they are actually doing!</p>
-<p>On Thursday, an exercise gave you <code>.dt.year</code> inside a boxed aside and told you not to worry about it. Then, on Friday (and just now before lunch!), another one gave you <code>aq['datetimeLocal'].str[11:13]</code> and said the same thing.</p>
-<p>Both of these code patterns were doing the same job by different means: pulling one piece out of a date so you could group by it.</p>
-<p>This afternoon we will learn how both of them work, and write them ourselves.</p>
-<p>Dates get a session of their own because a date is one of the few things in a data file that is almost never stored as what it is. It shows up as text, or as an integer, or as five separate columns… Each of those disguises often works well enough that nothing looks wrong… until something breaks!</p>
-<p>By the end of this session you will be able to:</p>
-<ul>
-<li>explain why a date stored as text or as a number is not a date</li>
-<li>write the <strong>parsing pattern</strong>, <code>pd.to_datetime(column, format=...)</code>, and build a format string out of <code>%Y</code>, <code>%m</code> and <code>%d</code></li>
-<li>pull the year, month and day out of a parsed date with the <strong><code>.dt</code> accessors</strong></li>
-<li>use a date component as a grouping key, and answer a question that needs one</li>
-</ul>
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
-<ol type="1">
-<li><p><strong>Create the file.</strong> In the Explorer, hover over the <strong>EDS217</strong> heading and click <strong>New File…</strong>, then type the name in full, extension included: <code>Session_6C_Dates.ipynb</code></p></li>
-<li><p><strong>Check the kernel.</strong> The Kernel Selector in the notebook’s action bar should read <strong>Python 3.11.15 (Conda: eds217)</strong>. If it reads anything else, click it, choose <strong>Change Kernel</strong>, and pick the eds217 entry.</p></li>
-<li><p><strong>Add a title cell.</strong> Click <strong>+ Markdown</strong> in the action bar, and give it this content, with today’s date:</p></li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Day 6: Session 6C - A Date Is Not a Number</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Session Webpage</span><span class="co">](https://eds-217-essential-python.github.io/course-materials/interactive-sessions/6c_dates.html)</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Date: 09/08/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="4" type="1">
-<li><p><strong>Save</strong> with <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), and keep saving as you go.</p></li>
-<li><p>Read in a file you first met (datetime.forever_ago) on the very first afternoon of this course:</p></li>
-</ol>
-<div id="b262513b" class="cell" data-execution_count="1">
+<p>Question 8 of yesterday’s practice asked you to build a table one row at a time, using a loop over groups. If you got stuck on it, the fault is ours: we took a lighter day on Friday and skipped <a href="../../course-materials/live-coding/5d_loops_over_groups.html">🔁 When a Pattern Is Not Enough</a>, which would have introduced looping over groups… and then… 🫠 we forgot about that yesterday afternoon and we went ahead and asked you for it anyway!</p>
+<p>So… let’s spend about fifteen minutes before we start on figures, to cover some of the most essential parts of Friday’s session this morning. We will work through the three things question 8 depended on: building a DataFrame yourself, taking one group at a time out of a <code>groupby</code>, and (gasp!) grouping a group.</p>
+<p>Nearly every table we have used this course came out of a file, by way of <code>pd.read_csv()</code>. However, yesterday we built two of our own: in <a href="../../course-materials/interactive-sessions/6a_joining_data.html">🔗 The Join Pattern</a> we typed the seven-row <code>regions</code> lookup table out by hand and merged it into the parks data, and in <a href="../../course-materials/interactive-sessions/6c_dates.html">📆 A Date Is Not a Number</a> we built the twelve-row Toolik <code>comparison</code> table out of two <code>groupby</code> results rather than out of values.</p>
+<p>That <code>comparison</code> example is closer than the <code>regions</code> example to what question 8 wanted, because it had no file behind it and its numbers were ones we had just computed a moment earlier. Question 8 asked for the same kind of table, put together one decade at a time inside a loop, which is something you hadn’t seen before.</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Open a new notebook called <code>Session_70_Building_Tables.ipynb</code> and start it with a title cell, the way you have started every notebook this week:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Session 7.0: Building a Table Row by Row</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Date: 09/09/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The setup below is the same one you built across questions 3, 5 and 6 of yesterday’s practice, gathered here into a single cell:</p>
+<div id="4f06bc13" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/toolik_weather.csv'</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>toolik <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/eurovision_contestants.csv'</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>eurovision <span class="op">=</span> pd.read_csv(url)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>toolik[[<span class="st">'Year'</span>, <span class="st">'Month'</span>, <span class="st">'Date'</span>, <span class="st">'Daily_AirTemp_Mean_C'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>contests <span class="op">=</span> eurovision[eurovision[<span class="st">'year'</span>] <span class="op">!=</span> <span class="dv">2020</span>].copy()</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>contests[<span class="st">'decade'</span>] <span class="op">=</span> (contests[<span class="st">'year'</span>] <span class="op">/</span> <span class="dv">10</span>).astype(<span class="bu">int</span>) <span class="op">*</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="1">
+</div>
+</section>
+<section id="making-dataframes-from-lists-and-dictionaries" class="level2">
+<h2 class="anchored" data-anchor-id="making-dataframes-from-lists-and-dictionaries">1. Making DataFrames from lists and dictionaries</h2>
+<section id="a-dictionary-of-lists-can-become-a-table" class="level3">
+<h3 class="anchored" data-anchor-id="a-dictionary-of-lists-can-become-a-table">A dictionary of lists can become a table!</h3>
+<p>Yesterday we built <code>regions</code> out of a dictionary. If you hand a dictionary to <code>pd.DataFrame()</code>, you get a table back: each key becomes a column name, and the list stored under that key becomes the column.</p>
+<div id="00f7a03c" class="cell" data-execution_count="2">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    {  <span class="co"># dictionary of lists: each column is defined all at once</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"country"</span>: [<span class="st">"Norway"</span>, <span class="st">"Sweden"</span>, <span class="st">"Malta"</span>],  <span class="co"># col1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"entries"</span>: [<span class="dv">58</span>, <span class="dv">59</span>, <span class="dv">32</span>],                   <span class="co"># col2</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
 
@@ -498,47 +493,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Year</th>
-<th data-quarto-table-cell-role="th">Month</th>
-<th data-quarto-table-cell-role="th">Date</th>
-<th data-quarto-table-cell-role="th">Daily_AirTemp_Mean_C</th>
+<th data-quarto-table-cell-role="th">country</th>
+<th data-quarto-table-cell-role="th">entries</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>1988</td>
-<td>6</td>
-<td>19880601</td>
-<td>8.4</td>
+<td>Norway</td>
+<td>58</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>1988</td>
-<td>6</td>
-<td>19880602</td>
-<td>6.0</td>
+<td>Sweden</td>
+<td>59</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>1988</td>
-<td>6</td>
-<td>19880603</td>
-<td>5.8</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>1988</td>
-<td>6</td>
-<td>19880604</td>
-<td>1.8</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>1988</td>
-<td>6</td>
-<td>19880605</td>
-<td>6.8</td>
+<td>Malta</td>
+<td>32</td>
 </tr>
 </tbody>
 </table>
@@ -546,45 +519,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Daily weather from the Toolik Field Station on the North Slope of Alaska. We’ve seen this!</p>
+<p>The one rule of making DataFrames using dictionaries is that <strong>every list has to be the same length</strong>, because a table is a rectangle.</p>
+<p>The table that comes back is a real DataFrame even though no file was involved: <code>.sort_values()</code>, <code>pd.merge()</code> and everything else from this week work on a table you typed out yourself exactly as they work on the Eurovision one.</p>
 </section>
-<section id="the-disguise" class="level2">
-<h2 class="anchored" data-anchor-id="the-disguise">The disguise</h2>
-<p>Look at the <code>Date</code> column, and then at the dtype pandas gives it:</p>
-<div id="bf359ccd" class="cell" data-execution_count="2">
+<section id="a-list-of-dictionaries-can-also-become-a-table" class="level3">
+<h3 class="anchored" data-anchor-id="a-list-of-dictionaries-can-also-become-a-table">A list of dictionaries can also become a table!</h3>
+<p><code>pd.DataFrame()</code> will also take a <strong>list of dictionaries</strong>. Each dictionary in the list is one row, and its keys are the column names:</p>
+<div id="ca27396e" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'Date'</span>].dtype</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>dtype('int64')</code></pre>
-</div>
-</div>
-<p><code>int64</code>. The first row’s date is not the first of June 1988; it is the integer nineteen million, eight hundred and eighty thousand, six hundred and one.</p>
-<p>An integer works better here than you might expect. Sorting by it gives the right order, because a date written year first, then month, then day, counts upward as the calendar does. Filtering to a year works, because <code>19880000 &lt; Date &lt; 19890000</code> catches exactly 1988. You could get quite a long way like this!</p>
-<p>Then we subtract two of them:</p>
-<div id="222a3ebb" class="cell" data-execution_count="3">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">19880701</span> <span class="op">-</span> <span class="dv">19880630</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    [  <span class="co"># list of dictionaries: each row is defined all at once:</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"country"</span>: <span class="st">"Norway"</span>, <span class="st">"entries"</span>: <span class="dv">58</span>},  <span class="co"># row 1</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"country"</span>: <span class="st">"Sweden"</span>, <span class="st">"entries"</span>: <span class="dv">59</span>},  <span class="co"># row 2</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"country"</span>: <span class="st">"Malta"</span>, <span class="st">"entries"</span>: <span class="dv">32</span>},   <span class="co"># row 3</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>71</code></pre>
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">country</th>
+<th data-quarto-table-cell-role="th">entries</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Norway</td>
+<td>58</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Sweden</td>
+<td>59</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Malta</td>
+<td>32</td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
-<p>Oops. The thirtieth of June and the first of July are one day apart, and the integer says seventy-one, because integer arithmetic has no concept of a month ending.</p>
-<p>Everything else that makes a date useful fails the same way. Which day of the week was it? How many days between sampling visits? Is this row in the growing season? None of those questions can be answered by arithmetic on <code>19880601</code>, and none of them will raise an error when you try.</p>
-<p>Curse you, integer dates!!</p>
+</div>
+<p>The result is the same table, down to the column types. A dictionary of lists describes a table <strong>column by column</strong>, and a list of dictionaries describes the same table <strong>row by row</strong>. So reach for whichever form matches the pieces you already have!</p>
+<p>If you already have whole columns, use the dictionary of lists. If you are producing one row at a time, use the list of dictionaries.</p>
 </section>
-<section id="the-parsing-pattern" class="level2">
-<h2 class="anchored" data-anchor-id="the-parsing-pattern">The parsing pattern</h2>
-<p><code>pd.to_datetime()</code> takes a column of dates in disguise and returns a column of <strong>real dates</strong>. You describe the disguise with <code>format=</code>:</p>
-<div id="d67a3833" class="cell" data-execution_count="4">
+</section>
+<section id="a-list-of-dictionaries-built-in-a-loop" class="level2">
+<h2 class="anchored" data-anchor-id="a-list-of-dictionaries-built-in-a-loop">2. A list of dictionaries, built in a loop</h2>
+<p>A loop usually gives you one row at a time, so a list of dictionaries is the form to reach for whenever a loop is producing the rows. Typing the rows out by hand, as we just did, works only when you already know every row in advance. More often you do not, because each row is the result of a calculation the loop is working through. So we collect the rows as we go!</p>
+<p>The code pattern has three parts: (1) Start with an empty <code>list</code>, (2) <code>append</code> one dictionary (i.e.&nbsp;“row”) per group inside the loop, and (3) turn the finished list into a <code>DataFrame</code> in one call at the end:</p>
+<div id="f2396831" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(toolik[<span class="st">'Date'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>toolik[[<span class="st">'Date'</span>, <span class="st">'date'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>records <span class="op">=</span> [] <span class="co"># Step 1: Start with an empty list.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> decade, decade_data <span class="kw">in</span> contests.groupby(<span class="st">'decade'</span>): </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    records.append({  <span class="co"># Step 2: append one dictionary per group inside the loop</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'decade'</span>: decade,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'entries'</span>: <span class="bu">len</span>(decade_data),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'countries'</span>: decade_data[<span class="st">'to_country'</span>].nunique()</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(records) <span class="co"># Step 3: Turn the finished list into a DataFrame</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
@@ -594,440 +600,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Date</th>
-<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">decade</th>
+<th data-quarto-table-cell-role="th">entries</th>
+<th data-quarto-table-cell-role="th">countries</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>19880601</td>
-<td>1988-06-01</td>
+<td>1950</td>
+<td>43</td>
+<td>12</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>19880602</td>
-<td>1988-06-02</td>
+<td>1960</td>
+<td>163</td>
+<td>18</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>19880603</td>
-<td>1988-06-03</td>
+<td>1970</td>
+<td>176</td>
+<td>22</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>19880604</td>
-<td>1988-06-04</td>
+<td>1980</td>
+<td>200</td>
+<td>23</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>19880605</td>
-<td>1988-06-05</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pd.to_datetime(column, <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#              ↑               ↑</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#              what to parse   how it is laid out</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The format string is a <strong>picture of the text you have</strong>. <code>%Y</code> stands where the four-digit year sits, <code>%m</code> where the two-digit month sits, <code>%d</code> where the two-digit day sits, and any punctuation in between is typed literally.</p>
-<table class="table-hover table-bordered caption-top table">
-<thead>
-<tr class="header">
-<th>Your data looks like</th>
-<th>Your format string is</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>19880601</code></td>
-<td><code>'%Y%m%d'</code></td>
+<td>1990</td>
+<td>236</td>
+<td>34</td>
 </tr>
 <tr class="even">
-<td><code>1988-06-01</code></td>
-<td><code>'%Y-%m-%d'</code></td>
-</tr>
-<tr class="odd">
-<td><code>06/01/1988</code></td>
-<td><code>'%m/%d/%Y'</code></td>
-</tr>
-<tr class="even">
-<td><code>01/06/1988</code></td>
-<td><code>'%d/%m/%Y'</code></td>
-</tr>
-</tbody>
-</table>
-<p>Look carefully at the last two rows. <code>01/06/1988</code> means the first of June in most of the world and the sixth of January in the United States, and the format string you type decides which of the two readings you get. A great many date bugs start right there, and they are hard to find later, because both readings produce a perfectly ordinary looking date column.</p>
-<div class="callout callout-style-default callout-important callout-titled" title="`format=` is not optional, it is a safety net">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<code>format=</code> is not optional, it is a safety net
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>pd.to_datetime()</code> will usually guess correctly if you leave <code>format=</code> out. <strong>Supply it anyway</strong>.</p>
-<p>A format string is an <strong>assertion about your data</strong>. If one row of your file is malformed, or the first few hundred rows are ISO dates and the rest are American ones, a supplied format raises an error and a guessed format will naively produce a column of wrong dates.</p>
-<p>Type the format string every time, even when you are fairly sure pandas would have guessed it correctly.</p>
-<p><em>An error you can generate today is much better than a wrong number you find next week.</em></p>
-</div>
-</div>
-<p>Check what you got:</p>
-<div id="edc032df" class="cell" data-execution_count="5">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(toolik[<span class="st">'date'</span>].dtype)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(toolik[<span class="st">'date'</span>].<span class="bu">min</span>())</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(toolik[<span class="st">'date'</span>].<span class="bu">max</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>datetime64[ns]
-1988-06-01 00:00:00
-2018-12-31 00:00:00</code></pre>
-</div>
-</div>
-<p><code>datetime64[ns]</code>, running from 1 June 1988 to 31 December 2018. Thirty years of Arctic weather, stored now as dates rather than as digits.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-✏️ Test your knowledge
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The <code>date_data.csv</code> file at <code>https://eds-217-essential-python.github.io/data/date_data.csv</code> has a <code>Date</code> column stored as text in the form <code>2023-11-02</code>. Read it in, write the parsing pattern for it with the correct format string, and print the dtype of the result to prove it worked.</p>
-</div>
-</div>
-</section>
-<section id="the-.dt-accessors" class="level2">
-<h2 class="anchored" data-anchor-id="the-.dt-accessors">The <code>.dt</code> accessors</h2>
-<p>Every value in a parsed date column has a year, a month and a day inside it, and <code>.dt</code> is how you get at them:</p>
-<div id="14ec26dc" class="cell" data-execution_count="6">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'year'</span>] <span class="op">=</span> toolik[<span class="st">'date'</span>].dt.year</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'month'</span>] <span class="op">=</span> toolik[<span class="st">'date'</span>].dt.month</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>toolik[<span class="st">'day'</span>] <span class="op">=</span> toolik[<span class="st">'date'</span>].dt.day</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>toolik[[<span class="st">'date'</span>, <span class="st">'year'</span>, <span class="st">'month'</span>, <span class="st">'day'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">date</th>
-<th data-quarto-table-cell-role="th">year</th>
-<th data-quarto-table-cell-role="th">month</th>
-<th data-quarto-table-cell-role="th">day</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1988-06-01</td>
-<td>1988</td>
-<td>6</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>1988-06-02</td>
-<td>1988</td>
-<td>6</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>1988-06-03</td>
-<td>1988</td>
-<td>6</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>1988-06-04</td>
-<td>1988</td>
-<td>6</td>
-<td>4</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>1988-06-05</td>
-<td>1988</td>
-<td>6</td>
-<td>5</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p><code>.dt</code> works the same way <code>.str</code> does. Both are doorways: <code>.str</code> gives you the string operations for a column of text, and <code>.dt</code> gives you the date operations for a column of dates. Neither one works on the wrong kind of column, which turns out to be useful. If <code>.dt.year</code> raises an <code>AttributeError</code>, the error is telling you that your column has not been parsed yet.</p>
-<p>The pair of doorways is what Friday’s supplied line was about. <code>aq['datetimeLocal'].str[11:13]</code> went through the <code>.str</code> door and cut characters 11 and 12 out of every timestamp, which works only because every timestamp in that file was written to the same width, and it hands back the text <code>'06'</code> rather than the number 6. Parse the column first and the same job goes through the <code>.dt</code> door as <code>aq['datetimeLocal'].dt.hour</code>, which returns a number, and which keeps working when one row is written differently from the rest.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>🐍 Other things <code>.dt</code> will give you, for when you need them. Of the eight accessors below, you are only responsible for the first three, <code>.dt.year</code>, <code>.dt.month</code> and <code>.dt.day</code>:</p>
-<p><code>.dt.year</code> · <code>.dt.month</code> · <code>.dt.day</code> · <code>.dt.hour</code> · <code>.dt.dayofyear</code> · <code>.dt.dayofweek</code> · <code>.dt.quarter</code> · <code>.dt.date</code></p>
-</div>
-</div>
-<section id="proving-it-worked" class="level3">
-<h3 class="anchored" data-anchor-id="proving-it-worked">Proving it worked</h3>
-<p>The Toolik file gives us something to check against, because it already has <code>Year</code> and <code>Month</code> columns, written by whoever prepared the data. So we can compare our parse against theirs.</p>
-<div id="3a802cb6" class="cell" data-execution_count="7">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((toolik[<span class="st">'year'</span>] <span class="op">==</span> toolik[<span class="st">'Year'</span>]).<span class="bu">all</span>())</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((toolik[<span class="st">'month'</span>] <span class="op">==</span> toolik[<span class="st">'Month'</span>]).<span class="bu">all</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>True
-True</code></pre>
-</div>
-</div>
-<p>Two <code>True</code>s. Every one of the 11,171 dates you parsed agrees with the year and month the station recorded independently.</p>
-<p>The check took two lines, and it is worth doing every time you have something to check against, because a wrong format string produces a column that looks completely normal. <code>'%d%m%Y'</code> on this file would have failed spectacularly, because it would have tried to read <code>88</code> as a month. On a file of American dates it would not have failed at all: every date whose day is twelve or less parses cleanly with the month and the day swapped, so <code>03/07/2019</code> becomes the seventh of March instead of the third of July, and nothing in the printed column would have told you that the swap happened.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-✏️ Test your knowledge
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Add a <code>dayofyear</code> column to <code>toolik</code> using the <code>.dt</code> accessor for it. Then use the filter pattern to show the rows where <code>dayofyear</code> is 366, and say in one sentence what those rows have in common.</p>
-</div>
-</div>
-</section>
-</section>
-<section id="dates-as-grouping-keys" class="level2">
-<h2 class="anchored" data-anchor-id="dates-as-grouping-keys">Dates as grouping keys</h2>
-<p>A date component is an ordinary column of integers, so it is an ordinary grouping key, and Friday’s split-apply-combine pattern works on it unchanged:</p>
-<div id="542f4988" class="cell" data-execution_count="8">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>toolik.groupby(<span class="st">'month'</span>)[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean().<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>month
-1    -22.89
-2    -20.70
-3    -20.69
-4    -11.76
-5     -0.80
-6      8.59
-7     11.22
-8      7.23
-9     -0.11
-10   -10.54
-11   -18.34
-12   -21.44
-Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
-</div>
-</div>
-<p>Ask for the count alongside the mean, the way we have been doing since Friday:</p>
-<div id="b86f954f" class="cell" data-execution_count="9">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>toolik.groupby(<span class="st">'year'</span>)[<span class="st">'Daily_AirTemp_Mean_C'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>]).head(<span class="dv">3</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">count</th>
-<th data-quarto-table-cell-role="th">mean</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">year</th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1988</td>
-<td>214</td>
-<td>-4.88</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1989</td>
-<td>365</td>
-<td>-7.94</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1990</td>
-<td>365</td>
-<td>-8.54</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>1988 has 214 rows because the station opened on the first of June. Its annual mean is warmer than every year that follows it, not because 1988 was warm but because 1988 has no January in it. Friday’s rule about always reading <code>.count()</code> alongside a grouped mean is helpful here, because it puts the 214 in front of you before you read the mean beside it!</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-✏️ Test your knowledge
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Group <code>toolik</code> by <code>month</code> and take the mean of <code>Daily_Precip_Total_mm</code> instead of temperature. Which three months get the most precipitation? Then check <code>.isnull().sum()</code> on that column and say whether it changes how much you trust the answer.</p>
-</div>
-</div>
-</section>
-<section id="the-question-that-needs-a-month-column" class="level2">
-<h2 class="anchored" data-anchor-id="the-question-that-needs-a-month-column">The question that needs a month column</h2>
-<p>Toolik has thirty years of data, and the obvious question to ask is <em>whether</em> the <em>weather</em> is getting warmer.</p>
-<p>Split the record into its first eleven years and its last ten years, using Wednesday’s filter pattern (we are leaving 1999 to 2008 out of both halves, so the two ends of the record are well separated):</p>
-<div id="244dd179" class="cell" data-execution_count="10">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>early <span class="op">=</span> toolik[toolik[<span class="st">'year'</span>] <span class="op">&lt;=</span> <span class="dv">1998</span>]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>late <span class="op">=</span> toolik[toolik[<span class="st">'year'</span>] <span class="op">&gt;=</span> <span class="dv">2009</span>]</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(early.shape)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(late.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>(3866, 25)
-(3652, 25)</code></pre>
-</div>
-</div>
-<p>Then ask each half the same question, and put the two answers side by side:</p>
-<div id="4b5f9a03" class="cell" data-execution_count="11">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'early'</span>: early.groupby(<span class="st">'month'</span>)[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean(),</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'late'</span>: late.groupby(<span class="st">'month'</span>)[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean(),</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>comparison[<span class="st">'change'</span>] <span class="op">=</span> comparison[<span class="st">'late'</span>] <span class="op">-</span> comparison[<span class="st">'early'</span>]</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>comparison.<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">early</th>
-<th data-quarto-table-cell-role="th">late</th>
-<th data-quarto-table-cell-role="th">change</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">month</th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>-24.72</td>
-<td>-21.26</td>
-<td>3.46</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
-<td>-21.86</td>
-<td>-19.38</td>
-<td>2.48</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>-18.62</td>
-<td>-20.64</td>
-<td>-2.02</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>-10.40</td>
-<td>-11.86</td>
-<td>-1.45</td>
-</tr>
-<tr class="odd">
 <td data-quarto-table-cell-role="th">5</td>
-<td>0.37</td>
-<td>-0.54</td>
-<td>-0.91</td>
+<td>2000</td>
+<td>336</td>
+<td>47</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
-<td>8.43</td>
-<td>8.19</td>
-<td>-0.24</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">7</td>
-<td>12.05</td>
-<td>11.28</td>
-<td>-0.77</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">8</td>
-<td>7.48</td>
-<td>7.18</td>
-<td>-0.30</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9</td>
-<td>-0.85</td>
-<td>-0.01</td>
-<td>0.84</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">10</td>
-<td>-12.26</td>
-<td>-7.99</td>
-<td>4.26</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11</td>
-<td>-19.84</td>
-<td>-17.47</td>
-<td>2.37</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">12</td>
-<td>-22.32</td>
-<td>-21.12</td>
-<td>1.20</td>
+<td>2010</td>
+<td>408</td>
+<td>46</td>
 </tr>
 </tbody>
 </table>
@@ -1035,34 +654,138 @@ Name: Daily_AirTemp_Mean_C, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p>Read the <code>change</code> column top to bottom, all twelve rows of it.</p>
-<p>October is 4.3 °C warmer and January is 3.5 °C warmer. February, November and December are up by one to two and a half degrees, and September by nearly a degree. July, the month people usually think of when they think about warming, is 0.8 °C <strong>cooler</strong>. May, June and August are cooler too, by between 0.2 and 0.9 °C.</p>
-<p>March and April are the two rows that spoil a tidy story: both are in the cold half of the year and both are <strong>cooler</strong>, March by 2.0 °C and April by 1.5 °C.</p>
-<p>If you had computed a single annual mean for each half of the record you would have got 0.5 °C and concluded, correctly but uselessly, that Toolik has warmed a little. The month column turns half a degree into something you can describe: the warming at Toolik (like most of the northern latitudes) has occurred in the early winter and in autumn, the summer is flat or slightly cooler, and the spring has gone the other way. The autumn and early winter warming is a well-documented Arctic pattern with physical causes you can reason about, snow arriving later and sea ice forming later, both of them changing how much heat the land loses in the dark half of the year. Our comparison table raises the question of why March and April have cooled, and it cannot answer it.</p>
-<p>The bottom line is that none of these patterns are visible without a month column, and there is no month column until you parse the date! The parsing code pattern at the top of this page turns <code>19880601</code> into a value you can group by.</p>
+<p>Notice that a <code>groupby</code> loop gives you two variables rather than one when you iterate over it. <code>decade</code> is the name of the group, which is the value we grouped on. <code>decade_data</code> is a DataFrame with every row for that decade in it. Yay!! Because you get a DataFrame with every pass through the loop, everything we have used this week works on it!</p>
+<p><code>len(decade_data)</code> gives you the number of rows in that group, because <code>len()</code> on a DataFrame counts its rows, which is something we have seen before.</p>
+<p>Each dictionary in <code>records</code> is one row, and its keys are the column names. <code>contests</code> has seven decades in it, so seven dictionaries go in and a seven-row table comes out.</p>
 </section>
-<section id="key-points" class="level2">
-<h2 class="anchored" data-anchor-id="key-points">Key points</h2>
-<ul>
-<li>A date stored as <strong>text or as an integer is not a date</strong>. It will sort correctly and then fail at arithmetic, and it will not raise an error when it fails.</li>
-<li>The <strong>parsing pattern</strong> is <code>pd.to_datetime(column, format='...')</code>.</li>
-<li>A format string is a <strong>picture of your data</strong>: <code>%Y</code> for a four-digit year, <code>%m</code> for a two-digit month, <code>%d</code> for a two-digit day, punctuation typed literally.</li>
-<li><strong>Always supply <code>format=</code>.</strong> It converts a silent wrong answer into a loud error.</li>
-<li><code>.dt</code> is to dates what <code>.str</code> is to text. <code>.dt.year</code>, <code>.dt.month</code>, <code>.dt.day</code>.</li>
-<li>If <code>.dt</code> raises an <code>AttributeError</code>, your column has not been parsed yet.</li>
-<li><strong>Check your parse</strong> against anything you can: another column, a known date range, a row count.</li>
-<li>Date components are ordinary columns, so they are ordinary <strong>grouping keys</strong>, which is usually the point of extracting them.</li>
-</ul>
+<section id="finally-question-8-using-the-same-code-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="finally-question-8-using-the-same-code-pattern">3. Finally, Question 8, using the same code pattern</h2>
+<p>Question 8 asked for the country with the highest average <code>points_final</code> in each decade, which is not a single number, so <code>.agg()</code> on its own cannot produce it. The answer for each decade is a whole row, which we create by sorting inside each decade group.</p>
+<p>The loop is the same one we wrote in section 2, and so is the ending: an empty list, one dictionary appended per group, and <code>pd.DataFrame()</code> once at the end. The hard part is working out what goes in each dictionary, because the numbers we want are buried inside each set of data in the groupby object.</p>
+<div id="0517857e" class="cell" data-execution_count="5">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>winners <span class="op">=</span> []</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> decade, decade_data <span class="kw">in</span> contests.groupby(<span class="st">"decade"</span>):</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find the average points_final by country in each decade:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    means <span class="op">=</span> decade_data.groupby(<span class="st">"to_country"</span>)[<span class="st">"points_final"</span>].mean()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Count the number of times a country was in the finals in each decade:</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> decade_data.groupby(<span class="st">"to_country"</span>)[<span class="st">"points_final"</span>].count()</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># What is the index (country) associated with the max avg. points_final in each decade?</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    best <span class="op">=</span> means.idxmax()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>decade<span class="sc">}</span><span class="ss"> best country was </span><span class="sc">{</span>best<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Append this decade to our winners list:</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    winners.append(</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">"decade"</span>: decade, <span class="co"># Current decade</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"country"</span>: best,  <span class="co"># Country that had highest avg. points_final for this decade</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"finals"</span>: counts[best],  <span class="co"># The number of times this country was in the finals</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"mean_points"</span>: means[best], <span class="co"># The average points_final for this country</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>decade_winners <span class="op">=</span> pd.DataFrame(winners) <span class="co"># Turn our list of dictionaries into a dataframe</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>decade_winners</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>1950 best country was France
+1960 best country was United Kingdom
+1970 best country was United Kingdom
+1980 best country was Ireland
+1990 best country was Ireland
+2000 best country was Serbia
+2010 best country was Bulgaria</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">decade</th>
+<th data-quarto-table-cell-role="th">country</th>
+<th data-quarto-table-cell-role="th">finals</th>
+<th data-quarto-table-cell-role="th">mean_points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1950</td>
+<td>France</td>
+<td>3</td>
+<td>19.666667</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1960</td>
+<td>United Kingdom</td>
+<td>10</td>
+<td>23.100000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1970</td>
+<td>United Kingdom</td>
+<td>10</td>
+<td>93.200000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1980</td>
+<td>Ireland</td>
+<td>9</td>
+<td>99.222222</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1990</td>
+<td>Ireland</td>
+<td>10</td>
+<td>119.200000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>2000</td>
+<td>Serbia</td>
+<td>2</td>
+<td>214.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>2010</td>
+<td>Bulgaria</td>
+<td>3</td>
+<td>362.666667</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Two lines in the loop are worth pointing at.</p>
+<p>The middle of the loop groups <code>decade_data</code>, which is itself a group. Grouping a group is allowed, and it is the part of question 8 that was genuinely new: the outer <code>groupby</code> gives us one decade at a time, and the inner one gives us the average for each country inside that decade.</p>
+<p>The line with <code>best</code> in it is <code>.idxmax()</code>, which is not new either. It gives back the label of the largest value in a Series, and we used it on the survey data to name the best site once grouping had made the labels site names. Here the grouping has made the labels country names, so <code>means.idxmax()</code> is the country we are after, and <code>means[best]</code> and <code>counts[best]</code> then look up that one country’s two numbers, which is the same label lookup we did on the survey means.</p>
+</section>
+<section id="the-one-idea" class="level2">
+<h2 class="anchored" data-anchor-id="the-one-idea">The one idea</h2>
+<p>A dictionary of lists describes a table by column, and a list of dictionaries describes it by row. A loop gives you rows, so start with an empty list, append one dictionary per group, and call <code>pd.DataFrame()</code> once on the finished list. Every table on this page was built that way, including question 8.</p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
-<li><a href="../../course-materials/cheatsheets/timeseries.html">📖 EDS 217 cheatsheet: working with dates</a></li>
-<li><a href="../../course-materials/cheatsheets/data_grouping.html">📖 EDS 217 cheatsheet: grouping and aggregating</a></li>
-<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html" target="_blank">pandas documentation: <code>pandas.to_datetime</code></a></li>
-<li><a href="https://pandas.pydata.org/docs/user_guide/timeseries.html" target="_blank">pandas user guide: time series</a></li>
-<li><a href="https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes" target="_blank">Python documentation: format codes for dates</a></li>
-<li><a href="https://arc-lter.ecosystems.mbl.edu/" target="_blank">Toolik Field Station, Arctic LTER</a></li>
+<li><a href="../../course-materials/live-coding/5d_loops_over_groups.html">🔁 When a Pattern Is Not Enough</a>, the session we skipped on Friday. It covers looping over groups at more length than we have this morning, and it spends about ten minutes on list comprehensions, which you are not expected to write but will meet in other people’s code. We wrote the page to be typed live in the room, so it has no Python on it to copy, and the instructor notes below are where the code is.</li>
+<li><a href="../../course-materials/live-coding/5d_loops_over_groups_notes.html">🎙️ Instructor Notes: When a Pattern Is Not Enough</a>, the run-through we would have taught Friday’s session from. It has all the Python the student page leaves out, so you will need to go through this one on your own. There are also some notes and timing stuff in there, which you can ignore (we often do too!)</li>
+<li><a href="../../course-materials/cheatsheets/dictionaries.html">📖 EDS 217 cheatsheet: dictionaries</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/groupby.html#iterating-through-groups" target="_blank">pandas user guide: iterating through groups</a></li>
 </ul>
 
 

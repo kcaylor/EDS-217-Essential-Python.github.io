@@ -1,0 +1,202 @@
+---
+title: "Live Coding Session"
+subtitle: "🧱 Building a Table Row by Row"
+jupyter: eds217_2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+---
+
+Question 8 of yesterday's practice asked you to build a table one row at a time, using a loop
+over groups. If you got stuck on it, the fault is ours: we took a lighter day on Friday and
+skipped [🔁 When a Pattern Is Not Enough](5d_loops_over_groups.qmd), which would have introduced
+looping over groups... and then... 🫠 we forgot about that yesterday afternoon and we went ahead and 
+asked you for it anyway! 
+
+So... let's spend about fifteen minutes before we start on figures, to cover some of the most essential parts of 
+Friday's session this morning. We will work through the three things question 8 depended on: building a DataFrame yourself, taking one group at a time out of a `groupby`, and (gasp!) grouping a group.
+
+Nearly every table we have used this course came out of a file, by way of `pd.read_csv()`. However, yesterday
+we built two of our own: in [🔗 The Join Pattern](../interactive-sessions/6a_joining_data.qmd) we
+typed the seven-row `regions` lookup table out by hand and merged it into the parks data, and in
+[📆 A Date Is Not a Number](../interactive-sessions/6c_dates.qmd) we built the twelve-row Toolik
+`comparison` table out of two `groupby` results rather than out of values.
+
+That `comparison` example is closer than the `regions` example to what question 8 wanted, because it had no file behind it and its numbers were ones we had just computed a moment earlier. Question 8 asked for the same
+kind of table, put together one decade at a time inside a loop, which is something you hadn't seen before.
+
+## Setup
+
+Open a new notebook called `Session_70_Building_Tables.ipynb` and start it with a title cell, the
+way you have started every notebook this week:
+
+```markdown
+# Session 7.0: Building a Table Row by Row
+Date: 09/09/2026
+```
+
+The setup below is the same one you built across questions 3, 5 and 6 of yesterday's practice,
+gathered here into a single cell:
+
+```{python}
+#| echo: true
+
+import pandas as pd
+
+url = 'https://eds-217-essential-python.github.io/data/eurovision_contestants.csv'
+eurovision = pd.read_csv(url)
+
+contests = eurovision[eurovision['year'] != 2020].copy()
+contests['decade'] = (contests['year'] / 10).astype(int) * 10
+```
+
+## 1. Making DataFrames from lists and dictionaries
+
+### A dictionary of lists can become a table!
+
+Yesterday we built `regions` out of a dictionary. If you hand a dictionary to `pd.DataFrame()`, you get a table
+back: each key becomes a column name, and the list stored under that key becomes the column. 
+
+```{python}
+scores = pd.DataFrame(
+    {  # dictionary of lists: each column is defined all at once
+        "country": ["Norway", "Sweden", "Malta"],  # col1
+        "entries": [58, 59, 32],                   # col2
+    }
+)
+
+scores
+```
+
+The one rule of making DataFrames using dictionaries is that **every list has to be the same length**, because a table is a rectangle. 
+
+The table that comes back is a real DataFrame even though no file was involved: `.sort_values()`,
+`pd.merge()` and everything else from this week work on a table you typed out yourself exactly as
+they work on the Eurovision one.
+
+### A list of dictionaries can also become a table!
+
+`pd.DataFrame()` will also take a **list of dictionaries**. Each dictionary in the list is one row,
+and its keys are the column names:
+
+```{python}
+pd.DataFrame(
+    [  # list of dictionaries: each row is defined all at once:
+        {"country": "Norway", "entries": 58},  # row 1
+        {"country": "Sweden", "entries": 59},  # row 2
+        {"country": "Malta", "entries": 32},   # row 3
+    ]
+)
+```
+
+The result is the same table, down to the column types. 
+A dictionary of lists describes a table **column by column**, and a list of
+dictionaries describes the same table **row by row**. So reach for whichever form matches the
+pieces you already have! 
+
+If you already have whole columns, use the dictionary of lists. If you
+are producing one row at a time, use the list of dictionaries.
+
+## 2. A list of dictionaries, built in a loop
+
+A loop usually gives you one row at a time, so a list of dictionaries is the form to reach for whenever a
+loop is producing the rows. Typing the rows out by hand, as we just did, works only when you
+already know every row in advance. More often you do not, because each row is the result of a
+calculation the loop is working through. So we collect the rows as we go!
+
+The code pattern has three parts: (1) Start with an empty `list`, (2) `append` one dictionary (i.e. "row") per 
+group inside the loop, and (3) turn the finished list into a `DataFrame` in one call at the end:
+
+```{python}
+records = [] # Step 1: Start with an empty list.
+
+for decade, decade_data in contests.groupby('decade'): 
+    records.append({  # Step 2: append one dictionary per group inside the loop
+        'decade': decade,
+        'entries': len(decade_data),
+        'countries': decade_data['to_country'].nunique()
+    })
+
+pd.DataFrame(records) # Step 3: Turn the finished list into a DataFrame
+```
+
+Notice that a `groupby` loop gives you two variables rather than one when you iterate over it. `decade` is the name of the group, which is the value we grouped on. `decade_data` is a DataFrame with every row for that decade in it. Yay!! Because you get a DataFrame with every pass through the loop, everything we have used this week works on it!
+
+`len(decade_data)` gives you the number of rows in that group, because `len()` on a DataFrame counts its rows, which is something we have seen before.
+
+Each dictionary in `records` is one row, and its keys are the column names. `contests` has seven
+decades in it, so seven dictionaries go in and a seven-row table comes out.
+
+## 3. Finally, Question 8, using the same code pattern
+
+Question 8 asked for the country with the highest average `points_final` in each decade, which is
+not a single number, so `.agg()` on its own cannot produce it. The answer for each decade is a
+whole row, which we create by sorting inside each decade group.
+
+The loop is the same one we wrote in section 2, and so is the ending: an empty list, one dictionary
+appended per group, and `pd.DataFrame()` once at the end. The hard part is working out what
+goes in each dictionary, because the numbers we want are buried inside each set of data in the groupby object.
+
+```{python}
+winners = []
+
+for decade, decade_data in contests.groupby("decade"):
+    # Find the average points_final by country in each decade:
+    means = decade_data.groupby("to_country")["points_final"].mean()
+
+    # Count the number of times a country was in the finals in each decade:
+    counts = decade_data.groupby("to_country")["points_final"].count()
+
+    # What is the index (country) associated with the max avg. points_final in each decade?
+    best = means.idxmax()
+    print(f"{decade} best country was {best}")
+
+    # Append this decade to our winners list:
+    winners.append(
+        {
+            "decade": decade, # Current decade
+            "country": best,  # Country that had highest avg. points_final for this decade
+            "finals": counts[best],  # The number of times this country was in the finals
+            "mean_points": means[best], # The average points_final for this country
+        }
+    )
+
+decade_winners = pd.DataFrame(winners) # Turn our list of dictionaries into a dataframe
+
+decade_winners
+```
+
+Two lines in the loop are worth pointing at.
+
+The middle of the loop groups `decade_data`, which is itself a group. Grouping a group is allowed,
+and it is the part of question 8 that was genuinely new: the outer `groupby` gives us one decade
+at a time, and the inner one gives us the average for each country inside that decade.
+
+The line with `best` in it is `.idxmax()`, which is not new either. It gives back the label of the
+largest value in a Series, and we used it on the survey data to name the best site once grouping
+had made the labels site names. Here the grouping has made the labels country names, so
+`means.idxmax()` is the country we are after, and `means[best]` and `counts[best]` then look up
+that one country's two numbers, which is the same label lookup we did on the survey means.
+
+## The one idea
+
+A dictionary of lists describes a table by column, and a list of dictionaries describes it by row.
+A loop gives you rows, so start with an empty list, append one dictionary per group, and call
+`pd.DataFrame()` once on the finished list. Every table on this page was built that way, including
+question 8.
+
+## Resources
+
+- [🔁 When a Pattern Is Not Enough](5d_loops_over_groups.qmd), the session we skipped on Friday.
+  It covers looping over groups at more length than we have this morning, and it spends about ten
+  minutes on list comprehensions, which you are not expected to write but will meet in other
+  people's code. We wrote the page to be typed live in the room, so it has no Python on it to
+  copy, and the instructor notes below are where the code is.
+- [🎙️ Instructor Notes: When a Pattern Is Not Enough](5d_loops_over_groups_notes.qmd), the
+  run-through we would have taught Friday's session from. It has all the Python the
+  student page leaves out, so you will need to go  through this one on your own. There are also some 
+  notes and timing stuff in there, which you can ignore (we often do too!)
+- [📖 EDS 217 cheatsheet: dictionaries](../cheatsheets/dictionaries.qmd)
+- [pandas user guide: iterating through groups](https://pandas.pydata.org/docs/user_guide/groupby.html#iterating-through-groups){target="_blank"}

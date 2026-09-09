@@ -253,6 +253,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -500,7 +504,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>First, let’s import pandas and load our dataset.</p>
-<div id="a320bb80" class="cell" data-execution_count="1">
+<div id="891a5fa0" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -525,7 +529,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="basic-selection">Basic Selection</h2>
 <section id="select-a-single-column" class="level3">
 <h3 class="anchored" data-anchor-id="select-a-single-column">Select a Single Column</h3>
-<div id="54c5303f" class="cell" data-execution_count="2">
+<div id="1f7cde60" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using square brackets</span></span>
@@ -538,7 +542,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="select-multiple-columns" class="level3">
 <h3 class="anchored" data-anchor-id="select-multiple-columns">Select Multiple Columns</h3>
-<div id="b4647490" class="cell" data-execution_count="3">
+<div id="1fb4fe9c" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select age and gpa columns</span></span>
@@ -548,7 +552,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="select-rows-by-index" class="level3">
 <h3 class="anchored" data-anchor-id="select-rows-by-index">Select Rows by Index</h3>
-<div id="d29146ef" class="cell" data-execution_count="4">
+<div id="4845814d" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select first 5 rows</span></span>
@@ -561,7 +565,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="select-rows-and-columns" class="level3">
 <h3 class="anchored" data-anchor-id="select-rows-and-columns">Select Rows and Columns</h3>
-<div id="30f3b958" class="cell" data-execution_count="5">
+<div id="e3ca450e" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select first 3 rows and 'age', 'gpa' columns</span></span>
@@ -574,7 +578,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="filtering">Filtering</h2>
 <section id="filter-by-a-single-condition" class="level3">
 <h3 class="anchored" data-anchor-id="filter-by-a-single-condition">Filter by a Single Condition</h3>
-<div id="c5ad13f2" class="cell" data-execution_count="6">
+<div id="9535ebfc" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Students with age greater than 21</span></span>
@@ -584,7 +588,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="filter-by-multiple-conditions" class="level3">
 <h3 class="anchored" data-anchor-id="filter-by-multiple-conditions">Filter by Multiple Conditions</h3>
-<div id="ad271c37" class="cell" data-execution_count="7">
+<div id="361e5a78" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Students with age &gt; 21 and gpa &gt; 3.5</span></span>
@@ -594,7 +598,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="filter-using-.isin" class="level3">
 <h3 class="anchored" data-anchor-id="filter-using-.isin">Filter Using .isin()</h3>
-<div id="69d3b191" class="cell" data-execution_count="8">
+<div id="bccc99d3" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Students majoring in Computer Science or Biology</span></span>
@@ -604,7 +608,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="filter-using-string-methods" class="level3">
 <h3 class="anchored" data-anchor-id="filter-using-string-methods">Filter Using String Methods</h3>
-<div id="2630ba49" class="cell" data-execution_count="9">
+<div id="e2d2eaa2" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Majors starting with 'E'</span></span>
@@ -615,7 +619,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="combining-selection-and-filtering" class="level2">
 <h2 class="anchored" data-anchor-id="combining-selection-and-filtering">Combining Selection and Filtering</h2>
-<div id="42928b08" class="cell" data-execution_count="10">
+<div id="8a6b0697" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select 'age' and 'gpa' for students with gpa &gt; 3.5</span></span>
@@ -634,7 +638,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="query-method" class="level3">
 <h3 class="anchored" data-anchor-id="query-method">.query() Method</h3>
-<div id="c46bfaec" class="cell" data-execution_count="11">
+<div id="ffd0661c" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter using query method</span></span>
@@ -644,7 +648,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="where-method" class="level3">
 <h3 class="anchored" data-anchor-id="where-method">.where() Method</h3>
-<div id="d1be305e" class="cell" data-execution_count="12">
+<div id="de0a8800" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace values not meeting the condition with NaN</span></span>

@@ -256,6 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -456,7 +460,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="cc761ded" class="cell" data-execution_count="1">
+<div id="a4ba0ba3" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -469,7 +473,7 @@ How to use this key
 <section id="part-1-what-is-in-this-file-and-what-is-missing-from-it" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-what-is-in-this-file-and-what-is-missing-from-it">Part 1: What is in this file, and what is missing from it</h2>
 <p><strong>1. How many rows and columns? What are the column names, and what is the range of <code>year</code>?</strong></p>
-<div id="e549b9f4" class="cell" data-execution_count="2">
+<div id="dea00a9a" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eurovision.shape)</span>
@@ -497,7 +501,7 @@ How to use this key
 </div>
 </div>
 <p><strong>2. Run <code>.isnull().sum()</code>. Several columns are null on well over a thousand of the 1,603 rows. Pick two of them and, in a markdown cell, propose an explanation for each that has nothing to do with anybody making a mistake.</strong></p>
-<div id="c0b1676d" class="cell" data-execution_count="3">
+<div id="75be0cab" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>eurovision.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -544,7 +548,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>3. <code>points_final</code> is the column the rest of this exercise depends on, and it is null on 295 rows. Group by <code>year</code> and count the non-null <code>points_final</code> values in each. Look at the last few years.</strong></p>
-<div id="518e5399" class="cell" data-execution_count="4">
+<div id="10a71093" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>eurovision.groupby(<span class="st">'year'</span>)[<span class="st">'points_final'</span>].count().tail(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -586,7 +590,7 @@ Name: points_final, dtype: int64</code></pre>
 <div class="callout-body-container callout-body">
 <p><strong>2020.</strong> The contest was cancelled in March 2020 because of the COVID-19 pandemic, the first cancellation in its history. The 41 entries are in the file with their performers and songs because they had been selected before the cancellation, but no country ever performed and no points were ever awarded, so <code>points_final</code> and <code>place_contest</code> are null on all 41 rows.</p>
 <p>A second year also has a count of zero, and <code>.tail(6)</code> hides it. Print the head of the same series:</p>
-<div id="7132cd43" class="cell" data-execution_count="5">
+<div id="4ddabaa9" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>eurovision.groupby(<span class="st">'year'</span>)[<span class="st">'points_final'</span>].count().head(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -606,7 +610,7 @@ Name: points_final, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>5. Build a table called <code>contests</code> that excludes that year, using the filter pattern and ending the line with <code>.copy()</code>. How many rows does it have?</strong></p>
-<div id="8e7a6ac2" class="cell" data-execution_count="6">
+<div id="1312b614" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>contests <span class="op">=</span> eurovision[eurovision[<span class="st">'year'</span>] <span class="op">!=</span> <span class="dv">2020</span>].copy()</span>
@@ -634,7 +638,7 @@ Name: points_final, dtype: int64</code></pre>
 <section id="part-2-decades" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-decades">Part 2: Decades</h2>
 <p><strong>6. Add a <code>decade</code> column. Divide <code>year</code> by ten, convert the result to an integer, and multiply by ten. <code>.astype(int)</code> truncates toward zero, which is exactly what you want here. Then count the entries in each decade.</strong></p>
-<div id="84b3e657" class="cell" data-execution_count="7">
+<div id="6276ee1b" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>contests[<span class="st">'decade'</span>] <span class="op">=</span> (contests[<span class="st">'year'</span>] <span class="op">/</span> <span class="dv">10</span>).astype(<span class="bu">int</span>) <span class="op">*</span> <span class="dv">10</span></span>
@@ -667,7 +671,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>7. Count the entries in each year from 2000 to 2007. What changes abruptly? In which year? In a markdown cell, say what a sudden jump in entries per contest would do to a comparison of average scores between the 1990s and the 2010s.</strong></p>
-<div id="7aebb789" class="cell" data-execution_count="8">
+<div id="9e57765a" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>contests.groupby(<span class="st">'year'</span>)[<span class="st">'to_country'</span>].count().loc[<span class="dv">2000</span>:<span class="dv">2007</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -703,21 +707,27 @@ Name: to_country, dtype: int64</code></pre>
 <section id="part-3-the-best-country-of-each-decade" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-the-best-country-of-each-decade">Part 3: The best country of each decade</h2>
 <p><strong>8. Build a table with one row per decade, holding the country with the highest average <code>points_final</code> in that decade, how many scored finals that average came from, and the average itself.</strong></p>
-<div id="e3733ceb" class="cell" data-execution_count="9">
+<div id="e7ad8a5a" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>decade_winners_list <span class="op">=</span> []</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> decade, decade_data <span class="kw">in</span> contests.groupby(<span class="st">'decade'</span>):</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    country_avg <span class="op">=</span> decade_data.groupby(<span class="st">'to_country'</span>)[<span class="st">'points_final'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>])</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    country_avg <span class="op">=</span> country_avg.reset_index()</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    top_country <span class="op">=</span> country_avg.sort_values(<span class="st">'mean'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">1</span>).copy()</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    top_country[<span class="st">'decade'</span>] <span class="op">=</span> decade</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    decade_winners_list.append(top_country)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>decade_winners <span class="op">=</span> pd.concat(decade_winners_list, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>decade_winners[[<span class="st">'decade'</span>, <span class="st">'to_country'</span>, <span class="st">'count'</span>, <span class="st">'mean'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    means <span class="op">=</span> decade_data.groupby(<span class="st">'to_country'</span>)[<span class="st">'points_final'</span>].mean()</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> decade_data.groupby(<span class="st">'to_country'</span>)[<span class="st">'points_final'</span>].count()</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    best <span class="op">=</span> means.idxmax()</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    decade_winners_list.append({</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'decade'</span>: decade,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'to_country'</span>: best,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">'count'</span>: counts[best],</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">'mean'</span>: means[best],</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>decade_winners <span class="op">=</span> pd.DataFrame(decade_winners_list)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>decade_winners</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
@@ -800,9 +810,9 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Seven rows and four columns: France takes the 1950s, the United Kingdom the 1960s and 1970s, Ireland the 1980s and 1990s, Serbia the 2000s and Bulgaria the 2010s.</strong> The <code>count</code> column should read 3, 10, 10, 9, 10, 2 and 3 down the page, and the <code>mean</code> column 19.7, 23.1, 93.2, 99.2, 119.2, 214.0 and 362.7. If your table names the same seven countries against the same seven decades, you built it correctly, even if your columns arrived in a different order or under different names.</p>
-<p>The pattern is the one we used this morning: build the pieces, collect them in a list, and stack the list once at the end. Each pass through the loop builds a one-row DataFrame, the list collects them, and the single <code>pd.concat()</code> after the loop stacks all seven rows into one table. <code>ignore_index=True</code> matters more here than it did this morning, because each of those rows kept whatever row label it happened to have inside its own decade’s sorted table, so without it the finished table is numbered 3, 16, 20, 9, 13, 37, 8 rather than 0 through 6, and nothing stops two decades landing on the same label.</p>
-<p>Two things can go wrong here and still leave you with a table that looks perfectly reasonable. Leaving <code>ascending=False</code> out of <code>.sort_values()</code> sorts the other way, because ascending is the default, and <code>.head(1)</code> then hands you the worst country of each decade in a table that is otherwise the right size. Reaching for <code>.max()</code> on the <code>mean</code> column instead of <code>.head(1)</code> on the sorted table gives you the number without the name, 362.7 for the 2010s with no Bulgaria attached to it, and the name is half of what the question asked for.</p>
-<p><code>.reset_index()</code> is the line that turns <code>to_country</code> from the index into a column, which is what lets the last line select it by name. A version of the loop that leaves the reset out stops with a <code>KeyError</code> on <code>to_country</code> rather than returning a wrong table, so you will know about it right away.</p>
+<p>There is no new pandas in the loop. Grouping the decade’s rows by country gives a Series labelled by country name, exactly as grouping the survey by site gave a Series labelled by site name on Friday morning, and <code>.idxmax()</code> reads the label of the largest value off it in the same way it named the best site there. The only part that is new is where the grouping happens: <code>decade_data</code> is itself a group, so the loop groups a group.</p>
+<p>Collecting the rows is the same list-and-append you have used since Tuesday. Each pass appends one dictionary, whose keys become the column names, and the single <code>pd.DataFrame()</code> after the loop turns all seven dictionaries into the finished table.</p>
+<p>The mistake to look out for is <code>.max()</code> where you wanted <code>.idxmax()</code>. <code>.max()</code> gives you the largest value, 362.7 for the 2010s, with no Bulgaria attached to it, and the name is half of what the question asked for. <code>.idxmax()</code> gives you the label instead, and the label is what you then look up in both Series. The mirror of the same slip is <code>.idxmin()</code>, which returns the worst country of each decade in a table that is otherwise exactly the right size and shows nothing obviously wrong.</p>
 </div>
 </div>
 <p><strong>9. Read the <code>count</code> column before you read the <code>mean</code> column. Remember what <code>.count()</code> counts: the non-null <code>points_final</code> values, which is finals a country was scored in, not contests it entered. Three of the seven winners were scored in fewer than four finals. Name them, and say in one sentence why you would not put any of them in a headline.</strong></p>
@@ -840,7 +850,7 @@ Name: to_country, dtype: int64</code></pre>
 <section id="part-4-the-second-table" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-the-second-table">Part 4: The second table</h2>
 <p><strong>11. Read the population file at <code>https://eds-217-essential-python.github.io/data/eurovision_country_populations.csv</code>. How many rows, and what are its columns?</strong></p>
-<div id="2a3785c4" class="cell" data-execution_count="10">
+<div id="aebceb83" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pop_url <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/eurovision_country_populations.csv'</span></span>
@@ -868,7 +878,7 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>12. Build a table called <code>modern</code> holding only contests from 1990 onwards, then count the entries per country and turn that count into a two-column table using the Series-to-table move. Rename the columns to <code>country</code> and <code>entries</code>.</strong></p>
-<div id="6a189c3c" class="cell" data-execution_count="11">
+<div id="7574bff0" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>modern <span class="op">=</span> contests[contests[<span class="st">'year'</span>] <span class="op">&gt;=</span> <span class="dv">1990</span>].copy()</span>
@@ -936,7 +946,7 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>13. Merge <code>counts</code> with <code>populations</code>. The key columns have different names, so you will need <code>left_on=</code> and <code>right_on=</code>. Do it twice, once with the default <code>how=</code> and once with <code>how='right'</code>, and report both shapes.</strong></p>
-<div id="c2000be4" class="cell" data-execution_count="12">
+<div id="ccafb3fa" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>entries <span class="op">=</span> pd.merge(counts, populations, left_on<span class="op">=</span><span class="st">'country'</span>, right_on<span class="op">=</span><span class="st">'country_name'</span>)</span>
@@ -965,7 +975,7 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>14. One country is in the population file and not in your counts. Find it, name it, and then find every row for it in the full <code>eurovision</code> table. In a markdown cell, say what you learned and why the inner merge was right to drop it.</strong></p>
-<div id="cb32ff3a" class="cell" data-execution_count="13">
+<div id="85aa4c6f" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(check[check[<span class="st">'entries'</span>].isnull()][[<span class="st">'country_name'</span>, <span class="st">'population'</span>]])</span>
@@ -994,7 +1004,7 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>15. Add an <code>entries_per_million</code> column to <code>entries</code>: the entry count divided by the population in millions. (<code>1_000_000</code> is a perfectly good way to write a million in Python; the underscores are ignored.) Rank it and show the top eight and the bottom five.</strong></p>
-<div id="dc74b17c" class="cell" data-execution_count="14">
+<div id="eb01a7b5" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>entries[<span class="st">'entries_per_million'</span>] <span class="op">=</span> entries[<span class="st">'entries'</span>] <span class="op">/</span> (entries[<span class="st">'population'</span>] <span class="op">/</span> <span class="dv">1_000_000</span>)</span>
@@ -1043,7 +1053,7 @@ Name: to_country, dtype: int64</code></pre>
 <section id="part-5-the-whole-contest-in-one-grid" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-the-whole-contest-in-one-grid">Part 5: The whole contest in one grid</h2>
 <p><strong>17. Build a wide table with <code>to_country</code> down the rows, <code>decade</code> across the columns, and the mean <code>points_final</code> in the cells. What shape is it?</strong></p>
-<div id="7af4872c" class="cell" data-execution_count="15">
+<div id="a99f3c07" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> contests.pivot_table(index<span class="op">=</span><span class="st">'to_country'</span>, columns<span class="op">=</span><span class="st">'decade'</span>, values<span class="op">=</span><span class="st">'points_final'</span>)</span>
@@ -1069,7 +1079,7 @@ Name: to_country, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>18. Build the same table again with <code>aggfunc='count'</code>, and look at both for four countries that have competed throughout: Ireland, Sweden, the United Kingdom and Norway.</strong></p>
-<div id="e6bf90ea" class="cell" data-execution_count="16">
+<div id="0a8d19d2" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>grid_n <span class="op">=</span> contests.pivot_table(index<span class="op">=</span><span class="st">'to_country'</span>, columns<span class="op">=</span><span class="st">'decade'</span>,</span>

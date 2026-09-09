@@ -175,24 +175,38 @@ stacking pattern from this morning:
     `points_final` in that decade, how many scored finals that average came from, and the average
     itself.
 
-    Do it with a loop over decade groups. For each decade: group by `to_country`, `.agg()` for the
-    count and mean of `points_final`, `.reset_index()`, take the top row with the top-N pattern,
-    add a `decade` column, and append the one-row table to a list. Then stack the list with
-    `pd.concat()`.
+    Do it with a loop over decade groups, building the finished table one row at a time. Start
+    with an empty list, and then for each decade:
+
+    a. Group the decade's rows by `to_country` and take the **mean** of `points_final`. What comes
+       back is a Series with one number per country, labelled by country name.
+    b. Do the same again with **count** in place of mean, so you have both numbers to hand.
+    c. Run `.idxmax()` on the means. It gives back the *label* of the largest value, which is the
+       country you are looking for.
+    d. Look that country up in each of the two Series, and append a dictionary holding the decade,
+       the country, the count and the mean.
+
+    After the loop, turn the finished list of dictionaries into a table with `pd.DataFrame()`.
 
 ```{python}
 decade_winners_list = []
 
 for decade, decade_data in contests.groupby('decade'):
-    country_avg = decade_data.groupby('to_country')['points_final'].agg(['count', 'mean'])
-    country_avg = country_avg.reset_index()
-    top_country = country_avg.sort_values('mean', ascending=False).head(1).copy()
-    top_country['decade'] = decade
-    decade_winners_list.append(top_country)
+    means = decade_data.groupby('to_country')['points_final'].mean()
+    counts = decade_data.groupby('to_country')['points_final'].count()
 
-decade_winners = pd.concat(decade_winners_list, ignore_index=True)
+    best = means.idxmax()
 
-decade_winners[['decade', 'to_country', 'count', 'mean']]
+    decade_winners_list.append({
+        'decade': decade,
+        'to_country': best,
+        'count': counts[best],
+        'mean': means[best],
+    })
+
+decade_winners = pd.DataFrame(decade_winners_list)
+
+decade_winners
 ```
 
 9. Read the `count` column before you read the `mean` column. Remember what `.count()` counts: the
@@ -318,17 +332,21 @@ number you would actually send them. Use complete sentences.
 
 ## The grammar minute
 
-Look back through your notebook. Three patterns did all of today's structural work without
+Look back through your notebook. Two patterns did all of today's structural work without
 calculating a single number:
 
 ```python
 pd.merge(a, b, left_on=, right_on=)    # two tables become one, side by side
-pd.concat([...], ignore_index=True)    # many tables become one, top to bottom
 df.pivot_table(index=, columns=, ...)  # one long table becomes one wide one
 ```
 
+The third pattern from this morning, `pd.concat([...], ignore_index=True)`, stacks many tables
+into one from top to bottom, and today's questions did not happen to need it. It is the one to
+reach for when the rows you want arrive split across several files, which is how the three air
+quality monitors arrived on Friday.
+
 Every other line in your notebook was something you already knew how to do, applied to a table
-that one of the three patterns above had already put into the right shape.
+that one of the two patterns above had already put into the right shape.
 
 Much of the difficulty in real data analysis has nothing to do with the analysis itself. The
 numbers you want to compare often sit in two different files, or sit in one file at right angles

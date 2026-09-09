@@ -256,6 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -471,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Save</strong> with <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), and keep saving as you go.</p></li>
 <li><p>Read in the Goleta air quality data and rebuild the <code>pm25</code> subset you made in this morning’s session:</p></li>
 </ol>
-<div id="4bc789a3" class="cell" data-execution_count="1">
+<div id="7f8d210f" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -490,7 +494,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="putting-a-table-in-order" class="level2">
 <h2 class="anchored" data-anchor-id="putting-a-table-in-order">Putting a table in order</h2>
 <p><code>.sort_values()</code> takes the name of a column and reorders the whole table by it:</p>
-<div id="e0f74951" class="cell" data-execution_count="2">
+<div id="d586298c" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pm25.sort_values(<span class="st">'value'</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -619,7 +623,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Sorting puts the smallest values first, which is what happens by default. The negative readings you flagged yesterday are the smallest of all, so they come out at the head of the table, which is where you would expect them once the order runs upward.</p>
 <p>To go the other way, pass <code>ascending=False</code>:</p>
-<div id="50329623" class="cell" data-execution_count="3">
+<div id="710bcfe9" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pm25.sort_values(<span class="st">'value'</span>, ascending<span class="op">=</span><span class="va">False</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -748,7 +752,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Now the largest values are on top. <code>ascending=</code> is a keyword argument, the same kind of argument as <code>index_col=</code> from yesterday: you pass it by name, after the column.</p>
 <p>Sorting works on text columns too, alphabetically:</p>
-<div id="9aa1013e" class="cell" data-execution_count="4">
+<div id="f6b778ff" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>goleta.sort_values(<span class="st">'parameter'</span>).head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -852,7 +856,7 @@ Note
 <p>🐍 <code>.sort_values()</code> returns a <strong>new</strong> DataFrame in the new order and leaves the original alone. Look at <code>pm25.head()</code> after all that sorting and the rows are exactly where they were!</p>
 </div>
 </div>
-<div id="2d0501d5" class="cell" data-execution_count="5">
+<div id="fab0bfce" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pm25.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -960,7 +964,7 @@ Note
 <section id="the-top-n-pattern" class="level2">
 <h2 class="anchored" data-anchor-id="the-top-n-pattern">The top-N pattern</h2>
 <p>Sorting gives you the whole table in order. Almost always you want the front of it, so pair the sort with <code>.head()</code>:</p>
-<div id="ecb4ee42" class="cell" data-execution_count="6">
+<div id="bd766218" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pm25.sort_values(<span class="st">'value'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1182,7 +1186,7 @@ Note
 <p>Read it left to right as three instructions: sort by this column, biggest first, and give me the first <code>n</code>. Drop <code>ascending=False</code> and the same pattern gives you the bottom N instead.</p>
 <p>Learn the whole line as one unit rather than as separate pieces, because you will almost never want to sort a table without immediately taking the front of the result.</p>
 <p>Often you only care about a couple of columns, so select them after ranking:</p>
-<div id="9523102b" class="cell" data-execution_count="7">
+<div id="608fdc82" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pm25.sort_values(<span class="st">'value'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)[[<span class="st">'datetimeLocal'</span>, <span class="st">'value'</span>, <span class="st">'unit'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1284,7 +1288,7 @@ Note
 <section id="filter-first-then-rank" class="level2">
 <h2 class="anchored" data-anchor-id="filter-first-then-rank">Filter first, then rank</h2>
 <p>Ranking the whole table, without filtering it first, gives you this:</p>
-<div id="cadd003e" class="cell" data-execution_count="8">
+<div id="f977796f" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>goleta.sort_values(<span class="st">'value'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">5</span>)[[<span class="st">'parameter'</span>, <span class="st">'value'</span>, <span class="st">'unit'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1341,7 +1345,7 @@ Note
 </div>
 <p>Every row at the top is <code>pm10</code>, because particulates are reported in micrograms per cubic metre and ozone is reported in parts per million. A number in µg/m³ will almost always beat a number in ppm, so the ranking tells you nothing except which pollutant is reported in the bigger units.</p>
 <p>The filter pattern and the top-N pattern are meant to be used together, and in one particular order:</p>
-<div id="7f37259f" class="cell" data-execution_count="9">
+<div id="23727000" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm10'</span>].sort_values(<span class="st">'value'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">5</span>)[</span>
@@ -1430,7 +1434,7 @@ A ranking is only as good as the group it ranks
 <h2 class="anchored" data-anchor-id="finding-the-label-instead-of-the-row">Finding the label instead of the row</h2>
 <p>Sometimes you don’t want the row. You want to know <em>which one</em> it was: which hour, which station, which pollutant.</p>
 <p><code>.idxmax()</code> gives you the <strong>index label</strong> of the largest value in a column:</p>
-<div id="6cd46d6a" class="cell" data-execution_count="10">
+<div id="ff19298a" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pm25[<span class="st">'value'</span>].idxmax()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1440,7 +1444,7 @@ A ranking is only as good as the group it ranks
 </div>
 </div>
 <p>The number you get back is a row label, not a value and not a position. Hand it to <code>.loc[]</code> with a column name and you get the one thing you were after:</p>
-<div id="9e514ea7" class="cell" data-execution_count="11">
+<div id="c6eb045c" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>worst_hour <span class="op">=</span> pm25[<span class="st">'value'</span>].idxmax()</span>
@@ -1452,7 +1456,7 @@ A ranking is only as good as the group it ranks
 </div>
 <p><code>.loc[row_label, column_label]</code> reads as “the value at this row, in this column”. You saw it this morning on the Toolik data, and it is the natural partner to <code>.idxmax()</code>.</p>
 <p><code>.idxmin()</code> does the same for the smallest value:</p>
-<div id="0132aca7" class="cell" data-execution_count="12">
+<div id="a271799e" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cleanest_hour <span class="op">=</span> pm25[<span class="st">'value'</span>].idxmin()</span>
@@ -1480,7 +1484,7 @@ A ranking is only as good as the group it ranks
 <p>Whenever the answer to your question would change if there were a tie, use the top-N pattern and read the result, rather than trusting a single label:</p>
 </div>
 </div>
-<div id="17508cb3" class="cell" data-execution_count="13">
+<div id="217b3d10" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pm25.sort_values(<span class="st">'value'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">3</span>)[[<span class="st">'datetimeLocal'</span>, <span class="st">'value'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1536,7 +1540,7 @@ A ranking is only as good as the group it ranks
 <section id="putting-it-together" class="level2">
 <h2 class="anchored" data-anchor-id="putting-it-together">Putting it together</h2>
 <p>The two patterns of Day 3, in one workflow:</p>
-<div id="baf060ea" class="cell" data-execution_count="14">
+<div id="f9ec318f" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pm10 <span class="op">=</span> goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'pm10'</span>].copy()</span>
@@ -1624,7 +1628,7 @@ A ranking is only as good as the group it ranks
 </div>
 </div>
 </div>
-<div id="aefe7ace" class="cell" data-execution_count="15">
+<div id="5ca1b2aa" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> pm10[<span class="st">'value'</span>].idxmax()</span>

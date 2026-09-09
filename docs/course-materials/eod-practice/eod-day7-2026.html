@@ -256,6 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -450,8 +454,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The USDA Plant Hardiness Zone Map tells you which plants will survive the winter where you live. It is built from one number: the average annual <strong>minimum</strong> temperature at a location, in degrees Fahrenheit. Locations whose coldest night averages within the same five degrees get the same zone label, from <code>1a</code> in interior Alaska to <code>13b</code> in Puerto Rico.</p>
 <p>Gardeners have used it for decades. It is printed on the back of seed packets.</p>
-<p>In November 2023 the USDA released a new version, built by the PRISM group at Oregon State from thirty years of weather station records. It was the first update since 2012, and it moved about half the country half a zone warmer. That was reported widely, and mostly reported badly.</p>
-<p>Today you have both maps, one row per zip code, and every tool you have learned this week. The question is not whether the country got warmer. The question is what you can honestly say about it from these two files, and where each of the answers goes wrong.</p>
+<p>In November 2023 the USDA released a new version, built by the PRISM group at Oregon State from thirty years of weather station records. It was the first update since 2012, and it moved about half the country half a zone warmer. The update was reported widely, and a lot of that reporting was not careful about what the two maps actually measure.</p>
+<p>Today you have both maps, one row per zip code, and every tool we have learned this week. We will compare them (without a mapping library!) to work out what you can say about the difference between the two files, and where a comparison built this way can mislead you.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -467,7 +471,7 @@ Reference
 </div>
 <section id="todays-patterns" class="level2">
 <h2 class="anchored" data-anchor-id="todays-patterns">Today’s patterns</h2>
-<p>Everything you draw here is built from these five.</p>
+<p>Everything you draw today is built from these patterns.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(w, h))                             <span class="co"># the canvas</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(...) <span class="op">;</span> plt.ylabel(...) <span class="op">;</span> plt.title(...)     <span class="co"># always</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()                                     <span class="co"># last</span></span>
@@ -475,7 +479,7 @@ Reference
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'col'</span>, y<span class="op">=</span><span class="st">'col'</span>, hue<span class="op">=</span><span class="st">'col'</span>)  <span class="co"># one measurement against another</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'col'</span>)                         <span class="co"># the shape of one column</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>series.values, y<span class="op">=</span>series.index)           <span class="co"># a grouped Series, as bars</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>And these, from earlier in the week:</p>
+<p>We will also use these patterns from earlier in the week:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.concat([a, b], ignore_index<span class="op">=</span><span class="va">True</span>)                   <span class="co"># the stacking pattern</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, left_on<span class="op">=</span><span class="st">'a'</span>, right_on<span class="op">=</span><span class="st">'b'</span>)       <span class="co"># the join pattern</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span>, columns<span class="op">=</span>, values<span class="op">=</span>)              <span class="co"># the pivot pattern</span></span>
@@ -495,7 +499,7 @@ Reference
 <ol start="3" type="1">
 <li>Read the three files:</li>
 </ol>
-<div id="4c11bf1c" class="cell" data-execution_count="1">
+<div id="77694b92" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -519,19 +523,19 @@ Reference
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Two lines of setup here use string operations you have not been taught. Both are the same kind of move: taking a column of text and reshaping it into something you can join on or do arithmetic with. Copy them as given.</p>
+<p>Two lines of setup here use string operations we have not covered yet. Both do the same kind of job: they take a column of text and turn it into something you can join on or do arithmetic with. Copy them as given, and ask Cella or Kelly if you want the longer version!</p>
 <p><strong>Padding a zip code.</strong> All three files store zip codes as <strong>integers</strong>, so <code>01001</code> arrives as the number <code>1001</code> and the leading zero is gone. Two files that lost their zeros in the same way will still match each other, but the moment you print one or compare it to a real zip code you have a problem. <code>.str.zfill(5)</code> <strong>z</strong>ero-<strong>fill</strong>s a string out to five characters:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>zones_2023[<span class="st">'zipcode'</span>] <span class="op">=</span> zones_2023[<span class="st">'zipcode'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Splitting a range.</strong> The <code>trange</code> column holds text like <code>'-10 to -5'</code>. To do arithmetic on the cold end of that range you need the first piece of it, as a number:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>zones[<span class="st">'trange_min'</span>] <span class="op">=</span> zones[<span class="st">'trange'</span>].<span class="bu">str</span>.split().<span class="bu">str</span>.get(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>.str.split()</code> cuts the text at every space, giving <code>['-10', 'to', '-5']</code>. <code>.str.get(0)</code> takes the first piece from each row. <code>.astype(int)</code> turns <code>'-10'</code> into <code>-10</code>.</p>
-<p>On Thursday, 4C told you that <code>.str</code> methods chained together were a Day 7 problem. This is Day 7, and this is the chain. Three methods, in a row, each one operating on what the last one handed it, which is exactly the pattern you have been reading all week in <code>.sort_values(...).head(10)</code>, because a chain is two patterns run one after the other.</p>
+<p>On Thursday, in 4C, we said that chaining <code>.str</code> methods together was a Day 7 problem, and here is the chain. Three methods in a row, each one working on whatever the last one returned, which is the same pattern you have been reading all week in <code>.sort_values(...).head(10)</code>. A chain is two patterns run one after the other.</p>
 </div>
 </div>
 <ol start="4" type="1">
 <li>Pad the zip codes in all three tables:</li>
 </ol>
-<div id="d50a8f23" class="cell" data-execution_count="2">
+<div id="76a1a34e" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>zones_2023[<span class="st">'zipcode'</span>] <span class="op">=</span> zones_2023[<span class="st">'zipcode'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>
@@ -545,7 +549,7 @@ Reference
 <p>Answer each question with code, then write the answer in a markdown cell underneath, in a complete sentence with the numbers in it.</p>
 <ol type="1">
 <li><p>How many rows and columns does each of the three tables have? What are the column names of the two zone tables, and are they the same?</p></li>
-<li><p>Run <code>.isnull().sum()</code> on both zone tables. Then look at <code>.head()</code> of either one and say, in one sentence, what <code>zone</code>, <code>trange</code> and <code>zonetitle</code> each hold and which of the three is redundant.</p></li>
+<li><p>Run <code>.isnull().sum()</code> on both zone tables. Then look at <code>.head()</code> of either one and say, in one sentence, what <code>zone</code>, <code>trange</code> and <code>zonetitle</code> each hold and which of the three columns is redundant.</p></li>
 <li><p>The two files do not have the same number of rows. Before you do anything else, write down two different explanations for that (not that someone made a mistake).</p></li>
 </ol>
 </section>
@@ -554,7 +558,7 @@ Reference
 <ol start="4" type="1">
 <li><p>Add a <code>year</code> column to each zone table, then stack the two of them into one table called <code>zones</code>, using the stacking pattern. How many rows?</p></li>
 <li><p>Add <code>trange_min</code> using the line from the Field Note, then confirm it has no nulls and look at its distinct values with <code>.value_counts().sort_index()</code>. In a markdown cell, say what you notice about the spacing of those values and what that means for the phrase “how much warmer”.</p></li>
-<li><p>Compute the mean <code>trange_min</code> for each year and report the difference. This is the headline number, and you are about to spend the rest of the practice finding out how much it is worth.</p></li>
+<li><p>Compute the mean <code>trange_min</code> for each year and report the difference. The difference is the headline number, and the rest of the practice is about how much it is worth.</p></li>
 <li><p>Merge <code>zones</code> with <code>zipcodes</code> to attach a state, a latitude and a longitude to every row. The key columns are called different things in the two tables. <strong>Compare the row count before and after</strong>, then run the merge again with <code>how='left'</code> and find out how many rows failed to match and how many distinct zip codes that is.</p></li>
 <li><p>In a markdown cell: 103 rows out of 80,455 did not match, covering 63 zip codes. Is that a number you would fix, a number you would mention, or a number you would ignore? Say which and why. There is more than one defensible answer.</p></li>
 </ol>
@@ -564,7 +568,7 @@ Reference
 <ol start="9" type="1">
 <li><p>Filter <code>located</code> to the 2023 rows only, then draw a scatter plot with <code>longitude</code> across the bottom, <code>latitude</code> up the side, and <code>hue='trange_min'</code>. Make the figure twelve inches by seven. Label both axes and title it.</p></li>
 <li><p>Describe what is wrong with that figure in a markdown cell.</p></li>
-<li><p>Find the culprit. Use the filter pattern on <code>located</code> to pull out every row with a <code>longitude</code> greater than −60, and print its zip code, state, city, latitude and longitude.</p></li>
+<li><p>Find the culprit. Use the filter pattern on <code>located</code> to pull out every row with a <code>longitude</code> greater than −60, and print its <code>zipcode</code>, <code>state</code>, <code>primary_city</code>, <code>latitude</code> and <code>longitude</code>.</p></li>
 <li><p>In a markdown cell: that is <strong>one</strong> zip code, appearing once in each year: two rows out of eighty thousand. Look up roughly where latitude 48.3, longitude −2.1 is. Is the temperature reading wrong, or is something else wrong? What did those two rows do to your figure?</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Two rows in eighty thousand">
@@ -577,8 +581,8 @@ Two rows in eighty thousand
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Nothing about those rows is unusual in a table. They are not null, not duplicated, not miscast, and they would survive every cleaning step you learned on Thursday. <code>.describe()</code> on <code>longitude</code> would have shown a maximum of −2.12 and you would have had no reason to look at it.</p>
-<p>A figure found them in one second, because a plot is the only summary of a dataset that gives an outlier as much room as it gives everything else. This is a large part of what visualization is for. Remember the gorilla from EDS 212…</p>
+<p>Nothing about those rows is unusual in a table. They are not null, not duplicated, not miscast, and they would survive every cleaning step we learned on Thursday. <code>.describe()</code> on <code>longitude</code> would have shown a maximum of −2.12 and you would have had no reason to look at it.</p>
+<p>A figure found them immediately, because a plot gives an outlier as much room on the page as it gives everything else, which is a large part of what visualization is for. Remember the gorilla from EDS 212…</p>
 </div>
 </div>
 <ol start="13" type="1">
@@ -589,7 +593,7 @@ Two rows in eighty thousand
 </section>
 <section id="part-4-what-actually-changed" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-what-actually-changed">Part 4: What actually changed</h2>
-<p>Comparing two maps by eye does not work. So, using the move you learned this morning, compute the change and map <strong>that</strong> instead.</p>
+<p>Comparing two maps by eye is hard, and for a change this small it mostly does not work. Instead, we will compute the change for every zip code and map <strong>that</strong>.</p>
 <ol start="16" type="1">
 <li><p>Use the pivot pattern to build a table with one row per zip code and one column per year. Index it on <code>['zipcode', 'state', 'latitude', 'longitude']</code> so those come along for the ride, put <code>year</code> across the columns and <code>trange_min</code> in the cells, then <code>.reset_index()</code>. What shape is it, and why is that number smaller than 80,000?</p></li>
 <li><p>Add a <code>temp_diff</code> column: the 2023 value minus the 2012 value. Count its nulls and say what a null means here. Then drop those rows.</p></li>
@@ -604,7 +608,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 The two year columns are named with the <strong>integers</strong> <code>2012</code> and <code>2023</code>, not with strings, because that is what was in the <code>year</code> column you pivoted on. So it is <code>change[2023]</code>, with no quotes. Everything else about column-to-column arithmetic is the same as it was on Thursday.</p>
+<p>🐍 The two year columns are named with the <strong>integers</strong> <code>2012</code> and <code>2023</code>, not with strings, because the <code>year</code> column you pivoted on held integers. So it is <code>change[2023]</code>, with no quotes. Everything else about column-to-column arithmetic is the same as it was on Thursday.</p>
 </div>
 </div>
 <ol start="18" type="1">
@@ -637,14 +641,14 @@ Note
 </section>
 <section id="the-figure-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-figure-minute">The figure minute</h2>
-<p>Look back through your notebook. You made six figures today, and they did four different jobs:</p>
+<p>Look back through your notebook. You made six figures in this practice, and they did four different jobs:</p>
 <ul>
 <li>Question 9 found a <strong>data error</strong>, in a file that was not otherwise wrong.</li>
-<li>Question 13 drew a <strong>map</strong> out of two ordinary numeric columns.</li>
-<li>Question 18 showed you that your “temperature change” is <strong>eleven distinct values</strong>, which is the single most important thing to know about it and is invisible in any mean.</li>
-<li>Question 21 answered the <strong>question</strong>.</li>
+<li>Question 13 drew two <strong>maps</strong> out of two ordinary numeric columns.</li>
+<li>Question 18 showed you how few distinct values your “temperature change” really has, which is the most important thing to know about it and is invisible in any mean.</li>
+<li>Questions 21 and 25 answered the <strong>question</strong>.</li>
 </ul>
-<p>Only one of the six was the figure the practice was about. The other five were how you found out what you had. That ratio is normal, and it is worth expecting: most of the plots you make in your career will never be shown to anybody, because their job is to tell <strong>you</strong> something before you tell anyone else.</p>
+<p>Four of those six figures were how you found out what you had, and two of them were the figures the practice was about. The ratio is normal and worth expecting, because a lot of the plots you make will never be shown to anybody: their job is to tell <strong>you</strong> something before you tell anyone else.</p>
 </section>
 <section id="wrap-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>
@@ -657,6 +661,7 @@ Note
 <li>your Part 6 answer names something these files cannot tell the newspaper</li>
 <li>your notebook reads top to bottom as a document, not as a pile of cells</li>
 </ul>
+<p>If one of those checks fails, fix it before you leave today, and grab Cella or Kelly if the fix is not obvious!</p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
@@ -678,7 +683,7 @@ Looking ahead to Day 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Tomorrow you stop being handed datasets. You and your team pick your own, and walk it through all ten steps yourselves. Bring the notebook you started this afternoon.</p>
+<p>Tomorrow we start the two-day final project. You and your team will pick your own dataset and walk it through all ten steps yourselves. Bring the notebook you started this afternoon.</p>
 </div>
 </div>
 

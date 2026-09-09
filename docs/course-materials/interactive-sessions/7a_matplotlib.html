@@ -256,6 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -428,7 +432,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#tick-labels-that-do-not-fit" id="toc-tick-labels-that-do-not-fit" class="nav-link" data-scroll-target="#tick-labels-that-do-not-fit">Tick labels that do not fit</a></li>
   <li><a href="#labels-are-not-decoration" id="toc-labels-are-not-decoration" class="nav-link" data-scroll-target="#labels-are-not-decoration">Labels are not decoration</a></li>
   <li><a href="#two-series-one-axes-and-a-legend" id="toc-two-series-one-axes-and-a-legend" class="nav-link" data-scroll-target="#two-series-one-axes-and-a-legend">Two series, one axes, and a legend</a></li>
-  <li><a href="#when-a-figure-is-honest-and-useless" id="toc-when-a-figure-is-honest-and-useless" class="nav-link" data-scroll-target="#when-a-figure-is-honest-and-useless">When a figure is honest and useless</a></li>
+  <li><a href="#when-a-figure-is-honest-but-still-useless" id="toc-when-a-figure-is-honest-but-still-useless" class="nav-link" data-scroll-target="#when-a-figure-is-honest-but-still-useless">When a figure is honest but still useless</a></li>
   <li><a href="#points-instead-of-lines" id="toc-points-instead-of-lines" class="nav-link" data-scroll-target="#points-instead-of-lines">Points instead of lines</a></li>
   <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key points</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
@@ -448,23 +452,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>A panda considers a blank canvas.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
 </div>
-<p>On the first afternoon of this course you typed four lines and a picture appeared:</p>
+<p>On the first afternoon of this course we used five lines to generate a figure:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>plt.plot(monthly_means)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Toolik Monthly Temperatures"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Month"</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Temperature (°C)"</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The page you typed them into said, in a box: <em>you will learn how visualization really works on Day 7. Today, just enjoy turning numbers into a picture.</em></p>
-<p>It is Day 7.</p>
-<p>Since then you have spent six days getting data ready: filtered, sorted, cleaned, derived, grouped, joined, reshaped, and parsed. Yesterday you produced twelve numbers that say something genuinely surprising about the Arctic, and you read them off a printed table. <strong>This morning you find out what that shape was for.</strong></p>
-<p>By the end of this session you will be able to:</p>
+<p>Since then we have spent six days getting data ready: imported, filtered, sorted, cleaned, transformed, grouped, aggregated, joined, and reshaped. .</p>
+<p><strong>This morning we finally turn our tables into pictures.</strong></p>
+<p>By the end of this morning’s first session you will be able to:</p>
 <ul>
 <li>name the two objects every matplotlib picture is made of, the <strong>figure</strong> and the <strong>axes</strong></li>
 <li>control the size and shape of a figure with <code>plt.figure(figsize=)</code></li>
-<li>label a figure so that somebody who was not in the room can read it</li>
+<li>label a figure so that someone can understand what it depicts</li>
 <li>put two series on one set of axes and tell them apart with a <strong>legend</strong></li>
-<li>fix the most common cosmetic failure in real plots, unreadable tick labels, with <code>plt.xticks(rotation=)</code> and <code>plt.tight_layout()</code></li>
-<li>say when a figure is honest but useless, and what to plot instead</li>
+<li>fix one of the most common cosmetic problems in plots: unreadable tick labels, with <code>plt.xticks(rotation=)</code> and <code>plt.tight_layout()</code></li>
+<li>explain when a figure can be honest and still useless, and decide what to plot instead</li>
 </ul>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
@@ -482,7 +485,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Save</strong> with <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), and keep saving as you go.</p></li>
 <li><p>Rebuild yesterday afternoon’s Toolik table. Every line below is one you wrote in 6C:</p></li>
 </ol>
-<div id="0ab9215a" class="cell" data-execution_count="1">
+<div id="af45467f" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -501,12 +504,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>(11171, 24)</code></pre>
 </div>
 </div>
-<p>11,171 days of Arctic weather, with a real date column on it.</p>
+<p>We end up with our usual 11,171 days of Arctic weather, now including a real date column we can group by.</p>
 </section>
 <section id="the-picture-you-already-made" class="level2">
 <h2 class="anchored" data-anchor-id="the-picture-you-already-made">The picture you already made</h2>
 <p>Rebuild the twelve numbers from Day 1, and draw them the same way you drew them then:</p>
-<div id="88892738" class="cell" data-execution_count="2">
+<div id="abf3fa65" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>monthly_means <span class="op">=</span> toolik.groupby(<span class="st">'month'</span>)[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span>
@@ -525,19 +528,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>That is a perfectly good figure, and on Day 1 you had no idea what any of those five lines were doing. Now you do, and the explanation takes one paragraph.</p>
+<p>The result is a perfectly good figure, and on Day 1 none of us knew what any of those five lines were doing. Now let’s dig into the two objects those five lines are drawing on.</p>
 </section>
 <section id="figure-and-axes" class="level2">
 <h2 class="anchored" data-anchor-id="figure-and-axes">Figure and axes</h2>
 <p>Every matplotlib picture is two nested objects.</p>
-<p>The <strong>figure</strong> is the canvas: a rectangle of a certain size, in inches, onto which everything gets drawn. The <strong>axes</strong> is the region inside it where data actually goes, together with its ticks, its tick labels, its axis labels and its title.</p>
-<p>One figure can hold several axes. In this course, every figure you make will hold exactly one.</p>
+<p>The <strong>figure</strong> is like a gallery wall: a rectangle of a certain size, in inches, onto which every frame gets hung. The <strong>axes</strong> is the picture frame: it defines a region where data can be placed, together with its ticks, its tick labels, its axis labels and its title.</p>
+<p>One figure (gallery wall) can hold several axes (picture frames). In this course, every figure you make will hold exactly one of them.</p>
 <div style="width: 60%; margin: auto;">
 <p><img src="../images/mpl_plot.svg" class="img-fluid"></p>
 </div>
-<p>You did not create either object in the cell above. <code>plt.plot()</code> noticed that no figure existed, made one with default settings, and drew on it. Every <code>plt</code> command after that went to the same place, which is why <code>plt.title()</code> on line two knew which picture to title.</p>
-<p>That convenience is also matplotlib’s biggest trap. If you run two plotting cells without saying where one figure ends and the next begins, both sets of data land on the same axes:</p>
-<div id="52f00c19" class="cell" data-execution_count="3">
+<p>You did not create either object in the cell above. <code>plt.plot()</code> found no figure open, so it made one with default settings and then created axes, and then it drew inside them.</p>
+<p>Every <code>plt</code> command after that went to the same figure.</p>
+<p>This convenience has a cost. If you run two plotting cells without saying where one figure ends and the next begins, both sets of data are drawn onto the same axes:</p>
+<div id="9af1e79e" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.plot(monthly_means)</span>
@@ -552,7 +556,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Two lines, one axes, no warning. Sometimes that is exactly what you want, and later in this session it will be. When it is not, <code>plt.figure()</code> is how you say <em>start a new one</em>.</p>
+<p>Two lines, one axes, and no warning that it happened. Sometimes drawing two series together is exactly what you want, and we will do it on purpose when we get to legends. However, when it is not what you want, <code>plt.figure()</code> is how you say <em>create a new place for my data</em> (make a new gallery wall!)</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -563,14 +567,14 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 <code>plt.show()</code> is the line that says <em>this figure is finished, draw it</em>. In a Jupyter notebook you can usually leave it out and the figure still appears at the end of the cell. Type it anyway. It makes the boundary between one figure and the next explicit, and it stops the notebook printing a line of matplotlib internals above your picture.</p>
+<p>🐍 <code>plt.show()</code> is the line that says <em>this figure is finished, draw it</em>. In a Jupyter notebook you can usually leave it out and the figure still appears at the end of the cell. Type it anyway! It makes the boundary between one figure and the next explicit, and it stops the notebook printing a line of matplotlib internals above your picture.</p>
 </div>
 </div>
 </section>
 <section id="size-and-shape-plt.figurefigsize" class="level2">
 <h2 class="anchored" data-anchor-id="size-and-shape-plt.figurefigsize">Size and shape: <code>plt.figure(figsize=)</code></h2>
-<p>Here is a figure the defaults get wrong. Thirty-one annual mean temperatures, drawn as bars:</p>
-<div id="4f24be8d" class="cell" data-execution_count="4">
+<p>Here is a figure the default settings do not suit. Thirty-one annual mean temperatures, drawn as bars:</p>
+<div id="10d2f0f6" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>annual_means <span class="op">=</span> toolik.groupby(<span class="st">'year'</span>)[<span class="st">'Daily_AirTemp_Mean_C'</span>].mean()</span>
@@ -588,12 +592,12 @@ Note
 </div>
 </div>
 </div>
-<p>The data is fine. The picture is not: thirty-one year labels have been crammed into six and a half inches and the x-axis has turned into a smear of ink.</p>
-<p>The default figure is 6.4 inches wide and 4.8 inches tall, which suits a scatter plot and suits almost nothing else. <code>plt.figure()</code> takes a <code>figsize=</code> argument, a tuple of <strong>(width, height) in inches</strong>, and it must come <em>before</em> the plotting command it applies to:</p>
+<p>The data is fine, but the picture is not: thirty-one year labels have been crammed into six and a half inches and the x-axis has turned into a smear of ink.</p>
+<p>The default matplotlib figure is 6.4 inches wide and 4.8 inches tall, which is a reasonable rectangle for a scatter plot,but often the wrong aspect ratio for anything with a lot of labels along the bottom. <code>plt.figure()</code> takes a <code>figsize=</code> argument, a tuple of <strong>(width, height) in inches</strong>, and it must come <em>before</em> the plotting command it applies to:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(width, height))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                    ↑       ↑</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                  inches  inches</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="78ca7318" class="cell" data-execution_count="5">
+<div id="882e25c5" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
@@ -611,7 +615,7 @@ Note
 </div>
 </div>
 </div>
-<p>Same data, same four lines of drawing code, and now the labels have room. A wide, short figure is the right shape for anything with time along the bottom, which in environmental data science is most things.</p>
+<p>This is the same data, and the same four lines of drawing code, but now the labels have room. A wide, short figure is usually the right shape for anything with time along the bottom, which in environmental data science is a lot of what we plot.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -623,15 +627,15 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>Filter <code>toolik</code> to a single year of your choosing, then draw its daily mean air temperature as a line with <code>date</code> on the x-axis. Draw it twice: once with no <code>plt.figure()</code> call at all, and once inside a figure twelve inches wide and four inches tall. Give the second one an x-label, a y-label and a title.</p>
-<p>Which of the two would you put in a report, and what specifically is wrong with the other one?</p>
+<p>Which of the two figures would you put in a report, and what specifically is wrong with the other one?</p>
 </div>
 </div>
 </section>
 <section id="tick-labels-that-do-not-fit" class="level2">
 <h2 class="anchored" data-anchor-id="tick-labels-that-do-not-fit">Tick labels that do not fit</h2>
-<p>Widening the figure bought you room. Often there is no room to buy, because the labels themselves are long: dates, station names, species names, states.</p>
-<p>The fix is to turn them. <code>plt.xticks(rotation=45, ha='right')</code> rotates every tick label on the x-axis by 45 degrees and anchors its <strong>h</strong>orizontal <strong>a</strong>lignment at its right-hand end, so the label ends underneath the tick it belongs to instead of drifting off to the side.</p>
-<div id="ae97f06a" class="cell" data-execution_count="6">
+<p>Widening the figure (larger wall!) buys us room. But often there is no more room to buy, because the labels themselves are long: dates, station names, species names, states.</p>
+<p>The easiest fix is to rotate them. <code>plt.xticks(rotation=45, ha='right')</code> rotates every tick label on the x-axis by 45 degrees and anchors its <strong>h</strong>orizontal <strong>a</strong>lignment at its right-hand end, so the label ends underneath the tick it belongs to instead of drifting off to the side.</p>
+<div id="2c9ce437" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
@@ -651,8 +655,9 @@ Note
 </div>
 </div>
 </div>
-<p>Two new lines, and both are worth having as habits.</p>
-<p><code>plt.tight_layout()</code> goes <strong>last</strong>, after everything else has been added. Rotated labels stick out further than upright ones and matplotlib will happily crop them off the bottom of the figure; <code>tight_layout()</code> measures whatever you actually drew and resizes the axes so that all of it fits. Add it to any figure with rotated labels, long axis labels, or a title that runs to two lines.</p>
+<p>This code block introduces two new tools, and they are both are worth creating as habits.</p>
+<p><code>plt.tight_layout()</code> goes <strong>last</strong>, after everything else has been added. Rotated labels stick out further than upright ones, and matplotlib will crop them off the bottom of the figure rather than make room for them; <code>tight_layout()</code> measures whatever you actually drew and resizes the axes so that all of it fits.</p>
+<p>Add it to any figure with rotated labels, long axis labels, or a title that runs to two lines.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -663,7 +668,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 <code>rotation=90</code> stands the labels straight up and needs no <code>ha=</code>. It is more compact than 45 degrees and harder to read. Use 45 unless you are desperate for width.</p>
+<p>🐍 <code>rotation=90</code> stands the labels straight up and needs no <code>ha=</code>. It is more compact than 45 degrees, but it is also harder to read. Use 45 unless you are desperate for width.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
@@ -677,23 +682,23 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>Build a Series holding the number of non-null <code>Daily_Precip_Total_mm</code> readings in each year, using <code>.count()</code> on a grouping by <code>year</code>. Draw it as bars in a figure ten inches wide and four tall, with the year labels rotated 45 degrees, and finish the cell with <code>plt.tight_layout()</code>. Label both axes and title it.</p>
-<p>Then, in a markdown cell: name the four years you would refuse to put into an annual precipitation total, and say what number you would have reported for each of them if you had used <code>.sum()</code> without looking at this figure first.</p>
+<p>Then, in a markdown cell: name the four years you would refuse to put into an annual precipitation total.</p>
 </div>
 </div>
 </section>
 <section id="labels-are-not-decoration" class="level2">
 <h2 class="anchored" data-anchor-id="labels-are-not-decoration">Labels are not decoration</h2>
-<p>Every figure in this course needs three things, and there is no exception you will meet this week:</p>
+<p>Every figure in this course needs three things:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'what is along the bottom, with units'</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'what is up the side, with units'</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'what this figure is of'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The reason is not tidiness. A figure without labels is a picture whose meaning lives in the head of whoever made it, which means it stops meaning anything the moment it leaves your screen, including when it comes back to your own screen in three weeks. <code>Temperature (°C)</code> takes four seconds to type and it is the difference between a figure and a rectangle of ink.</p>
+<p>The reason is not tidiness. A figure without labels is a picture whose meaning lives in the head of whoever made it… which means it stops meaning anything to anyone else… including you in three weeks! <code>Temperature (°C)</code> takes a few seconds to type, so you should always add labels, even to preliminary figures.</p>
 <p>The units matter as much as the words. <code>trange_min</code> is not a label. <code>Minimum winter temperature (°F)</code> is.</p>
 </section>
 <section id="two-series-one-axes-and-a-legend" class="level2">
 <h2 class="anchored" data-anchor-id="two-series-one-axes-and-a-legend">Two series, one axes, and a legend</h2>
-<p>Yesterday you split the Toolik record into its first eleven years and its last ten, and compared them month by month. Rebuild that table:</p>
-<div id="a1fa846f" class="cell" data-execution_count="7">
+<p>Yesterday afternoon we split the Toolik record into its first eleven years and its last ten years, and compared them month by month. Let’s rebuild that table:</p>
+<div id="d328663b" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>early <span class="op">=</span> toolik[toolik[<span class="st">'year'</span>] <span class="op">&lt;=</span> <span class="dv">1998</span>]</span>
@@ -806,8 +811,8 @@ Note
 </div>
 </div>
 </div>
-<p>Now plot both eras on one axes. Two <code>plt.plot()</code> calls with no <code>plt.figure()</code> between them land on the same axes, which is the behaviour you were warned about earlier and is exactly what you want here. Give each line a <code>label=</code>, then call <code>plt.legend()</code> once to draw the key:</p>
-<div id="84879582" class="cell" data-execution_count="8">
+<p>Now let’s plot both eras on one axes. Two <code>plt.plot()</code> calls with no <code>plt.figure()</code> between them draw onto the same axes, which is the stacking we saw earlier in the session and is exactly what we want now. Give each line a <code>label=</code>, then call <code>plt.legend()</code> once to draw the key:</p>
+<div id="c2328da6" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
@@ -831,16 +836,16 @@ Note
 </div>
 <div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, label<span class="op">=</span><span class="st">'what this line is'</span>)   <span class="co"># once per series</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt.legend()                                <span class="co"># once per figure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <code>label=</code> argument says what a series is called. <code>plt.legend()</code> collects every label on the axes and draws the key. Miss the <code>plt.legend()</code> line and nothing appears; miss a <code>label=</code> and that series is silently left out of the key.</p>
+<p>The <code>label=</code> argument says what a series is called. <code>plt.legend()</code> collects every label on the axes and draws the key. Miss the <code>plt.legend()</code> line and no key appears at all; miss a <code>label=</code> on one of the series and the key is drawn without it, and without an error to tell you so.</p>
 </section>
-<section id="when-a-figure-is-honest-and-useless" class="level2">
-<h2 class="anchored" data-anchor-id="when-a-figure-is-honest-and-useless">When a figure is honest and useless</h2>
+<section id="when-a-figure-is-honest-but-still-useless" class="level2">
+<h2 class="anchored" data-anchor-id="when-a-figure-is-honest-but-still-useless">When a figure is honest but still useless</h2>
 <p>Look at the figure you just made and ask what it shows.</p>
-<p>It shows that Toolik is cold in winter and less cold in summer, which you knew. The two eras are almost on top of each other. If somebody handed you that figure and claimed the site had changed, you would not believe them.</p>
-<p>Now look back at the <code>change</code> column in the table. January is <strong>3.5 °C</strong> warmer, October is <strong>4.3 °C</strong> warmer, and July is <strong>0.8 °C</strong> cooler. That is a real and striking result, and the figure has hidden it.</p>
-<p>Nothing is wrong with the figure. The problem is that the quantity you care about is a difference of a few degrees, and you have drawn it on an axis that has to span thirty-five degrees to fit the seasonal cycle. The signal is 10% of the axis.</p>
+<p>It shows that Toolik is cold in winter and less cold in summer, which we already knew. The two eras sit almost on top of each other. If somebody handed you the figure and claimed the site had changed, you would probably not believe them.</p>
+<p>Now look back at the <code>change</code> column in the table. January is <strong>3.5 °C</strong> warmer, October is <strong>4.3 °C</strong> warmer, and July is <strong>0.8 °C</strong> cooler. The changes are real and worth reporting, and the figure we just drew makes none of them visible.</p>
+<p>Nothing is wrong with the figure. The problem is that the quantity you care about is a difference of a few degrees, and you have drawn it on an axis that has to span nearly thirty-seven degrees to fit the seasonal cycle. The signal is about a tenth of the axis.</p>
 <p><strong>So plot the thing you actually care about.</strong> The difference is already a column:</p>
-<div id="509b0c87" class="cell" data-execution_count="9">
+<div id="ea74bdab" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
@@ -860,7 +865,8 @@ Note
 </div>
 </div>
 </div>
-<p>There it is. Tall positive bars in January, February, October, November and December; negative bars from March through August; zero as the line the bars hang from, so the sign of each month is readable at a glance. The cold-season warming that took you a table and a paragraph yesterday is now visible in about a second.</p>
+<p>There it is. Tall positive bars in January, February, October, November and December, a short positive one in September, and negative bars from March through August.</p>
+<p>Zero is the line the bars hang from, so the sign of each month is readable at a glance. The cold-season warming that took us a table and a paragraph yesterday is readable here in a single look.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="This is the whole job">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -871,7 +877,7 @@ This is the whole job
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Choosing what to plot is a larger decision than choosing how to plot it, and it is the one nobody teaches you. Both figures above are correct. One of them answers the question.</p>
+<p>Choosing what to plot is a larger decision than choosing how to plot it. Both figures above are correct, but only one of them answers a question.</p>
 <p>When a figure looks like nothing is happening, do not reach for a bigger figure or a brighter colour. Ask what quantity your question is actually about, compute that quantity as a column, and plot <strong>it</strong>.</p>
 </div>
 </div>
@@ -887,14 +893,14 @@ This is the whole job
 <div class="callout-body-container callout-body">
 <p>Build a table of mean <code>Daily_Precip_Total_mm</code> by month for the early and late eras, exactly as <code>comparison</code> was built for temperature, and add a <code>change</code> column.</p>
 <p>Then make two figures: the two eras as two labelled lines with a legend, and the change on its own as bars. Both need a title, both axes labelled with units.</p>
-<p>In a markdown cell, say which of the two figures you would show somebody, and whether the precipitation story is as clean as the temperature one. Check <code>.isnull().sum()</code> on the precipitation column before you commit to an answer.</p>
+<p>In a markdown cell, say which of the two figures you would show somebody, and whether the precipitation story is as clean as the temperature one.</p>
 </div>
 </div>
 </section>
 <section id="points-instead-of-lines" class="level2">
 <h2 class="anchored" data-anchor-id="points-instead-of-lines">Points instead of lines</h2>
-<p><code>plt.plot()</code> draws a line through your points in the order they appear, which is right when the x-axis is time or anything else with an order, and wrong otherwise. When you are plotting one measurement against another, use <code>plt.scatter()</code>:</p>
-<div id="38a1a842" class="cell" data-execution_count="10">
+<p><code>plt.plot()</code> draws a line through your points in the order they appear, which is right when the x-axis is time or anything else with an order… but generally a bad idea otherwise. When you are plotting one measurement against another, use <code>plt.scatter()</code>:</p>
+<div id="b8602666" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>wet_days <span class="op">=</span> toolik.dropna(subset<span class="op">=</span>[<span class="st">'Daily_Precip_Total_mm'</span>])</span>
@@ -916,8 +922,9 @@ This is the whole job
 </div>
 </div>
 </div>
-<p>Ten thousand days, each one a dot. Nothing above about −20 °C is bone dry and nothing below it is wet, which is a fact about how much water cold air can hold, and it arrives here without anybody computing anything.</p>
-<p><code>plt.scatter()</code> takes x and y in the same order <code>plt.plot()</code> does, and everything you have learned this session works on it unchanged: <code>figsize</code>, labels, title, legend, rotation, <code>tight_layout</code>. That is the point of learning the anatomy rather than the commands.</p>
+<p>Every day with a precipitation reading, 10,751 of the 11,171, is a dot. Most days are dry whatever the temperature, so the bottom of the plot is a solid band. The wettest days are the informative part: the largest totals all sit in the warmer half of the range, and below about −20 °C nothing gets past a few millimetres. Cold air has a very low saturation vapor pressure, and this plot shows that it’s hard for very dry air to generate substantial rainfall.</p>
+<p><code>plt.scatter()</code> takes x and y in the same order <code>plt.plot()</code> does, and everything you have learned this session works on it unchanged: <code>figsize</code>, labels, title, legend, rotation, <code>tight_layout</code>.</p>
+<p>The drawing command changes, but the figure and the axes underneath it do not.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -928,7 +935,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 Ten thousand overlapping dots is a lot of ink for what it shows, and matplotlib gives you a pile of keyword arguments for controlling colour, marker shape and transparency to deal with it. You will not need most of them. The next session shows you a library that makes better choices than you would, from the same DataFrame, in one line.</p>
+<p>🐍 Ten thousand overlapping dots is a lot of ink for what they show, and matplotlib gives you a pile of keyword arguments for controlling colour, marker shape and transparency to deal with it. You will not need most of them. In the next session we meet seaborn, which draws a better version of this same plot straight from the DataFrame, in one line.</p>
 </div>
 </div>
 </section>
@@ -937,7 +944,7 @@ Note
 <ul>
 <li>Every matplotlib picture is a <strong>figure</strong> (the canvas) containing an <strong>axes</strong> (where the data goes). You get both for free if you do not ask for them.</li>
 <li><code>plt.figure(figsize=(width, height))</code> sets the canvas size in inches, and must come <strong>before</strong> the plotting call.</li>
-<li>Plotting commands with no <code>plt.figure()</code> between them <strong>stack on the same axes</strong>. That is a feature when you want two series and a bug when you do not.</li>
+<li>Plotting commands with no <code>plt.figure()</code> between them <strong>stack on the same axes</strong>. Stacking is a feature when you want two series in one picture and a bug when you do not.</li>
 <li><strong>Always label</strong>: <code>plt.xlabel()</code>, <code>plt.ylabel()</code>, <code>plt.title()</code>, with units in the axis labels.</li>
 <li>Two series on one axes need a <code>label=</code> on each and one <code>plt.legend()</code> call.</li>
 <li><code>plt.xticks(rotation=45, ha='right')</code> rescues crowded tick labels.</li>

@@ -256,6 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -494,7 +498,7 @@ Reference
 <ol start="3" type="1">
 <li>Read the file:</li>
 </ol>
-<div id="e2b9bc06" class="cell" data-execution_count="1">
+<div id="4d932d7a" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -558,7 +562,14 @@ Note
 <p>You can answer the questions below with the loop over groups from Friday afternoon and the stacking pattern from this morning:</p>
 <ol start="8" type="1">
 <li><p>Build a table with one row per decade, holding the country with the highest average <code>points_final</code> in that decade, how many scored finals that average came from, and the average itself.</p>
-<p>Do it with a loop over decade groups. For each decade: group by <code>to_country</code>, <code>.agg()</code> for the count and mean of <code>points_final</code>, <code>.reset_index()</code>, take the top row with the top-N pattern, add a <code>decade</code> column, and append the one-row table to a list. Then stack the list with <code>pd.concat()</code>.</p></li>
+<p>Do it with a loop over decade groups, building the finished table one row at a time. Start with an empty list, and then for each decade:</p>
+<ol type="a">
+<li>Group the decade’s rows by <code>to_country</code> and take the <strong>mean</strong> of <code>points_final</code>. What comes back is a Series with one number per country, labelled by country name.</li>
+<li>Do the same again with <strong>count</strong> in place of mean, so you have both numbers to hand.</li>
+<li>Run <code>.idxmax()</code> on the means. It gives back the <em>label</em> of the largest value, which is the country you are looking for.</li>
+<li>Look that country up in each of the two Series, and append a dictionary holding the decade, the country, the count and the mean.</li>
+</ol>
+<p>After the loop, turn the finished list of dictionaries into a table with <code>pd.DataFrame()</code>.</p></li>
 <li><p>Read the <code>count</code> column before you read the <code>mean</code> column. Remember what <code>.count()</code> counts: the non-null <code>points_final</code> values, which is finals a country was scored in, not contests it entered. Three of the seven winners were scored in fewer than four finals. Name them, and say in one sentence why you would not put any of them in a headline.</p></li>
 <li><p>The <code>mean</code> column rises from about 20 in the 1950s to about 360 in the 2010s. In a markdown cell, two or three sentences: is Europe getting better at writing songs? What else changed between 1956 and 2019 that would produce this pattern? What would you have to divide by to remove it?</p></li>
 </ol>
@@ -605,11 +616,11 @@ Look at the population column before you answer
 </section>
 <section id="the-grammar-minute" class="level2">
 <h2 class="anchored" data-anchor-id="the-grammar-minute">The grammar minute</h2>
-<p>Look back through your notebook. Three patterns did all of today’s structural work without calculating a single number:</p>
+<p>Look back through your notebook. Two patterns did all of today’s structural work without calculating a single number:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pd.merge(a, b, left_on<span class="op">=</span>, right_on<span class="op">=</span>)    <span class="co"># two tables become one, side by side</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pd.concat([...], ignore_index<span class="op">=</span><span class="va">True</span>)    <span class="co"># many tables become one, top to bottom</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span>, columns<span class="op">=</span>, ...)  <span class="co"># one long table becomes one wide one</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Every other line in your notebook was something you already knew how to do, applied to a table that one of the three patterns above had already put into the right shape.</p>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span>, columns<span class="op">=</span>, ...)  <span class="co"># one long table becomes one wide one</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The third pattern from this morning, <code>pd.concat([...], ignore_index=True)</code>, stacks many tables into one from top to bottom, and today’s questions did not happen to need it. It is the one to reach for when the rows you want arrive split across several files, which is how the three air quality monitors arrived on Friday.</p>
+<p>Every other line in your notebook was something you already knew how to do, applied to a table that one of the two patterns above had already put into the right shape.</p>
 <p>Much of the difficulty in real data analysis has nothing to do with the analysis itself. The numbers you want to compare often sit in two different files, or sit in one file at right angles to each other, and merging, stacking and pivoting are how you get them side by side before the analysis starts.</p>
 </section>
 <section id="wrap-up" class="level2">

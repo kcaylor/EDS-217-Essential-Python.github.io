@@ -253,6 +253,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -442,16 +446,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="gray-text center-text">
 <p><em>A panda presents its findings.</em> <a href="https://www.midjourney.com">MidJourney 5</a></p>
 </div>
-<p>Everything you drew an hour ago, you drew by handing matplotlib two sequences of numbers and then describing, one command at a time, what you wanted done to them.</p>
-<p>That works, and it is worth knowing, because underneath every Python figure you will ever make there is a matplotlib figure and a matplotlib axes. But it means that a plot of your data has nothing to do with your data. <code>plt.scatter(wet_days['Daily_AirTemp_Mean_C'], wet_days['Daily_Precip_Total_mm'])</code> does not know it is looking at a DataFrame, does not know what those columns are called, and cannot use anything else in the table.</p>
-<p><strong>seaborn</strong> takes the other approach. You give it the table and the names of the columns, and it works out the drawing. In exchange for that one change of framing you get, almost for free, the single most useful thing a figure can do: show you that your data is made of groups.</p>
-<p>By the end of this session you will be able to:</p>
+<p>In our first session this morning we drew every figure by handing matplotlib two sequences of numbers and then describing, one command at a time, what we wanted done to them.</p>
+<p>Naming each command works, and it is worth knowing, because underneath every Python figure you will ever make there is a matplotlib figure and a matplotlib axes.</p>
+<p><strong>seaborn</strong> takes a different approach. You hand over the whole table plus the names of the columns you want plotted, and seaborn does the drawing. Because the whole table went in, seaborn can also use the columns you did not plot, including the one that says which group each row belongs to.</p>
+<p>By the end of this morning’s session you will be able to:</p>
 <ul>
 <li>write the three seaborn calls this course uses: <code>sns.scatterplot</code>, <code>sns.histplot</code> and <code>sns.barplot</code></li>
 <li>pass a whole table with <code>data=</code> and name the columns with <code>x=</code> and <code>y=</code></li>
 <li>split any of those three plots by a categorical column with <code>hue=</code>, and read the result</li>
 <li>feed a <strong>grouped Series</strong> to <code>sns.barplot</code> using its <code>.values</code> and its <code>.index</code></li>
-<li>keep using every matplotlib command from the last session on a seaborn figure</li>
+<li>keep using every matplotlib command from our first session on a seaborn figure</li>
 </ul>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
@@ -467,9 +471,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Date: 09/09/2026</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="4" type="1">
 <li><p><strong>Save</strong> with <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), and keep saving as you go.</p></li>
-<li><p>Rebuild Friday’s clean stream-chemistry table. Every line below is one you have run before, in the Thursday colab and again in 5A:</p></li>
+<li><p><strong>Rebuild the clean stream-chemistry table.</strong> Every line below is one we have run before, in Thursday’s colab and again in 5A:</p></li>
 </ol>
-<div id="3b784e55" class="cell" data-execution_count="1">
+<div id="5395d493" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -501,13 +505,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>(255, 7)</code></pre>
 </div>
 </div>
-<p>255 rows, six sites, four measurements each.</p>
-<p>The standard import line is <code>import seaborn as sns</code>, and <code>sns</code> is as fixed a convention as <code>pd</code> and <code>plt</code>. Nobody remembers why.</p>
+<p>We end up with 255 rows from six sites, collected over the 2025 field season. Each row is one sample, with four measurements on it: temperature, pH, dissolved oxygen and conductivity.</p>
+<p>The standard import line is <code>import seaborn as sns</code>, and <code>sns</code> is as fixed a convention as <code>pd</code> and <code>plt</code>. Most people (and even many bots!) assume there is no reason for this, but <a href="https://pbs.twimg.com/media/C3C6q1ZUYAALXX0.jpg">true West Wing fans know the truth</a>.</p>
 </section>
 <section id="the-same-figure-said-two-ways" class="level2">
 <h2 class="anchored" data-anchor-id="the-same-figure-said-two-ways">The same figure, said two ways</h2>
-<p>Here is a scatter of water temperature against dissolved oxygen, drawn the way you drew things an hour ago:</p>
-<div id="b2a49d14" class="cell" data-execution_count="2">
+<p>Here is a scatter of water temperature against dissolved oxygen, drawn the way we drew things in our first session this morning:</p>
+<div id="d19c1bbf" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -527,7 +531,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>And here is the same figure in seaborn:</p>
-<div id="3d50ab66" class="cell" data-execution_count="3">
+<div id="0042f7e2" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -548,13 +552,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#               ↑        ↑                ↑</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#               the      which column     which column</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#               table    across           up</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Three differences, and the third is the one that matters.</p>
+<p>Three differences between the two calls:</p>
 <ul>
 <li><code>data=</code> takes the <strong>whole table</strong>, once.</li>
 <li><code>x=</code> and <code>y=</code> take <strong>column names as strings</strong>, not the columns themselves.</li>
-<li>The axes came out <strong>labelled</strong>, because seaborn knew what the columns were called and matplotlib never did.</li>
+<li>The axes came out <strong>labelled</strong>, because the column names went in with the table. Nothing in the matplotlib version ever mentioned a column name.</li>
 </ul>
-<p>That last one is a small convenience and a large hint. seaborn is not a drawing library that happens to accept DataFrames. It is a library built on the assumption that your data is a tidy table, and it uses everything it knows about that table to make decisions you would otherwise make by hand.</p>
+<p>The free labels are a small convenience and a large hint. seaborn is built on the assumption that your data arrives as a tidy table, and it uses everything in that table, column names included, to make decisions you would otherwise have to make by hand.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -565,7 +569,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 Column names are not automatically good axis labels. <code>temperature_c</code> is a variable name; <em>Water temperature (°C)</em> is a label. Everything from the last session still works, so override them whenever you would show the figure to somebody:</p>
+<p>🐍 Column names are not automatically good axis labels. <code>temperature_c</code> is a variable name; <em>Water temperature (°C)</em> is a label. Every labelling command from our first session still works, so override the defaults whenever you would show the figure to somebody:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>survey, x<span class="op">=</span><span class="st">'temperature_c'</span>, y<span class="op">=</span><span class="st">'dissolved_oxygen_mg_L'</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Water temperature (°C)'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Dissolved oxygen (mg/L)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -574,8 +578,8 @@ Note
 </section>
 <section id="hue-and-what-a-table-cannot-show-you" class="level2">
 <h2 class="anchored" data-anchor-id="hue-and-what-a-table-cannot-show-you"><code>hue=</code>, and what a table cannot show you</h2>
-<p>On Friday morning you computed two small tables from this file and read them side by side:</p>
-<div id="56b36407" class="cell" data-execution_count="4">
+<p>On Friday morning we computed two small tables from this file and read them side by side:</p>
+<div id="4733bfdf" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].mean().sort_values())</span>
@@ -600,9 +604,9 @@ site_f    23.297674
 Name: temperature_c, dtype: float64</code></pre>
 </div>
 </div>
-<p>Two orderings of six sites, and one is the exact reverse of the other. You concluded, correctly, that the warm sites are the low-oxygen sites. You believed it because the two lists happened to line up.</p>
+<p>Two orderings of six sites, and one is the exact reverse of the other. We concluded, correctly, that the warm sites are the low-oxygen sites, and the whole of the evidence was two short lists that read in opposite directions.</p>
 <p>Now add one argument to the scatter you already made:</p>
-<div id="7fd83413" class="cell" data-execution_count="5">
+<div id="c4034e82" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -623,8 +627,8 @@ Name: temperature_c, dtype: float64</code></pre>
 </div>
 </div>
 <p><code>hue=</code> takes a column name and gives every distinct value in that column its own colour, with a legend built for free.</p>
-<p>Read what came back. The six sites are not scattered through the cloud; they are laid out <strong>along it</strong>, in order, from <code>site_d</code> in the cool oxygen-rich corner to <code>site_f</code> in the warm oxygen-poor one, with <code>site_a</code>, <code>site_b</code>, <code>site_e</code> and <code>site_c</code> strung between them in exactly the order your two tables gave.</p>
-<p>The tables told you six sites have six means. The figure tells you that all 255 samples, from all six sites, lie along one relationship, and that the sites differ because they sit at different places on it. That is a stronger claim and a different one, and no table you built this week could have made it.</p>
+<p>Read what came back. The six sites are not scattered through the cloud; they are laid out <strong>along it</strong>, in order, from <code>site_d</code> in the cool oxygen-rich corner to <code>site_f</code> in the warm oxygen-poor one, with <code>site_a</code>, <code>site_b</code>, <code>site_e</code> and <code>site_c</code> strung between them in exactly the order the two tables gave.</p>
+<p>The tables told us that six sites have six means. The figure shows that all 255 samples, from all six sites, lie along one relationship, and that the sites differ because they sit at different places on it. The second claim is both stronger and different in kind, and it is the sort of claim a picture of every sample can support and a table of six group means cannot.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="`hue=` is the argument you came for">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -635,7 +639,7 @@ Name: temperature_c, dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Almost every serious question in environmental data science is <em>does this relationship differ between groups</em>. Sites, species, seasons, treatments, oceans, decades.</p>
+<p>A great many questions in environmental data science come down to <em>does this relationship differ between groups?</em> Sites, species, seasons, treatments, oceans, decades.</p>
 <p><code>hue=</code> is how you ask it, and it works the same way on all three of the functions below. When you have a figure and a categorical column, try <code>hue=</code> before you try anything else.</p>
 </div>
 </div>
@@ -656,8 +660,8 @@ Name: temperature_c, dtype: float64</code></pre>
 </section>
 <section id="sns.histplot-the-shape-of-one-column" class="level2">
 <h2 class="anchored" data-anchor-id="sns.histplot-the-shape-of-one-column"><code>sns.histplot</code>: the shape of one column</h2>
-<p>A scatter needs two variables. When you have one and want to know how its values are distributed, you want a histogram: the values sorted into bins, with a bar showing how many landed in each.</p>
-<div id="1e28ee46" class="cell" data-execution_count="6">
+<p>A scatter needs two variables. When you have one variable and want to know how its values are distributed, you want a histogram: the values sorted into bins, with a bar showing how many values are in each bin.</p>
+<div id="e458b5f8" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -676,9 +680,9 @@ Name: temperature_c, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p><code>data=</code> and <code>x=</code>, and no <code>y=</code>, because the height of each bar is a count that seaborn works out. The picture is the same one <code>plt.hist()</code> drew for you behind a boxed note on Thursday, now with a name and an argument you can use.</p>
+<p><code>data=</code> and <code>x=</code>, and no <code>y=</code>, because the height of each bar is a count that seaborn computes for you. The picture is the same kind <code>plt.hist()</code> drew in a boxed note on Thursday, now with a name and an argument you can use.</p>
 <p>And <code>hue=</code> works here too:</p>
-<div id="06055148" class="cell" data-execution_count="7">
+<div id="f0d06026" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -697,7 +701,7 @@ Name: temperature_c, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p>One broad hump has become six narrow ones, mostly side by side. That is worth pausing on: the overall distribution looked like one population with a wide spread, and it is nothing of the sort. It is six streams, each fairly consistent, at six different temperatures.</p>
+<p>One broad hump has become six narrow ones, mostly side by side. The undivided histogram looked like one population with a wide spread, and the split version shows six streams instead, each fairly consistent, and each sitting at a different temperature.</p>
 <p>A histogram of a column that mixes groups almost always looks wider and vaguer than any of the groups in it. Splitting by <code>hue=</code> is how you find out whether the width is variability or structure.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
 <div class="callout-header d-flex align-content-center">
@@ -716,8 +720,8 @@ Name: temperature_c, dtype: float64</code></pre>
 </section>
 <section id="sns.barplot-and-the-series-idiom" class="level2">
 <h2 class="anchored" data-anchor-id="sns.barplot-and-the-series-idiom"><code>sns.barplot</code>, and the Series idiom</h2>
-<p>A bar chart compares one number per category, which makes it the natural picture for the output of a <code>.groupby()</code>. seaborn will do the whole thing in one line if you let it:</p>
-<div id="87a6b347" class="cell" data-execution_count="8">
+<p>A bar chart compares one number per category, which makes it the natural picture for the output of a <code>.groupby()</code>. seaborn will do the whole thing in a single line:</p>
+<div id="cd778e25" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -736,12 +740,12 @@ Name: temperature_c, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p>Six bars, and you never called <code>.groupby()</code>. Given a categorical <code>x=</code> and a numeric <code>y=</code>, <code>sns.barplot</code> groups the table by <code>x</code> and draws the <strong>mean</strong> of <code>y</code> for each group.</p>
-<p>That convenience comes with two things you did not ask for.</p>
-<p>The little black line on each bar is a measure of how uncertain that mean is, computed by resampling the data hundreds of times. It is a reasonable thing to want and this course has not taught you what it means, which is a poor reason to have it in your figure.</p>
+<p>Six bars, and we never called <code>.groupby()</code>. Given a categorical <code>x=</code> and a numeric <code>y=</code>, <code>sns.barplot</code> groups the table by <code>x</code> and draws the <strong>mean</strong> of <code>y</code> for each group.</p>
+<p>The convenience comes with two things you did not ask for.</p>
+<p>The little black line on each bar is a measure of how uncertain that mean is, computed by resampling the data hundreds of times. Showing uncertainty is a reasonable thing to want to do, but we have not covered what the interval means, and a figure with something in it that you cannot explain to a reader is a habit worth avoiding.</p>
 <p>And the bars are in whatever order the sites appear in the file, which is no order at all.</p>
-<p>The alternative is to compute the number yourself, with Friday’s sentence, and hand seaborn the answer:</p>
-<div id="2a21c7ae" class="cell" data-execution_count="9">
+<p>The alternative is to compute the number yourself, with Friday’s split-apply-combine pattern, and hand seaborn the answer:</p>
+<div id="2c4b64a9" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mean_do <span class="op">=</span> survey.groupby(<span class="st">'site'</span>)[<span class="st">'dissolved_oxygen_mg_L'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
@@ -759,8 +763,8 @@ site_f     6.18
 Name: dissolved_oxygen_mg_L, dtype: float64</code></pre>
 </div>
 </div>
-<p>That is a <strong>Series</strong>: six values, indexed by site name. A Series holds its numbers in <code>.values</code> and its labels in <code>.index</code>, and those are exactly the two things a bar chart needs.</p>
-<div id="dcb9c099" class="cell" data-execution_count="10">
+<p>The result is a <strong>Series</strong>: six values, indexed by site name. A Series holds its numbers in <code>.values</code> and its labels in <code>.index</code>, which are exactly the two things a bar chart needs.</p>
+<div id="e7d40fc6" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -782,9 +786,9 @@ Name: dissolved_oxygen_mg_L, dtype: float64</code></pre>
 </div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>series.values, y<span class="op">=</span>series.index)   <span class="co"># horizontal bars, sorted as you sorted them</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sns.barplot(y<span class="op">=</span>series.values, x<span class="op">=</span>series.index)   <span class="co"># vertical bars, same data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Learn this as one unit. It is the pattern that connects the six days of table-shaping you have just done to the pictures you make of the results, and you will type it constantly:</p>
+<p>Learn the two-argument call as one unit. The pattern connects a week of table-shaping to the pictures we make of the results, and you will type it constantly:</p>
 <p><strong>group, aggregate, sort, then plot the <code>.values</code> against the <code>.index</code>.</strong></p>
-<p>Three things came out of doing it the long way. The bars are in the order you sorted them, so the figure ranks the sites. There is no uncertainty interval, because you drew a mean and only a mean. And putting the values on <code>x=</code> and the labels on <code>y=</code> makes the bars horizontal, which means the site labels read left to right instead of needing rotation. With longer labels, that last one stops being cosmetic.</p>
+<p>Three things came out of doing it the long way. The bars are in the order you sorted them, so the figure ranks the sites. There is no uncertainty interval, because you drew a mean and only a mean. And putting the values on <code>x=</code> and the labels on <code>y=</code> makes the bars horizontal, so the site labels read left to right instead of needing rotation. With site labels longer than the six short ones here, the horizontal layout stops being cosmetic.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -795,7 +799,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 Note what this cell did <strong>not</strong> need. No <code>data=</code>, because there is no table: a Series is not a DataFrame, and <code>.values</code> and <code>.index</code> are two plain sequences. This is the one place in seaborn where you go back to handing over raw numbers, and it is worth knowing that the option exists.</p>
+<p>🐍 Note what this cell did <strong>not</strong> need. No <code>data=</code>, because there is no table: a Series is not a DataFrame, and <code>.values</code> and <code>.index</code> are two plain sequences. Passing them directly is the one place in today’s lesson where we go back to handing seaborn raw numbers, and the option is worth knowing about.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="✏️ Test your knowledge">
@@ -815,9 +819,9 @@ Note
 </section>
 <section id="seaborn-draws-on-matplotlib" class="level2">
 <h2 class="anchored" data-anchor-id="seaborn-draws-on-matplotlib">seaborn draws on matplotlib</h2>
-<p>Every seaborn call in this session sat inside a <code>plt.figure()</code> and was followed by <code>plt.xlabel()</code> and friends, and all of it worked.</p>
-<p>seaborn draws onto a matplotlib axes. If none exists it makes one, exactly the way <code>plt.plot()</code> does. So the whole of the last session applies unchanged:</p>
-<div id="c504a483" class="cell" data-execution_count="11">
+<p>Every seaborn call so far today sat inside a <code>plt.figure()</code> and was followed by <code>plt.xlabel()</code> and friends, and all of it worked.</p>
+<p>seaborn draws onto a matplotlib axes. If none exists it makes one, exactly the way <code>plt.plot()</code> does. So everything from our first session this morning applies unchanged:</p>
+<div id="9891fe1d" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
@@ -851,7 +855,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>🐍 seaborn has far more than three functions, and a <code>sns.set_theme()</code> call that restyles every figure in your notebook at once. Explore both when you have time. Three functions and <code>hue=</code> will get you through this course and most of a first job, and they are worth knowing cold before you collect any more.</p>
+<p>🐍 seaborn has far more than three functions, and a <code>sns.set_theme()</code> call that restyles every figure in your notebook at once. Explore both when you have time! Three functions and <code>hue=</code> will get you through this course and a good deal of what comes after it, and they are worth knowing well before you collect any more.</p>
 </div>
 </div>
 </section>
@@ -859,7 +863,7 @@ Note
 <h2 class="anchored" data-anchor-id="key-points">Key points</h2>
 <ul>
 <li>A seaborn call looks like <code>sns.function(data=df, x='col', y='col')</code>. The table goes in whole and the columns are named as <strong>strings</strong>.</li>
-<li><strong><code>hue='col'</code></strong> splits any of these plots by a categorical column and builds the legend for you. It is the argument that makes seaborn worth learning.</li>
+<li><strong><code>hue='col'</code></strong> splits any of these plots by a categorical column and builds the legend for you. It is the argument that answers <em>does this relationship differ between groups?</em></li>
 <li><code>sns.scatterplot</code> for one measurement against another.</li>
 <li><code>sns.histplot(data=, x=)</code> for the distribution of a single column. No <code>y=</code>; the heights are counts.</li>
 <li><code>sns.barplot(data=, x='category', y='value')</code> <strong>silently computes a mean</strong> and draws an uncertainty interval you did not ask for.</li>

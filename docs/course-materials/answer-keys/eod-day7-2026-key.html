@@ -256,6 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -456,7 +460,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="16421b73" class="cell" data-execution_count="1">
+<div id="d68a5e74" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -470,7 +474,7 @@ How to use this key
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>zipcodes <span class="op">=</span> pd.read_csv(base <span class="op">+</span> <span class="st">'zip_code_database.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="335faf7e" class="cell" data-execution_count="2">
+<div id="869be18a" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>zones_2023[<span class="st">'zipcode'</span>] <span class="op">=</span> zones_2023[<span class="st">'zipcode'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>
@@ -482,7 +486,7 @@ How to use this key
 <section id="part-1-three-files" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-three-files">Part 1: Three files</h2>
 <p><strong>1. How many rows and columns does each of the three tables have? What are the column names of the two zone tables, and are they the same?</strong></p>
-<div id="05c33ca9" class="cell" data-execution_count="3">
+<div id="7e9a9ef4" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zones_2012.shape, <span class="bu">list</span>(zones_2012.columns))</span>
@@ -508,15 +512,21 @@ How to use this key
 <p><strong>2012 is 40,534 rows by 4 columns, 2023 is 39,921 by 4, and the zip code database is 42,522 by 16.</strong> The two zone tables have exactly the same four column names, <code>zipcode</code>, <code>zone</code>, <code>trange</code> and <code>zonetitle</code>, in the same order, which is what makes stacking them safe in question 4. The zip code database is a different kind of file: many more columns, and one row per zip code rather than one row per zip code per map.</p>
 </div>
 </div>
-<p><strong>2. Run <code>.isnull().sum()</code> on both zone tables. Then look at <code>.head()</code> of either one and say, in one sentence, what <code>zone</code>, <code>trange</code> and <code>zonetitle</code> each hold and which of the three is redundant.</strong></p>
-<div id="7a9f850a" class="cell" data-execution_count="4">
+<p><strong>2. Run <code>.isnull().sum()</code> on both zone tables. Then look at <code>.head()</code> of either one and say, in one sentence, what <code>zone</code>, <code>trange</code> and <code>zonetitle</code> each hold and which of the three columns is redundant.</strong></p>
+<div id="95c9c33b" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zones_2012.isnull().<span class="bu">sum</span>())</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zones_2023.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zones_2023.isnull().<span class="bu">sum</span>())</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zones_2023.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>zipcode      0
+zone         0
+trange       0
+zonetitle    0
+dtype: int64
+zipcode      0
 zone         0
 trange       0
 zonetitle    0
@@ -544,7 +554,7 @@ dtype: int64
 </div>
 </div>
 <p><strong>3. The two files do not have the same number of rows. Before you do anything else, write down two different explanations for that (not that someone made a mistake).</strong></p>
-<div id="ff555c87" class="cell" data-execution_count="5">
+<div id="633ac41a" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>in_2012_only <span class="op">=</span> <span class="bu">set</span>(zones_2012[<span class="st">'zipcode'</span>]) <span class="op">-</span> <span class="bu">set</span>(zones_2023[<span class="st">'zipcode'</span>])</span>
@@ -568,17 +578,17 @@ dtype: int64
 <div class="callout-body-container callout-body">
 <p>Two explanations that involve nobody making a mistake:</p>
 <ol type="1">
-<li><strong>The zip code system itself changed.</strong> USPS retires zip codes and creates new ones continuously, so eleven years apart the two files are describing two slightly different lists of places. This is the larger effect here: 635 zip codes appear in 2012 and not in 2023, while 22 appear in 2023 and not in 2012.</li>
+<li><strong>The zip code system itself changed.</strong> USPS retires zip codes and creates new ones continuously, so eleven years apart the two files are describing two slightly different lists of places. Turnover in the zip code list is the larger of the two effects here: 635 zip codes appear in 2012 and not in 2023, while 22 appear in 2023 and not in 2012.</li>
 <li><strong>The two maps were built by different methods.</strong> The 2023 map used a different station network, a finer grid and a longer normals period, so a zip code that could be assigned a value under one procedure need not be assignable under the other.</li>
 </ol>
-<p>The important consequence comes later: the 2012 file covers a partly different set of locations from the 2023 file, so any comparison of the two whole files compares two different populations. Question 6 does exactly that, and question 17 is where you find out what it cost.</p>
+<p>The consequence is that the 2012 file covers a partly different set of locations from the 2023 file, so any comparison of the two whole files compares two different populations. Question 6 makes exactly that comparison, and question 17 counts the zip codes it has to leave out.</p>
 </div>
 </div>
 </section>
 <section id="part-2-one-table-out-of-three" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-one-table-out-of-three">Part 2: One table out of three</h2>
 <p><strong>4. Add a <code>year</code> column to each zone table, then stack the two of them into one table called <code>zones</code>, using the stacking pattern. How many rows?</strong></p>
-<div id="10e53f3d" class="cell" data-execution_count="6">
+<div id="1dea3939" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>zones_2023[<span class="st">'year'</span>] <span class="op">=</span> <span class="dv">2023</span></span>
@@ -606,7 +616,7 @@ dtype: int64
 </div>
 </div>
 <p><strong>5. Add <code>trange_min</code> using the line from the Field Note, then confirm it has no nulls and look at its distinct values with <code>.value_counts().sort_index()</code>. In a markdown cell, say what you notice about the spacing of those values and what that means for the phrase “how much warmer”.</strong></p>
-<div id="c5bed7fa" class="cell" data-execution_count="7">
+<div id="0e1210b0" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>zones[<span class="st">'trange_min'</span>] <span class="op">=</span> zones[<span class="st">'trange'</span>].<span class="bu">str</span>.split().<span class="bu">str</span>.get(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
@@ -649,11 +659,11 @@ Name: count, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Zero nulls, and only 18 distinct values, every one of them a multiple of five</strong>, running from -40 °F to 45 °F with no gaps and no value in between. There is no zip code at -12 or at 3, because no such label exists.</p>
-<p>That spacing is a property of the map and not of the country. <code>trange_min</code> is the cold edge of a five-degree bin, so it is a <strong>label</strong>, not a measurement. The phrase “how much warmer” can therefore only ever be answered here in whole multiples of five degrees, and the honest reading of any difference you compute is “this place crossed a zone boundary”, not “this place warmed by five degrees”. Hold on to that sentence: it is what questions 18 and 22 are about.</p>
+<p>The five-degree spacing is a property of the map rather than of the country. <code>trange_min</code> is the cold edge of a five-degree bin, so it is a <strong>label</strong>, not a measurement. The phrase “how much warmer” can therefore only ever be answered here in whole multiples of five degrees, and the careful reading of any difference you compute is “this place crossed a zone boundary” rather than “this place warmed by five degrees”. Questions 18 and 22 both come back to the difference between crossing a boundary and warming by five degrees.</p>
 </div>
 </div>
-<p><strong>6. Compute the mean <code>trange_min</code> for each year and report the difference. This is the headline number, and you are about to spend the rest of the practice finding out how much it is worth.</strong></p>
-<div id="e3a879ed" class="cell" data-execution_count="8">
+<p><strong>6. Compute the mean <code>trange_min</code> for each year and report the difference. The difference is the headline number, and the rest of the practice is about how much it is worth.</strong></p>
+<div id="c469a904" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> zones.groupby(<span class="st">'year'</span>)[<span class="st">'trange_min'</span>].mean()</span>
@@ -680,11 +690,11 @@ Name: trange_min, dtype: float64
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>The mean zone minimum is -1.900 °F in 2012 and 1.017 °F in 2023, a difference of 2.917 °F.</strong></p>
-<p>Two things are wrong with that number as a headline. First, it is a mean of bin labels, and no place in the file warmed by 2.917 °F, because 2.917 is not a value any zip code can take. Second, it compares two different sets of zip codes, since 635 zip codes are in the 2012 file only. The paired version, computed over the 39,858 zip codes present in both files, is 2.884 °F in question 17’s table. The two agree closely here, which is the reassuring case, but you only know that because you checked.</p>
+<p>Two things are wrong with that number as a headline. First, it is a mean of bin labels, and no place in the file warmed by 2.917 °F, because 2.917 is not a value any zip code can take. Second, it compares two different sets of zip codes, because 635 zip codes are in the 2012 file only. The paired version, computed over the 39,858 zip codes present in both files, is 2.884 °F in question 17’s table. The two agree closely here, which is the reassuring case, but you only know they agree because you checked.</p>
 </div>
 </div>
 <p><strong>7. Merge <code>zones</code> with <code>zipcodes</code> to attach a state, a latitude and a longitude to every row. The key columns are called different things in the two tables. Compare the row count before and after, then run the merge again with <code>how='left'</code> and find out how many rows failed to match and how many distinct zip codes that is.</strong></p>
-<div id="2bcfbbfb" class="cell" data-execution_count="9">
+<div id="88b1b82b" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>located <span class="op">=</span> pd.merge(zones, zipcodes, left_on<span class="op">=</span><span class="st">'zipcode'</span>, right_on<span class="op">=</span><span class="st">'zip'</span>)</span>
@@ -716,11 +726,11 @@ Name: trange_min, dtype: float64
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>80,455 rows went in and 80,352 came out, so 103 rows were lost, covering 63 distinct zip codes.</strong> The default merge is an inner join, so a zone row whose zip code is absent from the zip code database is silently discarded. The <code>how='left'</code> version is how you make the loss visible: every row survives, and the ones that failed to match are exactly the rows where <code>zip</code> is null.</p>
-<p>Note that 103 rows over 63 zip codes means most of those zip codes were lost twice, once in each year. Comparing the row count before and after is the cheapest habit in this whole exercise, and it is the one that catches a merge that quietly deleted a tenth of your data.</p>
+<p>Note that 103 rows over 63 zip codes means most of those zip codes were lost twice, once in each year. Comparing the row count before and after costs you one line of code, and it is the check that would have caught a merge that dropped a tenth of your rows rather than 0.13 percent of them.</p>
 </div>
 </div>
 <p><strong>8. In a markdown cell: 103 rows out of 80,455 did not match, covering 63 zip codes. Is that a number you would fix, a number you would mention, or a number you would ignore? Say which and why. There is more than one defensible answer.</strong></p>
-<div id="576a16e5" class="cell" data-execution_count="10">
+<div id="7ca0527f" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sorted</span>(missing[<span class="st">'zipcode'</span>].unique()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -739,15 +749,15 @@ Name: trange_min, dtype: float64
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Mention it, do not fix it.</strong> 103 rows is 0.13 percent of the file, so no result in this notebook can turn on them, and hand-repairing 63 zip codes would take an hour and introduce errors of your own. But you say so in a sentence, because a reader who recomputes your numbers from the raw files should not have to discover the gap themselves.</p>
-<p>Printing the codes is what makes the decision defensible rather than lazy. Eleven of the 63 are in the 56900 block, which USPS assigns to federal agencies in Washington DC, and one is 88888, the novelty code for Santa Claus at the North Pole. These are administrative codes and post office box ranges, not towns with gardens in them, so losing them costs the analysis nothing. Had the 63 been a contiguous block of rural counties in one state, the same 0.13 percent would have needed fixing. <strong>Whether a loss matters depends on what was lost, not on how large it is.</strong></p>
+<p><strong>Mention it, do not fix it.</strong> 103 rows is 0.13 percent of the file, so no result in this notebook can turn on them, and hand-repairing 63 zip codes would take an hour and introduce errors of your own. Say so in a sentence, though, because a reader who recomputes your numbers from the raw files should not have to discover the gap on their own.</p>
+<p>Printing the codes is what makes the decision defensible rather than lazy. Eleven of the 63 are in the 56900 block, which USPS assigns to federal agencies in Washington DC, and one is 88888, the novelty code for Santa Claus at the North Pole! The 63 are administrative codes and post office box ranges rather than towns with gardens in them, so losing them costs the analysis nothing. Had they been a contiguous block of rural counties in one state, the same 0.13 percent would have needed fixing.</p>
 </div>
 </div>
 </section>
 <section id="part-3-the-first-map" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-the-first-map">Part 3: The first map</h2>
 <p><strong>9. Filter <code>located</code> to the 2023 rows only, then draw a scatter plot with <code>longitude</code> across the bottom, <code>latitude</code> up the side, and <code>hue='trange_min'</code>. Make the figure twelve inches by seven. Label both axes and title it.</strong></p>
-<div id="346ff259" class="cell" data-execution_count="11">
+<div id="2df3bffd" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>recent <span class="op">=</span> located[located[<span class="st">'year'</span>] <span class="op">==</span> <span class="dv">2023</span>]</span>
@@ -783,8 +793,8 @@ Name: trange_min, dtype: float64
 <p>Nothing is wrong with the colours, the y-axis or the rest of the data. One value in one column set the scale for the entire figure.</p>
 </div>
 </div>
-<p><strong>11. Find the culprit. Use the filter pattern on <code>located</code> to pull out every row with a <code>longitude</code> greater than −60, and print its zip code, state, city, latitude and longitude.</strong></p>
-<div id="04ca6963" class="cell" data-execution_count="12">
+<p><strong>11. Find the culprit. Use the filter pattern on <code>located</code> to pull out every row with a <code>longitude</code> greater than −60, and print its <code>zipcode</code>, <code>state</code>, <code>primary_city</code>, <code>latitude</code> and <code>longitude</code>.</strong></p>
+<div id="d4639c87" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>located[located[<span class="st">'longitude'</span>] <span class="op">&gt;</span> <span class="op">-</span><span class="dv">60</span>][[<span class="st">'zipcode'</span>, <span class="st">'state'</span>, <span class="st">'primary_city'</span>,</span>
@@ -843,12 +853,12 @@ Name: trange_min, dtype: float64
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Zip code 22350, Alexandria, Virginia, recorded at 48.31 N and 2.12 W, which is in Brittany, in northwestern France.</strong> Alexandria is at roughly 38.8 N, 77.0 W, so the latitude is off by about ten degrees and the longitude by about seventy-five. The error is in the <strong>coordinates</strong>, which came from the zip code database, and not in the temperature: 22350 is zone 7b, 5 to 10 °F, which is an ordinary reading for the Washington DC suburbs.</p>
-<p>What those two rows did is set the scale. They added no visible information to the figure and they took away most of its resolution, because every other point had to share the remaining 40 percent of the axis. The general problem is this: a single bad value in a column you are plotting on damages every point in the figure, not just its own.</p>
-<p>Notice also what would <strong>not</strong> have caught it. The row is not null, not duplicated, not the wrong dtype, and <code>.describe()</code> on <code>longitude</code> reports a maximum of -2.12 with no comment. It survives every cleaning step from Thursday. The figure found it in one second, because a plot is the only summary of a dataset that gives an outlier as much room as it gives everything else.</p>
+<p>Between them, the two rows set the scale for the whole figure. They added no visible information and they took away most of its resolution, because every other point had to share the remaining 40 percent of the axis. A single bad value in a column you are plotting damages every point in the figure, not just its own.</p>
+<p>Notice also what would <strong>not</strong> have caught it. The row is not null, not duplicated, not the wrong dtype, and <code>.describe()</code> on <code>longitude</code> reports a maximum of -2.12 with no comment. It survives every cleaning step from Thursday. The figure showed it in one second, because a plot is one of the few summaries of a dataset that gives an outlier as much room as it gives everything else.</p>
 </div>
 </div>
 <p><strong>13. Build a table called <code>usa</code> holding only the rows with <code>longitude</code> less than −60, and redraw the 2023 map from it. Then draw the same map for 2012.</strong></p>
-<div id="e726e0b5" class="cell" data-execution_count="13">
+<div id="fb20b1dc" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>usa <span class="op">=</span> located[located[<span class="st">'longitude'</span>] <span class="op">&lt;</span> <span class="op">-</span><span class="dv">60</span>].copy()</span>
@@ -885,7 +895,7 @@ Name: trange_min, dtype: float64
 </div>
 </div>
 <p><strong>14. You have just drawn a recognizable map of the United States without a mapping library, a projection, or a shapefile. Explain in a markdown cell how that worked here. Then, run <code>usa['state'].nunique()</code> and say which parts of the country are not in these files at all.</strong></p>
-<div id="1f57625f" class="cell" data-execution_count="14">
+<div id="d4a99c39" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(usa[<span class="st">'state'</span>].nunique())</span>
@@ -906,8 +916,8 @@ Name: trange_min, dtype: float64
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>It worked because latitude and longitude are just two numbers, and 40,000 points are enough to show the outline of the country.</strong> A scatter plot of longitude against latitude is already a map at this density, since the country’s shape is visible in where the zip codes are and where they are not. The reason nobody uses this in production is that it is unprojected: distances and areas are distorted, and the further north you go the more the map is stretched sideways. For looking at your own data on the way to an answer, that does not matter.</p>
-<p><strong>49 states, which is the 48 contiguous states plus the District of Columbia.</strong> Alaska and Hawaii are absent, and so is Puerto Rico, along with the other territories. That matters more than it looks: the hardiness zones only run from <code>1a</code> to <code>13b</code> because of Alaska at one end and Puerto Rico at the other, and neither end of that scale is in these files. Anything you say here is a statement about the lower 48.</p>
+<p><strong>It worked because latitude and longitude are just two numbers, and 40,000 points are enough to show the outline of the country.</strong> A scatter plot of longitude against latitude is already a map at this density, because the country’s shape is visible in where the zip codes are and where they are not. Nobody uses a bare scatter plot in production because it is unprojected: distances and areas are distorted, and the further north you go the more the map is stretched sideways. For looking at your own data on the way to an answer, the distortion does not matter.</p>
+<p><strong>49 states, which is the 48 contiguous states plus the District of Columbia.</strong> Alaska and Hawaii are absent, and so is Puerto Rico, along with the other territories. The gap matters more than it might look: the hardiness zones only run from <code>1a</code> to <code>13b</code> because of Alaska at one end and Puerto Rico at the other, and neither end of that scale is in these files. Anything you say here is a statement about the lower 48.</p>
 </div>
 </div>
 <p><strong>15. Put the two maps side by side on your screen and try to see the difference between them. Can you?</strong></p>
@@ -921,14 +931,14 @@ Name: trange_min, dtype: float64
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>No.</strong> The two figures are the same picture: the same colour gradient from the Canadian border to the Gulf, the same mountains showing as cold streaks in the west, the same warm Florida. The change, where it exists, is one bin on an eighteen-bin colour scale at a handful of percent of the points, and no eye can pick that out of 40,000 overlapping markers by flipping between two images. If you thought you saw a difference, you were seeing the difference you expected.</p>
+<p><strong>No.</strong> The two figures are the same picture: the same colour gradient from the Canadian border to the Gulf, the same mountains showing as cold streaks in the west, the same warm Florida. The change, where it exists, is one bin on an eighteen-bin colour scale at a handful of percent of the points, and no eye can pick that out of 40,000 overlapping markers by flipping between two images. If you thought you saw a difference, you were probably seeing the difference you expected to see.</p>
 </div>
 </div>
 </section>
 <section id="part-4-what-actually-changed" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-what-actually-changed">Part 4: What actually changed</h2>
-<p><strong>16. Use the pivot pattern to build a table with one row per zip code and one column per year. Index it on <code>['zipcode', 'state', 'latitude', 'longitude']</code>, put <code>year</code> across the columns and <code>trange_min</code> in the cells, then <code>.reset_index()</code>. What shape is it, and why is that number smaller than 80,000?</strong></p>
-<div id="55bb2ab4" class="cell" data-execution_count="15">
+<p><strong>16. Use the pivot pattern to build a table with one row per zip code and one column per year. Index it on <code>['zipcode', 'state', 'latitude', 'longitude']</code> so those come along for the ride, put <code>year</code> across the columns and <code>trange_min</code> in the cells, then <code>.reset_index()</code>. What shape is it, and why is that number smaller than 80,000?</strong></p>
+<div id="33b5609a" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>change <span class="op">=</span> usa.pivot_table(index<span class="op">=</span>[<span class="st">'zipcode'</span>, <span class="st">'state'</span>, <span class="st">'latitude'</span>, <span class="st">'longitude'</span>],</span>
@@ -951,11 +961,11 @@ Name: trange_min, dtype: float64
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>40,492 rows and 6 columns.</strong> It is roughly half of 80,350 because the pivot changed what a row means. In <code>usa</code> a row was one zip code in one year, so nearly every zip code had two rows. In <code>change</code> a row is one zip code, with the two years side by side as columns, which is the shape you need to subtract one from the other.</p>
-<p>40,492 is the union of the two years’ zip codes, not the intersection, which is why it is slightly more than either file on its own. The pivot did not throw away the zip codes that appear in only one year: it gave them a row with a hole in it, and that hole is question 17.</p>
+<p>40,492 is close to the union of the two years’ zip codes rather than their intersection. The pivot did not throw away the zip codes that appear in only one year: it gave them a row with a hole in it, and question 17 is where you count the holes. The union of the two files is 40,556 zip codes, and 40,492 is what survives after the 63 that never matched the zip code database and the one that turned out to be in France.</p>
 </div>
 </div>
 <p><strong>17. Add a <code>temp_diff</code> column: the 2023 value minus the 2012 value. Count its nulls and say what a null means here. Then drop those rows.</strong></p>
-<div id="1d763626" class="cell" data-execution_count="16">
+<div id="db703103" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>change[<span class="st">'temp_diff'</span>] <span class="op">=</span> change[<span class="dv">2023</span>] <span class="op">-</span> change[<span class="dv">2012</span>]</span>
@@ -983,12 +993,12 @@ Name: trange_min, dtype: float64
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>634 nulls, leaving 39,858 zip codes with a difference.</strong> A null here does not mean a missing measurement. It means the zip code exists in one map and not the other, so there is nothing to subtract, and it is the row-count mismatch from question 3 arriving in a new form. Almost all of them, 632 of the 634, are zip codes that were in the 2012 file and are not in the 2023 file.</p>
-<p>Dropping them is right, because a difference cannot be computed for them, but notice what you have just done: every number in the rest of this notebook describes the 39,858 zip codes that were mapped <strong>both</strong> times. That is a slightly different country from the one in question 6, and it is why the paired mean change is 2.884 °F rather than 2.917 °F.</p>
+<p><strong>634 nulls, leaving 39,858 zip codes with a difference.</strong> A null here does not mean a missing measurement. It means the zip code exists in one map and not the other, so there is nothing to subtract, and it is the row-count mismatch from question 3 arriving in a new form. Almost all of them, 632 of the 634, are zip codes that were in the 2012 file and are not in the 2023 file. The other 2 are the reverse. Question 3 counted 22 zip codes that are in 2023 and not in 2012, so 20 of those 22 are missing here, and they are missing because they never matched the zip code database in question 7 and so never reached <code>usa</code> at all.</p>
+<p>Dropping them is right, because a difference cannot be computed for them, but notice what you have just done: every number in the rest of this notebook describes the 39,858 zip codes that were mapped <strong>both</strong> times. The 39,858 are a slightly different country from the one question 6 averaged over, and the difference is why the paired mean change is 2.884 °F rather than 2.917 °F.</p>
 </div>
 </div>
-<p><strong>18. Draw a histogram of <code>temp_diff</code>. Label it. Then print <code>change['temp_diff'].value_counts().sort_index()</code> and read the two together. In a markdown cell: what is the most common value, what is the second most common, and how many distinct values are there in total? Given that, is <code>temp_diff</code> a measurement of how much a place warmed, or is it something else? Be precise.</strong></p>
-<div id="c579555c" class="cell" data-execution_count="17">
+<p><strong>18. Draw a histogram of <code>temp_diff</code>. Label it. Then print <code>change['temp_diff'].value_counts().sort_index()</code> and read the two together.</strong></p>
+<div id="a511ad5e" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
@@ -1033,13 +1043,13 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>The most common value is +5 °F, on 22,374 zip codes, and the second is 0 °F, on 16,574. There are 11 distinct values in the whole column, every one of them a multiple of five, running from -30 to +25.</strong> Those two values alone cover 97.7 percent of the country. Everything else is a thin tail: 491 zip codes at +10, 363 at -5, and 28 or fewer at each of the remaining seven values.</p>
+<p><strong>The most common value is +5 °F, on 22,374 zip codes, and the second is 0 °F, on 16,574. There are 11 distinct values in the whole column, every one of them a multiple of five, running from -30 to +25.</strong> The two of them together cover 97.7 percent of the country. Everything else is a thin tail: 491 zip codes at +10, 363 at -5, and 28 or fewer at each of the remaining seven values.</p>
 <p>So <code>temp_diff</code> is <strong>not</strong> a measurement of how much a place warmed. It is the number of five-degree zone boundaries a zip code crossed between the two maps, multiplied by five. A zip code reading +5 warmed by some unknown amount that happened to be enough to push it over the line it was nearest to, which could be a tenth of a degree if it sat at the edge of its 2012 bin. A zip code reading 0 also warmed, probably by a similar amount, and simply did not cross anything.</p>
-<p>This is why the histogram matters more than the mean. The mean, 2.884 °F, is a real number that describes no zip code in the file, and it looks like a temperature. The histogram makes it impossible to forget that you are counting boundary crossings.</p>
+<p>The histogram matters more than the mean for exactly that reason. The mean, 2.884 °F, is a real number that describes no zip code in the file, and it looks like a temperature. A histogram of eleven spikes makes it hard to forget that you are counting boundary crossings.</p>
 </div>
 </div>
-<p><strong>19. Use the top-N pattern twice to show the five zip codes with the largest increase and the five with the largest decrease, with their states and coordinates. In a markdown cell: a zip code that moved by 25 or 30 °F has moved five or six whole zones. Do you believe that is a change in the climate? What else could produce it?</strong></p>
-<div id="dbbc06aa" class="cell" data-execution_count="18">
+<p><strong>19. The tails of that histogram are worth a minute. Use the top-N pattern twice to show the five zip codes with the largest increase and the five with the largest decrease, with their states and coordinates.</strong></p>
+<div id="6badef8c" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> [<span class="st">'zipcode'</span>, <span class="st">'state'</span>, <span class="st">'latitude'</span>, <span class="st">'longitude'</span>, <span class="dv">2012</span>, <span class="dv">2023</span>, <span class="st">'temp_diff'</span>]</span>
@@ -1071,13 +1081,15 @@ year  zipcode state  latitude  longitude  2012  2023  temp_diff
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>No.&nbsp;Every one of these ten is in high or steep terrain.</strong> The largest increase is 95604 in California, from 0 °F to 25 °F, in the Sierra Nevada foothills near Auburn; then 59761 in the mountains of southwest Montana at +20, and 37729 in the Tennessee Appalachians, 80442 in the Colorado Rockies and 83246 in southeast Idaho at +15. The largest decrease is 95321 in California, from 20 °F down to -10 °F, which is Groveland at the edge of Yosemite, and 95644 and 95223 at -20 are also in the Sierra Nevada. Three of the five largest decreases are Californian, and the other two are in Arizona and Utah.</p>
-<p>Six zones in eleven years is a product of the <strong>modelling</strong> rather than of the climate. In steep terrain the temperature changes faster with a mile of horizontal distance than it does with a decade of time, so a zip code covering a canyon and a ridge has no single true value, and the 2023 map’s finer grid put its point on a different part of the slope than the 2012 map did. The zip code also has no real location: it is represented by one coordinate pair standing in for an area that can be several hundred square miles in the mountain west.</p>
-<p>The practical rule is that the extremes of a difference between two models are usually telling you about the models. If the tails of your difference all come from the same kind of place, the place is the explanation.</p>
+<p><strong>A move of five or six whole zones in eleven years is not a change in the climate, and every one of these ten zip codes is in high or steep terrain.</strong> The largest increase is 95604 in California, from 0 °F to 25 °F, in the Sierra Nevada foothills near Auburn, and the second is 59761 in the mountains of southwest Montana at +20.</p>
+<p>Your third, fourth and fifth rows will very likely not match the ones printed above, which is worth understanding rather than worrying about. Twenty-one zip codes are tied at +15, so <code>.head(5)</code> returns whichever three of the twenty-one happen to sort first, and the top-N pattern says nothing about which three you get. Look up the three rows you did get: they are in the Montana Rockies, the Colorado Rockies, the Nevada mountains, the Tennessee Appalachians or the Idaho highlands. The tie is the finding here, rather than any of the individual rows.</p>
+<p>The decreases are steadier, because the tail is thinner. The largest is 95321 in California, from 20 °F down to -10 °F, which is Groveland at the edge of Yosemite, and 95644 and 95223 at -20 are also in the Sierra Nevada. Three of the five largest decreases are Californian, and the remaining two are in Arizona and Utah.</p>
+<p>Six zone steps in eleven years, which is what 95321’s -30 °F amounts to, is a product of the <strong>modelling</strong> rather than of the climate. In steep terrain the temperature changes faster with a mile of horizontal distance than it does with a decade of time, so a zip code covering a canyon and a ridge has no single true value, and the 2023 map’s finer grid put its point on a different part of the slope than the 2012 map did. A zip code also has no single location: it is represented by one coordinate pair standing in for an area that can be several hundred square miles in the mountain west.</p>
+<p>The extremes of a difference between two models are usually telling you about the models rather than about the world, so when the tails of a difference all come from the same kind of place, look at the place first.</p>
 </div>
 </div>
-<p><strong>20. Write a named function called <code>classify_shift</code> that takes one difference and returns <code>'warmer'</code>, <code>'colder'</code> or <code>'unchanged'</code>, apply it to build a <code>shift</code> column, and count the three categories.</strong></p>
-<div id="04f411fa" class="cell" data-execution_count="19">
+<p><strong>20. <code>temp_diff</code> has too many values to use as a <code>hue=</code> and too few to be interesting as a number. Write a named function called <code>classify_shift</code> that takes one difference and returns <code>'warmer'</code>, <code>'colder'</code> or <code>'unchanged'</code>, apply it to build a <code>shift</code> column, and count the three categories.</strong></p>
+<div id="45ec0d92" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_shift(diff):</span>
@@ -1117,7 +1129,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>21. Draw the change map: <code>longitude</code> and <code>latitude</code> again, this time with <code>hue='shift'</code>. Twelve by seven, labelled, titled.</strong></p>
-<div id="a955caeb" class="cell" data-execution_count="20">
+<div id="a9d38615" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">7</span>))</span>
@@ -1136,7 +1148,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<p><strong>22. In a markdown cell, four or five sentences. Where is the country almost uniformly warmer? Where is it patchy? Where are the <code>'colder'</code> points, and does their location connect to your answer to question 19? Then compare this figure with the two maps from question 13, and say in one sentence why the difference had to be computed rather than looked at.</strong></p>
+<p><strong>22. In a markdown cell: Where is the country almost uniformly warmer? Where is it patchy? Where are the <code>'colder'</code> points, and does their location connect to your answer to question 19?</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1148,16 +1160,16 @@ Name: count, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>The eastern half of the country is mostly warmer and the western half is mostly not.</strong> East of longitude -100, 62.3 percent of zip codes moved warmer, with a mean change of 3.17 °F; west of it only 37.1 percent did, at 1.72 °F. The solid blue is in the mid-South and the Ohio valley and up the mid-Atlantic: Tennessee 4.37 °F over 774 zip codes, Missouri 4.12 over 1,142, Alabama 4.02, West Virginia 4.00, Kentucky 3.99, with four fifths of their zip codes moving.</p>
-<p><strong>The east is striped rather than uniform</strong>, and that is the most informative thing in the figure. Broad bands of “warmer” alternate with bands of “unchanged” running roughly parallel to the zone contours themselves, because whether a zip code crossed a line depends on where inside its 2012 bin it was sitting, and neighbouring zip codes sat at the same place in the bin. Those stripes are an artifact of binning and would not appear at all in a map of the underlying continuous temperatures.</p>
-<p><strong>The west is speckled rather than banded, and the 396 colder points are almost all there:</strong> 87.4 percent of them lie west of -100, with 175 in California alone and the rest in Utah, Arizona, Nevada, New Mexico, Colorado, Washington and Oregon. That is the same Sierra Nevada, Cascade and Great Basin terrain as question 19’s extremes, and for the same reason. In mountains the difference between the two maps comes from the modelling method rather than from the weather.</p>
-<p>The difference had to be computed because it is one bin on an eighteen-bin scale for about half the points, and the eye comparing two 40,000-point maps cannot see a change that small, but it can see it instantly once the change is the only thing being drawn.</p>
+<p><strong>The east is striped rather than uniform</strong>, and the stripes are the most informative thing in the figure. Broad bands of “warmer” alternate with bands of “unchanged” running roughly parallel to the zone contours themselves, because whether a zip code crossed a line depends on where inside its 2012 bin it was sitting, and neighbouring zip codes sat at the same place in the bin. The striping is an artifact of the binning and would not appear at all in a map of the underlying continuous temperatures.</p>
+<p><strong>The west is speckled rather than banded, and the 396 colder points are almost all there:</strong> 87.4 percent of them lie west of -100, with 175 in California alone and the rest in Utah, Arizona, Nevada, New Mexico, Colorado, Washington and Oregon. The colder points sit in the same Sierra Nevada, Cascade and Great Basin terrain as question 19’s extremes, and for the same reason: in mountains the difference between the two maps comes from the modelling method rather than from the weather.</p>
+<p>The change had to be computed rather than seen, because it is one bin on an eighteen-bin scale for about half the points. Nobody can pick a change that small out of two 40,000-point maps by flipping between them, and anybody can see it at once when the change itself is the only thing on the figure.</p>
 </div>
 </div>
 </section>
 <section id="part-5-states-and-the-count-column" class="level2">
 <h2 class="anchored" data-anchor-id="part-5-states-and-the-count-column">Part 5: States, and the count column</h2>
 <p><strong>23. Group <code>change</code> by <code>state</code> and use <code>.agg(['count', 'mean'])</code> on <code>temp_diff</code>. Show the ten states with the largest mean increase.</strong></p>
-<div id="af2cc8ac" class="cell" data-execution_count="21">
+<div id="7c02e4a6" class="cell" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>by_state <span class="op">=</span> change.groupby(<span class="st">'state'</span>)[<span class="st">'temp_diff'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>])</span>
@@ -1238,7 +1250,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<p><strong>24. Read the <code>count</code> column before you read the <code>mean</code> column. Two entries in that top ten should stop you. Name them and say why in one sentence each.</strong></p>
+<p><strong>24. Read the <code>count</code> column before you read the <code>mean</code> column. Do any entries surprise you from the top ten? Why?</strong></p>
 <div class="callout callout-style-default callout-note callout-titled" title="✅ Answer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1251,11 +1263,11 @@ Name: count, dtype: int64</code></pre>
 <div class="callout-body-container callout-body">
 <p><strong>The District of Columbia and Delaware.</strong></p>
 <p><strong>DC, 7.18 °F over 275 zip codes</strong>, is not a state and is not comparable to one: it is 68 square miles of a single city, every one of its 275 zip codes moved warmer, and its mean sits 2.8 °F clear of the next entry because a mean over one small city covers about as much ground as one weather station. It belongs in a footnote, not in a ranking of states.</p>
-<p><strong>Delaware, 4.35 °F over 93 zip codes</strong>, has the second-smallest count of any state in the table, behind Rhode Island’s 88, so its mean is built from about a twenty-seventh of the zip codes behind Texas’s. That does not make 4.35 wrong, and Delaware is genuinely in the warm corridor, but a ranking that puts a 93-zip-code state next to an 1,142-zip-code state and calls them both observations is inviting the reader to treat them as equally solid. This is why you called <code>.agg(['count', 'mean'])</code> and not <code>.mean()</code>.</p>
+<p><strong>Delaware, 4.35 °F over 93 zip codes</strong>, has the second-smallest count of any state in the table, behind Rhode Island’s 88, so its mean is built from about one twenty-seventh as many zip codes as Texas’s. The small count does not make 4.35 wrong, and Delaware is genuinely in the warm corridor, but a ranking that puts a 93-zip-code state next to an 1,142-zip-code state and calls them both observations is inviting the reader to treat them as equally solid. The count column is why question 23 asked for <code>.agg(['count', 'mean'])</code> rather than <code>.mean()</code>.</p>
 </div>
 </div>
 <p><strong>25. Build a Series of the ten largest mean increases, sorted, and draw it as horizontal bars using the <code>.values</code> and <code>.index</code> idiom. Label both axes with units and title it.</strong></p>
-<div id="f7b8921e" class="cell" data-execution_count="22">
+<div id="94eda4fd" class="cell" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>top_states <span class="op">=</span> change.groupby(<span class="st">'state'</span>)[<span class="st">'temp_diff'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
@@ -1277,7 +1289,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>26. Now, show the five states with the smallest mean increase instead, with their counts. In a markdown cell: one of those states has more zip codes in it than all but one other state in the file. Does that make its small number more trustworthy or less, and does it make the ranking more interesting or less?</strong></p>
-<div id="67b8598e" class="cell" data-execution_count="23">
+<div id="a4fb014a" class="cell" data-execution_count="23">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>by_state.sort_values(<span class="st">'mean'</span>).head(<span class="dv">5</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1331,7 +1343,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="bd946f90" class="cell" data-execution_count="24">
+<div id="e5319695" class="cell" data-execution_count="24">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The answer compares California's count with the largest in the table, so put</span></span>
@@ -1387,8 +1399,8 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>California, 0.82 °F over 2,552 zip codes. Only Texas has more, at 2,566.</strong> California holds about 6 percent of the country’s zip codes, so its 0.82 °F is the best-supported number in the whole ranking, and it is far more trustworthy than DC’s 7.18 °F, not less. Small means are often noise, and this one is not: it is an average over 2,552 places, and it is small because 69.8 percent of California’s zip codes did not move at all and another 6.4 percent moved colder.</p>
-<p>That makes the ranking more interesting rather than less. The top of the list is partly a story about which small states sit in the warm corridor, while the bottom of the list is a real finding about a large and topographically varied state that the 2023 map moved much less than it moved the Southeast. Arizona at 0.99 over 520, North Dakota at 1.00 over 404 and Utah at 1.31 over 336 point the same way: the mountain west and the northern plains moved least, and California’s low value comes with the strongest evidence behind it.</p>
+<p><strong>California, 0.82 °F over 2,552 zip codes. Only Texas has more, at 2,566.</strong> California holds about 6 percent of the country’s zip codes, so its 0.82 °F is the best-supported number in the whole ranking, and it is far more trustworthy than DC’s 7.18 °F, not less. Small means are often noise, and this one is not: it is an average over 2,552 places, and it is small because 69.8 percent of California’s zip codes did not move at all and another 6.9 percent moved colder.</p>
+<p>California’s low mean makes the ranking more interesting rather than less. The top of the list is partly a story about which small states sit in the warm corridor, while the bottom is a finding about a large and topographically varied state that the 2023 map moved much less than it moved the Southeast. Arizona at 0.99 over 520, North Dakota at 1.00 over 404 and Utah at 1.31 over 336 point the same way: the mountain west and the northern plains moved least, and California’s low value comes with the strongest evidence behind it.</p>
 </div>
 </div>
 </section>
@@ -1407,9 +1419,9 @@ Name: count, dtype: int64</code></pre>
 <div class="callout-body-container callout-body">
 <p>I would send the change map from question 21 and the number 57.4 percent.</p>
 <p>The map shows every zip code in the lower 48 coloured by whether it moved warmer, stayed put, or moved colder between the 2012 and 2023 hardiness maps, and 57.4 percent of the 39,858 zip codes that appear on both maps moved warmer. The headline is defensible as far as it goes: the mean zone minimum rose from -1.900 °F to 1.017 °F, a difference of 2.917 °F, and the warming is concentrated exactly where the story says, with Tennessee at 4.37 °F across 774 zip codes and Missouri at 4.12 across 1,142.</p>
-<p>There are two things it does not mean. First, no place warmed by 2.917 degrees. The zone values come in five-degree bins, so the difference between the two maps takes only eleven values, all multiples of five, and 97.7 percent of the country is at either 0 or +5. A zip code that reads +5 crossed the line it was already nearest to, and one that reads 0 may have warmed almost as much without crossing anything. The number counts boundary crossings, not degrees. Second, the two maps were built by different methods eleven years apart, on a different station network and a finer grid, and where the terrain is steep that difference dominates. The extremes are the evidence: 95604 in the Sierra Nevada moved 25 °F and 95321 near Yosemite moved -30 °F, and every one of the ten largest movers in either direction is in mountains. Some of what this comparison measures is the improvement in the map.</p>
-<p>Two more limits are worth a line. The files cover the 48 contiguous states and DC only, so nothing here speaks to Alaska or Puerto Rico. And a hardiness zone is built from the average annual coldest night, which is one statistic out of a climate: it says nothing about summer heat, drought or the timing of the last frost, all of which decide more about what a gardener can grow.</p>
-<p>The figure to publish is the change map. The two individual year maps are indistinguishable by eye, which is the point.</p>
+<p>There are two things it does not mean. First, no place warmed by 2.917 degrees. The zone values come in five-degree bins, so the difference takes only eleven values, all multiples of five, and 97.7 percent of the country is at either 0 or +5. A zip code that reads +5 crossed the line it was already nearest to, and one that reads 0 may have warmed almost as much without crossing anything. The number counts boundary crossings, not degrees. Second, the two maps were built by different methods eleven years apart, on a different station network and a finer grid, and where the terrain is steep that difference dominates. The extremes are the evidence: 95604 in the Sierra Nevada moved 25 °F and 95321 near Yosemite moved -30 °F, and every one of the ten largest movers in either direction is in mountains. Some of what this comparison measures is the improvement in the map.</p>
+<p>Two limits are worth a line. The files cover the 48 contiguous states and DC only. And a hardiness zone is built from the average annual coldest night, which says nothing about summer heat, drought or the timing of the last frost.</p>
+<p>The figure to publish is the change map. The two individual year maps are indistinguishable by eye, so neither of them shows the finding on its own.</p>
 </div>
 </div>
 </section>
@@ -1417,10 +1429,10 @@ Name: count, dtype: int64</code></pre>
 <h2 class="anchored" data-anchor-id="where-the-marks-are">Where the marks are</h2>
 <p>If you compare your notebook against this key, look for these four things before you look at anything else.</p>
 <ol type="1">
-<li><strong>You never called <code>temp_diff</code> a temperature change.</strong> It is a count of five-degree boundary crossings, and eleven distinct values with 97.7 percent of the country at 0 or +5 is the evidence. Every other conclusion in the practice depends on getting this one right.</li>
-<li><strong>Your question 12 answer says the coordinates are wrong, not the temperature.</strong> Zip code 22350 is Alexandria, Virginia, plotted in Brittany. If your answer stops at “there is an outlier”, you have described the figure without diagnosing it.</li>
-<li><strong>Every mean in Part 5 has its count beside it, and you read the count first.</strong> DC’s 7.18 °F over 275 zip codes in one city and California’s 0.82 °F over 2,552 are the two entries that show why the ranking cannot be read straight down.</li>
-<li><strong>You compared the row count before and after the merge</strong>, and you said in a sentence what happened to the 103 rows and 634 nulls rather than letting pandas drop them quietly.</li>
+<li><strong>Your notebook should never call <code>temp_diff</code> a temperature change.</strong> It is a count of five-degree boundary crossings, and eleven distinct values with 97.7 percent of the country at 0 or +5 is the evidence. Every other conclusion in the practice depends on getting this one right.</li>
+<li><strong>Your question 12 answer should say the coordinates are wrong, not the temperature.</strong> Zip code 22350 is Alexandria, Virginia, plotted in Brittany. If your answer stops at “there is an outlier”, you have described the figure without diagnosing it.</li>
+<li><strong>Every mean in Part 5 should have its count beside it, and you should read the count first.</strong> DC’s 7.18 °F over 275 zip codes in one city and California’s 0.82 °F over 2,552 are the two entries that show why the ranking cannot be read straight down.</li>
+<li><strong>You should have compared the row count before and after the merge</strong>, and said in a sentence what happened to the 103 rows and 634 nulls rather than letting pandas drop them quietly.</li>
 </ol>
 <p>⬅️ Back to <a href="../../course-materials/eod-practice/eod-day7-2026.html">the exercise</a></p>
 

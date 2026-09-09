@@ -181,15 +181,21 @@ itself.**
 decade_winners_list = []
 
 for decade, decade_data in contests.groupby('decade'):
-    country_avg = decade_data.groupby('to_country')['points_final'].agg(['count', 'mean'])
-    country_avg = country_avg.reset_index()
-    top_country = country_avg.sort_values('mean', ascending=False).head(1).copy()
-    top_country['decade'] = decade
-    decade_winners_list.append(top_country)
+    means = decade_data.groupby('to_country')['points_final'].mean()
+    counts = decade_data.groupby('to_country')['points_final'].count()
 
-decade_winners = pd.concat(decade_winners_list, ignore_index=True)
+    best = means.idxmax()
 
-decade_winners[['decade', 'to_country', 'count', 'mean']]
+    decade_winners_list.append({
+        'decade': decade,
+        'to_country': best,
+        'count': counts[best],
+        'mean': means[best],
+    })
+
+decade_winners = pd.DataFrame(decade_winners_list)
+
+decade_winners
 ```
 
 :::{.callout-note title="✅ Answer"}
@@ -200,25 +206,22 @@ read 3, 10, 10, 9, 10, 2 and 3 down the page, and the `mean` column 19.7, 23.1, 
 decades, you built it correctly, even if your columns arrived in a different order or under
 different names.
 
-The pattern is the one we used this morning: build the pieces, collect them in a list, and stack
-the list once at the end. Each pass through the loop builds a one-row DataFrame, the list collects
-them, and the single `pd.concat()` after the loop stacks all seven rows into one table.
-`ignore_index=True` matters more here than it did this morning, because each of those rows kept
-whatever row label it happened to have inside its own decade's sorted table, so without it the
-finished table is numbered 3, 16, 20, 9, 13, 37, 8 rather than 0 through 6, and nothing stops two
-decades landing on the same label.
+There is no new pandas in the loop. Grouping the decade's rows by country gives a Series labelled
+by country name, exactly as grouping the survey by site gave a Series labelled by site name on
+Friday morning, and `.idxmax()` reads the label of the largest value off it in the same way it
+named the best site there. The only part that is new is where the grouping happens: `decade_data`
+is itself a group, so the loop groups a group.
 
-Two things can go wrong here and still leave you with a table that looks perfectly reasonable.
-Leaving `ascending=False` out of `.sort_values()` sorts the other way, because ascending is the
-default, and `.head(1)` then hands you the worst country of each decade in a table that is
-otherwise the right size. Reaching for `.max()` on the `mean` column instead of `.head(1)` on the
-sorted table gives you the number without the name, 362.7 for the 2010s with no Bulgaria attached
-to it, and the name is half of what the question asked for.
+Collecting the rows is the same list-and-append you have used since Tuesday. Each pass appends one
+dictionary, whose keys become the column names, and the single `pd.DataFrame()` after the loop
+turns all seven dictionaries into the finished table.
 
-`.reset_index()` is the line that turns `to_country` from the index into a column, which is what
-lets the last line select it by name. A version of the loop that leaves the reset out stops with a
-`KeyError` on `to_country` rather than returning a wrong table, so you will know about it right
-away.
+The mistake to look out for is `.max()` where you wanted `.idxmax()`. `.max()` gives you the
+largest value, 362.7 for the 2010s, with no Bulgaria attached to it, and the name is half of what
+the question asked for. `.idxmax()` gives you the label instead, and the label is what you then
+look up in both Series. The mirror of the same slip is `.idxmin()`, which returns the worst country
+of each decade in a table that is otherwise exactly the right size and shows nothing obviously
+wrong.
 :::
 
 **9. Read the `count` column before you read the `mean` column. Remember what `.count()` counts:

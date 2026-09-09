@@ -256,6 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -476,7 +480,7 @@ Same idea as Part 1 🚀
 <h3 class="anchored" data-anchor-id="pick-up-where-part-1-left-off">Pick up where Part 1 left off</h3>
 <p>We are in a new notebook, which means a new kernel, so <code>df</code> and <code>monthly_means</code> from Part 1 are not in memory any more. Run the cell below to rebuild them before we go on. It also sets <code>url</code> again, which the sandbox at the end of the session needs.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="0396e7df" class="cell" data-execution_count="1">
+<div id="2d5f5448" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -495,7 +499,7 @@ Same idea as Part 1 🚀
 <h2 class="anchored" data-anchor-id="step-10-visualize">Step 10: Visualize 🖼️</h2>
 <p><strong>Visualize</strong> means turning numbers into a picture you can read quickly. The simplest plot is a line plot with <code>plt.plot()</code>.</p>
 <p>✅ <strong>Canonical cell. Copy and run it exactly:</strong></p>
-<div id="5d07fda1" class="cell" data-execution_count="2">
+<div id="a67c04a7" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.plot(monthly_means)</span>
@@ -513,7 +517,7 @@ Same idea as Part 1 🚀
 </div>
 </div>
 <p>The same twelve numbers now show a clear seasonal cycle. We can also draw them as bars with <code>plt.bar()</code>, which takes two arguments rather than one: the month numbers for the x-axis, and the averages for the height of each bar. Both of those arguments come out of your <code>monthly_means</code>, the months from its index labels and the averages from its values. Copy the <code>plt.bar()</code> line below exactly.</p>
-<div id="bd405e95" class="cell" data-execution_count="3">
+<div id="0d2080d8" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.bar(monthly_means.index, monthly_means)</span>
@@ -549,7 +553,7 @@ Same idea as Part 1 🚀
 <p>You could reword the <code>plt.ylabel(...)</code> text instead. Either way, change just one thing.</p>
 </div>
 </div>
-<div id="d8983fcb" class="cell" data-execution_count="4">
+<div id="a1872b84" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🔁 Example: same plot, one new label. The data (monthly_means) stays the same.</span></span>
@@ -732,7 +736,7 @@ Same idea as Part 1 🚀
 </div>
 <div class="callout-body-container callout-body">
 <p>When time is up, run this to reload the data and rebuild your results from scratch:</p>
-<div id="59225b17" class="cell" data-execution_count="5">
+<div id="2e928951" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart: reload df and rebuild the canonical results</span></span>

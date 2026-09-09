@@ -18,7 +18,7 @@ format:
 
 :::
 
-On the first afternoon of this course we typed five lines and a picture appeared:
+On the first afternoon of this course we used five lines to generate a figure:
 
 ```python
 plt.plot(monthly_means)
@@ -28,23 +28,18 @@ plt.ylabel("Temperature (°C)")
 plt.show()
 ```
 
-The page we typed them into said, in a box: *we will learn how visualization actually works on
-Day 7... Today, just enjoy turning numbers into a picture!*
+Since then we have spent six days getting data ready: imported, filtered, sorted, cleaned, transformed,
+grouped, aggregated, joined, and reshaped. .
 
-It is Day 7.
-
-Since then we have spent six days getting data ready: filtered, sorted, cleaned, derived,
-grouped, joined, reshaped, and parsed. Yesterday afternoon we ended up with twelve numbers about
-the Arctic that were worth a second look, and we read them off a printed table, one row at a time.
-**This morning we turn tables like that one into pictures.**
+**This morning we finally turn our tables into pictures.**
 
 By the end of this morning's first session you will be able to:
 
 - name the two objects every matplotlib picture is made of, the **figure** and the **axes**
 - control the size and shape of a figure with `plt.figure(figsize=)`
-- label a figure so that somebody who was not in the room can read it
+- label a figure so that someone can understand what it depicts
 - put two series on one set of axes and tell them apart with a **legend**
-- fix one of the most common cosmetic problems in real plots, unreadable tick labels, with
+- fix one of the most common cosmetic problems in plots: unreadable tick labels, with
   `plt.xticks(rotation=)` and `plt.tight_layout()`
 - explain when a figure can be honest and still useless, and decide what to plot instead
 
@@ -87,7 +82,7 @@ toolik['month'] = toolik['date'].dt.month
 toolik.shape
 ```
 
-11,171 days of Arctic weather, with a real date column we can group by.
+We end up with our usual 11,171 days of Arctic weather, now including a real date column we can group by.
 
 ## The picture you already made
 
@@ -104,28 +99,28 @@ plt.show()
 ```
 
 The result is a perfectly good figure, and on Day 1 none of us knew what any of those five lines
-were doing. Now we can name the two objects those five lines are drawing on.
+were doing. Now let's dig into the two objects those five lines are drawing on.
 
 ## Figure and axes
 
 Every matplotlib picture is two nested objects.
 
-The **figure** is the canvas: a rectangle of a certain size, in inches, onto which everything gets
-drawn. The **axes** is the region inside it where data actually goes, together with its ticks, its
+The **figure** is like a gallery wall: a rectangle of a certain size, in inches, onto which every frame gets
+hung. The **axes** is the picture frame: it defines a region where data can be placed, together with its ticks, its
 tick labels, its axis labels and its title.
 
-One figure can hold several axes. In this course, every figure you make will hold exactly one
-of them.
+One figure (gallery wall) can hold several axes (picture frames). In this course, every figure you make will hold exactly one of them.
 
 ::: {style="width: 60%; margin: auto;"}
 ![](../images/mpl_plot.svg)
 :::
 
 You did not create either object in the cell above. `plt.plot()` found no figure open, so it made
-one with default settings and drew on it. Every `plt` command after that went to the same figure,
-which is why `plt.title()` on line two applied to the picture line one had just drawn.
+one with default settings and then created axes, and then it drew inside them. 
 
-The convenience has a cost. If you run two plotting cells without saying where one figure ends and
+Every `plt` command after that went to the same figure.
+
+This convenience has a cost. If you run two plotting cells without saying where one figure ends and
 the next begins, both sets of data are drawn onto the same axes:
 
 ```{python}
@@ -135,8 +130,8 @@ plt.show()
 ```
 
 Two lines, one axes, and no warning that it happened. Sometimes drawing two series together is
-exactly what you want, and we will do it on purpose when we get to legends. When it is not what you
-want, `plt.figure()` is how you say *start a new one*.
+exactly what you want, and we will do it on purpose when we get to legends. However, when it is not what you
+want, `plt.figure()` is how you say *create a new place for my data* (make a new gallery wall!)
 
 :::{.callout-note}
 🐍 `plt.show()` is the line that says *this figure is finished, draw it*. In a Jupyter notebook you
@@ -162,8 +157,8 @@ plt.show()
 The data is fine, but the picture is not: thirty-one year labels have been crammed into six and a
 half inches and the x-axis has turned into a smear of ink.
 
-The default figure is 6.4 inches wide and 4.8 inches tall, which is a reasonable rectangle for a
-scatter plot and often the wrong one for anything with a lot of labels along the bottom.
+The default matplotlib figure is 6.4 inches wide and 4.8 inches tall, which is a reasonable rectangle for a
+scatter plot,but often the wrong aspect ratio for anything with a lot of labels along the bottom.
 `plt.figure()` takes a `figsize=` argument, a tuple of **(width, height) in inches**, and it must
 come *before* the plotting command it applies to:
 
@@ -182,8 +177,7 @@ plt.ylabel('Mean air temperature (°C)')
 plt.show()
 ```
 
-Same data, same four lines of drawing code, and now the labels have room. A wide, short figure is
-usually the right shape for anything with time along the bottom, which in environmental data
+This is the same data, and the same four lines of drawing code, but now the labels have room. A wide, short figure is usually the right shape for anything with time along the bottom, which in environmental data
 science is a lot of what we plot.
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -198,10 +192,10 @@ one?
 
 ## Tick labels that do not fit
 
-Widening the figure bought you room. Often there is no more room to buy, because the labels
+Widening the figure (larger wall!) buys us room. But often there is no more room to buy, because the labels
 themselves are long: dates, station names, species names, states.
 
-The fix is to turn them. `plt.xticks(rotation=45, ha='right')` rotates every tick label on the
+The easiest fix is to rotate them. `plt.xticks(rotation=45, ha='right')` rotates every tick label on the
 x-axis by 45 degrees and anchors its **h**orizontal **a**lignment at its right-hand end, so the
 label ends underneath the tick it belongs to instead of drifting off to the side.
 
@@ -216,17 +210,18 @@ plt.tight_layout()
 plt.show()
 ```
 
-Two new lines, and both are worth having as habits.
+This code block introduces two new tools, and they are both are worth creating as habits.
 
 `plt.tight_layout()` goes **last**, after everything else has been added. Rotated labels stick out
 further than upright ones, and matplotlib will crop them off the bottom of the figure rather than
 make room for them; `tight_layout()` measures whatever you actually drew and resizes the axes so
 that all of it fits.
+
 Add it to any figure with rotated labels, long axis labels, or a title that runs to two lines.
 
 :::{.callout-note}
 🐍 `rotation=90` stands the labels straight up and needs no `ha=`. It is more compact than 45
-degrees and harder to read. Use 45 unless you are desperate for width.
+degrees, but it is also harder to read. Use 45 unless you are desperate for width.
 :::
 
 :::{.callout-tip title="✏️ Test your knowledge"}
@@ -236,8 +231,7 @@ the year labels rotated 45 degrees, and finish the cell with `plt.tight_layout()
 and title it.
 
 Then, in a markdown cell: name the four years you would refuse to put into an annual precipitation
-total, and say what number you would have reported for each of them if you had used `.sum()`
-without looking at this figure first.
+total.
 :::
 
 ## Labels are not decoration
@@ -251,9 +245,7 @@ plt.title('what this figure is of')
 ```
 
 The reason is not tidiness. A figure without labels is a picture whose meaning lives in the head of
-whoever made it, which means it stops meaning anything the moment it leaves your screen, including
-when it comes back to your own screen in three weeks. `Temperature (°C)` takes a few seconds to
-type and it is the difference between a figure and a rectangle of ink.
+whoever made it... which means it stops meaning anything to anyone else... including you in three weeks! `Temperature (°C)` takes a few seconds to type, so you should always add labels, even to preliminary figures.
 
 The units matter as much as the words. `trange_min` is not a label. `Minimum winter temperature
 (°F)` is.
@@ -261,7 +253,7 @@ The units matter as much as the words. `trange_min` is not a label. `Minimum win
 ## Two series, one axes, and a legend
 
 Yesterday afternoon we split the Toolik record into its first eleven years and its last ten years,
-and compared them month by month. Rebuild that table:
+and compared them month by month. Let's rebuild that table:
 
 ```{python}
 early = toolik[toolik['year'] <= 1998]
@@ -277,9 +269,9 @@ comparison['change'] = comparison['late'] - comparison['early']
 comparison.round(2)
 ```
 
-Now plot both eras on one axes. Two `plt.plot()` calls with no `plt.figure()` between them draw
+Now let's plot both eras on one axes. Two `plt.plot()` calls with no `plt.figure()` between them draw
 onto the same axes, which is the stacking we saw earlier in the session and is exactly what we want
-here. Give each line a `label=`, then call `plt.legend()` once to draw the key:
+now. Give each line a `label=`, then call `plt.legend()` once to draw the key:
 
 ```{python}
 plt.figure(figsize=(8, 5))
@@ -303,7 +295,7 @@ The `label=` argument says what a series is called. `plt.legend()` collects ever
 axes and draws the key. Miss the `plt.legend()` line and no key appears at all; miss a `label=` on
 one of the series and the key is drawn without it, and without an error to tell you so.
 
-## When a figure is honest and useless
+## When a figure is honest but still useless
 
 Look at the figure you just made and ask what it shows.
 
@@ -333,13 +325,14 @@ plt.show()
 ```
 
 There it is. Tall positive bars in January, February, October, November and December, a short
-positive one in September, and negative bars from March through August. Zero is the line the bars
-hang from, so the sign of each month is readable at a glance. The cold-season warming that took us a table and a paragraph yesterday is
-readable here in a single look.
+positive one in September, and negative bars from March through August. 
+
+Zero is the line the bars hang from, so the sign of each month is readable at a glance. 
+The cold-season warming that took us a table and a paragraph yesterday is readable here in a single look.
 
 :::{.callout-important title="This is the whole job"}
 Choosing what to plot is a larger decision than choosing how to plot it. Both figures above are
-correct, and only one of them answers the question we asked.
+correct, but only one of them answers a question.
 
 When a figure looks like nothing is happening, do not reach for a bigger figure or a brighter
 colour. Ask what quantity your question is actually about, compute that quantity as a column, and
@@ -354,14 +347,13 @@ Then make two figures: the two eras as two labelled lines with a legend, and the
 own as bars. Both need a title, both axes labelled with units.
 
 In a markdown cell, say which of the two figures you would show somebody, and whether the
-precipitation story is as clean as the temperature one. Check `.isnull().sum()` on the
-precipitation column before you commit to an answer.
+precipitation story is as clean as the temperature one.
 :::
 
 ## Points instead of lines
 
 `plt.plot()` draws a line through your points in the order they appear, which is right when the
-x-axis is time or anything else with an order, and wrong otherwise. When you are plotting one
+x-axis is time or anything else with an order... but generally a bad idea otherwise. When you are plotting one
 measurement against another, use `plt.scatter()`:
 
 ```{python}
@@ -380,10 +372,12 @@ plt.show()
 Every day with a precipitation reading, 10,751 of the 11,171, is a dot. Most days are dry whatever the temperature, so the bottom of
 the plot is a solid band. The wettest days are the informative part: the largest totals all sit in
 the warmer half of the range, and below about −20 °C nothing gets past a few millimetres. Cold air
-holds very little water, and the plot shows it without anybody computing anything.
+has a very low saturation vapor pressure, and this plot shows that it's hard 
+for very dry air to generate substantial rainfall.
 
 `plt.scatter()` takes x and y in the same order `plt.plot()` does, and everything you have learned
 this session works on it unchanged: `figsize`, labels, title, legend, rotation, `tight_layout`.
+
 The drawing command changes, but the figure and the axes underneath it do not.
 
 :::{.callout-note}

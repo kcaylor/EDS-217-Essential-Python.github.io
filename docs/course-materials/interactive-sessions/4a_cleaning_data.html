@@ -256,6 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -474,7 +478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Save</strong> with <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), and keep saving as you go.</p></li>
 <li><p>Read in the marine microplastics data:</p></li>
 </ol>
-<div id="4cfa497d" class="cell" data-execution_count="1">
+<div id="c796bc94" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -488,7 +492,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>16,245 rows and 22 columns. Every row is one sample taken somewhere in an ocean, on some day between 1972 and 2022. Most are water samples, but not all: about six thousand of them are sediment grabs or timed shoreline counts, and the sampling method turns out to matter a great deal for what is missing.</p>
-<div id="4c25c58f" class="cell" data-execution_count="2">
+<div id="bb6cabf1" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plastics.columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -522,7 +526,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="what-is-missing" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-missing">What is missing</h2>
 <p>We met this pattern on Day 2, and it should be the first thing you run on any table you did not build yourself:</p>
-<div id="2bcb696f" class="cell" data-execution_count="3">
+<div id="0b7254e1" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plastics.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -554,7 +558,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>Five columns have holes in them, and the three worst are worth looking at one at a time:</p>
-<div id="101cebd7" class="cell" data-execution_count="4">
+<div id="90a51c00" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plastics.isnull().<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -586,7 +590,7 @@ Note
 <section id="dropping-rows-.dropna" class="level2">
 <h2 class="anchored" data-anchor-id="dropping-rows-.dropna">Dropping rows: <code>.dropna()</code></h2>
 <p>The obvious move is to throw away the incomplete rows. <code>.dropna()</code> does that:</p>
-<div id="a1fc6cb8" class="cell" data-execution_count="5">
+<div id="48f235a2" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plastics.dropna().shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -615,7 +619,7 @@ Bare <code>.dropna()</code> is almost always the wrong tool
 <section id="dropping-on-purpose-.dropnasubset..." class="level2">
 <h2 class="anchored" data-anchor-id="dropping-on-purpose-.dropnasubset...">Dropping on purpose: <code>.dropna(subset=[...])</code></h2>
 <p><code>subset=</code> takes a <strong>list</strong> of column names, and only a gap in one of those columns can delete a row:</p>
-<div id="cdd17c5d" class="cell" data-execution_count="6">
+<div id="09bd03c2" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>measured <span class="op">=</span> plastics.dropna(subset<span class="op">=</span>[<span class="st">'Measurement'</span>])</span>
@@ -626,7 +630,7 @@ Bare <code>.dropna()</code> is almost always the wrong tool
 </div>
 </div>
 <p>10,453 rows. Dropping on <code>Measurement</code> is either a defensible cleaning step or a terrible one, depending entirely on what the rows we just deleted have in common. Compare the units before and after to find out:</p>
-<div id="1ea607f5" class="cell" data-execution_count="7">
+<div id="0f4b5def" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Unit'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -639,7 +643,7 @@ pieces kg-1 d.w.      275
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="efdcde35" class="cell" data-execution_count="8">
+<div id="a427b5e8" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>measured[<span class="st">'Unit'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -685,7 +689,7 @@ Missing values are rarely scattered at random
 <h2 class="anchored" data-anchor-id="filling-gaps-.fillnavalue">Filling gaps: <code>.fillna(value)</code></h2>
 <p>Sometimes the missing value means something, and removing the row throws that meaning away. <code>Regions</code> is missing on 8,249 rows not because anyone forgot, but because the sample was in open ocean, outside any named sea.</p>
 <p><code>.fillna()</code> replaces the gaps with a value you choose:</p>
-<div id="d7b6c0db" class="cell" data-execution_count="9">
+<div id="233c04bd" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Regions'</span>] <span class="op">=</span> plastics[<span class="st">'Regions'</span>].fillna(<span class="st">'Unspecified'</span>)</span>
@@ -702,7 +706,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>Two things are worth noticing in that one line. <code>.fillna()</code> hangs off a <strong>column</strong>, not the whole table. And it returns a new column, so you have to assign it back to <code>plastics['Regions']</code> for the change to stick. The assign-it-back rule is the same one we have met every day this week: pandas gives you back a result, and keeping it or discarding it is up to you.</p>
-<div id="2f768e22" class="cell" data-execution_count="10">
+<div id="9e55a7f7" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plastics.isnull().<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -745,7 +749,7 @@ Note
 <section id="duplicated-rows" class="level2">
 <h2 class="anchored" data-anchor-id="duplicated-rows">Duplicated rows</h2>
 <p>The other classic defect is the same sample entered twice. <code>.duplicated()</code> returns a mask, one <code>True</code> or <code>False</code> per row, and <code>.sum()</code> counts them:</p>
-<div id="747b96b2" class="cell" data-execution_count="11">
+<div id="f0a20ffa" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plastics.duplicated().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -756,7 +760,7 @@ Note
 </div>
 <p>Zero. Clean data, then.</p>
 <p>Except no. Look at the columns again:</p>
-<div id="b038b169" class="cell" data-execution_count="12">
+<div id="30143668" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>plastics[[<span class="st">'OBJECTID'</span>, <span class="st">'GlobalID'</span>, <span class="st">'Latitude'</span>, <span class="st">'Longitude'</span>, <span class="st">'Date'</span>, <span class="st">'Measurement'</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -813,7 +817,7 @@ Note
 </div>
 <p><code>OBJECTID</code> and <code>GlobalID</code> are identifiers, assigned one per record when the archive was built. No two rows can ever share them, so no two rows can ever be identical, so <code>.duplicated()</code> can only ever return zero. The answer was never about the data.</p>
 <p><code>subset=</code> fixes this the same way it fixed <code>.dropna()</code>. Point it at the columns that hold the science:</p>
-<div id="0aa688bc" class="cell" data-execution_count="13">
+<div id="663fbb96" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>sample_columns <span class="op">=</span> [<span class="st">'Latitude'</span>, <span class="st">'Longitude'</span>, <span class="st">'Date'</span>, <span class="st">'Measurement'</span>, <span class="st">'Unit'</span>]</span>
@@ -839,7 +843,7 @@ Note
 </div>
 </div>
 <p><code>.drop_duplicates()</code> takes the same argument and returns a table with the repeats removed, keeping the first of each:</p>
-<div id="22e7a933" class="cell" data-execution_count="14">
+<div id="81edf665" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>deduplicated <span class="op">=</span> plastics.drop_duplicates(subset<span class="op">=</span>sample_columns)</span>
@@ -850,7 +854,7 @@ Note
 </div>
 </div>
 <p>The hard part comes next, and pandas cannot do it for you. Are those 856 rows really duplicates? Two tows through the same patch of water on the same day, both finding zero pieces per cubic metre, would look exactly like this and would both be real:</p>
-<div id="8b3f6b41" class="cell" data-execution_count="15">
+<div id="8f285379" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>repeats <span class="op">=</span> plastics[plastics.duplicated(subset<span class="op">=</span>sample_columns, keep<span class="op">=</span><span class="va">False</span>)]</span>
@@ -923,7 +927,7 @@ Note
 </div>
 </div>
 </div>
-<div id="57d7b9b7" class="cell" data-execution_count="16">
+<div id="d7d35b9c" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>(repeats[<span class="st">'Measurement'</span>] <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -963,7 +967,7 @@ Note
 <section id="types-reading-them-and-changing-them" class="level2">
 <h2 class="anchored" data-anchor-id="types-reading-them-and-changing-them">Types: reading them and changing them</h2>
 <p>Every column has a <strong>dtype</strong>, which is the type of data pandas has assigned to that column:</p>
-<div id="5dabebbe" class="cell" data-execution_count="17">
+<div id="bcc0594e" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plastics.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -996,7 +1000,7 @@ dtype: object</code></pre>
 </div>
 <p><code>float64</code> is a decimal number, <code>int64</code> a whole number, and <code>object</code> is the catch-all for text, or for anything pandas could not identify. Three of these dtypes are wrong for what the column actually means, and we deal with each of them below.</p>
 <p><code>Accession Number</code> is stored as an integer:</p>
-<div id="330f926d" class="cell" data-execution_count="18">
+<div id="27bc60a8" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Accession Number'</span>].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1009,7 +1013,7 @@ Name: Accession Number, dtype: int64</code></pre>
 </div>
 </div>
 <p>It is not a quantity. Nobody will ever add two accession numbers together or take their mean. It is a label that happens to be spelled with digits, and leaving it numeric means it can end up averaged into some later summary without anyone noticing. <code>.astype()</code> converts a column to the type you name:</p>
-<div id="7ec7fd1a" class="cell" data-execution_count="19">
+<div id="21c0b774" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Accession Number'</span>] <span class="op">=</span> plastics[<span class="st">'Accession Number'</span>].astype(<span class="bu">str</span>)</span>
@@ -1022,7 +1026,7 @@ Name: Accession Number, dtype: int64</code></pre>
 Name: Accession Number, dtype: object</code></pre>
 </div>
 </div>
-<div id="97188180" class="cell" data-execution_count="20">
+<div id="795f0637" class="cell" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Accession Number'</span>].dtype</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1033,7 +1037,7 @@ Name: Accession Number, dtype: object</code></pre>
 </div>
 <p><code>object</code>, which is what text looks like. The same assign-it-back rule applies: <code>.astype()</code> returns a converted column and changes nothing until you store it.</p>
 <p>The three conversions you will use all week are <code>.astype(float)</code>, <code>.astype(int)</code>, and <code>.astype(str)</code>:</p>
-<div id="1f82c792" class="cell" data-execution_count="21">
+<div id="ff176a53" class="cell" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>plastics[<span class="st">'Latitude'</span>].astype(<span class="bu">int</span>).head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1078,7 +1082,7 @@ Name: Latitude, dtype: int64</code></pre>
 <section id="putting-it-together" class="level2">
 <h2 class="anchored" data-anchor-id="putting-it-together">Putting it together</h2>
 <p>A cleaning pass is a short, ordered list of decisions, each one a line of code with a comment saying why:</p>
-<div id="6a5eb8ea" class="cell" data-execution_count="22">
+<div id="c7dc68a1" class="cell" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>clean <span class="op">=</span> pd.read_csv(url)</span>
@@ -1100,7 +1104,7 @@ Name: Latitude, dtype: int64</code></pre>
 <pre><code>(10453, 22)</code></pre>
 </div>
 </div>
-<div id="1c20edc5" class="cell" data-execution_count="23">
+<div id="ecb07168" class="cell" data-execution_count="23">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>clean.isnull().<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

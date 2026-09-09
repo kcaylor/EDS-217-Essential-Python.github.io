@@ -256,6 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -400,7 +404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
       <h1 class="title">Coding Colab</h1>
-            <p class="subtitle lead">🐧 One Cloud of Points, Three Species</p>
+            <p class="subtitle lead">🙌 A Cloud of Points, Three flocks of 🐧</p>
                       </div>
   </div>
     
@@ -446,13 +450,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>A panda, measuring three different penguins.</em> <a href="https://www.midjourney.com/jobs/b64dc6b3-2e5a-49d0-8dd4-f9b8a8f49145?index=0">MidJourney 5</a></p>
 </div>
 <p>Between 2007 and 2009, researchers at the Palmer Station on the Antarctic Peninsula measured 344 penguins of three species: Adélie, Chinstrap and Gentoo. For each bird they recorded four numbers, the island it was caught on, and its biological sex.</p>
-<p>The resulting file is small, relatively clean by the standards of anything you have opened this week, and it contains a key result that you cannot really express without a figure. A table of summary statistics would steer you away from it.</p>
-<p>Your task this afternoon is to develop that figure and reveal the underlying pattern.</p>
+<p>The resulting file is small, and relatively clean by the standards of anything you have opened this week. It also holds a relationship between two of the bill measurements that runs one way within each species and the other way across all three at once, and a table of means of those same columns points at the wrong one of those two directions.</p>
+<p>This afternoon we will build the figure that separates them, one plot at a time, using the plotting patterns from this morning.</p>
 <p>Work in <strong>pairs</strong>, in one shared notebook, taking turns at the keyboard. Swap every time you finish a numbered task. The person not typing should read through the output (quietly) and explain what the code should produce/calculate before you run it.</p>
-<p>You have 45 minutes.</p>
+<p>We have about 45 minutes for this activity: roughly 40 on the four parts below, and the rest on setting up and on the wrap-up. The times in the headings are rough guides, so please let Cella or Kelly know if you and your partner are getting stuck on any of the tasks!</p>
 <section id="the-patterns-you-need" class="level2">
 <h2 class="anchored" data-anchor-id="the-patterns-you-need">The patterns you need</h2>
-<p>All the patterns we will use are from this morning.</p>
+<p>Every plotting pattern we need this afternoon comes from this morning’s session.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'col'</span>, y<span class="op">=</span><span class="st">'col'</span>)             <span class="co"># one measurement against another</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'col'</span>)                         <span class="co"># the distribution of one column</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>series.values, y<span class="op">=</span>series.index)           <span class="co"># a grouped Series, as bars</span></span>
@@ -471,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Create a notebook named <code>Colab_7C_Penguins.ipynb</code>, with both partners’ names in the title cell, then read the file:</p>
-<div id="7d7c2153" class="cell" data-execution_count="1">
+<div id="d92382f9" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -503,7 +507,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="part-3-relationships-about-15-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-relationships-about-15-minutes">Part 3: Relationships (about 15 minutes)</h2>
-<p>This is the part with the result in it. Do not skip ahead to the answer key, and do not skip question 9.</p>
+<p>Part 3 is where the afternoon’s result shows up, so please work through it in order, and do not skip question 9!</p>
 <ol start="8" type="1">
 <li><p>Draw a scatter plot of <code>body_mass_g</code> against <code>flipper_length_mm</code>, with flipper length across the bottom. Label both axes and title it. Describe the relationship in one sentence.</p></li>
 <li><p>Draw the same figure with <code>hue='species'</code>. Does adding the species change what you would say about the relationship, or just make it prettier? One sentence.</p></li>
@@ -523,8 +527,8 @@ This has a name
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A relationship that runs one way inside every group and the other way across the pooled data is called <strong>Simpson’s paradox</strong>. It is one of the most common ways that a perfectly correct summary of a dataset produces a conclusion that is the reverse of the truth. It happens whenever the groups differ both in what you are measuring and in how many of them there are.</p>
-<p>You found it here in one argument, <code>hue='species'</code>. Without the figure, you would have needed to suspect this pattern first!</p>
+<p>A relationship that runs one way inside every group and the other way across the pooled data is called <strong>Simpson’s paradox</strong>. It is one of the most common ways that a perfectly correct summary of a dataset can produce a conclusion that is the reverse of the truth. It can show up whenever the groups differ both in what you are measuring and in how many of them there are.</p>
+<p>One argument, <code>hue='species'</code>, is what makes it visible here. Without the figure, you would have had to suspect the pattern before you could go looking for it!</p>
 </div>
 </div>
 </section>
@@ -534,9 +538,9 @@ This has a name
 <li><p>Build a Series of mean <code>body_mass_g</code> by species, sorted from heaviest to lightest, and draw it as <strong>horizontal</strong> bars using the <code>.values</code> and <code>.index</code> idiom. Label both axes and title it.</p></li>
 <li><p>Two of those three bars are nearly the same height. Look back at your figure from question 11. In one sentence: would you say those two species are similar birds?</p></li>
 <li><p>Run <code>.agg(['count', 'mean'])</code> on the same grouping and print it. Then build a Series of the number of birds on each island with <code>.value_counts()</code>, and draw <strong>that</strong> as horizontal bars too.</p></li>
-<li><p>Draw a bar chart of mean <code>body_mass_g</code> by species, split by sex. This one is easier with the <code>data=</code> form, because you want two bars per species: <code>sns.barplot(data=birds, x='species', y='body_mass_g', hue='sex')</code>.</p>
+<li><p>Draw a bar chart of mean <code>body_mass_g</code> by species, split by sex. The <code>data=</code> form is easier here, because you want two bars per species: <code>sns.barplot(data=birds, x='species', y='body_mass_g', hue='sex')</code>.</p>
 <p>Then report in one sentence what the sex split adds to your answer to question 14.</p></li>
-<li><p>This is the last task, and it is a bit of a trap (sorry!). Build a wide table with <code>species</code> down the rows, <code>island</code> across the columns, and a <strong>count</strong> of <code>body_mass_g</code> in the cells. This is yesterday morning’s pivot pattern with <code>aggfunc='count'</code>.</p>
+<li><p>This is the last task, and it is a bit of a trap (sorry!). Build a wide table with <code>species</code> down the rows, <code>island</code> across the columns, and a <strong>count</strong> of <code>body_mass_g</code> in the cells. You built the pivot pattern yesterday morning; add <code>aggfunc='count'</code> to it.</p>
 <p>In a markdown cell, using two or three sentences answer the following: given that table, what might go wrong if somebody used this dataset to compare Biscoe island with Dream island?</p></li>
 </ol>
 </section>
@@ -545,7 +549,7 @@ This has a name
 <p>Check that:</p>
 <ul>
 <li>every figure you made has an x-label, a y-label and a title, and the labels give units</li>
-<li>you can say out loud what <code>hue=</code> did in each of the three kinds of plot in which it was invoked</li>
+<li>you can say out loud what <code>hue=</code> did in each of the three kinds of plot we used it in</li>
 <li>your answer to question 12 does not describe either figure as incorrect</li>
 <li>your notebook reads top to bottom as a document, not as a mishmash of cells</li>
 </ul>

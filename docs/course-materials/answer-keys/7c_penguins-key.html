@@ -256,6 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -400,7 +404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
       <h1 class="title">Answer Key</h1>
-            <p class="subtitle lead">🐧 One Cloud of Points, Three Species</p>
+            <p class="subtitle lead">🙌 A Cloud of Points, Three flocks of 🐧</p>
                       </div>
   </div>
     
@@ -447,14 +451,15 @@ How to use this key
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Work the colab through with your partner first, then come here. The code below is <strong>one</strong> correct answer, not the only one. This was a 45 minute pair exercise with very little scaffolding, so there are several reasonable ways to write almost every cell. If your figure looks different but shows the same thing, you were right.</p>
-<p>The written answers matter more than the code. You can already tell whether your code ran. What you cannot check on your own is whether you read the figure correctly, and that is what the green <strong>Answer</strong> boxes are for. Compare your markdown cells against them.</p>
+<p>Work the colab through with your partner first, then come here. The code below is <strong>one</strong> correct answer, not the only one. The colab was a 45 minute pair exercise with very little scaffolding, so there are several reasonable ways to write almost every cell. If your figure looks different but shows the same thing, you were right!</p>
+<p>The written answers matter more than the code. You can already tell whether your code ran, because either it drew the figure or it raised an error. Reading a figure correctly is the half you cannot check on your own, and the green <strong>Answer</strong> boxes are there for exactly that. Compare your markdown cells against them.</p>
+<p>If your answer and the key disagree and you cannot work out why, come find Cella or Kelly.</p>
 <p>⬅️ Back to <a href="../../course-materials/coding-colabs/7c_penguins.html">the colab</a></p>
 </div>
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="62b0916b" class="cell" data-execution_count="1">
+<div id="4aabd8cb" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -469,7 +474,7 @@ How to use this key
 <section id="part-1-what-is-in-the-file" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-what-is-in-the-file">Part 1: What is in the file</h2>
 <p><strong>1. How many rows and columns? What are the column names, and which are numeric?</strong></p>
-<div id="e5062c89" class="cell" data-execution_count="2">
+<div id="cd54b403" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.shape)</span>
@@ -497,12 +502,12 @@ dtype: object</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>344 rows and 7 columns.</strong> Four are numeric: <code>bill_length_mm</code>, <code>bill_depth_mm</code>, <code>flipper_length_mm</code> and <code>body_mass_g</code>. The other three, <code>species</code>, <code>island</code> and <code>sex</code>, are text.</p>
-<p>Notice that <code>body_mass_g</code> is <code>float64</code> even though every mass in the file is a whole number of grams. That is not a decision anybody made about penguins. A column with a missing value cannot be an integer column in pandas, because <code>NaN</code> is a float, so the missing values you are about to find in question 3 have already changed the dtype of the column.</p>
+<p><strong>344 rows and 7 columns.</strong> Four are numeric: <code>bill_length_mm</code>, <code>bill_depth_mm</code>, <code>flipper_length_mm</code> and <code>body_mass_g</code>. The other three columns, <code>species</code>, <code>island</code> and <code>sex</code>, are text.</p>
+<p>Notice that <code>body_mass_g</code> is <code>float64</code> even though every mass in the file is a whole number of grams. The dtype is not a decision anybody made about penguins. A column with a missing value cannot be an integer column in pandas, because <code>NaN</code> is a float, so the missing values that turn up in question 3 have already changed the dtype of the column.</p>
 </div>
 </div>
 <p><strong>2. Count the rows for each <code>species</code>, and separately for each <code>island</code>. Which species is rarest, and which island has the most birds?</strong></p>
-<div id="6813460c" class="cell" data-execution_count="3">
+<div id="8d7dfbf0" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins[<span class="st">'species'</span>].value_counts())</span>
@@ -532,11 +537,11 @@ Name: count, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Chinstrap is the rarest species at 68 birds</strong>, fewer than half the 152 Adelie, and <strong>Biscoe has the most birds at 168</strong>, ahead of Dream at 124 and Torgersen at 52.</p>
-<p>Read those as counts of sampling effort rather than counts of penguins in Antarctica. The researchers caught what they could reach from Palmer Station over three seasons. Nothing in this file says Chinstrap are the rarest bird on the peninsula; it says the field teams handled the fewest of them.</p>
+<p>Read the counts as a record of sampling effort rather than as counts of penguins in Antarctica. The researchers caught what they could reach from Palmer Station over three seasons. Nothing in this file says Chinstrap are the rarest bird on the peninsula; it says the field teams handled the fewest of them.</p>
 </div>
 </div>
 <p><strong>3. Run <code>.isnull().sum()</code>. Two different things are going on in that output. Say what each one probably is.</strong></p>
-<div id="477a7e9e" class="cell" data-execution_count="4">
+<div id="66bacef9" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>penguins.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -562,13 +567,13 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Two missing measurements and nine undetermined sexes, which the output shows as 2 and 11.</strong></p>
-<p>Each of the four measurement columns has exactly 2 nulls, and it is the same two rows in all four: two birds that were logged as caught but never measured. The <code>sex</code> column has 11 nulls, and 2 of those are the same two blank rows, so the remaining 9 are fully measured birds whose sex was left blank on its own.</p>
-<p>That second group is the interesting one. Adult penguins of the same species look alike, so sex is determined from a blood sample rather than by looking at the bird. Those 9 rows are birds that were weighed and measured successfully while the laboratory result for sex was never returned. A null in <code>sex</code> and a null in <code>body_mass_g</code> are two different kinds of event, and only one of them is a gap in the measurements you are about to plot.</p>
+<p><strong>Two birds were never measured, and nine more were measured but never sexed. The output shows those as 2 and 11, because the 11 sex nulls include the 2 unmeasured birds.</strong></p>
+<p>Each of the four measurement columns has exactly 2 nulls, and the same two rows account for them in all four columns: two birds that were logged as caught but never measured. The <code>sex</code> column has 11 nulls, and 2 of those are the same two blank rows, so the remaining 9 are fully measured birds whose sex was left blank on its own.</p>
+<p>The 9 sex-only nulls are the interesting group. Adult penguins of the same species look alike, so sex is determined from a blood sample rather than by looking at the bird. Each of those birds was weighed and measured successfully, but the laboratory result for its sex never came back. A null in <code>sex</code> and a null in <code>body_mass_g</code> are two different kinds of event, and only the missing mass is a gap in the measurements you go on to plot.</p>
 </div>
 </div>
 <p><strong>4. Build a clean table called <code>birds</code> by dropping every row with any missing value, and report how many rows you lost. Then re-run the species counts on <code>birds</code> and say whether the losses fell evenly across the three species.</strong></p>
-<div id="455a3163" class="cell" data-execution_count="5">
+<div id="b698ef7b" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>birds <span class="op">=</span> penguins.dropna().copy()</span>
@@ -596,14 +601,14 @@ Name: count, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>11 rows lost, 344 down to 333, and no, the losses were not even.</strong> Adelie went from 152 to 146 and Gentoo from 124 to 119, while Chinstrap stayed at 68. Every bird dropped was an Adelie or a Gentoo.</p>
-<p>Two things follow. First, 11 is not 13, even though the null counts in question 3 add up to 19: <code>dropna()</code> removes rows, and the two unmeasured birds were counted once in each of five columns. Second, dropping 3.2 percent of a file is cheap, but a drop that is uneven across the groups you plan to compare is worth stating explicitly. Here it is small enough not to change any conclusion below, and you only know that because you checked.</p>
+<p>Two things follow. First, 11 is not the 13 you get by adding the 2 to the 11, and it is not the 19 you get by adding up every null in question 3, because <code>dropna()</code> removes whole rows rather than nulls: the two unmeasured birds were counted once in each of five columns, and between them they cost you two rows. Second, dropping 3.2 percent of a file is cheap, but a drop that is uneven across the groups you plan to compare is worth stating explicitly. Here the drop is small enough not to change any conclusion below, and you only know that because you checked.</p>
 </div>
 </div>
 </section>
 <section id="part-2-distributions" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-distributions">Part 2: Distributions</h2>
 <p><strong>5. Draw a histogram of <code>flipper_length_mm</code> for the whole table. Label the x-axis with units and give the figure a title. Describe the shape in one sentence.</strong></p>
-<div id="0b91624a" class="cell" data-execution_count="6">
+<div id="55710225" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -631,11 +636,11 @@ Name: count, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>The distribution has two humps, not one</strong>: a tall one centred near 190 mm and a lower, broader one near 215 mm, separated by a dip around 200 to 205 mm.</p>
-<p>A single hump would let you talk about a typical flipper and a spread around it. Two humps say the 333 birds are a mixture of at least two kinds of thing, and until you know what the kinds are, the overall mean is describing the gap between them.</p>
+<p>A single hump would let you talk about a typical flipper and a spread around it. Two humps mean the 333 birds are a mixture of at least two kinds of thing, and until you know what the kinds are, the overall mean is describing the gap between them.</p>
 </div>
 </div>
 <p><strong>6. Draw it again, split by <code>species</code>. In a markdown cell, say what the two humps in question 5 turned out to be, and whether “the average penguin has a flipper of about 201 mm” is a useful sentence.</strong></p>
-<div id="d8f6b899" class="cell" data-execution_count="7">
+<div id="29ae153a" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -672,12 +677,12 @@ birds within 5 mm of the mean: 56</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>The right hump is Gentoo on its own; the left hump is Adelie and Chinstrap piled on top of each other.</strong> There are three species but only two humps, because flipper length separates Gentoo from the other two and does almost nothing to separate Adelie from Chinstrap.</p>
-<p>The sentence about 201 mm is arithmetically correct, but it is not a useful sentence. The mean flipper length is 200.97 mm, and that value sits in the dip between the humps: only 57 of the 333 birds are within 5 mm of it. The average penguin, described that way, is a bird that hardly exists in the file. A mean of a mixture falls between the parts of the mixture, so when the parts are far apart, few individual birds are close to the mean.</p>
+<p><strong>The right hump is Gentoo on its own; the left hump is Adelie and Chinstrap piled on top of each other.</strong> There are three species but only two humps, because flipper length separates Gentoo from the other two species and does almost nothing to separate Adelie from Chinstrap.</p>
+<p>The sentence about 201 mm is arithmetically correct, but it is not a useful sentence. The mean flipper length is 200.97 mm, and that value sits in the dip between the humps: only 56 of the 333 birds are within 5 mm of it. The average penguin, described that way, is a bird that hardly exists in the file. A mean of a mixture falls between the parts of the mixture, so when the parts are far apart, few individual birds are close to the mean.</p>
 </div>
 </div>
 <p><strong>7. Pick one of <code>bill_length_mm</code>, <code>bill_depth_mm</code> or <code>body_mass_g</code> and do the same pair of figures for it. Does that measurement separate the species as cleanly as flipper length does?</strong></p>
-<div id="5d26abf0" class="cell" data-execution_count="8">
+<div id="3ca60414" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -704,15 +709,15 @@ birds within 5 mm of the mean: 56</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>No.&nbsp;Body mass separates Gentoo from the other two, but far less cleanly than flipper length does.</strong> The lightest Gentoo weighs 3950 g, and 64 of the 214 Adelie and Chinstrap birds, close to a third of them, weigh at least that much. For flipper length the equivalent overlap is 15 birds out of 214.</p>
-<p>Mass cannot separate Adelie from Chinstrap, as question 14 comes back to. Mass also includes variation that has nothing to do with species: a bird’s sex and its condition on the day it was caught both move it, which is part of why the humps smear into each other. Any of the four columns is a defensible choice here; what matters is that you compared the overlap rather than comparing the peaks.</p>
+<p><strong>No.&nbsp;Body mass separates Gentoo from the other two species, but far less cleanly than flipper length does.</strong> The lightest Gentoo weighs 3950 g, and 64 of the 214 Adelie and Chinstrap birds, close to a third of them, weigh at least that much. For flipper length the equivalent overlap is 15 birds out of 214.</p>
+<p>Mass cannot separate Adelie from Chinstrap, as question 14 comes back to. Mass also includes variation that has nothing to do with species: a bird’s sex and its condition on the day it was caught both move it, which is part of why the humps smear into each other. Any of the four columns is a defensible choice here, as long as you compared the overlap between the groups rather than the distance between the peaks.</p>
 </div>
 </div>
 </section>
 <section id="part-3-relationships" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-relationships">Part 3: Relationships</h2>
 <p><strong>8. Draw a scatter plot of <code>body_mass_g</code> against <code>flipper_length_mm</code>, with flipper length across the bottom. Label both axes and title it. Describe the relationship in one sentence.</strong></p>
-<div id="a562b9a1" class="cell" data-execution_count="9">
+<div id="f56eba7e" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -744,7 +749,7 @@ birds within 5 mm of the mean: 56</code></pre>
 </div>
 </div>
 <p><strong>9. Draw the same figure with <code>hue='species'</code>. Does adding the species change what you would say about the relationship, or just make it prettier? One sentence.</strong></p>
-<div id="c36a1747" class="cell" data-execution_count="10">
+<div id="664ad483" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -777,7 +782,7 @@ birds within 5 mm of the mean: 56</code></pre>
 </div>
 <p><strong>10. Now a different pair of columns. Draw a scatter plot of <code>bill_depth_mm</code> against <code>bill_length_mm</code>, with bill length across the bottom, and no <code>hue=</code>. Label it.</strong></p>
 <p><strong>Before you go on, write down in a markdown cell what this figure says: as a penguin’s bill gets longer, does it get deeper or shallower?</strong></p>
-<div id="b729c1af" class="cell" data-execution_count="11">
+<div id="6d13ad80" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -806,11 +811,11 @@ birds within 5 mm of the mean: 56</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Shallower.</strong> The cloud runs downward to the right: the birds with the longest bills, out past 50 mm, have depths near 15 mm, while the birds with bills near 35 mm are the deepest, up near 20 mm. Read straight, this figure says that long bills are shallow bills.</p>
-<p>Write that down before you draw question 11, and do not go back and soften it afterwards. The point of the next two questions is what happens to a conclusion you have already committed to.</p>
+<p>Write it down before you draw question 11, and do not go back and soften it afterwards. Questions 11 and 12 ask what happens to a conclusion you have already committed to, and they only work if you committed to one.</p>
 </div>
 </div>
 <p><strong>11. Draw it once more with <code>hue='species'</code>.</strong></p>
-<div id="3624494a" class="cell" data-execution_count="12">
+<div id="95ca9507" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -841,14 +846,14 @@ birds within 5 mm of the mean: 56</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>The three species occupy three separate corners of the figure. Adelie have short, deep bills and sit at the upper left, around 39 mm by 18 mm; Chinstrap have long, deep bills at the upper right, around 49 mm by 18 mm; Gentoo have long, shallow bills at the lower right, around 48 mm by 15 mm. The downward trend in question 10 is the line you get by drawing from the Adelie corner to the Gentoo corner, so it is measuring the difference between two species rather than what happens to a bill as it gets longer. Inside each of the three clouds the slope is upward, because within a species a bigger bill is bigger in both directions at once. Both figures describe the data they were given accurately; they answer different questions, and only the second one is a question about penguins rather than about the composition of the sample.</p>
-<p><strong>What earns full marks:</strong> naming where at least two of the three species sit, saying explicitly that the pooled trend is a comparison between groups, and describing both figures as correct answers to different questions. Answers that stop at “the species are different” have described the figure without explaining the reversal. Answers that call the pooled figure misleading are fine; answers that call it wrong are not, since it is an accurate summary of a sample that happens to contain three species in these proportions.</p>
+<p><strong>What earns full marks:</strong> naming where at least two of the three species sit, saying explicitly that the pooled trend is a comparison between groups, and describing both figures as correct answers to different questions. Answers that stop at “the species are different” have described the figure without explaining the reversal. Answers that call the pooled figure misleading are fine; answers that call it wrong are not, because it is an accurate summary of a sample that happens to contain three species in these proportions.</p>
 </div>
 </div>
 </section>
 <section id="part-4-summaries-and-what-they-hide" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-summaries-and-what-they-hide">Part 4: Summaries, and what they hide</h2>
 <p><strong>13. Build a Series of mean <code>body_mass_g</code> by species, sorted from heaviest to lightest, and draw it as horizontal bars using the <code>.values</code> and <code>.index</code> idiom. Label both axes and title it.</strong></p>
-<div id="c0958fc2" class="cell" data-execution_count="13">
+<div id="c01b15dc" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mean_mass <span class="op">=</span> birds.groupby(<span class="st">'species'</span>)[<span class="st">'body_mass_g'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
@@ -884,7 +889,7 @@ birds within 5 mm of the mean: 56</code></pre>
 </div>
 </div>
 <p><strong>15. Run <code>.agg(['count', 'mean'])</code> on the same grouping and print it. Then build a Series of the number of birds on each island with <code>.value_counts()</code>, and draw that as horizontal bars too.</strong></p>
-<div id="b2ba19d4" class="cell" data-execution_count="14">
+<div id="48188fc6" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(birds.groupby(<span class="st">'species'</span>)[<span class="st">'body_mass_g'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>]).<span class="bu">round</span>(<span class="dv">1</span>))</span>
@@ -937,9 +942,9 @@ Name: count, dtype: int64</code></pre>
 <p><strong>The islands are sampled very unevenly: Biscoe 163 birds, Dream 123, Torgersen 47.</strong> Torgersen contributes about one bird in seven. The imbalance is worth remembering in question 17, where the islands are compared, because a difference between islands is partly a difference in which birds were caught there and how many.</p>
 </div>
 </div>
-<p><strong>16. Draw a bar chart of mean <code>body_mass_g</code> by species, split by sex.</strong></p>
+<p><strong>16. Draw a bar chart of mean <code>body_mass_g</code> by species, split by sex. The <code>data=</code> form is easier here, because you want two bars per species: <code>sns.barplot(data=birds, x='species', y='body_mass_g', hue='sex')</code>.</strong></p>
 <p><strong>Then report in one sentence what the sex split adds to your answer to question 14.</strong></p>
-<div id="66049431" class="cell" data-execution_count="15">
+<div id="57a9c8e2" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -968,12 +973,12 @@ Name: count, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>It shows that the near tie in question 13 is an average over two groups that rank in opposite orders.</strong> Adelie males average about 4040 g against Chinstrap males at about 3940 g, so Adelie are the heavier bird among males, while Adelie females average about 3370 g against Chinstrap females at about 3530 g, so Chinstrap are the heavier bird among females. Pooling the sexes cancels the two differences against each other and produces the 27 g gap.</p>
-<p>The sex gap inside a species is also far larger than the gap between these two species: roughly 680 g for Adelie and 410 g for Chinstrap, against 27 g. If the sample had held slightly more Adelie males, the two bars in question 13 would have swapped places without a single penguin changing. That is the same problem as question 12 in a smaller frame.</p>
+<p>The sex gap inside a species is also far larger than the gap between these two species: roughly 680 g for Adelie and 410 g for Chinstrap, against 27 g. If the sample had held slightly more Adelie males, the two bars in question 13 would have swapped places without a single penguin changing. A ranking that depends on which birds happened to be caught is the same problem as question 12, in a smaller frame.</p>
 </div>
 </div>
-<p><strong>17. This is the last task, and it is a bit of a trap (sorry!). Build a wide table with <code>species</code> down the rows, <code>island</code> across the columns, and a count of <code>body_mass_g</code> in the cells.</strong></p>
+<p><strong>17. This is the last task, and it is a bit of a trap (sorry!). Build a wide table with <code>species</code> down the rows, <code>island</code> across the columns, and a count of <code>body_mass_g</code> in the cells. You built the pivot pattern yesterday morning; add <code>aggfunc='count'</code> to it.</strong></p>
 <p><strong>In a markdown cell, using two or three sentences answer the following: given that table, what might go wrong if somebody used this dataset to compare Biscoe island with Dream island?</strong></p>
-<div id="0667785d" class="cell" data-execution_count="16">
+<div id="52ea43aa" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>birds.pivot_table(index<span class="op">=</span><span class="st">'species'</span>, columns<span class="op">=</span><span class="st">'island'</span>, values<span class="op">=</span><span class="st">'body_mass_g'</span>, aggfunc<span class="op">=</span><span class="st">'count'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1023,7 +1028,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>An extra check, not asked for, that puts a number on the answer below.</p>
-<div id="88e79cec" class="cell" data-execution_count="17">
+<div id="f644d220" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>adelie <span class="op">=</span> birds[birds[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Adelie'</span>]</span>
@@ -1079,8 +1084,8 @@ Name: count, dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Island and species are confounded, so any island comparison is really a species comparison labelled as an island comparison.</strong> Chinstrap appear only on Dream, with 68 birds, and Gentoo only on Biscoe, with 119. Biscoe is 73 percent Gentoo and Dream is 0 percent Gentoo, so a mean body mass for Biscoe is mostly a mean for the heaviest species in the file, and a mean for Dream is not.</p>
-<p>The <code>NaN</code> cells are not missing data. A count of an empty group is zero birds observed, and pandas prints <code>NaN</code> because <code>pivot_table</code> found no rows to count. Read those blanks as the shape of the sampling design.</p>
-<p>Adelie is the only species caught on all three islands, so it is the only honest island comparison available, and it comes out flat: 3709.7 g on Biscoe over 44 birds, 3701.4 g on Dream over 55, and 3708.5 g on Torgersen over 47, a spread of 8 g. The islands are indistinguishable once you hold species constant. No amount of extra data would fix the Biscoe against Dream comparison, because the problem is in which birds live where and not in how many were caught.</p>
+<p>The <code>NaN</code> cells are not missing data. A count of an empty group is zero birds observed, and pandas prints <code>NaN</code> because <code>pivot_table</code> found no rows to count. Read the blanks as part of the sampling design rather than as data that went missing.</p>
+<p>Adelie is the only species caught on all three islands, so it is the only honest island comparison available, and it comes out flat: 3709.7 g on Biscoe over 44 birds, 3701.4 g on Dream over 55, and 3708.5 g on Torgersen over 47, a spread of 8 g. The islands are indistinguishable once you hold species constant. Catching more birds would not fix the Biscoe against Dream comparison, because the problem is in which species live where rather than in how many birds were caught.</p>
 </div>
 </div>
 </section>
@@ -1088,10 +1093,10 @@ Name: count, dtype: int64</code></pre>
 <h2 class="anchored" data-anchor-id="where-the-marks-are">Where the marks are</h2>
 <p>If you compare your notebook against this key, look for these four things before you look at anything else.</p>
 <ol type="1">
-<li><strong>Your question 12 answer names where the species sit and calls both figures correct.</strong> The pooled trend runs from the Adelie corner to the Gentoo corner, so it compares species; the within-species slopes describe bills. An answer that says only “the species are different” has described the figure without explaining the reversal.</li>
-<li><strong>You said the mean flipper length is not a useful summary, and said why.</strong> 200.97 mm sits in the dip between the humps, and only 57 of 333 birds are within 5 mm of it. Reporting the mean as the typical penguin is the mistake this whole colab is built around.</li>
-<li><strong>You did not call Adelie and Chinstrap similar birds</strong> on the strength of means 27 g apart, when their bills differ by about 10 mm and their sexes rank in opposite orders.</li>
-<li><strong>Every figure has an x-label, a y-label, a title, and units on the measurement axes.</strong> Four of your figures differ from another figure only by <code>hue=</code>, so the titles are what stops a reader, including you next week, from confusing them.</li>
+<li><strong>Your question 12 answer should name where the species sit and call both figures correct.</strong> The pooled trend runs from the Adelie corner to the Gentoo corner, so it compares species; the within-species slopes describe bills. An answer that says only “the species are different” has described the figure without explaining the reversal.</li>
+<li><strong>You should have said that the mean flipper length is not a useful summary, and said why.</strong> 200.97 mm sits in the dip between the humps, and only 56 of 333 birds are within 5 mm of it, so reporting it as the typical penguin describes a bird that hardly exists in the file.</li>
+<li><strong>You should not have called Adelie and Chinstrap similar birds</strong> on the strength of means 27 g apart, when their bills differ by about 10 mm and their sexes rank in opposite orders.</li>
+<li><strong>Every figure should have an x-label, a y-label, a title, and units on the measurement axes.</strong> Four of your figures differ from another figure only by <code>hue=</code>, so the titles are the only thing stopping a reader, including you next week, from confusing them.</li>
 </ol>
 <p>⬅️ Back to <a href="../../course-materials/coding-colabs/7c_penguins.html">the colab</a></p>
 

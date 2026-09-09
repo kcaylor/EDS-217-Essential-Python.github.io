@@ -256,6 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -477,7 +481,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Save</strong> with <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), and keep saving as you go.</p></li>
 <li><p>Read in the Goleta air quality file, which you have now met twice:</p></li>
 </ol>
-<div id="9ae884ee" class="cell" data-execution_count="1">
+<div id="109872ac" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -500,7 +504,7 @@ Name: count, dtype: int64</code></pre>
 <section id="two-tables-out-of-one" class="level2">
 <h2 class="anchored" data-anchor-id="two-tables-out-of-one">Two tables out of one</h2>
 <p>Before we can join two tables we need two tables, so we will start by making them. Both lines below are Wednesday’s filter pattern, and nothing else:</p>
-<div id="312f289a" class="cell" data-execution_count="2">
+<div id="e8f6c4c2" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>o3 <span class="op">=</span> goleta[goleta[<span class="st">'parameter'</span>] <span class="op">==</span> <span class="st">'o3'</span>].copy()</span>
@@ -516,7 +520,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>Now we have 711 hours of ozone and 734 hours of PM2.5. The two instruments did not record the same number of hours, which is important! A gap like that usually says something about how the data was (or was not) collected.</p>
 <p>Each new table has fifteen columns, and twelve of them hold the same value in every row. Keep only the two columns that matter, and give the measurement column a name that says what it is. One method per line, the way we learned last Thursday:</p>
-<div id="f3d7de6b" class="cell" data-execution_count="3">
+<div id="3eaec91e" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>o3 <span class="op">=</span> o3[[<span class="st">'datetimeLocal'</span>, <span class="st">'value'</span>]]</span>
@@ -626,7 +630,7 @@ Note
 <p>A three-row table keeps the arithmetic easy to follow, but the files we merge in practice are longer than that and their keys line up much less tidily. In the second figure, <code>df1</code> and <code>df2</code> are drawn against a shared key axis running down the page, so every row sits at the position of its own key, and a missing key shows up as a gap in the column rather than as a number you would have to go and count. Neither table covers the whole axis, and the stretches they are missing are not the same stretches.</p>
 <p>The colours show where each part of a row came from: blue marks a key that is present in the result, green a value taken from <code>df1</code>, orange a value taken from <code>df2</code>, and a pale outlined box a <code>NaN</code>, where the key matched on one side only. <code>inner</code> keeps only the keys that both tables cover, so its column is the shortest one in the figure. <code>outer</code> keeps every key that either table covers, so its column is the longest, and the price of those extra rows is a gap wherever only one of the two tables had a value. <code>left</code> and <code>right</code> each keep one table’s keys intact and fill in from the other table wherever a key matches.</p>
 <p>Compare the two figures before you go on. The first figure tells us what each <code>how=</code> keeps, and the second tells us what each one costs in rows and in <code>NaN</code> values, which is worth checking on your own data before you trust a merged table.</p>
-<div id="d09ee34d" class="cell" data-execution_count="4">
+<div id="991c9130" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>paired <span class="op">=</span> pd.merge(o3, pm25, on<span class="op">=</span><span class="st">'datetimeLocal'</span>)</span>
@@ -692,7 +696,7 @@ Note
 <li><code>on=</code> names the column that both tables share. Pandas looks up every value of the left table’s key in the right table’s key, and glues the matching rows together end to end.</li>
 </ul>
 <p>The result has one row for every hour that appears in <strong>both</strong> tables, and the columns of both. For the first time in this course, one row of your data holds two different measurements!</p>
-<div id="e920ceb2" class="cell" data-execution_count="5">
+<div id="d5f3f0eb" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>paired.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -708,7 +712,7 @@ Note
 <p><strong>Where did the other rows go?</strong></p>
 <p>You will want to ask that question every single time you merge two tables, because nothing in pandas checks the row count for you. A merge that discards a third of your data looks exactly like a merge that discards nothing.</p>
 <p>By default, <code>pd.merge()</code> keeps only the rows whose key appears in <strong>both</strong> tables. The default has a name, and you should write it out:</p>
-<div id="f004ddeb" class="cell" data-execution_count="6">
+<div id="086651a0" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>inner <span class="op">=</span> pd.merge(o3, pm25, on<span class="op">=</span><span class="st">'datetimeLocal'</span>, how<span class="op">=</span><span class="st">'inner'</span>)</span>
@@ -740,7 +744,7 @@ Note
 <h2 class="anchored" data-anchor-id="keeping-everything-on-one-side">Keeping everything on one side</h2>
 <p>Very often you do not want the intersection. You have a table you care about, and a second table of extra information you would like to attach <strong>where it exists</strong>, without losing rows where it does not.</p>
 <p><code>how='left'</code> does exactly that: keep every row of the left table, attach the right table where the key matches, and fill in nulls where it does not.</p>
-<div id="999270f5" class="cell" data-execution_count="7">
+<div id="6934e61f" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> pd.merge(o3, pm25, on<span class="op">=</span><span class="st">'datetimeLocal'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
@@ -752,7 +756,7 @@ Note
 </div>
 </div>
 <p>All 711 ozone hours survive. Seven of them have no PM2.5 reading to attach, and we find those seven with the help of our good friend <code>isnull()</code>:</p>
-<div id="8200e7a1" class="cell" data-execution_count="8">
+<div id="348c94c3" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>left.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -765,7 +769,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><code>how='right'</code> does the mirror image, keeping every row of the right table:</p>
-<div id="85aa51ff" class="cell" data-execution_count="9">
+<div id="abc287d4" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>right <span class="op">=</span> pd.merge(o3, pm25, on<span class="op">=</span><span class="st">'datetimeLocal'</span>, how<span class="op">=</span><span class="st">'right'</span>)</span>
@@ -782,7 +786,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>And <code>how='outer'</code> keeps everything from both sides, filling nulls in both directions:</p>
-<div id="7364ed84" class="cell" data-execution_count="10">
+<div id="fe6f9564" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>outer <span class="op">=</span> pd.merge(o3, pm25, on<span class="op">=</span><span class="st">'datetimeLocal'</span>, how<span class="op">=</span><span class="st">'outer'</span>)</span>
@@ -849,7 +853,7 @@ dtype: int64</code></pre>
 <p>The inner join threw away 30 PM2.5 hours and 7 ozone hours, and it is tempting to shrug at 37 rows out of 1,445 and move on.</p>
 <p>Please don’t! Look at <strong>which</strong> rows went missing before you decide they do not matter.</p>
 <p>On Friday we handed you a line that pulls the hour out of a timestamp. Here it is again, doing the same job on the rows the join could not match:</p>
-<div id="023f03b2" class="cell" data-execution_count="11">
+<div id="58f2af40" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>missing_o3 <span class="op">=</span> right[right[<span class="st">'o3_ppm'</span>].isnull()].copy()</span>
@@ -863,7 +867,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>Every single one of the thirty PM2.5 hours with no ozone beside it is at <strong>03:00</strong>. Not spread across the day: all of them, all thirty, at three in the morning, on thirty different days.</p>
-<div id="f9ef5b88" class="cell" data-execution_count="12">
+<div id="c475423e" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>o3[<span class="st">'datetimeLocal'</span>].<span class="bu">str</span>[<span class="dv">11</span>:<span class="dv">13</span>].value_counts().sort_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -929,7 +933,7 @@ This is the habit
 <h2 class="anchored" data-anchor-id="what-a-joined-table-is-for">What a joined table is for</h2>
 <p>Now that the two pollutants are in the same row, we can ask the question one table could not answer. On Friday we found that ozone peaks in the early afternoon and PM2.5 peaks around midday, from which it is tempting to conclude that the bad hours are the same hours.</p>
 <p>Test it. The top-N pattern from Wednesday, applied to the joined table:</p>
-<div id="2cc0f17f" class="cell" data-execution_count="13">
+<div id="04fa1de9" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>paired.sort_values(<span class="st">'pm25_ugm3'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1016,7 +1020,7 @@ This is the habit
 </div>
 <p>Read the timestamps and the ozone column together. The ten smokiest hours of the month are not one group but two. Four of them are at <strong>01:00</strong>, and three of those four sit in the bottom half of the month’s ozone readings, one of them in the bottom six percent. The other six hours are daylight hours, and four of those six are in the top two percent of the month’s ozone readings.</p>
 <p>Now average the ten together, and compare that average with the file as a whole:</p>
-<div id="c6c6aca2" class="cell" data-execution_count="14">
+<div id="f151be13" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(paired[<span class="st">'o3_ppm'</span>].mean())</span>
@@ -1035,7 +1039,7 @@ This is the habit
 <h2 class="anchored" data-anchor-id="when-the-key-columns-have-different-names">When the key columns have different names</h2>
 <p>The join pattern so far assumes both tables call the key by the same name. Real files rarely line up that neatly, so pandas lets you name the two key columns separately: <em>this column here, that column there</em>.</p>
 <p>Here is a case you have already met. On Friday we grouped the national parks visitor records by <code>region</code> and got a handful of two-letter codes back, with no idea what they meant. Count the codes in the output below, because you will want the number in a moment:</p>
-<div id="cb2afcba" class="cell" data-execution_count="15">
+<div id="1702ab64" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://eds-217-essential-python.github.io/data/national_parks.csv'</span></span>
@@ -1061,7 +1065,7 @@ Name: count, dtype: int64</code></pre>
 <p>Eight codes. Note that this table is not quite Friday’s: Friday’s also kept only the rows whose <code>unit_type</code> is <code>National Park</code>, and the file you have just read in keeps every unit, so it has one code in it that Friday’s did not.</p>
 <p>Codes like these are extremely common, because whoever built the file was saving space and already knew what they meant. The fix is a <strong>lookup table</strong>: a small table, often one you write yourself, that translates codes into something a reader can use.</p>
 <p>Here is one for the seven geographic regions, which are the ones you met on Friday:</p>
-<div id="12c807a5" class="cell" data-execution_count="16">
+<div id="7fb92142" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>regions <span class="op">=</span> pd.DataFrame({</span>
@@ -1127,7 +1131,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>Seven rows and two columns, typed by hand, and it is about to make 21,000 rows readable. The key is <code>region</code> on the left and <code>code</code> on the right, so you name both:</p>
-<div id="c1ac718f" class="cell" data-execution_count="17">
+<div id="e5f55c6e" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>labelled <span class="op">=</span> pd.merge(parks, regions, left_on<span class="op">=</span><span class="st">'region'</span>, right_on<span class="op">=</span><span class="st">'code'</span>)</span>
@@ -1215,7 +1219,7 @@ Note
 <section id="the-merge-that-quietly-lost-something" class="level2">
 <h2 class="anchored" data-anchor-id="the-merge-that-quietly-lost-something">The merge that quietly lost something</h2>
 <p>Check the row count, the way we now do after every merge:</p>
-<div id="fb22041b" class="cell" data-execution_count="18">
+<div id="d66e503a" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(parks.shape)</span>
@@ -1228,7 +1232,7 @@ Note
 </div>
 <p>21,174 rows went in and 21,098 came out. Seventy-six rows did not survive, because the default is an inner join and their region code is missing from your lookup table.</p>
 <p>Find them the way you found the 3 a.m. gap:</p>
-<div id="096c93e3" class="cell" data-execution_count="19">
+<div id="eb9e5e0c" class="cell" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>checked <span class="op">=</span> pd.merge(parks, regions, left_on<span class="op">=</span><span class="st">'region'</span>, right_on<span class="op">=</span><span class="st">'code'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>

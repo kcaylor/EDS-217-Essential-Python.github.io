@@ -22,12 +22,9 @@ In our first session this morning we drew every figure by handing matplotlib two
 numbers and then describing, one command at a time, what we wanted done to them.
 
 Naming each command works, and it is worth knowing, because underneath every Python figure you
-will ever make there is a matplotlib figure and a matplotlib axes. But a call written that way
-only ever receives the numbers. `plt.scatter(wet_days['Daily_AirTemp_Mean_C'],
-wet_days['Daily_Precip_Total_mm'])` gets two sequences and nothing else: no DataFrame, no column
-names, and no way to reach the rest of the table.
+will ever make there is a matplotlib figure and a matplotlib axes. 
 
-**seaborn** takes the other approach. You hand over the whole table plus the names of the columns
+**seaborn** takes a different approach. You hand over the whole table plus the names of the columns
 you want plotted, and seaborn does the drawing. Because the whole table went in, seaborn can also
 use the columns you did not plot, including the one that says which group each row belongs to.
 
@@ -93,11 +90,11 @@ survey = survey.rename(columns={'collection date': 'collection_date'})
 survey.shape
 ```
 
-255 rows from six sites, collected over the 2025 field season. Each row is one sample, with
+We end up with 255 rows from six sites, collected over the 2025 field season. Each row is one sample, with
 four measurements on it: temperature, pH, dissolved oxygen and conductivity.
 
 The standard import line is `import seaborn as sns`, and `sns` is as fixed a convention as `pd`
-and `plt`, though nobody seems to remember why!
+and `plt`. Most people (and even many bots!) assume there is no reason for this, but [true West Wing fans know the truth](https://pbs.twimg.com/media/C3C6q1ZUYAALXX0.jpg).
 
 ## The same figure, said two ways
 

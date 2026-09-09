@@ -256,6 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Session 6c - 📆 A Date Is Not a Number</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../course-materials/live-coding/70_building_a_table.html">
+ <span class="dropdown-text">Session 7.0 - 🧱 Building a Table Row by Row</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../course-materials/interactive-sessions/7a_matplotlib.html">
  <span class="dropdown-text">Session 7a - 🖼️ The Anatomy of a Figure</span></a>
   </li>  
@@ -454,7 +458,7 @@ How to use this key
 </div>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="a4796cd7" class="cell" data-execution_count="1">
+<div id="680d2c54" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -469,7 +473,7 @@ How to use this key
 <section id="part-1-making-one-table-out-of-two" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-making-one-table-out-of-two">Part 1: Making one table out of two</h2>
 <p><strong>1. How many rows does each table have, and what columns? What is the earliest and latest <code>Date</code> in each? (<code>.min()</code> and <code>.max()</code> on the <code>Date</code> column will do it, because these dates are text in <code>%Y-%m-%d</code> form and text in that form sorts correctly.)</strong></p>
-<div id="924b3f9f" class="cell" data-execution_count="2">
+<div id="532a9e25" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temp.shape, <span class="bu">list</span>(temp.columns))</span>
@@ -500,7 +504,7 @@ How to use this key
 </div>
 </div>
 <p><strong>2. Merge the two tables on <code>Date</code>, with the default <code>how=</code>. How many rows come back?</strong></p>
-<div id="39940602" class="cell" data-execution_count="3">
+<div id="d43d4829" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>inner <span class="op">=</span> pd.merge(temp, co2, on<span class="op">=</span><span class="st">'Date'</span>)</span>
@@ -525,7 +529,7 @@ How to use this key
 </div>
 </div>
 <p><strong>3. Merge them again with <code>how='left'</code>, putting <code>temp</code> on the left. How many rows now, and how many nulls, in which column?</strong></p>
-<div id="ca016603" class="cell" data-execution_count="4">
+<div id="7839c437" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> pd.merge(temp, co2, on<span class="op">=</span><span class="st">'Date'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
@@ -555,7 +559,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>4. In a markdown cell: the two merges differ by 940 rows. Provide a sentence explaining what those 940 rows contain (your answer to question 1 should already have this).</strong></p>
-<div id="c20f9401" class="cell" data-execution_count="5">
+<div id="f10068b2" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>missing <span class="op">=</span> left[left[<span class="st">'CO2Concentration'</span>].isnull()]</span>
@@ -604,7 +608,7 @@ dtype: int64</code></pre>
 <section id="part-2-making-the-dates-real" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-making-the-dates-real">Part 2: Making the dates real</h2>
 <p><strong>6 and 7. Build <code>climate</code>, parse the dates, add <code>year</code> and <code>month</code>.</strong></p>
-<div id="bff9bc6b" class="cell" data-execution_count="6">
+<div id="f306ec43" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>climate <span class="op">=</span> pd.merge(temp, co2, on<span class="op">=</span><span class="st">'Date'</span>).copy()</span>
@@ -615,7 +619,7 @@ dtype: int64</code></pre>
 <pre><code>dtype('&lt;M8[ns]')</code></pre>
 </div>
 </div>
-<div id="4bf06978" class="cell" data-execution_count="7">
+<div id="4b61cb5d" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>climate[<span class="st">'year'</span>] <span class="op">=</span> climate[<span class="st">'date'</span>].dt.year</span>
@@ -693,7 +697,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><strong>8. Build a table of annual means: group by <code>year</code> and report the count of months, the mean of <code>MonthlyAnomaly</code>, and the mean of <code>CO2Concentration</code>. Show the first three rows and the last three rows.</strong></p>
-<div id="d7cb2774" class="cell" data-execution_count="8">
+<div id="b9265170" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>annual <span class="op">=</span> climate.groupby(<span class="st">'year'</span>).agg({<span class="st">'Date'</span>: <span class="st">'count'</span>,</span>
@@ -716,7 +720,7 @@ year
 </div>
 </div>
 <p><strong>9. Two of the sixty-seven years in the table are not twelve months long. Which two, and why? Filter the data into a new table called <code>full_years</code>. How many years survive?</strong></p>
-<div id="262102fa" class="cell" data-execution_count="9">
+<div id="0296ff60" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>full_years <span class="op">=</span> annual[annual[<span class="st">'Date'</span>] <span class="op">==</span> <span class="dv">12</span>]</span>
@@ -750,7 +754,7 @@ year
 <section id="part-3-the-size-of-the-annual-cycle" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-the-size-of-the-annual-cycle">Part 3: The size of the annual cycle</h2>
 <p><strong>10. Build a wide table with <code>year</code> down the rows, <code>month</code> across the columns, and <code>CO2Concentration</code> in the cells. Show the first three rows and the last three rows.</strong></p>
-<div id="23bfa816" class="cell" data-execution_count="10">
+<div id="cac31bd1" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>co2_grid <span class="op">=</span> climate.pivot_table(index<span class="op">=</span><span class="st">'year'</span>, columns<span class="op">=</span><span class="st">'month'</span>, values<span class="op">=</span><span class="st">'CO2Concentration'</span>)</span>
@@ -799,7 +803,7 @@ year
 </div>
 </div>
 <p><strong>12. For every year, the difference between its largest monthly value and its smallest is the size of the annual cycle. Compute that difference for two specific years, 1959 and 2023, and report both. (You will need two lines of code; one for each year)</strong></p>
-<div id="c9a1563e" class="cell" data-execution_count="11">
+<div id="4e9de907" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(co2_grid.loc[<span class="dv">1959</span>].<span class="bu">max</span>() <span class="op">-</span> co2_grid.loc[<span class="dv">1959</span>].<span class="bu">min</span>())</span>
@@ -825,7 +829,7 @@ year
 </div>
 </div>
 <p><strong>13. In a markdown cell: the annual cycle in CO₂ is caused by vegetation (mainly in the northern hemisphere), which removes carbon from the atmosphere during the growing season and releases it back in the autumn/winter. Given that context, explain what your two numbers from question 12 might indicate. Are two years sufficient to make that inference?</strong></p>
-<div id="7b0dd480" class="cell" data-execution_count="12">
+<div id="bb18891a" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="dv">1959</span>, <span class="dv">1960</span>, <span class="dv">1965</span>, <span class="dv">1991</span>, <span class="dv">2000</span>, <span class="dv">2016</span>, <span class="dv">2023</span>]:</span>
@@ -857,7 +861,7 @@ year
 </div>
 </div>
 <p><strong>14. Build the same wide table for <code>MonthlyAnomaly</code>. Does the temperature record have a comparable seasonal cycle in it? Say why or why not in one sentence.</strong></p>
-<div id="e01a449d" class="cell" data-execution_count="13">
+<div id="515fee35" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>temp_grid <span class="op">=</span> climate.pivot_table(index<span class="op">=</span><span class="st">'year'</span>, columns<span class="op">=</span><span class="st">'month'</span>, values<span class="op">=</span><span class="st">'MonthlyAnomaly'</span>)</span>
@@ -871,7 +875,7 @@ year
 2024   1.24  1.43  1.40  1.32  1.16  1.25  1.21   NaN   NaN   NaN   NaN   NaN</code></pre>
 </div>
 </div>
-<div id="a4b4b3ff" class="cell" data-execution_count="14">
+<div id="ab81eea3" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>temp_grid.mean().<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -912,7 +916,7 @@ dtype: float64</code></pre>
 <section id="part-4-making-a-statement-about-change" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-making-a-statement-about-change">Part 4: Making a statement about change</h2>
 <p><strong>15. Using <code>full_years</code>, compare the 1960s with the 2010s. Compute the mean of each column for <code>year</code> between 1960 and 1969, and again for <code>year</code> between 2010 and 2019, and report the change in each.</strong></p>
-<div id="7f47be24" class="cell" data-execution_count="15">
+<div id="fbbaf949" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sixties <span class="op">=</span> full_years[(full_years.index <span class="op">&gt;=</span> <span class="dv">1960</span>) <span class="op">&amp;</span> (full_years.index <span class="op">&lt;=</span> <span class="dv">1969</span>)]</span>
